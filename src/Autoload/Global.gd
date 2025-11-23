@@ -21,6 +21,8 @@ signal font_loaded  ## Emitted when a new font has been loaded, or an old one ge
 signal single_tool_mode_changed(mode: bool)  ## Emitted when [member single_tool_mode] changes.
 @warning_ignore("unused_signal")
 signal on_cursor_position_text_changed(text: String)
+@warning_ignore("unused_signal")
+signal dynamics_changed
 
 enum LayerTypes { PIXEL, GROUP, THREE_D, TILEMAP, AUDIO }
 enum GridTypes { CARTESIAN, ISOMETRIC, HEXAGONAL_POINTY_TOP, HEXAGONAL_FLAT_TOP }
@@ -649,8 +651,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var main_viewport: SubViewportContainer = control.find_child("SubViewportContainer")
 ## The main canvas node. It has the [param Canvas.gd] script attached.
 @onready var canvas: Canvas = main_viewport.find_child("Canvas")
-## The global tool options. It has the [param GlobalToolOptions.gd] script attached.
-@onready var global_tool_options: PanelContainer = control.find_child("Global Tool Options")
 ## Camera of the main canvas.
 @onready var camera: CanvasCamera = main_viewport.find_child("Camera2D")
 ## Transparent checker of the main canvas. It has the [param TransparentChecker.gd] script attached.

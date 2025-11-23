@@ -50,7 +50,7 @@ func _ready() -> void:
 	else:
 		_mm_action = Keychain.actions[&"mm_change_brush_size"] as Keychain.MouseMovementInputAction
 	Global.cel_switched.connect(update_brush)
-	Global.global_tool_options.dynamics_panel.dynamics_changed.connect(_reset_dynamics)
+	Global.dynamics_changed.connect(_reset_dynamics)
 	Tools.color_changed.connect(_on_Color_changed)
 	Global.brushes_popup.brush_removed.connect(_on_Brush_removed)
 
