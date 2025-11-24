@@ -56,7 +56,10 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	var brush_size_value := _mm_action.get_action_distance_int(event)
+	for action in [&"undo", &"redo"]:
+		if Input.is_action_pressed(action):
+			return
+	var brush_size_value := _mm_action.get_action_distance_int(event, true)
 	$Brush/BrushSize.value += brush_size_value
 
 
