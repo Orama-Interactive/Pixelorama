@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-11-08 21:34\n"
+"PO-Revision-Date: 2025-11-25 16:54\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -2052,7 +2052,7 @@ msgstr "Tag:"
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Report issue with an extension"
-msgstr "Laporkan isu dengan sambungan"
+msgstr "Laporkan isu pasal sambungan"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
@@ -3933,7 +3933,7 @@ msgstr "Mod letak sahaja:"
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr "Mengaktifkan mod letak sahaja ialah tindakan kekal. Jika diaktifkan, hanya dapat meletakkan jubin dan tidak dapat lagi mengubah jubin sedia ada pada lapisan ini."
+msgstr "Mendayakan mod letak sahaja ialah tindakan kekal. Jika didayakan, hanya dapat meletakkan jubin dan tidak dapat lagi mengubah jubin sedia ada pada lapisan ini."
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
