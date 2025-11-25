@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2025-11-04 16:55\n"
+"PO-Revision-Date: 2025-11-25 22:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1533,7 +1533,7 @@ msgid "imported"
 msgstr "importiert"
 
 msgid "copy"
-msgstr "kopiere"
+msgstr "Kopie"
 
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Möchten sie Pixelorama wirklich verlassen?"
