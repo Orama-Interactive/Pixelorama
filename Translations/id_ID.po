@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-11-08 17:42\n"
+"PO-Revision-Date: 2025-11-25 16:54\n"
 
 msgid "OK"
 msgstr "Iya"
@@ -2103,7 +2103,7 @@ msgstr "Tag:"
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Report issue with an extension"
-msgstr "Laporkan isu dengan ekstensi"
+msgstr "Laporkan isu tentang ekstensi"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
