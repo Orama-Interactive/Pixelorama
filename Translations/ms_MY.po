@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malay\n"
 "Language: ms_MY\n"
-"PO-Revision-Date: 2025-11-25 16:54\n"
+"PO-Revision-Date: 2025-11-25 17:59\n"
 
 msgid "OK"
 msgstr "Baik"
@@ -1108,7 +1108,7 @@ msgstr "Garis luar"
 
 #. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Drop Shadow"
-msgstr ""
+msgstr "Bayang Jatuh"
 
 msgid "Offset X:"
 msgstr ""
@@ -1121,23 +1121,23 @@ msgstr ""
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "Kabur Gauss"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
-msgstr ""
+msgstr "Jenis kabur:"
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
-msgstr ""
+msgstr "Jumlah kabur:"
 
 #. The applied radius of Gaussian blur, an image effect.
 msgid "Blur radius:"
-msgstr ""
+msgstr "Jejari kabur:"
 
 #. The applied direction of Gaussian blur, an image effect.
 msgid "Blur direction:"
-msgstr ""
+msgstr "Arah kabur:"
 
 msgid "Gradient"
 msgstr ""
@@ -2017,10 +2017,10 @@ msgid "Add Extension"
 msgstr "Tambah Sambungan"
 
 msgid "Enable"
-msgstr ""
+msgstr "Dayakan"
 
 msgid "Disable"
-msgstr ""
+msgstr "Matikan"
 
 msgid "Uninstall"
 msgstr ""
@@ -2503,7 +2503,7 @@ msgid "Timeline settings"
 msgstr ""
 
 msgid "Enable/disable Onion Skinning"
-msgstr ""
+msgstr "Daya/matikan Onion Skinning"
 
 msgid "How many frames per second should the animation preview be?\n"
 "The more FPS, the faster the animation plays."
@@ -3828,7 +3828,7 @@ msgstr "Bataskan Warna"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
-msgstr ""
+msgstr "Didayakan"
 
 #. Refers to non-destructive effects (such as outline, drop shadow etc) that are applied to layers. Found in the title of the layer effects dialog.
 msgid "Layer effects"
