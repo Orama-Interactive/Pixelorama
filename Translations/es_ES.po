@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2025-10-14 20:10\n"
+"PO-Revision-Date: 2025-11-04 19:25\n"
 
 msgid "OK"
 msgstr "OK"
@@ -961,6 +961,10 @@ msgstr "Fuente:"
 msgid "Font size:"
 msgstr "Tamaño de la fuente:"
 
+#. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
+msgid "Screen orientation:"
+msgstr "Orientación de la pantalla:"
+
 msgid "Dim interface on dialog popup"
 msgstr "Atenuar interface al abrir ventana emergente"
 
@@ -1026,6 +1030,14 @@ msgstr "Color del fondo:"
 
 msgid "Background color:"
 msgstr "Color de fondo:"
+
+#. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
+msgid "Single tool mode"
+msgstr "Modo de herramienta única"
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
+msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
+msgstr "Si está activado, el botón derecho del ratón siempre activará la misma herramienta que el botón izquierdo del ratón."
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
@@ -3105,6 +3117,10 @@ msgstr "Reestablecer todas las opciones de herramienta"
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
 msgstr "Eliminar todas las extensiones"
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all backups"
+msgstr "Eliminar todas las copias de seguridad"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2025-10-14 14:10\n"
+"PO-Revision-Date: 2025-11-25 16:54\n"
 
 msgid "OK"
 msgstr "Iya"
@@ -141,11 +141,11 @@ msgstr "Ulangi"
 
 #. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
 msgid "Undo History"
-msgstr ""
+msgstr "Urungkan Riwayat"
 
 #. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
 msgid "Initial state"
-msgstr ""
+msgstr "Keadaan awal"
 
 msgid "Copy"
 msgstr "Salin"
@@ -814,15 +814,15 @@ msgstr "Proyek Aseprite"
 
 #. Found in "Open" and "Save" file dialogs. Searches Krita project files only (.kra). Note that Krita is a software and should remain untranslated.
 msgid "Krita Project"
-msgstr ""
+msgstr "Proyek Krita"
 
 #. Found in "Open" and "Save" file dialogs. Searches Piskel project files only (.piskel). Note that Piskel is a software and should remain untranslated.
 msgid "Piskel Project"
-msgstr ""
+msgstr "Proyek Piskel"
 
 #. Found in "Open" and "Save" file dialogs. Searches Photoshop project files only (.psd). Note that Photoshop is a software and should remain untranslated.
 msgid "Photoshop Project"
-msgstr ""
+msgstr "Proyek Photoshop"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
@@ -964,6 +964,10 @@ msgstr "Font:"
 msgid "Font size:"
 msgstr "Ukuran font:"
 
+#. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
+msgid "Screen orientation:"
+msgstr "Orientasi layar:"
+
 msgid "Dim interface on dialog popup"
 msgstr "Redupkan antarmuka pada sembulan"
 
@@ -1029,6 +1033,14 @@ msgstr "Warna latar belakang dari:"
 
 msgid "Background color:"
 msgstr "Warna latar belakang:"
+
+#. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
+msgid "Single tool mode"
+msgstr "Mode alat segerak"
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
+msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
+msgstr "Jika ini diaktifkan, tetikus kanan akan mengaktifkan alat yang sama dengan tetikus kiri."
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
@@ -1327,27 +1339,27 @@ msgstr "Pelacak Isu"
 
 #. Found under the Help menu. When selected, it opens a window with a list of backups of projects opened in previous sessions.
 msgid "Restore Backup"
-msgstr ""
+msgstr "Pulihkan Cadangan"
 
 #. Found in the Restore Backup dialog.
 msgid "Past sessions"
-msgstr ""
+msgstr "Sesi sebelumnya"
 
 #. Found in the Restore Backup dialog.
 msgid "Double click to load an entire session, or a specific project."
-msgstr ""
+msgstr "Pencet dua kali untuk memuat seluruh sesi / proyek tertentu."
 
 #. Found in the Restore Backup dialog.
 msgid "Sessions"
-msgstr ""
+msgstr "Sesi"
 
 #. Found in the Restore Backup dialog.
 msgid "Projects"
-msgstr ""
+msgstr "Proyek"
 
 #. Found in the Restore Backup dialog.
 msgid "(Current Session)"
-msgstr ""
+msgstr "(Sesi Saat Ini)"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
@@ -1695,7 +1707,7 @@ msgstr "Garis Lengkung\n\n"
 "Tekan %s/%s untuk menambah titik\n"
 "Pencet dua kali untuk sudahi menggaris\n"
 "Tekan dan seret untuk melengkungkan\n"
-"Tekan %s untuk menghapus titik tadi"
+"Tekan %s untuk hapus titik yang tadi"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1731,7 +1743,14 @@ msgid "Isometric Box Tool\n\n"
 "Hold %s to snap the angle of the basis point\n"
 "Hold %s to displace the shape's origin\n"
 "Press %s to edit the last added basis"
-msgstr ""
+msgstr "Kotak Isometrik\n\n"
+"%s untuk tetikus kiri\n"
+"%s untuk tetikus kanan\n\n"
+"Menggambar kotak isometrik\n"
+"Tekan %s/%s untuk menambah titik\n"
+"Tahan %s untuk mengikut sudut arah titik\n"
+"Tahan %s untuk memindahkan bentuk\n"
+"Tekan %s untuk ubah titik yang tadi"
 
 msgid "Text\n\n"
 "%s for left mouse button\n"
@@ -2084,7 +2103,7 @@ msgstr "Tag:"
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Report issue with an extension"
-msgstr "Laporkan isu dengan ekstensi"
+msgstr "Laporkan isu tentang ekstensi"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
@@ -2242,7 +2261,7 @@ msgid "Overwrite color"
 msgstr "Timpa warna"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
-msgstr "Warnanya ditimpa dan tak dicampur. Opsi ini hanya relevan bagi warna yang tidak sepenuhnya legap (opaque)"
+msgstr "Warnanya ditimpa dan tak dicampur. Opsi ini hanya untuk warna yang tidak sepenuhnya legap (opaque)"
 
 msgid "Pixel Perfect"
 msgstr "Piksel Sempurna"
@@ -2275,7 +2294,7 @@ msgid "Fill Shape"
 msgstr "Warnai Bentuk"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr "Mengisi bentuk gambar dengan warna daripada berongga"
+msgstr "Mewarnai isi bentuk yang digambar alih-alih kopong"
 
 #. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
 msgid "Density:"
@@ -2306,7 +2325,7 @@ msgstr "Seluruh seleksi"
 
 #. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
 msgid "Fill regions from the merging of all layers"
-msgstr ""
+msgstr "Warnai isi seakan-akan lapisannya satu"
 
 msgid "Fill with:"
 msgstr "Isi dengan:"
@@ -2452,25 +2471,25 @@ msgstr "Skala kelabu"
 
 #. Refers to the color of a shape's edge.
 msgid "Edge Color"
-msgstr ""
+msgstr "Warna Tepi"
 
 #. Refers to the color of a tool.
 msgid "Tool color"
-msgstr ""
+msgstr "Warna alat"
 
 msgid "Adjusted average"
-msgstr ""
+msgstr "Rata-rata disesuaikan"
 
 msgid "Blend at interface"
-msgstr ""
+msgstr "Campur di antarmuka"
 
 #. Refers to the left face of a box shape.
 msgid "Left Face"
-msgstr ""
+msgstr "Bagian Kiri"
 
 #. Refers to the right face of a box shape.
 msgid "Right Face"
-msgstr ""
+msgstr "Bagian Kanan"
 
 msgid "Mirroring"
 msgstr "Pencerminan"
@@ -2491,11 +2510,11 @@ msgstr "Aktifkan gambar dicerminkan menegak"
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↗) mirrored drawing"
-msgstr ""
+msgstr "Aktifkan gambar dicerminkan menyudut (↗)"
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↘) mirrored drawing"
-msgstr ""
+msgstr "Aktifkan gambar dicerminkan menyudut (↘)"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
@@ -3104,6 +3123,10 @@ msgid "Remove all extensions"
 msgstr "Hapus semua ekstensi"
 
 #. Found in the preferences, under the Reset category.
+msgid "Remove all backups"
+msgstr "Hapus semua cadangan"
+
+#. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
 msgstr "Kosongkan daftar berkas yang dibuka"
 
@@ -3189,7 +3212,7 @@ msgid "Ellipse Tool"
 msgstr "Alat Lingkaran"
 
 msgid "Isometric Box Tool"
-msgstr ""
+msgstr "Kotak Isometrik"
 
 msgid "Switch Colors"
 msgstr "Ganti Warna"
@@ -3303,7 +3326,7 @@ msgid "Discard All"
 msgstr "Buang Semua"
 
 msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
-msgstr ""
+msgstr "Pixelorama tadi ditutup tidak benar. Apakah ingin memulihkan sesi sebelumnya?"
 
 msgid "Backup reloaded"
 msgstr "Cadangan dimuat ulang"
@@ -3354,7 +3377,7 @@ msgstr "Buat palet baru"
 
 #. Title of a window where the user can create a new project palette. Project palettes are palettes that are stored inside the project files, and are only being used by that project.
 msgid "Create a new project palette"
-msgstr ""
+msgstr "Buat palet proyek baru"
 
 msgid "Comment:"
 msgstr "Komentar:"
@@ -3450,13 +3473,13 @@ msgid "Color Pickers"
 msgstr "Pemilih Warna"
 
 msgid "Global Tool Options"
-msgstr "Opsi Global Untuk Alat"
+msgstr "Opsi Global untuk Alat"
 
 msgid "Left Tool Options"
-msgstr "Opsi Alat Di Kiri"
+msgstr "Opsi Alat di Kiri"
 
 msgid "Right Tool Options"
-msgstr "Opsi Alat Di Kanan"
+msgstr "Opsi Alat di Kanan"
 
 msgid "Reference Images"
 msgstr "Gambar Rujukan"
@@ -3509,8 +3532,8 @@ msgid "Locked size\n\n"
 "When enabled using the tool on the canvas will only move the cropping rectangle.\n\n"
 "When disabled using the tool on the canvas will draw the rectangle."
 msgstr "Ukuran terkunci\n\n"
-"Saat diaktifkan dengan alat di kanvas hanya akan memindahkan persegi terpotong.\n\n"
-"Saat dinonaktifkan dengan alat di kanvas hanya akan membuat persegi."
+"Saat diaktifkan, alat hanya akan memindahkan persegi terpotong di kanvas.\n\n"
+"Saat dinonaktifkan, alat hanya akan membuat persegi di kanvas."
 
 #. A tool used in 3D layers, that edits 3D objects.
 msgid "3D Shape Edit"
