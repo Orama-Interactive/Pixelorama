@@ -422,6 +422,13 @@ func _ready() -> void:
 	_show_relevant_tools(layer_type)
 
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("swap_tools"):
+		swap_tools()
+	if event.is_action_released("swap_tools") and Global.reset_swap_on_shortcut_release:
+		swap_tools()
+
+
 ## Syncs the other tool using the config of tool located at [param from_idx].[br]
 ## NOTE: For optimization, if there is already a ready made config available, then we will use that
 ## instead of re-calculating the config, else we have no choice but to re-generate it

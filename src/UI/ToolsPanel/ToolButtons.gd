@@ -21,11 +21,6 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed(action):
 			return
 
-	if event.is_action_pressed("swap_tools"):
-		Tools.swap_tools()
-	if event.is_action_released("swap_tools") and Global.reset_swap_on_shortcut_release:
-		Tools.swap_tools()
-
 	for tool_name in Tools.tools:  # Handle tool shortcuts
 		if not get_node(tool_name).visible:
 			continue

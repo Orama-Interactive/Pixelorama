@@ -59,6 +59,7 @@ var preferences: Array[Preference] = [
 		"Tools/ToolOptions/SwapColorWithToolCheckBox",
 		"button_pressed",
 		false
+	),
 	Preference.new(
 		"single_tool_mode",
 		"Tools/ToolOptions/SingleToolModeCheckBox",
