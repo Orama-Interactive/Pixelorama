@@ -13,6 +13,7 @@ tooltip_text = "Rectangular Selection
 
 %s for left mouse button
 %s for right mouse button"
+mouse_filter = 1
 mouse_default_cursor_shape = 2
 button_mask = 3
 

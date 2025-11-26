@@ -1,11 +1,23 @@
-[gd_scene load_steps=7 format=3 uid="uid://bq7ibhm0txl5p"]
+[gd_scene load_steps=18 format=3 uid="uid://bq7ibhm0txl5p"]
 
 [ext_resource type="Script" uid="uid://dpciapd2x2va6" path="res://addons/keychain/ShortcutEdit.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://ca58ufal2ufd8" path="res://addons/keychain/assets/joy_button.svg" id="2"]
+[ext_resource type="Texture2D" uid="uid://0ij8aasy3k3b" path="res://addons/keychain/assets/search.svg" id="2_4odqy"]
+[ext_resource type="Texture2D" uid="uid://cgsvoct3wwbjb" path="res://addons/keychain/assets/arrows/down.png" id="2_b4f3q"]
+[ext_resource type="Texture2D" uid="uid://esi4oenejswj" path="res://addons/keychain/assets/arrows/top_left.png" id="2_gs4p1"]
+[ext_resource type="Texture2D" uid="uid://cmh8eaibhn5y8" path="res://addons/keychain/assets/keyboard_physical.svg" id="2_wps2m"]
 [ext_resource type="Texture2D" uid="uid://c2s5rm4nec5yh" path="res://addons/keychain/assets/keyboard.svg" id="3"]
+[ext_resource type="Texture2D" uid="uid://b337qel4762m4" path="res://addons/keychain/assets/arrows/up.png" id="3_gw1s5"]
 [ext_resource type="Texture2D" uid="uid://bb6q6om3d08cm" path="res://addons/keychain/assets/joy_axis.svg" id="4"]
+[ext_resource type="Texture2D" uid="uid://yhwkkevw7lur" path="res://addons/keychain/assets/arrows/left.png" id="4_dmnk0"]
+[ext_resource type="Texture2D" uid="uid://cr4lfb2lrtl7a" path="res://addons/keychain/assets/arrows/top_right.png" id="4_wps2m"]
 [ext_resource type="Texture2D" uid="uid://bma7xj2rqqcr8" path="res://addons/keychain/assets/mouse.svg" id="5"]
+[ext_resource type="Texture2D" uid="uid://bj5ctot6clu13" path="res://addons/keychain/assets/arrows/right.png" id="5_nwpwn"]
 [ext_resource type="PackedScene" uid="uid://bfjcafe2kvx7n" path="res://addons/keychain/ShortcutSelectorDialog.tscn" id="6"]
+[ext_resource type="Texture2D" uid="uid://b3io8jf2b3w1y" path="res://addons/keychain/assets/arrows/bottom_left.png" id="7_4odqy"]
+[ext_resource type="Texture2D" uid="uid://b7gkuibgeavkl" path="res://addons/keychain/assets/arrows/bottom_right.png" id="9_v7k3h"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_b4f3q"]
 
 [node name="ShortcutEdit" type="Control"]
 layout_mode = 3
@@ -44,6 +56,12 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "New"
 
+[node name="ResetProfile" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "Reset"
+
 [node name="RenameProfile" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -62,10 +80,134 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Open Folder"
 
+[node name="Filters" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="FilterByNameLineEdit" type="LineEdit" parent="VBoxContainer/Filters"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Filter by name"
+clear_button_enabled = true
+right_icon = ExtResource("2_4odqy")
+
+[node name="FilterByShortcutLineEdit" type="LineEdit" parent="VBoxContainer/Filters"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Filter by shortcut"
+context_menu_enabled = false
+clear_button_enabled = true
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+right_icon = ExtResource("2_wps2m")
+
+[node name="ClearAllFilters" type="Button" parent="VBoxContainer/Filters"]
+layout_mode = 2
+text = "Clear all"
+
 [node name="ShortcutTree" type="Tree" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 hide_root = true
+
+[node name="MouseMovementOptions" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="AngleLabel" type="Label" parent="VBoxContainer/MouseMovementOptions"]
+layout_mode = 2
+text = "Angle:"
+
+[node name="AngleOptions" type="GridContainer" parent="VBoxContainer/MouseMovementOptions"]
+layout_mode = 2
+columns = 3
+
+[node name="MMTopLeft" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_b4f3q")
+icon = ExtResource("2_gs4p1")
+icon_alignment = 1
+
+[node name="MMTop" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_b4f3q")
+icon = ExtResource("3_gw1s5")
+icon_alignment = 1
+
+[node name="MMTopRight" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_b4f3q")
+icon = ExtResource("4_wps2m")
+icon_alignment = 1
+
+[node name="MMLeft" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_b4f3q")
+icon = ExtResource("4_dmnk0")
+icon_alignment = 1
+
+[node name="MMCenter" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+toggle_mode = true
+button_group = SubResource("ButtonGroup_b4f3q")
+icon_alignment = 1
+
+[node name="MMRight" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_b4f3q")
+icon = ExtResource("5_nwpwn")
+icon_alignment = 1
+
+[node name="MMBottomLeft" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_b4f3q")
+icon = ExtResource("7_4odqy")
+icon_alignment = 1
+
+[node name="MMBottom" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_b4f3q")
+icon = ExtResource("2_b4f3q")
+icon_alignment = 1
+
+[node name="MMBottomRight" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_b4f3q")
+icon = ExtResource("9_v7k3h")
+icon_alignment = 1
+
+[node name="SensitivityLabel" type="Label" parent="VBoxContainer/MouseMovementOptions"]
+layout_mode = 2
+text = "Sensitivity:"
+
+[node name="SensitivityRange" type="SpinBox" parent="VBoxContainer/MouseMovementOptions"]
+layout_mode = 2
+min_value = 0.001
+step = 0.001
+value = 0.1
+allow_greater = true
+custom_arrow_step = 0.1
 
 [node name="ShortcutTypeMenu" type="PopupMenu" parent="."]
 size = Vector2i(154, 116)
@@ -110,13 +252,27 @@ offset_bottom = 51.0
 size = Vector2i(427, 100)
 dialog_text = "Are you sure you want to delete this shortcut profile?"
 
+[node name="ResetConfirmation" type="ConfirmationDialog" parent="."]
+size = Vector2i(427, 100)
+dialog_text = "Are you sure you want to restore all shortcuts to their default settings?"
+
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/ProfileOptionButton" to="." method="_on_ProfileOptionButton_item_selected"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/NewProfile" to="." method="_on_NewProfile_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/ResetProfile" to="." method="_on_reset_profile_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/RenameProfile" to="." method="_on_RenameProfile_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/DeleteProfile" to="." method="_on_DeleteProfile_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/OpenProfileFolder" to="." method="_on_OpenProfileFolder_pressed"]
+[connection signal="text_changed" from="VBoxContainer/Filters/FilterByNameLineEdit" to="." method="_on_filter_by_name_line_edit_text_changed"]
+[connection signal="focus_entered" from="VBoxContainer/Filters/FilterByShortcutLineEdit" to="." method="_on_filter_by_shortcut_line_edit_focus_entered"]
+[connection signal="focus_exited" from="VBoxContainer/Filters/FilterByShortcutLineEdit" to="." method="_on_filter_by_shortcut_line_edit_focus_exited"]
+[connection signal="gui_input" from="VBoxContainer/Filters/FilterByShortcutLineEdit" to="." method="_on_filter_by_shortcut_line_edit_gui_input"]
+[connection signal="text_changed" from="VBoxContainer/Filters/FilterByShortcutLineEdit" to="." method="_on_filter_by_shortcut_line_edit_text_changed"]
+[connection signal="pressed" from="VBoxContainer/Filters/ClearAllFilters" to="." method="_on_clear_all_filters_pressed"]
 [connection signal="button_clicked" from="VBoxContainer/ShortcutTree" to="." method="_on_shortcut_tree_button_clicked"]
 [connection signal="item_activated" from="VBoxContainer/ShortcutTree" to="." method="_on_ShortcutTree_item_activated"]
+[connection signal="item_selected" from="VBoxContainer/ShortcutTree" to="." method="_on_shortcut_tree_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/MouseMovementOptions/SensitivityRange" to="." method="_on_sensitivity_range_value_changed"]
 [connection signal="id_pressed" from="ShortcutTypeMenu" to="." method="_on_ShortcutTypeMenu_id_pressed"]
 [connection signal="confirmed" from="ProfileSettings" to="." method="_on_ProfileSettings_confirmed"]
 [connection signal="confirmed" from="DeleteConfirmation" to="." method="_on_DeleteConfirmation_confirmed"]
+[connection signal="confirmed" from="ResetConfirmation" to="." method="_on_reset_confirmation_confirmed"]

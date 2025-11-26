@@ -101,9 +101,8 @@ func _set_shortcut(action: StringName, old_event: InputEvent, new_event: InputEv
 		var action_to_replace: StringName = matching_pair[0]
 		var input_to_replace: InputEvent = matching_pair[1]
 		Keychain.action_erase_event(action_to_replace, input_to_replace)
-		Keychain.selected_profile.change_action(action_to_replace)
+		Keychain.change_action(action_to_replace)
 		var tree_item: TreeItem = root.tree.get_root()
-		var prev_tree_item: TreeItem
 		while tree_item != null:  # Loop through Tree's TreeItems...
 			var metadata = tree_item.get_metadata(0)
 			if metadata is InputEvent:
@@ -116,7 +115,7 @@ func _set_shortcut(action: StringName, old_event: InputEvent, new_event: InputEv
 			tree_item = tree_item.get_next_in_tree()
 
 	Keychain.action_add_event(action, new_event)
-	Keychain.selected_profile.change_action(action)
+	Keychain.change_action(action)
 	return true
 
 

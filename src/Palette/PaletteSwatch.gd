@@ -102,28 +102,39 @@ func show_selected_highlight(new_value: bool, mouse_button: int) -> void:
 
 
 func _get_drag_data(_position: Vector2) -> Variant:
-	var data = null
-	if not empty:
-		var drag_icon: PaletteSwatch = self.duplicate()
-		drag_icon.show_left_highlight = false
-		drag_icon.show_right_highlight = false
-		drag_icon.empty = false
-		set_drag_preview(drag_icon)
-		data = {source_index = index}
-	return data
+	if DisplayServer.is_touchscreen_available() and not show_left_highlight:
+		return null
+	if empty:
+		return ["Swatch", null]
+	var drag_icon: PaletteSwatch = duplicate()
+	drag_icon.show_left_highlight = false
+	drag_icon.show_right_highlight = false
+	drag_icon.empty = false
+	set_drag_preview(drag_icon)
+	return ["Swatch", {source_index = index}]
 
 
-func _can_drop_data(_position: Vector2, _data) -> bool:
+func _can_drop_data(_position: Vector2, data) -> bool:
+	if typeof(data) != TYPE_ARRAY:
+		return false
+	if data[0] != "Swatch":
+		return false
 	return true
 
 
 func _drop_data(_position: Vector2, data) -> void:
-	dropped.emit(data.source_index, index)
+	dropped.emit(data[1].source_index, index)
 
 
 func _on_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed():
+	if event is InputEventMouseButton:
+		if not get_global_rect().has_point(event.global_position):
+			return
 		if event.double_click and not empty:
 			double_clicked.emit(event.button_index, get_global_rect().position)
-		elif event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT:
-			pressed.emit(event.button_index)
+		if event.is_released():
+			if event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT:
+				pressed.emit(event.button_index)
+		elif event.is_pressed():
+			if DisplayServer.is_touchscreen_available() and show_left_highlight:
+				accept_event()

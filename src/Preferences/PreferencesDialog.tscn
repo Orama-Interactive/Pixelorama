@@ -221,6 +221,22 @@ text = "Font:"
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="ScreenOrientationLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions" groups=["MobileOnly"]]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Screen orientation:"
+
+[node name="ScreenOrientationOptionButton" type="OptionButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions" groups=["MobileOnly"]]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Auto"
+popup/item_0/id = 6
+popup/item_1/text = "Landscape"
+popup/item_1/id = 4
+popup/item_2/text = "Portrait"
+popup/item_2/id = 5
+
 [node name="DimLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -966,6 +982,20 @@ For example, both tools will share the same brush size, and changing it on one t
 mouse_default_cursor_shape = 2
 text = "On"
 
+[node name="SingleToolModeLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
+mouse_filter = 1
+text = "Single tool mode"
+
+[node name="SingleToolModeCheckBox" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
+mouse_default_cursor_shape = 2
+text = "On"
+
 [node name="ShareOptionsLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1567,6 +1597,12 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Remove all extensions"
+
+[node name="RemoveAllBackups" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Reset"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Remove all backups"
 
 [node name="ClearRecentFiles" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Reset"]
 unique_name_in_owner = true

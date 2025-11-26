@@ -23,9 +23,8 @@ theme_override_constants/margin_right = 8
 layout_mode = 2
 
 [node name="MenuBar" type="MenuBar" parent="MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(575, 0)
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 2
 flat = true
 
 [node name="File" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
@@ -46,7 +45,7 @@ flat = true
 
 [node name="TopLabels" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
 theme_override_constants/separation = 20
 
 [node name="RotationSlider" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/TopLabels"]
@@ -99,6 +98,7 @@ text = "[64×64]"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 10
 alignment = 1
 
 [node name="CurrentFrame" type="Label" parent="MarginContainer/HBoxContainer/HBoxContainer"]

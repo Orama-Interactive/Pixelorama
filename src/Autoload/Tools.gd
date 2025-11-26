@@ -103,7 +103,7 @@ var tools: Dictionary[String, Tool] = {
 		"Move",
 		"move",
 		"res://src/Tools/UtilityTools/Move.tscn",
-		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP]
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.GROUP, Global.LayerTypes.TILEMAP]
 	),
 	"Zoom": Tool.new("Zoom", "Zoom", "zoom", "res://src/Tools/UtilityTools/Zoom.tscn"),
 	"Pan": Tool.new("Pan", "Pan", "pan", "res://src/Tools/UtilityTools/Pan.tscn"),
@@ -367,6 +367,7 @@ class Slot:
 func _ready() -> void:
 	options_reset.connect(reset_options)
 	Global.cel_switched.connect(_cel_switched)
+	Global.single_tool_mode_changed.connect(_on_single_tool_mode_changed)
 	_tool_buttons = Global.control.find_child("ToolButtons")
 	for t in tools:
 		add_tool_button(tools[t])
@@ -425,7 +426,7 @@ func _ready() -> void:
 ## NOTE: For optimization, if there is already a ready made config available, then we will use that
 ## instead of re-calculating the config, else we have no choice but to re-generate it
 func attempt_config_share(from_idx: int, config: Dictionary = {}) -> void:
-	if not Global.share_options_between_tools:
+	if not Global.share_options_between_tools and not Global.single_tool_mode:
 		return
 	if _slots.is_empty():
 		return
@@ -514,6 +515,8 @@ func get_tool(button: int) -> Slot:
 
 
 func assign_tool(tool_name: String, button: int, allow_refresh := false) -> void:
+	if Global.single_tool_mode and button == MOUSE_BUTTON_LEFT:
+		assign_tool(tool_name, MOUSE_BUTTON_RIGHT, allow_refresh)
 	var slot: Slot = _slots[button]
 	var panel: Node = _panels[button]
 
@@ -739,8 +742,15 @@ func update_tool_buttons() -> void:
 	for child in _tool_buttons.get_children():
 		var left_background: NinePatchRect = child.get_node("BackgroundLeft")
 		var right_background: NinePatchRect = child.get_node("BackgroundRight")
-		left_background.visible = _slots[MOUSE_BUTTON_LEFT].tool_node.name == child.name
-		right_background.visible = _slots[MOUSE_BUTTON_RIGHT].tool_node.name == child.name
+		var is_left_tool := _slots[MOUSE_BUTTON_LEFT].tool_node.name == child.name
+		var is_right_tool := _slots[MOUSE_BUTTON_RIGHT].tool_node.name == child.name
+		left_background.visible = is_left_tool
+		if Global.single_tool_mode:
+			right_background.visible = false
+			left_background.anchor_right = 1.0
+		else:
+			right_background.visible = is_right_tool
+			left_background.anchor_right = 0.5
 
 
 func update_hint_tooltips() -> void:
@@ -757,7 +767,7 @@ func update_tool_cursors() -> void:
 
 
 func draw_indicator() -> void:
-	if Global.right_square_indicator_visible:
+	if Global.right_square_indicator_visible and not Global.single_tool_mode:
 		_slots[MOUSE_BUTTON_RIGHT].tool_node.draw_indicator(false)
 	if Global.left_square_indicator_visible:
 		_slots[MOUSE_BUTTON_LEFT].tool_node.draw_indicator(true)
@@ -874,34 +884,41 @@ func get_alpha_dynamic(strength := 1.0) -> float:
 func _cel_switched() -> void:
 	var layer: BaseLayer = Global.current_project.layers[Global.current_project.current_layer]
 	var layer_type := layer.get_layer_type()
-	# Do not make any changes when its the same type of layer, or a group layer
-	if (
-		layer_type == _curr_layer_type
-		or layer_type in [Global.LayerTypes.GROUP, Global.LayerTypes.AUDIO]
-	):
+	# Do not make any changes when its the same type of layer, or an audio layer
+	if layer_type == _curr_layer_type or layer_type in [Global.LayerTypes.AUDIO]:
 		return
 	_show_relevant_tools(layer_type)
 
 
 func _show_relevant_tools(layer_type: Global.LayerTypes) -> void:
 	# Hide tools that are not available in the current layer type
+	var fallback_available_tool: StringName
 	for button in _tool_buttons.get_children():
 		var tool_name: String = button.name
 		var t: Tool = tools[tool_name]
-		var hide_tool := _is_tool_available(layer_type, t)
-		button.visible = hide_tool
+		var can_show_tool := _is_tool_available(layer_type, t)
+		if can_show_tool:
+			fallback_available_tool = tool_name
+		button.visible = can_show_tool
 
 	# Assign new tools if the layer type has changed
 	_curr_layer_type = layer_type
-	var new_tool_name: String = _left_tools_per_layer_type[layer_type]
+	var new_tool_name: String = _left_tools_per_layer_type.get(layer_type, fallback_available_tool)
 	assign_tool(new_tool_name, MOUSE_BUTTON_LEFT)
 
-	new_tool_name = _right_tools_per_layer_type[layer_type]
+	new_tool_name = _right_tools_per_layer_type.get(layer_type, fallback_available_tool)
 	assign_tool(new_tool_name, MOUSE_BUTTON_RIGHT)
 
 
 func _is_tool_available(layer_type: int, t: Tool) -> bool:
 	return t.layer_types.is_empty() or layer_type in t.layer_types
+
+
+func _on_single_tool_mode_changed(mode: bool) -> void:
+	if mode:
+		assign_tool(get_tool(MOUSE_BUTTON_LEFT).tool_node.name, MOUSE_BUTTON_RIGHT, true)
+	else:
+		update_tool_buttons()
 
 
 func change_layer_automatically(pos: Vector2i) -> void:

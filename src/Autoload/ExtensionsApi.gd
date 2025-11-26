@@ -212,21 +212,22 @@ class MenuAPI:
 			push_error("Menu of type: ", menu_type, " does not exist.")
 			return -1
 		popup_menu.add_item(item_name, item_id)
-		var idx := item_id
-		if item_id == -1:
-			idx = popup_menu.get_item_count() - 1
-		popup_menu.set_item_metadata(idx, item_metadata)
+		var true_id := item_id
+		if true_id == -1:
+			true_id = popup_menu.get_item_count() - 1
+		popup_menu.set_item_metadata(true_id, item_metadata)
 		ExtensionsApi.add_action("MenuAPI", "add_menu")
-		return idx
+		return true_id
 
 	## Removes a menu item at index [param item_idx] from the [param menu_type] defined by
 	## [enum @unnamed_enums].
-	func remove_menu_item(menu_type: int, item_idx: int) -> void:
+	func remove_menu_item(menu_type: int, item_id: int) -> void:
 		var popup_menu := _get_popup_menu(menu_type)
 		if not popup_menu:
 			push_error("Menu of type: ", menu_type, " does not exist.")
 			return
-		popup_menu.remove_item(item_idx)
+		# Ensure the index is correct by matching it with id
+		popup_menu.remove_item(popup_menu.get_item_index(item_id))
 		ExtensionsApi.remove_action("MenuAPI", "add_menu")
 
 
@@ -787,10 +788,11 @@ class ProjectAPI:
 			project.current_layer = above_layer  # temporary assignment
 			if type >= 0 and type < Global.LayerTypes.size():
 				Global.animation_timeline.on_add_layer_list_id_pressed(type)
+				var layer_vbox := Global.animation_timeline.layer_vbox as VBoxContainer
 				if name != "":
 					project.layers[above_layer + 1].name = name
-					var l_idx := Global.layer_vbox.get_child_count() - (above_layer + 2)
-					Global.layer_vbox.get_child(l_idx).label.text = name
+					var l_idx := layer_vbox.get_child_count() - (above_layer + 2)
+					layer_vbox.get_child(l_idx).label.text = name
 				project.current_layer = old_current
 			else:
 				push_error("invalid (type): ", type)

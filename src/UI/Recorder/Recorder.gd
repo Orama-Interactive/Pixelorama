@@ -75,6 +75,7 @@ class Recorder:
 			DrawingAlgos.blend_layers(image, frame, Vector2i.ZERO, project)
 
 			if recorder_panel.resize_percent != 100:
+				@warning_ignore("integer_division")
 				var resize := recorder_panel.resize_percent / 100
 				var new_width := image.get_width() * resize
 				var new_height := image.get_height() * resize
@@ -164,7 +165,7 @@ func _on_SpinBox_value_changed(value: float) -> void:
 
 
 func _on_Choose_pressed() -> void:
-	_path_dialog.popup_centered()
+	_path_dialog.popup_centered_clamped()
 	_path_dialog.current_dir = chosen_dir
 
 

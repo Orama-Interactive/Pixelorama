@@ -127,6 +127,9 @@ func _input(event: InputEvent) -> void:
 								0, _last_mouse_position - _curve.get_point_position(0)
 							)
 							_current_state -= 1
+	else:
+		var brush_size_value := _mm_action.get_action_distance_int(event)
+		$ThicknessSlider.value += brush_size_value
 
 
 func draw_start(pos: Vector2i) -> void:

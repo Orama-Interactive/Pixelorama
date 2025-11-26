@@ -6,7 +6,7 @@ enum Animate { POSITION, SIZE, ANGLE, CENTER_X, CENTER_Y, RADIUS_X, RADIUS_Y }
 var shader := preload("res://src/Shaders/Effects/Gradient.gdshader")
 var selected_dither_matrix := ShaderLoader.dither_matrices[0]
 
-@onready var options_cont: Container = $VBoxContainer/GradientOptions
+@onready var options_cont: Container = $VBoxContainer/ScrollContainer/GradientOptions
 @onready var gradient_edit: GradientEditNode = $VBoxContainer/GradientEdit
 @onready var shape_option_button: OptionButton = $"%ShapeOptionButton"
 @onready var dithering_option_button: OptionButton = $"%DitheringOptionButton"

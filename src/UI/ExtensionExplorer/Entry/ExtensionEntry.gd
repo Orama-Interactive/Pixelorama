@@ -118,7 +118,7 @@ func _on_DownloadRequest_request_completed(
 
 func _show_error_message(message: String) -> void:
 	alert_dialog.get_node("Text").text = message.c_unescape()
-	alert_dialog.popup_centered()
+	alert_dialog.popup_centered_clamped()
 	announce_done(false)
 
 
@@ -161,7 +161,7 @@ func change_button_if_updatable(extension_name: String, new_version: float) -> v
 ## Show an enlarged version of the thumbnail
 func enlarge_thumbnail(texture: ImageTexture) -> void:
 	enlarged_picture.texture = texture
-	enlarged_picture.get_parent().popup_centered()
+	enlarged_picture.get_parent().popup_centered_clamped()
 
 
 ## A beautification function that hides the "Done" label bar after some time

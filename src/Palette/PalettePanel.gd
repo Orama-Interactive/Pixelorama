@@ -30,12 +30,12 @@ var edit_palette_dialog: ConfirmationDialog:
 
 @onready var palette_select := $"%PaletteSelect" as OptionButton
 @onready var palette_grid := $"%PaletteGrid" as PaletteGrid
-@onready var palette_scroll := $"%PaletteScroll"
 
 @onready var add_color_button := $"%AddColor"
 @onready var delete_color_button := $"%DeleteColor"
 @onready var sort_button := %Sort as MenuButton
 @onready var sort_button_popup := sort_button.get_popup()
+@onready var lock_grid: Button = %LockGrid
 
 ## This color picker button itself is hidden, but its popup is used to edit color swatches.
 @onready var hidden_color_picker := $"%HiddenColorPickerButton" as ColorPickerButton
@@ -59,6 +59,9 @@ func _ready() -> void:
 	sort_submenu.add_item("Sort by alpha", Palettes.SortOptions.ALPHA)
 	sort_button_popup.add_child(sort_submenu)
 	sort_button_popup.add_submenu_node_item("Palette Sort", sort_submenu)
+	lock_grid.button_pressed = Global.config_cache.get_value(
+		"palettes", "palette_locked", palette_grid.grid_locked
+	)
 
 	Palettes.palette_selected.connect(select_palette)
 	Palettes.new_palette_created.connect(_new_palette_created)
@@ -119,15 +122,6 @@ func select_palette(palette_name: String) -> void:
 	var palette_id = palettes_name_id.get(palette_name)
 	if palette_id != null:
 		palette_select.selected = palette_id
-	palette_grid.set_palette(Palettes.current_palette)
-	palette_scroll.resize_grid()
-	palette_scroll.set_sliders(Palettes.current_palette, palette_grid.grid_window_origin)
-
-	var left_selected := Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_LEFT)
-	var right_selected := Palettes.current_palette_get_selected_color_index(MOUSE_BUTTON_RIGHT)
-	palette_grid.select_swatch(MOUSE_BUTTON_LEFT, left_selected, left_selected)
-	palette_grid.select_swatch(MOUSE_BUTTON_RIGHT, right_selected, right_selected)
-
 	toggle_add_delete_buttons()
 
 
@@ -226,6 +220,16 @@ func sort_pressed(id: Palettes.SortOptions) -> void:
 	else:
 		Palettes.sort_colors(id)
 		redraw_current_palette()
+
+
+func _on_lock_grid_toggled(toggled_on: bool) -> void:
+	palette_grid.grid_locked = toggled_on
+	var texture_button: TextureRect = lock_grid.get_node("TextureRect")
+	var file_name := "lock.png"
+	if not toggled_on:
+		file_name = "unlock.png"
+	Global.change_button_texturerect(texture_button, file_name)
+	Global.config_cache.set_value("palettes", "palette_locked", toggled_on)
 
 
 func _on_create_palette_dialog_saved(

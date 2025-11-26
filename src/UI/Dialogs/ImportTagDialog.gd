@@ -51,7 +51,7 @@ func prepare_and_show(frame_no: int) -> void:
 	# Populate tag list
 	refresh_list()
 	title = str("Import Tag (After Frame ", frame + 1, ")")
-	popup_centered()
+	popup_centered_clamped()
 
 
 func _on_FromProject_changed(id: int) -> void:
@@ -110,21 +110,33 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 	# the goal of this section is to mark existing layers with their indices else with -1
 	var layer_from_to := {}  # indices of layers from and to
 	for from in from_project.layers.size():
-		var to = layer_to_names.find(from_project.layers[from].name)
-		if project.layers[to].get_layer_type() != from_project.layers[from].get_layer_type():
-			to = -1
-		if to in layer_from_to.values():  # from_project has layers with duplicate frames
-			to = -1
+		var to := -1
+		var pos := 0
+		for i in layer_to_names.count(from_project.layers[from].name):
+			pos = layer_to_names.find(from_project.layers[from].name, pos)
+			# if layer types don't match, the destination is invalid.
+			if project.layers[pos].get_layer_type() != from_project.layers[from].get_layer_type():
+				# Don't give up if there is another layer with the same name, check that one as well
+				pos += 1
+				continue
+			# if destination is already assigned to another layer, then don't use it here.
+			if pos in layer_from_to.values():
+				# Don't give up if there is another layer with the same name, check that one as well
+				pos += 1
+				continue
+			to = pos
+			break
 		layer_from_to[from] = to
 
 	# Step 2: generate required layers
-	var combined_copy := Array()  # Makes calculations easy
+	var combined_copy := Array()  # Makes calculations easy (contains preview of final layer order).
 	combined_copy.append_array(project.layers)
 	var added_layers := Array()  # Array of layers
 	# Array of indices to add the respective layers (in added_layers) to
 	var added_idx := PackedInt32Array()
 	var added_cels := Array()  # Array of an Array of cels (added in same order as their layer)
 
+	# Create destinations for layers that don't have one yet
 	if layer_from_to.values().count(-1) > 0:
 		# As it is extracted from a dictionary, so i assume the keys aren't sorted
 		var from_layers_size = layer_from_to.keys().duplicate(true)
@@ -181,7 +193,7 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 		new_frame.duration = src_frame.duration
 		for to in combined_copy.size():
 			var new_cel: BaseCel
-			if to in layer_from_to.values():
+			if to in layer_from_to.values():  # We have data to Import to this layer index
 				var from = layer_from_to.find_key(to)
 				# Cel we're copying from, the source
 				var src_cel: BaseCel = from_project.frames[f].cels[from]

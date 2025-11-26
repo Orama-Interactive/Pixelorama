@@ -429,6 +429,7 @@ vertical_scroll_mode = 0
 [node name="AnimationTools" type="PanelContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools"]
 layout_mode = 2
@@ -789,6 +790,7 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="TagContainer" type="Control" parent="TimelineContainer/TimelineButtons/VBoxContainer/TagScroll/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -928,6 +930,7 @@ theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
 [node name="FrameHBox" type="HBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit/MarginContainer/FrameScrollHeaderContainer/MarginContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 theme_override_constants/separation = 0
@@ -958,6 +961,7 @@ layout_mode = 2
 theme_override_constants/separation = 1
 
 [node name="LayerVBox" type="VBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/LayerContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
@@ -984,6 +988,7 @@ theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
 [node name="CelVBox" type="VBoxContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/MarginContainer/FrameScrollContainer/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 0
 
