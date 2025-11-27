@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2025-11-25 22:06\n"
+"PO-Revision-Date: 2025-11-27 08:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -113,22 +113,22 @@ msgid "Import"
 msgstr "Importieren"
 
 msgid "Export"
-msgstr "Exportiere"
+msgstr "Exportieren"
 
 msgid "Overwrite"
 msgstr "Überschreiben"
 
 msgid "Export..."
-msgstr "Exportiere..."
+msgstr "Exportieren..."
 
 msgid "Export as..."
 msgstr "Exportieren als..."
 
 msgid "Export PNG..."
-msgstr "Exportiere PNG..."
+msgstr "PNG exportieren..."
 
 msgid "Export PNG as..."
-msgstr "Exportiere PNG als..."
+msgstr "PNG exportieren als..."
 
 msgid "Quit"
 msgstr "Verlassen"
