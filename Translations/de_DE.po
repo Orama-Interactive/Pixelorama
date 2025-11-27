@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2025-11-27 08:44\n"
+"PO-Revision-Date: 2025-11-27 11:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -37,7 +37,7 @@ msgid "Image Size"
 msgstr "Bildgröße"
 
 msgid "Canvas Size"
-msgstr "Canvasgröße"
+msgstr "Leinwandgröße"
 
 msgid "Frame Size"
 msgstr "Frame-Größe"
@@ -99,15 +99,15 @@ msgstr "Speichern als..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr "Gemischte Bilder einbeziehen"
+msgstr "Zusammengeführte Bilder einbeziehen"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr "Wenn aktiviert, werden die letzten überlagerten Bilder für jeden Frame auch in der pxo gespeichert.\n"
-"Dies macht die pxo-Datei größer und ist nützlich für den Import durch Software von Drittanbietern\n"
-"oder den CLI-Export. Beim Laden von pxo-Dateien in Pixelorama muss diese Option nicht aktiviert sein."
+msgstr "Wenn aktiviert, werden die endgültig zusammengeführten Bilder für jeden Frame in der PXO-Datei gespeichert.\n"
+"Dies vergrößert die Datei, ist aber nützlich für den Import in Drittanbieter-Software\n"
+"oder den CLI-Export. Beim Laden von PXO-Dateien in Pixelorama ist diese Option nicht erforderlich."
 
 msgid "Import"
 msgstr "Importieren"
@@ -137,15 +137,15 @@ msgid "Undo"
 msgstr "Rückgängig"
 
 msgid "Redo"
-msgstr "Wiederherstellen"
+msgstr "Wiederholen"
 
 #. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
 msgid "Undo History"
-msgstr ""
+msgstr "Verlauf"
 
 #. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
 msgid "Initial state"
-msgstr ""
+msgstr "Ausgangszustand"
 
 msgid "Copy"
 msgstr "Kopieren"
@@ -161,17 +161,17 @@ msgstr "An Ort einfügen"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
-msgstr "Aus Zwischenablage einfügen"
+msgstr "Aus der Zwischenablage einfügen"
 
 msgid "Delete"
 msgstr "Löschen"
 
 msgid "Delete Permanently"
-msgstr "Dauerhaft Löschen"
+msgstr "Dauerhaft löschen"
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
-msgstr "In Papierkorb verschieben"
+msgstr "In den Papierkorb verschieben"
 
 msgid "New Brush"
 msgstr "Neuer Pinsel"
@@ -206,17 +206,17 @@ msgid "Crop to Content"
 msgstr "Auf Inhalt zuschneiden"
 
 msgid "Resize Canvas"
-msgstr "Canvas skalieren"
+msgstr "Leinwandgröße ändern"
 
 msgid "Offset Image"
-msgstr "Bild offseten"
+msgstr "Bild verschieben"
 
 msgid "Offset:"
-msgstr "Offset:"
+msgstr "Versatz:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
-msgstr "Umwickeln:"
+msgstr "Übergang:"
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
@@ -226,10 +226,10 @@ msgid "Rotate Image"
 msgstr "Bild drehen"
 
 msgid "Pivot x:"
-msgstr "Pivot x:"
+msgstr "Drehpunkt x:"
 
 msgid "Pivot y:"
-msgstr "Pivot y:"
+msgstr "Drehpunkt y:"
 
 msgid "Smear options:"
 msgstr "Verwisch-Optionen:"
@@ -242,7 +242,7 @@ msgstr "Anfangswinkel:"
 
 #. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
 msgid "Wrap Strokes"
-msgstr "Pinselstriche umwickeln"
+msgstr "Pinselstriche umbinden"
 
 msgid "Clear"
 msgstr "Leeren"
@@ -252,10 +252,10 @@ msgstr "Invertieren"
 
 #. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
 msgid "Select cel area"
-msgstr "Cel Bereich auswählen"
+msgstr "Zellenbereich auswählen"
 
 msgid "Modify"
-msgstr "Modifizieren"
+msgstr "Ändern"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users expand the active selection.
 msgid "Expand"
@@ -320,13 +320,13 @@ msgstr "Geladen"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr "Canvas zentrieren"
+msgstr "Leinwand zentrieren"
 
 msgid "Tile Mode"
-msgstr "Tile-Modus"
+msgstr "Kachelmode"
 
 msgid "Tile Mode Offsets"
-msgstr "Tile-Modus Offsets"
+msgstr "Kachelmodus-Versatz"
 
 #. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
 msgid "X-basis:"
@@ -338,7 +338,7 @@ msgstr "Y-Basis:"
 
 #. Found under "Tile Mode Offsets". It's a button that when pressed, enables masking for tile mode. Masking essentially limits drawing to the visible pixels of the image, thus preventing from drawing on transparent pixels.
 msgid "Masking:"
-msgstr "Maskieren:"
+msgstr "Maskierung:"
 
 #. Verb, resets something.
 msgid "Reset"
@@ -355,7 +355,7 @@ msgid "Reset Mask"
 msgstr "Maske zurücksetzen"
 
 msgid "Window Opacity"
-msgstr "Fenstertransparenz"
+msgstr "Fensterdeckkraft"
 
 msgid "Window opacity does not work on fullscreen mode."
 msgstr "Fenstertransparenz funktioniert nicht im Vollbildmodus."
@@ -428,11 +428,11 @@ msgid "Show Rulers"
 msgstr "Zeige Lineale"
 
 msgid "Show Guides"
-msgstr "Zeige Guides"
+msgstr "Hilfslinien anzeigen"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
-msgstr "Zeige Maus Guides"
+msgstr "Maus-Hilfslinien anzeigen"
 
 #. Found under the View menu.
 msgid "Show Reference Images"
@@ -456,11 +456,11 @@ msgstr "An rechteckige Rastermitte einrasten"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
-msgstr "An Guides einrasten"
+msgstr "An Hilfslinien einrasten"
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
-msgstr "An perspektivische Guides einrasten"
+msgstr "An perspektivische Hilfslinien einrasten"
 
 msgid "Show Animation Timeline"
 msgstr "Zeige Animations-Zeitleiste"
@@ -509,7 +509,7 @@ msgstr "Neuer Frame"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Replace cel"
-msgstr "Cel ersetzen"
+msgstr "Zelle ersetzen"
 
 msgid "New layer"
 msgstr "Neue Ebene"
@@ -584,10 +584,10 @@ msgid "Save Sprite as .pxo"
 msgstr "Speichere Sprite als .pxo"
 
 msgid "Export Sprite as .png"
-msgstr "Exportiere Sprite als PNG"
+msgstr "Sprite als .png exportieren"
 
 msgid "Export Sprite"
-msgstr "Exportiere Sprite"
+msgstr "Sprite exportieren"
 
 msgid "File Exists, Overwrite?"
 msgstr "Datei existiert schon, überschreiben?"
@@ -935,25 +935,25 @@ msgid "Restricts the value to be an integer multiple of 100%"
 msgstr "Beschränkt den Wert auf eine ganzzahliges Vielfaches von 100%"
 
 msgid "Tablet pressure sensitivity:"
-msgstr "Tabletdrucksensitivität:"
+msgstr "Tablett-Druckempfindlichkeit:"
 
 msgid "None"
 msgstr "Keine"
 
 msgid "Affect Brush's Alpha"
-msgstr "Beeinflusst Pinsels Alpha"
+msgstr "Pinseldeckkraft beeinflussen"
 
 msgid "Color:"
 msgstr "Farbe:"
 
 msgid "Guide color:"
-msgstr "Guidefarbe"
+msgstr "Hilfslinienfarbe:"
 
 msgid "System Language"
 msgstr "Systemsprache"
 
 msgid "Display scale:"
-msgstr "Bildschirmmaße:"
+msgstr "Anzeigeskalierung:"
 
 #. Refers to the font of a text.
 msgid "Font:"
@@ -965,10 +965,10 @@ msgstr "Schriftgröße:"
 
 #. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
 msgid "Screen orientation:"
-msgstr ""
+msgstr "Bildschirmorientierung:"
 
 msgid "Dim interface on dialog popup"
-msgstr "Oberfläche abdunkeln wenn ein Popup sich öffnet"
+msgstr "Oberfläche abdunkeln, wenn Dialoge öffnen"
 
 #. Found in the preferences, under the interface section. If enabled, the notification labels appear in the canvas when performing an action, such as when undoing/redoing.
 msgid "Show notification labels"
@@ -976,11 +976,11 @@ msgstr "Benachrichtigungsbeschriftungen anzeigen"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
-msgstr "Native Datei-Dialoge verwenden"
+msgstr "Systemeigene Dateidialoge verwenden"
 
 #. Found in the preferences, tooltip of the "Use native file dialogs" option.
 msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
-msgstr "Wenn diese Einstellung aktiviert ist, werden die nativen Datei-Dialoge des Betriebssystems anstelle des Dialogs von Pixelorama verwendet."
+msgstr "Wenn diese Einstellung aktiviert ist, werden die systemeigenen Dateidialoge des Betriebssystems anstelle der Dialoge von Pixelorama verwendet."
 
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
@@ -1070,10 +1070,10 @@ msgid "Only affect selection"
 msgstr "Nur Auswahl beeinflussen"
 
 msgid "Selected cels"
-msgstr "Ausgewählte Cels"
+msgstr "Ausgewählte Zellen"
 
 msgid "Current cel"
-msgstr "Aktuelle cel"
+msgstr "Aktuelle Zelle"
 
 msgid "Current frame"
 msgstr "Aktueller Rahmen"
@@ -1317,11 +1317,11 @@ msgstr "Pixelieren"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
-msgstr "Posterizen"
+msgstr "Posterisieren"
 
 #. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize levels:"
-msgstr "Posterize-Level:"
+msgstr "Posterisieren-Level:"
 
 #. An option for the posterize image effect.
 msgid "Dither intensity:"
@@ -1375,7 +1375,7 @@ msgid "Support Pixelorama's Development"
 msgstr "Unterstütze Pixeloramas Entwicklung"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr "Pixelorama - Vollpixele deine Träume!"
+msgstr "Pixelorama - Verpixele deine Träume!"
 
 msgid "Developed by Orama Interactive"
 msgstr "Entwickelt von Orama Interactive"
@@ -1428,7 +1428,7 @@ msgid "Greek"
 msgstr "Griechisch"
 
 msgid "French"
-msgstr "Fanzösisch"
+msgstr "Französisch"
 
 msgid "German"
 msgstr "Deutsch"
@@ -1446,13 +1446,13 @@ msgid "Russian"
 msgstr "Russisch"
 
 msgid "Chinese Simplified"
-msgstr "Simples Chinesisch"
+msgstr "Chinesisch (Vereinfacht)"
 
 msgid "Chinese Traditional"
 msgstr "Traditionelles Chinesisch"
 
 msgid "Italian"
-msgstr "Italenisch"
+msgstr "Italienisch"
 
 msgid "Latvian"
 msgstr "Lettisch"
@@ -1618,15 +1618,15 @@ msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Zoom\n\n"
-"%s für linke Maustaste\n"
-"%s für rechte Maustaste"
+"%s für die linke Maustaste\n"
+"%s für die rechte Maustaste"
 
 msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Schwenk\n\n"
-"%s für linke Maustaste\n"
-"%s für rechte Maustaste"
+"%s für die linke Maustaste\n"
+"%s für die rechte Maustaste"
 
 msgid "Color Picker\n\n"
 "%s for left mouse button\n"
@@ -1650,9 +1650,9 @@ msgid "Pencil\n\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
 msgstr "Bleistift\n\n"
-"%s für linke Maustaste\n"
-"%s für rechte Maustaste\n\n"
-"Halte %s, um eine Linie zu bilden"
+"%s für die linke Maustaste\n"
+"%s für die rechte Maustaste\n\n"
+"%s halten, um eine Linie zu ziehen"
 
 msgid "Eraser\n\n"
 "%s for left mouse button\n"
@@ -1661,14 +1661,14 @@ msgid "Eraser\n\n"
 msgstr "Radiergummi\n\n"
 "%s für die linke Maustaste\n"
 "%s für die rechte Maustaste\n\n"
-"Halte %s, um eine Linie zu bilden"
+"%s halten, um eine Linie zu ziehen"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
 msgstr "Füllen\n\n"
-"%s für linke Maustaste\n"
-"%s für rechte Maustaste"
+"%s für die linke Maustaste\n"
+"%s für die rechte Maustaste"
 
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
@@ -1686,9 +1686,9 @@ msgid "Line Tool\n\n"
 msgstr "Linienwerkzeug\n\n"
 "%s für die linke Maustaste\n"
 "%s für die rechte Maustaste\n\n"
-"Halten Sie %s gedrückt, um den Winkel der Linie ein zurasten\n"
-"Halten Sie %s gedrückt, um die Form auf dem Klick-Ursprung zu zentrieren\n"
-"Halten Sie %s, um den Ursprung der Form zu verschieben"
+"%s halten, um den Linienwinkel einzurasten\n"
+"%s halten, um die Form auf den Ursprung des Klicks zu zentrieren\n"
+"%s halten, den Ursprung der Form zu verschieben"
 
 msgid "Curve Tool\n\n"
 "%s for left mouse button\n"
@@ -1833,28 +1833,28 @@ msgid "Show left tool icon"
 msgstr "Linkes Werkzeugsymbol anzeigen"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr "Zeigt ein Symbol des ausgewählten linken Werkzeugs neben dem Cursor auf dem Canvas an"
+msgstr "Zeigt ein Symbol des ausgewählten linken Werkzeugs neben dem Cursor auf der Leinwand an"
 
 msgid "Show right tool icon"
 msgstr "Rechtes Werkzeugsymbol anzeigen"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr "Zeigt ein Symbol des ausgewählten rechten Werkzeugs neben dem Cursor auf dem Canvas an"
+msgstr "Zeigt ein Symbol des ausgewählten rechten Werkzeugs neben dem Cursor auf der Leinwand an"
 
 msgid "Use native mouse cursors"
 msgstr "Native Mousezeiger verwenden"
 
 msgid "Use cross cursor for the canvas"
-msgstr "Kreuz-Mauszeiger für den Canvas benutzen"
+msgstr "Kreuz-Mauszeiger für die Leinwand benutzen"
 
 msgid "Guides"
-msgstr "Guides"
+msgstr "Hilfslinien"
 
 msgid "Guides color:"
-msgstr "Guide-Farbe:"
+msgstr "Hilfslinienfarbe:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr "Eine Farbe der Lineal-Guides, die auf dem Canvas angezeigt werden"
+msgstr "Die Farbe der auf der Leinwand angezeigten Hilfslinien"
 
 #. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping"
@@ -1862,11 +1862,11 @@ msgstr "Einrasten"
 
 #. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr "Einrastungs-Distanz:"
+msgstr "Einrastabstand:"
 
 #. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
-msgstr "Dies ist die Distanz in den Bildschirm-Pixel, in denen Guide- und Rastereinrastung aktiviert werden."
+msgstr "Der Abstand in Bildschirmpixeln, ab dem das Einrasten an Hilfslinien und Raster aktiviert wird."
 
 msgid "Grid"
 msgstr "Raster"
@@ -1916,7 +1916,7 @@ msgstr "Raster-Offset:"
 
 #. Found in the Preferences, in the Canvas category. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr "Legt den Offset des Rasters vom Ursprung des Canvas fest (linke obere Ecke des Bilds)"
+msgstr "Legt den Offset des Rasters vom Ursprung der Leinwand fest (linke obere Ecke des Bilds)"
 
 msgid "Draw over Tile Mode:"
 msgstr "Über Tile-Modus zeichnen:"
@@ -1967,13 +1967,13 @@ msgid "Second color of the transparent checker background"
 msgstr "Zweite Farbe des transparenten Checkerhintergrunds"
 
 msgid "Follow Canvas Movement"
-msgstr "Canvas folgen"
+msgstr "Bewegung der Leinwand folgen"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr "Die transparenten Checker folgen dem Canvas"
+msgstr "Die transparenten Checker folgen der Leinwand"
 
 msgid "Follow Canvas Zoom Level"
-msgstr "Folge Canvas-Zoom-Level"
+msgstr "Folge dem Zoomlevel der Leinwand"
 
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr "Die transparenten Checker folgen dem Canvas-Zoom-Level"
@@ -2339,7 +2339,7 @@ msgid "Offset"
 msgstr "Offset"
 
 msgid "Simple Shading"
-msgstr "Simples Shading"
+msgstr "Einfaches Schattieren"
 
 msgid "Hue Shifting"
 msgstr "Farbtonverschiebung"
@@ -2515,11 +2515,11 @@ msgstr "Aktiviere diagonal gespiegelte (↘) Zeichnung"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
-msgstr "In Canvas-Mitte verschieben"
+msgstr "Zur Leinwandmitte verschieben"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to view center"
-msgstr "In die Mitte verschieben"
+msgstr "Zur Ansichtsmitte verschieben"
 
 msgid "Current frame:"
 msgstr "Aktueller Frame"
@@ -2611,7 +2611,7 @@ msgstr "Wenn diese Option ausgewählt ist, wird die Animation nur auf den Frames
 
 #. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
 msgid "Cel size:"
-msgstr "Cel-Größe:"
+msgstr "Zellengröße:"
 
 #. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
@@ -2656,11 +2656,11 @@ msgstr "Pixel auswählen"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
-msgstr "Cels verknüpfen mit"
+msgstr "Zellen verknüpfen mit"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get unlinked.
 msgid "Unlink cels"
-msgstr "Cels Verknüpfung entfernen"
+msgstr "Zellenverknüpfung entfernen"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
@@ -2679,7 +2679,7 @@ msgid "Layer properties"
 msgstr "Ebenen-Eigenschaften"
 
 msgid "Cel properties"
-msgstr "Cel-Eigenschaften"
+msgstr "Zelleigenschaften"
 
 msgid "Tag properties"
 msgstr "Tag-Eigenschaften"
@@ -2867,10 +2867,10 @@ msgid "Luminosity"
 msgstr "Helligkeit"
 
 msgid "Opacity:"
-msgstr "Deckkraft"
+msgstr "Deckkraft:"
 
 msgid "Tile mode opacity:"
-msgstr "Kachelmodus Deckkraft:"
+msgstr "Kachelmodus-Deckkraft:"
 
 msgid "Toggle layer's visibility"
 msgstr "Ändere die Sichtbarkeit der Ebene"
@@ -2883,8 +2883,8 @@ msgstr "Frame: %s, Ebene: %s"
 
 msgid "Enable/disable automatic linking of new cels when creating new frames\n\n"
 "Linked cels share content across multiple frames"
-msgstr "Aktiviere/Deaktiviere automatische Verlinkung neuer Cels beim Erstellen neuer Frames\n\n"
-"Verknüpfte Cels teilen Inhalte über mehrere Frames"
+msgstr "Aktiviere/Deaktiviere automatische Verlinkung neuer Zellen beim Erstellen neuer Frames\n\n"
+"Verknüpfte Zellen teilen Inhalte über mehrere Frames"
 
 msgid "Expand/collapse group"
 msgstr "Gruppe aus- / einklappen"
@@ -2916,7 +2916,7 @@ msgid "Choose a palette"
 msgstr "Wähle eine Palette"
 
 msgid "Undo: Draw"
-msgstr "Rückgängig: Zeichen"
+msgstr "Rückgängig: Zeichnen"
 
 msgid "Redo: Draw"
 msgstr "Wiederherstellen: Zeichnen"
@@ -2940,7 +2940,7 @@ msgid "Redo: Add Layer"
 msgstr "Wiederherstellen: Ebene hinzufügen"
 
 msgid "Undo: Remove Layer"
-msgstr "Rückgängigg: Entferne Ebene"
+msgstr "Rückgängig: Ebene entfernen"
 
 msgid "Redo: Remove Layer"
 msgstr "Wiederherstellen: Entferne Ebene"
@@ -2952,7 +2952,7 @@ msgid "Redo: Merge Layer"
 msgstr "Wiederherstellen: Füge Ebene zusammen"
 
 msgid "Undo: Change Layer Order"
-msgstr "Rückgängig: Ändere Ebenenreihenfolge"
+msgstr "Rückgängig: Ebenenreihenfolge ändern"
 
 msgid "Redo: Change Layer Order"
 msgstr "Wiederherstellen: Ändere Ebenenreihenfolge"
@@ -3000,7 +3000,7 @@ msgid "Redo: Change frame duration"
 msgstr "Wiederholen: Frame-Dauer ändern"
 
 msgid "Move Guide"
-msgstr "Guide verschieben"
+msgstr "Hilfslinie verschieben"
 
 msgid "File saved"
 msgstr "Datei gespeichert"
@@ -3121,7 +3121,7 @@ msgstr "Alle Erweiterungen entfernen"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all backups"
-msgstr ""
+msgstr "Alle Sicherungen entfernen"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
@@ -3361,7 +3361,7 @@ msgid "Duration"
 msgstr "Dauer"
 
 msgid "Tiled In Both Axis"
-msgstr "In beiden Achsen gekachelt"
+msgstr "Auf beiden Achsen gekachelt"
 
 msgid "Tiled In X Axis"
 msgstr "In X-Achse gekachelt"
@@ -3455,16 +3455,16 @@ msgid "Tools"
 msgstr "Werkzeuge"
 
 msgid "Main Canvas"
-msgstr "Haupt-Canvas"
+msgstr "Hauptleinwand"
 
 msgid "Second Canvas"
-msgstr "Zweiter Canvas"
+msgstr "Zweite Leinwand"
 
 msgid "Animation Timeline"
 msgstr "Animations-Zeitleiste"
 
 msgid "Canvas Preview"
-msgstr "Canvas Vorschau"
+msgstr "Leinwand-Vorschau"
 
 msgid "Color Pickers"
 msgstr "Farbauswähler"
@@ -3490,13 +3490,13 @@ msgstr "Zeichnungsaufnahme"
 
 #. Tiles are images of a specific shape, usually rectangular, that are laid out in a grid. They are used in tile-based video games. https://en.wikipedia.org/wiki/Tile-based_video_game
 msgid "Tiles"
-msgstr "Tiles"
+msgstr "Kacheln"
 
 msgid "Crop"
 msgstr "Zuschneiden"
 
 msgid "Resize the canvas"
-msgstr "Canvas skalieren"
+msgstr "Leinwand skalieren"
 
 msgid "Margins"
 msgstr "Abstände"
@@ -3785,19 +3785,19 @@ msgstr "Sinus"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Wiggling around the edges"
-msgstr "Wiggling rund um die Kanten"
+msgstr "Wackeln an den Kanten"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Bouncing at the end"
-msgstr "Bouncing am Ende"
+msgstr "Zurückspringen am Ende"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
-msgstr "Backing out am Ende"
+msgstr "Zurückziehen am Ende"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Spring towards the end"
-msgstr "Zum Ende hinspringen"
+msgstr "Zum Ende federn"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
@@ -3810,8 +3810,8 @@ msgstr "Beim Öffnen eines Bildes kann es als Referenz importiert werden."
 #. Found in the Reference Images panel after a reference image has been imported.
 msgid "Select an image below to change its properties.\n"
 "Note that you cannot draw while a reference image is selected."
-msgstr "Wählen Sie ein Bild unten, um seine Eigenschaften zu ändern.\n"
-"Beachten Sie, dass Sie nicht zeichnen können, während ein Referenzbild ausgewählt ist."
+msgstr "Wähle ein Bild unten, um dessen Eigenschaften zu ändern.\n"
+"Hinweis: Du kannst nicht zeichnen, während ein Referenzbild ausgewählt ist."
 
 #. Removes the selected reference image.
 msgid "Remove"
@@ -3819,11 +3819,11 @@ msgstr "Entfernen"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove."
-msgstr "Halten Sie Shift während des Benutzens gedrückt für sofortige Entfernung."
+msgstr "Halte die Umschalttaste beim Klicken gedrückt, um sofort zu entfernen."
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr "Sind Sie sicher, dass Sie dieses Referenzbild entfernen möchten? Es wird nicht aus Ihrem Dateisystem gelöscht."
+msgstr "Möchtest du dieses Referenzbild wirklich entfernen? Es wird nicht aus deinem Dateisystem gelöscht."
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -3835,7 +3835,7 @@ msgstr "Ausgewähltes Referenzbild nach links verschieben"
 
 #. Select a reference on the canvas
 msgid "Selects a reference image on the canvas"
-msgstr "Wählt ein Referenzbild auf dem Canvas aus"
+msgstr "Wählt ein Referenzbild auf der Leinwand aus"
 
 #. Moves the reference on the canvas
 msgid "Move the selected reference image"
@@ -3875,11 +3875,11 @@ msgstr "Filter"
 
 #. Opacity of the selected reference image on the canvas.
 msgid "Opacity"
-msgstr "Transparenz"
+msgstr "Deckkraft"
 
 #. Color clamping of the selected reference image on the canvas.
 msgid "Color Clamping"
-msgstr "Farbklampen"
+msgstr "Farbbegrenzung"
 
 #. Used in checkbuttons (like on/off switches) that enable/disable something.
 msgid "Enabled"
@@ -3895,60 +3895,60 @@ msgstr "Effekt hinzufügen"
 
 #. Text from a confirmation dialog that appears when the user is attempting to drag and drop an image directly from the browser into Pixelorama.
 msgid "Do you want to download the image from %s?"
-msgstr "Möchten Sie das Bild von %s herunterladen?"
+msgstr "Möchtest du das Bild von %s herunterladen?"
 
 #. A tileset is a collection of tiles.
 #: src/Classes/TileSetCustom.gd
 #: src/UI/Dialogs/ImportPreviewDialog.gd
 msgid "Tileset"
-msgstr "Tileset"
+msgstr "Kachelset"
 
 #. A tileset is a collection of tiles.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tileset:"
-msgstr "Tileset:"
+msgstr "Kachelset:"
 
 #. A tileset is a collection of tiles.
 #: src/UI/Dialogs/ProjectProperties.tscn
 msgid "Tilesets"
-msgstr "Tilesets"
+msgstr "Kachelsets"
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "New tileset"
-msgstr "Neues Tileset"
+msgstr "Neues Kachelset"
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 msgid "Tileset name:"
-msgstr "Tileset Name:"
+msgstr "Name des Kachelsets:"
 
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile size:"
-msgstr "Tileset Größe:"
+msgstr "Kachelgröße:"
 
 #. The shape of each tile in a tileset (rectangular, isometric, hexagonal).
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile shape:"
-msgstr "Tile-Größe:"
+msgstr "Kachelform:"
 
 #. The layout that the tiles appear in, in a non-rectangular grid.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile layout:"
-msgstr "Tile-Layout:"
+msgstr "Kachellayout:"
 
 #. The offset axis (horizontal or vertical) of non-rectangular tiles.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile offset axis:"
-msgstr "Tile-Offset-Achse:"
+msgstr "Kachelversatz-Achse:"
 
 #. Tooltip of the "tile offset axis" option.
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "For all half-offset shapes (Isometric & Hexagonal), determines the offset axis."
-msgstr "Für alle halb-Offset-Formen (Isometrisch & Hexagonal) bestimmt die Offset-Achse."
+msgstr "Bestimmt die Versatzachse für alle Formen mit Halbversatz (Isometrisch & Hexagonal)."
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
