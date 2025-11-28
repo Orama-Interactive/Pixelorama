@@ -146,6 +146,9 @@ func _on_tilesets_list_item_edited() -> void:
 
 
 func _on_name_line_edit_text_changed(new_text: String) -> void:
+	new_text = new_text.strip_edges()
+	if new_text.is_empty() or !new_text.is_valid_filename():
+		new_text = tr("untitled")
 	Global.current_project.name = new_text
 
 
