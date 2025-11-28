@@ -1,7 +1,5 @@
 extends PopupPanel
 
-signal dynamics_changed
-
 enum { ALPHA, SIZE }
 
 @onready var alpha_pressure_button: Button = $"%AlphaPressureButton"
@@ -80,7 +78,7 @@ func _on_dynamics_toggled(
 	if !button.button_pressed:
 		file_name = "uncheck.png"
 	Global.change_button_texturerect(texture_button, file_name)
-	dynamics_changed.emit()
+	Global.dynamics_changed.emit()
 
 
 func _on_threshold_pressure_updated(value_1: float, value_2: float) -> void:
@@ -95,22 +93,22 @@ func _on_threshold_velocity_updated(value_1: float, value_2: float) -> void:
 
 func _on_alpha_min_value_changed(value: float) -> void:
 	Tools.alpha_min = value
-	dynamics_changed.emit()
+	Global.dynamics_changed.emit()
 
 
 func _on_alpha_max_value_changed(value: float) -> void:
 	Tools.alpha_max = value
-	dynamics_changed.emit()
+	Global.dynamics_changed.emit()
 
 
 func _on_size_min_value_changed(value: float) -> void:
 	Tools.brush_size_min = int(value)
-	dynamics_changed.emit()
+	Global.dynamics_changed.emit()
 
 
 func _on_size_max_value_changed(value: float) -> void:
 	Tools.brush_size_max = int(value)
-	dynamics_changed.emit()
+	Global.dynamics_changed.emit()
 
 
 func _on_enable_stabilizer_toggled(toggled_on: bool) -> void:

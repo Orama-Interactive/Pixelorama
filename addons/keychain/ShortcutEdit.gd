@@ -66,6 +66,9 @@ const JOY_AXIS_NAMES: PackedStringArray = [
 var currently_editing_tree_item: TreeItem
 var currently_editing_mouse_movement_action: Keychain.MouseMovementInputAction
 var is_editing := false
+var current_name_filter := ""
+var current_event_filter: InputEvent
+var filter_by_shortcut_line_edit_has_focus := false
 # Textures taken from Godot https://github.com/godotengine/godot/tree/master/editor/icons
 var add_tex: Texture2D = preload("assets/add.svg")
 var edit_tex: Texture2D = preload("assets/edit.svg")
@@ -78,6 +81,8 @@ var mouse_tex: Texture2D = preload("assets/mouse.svg")
 var shortcut_tex: Texture2D = preload("assets/shortcut.svg")
 var folder_tex: Texture2D = preload("assets/folder.svg")
 
+@onready var filter_by_name_line_edit: LineEdit = %FilterByNameLineEdit
+@onready var filter_by_shortcut_line_edit: LineEdit = %FilterByShortcutLineEdit
 @onready var tree: Tree = $VBoxContainer/ShortcutTree
 @onready var profile_option_button: OptionButton = find_child("ProfileOptionButton")
 @onready var rename_profile_button: Button = find_child("RenameProfile")
@@ -278,6 +283,90 @@ func event_to_str(event: InputEvent) -> String:
 	return output
 
 
+func _on_filter_by_name_line_edit_text_changed(new_text: String) -> void:
+	current_name_filter = new_text.strip_edges()
+	apply_search_filters()
+
+
+func _on_filter_by_shortcut_line_edit_gui_input(event: InputEvent) -> void:
+	if (
+		not event is InputEventKey
+		and not event is InputEventMouseButton
+		and not event is InputEventJoypadButton
+	):
+		return
+	if event.pressed:
+		if event is InputEventMouseButton:
+			if not filter_by_shortcut_line_edit_has_focus:
+				return
+			if event.position.x >= filter_by_shortcut_line_edit.get_rect().size.x - 30:
+				return
+		current_event_filter = event
+		filter_by_shortcut_line_edit.set_deferred(&"text", event.as_text())
+		apply_search_filters()
+
+
+func _on_filter_by_shortcut_line_edit_text_changed(new_text: String) -> void:
+	if not new_text.is_empty():
+		return
+	current_event_filter = null
+	apply_search_filters()
+
+
+func _on_clear_all_filters_pressed() -> void:
+	filter_by_name_line_edit.text = ""
+	filter_by_shortcut_line_edit.text = ""
+	current_name_filter = ""
+	current_event_filter = null
+	apply_search_filters()
+
+
+func apply_search_filters() -> void:
+	var tree_item: TreeItem = tree.get_root().get_first_child()
+	var results: Array[TreeItem] = []
+	var should_reset := (
+		not is_instance_valid(current_event_filter) and current_name_filter.is_empty()
+	)
+	while tree_item != null:  # Loop through Tree's TreeItems.
+		if is_instance_valid(current_event_filter):
+			var metadata = tree_item.get_metadata(0)
+			if metadata is InputEvent:
+				if current_event_filter.is_match(metadata):
+					if current_name_filter.is_empty():
+						results.append(tree_item)
+					else:
+						var parent := tree_item.get_parent()
+						if current_name_filter.is_subsequence_ofn(parent.get_text(0)):
+							results.append(tree_item)
+		elif not current_name_filter.is_empty():
+			var metadata = tree_item.get_metadata(0)
+			if metadata is StringName:
+				if current_name_filter.is_subsequence_ofn(tree_item.get_text(0)):
+					results.append(tree_item)
+			elif metadata is InputEvent:
+				tree_item = tree_item.get_next_in_tree()
+				continue
+
+		if should_reset:
+			tree_item.visible = true
+		else:
+			tree_item.collapsed = true
+			tree_item.visible = false
+		tree_item = tree_item.get_next_in_tree()
+	var expanded: Array[TreeItem] = []
+	for result in results:
+		var item: TreeItem = result
+		while item.get_parent():
+			if expanded.has(item):
+				break
+			item.collapsed = false
+			item.visible = true
+			expanded.append(item)
+			item = item.get_parent()
+	if not results.is_empty():
+		tree.scroll_to_item(results[0])
+
+
 func _on_shortcut_tree_button_clicked(item: TreeItem, _column: int, id: int, _mbi: int) -> void:
 	var action = item.get_metadata(0)
 	currently_editing_tree_item = item
@@ -406,7 +495,7 @@ func _on_ProfileOptionButton_item_selected(index: int) -> void:
 	if Keychain.profiles.size() == 1:
 		delete_profile_button.disabled = true
 
-	_recontrust_tree()
+	_reconstruct_tree()
 	Keychain.config_file.set_value("shortcuts", "shortcuts_profile", index)
 	Keychain.config_file.save(Keychain.config_path)
 
@@ -483,11 +572,19 @@ func _on_DeleteConfirmation_confirmed() -> void:
 func _on_reset_confirmation_confirmed() -> void:
 	Keychain.selected_profile.copy_bindings_from(Keychain.DEFAULT_PROFILE)
 	Keychain.change_profile(Keychain.profile_index)
-	_recontrust_tree()
+	_reconstruct_tree()
 
 
-func _recontrust_tree() -> void:
+func _reconstruct_tree() -> void:
 	for group in Keychain.groups:
 		Keychain.groups[group].tree_item = null
 	tree.clear()
 	_construct_tree()
+
+
+func _on_filter_by_shortcut_line_edit_focus_entered() -> void:
+	set_deferred(&"filter_by_shortcut_line_edit_has_focus", true)
+
+
+func _on_filter_by_shortcut_line_edit_focus_exited() -> void:
+	filter_by_shortcut_line_edit_has_focus = false

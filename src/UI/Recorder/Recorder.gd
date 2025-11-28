@@ -75,6 +75,7 @@ class Recorder:
 			DrawingAlgos.blend_layers(image, frame, Vector2i.ZERO, project)
 
 			if recorder_panel.resize_percent != 100:
+				@warning_ignore("integer_division")
 				var resize := recorder_panel.resize_percent / 100
 				var new_width := image.get_width() * resize
 				var new_height := image.get_height() * resize

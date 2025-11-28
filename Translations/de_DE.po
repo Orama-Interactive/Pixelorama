@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2025-10-14 14:09\n"
+"PO-Revision-Date: 2025-11-25 22:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -963,6 +963,10 @@ msgstr "Schriftart:"
 msgid "Font size:"
 msgstr "Schriftgröße:"
 
+#. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
+msgid "Screen orientation:"
+msgstr ""
+
 msgid "Dim interface on dialog popup"
 msgstr "Oberfläche abdunkeln wenn ein Popup sich öffnet"
 
@@ -1028,6 +1032,14 @@ msgstr "Hintergrundfarbe von:"
 
 msgid "Background color:"
 msgstr "Hintergrundfarbe:"
+
+#. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
+msgid "Single tool mode"
+msgstr ""
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
+msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
+msgstr ""
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
@@ -1521,7 +1533,7 @@ msgid "imported"
 msgstr "importiert"
 
 msgid "copy"
-msgstr "kopiere"
+msgstr "Kopie"
 
 msgid "Are you sure you want to exit Pixelorama?"
 msgstr "Möchten sie Pixelorama wirklich verlassen?"
@@ -3106,6 +3118,10 @@ msgstr "Alle Werkzeugoptionen zurücksetzen"
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
 msgstr "Alle Erweiterungen entfernen"
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all backups"
+msgstr ""
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"

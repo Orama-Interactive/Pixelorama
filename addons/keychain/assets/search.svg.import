@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bx1xa5aacxfx4"
-path="res://.godot/imported/merge_down.png-a3f5d31e30b455770aabfc4c5082293e.ctex"
+uid="uid://0ij8aasy3k3b"
+path="res://.godot/imported/search.svg-ce699cea82128153c676105375a8d6d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/graphics/layers/merge_down.png"
-dest_files=["res://.godot/imported/merge_down.png-a3f5d31e30b455770aabfc4c5082293e.ctex"]
+source_file="res://addons/keychain/assets/search.svg"
+dest_files=["res://.godot/imported/search.svg-ce699cea82128153c676105375a8d6d3.ctex"]
 
 [params]
 
@@ -38,3 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

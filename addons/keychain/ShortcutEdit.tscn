@@ -1,9 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://bq7ibhm0txl5p"]
+[gd_scene load_steps=18 format=3 uid="uid://bq7ibhm0txl5p"]
 
 [ext_resource type="Script" uid="uid://dpciapd2x2va6" path="res://addons/keychain/ShortcutEdit.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://ca58ufal2ufd8" path="res://addons/keychain/assets/joy_button.svg" id="2"]
+[ext_resource type="Texture2D" uid="uid://0ij8aasy3k3b" path="res://addons/keychain/assets/search.svg" id="2_4odqy"]
 [ext_resource type="Texture2D" uid="uid://cgsvoct3wwbjb" path="res://addons/keychain/assets/arrows/down.png" id="2_b4f3q"]
 [ext_resource type="Texture2D" uid="uid://esi4oenejswj" path="res://addons/keychain/assets/arrows/top_left.png" id="2_gs4p1"]
+[ext_resource type="Texture2D" uid="uid://cmh8eaibhn5y8" path="res://addons/keychain/assets/keyboard_physical.svg" id="2_wps2m"]
 [ext_resource type="Texture2D" uid="uid://c2s5rm4nec5yh" path="res://addons/keychain/assets/keyboard.svg" id="3"]
 [ext_resource type="Texture2D" uid="uid://b337qel4762m4" path="res://addons/keychain/assets/arrows/up.png" id="3_gw1s5"]
 [ext_resource type="Texture2D" uid="uid://bb6q6om3d08cm" path="res://addons/keychain/assets/joy_axis.svg" id="4"]
@@ -77,6 +79,33 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Open Folder"
+
+[node name="Filters" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="FilterByNameLineEdit" type="LineEdit" parent="VBoxContainer/Filters"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Filter by name"
+clear_button_enabled = true
+right_icon = ExtResource("2_4odqy")
+
+[node name="FilterByShortcutLineEdit" type="LineEdit" parent="VBoxContainer/Filters"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Filter by shortcut"
+context_menu_enabled = false
+clear_button_enabled = true
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+right_icon = ExtResource("2_wps2m")
+
+[node name="ClearAllFilters" type="Button" parent="VBoxContainer/Filters"]
+layout_mode = 2
+text = "Clear all"
 
 [node name="ShortcutTree" type="Tree" parent="VBoxContainer"]
 layout_mode = 2
@@ -233,6 +262,12 @@ dialog_text = "Are you sure you want to restore all shortcuts to their default s
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/RenameProfile" to="." method="_on_RenameProfile_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/DeleteProfile" to="." method="_on_DeleteProfile_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/OpenProfileFolder" to="." method="_on_OpenProfileFolder_pressed"]
+[connection signal="text_changed" from="VBoxContainer/Filters/FilterByNameLineEdit" to="." method="_on_filter_by_name_line_edit_text_changed"]
+[connection signal="focus_entered" from="VBoxContainer/Filters/FilterByShortcutLineEdit" to="." method="_on_filter_by_shortcut_line_edit_focus_entered"]
+[connection signal="focus_exited" from="VBoxContainer/Filters/FilterByShortcutLineEdit" to="." method="_on_filter_by_shortcut_line_edit_focus_exited"]
+[connection signal="gui_input" from="VBoxContainer/Filters/FilterByShortcutLineEdit" to="." method="_on_filter_by_shortcut_line_edit_gui_input"]
+[connection signal="text_changed" from="VBoxContainer/Filters/FilterByShortcutLineEdit" to="." method="_on_filter_by_shortcut_line_edit_text_changed"]
+[connection signal="pressed" from="VBoxContainer/Filters/ClearAllFilters" to="." method="_on_clear_all_filters_pressed"]
 [connection signal="button_clicked" from="VBoxContainer/ShortcutTree" to="." method="_on_shortcut_tree_button_clicked"]
 [connection signal="item_activated" from="VBoxContainer/ShortcutTree" to="." method="_on_ShortcutTree_item_activated"]
 [connection signal="item_selected" from="VBoxContainer/ShortcutTree" to="." method="_on_shortcut_tree_item_selected"]
