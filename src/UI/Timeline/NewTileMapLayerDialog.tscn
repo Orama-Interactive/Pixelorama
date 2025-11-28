@@ -47,7 +47,7 @@ text = "Tileset name:"
 [node name="TilesetNameLineEdit" type="LineEdit" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "New Tilemap"
+placeholder_text = "New Tileset"
 
 [node name="TileSizeLabel" type="Label" parent="GridContainer"]
 layout_mode = 2
