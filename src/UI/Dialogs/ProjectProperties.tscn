@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://fvgl2kl81v0h" path="res://assets/graphics/misc/search.svg" id="2_h0qhi"]
 
 [node name="ProjectProperties" type="AcceptDialog"]
+oversampling_override = 1.0
 title = "Project Properties"
 position = Vector2i(0, 36)
 size = Vector2i(300, 330)
@@ -13,7 +14,7 @@ script = ExtResource("1_0n4uc")
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 292.0
-offset_bottom = 239.0
+offset_bottom = 280.0
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -98,11 +99,19 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="FilterByNameEdit" type="LineEdit" parent="VBoxContainer/TilesetsContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 placeholder_text = "Filter by name"
 right_icon = ExtResource("2_h0qhi")
 
-[node name="TilesetsList" type="Tree" parent="VBoxContainer/TilesetsContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/TilesetsContainer"]
+self_modulate = Color(0.6, 0.6, 0.6, 1)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TilesetsList" type="Tree" parent="VBoxContainer/TilesetsContainer/PanelContainer"]
+unique_name_in_owner = true
+texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 3
 hide_root = true
@@ -111,6 +120,6 @@ hide_root = true
 [connection signal="text_changed" from="VBoxContainer/GridContainer/NameLineEdit" to="." method="_on_name_line_edit_text_changed"]
 [connection signal="text_changed" from="VBoxContainer/GridContainer/UserDataTextEdit" to="." method="_on_user_data_text_edit_text_changed"]
 [connection signal="text_changed" from="VBoxContainer/TilesetsContainer/FilterByNameEdit" to="." method="_on_filter_by_name_line_edit_text_changed"]
-[connection signal="button_clicked" from="VBoxContainer/TilesetsContainer/TilesetsList" to="." method="_on_tilesets_list_button_clicked"]
-[connection signal="item_activated" from="VBoxContainer/TilesetsContainer/TilesetsList" to="." method="_on_tilesets_list_item_activated"]
-[connection signal="item_edited" from="VBoxContainer/TilesetsContainer/TilesetsList" to="." method="_on_tilesets_list_item_edited"]
+[connection signal="button_clicked" from="VBoxContainer/TilesetsContainer/PanelContainer/TilesetsList" to="." method="_on_tilesets_list_button_clicked"]
+[connection signal="item_activated" from="VBoxContainer/TilesetsContainer/PanelContainer/TilesetsList" to="." method="_on_tilesets_list_item_activated"]
+[connection signal="item_edited" from="VBoxContainer/TilesetsContainer/PanelContainer/TilesetsList" to="." method="_on_tilesets_list_item_edited"]

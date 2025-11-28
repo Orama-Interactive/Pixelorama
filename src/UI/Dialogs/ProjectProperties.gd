@@ -12,8 +12,8 @@ var _current_tileset_name_filter: String
 @onready var name_line_edit := $VBoxContainer/GridContainer/NameLineEdit as LineEdit
 @onready var user_data_text_edit := $VBoxContainer/GridContainer/UserDataTextEdit as TextEdit
 @onready var tilesets_container := $VBoxContainer/TilesetsContainer as VBoxContainer
-@onready var tilesets_list := $VBoxContainer/TilesetsContainer/TilesetsList as Tree
-@onready var filter_by_name_edit := $VBoxContainer/TilesetsContainer/FilterByNameEdit as LineEdit
+@onready var tilesets_list := %TilesetsList as Tree
+@onready var filter_by_name_edit := %FilterByNameEdit as LineEdit
 
 
 func _on_visibility_changed() -> void:
@@ -75,14 +75,6 @@ func _create_tileset_tree_item(i: int, root_item: TreeItem) -> void:
 	var tree_item := tilesets_list.create_item(root_item)
 	var item_text := tileset.get_text_info(i)
 	var using_layers := tileset.find_using_layers(Global.current_project)
-	for j in using_layers.size():
-		if j == 0:
-			item_text += " ("
-		item_text += using_layers[j].name
-		if j == using_layers.size() - 1:
-			item_text += ")"
-		else:
-			item_text += ", "
 	for tile: TileSetCustom.Tile in tileset.tiles:
 		var preview: Image = tile.image
 		if not preview.get_used_rect().size == Vector2i.ZERO:
@@ -97,6 +89,12 @@ func _create_tileset_tree_item(i: int, root_item: TreeItem) -> void:
 			tex.set_size_override(Vector2i(32, 32))
 			tree_item.set_icon(0, tex)
 			break
+	for j in using_layers.size():
+		if j == 0:
+			item_text += "\n┖╴ Used by: "
+		item_text += using_layers[j].name
+		if j != using_layers.size() - 1:
+			item_text += ", "
 	tree_item.set_text(0, item_text)
 	tree_item.set_metadata(0, i)
 	tree_item.add_button(0, DUPLICATE_TEXTURE, -1, false, "Duplicate")
@@ -140,11 +138,9 @@ func _on_tilesets_list_item_edited() -> void:
 			var using_layers := tileset.find_using_layers(Global.current_project)
 			for j in using_layers.size():
 				if j == 0:
-					item_text += " ("
+					item_text += "\n┖╴ Used by: "
 				item_text += using_layers[j].name
-				if j == using_layers.size() - 1:
-					item_text += ")"
-				else:
+				if j != using_layers.size() - 1:
 					item_text += ", "
 			item.set_text(0, item_text)
 
