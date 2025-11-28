@@ -31,15 +31,10 @@ func _on_visibility_changed() -> void:
 	user_data_text_edit.text = Global.current_project.user_data
 	tilesets_container.visible = Global.current_project.tilesets.size() > 0
 	filter_by_name_edit.text = ""
-	refresh_tileset_list()
-
-
-func refresh_tileset_list():
-	if visible:  # Updating list only matters if it is visible
-		tilesets_list.clear()
-		var root_item := tilesets_list.create_item()
-		for i in Global.current_project.tilesets.size():
-			_create_tileset_tree_item(i, root_item)
+	tilesets_list.clear()
+	var root_item := tilesets_list.create_item()
+	for i in Global.current_project.tilesets.size():
+		_create_tileset_tree_item(i, root_item)
 
 
 func _on_filter_by_name_line_edit_text_changed(new_text: String) -> void:
@@ -132,17 +127,28 @@ func _on_tilesets_list_item_edited() -> void:
 			var project := Global.current_project
 			var old_name := tileset.name
 			var new_name = item.get_text(0).strip_edges()
-			if new_name.is_empty() or new_name == old_name:
-				return
+			if new_name.is_empty():
+				new_name = old_name
+			item.set_editable(0, false)
 			project.undo_redo.create_action("Rename tileset")
 			project.undo_redo.add_do_property(tileset, "name", new_name)
 			project.undo_redo.add_undo_property(tileset, "name", old_name)
-			project.undo_redo.add_do_method(refresh_tileset_list)
-			project.undo_redo.add_undo_method(refresh_tileset_list)
 			project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 			project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 			project.undo_redo.commit_action()
 
+			# Update the entry in the list
+			var item_text := tileset.get_text_info(tileset_index)
+			var using_layers := tileset.find_using_layers(Global.current_project)
+			for j in using_layers.size():
+				if j == 0:
+					item_text += " ("
+				item_text += using_layers[j].name
+				if j == using_layers.size() - 1:
+					item_text += ")"
+				else:
+					item_text += ", "
+			item.set_text(0, item_text)
 
 func _on_name_line_edit_text_changed(new_text: String) -> void:
 	Global.current_project.name = new_text
