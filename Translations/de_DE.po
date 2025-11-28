@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2025-11-27 13:34\n"
+"PO-Revision-Date: 2025-11-28 10:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -534,7 +534,7 @@ msgstr "Vertikale Frames:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
-msgstr "Smart Slice"
+msgstr "Intelligentes Zerteilen"
 
 #. A value that is a threshold
 msgid "Threshold:"
@@ -546,7 +546,7 @@ msgstr "Bilder, die eine Seite kleiner als dieser Wert haben, werden den Schwell
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Merge is an adjective, it refers to the distance where images get merged.
 msgid "Merge distance:"
-msgstr "Distanz zusammenführen:"
+msgstr "Zusammenführungsabstand:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
@@ -572,7 +572,7 @@ msgid "Brush type:"
 msgstr "Pinseltyp:"
 
 msgid "File brush"
-msgstr "Datei-Pinsel"
+msgstr "Dateipinsel"
 
 msgid "Project brush"
 msgstr "Projekt-Pinsel"
@@ -581,7 +581,7 @@ msgid "Random brush"
 msgstr "Zufälliger Pinsel"
 
 msgid "Save Sprite as .pxo"
-msgstr "Speichere Sprite als .pxo"
+msgstr "Sprite als .pxo speichern"
 
 msgid "Export Sprite as .png"
 msgstr "Sprite als .png exportieren"
@@ -614,7 +614,7 @@ msgstr "Kann Datei '%s ' nicht laden."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr "Kann Datei nicht laden '%s'. Error code: %s"
+msgstr "Kann Datei nicht laden '%s'. Fehlercode: %s"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
@@ -649,7 +649,7 @@ msgid "Browse"
 msgstr "Durchsuchen"
 
 msgid "Resize:"
-msgstr "Größe verändern"
+msgstr "Größe ändern:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
@@ -716,10 +716,10 @@ msgid "Columns:"
 msgstr "Spalten:"
 
 msgid "Rows"
-msgstr "Reihen"
+msgstr "Zeilen"
 
 msgid "Rows:"
-msgstr "Reihen:"
+msgstr "Zeilen:"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new column.
 msgid "Tags by column"
@@ -737,13 +737,13 @@ msgid "Save a File"
 msgstr "Datei speichern"
 
 msgid "Go to previous folder."
-msgstr "Gehe zum vorherigen Ordner."
+msgstr "Zum vorherigen Ordner wechseln."
 
 msgid "Go to next folder."
-msgstr "Gehe zum nächsten Ordner."
+msgstr "Zum nächsten Ordner wechseln."
 
 msgid "Go to parent folder."
-msgstr "Gehe zum übergeordneten Ordner."
+msgstr "Zum übergeordneten Ordner wechseln."
 
 msgid "Path:"
 msgstr "Pfad:"
@@ -789,7 +789,7 @@ msgstr "Radiance HDR-Bild"
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
-msgstr "JPEG Bild"
+msgstr "JPEG-Bild"
 
 #. Found in the "Open" file dialog. Searches SVG files only. (Note that SVG is a file type and should remain untranslated)
 msgid "SVG Image"
@@ -839,7 +839,7 @@ msgid "Interpolation:"
 msgstr "Interpolation:"
 
 msgid "Nearest"
-msgstr "Nächstes"
+msgstr "Nächster Nachbar"
 
 msgid "Bilinear"
 msgstr "Bilinear"
@@ -848,7 +848,7 @@ msgid "Cubic"
 msgstr "Kubisch"
 
 msgid "Trilinear"
-msgstr "Triliniar"
+msgstr "Trilinear"
 
 msgid "Constant"
 msgstr "Konstant"
@@ -877,7 +877,7 @@ msgid "Themes"
 msgstr "Designs"
 
 msgid "Canvas"
-msgstr "Canvas"
+msgstr "Leinwand"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
@@ -920,7 +920,7 @@ msgstr "Standardeinstellungen wiederherstellen"
 
 #. Found in the preferences, under Canvas.
 msgid "Smooth Zoom"
-msgstr "Smoother Zoom"
+msgstr "Weicher Zoom"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Smooth Zoom".
 msgid "Adds a smoother transition when zooming in or out"
@@ -968,7 +968,7 @@ msgid "Screen orientation:"
 msgstr "Bildschirmorientierung:"
 
 msgid "Dim interface on dialog popup"
-msgstr "Oberfläche abdunkeln, wenn Dialoge öffnen"
+msgstr "Oberfläche bei Dialogen abdunkeln"
 
 #. Found in the preferences, under the interface section. If enabled, the notification labels appear in the canvas when performing an action, such as when undoing/redoing.
 msgid "Show notification labels"
@@ -1058,7 +1058,7 @@ msgid "Right tool color:"
 msgstr "Farbe des rechten Werkzeugs:"
 
 msgid "Tool button size:"
-msgstr "Werkzeugbutton-Größe:"
+msgstr "Werkzeug-Schaltflächengröße:"
 
 msgid "Small"
 msgstr "Klein"
@@ -1545,7 +1545,7 @@ msgid "You have unsaved changes. If you proceed, the progress you have made will
 msgstr "Du hast ungespeicherte Änderungen. Wenn du fortfährst, gehen deine bisherigen Fortschritte verloren."
 
 msgid "Save before exiting?"
-msgstr "Speichere vor dem Verlassen?"
+msgstr "Vor dem Verlassen speichern?"
 
 msgid "Project %s has unsaved progress. How do you wish to proceed?"
 msgstr "Projekt %s hat ungespeicherte Änderungen. Wie möchtest du vorgehen?"
@@ -2220,7 +2220,7 @@ msgstr "Projekt-Pinsel"
 
 #. Found when selecting a brush. It's a section that shows a few brushes that come with Pixelorama and brushes the user has imported from files (not project-specific).
 msgid "File Brushes"
-msgstr "Datei-Pinsel"
+msgstr "Dateipinsel"
 
 #. Found when selecting a brush. One of the file brushes that come with Pixelorama.
 msgid "Snow"
@@ -2228,7 +2228,7 @@ msgstr "Schnee"
 
 #. Found when selecting a brush. It's a section that shows file brushes that are randomized.
 msgid "Random File Brushes"
-msgstr "Zufällige Datei-Pinsel"
+msgstr "Zufällige Dateipinsel"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Grass"
@@ -2536,7 +2536,7 @@ msgid "Jump to the first frame"
 msgstr "Zum ersten Frame springen"
 
 msgid "Go to the previous frame"
-msgstr "Zum vorherigen Frame gehen"
+msgstr "Zum vorherigen Frame wechseln"
 
 msgid "Play the animation backwards"
 msgstr "Animation rückwärts abspielen"
@@ -2545,7 +2545,7 @@ msgid "Play the animation forward"
 msgstr "Animation vorwärts abspielen"
 
 msgid "Go to the next frame"
-msgstr "Gehe zum nächsten Frame"
+msgstr "Zum nächsten Frame wechseln"
 
 msgid "Jump to the last frame"
 msgstr "Springe zum letzten Frame"
@@ -2957,7 +2957,7 @@ msgid "Undo: Change Layer Order"
 msgstr "Rückgängig: Ebenenreihenfolge ändern"
 
 msgid "Redo: Change Layer Order"
-msgstr "Wiederherstellen: Ändere Ebenenreihenfolge"
+msgstr "Wiederherstellen: Ebenenreihenfolge ändern"
 
 msgid "Undo: Add Frame"
 msgstr "Rückgängig: Füge Frame hinzu"
@@ -2972,10 +2972,10 @@ msgid "Redo: Remove Frame"
 msgstr "Wiederherstellen: Entferne Frame"
 
 msgid "Undo: Change Frame Order"
-msgstr "Rückgängig: Ändere Framereihenfolge"
+msgstr "Rückgängig: Framereihenfolge ändern"
 
 msgid "Redo: Change Frame Order"
-msgstr "Wiederherstellen: Ändere Framereihenfolge"
+msgstr "Wiederherstellen: Framereihenfolge ändern"
 
 msgid "Undo: Delete Custom Brush"
 msgstr "Rückgängig: Entferne benutzerdefinierten Pinsel"
