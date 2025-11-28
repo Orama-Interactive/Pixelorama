@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2025-11-28 12:08\n"
+"PO-Revision-Date: 2025-11-28 13:05\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3760,23 +3760,23 @@ msgstr "Schnell an beiden Enden, langsam in der Mitte"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
-msgstr "Quadratisch (Potenz von 2)"
+msgstr "Quadratisch (hoch 2)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Cubic (power of 3)"
-msgstr "Kubisch (Potenz von 3)"
+msgstr "Kubisch (hoch 3)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quartic (power of 4)"
-msgstr "Quartik (Potenz von 4)"
+msgstr "Quartik (hoch  4)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quintic (power of 5)"
-msgstr "Quintisch (Potenz von 5)"
+msgstr "Quintisch (hoch 5)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Exponential (power of x)"
-msgstr "Exponentiell (Potenz von x)"
+msgstr "Exponentiell (hoch x)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Square root"
@@ -3792,7 +3792,7 @@ msgstr "Wackeln an den Kanten"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Bouncing at the end"
-msgstr "Zurückspringen am Ende"
+msgstr "Am Ende abprallen"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Backing out at ends"
@@ -3961,7 +3961,7 @@ msgstr "Gestapelt"
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stacked offset"
-msgstr "Gestapelter-Offset"
+msgstr "Gestapelt (versetzt)"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
@@ -3976,12 +3976,12 @@ msgstr "Treppe unten"
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Diamond right"
-msgstr "Diamant rechts"
+msgstr "Raute rechts"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Diamond down"
-msgstr "Diamant unten"
+msgstr "Raute unten"
 
 #. A button that toggles place-only mode on for a tilemap layer. This mode is used to only place tiles in a tilemap, without the ability to modify them.
 #: src/UI/Timeline/LayerProperties.tscn
@@ -3995,31 +3995,31 @@ msgstr "Die Aktivierung des Nur-Platzieren-Modus ist eine dauerhafte Aktion. Sob
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
-msgstr "Wähle einen Tile, um ihn auf dem Canvas zu platzieren."
+msgstr "Wähle eine Kachel, um sie auf der Leinwand zu platzieren."
 
 #: src/UI/TilesPanel.gd
 msgid "Modify tiles on the canvas."
-msgstr "Tile auf dem Canvas ändern."
+msgstr "Kacheln auf der Leinwand bearbeiten."
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
-msgstr "Tiles zeichnen"
+msgstr "Kacheln zeichnen"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile left (counterclockwise)"
-msgstr "Tile nach links drehen (gegen den Uhrzeigersinn)"
+msgstr "Kachel nach links drehen (gegen den Uhrzeigersinn)"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile right (clockwise)"
-msgstr "Tile nach Rechts drehen (mit dem Uhrzeigersinn)"
+msgstr "Kachel nach rechts drehen (im Uhrzeigersinn)"
 
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile horizontally"
-msgstr "Tile horizontal spiegeln"
+msgstr "Kachel horizontal spiegeln"
 
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile vertically"
-msgstr "Tile vertikal spiegeln"
+msgstr "Kachel vertikal spiegeln"
 
 #. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
@@ -4038,15 +4038,15 @@ msgstr "Stapeln"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
-msgstr "Tiletastengröße:"
+msgstr "Größe der Kachel-Schaltfläche:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
-msgstr "Leeren Tile anzeigen:"
+msgstr "Leere Kachel anzeigen:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile properties"
-msgstr "Tile-Eigenschaften"
+msgstr "Kacheleigenschaften"
 
 #: src/UI/TilesPanel.tscn
 msgid "Probability:"
