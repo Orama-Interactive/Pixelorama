@@ -422,6 +422,13 @@ func _ready() -> void:
 	_show_relevant_tools(layer_type)
 
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("swap_tools"):
+		swap_tools()
+	if event.is_action_released("swap_tools") and Global.reset_swap_on_shortcut_release:
+		swap_tools()
+
+
 ## Syncs the other tool using the config of tool located at [param from_idx].[br]
 ## NOTE: For optimization, if there is already a ready made config available, then we will use that
 ## instead of re-calculating the config, else we have no choice but to re-generate it
@@ -568,6 +575,8 @@ func swap_tools() -> void:
 				_slots[MOUSE_BUTTON_RIGHT].tool_node.set_config(left_config)
 				_slots[MOUSE_BUTTON_LEFT].tool_node.update_config()
 				_slots[MOUSE_BUTTON_RIGHT].tool_node.update_config()
+				if Global.swap_color_on_tool_swap:
+					Tools.swap_color()
 
 
 func assign_color(color: Color, button: int, change_alpha := true, index: int = -1) -> void:

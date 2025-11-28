@@ -950,6 +950,30 @@ layout_mode = 2
 layout_mode = 2
 columns = 3
 
+[node name="ResetSwapLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "Reverse tool swap on shortcut release"
+
+[node name="ResetSwapCheckBox" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "On"
+
+[node name="SwapColorWithToolLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "Swap colors when swapping tools"
+
+[node name="SwapColorWithToolCheckBox" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "On"
+
 [node name="SingleToolModeLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools/ToolOptions"]
 layout_mode = 2
 size_flags_horizontal = 3
