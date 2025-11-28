@@ -144,6 +144,7 @@ func _on_tilesets_list_item_edited() -> void:
 					item_text += ", "
 			item.set_text(0, item_text)
 
+
 func _on_name_line_edit_text_changed(new_text: String) -> void:
 	Global.current_project.name = new_text
 
