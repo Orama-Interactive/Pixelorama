@@ -83,22 +83,20 @@ func _create_tileset_tree_item(i: int, root_item: TreeItem) -> void:
 			item_text += ")"
 		else:
 			item_text += ", "
-	var icon: Image
 	for tile: TileSetCustom.Tile in tileset.tiles:
 		var preview: Image = tile.image
 		if not preview.get_used_rect().size == Vector2i.ZERO:
-			icon = Image.create_from_data(
+			var icon := Image.create_from_data(
 				preview.get_width(),
 				preview.get_height(),
 				preview.has_mipmaps(),
 				preview.get_format(),
 				preview.get_data()
 			)
+			var tex := ImageTexture.create_from_image(icon)
+			tex.set_size_override(Vector2i(32, 32))
+			tree_item.set_icon(0, tex)
 			break
-	if not icon:
-		icon = Image.create_empty(1, 1, false, Image.FORMAT_L8)
-	var tex := ImageTexture.create_from_image(icon)
-	tree_item.set_icon(0, tex)
 	tree_item.set_text(0, item_text)
 	tree_item.set_metadata(0, i)
 	tree_item.add_button(0, DUPLICATE_TEXTURE, -1, false, "Duplicate")
