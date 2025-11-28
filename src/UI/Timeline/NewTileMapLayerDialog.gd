@@ -13,7 +13,7 @@ func _on_confirmed() -> void:
 	var project := Global.current_project
 	var layer_name := name_line_edit.text
 	var tileset_name := tileset_name_line_edit.text.strip_edges()
-	if tileset_name == "":  # Use placeholder name if the tileset name is not given
+	if tileset_name.is_empty():  # Use placeholder name if the tileset name is not given
 		tileset_name = tileset_name_line_edit.placeholder_text.strip_edges()
 	var tile_size := tile_size_slider.value
 	var tile_shape := tile_shape_option_button.get_item_id(tile_shape_option_button.selected)
