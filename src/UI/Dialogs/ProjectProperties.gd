@@ -3,6 +3,8 @@ extends AcceptDialog
 const DUPLICATE_TEXTURE := preload("res://assets/graphics/timeline/copy_frame.png")
 const REMOVE_TEXTURE := preload("res://assets/graphics/misc/close.png")
 
+var _current_tileset_name_filter: String
+
 @onready var size_value_label := $VBoxContainer/GridContainer/SizeValueLabel as Label
 @onready var color_mode_value_label := $VBoxContainer/GridContainer/ColorModeValueLabel as Label
 @onready var frames_value_label := $VBoxContainer/GridContainer/FramesValueLabel as Label
@@ -11,6 +13,7 @@ const REMOVE_TEXTURE := preload("res://assets/graphics/misc/close.png")
 @onready var user_data_text_edit := $VBoxContainer/GridContainer/UserDataTextEdit as TextEdit
 @onready var tilesets_container := $VBoxContainer/TilesetsContainer as VBoxContainer
 @onready var tilesets_list := $VBoxContainer/TilesetsContainer/TilesetsList as Tree
+@onready var filter_by_name_edit := $VBoxContainer/TilesetsContainer/FilterByNameEdit as LineEdit
 
 
 func _on_visibility_changed() -> void:
@@ -27,10 +30,49 @@ func _on_visibility_changed() -> void:
 	name_line_edit.text = Global.current_project.name
 	user_data_text_edit.text = Global.current_project.user_data
 	tilesets_container.visible = Global.current_project.tilesets.size() > 0
-	tilesets_list.clear()
-	var root_item := tilesets_list.create_item()
-	for i in Global.current_project.tilesets.size():
-		_create_tileset_tree_item(i, root_item)
+	filter_by_name_edit.text = ""
+	refresh_tileset_list()
+
+
+func refresh_tileset_list():
+	if visible:  # Updating list only matters if it is visible
+		tilesets_list.clear()
+		var root_item := tilesets_list.create_item()
+		for i in Global.current_project.tilesets.size():
+			_create_tileset_tree_item(i, root_item)
+
+
+func _on_filter_by_name_line_edit_text_changed(new_text: String) -> void:
+	_current_tileset_name_filter = new_text.strip_edges()
+	apply_search_filters()
+
+
+func apply_search_filters() -> void:
+	var tree_item: TreeItem = tilesets_list.get_root().get_first_child()
+	var results: Array[TreeItem] = []
+	var should_reset := _current_tileset_name_filter.is_empty()
+	while tree_item != null:  # Loop through Tree's TreeItems.
+		if not _current_tileset_name_filter.is_empty():
+			if _current_tileset_name_filter.is_subsequence_ofn(tree_item.get_text(0)):
+				results.append(tree_item)
+		if should_reset:
+			tree_item.visible = true
+		else:
+			tree_item.collapsed = true
+			tree_item.visible = false
+		tree_item = tree_item.get_next_in_tree()
+	var expanded: Array[TreeItem] = []
+	for result in results:
+		var item: TreeItem = result
+		while item.get_parent():
+			if expanded.has(item):
+				break
+			item.collapsed = false
+			item.visible = true
+			expanded.append(item)
+			item = item.get_parent()
+	if not results.is_empty():
+		tilesets_list.scroll_to_item(results[0])
 
 
 func _create_tileset_tree_item(i: int, root_item: TreeItem) -> void:
@@ -50,6 +92,40 @@ func _create_tileset_tree_item(i: int, root_item: TreeItem) -> void:
 	tree_item.set_metadata(0, i)
 	tree_item.add_button(0, DUPLICATE_TEXTURE, -1, false, "Duplicate")
 	tree_item.add_button(0, REMOVE_TEXTURE, -1, using_layers.size() > 0, "Delete")
+
+
+func _on_tilesets_list_item_activated() -> void:
+	var item := tilesets_list.get_selected()
+	if item:
+		# Setting it to editable here shows line edit only on double click
+		item.set_editable(0, true)
+		var tileset_index: int = item.get_metadata(0)
+		var tileset: TileSetCustom = Global.current_project.tilesets.get(tileset_index)
+		if tileset:
+			# track old name for undo
+			item.set_text(0, tileset.name)
+		tilesets_list.edit_selected()
+
+
+func _on_tilesets_list_item_edited() -> void:
+	var item := tilesets_list.get_edited()
+	if item:
+		var tileset_index: int = item.get_metadata(0)
+		var tileset: TileSetCustom = Global.current_project.tilesets.get(tileset_index)
+		if tileset:
+			var project := Global.current_project
+			var old_name := tileset.name
+			var new_name = item.get_text(0).strip_edges()
+			if new_name.is_empty():
+				return
+			project.undo_redo.create_action("Rename tileset")
+			project.undo_redo.add_do_property(tileset, "name", new_name)
+			project.undo_redo.add_undo_property(tileset, "name", old_name)
+			project.undo_redo.add_do_method(refresh_tileset_list)
+			project.undo_redo.add_undo_method(refresh_tileset_list)
+			project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+			project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+			project.undo_redo.commit_action()
 
 
 func _on_name_line_edit_text_changed(new_text: String) -> void:

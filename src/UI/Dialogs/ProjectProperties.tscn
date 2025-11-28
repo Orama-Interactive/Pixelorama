@@ -1,11 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnjcs2l1ri38n"]
+[gd_scene load_steps=3 format=3 uid="uid://dnjcs2l1ri38n"]
 
 [ext_resource type="Script" uid="uid://dy4j3c4fws8m" path="res://src/UI/Dialogs/ProjectProperties.gd" id="1_0n4uc"]
+[ext_resource type="Texture2D" uid="uid://fvgl2kl81v0h" path="res://assets/graphics/misc/search.svg" id="2_h0qhi"]
 
 [node name="ProjectProperties" type="AcceptDialog"]
 title = "Project Properties"
 position = Vector2i(0, 36)
-size = Vector2i(300, 288)
+size = Vector2i(300, 330)
 script = ExtResource("1_0n4uc")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -65,6 +66,7 @@ text = "Name:"
 
 [node name="NameLineEdit" type="LineEdit" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
+placeholder_text = "Enter name... (Default \"untitled\")"
 
 [node name="UserDataLabel" type="Label" parent="VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -95,6 +97,11 @@ text = "Tilesets"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="FilterByNameEdit" type="LineEdit" parent="VBoxContainer/TilesetsContainer"]
+layout_mode = 2
+placeholder_text = "Filter by name"
+right_icon = ExtResource("2_h0qhi")
+
 [node name="TilesetsList" type="Tree" parent="VBoxContainer/TilesetsContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -103,4 +110,7 @@ hide_root = true
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="text_changed" from="VBoxContainer/GridContainer/NameLineEdit" to="." method="_on_name_line_edit_text_changed"]
 [connection signal="text_changed" from="VBoxContainer/GridContainer/UserDataTextEdit" to="." method="_on_user_data_text_edit_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/TilesetsContainer/FilterByNameEdit" to="." method="_on_filter_by_name_line_edit_text_changed"]
 [connection signal="button_clicked" from="VBoxContainer/TilesetsContainer/TilesetsList" to="." method="_on_tilesets_list_button_clicked"]
+[connection signal="item_activated" from="VBoxContainer/TilesetsContainer/TilesetsList" to="." method="_on_tilesets_list_item_activated"]
+[connection signal="item_edited" from="VBoxContainer/TilesetsContainer/TilesetsList" to="." method="_on_tilesets_list_item_edited"]
