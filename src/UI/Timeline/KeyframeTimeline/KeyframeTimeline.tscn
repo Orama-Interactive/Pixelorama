@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://plf71ccex8tr"]
+
+[ext_resource type="Script" uid="uid://vrqfwwnows3p" path="res://src/UI/Timeline/KeyframeTimeline/KeyframeTimeline.gd" id="1_te3k4"]
+
+[sub_resource type="Animation" id="Animation_3tue1"]
+resource_name = "new_animation"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3wn0x"]
+_data = {
+&"new_animation": SubResource("Animation_3tue1")
+}
+
+[node name="KeyframeTimeline" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_te3k4")
+
+[node name="LayerElementContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="LayerElementSpacer" type="Control" parent="LayerElementContainer"]
+layout_mode = 2
+
+[node name="TrackContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FramesContainer" type="HBoxContainer" parent="TrackContainer"]
+layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_3wn0x")
+}
