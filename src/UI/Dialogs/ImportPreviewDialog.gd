@@ -59,7 +59,7 @@ var custom_importers := {}
 @onready var frames_divider := %FramesDivider as ValueSliderV2
 # Spritesheet option. Contains likely candidates for the tile size assuming a square tile.
 @onready var frame_size_preset := %FrameSizeOptionButton as OptionButton
-@onready var ignore_empty_area := %IgnoreEmptyArea as CheckBox
+@onready var include_empty := %IncludeEmptyArea as CheckBox
 @onready var tileset_options: GridContainer = %ImportOptions/TilesetOptions
 ## container of frame related import options
 @onready var at_frame_option := %ImportOptions/AtFrame as HBoxContainer
@@ -162,7 +162,11 @@ func _on_ImportPreviewDialog_confirmed() -> void:
 				)
 			else:
 				OpenSave.open_image_as_spritesheet_tab(
-					path, image, spritesheet_horizontal, spritesheet_vertical
+					path,
+					image,
+					spritesheet_horizontal,
+					spritesheet_vertical,
+					include_empty.button_pressed
 				)
 
 		elif current_import_option == ImageImportOptions.SPRITESHEET_LAYER:
@@ -185,7 +189,8 @@ func _on_ImportPreviewDialog_confirmed() -> void:
 					path.get_basename().get_file(),
 					spritesheet_horizontal,
 					spritesheet_vertical,
-					frame_index
+					frame_index,
+					include_empty.button_pressed
 				)
 
 		elif current_import_option == ImageImportOptions.NEW_FRAME:
@@ -243,7 +248,8 @@ func _on_ImportPreviewDialog_confirmed() -> void:
 					spritesheet_horizontal,
 					spritesheet_vertical,
 					tile_shape,
-					tile_offset_axis
+					tile_offset_axis,
+					include_empty.button_pressed
 				)
 
 		else:
@@ -294,10 +300,12 @@ func synchronize() -> void:
 			or id == ImageImportOptions.TILESET
 		):
 			var d_frames_divider := dialog.frames_divider
+			var d_include_empty := dialog.include_empty
 			d_frames_divider.value.x = mini(d_frames_divider.value.x, image.get_size().x)
 			d_frames_divider.value.y = mini(d_frames_divider.value.y, image.get_size().y)
 			if id == ImageImportOptions.SPRITESHEET_LAYER:
 				d_at_frame_spinbox.value = at_frame_spinbox.value
+			d_include_empty.button_pressed = include_empty.button_pressed
 
 		elif id == ImageImportOptions.NEW_FRAME:
 			d_at_layer_option_button.selected = at_layer_option_button.selected

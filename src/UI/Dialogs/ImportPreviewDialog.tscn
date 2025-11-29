@@ -126,10 +126,10 @@ show_ratio = true
 prefix_x = "Horizontal frames:"
 prefix_y = "Vertical frames:"
 
-[node name="IgnoreEmptyArea" type="CheckBox" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual/SplitOptions"]
+[node name="IncludeEmptyArea" type="CheckBox" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual/SplitOptions"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Ignore empty tiles"
+text = "Include empty tiles"
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual"]
 layout_mode = 2
