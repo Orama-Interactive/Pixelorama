@@ -250,7 +250,7 @@ func _on_ImportPreviewDialog_confirmed() -> void:
 					tile_shape,
 					tile_offset_axis,
 					Global.current_project,
-					include_empty.button_pressed,
+					include_empty.button_pressed
 				)
 
 		else:

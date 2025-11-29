@@ -734,17 +734,13 @@ func open_image_as_spritesheet_layer_smart(
 			new_frames.append(new_frame)
 
 	if not new_frames.is_empty():  # if new frames got added
-		frame_indices = range(
-			project.frames.size(), project.frames.size() + new_frames.size()
-		)
+		frame_indices = range(project.frames.size(), project.frames.size() + new_frames.size())
 		project.undo_redo.add_do_method(project.add_frames.bind(new_frames, frame_indices))
 		project.undo_redo.add_undo_method(project.remove_frames.bind(frame_indices))
 	project.undo_redo.add_do_method(
 		project.add_layers.bind([layer], [project.layers.size()], [cels])
 	)
-	project.undo_redo.add_do_method(
-		project.change_cel.bind(cels.size() - 1, project.layers.size())
-	)
+	project.undo_redo.add_do_method(project.change_cel.bind(cels.size() - 1, project.layers.size()))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 
 	project.undo_redo.add_undo_method(project.remove_layers.bind([project.layers.size()]))
@@ -827,17 +823,13 @@ func open_image_as_spritesheet_layer(
 			new_frames.append(new_frame)
 
 	if not new_frames.is_empty():  # if new frames got added
-		frame_indices = range(
-			project.frames.size(), project.frames.size() + new_frames.size()
-		)
+		frame_indices = range(project.frames.size(), project.frames.size() + new_frames.size())
 		project.undo_redo.add_do_method(project.add_frames.bind(new_frames, frame_indices))
 		project.undo_redo.add_undo_method(project.remove_frames.bind(frame_indices))
 	project.undo_redo.add_do_method(
 		project.add_layers.bind([layer], [project.layers.size()], [cels])
 	)
-	project.undo_redo.add_do_method(
-		project.change_cel.bind(cels.size() - 1, project.layers.size())
-	)
+	project.undo_redo.add_do_method(project.change_cel.bind(cels.size() - 1, project.layers.size()))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 
 	project.undo_redo.add_undo_method(project.remove_layers.bind([project.layers.size()]))
