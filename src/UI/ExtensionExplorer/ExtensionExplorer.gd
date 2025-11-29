@@ -165,8 +165,9 @@ func process_line(line: String) -> void:
 	# If the line isn't a comment, we will check data type
 	var raw_data
 	line = line.strip_edges()
-	# attempting to convert to a variable other than a string
-	raw_data = str_to_var(line)
+	# Attempting to convert to a variable other than a string
+	if not line.strip_edges().begins_with("#"):  # This check prevents error Invalid color code: #
+		raw_data = str_to_var(line)
 	if !raw_data:  # attempt failed, using it as string
 		raw_data = line
 
