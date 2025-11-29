@@ -321,6 +321,10 @@ var tool_button_size := ButtonSize.SMALL:
 			return
 		tool_button_size = value
 		Tools.set_button_size(tool_button_size)
+## Found in Preferences. Determines behavior of the swap_tools action.
+var reset_swap_on_shortcut_release := false
+## Found in Preferences. Determines if color should swap on tool swap.
+var swap_color_on_tool_swap := false
 ## Found in Preferences.
 ## If enabled, the right mouse button is always mapped to the same tool as the left button.
 var single_tool_mode := DisplayServer.is_touchscreen_available():
@@ -947,7 +951,7 @@ func _initialize_keychain() -> void:
 		&"brush_size_increment": Keychain.InputAction.new("", "Tool modifiers"),
 		&"brush_size_decrement": Keychain.InputAction.new("", "Tool modifiers"),
 		&"change_tool_mode": Keychain.InputAction.new("", "Tool modifiers", false),
-		&"swap_tools": Keychain.InputAction.new("", "Tool modifiers", false),
+		&"swap_tools": Keychain.InputAction.new("", "Tool modifiers"),
 		&"draw_create_line": Keychain.InputAction.new("", "Draw tools", false),
 		&"draw_snap_angle": Keychain.InputAction.new("", "Draw tools", false),
 		&"draw_color_picker": Keychain.InputAction.new("Quick color picker", "Draw tools", false),

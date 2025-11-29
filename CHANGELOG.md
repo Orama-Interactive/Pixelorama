@@ -5,12 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 <br><br>
 
 ## [v1.1.7] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 
 Built using Godot 4.5.1
 
 ### Added
 - Importing GIF files is now possible without needing FFMPEG!
 - Holding <kbd>Control + Shift</kbd> and moving the mouse right or left now changes the brush size. This shortcut can be changed from the Preferences.
+- The shortcuts category in the Preferences now have search bars to filter by name, or by shortcut.
+- Added mouse motion shortcuts to quickly change the color hue, saturation, value and alpha. By default, these shortcuts are empty, but they can be changed from the Preferences.
 - Added a button in the palette panel that unlocks the palette grid, making the swatches automatically resize based on the available free space of the panel, instead of having a fixed width and height.
 - A single tool mode has been added as a preference that makes the right mouse button activate the same tool as the left mouse button, instead of being independent.
 - Selecting "Paste from clipboard" while having a Lospec Palette URI copied will now automatically download that palette.
@@ -19,14 +23,19 @@ Built using Godot 4.5.1
 ### Changed
 - The default UI scale factor now depends on the monitor properties, instead of always being set to 1.0.
 - In the shortcut category of the Preferences, the Default shortcut profile is no longer selectable, and the Custom profile is now the default one. If you want to restore the default shortcuts, you can press the new "Reset" button.
-- The distance between panels in the interface has been increased from 8 to 12, making it a bit easier to grab the split handler in order to resize the panels.
+- The distance between panels in the interface has been increased from 8 pixels to 12, making it a bit easier to grab the split handler in order to resize the panels.
 - Palette swatches get selected on mouse button *release* and not *press*, making them more consistent with the rest of the buttons in the interface.
 - Scrolling on the palette panel is now smoother and works like the rest of the scrollable areas on the interface.
 
 ### Fixed
 - Fixed crash when drawing and there is no active palette.
+- Fixed a crash that sometimes happened when loading multiple projects at once. [#1379](https://github.com/Orama-Interactive/Pixelorama/issues/1379)
+- Fix crash when opening Pixelorama with a project which had a group layer saved as current layer. [#1378](https://github.com/Orama-Interactive/Pixelorama/pull/#1378)
 - Fixed crash when adding a new palette when there is none.
 - Fixed crash when drag and dropping something that is not a palette swatch (such as a cel button) into a swatch.
+- Fixed crash when trying to import a zip file that is not an extension. [#1375](https://github.com/Orama-Interactive/Pixelorama/pull/#1375)
+- The timeline now scrolls to the active cel when switching projects. [#1377](https://github.com/Orama-Interactive/Pixelorama/issues/1377)
+- Exporting videos should no longer skip the last frame.
 - Fixed subwindow dialogs being too big compared to the main window size, if the UI is scaled.
 - Fixed error code 1 when saving a backup, if the current session backup directory is removed while Pixelorama is running. Now, it always checks if the directory exists and re-creates it, if it is deleted.
 

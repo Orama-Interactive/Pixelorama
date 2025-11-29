@@ -1334,6 +1334,7 @@ func _on_project_about_to_switch() -> void:
 
 func _on_project_switched() -> void:
 	var project := Global.current_project
+	project_changed()
 	if not project.layers_updated.is_connected(_update_layer_ui):
 		project.layers_updated.connect(_update_layer_ui)
 	if not project.frames_updated.is_connected(_update_frame_ui):
@@ -1536,6 +1537,16 @@ func project_changed() -> void:
 
 			var layer_button := layer_vbox.get_child(vbox_child_count - 1 - layer)
 			layer_button.button_pressed = true
+	# Because we are re-creating the nodes, we need to wait one frame in order to call
+	# ensure_control_visible. If waiting wasn't needed, this piece of code wouldn't be needed
+	# anyway, since _cel_switched already calls ensure_control_visible.
+	await get_tree().process_frame
+	if project != Global.current_project:
+		# Needed in case we load multiple projects at once.
+		return
+	frame_scroll_container.ensure_control_visible(frame_hbox.get_child(project.current_frame))
+	var layer_index := project.layers.size() - project.current_layer - 1
+	timeline_scroll.ensure_control_visible.call_deferred(layer_vbox.get_child(layer_index))
 
 
 func project_frame_added(frame: int) -> void:
@@ -1589,6 +1600,8 @@ func project_layer_added(layer: int) -> void:
 	cel_vbox.move_child(cel_hbox, count - 1 - layer)
 	update_global_layer_buttons()
 	await get_tree().process_frame
+	if not is_instance_valid(layer_button):
+		return
 	timeline_scroll.ensure_control_visible(layer_button)
 
 
