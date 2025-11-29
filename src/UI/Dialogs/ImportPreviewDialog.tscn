@@ -126,11 +126,6 @@ show_ratio = true
 prefix_x = "Horizontal frames:"
 prefix_y = "Vertical frames:"
 
-[node name="IncludeEmptyArea" type="CheckBox" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual/SplitOptions"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Include empty tiles"
-
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual"]
 layout_mode = 2
 
@@ -189,11 +184,19 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Refresh"
 
-[node name="SmartSliceToggle" type="CheckBox" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions"]
+[node name="FlagToggles" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions"]
+layout_mode = 2
+
+[node name="SmartSliceToggle" type="CheckBox" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/FlagToggles"]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Smart Slice"
+
+[node name="IncludeEmptyArea" type="CheckBox" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/FlagToggles"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Include empty tiles"
 
 [node name="TilesetOptions" type="GridContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions"]
 visible = false
@@ -308,7 +311,7 @@ layout_mode = 2
 [connection signal="value_changed" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart/Threshold" to="." method="_on_threshold_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart/MergeDist" to="." method="_on_merge_dist_value_changed"]
 [connection signal="pressed" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart/Slice" to="." method="_on_slice_pressed"]
-[connection signal="toggled" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/SmartSliceToggle" to="." method="_on_smart_slice_toggled"]
+[connection signal="toggled" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/FlagToggles/SmartSliceToggle" to="." method="_on_smart_slice_toggled"]
 [connection signal="item_selected" from="VBoxContainer/ImportOptionsContainer/ImportOptions/TilesetOptions/TileShapeOptionButton" to="." method="_on_tile_shape_option_button_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/ImportOptionsContainer/ImportOptions/TilesetOptions/TileOffsetAxisButton" to="." method="_on_tile_offset_axis_button_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions/Type/BrushTypeOption" to="." method="_on_BrushTypeOption_item_selected"]

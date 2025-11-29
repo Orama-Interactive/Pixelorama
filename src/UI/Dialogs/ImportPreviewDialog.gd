@@ -249,7 +249,8 @@ func _on_ImportPreviewDialog_confirmed() -> void:
 					spritesheet_vertical,
 					tile_shape,
 					tile_offset_axis,
-					include_empty.button_pressed
+					Global.current_project,
+					include_empty.button_pressed,
 				)
 
 		else:
@@ -331,7 +332,7 @@ func synchronize() -> void:
 func _hide_all_options() -> void:
 	smart_slice = false
 	apply_all.disabled = false
-	spritesheet_options.get_node("SmartSliceToggle").button_pressed = false
+	%SmartSliceToggle.button_pressed = false
 	at_frame_option.get_node("AtFrameSpinbox").allow_greater = false
 	texture_rect.get_child(0).visible = false
 	texture_rect.get_child(1).visible = false
@@ -421,6 +422,7 @@ func _on_ImportOption_item_selected(id: ImageImportOptions) -> void:
 
 
 func _on_smart_slice_toggled(button_pressed: bool) -> void:
+	include_empty.visible = !button_pressed
 	setup_smart_slice(button_pressed)
 
 

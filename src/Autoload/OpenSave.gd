@@ -696,16 +696,26 @@ func open_image_as_spritesheet_layer_smart(
 	# Initialize undo mechanism
 	project.undo_redo.create_action("Add Spritesheet Layer")
 
-	# Create new frames (if needed)
-	var new_frames_size := maxi(project.frames.size(), start_frame + sliced_rects.size())
-	var frames := []
+	var max_frames_size := maxi(project.frames.size(), start_frame + sliced_rects.size())
+	var new_frames := []
 	var frame_indices := PackedInt32Array([])
-	if new_frames_size > project.frames.size():
-		var required_frames := new_frames_size - project.frames.size()
-		frame_indices = range(
-			project.current_frame + 1, project.current_frame + required_frames + 1
-		)
-		for i in required_frames:
+	# Create new layer for spritesheet
+	var layer := PixelLayer.new(project, file_name)
+	var cels: Array[PixelCel] = []
+	for f in max_frames_size:
+		if f >= start_frame and f < (start_frame + sliced_rects.size()):
+			# Slice spritesheet
+			var offset: Vector2 = (0.5 * (frame_size - sliced_rects[f - start_frame].size)).floor()
+			image.convert(project.get_image_format())
+			var cropped_image := Image.create(
+				project_width, project_height, false, project.get_image_format()
+			)
+			cropped_image.blit_rect(image, sliced_rects[f - start_frame], offset)
+			cels.append(layer.new_cel_from_image(cropped_image))
+		else:
+			cels.append(layer.new_empty_cel())
+		# If amount of cels exceede our project frames, then add new frame
+		if cels.size() > project.frames.size():
 			var new_frame := Frame.new()
 			for l in range(project.layers.size()):  # Create as many cels as there are layers
 				new_frame.cels.append(project.layers[l].new_empty_cel())
@@ -721,35 +731,23 @@ func open_image_as_spritesheet_layer_smart(
 						)
 					new_frame.cels[l].set_content(prev_cel.get_content(), prev_cel.image_texture)
 					new_frame.cels[l].link_set = prev_cel.link_set
-			frames.append(new_frame)
+			new_frames.append(new_frame)
 
-	# Create new layer for spritesheet
-	var layer := PixelLayer.new(project, file_name)
-	var cels: Array[PixelCel] = []
-	for f in new_frames_size:
-		if f >= start_frame and f < (start_frame + sliced_rects.size()):
-			# Slice spritesheet
-			var offset: Vector2 = (0.5 * (frame_size - sliced_rects[f - start_frame].size)).floor()
-			image.convert(project.get_image_format())
-			var cropped_image := Image.create(
-				project_width, project_height, false, project.get_image_format()
-			)
-			cropped_image.blit_rect(image, sliced_rects[f - start_frame], offset)
-			cels.append(layer.new_cel_from_image(cropped_image))
-		else:
-			cels.append(layer.new_empty_cel())
-
-	project.undo_redo.add_do_method(project.add_frames.bind(frames, frame_indices))
+	if not new_frames.is_empty():  # if new frames got added
+		frame_indices = range(
+			project.frames.size(), project.frames.size() + new_frames.size()
+		)
+		project.undo_redo.add_do_method(project.add_frames.bind(new_frames, frame_indices))
+		project.undo_redo.add_undo_method(project.remove_frames.bind(frame_indices))
 	project.undo_redo.add_do_method(
 		project.add_layers.bind([layer], [project.layers.size()], [cels])
 	)
 	project.undo_redo.add_do_method(
-		project.change_cel.bind(new_frames_size - 1, project.layers.size())
+		project.change_cel.bind(cels.size() - 1, project.layers.size())
 	)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 
 	project.undo_redo.add_undo_method(project.remove_layers.bind([project.layers.size()]))
-	project.undo_redo.add_undo_method(project.remove_frames.bind(frame_indices))
 	project.undo_redo.add_undo_method(
 		project.change_cel.bind(project.current_frame, project.current_layer)
 	)
@@ -781,17 +779,19 @@ func open_image_as_spritesheet_layer(
 
 	# Initialize undo mechanism
 	project.undo_redo.create_action("Add Spritesheet Layer")
-	var new_frames_size := maxi(project.frames.size(), start_frame + (vertical * horizontal))
-	var frames := []
+	var max_frames_size := maxi(project.frames.size(), start_frame + (vertical * horizontal))
+	var new_frames := []
 	var frame_indices := PackedInt32Array([])
 	# Create new layer for spritesheet
 	var layer := PixelLayer.new(project, file_name)
 	var cels := []
-	for f in new_frames_size:
-		if f >= start_frame and f < (start_frame + (vertical * horizontal)):
+	var tile_count := vertical * horizontal
+	for f in max_frames_size:
+		if f >= start_frame and f < start_frame + tile_count:  # Entered region of spritesheet
 			# Slice spritesheet
-			var xx := (f - start_frame) % horizontal
-			var yy := (f - start_frame) / horizontal
+			var tile_idx := f - start_frame
+			var xx := tile_idx % horizontal
+			var yy := tile_idx / horizontal
 			image.convert(project.get_image_format())
 			var cropped_image := Image.create(
 				project_width, project_height, false, project.get_image_format()
@@ -807,8 +807,8 @@ func open_image_as_spritesheet_layer(
 			cels.append(layer.new_cel_from_image(cropped_image))
 		else:
 			cels.append(layer.new_empty_cel())
-		# If frame exceedes current frame count, then add new frame
-		if f >= project.frames.size():
+		# If amount of cels exceede our project frames, then add new frame
+		if cels.size() > project.frames.size():
 			var new_frame := Frame.new()
 			for l in range(project.layers.size()):  # Create as many cels as there are layers
 				new_frame.cels.append(project.layers[l].new_empty_cel())
@@ -824,19 +824,19 @@ func open_image_as_spritesheet_layer(
 						)
 					new_frame.cels[l].set_content(prev_cel.get_content(), prev_cel.image_texture)
 					new_frame.cels[l].link_set = prev_cel.link_set
-			frames.append(new_frame)
+			new_frames.append(new_frame)
 
-	if not frames.is_empty():  # if new frames got added
+	if not new_frames.is_empty():  # if new frames got added
 		frame_indices = range(
-			project.current_frame + 1, project.current_frame + frames.size() + 1
+			project.frames.size(), project.frames.size() + new_frames.size()
 		)
-		project.undo_redo.add_do_method(project.add_frames.bind(frames, frame_indices))
+		project.undo_redo.add_do_method(project.add_frames.bind(new_frames, frame_indices))
 		project.undo_redo.add_undo_method(project.remove_frames.bind(frame_indices))
 	project.undo_redo.add_do_method(
 		project.add_layers.bind([layer], [project.layers.size()], [cels])
 	)
 	project.undo_redo.add_do_method(
-		project.change_cel.bind(new_frames_size - 1, project.layers.size())
+		project.change_cel.bind(cels.size() - 1, project.layers.size())
 	)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 
