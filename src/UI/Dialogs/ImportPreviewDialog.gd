@@ -478,10 +478,14 @@ func _on_FramesDivider_value_changed(value: Vector2i) -> void:
 func _on_frame_size_preset_item_selected(index: int):
 	var id = frame_size_preset.get_item_id(index)
 	@warning_ignore("integer_division")
-	frames_divider.value = Vector2i(image.get_width() / id, image.get_height() / id)
+	var h_v := Vector2i(image.get_width() / id, image.get_height() / id)
+	frames_divider.set_value_no_signal(h_v)
+	spritesheet_horizontal = h_v.x
+	spritesheet_vertical = h_v.y
 	spritesheet_frame_value_changed()
 
 
+## Updates the frame size label and redraws preview
 func spritesheet_frame_value_changed() -> void:
 	@warning_ignore("integer_division")
 	var frame_width := floori(image.get_size().x / spritesheet_horizontal)
