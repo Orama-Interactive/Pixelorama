@@ -175,8 +175,8 @@ func handle_project_resize(
 
 ## Returns the tilemap's info, such as its name and tile size and with a given
 ## [param tile_index], in the form of text.
-func get_text_info(tile_index: int) -> String:
-	var item_string := " %s (%s×%s)" % [tile_index, tile_size.x, tile_size.y]
+func get_text_info(tileset_index: int) -> String:
+	var item_string := " %s (%s×%s)" % [tileset_index, tile_size.x, tile_size.y]
 	if not name.is_empty():
 		item_string += ": " + name
 	return tr("Tileset") + item_string
