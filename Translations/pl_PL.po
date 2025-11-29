@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-11-04 18:28\n"
+"PO-Revision-Date: 2025-11-27 17:04\n"
 
 msgid "OK"
 msgstr "OK"
@@ -141,11 +141,11 @@ msgstr "Przywróć zmiany"
 
 #. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
 msgid "Undo History"
-msgstr ""
+msgstr "Cofnij historię"
 
 #. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
 msgid "Initial state"
-msgstr ""
+msgstr "Stan początkowy"
 
 msgid "Copy"
 msgstr "Kopiuj"
@@ -965,7 +965,7 @@ msgstr "Rozmiar czcionki:"
 
 #. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
 msgid "Screen orientation:"
-msgstr ""
+msgstr "Orientacja ekranu:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Przyciemnij interfejs, kiedy pojawia się okno dialogowe"
@@ -1035,11 +1035,11 @@ msgstr "Kolor tła:"
 
 #. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
 msgid "Single tool mode"
-msgstr ""
+msgstr "Tryb pojedynczego narzędzia"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
 msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
-msgstr ""
+msgstr "Jeśli ta opcja jest włączona, prawy przycisk myszy będzie zawsze aktywować to samo narzędzie, co lewy przycisk myszy."
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between the left and the right tools"
@@ -2505,11 +2505,11 @@ msgstr "Włącza lustrzane odbicie w pionie podczas rysowania"
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↗) mirrored drawing"
-msgstr ""
+msgstr "Włącz lustrzane odbicie rysunku po przekątnej (↗)"
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↘) mirrored drawing"
-msgstr ""
+msgstr "Włącz lustrzane odbicie rysunku po przekątnej (↘)"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
@@ -2654,7 +2654,7 @@ msgstr "Wybierz piksele"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
-msgstr ""
+msgstr "Połącz komórki z"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get unlinked.
 msgid "Unlink cels"
@@ -3119,7 +3119,7 @@ msgstr "Usuń wszystkie rozszerzenia"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all backups"
-msgstr ""
+msgstr "Usuń wszystkie kopie zapasowe"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
@@ -3321,7 +3321,7 @@ msgid "Discard All"
 msgstr "Odrzuć Wszystkie"
 
 msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
-msgstr ""
+msgstr "Pixelorama nie zamknęła się poprawnie ostatnim razem. Czy chcesz przywrócić poprzednią sesję?"
 
 msgid "Backup reloaded"
 msgstr "Wczytano ponownię kopię zapasową"
