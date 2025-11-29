@@ -651,7 +651,9 @@ func open_image_as_spritesheet_tab_smart(
 	set_new_imported_tab(project, path)
 
 
-func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert: int) -> void:
+func open_image_as_spritesheet_tab(
+	path: String, image: Image, horiz: int, vert: int, detect_empty := true
+) -> void:
 	horiz = mini(horiz, image.get_size().x)
 	vert = mini(vert, image.get_size().y)
 	var frame_width := image.get_size().x / horiz
@@ -662,10 +664,13 @@ func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert:
 	Global.projects.append(project)
 	for yy in range(vert):
 		for xx in range(horiz):
-			var frame := Frame.new()
 			var cropped_image := image.get_region(
 				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height)
 			)
+			if not detect_empty:
+				if cropped_image.get_used_rect().size == Vector2i.ZERO:
+					continue  # We don't need this Frame
+			var frame := Frame.new()
 			project.size = cropped_image.get_size()
 			cropped_image.convert(project.get_image_format())
 			frame.cels.append(layer.new_cel_from_image(cropped_image))
@@ -753,7 +758,13 @@ func open_image_as_spritesheet_layer_smart(
 
 
 func open_image_as_spritesheet_layer(
-	_path: String, image: Image, file_name: String, horizontal: int, vertical: int, start_frame: int
+	_path: String,
+	image: Image,
+	file_name: String,
+	horizontal: int,
+	vertical: int,
+	start_frame: int,
+	detect_empty := true
 ) -> void:
 	# Data needed to slice images
 	horizontal = mini(horizontal, image.get_size().x)
@@ -770,34 +781,9 @@ func open_image_as_spritesheet_layer(
 
 	# Initialize undo mechanism
 	project.undo_redo.create_action("Add Spritesheet Layer")
-
-	# Create new frames (if needed)
 	var new_frames_size := maxi(project.frames.size(), start_frame + (vertical * horizontal))
 	var frames := []
 	var frame_indices := PackedInt32Array([])
-	if new_frames_size > project.frames.size():
-		var required_frames := new_frames_size - project.frames.size()
-		frame_indices = range(
-			project.current_frame + 1, project.current_frame + required_frames + 1
-		)
-		for i in required_frames:
-			var new_frame := Frame.new()
-			for l in range(project.layers.size()):  # Create as many cels as there are layers
-				new_frame.cels.append(project.layers[l].new_empty_cel())
-				if project.layers[l].new_cels_linked:
-					var prev_cel := project.frames[project.current_frame].cels[l]
-					if prev_cel.link_set == null:
-						prev_cel.link_set = {}
-						project.undo_redo.add_do_method(
-							project.layers[l].link_cel.bind(prev_cel, prev_cel.link_set)
-						)
-						project.undo_redo.add_undo_method(
-							project.layers[l].link_cel.bind(prev_cel, null)
-						)
-					new_frame.cels[l].set_content(prev_cel.get_content(), prev_cel.image_texture)
-					new_frame.cels[l].link_set = prev_cel.link_set
-			frames.append(new_frame)
-
 	# Create new layer for spritesheet
 	var layer := PixelLayer.new(project, file_name)
 	var cels := []
@@ -815,11 +801,37 @@ func open_image_as_spritesheet_layer(
 				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height),
 				Vector2i.ZERO
 			)
+			if not detect_empty:
+				if cropped_image.get_used_rect().size == Vector2i.ZERO:
+					continue  # We don't need this cel
 			cels.append(layer.new_cel_from_image(cropped_image))
 		else:
 			cels.append(layer.new_empty_cel())
+		# If frame exceedes current frame count, then add new frame
+		if f >= project.frames.size():
+			var new_frame := Frame.new()
+			for l in range(project.layers.size()):  # Create as many cels as there are layers
+				new_frame.cels.append(project.layers[l].new_empty_cel())
+				if project.layers[l].new_cels_linked:
+					var prev_cel := project.frames[project.current_frame].cels[l]
+					if prev_cel.link_set == null:
+						prev_cel.link_set = {}
+						project.undo_redo.add_do_method(
+							project.layers[l].link_cel.bind(prev_cel, prev_cel.link_set)
+						)
+						project.undo_redo.add_undo_method(
+							project.layers[l].link_cel.bind(prev_cel, null)
+						)
+					new_frame.cels[l].set_content(prev_cel.get_content(), prev_cel.image_texture)
+					new_frame.cels[l].link_set = prev_cel.link_set
+			frames.append(new_frame)
 
-	project.undo_redo.add_do_method(project.add_frames.bind(frames, frame_indices))
+	if not frames.is_empty():  # if new frames got added
+		frame_indices = range(
+			project.current_frame + 1, project.current_frame + frames.size() + 1
+		)
+		project.undo_redo.add_do_method(project.add_frames.bind(frames, frame_indices))
+		project.undo_redo.add_undo_method(project.remove_frames.bind(frame_indices))
 	project.undo_redo.add_do_method(
 		project.add_layers.bind([layer], [project.layers.size()], [cels])
 	)
@@ -829,7 +841,6 @@ func open_image_as_spritesheet_layer(
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 
 	project.undo_redo.add_undo_method(project.remove_layers.bind([project.layers.size()]))
-	project.undo_redo.add_undo_method(project.remove_frames.bind(frame_indices))
 	project.undo_redo.add_undo_method(
 		project.change_cel.bind(project.current_frame, project.current_layer)
 	)
@@ -972,7 +983,8 @@ func open_image_as_tileset(
 	vert: int,
 	tile_shape: TileSet.TileShape,
 	tile_offset_axis: TileSet.TileOffsetAxis,
-	project := Global.current_project
+	project := Global.current_project,
+	detect_empty := true
 ) -> void:
 	image.convert(project.get_image_format())
 	horiz = mini(horiz, image.get_size().x)
@@ -987,6 +999,9 @@ func open_image_as_tileset(
 			var cropped_image := image.get_region(
 				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height)
 			)
+			if not detect_empty:
+				if cropped_image.get_used_rect().size == Vector2i.ZERO:
+					continue  # We don't need this Frame
 			@warning_ignore("int_as_enum_without_cast")
 			tileset.add_tile(cropped_image, null, 0)
 	project.tilesets.append(tileset)

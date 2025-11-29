@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://nba3nryom3ud"]
+[gd_scene load_steps=6 format=3 uid="uid://nba3nryom3ud"]
 
 [ext_resource type="Script" uid="uid://brtcr6mrev52o" path="res://src/UI/Dialogs/ImportPreviewDialog.gd" id="1_r16hn"]
 [ext_resource type="Script" uid="uid://bvn632m4s6crv" path="res://src/UI/Dialogs/HelperScripts/RowColumnLines.gd" id="2_yokw4"]
 [ext_resource type="Script" uid="uid://crtwdohribibe" path="res://src/UI/Dialogs/HelperScripts/SmartSlicePreview.gd" id="3_aeccv"]
+[ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="4_6umjk"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="4_nmo33"]
 
 [node name="ImportPreviewDialog" type="ConfirmationDialog"]
@@ -111,25 +112,38 @@ size_flags_horizontal = 3
 [node name="Manual" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual"]
+[node name="SplitOptions" type="VBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual"]
 layout_mode = 2
-text = "Horizontal frames:"
+size_flags_horizontal = 3
 
-[node name="HorizontalFrames" type="SpinBox" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual"]
+[node name="FramesDivider" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual/SplitOptions" instance=ExtResource("4_6umjk")]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
-min_value = 1.0
-value = 1.0
+value = Vector2(1, 1)
+min_value = Vector2(1, 1)
+show_ratio = true
+prefix_x = "Horizontal frames:"
+prefix_y = "Vertical frames:"
 
-[node name="Label2" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual"]
+[node name="IgnoreEmptyArea" type="CheckBox" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual/SplitOptions"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Vertical frames:"
+text = "Ignore empty tiles"
 
-[node name="VerticalFrames" type="SpinBox" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual"]
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual"]
 layout_mode = 2
-mouse_default_cursor_shape = 2
-min_value = 1.0
-value = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual"]
+layout_mode = 2
+
+[node name="FrameSizePresetLabel" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual/VBoxContainer"]
+layout_mode = 2
+text = "Presets:"
+
+[node name="FrameSizeOptionButton" type="OptionButton" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 
 [node name="Smart" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions"]
 visible = false
@@ -289,8 +303,8 @@ layout_mode = 2
 [connection signal="resized" from="VBoxContainer/VBoxContainer" to="." method="_on_preview_container_size_changed"]
 [connection signal="toggled" from="VBoxContainer/VBoxContainer/ApplyAll" to="." method="_on_ApplyAll_toggled"]
 [connection signal="item_selected" from="VBoxContainer/VBoxContainer/HBoxContainer/ImportOption" to="." method="_on_ImportOption_item_selected"]
-[connection signal="value_changed" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual/HorizontalFrames" to="." method="_on_HorizontalFrames_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual/VerticalFrames" to="." method="_on_VerticalFrames_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual/SplitOptions/FramesDivider" to="." method="_on_FramesDivider_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual/VBoxContainer/FrameSizeOptionButton" to="." method="_on_frame_size_preset_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart/Threshold" to="." method="_on_threshold_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart/MergeDist" to="." method="_on_merge_dist_value_changed"]
 [connection signal="pressed" from="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart/Slice" to="." method="_on_slice_pressed"]

@@ -55,6 +55,11 @@ var custom_importers := {}
 # depending on what your import option requires.
 ## container of spritesheet related import options
 @onready var spritesheet_options := %ImportOptions/SpritesheetOptions as VBoxContainer
+# Spritesheet option. decides the horizontal and veritcal frames that divide the spritesheet.
+@onready var frames_divider := %FramesDivider as ValueSliderV2
+# Spritesheet option. Contains likely candidates for the tile size assuming a square tile.
+@onready var frame_size_preset := %FrameSizeOptionButton as OptionButton
+@onready var ignore_empty_area := %IgnoreEmptyArea as CheckBox
 @onready var tileset_options: GridContainer = %ImportOptions/TilesetOptions
 ## container of frame related import options
 @onready var at_frame_option := %ImportOptions/AtFrame as HBoxContainer
@@ -96,10 +101,17 @@ func _on_ImportPreviewDialog_about_to_show() -> void:
 	texture_rect.texture = img_texture
 	aspect_ratio_container.ratio = float(image.get_width()) / image.get_height()
 	# set max values of spritesheet options
-	var h_frames := spritesheet_options.find_child("HorizontalFrames") as SpinBox
-	var v_frames := spritesheet_options.find_child("VerticalFrames") as SpinBox
-	h_frames.max_value = mini(h_frames.max_value, image.get_size().x)
-	v_frames.max_value = mini(v_frames.max_value, image.get_size().y)
+	frames_divider.max_value.x = mini(frames_divider.max_value.x, image.get_width())
+	frames_divider.max_value.y = mini(frames_divider.max_value.y, image.get_height())
+
+	# Make a list of likely tile sizes
+	var min_dimentions := int(ceilf(minf(image.get_width(), image.get_height()) / 2) + 1)
+	frame_size_preset.add_item(tr("Custom"), 0)
+	for i: int in range(3, min_dimentions, 1):
+		if image.get_width() % i == 0 and image.get_height() % i == 0:
+			var label := "%dpx X %dpx" % [i, i]
+			frame_size_preset.add_item(label, i)
+
 	# set labels
 	image_size_label.text = (
 		tr("Image Size") + ": " + str(image.get_size().x) + "×" + str(image.get_size().y)
@@ -281,12 +293,9 @@ func synchronize() -> void:
 			or id == ImageImportOptions.SPRITESHEET_LAYER
 			or id == ImageImportOptions.TILESET
 		):
-			var h_frames := spritesheet_options.find_child("HorizontalFrames") as SpinBox
-			var v_frames := spritesheet_options.find_child("VerticalFrames") as SpinBox
-			var d_h_frames := dialog.spritesheet_options.find_child("HorizontalFrames") as SpinBox
-			var d_v_frames := dialog.spritesheet_options.find_child("VerticalFrames") as SpinBox
-			d_h_frames.value = mini(h_frames.value, image.get_size().x)
-			d_v_frames.value = mini(v_frames.value, image.get_size().y)
+			var d_frames_divider := dialog.frames_divider
+			d_frames_divider.value.x = mini(d_frames_divider.value.x, image.get_size().x)
+			d_frames_divider.value.y = mini(d_frames_divider.value.y, image.get_size().y)
 			if id == ImageImportOptions.SPRITESHEET_LAYER:
 				d_at_frame_spinbox.value = at_frame_spinbox.value
 
@@ -448,18 +457,25 @@ func _on_slice_pressed() -> void:
 	_call_queue_redraw()
 
 
-func _on_HorizontalFrames_value_changed(value: int) -> void:
-	spritesheet_horizontal = value
+func _on_FramesDivider_value_changed(value: Vector2i) -> void:
+	spritesheet_horizontal = value.x
+	spritesheet_vertical = value.y
+	if frame_size_preset.item_count > 0:
+		frame_size_preset.select(0)
 	spritesheet_frame_value_changed()
 
 
-func _on_VerticalFrames_value_changed(value: int) -> void:
-	spritesheet_vertical = value
+func _on_frame_size_preset_item_selected(index: int):
+	var id = frame_size_preset.get_item_id(index)
+	@warning_ignore("integer_division")
+	frames_divider.value = Vector2i(image.get_width() / id, image.get_height() / id)
 	spritesheet_frame_value_changed()
 
 
 func spritesheet_frame_value_changed() -> void:
+	@warning_ignore("integer_division")
 	var frame_width := floori(image.get_size().x / spritesheet_horizontal)
+	@warning_ignore("integer_division")
 	var frame_height := floori(image.get_size().y / spritesheet_vertical)
 	frame_size_label.text = tr("Frame Size") + ": " + str(frame_width) + "×" + str(frame_height)
 	_call_queue_redraw()
