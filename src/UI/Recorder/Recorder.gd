@@ -3,7 +3,7 @@ extends PanelContainer
 
 enum CaptureMethod { ACTIONS, MOUSE_MOTION, SECONDS }
 enum RecordType { CANVAS, REGION }
-enum FFmpegExportBy {FPS_DETERMINES_DURATION, DURATION_DETERMINES_FPS}
+enum FFmpegExportBy { FPS_DETERMINES_DURATION, DURATION_DETERMINES_FPS }
 
 var capture_method := CaptureMethod.ACTIONS
 var record_type := RecordType.CANVAS
@@ -155,9 +155,9 @@ class Recorder:
 				var region := recorder_panel.record_area
 				if recorder_panel.area_follows_mouse:
 					var offset = region.size / 2
-					region.position = (
-						mouse_pos - offset
-					).clamp(Vector2i.ZERO, image.get_size() - region.size)
+					region.position = (mouse_pos - offset).clamp(
+						Vector2i.ZERO, image.get_size() - region.size
+					)
 				image = image.get_region(region)
 			RecorderPanel.RecordType.CANVAS:
 				var frame := project.frames[project.current_frame]
@@ -207,11 +207,7 @@ func initialize_recording() -> void:
 
 
 func finalize_recording(project := Global.current_project) -> void:
-	if (
-		recorded_projects.has(project)
-		and Export.is_ffmpeg_installed()
-		and should_export_gif
-	):
+	if recorded_projects.has(project) and Export.is_ffmpeg_installed() and should_export_gif:
 		export_gif(project)
 		recorded_projects.erase(project)
 	if project == Global.current_project:
@@ -226,28 +222,28 @@ func export_gif(project: Project) -> void:
 	var recorder := recorded_projects[project]
 	var path := recorder.save_directory
 	var palette_generation: PackedStringArray = [
-	"-y",
-	"-i",
-	path.path_join(project.name + "_%d.png"),
-	"-filter_complex",
-	"[0:v] palettegen",
-	path.path_join("palette.png")
+		"-y",
+		"-i",
+		path.path_join(project.name + "_%d.png"),
+		"-filter_complex",
+		"[0:v] palettegen",
+		path.path_join("palette.png")
 	]
 	var success := OS.execute(Global.ffmpeg_path, palette_generation, [], true)
 	var clip_fps := export_fps
 	if export_by == FFmpegExportBy.DURATION_DETERMINES_FPS:
 		clip_fps = recorder.frames_captured / export_duretion
 	var ffmpeg_execute: PackedStringArray = [
-	"-y",
-	"-framerate",
-	str(clip_fps),
-	"-i",
-	path.path_join(project.name + "_%d.png"),
-	"-i",
-	path.path_join("palette.png"),
-	"-filter_complex",
-	"paletteuse",
-	path.path_join(project.name + ".gif")
+		"-y",
+		"-framerate",
+		str(clip_fps),
+		"-i",
+		path.path_join(project.name + "_%d.png"),
+		"-i",
+		path.path_join("palette.png"),
+		"-filter_complex",
+		"paletteuse",
+		path.path_join(project.name + ".gif")
 	]
 	var out := []
 	success = OS.execute(Global.ffmpeg_path, ffmpeg_execute, out, true)
@@ -299,7 +295,7 @@ func save_config() -> void:
 
 
 func get_config() -> Dictionary:
-	return{
+	return {
 		"capture_method": capture_method,
 		"action_interval": action_interval,
 		"mouse_displacement": mouse_displacement,
@@ -398,9 +394,9 @@ func _on_options_dialog_visibility_changed() -> void:
 func _update_follow_mouse_preview() -> void:
 	if follow_mouse_checkbox and rect_texture.is_visible_in_tree():
 		var offset = record_area.size / 2
-		record_area.position = (
-			Vector2i(get_global_mouse_position()) - offset
-		).clamp(Vector2i.ZERO, get_window().size - record_area.size)
+		record_area.position = (Vector2i(get_global_mouse_position()) - offset).clamp(
+			Vector2i.ZERO, get_window().size - record_area.size
+		)
 		update_preview()
 
 
