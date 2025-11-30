@@ -13,6 +13,7 @@ var chosen_dir := "":
 		chosen_dir = value
 		if chosen_dir.ends_with("/"):  # Remove end back-slashes if present
 			chosen_dir[-1] = ""
+var start_after_delay_seconds: int = 0
 var action_interval: int = 1  ## Number of "do" actions after which a frame can be captured.
 var mouse_displacement: int = 100  ## Mouse displacement after which a frame can be captured.
 var seconds_interval: float = 1  ## Number of seconds after which a frame can be captured.
@@ -39,6 +40,7 @@ var _path_dialog: FileDialog:
 			add_child(_path_dialog)
 		return _path_dialog
 
+@onready var start_delay_slider: ValueSlider = %StartDelaySlider
 # Interval options
 @onready var capture_method_option: OptionButton = %CaptureMethodOption
 @onready var capture_actions: ValueSlider = %CaptureActions
@@ -212,10 +214,11 @@ func finalize_recording(project := Global.current_project) -> void:
 		recorded_projects.erase(project)
 	if project == Global.current_project:
 		captured_label.visible = false
-		var group_nodes := get_tree().get_nodes_in_group("hidden during recording")
-		if group_nodes:
-			for child: Control in group_nodes:
-				child.visible = true
+		if get_tree():
+			var group_nodes := get_tree().get_nodes_in_group("hidden during recording")
+			if group_nodes:
+				for child: Control in group_nodes:
+					child.visible = true
 
 
 func export_gif(project: Project) -> void:
@@ -265,12 +268,15 @@ func _on_open_folder_pressed() -> void:
 
 func _on_start_recording_toggled(button_pressed: bool) -> void:
 	if button_pressed:
+		if start_after_delay_seconds > 0:
+			await get_tree().create_timer(start_after_delay_seconds).timeout
 		recorded_projects[Global.current_project] = Recorder.new(Global.current_project, self)
 		initialize_recording()
 		Global.change_button_texturerect(start_button.get_child(0), "stop.png")
 	else:
-		finalize_recording()
-		Global.change_button_texturerect(start_button.get_child(0), "start.png")
+		if recorded_projects.has(Global.current_project):  # prevents reaching here during await
+			finalize_recording()
+			Global.change_button_texturerect(start_button.get_child(0), "start.png")
 
 
 func _on_project_switched() -> void:
@@ -296,6 +302,7 @@ func save_config() -> void:
 
 func get_config() -> Dictionary:
 	return {
+		"start_after_delay_seconds": start_after_delay_seconds,
 		"capture_method": capture_method,
 		"action_interval": action_interval,
 		"mouse_displacement": mouse_displacement,
@@ -314,6 +321,7 @@ func get_config() -> Dictionary:
 
 func set_config(config: Dictionary) -> void:
 	record_area.size = get_window().size
+	start_after_delay_seconds = config.get("start_after_delay_seconds", start_after_delay_seconds)
 	capture_method = config.get("capture_method", capture_method)
 	action_interval = config.get("action_interval", action_interval)
 	mouse_displacement = config.get("mouse_displacement", mouse_displacement)
@@ -330,6 +338,7 @@ func set_config(config: Dictionary) -> void:
 
 
 func update_config():
+	start_delay_slider.set_value_no_signal(start_after_delay_seconds)
 	capture_method_option.selected = capture_method_option.get_item_index(capture_method)
 	capture_actions.set_value_no_signal(action_interval)
 	capture_mouse_distance.set_value_no_signal(mouse_displacement)
@@ -389,6 +398,12 @@ func _on_options_dialog_visibility_changed() -> void:
 	else:
 		if rect_texture:
 			rect_texture.texture = null
+
+
+func _on_start_delay_slider_value_changed(value: int) -> void:
+	start_after_delay_seconds = value
+	update_config()
+	save_config()
 
 
 func _update_follow_mouse_preview() -> void:

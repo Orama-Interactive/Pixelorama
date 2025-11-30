@@ -116,7 +116,8 @@ stretch_mode = 5
 oversampling_override = 1.0
 title = "Capture Options"
 position = Vector2i(0, 36)
-size = Vector2i(400, 730)
+size = Vector2i(400, 758)
+visible = true
 exclusive = false
 popup_window = true
 
@@ -132,6 +133,13 @@ offset_bottom = -49.0
 [node name="OptionsContainer" type="VBoxContainer" parent="OptionsDialog/PanelContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="StartDelaySlider" parent="OptionsDialog/PanelContainer/OptionsContainer" groups=["hidden during recording"] instance=ExtResource("5_gel1w")]
+unique_name_in_owner = true
+layout_mode = 2
+allow_greater = true
+prefix = "Start after delay:"
+suffix = "seconds"
 
 [node name="IntervalOptions" type="VBoxContainer" parent="OptionsDialog/PanelContainer/OptionsContainer"]
 layout_mode = 2
@@ -413,6 +421,7 @@ unique_name_in_owner = true
 [connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/OpenFolder" to="." method="_on_open_folder_pressed"]
 [connection signal="visibility_changed" from="OptionsDialog" to="." method="_on_options_dialog_visibility_changed"]
+[connection signal="value_changed" from="OptionsDialog/PanelContainer/OptionsContainer/StartDelaySlider" to="." method="_on_start_delay_slider_value_changed"]
 [connection signal="item_selected" from="OptionsDialog/PanelContainer/OptionsContainer/IntervalOptions/CaptureMethod/HBoxContainer/CaptureMethodOption" to="." method="_on_capture_method_option_item_selected"]
 [connection signal="value_changed" from="OptionsDialog/PanelContainer/OptionsContainer/IntervalOptions/CaptureMethod/CaptureActions" to="." method="_on_action_interval_value_changed"]
 [connection signal="value_changed" from="OptionsDialog/PanelContainer/OptionsContainer/IntervalOptions/CaptureMethod/MouseDistance" to="." method="_on_mouse_distance_value_changed"]
