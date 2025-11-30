@@ -202,6 +202,7 @@ func _ready() -> void:
 func initialize_recording() -> void:
 	# disable some options that are not required during recording
 	captured_label.visible = true
+	captured_label.text = "Initializing"
 	var group_nodes := get_tree().get_nodes_in_group("hidden during recording")
 	if group_nodes:
 		for child: Control in group_nodes:
@@ -267,11 +268,11 @@ func _on_open_folder_pressed() -> void:
 
 
 func _on_start_recording_toggled(button_pressed: bool) -> void:
-	if button_pressed:
+	if button_pressed and captured_label.visible == false:
+		initialize_recording()
 		if start_after_delay_seconds > 0:
 			await get_tree().create_timer(start_after_delay_seconds).timeout
 		recorded_projects[Global.current_project] = Recorder.new(Global.current_project, self)
-		initialize_recording()
 		Global.change_button_texturerect(start_button.get_child(0), "stop.png")
 	else:
 		if recorded_projects.has(Global.current_project):  # prevents reaching here during await

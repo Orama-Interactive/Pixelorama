@@ -117,7 +117,6 @@ oversampling_override = 1.0
 title = "Capture Options"
 position = Vector2i(0, 36)
 size = Vector2i(400, 758)
-visible = true
 exclusive = false
 popup_window = true
 
