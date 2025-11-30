@@ -374,7 +374,6 @@ func update_config():
 
 	for recorder: Recorder in recorded_projects.values():
 		recorder.update_settings()
-	options_dialog.size.y = 0
 
 
 func update_preview():
