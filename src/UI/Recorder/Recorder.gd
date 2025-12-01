@@ -137,9 +137,7 @@ class Recorder:
 				recorder_panel.capture_timer.timeout.connect(capture_frame)
 				recorder_panel.capture_timer.start()
 
-	static func get_base_region(
-		target_window_idx: int, screen_optionbutton: OptionButton
-	) -> Array:
+	static func get_base_region(target_window_idx: int, screen_optionbutton: OptionButton) -> Array:
 		var screen_image: Image
 		var screen_idx := DisplayServer.INVALID_SCREEN
 		var base_region := Rect2i()
@@ -166,7 +164,6 @@ class Recorder:
 			else:
 				screen_offset = screen_optionbutton.get_tree().root.get_window().position
 		return [screen_image, screen_offset]
-
 
 	func capture_frame() -> void:
 		if Global.current_project != project:
@@ -197,8 +194,7 @@ class Recorder:
 					recorder_panel.finalize_recording(project)
 					return
 				var region = Rect2i(
-					recorder_panel.record_area.position,
-					recorder_panel.record_area.size
+					recorder_panel.record_area.position, recorder_panel.record_area.size
 				)
 				# Capture the cursor image
 				var mouse_pos: Vector2i = recorder_panel.get_global_mouse_position()
