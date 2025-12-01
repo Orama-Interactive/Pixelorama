@@ -92,10 +92,10 @@ class Recorder:
 	var actions_done := -1
 	var frames_captured := 0
 	var save_directory := ""
-	var _last_mouse_position := Vector2i.MAX
-	var _start_size := Vector2i.ZERO
 	var cursor_image: Image
 	var mouse_sprite := preload("res://assets/graphics/cursor.png")
+	var _last_mouse_position := Vector2i.MAX
+	var _start_size := Vector2i.ZERO
 
 	func _init(_project: Project, _recorder_panel: RecorderPanel) -> void:
 		project = _project
