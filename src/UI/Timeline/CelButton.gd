@@ -1,6 +1,6 @@
 extends Button
 
-enum MenuOptions { PROPERTIES, SELECT_PIXELS, DELETE, LINK, UNLINK }
+enum MenuOptions { PROPERTIES, SELECT_PIXELS, DELETE, LINK, UNLINK, RIPPLE_CELS }
 
 var frame := 0
 var layer := 0
@@ -14,6 +14,8 @@ var _is_guide_stylebox := false
 @onready var cel_texture: TextureRect = $CelTexture
 @onready var transparent_checker: ColorRect = $CelTexture/TransparentChecker
 @onready var z_index_indicator: TextureRect = $ZIndexIndicator
+@onready var ripple_options: AcceptDialog = $RippleOptions
+@onready var ripple_slider: ValueSlider = $RippleOptions/PanelContainer/RippleSlider
 @onready var properties: AcceptDialog = Global.control.find_child("CelProperties")
 
 
@@ -42,11 +44,12 @@ func _ready() -> void:
 		Global.current_project.layers[layer].audio_changed.connect(_is_playing_audio)
 		Global.current_project.layers[layer].playback_frame_changed.connect(_is_playing_audio)
 	else:
-		popup_menu.add_item("Select pixels")
+		popup_menu.add_item("Select pixels", MenuOptions.SELECT_PIXELS)
 	if cel is PixelCel:
-		popup_menu.add_item("Delete")
-		popup_menu.add_item("Link cels to")
-		popup_menu.add_item("Unlink cels")
+		popup_menu.add_item("Delete", MenuOptions.DELETE)
+		popup_menu.add_item("Link cels to", MenuOptions.LINK)
+		popup_menu.add_item("Unlink cels", MenuOptions.UNLINK)
+		popup_menu.add_item("Ripple cels", MenuOptions.RIPPLE_CELS)
 	elif cel is GroupCel:
 		transparent_checker.visible = false
 
@@ -155,85 +158,122 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 				Global.canvas.selection.select_cel_pixels(layer_class, project.frames[frame])
 		MenuOptions.DELETE:
 			_delete_cel_content()
-
 		MenuOptions.LINK, MenuOptions.UNLINK:
 			if id == MenuOptions.UNLINK:
 				project.undo_redo.create_action("Unlink Cel")
 				var selected_cels := _get_cel_indices(true)
 				if not selected_cels.has([frame, layer]):
 					selected_cels.append([frame, layer])  # Include this cel with the selected ones
-				for cel_index in selected_cels:
-					if layer != cel_index[1]:  # Skip selected cels not on the same layer
-						continue
-					var s_cel := project.frames[cel_index[0]].cels[cel_index[1]]
-					if s_cel.link_set == null:  # Skip cels that aren't linked
-						continue
-					project.undo_redo.add_do_method(
-						project.layers[layer].link_cel.bind(s_cel, null)
-					)
-					project.undo_redo.add_undo_method(
-						project.layers[layer].link_cel.bind(s_cel, s_cel.link_set)
-					)
-					if s_cel.link_set.size() > 1:  # Skip copying content if not linked to another
-						project.undo_redo.add_do_method(
-							s_cel.set_content.bind(s_cel.copy_content(), ImageTexture.new())
-						)
-						project.undo_redo.add_undo_method(
-							s_cel.set_content.bind(s_cel.get_content(), s_cel.image_texture)
-						)
-
+				set_link_cels([], selected_cels)
 			elif id == MenuOptions.LINK:
 				project.undo_redo.create_action("Link Cel")
-				var link_set: Dictionary = {} if cel.link_set == null else cel.link_set
-				if cel.link_set == null:
-					project.undo_redo.add_do_method(
-						project.layers[layer].link_cel.bind(cel, link_set)
-					)
-					project.undo_redo.add_undo_method(
-						project.layers[layer].link_cel.bind(cel, null)
-					)
-
-				for cel_index in project.selected_cels:
-					if layer != cel_index[1]:  # Skip selected cels not on the same layer
-						continue
-					var s_cel := project.frames[cel_index[0]].cels[cel_index[1]]
-					if cel == s_cel:  # Don't need to link cel to itself
-						continue
-					if s_cel.link_set == link_set:  # Skip cels that were already linked
-						continue
-					project.undo_redo.add_do_method(
-						project.layers[layer].link_cel.bind(s_cel, link_set)
-					)
-					project.undo_redo.add_undo_method(
-						project.layers[layer].link_cel.bind(s_cel, s_cel.link_set)
-					)
-					project.undo_redo.add_do_method(
-						s_cel.set_content.bind(cel.get_content(), cel.image_texture)
-					)
-					project.undo_redo.add_undo_method(
-						s_cel.set_content.bind(s_cel.get_content(), s_cel.image_texture)
-					)
-
-			# Remove and add a new cel button to update appearance (can't use button_setup
-			# because there is no guarantee that it will be the exact same cel button instance)
-			# May be able to use button_setup with a lambda to find correct cel button in Godot 4
-			for f in project.frames.size():
-				project.undo_redo.add_do_method(
-					Global.animation_timeline.project_cel_removed.bind(f, layer)
-				)
-				project.undo_redo.add_undo_method(
-					Global.animation_timeline.project_cel_removed.bind(f, layer)
-				)
-				project.undo_redo.add_do_method(
-					Global.animation_timeline.project_cel_added.bind(f, layer)
-				)
-				project.undo_redo.add_undo_method(
-					Global.animation_timeline.project_cel_added.bind(f, layer)
-				)
-
+				set_link_cels([frame, layer], project.selected_cels)
 			project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 			project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 			project.undo_redo.commit_action()
+		MenuOptions.RIPPLE_CELS:
+			ripple_options.popup_centered()
+
+
+func _on_ripple_options_confirmed() -> void:
+	var project := Global.current_project
+	project.undo_redo.create_action("Ripple Cel")
+	var ripple_amount := int(ripple_slider.value)
+	var move_amounts = {}
+	var arranged_cels_as_layers = {}
+	var selected_cels := _get_cel_indices(true)
+	if not selected_cels.has([frame, layer]):
+		selected_cels.append([frame, layer])  # Include this cel with the selected ones
+	# Sort cels per layer basis
+	for cel_pos in selected_cels:
+		var prev_array: Array = arranged_cels_as_layers.get(cel_pos[1], [])
+		prev_array.append(cel_pos[0])
+		arranged_cels_as_layers.set(cel_pos[1], prev_array)
+	# Determine move ammount per cel for each layer
+	for layer_idx: int in arranged_cels_as_layers.keys():
+		var frame_counts: Array = arranged_cels_as_layers[layer_idx]
+		move_amounts[layer_idx] = frame_counts.max() - frame_counts.min() + 1
+	for cel_pos in selected_cels:
+		var link_set_array := [cel_pos]
+		for i in ripple_amount:
+			var offset = cel_pos[0] + (move_amounts[cel_pos[1]] * (i + 1))
+			if offset >= project.frames.size():
+				break
+			link_set_array.append([offset, cel_pos[1]])
+		set_link_cels(cel_pos, link_set_array)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.commit_action()
+
+
+## template_cel_pos is array[frame, layer] while linker_cels is similar to project.selected_cels
+func set_link_cels(template_cel_pos: Array, linker_cels: Array):
+	var project := Global.current_project
+	var template_layer = layer if template_cel_pos.size() < 2 else template_cel_pos[1]
+	if template_cel_pos.size() == 2:  # Link cel
+		var template_cel := project.frames[template_cel_pos[0]].cels[template_layer]
+		var link_set: Dictionary = {} if template_cel.link_set == null else template_cel.link_set
+		if template_cel.link_set == null:
+			project.undo_redo.add_do_method(
+				project.layers[template_layer].link_cel.bind(template_cel, link_set)
+			)
+			project.undo_redo.add_undo_method(
+				project.layers[template_layer].link_cel.bind(template_cel, null)
+			)
+		for cel_index in linker_cels:
+			if template_layer != cel_index[1]:  # Skip cels not on the same layer
+				continue
+			var s_cel := project.frames[cel_index[0]].cels[cel_index[1]]
+			if template_cel == s_cel:  # Don't need to link cel to itself
+				continue
+			if s_cel.link_set == link_set:  # Skip cels that were already linked
+				continue
+			project.undo_redo.add_do_method(project.layers[layer].link_cel.bind(s_cel, link_set))
+			project.undo_redo.add_undo_method(
+				project.layers[layer].link_cel.bind(s_cel, s_cel.link_set)
+			)
+			project.undo_redo.add_do_method(
+				s_cel.set_content.bind(template_cel.get_content(), template_cel.image_texture)
+			)
+			project.undo_redo.add_undo_method(
+				s_cel.set_content.bind(s_cel.get_content(), s_cel.image_texture)
+			)
+	else:  # Unlink Cel
+		if not linker_cels.has([frame, layer]):
+			linker_cels.append([frame, layer])  # Include this cel with the selected ones
+		for cel_index in linker_cels:
+			if layer != cel_index[1]:  # Skip selected cels not on the same layer
+				continue
+			var s_cel := project.frames[cel_index[0]].cels[cel_index[1]]
+			if s_cel.link_set == null:  # Skip cels that aren't linked
+				continue
+			project.undo_redo.add_do_method(project.layers[layer].link_cel.bind(s_cel, null))
+			project.undo_redo.add_undo_method(
+				project.layers[layer].link_cel.bind(s_cel, s_cel.link_set)
+			)
+			if s_cel.link_set.size() > 1:  # Skip copying content if not linked to another
+				project.undo_redo.add_do_method(
+					s_cel.set_content.bind(s_cel.copy_content(), ImageTexture.new())
+				)
+				project.undo_redo.add_undo_method(
+					s_cel.set_content.bind(s_cel.get_content(), s_cel.image_texture)
+				)
+	# Remove and add a new cel button to update appearance (can't use button_setup
+	# because there is no guarantee that it will be the exact same cel button instance)
+	# May be able to use button_setup with a lambda to find correct cel button in Godot 4
+	for f in project.frames.size():
+		project.undo_redo.add_do_method(
+			Global.animation_timeline.project_cel_removed.bind(f, template_layer)
+		)
+		project.undo_redo.add_undo_method(
+			Global.animation_timeline.project_cel_removed.bind(f, template_layer)
+		)
+		project.undo_redo.add_do_method(
+			Global.animation_timeline.project_cel_added.bind(f, template_layer)
+		)
+		project.undo_redo.add_undo_method(
+			Global.animation_timeline.project_cel_added.bind(f, template_layer)
+		)
 
 
 func _delete_cel_content() -> void:
