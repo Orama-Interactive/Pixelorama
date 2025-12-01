@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dl6ook010q86o"]
+[gd_scene load_steps=10 format=3 uid="uid://dl6ook010q86o"]
 
 [ext_resource type="Texture2D" uid="uid://bgfqvkmstecr5" path="res://assets/graphics/recorder/start.png" id="1"]
 [ext_resource type="Script" uid="uid://h0nqlme6nopg" path="res://src/UI/Recorder/Recorder.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://dinubfua8gqhw" path="res://assets/graphics/timeline/expandable.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://b0gbmkb8xwksb" path="res://addons/keychain/assets/folder.svg" id="4"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="5_gel1w"]
-[ext_resource type="Texture2D" uid="uid://cgjbk5vsy535u" path="res://assets/graphics/splash.png" id="6_i12tv"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="6_uegas"]
 [ext_resource type="Shader" uid="uid://c50kmfvf635kb" path="res://src/Shaders/TransparentChecker.gdshader" id="7_4flx0"]
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="8_4flx0"]
@@ -18,7 +17,7 @@ shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
 shader_parameter/color2 = Color(1, 1, 1, 1)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/scale = Vector2(0, 0)
-shader_parameter/rect_size = Vector2(100, 100)
+shader_parameter/rect_size = Vector2(134, 134)
 shader_parameter/follow_movement = false
 shader_parameter/follow_scale = false
 
@@ -116,9 +115,7 @@ stretch_mode = 5
 oversampling_override = 1.0
 title = "Capture Options"
 position = Vector2i(0, 36)
-size = Vector2i(400, 758)
-exclusive = false
-popup_window = true
+size = Vector2i(400, 848)
 
 [node name="PanelContainer" type="MarginContainer" parent="OptionsDialog"]
 anchors_preset = 15
@@ -251,6 +248,19 @@ allow_greater = true
 prefix = "Clip Duration:"
 suffix = "Seconds"
 
+[node name="CropOptions" type="VBoxContainer" parent="OptionsDialog/PanelContainer/OptionsContainer/FFmpegOptions"]
+layout_mode = 2
+
+[node name="GifStartFrame" parent="OptionsDialog/PanelContainer/OptionsContainer/FFmpegOptions/CropOptions" instance=ExtResource("5_gel1w")]
+layout_mode = 2
+prefix = "Start Gif at frame:"
+
+[node name="GifEndFrame" parent="OptionsDialog/PanelContainer/OptionsContainer/FFmpegOptions/CropOptions" instance=ExtResource("5_gel1w")]
+layout_mode = 2
+min_value = -1.0
+value = -1.0
+prefix = "End Gif at frame:"
+
 [node name="CaptureModeOptions" type="VBoxContainer" parent="OptionsDialog/PanelContainer/OptionsContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -280,27 +290,35 @@ text = "Record type: "
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="TargetScreen" type="OptionButton" parent="OptionsDialog/PanelContainer/OptionsContainer/CaptureModeOptions/AreaTypeOption"]
+unique_name_in_owner = true
+layout_mode = 2
+allow_reselect = true
+
 [node name="AreaOptions" type="VBoxContainer" parent="OptionsDialog/PanelContainer/OptionsContainer/CaptureModeOptions"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="PreviewAspectRatioContainer" type="AspectRatioContainer" parent="OptionsDialog/PanelContainer/OptionsContainer/CaptureModeOptions/AreaOptions"]
+[node name="PanelContainer" type="PanelContainer" parent="OptionsDialog/PanelContainer/OptionsContainer/CaptureModeOptions/AreaOptions"]
+self_modulate = Color(0.7666196, 0.76661956, 0.76661956, 1)
+layout_mode = 2
+
+[node name="PreviewAspectRatioContainer" type="AspectRatioContainer" parent="OptionsDialog/PanelContainer/OptionsContainer/CaptureModeOptions/AreaOptions/PanelContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="RectTexture" type="TextureRect" parent="OptionsDialog/PanelContainer/OptionsContainer/CaptureModeOptions/AreaOptions/PreviewAspectRatioContainer"]
+[node name="RectTexture" type="TextureRect" parent="OptionsDialog/PanelContainer/OptionsContainer/CaptureModeOptions/AreaOptions/PanelContainer/PreviewAspectRatioContainer"]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
-texture = ExtResource("6_i12tv")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TransparentChecker" parent="OptionsDialog/PanelContainer/OptionsContainer/CaptureModeOptions/AreaOptions/PreviewAspectRatioContainer" instance=ExtResource("6_uegas")]
+[node name="TransparentChecker" parent="OptionsDialog/PanelContainer/OptionsContainer/CaptureModeOptions/AreaOptions/PanelContainer/PreviewAspectRatioContainer" instance=ExtResource("6_uegas")]
 unique_name_in_owner = true
 show_behind_parent = true
 material = SubResource("ShaderMaterial_i12tv")
@@ -350,10 +368,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Follow Mouse"
-
-[node name="FullRegionButton" type="Button" parent="OptionsDialog/PanelContainer/OptionsContainer/CaptureModeOptions/AreaOptions/HBoxContainer" groups=["hidden during recording"]]
-layout_mode = 2
-text = "Select full region"
 
 [node name="ScaleOutputCheckbox" type="CheckBox" parent="OptionsDialog/PanelContainer/OptionsContainer/CaptureModeOptions" groups=["hidden during recording"]]
 unique_name_in_owner = true
@@ -429,11 +443,13 @@ unique_name_in_owner = true
 [connection signal="item_selected" from="OptionsDialog/PanelContainer/OptionsContainer/FFmpegOptions/HBoxContainer/FFmpegExportByOption" to="." method="_on_ffmpeg_export_by_option_item_selected"]
 [connection signal="value_changed" from="OptionsDialog/PanelContainer/OptionsContainer/FFmpegOptions/FPSValueSlider" to="." method="_on_fps_value_value_changed"]
 [connection signal="value_changed" from="OptionsDialog/PanelContainer/OptionsContainer/FFmpegOptions/FFmpegScondsSlider" to="." method="_on_ffmpeg_sconds_slider_value_changed"]
+[connection signal="value_changed" from="OptionsDialog/PanelContainer/OptionsContainer/FFmpegOptions/CropOptions/GifStartFrame" to="." method="_on_gif_start_frame_value_changed"]
+[connection signal="value_changed" from="OptionsDialog/PanelContainer/OptionsContainer/FFmpegOptions/CropOptions/GifEndFrame" to="." method="_on_gif_end_frame_value_changed"]
 [connection signal="item_selected" from="OptionsDialog/PanelContainer/OptionsContainer/CaptureModeOptions/AreaTypeOption/RecordTypeOption" to="." method="_on_record_type_option_item_selected"]
+[connection signal="item_selected" from="OptionsDialog/PanelContainer/OptionsContainer/CaptureModeOptions/AreaTypeOption/TargetScreen" to="." method="_on_target_screen_item_selected"]
 [connection signal="value_changed" from="OptionsDialog/PanelContainer/OptionsContainer/CaptureModeOptions/AreaOptions/RectOptions/RectPositonSlider" to="." method="_on_rect_positon_slider_value_changed"]
 [connection signal="value_changed" from="OptionsDialog/PanelContainer/OptionsContainer/CaptureModeOptions/AreaOptions/RectOptions/RectSizeSlider" to="." method="_on_rect_size_slider_value_changed"]
 [connection signal="toggled" from="OptionsDialog/PanelContainer/OptionsContainer/CaptureModeOptions/AreaOptions/HBoxContainer/FollowMouse" to="." method="_on_follow_mouse_toggled"]
-[connection signal="pressed" from="OptionsDialog/PanelContainer/OptionsContainer/CaptureModeOptions/AreaOptions/HBoxContainer/FullRegionButton" to="." method="_on_full_region_button_pressed"]
 [connection signal="toggled" from="OptionsDialog/PanelContainer/OptionsContainer/CaptureModeOptions/ScaleOutputCheckbox" to="." method="_on_scale_output_checkbox_toggled"]
 [connection signal="value_changed" from="OptionsDialog/PanelContainer/OptionsContainer/CaptureModeOptions/OutputScale/ScaleValueSlider" to="." method="_on_output_scale_value_changed"]
 [connection signal="pressed" from="OptionsDialog/PanelContainer/OptionsContainer/OutputPath/PathContainer/Choose" to="." method="_on_Choose_pressed"]

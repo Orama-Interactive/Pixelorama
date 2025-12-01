@@ -24,8 +24,10 @@ var scale_percent := 100
 var should_export_gif := false
 var export_fps: float = 10
 var export_duretion: float = 20
+var target_window_idx := 0  # index of
 var export_by := FFmpegExportBy.FPS_DETERMINES_DURATION
 var recorded_projects: Dictionary[Project, Recorder] = {}
+
 var _path_dialog: FileDialog:
 	get:
 		if not is_instance_valid(_path_dialog):
@@ -39,6 +41,11 @@ var _path_dialog: FileDialog:
 			_path_dialog.dir_selected.connect(_on_path_dialog_dir_selected)
 			add_child(_path_dialog)
 		return _path_dialog
+var _gif_start_frame: int = 0
+var _gif_end_frame: int = -1
+## Performance variables
+var _old_preview_region: Rect2i
+var _old_last_position := Vector2.INF
 
 @onready var start_delay_slider: ValueSlider = %StartDelaySlider
 # Interval options
@@ -51,6 +58,7 @@ var _path_dialog: FileDialog:
 @onready var area_options: VBoxContainer = %AreaOptions
 @onready var rect_texture: TextureRect = %RectTexture
 @onready var preview_aspect_ratio_container: AspectRatioContainer = %PreviewAspectRatioContainer
+@onready var target_screen_option: OptionButton = %TargetScreen
 @onready var rect_positon_slider: ValueSliderV2 = %RectPositonSlider
 @onready var rect_size_slider: ValueSliderV2 = %RectSizeSlider
 @onready var follow_mouse_checkbox: CheckBox = %FollowMouse
@@ -73,9 +81,9 @@ var _path_dialog: FileDialog:
 # Panel elements
 @onready var captured_label := %CapturedLabel as Label
 @onready var start_button := %Start as Button
-@onready var options_dialog := $OptionsDialog as AcceptDialog
-@onready var preview_timer: Timer = %PreviewTimer
 @onready var capture_timer: Timer = %CaptureTimer
+@onready var preview_timer: Timer = %PreviewTimer
+@onready var options_dialog := $OptionsDialog as AcceptDialog
 
 
 class Recorder:
@@ -85,6 +93,7 @@ class Recorder:
 	var frames_captured := 0
 	var save_directory := ""
 	var _last_mouse_position := Vector2i.MAX
+	var _start_size := Vector2i.ZERO
 	var cursor_image: Image
 	var mouse_sprite := preload("res://assets/graphics/cursor.png")
 
@@ -103,6 +112,7 @@ class Recorder:
 		cursor_image = mouse_sprite.get_image()
 		update_settings()
 		recorder_panel.captured_label.text = ""
+		_start_size = recorder_panel.record_area.size
 
 	func _notification(what: int) -> void:
 		if what == NOTIFICATION_PREDELETE:
@@ -127,10 +137,43 @@ class Recorder:
 				recorder_panel.capture_timer.timeout.connect(capture_frame)
 				recorder_panel.capture_timer.start()
 
+	static func get_base_region(
+		target_window_idx: int, screen_optionbutton: OptionButton
+	) -> Array:
+		var screen_image: Image
+		var screen_idx := DisplayServer.INVALID_SCREEN
+		var base_region := Rect2i()
+		var screen_offset := Vector2i.ZERO
+		if target_window_idx < screen_optionbutton.item_count:
+			var metadata = screen_optionbutton.get_item_metadata(target_window_idx)
+			if typeof(metadata) == TYPE_ARRAY:
+				if metadata.size() == 2:
+					var idx: int = metadata[0]
+					var is_window: bool = metadata[1]
+					if is_window and DisplayServer.get_window_list().has(idx):
+						base_region = Rect2i(
+							DisplayServer.window_get_position(idx),
+							DisplayServer.window_get_size(idx)
+						)
+						screen_idx = DisplayServer.window_get_current_screen(idx)
+					else:
+						if idx < DisplayServer.get_screen_count():
+							screen_idx = idx
+		if screen_idx != DisplayServer.INVALID_SCREEN:
+			screen_image = DisplayServer.screen_get_image(screen_idx)
+			if base_region.has_area() and screen_image:
+				screen_image = screen_image.get_region(base_region)
+			else:
+				screen_offset = screen_optionbutton.get_tree().root.get_window().position
+		return [screen_image, screen_offset]
+
+
 	func capture_frame() -> void:
 		if Global.current_project != project:
 			return
 		if not recorder_panel.get_window():
+			return
+		if recorder_panel.options_dialog.visible:
 			return
 		match recorder_panel.capture_method:
 			RecorderPanel.CaptureMethod.ACTIONS:
@@ -146,25 +189,37 @@ class Recorder:
 		var image: Image
 		match recorder_panel.record_type:
 			RecorderPanel.RecordType.REGION:
-				image = recorder_panel.get_window().get_texture().get_image()
+				var base_area: Array = Recorder.get_base_region(
+					recorder_panel.target_window_idx, recorder_panel.target_screen_option
+				)
+				image = base_area[0]
+				if !image:  # Error encountered (Image not found)
+					recorder_panel.finalize_recording(project)
+					return
+				var region = Rect2i(
+					recorder_panel.record_area.position,
+					recorder_panel.record_area.size
+				)
 				# Capture the cursor image
 				var mouse_pos: Vector2i = recorder_panel.get_global_mouse_position()
-				var mouse_point := mouse_pos - (cursor_image.get_size() / 2)
+				var mouse_point: Vector2i = mouse_pos - (cursor_image.get_size() / 2) + base_area[1]
 				cursor_image.convert(image.get_format())
 				image.blend_rect(
 					cursor_image, Rect2i(Vector2i.ZERO, cursor_image.get_size()), mouse_point
 				)
-				var region := recorder_panel.record_area
 				if recorder_panel.area_follows_mouse:
-					var offset = region.size / 2
+					var offset = (region.size / 2) - base_area[1]
 					region.position = (mouse_pos - offset).clamp(
 						Vector2i.ZERO, image.get_size() - region.size
 					)
-				image = image.get_region(region)
+				if region != Rect2i(Vector2i.ZERO, image.get_size()):
+					image = image.get_region(region)
 			RecorderPanel.RecordType.CANVAS:
 				var frame := project.frames[project.current_frame]
 				image = project.new_empty_image()
 				DrawingAlgos.blend_layers(image, frame, Vector2i.ZERO, project)
+		if image.get_size() != _start_size:  # Resize image if it is different than intended
+			image.resize(_start_size.x, _start_size.y, Image.INTERPOLATE_NEAREST)
 		if recorder_panel.scaling_enabled:
 			@warning_ignore("integer_division")
 			var resize := recorder_panel.scale_percent / 100
@@ -197,6 +252,7 @@ func _ready() -> void:
 	var config = Global.config_cache.get_value("RecorderPanel", "settings", {})
 	set_config(config)
 	update_config()
+	repopulate_screen_options()
 
 
 func initialize_recording() -> void:
@@ -220,15 +276,23 @@ func finalize_recording(project := Global.current_project) -> void:
 			if group_nodes:
 				for child: Control in group_nodes:
 					child.visible = true
+			update_config()
 
 
 func export_gif(project: Project) -> void:
 	var recorder := recorded_projects[project]
 	var path := recorder.save_directory
+	var frame_count: int = recorder.frames_captured - _gif_start_frame
+	if _gif_end_frame != -1:
+		frame_count = _gif_end_frame - _gif_start_frame
 	var palette_generation: PackedStringArray = [
 		"-y",
+		"-start_number",
+		str(_gif_start_frame),
 		"-i",
 		path.path_join(project.name + "_%d.png"),
+		"-frames:v",
+		str(frame_count),
 		"-filter_complex",
 		"[0:v] palettegen",
 		path.path_join("palette.png")
@@ -236,21 +300,24 @@ func export_gif(project: Project) -> void:
 	var success := OS.execute(Global.ffmpeg_path, palette_generation, [], true)
 	var clip_fps := export_fps
 	if export_by == FFmpegExportBy.DURATION_DETERMINES_FPS:
-		clip_fps = recorder.frames_captured / export_duretion
+		clip_fps = frame_count / export_duretion
 	var ffmpeg_execute: PackedStringArray = [
 		"-y",
 		"-framerate",
 		str(clip_fps),
+		"-start_number",
+		str(_gif_start_frame),
 		"-i",
 		path.path_join(project.name + "_%d.png"),
 		"-i",
 		path.path_join("palette.png"),
 		"-filter_complex",
 		"paletteuse",
+		"-frames:v",
+		str(frame_count),
 		path.path_join(project.name + ".gif")
 	]
-	var out := []
-	success = OS.execute(Global.ffmpeg_path, ffmpeg_execute, out, true)
+	success = OS.execute(Global.ffmpeg_path, ffmpeg_execute, [], true)
 	if success < 0 or success > 1:
 		var fail_text := """Video failed to export. Make sure you have FFMPEG installed
 			and have set the correct path in the preferences."""
@@ -309,6 +376,7 @@ func get_config() -> Dictionary:
 		"mouse_displacement": mouse_displacement,
 		"seconds_interval": seconds_interval,
 		"record_type": record_type,
+		"target_window_idx": target_window_idx,
 		"record_area": record_area,
 		"area_follows_mouse": area_follows_mouse,
 		"scaling_enabled": scaling_enabled,
@@ -328,6 +396,7 @@ func set_config(config: Dictionary) -> void:
 	mouse_displacement = config.get("mouse_displacement", mouse_displacement)
 	seconds_interval = config.get("seconds_interval", seconds_interval)
 	record_type = config.get("record_type", record_type)
+	target_window_idx = config.get("target_window_idx", target_window_idx)
 	record_area = config.get("record_area", record_area)
 	area_follows_mouse = config.get("area_follows_mouse", area_follows_mouse)
 	scaling_enabled = config.get("scaling_enabled", scaling_enabled)
@@ -344,51 +413,89 @@ func update_config():
 	capture_actions.set_value_no_signal(action_interval)
 	capture_mouse_distance.set_value_no_signal(mouse_displacement)
 	capture_seconds.set_value_no_signal(seconds_interval)
-	capture_actions.visible = capture_method == CaptureMethod.ACTIONS
-	capture_mouse_distance.visible = capture_method == CaptureMethod.MOUSE_MOTION
-	capture_seconds.visible = capture_method == CaptureMethod.SECONDS
 
 	record_type_option.selected = record_type_option.get_item_index(record_type)
-	area_options.visible = record_type == RecordType.REGION
-	follow_mouse_checkbox.set_pressed_no_signal(area_follows_mouse)
-	if area_follows_mouse:
-		preview_timer.start()
+	if target_window_idx < target_screen_option.item_count:  # Fixes if window count suddenly changes
+		repopulate_screen_options()
 	else:
-		preview_timer.stop()
-	rect_positon_slider.visible = not follow_mouse_checkbox.button_pressed
+		target_screen_option.selected = target_window_idx
+	follow_mouse_checkbox.set_pressed_no_signal(area_follows_mouse)
 	rect_positon_slider.set_value_no_signal(record_area.position)
 	rect_size_slider.set_value_no_signal(record_area.size)
 
+	if area_follows_mouse:
+		if preview_timer.is_stopped():
+			preview_timer.start()
+	else:
+		if not preview_timer.is_stopped():
+			preview_timer.stop()
+
 	scale_output_checkbox.set_pressed_no_signal(scaling_enabled)
-	output_scale_container.visible = scaling_enabled
-	scale_value_slider.visible = scaling_enabled
 	scale_value_slider.set_value_no_signal(scale_percent)
 	var new_size: Vector2i = Global.current_project.size * (scale_percent / 100.0)
 	size_label.text = str("(", new_size.x, "×", new_size.y, ")")
 
 	export_gif_checkbox.set_pressed_no_signal(should_export_gif)
-	ffmpeg_export_by_option.visible = should_export_gif
 	ffmpeg_export_by_option.selected = ffmpeg_export_by_option.get_item_index(export_by)
+	fps_value_slider.set_value_no_signal(export_fps)
+	ffmpeg_sconds_slider.set_value_no_signal(export_duretion)
+
+	capture_actions.visible = capture_method == CaptureMethod.ACTIONS
+	capture_mouse_distance.visible = capture_method == CaptureMethod.MOUSE_MOTION
+	capture_seconds.visible = capture_method == CaptureMethod.SECONDS
+	target_screen_option.visible = record_type == RecordType.REGION
+	area_options.visible = record_type == RecordType.REGION
+	rect_positon_slider.visible = not follow_mouse_checkbox.button_pressed
+	output_scale_container.visible = scaling_enabled
+	scale_value_slider.visible = scaling_enabled
+	ffmpeg_export_by_option.visible = should_export_gif
 	fps_value_slider.visible = (
 		should_export_gif and export_by == FFmpegExportBy.FPS_DETERMINES_DURATION
 	)
 	ffmpeg_sconds_slider.visible = (
 		should_export_gif and export_by == FFmpegExportBy.DURATION_DETERMINES_FPS
 	)
-	fps_value_slider.set_value_no_signal(export_fps)
-	ffmpeg_sconds_slider.set_value_no_signal(export_duretion)
 
 	for recorder: Recorder in recorded_projects.values():
 		recorder.update_settings()
 
 
-func update_preview():
+func repopulate_screen_options():
+	target_screen_option.clear()
+	var entry_id: int = 0
+	for i in DisplayServer.get_screen_count():
+		target_screen_option.add_item("Screen %s" % str(i), entry_id)
+		target_screen_option.set_item_metadata(entry_id, [i, false])
+		entry_id += 1
+	for i in DisplayServer.get_window_list():
+		if options_dialog.get_window_id() == i:
+			continue
+		target_screen_option.add_item("Window %s" % str(entry_id), entry_id)
+		target_screen_option.set_item_metadata(entry_id, [i, true])
+		entry_id += 1
+	target_screen_option.select(clampi(target_window_idx, 0, target_screen_option.item_count - 1))
+
+
+func update_preview(reset_region := false):
 	if record_type != RecordType.REGION:
 		return
-	var preview = get_window().get_texture().get_image()
-	var texture = ImageTexture.create_from_image(preview.get_region(record_area))
-	rect_texture.texture = texture
-	preview_aspect_ratio_container.ratio = float(record_area.size.x) / record_area.size.y
+	var preview = Recorder.get_base_region(target_window_idx, target_screen_option)
+	if preview[0]:
+		var mouse_pos: Vector2i = get_global_mouse_position()
+		if reset_region:
+			record_area = Rect2i(Vector2i.ZERO, preview[0].get_size())
+		var region = Rect2i(record_area.position, record_area.size)
+		var offset = (region.size / 2) - preview[1]
+		region.position = (mouse_pos - offset).clamp(
+			Vector2i.ZERO, preview[0].get_size() - region.size
+		)
+		if _old_preview_region != region:
+			_old_preview_region = region
+			var texture = ImageTexture.create_from_image(preview[0].get_region(region))
+			rect_texture.texture = texture
+			preview_aspect_ratio_container.ratio = float(record_area.size.x) / record_area.size.y
+	else:
+		repopulate_screen_options()
 
 
 func _on_options_dialog_visibility_changed() -> void:
@@ -408,12 +515,19 @@ func _on_start_delay_slider_value_changed(value: int) -> void:
 
 
 func _update_follow_mouse_preview() -> void:
-	if follow_mouse_checkbox and rect_texture.is_visible_in_tree():
-		var offset = record_area.size / 2
-		record_area.position = (Vector2i(get_global_mouse_position()) - offset).clamp(
-			Vector2i.ZERO, get_window().size - record_area.size
-		)
-		update_preview()
+	if area_follows_mouse and options_dialog.visible:
+		var mouse_pos := get_global_mouse_position()
+		if _old_last_position.distance_to(mouse_pos) < 20:
+			return
+		_old_last_position = mouse_pos
+		if follow_mouse_checkbox and rect_texture.is_visible_in_tree():
+			var offset = record_area.size / 2
+			var new_position = (Vector2i(get_global_mouse_position()) - offset).clamp(
+				Vector2i.ZERO, get_window().size - record_area.size
+			)
+			if record_area.position != new_position:
+				record_area.position = new_position
+				update_preview()
 
 
 func _on_capture_method_option_item_selected(index: int) -> void:
@@ -442,30 +556,37 @@ func _on_seconds_interval_value_changed(value: float) -> void:
 
 func _on_record_type_option_item_selected(index: int) -> void:
 	record_type = record_type_option.get_item_id(index) as RecordType
+	update_preview()
 	update_config()
 	save_config()
-	update_preview()
+
+
+func _on_target_screen_item_selected(index: int) -> void:
+	target_window_idx = index
+	update_preview(true)
+	update_config()
+	save_config()
 
 
 func _on_rect_positon_slider_value_changed(value: Vector2i) -> void:
 	record_area.position = value
+	update_preview()
 	update_config()
 	save_config()
-	update_preview()
 
 
 func _on_full_region_button_pressed() -> void:
 	record_area = Rect2i(Vector2i.ZERO, get_window().size)
+	update_preview()
 	update_config()
 	save_config()
-	update_preview()
 
 
 func _on_rect_size_slider_value_changed(value: Vector2i) -> void:
 	record_area.size = value
+	update_preview()
 	update_config()
 	save_config()
-	update_preview()
 
 
 func _on_follow_mouse_toggled(toggled_on: bool) -> void:
@@ -519,3 +640,11 @@ func _on_path_dialog_dir_selected(dir: String) -> void:
 	chosen_dir = dir
 	path_field.text = chosen_dir
 	start_button.disabled = false
+
+
+func _on_gif_start_frame_value_changed(value: int) -> void:
+	_gif_start_frame = value
+
+
+func _on_gif_end_frame_value_changed(value: int) -> void:
+	_gif_end_frame = value
