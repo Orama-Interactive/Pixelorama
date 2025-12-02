@@ -238,7 +238,6 @@ func selection_map_changed() -> void:
 
 
 func change_project() -> void:
-	Global.animation_timeline.project_changed()
 	animation_tags = animation_tags
 	# Change the project brushes
 	Brushes.clear_project_brush()
