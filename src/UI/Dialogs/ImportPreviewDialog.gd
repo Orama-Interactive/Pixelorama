@@ -253,9 +253,10 @@ func _on_ApplyAll_toggled(pressed: bool) -> void:
 			child.hiding = pressed
 			if pressed:
 				child.hide()
-				synchronize()
 			else:
 				child.popup_centered_clamped()
+	if pressed:
+		synchronize()
 	popup(old_rect)  # needed for correct popup_order
 
 
