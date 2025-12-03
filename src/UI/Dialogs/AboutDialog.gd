@@ -95,6 +95,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Dominik K. (mezotv)": ["German"],
 	"alikin12": ["German"],
 	"Poolitzer": ["German"],
+	"Michael (michi-onl)": ["German"],
 	"Dawid Niedźwiedzki (tiritto)": ["Polish"],
 	"Serhiy Dmytryshyn (dies)": ["Polish"],
 	"Igor Santarek (jegor377)": ["Polish"],
