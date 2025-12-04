@@ -379,21 +379,38 @@ func _drop_data(_pos: Vector2, data) -> void:
 	for cel_idx in drop_cels:
 		drop_frames.append(cel_idx[0])
 		drop_layers.append(cel_idx[1])
-	var drop_layer := drop_layers[0]
 	var different_layers := false
 	for l in drop_layers:
 		if l != layer:
 			different_layers = true
-
+	# Get offset
+	var offset: Vector2i = Vector2i.ZERO
+	if drop_cels.size() > 0:
+		offset.x = frame - drop_cels[0][0]  # We don't need a new array for this
+		offset.y = layer - Array(drop_layers).max()
 	var project := Global.current_project
 	project.undo_redo.create_action("Move Cels")
 	if Input.is_action_pressed("ctrl") or different_layers:  # Swap cels
-		project.undo_redo.add_do_method(
-			project.swap_cel.bind(frame, layer, drop_frames[0], drop_layer)
-		)
-		project.undo_redo.add_undo_method(
-			project.swap_cel.bind(frame, layer, drop_frames[0], drop_layer)
-		)
+		for cel_idx in drop_cels:
+			var drop_point_frame: int = cel_idx[0] + offset.x
+			var drop_point_layer: int = cel_idx[1] + offset.y
+			# If Swapping is done with currently non-existing cels, ignore those
+			if drop_point_frame < 0 or drop_point_frame >= project.frames.size():
+				continue
+			if drop_point_layer < 0 or drop_point_layer >= project.layers.size():
+				continue
+			# if layer types are incompatible
+			if (
+				project.layers[drop_point_layer].get_layer_type()
+				!= project.layers[cel_idx[1]].get_layer_type()
+			):
+				continue
+			project.undo_redo.add_do_method(
+				project.swap_cel.bind(drop_point_frame, drop_point_layer, cel_idx[0], cel_idx[1])
+			)
+			project.undo_redo.add_undo_method(
+				project.swap_cel.bind(drop_point_frame, drop_point_layer, cel_idx[0], cel_idx[1])
+			)
 	else:  # Move cels
 		var to_frame: int
 		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):  # Left
