@@ -132,6 +132,7 @@ func _ready() -> void:
 	Global.cel_switched.connect(_cel_switched)
 	# Makes sure that the frame and tag scroll bars are in the right place:
 	layer_vbox.emit_signal.call_deferred("resized")
+	drag_highlight.visibility_changed.connect(clear_highlight)
 
 
 func _notification(what: int) -> void:
@@ -145,6 +146,37 @@ func _notification(what: int) -> void:
 			layer_header_container.custom_minimum_size.x = layer_container.custom_minimum_size.x
 
 
+func clear_highlight():
+	if not drag_highlight.visible:
+		for connection: Dictionary in drag_highlight.draw.get_connections():
+			var callable: Callable = connection.get("callable", null)
+			if callable:
+				drag_highlight.draw.disconnect(callable)
+		await get_tree().process_frame
+		drag_highlight.queue_redraw()
+
+
+## Manages frame highlighting during drag and drop.
+func set_frames_highlight(frame_indices: Array, offset: int) -> void:
+	if drag_highlight.draw.is_connected(_draw_highlight_frames):
+		drag_highlight.draw.disconnect(_draw_highlight_frames)
+	drag_highlight.draw.connect(_draw_highlight_frames.bind(frame_indices, offset))
+	drag_highlight.queue_redraw()
+
+
+## Draws frame highlighting during drag and drop.
+func _draw_highlight_frames(frame_indices: Array, offset: int) -> void:
+	for frame in frame_indices:
+		var frame_drop: int = frame + offset
+		if frame_drop < frame_hbox.get_child_count() and frame_drop >= 0:
+			var frame_button: BaseButton = frame_hbox.get_child(frame_drop)
+			var frame_rect: Rect2i = frame_button.get_global_rect()
+			frame_rect.position -= Vector2i(drag_highlight.global_position)
+			drag_highlight.draw_rect(frame_rect, drag_highlight.color)
+	frame_indices.clear()
+
+
+## Manages cel highlighting during drag and drop.
 func set_cels_highlight(cel_coords: Array, offset: Vector2i) -> void:
 	if drag_highlight.draw.is_connected(_draw_highlight_cels):
 		drag_highlight.draw.disconnect(_draw_highlight_cels)
@@ -152,6 +184,7 @@ func set_cels_highlight(cel_coords: Array, offset: Vector2i) -> void:
 	drag_highlight.queue_redraw()
 
 
+## Draws cel highlighting during drag and drop.
 func _draw_highlight_cels(cel_coords: Array, offset: Vector2i) -> void:
 	for cel in cel_coords:  # Press selected buttons
 		var frame: int = cel[0] + offset.x
