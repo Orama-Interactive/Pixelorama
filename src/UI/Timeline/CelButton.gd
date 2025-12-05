@@ -354,7 +354,13 @@ func _can_drop_data(pos: Vector2, data) -> bool:
 	):
 		var region: Rect2
 		if Input.is_action_pressed("ctrl") or different_layers:  # Swap cels
+			# Get offset
+			var offset: Vector2i = Vector2i.ZERO
+			if drop_cels.size() > 0:
+				offset.x = frame - drop_cels[0][0]  # We don't need a new array for this
+				offset.y = layer - Array(drop_layers).max()
 			region = get_global_rect()
+			Global.animation_timeline.set_cels_highlight(drop_cels, offset, self)
 		else:  # Move cels
 			if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):  # Left
 				region = _get_region_rect(-0.125, 0.125)

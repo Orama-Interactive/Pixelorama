@@ -145,6 +145,32 @@ func _notification(what: int) -> void:
 			layer_header_container.custom_minimum_size.x = layer_container.custom_minimum_size.x
 
 
+func set_cels_highlight(cel_coords: Array, offset: Vector2i, main_cel_button: BaseButton) -> void:
+	var copy_cel_coords := cel_coords.duplicate()
+	if drag_highlight.draw.is_connected(_draw_highlight_cels):
+		drag_highlight.draw.disconnect(_draw_highlight_cels)
+	drag_highlight.draw.connect(_draw_highlight_cels.bind(copy_cel_coords, offset, main_cel_button))
+	drag_highlight.queue_redraw()
+
+
+func _draw_highlight_cels(cel_coords: Array, offset: Vector2i, main_cel_button: BaseButton) -> void:
+	for cel in cel_coords:  # Press selected buttons
+		var frame: int = cel[0] + offset.x
+		var layer: int = cel[1] + offset.y
+		var cel_vbox_child_count: int = cel_vbox.get_child_count()
+		if layer < cel_vbox_child_count and layer >= 0:
+			var cel_hbox: Container = cel_vbox.get_child(cel_vbox_child_count - 1 - layer)
+			if frame < cel_hbox.get_child_count() and frame >= 0:
+				var cel_button: BaseButton = cel_hbox.get_child(frame)
+				# Highlighting of main_cel_button is done internally be the cel button
+				if cel_button == main_cel_button:
+					continue
+				var cel_rect: Rect2i = cel_button.get_global_rect()
+				cel_rect.position -= Vector2i(drag_highlight.global_position)
+				drag_highlight.draw_rect(cel_rect, drag_highlight.color)
+	cel_coords.clear()
+
+
 func _input(event: InputEvent) -> void:
 	var project := Global.current_project
 	if event.is_action_pressed(&"go_to_previous_layer"):
