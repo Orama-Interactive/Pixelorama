@@ -360,7 +360,11 @@ func _can_drop_data(pos: Vector2, data) -> bool:
 				offset.x = frame - drop_cels[0][0]  # We don't need a new array for this
 				offset.y = layer - Array(drop_layers).max()
 			region = get_global_rect()
-			Global.animation_timeline.set_cels_highlight(drop_cels, offset, self)
+			var copy_drop_cels := drop_cels.duplicate()  # to prevent overriting original array.
+			copy_drop_cels.erase(
+				[frame - offset.x, layer - offset.y]
+			)  # Don't highlight this cel here (it is done later)
+			Global.animation_timeline.set_cels_highlight(copy_drop_cels, offset)
 		else:  # Move cels
 			if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):  # Left
 				region = _get_region_rect(-0.125, 0.125)
