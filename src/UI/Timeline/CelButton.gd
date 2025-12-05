@@ -325,16 +325,12 @@ func _can_drop_data(pos: Vector2, data) -> bool:
 	for cel_idx in drop_cels:
 		drop_frames.append(cel_idx[0])
 		drop_layers.append(cel_idx[1])
-	# Can't move to the same cel
-	for drop_frame in drop_frames:
-		if drop_frame == frame and drop_layers[-1] == layer:
-			Global.animation_timeline.drag_highlight.visible = false
-			return false
-	# Can't move different types of layers between them
-	for drop_layer in drop_layers:
-		if project.layers[drop_layer].get_script() != project.layers[layer].get_script():
-			Global.animation_timeline.drag_highlight.visible = false
-			return false
+
+	# Get offset
+	var offset: Vector2i = Vector2i.ZERO
+	if drop_cels.size() > 0:
+		offset.x = frame - drop_cels[0][0]  # We don't need a new array for this
+		offset.y = layer - Array(drop_layers).max()
 
 	var drop_layer := drop_layers[0]
 	# Check if all dropped cels are on the same layer
@@ -342,6 +338,33 @@ func _can_drop_data(pos: Vector2, data) -> bool:
 	for l in drop_layers:
 		if l != layer:
 			different_layers = true
+	var is_swapping := Input.is_action_pressed("ctrl") or different_layers
+
+	if is_swapping:
+		for cel_idx in drop_cels:
+			# Can't move to the same cel
+			if drop_cels.has([cel_idx[0] + offset.x, cel_idx[1] + offset.y]):
+				Global.animation_timeline.drag_highlight.visible = false
+				return false
+			# Can't move different types of layers between them
+			if (
+				project.layers[cel_idx[1]].get_script()
+				!= project.layers[cel_idx[1] + offset.y].get_script()
+			):
+				Global.animation_timeline.drag_highlight.visible = false
+				return false
+	else:
+		# Can't move to the same cel
+		for d_frame in drop_frames:
+			if d_frame == frame and drop_layers[-1] == layer:
+				Global.animation_timeline.drag_highlight.visible = false
+				return false
+		# Can't move different types of layers between them
+		for d_layer in drop_layers:
+			if project.layers[d_layer].get_script() != project.layers[layer].get_script():
+				Global.animation_timeline.drag_highlight.visible = false
+				return false
+
 	# Check if any of the dropped cels are linked
 	var are_dropped_cels_linked := false
 	for f in drop_frames:
@@ -353,8 +376,10 @@ func _can_drop_data(pos: Vector2, data) -> bool:
 		or (project.frames[frame].cels[layer].link_set == null and not are_dropped_cels_linked)
 	):
 		var region: Rect2
-		if Input.is_action_pressed("ctrl") or different_layers:  # Swap cels
-			region = get_global_rect()
+		if is_swapping:  # Swap cels
+			var copy_drop_cels := drop_cels.duplicate()  # to prevent overriting original array.
+			# Don't highlight this button right now (it is done later, a few lines ahead)
+			Global.animation_timeline.set_cels_highlight(copy_drop_cels, offset)
 		else:  # Move cels
 			if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):  # Left
 				region = _get_region_rect(-0.125, 0.125)
@@ -379,21 +404,41 @@ func _drop_data(_pos: Vector2, data) -> void:
 	for cel_idx in drop_cels:
 		drop_frames.append(cel_idx[0])
 		drop_layers.append(cel_idx[1])
-	var drop_layer := drop_layers[0]
 	var different_layers := false
 	for l in drop_layers:
 		if l != layer:
 			different_layers = true
-
+	# Get offset
+	var offset: Vector2i = Vector2i.ZERO
+	if drop_cels.size() > 0:
+		offset.x = frame - drop_cels[0][0]  # We don't need a new array for this
+		offset.y = layer - Array(drop_layers).max()
 	var project := Global.current_project
 	project.undo_redo.create_action("Move Cels")
 	if Input.is_action_pressed("ctrl") or different_layers:  # Swap cels
-		project.undo_redo.add_do_method(
-			project.swap_cel.bind(frame, layer, drop_frames[0], drop_layer)
-		)
-		project.undo_redo.add_undo_method(
-			project.swap_cel.bind(frame, layer, drop_frames[0], drop_layer)
-		)
+		var swap_cel_positions := []
+		for cel_idx in drop_cels:
+			var drop_point_frame: int = cel_idx[0] + offset.x
+			var drop_point_layer: int = cel_idx[1] + offset.y
+			# If Swapping is done with currently non-existing cels, ignore those
+			if drop_point_frame < 0 or drop_point_frame >= project.frames.size():
+				continue
+			if drop_point_layer < 0 or drop_point_layer >= project.layers.size():
+				continue
+			# if layer types are incompatible
+			if (
+				project.layers[drop_point_layer].get_layer_type()
+				!= project.layers[cel_idx[1]].get_layer_type()
+			):
+				continue
+			swap_cel_positions.append([drop_point_frame, drop_point_layer])
+			project.undo_redo.add_do_method(
+				project.swap_cel.bind(drop_point_frame, drop_point_layer, cel_idx[0], cel_idx[1])
+			)
+			project.undo_redo.add_undo_method(
+				project.swap_cel.bind(drop_point_frame, drop_point_layer, cel_idx[0], cel_idx[1])
+			)
+		project.undo_redo.add_do_property(project, "selected_cels", swap_cel_positions)
 	else:  # Move cels
 		var to_frame: int
 		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):  # Left
