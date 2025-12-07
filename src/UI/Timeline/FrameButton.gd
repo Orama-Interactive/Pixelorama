@@ -118,7 +118,7 @@ func _get_drag_data(_position: Vector2) -> Variant:
 	button.text = text
 	set_drag_preview(button)
 
-	return ["Frame", _get_frame_indices()]
+	return ["Frame", _get_frame_indices(), Global.current_project]
 
 
 func _can_drop_data(pos: Vector2, data) -> bool:
@@ -140,20 +140,22 @@ func _can_drop_data(pos: Vector2, data) -> bool:
 			frame_container.get_child(get_index() - 1)
 		)
 
-	var is_swapping := Input.is_action_pressed("ctrl")
 	var drop_frames: PackedInt32Array = data[1]
+	var drop_project: Project = data[2]
+	var is_swapping := Input.is_action_pressed("ctrl") and drop_project == Global.current_project
 	# Get offset
 	var offset: int = 0
 	if drop_frames.size() > 0:
 		offset = frame - Array(drop_frames).min()
-	# Can't move to same frame
-	for drop_frame in drop_frames:
-		var is_not_valid = (
-			drop_frames.has(drop_frame + offset) if is_swapping else drop_frames.has(frame)
-		)
-		if is_not_valid:
-			Global.animation_timeline.drag_highlight.visible = false
-			return false
+	if drop_project == Global.current_project:
+		# Can't move to same frame
+		for drop_frame in drop_frames:
+			var is_not_valid = (
+				drop_frames.has(drop_frame + offset) if is_swapping else drop_frames.has(frame)
+			)
+			if is_not_valid:
+				Global.animation_timeline.drag_highlight.visible = false
+				return false
 	var region: Rect2
 	if is_swapping:  # Swap frames
 		var copy_drop_frames := drop_frames.duplicate()  # to prevent overriting original array.
@@ -170,10 +172,13 @@ func _can_drop_data(pos: Vector2, data) -> bool:
 
 
 func _drop_data(_pos: Vector2, data) -> void:
+	var drop_project: Project = data[2]
 	var drop_frames: PackedInt32Array = data[1]
 	var project := Global.current_project
-	project.undo_redo.create_action("Change Frame Order")
-	if Input.is_action_pressed("ctrl"):  # Swap frames
+	if project == drop_project:  # we only need to create action for changes within project
+		project.undo_redo.create_action("Change Frame Order")
+	var is_swapping := Input.is_action_pressed("ctrl") and drop_project == Global.current_project
+	if is_swapping:  # Swap frames
 		var swap_frame_positions := []
 		# Get offset
 		var offset: int = 0
@@ -185,15 +190,19 @@ func _drop_data(_pos: Vector2, data) -> void:
 			project.undo_redo.add_do_method(project.swap_frame.bind(drop_point, drop_frame))
 			project.undo_redo.add_undo_method(project.swap_frame.bind(drop_point, drop_frame))
 		project.undo_redo.add_do_property(project, "selected_cels", swap_frame_positions)
-	else:  # Move frames
+	else:  # Move frames (or copy if different project)
 		var to_frame: int
 		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):  # Left
 			to_frame = frame
 		else:  # Right
 			to_frame = frame + 1
-		for drop_frame in drop_frames:
-			if drop_frame < frame:
-				to_frame -= 1
+		if drop_project != Global.current_project:
+			Import.copy_frames_to_current_project(drop_project, drop_frames, to_frame - 1)
+			return  # No need to do anything further
+		else:
+			for drop_frame in drop_frames:
+				if drop_frame < frame:
+					to_frame -= 1
 		var to_frames := PackedInt32Array(range(to_frame, to_frame + drop_frames.size()))
 		if drop_frames != to_frames:
 			# Code to RECALCULATE tags due to frame movement
