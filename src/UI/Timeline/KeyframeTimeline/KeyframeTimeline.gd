@@ -1,3 +1,4 @@
+class_name KeyframeTimeline
 extends Control
 
 var current_layer: BaseLayer:
@@ -8,7 +9,7 @@ var current_layer: BaseLayer:
 		current_layer = value
 		_recreate_timeline()
 		current_layer.effects_added_removed.connect(_recreate_timeline)
-var frame_ui_size := 20
+static var frame_ui_size := 50
 
 @onready var layer_element_container: VBoxContainer = $LayerElementContainer
 @onready var layer_element_spacer: Control = $LayerElementContainer/LayerElementSpacer
@@ -61,7 +62,7 @@ func _recreate_timeline() -> void:
 		label.text = effect.name
 		layer_element_container.add_child(label)
 		var track := KeyframeAnimationTrack.new()
-		track.size = label.size
+		track.custom_minimum_size.y = label.size.y
 		track_container.add_child(track)
 		for param in effect.animated_params[0]:
 			if param in ["PXO_time", "PXO_frame_index", "PXO_layer_index"]:
@@ -70,9 +71,16 @@ func _recreate_timeline() -> void:
 			param_label.text = "\t " + param
 			layer_element_container.add_child(param_label)
 			var param_track := KeyframeAnimationTrack.new()
+			param_track.effect = effect
+			param_track.param_name = param
 			param_track.is_property = true
-			param_track.size = param_label.size
+			param_track.custom_minimum_size.y = param_label.size.y
 			track_container.add_child(param_track)
+			for frame_index in effect.animated_params:
+				var keyframe := Button.new()
+				keyframe.position.x = frame_index * frame_ui_size
+				keyframe.position.y = param_track.custom_minimum_size.y / 2
+				param_track.add_child(keyframe)
 
 
 func _add_ui_frames() -> void:
@@ -81,7 +89,8 @@ func _add_ui_frames() -> void:
 	var project := Global.current_project
 	for i in project.frames.size():
 		var frame_label := Label.new()
+		#frame_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		frame_label.text = str(i + 1)
 		frame_label.custom_minimum_size.x = frame_ui_size
 		frames_container.add_child(frame_label)
-	layer_element_spacer.custom_minimum_size = frames_container.size
+	layer_element_spacer.custom_minimum_size.y = frames_container.size.y
