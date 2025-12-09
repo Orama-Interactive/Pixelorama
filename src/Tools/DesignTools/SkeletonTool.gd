@@ -1,5 +1,12 @@
 extends BaseTool
 
+## TODO: try to set all commit_undo() such that execution is done by it everytime,
+## this may be achieved by having a list of starting bone data, then keeping track of which
+## bones get changed during movement, then call do and undo at the end.
+## TODO: I have to Update the UI of tools to resemble the extension,
+## TODO: I also need to fix threading system, to use the deferred mode.
+
+
 enum IKAlgorithms { FABRIK, CCDIK }
 
 var is_transforming := false
@@ -268,7 +275,7 @@ func quick_set_bones(bone_index: int):
 		var best_origin := Vector2(bone.get_best_origin(frame))
 		project.undo_redo.add_do_method(bone_cel.reset.bind({"gizmo_origin": best_origin}))
 		project.undo_redo.add_undo_method(bone_cel.deserialize.bind(old_data))
-	commit_undo(true)
+	commit_undo()
 
 
 func copy_bone_data(bone_index: int, from_frame: int, popup: PopupMenu):
@@ -287,7 +294,7 @@ func copy_bone_data(bone_index: int, from_frame: int, popup: PopupMenu):
 		project.undo_redo.add_do_method(bone_cel.deserialize.bind(from_cel.serialize()))
 	copy_pose_from.get_popup().hide()
 	copy_pose_from.get_popup().clear(true)  # To save Memory
-	commit_undo(true)
+	commit_undo()
 
 
 func tween_skeleton_data(bone_index: int, from_frame: int, popup: PopupMenu):
@@ -330,7 +337,7 @@ func tween_skeleton_data(bone_index: int, from_frame: int, popup: PopupMenu):
 			project.undo_redo.add_do_property(bone_cel, "should_update_children", old_update)
 	copy_pose_from.get_popup().hide()
 	copy_pose_from.get_popup().clear(true)  # To save Memory
-	commit_undo(true)
+	commit_undo()
 
 
 func reset_bone_angle(bone_index: int):
@@ -346,7 +353,7 @@ func reset_bone_angle(bone_index: int):
 		var bone_cel: BoneCel = project.frames[project.current_frame].cels[bone.index]
 		project.undo_redo.add_undo_property(bone_cel, "bone_rotation", bone_cel.bone_rotation)
 		project.undo_redo.add_do_property(bone_cel, "bone_rotation", 0)
-	commit_undo(true)
+	commit_undo()
 
 
 func reset_bone_position(bone_index: int):
@@ -362,7 +369,7 @@ func reset_bone_position(bone_index: int):
 		var bone_cel: BoneCel = project.frames[project.current_frame].cels[bone.index]
 		project.undo_redo.add_undo_property(bone_cel, "start_point", bone_cel.start_point)
 		project.undo_redo.add_do_property(bone_cel, "start_point", Vector2.ZERO)
-	commit_undo(true)
+	commit_undo()
 
 
 # Tool draw actions
@@ -515,7 +522,7 @@ func draw_end(_pos: Vector2i) -> void:
 	if Global.canvas.skeleton:
 		# Another tool is already active
 		if not is_transforming:
-			commit_undo()
+			commit_undo(false)
 			return
 		is_transforming = false
 		Global.canvas.skeleton.transformation_active = false
@@ -542,13 +549,13 @@ func draw_end(_pos: Vector2i) -> void:
 							Global.current_project.undo_redo.add_do_method(
 								child_cel.deserialize.bind(child_cel.serialize(), true)
 							)
-	commit_undo()
+	commit_undo(false)
 	Global.current_project.has_changed = true
 	display_props()
 
 
 ## Helper functions
-func commit_undo(execute := false):
+func commit_undo(execute := true):
 	var undo_redo = Global.current_project.undo_redo
 	undo_redo.add_do_method(Global.canvas.queue_redraw)
 	undo_redo.add_undo_method(Global.canvas.queue_redraw)
