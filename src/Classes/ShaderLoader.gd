@@ -36,11 +36,7 @@ static func create_ui_for_shader_uniforms(
 	params: Dictionary,
 	parent_node: Control,
 	value_changed: Callable,
-	file_selected: Callable,
-	is_animated := false,
-	animated_tween_params: Dictionary[String, Dictionary] = {},
-	animated_property_changed := func(): pass,
-	on_effect_animated_changed := Signal()
+	file_selected: Callable
 ) -> void:
 	var code := shader.code.split("\n")
 	var uniforms: PackedStringArray = []
@@ -200,14 +196,6 @@ static func create_ui_for_shader_uniforms(
 				slider.value_changed.connect(value_changed.bind(u_name))
 				slider.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 				hbox.add_child(slider)
-				_create_animation_property_ui(
-					u_name,
-					animated_tween_params,
-					hbox,
-					is_animated,
-					animated_property_changed,
-					on_effect_animated_changed
-				)
 			parent_node.add_child(hbox)
 		elif u_type == "vec2" or u_type == "ivec2" or u_type == "uvec2":
 			var label := Label.new()
@@ -231,14 +219,6 @@ static func create_ui_for_shader_uniforms(
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
 			hbox.add_child(slider)
-			_create_animation_property_ui(
-				u_name,
-				animated_tween_params,
-				hbox,
-				is_animated,
-				animated_property_changed,
-				on_effect_animated_changed
-			)
 			parent_node.add_child(hbox)
 		elif u_type == "vec4":
 			if "source_color" in u_hint:
@@ -259,14 +239,6 @@ static func create_ui_for_shader_uniforms(
 				var hbox := HBoxContainer.new()
 				hbox.add_child(label)
 				hbox.add_child(color_button)
-				_create_animation_property_ui(
-					u_name,
-					animated_tween_params,
-					hbox,
-					is_animated,
-					animated_property_changed,
-					on_effect_animated_changed
-				)
 				parent_node.add_child(hbox)
 		elif u_type == "mat3":
 			var label := Label.new()
@@ -480,50 +452,6 @@ static func create_ui_for_shader_uniforms(
 			button.toggled.connect(value_changed.bind(u_name))
 			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-
-
-static func _create_animation_property_ui(
-	param_name: String,
-	animated_tween_params: Dictionary[String, Dictionary],
-	parent_node: Control,
-	is_animated: bool,
-	animated_property_changed: Callable,
-	on_effect_animated_changed: Signal
-) -> void:
-	var trans_type_options := OptionButton.new()
-	trans_type_options.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	trans_type_options.visible = is_animated
-	on_effect_animated_changed.connect(func(animated): trans_type_options.visible = animated)
-	trans_type_options.add_item("Linear", Tween.TRANS_LINEAR)
-	trans_type_options.add_item("Quadratic", Tween.TRANS_QUAD)
-	trans_type_options.add_item("Cubic", Tween.TRANS_CUBIC)
-	trans_type_options.add_item("Quartic", Tween.TRANS_QUART)
-	trans_type_options.add_item("Quintic", Tween.TRANS_QUINT)
-	trans_type_options.add_item("Exponential", Tween.TRANS_EXPO)
-	trans_type_options.add_item("Square root", Tween.TRANS_CIRC)
-	trans_type_options.add_item("Sine", Tween.TRANS_SINE)
-	trans_type_options.add_item("Elastic", Tween.TRANS_ELASTIC)
-	trans_type_options.add_item("Bounce", Tween.TRANS_BOUNCE)
-	trans_type_options.add_item("Back", Tween.TRANS_BACK)
-	trans_type_options.add_item("Spring", Tween.TRANS_SPRING)
-	trans_type_options.item_selected.connect(animated_property_changed.bind(0, param_name))
-
-	var ease_type_options := OptionButton.new()
-	ease_type_options.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	ease_type_options.visible = is_animated
-	on_effect_animated_changed.connect(func(animated): ease_type_options.visible = animated)
-	ease_type_options.add_item("Ease in", Tween.EASE_IN)
-	ease_type_options.add_item("Ease out", Tween.EASE_OUT)
-	ease_type_options.add_item("Ease in out", Tween.EASE_IN_OUT)
-	ease_type_options.add_item("Ease out in", Tween.EASE_OUT_IN)
-	ease_type_options.item_selected.connect(animated_property_changed.bind(1, param_name))
-	if animated_tween_params.has(param_name):
-		trans_type_options.select(
-			animated_tween_params[param_name].get("trans_type", Tween.TRANS_LINEAR)
-		)
-		ease_type_options.select(animated_tween_params[param_name].get("ease_type", Tween.EASE_IN))
-	parent_node.add_child(trans_type_options)
-	parent_node.add_child(ease_type_options)
 
 
 static func _vec2str_to_vector2(vec2: String) -> Vector2:

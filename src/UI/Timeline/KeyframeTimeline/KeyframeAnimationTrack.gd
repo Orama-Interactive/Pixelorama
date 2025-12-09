@@ -31,4 +31,4 @@ func _on_popup_menu_id_pressed(id: int) -> void:
 	if id == 0:
 		if not effect.animated_params.has(keyframe_at):
 			effect.animated_params[keyframe_at] = {}
-		effect.animated_params[keyframe_at][param_name] = effect.animated_params[0][param_name]
+		effect.animated_params[keyframe_at][param_name] = effect.params[param_name]

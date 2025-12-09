@@ -67,7 +67,7 @@ func _recreate_timeline() -> void:
 		var track := KeyframeAnimationTrack.new()
 		track.custom_minimum_size.y = label.size.y
 		track_container.add_child(track)
-		for param in effect.animated_params[0]:
+		for param in effect.params:
 			if param in ["PXO_time", "PXO_frame_index", "PXO_layer_index"]:
 				continue
 			var param_label := Label.new()
