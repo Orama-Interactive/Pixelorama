@@ -227,6 +227,7 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 						)
 						new_cel.set_content(copy)
 						new_cel.set_indexed_mode(project.is_indexed())
+
 			else:
 				new_cel = combined_copy[to].new_empty_cel()
 			new_frame.cels.append(new_cel)
