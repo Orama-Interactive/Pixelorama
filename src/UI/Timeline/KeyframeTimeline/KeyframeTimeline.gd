@@ -1,6 +1,7 @@
 class_name KeyframeTimeline
 extends Control
 
+static var frame_ui_size := 50
 var current_layer: BaseLayer:
 	set(value):
 		if is_instance_valid(current_layer):
@@ -9,12 +10,14 @@ var current_layer: BaseLayer:
 		current_layer = value
 		_recreate_timeline()
 		current_layer.effects_added_removed.connect(_recreate_timeline)
-static var frame_ui_size := 50
+var keyframe_button_group := ButtonGroup.new()
 
 @onready var layer_element_container: VBoxContainer = $LayerElementContainer
 @onready var layer_element_spacer: Control = $LayerElementContainer/LayerElementSpacer
 @onready var track_container: VBoxContainer = $TrackContainer
 @onready var frames_container: HBoxContainer = $TrackContainer/FramesContainer
+@onready var properties_container: VBoxContainer = $PropertiesContainer
+@onready var no_key_selected_label: Label = %NoKeySelectedLabel
 
 
 func _ready() -> void:
@@ -78,8 +81,11 @@ func _recreate_timeline() -> void:
 			track_container.add_child(param_track)
 			for frame_index in effect.animated_params:
 				var keyframe := Button.new()
+				keyframe.toggle_mode = true
+				keyframe.button_group = keyframe_button_group
 				keyframe.position.x = frame_index * frame_ui_size
 				keyframe.position.y = param_track.custom_minimum_size.y / 2
+				keyframe.pressed.connect(_on_keyframe_pressed.bind(effect, param, frame_index))
 				param_track.add_child(keyframe)
 
 
@@ -94,3 +100,100 @@ func _add_ui_frames() -> void:
 		frame_label.custom_minimum_size.x = frame_ui_size
 		frames_container.add_child(frame_label)
 	layer_element_spacer.custom_minimum_size.y = frames_container.size.y
+
+
+func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: int) -> void:
+	for child in properties_container.get_children():
+		if child != no_key_selected_label:
+			child.queue_free()
+	no_key_selected_label.visible = false
+	var property_grid := GridContainer.new()
+	property_grid.columns = 2
+	var value_label := Label.new()
+	value_label.text = "Value:"
+	value_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	property_grid.add_child(value_label)
+	var property = effect.animated_params[frame_index][param_name]
+	if typeof(property) in [TYPE_INT, TYPE_FLOAT]:
+		var slider := ValueSlider.new()
+		slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		slider.allow_lesser = true
+		slider.allow_greater = true
+		slider.value = property
+		slider.value_changed.connect(_on_keyframe_value_changed.bind(effect, frame_index, param_name))
+		property_grid.add_child(slider)
+	elif typeof(property) in [TYPE_VECTOR2, TYPE_VECTOR2I]:
+		var slider := ShaderLoader.VALUE_SLIDER_V2_TSCN.instantiate() as ValueSliderV2
+		slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		slider.allow_lesser = true
+		slider.allow_greater = true
+		slider.value = property
+		slider.value_changed.connect(_on_keyframe_value_changed.bind(effect, frame_index, param_name))
+		property_grid.add_child(slider)
+
+	var trans_label := Label.new()
+	trans_label.text = "Transition"
+	trans_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	property_grid.add_child(trans_label)
+	var trans_type_options := OptionButton.new()
+	trans_type_options.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	trans_type_options.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	trans_type_options.add_item("Linear", Tween.TRANS_LINEAR)
+	trans_type_options.add_item("Quadratic", Tween.TRANS_QUAD)
+	trans_type_options.add_item("Cubic", Tween.TRANS_CUBIC)
+	trans_type_options.add_item("Quartic", Tween.TRANS_QUART)
+	trans_type_options.add_item("Quintic", Tween.TRANS_QUINT)
+	trans_type_options.add_item("Exponential", Tween.TRANS_EXPO)
+	trans_type_options.add_item("Square root", Tween.TRANS_CIRC)
+	trans_type_options.add_item("Sine", Tween.TRANS_SINE)
+	trans_type_options.add_item("Elastic", Tween.TRANS_ELASTIC)
+	trans_type_options.add_item("Bounce", Tween.TRANS_BOUNCE)
+	trans_type_options.add_item("Back", Tween.TRANS_BACK)
+	trans_type_options.add_item("Spring", Tween.TRANS_SPRING)
+	trans_type_options.item_selected.connect(_on_animated_property_changed.bind(0, param_name, effect))
+	property_grid.add_child(trans_type_options)
+
+	var easing_label := Label.new()
+	easing_label.text = "Easing"
+	easing_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	property_grid.add_child(easing_label)
+	var ease_type_options := OptionButton.new()
+	ease_type_options.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	ease_type_options.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	ease_type_options.add_item("Ease in", Tween.EASE_IN)
+	ease_type_options.add_item("Ease out", Tween.EASE_OUT)
+	ease_type_options.add_item("Ease in out", Tween.EASE_IN_OUT)
+	ease_type_options.add_item("Ease out in", Tween.EASE_OUT_IN)
+	ease_type_options.item_selected.connect(_on_animated_property_changed.bind(1, param_name, effect))
+	property_grid.add_child(ease_type_options)
+	if effect.animated_tween_params.has(param_name):
+		trans_type_options.select(
+			effect.animated_tween_params[param_name].get("trans_type", Tween.TRANS_LINEAR)
+		)
+		ease_type_options.select(effect.animated_tween_params[param_name].get("ease_type", Tween.EASE_IN))
+	properties_container.add_child(property_grid)
+
+	var delete_keyframe := Button.new()
+	delete_keyframe.text = "Delete keyframe"
+	delete_keyframe.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	delete_keyframe.pressed.connect(effect.delete_keyframe.bind(frame_index))
+	properties_container.add_child(delete_keyframe)
+
+
+func _on_keyframe_value_changed(
+	new_value, effect: LayerEffect, frame_index: int, param_name: String
+) -> void:
+	effect.animated_params[frame_index][param_name] = new_value
+	Global.canvas.queue_redraw()
+
+
+func _on_animated_property_changed(index: int, type: int, param: String, effect: LayerEffect) -> void:
+	if not effect.animated_tween_params.has(param):
+		effect.animated_tween_params[param] = {
+			"trans_type": Tween.TRANS_LINEAR, "ease_type": Tween.EASE_IN
+		}
+	if type == 0:
+		effect.animated_tween_params[param]["trans_type"] = index
+	else:
+		effect.animated_tween_params[param]["ease_type"] = index
+	Global.canvas.queue_redraw()
