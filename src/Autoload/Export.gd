@@ -9,7 +9,7 @@ enum { VISIBLE_LAYERS, SELECTED_LAYERS }
 enum ExportFrames { ALL_FRAMES, SELECTED_FRAMES }
 
 ## This path is used to temporarily store png files that FFMPEG uses to convert them to video
-const TEMP_PATH := "user://tmp"
+var temp_path := OS.get_temp_dir().path_join("pixelorama_tmp")
 
 ## List of animated formats
 var animated_formats := [
@@ -514,23 +514,34 @@ func export_processed_images(
 
 ## Uses FFMPEG to export a video
 func export_video(export_paths: PackedStringArray, project: Project) -> bool:
-	DirAccess.make_dir_absolute(TEMP_PATH)
+	DirAccess.make_dir_absolute(temp_path)
 	var video_duration := 0
-	var temp_path_real := ProjectSettings.globalize_path(TEMP_PATH)
-	var input_file_path := temp_path_real.path_join("input.txt")
+	var input_file_path := temp_path.path_join("input.txt")
 	var input_file := FileAccess.open(input_file_path, FileAccess.WRITE)
 	for i in range(processed_images.size()):
 		var temp_file_name := str(i + 1).pad_zeros(number_of_digits) + ".png"
-		var temp_file_path := temp_path_real.path_join(temp_file_name)
+		var temp_file_path := temp_path.path_join(temp_file_name)
 		processed_images[i].image.save_png(temp_file_path)
 		input_file.store_line("file '" + temp_file_name + "'")
 		input_file.store_line("duration %s" % processed_images[i].duration)
+		if i == processed_images.size() - 1:
+			# The last frame needs to be stored again after the duration line
+			# in order for it not to be skipped.
+			input_file.store_line("file '" + temp_file_name + "'")
 		video_duration += processed_images[i].duration
 	input_file.close()
 
-	# ffmpeg -y -f concat -i input.txt output_path
 	var ffmpeg_execute: PackedStringArray = [
-		"-y", "-f", "concat", "-i", input_file_path, export_paths[0]
+		"-y",
+		"-f",
+		"concat",
+		"-safe",
+		"0",
+		"-i",
+		input_file_path,
+		"-fps_mode",
+		"passthrough",
+		export_paths[0]
 	]
 	var success := OS.execute(Global.ffmpeg_path, ffmpeg_execute, [], true)
 	if success < 0 or success > 1:
@@ -551,7 +562,7 @@ func export_video(export_paths: PackedStringArray, project: Project) -> bool:
 				temp_file_name += ".mp3"
 			elif layer.audio is AudioStreamWAV:
 				temp_file_name += ".wav"
-			var temp_file_path := temp_path_real.path_join(temp_file_name)
+			var temp_file_path := temp_path.path_join(temp_file_name)
 			if layer.audio is AudioStreamMP3:
 				var temp_audio_file := FileAccess.open(temp_file_path, FileAccess.WRITE)
 				temp_audio_file.store_buffer(layer.audio.data)
@@ -573,7 +584,7 @@ func export_video(export_paths: PackedStringArray, project: Project) -> bool:
 			adelay_string += "[%sa]" % i
 		var amix_inputs_string := "amix=inputs=%s[a]" % audio_layer_count
 		var final_filter_string := adelay_string + amix_inputs_string
-		var audio_file_path := temp_path_real.path_join("audio.mp3")
+		var audio_file_path := temp_path.path_join("audio.mp3")
 		ffmpeg_combine_audio.append_array(
 			PackedStringArray(
 				["-filter_complex", final_filter_string, "-map", '"[a]"', audio_file_path]
@@ -582,7 +593,7 @@ func export_video(export_paths: PackedStringArray, project: Project) -> bool:
 		# ffmpeg -i input1 -i input2 ... -i inputn -filter_complex amix=inputs=n output_path
 		var combined_audio_success := OS.execute(Global.ffmpeg_path, ffmpeg_combine_audio, [], true)
 		if combined_audio_success == 0 or combined_audio_success == 1:
-			var copied_video := temp_path_real.path_join("video." + export_paths[0].get_extension())
+			var copied_video := temp_path.path_join("video." + export_paths[0].get_extension())
 			# Then mix the audio file with the video.
 			DirAccess.copy_absolute(export_paths[0], copied_video)
 			# ffmpeg -y -i video_file -i input_audio -c:v copy -map 0:v:0 -map 1:a:0 video_file
@@ -600,10 +611,10 @@ func export_video(export_paths: PackedStringArray, project: Project) -> bool:
 
 
 func _clear_temp_folder() -> void:
-	var temp_dir := DirAccess.open(TEMP_PATH)
+	var temp_dir := DirAccess.open(temp_path)
 	for file in temp_dir.get_files():
 		temp_dir.remove(file)
-	DirAccess.remove_absolute(TEMP_PATH)
+	DirAccess.remove_absolute(temp_path)
 
 
 func export_animated(args: Dictionary) -> void:

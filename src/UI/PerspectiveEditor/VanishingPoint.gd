@@ -7,6 +7,7 @@ var perspective_lines := []
 var color := Color(randf(), randf(), randf(), 1)
 
 var tracker_line: PerspectiveLine
+@onready var perspective_editor := get_parent().get_parent().get_parent().get_parent()
 @onready var color_picker_button := $"%ColorPickerButton" as ColorPickerButton
 @onready var title := $"%PointCollapseContainer"
 @onready var pos_y := $"%Y" as ValueSlider
@@ -103,7 +104,7 @@ func _on_AddLine_pressed() -> void:
 
 
 func _on_Delete_pressed() -> void:
-	Global.perspective_editor.delete_point(get_index())
+	perspective_editor.delete_point(get_index())
 
 
 func _on_color_changed(_color: Color) -> void:

@@ -788,10 +788,11 @@ class ProjectAPI:
 			project.current_layer = above_layer  # temporary assignment
 			if type >= 0 and type < Global.LayerTypes.size():
 				Global.animation_timeline.on_add_layer_list_id_pressed(type)
+				var layer_vbox := Global.animation_timeline.layer_vbox as VBoxContainer
 				if name != "":
 					project.layers[above_layer + 1].name = name
-					var l_idx := Global.layer_vbox.get_child_count() - (above_layer + 2)
-					Global.layer_vbox.get_child(l_idx).label.text = name
+					var l_idx := layer_vbox.get_child_count() - (above_layer + 2)
+					layer_vbox.get_child(l_idx).label.text = name
 				project.current_layer = old_current
 			else:
 				push_error("invalid (type): ", type)

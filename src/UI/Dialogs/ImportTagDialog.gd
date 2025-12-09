@@ -116,10 +116,12 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 			pos = layer_to_names.find(from_project.layers[from].name, pos)
 			# if layer types don't match, the destination is invalid.
 			if project.layers[pos].get_layer_type() != from_project.layers[from].get_layer_type():
+				# Don't give up if there is another layer with the same name, check that one as well
 				pos += 1
 				continue
 			# if destination is already assigned to another layer, then don't use it here.
 			if pos in layer_from_to.values():
+				# Don't give up if there is another layer with the same name, check that one as well
 				pos += 1
 				continue
 			to = pos

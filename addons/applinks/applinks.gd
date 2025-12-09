@@ -21,6 +21,8 @@ const CUSTOM_MANIFEST_ACTIVITY_ELEMENT := """
 		<data android:mimeType="image/png"/>
 		<data android:mimeType="image/jpeg"/>
 		<data android:mimeType="image/webp"/>
+		<data android:mimeType="image/gif"/>
+		<data android:mimeType="image/pxo"/>
 		<data android:pathPattern=".*\\.pxo"/>
 	</intent-filter>
 """

@@ -103,7 +103,7 @@ var tools: Dictionary[String, Tool] = {
 		"Move",
 		"move",
 		"res://src/Tools/UtilityTools/Move.tscn",
-		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP]
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.GROUP, Global.LayerTypes.TILEMAP]
 	),
 	"Zoom": Tool.new("Zoom", "Zoom", "zoom", "res://src/Tools/UtilityTools/Zoom.tscn"),
 	"Pan": Tool.new("Pan", "Pan", "pan", "res://src/Tools/UtilityTools/Pan.tscn"),
@@ -432,6 +432,13 @@ func _ready() -> void:
 	_show_relevant_tools(layer_type)
 
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("swap_tools"):
+		swap_tools()
+	if event.is_action_released("swap_tools") and Global.reset_swap_on_shortcut_release:
+		swap_tools()
+
+
 ## Syncs the other tool using the config of tool located at [param from_idx].[br]
 ## NOTE: For optimization, if there is already a ready made config available, then we will use that
 ## instead of re-calculating the config, else we have no choice but to re-generate it
@@ -578,6 +585,8 @@ func swap_tools() -> void:
 				_slots[MOUSE_BUTTON_RIGHT].tool_node.set_config(left_config)
 				_slots[MOUSE_BUTTON_LEFT].tool_node.update_config()
 				_slots[MOUSE_BUTTON_RIGHT].tool_node.update_config()
+				if Global.swap_color_on_tool_swap:
+					Tools.swap_color()
 
 
 func assign_color(color: Color, button: int, change_alpha := true, index: int = -1) -> void:
@@ -892,29 +901,29 @@ func get_alpha_dynamic(strength := 1.0) -> float:
 func _cel_switched() -> void:
 	var layer: BaseLayer = Global.current_project.layers[Global.current_project.current_layer]
 	var layer_type := layer.get_layer_type()
-	# Do not make any changes when its the same type of layer, or a group layer
-	if (
-		layer_type == _curr_layer_type
-		or layer_type in [Global.LayerTypes.GROUP, Global.LayerTypes.AUDIO]
-	):
+	# Do not make any changes when its the same type of layer, or an audio layer
+	if layer_type == _curr_layer_type or layer_type in [Global.LayerTypes.AUDIO]:
 		return
 	_show_relevant_tools(layer_type)
 
 
 func _show_relevant_tools(layer_type: Global.LayerTypes) -> void:
 	# Hide tools that are not available in the current layer type
+	var fallback_available_tool: StringName
 	for button in _tool_buttons.get_children():
 		var tool_name: String = button.name
 		var t: Tool = tools[tool_name]
-		var hide_tool := _is_tool_available(layer_type, t)
-		button.visible = hide_tool
+		var can_show_tool := _is_tool_available(layer_type, t)
+		if can_show_tool:
+			fallback_available_tool = tool_name
+		button.visible = can_show_tool
 
 	# Assign new tools if the layer type has changed
 	_curr_layer_type = layer_type
-	var new_tool_name: String = _left_tools_per_layer_type[layer_type]
+	var new_tool_name: String = _left_tools_per_layer_type.get(layer_type, fallback_available_tool)
 	assign_tool(new_tool_name, MOUSE_BUTTON_LEFT)
 
-	new_tool_name = _right_tools_per_layer_type[layer_type]
+	new_tool_name = _right_tools_per_layer_type.get(layer_type, fallback_available_tool)
 	assign_tool(new_tool_name, MOUSE_BUTTON_RIGHT)
 
 

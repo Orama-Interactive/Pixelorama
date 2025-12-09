@@ -5,6 +5,7 @@ extends Node
 ## This Autoload contains signals, enums, constants, variables and
 ## references to many UI elements used within Pixelorama.
 
+#region signals
 @warning_ignore("unused_signal")
 signal pixelorama_opened  ## Emitted as soon as Pixelorama fully opens up.
 @warning_ignore("unused_signal")
@@ -21,6 +22,9 @@ signal font_loaded  ## Emitted when a new font has been loaded, or an old one ge
 signal single_tool_mode_changed(mode: bool)  ## Emitted when [member single_tool_mode] changes.
 @warning_ignore("unused_signal")
 signal on_cursor_position_text_changed(text: String)
+@warning_ignore("unused_signal")
+signal dynamics_changed
+#endregion
 
 enum LayerTypes { PIXEL, GROUP, THREE_D, TILEMAP, AUDIO, BONE }
 enum GridTypes { CARTESIAN, ISOMETRIC, HEXAGONAL_POINTY_TOP, HEXAGONAL_FLAT_TOP }
@@ -192,10 +196,10 @@ var show_x_symmetry_axis := false
 var show_y_symmetry_axis := false
 ## If true, the x=y symmetry guide ( / ) is visible.
 var show_xy_symmetry_axis := false
-## If true, the x==y symmetry guide ( \ ) is visible.
+## If true, the x=-y symmetry guide ( \ ) is visible.
 var show_x_minus_y_symmetry_axis := false
 
-# Preferences
+#region Preferences
 ## Found in Preferences. If [code]true[/code], the last saved project will open on startup.
 var open_last_project := false
 ## Found in Preferences. If [code]true[/code], asks for permission to quit on exit.
@@ -317,6 +321,10 @@ var tool_button_size := ButtonSize.SMALL:
 			return
 		tool_button_size = value
 		Tools.set_button_size(tool_button_size)
+## Found in Preferences. Determines behavior of the swap_tools action.
+var reset_swap_on_shortcut_release := false
+## Found in Preferences. Determines if color should swap on tool swap.
+var swap_color_on_tool_swap := false
 ## Found in Preferences.
 ## If enabled, the right mouse button is always mapped to the same tool as the left button.
 var single_tool_mode := DisplayServer.is_touchscreen_available():
@@ -578,8 +586,9 @@ var native_cursors := false:
 			control.set_custom_cursor()
 ## Found in Preferences. If [code]true[/code], cursor becomes cross shaped when hovering the canvas.
 var cross_cursor := true
+#endregion
 
-# View menu options
+#region View menu options
 ## If [code]true[/code], the canvas is in greyscale.
 var greyscale_view := false
 ## If [code]true[/code], the content of canvas is flipped.
@@ -624,6 +633,7 @@ var snap_to_rectangular_grid_center := false
 var snap_to_guides := false
 ## If [code]true[/code], cursor snaps to perspective guides.
 var snap_to_perspective_guides := false
+#endregion
 
 # Onion skinning options
 var onion_skinning := false  ## If [code]true[/code], onion skinning is enabled.
@@ -649,33 +659,19 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var main_viewport: SubViewportContainer = control.find_child("SubViewportContainer")
 ## The main canvas node. It has the [param Canvas.gd] script attached.
 @onready var canvas: Canvas = main_viewport.find_child("Canvas")
-## The global tool options. It has the [param GlobalToolOptions.gd] script attached.
-@onready var global_tool_options: PanelContainer = control.find_child("Global Tool Options")
 ## Camera of the main canvas.
 @onready var camera: CanvasCamera = main_viewport.find_child("Camera2D")
 ## Transparent checker of the main canvas. It has the [param TransparentChecker.gd] script attached.
 @onready var transparent_checker: ColorRect = control.find_child("TransparentChecker")
-## The perspective editor. It has the [param PerspectiveEditor.gd] script attached.
-@onready var perspective_editor := control.find_child("Perspective Editor")
 ## The top menu container. It has the [param TopMenuContainer.gd] script attached.
 @onready var top_menu_container: Panel = control.find_child("TopMenuContainer")
 ## The animation timeline. It has the [param AnimationTimeline.gd] script attached.
 @onready var animation_timeline: Panel = control.find_child("Animation Timeline")
 ## The palette panel. It has the [param PalettePanel.gd] script attached.
 @onready var palette_panel: PalettePanel = control.find_child("Palettes")
-## The container of frame buttons
-@onready var frame_hbox: HBoxContainer = animation_timeline.find_child("FrameHBox")
-## The container of layer buttons
-@onready var layer_vbox: VBoxContainer = animation_timeline.find_child("LayerVBox")
-## At runtime HBoxContainers containing cel buttons get added to it.
-@onready var cel_vbox: VBoxContainer = animation_timeline.find_child("CelVBox")
-## The container of animation tags.
-@onready var tag_container: Control = animation_timeline.find_child("TagContainer")
-## The brushes popup dialog used to display brushes.
-## It has the [param BrushesPopup.gd] script attached.
+## Popup dialog that displays brushes. It has the [param BrushesPopup.gd] script attached.
 @onready var brushes_popup: Popup = control.find_child("BrushesPopup")
-## The patterns popup dialog used to display patterns
-## It has the [param PatternsPopup.gd] script attached.
+## Popup dialog that displays patterns. It has the [param PatternsPopup.gd] script attached.
 @onready var patterns_popup: Popup = control.find_child("PatternsPopup")
 ## Dialog used to export images. It has the [param ExportDialog.gd] script attached.
 @onready var export_dialog: AcceptDialog = control.find_child("ExportDialog")
@@ -955,7 +951,7 @@ func _initialize_keychain() -> void:
 		&"brush_size_increment": Keychain.InputAction.new("", "Tool modifiers"),
 		&"brush_size_decrement": Keychain.InputAction.new("", "Tool modifiers"),
 		&"change_tool_mode": Keychain.InputAction.new("", "Tool modifiers", false),
-		&"swap_tools": Keychain.InputAction.new("", "Tool modifiers", false),
+		&"swap_tools": Keychain.InputAction.new("", "Tool modifiers"),
 		&"draw_create_line": Keychain.InputAction.new("", "Draw tools", false),
 		&"draw_snap_angle": Keychain.InputAction.new("", "Draw tools", false),
 		&"draw_color_picker": Keychain.InputAction.new("Quick color picker", "Draw tools", false),

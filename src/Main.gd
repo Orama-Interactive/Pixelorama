@@ -524,6 +524,9 @@ func load_recent_project_file(path: String) -> void:
 
 
 func _on_OpenSprite_files_selected(paths: PackedStringArray) -> void:
+	# Wait for file dialog to close otherwise an "Attempting to make child window exclusive"
+	# error will appear
+	await get_tree().process_frame
 	for path in paths:
 		OpenSave.handle_loading_file(path, true)
 	save_sprite_dialog.current_dir = paths[0].get_base_dir()
