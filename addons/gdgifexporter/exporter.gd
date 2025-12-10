@@ -176,6 +176,7 @@ func add_frame(image: Image, frame_delay: float, quantizator: Script) -> int:
 	add_image_descriptor(Vector2.ZERO, image.get_size(), color_table_bit_size(color_table))
 	add_local_color_table(color_table)
 	add_image_data_block(lzw_min_code_size, compressed_image_data)
+
 	return Error.OK
 
 
