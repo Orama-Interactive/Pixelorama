@@ -79,14 +79,15 @@ func _recreate_timeline() -> void:
 			param_track.is_property = true
 			param_track.custom_minimum_size.y = param_label.size.y
 			track_container.add_child(param_track)
-			for frame_index in effect.animated_params:
-				var keyframe := Button.new()
-				keyframe.toggle_mode = true
-				keyframe.button_group = keyframe_button_group
-				keyframe.position.x = frame_index * frame_ui_size
-				keyframe.position.y = param_track.custom_minimum_size.y / 2
-				keyframe.pressed.connect(_on_keyframe_pressed.bind(effect, param, frame_index))
-				param_track.add_child(keyframe)
+			if effect.animated_params.has(param):
+				for frame_index: int in effect.animated_params[param]:
+					var keyframe := Button.new()
+					keyframe.toggle_mode = true
+					keyframe.button_group = keyframe_button_group
+					keyframe.position.x = frame_index * frame_ui_size
+					keyframe.position.y = param_track.custom_minimum_size.y / 2
+					keyframe.pressed.connect(_on_keyframe_pressed.bind(effect, param, frame_index))
+					param_track.add_child(keyframe)
 
 
 func _add_ui_frames() -> void:
@@ -113,7 +114,9 @@ func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: 
 	value_label.text = "Value:"
 	value_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	property_grid.add_child(value_label)
-	var property = effect.animated_params[frame_index][param_name]
+	var property = effect.animated_params[param_name][frame_index]["value"]
+	var trans_type = effect.animated_params[param_name][frame_index]["trans"]
+	var ease_type = effect.animated_params[param_name][frame_index]["ease"]
 	if typeof(property) in [TYPE_INT, TYPE_FLOAT]:
 		var slider := ValueSlider.new()
 		slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -150,7 +153,8 @@ func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: 
 	trans_type_options.add_item("Bounce", Tween.TRANS_BOUNCE)
 	trans_type_options.add_item("Back", Tween.TRANS_BACK)
 	trans_type_options.add_item("Spring", Tween.TRANS_SPRING)
-	trans_type_options.item_selected.connect(_on_animated_property_changed.bind(0, param_name, effect))
+	trans_type_options.select(trans_type)
+	trans_type_options.item_selected.connect(_on_keyframe_trans_changed.bind(effect, frame_index, param_name))
 	property_grid.add_child(trans_type_options)
 
 	var easing_label := Label.new()
@@ -164,36 +168,30 @@ func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: 
 	ease_type_options.add_item("Ease out", Tween.EASE_OUT)
 	ease_type_options.add_item("Ease in out", Tween.EASE_IN_OUT)
 	ease_type_options.add_item("Ease out in", Tween.EASE_OUT_IN)
-	ease_type_options.item_selected.connect(_on_animated_property_changed.bind(1, param_name, effect))
+	ease_type_options.select(ease_type)
+	ease_type_options.item_selected.connect(_on_keyframe_ease_changed.bind(effect, frame_index, param_name))
 	property_grid.add_child(ease_type_options)
-	if effect.animated_tween_params.has(param_name):
-		trans_type_options.select(
-			effect.animated_tween_params[param_name].get("trans_type", Tween.TRANS_LINEAR)
-		)
-		ease_type_options.select(effect.animated_tween_params[param_name].get("ease_type", Tween.EASE_IN))
 	properties_container.add_child(property_grid)
 
 	var delete_keyframe := Button.new()
 	delete_keyframe.text = "Delete keyframe"
 	delete_keyframe.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	delete_keyframe.pressed.connect(effect.delete_keyframe.bind(frame_index))
+	delete_keyframe.pressed.connect(effect.delete_keyframe.bind(param_name, frame_index))
 	properties_container.add_child(delete_keyframe)
 
 
 func _on_keyframe_value_changed(
 	new_value, effect: LayerEffect, frame_index: int, param_name: String
 ) -> void:
-	effect.animated_params[frame_index][param_name] = new_value
+	effect.animated_params[param_name][frame_index]["value"] = new_value
 	Global.canvas.queue_redraw()
 
 
-func _on_animated_property_changed(index: int, type: int, param: String, effect: LayerEffect) -> void:
-	if not effect.animated_tween_params.has(param):
-		effect.animated_tween_params[param] = {
-			"trans_type": Tween.TRANS_LINEAR, "ease_type": Tween.EASE_IN
-		}
-	if type == 0:
-		effect.animated_tween_params[param]["trans_type"] = index
-	else:
-		effect.animated_tween_params[param]["ease_type"] = index
+func _on_keyframe_trans_changed(index: int, effect: LayerEffect, frame_index: int, param_name: String) -> void:
+	effect.animated_params[param_name][frame_index]["trans"] = index
+	Global.canvas.queue_redraw()
+
+
+func _on_keyframe_ease_changed(index: int, effect: LayerEffect, frame_index: int, param_name: String) -> void:
+	effect.animated_params[param_name][frame_index]["ease"] = index
 	Global.canvas.queue_redraw()

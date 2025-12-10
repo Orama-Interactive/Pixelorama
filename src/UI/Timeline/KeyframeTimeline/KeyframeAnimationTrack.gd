@@ -29,6 +29,4 @@ func _gui_input(event: InputEvent) -> void:
 
 func _on_popup_menu_id_pressed(id: int) -> void:
 	if id == 0:
-		if not effect.animated_params.has(keyframe_at):
-			effect.animated_params[keyframe_at] = {}
-		effect.animated_params[keyframe_at][param_name] = effect.params[param_name]
+		effect.set_keyframe(param_name, keyframe_at)

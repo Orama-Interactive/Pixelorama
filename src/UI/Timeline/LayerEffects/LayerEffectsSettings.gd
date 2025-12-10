@@ -225,7 +225,7 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 			undo_data[cel_image.indices_image] = cel_image.indices_image.data
 		undo_data[cel_image] = cel_image.data
 		var image_size := cel_image.get_size()
-		var params := effect.params
+		var params := effect.get_params(i)
 		params["PXO_time"] = frame.position_in_seconds(project)
 		params["PXO_frame_index"] = i
 		params["PXO_layer_index"] = layer.index
