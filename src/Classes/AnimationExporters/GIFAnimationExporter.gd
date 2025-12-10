@@ -23,8 +23,8 @@ func export_animation(
 	var first_frame: AImgIOFrame = frames[0]
 	var first_img := first_frame.content
 	var exporter := GIFExporter.new(first_img.get_width(), first_img.get_height())
-	while frames.size() > 0:
-		var frame: AImgIOFrame = frames.pop_front()
+	for v in frames:
+		var frame: AImgIOFrame = v
 		exporter.add_frame(frame.content, frame.duration, MedianCutQuantization)
 		# Directly store data to buffer file if it is given, this preserves
 		# GIF if export is canceled for some reason

@@ -14,9 +14,10 @@ var mime_type: String
 func export_animation(
 	_frames: Array,
 	_fps_hint: float,
-	_progress_report_obj: Object,
-	_progress_report_method,
-	_progress_report_args,
+	progress_report_obj: Object,
+	progress_report_method,
+	progress_report_args,
 	_export_file: FileAccess = null
 ) -> PackedByteArray:
+	await progress_report_obj.callv(progress_report_method, progress_report_args)
 	return PackedByteArray()

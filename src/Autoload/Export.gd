@@ -639,7 +639,6 @@ func export_animated(args: Dictionary) -> void:
 	# Export and save GIF/APNG
 
 	if OS.has_feature("web"):
-		@warning_ignore("redundant_await")  # await is needed for GIF export
 		var file_data := await exporter.export_animation(
 			frames, project.fps, self, "_increase_export_progress", [export_dialog]
 		)
@@ -648,14 +647,8 @@ func export_animated(args: Dictionary) -> void:
 		# Open the file for export
 		var file := FileAccess.open(args["export_paths"][0], FileAccess.WRITE)
 		if FileAccess.get_open_error() == OK:
-			@warning_ignore("redundant_await")  # await is needed for GIF export
 			var buffer_data := await exporter.export_animation(
-				frames,
-				project.fps,
-				self,
-				"_increase_export_progress",
-				[export_dialog],
-				file
+				frames, project.fps, self, "_increase_export_progress", [export_dialog], file
 			)
 			# In order to save memory, some exporters (like GIF) auto saves the data to file as
 			# soon as it is processed (usually, frame by frame). If the exporter does not have this
