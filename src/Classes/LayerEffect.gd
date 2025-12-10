@@ -114,16 +114,12 @@ func find_frame_edges(frame_index: int, animated_properties: Dictionary) -> Arra
 
 
 func serialize() -> Dictionary:
-	var p_str := {}
-	for frame_index in animated_params:
-		p_str[frame_index] = {}
-		for param in animated_params[frame_index]:
-			p_str[frame_index][param] = var_to_str(animated_params[frame_index][param])
 	return {
 		"name": name,
 		"shader_path": shader.resource_path,
 		"enabled": enabled,
-		"animated_params": p_str,
+		"params": var_to_str(params),
+		"animated_params": var_to_str(animated_params),
 	}
 
 
@@ -137,17 +133,6 @@ func deserialize(dict: Dictionary) -> void:
 			shader = shader_to_load
 	if dict.has("enabled"):
 		enabled = dict["enabled"]
-
-	# TODO: Fix
-	#if dict.has("animated_params"):
-		#for frame_index_str in dict["animated_params"]:
-			#var frame_params = dict["animated_params"][frame_index_str]
-			#var frame_index := int(frame_index_str)
-			#for param in frame_params:
-				#if typeof(frame_params[param]) == TYPE_STRING:
-					#frame_params[param] = str_to_var(frame_params[param])
-			#animated_params[frame_index] = frame_params
-
 	if dict.has("params"):
 		if typeof(dict["params"]) == TYPE_DICTIONARY:
 			for param in dict["params"]:
@@ -155,4 +140,5 @@ func deserialize(dict: Dictionary) -> void:
 					params[param] = str_to_var(dict["params"][param])
 		else:
 			params = str_to_var(dict["params"])
-	animated = dict.get("animated", animated)
+	if dict.has("animated_params"):
+		params = str_to_var(dict["animated_params"])

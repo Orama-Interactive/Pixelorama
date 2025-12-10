@@ -131,7 +131,9 @@ func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: 
 		slider.allow_lesser = true
 		slider.allow_greater = true
 		slider.value = property
-		slider.value_changed.connect(_on_keyframe_value_changed.bind(effect, frame_index, param_name))
+		slider.value_changed.connect(
+			_on_keyframe_value_changed.bind(effect, frame_index, param_name)
+		)
 		property_grid.add_child(slider)
 
 	var trans_label := Label.new()
@@ -154,7 +156,9 @@ func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: 
 	trans_type_options.add_item("Back", Tween.TRANS_BACK)
 	trans_type_options.add_item("Spring", Tween.TRANS_SPRING)
 	trans_type_options.select(trans_type)
-	trans_type_options.item_selected.connect(_on_keyframe_trans_changed.bind(effect, frame_index, param_name))
+	trans_type_options.item_selected.connect(
+		_on_keyframe_trans_changed.bind(effect, frame_index, param_name)
+	)
 	property_grid.add_child(trans_type_options)
 
 	var easing_label := Label.new()
@@ -169,7 +173,9 @@ func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: 
 	ease_type_options.add_item("Ease in out", Tween.EASE_IN_OUT)
 	ease_type_options.add_item("Ease out in", Tween.EASE_OUT_IN)
 	ease_type_options.select(ease_type)
-	ease_type_options.item_selected.connect(_on_keyframe_ease_changed.bind(effect, frame_index, param_name))
+	ease_type_options.item_selected.connect(
+		_on_keyframe_ease_changed.bind(effect, frame_index, param_name)
+	)
 	property_grid.add_child(ease_type_options)
 	properties_container.add_child(property_grid)
 
@@ -187,11 +193,15 @@ func _on_keyframe_value_changed(
 	Global.canvas.queue_redraw()
 
 
-func _on_keyframe_trans_changed(index: int, effect: LayerEffect, frame_index: int, param_name: String) -> void:
+func _on_keyframe_trans_changed(
+	index: int, effect: LayerEffect, frame_index: int, param_name: String
+) -> void:
 	effect.animated_params[param_name][frame_index]["trans"] = index
 	Global.canvas.queue_redraw()
 
 
-func _on_keyframe_ease_changed(index: int, effect: LayerEffect, frame_index: int, param_name: String) -> void:
+func _on_keyframe_ease_changed(
+	index: int, effect: LayerEffect, frame_index: int, param_name: String
+) -> void:
 	effect.animated_params[param_name][frame_index]["ease"] = index
 	Global.canvas.queue_redraw()
