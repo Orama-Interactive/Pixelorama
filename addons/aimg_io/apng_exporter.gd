@@ -12,7 +12,8 @@ func export_animation(
 	fps_hint: float,
 	progress_report_obj: Object,
 	progress_report_method,
-	progress_report_args
+	progress_report_args,
+	_export_file: FileAccess = null
 ) -> PackedByteArray:
 	var frame_count := len(frames)
 	var result := AImgIOAPNGStream.new()

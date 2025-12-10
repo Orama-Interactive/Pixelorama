@@ -17,13 +17,16 @@ func export_animation(
 	_fps_hint: float,
 	progress_report_obj: Object,
 	progress_report_method,
-	progress_report_args
+	progress_report_args,
+	export_file: FileAccess = null
 ) -> PackedByteArray:
 	var first_frame: AImgIOFrame = frames[0]
 	var first_img := first_frame.content
-	var exporter := GIFExporter.new(first_img.get_width(), first_img.get_height())
+	var exporter := GIFExporter.new(first_img.get_width(), first_img.get_height(), export_file)
 	for v in frames:
 		var frame: AImgIOFrame = v
+		var time := Time.get_ticks_msec()
 		exporter.add_frame(frame.content, frame.duration, MedianCutQuantization)
+		print(Time.get_ticks_msec() - time)
 		progress_report_obj.callv(progress_report_method, progress_report_args)
 	return exporter.export_file_data()
