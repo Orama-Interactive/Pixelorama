@@ -627,8 +627,6 @@ func export_animated(args: Dictionary) -> void:
 	export_progress = 0.0
 	export_dialog.set_export_progress_bar(export_progress)
 	export_dialog.toggle_export_progress_popup(true)
-	await get_tree().process_frame
-	await get_tree().process_frame
 
 	# Transform into AImgIO form
 	var frames := []
@@ -641,7 +639,8 @@ func export_animated(args: Dictionary) -> void:
 	# Export and save GIF/APNG
 
 	if OS.has_feature("web"):
-		var file_data := exporter.export_animation(
+		@warning_ignore("redundant_await")  # await is needed for GIF export
+		var file_data := await exporter.export_animation(
 			frames, project.fps, self, "_increase_export_progress", [export_dialog]
 		)
 		JavaScriptBridge.download_buffer(file_data, args["export_paths"][0], exporter.mime_type)
@@ -649,7 +648,8 @@ func export_animated(args: Dictionary) -> void:
 		# Open the file for export
 		var file := FileAccess.open(args["export_paths"][0], FileAccess.WRITE)
 		if FileAccess.get_open_error() == OK:
-			var buffer_data := exporter.export_animation(
+			@warning_ignore("redundant_await")  # await is needed for GIF export
+			var buffer_data := await exporter.export_animation(
 				frames,
 				project.fps,
 				self,
@@ -671,6 +671,8 @@ func export_animated(args: Dictionary) -> void:
 func _increase_export_progress(export_dialog: Node) -> void:
 	export_progress += export_progress_fraction
 	export_dialog.set_export_progress_bar(export_progress)
+	await get_tree().process_frame
+	await get_tree().process_frame
 
 
 func _scale_processed_images() -> void:
