@@ -11,23 +11,16 @@ var last_transparency_index := -1
 
 # File data and Header
 var data := PackedByteArray([])
-var buffer_file: FileAccess
 
 
-func _init(_width: int, _height: int, _buffer_file: FileAccess = null):
+func _init(_width: int, _height: int):
 	add_header()
 	add_logical_screen_descriptor(_width, _height)
 	add_application_ext("NETSCAPE", "2.0", [1, 0, 0])
-	if _buffer_file:
-		buffer_file = _buffer_file
 
 
 func export_file_data() -> PackedByteArray:
-	data.append(0x3b)
-	if buffer_file:
-		buffer_file.store_buffer(data)
-		data.clear()
-	return data
+	return data + PackedByteArray([0x3b])
 
 
 func add_header() -> void:
@@ -183,9 +176,6 @@ func add_frame(image: Image, frame_delay: float, quantizator: Script) -> int:
 	add_image_descriptor(Vector2.ZERO, image.get_size(), color_table_bit_size(color_table))
 	add_local_color_table(color_table)
 	add_image_data_block(lzw_min_code_size, compressed_image_data)
-	if buffer_file:  # Directly store data to buffer file if it is given, this saves memory
-		buffer_file.store_buffer(data)
-		data.clear()  # Clear data so it can be filled with next frame data
 	return Error.OK
 
 

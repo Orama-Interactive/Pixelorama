@@ -627,6 +627,8 @@ func export_animated(args: Dictionary) -> void:
 	export_progress = 0.0
 	export_dialog.set_export_progress_bar(export_progress)
 	export_dialog.toggle_export_progress_popup(true)
+	await get_tree().process_frame
+	await get_tree().process_frame
 
 	# Transform into AImgIO form
 	var frames := []
