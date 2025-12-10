@@ -22,7 +22,7 @@ func export_animation(
 ) -> PackedByteArray:
 	var first_frame: AImgIOFrame = frames[0]
 	var first_img := first_frame.content
-	var exporter := GIFExporter.new(first_img.get_width(), first_img.get_height(), buffer_file)
+	var exporter := GIFExporter.new(first_img.get_width(), first_img.get_height())
 	for v in frames:
 		var frame: AImgIOFrame = v
 		print("==============")
