@@ -46,7 +46,7 @@ func _update_position(new_pos: Vector2) -> void:
 	var container_pos := container.get_global_rect().position.x
 	var container_end := container.get_global_rect().end.x
 	pos = clampf(new_pos.x - (size.x / 2.0), container_pos, container_end)
-	var frame := roundi((pos - container_pos) / KeyframeTimeline.frame_ui_size)
+	var frame := floori((pos - container_pos) / KeyframeTimeline.frame_ui_size)
 	frame = clampi(frame, 0, Global.current_project.frames.size() - 1)
 	# Change frame
 	Global.current_project.selected_cels.clear()

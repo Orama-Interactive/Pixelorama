@@ -35,7 +35,6 @@ func _ready() -> void:
 	await get_tree().process_frame
 	var project := Global.current_project
 	current_layer = project.layers[project.current_layer]
-	_add_ui_frames()
 
 
 func _on_cel_switched() -> void:
@@ -54,6 +53,7 @@ func _on_project_about_to_switch() -> void:
 
 func _on_project_switched() -> void:
 	var project := Global.current_project
+	_add_ui_frames()
 	if not project.frames_updated.is_connected(_add_ui_frames):
 		project.frames_updated.connect(_add_ui_frames)
 
@@ -121,7 +121,6 @@ func _add_ui_frames() -> void:
 		var v_separator := VSeparator.new()
 		frames_container.add_child(v_separator)
 		var frame_label := Label.new()
-		#frame_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		frame_label.text = str(i + 1)
 		frame_label.custom_minimum_size.x = frame_ui_size - v_separator.size.x
 		frames_container.add_child(frame_label)

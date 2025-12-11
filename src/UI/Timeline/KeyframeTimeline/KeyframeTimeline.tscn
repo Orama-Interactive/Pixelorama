@@ -123,6 +123,7 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+hide_folding = true
 hide_root = true
 
 [node name="TrackScrollContainer" type="ScrollContainer" parent="HSplitContainer/HSplitContainer"]
