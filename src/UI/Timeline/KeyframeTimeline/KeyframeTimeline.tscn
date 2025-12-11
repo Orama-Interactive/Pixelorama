@@ -96,9 +96,16 @@ script = ExtResource("1_te3k4")
 
 [node name="LayerElementContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
 
 [node name="LayerElementSpacer" type="Control" parent="LayerElementContainer"]
 layout_mode = 2
+
+[node name="LayerElementTree" type="Tree" parent="LayerElementContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+hide_root = true
 
 [node name="TrackContainer" type="VBoxContainer" parent="."]
 layout_mode = 2

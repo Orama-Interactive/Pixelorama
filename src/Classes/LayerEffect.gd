@@ -36,7 +36,7 @@ func duplicate() -> LayerEffect:
 
 
 func get_params(frame_index: int) -> Dictionary:
-	var to_return := params
+	var to_return := params.duplicate()
 	for param in animated_params:
 		if param.begins_with("PXO_"):
 			continue
@@ -45,6 +45,8 @@ func get_params(frame_index: int) -> Dictionary:
 			# If the frame index exists in the properties, get that.
 			to_return[param] = animated_properties[frame_index].get("value", to_return[param])
 		else:
+			if animated_properties.size() == 0:
+				continue
 			# If it doesn't exist, interpolate.
 			var frame_edges := find_frame_edges(frame_index, animated_properties)
 			var min_params: Dictionary = animated_properties[frame_edges[0]]

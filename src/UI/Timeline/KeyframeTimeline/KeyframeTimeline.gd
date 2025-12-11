@@ -17,8 +17,8 @@ var current_layer: BaseLayer:
 			effect.keyframe_set.connect(_recreate_timeline)
 var keyframe_button_group := ButtonGroup.new()
 
-@onready var layer_element_container: VBoxContainer = $LayerElementContainer
 @onready var layer_element_spacer: Control = $LayerElementContainer/LayerElementSpacer
+@onready var layer_element_tree: Tree = $LayerElementContainer/LayerElementTree
 @onready var track_container: VBoxContainer = $TrackContainer
 @onready var frames_container: HBoxContainer = $TrackContainer/FramesContainer
 @onready var properties_container: VBoxContainer = $PropertiesContainer
@@ -69,10 +69,8 @@ func _on_effects_added_removed() -> void:
 
 
 func _recreate_timeline() -> void:
-	for child in layer_element_container.get_children():
-		if child == layer_element_spacer:
-			continue
-		child.queue_free()
+	layer_element_tree.clear()
+	layer_element_tree.create_item()
 	for child in track_container.get_children():
 		if child == frames_container:
 			continue
@@ -80,23 +78,22 @@ func _recreate_timeline() -> void:
 	# Await is needed so that the params get added to the layer effect.
 	await get_tree().process_frame
 	for effect in current_layer.effects:
-		var label := Label.new()
-		label.text = effect.name
-		layer_element_container.add_child(label)
+		var tree_item := layer_element_tree.create_item()
+		tree_item.set_text(0, effect.name)
 		var track := KeyframeAnimationTrack.new()
-		track.custom_minimum_size.y = label.size.y
+		track.custom_minimum_size.y = layer_element_tree.get_item_area_rect(tree_item).size.y
 		track_container.add_child(track)
 		for param in effect.params:
 			if param in ["PXO_time", "PXO_frame_index", "PXO_layer_index"]:
 				continue
-			var param_label := Label.new()
-			param_label.text = "\t " + param
-			layer_element_container.add_child(param_label)
+			var param_tree_item := tree_item.create_child()
+			param_tree_item.set_text(0, Keychain.humanize_snake_case(param))
 			var param_track := KeyframeAnimationTrack.new()
 			param_track.effect = effect
 			param_track.param_name = param
 			param_track.is_property = true
-			param_track.custom_minimum_size.y = param_label.size.y
+			var tree_item_area_rect := layer_element_tree.get_item_area_rect(param_tree_item)
+			param_track.custom_minimum_size.y = tree_item_area_rect.size.y
 			track_container.add_child(param_track)
 			if effect.animated_params.has(param):
 				for frame_index: int in effect.animated_params[param]:
