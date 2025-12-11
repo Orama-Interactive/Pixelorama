@@ -134,4 +134,4 @@ func deserialize(dict: Dictionary) -> void:
 		else:
 			params = str_to_var(dict["params"])
 	if dict.has("animated_params"):
-		params = str_to_var(dict["animated_params"])
+		animated_params = str_to_var(dict["animated_params"])
