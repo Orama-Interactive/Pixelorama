@@ -7,14 +7,21 @@ const TRIANGLE_SIZE := 8
 
 var cursor_color := Color.BLUE
 var is_dragged := false
+var pos := global_position.x:
+	set(value):
+		pos = value
+		global_position.x = pos
 
 
 func _ready() -> void:
+	get_parent().sort_children.connect(func(): global_position.x = pos)
+	Global.cel_switched.connect(_on_cel_switched)
 	if is_instance_valid(container):
 		container.get_child(0).gui_input.connect(_on_frames_container_gui_input)
 		await get_tree().process_frame
+		await get_tree().process_frame
 		var container_pos := container.get_global_rect().position.x
-		global_position.x = container_pos
+		pos = container_pos
 
 
 func _notification(what: int) -> void:
@@ -38,10 +45,9 @@ func _on_frames_container_gui_input(event: InputEvent) -> void:
 func _update_position(new_pos: Vector2) -> void:
 	var container_pos := container.get_global_rect().position.x
 	var container_end := container.get_global_rect().end.x
-	global_position.x = clampf(new_pos.x, container_pos, container_end)
-	var frame := roundi((global_position.x - container_pos) / KeyframeTimeline.frame_ui_size)
-	if frame >= Global.current_project.frames.size():
-		return
+	pos = clampf(new_pos.x - (size.x / 2.0), container_pos, container_end)
+	var frame := roundi((pos - container_pos) / KeyframeTimeline.frame_ui_size)
+	frame = clampi(frame, 0, Global.current_project.frames.size() - 1)
 	# Change frame
 	Global.current_project.selected_cels.clear()
 	var frame_layer := [frame, Global.current_project.current_layer]
@@ -50,8 +56,17 @@ func _update_position(new_pos: Vector2) -> void:
 	Global.current_project.change_cel(frame, -1)
 
 
+func _on_cel_switched() -> void:
+	if is_dragged:
+		return
+	var frame := Global.current_project.current_frame
+	var container_pos := container.get_global_rect().position.x
+	var container_end := container.get_global_rect().end.x
+	pos = clampf(frame * KeyframeTimeline.frame_ui_size + container_pos, container_pos, container_end)
+
+
 func _draw() -> void:
-	var cursor_pos := 0.0
+	var cursor_pos := size.x / 2.0
 	draw_line(Vector2(cursor_pos, 0), Vector2(cursor_pos, size.y), cursor_color, CURSOR_WIDTH)
 
 	var half := TRIANGLE_SIZE * 0.5

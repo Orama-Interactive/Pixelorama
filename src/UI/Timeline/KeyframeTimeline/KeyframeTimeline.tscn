@@ -20,7 +20,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HBoxContainer/LayerElementContainer:custom_minimum_size")
+tracks/1/path = NodePath("HSplitContainer/HSplitContainer/LayerElementContainer:custom_minimum_size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -32,7 +32,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("HBoxContainer/LayerElementContainer:clip_contents")
+tracks/2/path = NodePath("HSplitContainer/HSplitContainer/LayerElementContainer:clip_contents")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -44,6 +44,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_3tue1"]
 resource_name = "new_animation"
+length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -59,7 +60,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("HBoxContainer/LayerElementContainer:custom_minimum_size")
+tracks/1/path = NodePath("HSplitContainer/HSplitContainer/LayerElementContainer:custom_minimum_size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -71,7 +72,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("HBoxContainer/LayerElementContainer:clip_contents")
+tracks/2/path = NodePath("HSplitContainer/HSplitContainer/LayerElementContainer:clip_contents")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -87,8 +88,8 @@ _data = {
 &"new_animation": SubResource("Animation_3tue1")
 }
 
-[node name="KeyframeTimeline" type="Control"]
-layout_mode = 3
+[node name="KeyframeTimeline" type="Panel"]
+clip_contents = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -96,7 +97,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_te3k4")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -104,48 +105,72 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LayerElementContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LayerElementContainer" type="VBoxContainer" parent="HSplitContainer/HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 
-[node name="LayerElementSpacer" type="Control" parent="HBoxContainer/LayerElementContainer"]
+[node name="LayerElementSpacer" type="Control" parent="HSplitContainer/HSplitContainer/LayerElementContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="LayerElementTree" type="Tree" parent="HBoxContainer/LayerElementContainer"]
+[node name="LayerElementTree" type="Tree" parent="HSplitContainer/HSplitContainer/LayerElementContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 hide_root = true
 
-[node name="TrackContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="TrackScrollContainer" type="ScrollContainer" parent="HSplitContainer/HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="FramesContainer" type="HBoxContainer" parent="HBoxContainer/TrackContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="HSplitContainer/HSplitContainer/TrackScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TrackContainer" type="VBoxContainer" parent="HSplitContainer/HSplitContainer/TrackScrollContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="FramesContainer" type="HBoxContainer" parent="HSplitContainer/HSplitContainer/TrackScrollContainer/PanelContainer/TrackContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="PropertiesContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="KeyframeTimelineCursor" type="Control" parent="HSplitContainer/HSplitContainer/TrackScrollContainer/PanelContainer" node_paths=PackedStringArray("container")]
+clip_contents = true
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+mouse_filter = 2
+script = ExtResource("2_3wn0x")
+container = NodePath("../TrackContainer")
+
+[node name="PropertiesPanelContainer" type="PanelContainer" parent="HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.33
 
-[node name="NoKeySelectedLabel" type="Label" parent="HBoxContainer/PropertiesContainer"]
+[node name="PropertiesContainer" type="VBoxContainer" parent="HSplitContainer/PropertiesPanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="NoKeySelectedLabel" type="Label" parent="HSplitContainer/PropertiesPanelContainer/PropertiesContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 text = "No key selected"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="KeyframeTimelineCursor" type="Control" parent="." node_paths=PackedStringArray("container")]
-layout_mode = 1
-anchor_left = 0.20700002
-anchor_right = 0.216
-offset_left = 0.039978027
-offset_bottom = 720.0
-mouse_filter = 2
-script = ExtResource("2_3wn0x")
-container = NodePath("../HBoxContainer/TrackContainer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
