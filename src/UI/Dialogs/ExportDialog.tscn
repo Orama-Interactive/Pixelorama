@@ -354,6 +354,8 @@ always_on_top = true
 dialog_text = "File %s already exists. Overwrite?"
 
 [node name="ExportProgressBar" type="Window" parent="."]
+title = "Export Progress"
+size = Vector2i(400, 100)
 visible = false
 exclusive = true
 always_on_top = true
