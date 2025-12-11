@@ -76,7 +76,6 @@ static func open_kra_file(path: String) -> void:
 					guide.add_point(Vector2(99999, position))
 					guide.has_focus = false
 					guide.project = new_project
-					new_project.guides.append(guide)
 					Global.canvas.add_child(guide)
 				elif is_parsing_vertical_guides:
 					var value_str := parser.get_named_attribute_value_safe("value")
