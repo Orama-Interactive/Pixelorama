@@ -138,7 +138,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="KeyframeTimelineCursor" type="Control" parent="." node_paths=PackedStringArray("container")]
-custom_minimum_size = Vector2(12, 0)
 layout_mode = 1
 anchor_left = 0.20700002
 anchor_right = 0.216
