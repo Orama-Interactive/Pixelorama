@@ -144,6 +144,7 @@ anchor_left = 0.20700002
 anchor_right = 0.216
 offset_left = 0.039978027
 offset_bottom = 720.0
+mouse_filter = 2
 script = ExtResource("2_3wn0x")
 container = NodePath("../HBoxContainer/TrackContainer")
 
