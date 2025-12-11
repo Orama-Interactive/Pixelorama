@@ -664,8 +664,6 @@ func export_animated(args: Dictionary) -> void:
 func _increase_export_progress(export_dialog: Node) -> void:
 	export_progress += export_progress_fraction
 	export_dialog.set_export_progress_bar(export_progress)
-	await get_tree().process_frame
-	await get_tree().process_frame
 
 
 func _scale_processed_images() -> void:

@@ -73,7 +73,8 @@ func export_animation(
 		else:
 			result.write_chunk("fdAT", chunk.data_array)
 		# Done with this frame!
-		await progress_report_obj.callv(progress_report_method, progress_report_args)
+		progress_report_obj.callv(progress_report_method, progress_report_args)
+		await RenderingServer.frame_post_draw
 	# Final chunk.
 	result.write_chunk("IEND", PackedByteArray())
 	return result.finish()

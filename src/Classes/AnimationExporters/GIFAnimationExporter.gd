@@ -31,7 +31,8 @@ func export_animation(
 		if buffer_file:
 			buffer_file.store_buffer(exporter.data)
 			exporter.data.clear()  # Clear data so it can be filled with next frame data
-		await progress_report_obj.callv(progress_report_method, progress_report_args)
+		progress_report_obj.callv(progress_report_method, progress_report_args)
+		await RenderingServer.frame_post_draw
 	if buffer_file:
 		buffer_file.store_buffer(exporter.export_file_data())
 		return PackedByteArray()
