@@ -17,11 +17,11 @@ var current_layer: BaseLayer:
 			effect.keyframe_set.connect(_recreate_timeline)
 var keyframe_button_group := ButtonGroup.new()
 
-@onready var layer_element_spacer: Control = $LayerElementContainer/LayerElementSpacer
-@onready var layer_element_tree: Tree = $LayerElementContainer/LayerElementTree
-@onready var track_container: VBoxContainer = $TrackContainer
-@onready var frames_container: HBoxContainer = $TrackContainer/FramesContainer
-@onready var properties_container: VBoxContainer = $PropertiesContainer
+@onready var layer_element_spacer: Control = $HBoxContainer/LayerElementContainer/LayerElementSpacer
+@onready var layer_element_tree: Tree = $HBoxContainer/LayerElementContainer/LayerElementTree
+@onready var track_container: VBoxContainer = $HBoxContainer/TrackContainer
+@onready var frames_container: HBoxContainer = $HBoxContainer/TrackContainer/FramesContainer
+@onready var properties_container: VBoxContainer = $HBoxContainer/PropertiesContainer
 @onready var no_key_selected_label: Label = %NoKeySelectedLabel
 
 
