@@ -29,7 +29,7 @@ func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			var rect := Rect2()
-			keyframe_at = roundi(event.position.x / KeyframeTimeline.frame_ui_size)
+			keyframe_at = floori(event.position.x / KeyframeTimeline.frame_ui_size)
 			rect.position = event.global_position
 			rect.size = Vector2(100, 0)
 			popup_menu.popup(rect)

@@ -62,7 +62,9 @@ func _on_cel_switched() -> void:
 	var frame := Global.current_project.current_frame
 	var container_pos := container.get_global_rect().position.x
 	var container_end := container.get_global_rect().end.x
-	pos = clampf(frame * KeyframeTimeline.frame_ui_size + container_pos, container_pos, container_end)
+	pos = clampf(
+		frame * KeyframeTimeline.frame_ui_size + container_pos, container_pos, container_end
+	)
 
 
 func _draw() -> void:

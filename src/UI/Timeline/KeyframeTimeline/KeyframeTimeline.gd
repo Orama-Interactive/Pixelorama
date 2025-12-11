@@ -1,6 +1,9 @@
 class_name KeyframeTimeline
 extends Control
 
+const KEYFRAME_ICON := preload("uid://yhha3l44svgs")
+const KEYFRAME_SELECTED_ICON = preload("uid://dtx6hygsgoifb")
+
 static var frame_ui_size := 50
 var current_layer: BaseLayer:
 	set(value):
@@ -97,11 +100,15 @@ func _recreate_timeline() -> void:
 			track_container.add_child(param_track)
 			if effect.animated_params.has(param):
 				for frame_index: int in effect.animated_params[param]:
-					var keyframe := Button.new()
+					var keyframe := TextureButton.new()
+					keyframe.texture_normal = KEYFRAME_ICON
+					keyframe.texture_pressed = KEYFRAME_SELECTED_ICON
 					keyframe.toggle_mode = true
 					keyframe.button_group = keyframe_button_group
 					keyframe.position.x = frame_index * frame_ui_size
-					keyframe.position.y = param_track.custom_minimum_size.y / 2
+					keyframe.position.y = (
+						param_track.custom_minimum_size.y / 2 - keyframe.size.y / 2
+					)
 					keyframe.pressed.connect(_on_keyframe_pressed.bind(effect, param, frame_index))
 					param_track.add_child(keyframe)
 
@@ -111,10 +118,12 @@ func _add_ui_frames() -> void:
 		child.queue_free()
 	var project := Global.current_project
 	for i in project.frames.size():
+		var v_separator := VSeparator.new()
+		frames_container.add_child(v_separator)
 		var frame_label := Label.new()
 		#frame_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		frame_label.text = str(i + 1)
-		frame_label.custom_minimum_size.x = frame_ui_size
+		frame_label.custom_minimum_size.x = frame_ui_size - v_separator.size.x
 		frames_container.add_child(frame_label)
 	layer_element_spacer.custom_minimum_size.y = frames_container.size.y
 
