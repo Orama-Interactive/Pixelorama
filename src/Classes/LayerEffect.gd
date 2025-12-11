@@ -1,9 +1,7 @@
 class_name LayerEffect
 extends RefCounted
 
-signal keyframe_set(frame_index: int)
-
-const MAX_FRAME_INDEX := 9999999
+signal keyframe_set
 
 var name := ""
 var shader: Shader
@@ -77,14 +75,7 @@ func set_keyframe(
 	if not animated_params.has(param_name):
 		animated_params[param_name] = {}
 	animated_params[param_name][frame_index] = {"value": value, "trans": trans, "ease": ease_type}
-	keyframe_set.emit(frame_index)
-
-
-func delete_keyframe(param_name: String, frame_index: int) -> void:
-	if not animated_params.has(param_name):
-		return
-	animated_params[param_name].erase(frame_index)
-	keyframe_set.emit(frame_index)
+	keyframe_set.emit()
 
 
 func is_interpolatable_type(value: Variant) -> bool:
@@ -103,8 +94,8 @@ func find_frame_edges(frame_index: int, animated_properties: Dictionary) -> Arra
 	if param_keys.size() == 1:
 		return [param_keys[0], param_keys[0]]
 	param_keys.sort()
-	var minimum := 0
-	var maximum := MAX_FRAME_INDEX
+	var minimum: int = param_keys[0]
+	var maximum: int = param_keys[-1]
 	for key in param_keys:
 		if key > minimum and key <= frame_index:
 			minimum = key

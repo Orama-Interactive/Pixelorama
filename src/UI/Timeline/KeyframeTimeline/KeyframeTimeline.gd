@@ -5,11 +5,16 @@ static var frame_ui_size := 50
 var current_layer: BaseLayer:
 	set(value):
 		if is_instance_valid(current_layer):
-			if current_layer.effects_added_removed.is_connected(_recreate_timeline):
-				current_layer.effects_added_removed.disconnect(_recreate_timeline)
+			if current_layer.effects_added_removed.is_connected(_on_effects_added_removed):
+				current_layer.effects_added_removed.disconnect(_on_effects_added_removed)
+			for effect in current_layer.effects:
+				for connection in effect.keyframe_set.get_connections():
+					effect.keyframe_set.disconnect(connection["callable"])
 		current_layer = value
 		_recreate_timeline()
-		current_layer.effects_added_removed.connect(_recreate_timeline)
+		current_layer.effects_added_removed.connect(_on_effects_added_removed)
+		for effect in current_layer.effects:
+			effect.keyframe_set.connect(_recreate_timeline)
 var keyframe_button_group := ButtonGroup.new()
 
 @onready var layer_element_container: VBoxContainer = $LayerElementContainer
@@ -36,6 +41,7 @@ func _on_cel_switched() -> void:
 	if layer == current_layer:
 		return
 	current_layer = layer
+	_on_keyframe_unselect()
 
 
 func _on_project_about_to_switch() -> void:
@@ -47,6 +53,19 @@ func _on_project_switched() -> void:
 	var project := Global.current_project
 	if not project.frames_updated.is_connected(_add_ui_frames):
 		project.frames_updated.connect(_add_ui_frames)
+
+
+func _on_effects_added_removed() -> void:
+	# Disconnect keyframe_set signals and connect them again,
+	# to handle both effect removal and addition.
+	# TODO: This is a very lazy way to handle this,
+	# the correct approach would be to have separate added and removed signals for effects.
+	for effect in current_layer.effects:
+		for connection in effect.keyframe_set.get_connections():
+			effect.keyframe_set.disconnect(connection["callable"])
+	for effect in current_layer.effects:
+		effect.keyframe_set.connect(_recreate_timeline)
+	_recreate_timeline()
 
 
 func _recreate_timeline() -> void:
@@ -123,7 +142,9 @@ func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: 
 		slider.allow_lesser = true
 		slider.allow_greater = true
 		slider.value = property
-		slider.value_changed.connect(_on_keyframe_value_changed.bind(effect, frame_index, param_name))
+		slider.value_changed.connect(
+			_on_keyframe_value_changed.bind(effect.animated_params, frame_index, param_name)
+		)
 		property_grid.add_child(slider)
 	elif typeof(property) in [TYPE_VECTOR2, TYPE_VECTOR2I]:
 		var slider := ShaderLoader.VALUE_SLIDER_V2_TSCN.instantiate() as ValueSliderV2
@@ -132,7 +153,7 @@ func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: 
 		slider.allow_greater = true
 		slider.value = property
 		slider.value_changed.connect(
-			_on_keyframe_value_changed.bind(effect, frame_index, param_name)
+			_on_keyframe_value_changed.bind(effect.animated_params, frame_index, param_name)
 		)
 		property_grid.add_child(slider)
 
@@ -157,7 +178,7 @@ func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: 
 	trans_type_options.add_item("Spring", Tween.TRANS_SPRING)
 	trans_type_options.select(trans_type)
 	trans_type_options.item_selected.connect(
-		_on_keyframe_trans_changed.bind(effect, frame_index, param_name)
+		_on_keyframe_trans_changed.bind(effect.animated_params, frame_index, param_name)
 	)
 	property_grid.add_child(trans_type_options)
 
@@ -174,34 +195,50 @@ func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: 
 	ease_type_options.add_item("Ease out in", Tween.EASE_OUT_IN)
 	ease_type_options.select(ease_type)
 	ease_type_options.item_selected.connect(
-		_on_keyframe_ease_changed.bind(effect, frame_index, param_name)
+		_on_keyframe_ease_changed.bind(effect.animated_params, frame_index, param_name)
 	)
 	property_grid.add_child(ease_type_options)
 	properties_container.add_child(property_grid)
 
-	var delete_keyframe := Button.new()
-	delete_keyframe.text = "Delete keyframe"
-	delete_keyframe.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	delete_keyframe.pressed.connect(effect.delete_keyframe.bind(param_name, frame_index))
-	properties_container.add_child(delete_keyframe)
+	var delete_keyframe_button := Button.new()
+	delete_keyframe_button.text = "Delete keyframe"
+	delete_keyframe_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	delete_keyframe_button.pressed.connect(
+		_on_keyframe_deleted.bind(effect.animated_params, frame_index, param_name)
+	)
+	properties_container.add_child(delete_keyframe_button)
+
+
+func _on_keyframe_unselect() -> void:
+	for child in properties_container.get_children():
+		if child != no_key_selected_label:
+			child.queue_free()
+	no_key_selected_label.visible = true
 
 
 func _on_keyframe_value_changed(
-	new_value, effect: LayerEffect, frame_index: int, param_name: String
+	new_value, dict: Dictionary, frame_index: int, param_name: String
 ) -> void:
-	effect.animated_params[param_name][frame_index]["value"] = new_value
+	dict[param_name][frame_index]["value"] = new_value
 	Global.canvas.queue_redraw()
 
 
 func _on_keyframe_trans_changed(
-	index: int, effect: LayerEffect, frame_index: int, param_name: String
+	index: int, dict: Dictionary, frame_index: int, param_name: String
 ) -> void:
-	effect.animated_params[param_name][frame_index]["trans"] = index
+	dict[param_name][frame_index]["trans"] = index
 	Global.canvas.queue_redraw()
 
 
 func _on_keyframe_ease_changed(
-	index: int, effect: LayerEffect, frame_index: int, param_name: String
+	index: int, dict: Dictionary, frame_index: int, param_name: String
 ) -> void:
-	effect.animated_params[param_name][frame_index]["ease"] = index
+	dict[param_name][frame_index]["ease"] = index
+	Global.canvas.queue_redraw()
+
+
+func _on_keyframe_deleted(dict: Dictionary, frame_index: int, param_name: String) -> void:
+	dict[param_name].erase(frame_index)
+	_recreate_timeline()
+	_on_keyframe_unselect()
 	Global.canvas.queue_redraw()
