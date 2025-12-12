@@ -17,7 +17,7 @@ func _ready() -> void:
 	get_parent().sort_children.connect(func(): global_position.x = pos)
 	Global.cel_switched.connect(_on_cel_switched)
 	if is_instance_valid(container):
-		container.get_child(0).gui_input.connect(_on_frames_container_gui_input)
+		container.gui_input.connect(_on_frames_container_gui_input)
 		await get_tree().process_frame
 		await get_tree().process_frame
 		var container_pos := container.get_global_rect().position.x

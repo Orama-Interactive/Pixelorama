@@ -19,8 +19,10 @@ var current_layer: BaseLayer:
 		for effect in current_layer.effects:
 			effect.keyframe_set.connect(_recreate_timeline)
 var keyframe_button_group := ButtonGroup.new()
+var layer_element_tree_vscrollbar: VScrollBar
 
-@onready var layer_element_spacer: Control = %LayerElementSpacer
+@onready var frames_scroll_container: ScrollContainer = %FramesScrollContainer
+@onready var track_scroll_container: ScrollContainer = %TrackScrollContainer
 @onready var layer_element_tree: Tree = %LayerElementTree
 @onready var track_container: VBoxContainer = %TrackContainer
 @onready var frames_container: HBoxContainer = %FramesContainer
@@ -32,9 +34,16 @@ func _ready() -> void:
 	Global.project_about_to_switch.connect(_on_project_about_to_switch)
 	Global.project_switched.connect(_on_project_switched)
 	Global.cel_switched.connect(_on_cel_switched)
+	for child in layer_element_tree.get_children(true):
+		if child is VScrollBar:
+			layer_element_tree_vscrollbar = child
+			child.scrolling.connect(_on_layer_element_tree_vertical_scrolling)
+			break
 	await get_tree().process_frame
 	var project := Global.current_project
 	current_layer = project.layers[project.current_layer]
+	await get_tree().process_frame
+	_on_track_scroll_container_resized()
 
 
 func _on_cel_switched() -> void:
@@ -75,8 +84,6 @@ func _recreate_timeline() -> void:
 	layer_element_tree.clear()
 	layer_element_tree.create_item()
 	for child in track_container.get_children():
-		if child == frames_container:
-			continue
 		child.queue_free()
 	# Await is needed so that the params get added to the layer effect.
 	await get_tree().process_frame
@@ -84,6 +91,7 @@ func _recreate_timeline() -> void:
 		var tree_item := layer_element_tree.create_item()
 		tree_item.set_text(0, effect.name)
 		var track := KeyframeAnimationTrack.new()
+		track.custom_minimum_size.x = frames_container.get_combined_minimum_size().x
 		track.custom_minimum_size.y = layer_element_tree.get_item_area_rect(tree_item).size.y
 		track_container.add_child(track)
 		for param in effect.params:
@@ -96,6 +104,7 @@ func _recreate_timeline() -> void:
 			param_track.param_name = param
 			param_track.is_property = true
 			var tree_item_area_rect := layer_element_tree.get_item_area_rect(param_tree_item)
+			param_track.custom_minimum_size.x = frames_container.get_combined_minimum_size().x
 			param_track.custom_minimum_size.y = tree_item_area_rect.size.y
 			track_container.add_child(param_track)
 			if effect.animated_params.has(param):
@@ -124,7 +133,9 @@ func _add_ui_frames() -> void:
 		frame_label.text = str(i + 1)
 		frame_label.custom_minimum_size.x = frame_ui_size - v_separator.size.x
 		frames_container.add_child(frame_label)
-	layer_element_spacer.custom_minimum_size.y = frames_container.size.y
+	await get_tree().process_frame
+	for child in track_container.get_children():
+		child.custom_minimum_size.x = frames_container.get_combined_minimum_size().x
 
 
 func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: int) -> void:
@@ -247,3 +258,32 @@ func _on_keyframe_deleted(dict: Dictionary, frame_index: int, param_name: String
 	_recreate_timeline()
 	_on_keyframe_unselect()
 	Global.canvas.queue_redraw()
+
+
+func _on_track_scroll_container_resized() -> void:
+	var split_separation := get_theme_constant(&"separation", &"SplitContainer")
+	var margin_container := frames_container.get_parent().get_parent() as MarginContainer
+	margin_container.add_theme_constant_override(
+		&"margin_left", layer_element_tree.size.x + split_separation
+	)
+	margin_container.add_theme_constant_override(
+		&"margin_right", properties_container.size.x + split_separation
+	)
+
+
+func _on_frames_scroll_container_sort_children() -> void:
+	track_scroll_container.scroll_horizontal = frames_scroll_container.scroll_horizontal
+
+
+func _on_track_scroll_container_sort_children() -> void:
+	frames_scroll_container.scroll_horizontal = track_scroll_container.scroll_horizontal
+	if is_instance_valid(layer_element_tree_vscrollbar):
+		layer_element_tree_vscrollbar.value = track_scroll_container.scroll_vertical
+
+
+func _on_layer_element_tree_vertical_scrolling() -> void:
+	track_scroll_container.scroll_vertical = layer_element_tree.get_scroll().y
+
+
+func _on_layer_element_tree_gui_input(_event: InputEvent) -> void:
+	track_scroll_container.scroll_vertical = layer_element_tree.get_scroll().y
