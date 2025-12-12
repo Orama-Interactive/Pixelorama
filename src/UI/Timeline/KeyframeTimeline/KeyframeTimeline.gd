@@ -223,6 +223,8 @@ func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: 
 		_on_keyframe_deleted.bind(effect.animated_params, frame_index, param_name)
 	)
 	properties_container.add_child(delete_keyframe_button)
+	await get_tree().process_frame
+	_on_track_scroll_container_resized()
 
 
 func _on_keyframe_unselect() -> void:
@@ -230,6 +232,8 @@ func _on_keyframe_unselect() -> void:
 		if child != no_key_selected_label:
 			child.queue_free()
 	no_key_selected_label.visible = true
+	await get_tree().process_frame
+	_on_track_scroll_container_resized()
 
 
 func _on_keyframe_value_changed(
