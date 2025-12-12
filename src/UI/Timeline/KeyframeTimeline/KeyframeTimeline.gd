@@ -192,6 +192,7 @@ func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: 
 	trans_type_options.add_item("Bounce", Tween.TRANS_BOUNCE)
 	trans_type_options.add_item("Back", Tween.TRANS_BACK)
 	trans_type_options.add_item("Spring", Tween.TRANS_SPRING)
+	trans_type_options.add_item("Constant", Tween.TRANS_SPRING + 1)
 	trans_type_options.select(trans_type)
 	trans_type_options.item_selected.connect(
 		_on_keyframe_trans_changed.bind(effect.animated_params, frame_index, param_name)
