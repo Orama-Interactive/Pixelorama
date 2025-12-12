@@ -2,24 +2,20 @@ class_name KeyframeTimeline
 extends Control
 
 const KEYFRAME_ICON := preload("uid://yhha3l44svgs")
-const KEYFRAME_SELECTED_ICON = preload("uid://dtx6hygsgoifb")
+const KEYFRAME_SELECTED_ICON := preload("uid://dtx6hygsgoifb")
 
 static var frame_ui_size := 50
 var current_layer: BaseLayer:
 	set(value):
 		if is_instance_valid(current_layer):
-			if current_layer.effects_added_removed.is_connected(_on_effects_added_removed):
-				current_layer.effects_added_removed.disconnect(_on_effects_added_removed)
-			for effect in current_layer.effects:
-				for connection in effect.keyframe_set.get_connections():
-					effect.keyframe_set.disconnect(connection["callable"])
+			if current_layer.effects_added_removed.is_connected(_recreate_timeline):
+				current_layer.effects_added_removed.disconnect(_recreate_timeline)
 		current_layer = value
 		_recreate_timeline()
-		current_layer.effects_added_removed.connect(_on_effects_added_removed)
-		for effect in current_layer.effects:
-			effect.keyframe_set.connect(_recreate_timeline)
+		current_layer.effects_added_removed.connect(_recreate_timeline)
 var keyframe_button_group := ButtonGroup.new()
 var layer_element_tree_vscrollbar: VScrollBar
+var selected_keyframes: Array[BaseButton]
 
 @onready var frames_scroll_container: ScrollContainer = %FramesScrollContainer
 @onready var track_scroll_container: ScrollContainer = %TrackScrollContainer
@@ -67,19 +63,6 @@ func _on_project_switched() -> void:
 		project.frames_updated.connect(_add_ui_frames)
 
 
-func _on_effects_added_removed() -> void:
-	# Disconnect keyframe_set signals and connect them again,
-	# to handle both effect removal and addition.
-	# TODO: This is a very lazy way to handle this,
-	# the correct approach would be to have separate added and removed signals for effects.
-	for effect in current_layer.effects:
-		for connection in effect.keyframe_set.get_connections():
-			effect.keyframe_set.disconnect(connection["callable"])
-	for effect in current_layer.effects:
-		effect.keyframe_set.connect(_recreate_timeline)
-	_recreate_timeline()
-
-
 func _recreate_timeline() -> void:
 	layer_element_tree.clear()
 	layer_element_tree.create_item()
@@ -94,32 +77,40 @@ func _recreate_timeline() -> void:
 		track.custom_minimum_size.x = frames_container.get_combined_minimum_size().x
 		track.custom_minimum_size.y = layer_element_tree.get_item_area_rect(tree_item).size.y
 		track_container.add_child(track)
-		for param in effect.params:
-			if param in ["PXO_time", "PXO_frame_index", "PXO_layer_index"]:
+		for param_name in effect.params:
+			if param_name in ["PXO_time", "PXO_frame_index", "PXO_layer_index"]:
 				continue
 			var param_tree_item := tree_item.create_child()
-			param_tree_item.set_text(0, Keychain.humanize_snake_case(param))
+			param_tree_item.set_text(0, Keychain.humanize_snake_case(param_name))
 			var param_track := KeyframeAnimationTrack.new()
+			param_track.timeline = self
 			param_track.effect = effect
-			param_track.param_name = param
+			param_track.param_name = param_name
 			param_track.is_property = true
 			var tree_item_area_rect := layer_element_tree.get_item_area_rect(param_tree_item)
 			param_track.custom_minimum_size.x = frames_container.get_combined_minimum_size().x
 			param_track.custom_minimum_size.y = tree_item_area_rect.size.y
 			track_container.add_child(param_track)
-			if effect.animated_params.has(param):
-				for frame_index: int in effect.animated_params[param]:
-					var keyframe := TextureButton.new()
-					keyframe.texture_normal = KEYFRAME_ICON
-					keyframe.texture_pressed = KEYFRAME_SELECTED_ICON
-					keyframe.toggle_mode = true
-					keyframe.button_group = keyframe_button_group
-					keyframe.position.x = frame_index * frame_ui_size
-					keyframe.position.y = (
-						param_track.custom_minimum_size.y / 2 - keyframe.size.y / 2
+			if effect.animated_params.has(param_name):
+				for frame_index: int in effect.animated_params[param_name]:
+					var key_button := _create_keyframe_button(
+						frame_index, param_track, effect.animated_params, param_name
 					)
-					keyframe.pressed.connect(_on_keyframe_pressed.bind(effect, param, frame_index))
-					param_track.add_child(keyframe)
+					param_track.add_child(key_button)
+
+
+func _create_keyframe_button(
+	frame_index: int, param_track: KeyframeAnimationTrack, dict: Dictionary, param_name: String
+) -> BaseButton:
+	var key_button := TextureButton.new()
+	key_button.texture_normal = KEYFRAME_ICON
+	key_button.texture_pressed = KEYFRAME_SELECTED_ICON
+	key_button.toggle_mode = true
+	key_button.button_group = keyframe_button_group
+	key_button.position.x = frame_index * frame_ui_size
+	key_button.position.y = param_track.custom_minimum_size.y / 2 - key_button.size.y / 2
+	key_button.pressed.connect(_on_keyframe_pressed.bind(key_button, dict, param_name, frame_index))
+	return key_button
 
 
 func _add_ui_frames() -> void:
@@ -138,10 +129,13 @@ func _add_ui_frames() -> void:
 		child.custom_minimum_size.x = frames_container.get_combined_minimum_size().x
 
 
-func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: int) -> void:
+func _on_keyframe_pressed(
+	key_button: BaseButton, dict: Dictionary, param_name: String, frame_index: int
+) -> void:
 	for child in properties_container.get_children():
 		if child != no_key_selected_label:
 			child.queue_free()
+	selected_keyframes = [key_button]
 	no_key_selected_label.visible = false
 	var property_grid := GridContainer.new()
 	property_grid.columns = 2
@@ -149,18 +143,16 @@ func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: 
 	value_label.text = "Value:"
 	value_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	property_grid.add_child(value_label)
-	var property = effect.animated_params[param_name][frame_index]["value"]
-	var trans_type = effect.animated_params[param_name][frame_index]["trans"]
-	var ease_type = effect.animated_params[param_name][frame_index]["ease"]
+	var property = dict[param_name][frame_index]["value"]
+	var trans_type = dict[param_name][frame_index]["trans"]
+	var ease_type = dict[param_name][frame_index]["ease"]
 	if typeof(property) in [TYPE_INT, TYPE_FLOAT]:
 		var slider := ValueSlider.new()
 		slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		slider.allow_lesser = true
 		slider.allow_greater = true
 		slider.value = property
-		slider.value_changed.connect(
-			_on_keyframe_value_changed.bind(effect.animated_params, frame_index, param_name)
-		)
+		slider.value_changed.connect(_on_keyframe_value_changed.bind(dict, frame_index, param_name))
 		property_grid.add_child(slider)
 	elif typeof(property) in [TYPE_VECTOR2, TYPE_VECTOR2I]:
 		var slider := ShaderLoader.VALUE_SLIDER_V2_TSCN.instantiate() as ValueSliderV2
@@ -168,9 +160,7 @@ func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: 
 		slider.allow_lesser = true
 		slider.allow_greater = true
 		slider.value = property
-		slider.value_changed.connect(
-			_on_keyframe_value_changed.bind(effect.animated_params, frame_index, param_name)
-		)
+		slider.value_changed.connect(_on_keyframe_value_changed.bind(dict, frame_index, param_name))
 		property_grid.add_child(slider)
 
 	var trans_label := Label.new()
@@ -195,7 +185,7 @@ func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: 
 	trans_type_options.add_item("Constant", Tween.TRANS_SPRING + 1)
 	trans_type_options.select(trans_type)
 	trans_type_options.item_selected.connect(
-		_on_keyframe_trans_changed.bind(effect.animated_params, frame_index, param_name)
+		_on_keyframe_trans_changed.bind(dict, frame_index, param_name)
 	)
 	property_grid.add_child(trans_type_options)
 
@@ -212,7 +202,7 @@ func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: 
 	ease_type_options.add_item("Ease out in", Tween.EASE_OUT_IN)
 	ease_type_options.select(ease_type)
 	ease_type_options.item_selected.connect(
-		_on_keyframe_ease_changed.bind(effect.animated_params, frame_index, param_name)
+		_on_keyframe_ease_changed.bind(dict, frame_index, param_name)
 	)
 	property_grid.add_child(ease_type_options)
 	properties_container.add_child(property_grid)
@@ -220,18 +210,21 @@ func _on_keyframe_pressed(effect: LayerEffect, param_name: String, frame_index: 
 	var delete_keyframe_button := Button.new()
 	delete_keyframe_button.text = "Delete keyframe"
 	delete_keyframe_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	delete_keyframe_button.pressed.connect(
-		_on_keyframe_deleted.bind(effect.animated_params, frame_index, param_name)
-	)
+	delete_keyframe_button.pressed.connect(_on_keyframe_deleted.bind(dict, frame_index, param_name))
 	properties_container.add_child(delete_keyframe_button)
 	await get_tree().process_frame
 	_on_track_scroll_container_resized()
 
 
-func _on_keyframe_unselect() -> void:
+func _on_keyframe_unselect(key_button: BaseButton = null) -> void:
 	for child in properties_container.get_children():
 		if child != no_key_selected_label:
 			child.queue_free()
+	if key_button == null:
+		selected_keyframes.clear()
+	else:
+		if key_button in selected_keyframes:
+			selected_keyframes.erase(key_button)
 	no_key_selected_label.visible = true
 	await get_tree().process_frame
 	_on_track_scroll_container_resized()
@@ -258,11 +251,39 @@ func _on_keyframe_ease_changed(
 	Global.canvas.queue_redraw()
 
 
+func add_effect_keyframe(
+	effect: LayerEffect, frame_index: int, param_name: String, param_track: KeyframeAnimationTrack
+) -> void:
+	var key_button := _create_keyframe_button(
+		frame_index, param_track, effect.animated_params, param_name
+	)
+	var undo_redo := Global.current_project.undo_redo
+	undo_redo.create_action("Add keyframe")
+	undo_redo.add_do_method(effect.set_keyframe.bind(param_name, frame_index))
+	undo_redo.add_undo_method(func(): effect.animated_params[param_name].erase(frame_index))
+	undo_redo.add_undo_method(_on_keyframe_unselect.bind(key_button))
+	undo_redo.add_do_method(param_track.add_child.bind(key_button))
+	undo_redo.add_do_reference(key_button)
+	undo_redo.add_undo_method(param_track.remove_child.bind(key_button))
+	undo_redo.add_do_method(Global.canvas.queue_redraw)
+	undo_redo.add_undo_method(Global.canvas.queue_redraw)
+	undo_redo.commit_action()
+
+
 func _on_keyframe_deleted(dict: Dictionary, frame_index: int, param_name: String) -> void:
-	dict[param_name].erase(frame_index)
-	_recreate_timeline()
-	_on_keyframe_unselect()
-	Global.canvas.queue_redraw()
+	var old_dict = dict[param_name][frame_index].duplicate()
+	var undo_redo := Global.current_project.undo_redo
+	undo_redo.create_action("Delete keyframe")
+	undo_redo.add_do_method(func(): dict[param_name].erase(frame_index))
+	undo_redo.add_undo_method(func(): dict[param_name][frame_index] = old_dict)
+	for key_button in selected_keyframes:
+		undo_redo.add_do_method(_on_keyframe_unselect.bind(key_button))
+		undo_redo.add_do_method(key_button.get_parent().remove_child.bind(key_button))
+		undo_redo.add_undo_method(key_button.get_parent().add_child.bind(key_button))
+		undo_redo.add_undo_reference(key_button)
+	undo_redo.add_do_method(Global.canvas.queue_redraw)
+	undo_redo.add_undo_method(Global.canvas.queue_redraw)
+	undo_redo.commit_action()
 
 
 func _on_track_scroll_container_resized() -> void:

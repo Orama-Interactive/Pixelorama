@@ -1,6 +1,7 @@
 class_name KeyframeAnimationTrack
 extends Control
 
+var timeline: KeyframeTimeline
 var effect: LayerEffect
 var param_name: String
 var is_property := false
@@ -10,7 +11,6 @@ var line_color := Color.WHITE
 
 
 func _ready() -> void:
-	#size_flags_vertical = Control.SIZE_EXPAND_FILL
 	popup_menu.add_item("Insert keyframe")
 	popup_menu.id_pressed.connect(_on_popup_menu_id_pressed)
 	add_child(popup_menu)
@@ -46,4 +46,4 @@ func _on_popup_menu_id_pressed(id: int) -> void:
 			and effect.animated_params[param_name].has(keyframe_at)
 		):
 			return
-		effect.set_keyframe(param_name, keyframe_at)
+		timeline.add_effect_keyframe(effect, keyframe_at, param_name, self)
