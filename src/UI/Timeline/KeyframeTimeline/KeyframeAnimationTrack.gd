@@ -41,4 +41,9 @@ func _draw() -> void:
 
 func _on_popup_menu_id_pressed(id: int) -> void:
 	if id == 0:
+		if (
+			effect.animated_params.has(param_name)
+			and effect.animated_params[param_name].has(keyframe_at)
+		):
+			return
 		effect.set_keyframe(param_name, keyframe_at)
