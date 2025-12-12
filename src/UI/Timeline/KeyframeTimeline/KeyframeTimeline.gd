@@ -217,17 +217,18 @@ func _on_keyframe_pressed(
 
 
 func _on_keyframe_unselect(key_button: BaseButton = null) -> void:
-	for child in properties_container.get_children():
-		if child != no_key_selected_label:
-			child.queue_free()
 	if key_button == null:
 		selected_keyframes.clear()
 	else:
 		if key_button in selected_keyframes:
 			selected_keyframes.erase(key_button)
-	no_key_selected_label.visible = true
-	await get_tree().process_frame
-	_on_track_scroll_container_resized()
+	if selected_keyframes.size() == 0:
+		for child in properties_container.get_children():
+			if child != no_key_selected_label:
+				child.queue_free()
+		no_key_selected_label.visible = true
+		await get_tree().process_frame
+		_on_track_scroll_container_resized()
 
 
 func _on_keyframe_value_changed(
