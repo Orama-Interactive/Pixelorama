@@ -11,6 +11,7 @@ var line_color := Color.WHITE
 
 
 func _ready() -> void:
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	popup_menu.add_item("Insert keyframe")
 	popup_menu.id_pressed.connect(_on_popup_menu_id_pressed)
 	add_child(popup_menu)

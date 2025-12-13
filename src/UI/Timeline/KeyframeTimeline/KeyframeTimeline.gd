@@ -13,7 +13,6 @@ var current_layer: BaseLayer:
 		current_layer = value
 		_recreate_timeline()
 		current_layer.effects_added_removed.connect(_recreate_timeline)
-var keyframe_button_group := ButtonGroup.new()
 var layer_element_tree_vscrollbar: VScrollBar
 var selected_keyframes: Array[BaseButton]
 
@@ -48,7 +47,7 @@ func _on_cel_switched() -> void:
 	if layer == current_layer:
 		return
 	current_layer = layer
-	_on_keyframe_unselect()
+	unselect_keyframe()
 
 
 func _on_project_about_to_switch() -> void:
@@ -106,7 +105,6 @@ func _create_keyframe_button(
 	key_button.texture_normal = KEYFRAME_ICON
 	key_button.texture_pressed = KEYFRAME_SELECTED_ICON
 	key_button.toggle_mode = true
-	key_button.button_group = keyframe_button_group
 	key_button.position.x = frame_index * frame_ui_size
 	key_button.position.y = param_track.custom_minimum_size.y / 2 - key_button.size.y / 2
 	key_button.pressed.connect(_on_keyframe_pressed.bind(key_button, dict, param_name, frame_index))
@@ -135,7 +133,10 @@ func _on_keyframe_pressed(
 	for child in properties_container.get_children():
 		if child != no_key_selected_label:
 			child.queue_free()
+	for selected_keyframe in selected_keyframes:
+		selected_keyframe.button_pressed = false
 	selected_keyframes = [key_button]
+	key_button.button_pressed = true
 	no_key_selected_label.visible = false
 	var property_grid := GridContainer.new()
 	property_grid.columns = 2
@@ -216,11 +217,14 @@ func _on_keyframe_pressed(
 	_on_track_scroll_container_resized()
 
 
-func _on_keyframe_unselect(key_button: BaseButton = null) -> void:
+func unselect_keyframe(key_button: BaseButton = null) -> void:
 	if key_button == null:
+		for selected_keyframe in selected_keyframes:
+			selected_keyframe.button_pressed = false
 		selected_keyframes.clear()
 	else:
 		if key_button in selected_keyframes:
+			key_button.button_pressed = false
 			selected_keyframes.erase(key_button)
 	if selected_keyframes.size() == 0:
 		for child in properties_container.get_children():
@@ -229,6 +233,16 @@ func _on_keyframe_unselect(key_button: BaseButton = null) -> void:
 		no_key_selected_label.visible = true
 		await get_tree().process_frame
 		_on_track_scroll_container_resized()
+
+
+func append_keyframes_to_selection(rect: Rect2) -> void:
+	for track in track_container.get_children():
+		for keyframe_button in track.get_children():
+			if keyframe_button is not BaseButton:
+				continue
+			if rect.has_point(keyframe_button.position + track.position):
+				selected_keyframes.append(keyframe_button)
+				keyframe_button.button_pressed = true
 
 
 func _on_keyframe_value_changed(
@@ -262,7 +276,7 @@ func add_effect_keyframe(
 	undo_redo.create_action("Add keyframe")
 	undo_redo.add_do_method(effect.set_keyframe.bind(param_name, frame_index))
 	undo_redo.add_undo_method(func(): effect.animated_params[param_name].erase(frame_index))
-	undo_redo.add_undo_method(_on_keyframe_unselect.bind(key_button))
+	undo_redo.add_undo_method(unselect_keyframe.bind(key_button))
 	undo_redo.add_do_method(param_track.add_child.bind(key_button))
 	undo_redo.add_do_reference(key_button)
 	undo_redo.add_undo_method(param_track.remove_child.bind(key_button))
@@ -278,7 +292,7 @@ func _on_keyframe_deleted(dict: Dictionary, frame_index: int, param_name: String
 	undo_redo.add_do_method(func(): dict[param_name].erase(frame_index))
 	undo_redo.add_undo_method(func(): dict[param_name][frame_index] = old_dict)
 	for key_button in selected_keyframes:
-		undo_redo.add_do_method(_on_keyframe_unselect.bind(key_button))
+		undo_redo.add_do_method(unselect_keyframe.bind(key_button))
 		undo_redo.add_do_method(key_button.get_parent().remove_child.bind(key_button))
 		undo_redo.add_undo_method(key_button.get_parent().add_child.bind(key_button))
 		undo_redo.add_undo_reference(key_button)
