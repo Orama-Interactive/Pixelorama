@@ -2,6 +2,7 @@ class_name KeyframeTimeline
 extends Control
 
 static var frame_ui_size := 50
+static var selected_keyframes: Array[KeyframeButton]
 var current_layer: BaseLayer:
 	set(value):
 		if is_instance_valid(current_layer):
@@ -11,7 +12,6 @@ var current_layer: BaseLayer:
 		_recreate_timeline()
 		current_layer.effects_added_removed.connect(_recreate_timeline)
 var layer_element_tree_vscrollbar: VScrollBar
-var selected_keyframes: Array[KeyframeButton]
 
 @onready var frames_scroll_container: ScrollContainer = %FramesScrollContainer
 @onready var track_scroll_container: ScrollContainer = %TrackScrollContainer
@@ -174,7 +174,7 @@ func select_keyframes() -> void:
 		property_grid.add_child(slider)
 
 	var trans_label := Label.new()
-	trans_label.text = "Transition"
+	trans_label.text = "Transition:"
 	trans_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	property_grid.add_child(trans_label)
 	var trans_type_options := OptionButton.new()
@@ -198,7 +198,7 @@ func select_keyframes() -> void:
 	property_grid.add_child(trans_type_options)
 
 	var easing_label := Label.new()
-	easing_label.text = "Easing"
+	easing_label.text = "Easing:"
 	easing_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	property_grid.add_child(easing_label)
 	var ease_type_options := OptionButton.new()
@@ -302,6 +302,68 @@ func _on_keyframe_deleted() -> void:
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
+
+
+static func update_keyframe_positions() -> void:
+	var undo_redo := Global.current_project.undo_redo
+	undo_redo.create_action("Move keyframe(s)")
+
+	# param_dict → [{from, to, data}]
+	var moves := {}
+
+	for kf in selected_keyframes:
+		var frame_from := kf.frame_index
+		var frame_to := floori(kf.position.x / frame_ui_size)
+
+		if frame_from == frame_to:
+			continue
+
+		var param_dict: Dictionary = kf.dict[kf.param_name]
+
+		if not moves.has(param_dict):
+			moves[param_dict] = []
+
+		moves[param_dict].append({"from": frame_from, "to": frame_to})
+		#undo_redo.add_do_property(kf, &"frame_index", frame_to)
+		#undo_redo.add_do_property(kf, &"position:x", kf.position.x)
+		#undo_redo.add_undo_property(kf, &"frame_index", frame_from)
+		#undo_redo.add_undo_property(kf, &"position:x", kf.drag_pos)
+	for param_dict in moves.keys():
+		var move_list = moves[param_dict]
+
+		undo_redo.add_do_method(_apply_frame_moves.bind(param_dict, move_list))
+		undo_redo.add_undo_method(_apply_frame_moves.bind(param_dict, _invert_moves(move_list)))
+
+	# DEBUG
+	var project := Global.current_project
+	var layer := project.layers[project.current_layer]
+	undo_redo.add_do_method(func(): print(layer.effects[0].animated_params))
+	undo_redo.add_undo_method(func(): print(layer.effects[0].animated_params))
+	#
+	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	undo_redo.commit_action()
+
+
+static func _apply_frame_moves(param_dict: Dictionary, moves: Array) -> void:
+	var temp := {}
+
+	# extract
+	for m in moves:
+		if param_dict.has(m.from):
+			temp[m.to] = param_dict[m.from].duplicate(true)
+			param_dict.erase(m.from)
+
+	# insert
+	for frame in temp.keys():
+		param_dict[frame] = temp[frame]
+
+
+static func _invert_moves(moves: Array) -> Array:
+	var inverted := []
+	for m in moves:
+		inverted.append({"from": m.to, "to": m.from})
+	return inverted
 
 
 func _on_track_scroll_container_resized() -> void:
