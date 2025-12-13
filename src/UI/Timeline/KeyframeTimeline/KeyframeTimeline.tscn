@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://plf71ccex8tr"]
 
 [ext_resource type="Script" uid="uid://vrqfwwnows3p" path="res://src/UI/Timeline/KeyframeTimeline/KeyframeTimeline.gd" id="1_te3k4"]
-[ext_resource type="Script" uid="uid://cyarevvdmj517" path="res://src/UI/Timeline/KeyframeTimeline/keyframe_timeline_cursor.gd" id="2_3wn0x"]
+[ext_resource type="Script" uid="uid://cyarevvdmj517" path="res://src/UI/Timeline/KeyframeTimeline/KeyframeTimelineCursor.gd" id="2_3wn0x"]
 [ext_resource type="Script" uid="uid://hmhmdm0a8vgr" path="res://src/UI/Timeline/KeyframeTimeline/KeyframeTimelineTrackContainer.gd" id="2_bho5j"]
 
 [sub_resource type="Animation" id="Animation_3wn0x"]
