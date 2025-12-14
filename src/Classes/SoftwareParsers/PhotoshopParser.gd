@@ -459,7 +459,6 @@ static func psd_to_pxo_project(psd_project: PhotoshopProject, add_frames := true
 			guide.add_point(Vector2(99999, psd_guide.position))
 		guide.has_focus = false
 		guide.project = new_project
-		new_project.guides.append(guide)
 		Global.canvas.add_child(guide)
 
 	new_project.save_path = psd_project.path.get_basename() + ".pxo"
