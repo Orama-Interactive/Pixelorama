@@ -120,6 +120,7 @@ func _on_effect_list_pressed(menu_item_index: int, menu: PopupMenu) -> void:
 	var index: int = menu.get_item_metadata(menu_item_index)
 	var layer := Global.current_project.layers[Global.current_project.current_layer]
 	var effect := effects[index].duplicate()
+	effect.layer = layer
 	Global.current_project.undo_redo.create_action("Add layer effect")
 	Global.current_project.undo_redo.add_do_method(func(): layer.effects.append(effect))
 	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)

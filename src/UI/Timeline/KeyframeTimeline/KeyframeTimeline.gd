@@ -2,7 +2,8 @@ class_name KeyframeTimeline
 extends Control
 
 static var frame_ui_size := 50
-static var selected_keyframes: Array[KeyframeButton]
+## Array of keyframe IDs.
+static var selected_keyframes: Array[int]
 var current_layer: BaseLayer:
 	set(value):
 		if is_instance_valid(current_layer):
@@ -59,6 +60,14 @@ func _on_project_switched() -> void:
 		project.frames_updated.connect(_add_ui_frames)
 
 
+static func get_selected_keyframe_buttons() -> Array[KeyframeButton]:
+	var keyframe_buttons: Array[KeyframeButton]
+	for kfb: KeyframeButton in Global.get_tree().get_nodes_in_group(&"KeyframeButtons"):
+		if kfb.keyframe_id in selected_keyframes:
+			keyframe_buttons.append(kfb)
+	return keyframe_buttons
+
+
 func _recreate_timeline() -> void:
 	layer_element_tree.clear()
 	layer_element_tree.create_item()
@@ -93,18 +102,21 @@ func _recreate_timeline() -> void:
 						frame_index, param_track, effect.animated_params, param_name
 					)
 					param_track.add_child(key_button)
+	select_keyframes()
 
 
 func _create_keyframe_button(
 	frame_index: int, param_track: KeyframeAnimationTrack, dict: Dictionary, param_name: String
 ) -> KeyframeButton:
 	var key_button := KeyframeButton.new()
+	key_button.keyframe_id = dict[param_name][frame_index].get("id", 0)
 	key_button.dict = dict
 	key_button.param_name = param_name
 	key_button.frame_index = frame_index
 	key_button.position.x = frame_index * frame_ui_size
 	key_button.position.y = param_track.custom_minimum_size.y / 2 - key_button.size.y / 2
 	key_button.pressed.connect(_on_keyframe_pressed.bind(key_button))
+	key_button.updated_position.connect(update_keyframe_positions)
 	return key_button
 
 
@@ -128,20 +140,26 @@ func _on_keyframe_pressed(key_button: KeyframeButton) -> void:
 	for child in properties_container.get_children():
 		if child != no_key_selected_label:
 			child.queue_free()
-	for selected_keyframe in selected_keyframes:
+	for selected_keyframe in get_selected_keyframe_buttons():
 		selected_keyframe.button_pressed = false
-	selected_keyframes = [key_button]
+	selected_keyframes = [key_button.keyframe_id]
 	select_keyframes()
 
 
 func select_keyframes() -> void:
+	_clear_keyframe_properties_container()
 	if selected_keyframes.size() == 0:
 		return
 	var key_button: KeyframeButton
-	for selected_keyframe in selected_keyframes:
+	for selected_keyframe in get_selected_keyframe_buttons():
 		selected_keyframe.button_pressed = true
 		# Set the last selected keyframe as the key button.
 		key_button = selected_keyframe
+	var dict := key_button.dict
+	var param_name := key_button.param_name
+	var frame_index := key_button.frame_index
+	if not dict[param_name].has(frame_index):
+		return
 	no_key_selected_label.visible = false
 	var property_grid := GridContainer.new()
 	property_grid.columns = 2
@@ -149,10 +167,6 @@ func select_keyframes() -> void:
 	value_label.text = "Value:"
 	value_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	property_grid.add_child(value_label)
-
-	var dict := key_button.dict
-	var param_name := key_button.param_name
-	var frame_index := key_button.frame_index
 	var property = dict[param_name][frame_index]["value"]
 	var trans_type = dict[param_name][frame_index]["trans"]
 	var ease_type = dict[param_name][frame_index]["ease"]
@@ -222,22 +236,28 @@ func select_keyframes() -> void:
 	_on_track_scroll_container_resized()
 
 
-func unselect_keyframe(key_button: KeyframeButton = null) -> void:
-	if key_button == null:
-		for selected_keyframe in selected_keyframes:
-			selected_keyframe.button_pressed = false
+func unselect_keyframe(key_id := -1) -> void:
+	if key_id == -1:
+		for selected_keyframe_button in get_selected_keyframe_buttons():
+			selected_keyframe_button.button_pressed = false
 		selected_keyframes.clear()
 	else:
-		if key_button in selected_keyframes:
-			key_button.button_pressed = false
-			selected_keyframes.erase(key_button)
+		if key_id in selected_keyframes:
+			selected_keyframes.erase(key_id)
+		for kfb: KeyframeButton in Global.get_tree().get_nodes_in_group(&"KeyframeButtons"):
+			if kfb.keyframe_id == key_id:
+				kfb.button_pressed = false
 	if selected_keyframes.size() == 0:
-		for child in properties_container.get_children():
-			if child != no_key_selected_label:
-				child.queue_free()
+		_clear_keyframe_properties_container()
 		no_key_selected_label.visible = true
 		await get_tree().process_frame
 		_on_track_scroll_container_resized()
+
+
+func _clear_keyframe_properties_container() -> void:
+	for child in properties_container.get_children():
+		if child != no_key_selected_label:
+			child.queue_free()
 
 
 func append_keyframes_to_selection(rect: Rect2) -> void:
@@ -246,7 +266,7 @@ func append_keyframes_to_selection(rect: Rect2) -> void:
 			if keyframe_button is not KeyframeButton:
 				continue
 			if rect.has_point(keyframe_button.position + track.position):
-				selected_keyframes.append(keyframe_button)
+				selected_keyframes.append(keyframe_button.keyframe_id)
 				keyframe_button.button_pressed = true
 	select_keyframes()
 
@@ -254,7 +274,7 @@ func append_keyframes_to_selection(rect: Rect2) -> void:
 func _on_keyframe_property_changed(new_value, property_name: String) -> void:
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Change keyframe %s" % property_name, UndoRedo.MERGE_ENDS)
-	for key_button in selected_keyframes:
+	for key_button in get_selected_keyframe_buttons():
 		var dict := key_button.dict
 		var param_name := key_button.param_name
 		var frame_index := key_button.frame_index
@@ -266,20 +286,15 @@ func _on_keyframe_property_changed(new_value, property_name: String) -> void:
 	undo_redo.commit_action()
 
 
-func add_effect_keyframe(
-	effect: LayerEffect, frame_index: int, param_name: String, param_track: KeyframeAnimationTrack
-) -> void:
-	var key_button := _create_keyframe_button(
-		frame_index, param_track, effect.animated_params, param_name
-	)
+func add_effect_keyframe(effect: LayerEffect, frame_index: int, param_name: String) -> void:
+	var next_keyframe_id := effect.layer.next_keyframe_id
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Add keyframe")
 	undo_redo.add_do_method(effect.set_keyframe.bind(param_name, frame_index))
 	undo_redo.add_undo_method(func(): effect.animated_params[param_name].erase(frame_index))
-	undo_redo.add_undo_method(unselect_keyframe.bind(key_button))
-	undo_redo.add_do_method(param_track.add_child.bind(key_button))
-	undo_redo.add_do_reference(key_button)
-	undo_redo.add_undo_method(param_track.remove_child.bind(key_button))
+	undo_redo.add_undo_method(unselect_keyframe.bind(next_keyframe_id))
+	undo_redo.add_do_method(_recreate_timeline)
+	undo_redo.add_undo_method(_recreate_timeline)
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
@@ -288,78 +303,63 @@ func add_effect_keyframe(
 func _on_keyframe_deleted() -> void:
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Delete keyframe")
-	for key_button in selected_keyframes:
+	for key_button in get_selected_keyframe_buttons():
 		var dict := key_button.dict
 		var param_name := key_button.param_name
 		var frame_index := key_button.frame_index
 		var old_dict = dict[param_name][frame_index].duplicate()
 		undo_redo.add_do_method(func(): dict[param_name].erase(frame_index))
 		undo_redo.add_undo_method(func(): dict[param_name][frame_index] = old_dict)
-		undo_redo.add_do_method(unselect_keyframe.bind(key_button))
-		undo_redo.add_do_method(key_button.get_parent().remove_child.bind(key_button))
-		undo_redo.add_undo_method(key_button.get_parent().add_child.bind(key_button))
-		undo_redo.add_undo_reference(key_button)
+		undo_redo.add_do_method(unselect_keyframe.bind(key_button.keyframe_id))
+	undo_redo.add_do_method(_recreate_timeline)
+	undo_redo.add_undo_method(_recreate_timeline)
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
 
 
-static func update_keyframe_positions() -> void:
+func update_keyframe_positions() -> void:
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Move keyframe(s)")
 
 	# param_dict → [{from, to, data}]
-	var moves := {}
+	var moves: Dictionary[Dictionary, Array] = {}
 
-	for kf in selected_keyframes:
+	for kf in get_selected_keyframe_buttons():
 		var frame_from := kf.frame_index
 		var frame_to := floori(kf.position.x / frame_ui_size)
-
 		if frame_from == frame_to:
 			continue
-
 		var param_dict: Dictionary = kf.dict[kf.param_name]
-
 		if not moves.has(param_dict):
 			moves[param_dict] = []
 
 		moves[param_dict].append({"from": frame_from, "to": frame_to})
-		#undo_redo.add_do_property(kf, &"frame_index", frame_to)
-		#undo_redo.add_do_property(kf, &"position:x", kf.position.x)
-		#undo_redo.add_undo_property(kf, &"frame_index", frame_from)
-		#undo_redo.add_undo_property(kf, &"position:x", kf.drag_pos)
 	for param_dict in moves.keys():
-		var move_list = moves[param_dict]
-
+		var move_list := moves[param_dict]
 		undo_redo.add_do_method(_apply_frame_moves.bind(param_dict, move_list))
 		undo_redo.add_undo_method(_apply_frame_moves.bind(param_dict, _invert_moves(move_list)))
 
-	# DEBUG
-	var project := Global.current_project
-	var layer := project.layers[project.current_layer]
-	undo_redo.add_do_method(func(): print(layer.effects[0].animated_params))
-	undo_redo.add_undo_method(func(): print(layer.effects[0].animated_params))
-	#
+	undo_redo.add_do_method(_recreate_timeline)
+	undo_redo.add_undo_method(_recreate_timeline)
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
 
 
-static func _apply_frame_moves(param_dict: Dictionary, moves: Array) -> void:
+func _apply_frame_moves(param_dict: Dictionary, moves: Array) -> void:
 	var temp := {}
-
 	# extract
 	for m in moves:
 		if param_dict.has(m.from):
 			temp[m.to] = param_dict[m.from].duplicate(true)
 			param_dict.erase(m.from)
-
 	# insert
 	for frame in temp.keys():
 		param_dict[frame] = temp[frame]
 
 
-static func _invert_moves(moves: Array) -> Array:
+func _invert_moves(moves: Array) -> Array:
 	var inverted := []
 	for m in moves:
 		inverted.append({"from": m.to, "to": m.from})

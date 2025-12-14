@@ -5,6 +5,7 @@ signal keyframe_set
 
 var name := ""
 var shader: Shader
+var layer: BaseLayer
 var category := ""
 var params: Dictionary[String, Variant] = {}
 ## A Dictionary containing another Dictionary that
@@ -13,8 +14,8 @@ var params: Dictionary[String, Variant] = {}
 ## [codeblock]
 ##{"offset":
 ##	{
-##		0: {"value" : Vector2(0, 0), "trans": 0, "ease": 2},
-##		10: {"value" : Vector2(64, 64), "trans": 1, "ease": 3},
+##		0: {id: 0, "value": Vector2(0, 0), "trans": 0, "ease": 2},
+##		10: {id: 1, "value": Vector2(64, 64), "trans": 1, "ease": 3},
 ##	}
 ##}
 ## [/codeblock]
@@ -79,7 +80,11 @@ func set_keyframe(
 ) -> void:
 	if not animated_params.has(param_name):
 		animated_params[param_name] = {}
-	animated_params[param_name][frame_index] = {"value": value, "trans": trans, "ease": ease_type}
+	var id := layer.next_keyframe_id
+	animated_params[param_name][frame_index] = {
+		"id": id, "value": value, "trans": trans, "ease": ease_type
+	}
+	layer.next_keyframe_id += 1
 	keyframe_set.emit()
 
 

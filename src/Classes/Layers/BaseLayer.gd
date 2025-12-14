@@ -69,6 +69,7 @@ var ui_color := Color(0, 0, 0, 0):
 	set(value):
 		ui_color = value
 		ui_color_changed.emit()
+var next_keyframe_id := 0
 var text_server := TextServerManager.get_primary_interface()
 
 
@@ -313,7 +314,8 @@ func serialize() -> Dictionary:
 		"opacity": opacity,
 		"ui_color": ui_color,
 		"parent": parent.index if is_instance_valid(parent) else -1,
-		"effects": effect_data
+		"effects": effect_data,
+		"next_keyframe_id": next_keyframe_id,
 	}
 	if not user_data.is_empty():
 		dict["user_data"] = user_data
@@ -338,6 +340,7 @@ func deserialize(dict: Dictionary) -> void:
 	clipping_mask = dict.get("clipping_mask", false)
 	opacity = dict.get("opacity", 1.0)
 	user_data = dict.get("user_data", user_data)
+	next_keyframe_id = dict.get("next_keyframe_id", 0)
 	if dict.has("ui_color"):
 		var tmp_ui_color = dict.ui_color
 		if typeof(tmp_ui_color) == TYPE_STRING:
@@ -364,6 +367,7 @@ func deserialize(dict: Dictionary) -> void:
 				print("Loading effect failed, not a dictionary.")
 				continue
 			var effect := LayerEffect.new()
+			effect.layer = self
 			effect.deserialize(effect_dict)
 			effects.append(effect)
 
