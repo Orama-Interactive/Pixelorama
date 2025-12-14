@@ -162,6 +162,7 @@ script = ExtResource("2_bho5j")
 timeline = NodePath("../../../../../..")
 
 [node name="KeyframeTimelineCursor" type="Control" parent="VBoxContainer/HSplitContainer/HSplitContainer/TrackScrollContainer/PanelContainer" node_paths=PackedStringArray("container")]
+unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2

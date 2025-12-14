@@ -15,7 +15,7 @@ var pos := global_position.x:
 
 func _ready() -> void:
 	get_parent().sort_children.connect(func(): global_position.x = pos)
-	Global.cel_switched.connect(_on_cel_switched)
+	Global.cel_switched.connect(update_position)
 	if is_instance_valid(container):
 		container.gui_input.connect(_on_frames_container_gui_input)
 		await get_tree().process_frame
@@ -35,14 +35,14 @@ func _on_frames_container_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			is_dragged = true
-			_update_position(event.global_position)
+			_change_cel(event.global_position)
 		else:
 			is_dragged = false
 	if event is InputEventMouseMotion and is_dragged:
-		_update_position(event.global_position)
+		_change_cel(event.global_position)
 
 
-func _update_position(new_pos: Vector2) -> void:
+func _change_cel(new_pos: Vector2) -> void:
 	var container_pos := container.get_global_rect().position.x
 	var container_end := container.get_global_rect().end.x
 	pos = clampf(new_pos.x - (size.x / 2.0), container_pos, container_end)
@@ -56,7 +56,7 @@ func _update_position(new_pos: Vector2) -> void:
 	Global.current_project.change_cel(frame, -1)
 
 
-func _on_cel_switched() -> void:
+func update_position() -> void:
 	if is_dragged:
 		return
 	var frame := Global.current_project.current_frame

@@ -1,7 +1,9 @@
 class_name KeyframeTimeline
 extends Control
 
-static var frame_ui_size := 50
+static var frame_ui_size := 50:
+	set(value):
+		frame_ui_size = clampi(value, 10, 128)
 ## Array of keyframe IDs.
 static var selected_keyframes: Array[int]
 var current_layer: BaseLayer:
@@ -18,12 +20,14 @@ var layer_element_tree_vscrollbar: VScrollBar
 @onready var track_scroll_container: ScrollContainer = %TrackScrollContainer
 @onready var layer_element_tree: Tree = %LayerElementTree
 @onready var track_container: VBoxContainer = %TrackContainer
+@onready var keyframe_timeline_cursor: Control = %KeyframeTimelineCursor
 @onready var frames_container: HBoxContainer = %FramesContainer
 @onready var properties_container: VBoxContainer = %PropertiesContainer
 @onready var no_key_selected_label: Label = %NoKeySelectedLabel
 
 
 func _ready() -> void:
+	gui_input.connect(_on_gui_input)
 	Global.project_about_to_switch.connect(_on_project_about_to_switch)
 	Global.project_switched.connect(_on_project_switched)
 	Global.cel_switched.connect(_on_cel_switched)
@@ -37,6 +41,30 @@ func _ready() -> void:
 	current_layer = project.layers[project.current_layer]
 	await get_tree().process_frame
 	_on_track_scroll_container_resized()
+
+
+func _on_gui_input(event: InputEvent) -> void:
+	if Input.is_key_pressed(KEY_CTRL):
+		var zoom := 2 * int(event.is_action("zoom_in")) - 2 * int(event.is_action("zoom_out"))
+		if is_zero_approx(zoom):
+			return
+		frame_ui_size += zoom
+		get_viewport().set_input_as_handled()
+		var v_separator_size := 8
+		for child in frames_container.get_children():
+			if child is VSeparator:
+				v_separator_size = child.size.x
+			elif child is Label:
+				child.custom_minimum_size.x = frame_ui_size - v_separator_size
+		for track in track_container.get_children():
+			if track is not KeyframeAnimationTrack:
+				continue
+			track.custom_minimum_size.x = frames_container.get_combined_minimum_size().x
+			for key_button in track.get_children():
+				if key_button is not KeyframeButton:
+					continue
+				key_button.position.x = key_button.frame_index * frame_ui_size
+		keyframe_timeline_cursor.update_position()
 
 
 func _on_cel_switched() -> void:
