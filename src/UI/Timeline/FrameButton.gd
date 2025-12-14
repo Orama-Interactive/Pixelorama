@@ -181,6 +181,9 @@ func _drop_data(_pos: Vector2, data) -> void:
 			offset = frame - Array(drop_frames).min()
 		for drop_frame in drop_frames:
 			var drop_point: int = drop_frame + offset
+			# If Swapping is done with currently non-existing frames, ignore those
+			if drop_point < 0 or drop_point >= project.frames.size():
+				continue
 			swap_frame_positions.append([drop_point, project.current_layer])
 			project.undo_redo.add_do_method(project.swap_frame.bind(drop_point, drop_frame))
 			project.undo_redo.add_undo_method(project.swap_frame.bind(drop_point, drop_frame))
