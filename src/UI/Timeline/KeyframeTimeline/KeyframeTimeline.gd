@@ -14,6 +14,12 @@ var current_layer: BaseLayer:
 		current_layer = value
 		_recreate_timeline()
 		current_layer.effects_added_removed.connect(_recreate_timeline)
+		await get_tree().process_frame
+		keyframe_timeline_cursor.update_position()
+		await get_tree().process_frame
+		var v_scroll := track_scroll_container.scroll_vertical
+		track_scroll_container.ensure_control_visible(keyframe_timeline_cursor)
+		track_scroll_container.scroll_vertical = v_scroll
 var layer_element_tree_vscrollbar: VScrollBar
 
 @onready var frames_scroll_container: ScrollContainer = %FramesScrollContainer
@@ -68,6 +74,9 @@ func _on_gui_input(event: InputEvent) -> void:
 
 
 func _on_cel_switched() -> void:
+	var v_scroll := track_scroll_container.scroll_vertical
+	track_scroll_container.ensure_control_visible(keyframe_timeline_cursor)
+	track_scroll_container.scroll_vertical = v_scroll
 	var project := Global.current_project
 	var layer := project.layers[project.current_layer]
 	if layer == current_layer:
@@ -97,6 +106,8 @@ static func get_selected_keyframe_buttons() -> Array[KeyframeButton]:
 
 
 func _recreate_timeline() -> void:
+	var h_scroll := track_scroll_container.scroll_horizontal
+	var v_scroll := track_scroll_container.scroll_vertical
 	layer_element_tree.clear()
 	layer_element_tree.create_item()
 	for child in track_container.get_children():
@@ -131,6 +142,9 @@ func _recreate_timeline() -> void:
 					)
 					param_track.add_child(key_button)
 	select_keyframes()
+	await get_tree().process_frame
+	track_scroll_container.scroll_horizontal = h_scroll
+	track_scroll_container.scroll_vertical = v_scroll
 
 
 func _create_keyframe_button(
@@ -198,7 +212,13 @@ func select_keyframes() -> void:
 	var property = dict[param_name][frame_index]["value"]
 	var trans_type = dict[param_name][frame_index]["trans"]
 	var ease_type = dict[param_name][frame_index]["ease"]
-	if typeof(property) in [TYPE_INT, TYPE_FLOAT]:
+	if typeof(property) == TYPE_BOOL:
+		var check_box := CheckBox.new()
+		check_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		check_box.button_pressed = property
+		check_box.toggled.connect(_on_keyframe_property_changed.bind("value"))
+		property_grid.add_child(check_box)
+	elif typeof(property) in [TYPE_INT, TYPE_FLOAT]:
 		var slider := ValueSlider.new()
 		slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		slider.allow_lesser = true
@@ -214,6 +234,12 @@ func select_keyframes() -> void:
 		slider.value = property
 		slider.value_changed.connect(_on_keyframe_property_changed.bind("value"))
 		property_grid.add_child(slider)
+	elif typeof(property) == TYPE_COLOR:
+		var color_picker_button := ColorPickerButton.new()
+		color_picker_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		color_picker_button.color = property
+		color_picker_button.color_changed.connect(_on_keyframe_property_changed.bind("value"))
+		property_grid.add_child(color_picker_button)
 
 	var trans_label := Label.new()
 	trans_label.text = "Transition:"

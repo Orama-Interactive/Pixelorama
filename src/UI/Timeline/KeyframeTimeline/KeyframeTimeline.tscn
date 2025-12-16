@@ -4,12 +4,12 @@
 [ext_resource type="Script" uid="uid://cyarevvdmj517" path="res://src/UI/Timeline/KeyframeTimeline/KeyframeTimelineCursor.gd" id="2_3wn0x"]
 [ext_resource type="Script" uid="uid://hmhmdm0a8vgr" path="res://src/UI/Timeline/KeyframeTimeline/KeyframeTimelineTrackContainer.gd" id="2_bho5j"]
 
-[sub_resource type="Animation" id="Animation_3wn0x"]
+[sub_resource type="Animation" id="Animation_f3yqq"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:custom_minimum_size")
+tracks/0/path = NodePath("VBoxContainer/HSplitContainer/PropertiesPanelContainer:custom_minimum_size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -18,75 +18,26 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("VBoxContainer/HSplitContainer/HSplitContainer/LayerElementContainer:custom_minimum_size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("VBoxContainer/HSplitContainer/HSplitContainer/LayerElementContainer:clip_contents")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
-[sub_resource type="Animation" id="Animation_3tue1"]
+[sub_resource type="Animation" id="Animation_bho5j"]
 resource_name = "new_animation"
-length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:custom_minimum_size")
+tracks/0/path = NodePath("VBoxContainer/HSplitContainer/PropertiesPanelContainer:custom_minimum_size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.16666667),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("VBoxContainer/HSplitContainer/HSplitContainer/LayerElementContainer:custom_minimum_size")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("VBoxContainer/HSplitContainer/HSplitContainer/LayerElementContainer:clip_contents")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3wn0x"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0n3lj"]
 _data = {
-&"RESET": SubResource("Animation_3wn0x"),
-&"new_animation": SubResource("Animation_3tue1")
+&"RESET": SubResource("Animation_f3yqq"),
+&"new_animation": SubResource("Animation_bho5j")
 }
 
 [node name="KeyframeTimeline" type="Panel"]
@@ -193,7 +144,7 @@ autowrap_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_3wn0x")
+&"": SubResource("AnimationLibrary_0n3lj")
 }
 
 [connection signal="sort_children" from="VBoxContainer/MarginContainer/FramesScrollContainer" to="." method="_on_frames_scroll_container_sort_children"]
