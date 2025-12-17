@@ -140,15 +140,24 @@ func _can_drop_data(pos: Vector2, data) -> bool:
 			frame_container.get_child(get_index() - 1)
 		)
 
+	var is_swapping := Input.is_action_pressed("ctrl")
 	var drop_frames: PackedInt32Array = data[1]
+	# Get offset
+	var offset: int = 0
+	if drop_frames.size() > 0:
+		offset = frame - Array(drop_frames).min()
 	# Can't move to same frame
 	for drop_frame in drop_frames:
-		if drop_frame == frame:
+		var is_not_valid = (
+			drop_frames.has(drop_frame + offset) if is_swapping else drop_frames.has(frame)
+		)
+		if is_not_valid:
 			Global.animation_timeline.drag_highlight.visible = false
 			return false
 	var region: Rect2
-	if Input.is_action_pressed("ctrl") and drop_frames.size() == 1:  # Swap frames
-		region = get_global_rect()
+	if is_swapping:  # Swap frames
+		var copy_drop_frames := drop_frames.duplicate()  # to prevent overriting original array.
+		Global.animation_timeline.set_frames_highlight(copy_drop_frames, offset)
 	else:  # Move frames
 		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):
 			region = _get_region_rect(-0.125, 0.125)
@@ -164,9 +173,21 @@ func _drop_data(_pos: Vector2, data) -> void:
 	var drop_frames: PackedInt32Array = data[1]
 	var project := Global.current_project
 	project.undo_redo.create_action("Change Frame Order")
-	if Input.is_action_pressed("ctrl") and drop_frames.size() == 1:  # Swap frames
-		project.undo_redo.add_do_method(project.swap_frame.bind(frame, drop_frames[0]))
-		project.undo_redo.add_undo_method(project.swap_frame.bind(frame, drop_frames[0]))
+	if Input.is_action_pressed("ctrl"):  # Swap frames
+		var swap_frame_positions := []
+		# Get offset
+		var offset: int = 0
+		if drop_frames.size() > 0:
+			offset = frame - Array(drop_frames).min()
+		for drop_frame in drop_frames:
+			var drop_point: int = drop_frame + offset
+			# If Swapping is done with currently non-existing frames, ignore those
+			if drop_point < 0 or drop_point >= project.frames.size():
+				continue
+			swap_frame_positions.append([drop_point, project.current_layer])
+			project.undo_redo.add_do_method(project.swap_frame.bind(drop_point, drop_frame))
+			project.undo_redo.add_undo_method(project.swap_frame.bind(drop_point, drop_frame))
+		project.undo_redo.add_do_property(project, "selected_cels", swap_frame_positions)
 	else:  # Move frames
 		var to_frame: int
 		if _get_region_rect(0, 0.5).has_point(get_global_mouse_position()):  # Left
