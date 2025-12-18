@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.1.8] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+
+Built using Godot 4.5.1
+
+### Added
+- Added support for multi frame/cel swapping! [#1393](https://github.com/Orama-Interactive/Pixelorama/pull/#1393)
+- You can now search & rename tilesets in the project properties dialog. [#1383](https://github.com/Orama-Interactive/Pixelorama/pull/#1383)
+- Various improvements to the import image dialog have been made when importing an image as a spritesheet, such as a preset system and the ability to include or exclude empty tiles. [#1385](https://github.com/Orama-Interactive/Pixelorama/pull/#1385)
+- The recorder panel now has more options, such as the ability to use FFMPEG to export the recording as a gif file, and the ability to set a custom rectangular area of the screen to record. [#1387](https://github.com/Orama-Interactive/Pixelorama/pull/#1387)
+
+### Changed
+- Gif files are now being exported frame by frame, which saves memory space and users can now see the current progress of the export. [#1396](https://github.com/Orama-Interactive/Pixelorama/pull/#1396)
+
+### Fixed
+- The "apply all" toggle when importing multiple images is now faster. [#1390](https://github.com/Orama-Interactive/Pixelorama/pull/#1390)
+- Fixed a visual bug with clipping masks. [#1389](https://github.com/Orama-Interactive/Pixelorama/pull/#1389)
+- Clear the saved processed images from memory when closing the export dialog, so that they don't waste space in memory. [#1397](https://github.com/Orama-Interactive/Pixelorama/pull/#1397)
+- Fixed selection animated borders setting not being applied on startup.
+- Non-valid names for projects are no longer allowed in the project properties. [#1383](https://github.com/Orama-Interactive/Pixelorama/pull/#1383)
+- Fixed guides being appended twice when loading Krita & Photoshop projects, leading to crashes when hovering over the canvas rulers.
+
 ## [v1.1.7] - 2025-11-29
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
