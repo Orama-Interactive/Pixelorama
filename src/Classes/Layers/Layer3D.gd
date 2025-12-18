@@ -273,21 +273,31 @@ func node_change_scale(node: Node3D, diff: Vector3, axis: Vector3, dir: Vector3)
 	update_animation_track(node, &"scale", node.scale, prev_scale, project.current_frame)
 
 
-## TODO: On undo, check if keys and tracks are empty and remove them.
 func update_animation_track(object: Node, property: StringName, current_value: Variant, prev_value: Variant, frame_index: int) -> void:
 	var undo_redo := project.undo_redo
-	undo_redo.create_action("Change 3D object %s" % property, UndoRedo.MERGE_ENDS)
 	var property_path := NodePath(String(viewport.get_path_to(object)) + ":" + property)
 	var track_idx := animation.find_track(property_path, Animation.TYPE_VALUE)
+
 	if track_idx == -1:
+		undo_redo.create_action("Create 3D animation track")
 		track_idx = animation.get_track_count()
-		animation.add_track(Animation.TYPE_VALUE)
-		animation.track_set_path(track_idx, property_path)
+		undo_redo.add_do_method(animation.add_track.bind(Animation.TYPE_VALUE))
+		undo_redo.add_do_method(animation.track_set_path.bind(track_idx, property_path))
+		undo_redo.add_undo_method(animation.remove_track.bind(track_idx))
+		undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+		undo_redo.commit_action()
 
 	var key_idx := animation.track_find_key(track_idx, frame_index, Animation.FIND_MODE_APPROX)
 	if key_idx == -1:
+		undo_redo.create_action("Create 3D animation key")
 		key_idx = animation.track_get_key_count(track_idx)
-		animation.track_insert_key(track_idx, frame_index, prev_value)
+		undo_redo.add_do_method(animation.track_insert_key.bind(track_idx, frame_index, prev_value))
+		undo_redo.add_undo_method(animation.track_remove_key.bind(track_idx, key_idx))
+		undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+		undo_redo.commit_action()
+	undo_redo.create_action("Change 3D object %s" % property, UndoRedo.MERGE_ENDS)
 	undo_redo.add_do_method(animation.track_set_key_value.bind(track_idx, key_idx, current_value))
 	undo_redo.add_undo_method(animation.track_set_key_value.bind(track_idx, key_idx, prev_value))
 	undo_redo.add_do_method(emit_signal.bind(&"node_property_changed", object, property, frame_index))
