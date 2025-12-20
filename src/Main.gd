@@ -245,10 +245,6 @@ func _input(event: InputEvent) -> void:
 	left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
 	right_cursor.position = get_global_mouse_position() + Vector2(32, 32)
 
-	if event is InputEventKey and (event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER):
-		if get_viewport().gui_get_focus_owner() is LineEdit:
-			get_viewport().gui_get_focus_owner().release_focus()
-
 
 func _project_switched() -> void:
 	if Global.current_project.export_directory_path != "":

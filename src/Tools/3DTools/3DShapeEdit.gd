@@ -269,6 +269,8 @@ func _object_property_changed(object: Node, property: String, frame_index: int) 
 					property_editor_node.set_value_no_signal(curr_value)
 				elif property_editor_node is ColorPickerButton:
 					property_editor_node.color = curr_value
+				elif property_editor_node is LineEdit or property_editor_node is TextEdit:
+					property_editor_node.text = curr_value
 
 
 func _on_selected_object(object: Node3D, old_object: Node3D) -> void:
@@ -278,19 +280,6 @@ func _on_selected_object(object: Node3D, old_object: Node3D) -> void:
 	if is_instance_valid(object):
 		remove_object_button.disabled = false
 		_create_object_property_nodes(object)
-		#if object is MeshInstance3D:
-			#if is_instance_valid(object.mesh):
-				#var mesh := object.mesh as Mesh
-				#var mesh_foldable := _create_object_property_nodes(mesh)
-				#mesh_foldable.set_meta("object", mesh)
-				#mesh_foldable.title = "Mesh"
-				#mesh_foldable.fold()
-				#if is_instance_valid(mesh.surface_get_material(0)):
-					#var mat := mesh.surface_get_material(0) as BaseMaterial3D
-					#var mat_foldable := _create_object_property_nodes(mat)
-					#mat_foldable.set_meta("object", mat)
-					#mat_foldable.title = "Material"
-					#mat_foldable.fold()
 	else:
 		_show_node_property_nodes()
 
@@ -409,6 +398,18 @@ func _create_object_property_nodes(object: Node, title := "Node") -> Array[Folda
 				color_picker_button.color_changed.connect(_set_value_from_node.bind(object, prop_name))
 				grid_container.add_child(label)
 				grid_container.add_child(color_picker_button)
+			TYPE_STRING, TYPE_STRING_NAME:
+				var label := Label.new()
+				label.text = humanized_name
+				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				grid_container.add_child(label)
+				var line_edit := LineEdit.new()
+				line_edit.name = prop_name
+				line_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				line_edit.text = curr_value
+				line_edit.editing_toggled.connect(func(toggled_on: bool): if toggled_on: _undo_data = _get_undo_data(object))
+				line_edit.text_submitted.connect(_set_value_from_node.bind(object, prop_name))
+				grid_container.add_child(line_edit)
 	return containers
 
 

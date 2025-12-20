@@ -63,6 +63,7 @@ static var properties_to_exclude: Array[String] = [
 	"resource_name",
 	"resource_path",
 	"editor_only",
+	"language",
 ]
 
 
