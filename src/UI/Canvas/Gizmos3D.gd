@@ -80,6 +80,19 @@ func get_hovering_gizmo(pos: Vector2) -> Layer3D.Gizmos:
 	return Layer3D.Gizmos.NONE
 
 
+func get_hovering_light(pos: Vector2) -> Node3D:
+	var draw_scale := Vector2(20.0, 20.0) / Global.camera.zoom
+	for object in always_visible:
+		if not always_visible[object]:
+			continue
+		var camera := object.get_viewport().get_camera_3d()
+		var object_pos := camera.unproject_position(object.position)
+		var rect := Rect2(object_pos - draw_scale / 2.0, draw_scale)
+		if rect.has_point(pos):
+			return object
+	return null
+
+
 func _cel_switched() -> void:
 	if is_instance_valid(layer_3d):
 		if layer_3d.selected_object_changed.is_connected(_on_selected_object):
@@ -233,13 +246,13 @@ func _draw() -> void:
 		var center := Vector2(8, 8)
 		var camera := object.get_viewport().get_camera_3d()
 		var pos: Vector2 = camera.unproject_position(object.position)
-		var back: Vector3 = object.position - object.transform.basis.z
-		var back_proj: Vector2 = camera.unproject_position(back) - pos
-		back_proj = _resize_vector(back_proj, LIGHT_ARROW_LENGTH)
 		draw_set_transform(pos, 0, draw_scale / 4)
 		draw_texture(texture, -center)
 		draw_set_transform(pos, 0, draw_scale / 2)
 		if object is DirectionalLight3D:
+			var back: Vector3 = object.position - object.transform.basis.z
+			var back_proj: Vector2 = camera.unproject_position(back) - pos
+			back_proj = _resize_vector(back_proj, LIGHT_ARROW_LENGTH)
 			var line_width := lerpf(0.5, 0.1, (1 + (Vector3.RIGHT - back).z) / 2.0)
 			draw_line(Vector2.ZERO, back_proj, Color.WHITE, line_width)
 			var arrow := _find_arrow(back_proj)

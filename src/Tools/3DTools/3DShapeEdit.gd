@@ -123,10 +123,11 @@ func cursor_move(pos: Vector2i) -> void:
 	if _dragging:
 		return
 	# Hover logic
-	var currently_hovering: Node3D = null
-	var intersect_info := get_3d_node_at_pos(pos, layer_3d.camera)
-	if not intersect_info.is_empty():
-		currently_hovering = intersect_info[0]
+	var currently_hovering: Node3D = Global.canvas.gizmos_3d.get_hovering_light(Global.canvas.current_pixel)
+	if currently_hovering == null:
+		var intersect_info := get_3d_node_at_pos(pos, layer_3d.camera)
+		if not intersect_info.is_empty():
+			currently_hovering = intersect_info[0]
 	_hovering = currently_hovering
 
 
@@ -156,12 +157,6 @@ func get_3d_node_at_pos(pos: Vector2i, camera: Camera3D, max_distance := 100.0) 
 			var intersect := tri_mesh.intersect_ray(local_from, local_to)
 			if not intersect.is_empty():
 				return [intersect_node, intersect]
-		elif intersect_node is Light3D:
-			var light_3d := intersect_node as Light3D
-			var aabb := light_3d.get_aabb()
-			var intersect = aabb.intersects_ray(local_from, local_to)
-			if intersect != null:
-				return [intersect_node]
 	return []
 
 
