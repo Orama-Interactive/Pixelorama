@@ -277,9 +277,7 @@ func _on_selected_object(object: Node3D, old_object: Node3D) -> void:
 	get_tree().call_group(FOLDABLE_CONTAINER_GROUP_NAME, &"queue_free")
 	if is_instance_valid(object):
 		remove_object_button.disabled = false
-		var node_foldable := _create_object_property_nodes(object)
-		node_foldable.set_meta("object", object)
-		node_foldable.title = "Node"
+		_create_object_property_nodes(object)
 		#if object is MeshInstance3D:
 			#if is_instance_valid(object.mesh):
 				#var mesh := object.mesh as Mesh
@@ -298,33 +296,37 @@ func _on_selected_object(object: Node3D, old_object: Node3D) -> void:
 
 
 func _show_node_property_nodes() -> void:
-	var camera_foldable := _create_object_property_nodes(layer_3d.camera)
-	camera_foldable.set_meta("object", layer_3d.camera)
-	camera_foldable.title = "Camera"
+	_create_object_property_nodes(layer_3d.camera, "Camera")
 	var environment := layer_3d.world_environment
-	var environment_foldable := _create_object_property_nodes(environment)
-	environment_foldable.set_meta("object", environment)
-	environment_foldable.title = "Environment"
+	var environment_foldable := _create_object_property_nodes(environment, "Environment")[0]
 	environment_foldable.fold()
 	remove_object_button.disabled = true
 
 
-func _create_object_property_nodes(object: Node) -> FoldableContainer:
-	var foldable_container := FoldableContainer.new()
-	foldable_container.add_to_group(FOLDABLE_CONTAINER_GROUP_NAME)
-	add_child(foldable_container)
-	var grid_container := GridContainer.new()
-	grid_container.columns = 2
-	foldable_container.add_child(grid_container)
+func _create_object_property_nodes(object: Node, title := "Node") -> Array[FoldableContainer]:
+	var containers: Array[FoldableContainer] = []
+	var foldable_container := _create_foldable_container(object, title)
+	containers.append(foldable_container)
+	var grid_container: GridContainer = foldable_container.get_child(0)
 	var property_list := Layer3D.get_object_property_list(object)
 	for prop in property_list:
 		var prop_name: String = prop["name"]
 		var curr_value = object.get_indexed(prop_name)
 		var prop_name_nodepath := NodePath(prop_name)
-		var subname_count := prop_name_nodepath.get_subname_count() - 1
+		var subname_count := prop_name_nodepath.get_subname_count()
+		var last_subname_index := subname_count - 1
 		var string_to_humanize := prop_name
-		if subname_count >= 0:
-			string_to_humanize = prop_name_nodepath.get_subname(subname_count)
+		if subname_count > 0:
+			string_to_humanize = prop_name_nodepath.get_subname(last_subname_index)
+			var new_title := prop_name_nodepath.get_name(0)
+			if subname_count > 1:
+				new_title = prop_name_nodepath.get_subname(0)
+			new_title = Keychain.humanize_snake_case(new_title)
+			if subname_count == containers.size() and new_title != title:
+				var fc := _create_foldable_container(object, new_title)
+				fc.fold()
+				containers.append(fc)
+				grid_container = fc.get_child(0)
 		var humanized_name := Keychain.humanize_snake_case(string_to_humanize, true)
 		var type: Variant.Type = prop["type"]
 		var hint: PropertyHint = prop["hint"]
@@ -407,6 +409,18 @@ func _create_object_property_nodes(object: Node) -> FoldableContainer:
 				color_picker_button.color_changed.connect(_set_value_from_node.bind(object, prop_name))
 				grid_container.add_child(label)
 				grid_container.add_child(color_picker_button)
+	return containers
+
+
+func _create_foldable_container(object: Node, title: String) -> FoldableContainer:
+	var foldable_container := FoldableContainer.new()
+	foldable_container.title = title
+	foldable_container.set_meta("object", object)
+	foldable_container.add_to_group(FOLDABLE_CONTAINER_GROUP_NAME)
+	add_child(foldable_container)
+	var grid_container := GridContainer.new()
+	grid_container.columns = 2
+	foldable_container.add_child(grid_container)
 	return foldable_container
 
 
