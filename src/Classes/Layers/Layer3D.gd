@@ -195,6 +195,9 @@ static func get_object_property_list(object: Object) -> Array[Dictionary]:
 
 
 static func filter_object_properties(dict: Dictionary) -> bool:
+	var class_n := dict["class_name"] as StringName
+	if &"Font" in class_n:
+		return true
 	var prop_name := dict["name"] as String
 	if prop_name in properties_to_exclude:
 		return false

@@ -271,6 +271,14 @@ func _object_property_changed(object: Node, property: String, frame_index: int) 
 					property_editor_node.color = curr_value
 				elif property_editor_node is LineEdit or property_editor_node is TextEdit:
 					property_editor_node.text = curr_value
+				elif property_editor_node is OptionButton:
+					if curr_value is Font:
+						var font_name: String = curr_value.get_font_name()
+						for i in property_editor_node.item_count:
+							var item_name: String = property_editor_node.get_item_text(i)
+							if font_name == item_name:
+								property_editor_node.select(i)
+								break
 
 
 func _on_selected_object(object: Node3D, old_object: Node3D) -> void:
@@ -319,6 +327,25 @@ func _create_object_property_nodes(object: Node, title := "Node") -> Array[Folda
 		var humanized_name := Keychain.humanize_snake_case(string_to_humanize, true)
 		var type: Variant.Type = prop["type"]
 		var hint: PropertyHint = prop["hint"]
+		if curr_value is Font:
+			var label := Label.new()
+			label.text = humanized_name
+			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			grid_container.add_child(label)
+			var option_button := OptionButton.new()
+			option_button.name = prop_name
+			option_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			var font := curr_value as Font
+			var font_name := font.get_font_name()
+			for available_font_name in Global.get_available_font_names():
+				option_button.add_item(available_font_name)
+				if font_name == available_font_name:
+					option_button.select(option_button.item_count - 1)
+
+			option_button.button_down.connect(func(): _undo_data = _get_undo_data(object))
+			option_button.item_selected.connect(_set_value_from_node.bind(object, prop_name))
+			grid_container.add_child(option_button)
+			continue
 		match type:
 			TYPE_BOOL:
 				var label := Label.new()
@@ -431,8 +458,8 @@ func _set_value_from_node(value, to_edit: Node, prop: String) -> void:
 	if prop not in _undo_data:
 		print(prop, " not found in undo data.")
 		return
-	#if "font" in prop and not "font_" in prop:
-		#value = Global.find_font_from_name(%MeshFont.get_item_text(value))
+	if prop == "mesh:font":
+		value = Global.find_font_from_name(Global.get_available_font_names()[value])
 	var frame_index := layer_3d.project.current_frame
 	var prev_value = _undo_data[prop]
 	layer_3d.update_animation_track(to_edit, prop, value, prev_value, frame_index)
