@@ -212,8 +212,9 @@ func _add_object(type: Layer3D.ObjectType, custom_mesh: Mesh = null) -> void:
 	undo_redo.add_undo_method(layer_3d.parent_node.remove_child.bind(node3d))
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	undo_redo.add_do_method(sprite_changed_this_frame)
+	undo_redo.add_undo_method(sprite_changed_this_frame)
 	undo_redo.commit_action()
-	sprite_changed_this_frame()
 
 
 func _on_RemoveObject_pressed() -> void:
@@ -244,8 +245,9 @@ func _on_RemoveObject_pressed() -> void:
 	undo_redo.add_undo_reference(layer_3d.selected)
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	undo_redo.add_do_method(sprite_changed_this_frame)
+	undo_redo.add_undo_method(sprite_changed_this_frame)
 	undo_redo.commit_action()
-	sprite_changed_this_frame()
 
 
 func _object_property_changed(object: Node, property: String, frame_index: int) -> void:
