@@ -4,6 +4,7 @@ enum RotationAlgorithm { ROTXEL_SMEAR, CLEANEDGE, OMNISCALE, NNS, NN, ROTXEL, UR
 enum GradientDirection { TOP, BOTTOM, LEFT, RIGHT }
 ## Continuation from Image.Interpolation
 enum Interpolation { SCALE3X = 5, CLEANEDGE = 6, OMNISCALE = 7 }
+enum BoneRenderMode { EDIT, POSE, NONE }
 
 const DUMMY_PRE_MUL_ALPHA_SHADER := preload("res://src/Shaders/DummyPreMulAlpha.gdshader")
 
@@ -37,6 +38,9 @@ var omniscale_shader_premul_alpha: Shader:
 var rotxel_shader := preload("res://src/Shaders/Effects/Rotation/SmearRotxel.gdshader")
 var nn_shader := preload("res://src/Shaders/Effects/Rotation/NearestNeighbour.gdshader")
 var isometric_tile_cache := {}
+## For some special situations, the blend_layers need preview (always) in bone edit or pose mode,
+## regardless of the selected layer, for such cases we use force_bone_mode
+var force_bone_mode := BoneRenderMode.NONE
 
 
 ## Blends canvas layers into passed image starting from the origin position
@@ -833,6 +837,10 @@ func center(indices: Array) -> void:
 		# Now apply centering
 		var offset: Vector2i = (0.5 * (project.size - used_rect.size)).floor()
 		for cel in project.frames[frame].cels:
+			if cel is BoneCel:
+				var bone_offset := Vector2(offset - used_rect.position)
+				redo_data[cel] = {"gizmo_origin": cel.gizmo_origin + bone_offset}
+				undo_data[cel] = {"gizmo_origin": cel.gizmo_origin}
 			if not cel is PixelCel:
 				continue
 			var cel_image := (cel as PixelCel).get_image()
@@ -858,6 +866,7 @@ func scale_project(width: int, height: int, interpolation: int) -> void:
 	var redo_data := {}
 	var undo_data := {}
 	var tilesets: Array[TileSetCustom] = []
+	var factor := Vector2(width, height) / Vector2(Global.current_project.size)
 	for cel in Global.current_project.get_all_pixel_cels():
 		if not cel is PixelCel:
 			continue
@@ -872,6 +881,17 @@ func scale_project(width: int, height: int, interpolation: int) -> void:
 			tilesets.append(tilemap_cel.tileset)
 		sprite.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
+	for cel in Global.current_project.get_all_bone_cels():
+		redo_data[cel] = {
+			"gizmo_origin": (cel.gizmo_origin * factor).floor(),
+			"start_point": (cel.start_point * factor).floor(),
+			"gizmo_length": floori(cel.gizmo_length * factor.length())
+		}
+		undo_data[cel] = {
+			"gizmo_origin": cel.gizmo_origin,
+			"start_point": cel.start_point,
+			"gizmo_length": cel.gizmo_length
+		}
 
 	general_do_and_undo_scale(width, height, redo_data, undo_data)
 
@@ -929,6 +949,10 @@ func crop_to_selection() -> void:
 			tilemap_cel.serialize_undo_data_source_image(cropped, redo_data, undo_data, -offset)
 		cropped.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
+	for cel in Global.current_project.get_all_bone_cels():
+		var offset := rect.position
+		redo_data[cel] = {"gizmo_origin": cel.gizmo_origin - Vector2(offset)}
+		undo_data[cel] = {"gizmo_origin": cel.gizmo_origin}
 
 	general_do_and_undo_scale(rect.size.x, rect.size.y, redo_data, undo_data)
 
@@ -970,6 +994,10 @@ func crop_to_content() -> void:
 			tilemap_cel.serialize_undo_data_source_image(cropped, redo_data, undo_data, -offset)
 		cropped.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
+	for cel in Global.current_project.get_all_bone_cels():
+		var offset := used_rect.position
+		redo_data[cel] = {"gizmo_origin": cel.gizmo_origin - Vector2(offset)}
+		undo_data[cel] = {"gizmo_origin": cel.gizmo_origin}
 
 	general_do_and_undo_scale(width, height, redo_data, undo_data)
 
@@ -992,7 +1020,9 @@ func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> voi
 			tilemap_cel.serialize_undo_data_source_image(resized, redo_data, undo_data, offset)
 		resized.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
-
+	for cel in Global.current_project.get_all_bone_cels():
+		redo_data[cel] = {"gizmo_origin": cel.gizmo_origin + Vector2(offset_x, offset_y)}
+		undo_data[cel] = {"gizmo_origin": cel.gizmo_origin}
 	general_do_and_undo_scale(width, height, redo_data, undo_data)
 
 
