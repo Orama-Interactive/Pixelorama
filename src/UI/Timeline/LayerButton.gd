@@ -249,6 +249,8 @@ func _on_main_button_gui_input(event: InputEvent) -> void:
 			line_edit.visible = true
 			line_edit.editable = true
 			line_edit.grab_focus()
+			line_edit.select_all()
+			line_edit.caret_column = line_edit.text.length()
 
 	elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 		popup_menu.popup_on_parent(Rect2(get_global_mouse_position(), Vector2.ONE))
