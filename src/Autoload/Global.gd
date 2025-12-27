@@ -123,7 +123,7 @@ const LANGUAGES_DICT := {
 ## The file path used for the [member config_cache] file.
 const CONFIG_PATH := "user://config.ini"
 ## The file used to save preferences that use [method _save_to_override_file].
-const OVERRIDE_FILE := "override.cfg"
+const OVERRIDE_FILE := "user://override.cfg"
 ## The name of folder containing Pixelorama preferences.
 const HOME_SUBDIR_NAME := "pixelorama"
 ## The name of folder that contains subdirectories for users to place brushes, palettes, patterns.
@@ -1294,7 +1294,7 @@ func undo_redo_draw_op(
 ## users who have already saved an override.cfg file, leading into confusion.
 ## To avoid this issue, we just write the lines we want to the override.cfg file.
 func _save_to_override_file() -> void:
-	var file := FileAccess.open(root_directory.path_join(OVERRIDE_FILE), FileAccess.WRITE)
+	var file := FileAccess.open(OVERRIDE_FILE, FileAccess.WRITE)
 	file.store_line("[display]\n")
 	file.store_line("window/subwindows/embed_subwindows=%s" % single_window_mode)
 	file.store_line("window/per_pixel_transparency/allowed=%s" % window_transparency)
