@@ -96,8 +96,8 @@ func _add_nodes(size: Vector2i) -> void:
 	camera.position.z = 3
 	camera.fov = 70
 	animation_player = AnimationPlayer.new()
-	var animation_library := AnimationLibrary.new()
 	animation = Animation.new()
+	var animation_library := AnimationLibrary.new()
 	animation_library.add_animation(&"__pxo_anim", animation)
 	animation_player.add_animation_library(&"__pxo_anim_lib", animation_library)
 	animation_player.current_animation = "__pxo_anim_lib/__pxo_anim"
@@ -107,9 +107,31 @@ func _add_nodes(size: Vector2i) -> void:
 	dir_light.transform = Transform3D(Basis(), Vector3(-2.5, 0, 0))
 	parent_node.add_child(dir_light)
 	viewport.add_child(animation_player)
+	animation_player.owner = viewport
 	viewport.add_child(camera)
+	camera.owner = viewport
 	viewport.add_child(world_environment)
+	world_environment.owner = viewport
 	viewport.add_child(parent_node)
+	parent_node.owner = viewport
+	dir_light.owner = viewport
+	Global.canvas.add_child(viewport)
+
+
+## Used to load from pxo files.
+func load_scene(scene: PackedScene) -> void:
+	viewport = scene.instantiate()
+	for child in viewport.get_children():
+		if child is AnimationPlayer:
+			animation_player = child
+			animation_player.current_animation = "__pxo_anim_lib/__pxo_anim"
+			animation = animation_player.get_animation(&"__pxo_anim_lib/__pxo_anim")
+		elif child is Camera3D:
+			camera = child
+		elif child is WorldEnvironment:
+			world_environment = child
+		elif child is Node3D:
+			parent_node = child
 	Global.canvas.add_child(viewport)
 
 

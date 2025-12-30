@@ -560,6 +560,25 @@ func save_pxo_file(
 			zip_packer.start_file(tileset_path.path_join(str(j)))
 			zip_packer.write_file(tile.image.get_data())
 			zip_packer.close_file()
+	var layers_3d := project.get_all_3d_layers()
+	for i in layers_3d.size():
+		var layer := layers_3d[i]
+		DirAccess.make_dir_absolute(Export.temp_path)
+		var scene_path_zip := "scene/%s" % i
+		var scene_path_file := Export.temp_path.path_join(str(i)) + ".tscn"
+		var node_to_pack := layer.viewport
+		var scene := PackedScene.new()
+		scene.pack(node_to_pack)
+		var scene_err := ResourceSaver.save(scene, scene_path_file)
+		if scene_err == OK:
+			var scene_file := FileAccess.open(scene_path_file, FileAccess.READ)
+			if is_instance_valid(scene_file):
+				zip_packer.start_file(scene_path_zip)
+				zip_packer.write_file(scene_file.get_buffer(scene_file.get_length()))
+				zip_packer.close_file()
+				scene_file.close()
+		DirAccess.remove_absolute(scene_path_file)
+		DirAccess.remove_absolute(Export.temp_path)
 	var audio_layers := project.get_all_audio_layers()
 	for i in audio_layers.size():
 		var layer := audio_layers[i]

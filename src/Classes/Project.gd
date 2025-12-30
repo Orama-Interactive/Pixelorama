@@ -374,6 +374,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 				palettes[corrected_palette_name] = palette
 		project_current_palette_name = current_palette_name
 	if dict.has("frames") and dict.has("layers"):
+		var layers_3d_count := 0
 		var audio_layers := 0
 		for saved_layer in dict.layers:
 			match int(saved_layer.get("type", Global.LayerTypes.PIXEL)):
@@ -382,7 +383,21 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 				Global.LayerTypes.GROUP:
 					layers.append(GroupLayer.new(self))
 				Global.LayerTypes.THREE_D:
-					layers.append(Layer3D.new(self, "", true))
+					var layer := Layer3D.new(self, "", true)
+					layers.append(layer)
+					var scene_path_zip := "scene/%s" % layers_3d_count
+					if zip_reader.file_exists(scene_path_zip):
+						var scene_data := zip_reader.read_file(scene_path_zip)
+						DirAccess.make_dir_absolute(Export.temp_path)
+						var scene_path_file := Export.temp_path.path_join(str(layers_3d_count)) + ".tscn"
+						var scene_file := FileAccess.open(scene_path_file, FileAccess.WRITE)
+						scene_file.store_buffer(scene_data)
+						scene_file.close()
+						var scene := load(scene_path_file) as PackedScene
+						layer.load_scene(scene)
+						DirAccess.remove_absolute(scene_path_file)
+						DirAccess.remove_absolute(Export.temp_path)
+						layers_3d_count += 1
 				Global.LayerTypes.TILEMAP:
 					layers.append(LayerTileMap.new(self, null))
 				Global.LayerTypes.AUDIO:
@@ -640,6 +655,14 @@ func get_all_pixel_cels() -> Array[PixelCel]:
 			if cel is PixelCel:
 				cels.append(cel)
 	return cels
+
+
+func get_all_3d_layers() -> Array[Layer3D]:
+	var layers_3d: Array[Layer3D]
+	for layer in layers:
+		if layer is Layer3D:
+			layers_3d.append(layer)
+	return layers_3d
 
 
 func get_all_audio_layers(only_valid_streams := true) -> Array[AudioLayer]:
