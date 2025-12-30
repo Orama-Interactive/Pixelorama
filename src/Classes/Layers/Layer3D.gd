@@ -71,7 +71,7 @@ func _init(_project: Project, _name := "", from_pxo := false) -> void:
 	project = _project
 	name = _name
 	if not from_pxo:
-		_add_nodes(project.size)
+		add_nodes(project.size)
 	node_property_changed.connect(_on_node_property_changed)
 
 
@@ -81,7 +81,7 @@ func _notification(what: int) -> void:
 			viewport.queue_free()
 
 
-func _add_nodes(size: Vector2i) -> void:
+func add_nodes(size: Vector2i) -> void:
 	viewport = SubViewport.new()
 	viewport.size = size
 	viewport.own_world_3d = true
