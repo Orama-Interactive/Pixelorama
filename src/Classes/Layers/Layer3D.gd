@@ -132,6 +132,13 @@ func load_scene(scene: PackedScene) -> void:
 			world_environment = child
 		elif child is Node3D:
 			parent_node = child
+	for child in parent_node.get_children():
+		if child is DirectionalLight3D:
+			Global.canvas.gizmos_3d.add_always_visible(child, DIR_LIGHT_TEXTURE)
+		elif child is SpotLight3D:
+			Global.canvas.gizmos_3d.add_always_visible(child, SPOT_LIGHT_TEXTURE)
+		elif child is OmniLight3D:
+			Global.canvas.gizmos_3d.add_always_visible(child, OMNI_LIGHT_TEXTURE)
 	Global.canvas.add_child(viewport)
 
 
