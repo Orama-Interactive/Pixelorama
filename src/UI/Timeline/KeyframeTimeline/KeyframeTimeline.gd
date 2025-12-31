@@ -30,6 +30,8 @@ var layer_element_tree_vscrollbar: VScrollBar
 @onready var frames_container: HBoxContainer = %FramesContainer
 @onready var properties_container: VBoxContainer = %PropertiesContainer
 @onready var no_key_selected_label: Label = %NoKeySelectedLabel
+@onready var properties_grid_container: GridContainer = %PropertiesGridContainer
+@onready var delete_keyframe_button: Button = %DeleteKeyframeButton
 
 
 func _ready() -> void:
@@ -179,9 +181,8 @@ func _add_ui_frames() -> void:
 
 
 func _on_keyframe_pressed(key_button: KeyframeButton) -> void:
-	for child in properties_container.get_children():
-		if child != no_key_selected_label:
-			child.queue_free()
+	for child in properties_grid_container.get_children():
+		child.queue_free()
 	for selected_keyframe in get_selected_keyframe_buttons():
 		selected_keyframe.button_pressed = false
 	selected_keyframes = [key_button.keyframe_id]
@@ -203,12 +204,12 @@ func select_keyframes() -> void:
 	if not dict[param_name].has(frame_index):
 		return
 	no_key_selected_label.visible = false
-	var property_grid := GridContainer.new()
-	property_grid.columns = 2
+	properties_grid_container.visible = not no_key_selected_label.visible
+	delete_keyframe_button.visible = not no_key_selected_label.visible
 	var value_label := Label.new()
 	value_label.text = "Value:"
 	value_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	property_grid.add_child(value_label)
+	properties_grid_container.add_child(value_label)
 	var property = dict[param_name][frame_index]["value"]
 	var trans_type = dict[param_name][frame_index]["trans"]
 	var ease_type = dict[param_name][frame_index]["ease"]
@@ -217,7 +218,7 @@ func select_keyframes() -> void:
 		check_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		check_box.button_pressed = property
 		check_box.toggled.connect(_on_keyframe_property_changed.bind("value"))
-		property_grid.add_child(check_box)
+		properties_grid_container.add_child(check_box)
 	elif typeof(property) in [TYPE_INT, TYPE_FLOAT]:
 		var slider := ValueSlider.new()
 		slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -225,7 +226,7 @@ func select_keyframes() -> void:
 		slider.allow_greater = true
 		slider.value = property
 		slider.value_changed.connect(_on_keyframe_property_changed.bind("value"))
-		property_grid.add_child(slider)
+		properties_grid_container.add_child(slider)
 	elif typeof(property) in [TYPE_VECTOR2, TYPE_VECTOR2I]:
 		var slider := ShaderLoader.VALUE_SLIDER_V2_TSCN.instantiate() as ValueSliderV2
 		slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -233,18 +234,18 @@ func select_keyframes() -> void:
 		slider.allow_greater = true
 		slider.value = property
 		slider.value_changed.connect(_on_keyframe_property_changed.bind("value"))
-		property_grid.add_child(slider)
+		properties_grid_container.add_child(slider)
 	elif typeof(property) == TYPE_COLOR:
 		var color_picker_button := ColorPickerButton.new()
 		color_picker_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		color_picker_button.color = property
 		color_picker_button.color_changed.connect(_on_keyframe_property_changed.bind("value"))
-		property_grid.add_child(color_picker_button)
+		properties_grid_container.add_child(color_picker_button)
 
 	var trans_label := Label.new()
 	trans_label.text = "Transition:"
 	trans_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	property_grid.add_child(trans_label)
+	properties_grid_container.add_child(trans_label)
 	var trans_type_options := OptionButton.new()
 	trans_type_options.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	trans_type_options.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
@@ -263,12 +264,12 @@ func select_keyframes() -> void:
 	trans_type_options.add_item("Constant", Tween.TRANS_SPRING + 1)
 	trans_type_options.select(trans_type)
 	trans_type_options.item_selected.connect(_on_keyframe_property_changed.bind("trans"))
-	property_grid.add_child(trans_type_options)
+	properties_grid_container.add_child(trans_type_options)
 
 	var easing_label := Label.new()
 	easing_label.text = "Easing:"
 	easing_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	property_grid.add_child(easing_label)
+	properties_grid_container.add_child(easing_label)
 	var ease_type_options := OptionButton.new()
 	ease_type_options.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	ease_type_options.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
@@ -278,14 +279,8 @@ func select_keyframes() -> void:
 	ease_type_options.add_item("Ease out in", Tween.EASE_OUT_IN)
 	ease_type_options.select(ease_type)
 	ease_type_options.item_selected.connect(_on_keyframe_property_changed.bind("ease"))
-	property_grid.add_child(ease_type_options)
-	properties_container.add_child(property_grid)
+	properties_grid_container.add_child(ease_type_options)
 
-	var delete_keyframe_button := Button.new()
-	delete_keyframe_button.text = "Delete keyframe"
-	delete_keyframe_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	delete_keyframe_button.pressed.connect(_on_keyframe_deleted)
-	properties_container.add_child(delete_keyframe_button)
 	await get_tree().process_frame
 	_on_track_scroll_container_resized()
 
@@ -304,14 +299,15 @@ func unselect_keyframe(key_id := -1) -> void:
 	if selected_keyframes.size() == 0:
 		_clear_keyframe_properties_container()
 		no_key_selected_label.visible = true
+		properties_grid_container.visible = not no_key_selected_label.visible
+		delete_keyframe_button.visible = not no_key_selected_label.visible
 		await get_tree().process_frame
 		_on_track_scroll_container_resized()
 
 
 func _clear_keyframe_properties_container() -> void:
-	for child in properties_container.get_children():
-		if child != no_key_selected_label:
-			child.queue_free()
+	for child in properties_grid_container.get_children():
+		child.queue_free()
 
 
 func append_keyframes_to_selection(rect: Rect2) -> void:

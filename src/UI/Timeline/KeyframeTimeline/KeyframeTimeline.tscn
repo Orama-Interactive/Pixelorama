@@ -142,6 +142,19 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="PropertiesGridContainer" type="GridContainer" parent="VBoxContainer/HSplitContainer/PropertiesPanelContainer/PropertiesContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+columns = 2
+
+[node name="DeleteKeyframeButton" type="Button" parent="VBoxContainer/HSplitContainer/PropertiesPanelContainer/PropertiesContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Delete keyframe"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_0n3lj")
@@ -152,3 +165,4 @@ libraries = {
 [connection signal="resized" from="VBoxContainer/HSplitContainer/HSplitContainer/TrackScrollContainer" to="." method="_on_track_scroll_container_resized"]
 [connection signal="sort_children" from="VBoxContainer/HSplitContainer/HSplitContainer/TrackScrollContainer" to="." method="_on_track_scroll_container_sort_children"]
 [connection signal="gui_input" from="VBoxContainer/HSplitContainer/HSplitContainer/TrackScrollContainer/PanelContainer/TrackContainer" to="VBoxContainer/HSplitContainer/HSplitContainer/TrackScrollContainer/PanelContainer/TrackContainer" method="_on_gui_input"]
+[connection signal="pressed" from="VBoxContainer/HSplitContainer/PropertiesPanelContainer/PropertiesContainer/DeleteKeyframeButton" to="." method="_on_keyframe_deleted"]
