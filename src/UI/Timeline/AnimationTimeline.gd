@@ -69,6 +69,7 @@ var global_layer_expand := true
 @onready var tag_container: Control = %TagContainer
 @onready var layer_frame_h_split := %LayerFrameHSplit as HSplitContainer
 @onready var layer_frame_header_h_split := %LayerFrameHeaderHSplit as HSplitContainer
+@onready var keyframe_timeline := %KeyframeTimeline as KeyframeTimeline
 @onready var delete_frame := %DeleteFrame as Button
 @onready var move_frame_left := %MoveFrameLeft as Button
 @onready var move_frame_right := %MoveFrameRight as Button
@@ -1760,3 +1761,9 @@ func _on_layer_frame_h_split_dragged(offset: int) -> void:
 		layer_frame_header_h_split.split_offset = offset
 	if layer_frame_h_split.split_offset != offset:
 		layer_frame_h_split.split_offset = offset
+
+
+func _on_keyframe_timeline_check_button_toggled(toggled_on: bool) -> void:
+	keyframe_timeline.visible = toggled_on
+	layer_frame_header_h_split.get_parent().visible = not toggled_on
+	frame_scroll_container.get_parent().visible = not toggled_on
