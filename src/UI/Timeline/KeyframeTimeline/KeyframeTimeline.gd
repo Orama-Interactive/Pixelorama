@@ -247,6 +247,7 @@ func select_keyframes() -> void:
 	trans_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	properties_grid_container.add_child(trans_label)
 	var trans_type_options := OptionButton.new()
+	trans_type_options.name = "TransTypeOptions"
 	trans_type_options.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	trans_type_options.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	trans_type_options.add_item("Linear", Tween.TRANS_LINEAR)
@@ -271,6 +272,7 @@ func select_keyframes() -> void:
 	easing_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	properties_grid_container.add_child(easing_label)
 	var ease_type_options := OptionButton.new()
+	ease_type_options.name = "EaseTypeOptions"
 	ease_type_options.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	ease_type_options.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	ease_type_options.add_item("Ease in", Tween.EASE_IN)
@@ -324,6 +326,7 @@ func append_keyframes_to_selection(rect: Rect2) -> void:
 func _on_keyframe_property_changed(new_value, property_name: String) -> void:
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Change keyframe %s" % property_name, UndoRedo.MERGE_ENDS)
+	var last_key_button: KeyframeButton
 	for key_button in get_selected_keyframe_buttons():
 		var dict := key_button.dict
 		var param_name := key_button.param_name
@@ -331,9 +334,45 @@ func _on_keyframe_property_changed(new_value, property_name: String) -> void:
 		var old_value = dict[param_name][frame_index][property_name]
 		undo_redo.add_do_method(func(): dict[param_name][frame_index][property_name] = new_value)
 		undo_redo.add_undo_method(func(): dict[param_name][frame_index][property_name] = old_value)
+		last_key_button = key_button
+	var last_dict := last_key_button.dict
+	var last_param_name := last_key_button.param_name
+	var last_frame_index := last_key_button.frame_index
+	var property_dict := last_dict[last_param_name][last_frame_index] as Dictionary
+	var last_key_id := last_key_button.keyframe_id
+	undo_redo.add_do_method(_update_keyframe_property_ui.bind(property_dict, last_key_id))
+	undo_redo.add_undo_method(_update_keyframe_property_ui.bind(property_dict, last_key_id))
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
+
+
+## Called on undo/redo when changing a keyframe property
+func _update_keyframe_property_ui(dict: Dictionary, keyframe_id: int) -> void:
+	if keyframe_id != selected_keyframes[-1]:
+		return
+	var value = dict.get("value")
+	var trans_type: int = dict.get("trans", Tween.TRANS_LINEAR)
+	var ease_type: Tween.EaseType = dict.get("ease", Tween.EASE_IN)
+	var property_value_node := properties_grid_container.get_child(1)
+	if property_value_node is CheckBox:
+		property_value_node.set_pressed_no_signal(value)
+	elif property_value_node is ValueSlider:
+		property_value_node.set_value_no_signal_update_display(value)
+	elif property_value_node is ValueSliderV2:
+		property_value_node.set_value_no_signal(value)
+	elif property_value_node is ValueSliderV3:
+		property_value_node.set_value_no_signal(value)
+	elif property_value_node is ColorPickerButton:
+		property_value_node.color = value
+	elif property_value_node is LineEdit or property_value_node is TextEdit:
+		property_value_node.text = value
+	var trans_type_options := (
+		properties_grid_container.get_node(^"TransTypeOptions") as OptionButton
+	)
+	trans_type_options.select(trans_type)
+	var ease_type_options := properties_grid_container.get_node(^"EaseTypeOptions") as OptionButton
+	ease_type_options.select(ease_type)
 
 
 func add_effect_keyframe(effect: LayerEffect, frame_index: int, param_name: String) -> void:

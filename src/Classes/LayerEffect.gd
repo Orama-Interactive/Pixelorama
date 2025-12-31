@@ -60,11 +60,11 @@ func get_params(frame_index: int) -> Dictionary:
 			var elapsed := frame_index - frame_edges[0]
 			var delta = max_value - min_value
 			var duration := frame_edges[1] - frame_edges[0]
-			var trans_type: int = max_params.get("trans", Tween.TRANS_LINEAR)
+			var trans_type: int = min_params.get("trans", Tween.TRANS_LINEAR)
 			if trans_type == Tween.TRANS_SPRING + 1:
 				to_return[param] = min_value
 				continue
-			var ease_type: Tween.EaseType = max_params.get("ease", Tween.EASE_IN)
+			var ease_type: Tween.EaseType = min_params.get("ease", Tween.EASE_IN)
 			to_return[param] = Tween.interpolate_value(
 				min_value, delta, elapsed, duration, trans_type, ease_type
 			)
