@@ -231,6 +231,8 @@ func _create_object_property_nodes(object: Node, title := "Node") -> Array[Folda
 	for prop in property_list:
 		var prop_name: String = prop["name"]
 		var curr_value = object.get_indexed(prop_name)
+		if curr_value == null:
+			continue
 		var prop_name_nodepath := NodePath(prop_name)
 		var subname_count := prop_name_nodepath.get_subname_count()
 		var last_subname_index := subname_count - 1

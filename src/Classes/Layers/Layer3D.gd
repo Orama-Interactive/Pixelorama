@@ -105,7 +105,7 @@ func add_nodes(size: Vector2i) -> void:
 	animation.length = project.frames.size()
 	var dir_light := create_node(ObjectType.DIR_LIGHT)
 	dir_light.transform = Transform3D(Basis(), Vector3(-2.5, 0, 0))
-	parent_node.add_child(dir_light)
+	parent_node.add_child(dir_light, true)
 	viewport.add_child(animation_player)
 	animation_player.owner = viewport
 	viewport.add_child(camera)
@@ -151,50 +151,59 @@ static func create_node(type: ObjectType, custom_mesh: Mesh = null) -> Node3D:
 	match type:
 		ObjectType.BOX:
 			node3d = MeshInstance3D.new()
+			node3d.name = "BoxMesh"
 			node3d.mesh = BoxMesh.new()
 		ObjectType.SPHERE:
 			node3d = MeshInstance3D.new()
+			node3d.name = "SphereMesh"
 			node3d.mesh = SphereMesh.new()
 		ObjectType.CAPSULE:
 			node3d = MeshInstance3D.new()
+			node3d.name = "CapsuleMesh"
 			node3d.mesh = CapsuleMesh.new()
 		ObjectType.CYLINDER:
 			node3d = MeshInstance3D.new()
+			node3d.name = "CylinderMesh"
 			node3d.mesh = CylinderMesh.new()
 		ObjectType.PRISM:
 			node3d = MeshInstance3D.new()
+			node3d.name = "PrismMesh"
 			node3d.mesh = PrismMesh.new()
 		ObjectType.PLANE:
 			node3d = MeshInstance3D.new()
+			node3d.name = "PlaneMesh"
 			node3d.mesh = PlaneMesh.new()
 		ObjectType.TORUS:
 			node3d = MeshInstance3D.new()
+			node3d.name = "TorusMesh"
 			node3d.mesh = TorusMesh.new()
 		ObjectType.TEXT:
 			node3d = MeshInstance3D.new()
+			node3d.name = "TextMesh"
 			var mesh := TextMesh.new()
 			mesh.font = Themes.get_font()
 			mesh.text = "Sample"
 			node3d.mesh = mesh
 		ObjectType.ARRAY_MESH:
 			node3d = MeshInstance3D.new()
+			node3d.name = "CustomMesh"
 			node3d.mesh = custom_mesh
 		ObjectType.DIR_LIGHT:
 			node3d = DirectionalLight3D.new()
+			node3d.name = "DirectionalLight"
 			Global.canvas.gizmos_3d.add_always_visible(node3d, DIR_LIGHT_TEXTURE)
 		ObjectType.SPOT_LIGHT:
 			node3d = SpotLight3D.new()
+			node3d.name = "SpotLight"
 			Global.canvas.gizmos_3d.add_always_visible(node3d, SPOT_LIGHT_TEXTURE)
 		ObjectType.OMNI_LIGHT:
 			node3d = OmniLight3D.new()
+			node3d.name = "OmniLight"
 			node3d.omni_range = 1.0
 			Global.canvas.gizmos_3d.add_always_visible(node3d, OMNI_LIGHT_TEXTURE)
 	if node3d is MeshInstance3D and not is_instance_valid(node3d.mesh.surface_get_material(0)):
 		var material := StandardMaterial3D.new()
 		node3d.mesh.surface_set_material(0, material)
-		#print(node3d.mesh.get_property_list())
-		#print(material.get_property_list())
-	#print(node3d.get_property_list())
 	return node3d
 
 
