@@ -32,9 +32,6 @@ func _ready() -> void:
 
 
 func _on_cel_switched() -> void:
-	object_tree.clear()
-	var root := object_tree.create_item()
-	root.set_text(0, "Root")
 	if is_instance_valid(layer_3d):
 		if layer_3d.selected_object_changed.is_connected(_on_selected_object):
 			layer_3d.selected_object_changed.disconnect(_on_selected_object)
@@ -45,6 +42,13 @@ func _on_cel_switched() -> void:
 	layer_3d = Global.current_project.layers[Global.current_project.current_layer]
 	layer_3d.selected_object_changed.connect(_on_selected_object)
 	remove_object_button.disabled = not is_instance_valid(layer_3d.selected)
+	_setup_tree()
+
+
+func _setup_tree() -> void:
+	object_tree.clear()
+	var root := object_tree.create_item()
+	root.set_text(0, "Root")
 	for child in layer_3d.parent_node.get_children():
 		var tree_item := object_tree.create_item()
 		tree_item.set_text(0, child.name)
@@ -65,7 +69,9 @@ func _add_object(type: Layer3D.ObjectType, custom_mesh: Mesh = null) -> void:
 	undo_redo.add_do_method(layer_3d.parent_node.add_child.bind(node3d))
 	undo_redo.add_do_property(node3d, &"owner", layer_3d.viewport)
 	undo_redo.add_do_reference(node3d)
+	undo_redo.add_do_method(_setup_tree)
 	undo_redo.add_undo_method(layer_3d.parent_node.remove_child.bind(node3d))
+	undo_redo.add_undo_method(_setup_tree)
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.add_do_method(sprite_changed_this_frame)
@@ -109,8 +115,10 @@ func _on_remove_object_pressed() -> void:
 				undo_redo.add_undo_method(layer_3d.animation.track_insert_key.bind(idx, key_time, key_value, key_transition))
 
 	undo_redo.add_do_method(layer_3d.parent_node.remove_child.bind(layer_3d.selected))
+	undo_redo.add_do_method(_setup_tree)
 	undo_redo.add_undo_method(layer_3d.parent_node.add_child.bind(layer_3d.selected))
 	undo_redo.add_undo_reference(layer_3d.selected)
+	undo_redo.add_undo_method(_setup_tree)
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.add_do_method(sprite_changed_this_frame)
