@@ -34,7 +34,7 @@ var world_environment: WorldEnvironment
 var camera: Camera3D  ## Camera that is used to render the Image.
 var animation_player: AnimationPlayer
 var animation: Animation
-## The currently selected [Cel3DObject].
+## The currently selected [Node3D].
 var selected: Node3D = null:
 	set(value):
 		# If there was a previously selected object, disconnect the tree_exiting signal.

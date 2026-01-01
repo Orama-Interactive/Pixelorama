@@ -115,9 +115,9 @@ func _cel_switched() -> void:
 
 
 func _on_selected_object(new_object: Node3D, old_object: Node3D) -> void:
-	if is_instance_valid(new_object):
+	if is_instance_valid(new_object) and new_object is VisualInstance3D:
 		get_points(new_object, true)
-	if is_instance_valid(old_object) and new_object != old_object:
+	if is_instance_valid(old_object) and new_object != old_object and old_object is VisualInstance3D:
 		clear_points(old_object)
 
 

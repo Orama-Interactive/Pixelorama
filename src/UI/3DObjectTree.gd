@@ -49,9 +49,16 @@ func _setup_tree() -> void:
 	object_tree.clear()
 	var root := object_tree.create_item()
 	root.set_text(0, "Root")
-	for child in layer_3d.parent_node.get_children():
-		var tree_item := object_tree.create_item()
+	_populate_tree(layer_3d.parent_node, root)
+
+
+func _populate_tree(parent_node: Node, parent_item: TreeItem) -> void:
+	for child in parent_node.get_children():
+		if child is not Node3D:
+			continue
+		var tree_item := parent_item.create_child()
 		tree_item.set_text(0, child.name)
+		_populate_tree(child, tree_item)
 
 
 func _new_object_popup_id_pressed(id: Layer3D.ObjectType) -> void:
@@ -82,7 +89,13 @@ func _add_object(type: Layer3D.ObjectType, custom_mesh: Mesh = null) -> void:
 func _on_object_tree_item_selected() -> void:
 	if layer_3d == null:
 		return
-	var node := layer_3d.parent_node.get_node_or_null(object_tree.get_selected().get_text(0))
+	var tree_item := object_tree.get_selected()
+	var node_path := tree_item.get_text(0)
+	tree_item = tree_item.get_parent()
+	while tree_item != null and tree_item != object_tree.get_root():
+		node_path = tree_item.get_text(0) + "/" + node_path
+		tree_item = tree_item.get_parent()
+	var node := layer_3d.parent_node.get_node_or_null(node_path)
 	if is_instance_valid(node):
 		layer_3d.selected = node
 	else:
@@ -114,9 +127,10 @@ func _on_remove_object_pressed() -> void:
 				var key_transition := layer_3d.animation.track_get_key_transition(i, j)
 				undo_redo.add_undo_method(layer_3d.animation.track_insert_key.bind(idx, key_time, key_value, key_transition))
 
-	undo_redo.add_do_method(layer_3d.parent_node.remove_child.bind(layer_3d.selected))
+	var parent_node := layer_3d.selected.get_parent()
+	undo_redo.add_do_method(parent_node.remove_child.bind(layer_3d.selected))
 	undo_redo.add_do_method(_setup_tree)
-	undo_redo.add_undo_method(layer_3d.parent_node.add_child.bind(layer_3d.selected))
+	undo_redo.add_undo_method(parent_node.add_child.bind(layer_3d.selected))
 	undo_redo.add_undo_reference(layer_3d.selected)
 	undo_redo.add_undo_method(_setup_tree)
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))

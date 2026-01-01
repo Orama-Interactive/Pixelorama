@@ -92,6 +92,8 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 		var new_path := SHADERS_DIRECTORY.path_join(file.get_file())
 		DirAccess.copy_absolute(file, new_path)
 		shader_copied.emit(new_path)
+	elif file_ext == "gltf" or file_ext == "glb":  # 3D scene
+		open_3d_scene_file(file)
 	elif file_ext == "mp3" or file_ext == "wav":  # Audio file
 		open_audio_file(file)
 	elif file_ext in FONT_FILE_EXTENSIONS:
@@ -1065,6 +1067,19 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 
 	if prev_project_empty:
 		Global.tabs.delete_tab(prev_project_pos)
+
+
+func open_3d_scene_file(path: String) -> void:
+	var gltf_document_load := GLTFDocument.new()
+	var gltf_state_load := GLTFState.new()
+	var error = gltf_document_load.append_from_file(path, gltf_state_load)
+	if error != OK:
+		return
+	var gltf_scene_root_node := gltf_document_load.generate_scene(gltf_state_load)
+	var project := Global.current_project
+	var new_layer := Layer3D.new(project, path.get_basename().get_file())
+	new_layer.parent_node.add_child(gltf_scene_root_node)
+	Global.animation_timeline.add_layer(new_layer, project)
 
 
 func open_audio_file(path: String) -> void:
