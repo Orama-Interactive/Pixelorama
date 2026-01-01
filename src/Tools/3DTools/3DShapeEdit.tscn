@@ -1,49 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cg7d36746on67"]
+[gd_scene load_steps=3 format=3 uid="uid://cg7d36746on67"]
 
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
 [ext_resource type="Script" uid="uid://d3my38wgqe4hq" path="res://src/Tools/3DTools/3DShapeEdit.gd" id="2"]
 
-[sub_resource type="InputEventAction" id="InputEventAction_8sqgw"]
-action = &"delete"
-
-[sub_resource type="Shortcut" id="34"]
-events = [SubResource("InputEventAction_8sqgw")]
-
 [node name="3DShapeEdit" instance=ExtResource("1")]
 script = ExtResource("2")
-
-[node name="HandleObjects" type="GridContainer" parent="." index="2"]
-layout_mode = 2
-columns = 2
-
-[node name="NewObjectMenuButton" type="MenuButton" parent="HandleObjects" index="0"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 2
-mouse_default_cursor_shape = 2
-text = "Add new object"
-flat = false
-
-[node name="RemoveObject" type="Button" parent="HandleObjects" index="1"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_default_cursor_shape = 2
-disabled = true
-shortcut = SubResource("34")
-text = "Remove object"
-
-[node name="LoadModelDialog" type="FileDialog" parent="." index="3" groups=["FileDialogs"]]
-mode = 1
-title = "Open File(s)"
-size = Vector2i(558, 300)
-ok_button_text = "Open"
-file_mode = 1
-access = 2
-filters = PackedStringArray("*.obj")
-show_hidden_files = true
-
-[connection signal="pressed" from="HandleObjects/RemoveObject" to="." method="_on_RemoveObject_pressed"]
-[connection signal="files_selected" from="LoadModelDialog" to="." method="_on_LoadModelDialog_files_selected"]
-[connection signal="visibility_changed" from="LoadModelDialog" to="." method="_on_load_model_dialog_visibility_changed"]
