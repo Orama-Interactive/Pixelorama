@@ -128,16 +128,22 @@ func _gui_input(event: InputEvent) -> void:
 				state = HELD
 				set_meta("mouse_start_position", get_local_mouse_position())
 			elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				drag_started.emit()
+				_start_value = value
 				if snap_by_default:
 					value += step if event.ctrl_pressed else snap_step
 				else:
 					value += snap_step if event.ctrl_pressed else step
+				drag_ended.emit(not is_equal_approx(_start_value, value))
 				get_viewport().set_input_as_handled()
 			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				drag_started.emit()
+				_start_value = value
 				if snap_by_default:
 					value -= step if event.ctrl_pressed else snap_step
 				else:
 					value -= snap_step if event.ctrl_pressed else step
+				drag_ended.emit(not is_equal_approx(_start_value, value))
 				get_viewport().set_input_as_handled()
 	elif state == HELD:
 		if event.is_action_released("left_mouse"):
