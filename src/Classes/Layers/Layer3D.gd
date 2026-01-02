@@ -346,35 +346,97 @@ func node_change_scale(node: Node3D, diff: Vector3, axis: Vector3, dir: Vector3)
 func update_animation_track(object: Node, property: StringName, current_value: Variant, prev_value: Variant, frame_index: int) -> void:
 	var undo_redo := project.undo_redo
 	var property_path := NodePath(String(viewport.get_path_to(object)) + ":" + property)
-	var track_idx := animation.find_track(property_path, Animation.TYPE_VALUE)
 
-	if track_idx == -1:
-		undo_redo.create_action("Create 3D animation track")
-		track_idx = animation.get_track_count()
-		undo_redo.add_do_method(animation.add_track.bind(Animation.TYPE_VALUE))
-		undo_redo.add_do_method(animation.track_set_path.bind(track_idx, property_path))
-		undo_redo.add_undo_method(animation.remove_track.bind(track_idx))
-		undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-		undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
-		undo_redo.commit_action()
+	var track_existed := animation.find_track(property_path, Animation.TYPE_VALUE) != -1
+	var key_existed := false
+	if track_existed:
+		var t := animation.find_track(property_path, Animation.TYPE_VALUE)
+		key_existed = animation.track_find_key(t, frame_index, Animation.FIND_MODE_APPROX) != -1
 
-	var key_idx := animation.track_find_key(track_idx, frame_index, Animation.FIND_MODE_APPROX)
-	if key_idx == -1:
-		undo_redo.create_action("Create 3D animation key")
-		key_idx = animation.track_get_key_count(track_idx)
-		undo_redo.add_do_method(animation.track_insert_key.bind(track_idx, frame_index, prev_value))
-		undo_redo.add_undo_method(animation.track_remove_key.bind(track_idx, key_idx))
-		undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-		undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
-		undo_redo.commit_action()
 	undo_redo.create_action("Change 3D object %s" % property, UndoRedo.MERGE_ENDS)
-	undo_redo.add_do_method(animation.track_set_key_value.bind(track_idx, key_idx, current_value))
-	undo_redo.add_undo_method(animation.track_set_key_value.bind(track_idx, key_idx, prev_value))
+
+	undo_redo.add_do_method(
+		_do_set_anim_key.bind(
+			property_path,
+			frame_index,
+			current_value,
+			prev_value
+		)
+	)
+
+	undo_redo.add_undo_method(
+		_undo_set_anim_key.bind(
+			object,
+			property,
+			property_path,
+			frame_index,
+			prev_value,
+			track_existed,
+			key_existed
+		)
+	)
+
 	undo_redo.add_do_method(emit_signal.bind(&"node_property_changed", object, property, frame_index))
 	undo_redo.add_undo_method(emit_signal.bind(&"node_property_changed", object, property, frame_index))
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
+
+
+func _do_set_anim_key(
+	property_path: NodePath,
+	frame_index: int,
+	value: Variant,
+	fallback_value: Variant
+) -> void:
+	var track_idx := animation.find_track(property_path, Animation.TYPE_VALUE)
+
+	if track_idx == -1:
+		track_idx = animation.get_track_count()
+		animation.add_track(Animation.TYPE_VALUE)
+		animation.track_set_path(track_idx, property_path)
+
+	var key_idx := animation.track_find_key(
+		track_idx,
+		frame_index,
+		Animation.FIND_MODE_APPROX
+	)
+
+	if key_idx == -1:
+		animation.track_insert_key(track_idx, frame_index, fallback_value)
+		key_idx = animation.track_find_key(track_idx, frame_index)
+
+	animation.track_set_key_value(track_idx, key_idx, value)
+
+
+func _undo_set_anim_key(
+	object: Node,
+	property: String,
+	property_path: NodePath,
+	frame_index: int,
+	prev_value: Variant,
+	track_existed: bool,
+	key_existed: bool
+) -> void:
+	var track_idx := animation.find_track(property_path, Animation.TYPE_VALUE)
+	if track_idx == -1:
+		return
+
+	var key_idx := animation.track_find_key(
+		track_idx,
+		frame_index,
+		Animation.FIND_MODE_APPROX
+	)
+
+	if key_idx != -1:
+		if key_existed:
+			animation.track_set_key_value(track_idx, key_idx, prev_value)
+		else:
+			animation.track_remove_key(track_idx, key_idx)
+			object.set_indexed(property, prev_value)
+
+	if not track_existed and animation.track_get_key_count(track_idx) == 0:
+		animation.remove_track(track_idx)
 
 
 func _on_node_property_changed(_node: Node, _property: StringName, frame_index: int) -> void:
