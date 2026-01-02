@@ -124,6 +124,9 @@ func _recreate_timeline() -> void:
 		for param_name in effect.params:
 			if param_name in ["PXO_time", "PXO_frame_index", "PXO_layer_index"]:
 				continue
+			var value = effect.params[param_name]
+			if not effect.is_interpolatable_type(value) and typeof(value) != TYPE_BOOL:
+				continue
 			var param_tree_item := tree_item.create_child()
 			param_tree_item.set_text(0, Keychain.humanize_snake_case(param_name))
 			var param_track := KeyframeAnimationTrack.new()
