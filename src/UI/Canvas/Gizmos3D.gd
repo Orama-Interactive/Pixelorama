@@ -124,13 +124,9 @@ func _cel_switched() -> void:
 
 
 func _on_selected_object(new_object: Node3D, old_object: Node3D) -> void:
-	if is_instance_valid(new_object) and new_object is VisualInstance3D:
+	if is_instance_valid(new_object):
 		get_points(new_object, true)
-	if (
-		is_instance_valid(old_object)
-		and new_object != old_object
-		and old_object is VisualInstance3D
-	):
+	if is_instance_valid(old_object) and new_object != old_object:
 		clear_points(old_object)
 
 
@@ -149,13 +145,6 @@ func _on_node_property_changed(node: Node, _property: StringName, frame_index: i
 	queue_redraw()
 
 
-func _find_selected_object() -> Cel3DObject:
-	for object in points_per_object:
-		if is_instance_valid(object) and object.selected:
-			return object
-	return null
-
-
 func add_always_visible(object3d: VisualInstance3D, texture: Texture2D) -> void:
 	always_visible[object3d] = texture
 	if not object3d.tree_exiting.is_connected(remove_always_visible):
@@ -169,11 +158,14 @@ func remove_always_visible(object3d: VisualInstance3D) -> void:
 	queue_redraw()
 
 
-func get_points(object3d: VisualInstance3D, selected: bool) -> void:
+func get_points(object3d: Node3D, selected: bool) -> void:
 	if not is_instance_valid(object3d):
 		return
+
 	var camera := object3d.get_viewport().get_camera_3d()
-	var aabb := object3d.get_aabb()
+	var aabb := AABB(Vector3.ZERO, Vector3.ONE)
+	if object3d is VisualInstance3D:
+		aabb = (object3d as VisualInstance3D).get_aabb()
 	var corners := PackedVector2Array()
 	var corner_per_dimension := PackedInt32Array([0, 1])
 	for x in corner_per_dimension:
@@ -181,8 +173,6 @@ func get_points(object3d: VisualInstance3D, selected: bool) -> void:
 			for z in corner_per_dimension:
 				var local := aabb.position + Vector3(x, y, z) * aabb.size
 				var world := object3d.global_transform * local
-				#if camera.is_position_behind(world):
-				#continue
 				corners.append(camera.unproject_position(world))
 	var points := PackedVector2Array()
 	for edge in EDGES:
@@ -242,9 +232,10 @@ func get_points(object3d: VisualInstance3D, selected: bool) -> void:
 	queue_redraw()
 
 
-func clear_points(object3d: VisualInstance3D) -> void:
-	points_per_object.erase(object3d)
-	queue_redraw()
+func clear_points(object3d: Node3D) -> void:
+	if points_per_object.has(object3d):
+		points_per_object.erase(object3d)
+		queue_redraw()
 
 
 func _draw() -> void:
