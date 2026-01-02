@@ -1765,5 +1765,6 @@ func _on_layer_frame_h_split_dragged(offset: int) -> void:
 
 func _on_keyframe_timeline_check_button_toggled(toggled_on: bool) -> void:
 	keyframe_timeline.visible = toggled_on
+	tag_scroll_container.visible = not toggled_on
 	layer_frame_header_h_split.get_parent().visible = not toggled_on
 	frame_scroll_container.get_parent().visible = not toggled_on
