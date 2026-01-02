@@ -309,6 +309,9 @@ func unselect_keyframe(key_id := -1) -> void:
 
 func _clear_keyframe_properties_container() -> void:
 	for child in properties_grid_container.get_children():
+		# Remove child is needed so that new child nodes
+		# will have the correct name.
+		properties_grid_container.remove_child(child)
 		child.queue_free()
 
 
