@@ -120,6 +120,7 @@ func _on_effect_list_pressed(menu_item_index: int, menu: PopupMenu) -> void:
 	var index: int = menu.get_item_metadata(menu_item_index)
 	var layer := Global.current_project.layers[Global.current_project.current_layer]
 	var effect := effects[index].duplicate()
+	effect.layer = layer
 	Global.current_project.undo_redo.create_action("Add layer effect")
 	Global.current_project.undo_redo.add_do_method(func(): layer.effects.append(effect))
 	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)
@@ -241,7 +242,7 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 			undo_data[cel_image.indices_image] = cel_image.indices_image.data
 		undo_data[cel_image] = cel_image.data
 		var image_size := cel_image.get_size()
-		var params := effect.params
+		var params := effect.get_params(i)
 		params["PXO_time"] = frame.position_in_seconds(project)
 		params["PXO_frame_index"] = i
 		params["PXO_layer_index"] = layer.index
