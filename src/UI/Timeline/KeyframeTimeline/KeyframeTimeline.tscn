@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://plf71ccex8tr"]
+[gd_scene load_steps=8 format=3 uid="uid://plf71ccex8tr"]
 
 [ext_resource type="Script" uid="uid://vrqfwwnows3p" path="res://src/UI/Timeline/KeyframeTimeline/KeyframeTimeline.gd" id="1_te3k4"]
 [ext_resource type="Script" uid="uid://cyarevvdmj517" path="res://src/UI/Timeline/KeyframeTimeline/KeyframeTimelineCursor.gd" id="2_3wn0x"]
 [ext_resource type="Script" uid="uid://hmhmdm0a8vgr" path="res://src/UI/Timeline/KeyframeTimeline/KeyframeTimelineTrackContainer.gd" id="2_bho5j"]
+[ext_resource type="Script" uid="uid://cbvfn34ccek0l" path="res://src/UI/Timeline/KeyframeTimeline/KeyframeTimelineFrameDisplay.gd" id="2_f3yqq"]
 
 [sub_resource type="Animation" id="Animation_f3yqq"]
 length = 0.001
@@ -54,6 +55,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 12.0
+offset_right = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -61,16 +64,12 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="FramesScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer"]
+[node name="KeyframeTimelineFrameDisplay" type="Control" parent="VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
+clip_contents = true
+custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-horizontal_scroll_mode = 3
-vertical_scroll_mode = 0
-
-[node name="FramesContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/FramesScrollContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/separation = 0
+script = ExtResource("2_f3yqq")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -84,7 +83,7 @@ size_flags_vertical = 3
 [node name="LayerElementContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/HSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.25
+size_flags_stretch_ratio = 0.3
 
 [node name="LayerElementTree" type="Tree" parent="VBoxContainer/HSplitContainer/HSplitContainer/LayerElementContainer"]
 unique_name_in_owner = true
@@ -112,7 +111,7 @@ theme_override_constants/separation = 0
 script = ExtResource("2_bho5j")
 timeline = NodePath("../../../../../..")
 
-[node name="KeyframeTimelineCursor" type="Control" parent="VBoxContainer/HSplitContainer/HSplitContainer/TrackScrollContainer/PanelContainer" node_paths=PackedStringArray("container")]
+[node name="KeyframeTimelineCursor" type="Control" parent="VBoxContainer/HSplitContainer/HSplitContainer/TrackScrollContainer/PanelContainer" node_paths=PackedStringArray("keyframe_timeline_frame_display")]
 unique_name_in_owner = true
 clip_contents = true
 custom_minimum_size = Vector2(8, 0)
@@ -121,7 +120,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 3
 mouse_filter = 2
 script = ExtResource("2_3wn0x")
-container = NodePath("../../../../../MarginContainer/FramesScrollContainer/FramesContainer")
+keyframe_timeline_frame_display = NodePath("../../../../../MarginContainer/KeyframeTimelineFrameDisplay")
 
 [node name="PropertiesPanelContainer" type="PanelContainer" parent="VBoxContainer/HSplitContainer"]
 layout_mode = 2
@@ -160,7 +159,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_0n3lj")
 }
 
-[connection signal="sort_children" from="VBoxContainer/MarginContainer/FramesScrollContainer" to="." method="_on_frames_scroll_container_sort_children"]
 [connection signal="gui_input" from="VBoxContainer/HSplitContainer/HSplitContainer/LayerElementContainer/LayerElementTree" to="." method="_on_layer_element_tree_gui_input"]
 [connection signal="resized" from="VBoxContainer/HSplitContainer/HSplitContainer/TrackScrollContainer" to="." method="_on_track_scroll_container_resized"]
 [connection signal="sort_children" from="VBoxContainer/HSplitContainer/HSplitContainer/TrackScrollContainer" to="." method="_on_track_scroll_container_sort_children"]

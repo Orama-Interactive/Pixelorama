@@ -3,7 +3,7 @@ extends Control
 const CURSOR_WIDTH := 2
 const TRIANGLE_SIZE := 8
 
-@export var container: Control
+@export var keyframe_timeline_frame_display: KeyframeTimelineFrameDisplay
 
 var cursor_color := Color.BLUE
 var is_dragged := false
@@ -16,11 +16,13 @@ var pos := global_position.x:
 func _ready() -> void:
 	get_parent().sort_children.connect(func(): global_position.x = pos)
 	Global.cel_switched.connect(update_position)
-	if is_instance_valid(container):
-		container.gui_input.connect(_on_frames_container_gui_input)
+	if is_instance_valid(keyframe_timeline_frame_display):
+		keyframe_timeline_frame_display.gui_input.connect(
+			_on_keyframe_timeline_frame_display_gui_input
+		)
 		await get_tree().process_frame
 		await get_tree().process_frame
-		var container_pos := container.get_global_rect().position.x
+		var container_pos := keyframe_timeline_frame_display.get_global_rect().position.x
 		pos = container_pos
 
 
@@ -31,7 +33,7 @@ func _notification(what: int) -> void:
 			cursor_color = pressed_cel_button_stylebox.border_color
 
 
-func _on_frames_container_gui_input(event: InputEvent) -> void:
+func _on_keyframe_timeline_frame_display_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			is_dragged = true
@@ -43,10 +45,11 @@ func _on_frames_container_gui_input(event: InputEvent) -> void:
 
 
 func _change_cel(new_pos: Vector2) -> void:
-	var container_pos := container.get_global_rect().position.x
-	var container_end := container.get_global_rect().end.x
+	var container_pos := keyframe_timeline_frame_display.get_global_rect().position.x
+	var container_end := keyframe_timeline_frame_display.get_global_rect().end.x
+	var x_offset := keyframe_timeline_frame_display.x_offset
 	pos = clampf(new_pos.x - (size.x / 2.0), container_pos, container_end)
-	var frame := floori((pos - container_pos) / KeyframeTimeline.frame_ui_size)
+	var frame := floori((pos - container_pos + x_offset) / KeyframeTimeline.frame_ui_size)
 	frame = clampi(frame, 0, Global.current_project.frames.size() - 1)
 	# Change frame
 	Global.current_project.selected_cels.clear()
@@ -60,11 +63,9 @@ func update_position() -> void:
 	if is_dragged:
 		return
 	var frame := Global.current_project.current_frame
-	var container_pos := container.get_global_rect().position.x
-	var container_end := container.get_global_rect().end.x
-	pos = clampf(
-		frame * KeyframeTimeline.frame_ui_size + container_pos, container_pos, container_end
-	)
+	var container_pos := keyframe_timeline_frame_display.get_global_rect().position.x
+	var x_offset := keyframe_timeline_frame_display.x_offset
+	pos = frame * KeyframeTimeline.frame_ui_size + container_pos - x_offset
 
 
 func _draw() -> void:

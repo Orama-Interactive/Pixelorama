@@ -22,12 +22,12 @@ var current_layer: BaseLayer:
 		track_scroll_container.scroll_vertical = v_scroll
 var layer_element_tree_vscrollbar: VScrollBar
 
-@onready var frames_scroll_container: ScrollContainer = %FramesScrollContainer
+@onready
+var keyframe_timeline_frame_display: KeyframeTimelineFrameDisplay = %KeyframeTimelineFrameDisplay
 @onready var track_scroll_container: ScrollContainer = %TrackScrollContainer
 @onready var layer_element_tree: Tree = %LayerElementTree
 @onready var track_container: VBoxContainer = %TrackContainer
 @onready var keyframe_timeline_cursor: Control = %KeyframeTimelineCursor
-@onready var frames_container: HBoxContainer = %FramesContainer
 @onready var properties_container: VBoxContainer = %PropertiesContainer
 @onready var no_key_selected_label: Label = %NoKeySelectedLabel
 @onready var properties_grid_container: GridContainer = %PropertiesGridContainer
@@ -35,7 +35,6 @@ var layer_element_tree_vscrollbar: VScrollBar
 
 
 func _ready() -> void:
-	gui_input.connect(_on_gui_input)
 	Global.project_about_to_switch.connect(_on_project_about_to_switch)
 	Global.project_switched.connect(_on_project_switched)
 	Global.cel_switched.connect(_on_cel_switched)
@@ -51,23 +50,22 @@ func _ready() -> void:
 	_on_track_scroll_container_resized()
 
 
-func _on_gui_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
+	var mouse_pos := get_global_mouse_position()
+	var timeline_rect := Rect2(global_position, size)
+	if not timeline_rect.has_point(mouse_pos) or not visible:
+		return
 	if Input.is_key_pressed(KEY_CTRL):
 		var zoom := 2 * int(event.is_action("zoom_in")) - 2 * int(event.is_action("zoom_out"))
 		if is_zero_approx(zoom):
 			return
 		frame_ui_size += zoom
 		get_viewport().set_input_as_handled()
-		var v_separator_size := 8
-		for child in frames_container.get_children():
-			if child is VSeparator:
-				v_separator_size = child.size.x
-			elif child is Label:
-				child.custom_minimum_size.x = frame_ui_size - v_separator_size
+		keyframe_timeline_frame_display.queue_redraw()
 		for track in track_container.get_children():
 			if track is not KeyframeAnimationTrack:
 				continue
-			track.custom_minimum_size.x = frames_container.get_combined_minimum_size().x
+			track.custom_minimum_size.x = frame_ui_size * Global.current_project.frames.size()
 			for key_button in track.get_children():
 				if key_button is not KeyframeButton:
 					continue
@@ -120,7 +118,7 @@ func _recreate_timeline() -> void:
 		var tree_item := layer_element_tree.create_item()
 		tree_item.set_text(0, effect.name)
 		var track := KeyframeAnimationTrack.new()
-		track.custom_minimum_size.x = frames_container.get_combined_minimum_size().x
+		track.custom_minimum_size.x = frame_ui_size * Global.current_project.frames.size()
 		track.custom_minimum_size.y = layer_element_tree.get_item_area_rect(tree_item).size.y
 		track_container.add_child(track)
 		for param_name in effect.params:
@@ -134,7 +132,7 @@ func _recreate_timeline() -> void:
 			param_track.param_name = param_name
 			param_track.is_property = true
 			var tree_item_area_rect := layer_element_tree.get_item_area_rect(param_tree_item)
-			param_track.custom_minimum_size.x = frames_container.get_combined_minimum_size().x
+			param_track.custom_minimum_size.x = frame_ui_size * Global.current_project.frames.size()
 			param_track.custom_minimum_size.y = tree_item_area_rect.size.y
 			track_container.add_child(param_track)
 			if effect.animated_params.has(param_name):
@@ -165,19 +163,9 @@ func _create_keyframe_button(
 
 
 func _add_ui_frames() -> void:
-	for child in frames_container.get_children():
-		child.queue_free()
 	var project := Global.current_project
-	for i in project.frames.size():
-		var v_separator := VSeparator.new()
-		frames_container.add_child(v_separator)
-		var frame_label := Label.new()
-		frame_label.text = str(i + 1)
-		frame_label.custom_minimum_size.x = frame_ui_size - v_separator.size.x
-		frames_container.add_child(frame_label)
-	await get_tree().process_frame
 	for child in track_container.get_children():
-		child.custom_minimum_size.x = frames_container.get_combined_minimum_size().x
+		child.custom_minimum_size.x = frame_ui_size * project.frames.size()
 
 
 func _on_keyframe_pressed(key_button: KeyframeButton) -> void:
@@ -460,7 +448,7 @@ func _invert_moves(moves: Array) -> Array:
 
 func _on_track_scroll_container_resized() -> void:
 	var split_separation := get_theme_constant(&"separation", &"SplitContainer")
-	var margin_container := frames_container.get_parent().get_parent() as MarginContainer
+	var margin_container := keyframe_timeline_frame_display.get_parent() as MarginContainer
 	margin_container.add_theme_constant_override(
 		&"margin_left", layer_element_tree.size.x + split_separation
 	)
@@ -469,12 +457,9 @@ func _on_track_scroll_container_resized() -> void:
 	)
 
 
-func _on_frames_scroll_container_sort_children() -> void:
-	track_scroll_container.scroll_horizontal = frames_scroll_container.scroll_horizontal
-
-
 func _on_track_scroll_container_sort_children() -> void:
-	frames_scroll_container.scroll_horizontal = track_scroll_container.scroll_horizontal
+	keyframe_timeline_frame_display.x_offset = track_scroll_container.scroll_horizontal
+	keyframe_timeline_frame_display.queue_redraw()
 	if is_instance_valid(layer_element_tree_vscrollbar):
 		layer_element_tree_vscrollbar.value = track_scroll_container.scroll_vertical
 
