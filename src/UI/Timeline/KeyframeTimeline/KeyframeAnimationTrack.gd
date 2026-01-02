@@ -1,7 +1,12 @@
 class_name KeyframeAnimationTrack
 extends Control
 
+## An enum that contains the possible types of the track.
+## Such as layer effect, and in the future, 3D and bones.
+enum TrackTypes { LAYER_EFFECT }
+
 var timeline: KeyframeTimeline
+var type := TrackTypes.LAYER_EFFECT
 var effect: LayerEffect
 var param_name: String
 var is_property := false
@@ -47,4 +52,5 @@ func _on_popup_menu_id_pressed(id: int) -> void:
 			and effect.animated_params[param_name].has(keyframe_at)
 		):
 			return
-		timeline.add_effect_keyframe(effect, keyframe_at, param_name)
+		if type == TrackTypes.LAYER_EFFECT:
+			timeline.add_effect_keyframe(effect, keyframe_at, param_name)

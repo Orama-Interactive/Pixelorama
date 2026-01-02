@@ -9,14 +9,22 @@ var layer: BaseLayer
 var category := ""
 var params: Dictionary[String, Variant] = {}
 ## A Dictionary containing another Dictionary that
-## maps the frame indices (int) to another Dictionary of value, trans and ease.
+## maps the frame indices (int) to another Dictionary of value, trans, ease,
+## and a layer-scope unique ID.
 ## Example:
 ## [codeblock]
-##{"offset":
+##{
+##	"offset":
 ##	{
 ##		0: {id: 0, "value": Vector2(0, 0), "trans": 0, "ease": 2},
 ##		10: {id: 1, "value": Vector2(64, 64), "trans": 1, "ease": 3},
-##	}
+##	},
+##	"wrap_around":
+##	{
+##		1: {id: 2, "value": false, "trans": 0, "ease": 0},
+##		3: {id: 3, "value": true, "trans": 0, "ease": 0},
+##		10: {id: 4, "value": false, "trans": 0, "ease": 0},
+##	},
 ##}
 ## [/codeblock]
 var animated_params: Dictionary[String, Dictionary] = {}

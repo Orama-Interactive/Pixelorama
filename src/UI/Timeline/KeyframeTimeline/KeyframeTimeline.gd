@@ -112,12 +112,14 @@ func _recreate_timeline() -> void:
 	layer_element_tree.create_item()
 	for child in track_container.get_children():
 		child.queue_free()
+	#region Add tracks for layer effects.
 	# Await is needed so that the params get added to the layer effect.
 	await get_tree().process_frame
 	for effect in current_layer.effects:
 		var tree_item := layer_element_tree.create_item()
 		tree_item.set_text(0, effect.name)
 		var track := KeyframeAnimationTrack.new()
+		track.type = KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT
 		track.custom_minimum_size.x = frame_ui_size * Global.current_project.frames.size()
 		track.custom_minimum_size.y = layer_element_tree.get_item_area_rect(tree_item).size.y
 		track_container.add_child(track)
@@ -144,6 +146,7 @@ func _recreate_timeline() -> void:
 						frame_index, param_track, effect.animated_params, param_name
 					)
 					param_track.add_child(key_button)
+	#endregion
 	select_keyframes()
 	await get_tree().process_frame
 	track_scroll_container.scroll_horizontal = h_scroll
