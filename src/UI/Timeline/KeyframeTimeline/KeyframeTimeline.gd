@@ -340,6 +340,8 @@ func _on_keyframe_property_changed(new_value, property_name: String) -> void:
 
 ## Called on undo/redo when changing a keyframe property
 func _update_keyframe_property_ui(dict: Dictionary, keyframe_id: int) -> void:
+	if selected_keyframes.is_empty():
+		return
 	if keyframe_id != selected_keyframes[-1]:
 		return
 	var value = dict.get("value")

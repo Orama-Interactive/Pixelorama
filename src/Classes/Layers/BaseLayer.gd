@@ -256,11 +256,11 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 	if not effects_enabled:
 		return image
 	var image_size := image.get_size()
+	var frame := cel.get_frame(project)
+	var frame_index := project.frames.find(frame)
 	for effect in effects:
 		if not effect.enabled or not is_instance_valid(effect.shader):
 			continue
-		var frame := cel.get_frame(project)
-		var frame_index := project.frames.find(frame)
 		var params := effect.get_params(frame_index)
 		params["PXO_time"] = frame.position_in_seconds(project)
 		params["PXO_frame_index"] = frame_index
@@ -276,8 +276,12 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 		for effect in ancestor.effects:
 			if not effect.enabled:
 				continue
+			var params := effect.get_params(frame_index)
+			params["PXO_time"] = frame.position_in_seconds(project)
+			params["PXO_frame_index"] = frame_index
+			params["PXO_layer_index"] = index
 			var shader_image_effect := ShaderImageEffect.new()
-			shader_image_effect.generate_image(image, effect.shader, effect.params, image_size)
+			shader_image_effect.generate_image(image, effect.shader, params, image_size)
 	return image
 
 
