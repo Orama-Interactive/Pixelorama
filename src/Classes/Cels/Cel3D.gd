@@ -17,6 +17,7 @@ func size_changed(new_size: Vector2i) -> void:
 	var viewport_image := viewport.get_texture().get_image()
 	(image_texture as ImageTexture).set_image(viewport_image)
 
+
 # Overridden methods
 
 

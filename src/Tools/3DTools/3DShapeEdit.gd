@@ -76,7 +76,10 @@ func draw_move(pos: Vector2i) -> void:
 		var proj_mouse_pos := camera.project_position(pos, camera.position.z)
 		var proj_prev_mouse_pos := camera.project_position(_prev_mouse_pos, camera.position.z)
 		layer_3d.node_change_transform(
-			layer_3d.selected, proj_mouse_pos, proj_prev_mouse_pos, Global.canvas.gizmos_3d.applying_gizmos
+			layer_3d.selected,
+			proj_mouse_pos,
+			proj_prev_mouse_pos,
+			Global.canvas.gizmos_3d.applying_gizmos
 		)
 		_prev_mouse_pos = pos
 	sprite_changed_this_frame()
@@ -100,7 +103,9 @@ func cursor_move(pos: Vector2i) -> void:
 	if _dragging:
 		return
 	# Hover logic
-	var currently_hovering: Node3D = Global.canvas.gizmos_3d.get_hovering_light(Global.canvas.current_pixel)
+	var currently_hovering: Node3D = Global.canvas.gizmos_3d.get_hovering_light(
+		Global.canvas.current_pixel
+	)
 	if currently_hovering == null:
 		var intersect_info := get_3d_node_at_pos(pos, layer_3d.camera)
 		if not intersect_info.is_empty():
@@ -346,7 +351,9 @@ func _create_object_property_nodes(object: Node, title := "Node") -> Array[Folda
 				color_picker_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				color_picker_button.color = curr_value
 				color_picker_button.button_down.connect(func(): _undo_data = _get_undo_data(object))
-				color_picker_button.color_changed.connect(_set_value_from_node.bind(object, prop_name))
+				color_picker_button.color_changed.connect(
+					_set_value_from_node.bind(object, prop_name)
+				)
 				grid_container.add_child(label)
 				grid_container.add_child(color_picker_button)
 			TYPE_STRING, TYPE_STRING_NAME:
@@ -358,10 +365,17 @@ func _create_object_property_nodes(object: Node, title := "Node") -> Array[Folda
 				line_edit.name = prop_name
 				line_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				line_edit.text = curr_value
-				line_edit.editing_toggled.connect(func(toggled_on: bool): if toggled_on: _undo_data = _get_undo_data(object))
+				line_edit.editing_toggled.connect(
+					_on_object_property_line_edit_editing_toggled.bind(object)
+				)
 				line_edit.text_submitted.connect(_set_value_from_node.bind(object, prop_name))
 				grid_container.add_child(line_edit)
 	return containers
+
+
+func _on_object_property_line_edit_editing_toggled(toggled_on: bool, object: Node) -> void:
+	if toggled_on:
+		_undo_data = _get_undo_data(object)
 
 
 func _create_foldable_container(object: Node, title: String) -> FoldableContainer:

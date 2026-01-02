@@ -118,14 +118,24 @@ func _on_remove_object_pressed() -> void:
 			var idx := i - tracks_removed
 			tracks_removed += 1
 			undo_redo.add_do_method(layer_3d.animation.remove_track.bind(idx))
-			undo_redo.add_undo_method(layer_3d.animation.add_track.bind(layer_3d.animation.track_get_type(i), idx))
+			undo_redo.add_undo_method(
+				layer_3d.animation.add_track.bind(layer_3d.animation.track_get_type(i), idx)
+			)
 			undo_redo.add_undo_method(layer_3d.animation.track_set_path.bind(idx, track_np))
-			undo_redo.add_undo_method(layer_3d.animation.track_set_interpolation_type.bind(idx, layer_3d.animation.track_get_interpolation_type(i)))
+			undo_redo.add_undo_method(
+				layer_3d.animation.track_set_interpolation_type.bind(
+					idx, layer_3d.animation.track_get_interpolation_type(i)
+				)
+			)
 			for j in layer_3d.animation.track_get_key_count(i):
 				var key_time := layer_3d.animation.track_get_key_time(i, j)
 				var key_value = layer_3d.animation.track_get_key_value(i, j)
 				var key_transition := layer_3d.animation.track_get_key_transition(i, j)
-				undo_redo.add_undo_method(layer_3d.animation.track_insert_key.bind(idx, key_time, key_value, key_transition))
+				undo_redo.add_undo_method(
+					layer_3d.animation.track_insert_key.bind(
+						idx, key_time, key_value, key_transition
+					)
+				)
 
 	var parent_node := layer_3d.selected.get_parent()
 	undo_redo.add_do_method(parent_node.remove_child.bind(layer_3d.selected))

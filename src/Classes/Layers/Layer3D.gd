@@ -28,26 +28,6 @@ const DIR_LIGHT_TEXTURE := preload("res://assets/graphics/gizmos/directional_lig
 const SPOT_LIGHT_TEXTURE := preload("res://assets/graphics/gizmos/spot_light.svg")
 const OMNI_LIGHT_TEXTURE := preload("res://assets/graphics/gizmos/omni_light.svg")
 
-var viewport: SubViewport  ## SubViewport used by the layer.
-var parent_node: Node3D  ## Parent node of the 3D objects placed in the layer.
-var world_environment: WorldEnvironment
-var camera: Camera3D  ## Camera that is used to render the Image.
-var animation_player: AnimationPlayer
-var animation: Animation
-## The currently selected [Node3D].
-var selected: Node3D = null:
-	set(value):
-		# If there was a previously selected object, disconnect the tree_exiting signal.
-		if is_instance_valid(selected) and selected.tree_exiting.is_connected(unselect):
-			selected.tree_exiting.disconnect(unselect)
-		selected_object_changed.emit(value, selected)
-		selected = value
-		# If we selected an object, connect its tree_exiting signal to the unselect method.
-		# This is needed in case the selected object gets removed, in which case,
-		# we want to unselect that object.
-		if is_instance_valid(selected) and not selected.tree_exiting.is_connected(unselect):
-			selected.tree_exiting.connect(unselect)
-
 static var properties_to_exclude: Array[String] = [
 	"process_mode",
 	"process_priority",
@@ -93,6 +73,26 @@ static var properties_to_exclude: Array[String] = [
 	"directional_shadow_split_3",
 	"lightmap_size_hint",
 ]
+
+var viewport: SubViewport  ## SubViewport used by the layer.
+var parent_node: Node3D  ## Parent node of the 3D objects placed in the layer.
+var world_environment: WorldEnvironment
+var camera: Camera3D  ## Camera that is used to render the Image.
+var animation_player: AnimationPlayer
+var animation: Animation
+## The currently selected [Node3D].
+var selected: Node3D = null:
+	set(value):
+		# If there was a previously selected object, disconnect the tree_exiting signal.
+		if is_instance_valid(selected) and selected.tree_exiting.is_connected(unselect):
+			selected.tree_exiting.disconnect(unselect)
+		selected_object_changed.emit(value, selected)
+		selected = value
+		# If we selected an object, connect its tree_exiting signal to the unselect method.
+		# This is needed in case the selected object gets removed, in which case,
+		# we want to unselect that object.
+		if is_instance_valid(selected) and not selected.tree_exiting.is_connected(unselect):
+			selected.tree_exiting.connect(unselect)
 
 
 func _init(_project: Project, _name := "", from_pxo := false) -> void:
@@ -270,7 +270,23 @@ static func filter_object_properties(dict: Dictionary) -> bool:
 	var usage := dict["usage"] as int
 	var type := dict["type"] as Variant.Type
 	var usage_editor := usage & PROPERTY_USAGE_EDITOR == PROPERTY_USAGE_EDITOR
-	var is_type := type in [TYPE_BOOL, TYPE_INT, TYPE_FLOAT, TYPE_STRING, TYPE_VECTOR2, TYPE_VECTOR2I, TYPE_VECTOR3, TYPE_VECTOR3I, TYPE_VECTOR4, TYPE_VECTOR4I, TYPE_COLOR, TYPE_STRING_NAME]
+	var is_type := (
+		type
+		in [
+			TYPE_BOOL,
+			TYPE_INT,
+			TYPE_FLOAT,
+			TYPE_STRING,
+			TYPE_VECTOR2,
+			TYPE_VECTOR2I,
+			TYPE_VECTOR3,
+			TYPE_VECTOR3I,
+			TYPE_VECTOR4,
+			TYPE_VECTOR4I,
+			TYPE_COLOR,
+			TYPE_STRING_NAME
+		]
+	)
 	return usage_editor and is_type
 
 
@@ -343,7 +359,13 @@ func node_change_scale(node: Node3D, diff: Vector3, axis: Vector3, dir: Vector3)
 	update_animation_track(node, &"scale", node.scale, prev_scale, project.current_frame)
 
 
-func update_animation_track(object: Node, property: StringName, current_value: Variant, prev_value: Variant, frame_index: int) -> void:
+func update_animation_track(
+	object: Node,
+	property: StringName,
+	current_value: Variant,
+	prev_value: Variant,
+	frame_index: int
+) -> void:
 	var undo_redo := project.undo_redo
 	var property_path := NodePath(String(viewport.get_path_to(object)) + ":" + property)
 
@@ -356,38 +378,28 @@ func update_animation_track(object: Node, property: StringName, current_value: V
 	undo_redo.create_action("Change 3D object %s" % property, UndoRedo.MERGE_ENDS)
 
 	undo_redo.add_do_method(
-		_do_set_anim_key.bind(
-			property_path,
-			frame_index,
-			current_value,
-			prev_value
-		)
+		_do_set_anim_key.bind(property_path, frame_index, current_value, prev_value)
 	)
 
 	undo_redo.add_undo_method(
 		_undo_set_anim_key.bind(
-			object,
-			property,
-			property_path,
-			frame_index,
-			prev_value,
-			track_existed,
-			key_existed
+			object, property, property_path, frame_index, prev_value, track_existed, key_existed
 		)
 	)
 
-	undo_redo.add_do_method(emit_signal.bind(&"node_property_changed", object, property, frame_index))
-	undo_redo.add_undo_method(emit_signal.bind(&"node_property_changed", object, property, frame_index))
+	undo_redo.add_do_method(
+		emit_signal.bind(&"node_property_changed", object, property, frame_index)
+	)
+	undo_redo.add_undo_method(
+		emit_signal.bind(&"node_property_changed", object, property, frame_index)
+	)
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
 
 
 func _do_set_anim_key(
-	property_path: NodePath,
-	frame_index: int,
-	value: Variant,
-	fallback_value: Variant
+	property_path: NodePath, frame_index: int, value: Variant, fallback_value: Variant
 ) -> void:
 	var track_idx := animation.find_track(property_path, Animation.TYPE_VALUE)
 
@@ -396,11 +408,7 @@ func _do_set_anim_key(
 		animation.add_track(Animation.TYPE_VALUE)
 		animation.track_set_path(track_idx, property_path)
 
-	var key_idx := animation.track_find_key(
-		track_idx,
-		frame_index,
-		Animation.FIND_MODE_APPROX
-	)
+	var key_idx := animation.track_find_key(track_idx, frame_index, Animation.FIND_MODE_APPROX)
 
 	if key_idx == -1:
 		animation.track_insert_key(track_idx, frame_index, fallback_value)
@@ -422,11 +430,7 @@ func _undo_set_anim_key(
 	if track_idx == -1:
 		return
 
-	var key_idx := animation.track_find_key(
-		track_idx,
-		frame_index,
-		Animation.FIND_MODE_APPROX
-	)
+	var key_idx := animation.track_find_key(track_idx, frame_index, Animation.FIND_MODE_APPROX)
 
 	if key_idx != -1:
 		if key_existed:

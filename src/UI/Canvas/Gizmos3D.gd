@@ -11,9 +11,18 @@ const CHAR_SCALE := 0.10
 const DISAPPEAR_THRESHOLD := 1  ## length of arrow below which system won't draw it (for cleaner UI)
 
 const EDGES: Array[Array] = [
-	[0,1],[0,2],[1,3],[2,3],  # bottom face
-	[4,5],[4,6],[5,7],[6,7],  # top face
-	[0,4],[1,5],[2,6],[3,7],  # vertical edges
+	[0, 1],
+	[0, 2],
+	[1, 3],
+	[2, 3],  # bottom face
+	[4, 5],
+	[4, 6],
+	[5, 7],
+	[6, 7],  # top face
+	[0, 4],
+	[1, 5],
+	[2, 6],
+	[3, 7],  # vertical edges
 ]
 
 var layer_3d: Layer3D
@@ -117,7 +126,11 @@ func _cel_switched() -> void:
 func _on_selected_object(new_object: Node3D, old_object: Node3D) -> void:
 	if is_instance_valid(new_object) and new_object is VisualInstance3D:
 		get_points(new_object, true)
-	if is_instance_valid(old_object) and new_object != old_object and old_object is VisualInstance3D:
+	if (
+		is_instance_valid(old_object)
+		and new_object != old_object
+		and old_object is VisualInstance3D
+	):
 		clear_points(old_object)
 
 
@@ -169,7 +182,7 @@ func get_points(object3d: VisualInstance3D, selected: bool) -> void:
 				var local := aabb.position + Vector3(x, y, z) * aabb.size
 				var world := object3d.global_transform * local
 				#if camera.is_position_behind(world):
-					#continue
+				#continue
 				corners.append(camera.unproject_position(world))
 	var points := PackedVector2Array()
 	for edge in EDGES:
