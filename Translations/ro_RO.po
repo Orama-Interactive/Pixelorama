@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-11-04 18:28\n"
+"PO-Revision-Date: 2026-01-03 23:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2998,6 +2998,48 @@ msgstr "Anulare: modificarea duratei cadrului"
 
 msgid "Redo: Change frame duration"
 msgstr "Refacere: modificarea duratei cadrului"
+
+msgid "Undo: Rename Layer"
+msgstr ""
+
+msgid "Redo: Rename Layer"
+msgstr ""
+
+msgid "Undo: Change Layer Opacity"
+msgstr ""
+
+msgid "Redo: Change Layer Opacity"
+msgstr ""
+
+msgid "Undo: Change Layer Onion Ignore"
+msgstr ""
+
+msgid "Redo: Change Layer Onion Ignore"
+msgstr ""
+
+msgid "Undo: Change Layer User Data"
+msgstr ""
+
+msgid "Redo: Change Layer User Data"
+msgstr ""
+
+msgid "Undo: Change Layer Color"
+msgstr ""
+
+msgid "Redo: Change Layer Color"
+msgstr ""
+
+msgid "Undo: Change Layer Visibility"
+msgstr ""
+
+msgid "Redo: Change Layer Visibility"
+msgstr ""
+
+msgid "Undo: Change Layer Locked"
+msgstr ""
+
+msgid "Redo: Change Layer Locked"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "Deplasare ghidaj"
