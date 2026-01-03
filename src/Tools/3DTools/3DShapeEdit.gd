@@ -258,6 +258,7 @@ func _create_object_property_nodes(object: Node, title := "Node") -> Array[Folda
 		var humanized_name := Keychain.humanize_snake_case(string_to_humanize, true)
 		var type: Variant.Type = prop["type"]
 		var hint: PropertyHint = prop["hint"]
+		var hint_string: String = prop["hint_string"]
 		if curr_value is Font:
 			var label := Label.new()
 			label.text = humanized_name
@@ -292,9 +293,11 @@ func _create_object_property_nodes(object: Node, title := "Node") -> Array[Folda
 				grid_container.add_child(label)
 				grid_container.add_child(check_box)
 			TYPE_INT, TYPE_FLOAT:
+				if prop_name == "transparency":
+					continue
 				if hint == PROPERTY_HINT_FLAGS:
 					continue
-				if hint != PROPERTY_HINT_ENUM and hint != PROPERTY_HINT_ENUM_SUGGESTION:
+				if hint == PROPERTY_HINT_RANGE:
 					var label := Label.new()
 					label.text = humanized_name
 					label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -302,16 +305,30 @@ func _create_object_property_nodes(object: Node, title := "Node") -> Array[Folda
 					slider.name = prop_name
 					if type == TYPE_FLOAT:
 						slider.step = 0.01
-					slider.allow_lesser = true
-					slider.allow_greater = true
+					if "or_less" in hint_string:
+						slider.allow_lesser = true
+					if "or_greater" in hint_string:
+						slider.allow_greater = true
+					var slider_options := hint_string.split(",")
+					for i in slider_options.size():
+						var option := slider_options[i]
+						if i == 0:
+							slider.min_value = float(slider_options[0])
+						elif i == 1:
+							slider.max_value = float(slider_options[1])
+						elif i == 2:
+							slider.step = float(slider_options[2])
+						elif option.begins_with("prefix:"):
+							slider.prefix = option.replace("prefix:", "")
+						elif option.begins_with("suffix:"):
+							slider.suffix = option.replace("suffix:", "")
 					slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 					slider.value = curr_value
 					slider.drag_started.connect(func(): _undo_data = _get_undo_data(object))
 					slider.value_changed.connect(_set_value_from_node.bind(object, prop_name))
 					grid_container.add_child(label)
 					grid_container.add_child(slider)
-				else:
-					var hint_string: String = prop["hint_string"]
+				elif hint == PROPERTY_HINT_ENUM or hint == PROPERTY_HINT_ENUM_SUGGESTION:
 					var options := hint_string.split(",")
 					var label := Label.new()
 					label.text = humanized_name

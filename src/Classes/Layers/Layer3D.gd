@@ -43,11 +43,13 @@ static var properties_to_exclude: Array[String] = [
 	"top_level",
 	"current",
 	"cull_mask",
+	"gi_mode",
 	"editor_only",
 	"layers",
 	"sorting_offset",
 	"sorting_use_aabb_center",
 	"language",
+	"structured_text_bidi_override",
 	"distance_fade_begin",
 	"distance_fade_enabled",
 	"distance_fade_length",
@@ -87,6 +89,7 @@ static var properties_to_exclude: Array[String] = [
 	"subdivide_width",
 	"subdivide_height",
 	"subdivide_depth",
+	"render_priority",
 ]
 
 var viewport: SubViewport  ## SubViewport used by the layer.
