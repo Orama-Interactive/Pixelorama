@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2025-11-04 16:55\n"
+"PO-Revision-Date: 2026-01-03 23:14\n"
 
 msgid "OK"
 msgstr "예"
@@ -2968,6 +2968,48 @@ msgstr "실행 취소: 프레임 기간 변경"
 
 msgid "Redo: Change frame duration"
 msgstr "다시 실행: 프레임 기간 변경"
+
+msgid "Undo: Rename Layer"
+msgstr ""
+
+msgid "Redo: Rename Layer"
+msgstr ""
+
+msgid "Undo: Change Layer Opacity"
+msgstr ""
+
+msgid "Redo: Change Layer Opacity"
+msgstr ""
+
+msgid "Undo: Change Layer Onion Ignore"
+msgstr ""
+
+msgid "Redo: Change Layer Onion Ignore"
+msgstr ""
+
+msgid "Undo: Change Layer User Data"
+msgstr ""
+
+msgid "Redo: Change Layer User Data"
+msgstr ""
+
+msgid "Undo: Change Layer Color"
+msgstr ""
+
+msgid "Redo: Change Layer Color"
+msgstr ""
+
+msgid "Undo: Change Layer Visibility"
+msgstr ""
+
+msgid "Redo: Change Layer Visibility"
+msgstr ""
+
+msgid "Undo: Change Layer Locked"
+msgstr ""
+
+msgid "Redo: Change Layer Locked"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "이동 가이드"
