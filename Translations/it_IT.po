@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2025-11-09 14:57\n"
+"PO-Revision-Date: 2026-01-03 23:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3000,6 +3000,48 @@ msgstr "Annulla: Cambia la durata del frame"
 
 msgid "Redo: Change frame duration"
 msgstr "Ripeti: cambia la durata del frame"
+
+msgid "Undo: Rename Layer"
+msgstr ""
+
+msgid "Redo: Rename Layer"
+msgstr ""
+
+msgid "Undo: Change Layer Opacity"
+msgstr ""
+
+msgid "Redo: Change Layer Opacity"
+msgstr ""
+
+msgid "Undo: Change Layer Onion Ignore"
+msgstr ""
+
+msgid "Redo: Change Layer Onion Ignore"
+msgstr ""
+
+msgid "Undo: Change Layer User Data"
+msgstr ""
+
+msgid "Redo: Change Layer User Data"
+msgstr ""
+
+msgid "Undo: Change Layer Color"
+msgstr ""
+
+msgid "Redo: Change Layer Color"
+msgstr ""
+
+msgid "Undo: Change Layer Visibility"
+msgstr ""
+
+msgid "Redo: Change Layer Visibility"
+msgstr ""
+
+msgid "Undo: Change Layer Locked"
+msgstr ""
+
+msgid "Redo: Change Layer Locked"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "Muovi la guida"
