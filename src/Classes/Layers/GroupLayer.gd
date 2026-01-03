@@ -14,6 +14,11 @@ func _init(_project: Project, _name := "") -> void:
 	blend_mode = BlendModes.PASS_THROUGH
 
 
+## Returns a new empty [BaseCel]
+func new_empty_cel() -> BaseCel:
+	return GroupCel.new()
+
+
 ## Blends all of the images of children layer of the group layer into a single image.
 func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true) -> Image:
 	var image := ImageExtended.create_custom(
@@ -107,6 +112,9 @@ func _include_child_in_blending(
 			cel_image = layer.display_effects(cel)
 		else:
 			cel_image = cel.get_image()
+		var bone_layer := BoneLayer.get_parent_bone(layer)
+		if bone_layer:
+			cel_image = bone_layer.apply_bone(cel_image, frame)
 		textures.append(cel_image)
 		_cache_texture_data.append(cel_image.get_data())
 		DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, i)
@@ -179,10 +187,6 @@ func deserialize(dict: Dictionary) -> void:
 
 func get_layer_type() -> int:
 	return Global.LayerTypes.GROUP
-
-
-func new_empty_cel() -> BaseCel:
-	return GroupCel.new()
 
 
 func set_name_to_default(number: int) -> void:
