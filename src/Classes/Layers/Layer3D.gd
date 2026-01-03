@@ -71,7 +71,22 @@ static var properties_to_exclude: Array[String] = [
 	"directional_shadow_split_1",
 	"directional_shadow_split_2",
 	"directional_shadow_split_3",
+	"extra_cull_margin",
+	"gi_lightmap_scale",
+	"gi_lightmap_texel_scale",
+	"ignore_occlusion_culling",
+	"lod_bias",
 	"lightmap_size_hint",
+	"visibility_range_begin",
+	"visibility_range_begin_margin",
+	"visibility_range_end",
+	"visibility_range_end_margin",
+	"visibility_range_fade_mode",
+	"add_uv2",
+	"uv2_padding",
+	"subdivide_width",
+	"subdivide_height",
+	"subdivide_depth",
 ]
 
 var viewport: SubViewport  ## SubViewport used by the layer.

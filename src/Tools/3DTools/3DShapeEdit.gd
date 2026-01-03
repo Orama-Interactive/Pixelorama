@@ -208,6 +208,8 @@ func _object_property_changed(object: Node, property: String, frame_index: int) 
 							if font_name == item_name:
 								property_editor_node.select(i)
 								break
+					else:
+						property_editor_node.select(curr_value)
 
 
 func _on_selected_object(object: Node3D, old_object: Node3D) -> void:
@@ -308,6 +310,25 @@ func _create_object_property_nodes(object: Node, title := "Node") -> Array[Folda
 					slider.value_changed.connect(_set_value_from_node.bind(object, prop_name))
 					grid_container.add_child(label)
 					grid_container.add_child(slider)
+				else:
+					var hint_string: String = prop["hint_string"]
+					var options := hint_string.split(",")
+					var label := Label.new()
+					label.text = humanized_name
+					label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+					grid_container.add_child(label)
+					var option_button := OptionButton.new()
+					option_button.name = prop_name
+					option_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+					for option in options:
+						option_button.add_item(option)
+
+					option_button.select(curr_value)
+					option_button.button_down.connect(func(): _undo_data = _get_undo_data(object))
+					option_button.item_selected.connect(
+						_set_value_from_node.bind(object, prop_name)
+					)
+					grid_container.add_child(option_button)
 			TYPE_VECTOR2, TYPE_VECTOR2I:
 				var label := Label.new()
 				label.text = humanized_name
