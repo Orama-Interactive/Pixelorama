@@ -91,6 +91,22 @@ static var properties_to_exclude: Array[String] = [
 	"subdivide_depth",
 	"render_priority",
 ]
+static var material_properties_to_exclude: Array[String] = [
+	"ao_",  # Materials
+	"bent_",
+	"depth_",
+	"detail_",
+	"disable_fog",
+	"emission_on_uv2",
+	"emission_operator",
+	"heightmap_",
+	"msdf_",
+	"normal_",
+	"particles_",
+	"stencil_",
+	"use_particle_trails",
+	"uv2_",
+]
 
 var viewport: SubViewport  ## SubViewport used by the layer.
 var parent_node: Node3D  ## Parent node of the 3D objects placed in the layer.
@@ -219,6 +235,7 @@ static func create_node(type: ObjectType, custom_mesh: Mesh = null) -> Node3D:
 			node3d = MeshInstance3D.new()
 			node3d.name = "PlaneMesh"
 			node3d.mesh = PlaneMesh.new()
+			node3d.mesh.orientation = PlaneMesh.FACE_Z
 		ObjectType.TORUS:
 			node3d = MeshInstance3D.new()
 			node3d.name = "TorusMesh"
@@ -263,12 +280,28 @@ static func get_object_property_list(object: Object) -> Array[Dictionary]:
 			for mesh_prop in mesh_property_list:
 				mesh_prop["name"] = "mesh:%s" % mesh_prop["name"]
 			property_list.append_array(mesh_property_list)
-			if is_instance_valid(mesh.surface_get_material(0)):
-				var material := mesh.surface_get_material(0) as BaseMaterial3D
-				var material_property_list := get_object_property_list(material)
-				for mat_prop in material_property_list:
-					mat_prop["name"] = "mesh:material:%s" % mat_prop["name"]
-				property_list.append_array(material_property_list)
+			if mesh is PrimitiveMesh:
+				if is_instance_valid(mesh.surface_get_material(0)):
+					var material := mesh.surface_get_material(0) as BaseMaterial3D
+					var material_property_list := get_object_property_list(material)
+					material_property_list = material_property_list.filter(
+						filter_material_properties
+					)
+					for mat_prop in material_property_list:
+						mat_prop["name"] = "mesh:material:%s" % mat_prop["name"]
+					property_list.append_array(material_property_list)
+			elif mesh is ArrayMesh:
+				for i in mesh.get_surface_count():
+					if not is_instance_valid(mesh.surface_get_material(i)):
+						continue
+					var material := mesh.surface_get_material(i) as BaseMaterial3D
+					var material_property_list := get_object_property_list(material)
+					material_property_list = material_property_list.filter(
+						filter_material_properties
+					)
+					for mat_prop in material_property_list:
+						mat_prop["name"] = "mesh:surface_%s/material:%s" % [i, mat_prop["name"]]
+					property_list.append_array(material_property_list)
 	elif object is WorldEnvironment:
 		if is_instance_valid(object.environment):
 			var env_property_list := get_object_property_list(object.environment)
@@ -302,10 +335,18 @@ static func filter_object_properties(dict: Dictionary) -> bool:
 			TYPE_VECTOR4,
 			TYPE_VECTOR4I,
 			TYPE_COLOR,
-			TYPE_STRING_NAME
+			TYPE_STRING_NAME,
 		]
 	)
 	return usage_editor and is_type
+
+
+static func filter_material_properties(dict: Dictionary) -> bool:
+	var prop_name := dict["name"] as String
+	for to_exclude in material_properties_to_exclude:
+		if prop_name.begins_with(to_exclude):
+			return false
+	return true
 
 
 func node_change_transform(node: Node3D, a: Vector3, b: Vector3, applying_gizmos: Gizmos) -> void:

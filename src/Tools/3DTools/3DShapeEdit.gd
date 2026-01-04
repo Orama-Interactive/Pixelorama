@@ -186,7 +186,7 @@ func _object_property_changed(object: Node, property: String, frame_index: int) 
 			continue
 		var grid_container := foldable.get_child(0)
 		for property_editor_node in grid_container.get_children():
-			var property_node_name := property.replace(":", "_")
+			var property_node_name := property.replace(":", "_").replace("/", "_")
 			if property_editor_node.name == property_node_name:
 				if property_editor_node is CheckBox:
 					property_editor_node.set_pressed_no_signal(curr_value)
@@ -250,10 +250,11 @@ func _create_object_property_nodes(object: Node, title := "Node") -> Array[Folda
 			if subname_count > 1:
 				new_title = prop_name_nodepath.get_subname(0)
 			new_title = Keychain.humanize_snake_case(new_title)
-			if subname_count == containers.size() and new_title != title:
+			if new_title != title:
 				var fc := _create_foldable_container(object, new_title)
 				fc.fold()
 				containers.append(fc)
+				title = new_title
 				grid_container = fc.get_child(0)
 		var humanized_name := Keychain.humanize_snake_case(string_to_humanize, true)
 		var type: Variant.Type = prop["type"]
