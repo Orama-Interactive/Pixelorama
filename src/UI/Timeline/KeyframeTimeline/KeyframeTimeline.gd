@@ -152,10 +152,10 @@ func _recreate_timeline() -> void:
 	track_scroll_container.scroll_horizontal = h_scroll
 	track_scroll_container.scroll_vertical = v_scroll
 	# Hide UI which is un-usable
-	_hide_extra_UI()
+	_hide_extra_ui()
 
 
-func _hide_extra_UI():
+func _hide_extra_ui() -> void:
 	var was_visible_before = layer_element_tree.get_parent().visible
 	layer_element_tree.get_parent().visible = not current_layer.effects.is_empty()
 	properties_container.get_parent().visible = not current_layer.effects.is_empty()
