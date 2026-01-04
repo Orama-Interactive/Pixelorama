@@ -92,7 +92,7 @@ static var properties_to_exclude: Array[String] = [
 	"render_priority",
 ]
 static var material_properties_to_exclude: Array[String] = [
-	"ao_",  # Materials
+	"ao_",
 	"bent_",
 	"depth_",
 	"detail_",
@@ -107,7 +107,16 @@ static var material_properties_to_exclude: Array[String] = [
 	"use_particle_trails",
 	"uv2_",
 ]
-
+static var environment_properties_to_exclude: Array[String] = [
+	"background_",
+	"sky_",
+	"ssr_",
+	"ssao_",
+	"ssil_",
+	"sdfgi_",
+	"fog_",
+	"volumetric_fog_",
+]
 var viewport: SubViewport  ## SubViewport used by the layer.
 var parent_node: Node3D  ## Parent node of the 3D objects placed in the layer.
 var world_environment: WorldEnvironment
@@ -305,6 +314,7 @@ static func get_object_property_list(object: Object) -> Array[Dictionary]:
 	elif object is WorldEnvironment:
 		if is_instance_valid(object.environment):
 			var env_property_list := get_object_property_list(object.environment)
+			env_property_list = env_property_list.filter(filter_environment_properties)
 			for env_prop in env_property_list:
 				env_prop["name"] = "environment:%s" % env_prop["name"]
 			property_list = env_property_list
@@ -344,6 +354,14 @@ static func filter_object_properties(dict: Dictionary) -> bool:
 static func filter_material_properties(dict: Dictionary) -> bool:
 	var prop_name := dict["name"] as String
 	for to_exclude in material_properties_to_exclude:
+		if prop_name.begins_with(to_exclude):
+			return false
+	return true
+
+
+static func filter_environment_properties(dict: Dictionary) -> bool:
+	var prop_name := dict["name"] as String
+	for to_exclude in environment_properties_to_exclude:
 		if prop_name.begins_with(to_exclude):
 			return false
 	return true
