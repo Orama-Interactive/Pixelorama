@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2026-01-03 23:13\n"
+"PO-Revision-Date: 2026-01-04 12:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3000,10 +3000,10 @@ msgid "Redo: Change frame duration"
 msgstr "Refacere: modificarea duratei cadrului"
 
 msgid "Undo: Rename Layer"
-msgstr ""
+msgstr "Anulare: redenumire strat"
 
 msgid "Redo: Rename Layer"
-msgstr ""
+msgstr "Refacere: redenumire strat"
 
 msgid "Undo: Change Layer Opacity"
 msgstr ""
