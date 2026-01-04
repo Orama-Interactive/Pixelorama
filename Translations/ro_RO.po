@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2026-01-04 12:51\n"
+"PO-Revision-Date: 2026-01-04 14:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3006,10 +3006,10 @@ msgid "Redo: Rename Layer"
 msgstr "Refacere: redenumire strat"
 
 msgid "Undo: Change Layer Opacity"
-msgstr ""
+msgstr "Anulare: modificarea opacității stratului"
 
 msgid "Redo: Change Layer Opacity"
-msgstr ""
+msgstr "Refacere: modificarea opacității stratului"
 
 msgid "Undo: Change Layer Onion Ignore"
 msgstr ""
@@ -3024,16 +3024,16 @@ msgid "Redo: Change Layer User Data"
 msgstr ""
 
 msgid "Undo: Change Layer Color"
-msgstr ""
+msgstr "Anulare: modificarea culorii stratului"
 
 msgid "Redo: Change Layer Color"
-msgstr ""
+msgstr "Refacere: modificarea culorii stratului"
 
 msgid "Undo: Change Layer Visibility"
-msgstr ""
+msgstr "Anulare: modificarea vizibilității stratului"
 
 msgid "Redo: Change Layer Visibility"
-msgstr ""
+msgstr "Refacere: modificarea vizibilității stratului"
 
 msgid "Undo: Change Layer Locked"
 msgstr ""
