@@ -35,7 +35,10 @@ func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			var rect := Rect2()
-			keyframe_at = floori(event.position.x / KeyframeTimeline.frame_ui_size)
+			# Snap event.position to the nearest frame marking. This solves the issue of keyframe
+			# getting created at the wrong frame even if the user right clicks at a frame marking.
+			var snapped_event := snappedf(event.position.x, KeyframeTimeline.frame_ui_size)
+			keyframe_at = floori(snapped_event / KeyframeTimeline.frame_ui_size)
 			rect.position = event.global_position
 			rect.size = Vector2(100, 0)
 			popup_menu.popup(rect)
