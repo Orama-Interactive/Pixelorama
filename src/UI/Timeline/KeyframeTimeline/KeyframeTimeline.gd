@@ -151,6 +151,17 @@ func _recreate_timeline() -> void:
 	await get_tree().process_frame
 	track_scroll_container.scroll_horizontal = h_scroll
 	track_scroll_container.scroll_vertical = v_scroll
+	# Hide UI which is un-usable
+	_hide_extra_UI()
+
+
+func _hide_extra_UI():
+	var was_visible_before = layer_element_tree.get_parent().visible
+	layer_element_tree.get_parent().visible = not current_layer.effects.is_empty()
+	properties_container.get_parent().visible = not current_layer.effects.is_empty()
+	if layer_element_tree.get_parent().visible != was_visible_before:
+		await get_tree().process_frame
+		_on_track_scroll_container_resized()
 
 
 func _create_keyframe_button(
@@ -457,11 +468,13 @@ func _invert_moves(moves: Array) -> Array:
 func _on_track_scroll_container_resized() -> void:
 	var split_separation := get_theme_constant(&"separation", &"SplitContainer")
 	var margin_container := keyframe_timeline_frame_display.get_parent() as MarginContainer
+	var l_marg := layer_element_tree.size.x if layer_element_tree.is_visible_in_tree() else 0.0
+	var r_marg := properties_container.size.x if properties_container.is_visible_in_tree() else 0.0
 	margin_container.add_theme_constant_override(
-		&"margin_left", layer_element_tree.size.x + split_separation
+		&"margin_left", l_marg + split_separation
 	)
 	margin_container.add_theme_constant_override(
-		&"margin_right", properties_container.size.x + split_separation
+		&"margin_right", r_marg + split_separation
 	)
 
 
