@@ -470,12 +470,8 @@ func _on_track_scroll_container_resized() -> void:
 	var margin_container := keyframe_timeline_frame_display.get_parent() as MarginContainer
 	var l_marg := layer_element_tree.size.x if layer_element_tree.is_visible_in_tree() else 0.0
 	var r_marg := properties_container.size.x if properties_container.is_visible_in_tree() else 0.0
-	margin_container.add_theme_constant_override(
-		&"margin_left", l_marg + split_separation
-	)
-	margin_container.add_theme_constant_override(
-		&"margin_right", r_marg + split_separation
-	)
+	margin_container.add_theme_constant_override(&"margin_left", l_marg + split_separation)
+	margin_container.add_theme_constant_override(&"margin_right", r_marg + split_separation)
 
 
 func _on_track_scroll_container_sort_children() -> void:
