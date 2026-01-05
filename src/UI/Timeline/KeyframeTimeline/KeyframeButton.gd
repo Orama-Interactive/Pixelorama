@@ -38,7 +38,6 @@ func _on_gui_input(event: InputEvent) -> void:
 			if is_dragged:
 				is_dragged = false
 				updated_position.emit()
-
 	if event is InputEventMouseMotion and is_dragged:
 		var mouse_pos: float = parent.get_local_mouse_position().x
 		var delta := mouse_pos - drag_mouse_start_pos
