@@ -387,12 +387,12 @@ func _update_keyframe_property_ui(dict: Dictionary, keyframe_id: int) -> void:
 
 func add_effect_keyframe(effect: LayerEffect, frame_index: int, param_name: String) -> void:
 	var next_keyframe_id := effect.layer.next_keyframe_id
+	selected_keyframes = [next_keyframe_id]
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Add keyframe")
 	undo_redo.add_do_method(effect.set_keyframe.bind(param_name, frame_index))
 	undo_redo.add_undo_method(func(): effect.animated_params[param_name].erase(frame_index))
 	undo_redo.add_undo_method(unselect_keyframe.bind(next_keyframe_id))
-	undo_redo.add_do_method(func(): selected_keyframes = [next_keyframe_id])
 	undo_redo.add_do_method(_recreate_timeline)
 	undo_redo.add_undo_method(_recreate_timeline)
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
