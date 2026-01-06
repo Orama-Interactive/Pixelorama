@@ -133,6 +133,7 @@ func _recreate_timeline() -> void:
 			var param_tree_item := tree_item.create_child()
 			param_tree_item.set_text(0, Keychain.humanize_snake_case(param_name))
 			var param_track := KeyframeAnimationTrack.new()
+			param_track.type = KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT
 			param_track.timeline = self
 			param_track.effect = effect
 			param_track.param_name = param_name
@@ -158,8 +159,9 @@ func _recreate_timeline() -> void:
 
 func _hide_extra_ui() -> void:
 	var was_visible_before = layer_element_tree.get_parent().visible
-	layer_element_tree.get_parent().visible = not current_layer.effects.is_empty()
-	properties_container.get_parent().visible = not current_layer.effects.is_empty()
+	var tree_root := layer_element_tree.get_root()
+	layer_element_tree.get_parent().visible = tree_root.get_first_child() != null
+	properties_container.get_parent().visible = tree_root.get_first_child() != null
 	if layer_element_tree.get_parent().visible != was_visible_before:
 		await get_tree().process_frame
 		_on_track_scroll_container_resized()
