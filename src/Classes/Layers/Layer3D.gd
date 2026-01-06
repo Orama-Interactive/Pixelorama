@@ -254,7 +254,7 @@ static func create_node(type: ObjectType, custom_mesh: Mesh = null) -> Node3D:
 			node3d.name = "TextMesh"
 			var mesh := TextMesh.new()
 			mesh.font = Themes.get_font()
-			mesh.text = "Sample"
+			mesh.text = "Text"
 			node3d.mesh = mesh
 		ObjectType.ARRAY_MESH:
 			node3d = MeshInstance3D.new()

@@ -162,14 +162,10 @@ func _cel_switched() -> void:
 		return
 	get_child(0).visible = true
 	layer_3d = Global.current_project.layers[Global.current_project.current_layer]
-	layer_3d.animation_player.speed_scale = layer_3d.project.fps
-	layer_3d.animation.length = layer_3d.project.frames.size()
-	layer_3d.animation_player.seek(layer_3d.project.current_frame, true)
 	var selected := layer_3d.selected
 	layer_3d.selected = null
 	layer_3d.selected_object_changed.connect(_on_selected_object)
 	layer_3d.node_property_changed.connect(_object_property_changed)
-	sprite_changed_this_frame()
 	if is_instance_valid(selected):
 		layer_3d.selected = selected
 	else:
