@@ -232,6 +232,8 @@ func select_keyframes() -> void:
 		slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		slider.allow_lesser = true
 		slider.allow_greater = true
+		if typeof(property) == TYPE_FLOAT:
+			slider.step = 0.01
 		slider.value = property
 		slider.value_changed.connect(_on_keyframe_property_changed.bind("value"))
 		properties_grid_container.add_child(slider)
@@ -240,6 +242,8 @@ func select_keyframes() -> void:
 		slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		slider.allow_lesser = true
 		slider.allow_greater = true
+		if typeof(property) == TYPE_VECTOR2:
+			slider.step = 0.01
 		slider.value = property
 		slider.value_changed.connect(_on_keyframe_property_changed.bind("value"))
 		properties_grid_container.add_child(slider)
