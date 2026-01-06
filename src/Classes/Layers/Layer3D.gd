@@ -162,6 +162,7 @@ func add_nodes(size: Vector2i) -> void:
 	world_environment.environment = Environment.new()
 	world_environment.environment.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	parent_node = Node3D.new()
+	parent_node.name = "Root3D"
 	camera = Camera3D.new()
 	camera.current = true
 	camera.position.z = 3

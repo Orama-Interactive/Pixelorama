@@ -386,29 +386,32 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 					var layer := Layer3D.new(self, "", true)
 					layers.append(layer)
 					var scene_path_zip := "scene/%s" % layers_3d_count
-					if zip_reader.file_exists(scene_path_zip):
-						var scene_data := zip_reader.read_file(scene_path_zip)
-						var scene_data_text := scene_data.get_string_from_utf8()
-						if 'resource type="Script"' in scene_data_text:
-							# If a script is detected inside the scene, it's possible someone
-							# may have injected malicious code. To prevent the users,
-							# refuse to load scenes with scripts on them.
-							print("Script detected, there may be malicious code in the scene.")
-							layer.add_nodes(size)
-							layers_3d_count += 1
-							continue
-						DirAccess.make_dir_absolute(Export.temp_path)
-						var scene_path_file := (
-							Export.temp_path.path_join(str(layers_3d_count)) + ".tscn"
-						)
-						var scene_file := FileAccess.open(scene_path_file, FileAccess.WRITE)
-						scene_file.store_buffer(scene_data)
-						scene_file.close()
-						var scene := load(scene_path_file) as PackedScene
-						layer.load_scene(scene)
-						DirAccess.remove_absolute(scene_path_file)
-						DirAccess.remove_absolute(Export.temp_path)
+					if not zip_reader.file_exists(scene_path_zip):
+						layer.add_nodes(size)
 						layers_3d_count += 1
+						continue
+					var scene_data := zip_reader.read_file(scene_path_zip)
+					var scene_data_text := scene_data.get_string_from_utf8()
+					if 'resource type="Script"' in scene_data_text:
+						# If a script is detected inside the scene, it's possible someone
+						# may have injected malicious code. To prevent the users,
+						# refuse to load scenes with scripts on them.
+						print("Script detected, there may be malicious code in the scene.")
+						layer.add_nodes(size)
+						layers_3d_count += 1
+						continue
+					DirAccess.make_dir_absolute(Export.temp_path)
+					var scene_path_file := (
+						Export.temp_path.path_join(str(layers_3d_count)) + ".tscn"
+					)
+					var scene_file := FileAccess.open(scene_path_file, FileAccess.WRITE)
+					scene_file.store_buffer(scene_data)
+					scene_file.close()
+					var scene := load(scene_path_file) as PackedScene
+					layer.load_scene(scene)
+					DirAccess.remove_absolute(scene_path_file)
+					DirAccess.remove_absolute(Export.temp_path)
+					layers_3d_count += 1
 				Global.LayerTypes.TILEMAP:
 					layers.append(LayerTileMap.new(self, null))
 				Global.LayerTypes.AUDIO:
