@@ -44,9 +44,10 @@ func _ready() -> void:
 			child.scrolling.connect(_on_layer_element_tree_vertical_scrolling)
 			break
 	await get_tree().process_frame
-	var project := Global.current_project
-	current_layer = project.layers[project.current_layer]
-	await get_tree().process_frame
+	if not is_instance_valid(current_layer):
+		var project := Global.current_project
+		current_layer = project.layers[project.current_layer]
+		await get_tree().process_frame
 	_on_track_scroll_container_resized()
 
 
