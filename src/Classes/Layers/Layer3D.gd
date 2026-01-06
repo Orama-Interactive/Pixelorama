@@ -522,11 +522,10 @@ func _undo_set_anim_key(
 
 func _on_node_property_changed(_node: Node, _property: StringName, frame_index: int) -> void:
 	animation_player.seek(frame_index, true)
-	#await RenderingServer.frame_post_draw
 	project.frames[frame_index].cels[index].update_texture()
 	if frame_index != project.current_frame:
 		animation_player.seek(project.current_frame, true)
-	#Global.canvas.queue_redraw()
+		project.frames[project.current_frame].cels[index].update_texture()
 
 
 # Overridden Methods:
