@@ -162,6 +162,7 @@ func _hide_extra_ui() -> void:
 	if layer_element_tree.get_parent().visible != was_visible_before:
 		await get_tree().process_frame
 		_on_track_scroll_container_resized()
+		keyframe_timeline_cursor.update_position()
 
 
 func _create_keyframe_button(

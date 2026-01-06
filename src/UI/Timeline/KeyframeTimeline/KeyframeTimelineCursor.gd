@@ -39,7 +39,19 @@ func _on_keyframe_timeline_frame_display_gui_input(event: InputEvent) -> void:
 			is_dragged = true
 			_change_cel(event.global_position)
 		else:
+			# Snap the cursor to the frame, as we don't have any useful behavior defined for
+			# cursor being in the middle of frames, this makes more sense
+			var container_pos := keyframe_timeline_frame_display.get_global_rect().position.x
+			var x_offset := keyframe_timeline_frame_display.x_offset
+			var frame_pos = (
+					Global.current_project.current_frame
+					* KeyframeTimeline.frame_ui_size
+					+ container_pos
+					- x_offset
+				)
+			pos = frame_pos
 			is_dragged = false
+
 	if event is InputEventMouseMotion and is_dragged:
 		_change_cel(event.global_position)
 
