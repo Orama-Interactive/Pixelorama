@@ -44,11 +44,10 @@ func _on_keyframe_timeline_frame_display_gui_input(event: InputEvent) -> void:
 			var container_pos := keyframe_timeline_frame_display.get_global_rect().position.x
 			var x_offset := keyframe_timeline_frame_display.x_offset
 			var frame_pos = (
-					Global.current_project.current_frame
-					* KeyframeTimeline.frame_ui_size
-					+ container_pos
-					- x_offset
-				)
+				Global.current_project.current_frame * KeyframeTimeline.frame_ui_size
+				+ container_pos
+				- x_offset
+			)
 			pos = frame_pos
 			is_dragged = false
 
