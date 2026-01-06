@@ -20,6 +20,8 @@ signal project_data_changed(project: Project)  ## Emitted when project data is m
 @warning_ignore("unused_signal")
 signal font_loaded  ## Emitted when a new font has been loaded, or an old one gets unloaded.
 signal single_tool_mode_changed(mode: bool)  ## Emitted when [member single_tool_mode] changes.
+## Emitted when [member share_options_between_tools] changes.
+signal share_options_between_tools_changed(mode: bool)
 @warning_ignore("unused_signal")
 signal on_cursor_position_text_changed(text: String)
 @warning_ignore("unused_signal")
@@ -335,6 +337,7 @@ var single_tool_mode := DisplayServer.is_touchscreen_available():
 var share_options_between_tools := false:
 	set(value):
 		share_options_between_tools = value
+		share_options_between_tools_changed.emit(share_options_between_tools)
 		Tools.attempt_config_share(MOUSE_BUTTON_LEFT)
 ## Found in Preferences. The left tool color.
 var left_tool_color := Color("0086cf"):
