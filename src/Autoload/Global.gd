@@ -1126,7 +1126,6 @@ func undo_or_redo(
 			canvas.pixel_grid.queue_redraw()
 			project.selection_map_changed()
 
-	await RenderingServer.frame_post_draw
 	canvas.queue_redraw()
 	for canvas_preview in get_tree().get_nodes_in_group("CanvasPreviews"):
 		canvas_preview.queue_redraw()
