@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2026-01-03 23:13\n"
+"PO-Revision-Date: 2026-01-07 17:10\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2942,19 +2942,19 @@ msgid "Undo: Remove Layer"
 msgstr "Deshacer: Eliminar capa"
 
 msgid "Redo: Remove Layer"
-msgstr "Rehacer: Eliminar Capa"
+msgstr "Rehacer: Eliminar capa"
 
 msgid "Undo: Merge Layer"
 msgstr "Deshacer: Combinar Capa"
 
 msgid "Redo: Merge Layer"
-msgstr "Rehacer: Combinar Capa"
+msgstr "Rehacer: Combinar capa"
 
 msgid "Undo: Change Layer Order"
-msgstr "Deshacer: cambiar el orden de la capa"
+msgstr "Deshacer: Cambiar el orden de la capa"
 
 msgid "Redo: Change Layer Order"
-msgstr "Rehacer: cambiar orden de la capa"
+msgstr "Rehacer: Cambiar orden de capa"
 
 msgid "Undo: Add Frame"
 msgstr "Deshacer: Añadir fotograma"
@@ -2969,46 +2969,46 @@ msgid "Redo: Remove Frame"
 msgstr "Rehacer: Eliminar fotograma"
 
 msgid "Undo: Change Frame Order"
-msgstr "Deshacer: cambiar el orden del fotograma"
+msgstr "Deshacer: Cambiar el orden del fotograma"
 
 msgid "Redo: Change Frame Order"
-msgstr "Rehacer: cambiar el orden del fotograma"
+msgstr "Rehacer: Cambiar orden del fotograma"
 
 msgid "Undo: Delete Custom Brush"
 msgstr "Deshacer: Eliminar Pincel Personalizado"
 
 msgid "Redo: Delete Custom Brush"
-msgstr "Rehacer: Eliminar Pincel Personalizado"
+msgstr "Rehacer: Eliminar pincel personalizado"
 
 msgid "Undo: Modify Frame Tag"
 msgstr "Deshacer: Modificar la etiqueta del fotograma"
 
 msgid "Redo: Modify Frame Tag"
-msgstr "Rehacer: Modificar la etiqueta del fotograma"
+msgstr "Rehacer: Modificar etiqueta del fotograma"
 
 msgid "Undo: Delete Frame Tag"
 msgstr "Deshacer: Eliminar etiqueta de fotograma"
 
 msgid "Redo: Delete Frame Tag"
-msgstr "Rehacer: Eliminar la etiqueta del fotograma"
+msgstr "Rehacer: Eliminar etiqueta del fotograma"
 
 msgid "Undo: Change frame duration"
 msgstr "Deshacer: Cambiar la duración de los fotogramas"
 
 msgid "Redo: Change frame duration"
-msgstr "Rehacer: Cambiar la duración de los fotogramas"
+msgstr "Rehacer: Cambiar duración de los fotogramas"
 
 msgid "Undo: Rename Layer"
-msgstr ""
+msgstr "Deshacer: Renombrar capa"
 
 msgid "Redo: Rename Layer"
-msgstr ""
+msgstr "Rehacer: Renombrar capa"
 
 msgid "Undo: Change Layer Opacity"
-msgstr ""
+msgstr "Deshacer: Cambiar opacidad de la capa"
 
 msgid "Redo: Change Layer Opacity"
-msgstr ""
+msgstr "Rehacer: Cambiar opacidad de capa"
 
 msgid "Undo: Change Layer Onion Ignore"
 msgstr ""
@@ -3017,22 +3017,22 @@ msgid "Redo: Change Layer Onion Ignore"
 msgstr ""
 
 msgid "Undo: Change Layer User Data"
-msgstr ""
+msgstr "Deshacer: Cambiar datos de usuario de capa"
 
 msgid "Redo: Change Layer User Data"
-msgstr ""
+msgstr "Rehacer: Cambiar datos de usuario de capa"
 
 msgid "Undo: Change Layer Color"
-msgstr ""
+msgstr "Deshacer: Cambiar color de capa"
 
 msgid "Redo: Change Layer Color"
-msgstr ""
+msgstr "Rehacer: Cambiar color de capa"
 
 msgid "Undo: Change Layer Visibility"
-msgstr ""
+msgstr "Deshacer: Cambiar visibilidad de capa"
 
 msgid "Redo: Change Layer Visibility"
-msgstr ""
+msgstr "Rehacer: Cambiar visibilidad de capa"
 
 msgid "Undo: Change Layer Locked"
 msgstr ""
