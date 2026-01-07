@@ -1,12 +1,14 @@
 extends FlowContainer
 
 var pen_inverted := false
+## Fixes tools accidentaly being switched through shortcuts when user types on a line edit
+var _ignore_shortcuts := false
 
 
 func _ready() -> void:
 	# Ensure to only call _input() if the cursor is inside the main canvas viewport
-	Global.main_viewport.mouse_entered.connect(set_process_input.bind(true))
-	Global.main_viewport.mouse_exited.connect(set_process_input.bind(false))
+	Global.main_viewport.mouse_entered.connect(func(): _ignore_shortcuts = false)
+	Global.main_viewport.mouse_exited.connect(func(): _ignore_shortcuts = true)
 
 
 func _input(event: InputEvent) -> void:
@@ -16,6 +18,8 @@ func _input(event: InputEvent) -> void:
 	if not Global.can_draw:
 		return
 	if get_tree().current_scene.is_writing_text:
+		return
+	if _ignore_shortcuts:
 		return
 	for action in ["undo", "redo"]:
 		if event.is_action_pressed(action):
