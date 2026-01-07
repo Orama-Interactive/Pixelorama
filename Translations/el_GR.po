@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2026-01-07 22:49\n"
+"PO-Revision-Date: 2026-01-07 23:52\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -137,7 +137,7 @@ msgid "Undo"
 msgstr "Αναίρεση"
 
 msgid "Redo"
-msgstr "Ακύρωση αναίρεσης"
+msgstr "Επαναφορά"
 
 #. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
 msgid "Undo History"
@@ -3002,52 +3002,52 @@ msgid "Redo: Change frame duration"
 msgstr "Ακύρωση αναίρεσης: Αλλαγή διάρκειας καρέ"
 
 msgid "Undo: Rename Layer"
-msgstr ""
+msgstr "Αναίρεση: Μετονομασία στρώσης"
 
 msgid "Redo: Rename Layer"
-msgstr ""
+msgstr "Επαναφορά: Μετονομασία στρώσης"
 
 msgid "Undo: Change Layer Opacity"
-msgstr ""
+msgstr "Αναίρεση: Αλλαγή αδιαφάνειας στρώσης"
 
 msgid "Redo: Change Layer Opacity"
-msgstr ""
+msgstr "Επαναφορά: Αλλαγή αδιαφάνειας στρώσης"
 
 #. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
 msgid "Undo: Change Layer Onion Skinning Ignore Status"
-msgstr ""
+msgstr "Αναίρεση: Αλλαγή κατάστασης συμπερίληψης στο onion skinning"
 
 #. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
 msgid "Redo: Change Layer Onion Skinning Ignore Status"
-msgstr ""
+msgstr "Επαναφορά: Αλλαγή κατάστασης συμπερίληψης στο onion skinning"
 
 #. Appears as a notification when the user data field of a layer is changed, and the user undos.
 msgid "Undo: Change Layer User Data"
-msgstr ""
+msgstr "Αναίρεση: Αλλαγή δεδομένα χρήστη στρώσης"
 
 #. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
 msgid "Redo: Change Layer User Data"
-msgstr ""
+msgstr "Επαναφορά: Αλλαγή δεδομένα χρήστη στρώσης"
 
 msgid "Undo: Change Layer Color"
-msgstr ""
+msgstr "Αναίρεση: Αλλαγή χρώματος στρώσης"
 
 msgid "Redo: Change Layer Color"
-msgstr ""
+msgstr "Επαναφορά: Αλλαγή χρώματος στρώσης"
 
 msgid "Undo: Change Layer Visibility"
-msgstr ""
+msgstr "Αναίρεση: Αλλαγή ορατότητας στρώσης"
 
 msgid "Redo: Change Layer Visibility"
-msgstr ""
+msgstr "Επαναφορά: Αλλαγή ορατότητας στρώσης"
 
 #. Appears as a notification when a layer gets locked or unlocked, and the user undos.
 msgid "Undo: Change Layer Locked Status"
-msgstr ""
+msgstr "Αναίρεση: Αλλαγή κατάστασης κλειδώματος στρώσης"
 
 #. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
 msgid "Redo: Change Layer Locked Status"
-msgstr ""
+msgstr "Επαναφορά: Αλλαγή κατάστασης κλειδώματος στρώσης"
 
 msgid "Move Guide"
 msgstr "Μετακίνηση βοηθού"
