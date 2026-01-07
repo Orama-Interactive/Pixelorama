@@ -990,6 +990,8 @@ func on_add_layer_list_id_pressed(id: int) -> void:
 				SteamManager.set_achievement("ACH_3D_LAYER")
 			Global.LayerTypes.AUDIO:
 				layer = AudioLayer.new(project)
+			Global.LayerTypes.BONE:
+				layer = BoneLayer.new(project)
 		add_layer(layer, project)
 
 
@@ -1012,6 +1014,8 @@ func add_layer(layer: BaseLayer, project: Project) -> void:
 		# Make layer child of group.
 		layer.parent = project.layers[project.current_layer]
 	else:
+		if layer is BoneLayer:
+			new_layer_idx = project.current_layer
 		# Set the parent of layer to be the same as the layer below it.
 		layer.parent = project.layers[project.current_layer].parent
 
