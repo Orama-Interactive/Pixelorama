@@ -4,6 +4,7 @@ var pen_inverted := false
 ## Fixes tools accidentaly being switched through shortcuts when user types on a line edit
 var _ignore_shortcuts := false
 
+
 func _ready() -> void:
 	# Ensure to only call _input() if the cursor is inside the main canvas viewport
 	Global.main_viewport.mouse_entered.connect(func(): _ignore_shortcuts = false)
