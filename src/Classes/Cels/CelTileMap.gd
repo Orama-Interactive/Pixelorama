@@ -359,7 +359,7 @@ func transform_tile(
 
 ## Given a [param selection_map] and a [param selection_rect],
 ## the method finds the cells that are currently selected and returns them
-## in the form of a 2D array that contains the serialiazed data
+## in the form of a 2D array that contains the serialized data
 ## of the selected cells in the form of [Dictionary].
 func get_selected_cells(selection_map: SelectionMap, selection_rect: Rect2i) -> Array[Array]:
 	var selected_cells: Array[Array] = []

@@ -1,7 +1,7 @@
 extends FlowContainer
 
 var pen_inverted := false
-## Fixes tools accidentaly being switched through shortcuts when user types on a line edit
+## Fixes tools accidentally being switched through shortcuts when user types on a line edit.
 var _ignore_shortcuts := false
 
 

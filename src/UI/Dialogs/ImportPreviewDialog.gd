@@ -55,7 +55,7 @@ var custom_importers := {}
 # depending on what your import option requires.
 ## container of spritesheet related import options
 @onready var spritesheet_options := %ImportOptions/SpritesheetOptions as VBoxContainer
-# Spritesheet option. decides the horizontal and veritcal frames that divide the spritesheet.
+# Spritesheet option. decides the horizontal and vertical frames that divide the spritesheet.
 @onready var frames_divider := %FramesDivider as ValueSliderV2
 # Spritesheet option. Contains likely candidates for the tile size assuming a square tile.
 @onready var frame_size_preset := %FrameSizeOptionButton as OptionButton
