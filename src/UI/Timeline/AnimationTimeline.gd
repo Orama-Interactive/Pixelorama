@@ -1736,7 +1736,7 @@ func _on_global_visibility_button_pressed() -> void:
 
 func _on_global_lock_button_pressed() -> void:
 	var project = Global.current_project
-	project.undo_redo.create_action("Change Layer Locked")
+	project.undo_redo.create_action("Change Layer Locked Status")
 
 	var locked := !global_layer_lock
 	for layer_button: LayerButton in layer_vbox.get_children():

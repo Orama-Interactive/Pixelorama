@@ -333,7 +333,7 @@ func _on_visibility_button_pressed() -> void:
 
 func _on_lock_button_pressed() -> void:
 	var project = Global.current_project
-	project.undo_redo.create_action("Change Layer Locked")
+	project.undo_redo.create_action("Change Layer Locked Status")
 
 	Global.canvas.selection.transform_content_confirm()
 	var layer := Global.current_project.layers[layer_index]

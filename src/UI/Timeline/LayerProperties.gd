@@ -171,7 +171,7 @@ func _on_onion_ignore_button_toggled(toggled_on: bool) -> void:
 		return
 
 	var project: Project = Global.current_project
-	project.undo_redo.create_action("Change Layer Onion Ignore")
+	project.undo_redo.create_action("Change Layer Onion Skinning Ignore Status")
 	for layer_index in layer_indices:
 		var layer := project.layers[layer_index]
 
