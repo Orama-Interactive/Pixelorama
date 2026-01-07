@@ -332,7 +332,8 @@ func append_keyframes_to_selection(rect: Rect2) -> void:
 		for keyframe_button in track.get_children():
 			if keyframe_button is not KeyframeButton:
 				continue
-			if rect.has_point(keyframe_button.position + track.position):
+			var key_rect := Rect2(keyframe_button.position + track.position, keyframe_button.size)
+			if rect.intersects(key_rect):
 				selected_keyframes.append(keyframe_button.keyframe_id)
 				keyframe_button.button_pressed = true
 	select_keyframes()
@@ -394,6 +395,7 @@ func _update_keyframe_property_ui(dict: Dictionary, keyframe_id: int) -> void:
 
 func add_effect_keyframe(effect: LayerEffect, frame_index: int, param_name: String) -> void:
 	var next_keyframe_id := effect.layer.next_keyframe_id
+	selected_keyframes = [next_keyframe_id]
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Add keyframe")
 	undo_redo.add_do_method(effect.set_keyframe.bind(param_name, frame_index))
