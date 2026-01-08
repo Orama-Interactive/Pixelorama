@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-07 04:44\n"
-"PO-Revision-Date: 2025-11-28 10:36\n"
+"PO-Revision-Date: 2025-11-29 21:33\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
 "Language: de_DE\n"
@@ -50,12 +50,12 @@ msgstr "Installiert ${APPNAME} ${APPVERSION}."
 #. DESC_SecStartmenu
 #: ..\pixelorama.nsi:201
 msgid "Creates Start Menu shortcuts for ${APPNAME}."
-msgstr "Erstellt eine Startmenü-Verknüpfungen für ${APPNAME}."
+msgstr "Erstellt Verknüpfungen im Startmenü für ${APPNAME}."
 
 #. DESC_SecDesktop
 #: ..\pixelorama.nsi:202
 msgid "Creates a Desktop shortcut for ${APPNAME}."
-msgstr "Desktop-Verknüpfung für ${APPNAME} erstellen."
+msgstr "Erstellt eine Verknüpfung auf dem Desktop für ${APPNAME}."
 
 #. DESC_un.SecUninstall
 #: ..\pixelorama.nsi:203

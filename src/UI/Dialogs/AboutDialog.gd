@@ -13,6 +13,7 @@ const AUTHORS: PackedStringArray = [
 	"ArthyChaux",
 	"azagaya",
 	"ballerburg9005",
+	"Bartkk",
 	"BrotherShort",
 	"CheetoHead (greusser)",
 	"Christos Tsoychlakis (ChrisTs8920)",

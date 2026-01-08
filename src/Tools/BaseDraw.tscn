@@ -84,6 +84,7 @@ value = 1.0
 allow_greater = true
 prefix = "Size:"
 suffix = "px"
+allow_global_input_events = true
 global_increment_action = "brush_size_increment"
 global_decrement_action = "brush_size_decrement"
 

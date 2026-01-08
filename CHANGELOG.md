@@ -4,9 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v1.1.8] - Unreleased
+## [v1.1.8] - 2025-12-31
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@Bartkk0](https://github.com/Bartkk0)
 
 Built using Godot 4.5.1
 
@@ -18,6 +18,8 @@ Built using Godot 4.5.1
 
 ### Changed
 - Gif files are now being exported frame by frame, which saves memory space and users can now see the current progress of the export. [#1396](https://github.com/Orama-Interactive/Pixelorama/pull/#1396)
+- The `override.cfg` file, which is used to store settings such as single-window mode, window transparency and audio driver is now stored in the same place as the `config.ini` file, instead of the same folder as the Pixelorama executable.
+- When double clicking on a layer button to rename it, the entire text is now automatically selected. [#1411](https://github.com/Orama-Interactive/Pixelorama/pull/#1411)
 
 ### Fixed
 - The "apply all" toggle when importing multiple images is now faster. [#1390](https://github.com/Orama-Interactive/Pixelorama/pull/#1390)
