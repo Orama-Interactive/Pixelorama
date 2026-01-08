@@ -14,8 +14,9 @@ func _ready() -> void:
 
 
 func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_released("ui_accept"):
-		get_ok_button().grab_focus()
+	if Input.is_action_just_released("ui_text_submit"):
+		if gui_get_focus_owner() != user_data_text_edit:
+			get_ok_button().grab_focus()
 
 
 func show_dialog(
