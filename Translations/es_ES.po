@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2026-01-07 22:49\n"
+"PO-Revision-Date: 2026-01-10 17:12\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3012,11 +3012,11 @@ msgstr "Rehacer: Cambiar opacidad de capa"
 
 #. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
 msgid "Undo: Change Layer Onion Skinning Ignore Status"
-msgstr ""
+msgstr "Deshacer: Cambiar estado de ignorancia de papel cebolla"
 
 #. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
 msgid "Redo: Change Layer Onion Skinning Ignore Status"
-msgstr ""
+msgstr "Rehacer: Cambiar estado de ignorancia de papel cebolla"
 
 #. Appears as a notification when the user data field of a layer is changed, and the user undos.
 msgid "Undo: Change Layer User Data"
@@ -3040,11 +3040,11 @@ msgstr "Rehacer: Cambiar visibilidad de capa"
 
 #. Appears as a notification when a layer gets locked or unlocked, and the user undos.
 msgid "Undo: Change Layer Locked Status"
-msgstr ""
+msgstr "Deshacer: Cambiar estado de bloqueo de capa"
 
 #. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
 msgid "Redo: Change Layer Locked Status"
-msgstr ""
+msgstr "Rehacer: Cambiar estado de bloqueo de capa"
 
 msgid "Move Guide"
 msgstr "Mover Guía"
