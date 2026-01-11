@@ -253,7 +253,6 @@ func _create_object_property_nodes(object: Node, title := "Node") -> Array[Folda
 				title = new_title
 				grid_container = fc.get_child(0)
 		var humanized_name := Keychain.humanize_snake_case(string_to_humanize, true)
-		var type: Variant.Type = prop["type"]
 		var hint: PropertyHint = prop["hint"]
 		var hint_string: String = prop["hint_string"]
 		if curr_value is Font:
@@ -275,136 +274,54 @@ func _create_object_property_nodes(object: Node, title := "Node") -> Array[Folda
 			option_button.item_selected.connect(_set_value_from_node.bind(object, prop_name))
 			grid_container.add_child(option_button)
 			continue
-		match type:
-			TYPE_BOOL:
-				var label := Label.new()
-				label.text = humanized_name
-				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				var check_box := CheckBox.new()
-				check_box.name = prop_name
-				check_box.text = "On"
-				check_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				check_box.button_pressed = curr_value == true
-				check_box.button_down.connect(func(): _undo_data = _get_undo_data(object))
-				check_box.toggled.connect(_set_value_from_node.bind(object, prop_name))
-				grid_container.add_child(label)
-				grid_container.add_child(check_box)
-			TYPE_INT, TYPE_FLOAT:
-				if prop_name == "transparency":
-					continue
-				if hint == PROPERTY_HINT_FLAGS:
-					continue
-				if hint == PROPERTY_HINT_RANGE:
-					var label := Label.new()
-					label.text = humanized_name
-					label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-					var slider := ValueSlider.new()
-					slider.name = prop_name
-					if type == TYPE_FLOAT:
-						slider.step = 0.01
-					if "or_less" in hint_string:
-						slider.allow_lesser = true
-					if "or_greater" in hint_string:
-						slider.allow_greater = true
-					var slider_options := hint_string.split(",")
-					for i in slider_options.size():
-						var option := slider_options[i]
-						if i == 0:
-							slider.min_value = float(slider_options[0])
-						elif i == 1:
-							slider.max_value = float(slider_options[1])
-						elif i == 2:
-							slider.step = float(slider_options[2])
-						elif option.begins_with("prefix:"):
-							slider.prefix = option.replace("prefix:", "")
-						elif option.begins_with("suffix:"):
-							slider.suffix = option.replace("suffix:", "")
-					slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-					slider.value = curr_value
-					slider.drag_started.connect(func(): _undo_data = _get_undo_data(object))
-					slider.value_changed.connect(_set_value_from_node.bind(object, prop_name))
-					grid_container.add_child(label)
-					grid_container.add_child(slider)
-				elif hint == PROPERTY_HINT_ENUM or hint == PROPERTY_HINT_ENUM_SUGGESTION:
-					var options := hint_string.split(",")
-					var label := Label.new()
-					label.text = humanized_name
-					label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-					grid_container.add_child(label)
-					var option_button := OptionButton.new()
-					option_button.name = prop_name
-					option_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-					for option in options:
-						option_button.add_item(option)
 
-					option_button.select(curr_value)
-					option_button.button_down.connect(func(): _undo_data = _get_undo_data(object))
-					option_button.item_selected.connect(
-						_set_value_from_node.bind(object, prop_name)
-					)
-					grid_container.add_child(option_button)
-			TYPE_VECTOR2, TYPE_VECTOR2I:
-				var label := Label.new()
-				label.text = humanized_name
-				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				var slider := VALUE_SLIDER_V2_TSCN.instantiate() as ValueSliderV2
-				slider.name = prop_name
-				slider.show_ratio = true
-				if type == TYPE_VECTOR2:
-					slider.step = 0.01
-				slider.allow_lesser = true
-				slider.allow_greater = true
-				slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				slider.value = curr_value
-				slider.drag_started.connect(func(): _undo_data = _get_undo_data(object))
-				slider.value_changed.connect(_set_value_from_node.bind(object, prop_name))
-				grid_container.add_child(label)
-				grid_container.add_child(slider)
-			TYPE_VECTOR3, TYPE_VECTOR3I:
-				var label := Label.new()
-				label.text = humanized_name
-				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				var slider := VALUE_SLIDER_V3_TSCN.instantiate() as ValueSliderV3
-				slider.name = prop_name
-				slider.show_ratio = true
-				if type == TYPE_VECTOR3:
-					slider.step = 0.01
-				slider.allow_lesser = true
-				slider.allow_greater = true
-				slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				slider.value = curr_value
-				slider.drag_started.connect(func(): _undo_data = _get_undo_data(object))
-				slider.value_changed.connect(_set_value_from_node.bind(object, prop_name))
-				grid_container.add_child(label)
-				grid_container.add_child(slider)
-			TYPE_VECTOR4, TYPE_VECTOR4I, TYPE_COLOR:
-				var label := Label.new()
-				label.text = humanized_name
-				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				var color_picker_button := ColorPickerButton.new()
-				color_picker_button.name = prop_name
-				color_picker_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				color_picker_button.color = curr_value
-				color_picker_button.button_down.connect(func(): _undo_data = _get_undo_data(object))
-				color_picker_button.color_changed.connect(
-					_set_value_from_node.bind(object, prop_name)
-				)
-				grid_container.add_child(label)
-				grid_container.add_child(color_picker_button)
-			TYPE_STRING, TYPE_STRING_NAME:
-				var label := Label.new()
-				label.text = humanized_name
-				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				grid_container.add_child(label)
-				var line_edit := LineEdit.new()
-				line_edit.name = prop_name
-				line_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				line_edit.text = curr_value
-				line_edit.editing_toggled.connect(
-					_on_object_property_line_edit_editing_toggled.bind(object)
-				)
-				line_edit.text_submitted.connect(_set_value_from_node.bind(object, prop_name))
-				grid_container.add_child(line_edit)
+		var min_value: Variant = null
+		var max_value: Variant = null
+		var step: Variant = null
+		var allow_lesser := false
+		var allow_greater := false
+		var prefix := ""
+		var suffix := ""
+		if "or_less" in hint_string:
+			allow_lesser = true
+		if "or_greater" in hint_string:
+			allow_greater = true
+		var slider_options := hint_string.split(",")
+		for i in slider_options.size():
+			var option := slider_options[i]
+			if i == 0:
+				min_value = float(slider_options[0])
+			elif i == 1:
+				max_value = float(slider_options[1])
+			elif i == 2:
+				step = float(slider_options[2])
+			elif option.begins_with("prefix:"):
+				prefix = option.replace("prefix:", "")
+			elif option.begins_with("suffix:"):
+				suffix = option.replace("suffix:", "")
+		var option_button_options := hint_string.split(",")
+		var node := Global.create_node_from_variable(
+			curr_value,
+			_set_value_from_node.bind(object, prop_name),
+			func(): _undo_data = _get_undo_data(object),
+			min_value,
+			max_value,
+			step,
+			allow_lesser,
+			allow_greater,
+			prefix,
+			suffix,
+			hint,
+			option_button_options
+		)
+		if is_instance_valid(node):
+			node.name = prop_name
+			var label := Label.new()
+			label.text = humanized_name
+			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			grid_container.add_child(label)
+			grid_container.add_child(node)
+
 	return containers
 
 
