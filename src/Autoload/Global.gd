@@ -1307,6 +1307,115 @@ func undo_redo_draw_op(
 		)
 
 
+#gdlint: ignore=function-arguments-number
+func create_node_from_variable(
+	curr_value: Variant,
+	value_changed: Callable,
+	started_editing := Callable(),
+	min_value: Variant = null,
+	max_value: Variant = null,
+	step: Variant = null,
+	allow_lesser := true,
+	allow_greater := true,
+	prefix := "",
+	suffix := "",
+	hint := PROPERTY_HINT_NONE,
+	option_button_options := PackedStringArray()
+) -> Control:
+	var type := typeof(curr_value)
+	match type:
+		TYPE_BOOL:
+			var check_box := CheckBox.new()
+			check_box.text = "On"
+			check_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			check_box.button_pressed = curr_value == true
+			if started_editing.is_valid():
+				check_box.button_down.connect(started_editing)
+			if value_changed.is_valid():
+				check_box.toggled.connect(value_changed)
+			return check_box
+		TYPE_INT, TYPE_FLOAT:
+			if hint == PROPERTY_HINT_ENUM or hint == PROPERTY_HINT_ENUM_SUGGESTION:
+				var option_button := OptionButton.new()
+				option_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				for option in option_button_options:
+					option_button.add_item(option)
+				option_button.select(curr_value)
+				if started_editing.is_valid():
+					option_button.button_down.connect(started_editing)
+				if value_changed.is_valid():
+					option_button.item_selected.connect(value_changed)
+				return option_button
+			else:
+				var slider := ValueSlider.new()
+				if type == TYPE_FLOAT:
+					slider.step = 0.01
+				if step != null:
+					slider.step = step
+				slider.allow_lesser = allow_lesser
+				slider.allow_greater = allow_greater
+				if min_value != null:
+					slider.min_value = min_value
+				if max_value != null:
+					slider.max_value = max_value
+				slider.prefix = prefix
+				slider.suffix = suffix
+				slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				slider.value = curr_value
+				if started_editing.is_valid():
+					slider.drag_started.connect(started_editing)
+				if value_changed.is_valid():
+					slider.value_changed.connect(value_changed)
+				return slider
+		TYPE_VECTOR2, TYPE_VECTOR2I:
+			var slider := ShaderLoader.VALUE_SLIDER_V2_TSCN.instantiate() as ValueSliderV2
+			slider.show_ratio = true
+			if type == TYPE_VECTOR2:
+				slider.step = 0.01
+			slider.allow_lesser = true
+			slider.allow_greater = true
+			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			slider.value = curr_value
+			if started_editing.is_valid():
+				slider.drag_started.connect(started_editing)
+			if value_changed.is_valid():
+				slider.value_changed.connect(value_changed)
+			return slider
+		TYPE_VECTOR3, TYPE_VECTOR3I:
+			var slider := ShaderLoader.VALUE_SLIDER_V3_TSCN.instantiate() as ValueSliderV3
+			slider.show_ratio = true
+			if type == TYPE_VECTOR3:
+				slider.step = 0.01
+			slider.allow_lesser = true
+			slider.allow_greater = true
+			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			slider.value = curr_value
+			if started_editing.is_valid():
+				slider.drag_started.connect(started_editing)
+			if value_changed.is_valid():
+				slider.value_changed.connect(value_changed)
+			return slider
+		TYPE_VECTOR4, TYPE_VECTOR4I, TYPE_COLOR:
+			var color_picker_button := ColorPickerButton.new()
+			color_picker_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			color_picker_button.color = curr_value
+			if started_editing.is_valid():
+				color_picker_button.button_down.connect(started_editing)
+			if value_changed.is_valid():
+				color_picker_button.color_changed.connect(value_changed)
+			return color_picker_button
+		TYPE_STRING, TYPE_STRING_NAME:
+			var line_edit := LineEdit.new()
+			line_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			line_edit.text = curr_value
+			if started_editing.is_valid():
+				line_edit.editing_toggled.connect(started_editing)
+			if value_changed.is_valid():
+				line_edit.text_submitted.connect(value_changed)
+			return line_edit
+	return null
+
+
 ## This method is used to write project setting overrides to the override.cfg file, located
 ## in the same directory as the executable.
 ## We use this method instead of [method ProjectSettings.save_custom] because that copies

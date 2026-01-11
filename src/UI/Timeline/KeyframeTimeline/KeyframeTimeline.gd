@@ -221,38 +221,11 @@ func select_keyframes() -> void:
 	var property = dict[param_name][frame_index]["value"]
 	var trans_type = dict[param_name][frame_index]["trans"]
 	var ease_type = dict[param_name][frame_index]["ease"]
-	if typeof(property) == TYPE_BOOL:
-		var check_box := CheckBox.new()
-		check_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		check_box.button_pressed = property
-		check_box.toggled.connect(_on_keyframe_property_changed.bind("value"))
-		properties_grid_container.add_child(check_box)
-	elif typeof(property) in [TYPE_INT, TYPE_FLOAT]:
-		var slider := ValueSlider.new()
-		slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		slider.allow_lesser = true
-		slider.allow_greater = true
-		if typeof(property) == TYPE_FLOAT:
-			slider.step = 0.01
-		slider.value = property
-		slider.value_changed.connect(_on_keyframe_property_changed.bind("value"))
-		properties_grid_container.add_child(slider)
-	elif typeof(property) in [TYPE_VECTOR2, TYPE_VECTOR2I]:
-		var slider := ShaderLoader.VALUE_SLIDER_V2_TSCN.instantiate() as ValueSliderV2
-		slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		slider.allow_lesser = true
-		slider.allow_greater = true
-		if typeof(property) == TYPE_VECTOR2:
-			slider.step = 0.01
-		slider.value = property
-		slider.value_changed.connect(_on_keyframe_property_changed.bind("value"))
-		properties_grid_container.add_child(slider)
-	elif typeof(property) == TYPE_COLOR:
-		var color_picker_button := ColorPickerButton.new()
-		color_picker_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		color_picker_button.color = property
-		color_picker_button.color_changed.connect(_on_keyframe_property_changed.bind("value"))
-		properties_grid_container.add_child(color_picker_button)
+	var node := Global.create_node_from_variable(
+		property, _on_keyframe_property_changed.bind("value")
+	)
+	if is_instance_valid(node):
+		properties_grid_container.add_child(node)
 
 	var trans_label := Label.new()
 	trans_label.text = "Transition:"
