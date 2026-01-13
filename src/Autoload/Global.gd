@@ -1388,6 +1388,17 @@ func create_node_from_variable(
 			if value_changed.is_valid():
 				color_picker_button.color_changed.connect(value_changed)
 			return color_picker_button
+		TYPE_BASIS:
+			var sliders := ShaderLoader.BASIS_SLIDERS_TSCN.instantiate() as BasisSliders
+			sliders.allow_greater = true
+			sliders.allow_lesser = true
+			sliders.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			sliders.value = curr_value
+			if started_editing.is_valid():
+				sliders.drag_started.connect(started_editing)
+			if value_changed.is_valid():
+				sliders.value_changed.connect(value_changed)
+			return sliders
 		TYPE_STRING, TYPE_STRING_NAME:
 			var line_edit := LineEdit.new()
 			line_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL

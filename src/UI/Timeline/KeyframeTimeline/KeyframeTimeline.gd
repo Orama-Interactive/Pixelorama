@@ -128,7 +128,7 @@ func _recreate_timeline() -> void:
 			if param_name in ["PXO_time", "PXO_frame_index", "PXO_layer_index"]:
 				continue
 			var value = effect.params[param_name]
-			if not effect.is_interpolatable_type(value) and typeof(value) != TYPE_BOOL:
+			if not LayerEffect.is_animatable_type(value):
 				continue
 			var param_tree_item := tree_item.create_child()
 			param_tree_item.set_text(0, Keychain.humanize_snake_case(param_name))
@@ -227,46 +227,47 @@ func select_keyframes() -> void:
 	if is_instance_valid(node):
 		properties_grid_container.add_child(node)
 
-	var trans_label := Label.new()
-	trans_label.text = "Transition:"
-	trans_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	properties_grid_container.add_child(trans_label)
-	var trans_type_options := OptionButton.new()
-	trans_type_options.name = "TransTypeOptions"
-	trans_type_options.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	trans_type_options.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	trans_type_options.add_item("Linear", Tween.TRANS_LINEAR)
-	trans_type_options.add_item("Quadratic", Tween.TRANS_QUAD)
-	trans_type_options.add_item("Cubic", Tween.TRANS_CUBIC)
-	trans_type_options.add_item("Quartic", Tween.TRANS_QUART)
-	trans_type_options.add_item("Quintic", Tween.TRANS_QUINT)
-	trans_type_options.add_item("Exponential", Tween.TRANS_EXPO)
-	trans_type_options.add_item("Square root", Tween.TRANS_CIRC)
-	trans_type_options.add_item("Sine", Tween.TRANS_SINE)
-	trans_type_options.add_item("Elastic", Tween.TRANS_ELASTIC)
-	trans_type_options.add_item("Bounce", Tween.TRANS_BOUNCE)
-	trans_type_options.add_item("Back", Tween.TRANS_BACK)
-	trans_type_options.add_item("Spring", Tween.TRANS_SPRING)
-	trans_type_options.add_item("Constant", Tween.TRANS_SPRING + 1)
-	trans_type_options.select(trans_type)
-	trans_type_options.item_selected.connect(_on_keyframe_property_changed.bind("trans"))
-	properties_grid_container.add_child(trans_type_options)
+	if LayerEffect.is_interpolatable_type(property):
+		var trans_label := Label.new()
+		trans_label.text = "Transition:"
+		trans_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		properties_grid_container.add_child(trans_label)
+		var trans_type_options := OptionButton.new()
+		trans_type_options.name = "TransTypeOptions"
+		trans_type_options.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		trans_type_options.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		trans_type_options.add_item("Linear", Tween.TRANS_LINEAR)
+		trans_type_options.add_item("Quadratic", Tween.TRANS_QUAD)
+		trans_type_options.add_item("Cubic", Tween.TRANS_CUBIC)
+		trans_type_options.add_item("Quartic", Tween.TRANS_QUART)
+		trans_type_options.add_item("Quintic", Tween.TRANS_QUINT)
+		trans_type_options.add_item("Exponential", Tween.TRANS_EXPO)
+		trans_type_options.add_item("Square root", Tween.TRANS_CIRC)
+		trans_type_options.add_item("Sine", Tween.TRANS_SINE)
+		trans_type_options.add_item("Elastic", Tween.TRANS_ELASTIC)
+		trans_type_options.add_item("Bounce", Tween.TRANS_BOUNCE)
+		trans_type_options.add_item("Back", Tween.TRANS_BACK)
+		trans_type_options.add_item("Spring", Tween.TRANS_SPRING)
+		trans_type_options.add_item("Constant", Tween.TRANS_SPRING + 1)
+		trans_type_options.select(trans_type)
+		trans_type_options.item_selected.connect(_on_keyframe_property_changed.bind("trans"))
+		properties_grid_container.add_child(trans_type_options)
 
-	var easing_label := Label.new()
-	easing_label.text = "Easing:"
-	easing_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	properties_grid_container.add_child(easing_label)
-	var ease_type_options := OptionButton.new()
-	ease_type_options.name = "EaseTypeOptions"
-	ease_type_options.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	ease_type_options.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-	ease_type_options.add_item("Ease in", Tween.EASE_IN)
-	ease_type_options.add_item("Ease out", Tween.EASE_OUT)
-	ease_type_options.add_item("Ease in out", Tween.EASE_IN_OUT)
-	ease_type_options.add_item("Ease out in", Tween.EASE_OUT_IN)
-	ease_type_options.select(ease_type)
-	ease_type_options.item_selected.connect(_on_keyframe_property_changed.bind("ease"))
-	properties_grid_container.add_child(ease_type_options)
+		var easing_label := Label.new()
+		easing_label.text = "Easing:"
+		easing_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		properties_grid_container.add_child(easing_label)
+		var ease_type_options := OptionButton.new()
+		ease_type_options.name = "EaseTypeOptions"
+		ease_type_options.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		ease_type_options.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		ease_type_options.add_item("Ease in", Tween.EASE_IN)
+		ease_type_options.add_item("Ease out", Tween.EASE_OUT)
+		ease_type_options.add_item("Ease in out", Tween.EASE_IN_OUT)
+		ease_type_options.add_item("Ease out in", Tween.EASE_OUT_IN)
+		ease_type_options.select(ease_type)
+		ease_type_options.item_selected.connect(_on_keyframe_property_changed.bind("ease"))
+		properties_grid_container.add_child(ease_type_options)
 
 	await get_tree().process_frame
 	_on_track_scroll_container_resized()
@@ -358,12 +359,16 @@ func _update_keyframe_property_ui(dict: Dictionary, keyframe_id: int) -> void:
 		property_value_node.color = value
 	elif property_value_node is LineEdit or property_value_node is TextEdit:
 		property_value_node.text = value
-	var trans_type_options := (
-		properties_grid_container.get_node(^"TransTypeOptions") as OptionButton
-	)
-	trans_type_options.select(trans_type)
-	var ease_type_options := properties_grid_container.get_node(^"EaseTypeOptions") as OptionButton
-	ease_type_options.select(ease_type)
+	if properties_grid_container.has_node(^"TransTypeOptions"):
+		var trans_type_options := (
+			properties_grid_container.get_node(^"TransTypeOptions") as OptionButton
+		)
+		trans_type_options.select(trans_type)
+	if properties_grid_container.has_node(^"EaseTypeOptions"):
+		var ease_type_options := (
+			properties_grid_container.get_node(^"EaseTypeOptions") as OptionButton
+		)
+		ease_type_options.select(ease_type)
 
 
 func add_effect_keyframe(effect: LayerEffect, frame_index: int, param_name: String) -> void:

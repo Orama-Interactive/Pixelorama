@@ -96,12 +96,21 @@ func set_keyframe(
 	keyframe_set.emit()
 
 
-func is_interpolatable_type(value: Variant) -> bool:
-	var type := typeof(value)
-	match type:
+static func is_interpolatable_type(value: Variant) -> bool:
+	match typeof(value):
 		TYPE_INT, TYPE_FLOAT, TYPE_VECTOR2, TYPE_VECTOR2I, TYPE_VECTOR3, TYPE_VECTOR3I:
 			return true
 		TYPE_VECTOR4, TYPE_VECTOR4I, TYPE_COLOR, TYPE_QUATERNION:
+			return true
+		_:
+			return false
+
+
+static func is_animatable_type(value: Variant) -> bool:
+	if is_interpolatable_type(value):
+		return true
+	match typeof(value):
+		TYPE_BOOL, TYPE_BASIS:
 			return true
 		_:
 			return false
