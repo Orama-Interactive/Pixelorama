@@ -275,44 +275,12 @@ func _create_object_property_nodes(object: Node, title := "Node") -> Array[Folda
 			grid_container.add_child(option_button)
 			continue
 
-		var min_value: Variant = null
-		var max_value: Variant = null
-		var step: Variant = null
-		var allow_lesser := false
-		var allow_greater := false
-		var prefix := ""
-		var suffix := ""
-		if "or_less" in hint_string:
-			allow_lesser = true
-		if "or_greater" in hint_string:
-			allow_greater = true
-		var slider_options := hint_string.split(",")
-		for i in slider_options.size():
-			var option := slider_options[i]
-			if i == 0:
-				min_value = float(slider_options[0])
-			elif i == 1:
-				max_value = float(slider_options[1])
-			elif i == 2:
-				step = float(slider_options[2])
-			elif option.begins_with("prefix:"):
-				prefix = option.replace("prefix:", "")
-			elif option.begins_with("suffix:"):
-				suffix = option.replace("suffix:", "")
-		var option_button_options := hint_string.split(",")
 		var node := Global.create_node_from_variable(
 			curr_value,
 			_set_value_from_node.bind(object, prop_name),
-			func(): _undo_data = _get_undo_data(object),
-			min_value,
-			max_value,
-			step,
-			allow_lesser,
-			allow_greater,
-			prefix,
-			suffix,
+			hint_string,
 			hint,
-			option_button_options
+			func(): _undo_data = _get_undo_data(object),
 		)
 		if is_instance_valid(node):
 			node.name = prop_name
