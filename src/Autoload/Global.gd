@@ -1307,21 +1307,38 @@ func undo_redo_draw_op(
 		)
 
 
-#gdlint: ignore=function-arguments-number
 func create_node_from_variable(
 	curr_value: Variant,
 	value_changed: Callable,
-	started_editing := Callable(),
-	min_value: Variant = null,
-	max_value: Variant = null,
-	step: Variant = null,
-	allow_lesser := true,
-	allow_greater := true,
-	prefix := "",
-	suffix := "",
+	hint_string := "",
 	hint := PROPERTY_HINT_NONE,
-	option_button_options := PackedStringArray()
+	started_editing := Callable()
 ) -> Control:
+	var min_value = null
+	var max_value = null
+	var step = null
+	var allow_lesser := false
+	var allow_greater := false
+	var prefix := ""
+	var suffix := ""
+	if "or_less" in hint_string:
+		allow_lesser = true
+	if "or_greater" in hint_string:
+		allow_greater = true
+	var slider_options := hint_string.split(",")
+	for i in slider_options.size():
+		var option := slider_options[i]
+		if i == 0 and slider_options[0].is_valid_float():
+			min_value = slider_options[0].to_float()
+		elif i == 1 and slider_options[1].is_valid_float():
+			max_value = slider_options[1].to_float()
+		elif i == 2 and slider_options[2].is_valid_float():
+			step = slider_options[2].to_float()
+		elif option.begins_with("prefix:"):
+			prefix = option.replace("prefix:", "")
+		elif option.begins_with("suffix:"):
+			suffix = option.replace("suffix:", "")
+	var option_button_options := hint_string.split(",")
 	var type := typeof(curr_value)
 	match type:
 		TYPE_BOOL:
