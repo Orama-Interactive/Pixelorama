@@ -1380,8 +1380,14 @@ func create_node_from_variable(
 			slider.show_ratio = true
 			if type == TYPE_VECTOR2:
 				slider.step = 0.01
-			slider.allow_lesser = true
-			slider.allow_greater = true
+			if step != null:
+				slider.step = step
+			slider.allow_lesser = allow_lesser
+			slider.allow_greater = allow_greater
+			if min_value != null:
+				slider.min_value = min_value
+			if max_value != null:
+				slider.max_value = max_value
 			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			slider.value = curr_value
 			if started_editing.is_valid():
@@ -1394,8 +1400,14 @@ func create_node_from_variable(
 			slider.show_ratio = true
 			if type == TYPE_VECTOR3:
 				slider.step = 0.01
-			slider.allow_lesser = true
-			slider.allow_greater = true
+			if step != null:
+				slider.step = step
+			slider.allow_lesser = allow_lesser
+			slider.allow_greater = allow_greater
+			if min_value != null:
+				slider.min_value = min_value
+			if max_value != null:
+				slider.max_value = max_value
 			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			slider.value = curr_value
 			if started_editing.is_valid():
@@ -1414,8 +1426,14 @@ func create_node_from_variable(
 			return color_picker_button
 		TYPE_BASIS:
 			var sliders := ShaderLoader.BASIS_SLIDERS_TSCN.instantiate() as BasisSliders
-			sliders.allow_greater = true
-			sliders.allow_lesser = true
+			if step != null:
+				sliders.step = step
+			sliders.allow_lesser = allow_lesser
+			sliders.allow_greater = allow_greater
+			if min_value != null:
+				sliders.min_value = min_value
+			if max_value != null:
+				sliders.max_value = max_value
 			sliders.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			sliders.value = curr_value
 			if started_editing.is_valid():
