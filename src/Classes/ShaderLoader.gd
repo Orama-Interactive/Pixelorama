@@ -538,6 +538,10 @@ static func _create_simple_texture_ui(
 	file_dialog.always_on_top = true
 	file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 	file_dialog.access = FileDialog.ACCESS_FILESYSTEM
+	var filters := PackedStringArray([])
+	for image_type in Global.SUPPORTED_IMAGE_TYPES:
+		filters.append("*.%s;" % image_type)
+	file_dialog.filters = filters
 	file_dialog.size = Vector2(384, 281)
 	file_dialog.file_selected.connect(file_selected.bind(u_name))
 	file_dialog.use_native_dialog = Global.use_native_file_dialogs

@@ -121,7 +121,9 @@ const LANGUAGES_DICT := {
 	"ja_JP": ["日本語", "Japanese"],
 	"uk_UA": ["Українська", "Ukrainian"],
 }
-
+const SUPPORTED_IMAGE_TYPES: PackedStringArray = [
+	"png", "bmp", "hdr", "jpg", "jpeg", "svg", "tga", "webp"
+]
 ## The file path used for the [member config_cache] file.
 const CONFIG_PATH := "user://config.ini"
 ## The file used to save preferences that use [method _save_to_override_file].
