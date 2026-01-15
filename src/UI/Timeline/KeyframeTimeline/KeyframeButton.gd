@@ -56,7 +56,8 @@ func _on_gui_input(event: InputEvent) -> void:
 				if not button_pressed and self in selected_keyframe_buttons:
 					button_pressed = true
 					pressed.emit()
-				updated_position.emit()
+				if drag_pos != position.x:
+					updated_position.emit()
 
 	if event is InputEventMouseMotion and is_dragged:
 		var mouse_pos: float = parent.get_local_mouse_position().x
