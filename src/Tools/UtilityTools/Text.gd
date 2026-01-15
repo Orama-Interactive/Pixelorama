@@ -43,6 +43,11 @@ var _offset := Vector2i.ZERO
 
 
 func _ready() -> void:
+	if tool_slot.button == MOUSE_BUTTON_RIGHT:
+		$TextSizeSlider.allow_global_input_events = not Global.share_options_between_tools
+		Global.share_options_between_tools_changed.connect(
+			func(enabled): $TextSizeSlider.allow_global_input_events = not enabled
+		)
 	var font_names := Global.get_available_font_names()
 	for f_name in font_names:
 		font_option_button.add_item(f_name)

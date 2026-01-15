@@ -77,6 +77,7 @@ stretch_margin_bottom = 3
 script = ExtResource("3_tidsq")
 prefix = "Size:"
 suffix = "px"
+allow_global_input_events = true
 global_increment_action = "brush_size_increment"
 global_decrement_action = "brush_size_decrement"
 
