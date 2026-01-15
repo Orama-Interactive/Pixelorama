@@ -1443,7 +1443,88 @@ func create_node_from_variable(
 			if value_changed.is_valid():
 				line_edit.text_submitted.connect(value_changed)
 			return line_edit
+		TYPE_OBJECT:
+			if curr_value is Font:
+				var option_button := OptionButton.new()
+				option_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				var font_name := (curr_value as Font).get_font_name()
+				for available_font_name in get_available_font_names():
+					option_button.add_item(available_font_name)
+					if font_name == available_font_name:
+						option_button.select(option_button.item_count - 1)
+				if started_editing.is_valid():
+					option_button.button_down.connect(started_editing)
+				if value_changed.is_valid():
+					option_button.item_selected.connect(value_changed)
+				return option_button
+			elif curr_value is Texture2D:
+				var button := Button.new()
+				button.text = "Load texture"
+				if started_editing.is_valid():
+					button.button_down.connect(started_editing)
+				if value_changed.is_valid():
+					button.pressed.connect(popup_image_file_dialog.bind(value_changed))
+				button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+				var mod_button := Button.new()
+				mod_button.text = "Modify"
+				if value_changed.is_valid():
+					mod_button.pressed.connect(
+						func():
+							ShaderLoader.modify_texture_resource(
+								curr_value.get_image(),
+								"",
+								_on_resource_proj_updated.bind(value_changed)
+							)
+					)
+				mod_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				mod_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+				var hbox := HBoxContainer.new()
+				hbox.add_child(button)
+				hbox.add_child(mod_button)
+				return hbox
 	return null
+
+
+func popup_image_file_dialog(on_file_selected: Callable) -> void:
+	var file_dialog := FileDialog.new()
+	file_dialog.always_on_top = true
+	file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+	file_dialog.access = FileDialog.ACCESS_FILESYSTEM
+	file_dialog.use_native_dialog = use_native_file_dialogs
+	var filters := PackedStringArray([])
+	for image_type in SUPPORTED_IMAGE_TYPES:
+		filters.append("*.%s;" % image_type)
+	file_dialog.filters = filters
+	file_dialog.size = Vector2(384, 281)
+	file_dialog.file_selected.connect(
+		func(path: String):
+			var image := Image.new()
+			image.load(path)
+			if !image:
+				print("Error loading texture")
+				file_dialog.queue_free()
+				return
+			var image_tex := ImageTexture.create_from_image(image)
+			on_file_selected.call(image_tex)
+			file_dialog.queue_free()
+	)
+	add_child(file_dialog)
+	file_dialog.popup_centered_clamped()
+	file_dialog.canceled.connect(file_dialog.queue_free)
+
+
+# TODO: Remove duplicate code, either keep this or
+# _shader_update_texture in ShaderLoader.
+func _on_resource_proj_updated(resource_proj: ResourceProject, value_changed: Callable) -> void:
+	var warnings := ""
+	if resource_proj.frames.size() > 1:
+		warnings += "This resource is intended to have 1 frame only. Extra frames will be ignored."
+	var updated_image := resource_proj.get_frame_image(0)
+	if value_changed and value_changed.is_valid():
+		value_changed.call(ImageTexture.create_from_image(updated_image))
+	if not warnings.is_empty():
+		popup_error(warnings)
 
 
 ## This method is used to write project setting overrides to the override.cfg file, located
