@@ -555,7 +555,7 @@ static func _create_simple_texture_ui(
 	mod_button.text = "Modify"
 	mod_button.pressed.connect(
 		func():
-			_modify_texture_resource(
+			modify_texture_resource(
 				_get_loaded_texture(params, u_name),
 				u_name,
 				_shader_update_texture.bind(value_changed, u_name)
@@ -671,7 +671,7 @@ static func _shader_update_texture(
 		Global.popup_error(warnings)
 
 
-static func _modify_texture_resource(
+static func modify_texture_resource(
 	image: Image, resource_name: StringName, update_callable: Callable
 ) -> void:
 	var resource_proj := ResourceProject.new([], resource_name, image.get_size())
