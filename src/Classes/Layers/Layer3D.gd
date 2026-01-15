@@ -94,14 +94,11 @@ static var properties_to_exclude: Array[String] = [
 static var material_properties_to_exclude: Array[String] = [
 	"ao_",
 	"bent_",
-	"depth_",
 	"detail_",
 	"disable_fog",
 	"emission_on_uv2",
 	"emission_operator",
-	"heightmap_",
 	"msdf_",
-	"normal_",
 	"particles_",
 	"stencil_",
 	"use_particle_trails",
@@ -136,6 +133,7 @@ var selected: Node3D = null:
 		# we want to unselect that object.
 		if is_instance_valid(selected) and not selected.tree_exiting.is_connected(unselect):
 			selected.tree_exiting.connect(unselect)
+var _undo_data: Dictionary[StringName, Variant] = {}
 
 
 func _init(_project: Project, _name := "", from_pxo := false) -> void:
@@ -276,6 +274,10 @@ static func create_node(type: ObjectType, custom_mesh: Mesh = null) -> Node3D:
 			Global.canvas.gizmos_3d.add_always_visible(node3d, OMNI_LIGHT_TEXTURE)
 	if node3d is MeshInstance3D and not is_instance_valid(node3d.mesh.surface_get_material(0)):
 		var material := StandardMaterial3D.new()
+		material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		var albedo_image := Image.create_empty(64, 64, false, Image.FORMAT_RGBA8)
+		albedo_image.fill(Color(1, 1, 1, 1))
+		material.albedo_texture = ImageTexture.create_from_image(albedo_image)
 		node3d.mesh.surface_set_material(0, material)
 	return node3d
 
@@ -325,6 +327,8 @@ static func get_object_property_list(object: Object) -> Array[Dictionary]:
 static func filter_object_properties(dict: Dictionary) -> bool:
 	var class_n := dict["class_name"] as StringName
 	if &"Font" in class_n:
+		return true
+	if &"Texture2D" in class_n:
 		return true
 	var prop_name := dict["name"] as String
 	if prop_name in properties_to_exclude:
@@ -527,6 +531,27 @@ func _on_node_property_changed(_node: Node, _property: StringName, frame_index: 
 	if frame_index != project.current_frame:
 		animation_player.seek(project.current_frame, true)
 		project.frames[project.current_frame].cels[index].update_texture()
+
+
+func set_value_from_node(value, to_edit: Node, prop: String) -> void:
+	if not is_instance_valid(to_edit):
+		return
+	if prop not in _undo_data:
+		print(prop, " not found in undo data.")
+		return
+	if prop == "mesh:font":
+		value = Global.find_font_from_name(Global.get_available_font_names()[value])
+	var frame_index := project.current_frame
+	var prev_value = _undo_data[prop]
+	update_animation_track(to_edit, prop, value, prev_value, frame_index)
+
+
+func get_undo_data(node: Object) -> void:
+	_undo_data = {}
+	var property_list := get_object_property_list(node)
+	for prop in property_list:
+		var prop_name: String = prop["name"]
+		_undo_data[prop_name] = node.get_indexed(prop_name)
 
 
 # Overridden Methods:

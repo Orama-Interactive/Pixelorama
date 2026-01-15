@@ -5,7 +5,6 @@ const VALUE_SLIDER_V3_TSCN := preload("res://src/UI/Nodes/Sliders/ValueSliderV3.
 
 const FOLDABLE_CONTAINER_GROUP_NAME := &"3DObjectPropertyNodes"
 var layer_3d: Layer3D
-var _undo_data: Dictionary[StringName, Variant] = {}
 var _hovering: Node3D = null:
 	set(value):
 		var selected := layer_3d.selected == _hovering
@@ -54,7 +53,7 @@ func draw_start(pos: Vector2i) -> void:
 		layer_3d.selected = _hovering
 		Global.canvas.gizmos_3d.get_points(_hovering, true)
 		_dragging = true
-		_undo_data = _get_undo_data(layer_3d.selected)
+		layer_3d.get_undo_data(layer_3d.selected)
 		_prev_mouse_pos = pos
 	else:  # We're not hovering
 		if is_instance_valid(layer_3d.selected):
@@ -63,7 +62,7 @@ func draw_start(pos: Vector2i) -> void:
 				layer_3d.selected = null
 			else:
 				_dragging = true
-				_undo_data = _get_undo_data(layer_3d.selected)
+				layer_3d.get_undo_data(layer_3d.selected)
 				_prev_mouse_pos = pos
 
 
@@ -140,15 +139,6 @@ func get_3d_node_at_pos(pos: Vector2i, camera: Camera3D, max_distance := 100.0) 
 			if not intersect.is_empty():
 				return [intersect_node, intersect]
 	return []
-
-
-func _get_undo_data(node: Object) -> Dictionary[StringName, Variant]:
-	var data: Dictionary[StringName, Variant] = {}
-	var property_list := Layer3D.get_object_property_list(node)
-	for prop in property_list:
-		var prop_name: String = prop["name"]
-		data[prop_name] = node.get_indexed(prop_name)
-	return data
 
 
 func _cel_switched() -> void:
@@ -233,9 +223,13 @@ func _create_object_property_nodes(object: Node, title := "Node") -> Array[Folda
 	var property_list := Layer3D.get_object_property_list(object)
 	for prop in property_list:
 		var prop_name: String = prop["name"]
+		var class_n := prop["class_name"] as StringName
 		var curr_value = object.get_indexed(prop_name)
 		if curr_value == null:
-			continue
+			if &"Texture2D" in class_n:
+				curr_value = ImageTexture.new()
+			else:
+				continue
 		var prop_name_nodepath := NodePath(prop_name)
 		var subname_count := prop_name_nodepath.get_subname_count()
 		var last_subname_index := subname_count - 1
@@ -255,32 +249,12 @@ func _create_object_property_nodes(object: Node, title := "Node") -> Array[Folda
 		var humanized_name := Keychain.humanize_snake_case(string_to_humanize, true)
 		var hint: PropertyHint = prop["hint"]
 		var hint_string: String = prop["hint_string"]
-		if curr_value is Font:
-			var label := Label.new()
-			label.text = humanized_name
-			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			grid_container.add_child(label)
-			var option_button := OptionButton.new()
-			option_button.name = prop_name
-			option_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var font := curr_value as Font
-			var font_name := font.get_font_name()
-			for available_font_name in Global.get_available_font_names():
-				option_button.add_item(available_font_name)
-				if font_name == available_font_name:
-					option_button.select(option_button.item_count - 1)
-
-			option_button.button_down.connect(func(): _undo_data = _get_undo_data(object))
-			option_button.item_selected.connect(_set_value_from_node.bind(object, prop_name))
-			grid_container.add_child(option_button)
-			continue
-
 		var node := Global.create_node_from_variable(
 			curr_value,
-			_set_value_from_node.bind(object, prop_name),
+			layer_3d.set_value_from_node.bind(object, prop_name),
 			hint_string,
 			hint,
-			func(): _undo_data = _get_undo_data(object),
+			func(): layer_3d.get_undo_data(object),
 		)
 		if is_instance_valid(node):
 			node.name = prop_name
@@ -295,7 +269,7 @@ func _create_object_property_nodes(object: Node, title := "Node") -> Array[Folda
 
 func _on_object_property_line_edit_editing_toggled(toggled_on: bool, object: Node) -> void:
 	if toggled_on:
-		_undo_data = _get_undo_data(object)
+		layer_3d.get_undo_data(object)
 
 
 func _create_foldable_container(object: Node, title: String) -> FoldableContainer:
@@ -308,16 +282,3 @@ func _create_foldable_container(object: Node, title: String) -> FoldableContaine
 	grid_container.columns = 2
 	foldable_container.add_child(grid_container)
 	return foldable_container
-
-
-func _set_value_from_node(value, to_edit: Node, prop: String) -> void:
-	if not is_instance_valid(to_edit):
-		return
-	if prop not in _undo_data:
-		print(prop, " not found in undo data.")
-		return
-	if prop == "mesh:font":
-		value = Global.find_font_from_name(Global.get_available_font_names()[value])
-	var frame_index := layer_3d.project.current_frame
-	var prev_value = _undo_data[prop]
-	layer_3d.update_animation_track(to_edit, prop, value, prev_value, frame_index)
