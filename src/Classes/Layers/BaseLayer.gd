@@ -157,8 +157,8 @@ func can_layer_be_modified() -> bool:
 func is_blended_by_ancestor() -> bool:
 	var is_blended := false
 	for ancestor in get_ancestors():
-		if ancestor.blend_mode != BlendModes.PASS_THROUGH:
-			is_blended = true
+		is_blended = ancestor.is_blender()
+		if is_blended:
 			break
 	return is_blended
 
