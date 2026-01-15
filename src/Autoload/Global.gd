@@ -1358,13 +1358,13 @@ func create_node_from_variable(
 				var slider := ValueSlider.new()
 				if type == TYPE_FLOAT:
 					slider.step = 0.01
-				if step != null:
+				if typeof(step) == type:
 					slider.step = step
 				slider.allow_lesser = allow_lesser
 				slider.allow_greater = allow_greater
-				if min_value != null:
+				if typeof(min_value) == type:
 					slider.min_value = min_value
-				if max_value != null:
+				if typeof(max_value) == type:
 					slider.max_value = max_value
 				slider.prefix = prefix
 				slider.suffix = suffix
@@ -1380,13 +1380,13 @@ func create_node_from_variable(
 			slider.show_ratio = true
 			if type == TYPE_VECTOR2:
 				slider.step = 0.01
-			if step != null:
+			if typeof(step) in [TYPE_FLOAT, TYPE_INT]:
 				slider.step = step
 			slider.allow_lesser = allow_lesser
 			slider.allow_greater = allow_greater
-			if min_value != null:
+			if typeof(min_value) == type:
 				slider.min_value = min_value
-			if max_value != null:
+			if typeof(max_value) == type:
 				slider.max_value = max_value
 			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			slider.value = curr_value
@@ -1400,13 +1400,13 @@ func create_node_from_variable(
 			slider.show_ratio = true
 			if type == TYPE_VECTOR3:
 				slider.step = 0.01
-			if step != null:
+			if typeof(step) in [TYPE_FLOAT, TYPE_INT]:
 				slider.step = step
 			slider.allow_lesser = allow_lesser
 			slider.allow_greater = allow_greater
-			if min_value != null:
+			if typeof(min_value) == type:
 				slider.min_value = min_value
-			if max_value != null:
+			if typeof(max_value) == type:
 				slider.max_value = max_value
 			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			slider.value = curr_value
@@ -1426,13 +1426,13 @@ func create_node_from_variable(
 			return color_picker_button
 		TYPE_BASIS:
 			var sliders := ShaderLoader.BASIS_SLIDERS_TSCN.instantiate() as BasisSliders
-			if step != null:
+			if typeof(step) in [TYPE_FLOAT, TYPE_INT]:
 				sliders.step = step
 			sliders.allow_lesser = allow_lesser
 			sliders.allow_greater = allow_greater
-			if min_value != null:
+			if typeof(min_value) == type:
 				sliders.min_value = min_value
-			if max_value != null:
+			if typeof(max_value) == type:
 				sliders.max_value = max_value
 			sliders.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			sliders.value = curr_value
