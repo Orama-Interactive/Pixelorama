@@ -163,16 +163,16 @@ func _cel_switched() -> void:
 		_show_node_property_nodes()
 
 
-func _object_property_changed(object: Node, property: String, frame_index: int) -> void:
+func _object_property_changed(object: Node, prop_name: String, frame_index: int) -> void:
 	if frame_index != layer_3d.project.current_frame:
 		return
-	var curr_value = object.get_indexed(property)
+	var curr_value = object.get_indexed(prop_name)
 	for foldable in get_tree().get_nodes_in_group(FOLDABLE_CONTAINER_GROUP_NAME):
 		if foldable.get_meta(&"object") != object:
 			continue
 		var grid_container := foldable.get_child(0)
 		for property_editor_node in grid_container.get_children():
-			var property_node_name := property.replace(":", "_").replace("/", "_")
+			var property_node_name := prop_name.replace(":", "_").replace("/", "_")
 			if property_editor_node.name == property_node_name:
 				if property_editor_node is CheckBox:
 					property_editor_node.set_pressed_no_signal(curr_value)
@@ -196,6 +196,26 @@ func _object_property_changed(object: Node, property: String, frame_index: int) 
 								break
 					else:
 						property_editor_node.select(curr_value)
+				elif property_editor_node is HBoxContainer:
+					if curr_value is Texture2D and property_editor_node.has_node(^"ModifyButton"):
+						# Needed to ensure that the correct Image gets created when
+						# clicking on the modify button, if the image was modified by some
+						# other way, such us loading or undoing.
+						var mod_button := property_editor_node.get_node(^"ModifyButton") as Button
+						for connection in mod_button.pressed.get_connections():
+							var callable: Callable = connection.get("callable", null)
+							if callable:
+								mod_button.pressed.disconnect(callable)
+						mod_button.pressed.connect(
+							func():
+								ShaderLoader.modify_texture_resource(
+									curr_value.get_image(),
+									"",
+									Global.on_resource_proj_updated.bind(
+										layer_3d.set_value_from_node.bind(object, prop_name)
+									)
+								)
+						)
 
 
 func _on_selected_object(object: Node3D, old_object: Node3D) -> void:

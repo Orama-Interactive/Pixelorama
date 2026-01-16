@@ -1466,6 +1466,7 @@ func create_node_from_variable(
 				button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 				var mod_button := Button.new()
+				mod_button.name = "ModifyButton"
 				mod_button.text = "Modify"
 				if value_changed.is_valid():
 					mod_button.pressed.connect(
@@ -1473,7 +1474,7 @@ func create_node_from_variable(
 							ShaderLoader.modify_texture_resource(
 								curr_value.get_image(),
 								"",
-								_on_resource_proj_updated.bind(value_changed)
+								on_resource_proj_updated.bind(value_changed)
 							)
 					)
 				mod_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -1515,7 +1516,7 @@ func popup_image_file_dialog(on_file_selected: Callable) -> void:
 
 # TODO: Remove duplicate code, either keep this or
 # _shader_update_texture in ShaderLoader.
-func _on_resource_proj_updated(resource_proj: ResourceProject, value_changed: Callable) -> void:
+func on_resource_proj_updated(resource_proj: ResourceProject, value_changed: Callable) -> void:
 	var warnings := ""
 	if resource_proj.frames.size() > 1:
 		warnings += "This resource is intended to have 1 frame only. Extra frames will be ignored."
