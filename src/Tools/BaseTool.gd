@@ -6,11 +6,13 @@ var is_syncing := false
 var kname: String
 var tool_slot: Tools.Slot = null
 var cursor_text := ""
-var editing_3d_node: Node3D
-var materials_3d: Dictionary[BaseMaterial3D, Image]  ## Used for drawing on 3D models.
+## The 3D node we are currently drawing on, if there is any.
+var drawing_on_3d_node: MeshInstance3D
+## Used for drawing on 3D models. The Array contains an Image and the index of the surface.
+var materials_3d: Dictionary[BaseMaterial3D, Array]
+
 var _cursor := Vector2i(Vector2.INF)
 var _stabilizer_center := Vector2.ZERO
-
 var _draw_cache: Array[Vector2i] = []  ## For storing already drawn pixels
 @warning_ignore("unused_private_class_variable")
 var _for_frame := 0  ## Cache for which frame

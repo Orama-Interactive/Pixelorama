@@ -279,15 +279,19 @@ func commit_undo(action := "Draw") -> void:
 	var project := Global.current_project
 	var layer := project.layers[project.current_layer]
 	if layer is Layer3D:
+		var properties: Array[Layer3D.Property]
 		for mat in materials_3d:
-			var original_tex := ImageTexture.create_from_image(materials_3d[mat])
+			var image := materials_3d[mat][0] as Image
+			var surface_index := materials_3d[mat][1] as int
+			var original_tex := ImageTexture.create_from_image(image)
 			var new_tex := ImageTexture.create_from_image(mat.albedo_texture.get_image())
-			mat.albedo_texture.update(materials_3d[mat])
-			# TODO: mesh:surface_0/material:albedo_texture
-			var property := "mesh:material:albedo_texture"
-			layer.update_animation_track(
-				editing_3d_node, property, new_tex, original_tex, project.current_frame
-			)
+			mat.albedo_texture.update(image)
+			var property_path := "mesh:surface_%s/material:albedo_texture" % surface_index
+			if drawing_on_3d_node.mesh is PrimitiveMesh:
+				property_path = "mesh:material:albedo_texture"
+			var property := Layer3D.Property.new(property_path, new_tex, original_tex)
+			properties.append(property)
+		layer.update_animation_track(drawing_on_3d_node, properties, project.current_frame)
 	else:
 		Global.canvas.update_selected_cels_textures(project)
 		var tile_editing_mode := TileSetPanel.tile_editing_mode
@@ -371,7 +375,7 @@ func draw_end(pos: Vector2i) -> void:
 	super.draw_end(pos)
 	_stroke_project = null
 	_stroke_images = []
-	editing_3d_node = null
+	drawing_on_3d_node = null
 	materials_3d = {}
 	_circle_tool_shortcut = []
 	_brush_size_dynamics = _brush_size
@@ -506,13 +510,13 @@ func draw_on_3d_object(pos: Vector2, layer: Layer3D, clear_mat := true) -> Vecto
 	var object_data := get_3d_node_uvs(pos, layer.camera)
 	if object_data.is_empty():
 		if clear_mat:
-			editing_3d_node = null
+			drawing_on_3d_node = null
 			materials_3d = {}
 		return Vector2.INF
 	var mesh_instance := object_data[0] as MeshInstance3D
 	if mesh_instance.mesh.get_surface_count() == 0:
 		if clear_mat:
-			editing_3d_node = null
+			drawing_on_3d_node = null
 			materials_3d = {}
 		return Vector2.INF
 	var uv := object_data[1] as Vector2
@@ -526,8 +530,8 @@ func draw_on_3d_object(pos: Vector2, layer: Layer3D, clear_mat := true) -> Vecto
 			64, 64, false, Global.current_project.get_image_format(), false
 		)
 		mat.albedo_texture = ImageTexture.create_from_image(image)
-		editing_3d_node = mesh_instance
-		materials_3d[mat] = image
+		drawing_on_3d_node = mesh_instance
+		materials_3d[mat] = [image, surface_index]
 	else:
 		var mat := mesh_instance.mesh.surface_get_material(surface_index) as BaseMaterial3D
 		if not is_instance_valid(mat.albedo_texture):
@@ -540,8 +544,8 @@ func draw_on_3d_object(pos: Vector2, layer: Layer3D, clear_mat := true) -> Vecto
 		image = ImageExtended.new()
 		image.copy_from_custom(temp_image)
 		if not materials_3d.has(mat):
-			editing_3d_node = mesh_instance
-			materials_3d[mat] = image
+			drawing_on_3d_node = mesh_instance
+			materials_3d[mat] = [image, surface_index]
 	return uv * Vector2(image.get_size())
 
 

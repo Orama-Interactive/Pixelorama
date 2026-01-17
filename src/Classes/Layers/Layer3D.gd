@@ -136,6 +136,17 @@ var selected: Node3D = null:
 var _undo_data: Dictionary[StringName, Variant] = {}
 
 
+class Property:
+	var property_path := ""
+	var new_value
+	var old_value
+
+	func _init(_property_path: String, _new_value, _old_value) -> void:
+		property_path = _property_path
+		new_value = _new_value
+		old_value = _old_value
+
+
 func _init(_project: Project, _name := "", from_pxo := false) -> void:
 	project = _project
 	name = _name
@@ -400,7 +411,9 @@ func node_change_transform(node: Node3D, a: Vector3, b: Vector3, applying_gizmos
 func node_move(node: Node3D, pos: Vector3) -> void:
 	var prev_pos := node.position
 	node.position += pos
-	update_animation_track(node, &"position", node.position, prev_pos, project.current_frame)
+	update_animation_track(
+		node, [Property.new(&"position", node.position, prev_pos)], project.current_frame
+	)
 
 
 ## Move the object in the direction it is facing, and restrict mouse movement in that axis
@@ -411,7 +424,9 @@ func node_move_axis(node: Node3D, diff: Vector3, axis: Vector3) -> void:
 		axis_v2 = Vector2(axis.y, axis.z).normalized()
 	var diff_v2 := Vector2(diff.x, diff.y).normalized()
 	node.position += axis * axis_v2.dot(diff_v2) * diff.length()
-	update_animation_track(node, &"position", node.position, prev_pos, project.current_frame)
+	update_animation_track(
+		node, [Property.new(&"position", node.position, prev_pos)], project.current_frame
+	)
 
 
 func node_change_rotation(node: Node3D, a: Vector3, b: Vector3, axis: Vector3) -> void:
@@ -427,7 +442,9 @@ func node_change_rotation(node: Node3D, a: Vector3, b: Vector3, axis: Vector3) -
 	node.rotation.x = wrapf(node.rotation.x, -PI, PI)
 	node.rotation.y = wrapf(node.rotation.y, -PI, PI)
 	node.rotation.z = wrapf(node.rotation.z, -PI, PI)
-	update_animation_track(node, &"rotation", node.rotation, prev_rot, project.current_frame)
+	update_animation_track(
+		node, [Property.new(&"rotation", node.rotation, prev_rot)], project.current_frame
+	)
 
 
 ## Scale the object in the direction it is facing, and restrict mouse movement in that axis
@@ -438,46 +455,53 @@ func node_change_scale(node: Node3D, diff: Vector3, axis: Vector3, dir: Vector3)
 		axis_v2 = Vector2(axis.y, axis.z).normalized()
 	var diff_v2 := Vector2(diff.x, diff.y).normalized()
 	node.scale += dir * axis_v2.dot(diff_v2) * diff.length()
-	update_animation_track(node, &"scale", node.scale, prev_scale, project.current_frame)
+	update_animation_track(
+		node, [Property.new(&"scale", node.scale, prev_scale)], project.current_frame
+	)
 
 
-func update_animation_track(
-	object: Node,
-	property: StringName,
-	current_value: Variant,
-	prev_value: Variant,
-	frame_index: int
-) -> void:
+func update_animation_track(object: Node, properties: Array[Property], frame_index: int) -> void:
+	if properties.is_empty():
+		return
+	var node_path := String(viewport.get_path_to(object))
 	var undo_redo := project.undo_redo
-	var property_path := NodePath(String(viewport.get_path_to(object)) + ":" + property)
-
-	var track_existed := animation.find_track(property_path, Animation.TYPE_VALUE) != -1
-	var key_existed := false
-	if track_existed:
-		var t := animation.find_track(property_path, Animation.TYPE_VALUE)
-		key_existed = animation.track_find_key(t, frame_index, Animation.FIND_MODE_APPROX) != -1
-
+	var first_property := properties[0]
 	var merge_mode := UndoRedo.MERGE_ENDS
-	if current_value is Texture2D:
+	if first_property.new_value is Texture2D:
 		merge_mode = UndoRedo.MERGE_DISABLE
-	undo_redo.create_action("Change 3D object %s" % property, merge_mode)
+	undo_redo.create_action("Change 3D object %s" % first_property.property_path, merge_mode)
+	for property in properties:
+		var current_value = property.new_value
+		var prev_value = property.old_value
+		var property_path := NodePath(node_path + ":" + property.property_path)
+		var track_existed := animation.find_track(property_path, Animation.TYPE_VALUE) != -1
+		var key_existed := false
+		if track_existed:
+			var t := animation.find_track(property_path, Animation.TYPE_VALUE)
+			key_existed = animation.track_find_key(t, frame_index, Animation.FIND_MODE_APPROX) != -1
 
-	undo_redo.add_do_method(
-		_do_set_anim_key.bind(property_path, frame_index, current_value, prev_value)
-	)
-
-	undo_redo.add_undo_method(
-		_undo_set_anim_key.bind(
-			object, property, property_path, frame_index, prev_value, track_existed, key_existed
+		undo_redo.add_do_method(
+			_do_set_anim_key.bind(property_path, frame_index, current_value, prev_value)
 		)
-	)
 
-	undo_redo.add_do_method(
-		emit_signal.bind(&"node_property_changed", object, property, frame_index)
-	)
-	undo_redo.add_undo_method(
-		emit_signal.bind(&"node_property_changed", object, property, frame_index)
-	)
+		undo_redo.add_undo_method(
+			_undo_set_anim_key.bind(
+				object,
+				property.property_path,
+				property_path,
+				frame_index,
+				prev_value,
+				track_existed,
+				key_existed
+			)
+		)
+
+		undo_redo.add_do_method(
+			emit_signal.bind(&"node_property_changed", object, property.property_path, frame_index)
+		)
+		undo_redo.add_undo_method(
+			emit_signal.bind(&"node_property_changed", object, property.property_path, frame_index)
+		)
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
@@ -546,7 +570,7 @@ func set_value_from_node(value, to_edit: Node, prop: String) -> void:
 		value = Global.find_font_from_name(Global.get_available_font_names()[value])
 	var frame_index := project.current_frame
 	var prev_value = _undo_data[prop]
-	update_animation_track(to_edit, prop, value, prev_value, frame_index)
+	update_animation_track(to_edit, [Property.new(prop, value, prev_value)], frame_index)
 
 
 func get_undo_data(node: Object) -> void:
