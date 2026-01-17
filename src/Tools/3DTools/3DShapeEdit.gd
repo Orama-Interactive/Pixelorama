@@ -112,35 +112,6 @@ func cursor_move(pos: Vector2i) -> void:
 	_hovering = currently_hovering
 
 
-func get_3d_node_at_pos(pos: Vector2i, camera: Camera3D, max_distance := 100.0) -> Array:
-	var scenario := camera.get_world_3d().scenario
-	var ray_from := camera.project_ray_origin(pos)
-	var ray_dir := camera.project_ray_normal(pos)
-	var ray_to := ray_from + ray_dir * max_distance
-	var intersecting_objects := RenderingServer.instances_cull_ray(ray_from, ray_to, scenario)
-	for obj in intersecting_objects:
-		var intersect_node := instance_from_id(obj)
-		if intersect_node is not Node3D:
-			continue
-		# Convert ray into the node’s local space
-		var to_local := (intersect_node as Node3D).global_transform.affine_inverse()
-		var local_from := to_local * ray_from
-		var local_to := to_local * ray_to
-		if intersect_node is MeshInstance3D:
-			var mesh_instance := intersect_node as MeshInstance3D
-			var mesh := mesh_instance.mesh
-			if mesh == null:
-				continue
-			var tri_mesh := mesh.generate_triangle_mesh()
-			if tri_mesh == null:
-				continue
-			# Intersect ray with local-space triangles
-			var intersect := tri_mesh.intersect_ray(local_from, local_to)
-			if not intersect.is_empty():
-				return [intersect_node, intersect]
-	return []
-
-
 func _cel_switched() -> void:
 	if is_instance_valid(layer_3d):
 		if layer_3d.selected_object_changed.is_connected(_on_selected_object):

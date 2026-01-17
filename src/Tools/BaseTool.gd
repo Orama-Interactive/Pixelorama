@@ -218,6 +218,93 @@ func mirror_array(array: Array[Vector2i], callable := func(_array): pass) -> Arr
 	return new_array
 
 
+func get_3d_node_at_pos(pos: Vector2i, camera: Camera3D, max_distance := 100.0) -> Array:
+	var scenario := camera.get_world_3d().scenario
+	var ray_from := camera.project_ray_origin(pos)
+	var ray_dir := camera.project_ray_normal(pos)
+	var ray_to := ray_from + ray_dir * max_distance
+	var intersecting_objects := RenderingServer.instances_cull_ray(ray_from, ray_to, scenario)
+	for obj in intersecting_objects:
+		var intersect_node := instance_from_id(obj)
+		if intersect_node is not Node3D:
+			continue
+		# Convert ray into the node’s local space
+		var to_local := (intersect_node as Node3D).global_transform.affine_inverse()
+		var local_from := to_local * ray_from
+		var local_to := to_local * ray_to
+		if intersect_node is MeshInstance3D:
+			var mesh_instance := intersect_node as MeshInstance3D
+			var mesh := mesh_instance.mesh
+			if mesh == null:
+				continue
+			var tri_mesh := mesh.generate_triangle_mesh()
+			if tri_mesh == null:
+				continue
+			# Intersect ray with local-space triangles
+			var intersect := tri_mesh.intersect_ray(local_from, local_to)
+			if not intersect.is_empty():
+				return [intersect_node, intersect]
+	return []
+
+
+func get_3d_node_uvs(pos: Vector2i, camera: Camera3D, max_distance := 100.0) -> Array:
+	var intersect_data := get_3d_node_at_pos(pos, camera, max_distance)
+	if intersect_data.is_empty():
+		return []
+	var object := intersect_data[0] as MeshInstance3D
+	var intersect_result := intersect_data[1] as Dictionary
+	var faces: PackedVector3Array
+	var uvs: PackedVector2Array
+	var surface := object.mesh.surface_get_arrays(0)
+	var vertices: PackedVector3Array = surface[Mesh.ARRAY_VERTEX]
+	var tex_uvs: PackedVector2Array
+	if surface[Mesh.ARRAY_TEX_UV] == null:
+		for v in vertices:
+			tex_uvs.append(Vector2(v.x, v.z))  # XZ projection fallback
+	else:
+		tex_uvs = surface[Mesh.ARRAY_TEX_UV]
+	if surface[Mesh.ARRAY_INDEX] != null:
+		var indices: PackedInt32Array = surface[Mesh.ARRAY_INDEX]
+		var index_count := indices.size()
+		uvs.resize(index_count)
+		faces.resize(index_count)
+		for index in range(index_count):
+			var vertex_idx := indices[index]
+			uvs[index] = tex_uvs[vertex_idx]
+			faces[index] = vertices[vertex_idx]
+	else:
+		var index_count := vertices.size()
+		uvs.resize(index_count)
+		faces.resize(index_count)
+		for index in range(index_count):
+			uvs[index] = tex_uvs[index]
+			faces[index] = vertices[index]
+
+	var index: int = intersect_result.face_index * 3
+	var f: Vector3 = intersect_result.position
+	if index + 2 >= faces.size():
+		return []
+	var p1 := faces[index]
+	var p2 := faces[index + 1]
+	var p3 := faces[index + 2]
+
+	# calculate vectors from point f to vertices p1, p2 and p3:
+	var f1 := p1 - f
+	var f2 := p2 - f
+	var f3 := p3 - f
+
+	# calculate the areas and factors (order of parameters doesn't matter):
+	var a: float = (p1-p2).cross(p1-p3).length() # main triangle area a
+	var a1: float = f2.cross(f3).length() / a # p1's triangle area / a
+	var a2: float = f3.cross(f1).length() / a # p2's triangle area / a
+	var a3: float = f1.cross(f2).length() / a # p3's triangle area / a
+
+	# find the uv corresponding to point f (uv1/uv2/uv3 are associated to p1/p2/p3):
+	var uv: Vector2 = uvs[index] * a1 + uvs[index + 1] * a2 + uvs[index + 2] * a3
+
+	return [object, uv]
+
+
 func _get_stabilized_position(normal_pos: Vector2) -> Vector2:
 	if not Tools.stabilizer_enabled:
 		return normal_pos
