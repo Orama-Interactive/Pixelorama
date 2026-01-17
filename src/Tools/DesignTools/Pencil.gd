@@ -204,8 +204,8 @@ func draw_end(pos: Vector2i) -> void:
 							draw_tool(v)
 
 	_fill_inside_rect = Rect2i()
-	super.draw_end(pos)
 	commit_undo()
+	super.draw_end(pos)
 	cursor_text = ""
 	update_random_image()
 	_spacing_mode = _old_spacing_mode
@@ -230,8 +230,4 @@ func _draw_brush_image(brush_image: Image, src_rect: Rect2i, dst: Vector2i) -> v
 			else:
 				draw_image.blend_rect(brush_image, src_rect, dst)
 			draw_image.convert_rgb_to_indexed()
-	if not materials_3d.is_empty():
-		for i in materials_3d.size():
-			var mat := materials_3d[i]
-			if i < images.size():
-				mat.albedo_texture.update(images[i])
+	update_materials(images)

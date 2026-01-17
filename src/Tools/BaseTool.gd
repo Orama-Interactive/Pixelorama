@@ -6,7 +6,8 @@ var is_syncing := false
 var kname: String
 var tool_slot: Tools.Slot = null
 var cursor_text := ""
-var materials_3d: Array[BaseMaterial3D]  ## Used for drawing on 3D models.
+var editing_3d_node: Node3D
+var materials_3d: Dictionary[BaseMaterial3D, Image]  ## Used for drawing on 3D models.
 var _cursor := Vector2i(Vector2.INF)
 var _stabilizer_center := Vector2.ZERO
 

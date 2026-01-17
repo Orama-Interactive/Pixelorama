@@ -457,7 +457,10 @@ func update_animation_track(
 		var t := animation.find_track(property_path, Animation.TYPE_VALUE)
 		key_existed = animation.track_find_key(t, frame_index, Animation.FIND_MODE_APPROX) != -1
 
-	undo_redo.create_action("Change 3D object %s" % property, UndoRedo.MERGE_ENDS)
+	var merge_mode := UndoRedo.MERGE_ENDS
+	if current_value is Texture2D:
+		merge_mode = UndoRedo.MERGE_DISABLE
+	undo_redo.create_action("Change 3D object %s" % property, merge_mode)
 
 	undo_redo.add_do_method(
 		_do_set_anim_key.bind(property_path, frame_index, current_value, prev_value)

@@ -277,24 +277,38 @@ func prepare_undo() -> void:
 
 func commit_undo(action := "Draw") -> void:
 	var project := Global.current_project
-	Global.canvas.update_selected_cels_textures(project)
-	var tile_editing_mode := TileSetPanel.tile_editing_mode
-	if TileSetPanel.placing_tiles:
-		tile_editing_mode = TileSetPanel.TileEditingMode.STACK
-	project.update_tilemaps(_undo_data, tile_editing_mode)
-	var redo_data := _get_undo_data()
-	var frame := -1
-	var layer := -1
-	if Global.animation_timeline.animation_timer.is_stopped() and project.selected_cels.size() == 1:
-		frame = project.current_frame
-		layer = project.current_layer
-
-	project.undo_redo.create_action(action)
-	manage_undo_redo_palettes()
-	project.deserialize_cel_undo_data(redo_data, _undo_data)
-	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
-	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
-	project.undo_redo.commit_action()
+	var layer := project.layers[project.current_layer]
+	if layer is Layer3D:
+		for mat in materials_3d:
+			var original_tex := ImageTexture.create_from_image(materials_3d[mat])
+			var new_tex := ImageTexture.create_from_image(mat.albedo_texture.get_image())
+			mat.albedo_texture.update(materials_3d[mat])
+			# TODO: mesh:surface_0/material:albedo_texture
+			var property := "mesh:material:albedo_texture"
+			layer.update_animation_track(
+				editing_3d_node, property, new_tex, original_tex, project.current_frame
+			)
+	else:
+		Global.canvas.update_selected_cels_textures(project)
+		var tile_editing_mode := TileSetPanel.tile_editing_mode
+		if TileSetPanel.placing_tiles:
+			tile_editing_mode = TileSetPanel.TileEditingMode.STACK
+		project.update_tilemaps(_undo_data, tile_editing_mode)
+		var redo_data := _get_undo_data()
+		var frame_index := -1
+		var layer_index := -1
+		if (
+			Global.animation_timeline.animation_timer.is_stopped()
+			and project.selected_cels.size() == 1
+		):
+			frame_index = project.current_frame
+			layer_index = project.current_layer
+		project.undo_redo.create_action(action)
+		manage_undo_redo_palettes()
+		project.deserialize_cel_undo_data(redo_data, _undo_data)
+		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame_index, layer_index))
+		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame_index, layer_index))
+		project.undo_redo.commit_action()
 
 	_undo_data.clear()
 
@@ -357,8 +371,9 @@ func draw_end(pos: Vector2i) -> void:
 	super.draw_end(pos)
 	_stroke_project = null
 	_stroke_images = []
+	editing_3d_node = null
+	materials_3d = {}
 	_circle_tool_shortcut = []
-	materials_3d = []
 	_brush_size_dynamics = _brush_size
 	if Tools.dynamics_size != Tools.Dynamics.NONE:
 		_brush_size_dynamics = Tools.brush_size_min
@@ -487,16 +502,18 @@ func draw_fill_gap(start: Vector2i, end: Vector2i) -> void:
 		project.selection_map.lock_selection_rect(project, false)
 
 
-func draw_on_3d_object(pos: Vector2, layer: Layer3D, nullify_mat := true) -> Vector2:
+func draw_on_3d_object(pos: Vector2, layer: Layer3D, clear_mat := true) -> Vector2:
 	var object_data := get_3d_node_uvs(pos, layer.camera)
 	if object_data.is_empty():
-		if nullify_mat:
-			materials_3d = []
+		if clear_mat:
+			editing_3d_node = null
+			materials_3d = {}
 		return Vector2.INF
 	var mesh_instance := object_data[0] as MeshInstance3D
 	if mesh_instance.mesh.get_surface_count() == 0:
-		if nullify_mat:
-			materials_3d = []
+		if clear_mat:
+			editing_3d_node = null
+			materials_3d = {}
 		return Vector2.INF
 	var uv := object_data[1] as Vector2
 	var surface_index := object_data[2] as int
@@ -509,7 +526,8 @@ func draw_on_3d_object(pos: Vector2, layer: Layer3D, nullify_mat := true) -> Vec
 			64, 64, false, Global.current_project.get_image_format(), false
 		)
 		mat.albedo_texture = ImageTexture.create_from_image(image)
-		materials_3d.append(mat)
+		editing_3d_node = mesh_instance
+		materials_3d[mat] = image
 	else:
 		var mat := mesh_instance.mesh.surface_get_material(surface_index) as BaseMaterial3D
 		if not is_instance_valid(mat.albedo_texture):
@@ -522,8 +540,17 @@ func draw_on_3d_object(pos: Vector2, layer: Layer3D, nullify_mat := true) -> Vec
 		image = ImageExtended.new()
 		image.copy_from_custom(temp_image)
 		if not materials_3d.has(mat):
-			materials_3d.append(mat)
+			editing_3d_node = mesh_instance
+			materials_3d[mat] = image
 	return uv * Vector2(image.get_size())
+
+
+func update_materials(images: Array[ImageExtended]) -> void:
+	if not materials_3d.is_empty():
+		for i in materials_3d.size():
+			var mat := materials_3d.keys()[i] as BaseMaterial3D
+			if i < images.size():
+				mat.albedo_texture.update(images[i])
 
 
 ## Calls [method Geometry2D.bresenham_line] and takes [param thickness] into account.
@@ -736,11 +763,7 @@ func _set_pixel_no_cache(pos: Vector2i, ignore_mirroring := false) -> void:
 		else:
 			for image in images:
 				_drawer.set_pixel(image, pos, tool_slot.color, ignore_mirroring)
-	if not materials_3d.is_empty():
-		for i in materials_3d.size():
-			var mat := materials_3d[i]
-			if i < images.size():
-				mat.albedo_texture.update(images[i])
+	update_materials(images)
 
 
 func _draw_brush_image(_image: Image, _src_rect: Rect2i, _dst: Vector2i) -> void:
