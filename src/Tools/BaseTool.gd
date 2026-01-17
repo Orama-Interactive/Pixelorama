@@ -237,13 +237,55 @@ func get_3d_node_at_pos(pos: Vector2i, camera: Camera3D, max_distance := 100.0) 
 			var mesh := mesh_instance.mesh
 			if mesh == null:
 				continue
-			var tri_mesh := mesh.generate_triangle_mesh()
-			if tri_mesh == null:
-				continue
-			# Intersect ray with local-space triangles
-			var intersect := tri_mesh.intersect_ray(local_from, local_to)
-			if not intersect.is_empty():
-				return [intersect_node, intersect]
+			var closest_dist := INF
+			var best_hit := {}
+			var best_surface := -1
+			for surface_idx in range(mesh.get_surface_count()):
+				var surface := mesh.surface_get_arrays(surface_idx)
+				if surface.is_empty():
+					continue
+
+				var vertices: PackedVector3Array = []
+				if surface[Mesh.ARRAY_VERTEX]:
+					vertices = surface[Mesh.ARRAY_VERTEX]
+				var indices: PackedInt32Array = []
+				if surface[Mesh.ARRAY_INDEX]:
+					indices = surface[Mesh.ARRAY_INDEX]
+
+				if indices.is_empty():
+					# non-indexed: vertices are already triangles
+					for i in range(0, vertices.size(), 3):
+						var hit = Geometry3D.ray_intersects_triangle(
+							local_from,
+							local_to - local_from,
+							vertices[i],
+							vertices[i + 1],
+							vertices[i + 2]
+						)
+						if hit:
+							var d := local_from.distance_to(hit)
+							if d < closest_dist:
+								closest_dist = d
+								best_hit = {"position": hit, "face_index": i / 3}
+								best_surface = surface_idx
+				else:
+					for i in range(0, indices.size(), 3):
+						var v0 := vertices[indices[i]]
+						var v1 := vertices[indices[i + 1]]
+						var v2 := vertices[indices[i + 2]]
+						var hit = Geometry3D.ray_intersects_triangle(
+							local_from, local_to - local_from, v0, v1, v2
+						)
+						if hit:
+							var d := local_from.distance_to(hit)
+							if d < closest_dist:
+								closest_dist = d
+								best_hit = {"position": hit, "face_index": i / 3}
+								best_surface = surface_idx
+
+			if best_surface == -1:
+				return []
+			return [intersect_node, best_hit, best_surface]
 	return []
 
 
@@ -253,9 +295,10 @@ func get_3d_node_uvs(pos: Vector2i, camera: Camera3D, max_distance := 100.0) -> 
 		return []
 	var object := intersect_data[0] as MeshInstance3D
 	var intersect_result := intersect_data[1] as Dictionary
+	var surface_index := intersect_data[2] as int
 	var faces: PackedVector3Array
 	var uvs: PackedVector2Array
-	var surface := object.mesh.surface_get_arrays(0)
+	var surface := object.mesh.surface_get_arrays(surface_index)
 	var vertices: PackedVector3Array = surface[Mesh.ARRAY_VERTEX]
 	var tex_uvs: PackedVector2Array
 	if surface[Mesh.ARRAY_TEX_UV] == null:
@@ -294,15 +337,15 @@ func get_3d_node_uvs(pos: Vector2i, camera: Camera3D, max_distance := 100.0) -> 
 	var f3 := p3 - f
 
 	# calculate the areas and factors (order of parameters doesn't matter):
-	var a: float = (p1-p2).cross(p1-p3).length() # main triangle area a
-	var a1: float = f2.cross(f3).length() / a # p1's triangle area / a
-	var a2: float = f3.cross(f1).length() / a # p2's triangle area / a
-	var a3: float = f1.cross(f2).length() / a # p3's triangle area / a
+	var a: float = (p1 - p2).cross(p1 - p3).length()  # main triangle area a
+	var a1: float = f2.cross(f3).length() / a  # p1's triangle area / a
+	var a2: float = f3.cross(f1).length() / a  # p2's triangle area / a
+	var a3: float = f1.cross(f2).length() / a  # p3's triangle area / a
 
 	# find the uv corresponding to point f (uv1/uv2/uv3 are associated to p1/p2/p3):
 	var uv: Vector2 = uvs[index] * a1 + uvs[index + 1] * a2 + uvs[index + 2] * a3
 
-	return [object, uv]
+	return [object, uv, surface_index]
 
 
 func _get_stabilized_position(normal_pos: Vector2) -> Vector2:
