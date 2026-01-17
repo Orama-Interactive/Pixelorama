@@ -6,6 +6,7 @@ var is_syncing := false
 var kname: String
 var tool_slot: Tools.Slot = null
 var cursor_text := ""
+var materials_3d: Array[BaseMaterial3D]  ## Used for drawing on 3D models.
 var _cursor := Vector2i(Vector2.INF)
 var _stabilizer_center := Vector2.ZERO
 
@@ -232,63 +233,68 @@ func get_3d_node_at_pos(pos: Vector2i, camera: Camera3D, max_distance := 100.0) 
 		var to_local := (intersect_node as Node3D).global_transform.affine_inverse()
 		var local_from := to_local * ray_from
 		var local_to := to_local * ray_to
-		if intersect_node is MeshInstance3D:
-			var mesh_instance := intersect_node as MeshInstance3D
-			var mesh := mesh_instance.mesh
-			if mesh == null:
+		if not intersect_node is MeshInstance3D:
+			continue
+		var mesh_instance := intersect_node as MeshInstance3D
+		var mesh := mesh_instance.mesh
+		if mesh == null:
+			continue
+		var closest_dist := INF
+		var best_hit := {}
+		var best_surface := -1
+		for surface_idx in range(mesh.get_surface_count()):
+			var surface := mesh.surface_get_arrays(surface_idx)
+			if surface.is_empty():
 				continue
-			var closest_dist := INF
-			var best_hit := {}
-			var best_surface := -1
-			for surface_idx in range(mesh.get_surface_count()):
-				var surface := mesh.surface_get_arrays(surface_idx)
-				if surface.is_empty():
-					continue
 
-				var vertices: PackedVector3Array = []
-				if surface[Mesh.ARRAY_VERTEX]:
-					vertices = surface[Mesh.ARRAY_VERTEX]
-				var indices: PackedInt32Array = []
-				if surface[Mesh.ARRAY_INDEX]:
-					indices = surface[Mesh.ARRAY_INDEX]
+			var vertices: PackedVector3Array = []
+			if surface[Mesh.ARRAY_VERTEX]:
+				vertices = surface[Mesh.ARRAY_VERTEX]
+			var indices: PackedInt32Array = []
+			if surface[Mesh.ARRAY_INDEX]:
+				indices = surface[Mesh.ARRAY_INDEX]
 
-				if indices.is_empty():
-					# non-indexed: vertices are already triangles
-					for i in range(0, vertices.size(), 3):
-						var hit = Geometry3D.ray_intersects_triangle(
-							local_from,
-							local_to - local_from,
-							vertices[i],
-							vertices[i + 1],
-							vertices[i + 2]
-						)
-						if hit:
-							var d := local_from.distance_to(hit)
-							if d < closest_dist:
-								closest_dist = d
-								best_hit = {"position": hit, "face_index": i / 3}
-								best_surface = surface_idx
-				else:
-					for i in range(0, indices.size(), 3):
-						var v0 := vertices[indices[i]]
-						var v1 := vertices[indices[i + 1]]
-						var v2 := vertices[indices[i + 2]]
-						var hit = Geometry3D.ray_intersects_triangle(
-							local_from, local_to - local_from, v0, v1, v2
-						)
-						if hit:
-							var d := local_from.distance_to(hit)
-							if d < closest_dist:
-								closest_dist = d
-								best_hit = {"position": hit, "face_index": i / 3}
-								best_surface = surface_idx
+			if indices.is_empty():
+				# non-indexed: vertices are already triangles
+				for i in range(0, vertices.size(), 3):
+					var hit = Geometry3D.ray_intersects_triangle(
+						local_from,
+						local_to - local_from,
+						vertices[i],
+						vertices[i + 1],
+						vertices[i + 2]
+					)
+					if hit:
+						var d := local_from.distance_to(hit)
+						if d < closest_dist:
+							closest_dist = d
+							@warning_ignore("integer_division")
+							best_hit = {"position": hit, "face_index": i / 3}
+							best_surface = surface_idx
+			else:
+				for i in range(0, indices.size(), 3):
+					var v0 := vertices[indices[i]]
+					var v1 := vertices[indices[i + 1]]
+					var v2 := vertices[indices[i + 2]]
+					var hit = Geometry3D.ray_intersects_triangle(
+						local_from, local_to - local_from, v0, v1, v2
+					)
+					if hit:
+						var d := local_from.distance_to(hit)
+						if d < closest_dist:
+							closest_dist = d
+							@warning_ignore("integer_division")
+							best_hit = {"position": hit, "face_index": i / 3}
+							best_surface = surface_idx
 
-			if best_surface == -1:
-				return []
-			return [intersect_node, best_hit, best_surface]
+		if best_surface == -1:
+			return []
+		return [intersect_node, best_hit, best_surface]
 	return []
 
 
+# Inspired from
+# https://github.com/BastiaanOlij/drawable-textures-demo/blob/master/main.gd
 func get_3d_node_uvs(pos: Vector2i, camera: Camera3D, max_distance := 100.0) -> Array:
 	var intersect_data := get_3d_node_at_pos(pos, camera, max_distance)
 	if intersect_data.is_empty():
@@ -383,6 +389,14 @@ func _get_selected_draw_cels() -> Array[BaseCel]:
 
 func _get_selected_draw_images() -> Array[ImageExtended]:
 	var images: Array[ImageExtended] = []
+	if not materials_3d.is_empty():
+		for mat in materials_3d:
+			if is_instance_valid(mat.albedo_texture):
+				var temp_image := mat.albedo_texture.get_image()
+				var image := ImageExtended.new()
+				image.copy_from_custom(temp_image)
+				images.append(image)
+		return images
 	var project := Global.current_project
 	for cel_index in project.selected_cels:
 		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]

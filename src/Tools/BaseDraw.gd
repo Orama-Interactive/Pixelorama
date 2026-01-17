@@ -358,6 +358,7 @@ func draw_end(pos: Vector2i) -> void:
 	_stroke_project = null
 	_stroke_images = []
 	_circle_tool_shortcut = []
+	materials_3d = []
 	_brush_size_dynamics = _brush_size
 	if Tools.dynamics_size != Tools.Dynamics.NONE:
 		_brush_size_dynamics = Tools.brush_size_min
@@ -467,6 +468,14 @@ func draw_fill_gap(start: Vector2i, end: Vector2i) -> void:
 	var coords_to_draw := {}
 	var pixel_coords := Geometry2D.bresenham_line(start, end)
 	pixel_coords.pop_front()
+	if project.get_current_cel() is Cel3D:
+		var layer := project.layers[project.current_layer] as Layer3D
+		for i in pixel_coords.size():
+			var pos := pixel_coords[i]
+			var draw_pos := draw_on_3d_object(pos, layer, false)
+			if draw_pos == Vector2.INF:
+				return
+			pixel_coords[i] = Vector2i(draw_pos)
 	for current_pixel_coord in pixel_coords:
 		if _spacing_mode:
 			current_pixel_coord = get_spacing_position(current_pixel_coord)
@@ -476,6 +485,45 @@ func draw_fill_gap(start: Vector2i, end: Vector2i) -> void:
 		_set_pixel_no_cache(c)
 	if project.has_selection:
 		project.selection_map.lock_selection_rect(project, false)
+
+
+func draw_on_3d_object(pos: Vector2, layer: Layer3D, nullify_mat := true) -> Vector2:
+	var object_data := get_3d_node_uvs(pos, layer.camera)
+	if object_data.is_empty():
+		if nullify_mat:
+			materials_3d = []
+		return Vector2.INF
+	var mesh_instance := object_data[0] as MeshInstance3D
+	if mesh_instance.mesh.get_surface_count() == 0:
+		if nullify_mat:
+			materials_3d = []
+		return Vector2.INF
+	var uv := object_data[1] as Vector2
+	var surface_index := object_data[2] as int
+	var image: ImageExtended
+	if mesh_instance.mesh.surface_get_material(surface_index) == null:
+		var mat := StandardMaterial3D.new()
+		mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		mesh_instance.mesh.surface_set_material(surface_index, mat)
+		image = ImageExtended.create_custom(
+			64, 64, false, Global.current_project.get_image_format(), false
+		)
+		mat.albedo_texture = ImageTexture.create_from_image(image)
+		materials_3d.append(mat)
+	else:
+		var mat := mesh_instance.mesh.surface_get_material(surface_index) as BaseMaterial3D
+		if not is_instance_valid(mat.albedo_texture):
+			image = ImageExtended.create_custom(
+				64, 64, false, Global.current_project.get_image_format(), false
+			)
+			image.fill(Color.WHITE)
+			mat.albedo_texture = ImageTexture.create_from_image(image)
+		var temp_image := mat.albedo_texture.get_image()
+		image = ImageExtended.new()
+		image.copy_from_custom(temp_image)
+		if not materials_3d.has(mat):
+			materials_3d.append(mat)
+	return uv * Vector2(image.get_size())
 
 
 ## Calls [method Geometry2D.bresenham_line] and takes [param thickness] into account.
@@ -688,6 +736,11 @@ func _set_pixel_no_cache(pos: Vector2i, ignore_mirroring := false) -> void:
 		else:
 			for image in images:
 				_drawer.set_pixel(image, pos, tool_slot.color, ignore_mirroring)
+	if not materials_3d.is_empty():
+		for i in materials_3d.size():
+			var mat := materials_3d[i]
+			if i < images.size():
+				mat.albedo_texture.update(images[i])
 
 
 func _draw_brush_image(_image: Image, _src_rect: Rect2i, _dst: Vector2i) -> void:
