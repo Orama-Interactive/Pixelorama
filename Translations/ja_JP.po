@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2026-01-07 22:49\n"
+"PO-Revision-Date: 2026-01-20 14:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3003,13 +3003,13 @@ msgid "Redo: Change frame duration"
 msgstr "やり直し: フレームの長さを変更"
 
 msgid "Undo: Rename Layer"
-msgstr ""
+msgstr "元に戻す: レイヤー名の変更"
 
 msgid "Redo: Rename Layer"
 msgstr ""
 
 msgid "Undo: Change Layer Opacity"
-msgstr ""
+msgstr "元に戻す: レイヤーの不透明度の変更"
 
 msgid "Redo: Change Layer Opacity"
 msgstr ""
