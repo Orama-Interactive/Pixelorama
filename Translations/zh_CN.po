@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2026-01-07 22:49\n"
+"PO-Revision-Date: 2026-01-21 02:12\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1382,7 +1382,7 @@ msgid "Developed by Orama Interactive"
 msgstr "由 Orama Interactive 开发 - 简体中文翻译 By 大眼仔~旭（Anan）"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr "© 版权所有 2019~2025 - Orama Interactive 和贡献者"
+msgstr "© 版权所有 2019 Orama Interactive 和贡献者"
 
 msgid "Website"
 msgstr "网站"
@@ -3003,52 +3003,52 @@ msgid "Redo: Change frame duration"
 msgstr "重做：更改帧持续时间"
 
 msgid "Undo: Rename Layer"
-msgstr ""
+msgstr "撤销：重命名图层"
 
 msgid "Redo: Rename Layer"
-msgstr ""
+msgstr "重做：重命名图层"
 
 msgid "Undo: Change Layer Opacity"
-msgstr ""
+msgstr "撤销：更改图层不透明度"
 
 msgid "Redo: Change Layer Opacity"
-msgstr ""
+msgstr "重做：更改图层不透明度"
 
 #. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
 msgid "Undo: Change Layer Onion Skinning Ignore Status"
-msgstr ""
+msgstr "撤销：更改图层洋葱皮忽略状态"
 
 #. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
 msgid "Redo: Change Layer Onion Skinning Ignore Status"
-msgstr ""
+msgstr "重做：更改图层洋葱皮忽略状态"
 
 #. Appears as a notification when the user data field of a layer is changed, and the user undos.
 msgid "Undo: Change Layer User Data"
-msgstr ""
+msgstr "撤销：更改图层用户数据"
 
 #. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
 msgid "Redo: Change Layer User Data"
-msgstr ""
+msgstr "重做：更改图层用户数据"
 
 msgid "Undo: Change Layer Color"
-msgstr ""
+msgstr "撤销：更改图层颜色"
 
 msgid "Redo: Change Layer Color"
-msgstr ""
+msgstr "重做：更改图层颜色"
 
 msgid "Undo: Change Layer Visibility"
-msgstr ""
+msgstr "撤销：更改图层可见性"
 
 msgid "Redo: Change Layer Visibility"
-msgstr ""
+msgstr "重做：更改图层可见性"
 
 #. Appears as a notification when a layer gets locked or unlocked, and the user undos.
 msgid "Undo: Change Layer Locked Status"
-msgstr ""
+msgstr "撤销：更改图层锁定状态"
 
 #. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
 msgid "Redo: Change Layer Locked Status"
-msgstr ""
+msgstr "重做：更改图层锁定状态"
 
 msgid "Move Guide"
 msgstr "移除辅助线"
