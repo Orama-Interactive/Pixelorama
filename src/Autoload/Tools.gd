@@ -855,7 +855,7 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 			pen_pressure = 1.0
 		if dynamics_alpha != Dynamics.VELOCITY and dynamics_size != Dynamics.VELOCITY:
 			mouse_velocity = 1.0
-		if active_button == -1:  # there is no such thing as velocity without an active tool
+		if active_button == -1:  # there is no meaning of velocity without an active tool
 			mouse_velocity = 0.0
 		if not position == _last_position:
 			_last_position = position

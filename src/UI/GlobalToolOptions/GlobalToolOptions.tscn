@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://wo0hqxkst808"]
+[gd_scene load_steps=28 format=3 uid="uid://wo0hqxkst808"]
 
 [ext_resource type="Texture2D" uid="uid://cjrokejjsp5dm" path="res://assets/graphics/misc/horizontal_mirror_off.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://hiduvaa73fr6" path="res://assets/graphics/misc/vertical_mirror_off.png" id="2"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://di8au2u87jgv5" path="res://assets/graphics/misc/uncheck.png" id="7"]
 [ext_resource type="Script" uid="uid://c8iilx5w0hjf3" path="res://src/UI/GlobalToolOptions/DynamicsPanel.gd" id="7_iqcw1"]
 [ext_resource type="PackedScene" uid="uid://bmsc0s03pwji4" path="res://src/UI/Nodes/MaxMinEdit.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="14_d1yms"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_4k08w"]
 action = &"horizontal_mirror"
@@ -535,6 +536,14 @@ anchor_bottom = 0.0
 offset_right = 1.0
 offset_bottom = 23.0
 
+[node name="MaxVelocitySlider" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity" instance=ExtResource("14_d1yms")]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1000.0
+allow_greater = true
+prefix = "Max velocity:"
+suffix = "Pixels per sec"
+
 [connection signal="resized" from="." to="." method="_on_resized"]
 [connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/Horizontal" to="." method="_on_Horizontal_toggled"]
 [connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/Vertical" to="." method="_on_Vertical_toggled"]
@@ -550,6 +559,7 @@ offset_bottom = 23.0
 [connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/SizeLimits/SizeMaxIncrement" to="DynamicsPanel" method="_on_size_max_value_changed"]
 [connection signal="updated" from="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure" to="DynamicsPanel" method="_on_threshold_pressure_updated"]
 [connection signal="updated" from="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity" to="DynamicsPanel" method="_on_threshold_velocity_updated"]
+[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity/MaxVelocitySlider" to="DynamicsPanel" method="_on_max_velocity_slider_value_changed"]
 
 [editable path="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure"]
 [editable path="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity"]
