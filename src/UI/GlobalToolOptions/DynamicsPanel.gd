@@ -51,7 +51,7 @@ func _input(event: InputEvent) -> void:
 		max_velocity_slider.tooltip_text = (
 			tr(
 				"""
-		Maxium mouse velocity allowed to be detected by app.
+		Maximum mouse velocity allowed to be detected by app.
 		Recommended: %s
 		"""
 			)
