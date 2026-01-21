@@ -392,13 +392,9 @@ func _prepare_tool() -> void:
 	var strength := Tools.get_alpha_dynamic(_strength)
 	var max_inctrment := maxi(1, _brush_size + Tools.brush_size_max_increment)
 	if Tools.dynamics_size == Tools.Dynamics.PRESSURE:
-		_brush_size_dynamics = roundi(
-			lerpf(_brush_size, max_inctrment, Tools.pen_pressure)
-		)
+		_brush_size_dynamics = roundi(lerpf(_brush_size, max_inctrment, Tools.pen_pressure))
 	elif Tools.dynamics_size == Tools.Dynamics.VELOCITY:
-		_brush_size_dynamics = roundi(
-			lerpf(_brush_size, max_inctrment, Tools.mouse_velocity)
-		)
+		_brush_size_dynamics = roundi(lerpf(_brush_size, max_inctrment, Tools.mouse_velocity))
 	_drawer.pixel_perfect = Tools.pixel_perfect if _brush_size == 1 else false
 	_drawer.color_op.strength = strength
 	_indicator = _create_brush_indicator()

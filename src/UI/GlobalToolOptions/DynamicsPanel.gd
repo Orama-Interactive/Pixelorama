@@ -48,10 +48,15 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if event.velocity.length() > Tools.mouse_velocity_max:
 			recommended_max_velocity = event.velocity.length()
-		max_velocity_slider.tooltip_text = tr("""
+		max_velocity_slider.tooltip_text = (
+			tr(
+				"""
 		Maxium mouse velocity allowed to be detected by app.
 		Recommended: %s
-		""") % str(recommended_max_velocity)
+		"""
+			)
+			% str(recommended_max_velocity)
+		)
 		pressure_preview.value = event.pressure
 		velocity_preview.value = event.velocity.length() / Tools.mouse_velocity_max
 
