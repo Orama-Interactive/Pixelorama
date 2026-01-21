@@ -101,13 +101,11 @@ func _on_alpha_max_value_changed(value: float) -> void:
 	Global.dynamics_changed.emit()
 
 
-func _on_size_min_value_changed(value: float) -> void:
-	Tools.brush_size_min = int(value)
-	Global.dynamics_changed.emit()
-
-
 func _on_size_max_value_changed(value: float) -> void:
-	Tools.brush_size_max = int(value)
+	Tools.brush_size_max_increment = int(value)
+	%SizeMaxIncrement.prefix = "Brush size +"
+	if value < 0:
+		%SizeMaxIncrement.prefix = "Brush size "
 	Global.dynamics_changed.emit()
 
 

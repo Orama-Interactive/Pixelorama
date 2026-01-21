@@ -39,8 +39,7 @@ var mouse_velocity_max_thres := 0.8
 var mouse_velocity_max := 1000.0
 var alpha_min := 0.1
 var alpha_max := 1.0
-var brush_size_min := 1
-var brush_size_max := 4
+var brush_size_max_increment := 4
 
 var tools: Dictionary[String, Tool] = {
 	"RectSelect":
