@@ -101,8 +101,6 @@ func _on_Brush_selected(brush: Brushes.Brush) -> void:
 func _on_BrushSize_value_changed(value: float) -> void:
 	_brush_size = int(value)
 	_brush_size_dynamics = _brush_size
-	if Tools.dynamics_size != Tools.Dynamics.NONE:
-		_brush_size_dynamics = Tools.brush_size_min
 	_cache_limit = (_brush_size * _brush_size) * 3  # This equation seems the best match
 	update_config()
 	save_config()
@@ -110,8 +108,6 @@ func _on_BrushSize_value_changed(value: float) -> void:
 
 func _reset_dynamics() -> void:
 	_brush_size_dynamics = _brush_size
-	if Tools.dynamics_size != Tools.Dynamics.NONE:
-		_brush_size_dynamics = Tools.brush_size_min
 	_cache_limit = (_brush_size * _brush_size) * 3  # This equation seems the best match
 	update_config()
 	save_config()
@@ -156,8 +152,6 @@ func set_config(config: Dictionary) -> void:
 	_brush = Global.brushes_popup.get_brush(type, index)
 	_brush_size = config.get("brush_size", _brush_size)
 	_brush_size_dynamics = _brush_size
-	if Tools.dynamics_size != Tools.Dynamics.NONE:
-		_brush_size_dynamics = Tools.brush_size_min
 	_brush_density = config.get("brush_density", _brush_density)
 	_brush_interpolate = config.get("brush_interpolate", _brush_interpolate)
 
@@ -359,8 +353,6 @@ func draw_end(pos: Vector2i) -> void:
 	_stroke_images = []
 	_circle_tool_shortcut = []
 	_brush_size_dynamics = _brush_size
-	if Tools.dynamics_size != Tools.Dynamics.NONE:
-		_brush_size_dynamics = Tools.brush_size_min
 	match _brush.type:
 		Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM:
 			_brush_image = _create_blended_brush_image(_orignal_brush_image)
@@ -406,14 +398,11 @@ func _prepare_tool() -> void:
 		return
 	_brush_size_dynamics = _brush_size
 	var strength := Tools.get_alpha_dynamic(_strength)
+	var max_inctrment := maxi(1, _brush_size + Tools.brush_size_max_increment)
 	if Tools.dynamics_size == Tools.Dynamics.PRESSURE:
-		_brush_size_dynamics = roundi(
-			lerpf(Tools.brush_size_min, Tools.brush_size_max, Tools.pen_pressure)
-		)
+		_brush_size_dynamics = roundi(lerpf(_brush_size, max_inctrment, Tools.pen_pressure))
 	elif Tools.dynamics_size == Tools.Dynamics.VELOCITY:
-		_brush_size_dynamics = roundi(
-			lerpf(Tools.brush_size_min, Tools.brush_size_max, Tools.mouse_velocity)
-		)
+		_brush_size_dynamics = roundi(lerpf(_brush_size, max_inctrment, Tools.mouse_velocity))
 	_drawer.pixel_perfect = Tools.pixel_perfect if _brush_size == 1 else false
 	_drawer.color_op.strength = strength
 	_indicator = _create_brush_indicator()

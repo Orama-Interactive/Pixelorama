@@ -14,7 +14,7 @@ gradient = SubResource("3")
 [sub_resource type="ShaderMaterial" id="5"]
 shader = ExtResource("2")
 shader_parameter/width = 0.05
-shader_parameter/hollow_shapes = true
+shader_parameter/hollow_shapes = false
 
 [node name="MaxMinEdit" type="VBoxContainer"]
 anchors_preset = 15
