@@ -539,7 +539,9 @@ offset_bottom = 23.0
 [node name="MaxVelocitySlider" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity" instance=ExtResource("14_d1yms")]
 unique_name_in_owner = true
 layout_mode = 2
+min_value = 1.0
 max_value = 1000.0
+value = 1000.0
 allow_greater = true
 prefix = "Max velocity:"
 suffix = "Pixels per sec"
