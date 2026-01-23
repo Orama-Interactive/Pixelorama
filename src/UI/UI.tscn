@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://c8dsi6ggkqa7a"]
+[gd_scene load_steps=57 format=3 uid="uid://c8dsi6ggkqa7a"]
 
 [ext_resource type="PackedScene" uid="uid://byu3rtoipuvoc" path="res://src/UI/ToolsPanel/Tools.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://c546tskdu53j1" path="res://src/UI/Canvas/CanvasPreview.tscn" id="2"]
@@ -9,7 +9,9 @@
 [ext_resource type="Script" uid="uid://ctqrsfsbx4kwk" path="res://src/UI/Canvas/CanvasCamera.gd" id="7"]
 [ext_resource type="Shader" uid="uid://bhgdieau4cr1b" path="res://src/Shaders/Greyscale.gdshader" id="8"]
 [ext_resource type="Shader" uid="uid://c50kmfvf635kb" path="res://src/Shaders/TransparentChecker.gdshader" id="9"]
+[ext_resource type="Texture2D" uid="uid://bcqmtbq241how" path="res://assets/graphics/tools/icon_undo.png" id="9_pgedu"]
 [ext_resource type="PackedScene" uid="uid://wo0hqxkst808" path="res://src/UI/GlobalToolOptions/GlobalToolOptions.tscn" id="10"]
+[ext_resource type="Texture2D" uid="uid://dsyafi8uxkte4" path="res://assets/graphics/tools/icon_redo.png" id="10_wrubn"]
 [ext_resource type="PackedScene" uid="uid://cxhs8qy5ilufv" path="res://src/UI/ReferenceImages/ReferencesPanel.tscn" id="11"]
 [ext_resource type="PackedScene" uid="uid://cap1bhavhi33g" path="res://src/UI/PerspectiveEditor/PerspectiveEditor.tscn" id="12"]
 [ext_resource type="PackedScene" uid="uid://dl6ook010q86o" path="res://src/UI/Recorder/Recorder.tscn" id="13"]
@@ -245,15 +247,51 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="TabsContainer" type="PanelContainer" parent="DockableContainer/Main Canvas"]
+[node name="HBoxContainer" type="HBoxContainer" parent="DockableContainer/Main Canvas"]
 layout_mode = 2
 
-[node name="TabBar" type="TabBar" parent="DockableContainer/Main Canvas/TabsContainer"]
+[node name="TabsContainer" type="PanelContainer" parent="DockableContainer/Main Canvas/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TabBar" type="TabBar" parent="DockableContainer/Main Canvas/HBoxContainer/TabsContainer"]
 auto_translate_mode = 2
 layout_mode = 2
 tab_close_display_policy = 2
 drag_to_rearrange_enabled = true
 script = ExtResource("3")
+
+[node name="AndroidUndoRedo" type="HBoxContainer" parent="DockableContainer/Main Canvas/HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Undo" type="Button" parent="DockableContainer/Main Canvas/HBoxContainer/AndroidUndoRedo"]
+custom_minimum_size = Vector2(24, 24)
+layout_direction = 2
+layout_mode = 2
+tooltip_text = "Rectangular Selection
+
+%s for left mouse button
+%s for right mouse button"
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+button_mask = 3
+icon = ExtResource("9_pgedu")
+flat = true
+
+[node name="Redo" type="Button" parent="DockableContainer/Main Canvas/HBoxContainer/AndroidUndoRedo"]
+custom_minimum_size = Vector2(24, 24)
+layout_direction = 2
+layout_mode = 2
+tooltip_text = "Rectangular Selection
+
+%s for left mouse button
+%s for right mouse button"
+mouse_filter = 1
+mouse_default_cursor_shape = 2
+button_mask = 3
+icon = ExtResource("10_wrubn")
+flat = true
 
 [node name="HorizontalRuler" type="Button" parent="DockableContainer/Main Canvas" node_paths=PackedStringArray("viewport_container", "camera") groups=["CanvasRulers"]]
 clip_contents = true
@@ -405,9 +443,11 @@ layout_mode = 2
 
 [connection signal="item_rect_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_item_rect_changed"]
 [connection signal="visibility_changed" from="DockableContainer/Main Canvas" to="." method="_on_main_canvas_visibility_changed"]
-[connection signal="active_tab_rearranged" from="DockableContainer/Main Canvas/TabsContainer/TabBar" to="DockableContainer/Main Canvas/TabsContainer/TabBar" method="_on_active_tab_rearranged"]
-[connection signal="tab_changed" from="DockableContainer/Main Canvas/TabsContainer/TabBar" to="DockableContainer/Main Canvas/TabsContainer/TabBar" method="_on_Tabs_tab_changed"]
-[connection signal="tab_close_pressed" from="DockableContainer/Main Canvas/TabsContainer/TabBar" to="DockableContainer/Main Canvas/TabsContainer/TabBar" method="_on_tab_close_pressed"]
+[connection signal="active_tab_rearranged" from="DockableContainer/Main Canvas/HBoxContainer/TabsContainer/TabBar" to="DockableContainer/Main Canvas/HBoxContainer/TabsContainer/TabBar" method="_on_active_tab_rearranged"]
+[connection signal="tab_changed" from="DockableContainer/Main Canvas/HBoxContainer/TabsContainer/TabBar" to="DockableContainer/Main Canvas/HBoxContainer/TabsContainer/TabBar" method="_on_Tabs_tab_changed"]
+[connection signal="tab_close_pressed" from="DockableContainer/Main Canvas/HBoxContainer/TabsContainer/TabBar" to="DockableContainer/Main Canvas/HBoxContainer/TabsContainer/TabBar" method="_on_tab_close_pressed"]
+[connection signal="pressed" from="DockableContainer/Main Canvas/HBoxContainer/AndroidUndoRedo/Undo" to="." method="_on_android_undo_pressed"]
+[connection signal="pressed" from="DockableContainer/Main Canvas/HBoxContainer/AndroidUndoRedo/Redo" to="." method="_on_android_redo_pressed"]
 [connection signal="mouse_entered" from="DockableContainer/Main Canvas/HorizontalRuler" to="DockableContainer/Main Canvas/HorizontalRuler" method="_on_HorizontalRuler_mouse_entered"]
 [connection signal="pressed" from="DockableContainer/Main Canvas/HorizontalRuler" to="DockableContainer/Main Canvas/HorizontalRuler" method="_on_HorizontalRuler_pressed"]
 [connection signal="pressed" from="DockableContainer/Main Canvas/ViewportandVerticalRuler/VerticalRuler" to="DockableContainer/Main Canvas/ViewportandVerticalRuler/VerticalRuler" method="_on_VerticalRuler_pressed"]

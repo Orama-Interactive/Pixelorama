@@ -59,3 +59,11 @@ func update_transparent_shader() -> void:
 		"position", main_canvas_container.global_position * Global.shrink
 	)
 	transparency_material.set_shader_parameter("size", canvas_size)
+
+
+func _on_android_undo_pressed() -> void:
+	Global.current_project.commit_undo()
+
+
+func _on_android_redo_pressed() -> void:
+	Global.current_project.commit_redo()
