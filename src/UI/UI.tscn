@@ -265,6 +265,11 @@ script = ExtResource("3")
 visible = false
 layout_mode = 2
 
+[node name="Spacer" type="Control" parent="DockableContainer/Main Canvas/HBoxContainer/AndroidUndoRedo"]
+editor_description = "This is here to prevent user from accidentally touching a tab to another project"
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
 [node name="Undo" type="Button" parent="DockableContainer/Main Canvas/HBoxContainer/AndroidUndoRedo"]
 custom_minimum_size = Vector2(24, 24)
 layout_direction = 2
@@ -292,6 +297,11 @@ mouse_default_cursor_shape = 2
 button_mask = 3
 icon = ExtResource("10_wrubn")
 flat = true
+
+[node name="Spacer2" type="Control" parent="DockableContainer/Main Canvas/HBoxContainer/AndroidUndoRedo"]
+editor_description = "This is here to prevent user from accidentally touching the grabber at the edge instead"
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
 
 [node name="HorizontalRuler" type="Button" parent="DockableContainer/Main Canvas" node_paths=PackedStringArray("viewport_container", "camera") groups=["CanvasRulers"]]
 clip_contents = true
