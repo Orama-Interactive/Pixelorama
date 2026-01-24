@@ -54,6 +54,7 @@ var button_size := 36:
 			button.size = Vector2(button_size, button_size)
 var show_empty_tile := true
 var tile_index_menu_popped := 0
+var _tileset_updated_this_frame := false
 
 @onready var place_tiles: Button = %PlaceTiles
 @onready var transform_buttons_container: HFlowContainer = %TransformButtonsContainer
@@ -131,6 +132,7 @@ func _on_cel_switched() -> void:
 
 
 func _update_tileset() -> void:
+	_tileset_updated_this_frame = false
 	_clear_tile_buttons()
 	for tile_index in selected_tiles:
 		if tile_index >= current_tileset.tiles.size():
@@ -198,7 +200,10 @@ static func _update_tile(
 
 
 func _update_tileset_dummy_params(_cel: BaseCel, _index: int) -> void:
-	_update_tileset()
+	if _tileset_updated_this_frame:
+		return
+	_tileset_updated_this_frame = true
+	_update_tileset.call_deferred()
 
 
 func _create_tile_button(texture: Texture2D, index: int) -> Button:
