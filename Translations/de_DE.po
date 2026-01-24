@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2026-01-07 22:49\n"
+"PO-Revision-Date: 2026-01-24 14:11\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3003,52 +3003,52 @@ msgid "Redo: Change frame duration"
 msgstr "Wiederholen: Frame-Dauer ändern"
 
 msgid "Undo: Rename Layer"
-msgstr ""
+msgstr "Rückgängig: Ebene umbenennen"
 
 msgid "Redo: Rename Layer"
-msgstr ""
+msgstr "Wiederherstellen: Ebene umbenennen"
 
 msgid "Undo: Change Layer Opacity"
-msgstr ""
+msgstr "Rückgängig: Ebenendeckkraft ändern"
 
 msgid "Redo: Change Layer Opacity"
-msgstr ""
+msgstr "Wiederherstellen: Ebenendeckkraft ändern"
 
 #. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
 msgid "Undo: Change Layer Onion Skinning Ignore Status"
-msgstr ""
+msgstr "Rückgängig: Onion-Skinning-Ignorierung der Ebene ändern"
 
 #. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
 msgid "Redo: Change Layer Onion Skinning Ignore Status"
-msgstr ""
+msgstr "Wiederherstellen: Onion-Skinning-Ignorierung der Ebene ändern"
 
 #. Appears as a notification when the user data field of a layer is changed, and the user undos.
 msgid "Undo: Change Layer User Data"
-msgstr ""
+msgstr "Rückgängig: Ebenen-Benutzerdaten ändern"
 
 #. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
 msgid "Redo: Change Layer User Data"
-msgstr ""
+msgstr "Wiederherstellen: Ebenen-Benutzerdaten ändern"
 
 msgid "Undo: Change Layer Color"
-msgstr ""
+msgstr "Rückgängig: Ebenenfarbe ändern"
 
 msgid "Redo: Change Layer Color"
-msgstr ""
+msgstr "Wiederherstellen: Ebenenfarbe ändern"
 
 msgid "Undo: Change Layer Visibility"
-msgstr ""
+msgstr "Rückgängig: Ebenensichtbarkeit ändern"
 
 msgid "Redo: Change Layer Visibility"
-msgstr ""
+msgstr "Wiederherstellen: Ebenensichtbarkeit ändern"
 
 #. Appears as a notification when a layer gets locked or unlocked, and the user undos.
 msgid "Undo: Change Layer Locked Status"
-msgstr ""
+msgstr "Rückgängig: Sperrstatus der Ebene ändern"
 
 #. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
 msgid "Redo: Change Layer Locked Status"
-msgstr ""
+msgstr "Wiederherstellen: Sperrstatus der Ebene ändern"
 
 msgid "Move Guide"
 msgstr "Hilfslinie verschieben"
