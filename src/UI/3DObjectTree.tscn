@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvpfnxblh1n3n"]
+
+[ext_resource type="Script" uid="uid://can6ogo08bxlm" path="res://src/UI/3DObjectTree.gd" id="1_udgli"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_8sqgw"]
+action = &"delete"
+
+[sub_resource type="Shortcut" id="Shortcut_udgli"]
+events = [SubResource("InputEventAction_8sqgw")]
+
+[node name="3DObjectTree" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_udgli")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HandleObjects" type="GridContainer" parent="VBoxContainer"]
+layout_mode = 2
+columns = 2
+
+[node name="NewObjectMenuButton" type="MenuButton" parent="VBoxContainer/HandleObjects"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+text = "Add new object"
+flat = false
+
+[node name="RemoveObject" type="Button" parent="VBoxContainer/HandleObjects"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+disabled = true
+shortcut = SubResource("Shortcut_udgli")
+text = "Remove object"
+
+[node name="ObjectTree" type="Tree" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LoadModelDialog" type="FileDialog" parent="." groups=["FileDialogs"]]
+mode = 1
+title = "Open File(s)"
+size = Vector2i(558, 300)
+ok_button_text = "Open"
+file_mode = 1
+access = 2
+filters = PackedStringArray("*.obj")
+show_hidden_files = true
+
+[connection signal="pressed" from="VBoxContainer/HandleObjects/RemoveObject" to="." method="_on_remove_object_pressed"]
+[connection signal="item_selected" from="VBoxContainer/ObjectTree" to="." method="_on_object_tree_item_selected"]
+[connection signal="files_selected" from="LoadModelDialog" to="." method="_on_load_model_dialog_files_selected"]
