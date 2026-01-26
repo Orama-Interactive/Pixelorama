@@ -6,9 +6,13 @@ var is_syncing := false
 var kname: String
 var tool_slot: Tools.Slot = null
 var cursor_text := ""
+## The 3D node we are currently drawing on, if there is any.
+var drawing_on_3d_node: MeshInstance3D
+## Used for drawing on 3D models. The Array contains an Image and the index of the surface.
+var materials_3d: Dictionary[BaseMaterial3D, Array]
+
 var _cursor := Vector2i(Vector2.INF)
 var _stabilizer_center := Vector2.ZERO
-
 var _draw_cache: Array[Vector2i] = []  ## For storing already drawn pixels
 @warning_ignore("unused_private_class_variable")
 var _for_frame := 0  ## Cache for which frame
@@ -218,6 +222,141 @@ func mirror_array(array: Array[Vector2i], callable := func(_array): pass) -> Arr
 	return new_array
 
 
+func get_3d_node_at_pos(pos: Vector2i, camera: Camera3D, max_distance := 100.0) -> Array:
+	var scenario := camera.get_world_3d().scenario
+	var ray_from := camera.project_ray_origin(pos)
+	var ray_dir := camera.project_ray_normal(pos)
+	var ray_to := ray_from + ray_dir * max_distance
+	var intersecting_objects := RenderingServer.instances_cull_ray(ray_from, ray_to, scenario)
+	for obj in intersecting_objects:
+		var intersect_node := instance_from_id(obj)
+		if intersect_node is not Node3D:
+			continue
+		# Convert ray into the node’s local space
+		var to_local := (intersect_node as Node3D).global_transform.affine_inverse()
+		var local_from := to_local * ray_from
+		var local_to := to_local * ray_to
+		if not intersect_node is MeshInstance3D:
+			continue
+		var mesh_instance := intersect_node as MeshInstance3D
+		var mesh := mesh_instance.mesh
+		if mesh == null:
+			continue
+		var closest_dist := INF
+		var best_hit := {}
+		var best_surface := -1
+		for surface_idx in range(mesh.get_surface_count()):
+			var surface := mesh.surface_get_arrays(surface_idx)
+			if surface.is_empty():
+				continue
+
+			var vertices: PackedVector3Array = []
+			if surface[Mesh.ARRAY_VERTEX]:
+				vertices = surface[Mesh.ARRAY_VERTEX]
+			var indices: PackedInt32Array = []
+			if surface[Mesh.ARRAY_INDEX]:
+				indices = surface[Mesh.ARRAY_INDEX]
+
+			if indices.is_empty():
+				# non-indexed: vertices are already triangles
+				for i in range(0, vertices.size(), 3):
+					var hit = Geometry3D.ray_intersects_triangle(
+						local_from,
+						local_to - local_from,
+						vertices[i],
+						vertices[i + 1],
+						vertices[i + 2]
+					)
+					if hit:
+						var d := local_from.distance_to(hit)
+						if d < closest_dist:
+							closest_dist = d
+							@warning_ignore("integer_division")
+							best_hit = {"position": hit, "face_index": i / 3}
+							best_surface = surface_idx
+			else:
+				for i in range(0, indices.size(), 3):
+					var v0 := vertices[indices[i]]
+					var v1 := vertices[indices[i + 1]]
+					var v2 := vertices[indices[i + 2]]
+					var hit = Geometry3D.ray_intersects_triangle(
+						local_from, local_to - local_from, v0, v1, v2
+					)
+					if hit:
+						var d := local_from.distance_to(hit)
+						if d < closest_dist:
+							closest_dist = d
+							@warning_ignore("integer_division")
+							best_hit = {"position": hit, "face_index": i / 3}
+							best_surface = surface_idx
+
+		if best_surface == -1:
+			return []
+		return [intersect_node, best_hit, best_surface]
+	return []
+
+
+# Inspired from
+# https://github.com/BastiaanOlij/drawable-textures-demo/blob/master/main.gd
+func get_3d_node_uvs(pos: Vector2i, camera: Camera3D, max_distance := 100.0) -> Array:
+	var intersect_data := get_3d_node_at_pos(pos, camera, max_distance)
+	if intersect_data.is_empty():
+		return []
+	var object := intersect_data[0] as MeshInstance3D
+	var intersect_result := intersect_data[1] as Dictionary
+	var surface_index := intersect_data[2] as int
+	var faces: PackedVector3Array
+	var uvs: PackedVector2Array
+	var surface := object.mesh.surface_get_arrays(surface_index)
+	var vertices: PackedVector3Array = surface[Mesh.ARRAY_VERTEX]
+	var tex_uvs: PackedVector2Array
+	if surface[Mesh.ARRAY_TEX_UV] == null:
+		for v in vertices:
+			tex_uvs.append(Vector2(v.x, v.z))  # XZ projection fallback
+	else:
+		tex_uvs = surface[Mesh.ARRAY_TEX_UV]
+	if surface[Mesh.ARRAY_INDEX] != null:
+		var indices: PackedInt32Array = surface[Mesh.ARRAY_INDEX]
+		var index_count := indices.size()
+		uvs.resize(index_count)
+		faces.resize(index_count)
+		for index in range(index_count):
+			var vertex_idx := indices[index]
+			uvs[index] = tex_uvs[vertex_idx]
+			faces[index] = vertices[vertex_idx]
+	else:
+		var index_count := vertices.size()
+		uvs.resize(index_count)
+		faces.resize(index_count)
+		for index in range(index_count):
+			uvs[index] = tex_uvs[index]
+			faces[index] = vertices[index]
+
+	var index: int = intersect_result.face_index * 3
+	var f: Vector3 = intersect_result.position
+	if index + 2 >= faces.size():
+		return []
+	var p1 := faces[index]
+	var p2 := faces[index + 1]
+	var p3 := faces[index + 2]
+
+	# calculate vectors from point f to vertices p1, p2 and p3:
+	var f1 := p1 - f
+	var f2 := p2 - f
+	var f3 := p3 - f
+
+	# calculate the areas and factors (order of parameters doesn't matter):
+	var a: float = (p1 - p2).cross(p1 - p3).length()  # main triangle area a
+	var a1: float = f2.cross(f3).length() / a  # p1's triangle area / a
+	var a2: float = f3.cross(f1).length() / a  # p2's triangle area / a
+	var a3: float = f1.cross(f2).length() / a  # p3's triangle area / a
+
+	# find the uv corresponding to point f (uv1/uv2/uv3 are associated to p1/p2/p3):
+	var uv: Vector2 = uvs[index] * a1 + uvs[index + 1] * a2 + uvs[index + 2] * a3
+
+	return [object, uv, surface_index]
+
+
 func _get_stabilized_position(normal_pos: Vector2) -> Vector2:
 	if not Tools.stabilizer_enabled:
 		return normal_pos
@@ -253,6 +392,14 @@ func _get_selected_draw_cels() -> Array[BaseCel]:
 
 func _get_selected_draw_images() -> Array[ImageExtended]:
 	var images: Array[ImageExtended] = []
+	if not materials_3d.is_empty():
+		for mat in materials_3d:
+			if is_instance_valid(mat.albedo_texture):
+				var temp_image := mat.albedo_texture.get_image()
+				var image := ImageExtended.new()
+				image.copy_from_custom(temp_image)
+				images.append(image)
+		return images
 	var project := Global.current_project
 	for cel_index in project.selected_cels:
 		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]

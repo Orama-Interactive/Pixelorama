@@ -374,6 +374,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 				palettes[corrected_palette_name] = palette
 		project_current_palette_name = current_palette_name
 	if dict.has("frames") and dict.has("layers"):
+		var layers_3d_count := 0
 		var audio_layers := 0
 		for saved_layer in dict.layers:
 			match int(saved_layer.get("type", Global.LayerTypes.PIXEL)):
@@ -382,7 +383,35 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 				Global.LayerTypes.GROUP:
 					layers.append(GroupLayer.new(self))
 				Global.LayerTypes.THREE_D:
-					layers.append(Layer3D.new(self))
+					var layer := Layer3D.new(self, "", true)
+					layers.append(layer)
+					var scene_path_zip := "scene/%s" % layers_3d_count
+					if not zip_reader.file_exists(scene_path_zip):
+						layer.add_nodes(size)
+						layers_3d_count += 1
+						continue
+					var scene_data := zip_reader.read_file(scene_path_zip)
+					var scene_data_text := scene_data.get_string_from_utf8()
+					if 'resource type="Script"' in scene_data_text:
+						# If a script is detected inside the scene, it's possible someone
+						# may have injected malicious code. To prevent the users,
+						# refuse to load scenes with scripts on them.
+						print("Script detected, there may be malicious code in the scene.")
+						layer.add_nodes(size)
+						layers_3d_count += 1
+						continue
+					DirAccess.make_dir_absolute(Export.temp_path)
+					var scene_path_file := (
+						Export.temp_path.path_join(str(layers_3d_count)) + ".tscn"
+					)
+					var scene_file := FileAccess.open(scene_path_file, FileAccess.WRITE)
+					scene_file.store_buffer(scene_data)
+					scene_file.close()
+					var scene := load(scene_path_file) as PackedScene
+					layer.load_scene(scene)
+					DirAccess.remove_absolute(scene_path_file)
+					DirAccess.remove_absolute(Export.temp_path)
+					layers_3d_count += 1
 				Global.LayerTypes.TILEMAP:
 					layers.append(LayerTileMap.new(self, null))
 				Global.LayerTypes.AUDIO:
@@ -416,7 +445,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 						if is_instance_valid(file):  # For pxo files saved in 0.x
 							# Don't do anything with it, just read it so that the file can move on
 							file.get_buffer(size.x * size.y * 4)
-						cels.append(Cel3D.new(size, true))
+						cels.append(layer.new_empty_cel())
 					Global.LayerTypes.TILEMAP:
 						var image := _load_image_from_pxo(frame_i, cel_i, zip_reader, file)
 						var tileset_index = dict.layers[cel_i].tileset_index
@@ -642,6 +671,14 @@ func get_all_pixel_cels() -> Array[PixelCel]:
 	return cels
 
 
+func get_all_3d_layers() -> Array[Layer3D]:
+	var layers_3d: Array[Layer3D]
+	for layer in layers:
+		if layer is Layer3D:
+			layers_3d.append(layer)
+	return layers_3d
+
+
 func get_all_audio_layers(only_valid_streams := true) -> Array[AudioLayer]:
 	var audio_layers: Array[AudioLayer]
 	for layer in layers:
@@ -836,11 +873,12 @@ func remove_layers(indices: PackedInt32Array) -> void:
 	selected_cels.clear()
 	for i in indices.size():
 		# With each removed index, future indices need to be lowered, so subtract by i
-		layers.remove_at(indices[i] - i)
+		var layer_index := indices[i] - i
+		layers.remove_at(layer_index)
 		for frame in frames:
-			frame.cels[indices[i] - i].on_remove()
-			frame.cels.remove_at(indices[i] - i)
-		Global.animation_timeline.project_layer_removed(indices[i] - i)
+			frame.cels[layer_index].on_remove()
+			frame.cels.remove_at(layer_index)
+		Global.animation_timeline.project_layer_removed(layer_index)
 	layers_updated.emit()
 
 

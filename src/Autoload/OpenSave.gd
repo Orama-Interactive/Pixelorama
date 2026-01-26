@@ -92,6 +92,8 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 		var new_path := SHADERS_DIRECTORY.path_join(file.get_file())
 		DirAccess.copy_absolute(file, new_path)
 		shader_copied.emit(new_path)
+	elif file_ext == "gltf" or file_ext == "glb":  # 3D scene
+		open_3d_scene_file(file)
 	elif file_ext == "mp3" or file_ext == "wav":  # Audio file
 		open_audio_file(file)
 	elif file_ext in FONT_FILE_EXTENSIONS:
@@ -560,6 +562,25 @@ func save_pxo_file(
 			zip_packer.start_file(tileset_path.path_join(str(j)))
 			zip_packer.write_file(tile.image.get_data())
 			zip_packer.close_file()
+	var layers_3d := project.get_all_3d_layers()
+	for i in layers_3d.size():
+		var layer := layers_3d[i]
+		DirAccess.make_dir_absolute(Export.temp_path)
+		var scene_path_zip := "scene/%s" % i
+		var scene_path_file := Export.temp_path.path_join(str(i)) + ".tscn"
+		var node_to_pack := layer.viewport
+		var scene := PackedScene.new()
+		scene.pack(node_to_pack)
+		var scene_err := ResourceSaver.save(scene, scene_path_file)
+		if scene_err == OK:
+			var scene_file := FileAccess.open(scene_path_file, FileAccess.READ)
+			if is_instance_valid(scene_file):
+				zip_packer.start_file(scene_path_zip)
+				zip_packer.write_file(scene_file.get_buffer(scene_file.get_length()))
+				zip_packer.close_file()
+				scene_file.close()
+		DirAccess.remove_absolute(scene_path_file)
+		DirAccess.remove_absolute(Export.temp_path)
 	var audio_layers := project.get_all_audio_layers()
 	for i in audio_layers.size():
 		var layer := audio_layers[i]
@@ -1046,6 +1067,19 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 
 	if prev_project_empty:
 		Global.tabs.delete_tab(prev_project_pos)
+
+
+func open_3d_scene_file(path: String) -> void:
+	var gltf_document_load := GLTFDocument.new()
+	var gltf_state_load := GLTFState.new()
+	var error = gltf_document_load.append_from_file(path, gltf_state_load)
+	if error != OK:
+		return
+	var gltf_scene_root_node := gltf_document_load.generate_scene(gltf_state_load)
+	var project := Global.current_project
+	var new_layer := Layer3D.new(project, path.get_basename().get_file())
+	new_layer.parent_node.add_child(gltf_scene_root_node)
+	Global.animation_timeline.add_layer(new_layer, project)
 
 
 func open_audio_file(path: String) -> void:
