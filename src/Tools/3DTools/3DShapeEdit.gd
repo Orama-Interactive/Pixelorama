@@ -152,6 +152,8 @@ func _object_property_changed(object: Node, prop_name: String, frame_index: int)
 				elif property_editor_node is ValueSliderV2:
 					property_editor_node.set_value_no_signal(curr_value)
 				elif property_editor_node is ValueSliderV3:
+					if prop_name == "rotation":
+						curr_value = Global.radians_to_degrees(curr_value)
 					property_editor_node.set_value_no_signal(curr_value)
 				elif property_editor_node is ColorPickerButton:
 					property_editor_node.color = curr_value
