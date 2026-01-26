@@ -1403,10 +1403,14 @@ func create_node_from_variable(
 			if typeof(min_value) == type:
 				slider.min_value = min_value
 			elif typeof(min_value) in [TYPE_FLOAT, TYPE_INT]:
+				if min_value <= -9999:
+					min_value = -100
 				slider.min_value = Vector3(min_value, min_value, min_value)
 			if typeof(max_value) == type:
 				slider.max_value = max_value
 			elif typeof(max_value) in [TYPE_FLOAT, TYPE_INT]:
+				if max_value >= 9999:
+					max_value = 100
 				slider.max_value = Vector3(max_value, max_value, max_value)
 			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			if "radians_as_degrees" in hint_string:
