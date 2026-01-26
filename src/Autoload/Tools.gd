@@ -131,7 +131,7 @@ var tools: Dictionary[String, Tool] = {
 		"Pencil",
 		"pencil",
 		"res://src/Tools/DesignTools/Pencil.tscn",
-		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP, Global.LayerTypes.THREE_D],
 		"Hold %s to make a line",
 		["draw_create_line"]
 	),

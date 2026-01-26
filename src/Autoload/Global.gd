@@ -1126,7 +1126,6 @@ func undo_or_redo(
 			canvas.pixel_grid.queue_redraw()
 			project.selection_map_changed()
 
-	await RenderingServer.frame_post_draw
 	canvas.queue_redraw()
 	for canvas_preview in get_tree().get_nodes_in_group("CanvasPreviews"):
 		canvas_preview.queue_redraw()
@@ -1379,8 +1378,12 @@ func create_node_from_variable(
 			slider.allow_greater = allow_greater
 			if typeof(min_value) == type:
 				slider.min_value = min_value
+			elif typeof(min_value) in [TYPE_FLOAT, TYPE_INT]:
+				slider.min_value = Vector2(min_value, min_value)
 			if typeof(max_value) == type:
 				slider.max_value = max_value
+			elif typeof(max_value) in [TYPE_FLOAT, TYPE_INT]:
+				slider.max_value = Vector2(max_value, max_value)
 			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			slider.value = curr_value
 			if started_editing.is_valid():
@@ -1399,14 +1402,30 @@ func create_node_from_variable(
 			slider.allow_greater = allow_greater
 			if typeof(min_value) == type:
 				slider.min_value = min_value
+			elif typeof(min_value) in [TYPE_FLOAT, TYPE_INT]:
+				if min_value <= -9999:
+					min_value = -100
+				slider.min_value = Vector3(min_value, min_value, min_value)
 			if typeof(max_value) == type:
 				slider.max_value = max_value
+			elif typeof(max_value) in [TYPE_FLOAT, TYPE_INT]:
+				if max_value >= 9999:
+					max_value = 100
+				slider.max_value = Vector3(max_value, max_value, max_value)
 			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			slider.value = curr_value
+			if "radians_as_degrees" in hint_string:
+				slider.value = radians_to_degrees(curr_value)
+			else:
+				slider.value = curr_value
 			if started_editing.is_valid():
 				slider.drag_started.connect(started_editing)
 			if value_changed.is_valid():
-				slider.value_changed.connect(value_changed)
+				if "radians_as_degrees" in hint_string:
+					slider.value_changed.connect(
+						func(new_value): value_changed.call(degrees_to_radians(new_value))
+					)
+				else:
+					slider.value_changed.connect(value_changed)
 			return slider
 		TYPE_VECTOR4, TYPE_VECTOR4I, TYPE_COLOR:
 			var color_picker_button := ColorPickerButton.new()
@@ -1467,6 +1486,7 @@ func create_node_from_variable(
 				button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 				var mod_button := Button.new()
+				mod_button.name = "ModifyButton"
 				mod_button.text = "Modify"
 				if value_changed.is_valid():
 					mod_button.pressed.connect(
@@ -1474,7 +1494,7 @@ func create_node_from_variable(
 							ShaderLoader.modify_texture_resource(
 								curr_value.get_image(),
 								"",
-								_on_resource_proj_updated.bind(value_changed)
+								on_resource_proj_updated.bind(value_changed)
 							)
 					)
 				mod_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -1484,6 +1504,38 @@ func create_node_from_variable(
 				hbox.add_child(mod_button)
 				return hbox
 	return null
+
+
+func degrees_to_radians(value_in_deg) -> Variant:
+	var new_value
+	if typeof(value_in_deg) == TYPE_FLOAT:
+		new_value = deg_to_rad(value_in_deg)
+	elif typeof(value_in_deg) == TYPE_VECTOR2:
+		new_value = Vector2()
+		new_value.x = deg_to_rad(value_in_deg.x)
+		new_value.y = deg_to_rad(value_in_deg.y)
+	elif typeof(value_in_deg) == TYPE_VECTOR3:
+		new_value = Vector3()
+		new_value.x = deg_to_rad(value_in_deg.x)
+		new_value.y = deg_to_rad(value_in_deg.y)
+		new_value.z = deg_to_rad(value_in_deg.z)
+	return new_value
+
+
+func radians_to_degrees(value_in_deg) -> Variant:
+	var new_value
+	if typeof(value_in_deg) == TYPE_FLOAT:
+		new_value = rad_to_deg(value_in_deg)
+	elif typeof(value_in_deg) == TYPE_VECTOR2:
+		new_value = Vector2()
+		new_value.x = rad_to_deg(value_in_deg.x)
+		new_value.y = rad_to_deg(value_in_deg.y)
+	elif typeof(value_in_deg) == TYPE_VECTOR3:
+		new_value = Vector3()
+		new_value.x = rad_to_deg(value_in_deg.x)
+		new_value.y = rad_to_deg(value_in_deg.y)
+		new_value.z = rad_to_deg(value_in_deg.z)
+	return new_value
 
 
 func popup_image_file_dialog(on_file_selected: Callable) -> void:
@@ -1516,7 +1568,7 @@ func popup_image_file_dialog(on_file_selected: Callable) -> void:
 
 # TODO: Remove duplicate code, either keep this or
 # _shader_update_texture in ShaderLoader.
-func _on_resource_proj_updated(resource_proj: ResourceProject, value_changed: Callable) -> void:
+func on_resource_proj_updated(resource_proj: ResourceProject, value_changed: Callable) -> void:
 	var warnings := ""
 	if resource_proj.frames.size() > 1:
 		warnings += "This resource is intended to have 1 frame only. Extra frames will be ignored."
