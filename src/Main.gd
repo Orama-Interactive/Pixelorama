@@ -210,8 +210,6 @@ func _ready() -> void:
 		var intent_data := Applinks.get_data()
 		if not intent_data.is_empty():
 			_on_applinks_data_received(intent_data)
-	if Global.open_last_project:
-		load_last_project()
 
 	# Detect if Pixelorama crashed last time.
 	var crashed_last_time := FileAccess.file_exists(RUNNING_FILE_PATH)
@@ -222,6 +220,8 @@ func _ready() -> void:
 	# it means that Pixelorama crashed last time.
 	FileAccess.open(RUNNING_FILE_PATH, FileAccess.WRITE)
 	await get_tree().process_frame
+	if Global.open_last_project:
+		load_last_project()
 	_setup_application_window_size()
 	_show_splash_screen()
 	Global.pixelorama_opened.emit()
@@ -524,6 +524,9 @@ func load_recent_project_file(path: String) -> void:
 
 
 func _on_OpenSprite_files_selected(paths: PackedStringArray) -> void:
+	# Wait for file dialog to close otherwise an "Attempting to make child window exclusive"
+	# error will appear
+	await get_tree().process_frame
 	for path in paths:
 		OpenSave.handle_loading_file(path, true)
 	save_sprite_dialog.current_dir = paths[0].get_base_dir()

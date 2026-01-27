@@ -354,6 +354,8 @@ always_on_top = true
 dialog_text = "File %s already exists. Overwrite?"
 
 [node name="ExportProgressBar" type="Window" parent="."]
+title = "Export Progress"
+size = Vector2i(400, 100)
 visible = false
 exclusive = true
 always_on_top = true
@@ -376,6 +378,7 @@ size_flags_horizontal = 3
 
 [connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
 [connection signal="confirmed" from="." to="." method="_on_confirmed"]
+[connection signal="visibility_changed" from="." to="." method="_on_ExportDialog_visibility_changed"]
 [connection signal="tab_clicked" from="VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_clicked"]
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Orientation" to="." method="_on_orientation_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/LinesCount" to="." method="_on_lines_count_value_changed"]

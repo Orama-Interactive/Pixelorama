@@ -26,6 +26,9 @@ func _ready() -> void:
 	Global.main_viewport.mouse_entered.connect(set_process_input.bind(true))
 	Global.main_viewport.mouse_exited.connect(set_process_input.bind(false))
 	marching_ants_outline.texture = preview_selection_texture
+	marching_ants_outline.material.set_shader_parameter(
+		"animated", Global.selection_animated_borders
+	)
 	transformation_handles.preview_transform_changed.connect(_update_marching_ants)
 	Global.project_switched.connect(_project_switched)
 	Global.camera.zoom_changed.connect(_update_on_zoom)

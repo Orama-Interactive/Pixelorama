@@ -5,9 +5,9 @@ on:
     branches: [ release ]
 
 env:
-  GODOT_VERSION: 4.5.1
+  GODOT_VERSION: 4.6
   EXPORT_NAME: Pixelorama
-  TAG: v1.1.7
+  TAG: v1.1.8
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
 jobs:
@@ -15,10 +15,10 @@ jobs:
     name: Windows Export 🗔
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.5.1
+      image: docker://barichello/godot-ci:4.6
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: true
       - name: Setup 💻
@@ -68,10 +68,10 @@ jobs:
     name: Linux Export 🐧
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.5.1
+      image: docker://barichello/godot-ci:4.6
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: true
       - name: Setup 💻
@@ -127,7 +127,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: true
       - name: Setup environment 🔧
@@ -171,7 +171,7 @@ jobs:
         run: hdiutil create -srcfolder ./build/mac -fs HFS+ -volname ${EXPORT_NAME} ./build/mac/${EXPORT_NAME}-Mac.dmg
       - name: Upload Release Assets to itch.io 🎮
         run: |
-          curl -L -o butler.zip https://broth.itch.ovh/butler/darwin-amd64/LATEST/archive/default
+          curl -L -o butler.zip https://broth.itch.zone/butler/darwin-amd64/LATEST/archive/default
           unzip butler.zip
           chmod +x butler
           ./butler push ./build/mac/${{env.EXPORT_NAME}}-Mac.dmg ${{ secrets.ITCHIO_USERNAME }}/${{ secrets.ITCHIO_GAME }}:mac --userversion ${{env.TAG}}
@@ -187,10 +187,10 @@ jobs:
     name: Web Export 🌐
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.5.1
+      image: docker://barichello/godot-ci:4.6
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: true
       - name: Setup 💻

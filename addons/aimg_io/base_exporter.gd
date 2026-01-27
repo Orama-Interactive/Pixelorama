@@ -16,6 +16,8 @@ func export_animation(
 	_fps_hint: float,
 	_progress_report_obj: Object,
 	_progress_report_method,
-	_progress_report_args
+	_progress_report_args,
+	_export_file: FileAccess = null
 ) -> PackedByteArray:
+	await RenderingServer.frame_post_draw
 	return PackedByteArray()

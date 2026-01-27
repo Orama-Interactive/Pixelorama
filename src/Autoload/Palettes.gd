@@ -557,26 +557,24 @@ func import_palette_from_path(path: String, make_copy := false, is_initialising 
 		return
 
 	var palette: Palette = null
-	match path.to_lower().get_extension():
-		"gpl":
-			if FileAccess.file_exists(path):
-				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
-				palette = _import_gpl(path, text)
-		"pal":
-			if FileAccess.file_exists(path):
-				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
-				palette = _import_pal_palette(path, text)
-		"png", "bmp", "hdr", "jpg", "jpeg", "svg", "tga", "webp":
+	if FileAccess.file_exists(path):
+		var palette_ext := path.to_lower().get_extension()
+		if palette_ext in Global.SUPPORTED_IMAGE_TYPES:
 			var image := Image.new()
 			var err := image.load(path)
 			if !err:
 				palette = _import_image_palette(path, image)
-		"json":
-			if FileAccess.file_exists(path):
-				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
-				palette = Palette.new(path.get_basename().get_file())
-				palette.path = path
-				palette.deserialize(text)
+		elif palette_ext == "gpl":
+			var text := FileAccess.open(path, FileAccess.READ).get_as_text()
+			palette = _import_gpl(path, text)
+		elif palette_ext == "pal":
+			var text := FileAccess.open(path, FileAccess.READ).get_as_text()
+			palette = _import_pal_palette(path, text)
+		elif palette_ext == "json":
+			var text := FileAccess.open(path, FileAccess.READ).get_as_text()
+			palette = Palette.new(path.get_basename().get_file())
+			palette.path = path
+			palette.deserialize(text)
 
 	if is_instance_valid(palette):
 		if make_copy:

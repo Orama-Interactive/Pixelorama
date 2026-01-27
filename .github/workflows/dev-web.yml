@@ -9,7 +9,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  GODOT_VERSION: 4.5.1
+  GODOT_VERSION: 4.6
   EXPORT_NAME: Pixelorama
 
 jobs:
@@ -17,10 +17,10 @@ jobs:
     name: Web Export 🌐
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.5.1
+      image: docker://barichello/godot-ci:4.6
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: true
       - name: Setup 💻

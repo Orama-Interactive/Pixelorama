@@ -33,14 +33,13 @@ var pen_pressure_min := 0.2
 var pen_pressure_max := 0.8
 var pressure_buf := [0, 0]  # past pressure value buffer
 var pen_inverted := false
-var mouse_velocity := 1.0
+var mouse_velocity := 0.0
 var mouse_velocity_min_thres := 0.2
 var mouse_velocity_max_thres := 0.8
 var mouse_velocity_max := 1000.0
 var alpha_min := 0.1
 var alpha_max := 1.0
-var brush_size_min := 1
-var brush_size_max := 4
+var brush_size_max_increment := 4
 
 var tools: Dictionary[String, Tool] = {
 	"RectSelect":
@@ -847,7 +846,6 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 		pen_pressure = clampf(pen_pressure, 0.0, 1.0)
 
 		pen_inverted = event.pen_inverted
-
 		mouse_velocity = event.velocity.length() / mouse_velocity_max
 		mouse_velocity = remap(
 			mouse_velocity, mouse_velocity_min_thres, mouse_velocity_max_thres, 0.0, 1.0
@@ -857,6 +855,8 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 			pen_pressure = 1.0
 		if dynamics_alpha != Dynamics.VELOCITY and dynamics_size != Dynamics.VELOCITY:
 			mouse_velocity = 1.0
+		if active_button == -1:  # there is no meaning of velocity without an active tool
+			mouse_velocity = 0.0
 		if not position == _last_position:
 			_last_position = position
 			_slots[MOUSE_BUTTON_LEFT].tool_node.cursor_move(position)

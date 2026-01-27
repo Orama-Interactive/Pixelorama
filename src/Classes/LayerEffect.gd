@@ -35,9 +35,11 @@ func deserialize(dict: Dictionary) -> void:
 		if is_instance_valid(shader_to_load) and shader_to_load is Shader:
 			shader = shader_to_load
 	if dict.has("params"):
-		for param in dict["params"]:
-			if typeof(dict["params"][param]) == TYPE_STRING:
-				dict["params"][param] = str_to_var(dict["params"][param])
-		params = dict["params"]
+		if typeof(dict["params"]) == TYPE_DICTIONARY:
+			for param in dict["params"]:
+				if typeof(dict["params"][param]) == TYPE_STRING:
+					params[param] = str_to_var(dict["params"][param])
+		else:
+			params = str_to_var(dict["params"])
 	if dict.has("enabled"):
 		enabled = dict["enabled"]
