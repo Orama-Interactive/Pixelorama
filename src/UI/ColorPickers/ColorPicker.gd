@@ -8,15 +8,15 @@ var shapes_container: HBoxContainer
 ## The internal control node of the HSV Rectangle of the [ColorPicker] node.
 var hsv_rectangle: Control
 ## The internal control node of the HSV Wheel of the [ColorPicker] node.
-var hsv_wheel: MarginContainer
+var hsv_wheel: Control
 ## The internal control node of the VHS Circle of the [ColorPicker] node.
-var vhs_circle: MarginContainer
+var vhs_circle: Control
 ## The internal control node of OKHSL VHS Circle of the [ColorPicker] node.
-var okhsl_circle: MarginContainer
+var okhsl_circle: Control
 ## The internal control node of the OK HS Rectangle of the [ColorPicker] node.
-var ok_hs_rectangle: MarginContainer
+var ok_hs_rectangle: Control
 ## The internal control node of the OK HL Rectangle of the [ColorPicker] node.
-var ok_hl_rectangle: MarginContainer
+var ok_hl_rectangle: Control
 ## The internal swatches button of the [ColorPicker] node.
 ## Used to ensure that swatches are always invisible.
 var swatches_button: HBoxContainer

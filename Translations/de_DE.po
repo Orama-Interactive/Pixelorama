@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2025-11-28 13:05\n"
+"PO-Revision-Date: 2025-11-29 21:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -131,7 +131,7 @@ msgid "Export PNG as..."
 msgstr "PNG exportieren als..."
 
 msgid "Quit"
-msgstr "Verlassen"
+msgstr "Beenden"
 
 msgid "Undo"
 msgstr "Rückgängig"
@@ -323,7 +323,7 @@ msgid "Center Canvas"
 msgstr "Leinwand zentrieren"
 
 msgid "Tile Mode"
-msgstr "Kachelmode"
+msgstr "Kachelmodus"
 
 msgid "Tile Mode Offsets"
 msgstr "Kachelmodus-Versatz"
@@ -1844,7 +1844,7 @@ msgid "Displays an icon of the selected right tool next to the cursor on the can
 msgstr "Zeigt ein Symbol des ausgewählten rechten Werkzeugs neben dem Cursor auf der Leinwand an"
 
 msgid "Use native mouse cursors"
-msgstr "Native Mousezeiger verwenden"
+msgstr "Mauszeiger des Systems verwenden"
 
 msgid "Use cross cursor for the canvas"
 msgstr "Kreuz-Mauszeiger für die Leinwand benutzen"

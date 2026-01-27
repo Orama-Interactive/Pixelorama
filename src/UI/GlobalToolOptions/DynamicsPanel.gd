@@ -2,19 +2,23 @@ extends PopupPanel
 
 enum { ALPHA, SIZE }
 
-@onready var alpha_pressure_button: Button = $"%AlphaPressureButton"
-@onready var alpha_velocity_button: Button = $"%AlphaVelocityButton"
-@onready var size_pressure_button: Button = $"%SizePressureButton"
-@onready var size_velocity_button: Button = $"%SizeVelocityButton"
-@onready var pressure_preview: ProgressBar = $"%PressurePreview"
-@onready var velocity_preview: ProgressBar = $"%VelocityPreview"
+var recommended_max_velocity: int = Tools.mouse_velocity_max
+
+@onready var alpha_pressure_button: Button = %AlphaPressureButton
+@onready var alpha_velocity_button: Button = %AlphaVelocityButton
+@onready var size_pressure_button: Button = %SizePressureButton
+@onready var size_velocity_button: Button = %SizeVelocityButton
+@onready var pressure_preview: ProgressBar = %PressurePreview
+@onready var velocity_preview: ProgressBar = %VelocityPreview
 @onready var limits_header: HBoxContainer = %LimitsHeader
 @onready var thresholds_header: HBoxContainer = %ThresholdsHeader
+@onready var max_velocity_slider: ValueSlider = %MaxVelocitySlider
 @onready var alpha_group := alpha_pressure_button.button_group
 @onready var size_group := size_pressure_button.button_group
 
 
 func _ready() -> void:
+	max_velocity_slider.set_value_no_signal(Tools.mouse_velocity_max)
 	alpha_pressure_button.toggled.connect(
 		_on_dynamics_toggled.bind(alpha_pressure_button, ALPHA, Tools.Dynamics.PRESSURE)
 	)
@@ -42,6 +46,17 @@ func _input(event: InputEvent) -> void:
 	pressure_preview.value = 0
 	velocity_preview.value = 0
 	if event is InputEventMouseMotion:
+		if event.velocity.length() > Tools.mouse_velocity_max:
+			recommended_max_velocity = event.velocity.length()
+		max_velocity_slider.tooltip_text = (
+			tr(
+				"""
+		Maximum mouse velocity allowed to be detected by app.
+		Recommended: %s
+		"""
+			)
+			% str(recommended_max_velocity)
+		)
 		pressure_preview.value = event.pressure
 		velocity_preview.value = event.velocity.length() / Tools.mouse_velocity_max
 
@@ -101,13 +116,11 @@ func _on_alpha_max_value_changed(value: float) -> void:
 	Global.dynamics_changed.emit()
 
 
-func _on_size_min_value_changed(value: float) -> void:
-	Tools.brush_size_min = int(value)
-	Global.dynamics_changed.emit()
-
-
 func _on_size_max_value_changed(value: float) -> void:
-	Tools.brush_size_max = int(value)
+	Tools.brush_size_max_increment = int(value)
+	%SizeMaxIncrement.prefix = "Brush size +"
+	if value < 0:
+		%SizeMaxIncrement.prefix = "Brush size "
 	Global.dynamics_changed.emit()
 
 
@@ -117,3 +130,7 @@ func _on_enable_stabilizer_toggled(toggled_on: bool) -> void:
 
 func _on_stabilizer_value_value_changed(value: float) -> void:
 	Tools.stabilizer_value = value
+
+
+func _on_max_velocity_slider_value_changed(value: float) -> void:
+	Tools.mouse_velocity_max = value

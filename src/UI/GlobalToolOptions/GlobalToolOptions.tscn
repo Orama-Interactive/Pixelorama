@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://wo0hqxkst808"]
+[gd_scene load_steps=28 format=3 uid="uid://wo0hqxkst808"]
 
 [ext_resource type="Texture2D" uid="uid://cjrokejjsp5dm" path="res://assets/graphics/misc/horizontal_mirror_off.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://hiduvaa73fr6" path="res://assets/graphics/misc/vertical_mirror_off.png" id="2"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://di8au2u87jgv5" path="res://assets/graphics/misc/uncheck.png" id="7"]
 [ext_resource type="Script" uid="uid://c8iilx5w0hjf3" path="res://src/UI/GlobalToolOptions/DynamicsPanel.gd" id="7_iqcw1"]
 [ext_resource type="PackedScene" uid="uid://bmsc0s03pwji4" path="res://src/UI/Nodes/MaxMinEdit.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="14_d1yms"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_4k08w"]
 action = &"horizontal_mirror"
@@ -245,6 +246,7 @@ texture = ExtResource("6")
 
 [node name="DynamicsPanel" type="PopupPanel" parent="."]
 canvas_item_default_texture_filter = 0
+oversampling_override = 1.0
 size = Vector2i(300, 334)
 script = ExtResource("7_iqcw1")
 
@@ -378,18 +380,19 @@ text = "Value limits"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LimitContainer" type="GridContainer" parent="DynamicsPanel/VBoxContainer"]
+[node name="LimitContainer" type="VBoxContainer" parent="DynamicsPanel/VBoxContainer"]
 layout_mode = 2
-columns = 3
 
-[node name="AlphaLabel" type="Label" parent="DynamicsPanel/VBoxContainer/LimitContainer" groups=["VisibleOnAlpha"]]
+[node name="AlphaLimits" type="HBoxContainer" parent="DynamicsPanel/VBoxContainer/LimitContainer" groups=["VisibleOnAlpha"]]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 3
+
+[node name="AlphaLabel" type="Label" parent="DynamicsPanel/VBoxContainer/LimitContainer/AlphaLimits"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 text = "Alpha"
 
-[node name="AlphaMin" type="TextureProgressBar" parent="DynamicsPanel/VBoxContainer/LimitContainer" groups=["VisibleOnAlpha"]]
-visible = false
+[node name="AlphaMin" type="TextureProgressBar" parent="DynamicsPanel/VBoxContainer/LimitContainer/AlphaLimits"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
@@ -407,8 +410,7 @@ script = ExtResource("5")
 prefix = "Start"
 snap_step = 0.1
 
-[node name="AlphaMax" type="TextureProgressBar" parent="DynamicsPanel/VBoxContainer/LimitContainer" groups=["VisibleOnAlpha"]]
-visible = false
+[node name="AlphaMax" type="TextureProgressBar" parent="DynamicsPanel/VBoxContainer/LimitContainer/AlphaLimits"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
@@ -426,47 +428,34 @@ script = ExtResource("5")
 prefix = "End"
 snap_step = 0.1
 
-[node name="SizeLabel" type="Label" parent="DynamicsPanel/VBoxContainer/LimitContainer" groups=["VisibleOnSize"]]
+[node name="SizeLimits" type="HBoxContainer" parent="DynamicsPanel/VBoxContainer/LimitContainer" groups=["VisibleOnSize"]]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 3
-text = "Size"
 
-[node name="SizeMin" type="TextureProgressBar" parent="DynamicsPanel/VBoxContainer/LimitContainer" groups=["VisibleOnSize"]]
-visible = false
+[node name="SizeLabel" type="Label" parent="DynamicsPanel/VBoxContainer/LimitContainer/SizeLimits"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Size max:"
+
+[node name="SizeMaxIncrement" type="TextureProgressBar" parent="DynamicsPanel/VBoxContainer/LimitContainer/SizeLimits"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
-max_value = 25.0
-value = 1.0
-allow_greater = true
-nine_patch_stretch = true
-stretch_margin_left = 3
-stretch_margin_top = 3
-stretch_margin_right = 3
-stretch_margin_bottom = 3
-script = ExtResource("5")
-prefix = "Start"
-
-[node name="SizeMax" type="TextureProgressBar" parent="DynamicsPanel/VBoxContainer/LimitContainer" groups=["VisibleOnSize"]]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 2
-mouse_default_cursor_shape = 2
-theme_type_variation = &"ValueSlider"
+min_value = -25.0
 max_value = 25.0
 value = 4.0
 allow_greater = true
+allow_lesser = true
 nine_patch_stretch = true
 stretch_margin_left = 3
 stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
-prefix = "End"
+prefix = "Brush size +"
 
 [node name="ThresholdsHeader" type="HBoxContainer" parent="DynamicsPanel/VBoxContainer"]
 unique_name_in_owner = true
@@ -547,6 +536,16 @@ anchor_bottom = 0.0
 offset_right = 1.0
 offset_bottom = 23.0
 
+[node name="MaxVelocitySlider" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity" instance=ExtResource("14_d1yms")]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 1000.0
+value = 1000.0
+allow_greater = true
+prefix = "Max velocity:"
+suffix = "Pixels per sec"
+
 [connection signal="resized" from="." to="." method="_on_resized"]
 [connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/Horizontal" to="." method="_on_Horizontal_toggled"]
 [connection signal="toggled" from="ScrollContainer/CenterContainer/GridContainer/Vertical" to="." method="_on_Vertical_toggled"]
@@ -557,12 +556,12 @@ offset_bottom = 23.0
 [connection signal="pressed" from="ScrollContainer/CenterContainer/GridContainer/Dynamics" to="." method="_on_Dynamics_pressed"]
 [connection signal="toggled" from="DynamicsPanel/VBoxContainer/StabilizerContainer/EnableStabilizer" to="DynamicsPanel" method="_on_enable_stabilizer_toggled"]
 [connection signal="value_changed" from="DynamicsPanel/VBoxContainer/StabilizerContainer/StabilizerValue" to="DynamicsPanel" method="_on_stabilizer_value_value_changed"]
-[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/AlphaMin" to="DynamicsPanel" method="_on_alpha_min_value_changed"]
-[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/AlphaMax" to="DynamicsPanel" method="_on_alpha_max_value_changed"]
-[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/SizeMin" to="DynamicsPanel" method="_on_size_min_value_changed"]
-[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/SizeMax" to="DynamicsPanel" method="_on_size_max_value_changed"]
+[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/AlphaLimits/AlphaMin" to="DynamicsPanel" method="_on_alpha_min_value_changed"]
+[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/AlphaLimits/AlphaMax" to="DynamicsPanel" method="_on_alpha_max_value_changed"]
+[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/LimitContainer/SizeLimits/SizeMaxIncrement" to="DynamicsPanel" method="_on_size_max_value_changed"]
 [connection signal="updated" from="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure" to="DynamicsPanel" method="_on_threshold_pressure_updated"]
 [connection signal="updated" from="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity" to="DynamicsPanel" method="_on_threshold_velocity_updated"]
+[connection signal="value_changed" from="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity/MaxVelocitySlider" to="DynamicsPanel" method="_on_max_velocity_slider_value_changed"]
 
 [editable path="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure"]
 [editable path="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity"]

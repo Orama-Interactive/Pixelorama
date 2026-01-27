@@ -8,17 +8,22 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Pixelorama"
 config/description="Unleash your creativity with Pixelorama, a powerful and accessible open-source pixel art multitool. Whether you want to create sprites, tiles, animations, or just express yourself in the language of pixel art, this software will realize your pixel-perfect dreams with a vast toolbox of features."
-config/version="v1.1.7-stable"
+config/version="v1.1.9-dev"
 config/tags=PackedStringArray("pixelorama")
 run/main_scene="res://src/Main.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="pixelorama"
+config/project_settings_override="user://override.cfg"
 config/quit_on_go_back=false
-config/features=PackedStringArray("4.5")
+config/features=PackedStringArray("4.6")
 run/low_processor_mode=true
 boot_splash/bg_color=Color(0.145098, 0.145098, 0.164706, 1)
 boot_splash/use_filter=false
@@ -39,10 +44,10 @@ Tools="*res://src/Autoload/Tools.gd"
 Html5FileExchange="*res://src/Autoload/HTML5FileExchange.gd"
 Export="*res://src/Autoload/Export.gd"
 Palettes="*res://src/Autoload/Palettes.gd"
-Keychain="*res://addons/keychain/Keychain.gd"
+Keychain="*uid://dgiia2xg7fsud"
 ExtensionsApi="*res://src/Autoload/ExtensionsApi.gd"
 Themes="*res://src/Autoload/Themes.gd"
-Applinks="*res://addons/applinks/applinks.gd"
+Applinks="*uid://bwxc40knpboql"
 
 [debug]
 

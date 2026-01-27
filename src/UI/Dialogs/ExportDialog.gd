@@ -443,8 +443,11 @@ func _on_frame_timer_timeout() -> void:
 	frame_timer.start()
 
 
-func _on_ExportDialog_popup_hide() -> void:
-	frame_timer.stop()
+func _on_ExportDialog_visibility_changed() -> void:
+	if not visible:
+		frame_timer.stop()
+		Export.blended_frames.clear()
+		Export.processed_images.clear()
 
 
 func _on_export_json_toggled(toggled_on: bool) -> void:

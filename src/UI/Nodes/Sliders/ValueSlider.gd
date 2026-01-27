@@ -50,6 +50,10 @@ enum { NORMAL, HELD, SLIDING, TYPING }
 		_value_up_button.visible = v
 		_value_down_button.visible = v
 @export var echo_arrow_time := 0.075
+@export var allow_global_input_events := false:
+	set(v):
+		allow_global_input_events = v
+		set_process_unhandled_input(allow_global_input_events)
 @export var global_increment_action := ""  ## Global shortcut to increment
 @export var global_decrement_action := ""  ## Global shortcut to decrement
 
@@ -79,7 +83,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	value_changed.connect(_on_value_changed)
-	set_process_input(!global_increment_action.is_empty() and !global_decrement_action.is_empty())
+	set_process_unhandled_input(allow_global_input_events)
 	_reset_display(true)
 	if not Engine.is_editor_hint():  # Pixelorama specific code
 		_value_up_button.modulate = Global.modulate_icon_color
@@ -128,16 +132,22 @@ func _gui_input(event: InputEvent) -> void:
 				state = HELD
 				set_meta("mouse_start_position", get_local_mouse_position())
 			elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				drag_started.emit()
+				_start_value = value
 				if snap_by_default:
 					value += step if event.ctrl_pressed else snap_step
 				else:
 					value += snap_step if event.ctrl_pressed else step
+				drag_ended.emit(not is_equal_approx(_start_value, value))
 				get_viewport().set_input_as_handled()
 			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				drag_started.emit()
+				_start_value = value
 				if snap_by_default:
 					value -= step if event.ctrl_pressed else snap_step
 				else:
 					value -= snap_step if event.ctrl_pressed else step
+				drag_ended.emit(not is_equal_approx(_start_value, value))
 				get_viewport().set_input_as_handled()
 	elif state == HELD:
 		if event.is_action_released("left_mouse"):

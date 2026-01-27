@@ -639,16 +639,26 @@ func export_animated(args: Dictionary) -> void:
 		frames.push_back(frame)
 
 	# Export and save GIF/APNG
-	var file_data := exporter.export_animation(
-		frames, project.fps, self, "_increase_export_progress", [export_dialog]
-	)
 
 	if OS.has_feature("web"):
+		var file_data := await exporter.export_animation(
+			frames, project.fps, self, "_increase_export_progress", [export_dialog]
+		)
 		JavaScriptBridge.download_buffer(file_data, args["export_paths"][0], exporter.mime_type)
 	else:
+		# Open the file for export
 		var file := FileAccess.open(args["export_paths"][0], FileAccess.WRITE)
-		file.store_buffer(file_data)
-		file.close()
+		if FileAccess.get_open_error() == OK:
+			var buffer_data := await exporter.export_animation(
+				frames, project.fps, self, "_increase_export_progress", [export_dialog], file
+			)
+			# In order to save memory, some exporters (like GIF) auto saves the data to file as
+			# soon as it is processed (usually, frame by frame). If the exporter does not have this
+			# feature, then the buffer_data will not be empty and we have to save it manually after
+			# all frames are processed.
+			if not buffer_data.is_empty():
+				file.store_buffer(buffer_data)
+			file.close()
 	export_dialog.toggle_export_progress_popup(false)
 	Global.notification_label("File(s) exported")
 

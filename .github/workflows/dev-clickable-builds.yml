@@ -15,7 +15,7 @@ jobs:
       image: docker://barichello/godot-ci:3.5
     steps:
       - name: Clone source
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: true
       - name: Linux Build 🔧
@@ -24,7 +24,7 @@ jobs:
         run: |
           cp -R ./pixelorama_data ./Misc/Clickable
       - name: Upload data files for click package
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: pixelorama_click_data
           path: Misc/Clickable/
@@ -40,7 +40,7 @@ jobs:
           - arm64
     steps:
       - name: Clone source
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install clickable dependencies
         run: |
           sudo add-apt-repository ppa:bhdouglass/clickable
@@ -51,7 +51,7 @@ jobs:
       - name: Remove existing click folder
         run: rm -r ./Misc/Clickable
       - name: Download click data
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: pixelorama_click_data
           path: ./Misc/Clickable
@@ -63,7 +63,7 @@ jobs:
         env:
           CLICKABLE_ARCH: ${{ matrix.architectures }}
       - name: Upload click package artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: pixelorama_click_packages
           path: Misc/Clickable/build/**.click

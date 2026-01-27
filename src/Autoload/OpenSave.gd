@@ -1050,12 +1050,10 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 
 func open_audio_file(path: String) -> void:
 	var audio_stream: AudioStream
-	var file := FileAccess.open(path, FileAccess.READ)
 	if path.get_extension().to_lower() == "mp3":
-		audio_stream = AudioStreamMP3.new()
-		audio_stream.data = file.get_buffer(file.get_length())
+		audio_stream = AudioStreamMP3.load_from_file(path)
 	elif path.get_extension().to_lower() == "wav":
-		audio_stream = AudioStreamWAV.load_from_buffer(file.get_buffer(file.get_length()))
+		audio_stream = AudioStreamWAV.load_from_file(path)
 	if not is_instance_valid(audio_stream):
 		return
 	var project := Global.current_project

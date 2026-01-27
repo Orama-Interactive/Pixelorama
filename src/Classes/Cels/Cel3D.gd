@@ -200,8 +200,8 @@ func deserialize(dict: Dictionary) -> void:
 			convert_0x_to_1x(dict)
 	super.deserialize(dict)
 	scene_properties = {}
-	var scene_properties_str: Dictionary = dict["scene_properties"]
-	var objects_copy_str: Dictionary = dict["object_properties"]
+	var scene_properties_str: Dictionary = dict.get("scene_properties", {})
+	var objects_copy_str: Dictionary = dict.get("object_properties", {})
 	for prop in scene_properties_str:
 		scene_properties[prop] = str_to_var(scene_properties_str[prop])
 	for object_id_as_str in objects_copy_str:
@@ -211,6 +211,17 @@ func deserialize(dict: Dictionary) -> void:
 		if current_object_id < id:
 			current_object_id = id
 		object_properties[id] = str_to_var(objects_copy_str[object_id_as_str])
+	if scene_properties.is_empty():
+		var camera_transform := Transform3D()
+		camera_transform.origin = Vector3(0, 0, 3)
+		scene_properties = {
+			"camera_transform": camera_transform,
+			"camera_projection": Camera3D.PROJECTION_PERSPECTIVE,
+			"camera_fov": 70.0,
+			"camera_size": 1.0,
+			"ambient_light_color": Color.BLACK,
+			"ambient_light_energy": 1,
+		}
 	current_object_id += 1
 	deserialize_scene_properties()
 	for object in object_properties:

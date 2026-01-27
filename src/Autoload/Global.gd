@@ -20,6 +20,8 @@ signal project_data_changed(project: Project)  ## Emitted when project data is m
 @warning_ignore("unused_signal")
 signal font_loaded  ## Emitted when a new font has been loaded, or an old one gets unloaded.
 signal single_tool_mode_changed(mode: bool)  ## Emitted when [member single_tool_mode] changes.
+## Emitted when [member share_options_between_tools] changes.
+signal share_options_between_tools_changed(mode: bool)
 @warning_ignore("unused_signal")
 signal on_cursor_position_text_changed(text: String)
 @warning_ignore("unused_signal")
@@ -119,11 +121,13 @@ const LANGUAGES_DICT := {
 	"ja_JP": ["日本語", "Japanese"],
 	"uk_UA": ["Українська", "Ukrainian"],
 }
-
+const SUPPORTED_IMAGE_TYPES: PackedStringArray = [
+	"png", "bmp", "hdr", "jpg", "jpeg", "svg", "tga", "webp"
+]
 ## The file path used for the [member config_cache] file.
 const CONFIG_PATH := "user://config.ini"
 ## The file used to save preferences that use [method _save_to_override_file].
-const OVERRIDE_FILE := "override.cfg"
+const OVERRIDE_FILE := "user://override.cfg"
 ## The name of folder containing Pixelorama preferences.
 const HOME_SUBDIR_NAME := "pixelorama"
 ## The name of folder that contains subdirectories for users to place brushes, palettes, patterns.
@@ -335,6 +339,7 @@ var single_tool_mode := DisplayServer.is_touchscreen_available():
 var share_options_between_tools := false:
 	set(value):
 		share_options_between_tools = value
+		share_options_between_tools_changed.emit(share_options_between_tools)
 		Tools.attempt_config_share(MOUSE_BUTTON_LEFT)
 ## Found in Preferences. The left tool color.
 var left_tool_color := Color("0086cf"):
@@ -1294,7 +1299,7 @@ func undo_redo_draw_op(
 ## users who have already saved an override.cfg file, leading into confusion.
 ## To avoid this issue, we just write the lines we want to the override.cfg file.
 func _save_to_override_file() -> void:
-	var file := FileAccess.open(root_directory.path_join(OVERRIDE_FILE), FileAccess.WRITE)
+	var file := FileAccess.open(OVERRIDE_FILE, FileAccess.WRITE)
 	file.store_line("[display]\n")
 	file.store_line("window/subwindows/embed_subwindows=%s" % single_window_mode)
 	file.store_line("window/per_pixel_transparency/allowed=%s" % window_transparency)
