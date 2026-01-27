@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=91 format=3 uid="uid://bt5baxg8dg3m5"]
+[gd_resource type="Theme" format=3 uid="uid://bt5baxg8dg3m5"]
 
 [ext_resource type="Texture2D" uid="uid://brdgp0y4tarar" path="res://assets/graphics/misc/radio_unpressed.png" id="1_oyygx"]
 [ext_resource type="Texture2D" uid="uid://ybfsxkc2qap7" path="res://assets/graphics/misc/checkbox_unpressed.png" id="2_3mf1i"]
