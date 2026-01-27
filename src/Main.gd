@@ -210,6 +210,7 @@ func _ready() -> void:
 		var intent_data := Applinks.get_data()
 		if not intent_data.is_empty():
 			_on_applinks_data_received(intent_data)
+		find_child("AndroidUndoRedo").visible = true
 
 	# Detect if Pixelorama crashed last time.
 	var crashed_last_time := FileAccess.file_exists(RUNNING_FILE_PATH)
