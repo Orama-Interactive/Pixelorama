@@ -123,10 +123,18 @@ func _on_effect_list_pressed(menu_item_index: int, menu: PopupMenu) -> void:
 	Global.current_project.undo_redo.create_action("Add layer effect")
 	Global.current_project.undo_redo.add_do_method(func(): layer.effects.append(effect))
 	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)
+	# we may be a different layer during redo
+	Global.current_project.undo_redo.add_do_property(
+		Global.canvas, "mandatory_update_layers", [layer.index]
+	)
 	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw)
 	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	Global.current_project.undo_redo.add_undo_method(func(): layer.effects.erase(effect))
 	Global.current_project.undo_redo.add_undo_method(layer.emit_effects_added_removed)
+	# we may be a different layer during undo
+	Global.current_project.undo_redo.add_undo_property(
+		Global.canvas, "mandatory_update_layers", [layer.index]
+	)
 	Global.current_project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
 	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	Global.current_project.undo_redo.commit_action()
@@ -198,10 +206,18 @@ func _delete_effect(effect: LayerEffect) -> void:
 	Global.current_project.undo_redo.create_action("Delete layer effect")
 	Global.current_project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
 	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)
+	# we may be a different layer during redo
+	Global.current_project.undo_redo.add_do_property(
+		Global.canvas, "mandatory_update_layers", [layer.index]
+	)
 	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw)
 	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	Global.current_project.undo_redo.add_undo_method(func(): layer.effects.insert(index, effect))
 	Global.current_project.undo_redo.add_undo_method(layer.emit_effects_added_removed)
+	# we may be a different layer during undo
+	Global.current_project.undo_redo.add_undo_property(
+		Global.canvas, "mandatory_update_layers", [layer.index]
+	)
 	Global.current_project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
 	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	Global.current_project.undo_redo.commit_action()
@@ -248,10 +264,18 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 	project.deserialize_cel_undo_data(redo_data, undo_data)
 	project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
 	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)
+	# we may be a different layer during redo
+	Global.current_project.undo_redo.add_do_property(
+		Global.canvas, "mandatory_update_layers", [layer.index]
+	)
 	project.undo_redo.add_do_method(Global.canvas.queue_redraw)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_undo_method(func(): layer.effects.insert(index, effect))
 	Global.current_project.undo_redo.add_undo_method(layer.emit_effects_added_removed)
+	# we may be a different layer during undo
+	Global.current_project.undo_redo.add_undo_property(
+		Global.canvas, "mandatory_update_layers", [layer.index]
+	)
 	project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.commit_action()

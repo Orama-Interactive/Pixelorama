@@ -1718,11 +1718,17 @@ func _on_global_visibility_button_pressed() -> void:
 	project.undo_redo.create_action("Change Layer Visibility")
 
 	var layer_visible := !global_layer_visibility
+	var mandatory_update := PackedInt32Array()
 	for layer_button: LayerButton in layer_vbox.get_children():
 		var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
 		if layer.parent == null and layer.visible != layer_visible:
+			mandatory_update.append(layer.index)
 			project.undo_redo.add_do_property(layer, "visible", layer_visible)
 			project.undo_redo.add_undo_property(layer, "visible", layer.visible)
+
+	# Multiple layers need to be redrawn
+	project.undo_redo.add_do_property(Global.canvas, "mandatory_update_layers", mandatory_update)
+	project.undo_redo.add_undo_property(Global.canvas, "mandatory_update_layers", mandatory_update)
 
 	project.undo_redo.add_do_method(update_global_layer_buttons)
 	project.undo_redo.add_undo_method(update_global_layer_buttons)
