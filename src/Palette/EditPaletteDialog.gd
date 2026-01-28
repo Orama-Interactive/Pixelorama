@@ -44,7 +44,7 @@ func open(current_palette: Palette) -> void:
 	if current_palette:
 		is_proj_palette = current_palette.is_project_palette
 		var type := "global" if current_palette.is_project_palette else "project wide"
-		type_checkbox.text = "Apply changes to a %s copy" % type
+		type_checkbox.text = "Create a %s copy when confirming the dialog." % type
 		type_checkbox.button_pressed = false
 		trash_button.visible = !current_palette.is_project_palette
 		path_input.visible = !current_palette.is_project_palette
