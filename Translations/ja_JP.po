@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2025-11-04 18:28\n"
+"PO-Revision-Date: 2026-01-20 14:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3001,6 +3001,54 @@ msgstr "元に戻す: フレームの長さを変更"
 
 msgid "Redo: Change frame duration"
 msgstr "やり直し: フレームの長さを変更"
+
+msgid "Undo: Rename Layer"
+msgstr "元に戻す: レイヤー名の変更"
+
+msgid "Redo: Rename Layer"
+msgstr ""
+
+msgid "Undo: Change Layer Opacity"
+msgstr "元に戻す: レイヤーの不透明度の変更"
+
+msgid "Redo: Change Layer Opacity"
+msgstr ""
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
+msgid "Undo: Change Layer Onion Skinning Ignore Status"
+msgstr ""
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
+msgid "Redo: Change Layer Onion Skinning Ignore Status"
+msgstr ""
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos.
+msgid "Undo: Change Layer User Data"
+msgstr ""
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
+msgid "Redo: Change Layer User Data"
+msgstr ""
+
+msgid "Undo: Change Layer Color"
+msgstr ""
+
+msgid "Redo: Change Layer Color"
+msgstr ""
+
+msgid "Undo: Change Layer Visibility"
+msgstr ""
+
+msgid "Redo: Change Layer Visibility"
+msgstr ""
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos.
+msgid "Undo: Change Layer Locked Status"
+msgstr ""
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
+msgid "Redo: Change Layer Locked Status"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "ガイドを移動"
