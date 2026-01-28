@@ -760,6 +760,7 @@ func _init() -> void:
 	if config_cache.has_section_key("preferences", "locale"):
 		saved_locale = config_cache.get_value("preferences", "locale")
 	set_locale(saved_locale, false)  # If no language is saved, OS' locale is used
+	# Set Data Directories
 	if OS.has_feature("template"):
 		root_directory = OS.get_executable_path().get_base_dir()
 	if OS.get_name() == "macOS":
@@ -778,6 +779,12 @@ func _init() -> void:
 			# Create defaults
 			for default_loc in ["/usr/local/share", "/usr/share"]:
 				data_directories.append(default_loc.path_join(HOME_SUBDIR_NAME))
+	# Set Favourites list in File dialogs
+	if config_cache.has_section_key("FileDialog", "favourite_paths"):
+		FileDialog.set_favorite_list(
+			config_cache.get_value("FileDialog", "favourite_paths", PackedStringArray())
+		)
+	# Load overridden project settings
 	if ProjectSettings.get_setting("display/window/tablet_driver") == "winink":
 		tablet_driver = 1
 	single_window_mode = ProjectSettings.get_setting("display/window/subwindows/embed_subwindows")
