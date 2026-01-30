@@ -834,7 +834,7 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 		active_button = -1
 
 	if event is InputEventMouseMotion:
-		var _last_pressure_increment := roundi(lerpf(0, brush_size_max_increment, pen_pressure))
+		var last_pressure_increment := roundi(lerpf(0, brush_size_max_increment, pen_pressure))
 		pen_pressure = event.pressure
 		# Workaround https://github.com/godotengine/godot/issues/53033#issuecomment-930409407
 		# If a pressure value of 1 is encountered, "correct" the value by
@@ -863,7 +863,7 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 		# Check if we should update with new brush size if pressure is changed enough, or if the
 		# mouse was moved by an entire pixel
 		var dynamic_pressure_increment := roundi(lerpf(0, brush_size_max_increment, pen_pressure))
-		pressure_changed_size = _last_pressure_increment != dynamic_pressure_increment
+		pressure_changed_size = last_pressure_increment != dynamic_pressure_increment
 		if not position == _last_position or pressure_changed_size:
 			_last_position = position
 			_slots[MOUSE_BUTTON_LEFT].tool_node.cursor_move(position)
