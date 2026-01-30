@@ -154,7 +154,13 @@ func draw_move(pos_i: Vector2i) -> void:
 		cursor_text = d.text
 		update_line_polylines(_line_start, _line_end)
 	else:
-		draw_fill_gap(_last_position, pos)
+		# If the tool moved, fill the middle points between last (exclusive)
+		# and new (inclusive) pixel position.
+		if _last_position != Vector2i(pos):
+			draw_fill_gap(_last_position, pos)
+		# If tool didn't move but pressure changed we still need to re-draw with new size
+		elif Tools.pressure_changed_size:
+			draw_tool(pos)
 		_last_position = pos
 		cursor_text = ""
 		Global.canvas.sprite_changed_this_frame = true
