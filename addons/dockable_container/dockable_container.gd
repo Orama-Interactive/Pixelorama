@@ -312,7 +312,7 @@ func get_tab_count() -> int:
 
 
 func _can_handle_drag_data(data) -> bool:
-	if data is Dictionary and data.get("type") in ["tab_container_tab", "tabc_element"]:
+	if data is Dictionary and data.get("type") in ["tab_container_tab", "tabc_element", "tab"]:
 		var tabc := get_node_or_null(data.get("from_path"))
 		return (
 			tabc
