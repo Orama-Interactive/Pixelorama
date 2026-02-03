@@ -23,6 +23,7 @@ var layer_metadata_texture := ImageTexture.new()
 @onready var onion_future := $OnionFuture as Node2D
 @onready var crop_rect := $CropRect as CropRect
 @onready var indicators := $Indicators as Node2D
+@onready var skeleton := $Skeleton as Node2D
 @onready var previews := $Previews as Node2D
 @onready var previews_sprite := $PreviewsSprite as Sprite2D
 @onready var mouse_guide_container := $MouseGuideContainer as Node2D
@@ -67,6 +68,7 @@ func _draw() -> void:
 	tile_mode.queue_redraw()
 	draw_set_transform(position, rotation, scale)
 	color_index.queue_redraw()
+	skeleton.queue_redraw()
 
 
 func _input(event: InputEvent) -> void:
@@ -248,6 +250,9 @@ func _update_texture_array_layer(
 			cel_image.copy_from(layer.display_effects(cel))
 		else:
 			cel_image.copy_from(cel.get_image())
+		var bone_layer := BoneLayer.get_parent_bone(layer)
+		if bone_layer:
+			cel_image = bone_layer.apply_bone(cel_image, project.frames[project.current_frame])
 	if layer.is_blended_by_ancestor():
 		include = false
 	if update_layer:

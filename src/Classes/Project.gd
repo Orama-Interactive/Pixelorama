@@ -428,6 +428,8 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 						layer.audio = stream
 					layers.append(layer)
 					audio_layers += 1
+				Global.LayerTypes.BONE:
+					layers.append(BoneLayer.new(self))
 
 		var frame_i := 0
 		for frame in dict.frames:
@@ -454,6 +456,8 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 						cels.append(new_cel)
 					Global.LayerTypes.AUDIO:
 						cels.append(AudioCel.new())
+					Global.LayerTypes.BONE:
+						cels.append(BoneCel.new())
 				cel["pxo_version"] = pxo_version
 				cels[cel_i].deserialize(cel)
 				_deserialize_metadata(cels[cel_i], cel)
@@ -671,6 +675,16 @@ func get_all_pixel_cels() -> Array[PixelCel]:
 	return cels
 
 
+## Returns an [Array] of type [PixelCel] containing all of the pixel cels of the project.
+func get_all_bone_cels() -> Array[BoneCel]:
+	var cels: Array[BoneCel]
+	for frame in frames:
+		for cel in frame.cels:
+			if cel is BoneCel:
+				cels.append(cel)
+	return cels
+
+
 func get_all_3d_layers() -> Array[Layer3D]:
 	var layers_3d: Array[Layer3D]
 	for layer in layers:
@@ -717,9 +731,15 @@ func deserialize_cel_undo_data(redo_data: Dictionary, undo_data: Dictionary) -> 
 	for cel in redo_data:
 		if cel is CelTileMap:
 			(cel as CelTileMap).deserialize_undo_data(redo_data[cel], undo_redo, false)
+		if cel is BoneCel:
+			undo_redo.add_do_method((cel as BoneCel).deserialize.bind(redo_data[cel], false, false))
 	for cel in undo_data:
 		if cel is CelTileMap:
 			(cel as CelTileMap).deserialize_undo_data(undo_data[cel], undo_redo, true)
+		if cel is BoneCel:
+			undo_redo.add_undo_method(
+				(cel as BoneCel).deserialize.bind(undo_data[cel], false, false)
+			)
 
 
 ## Returns all [BaseCel]s in [param cels], and for every [CelTileMap],
