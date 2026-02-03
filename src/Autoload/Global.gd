@@ -760,6 +760,7 @@ func _init() -> void:
 	if config_cache.has_section_key("preferences", "locale"):
 		saved_locale = config_cache.get_value("preferences", "locale")
 	set_locale(saved_locale, false)  # If no language is saved, OS' locale is used
+	# Set Data Directories
 	if OS.has_feature("template"):
 		root_directory = OS.get_executable_path().get_base_dir()
 	if OS.get_name() == "macOS":
@@ -778,6 +779,12 @@ func _init() -> void:
 			# Create defaults
 			for default_loc in ["/usr/local/share", "/usr/share"]:
 				data_directories.append(default_loc.path_join(HOME_SUBDIR_NAME))
+	# Set Favourites list in File dialogs
+	if config_cache.has_section_key("FileDialog", "favourite_paths"):
+		FileDialog.set_favorite_list(
+			config_cache.get_value("FileDialog", "favourite_paths", PackedStringArray())
+		)
+	# Load overridden project settings
 	if ProjectSettings.get_setting("display/window/tablet_driver") == "winink":
 		tablet_driver = 1
 	single_window_mode = ProjectSettings.get_setting("display/window/subwindows/embed_subwindows")
@@ -1126,7 +1133,6 @@ func undo_or_redo(
 			canvas.pixel_grid.queue_redraw()
 			project.selection_map_changed()
 
-	await RenderingServer.frame_post_draw
 	canvas.queue_redraw()
 	for canvas_preview in get_tree().get_nodes_in_group("CanvasPreviews"):
 		canvas_preview.queue_redraw()
@@ -1289,6 +1295,295 @@ func undo_redo_draw_op(
 		image.set_data(
 			new_size.x, new_size.y, image.has_mipmaps(), image.get_format(), decompressed
 		)
+
+
+func create_node_from_variable(
+	curr_value: Variant,
+	value_changed: Callable,
+	hint_string := "",
+	hint := PROPERTY_HINT_NONE,
+	started_editing := Callable()
+) -> Control:
+	var min_value = null
+	var max_value = null
+	var step = null
+	var allow_lesser := false
+	var allow_greater := false
+	var prefix := ""
+	var suffix := ""
+	if "or_less" in hint_string:
+		allow_lesser = true
+	if "or_greater" in hint_string:
+		allow_greater = true
+	var slider_options := hint_string.split(",")
+	for i in slider_options.size():
+		var option := slider_options[i]
+		if i == 0 and slider_options[0].is_valid_float():
+			min_value = slider_options[0].to_float()
+		elif i == 1 and slider_options[1].is_valid_float():
+			max_value = slider_options[1].to_float()
+		elif i == 2 and slider_options[2].is_valid_float():
+			step = slider_options[2].to_float()
+		elif option.begins_with("prefix:"):
+			prefix = option.replace("prefix:", "")
+		elif option.begins_with("suffix:"):
+			suffix = option.replace("suffix:", "")
+	var option_button_options := hint_string.split(",")
+	var type := typeof(curr_value)
+	match type:
+		TYPE_BOOL:
+			var check_box := CheckBox.new()
+			check_box.text = "On"
+			check_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			check_box.button_pressed = curr_value == true
+			if started_editing.is_valid():
+				check_box.button_down.connect(started_editing)
+			if value_changed.is_valid():
+				check_box.toggled.connect(value_changed)
+			return check_box
+		TYPE_INT, TYPE_FLOAT:
+			if hint == PROPERTY_HINT_ENUM or hint == PROPERTY_HINT_ENUM_SUGGESTION:
+				var option_button := OptionButton.new()
+				option_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				for option in option_button_options:
+					option_button.add_item(option)
+				option_button.select(curr_value)
+				if started_editing.is_valid():
+					option_button.button_down.connect(started_editing)
+				if value_changed.is_valid():
+					option_button.item_selected.connect(value_changed)
+				return option_button
+			else:
+				var slider := ValueSlider.new()
+				if type == TYPE_FLOAT:
+					slider.step = 0.01
+				if typeof(step) == type:
+					slider.step = step
+				slider.allow_lesser = allow_lesser
+				slider.allow_greater = allow_greater
+				if typeof(min_value) == type:
+					slider.min_value = min_value
+				if typeof(max_value) == type:
+					slider.max_value = max_value
+				slider.prefix = prefix
+				slider.suffix = suffix
+				slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				slider.value = curr_value
+				if started_editing.is_valid():
+					slider.drag_started.connect(started_editing)
+				if value_changed.is_valid():
+					slider.value_changed.connect(value_changed)
+				return slider
+		TYPE_VECTOR2, TYPE_VECTOR2I:
+			var slider := ShaderLoader.VALUE_SLIDER_V2_TSCN.instantiate() as ValueSliderV2
+			slider.show_ratio = true
+			if type == TYPE_VECTOR2:
+				slider.step = 0.01
+			if typeof(step) in [TYPE_FLOAT, TYPE_INT]:
+				slider.step = step
+			slider.allow_lesser = allow_lesser
+			slider.allow_greater = allow_greater
+			if typeof(min_value) == type:
+				slider.min_value = min_value
+			elif typeof(min_value) in [TYPE_FLOAT, TYPE_INT]:
+				slider.min_value = Vector2(min_value, min_value)
+			if typeof(max_value) == type:
+				slider.max_value = max_value
+			elif typeof(max_value) in [TYPE_FLOAT, TYPE_INT]:
+				slider.max_value = Vector2(max_value, max_value)
+			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			slider.value = curr_value
+			if started_editing.is_valid():
+				slider.drag_started.connect(started_editing)
+			if value_changed.is_valid():
+				slider.value_changed.connect(value_changed)
+			return slider
+		TYPE_VECTOR3, TYPE_VECTOR3I:
+			var slider := ShaderLoader.VALUE_SLIDER_V3_TSCN.instantiate() as ValueSliderV3
+			slider.show_ratio = true
+			if type == TYPE_VECTOR3:
+				slider.step = 0.01
+			if typeof(step) in [TYPE_FLOAT, TYPE_INT]:
+				slider.step = step
+			slider.allow_lesser = allow_lesser
+			slider.allow_greater = allow_greater
+			if typeof(min_value) == type:
+				slider.min_value = min_value
+			elif typeof(min_value) in [TYPE_FLOAT, TYPE_INT]:
+				if min_value <= -9999:
+					min_value = -100
+				slider.min_value = Vector3(min_value, min_value, min_value)
+			if typeof(max_value) == type:
+				slider.max_value = max_value
+			elif typeof(max_value) in [TYPE_FLOAT, TYPE_INT]:
+				if max_value >= 9999:
+					max_value = 100
+				slider.max_value = Vector3(max_value, max_value, max_value)
+			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			if "radians_as_degrees" in hint_string:
+				slider.value = radians_to_degrees(curr_value)
+			else:
+				slider.value = curr_value
+			if started_editing.is_valid():
+				slider.drag_started.connect(started_editing)
+			if value_changed.is_valid():
+				if "radians_as_degrees" in hint_string:
+					slider.value_changed.connect(
+						func(new_value): value_changed.call(degrees_to_radians(new_value))
+					)
+				else:
+					slider.value_changed.connect(value_changed)
+			return slider
+		TYPE_VECTOR4, TYPE_VECTOR4I, TYPE_COLOR:
+			var color_picker_button := ColorPickerButton.new()
+			color_picker_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			color_picker_button.color = curr_value
+			if started_editing.is_valid():
+				color_picker_button.button_down.connect(started_editing)
+			if value_changed.is_valid():
+				color_picker_button.color_changed.connect(value_changed)
+			return color_picker_button
+		TYPE_BASIS:
+			var sliders := ShaderLoader.BASIS_SLIDERS_TSCN.instantiate() as BasisSliders
+			if typeof(step) in [TYPE_FLOAT, TYPE_INT]:
+				sliders.step = step
+			sliders.allow_lesser = allow_lesser
+			sliders.allow_greater = allow_greater
+			if typeof(min_value) == type:
+				sliders.min_value = min_value
+			if typeof(max_value) == type:
+				sliders.max_value = max_value
+			sliders.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			sliders.value = curr_value
+			if started_editing.is_valid():
+				sliders.drag_started.connect(started_editing)
+			if value_changed.is_valid():
+				sliders.value_changed.connect(value_changed)
+			return sliders
+		TYPE_STRING, TYPE_STRING_NAME:
+			var line_edit := LineEdit.new()
+			line_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			line_edit.text = curr_value
+			if started_editing.is_valid():
+				line_edit.editing_toggled.connect(started_editing)
+			if value_changed.is_valid():
+				line_edit.text_submitted.connect(value_changed)
+			return line_edit
+		TYPE_OBJECT:
+			if curr_value is Font:
+				var option_button := OptionButton.new()
+				option_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				var font_name := (curr_value as Font).get_font_name()
+				for available_font_name in get_available_font_names():
+					option_button.add_item(available_font_name)
+					if font_name == available_font_name:
+						option_button.select(option_button.item_count - 1)
+				if started_editing.is_valid():
+					option_button.button_down.connect(started_editing)
+				if value_changed.is_valid():
+					option_button.item_selected.connect(value_changed)
+				return option_button
+			elif curr_value is Texture2D:
+				var button := Button.new()
+				button.text = "Load texture"
+				if started_editing.is_valid():
+					button.button_down.connect(started_editing)
+				if value_changed.is_valid():
+					button.pressed.connect(popup_image_file_dialog.bind(value_changed))
+				button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+				var mod_button := Button.new()
+				mod_button.name = "ModifyButton"
+				mod_button.text = "Modify"
+				if value_changed.is_valid():
+					mod_button.pressed.connect(
+						func():
+							ShaderLoader.modify_texture_resource(
+								curr_value.get_image(),
+								"",
+								on_resource_proj_updated.bind(value_changed)
+							)
+					)
+				mod_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				mod_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+				var hbox := HBoxContainer.new()
+				hbox.add_child(button)
+				hbox.add_child(mod_button)
+				return hbox
+	return null
+
+
+func degrees_to_radians(value_in_deg) -> Variant:
+	var new_value
+	if typeof(value_in_deg) == TYPE_FLOAT:
+		new_value = deg_to_rad(value_in_deg)
+	elif typeof(value_in_deg) == TYPE_VECTOR2:
+		new_value = Vector2()
+		new_value.x = deg_to_rad(value_in_deg.x)
+		new_value.y = deg_to_rad(value_in_deg.y)
+	elif typeof(value_in_deg) == TYPE_VECTOR3:
+		new_value = Vector3()
+		new_value.x = deg_to_rad(value_in_deg.x)
+		new_value.y = deg_to_rad(value_in_deg.y)
+		new_value.z = deg_to_rad(value_in_deg.z)
+	return new_value
+
+
+func radians_to_degrees(value_in_deg) -> Variant:
+	var new_value
+	if typeof(value_in_deg) == TYPE_FLOAT:
+		new_value = rad_to_deg(value_in_deg)
+	elif typeof(value_in_deg) == TYPE_VECTOR2:
+		new_value = Vector2()
+		new_value.x = rad_to_deg(value_in_deg.x)
+		new_value.y = rad_to_deg(value_in_deg.y)
+	elif typeof(value_in_deg) == TYPE_VECTOR3:
+		new_value = Vector3()
+		new_value.x = rad_to_deg(value_in_deg.x)
+		new_value.y = rad_to_deg(value_in_deg.y)
+		new_value.z = rad_to_deg(value_in_deg.z)
+	return new_value
+
+
+func popup_image_file_dialog(on_file_selected: Callable) -> void:
+	var file_dialog := FileDialog.new()
+	file_dialog.always_on_top = true
+	file_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+	file_dialog.access = FileDialog.ACCESS_FILESYSTEM
+	file_dialog.use_native_dialog = use_native_file_dialogs
+	var filters := PackedStringArray([])
+	for image_type in SUPPORTED_IMAGE_TYPES:
+		filters.append("*.%s;" % image_type)
+	file_dialog.filters = filters
+	file_dialog.size = Vector2(384, 281)
+	file_dialog.file_selected.connect(
+		func(path: String):
+			var image := Image.new()
+			image.load(path)
+			if !image:
+				print("Error loading texture")
+				file_dialog.queue_free()
+				return
+			var image_tex := ImageTexture.create_from_image(image)
+			on_file_selected.call(image_tex)
+			file_dialog.queue_free()
+	)
+	add_child(file_dialog)
+	file_dialog.popup_centered_clamped()
+	file_dialog.canceled.connect(file_dialog.queue_free)
+
+
+# TODO: Remove duplicate code, either keep this or
+# _shader_update_texture in ShaderLoader.
+func on_resource_proj_updated(resource_proj: ResourceProject, value_changed: Callable) -> void:
+	var warnings := ""
+	if resource_proj.frames.size() > 1:
+		warnings += "This resource is intended to have 1 frame only. Extra frames will be ignored."
+	var updated_image := resource_proj.get_frame_image(0)
+	if value_changed and value_changed.is_valid():
+		value_changed.call(ImageTexture.create_from_image(updated_image))
+	if not warnings.is_empty():
+		popup_error(warnings)
 
 
 ## This method is used to write project setting overrides to the override.cfg file, located

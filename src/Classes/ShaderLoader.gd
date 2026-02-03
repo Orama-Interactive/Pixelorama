@@ -2,6 +2,7 @@ class_name ShaderLoader
 extends RefCounted
 
 const VALUE_SLIDER_V2_TSCN := preload("res://src/UI/Nodes/Sliders/ValueSliderV2.tscn")
+const VALUE_SLIDER_V3_TSCN := preload("res://src/UI/Nodes/Sliders/ValueSliderV3.tscn")
 const BASIS_SLIDERS_TSCN := preload("res://src/UI/Nodes/Sliders/BasisSliders.tscn")
 const GRADIENT_EDIT_TSCN := preload("res://src/UI/Nodes/GradientEdit.tscn")
 const NOISE_GENERATOR := preload("res://src/UI/Nodes/NoiseGeneratorDialog.tscn")
@@ -554,7 +555,7 @@ static func _create_simple_texture_ui(
 	mod_button.text = "Modify"
 	mod_button.pressed.connect(
 		func():
-			_modify_texture_resource(
+			modify_texture_resource(
 				_get_loaded_texture(params, u_name),
 				u_name,
 				_shader_update_texture.bind(value_changed, u_name)
@@ -670,9 +671,11 @@ static func _shader_update_texture(
 		Global.popup_error(warnings)
 
 
-static func _modify_texture_resource(
+static func modify_texture_resource(
 	image: Image, resource_name: StringName, update_callable: Callable
 ) -> void:
+	if not is_instance_valid(image):
+		image = Image.create_empty(64, 64, false, Image.FORMAT_RGBA8)
 	var resource_proj := ResourceProject.new([], resource_name, image.get_size())
 	resource_proj.layers.append(PixelLayer.new(resource_proj))
 	resource_proj.frames.append(resource_proj.new_empty_frame())

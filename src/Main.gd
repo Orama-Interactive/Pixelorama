@@ -245,10 +245,6 @@ func _input(event: InputEvent) -> void:
 	left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
 	right_cursor.position = get_global_mouse_position() + Vector2(32, 32)
 
-	if event is InputEventKey and (event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER):
-		if get_viewport().gui_get_focus_owner() is LineEdit:
-			get_viewport().gui_get_focus_owner().release_focus()
-
 
 func _project_switched() -> void:
 	if Global.current_project.export_directory_path != "":
@@ -643,6 +639,9 @@ func _on_QuitAndSaveDialog_confirmed() -> void:
 
 func _quit() -> void:
 	Global.pixelorama_about_to_close.emit()
+	# Save the favourite list of file dialogs for next session
+	Global.config_cache.set_value("FileDialog", "favourite_paths", FileDialog.get_favorite_list())
+	Global.config_cache.save(Global.CONFIG_PATH)
 	# Darken the UI to denote that the application is currently exiting
 	# (it won't respond to user input in this state).
 	modulate = Color(0.5, 0.5, 0.5)
