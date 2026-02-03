@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.1.9] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@Bartkk0](https://github.com/Bartkk0)
+
+Built using Godot 4.6
+
+### Added
+- Undo/redo now works for layer properties. [#1413](https://github.com/Orama-Interactive/Pixelorama/pull/#1413)
+
+### Fixed
+- Brush size no longer changes in odd increments if share tool options is enabled.
+- Fixed right tool not selected by stylus when invert button is pressed. [#1426](https://github.com/Orama-Interactive/Pixelorama/pull/#1426)
+- Fixed animation tags not being visible if the last project gets loaded on startup.
+
 ## [v1.1.8] - 2025-12-31
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@Bartkk0](https://github.com/Bartkk0)

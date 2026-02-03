@@ -14,6 +14,15 @@ func _init() -> void:
 	update_indicator()
 
 
+func _ready() -> void:
+	super()
+	if tool_slot.button == MOUSE_BUTTON_RIGHT:
+		$ThicknessSlider.allow_global_input_events = not Global.share_options_between_tools
+		Global.share_options_between_tools_changed.connect(
+			func(enabled): $ThicknessSlider.allow_global_input_events = not enabled
+		)
+
+
 func update_brush() -> void:
 	pass
 
@@ -70,6 +79,10 @@ func _input(event: InputEvent) -> void:
 		elif event.is_action_released("shape_displace"):
 			_displace_origin = false
 	else:
+		# If options are being shared, no need to change the brush size on the right tool slots,
+		# otherwise it will be changed twice on both left and right tools.
+		if tool_slot.button == MOUSE_BUTTON_RIGHT and Global.share_options_between_tools:
+			return
 		var brush_size_value := _mm_action.get_action_distance_int(event)
 		$ThicknessSlider.value += brush_size_value
 
