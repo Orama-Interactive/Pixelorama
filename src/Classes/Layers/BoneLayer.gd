@@ -148,8 +148,8 @@ func apply_bone(cel_image: Image, at_frame: Frame) -> Image:
 			"preview": false
 		}
 		# Detects if the rotation is changed for this generation or not
-		# (useful if bone is moved arround while having some rotation)
-		# NOTE: I tried cacheing entire poses (that remain same) as well. It was faster than this
+		# (useful if bone is moved around while having some rotation)
+		# NOTE: I tried caching entire poses (that remain same) as well. It was faster than this
 		# approach but only by a few milliseconds. I don't think straining the memory for only
 		# a boost of a few millisec was worth it so i declare this the most optimal approach.
 		var cache_key := {"angle": angle, "un_transformed": square_image.get_data()}

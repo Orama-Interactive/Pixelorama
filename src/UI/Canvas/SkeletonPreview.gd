@@ -219,7 +219,7 @@ func get_selected_bone() -> void:
 			and selected_bone.modify_mode == BoneLayer.NONE
 		):
 			selected_bone = null
-	if !selected_bone:  # If in the prevoius check we deselected the gizmo then search for a new one.
+	if !selected_bone:  # If in the previous check we deselected the gizmo then search for a new one.
 		var canon_bones = bone_layer.get_children(true)
 		canon_bones.push_front(bone_layer)
 		for bone in canon_bones:

@@ -1,6 +1,6 @@
 extends BaseTool
 
-## TODO: try to set all commit_undo() such that execution is done by it everytime,
+## TODO: try to set all commit_undo() such that execution is done by it every time,
 ## this may be achieved by having a list of starting bone data, then keeping track of which
 ## bones get changed during movement, then call do and undo at the end.
 ## TODO: I have to Update the UI of tools to resemble the extension,
@@ -18,7 +18,7 @@ var _allow_chaining := false
 var _use_ik := true
 var _ik_protocol: int = IKAlgorithms.FABRIK
 var _chain_length: int = 2
-var _max_ik_itterations: int = 20
+var _max_ik_iterations: int = 20
 var _ik_error_margin: float = 0.1
 var _include_children := true
 var _displace_offset := Vector2.ZERO
@@ -49,7 +49,7 @@ func _ready() -> void:
 
 func _on_warn_pressed() -> void:
 	var warn_text = """
-To avoid any quirky behavior, it is recomended to not tween between
+To avoid any quirky behavior, it is recommended to not tween between
 large rotations, and have "Include bone children" enabled.
 """
 	Global.popup_error(warn_text)
@@ -62,7 +62,7 @@ func get_config() -> Dictionary:
 	config["use_ik"] = _use_ik
 	config["ik_protocol"] = _ik_protocol
 	config["chain_length"] = _chain_length
-	config["max_ik_itterations"] = _max_ik_itterations
+	config["max_ik_iterations"] = _max_ik_iterations
 	config["ik_error_margin"] = _ik_error_margin
 	config["include_children"] = _include_children
 	return config
@@ -75,7 +75,7 @@ func set_config(config: Dictionary) -> void:
 	_use_ik = config.get("use_ik", _use_ik)
 	_ik_protocol = config.get("ik_protocol", _ik_protocol)
 	_chain_length = config.get("chain_length", _chain_length)
-	_max_ik_itterations = config.get("max_ik_itterations", _max_ik_itterations)
+	_max_ik_iterations = config.get("max_ik_iterations", _max_ik_iterations)
 	_ik_error_margin = config.get("ik_error_margin", _ik_error_margin)
 	_include_children = config.get("include_children", _include_children)
 
@@ -87,7 +87,7 @@ func update_config() -> void:
 	%InverseKinematics.set_pressed_no_signal(_use_ik)
 	%AlgorithmOption.select(_ik_protocol)
 	%ChainSize.set_value_no_signal_update_display(_chain_length)
-	%IKIterations.set_value_no_signal_update_display(_max_ik_itterations)
+	%IKIterations.set_value_no_signal_update_display(_max_ik_iterations)
 	%IKErrorMargin.set_value_no_signal_update_display(_ik_error_margin)
 	%IncludeChildrenCheckbox.set_pressed_no_signal(_include_children)
 	%ChainingOptions.visible = _allow_chaining
@@ -141,7 +141,7 @@ func _on_chain_size_value_changed(value: float) -> void:
 
 
 func _on_ik_iterations_value_changed(value: float) -> void:
-	_max_ik_itterations = value
+	_max_ik_iterations = value
 	update_config()
 	save_config()
 
@@ -387,7 +387,7 @@ func draw_start(_pos: Vector2i) -> void:
 	var bone_cel = current_selected_bone.get_current_bone_cel()
 	if current_selected_bone.modify_mode == BoneLayer.NONE:
 		# When moving mouse we may stop hovering but we are still modifying that bone.
-		# this is why we need a sepatate modify_mode variable
+		# this is why we need a separate modify_mode variable
 		current_selected_bone.modify_mode = current_selected_bone.hover_mode(
 			Vector2(mouse_point), Global.camera.zoom
 		)
@@ -452,14 +452,14 @@ func draw_move(_pos: Vector2i) -> void:
 							update_canvas = FABRIK.calculate(
 								get_ik_cels(current_selected_bone),
 								mouse_point,
-								_max_ik_itterations,
+								_max_ik_iterations,
 								_ik_error_margin
 							)
 						IKAlgorithms.CCDIK:
 							update_canvas = CCDIK.calculate(
 								get_ik_cels(current_selected_bone),
 								mouse_point,
-								_max_ik_itterations,
+								_max_ik_iterations,
 								_ik_error_margin
 							)
 					if _live_update and update_canvas:
@@ -651,10 +651,10 @@ class FABRIK:
 	# https://github.com/nezvers/Godot_Public_Examples/blob/master/Nature_code/Kinematics/FABRIK.gd
 	# see https://www.youtube.com/watch?v=Ihp6tOCYHug for an intuitive explanation.
 	static func calculate(
-		bone_cels: Array[BoneCel], target_pos: Vector2, max_itterations: int, error_margin: float
+		bone_cels: Array[BoneCel], target_pos: Vector2, max_iterations: int, error_margin: float
 	) -> bool:
 		var pos_list := PackedVector2Array()
-		var lenghts := PackedFloat32Array()
+		var lengths := PackedFloat32Array()
 		var total_length := 0
 		for i in bone_cels.size() - 1:
 			var p_1 := _get_global_start(bone_cels[i])
@@ -663,7 +663,7 @@ class FABRIK:
 			if i == bone_cels.size() - 2:
 				pos_list.append(p_2)
 			var l = p_2.distance_to(p_1)
-			lenghts.append(l)
+			lengths.append(l)
 			total_length += l
 		var old_points = pos_list.duplicate()
 		var start_global = pos_list[0]
@@ -687,13 +687,13 @@ class FABRIK:
 			return true
 		else:
 			var error_dist: float = (target_pos - end_global).length()
-			var itterations := 0
-			# limit the itteration count
-			while error_dist > error_margin && itterations < max_itterations:
-				_backward_reach(pos_list, target_pos, lenghts)  # start at endPos
-				_forward_reach(pos_list, start_global, lenghts)  # start at pinPos
+			var iterations := 0
+			# limit the iteration count
+			while error_dist > error_margin && iterations < max_iterations:
+				_backward_reach(pos_list, target_pos, lengths)  # start at endPos
+				_forward_reach(pos_list, start_global, lengths)  # start at pinPos
 				error_dist = (target_pos - pos_list[pos_list.size() - 1]).length()
-				itterations += 1
+				iterations += 1
 			if old_points == pos_list:
 				return false
 			for i in bone_cels.size():
@@ -712,23 +712,23 @@ class FABRIK:
 						cel.bone_rotation += angle_diff
 			return true
 
-	static func _backward_reach(pos_list: PackedVector2Array, ending: Vector2, lenghts) -> void:
+	static func _backward_reach(pos_list: PackedVector2Array, ending: Vector2, lengths) -> void:
 		var last := pos_list.size() - 1
 		pos_list[last] = ending  # Place the tail of last vector at ending
 		for i in last:
 			var head_of_last: Vector2 = pos_list[last - i]
 			var tail_of_next: Vector2 = pos_list[last - i - 1]
 			var dir: Vector2 = (tail_of_next - head_of_last).normalized()
-			tail_of_next = head_of_last + (dir * lenghts[i - 1])
+			tail_of_next = head_of_last + (dir * lengths[i - 1])
 			pos_list[last - 1 - i] = tail_of_next
 
-	static func _forward_reach(pos_list: PackedVector2Array, starting: Vector2, lenghts) -> void:
+	static func _forward_reach(pos_list: PackedVector2Array, starting: Vector2, lengths) -> void:
 		pos_list[0] = starting  # Place the tail of first vector at starting
 		for i in pos_list.size() - 1:
 			var head_of_last: Vector2 = pos_list[i]
 			var tail_of_next: Vector2 = pos_list[i + 1]
 			var dir: Vector2 = (tail_of_next - head_of_last).normalized()
-			tail_of_next = head_of_last + (dir * lenghts[i])
+			tail_of_next = head_of_last + (dir * lengths[i])
 			pos_list[i + 1] = tail_of_next
 
 	static func _get_global_start(cel: BaseCel) -> Vector2:
@@ -741,13 +741,13 @@ class CCDIK:
 	static func calculate(
 		bone_cels: Array[BoneCel], target_pos: Vector2, max_iterations: int, error_margin: float
 	) -> bool:
-		var lenghts := PackedFloat32Array()
+		var lengths := PackedFloat32Array()
 		var total_length := 0
 		for i in bone_cels.size() - 1:
 			var p_1 := _get_global_start(bone_cels[i])
 			var p_2 := _get_global_start(bone_cels[i + 1])
 			var l = p_2.distance_to(p_1)
-			lenghts.append(l)
+			lengths.append(l)
 			total_length += l
 		var distance: float = (target_pos - _get_global_start(bone_cels[0])).length()
 		# Check if the target is reachable

@@ -242,7 +242,7 @@ flat = true
 
 [node name="TweenSkeleton" type="MenuButton" parent="." index="13"]
 layout_mode = 2
-tooltip_text = "Gererates In-Betweens from a chosen start frame to the current frame."
+tooltip_text = "Generates In-Betweens from a chosen start frame to the current frame."
 text = "Tween Skeleton"
 flat = false
 
