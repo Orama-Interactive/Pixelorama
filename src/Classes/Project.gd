@@ -685,7 +685,6 @@ func get_all_bone_cels() -> Array[BoneCel]:
 	return cels
 
 
-
 func get_all_3d_layers() -> Array[Layer3D]:
 	var layers_3d: Array[Layer3D]
 	for layer in layers:
