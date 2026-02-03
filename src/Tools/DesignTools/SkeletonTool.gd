@@ -6,7 +6,6 @@ extends BaseTool
 ## TODO: I have to Update the UI of tools to resemble the extension,
 ## TODO: I also need to fix threading system, to use the deferred mode.
 
-
 enum IKAlgorithms { FABRIK, CCDIK }
 
 var is_transforming := false
