@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Welsh\n"
 "Language: cy_GB\n"
-"PO-Revision-Date: 2026-01-07 22:50\n"
+"PO-Revision-Date: 2026-02-05 17:07\n"
 
 msgid "OK"
 msgstr ""
@@ -980,6 +980,10 @@ msgstr ""
 
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
+msgstr ""
+
+#. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
+msgid "Collapse main menu"
 msgstr ""
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
