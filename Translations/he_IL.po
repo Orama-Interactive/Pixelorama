@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2026-02-05 17:06\n"
+"PO-Revision-Date: 2026-02-05 23:29\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -492,7 +492,7 @@ msgid "Recent projects"
 msgstr "פרוייקטים אחרונים"
 
 msgid "New project"
-msgstr ""
+msgstr "פרויקט חדש"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new project)"
@@ -999,7 +999,7 @@ msgid "Gray"
 msgstr ""
 
 msgid "Blue"
-msgstr ""
+msgstr "כחול"
 
 msgid "Caramel"
 msgstr ""
@@ -1008,7 +1008,7 @@ msgid "Light"
 msgstr ""
 
 msgid "Purple"
-msgstr ""
+msgstr "סגול"
 
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
@@ -1355,7 +1355,7 @@ msgstr ""
 
 #. Found in the Restore Backup dialog.
 msgid "Projects"
-msgstr ""
+msgstr "פרויקטים"
 
 #. Found in the Restore Backup dialog.
 msgid "(Current Session)"
@@ -1412,7 +1412,7 @@ msgstr "רשיונות"
 
 #. Refers to a software license. https://en.wikipedia.org/wiki/Software_license
 msgid "License"
-msgstr ""
+msgstr "רישיון"
 
 #. Refers to the licenses of the software that are used by the Godot Engine. https://en.wikipedia.org/wiki/Software_license
 msgid "Godot Licenses"
@@ -3670,10 +3670,10 @@ msgid "Vertical alignment:"
 msgstr ""
 
 msgid "Left"
-msgstr ""
+msgstr "שמאל"
 
 msgid "Right"
-msgstr ""
+msgstr "ימין"
 
 #. Refers to the vertical space between lines in a text.
 msgid "Line spacing:"
