@@ -1,16 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsgwar3l6qtgv"]
+[gd_scene format=3 uid="uid://bsgwar3l6qtgv"]
 
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="1"]
 [ext_resource type="Script" uid="uid://bw54cqc214ur8" path="res://src/UI/TopMenuContainer/TopMenuContainer.gd" id="2"]
 [ext_resource type="Script" uid="uid://c6oak0m37f3xg" path="res://src/UI/TopMenuContainer/undo_history_dialog.gd" id="3_5t7b8"]
 
-[node name="TopMenuContainer" type="Panel"]
+[node name="TopMenuContainer" type="Panel" unique_id=1569386863]
 custom_minimum_size = Vector2(0, 28)
 offset_right = 1280.0
 offset_bottom = 28.0
 script = ExtResource("2")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1524615853]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -19,36 +19,42 @@ grow_vertical = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_right = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1819716554]
 layout_mode = 2
 
-[node name="MenuBar" type="MenuBar" parent="MarginContainer/HBoxContainer"]
+[node name="MainMenuButton" type="MenuButton" parent="MarginContainer/HBoxContainer" unique_id=146980267]
+visible = false
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Main Menu"
+
+[node name="MenuBar" type="MenuBar" parent="MarginContainer/HBoxContainer" unique_id=359350634]
 layout_mode = 2
 size_flags_horizontal = 2
 flat = true
 
-[node name="File" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+[node name="File" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=1224741301]
 
-[node name="Edit" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+[node name="Edit" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=894854999]
 
-[node name="Select" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+[node name="Select" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=1630003755]
 
-[node name="Project" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+[node name="Project" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=1172244258]
 
-[node name="Effects" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+[node name="Effects" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=77521974]
 
-[node name="View" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+[node name="View" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=1075900013]
 
-[node name="Window" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+[node name="Window" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=506854729]
 
-[node name="Help" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+[node name="Help" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=2064979441]
 
-[node name="TopLabels" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="TopLabels" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1935929971]
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_constants/separation = 20
 
-[node name="RotationSlider" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/TopLabels"]
+[node name="RotationSlider" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/TopLabels" unique_id=204642904]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
@@ -70,7 +76,7 @@ script = ExtResource("1")
 suffix = "°"
 snap_step = 45.0
 
-[node name="ZoomSlider" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/TopLabels"]
+[node name="ZoomSlider" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/TopLabels" unique_id=1489184637]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 20)
 layout_mode = 2
@@ -91,34 +97,34 @@ script = ExtResource("1")
 suffix = "%"
 snap_step = 100.0
 
-[node name="CursorPosition" type="Label" parent="MarginContainer/HBoxContainer/TopLabels"]
+[node name="CursorPosition" type="Label" parent="MarginContainer/HBoxContainer/TopLabels" unique_id=669818577]
 unique_name_in_owner = true
 layout_mode = 2
 text = "[64×64]"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1819772476]
 layout_mode = 2
 size_flags_horizontal = 10
 alignment = 1
 
-[node name="CurrentFrame" type="Label" parent="MarginContainer/HBoxContainer/HBoxContainer"]
+[node name="CurrentFrame" type="Label" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=1572105713]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Current frame:"
 
-[node name="CurrentFrameMark" type="Label" parent="MarginContainer/HBoxContainer/HBoxContainer"]
+[node name="CurrentFrameMark" type="Label" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=1844494753]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
 text = "1/1"
 
-[node name="UndoHistoryDialog" type="AcceptDialog" parent="."]
+[node name="UndoHistoryDialog" type="AcceptDialog" parent="." unique_id=935198027]
 oversampling_override = 1.0
 title = "Undo History"
 size = Vector2i(400, 300)
 script = ExtResource("3_5t7b8")
 
-[node name="ItemList" type="ItemList" parent="UndoHistoryDialog"]
+[node name="ItemList" type="ItemList" parent="UndoHistoryDialog" unique_id=1724670920]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -129,32 +135,32 @@ offset_bottom = -49.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AddLayoutConfirmation" type="ConfirmationDialog" parent="."]
+[node name="AddLayoutConfirmation" type="ConfirmationDialog" parent="." unique_id=1872394877]
 auto_translate_mode = 1
 title = "Add Layout"
 size = Vector2i(246, 123)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="AddLayoutConfirmation"]
+[node name="VBoxContainer" type="VBoxContainer" parent="AddLayoutConfirmation" unique_id=1812847554]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 238.0
 offset_bottom = 74.0
 
-[node name="LayoutName" type="LineEdit" parent="AddLayoutConfirmation/VBoxContainer"]
+[node name="LayoutName" type="LineEdit" parent="AddLayoutConfirmation/VBoxContainer" unique_id=704901556]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Insert name"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="AddLayoutConfirmation/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="AddLayoutConfirmation/VBoxContainer" unique_id=2083838297]
 layout_mode = 2
 
-[node name="LayoutFromLabel" type="Label" parent="AddLayoutConfirmation/VBoxContainer/HBoxContainer"]
+[node name="LayoutFromLabel" type="Label" parent="AddLayoutConfirmation/VBoxContainer/HBoxContainer" unique_id=356502800]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Copy from"
 
-[node name="LayoutFrom" type="OptionButton" parent="AddLayoutConfirmation/VBoxContainer/HBoxContainer"]
+[node name="LayoutFrom" type="OptionButton" parent="AddLayoutConfirmation/VBoxContainer/HBoxContainer" unique_id=977450996]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -163,7 +169,7 @@ item_count = 1
 popup/item_0/text = "Current layout"
 popup/item_0/id = 0
 
-[node name="DeleteLayoutConfirmation" type="ConfirmationDialog" parent="."]
+[node name="DeleteLayoutConfirmation" type="ConfirmationDialog" parent="." unique_id=984107300]
 auto_translate_mode = 1
 title = "Delete Layout"
 dialog_text = "Are you sure you want to delete this layout?"

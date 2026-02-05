@@ -39,6 +39,15 @@ var preferences: Array[Preference] = [
 		true,
 		true
 	),
+	(
+		Preference
+		. new(
+			"collapse_main_menu",
+			"Interface/InterfaceOptions/CollapseMainMenu",
+			"button_pressed",
+			OS.has_feature("mobile"),
+		)
+	),
 	Preference.new(
 		"icon_color_from",
 		"Interface/ButtonOptions/IconColorOptionButton",

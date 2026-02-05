@@ -19,6 +19,7 @@ signal cel_switched  ## Emitted whenever you select a different cel.
 signal project_data_changed(project: Project)  ## Emitted when project data is modified.
 @warning_ignore("unused_signal")
 signal font_loaded  ## Emitted when a new font has been loaded, or an old one gets unloaded.
+signal collapse_main_menu_changed  ## Emitted when [member collapse_main_menu] changes.
 signal single_tool_mode_changed(mode: bool)  ## Emitted when [member single_tool_mode] changes.
 ## Emitted when [member share_options_between_tools] changes.
 signal share_options_between_tools_changed(mode: bool)
@@ -273,6 +274,12 @@ var use_native_file_dialogs := false:
 			await tree_entered
 			await get_tree().process_frame
 		get_tree().set_group(&"FileDialogs", "use_native_dialog", value)
+var collapse_main_menu := OS.has_feature("mobile"):
+	set(value):
+		if value == collapse_main_menu:
+			return
+		collapse_main_menu = value
+		collapse_main_menu_changed.emit()
 ## Found in Preferences. If [code]true[/code], subwindows are embedded in the main window.
 var single_window_mode := true:
 	set(value):
