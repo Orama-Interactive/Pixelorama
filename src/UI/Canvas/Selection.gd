@@ -241,7 +241,9 @@ func _get_selected_draw_images(tile_cel_pointer: Array[CelTileMap]) -> Array[Ima
 			tile_cel_pointer.append(cel)
 			continue
 		if project.layers[cel_index[1]].can_layer_get_drawn():
-			images.append(cel.get_image())
+			var image := cel.get_image()
+			if is_instance_valid(image) and image is ImageExtended:  # Avoid type conflicts
+				images.append(cel.get_image())
 	return images
 
 
@@ -488,7 +490,10 @@ func delete(selected_cels := true) -> void:
 	if selected_cels:
 		images = _get_selected_draw_images(tile_cels)
 	else:
-		images = [project.get_current_cel().get_image()]
+		var current_cel_image := project.get_current_cel().get_image()
+		# Avoid type conflict
+		if is_instance_valid(current_cel_image) and current_cel_image is ImageExtended:
+			images = [current_cel_image]
 		if project.get_current_cel() is CelTileMap:
 			if Tools.is_placing_tiles():
 				images.clear()

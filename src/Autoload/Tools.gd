@@ -413,11 +413,12 @@ func _ready() -> void:
 	)
 	assign_color(color_value, MOUSE_BUTTON_RIGHT, false)
 	update_tool_cursors()
+
+	# Await is necessary to hide tools irrelevant to the current layer (That may have been
+	# added by extensions), And to make sure projects loaded at startup have correct visible tools
+	await get_tree().process_frame
 	var layer: BaseLayer = Global.current_project.layers[Global.current_project.current_layer]
 	var layer_type := layer.get_layer_type()
-
-	# Await is necessary to hide irrelevant tools added by extensions
-	await get_tree().process_frame
 	_show_relevant_tools(layer_type)
 
 
