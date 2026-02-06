@@ -1,8 +1,10 @@
 extends AcceptDialog
 
+const SAVE_TEXTURE := preload("uid://cvc120a27s57m")
 const DUPLICATE_TEXTURE := preload("res://assets/graphics/timeline/copy_frame.png")
 const REMOVE_TEXTURE := preload("res://assets/graphics/misc/close.png")
 
+var _selected_tileset: TileSetCustom
 var _current_tileset_name_filter: String
 
 @onready var size_value_label := $VBoxContainer/GridContainer/SizeValueLabel as Label
@@ -14,6 +16,11 @@ var _current_tileset_name_filter: String
 @onready var tilesets_container := $VBoxContainer/TilesetsContainer as VBoxContainer
 @onready var tilesets_list := %TilesetsList as Tree
 @onready var filter_by_name_edit := %FilterByNameEdit as LineEdit
+@onready var export_tileset_file_dialog: FileDialog = $ExportTilesetFileDialog
+
+
+func _ready() -> void:
+	export_tileset_file_dialog.use_native_dialog = Global.use_native_file_dialogs
 
 
 func _on_visibility_changed() -> void:
@@ -97,6 +104,7 @@ func _create_tileset_tree_item(i: int, root_item: TreeItem) -> void:
 			item_text += ", "
 	tree_item.set_text(0, item_text)
 	tree_item.set_metadata(0, i)
+	tree_item.add_button(0, SAVE_TEXTURE, -1, false, "Export")
 	tree_item.add_button(0, DUPLICATE_TEXTURE, -1, false, "Duplicate")
 	tree_item.add_button(0, REMOVE_TEXTURE, -1, using_layers.size() > 0, "Delete")
 
@@ -164,7 +172,10 @@ func _on_tilesets_list_button_clicked(item: TreeItem, column: int, id: int, _mbi
 		tileset = project.tilesets[tileset_index]
 	else:
 		tileset = project.tilesets[-1]
-	if id == 0:  # Duplicate
+	_selected_tileset = tileset
+	if id == 0:  # Export
+		export_tileset_file_dialog.popup_centered_clamped()
+	elif id == 1:  # Duplicate
 		var new_tileset := tileset.duplicate()
 		for i in range(1, tileset.tiles.size()):
 			var tile := tileset.tiles[i]
@@ -178,7 +189,7 @@ func _on_tilesets_list_button_clicked(item: TreeItem, column: int, id: int, _mbi
 		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 		project.undo_redo.commit_action()
 		_create_tileset_tree_item(item.get_parent().get_child_count(), item.get_parent())
-	if id == 1:  # Delete
+	elif id == 2:  # Delete
 		if tileset.find_using_layers(project).size() > 0:
 			return
 		project.undo_redo.create_action("Delete tileset")
@@ -188,3 +199,16 @@ func _on_tilesets_list_button_clicked(item: TreeItem, column: int, id: int, _mbi
 		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 		project.undo_redo.commit_action()
 		item.free()
+
+
+func _on_export_tileset_file_dialog_file_selected(path: String) -> void:
+	if not is_instance_valid(_selected_tileset):
+		return
+	match path.get_extension().to_lower():
+		"png":
+			var image := _selected_tileset.create_image_atlas()
+			if is_instance_valid(image) and not image.is_empty():
+				image.save_png(path)
+		"tres":
+			var godot_tileset := _selected_tileset.create_godot_tileset()
+			ResourceSaver.save(godot_tileset, path)

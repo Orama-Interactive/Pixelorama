@@ -213,6 +213,52 @@ func pick_random_tile(selected_tile_indices: Array[int]) -> int:
 	return 0
 
 
+func create_image_atlas(rows := 1, skip_first := true) -> Image:
+	var tiles_size := tiles.size()
+	if skip_first:
+		tiles_size -= 1
+	if tiles_size == 0:
+		return null
+	var columns := ceili(tiles_size / float(rows))
+	var width := tile_size.x * columns
+	var height := tile_size.y * rows
+	var image := Image.create_empty(width, height, false, tiles[0].image.get_format())
+	var origin := Vector2i.ZERO
+	var hh := 0
+	var vv := 0
+	for tile in tiles:
+		if skip_first and tile == tiles[0]:
+			continue
+		if vv < columns:
+			origin.x = tile_size.x * vv
+			vv += 1
+		else:
+			hh += 1
+			origin.x = 0
+			vv = 1
+			origin.y = tile_size.y * hh
+		image.blend_rect(tile.image, Rect2i(Vector2i.ZERO, tile_size), origin)
+	return image
+
+
+func create_godot_tileset() -> TileSet:
+	var godot_tileset := TileSet.new()
+	godot_tileset.tile_size = tile_size
+	godot_tileset.tile_shape = tile_shape
+	godot_tileset.tile_offset_axis = tile_offset_axis
+	var tileset_atlas_source := TileSetAtlasSource.new()
+	var image_atlas := create_image_atlas()
+	tileset_atlas_source.texture = ImageTexture.create_from_image(image_atlas)
+	tileset_atlas_source.texture_region_size = tile_size
+	var grid_size := tileset_atlas_source.get_atlas_grid_size()
+	for x in grid_size.x:
+		for y in grid_size.y:
+			var coords := Vector2i(x, y)
+			tileset_atlas_source.create_tile(coords)
+	godot_tileset.add_source(tileset_atlas_source)
+	return godot_tileset
+
+
 ## Serializes the data of this class into the form of a [Dictionary],
 ## which is used so the data can be stored in pxo files.
 func serialize() -> Dictionary:
