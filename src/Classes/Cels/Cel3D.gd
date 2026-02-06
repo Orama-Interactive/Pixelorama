@@ -21,8 +21,14 @@ func size_changed(new_size: Vector2i) -> void:
 # Overridden methods
 
 
-func get_image() -> Image:
-	return image_texture.get_image()
+func get_image() -> ImageExtended:
+	var image := image_texture.get_image()
+	if image:
+		# We are returning an ImageExtended because it's required by selection-cut to work properly.
+		var extended_image := ImageExtended.new()
+		extended_image.copy_from_custom(image, false)
+		return extended_image
+	return null
 
 
 func duplicate_cel() -> Cel3D:

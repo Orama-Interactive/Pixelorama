@@ -194,7 +194,8 @@ func _object_property_changed(object: Node, prop_name: String, frame_index: int)
 func _on_selected_object(object: Node3D, old_object: Node3D) -> void:
 	if object == old_object:
 		return
-	get_tree().call_group(FOLDABLE_CONTAINER_GROUP_NAME, &"queue_free")
+	if is_instance_valid(get_tree()):  # Needed to avoid crash if an object is selected during exit.
+		get_tree().call_group(FOLDABLE_CONTAINER_GROUP_NAME, &"queue_free")
 	if is_instance_valid(object):
 		_create_object_property_nodes(object)
 	else:
