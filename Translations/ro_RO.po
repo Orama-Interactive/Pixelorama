@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2026-02-05 18:02\n"
+"PO-Revision-Date: 2026-02-07 22:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1045,8 +1045,8 @@ msgid "If this is enabled, the right mouse button will always activate the same 
 msgstr "Dacă această opțiune este activată, butonul din dreapta al mausului va activa întotdeauna același instrument ca butonul din stânga al mausului."
 
 #. Found in the preferences, under the Tools category.
-msgid "Share options between the left and the right tools"
-msgstr "Sincronizează opțiunile între instrumentele din stânga și cele din dreapta"
+msgid "Share options between left and right tools"
+msgstr ""
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
