@@ -242,10 +242,12 @@ var preferences: Array[Preference] = [
 var content_list := PackedStringArray([])
 var selected_item := 0
 
-@onready var list: ItemList = $HSplitContainer/List
+@onready var search_line_edit: LineEdit = %SearchLineEdit
+@onready var list: ItemList = $HSplitContainer/SearchandList/List
 @onready var right_side: VBoxContainer = $"%RightSide"
 @onready var language: VBoxContainer = %Language
 @onready var system_language := language.get_node(^"System Language") as CheckBox
+@onready var grid_options: GridContainer = %GridOptions
 @onready var autosave_container: Container = right_side.get_node("Backup/AutosaveContainer")
 @onready var autosave_interval: SpinBox = autosave_container.get_node("AutosaveInterval")
 @onready var themes: BoxContainer = right_side.get_node("Interface/Themes")
@@ -253,6 +255,7 @@ var selected_item := 0
 @onready var tablet_driver_label: Label = $"%TabletDriverLabel"
 @onready var tablet_driver: OptionButton = $"%TabletDriver"
 @onready var extensions: BoxContainer = right_side.get_node("Extensions")
+@onready var reset_category: VBoxContainer = %Reset
 @onready var must_restart: BoxContainer = $"%MustRestart"
 
 
@@ -458,7 +461,72 @@ func _on_PreferencesDialog_visibility_changed() -> void:
 		Global.config_cache.save(Global.CONFIG_PATH)
 
 
+func _on_search_line_edit_text_changed(new_text: String) -> void:
+	if new_text.is_empty():
+		# If the text is empty/the search bar gets cleared.
+		themes.visible = true
+		get_tree().call_group(&"HeaderLabels", &"show")
+		for pref in preferences:
+			if not right_side.has_node(pref.node_path):
+				continue
+			var node := right_side.get_node(pref.node_path)
+			_show_node_when_searching(node, new_text)
+		for pref in grid_options.grid_preferences:
+			if not grid_options.has_node(pref.node_path):
+				continue
+			var node := grid_options.get_node(pref.node_path)
+			_show_node_when_searching(node, new_text)
+		_show_node_when_searching(grid_options.grids_count_slider, new_text)
+		_show_node_when_searching(grid_options.grids_select_container, new_text)
+		_on_List_item_selected(selected_item)
+		return
+
+	# When the search bar has text, show relevant nodes.
+	for child in right_side.get_children():
+		child.visible = true
+	language.visible = false
+	themes.visible = false
+	shortcuts.get_parent().visible = false
+	extensions.visible = false
+	reset_category.visible = false
+	get_tree().call_group(&"HeaderLabels", &"hide")
+	for pref in preferences:
+		if not right_side.has_node(pref.node_path):
+			continue
+		var node := right_side.get_node(pref.node_path)
+		_show_node_when_searching(node, new_text)
+	for pref in grid_options.grid_preferences:
+		if not grid_options.has_node(pref.node_path):
+			continue
+		var node := grid_options.get_node(pref.node_path)
+		_show_node_when_searching(node, new_text)
+	_show_node_when_searching(grid_options.grids_count_slider, new_text)
+	_show_node_when_searching(grid_options.grids_select_container, new_text)
+
+
+func _show_node_when_searching(node: Control, search_text: String) -> void:
+	var node_index := node.get_index()
+	var node_parent := node.get_parent()
+	var default_button := node_parent.get_child(node_index - 1)
+	var label := node_parent.get_child(node_index - 2)
+	if node_parent.get_child_count() < 3 and label is not Label:
+		var node_parent_index := node_parent.get_index()
+		node = node_parent
+		default_button = node_parent.get_parent().get_child(node_parent_index - 1)
+		label = node_parent.get_parent().get_child(node_parent_index - 2)
+	var show_node := true
+	if not search_text.is_empty():
+		show_node = search_text.is_subsequence_ofn(node.name)
+		if label is Label:
+			show_node = show_node or search_text.is_subsequence_ofn(label.text)
+	node.visible = show_node
+	default_button.visible = node.visible
+	label.visible = node.visible
+
+
 func _on_List_item_selected(index: int) -> void:
+	if not search_line_edit.text.is_empty():
+		search_line_edit.clear()
 	selected_item = index
 	for child in right_side.get_children():
 		child.visible = child.name == content_list[index]
