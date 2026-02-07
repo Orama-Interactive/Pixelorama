@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2026-02-05 17:06\n"
+"PO-Revision-Date: 2026-02-07 22:32\n"
 
 msgid "OK"
 msgstr "예"
@@ -1044,7 +1044,7 @@ msgid "If this is enabled, the right mouse button will always activate the same 
 msgstr ""
 
 #. Found in the preferences, under the Tools category.
-msgid "Share options between the left and the right tools"
+msgid "Share options between left and right tools"
 msgstr ""
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
