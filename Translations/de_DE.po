@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2025-11-29 21:33\n"
+"PO-Revision-Date: 2026-02-07 22:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -413,19 +413,19 @@ msgid "Widescreen"
 msgstr "Breitbild"
 
 msgid "Tallscreen"
-msgstr "Hochbildschirm"
+msgstr "Hochbild"
 
 msgid "Mirror View"
 msgstr "Spiegel-Ansicht"
 
 msgid "Show Grid"
-msgstr "Zeige Raster"
+msgstr "Raster anzeigen"
 
 msgid "Show Pixel Grid"
 msgstr "Pixelraster anzeigen"
 
 msgid "Show Rulers"
-msgstr "Zeige Lineale"
+msgstr "Lineale anzeigen"
 
 msgid "Show Guides"
 msgstr "Hilfslinien anzeigen"
@@ -463,7 +463,7 @@ msgid "Snap to Perspective Guides"
 msgstr "An perspektivische Hilfslinien einrasten"
 
 msgid "Show Animation Timeline"
-msgstr "Zeige Animations-Zeitleiste"
+msgstr "Animations-Zeitleiste anzeigen"
 
 msgid "Zen Mode"
 msgstr "Zen-Modus"
@@ -475,10 +475,10 @@ msgid "Fill with color:"
 msgstr "Fülle mit Farbe:"
 
 msgid "Open a File"
-msgstr "Öffne eine Datei"
+msgstr "Datei öffnen"
 
 msgid "Open File(s)"
-msgstr "Öffne Datei(en)"
+msgstr "Datei(en) öffnen"
 
 msgid "Import Options"
 msgstr "Importoptionen"
@@ -662,10 +662,10 @@ msgid "Alert!"
 msgstr "Warnung!"
 
 msgid "Select Current Folder"
-msgstr "Wähle aktuellen Ordner"
+msgstr "Aktuellen Ordner auswählen"
 
 msgid "Open a Directory"
-msgstr "Öffne ein Verzeichnis"
+msgstr "Verzeichnis öffnen"
 
 msgid "Background:"
 msgstr "Hintergrund:"
@@ -758,7 +758,7 @@ msgid "Directories & Files:"
 msgstr "Verzeichnisse & Dateien:"
 
 msgid "Create Folder"
-msgstr "Erstelle Ordner"
+msgstr "Ordner erstellen"
 
 msgid "File:"
 msgstr "Datei:"
@@ -801,7 +801,7 @@ msgstr "TGA-Bild"
 
 #. Found in the "Open" file dialog. Searches WebP files only. (Note that WebP is a file type and should remain untranslated)
 msgid "WebP Image"
-msgstr "WebP Bild"
+msgstr "WebP-Bild"
 
 #. Found in "Open" and "Save" file dialogs. Searches OpenRaster project files only (.ora). OpenRaster should remain untranslated. https://www.openraster.org/
 msgid "OpenRaster Project"
@@ -809,7 +809,7 @@ msgstr "OpenRaster-Projekt"
 
 #. Found in "Open" and "Save" file dialogs. Searches Aseprite project files only (.ase and .aseprite). Note that Aseprite is a software and should remain untranslated.
 msgid "Aseprite Project"
-msgstr "Aseprite Projekt"
+msgstr "Aseprite-Projekt"
 
 #. Found in "Open" and "Save" file dialogs. Searches Krita project files only (.kra). Note that Krita is a software and should remain untranslated.
 msgid "Krita Project"
@@ -829,7 +829,7 @@ msgstr "Pixelorama-Palette"
 
 #. Found in the "Open" file dialog. Searches GIMP palette files only (.gpl). Note that GIMP is a software and should remain untranslated.
 msgid "GIMP palette"
-msgstr "GIMP palette"
+msgstr "GIMP-Palette"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
@@ -881,7 +881,7 @@ msgstr "Leinwand"
 
 #. Refers to the animation timeline.
 msgid "Timeline"
-msgstr "Zeitachse"
+msgstr "Zeitleiste"
 
 msgid "Selection"
 msgstr "Auswahl"
@@ -986,6 +986,10 @@ msgstr "Wenn diese Einstellung aktiviert ist, werden die systemeigenen Dateidial
 msgid "Single window mode"
 msgstr "Einzelfenstermodus"
 
+#. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
+msgid "Collapse main menu"
+msgstr "Hauptmenü einklappen"
+
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
 msgstr "Wenn diese Einstellung aktiviert ist, werden Pixeloramas Unterfenster in das Hauptfenster eingebettet, andernfalls wird jeder Dialog ein eigenes Fenster."
@@ -1042,8 +1046,8 @@ msgid "If this is enabled, the right mouse button will always activate the same 
 msgstr "Wenn diese Option aktiviert ist, verwendet die rechte Maustaste immer dasselbe Werkzeug wie die linke Maustaste."
 
 #. Found in the preferences, under the Tools category.
-msgid "Share options between the left and the right tools"
-msgstr "Optionen zwischen dem linken und dem rechten Werkzeug teilen"
+msgid "Share options between left and right tools"
+msgstr ""
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
@@ -1076,7 +1080,7 @@ msgid "Current cel"
 msgstr "Aktuelle Zelle"
 
 msgid "Current frame"
-msgstr "Aktueller Rahmen"
+msgstr "Aktueller Frame"
 
 msgid "All frames"
 msgstr "Alle Frames"
@@ -1122,7 +1126,7 @@ msgstr "Schattenfarbe:"
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr "Gaußsche Weichzeichner"
+msgstr "Gaußscher Weichzeichner"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
@@ -1328,13 +1332,13 @@ msgid "Dither intensity:"
 msgstr "Dither-Intensität:"
 
 msgid "View Splash Screen"
-msgstr "Zeige Splash Screen"
+msgstr "Startbildschirm anzeigen"
 
 msgid "Online Docs"
-msgstr "Online Docs"
+msgstr "Online-Dokumentation"
 
 msgid "Issue Tracker"
-msgstr "Fehlerverfolgung"
+msgstr "Fehlermeldungen"
 
 #. Found under the Help menu. When selected, it opens a window with a list of backups of projects opened in previous sessions.
 msgid "Restore Backup"
@@ -1365,7 +1369,7 @@ msgid "Open Editor Data Folder"
 msgstr "Editor-Datenordner öffnen"
 
 msgid "Changelog"
-msgstr "Änderungen"
+msgstr "Änderungsprotokoll"
 
 msgid "About Pixelorama"
 msgstr "Über Pixelorama"
@@ -1381,7 +1385,7 @@ msgid "Developed by Orama Interactive"
 msgstr "Entwickelt von Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr "@2019–heute Orama Interactive und Mitwirkende"
+msgstr "©2019–heute Orama Interactive und Mitwirkende"
 
 msgid "Website"
 msgstr "Website"
@@ -1649,7 +1653,7 @@ msgid "Pencil\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr "Bleistift\n\n"
+msgstr "Stift\n\n"
 "%s für die linke Maustaste\n"
 "%s für die rechte Maustaste\n\n"
 "%s halten, um eine Linie zu ziehen"
@@ -1658,7 +1662,7 @@ msgid "Eraser\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr "Radiergummi\n\n"
+msgstr "Radierer\n\n"
 "%s für die linke Maustaste\n"
 "%s für die rechte Maustaste\n\n"
 "%s halten, um eine Linie zu ziehen"
@@ -1786,8 +1790,7 @@ msgstr "Wähle eine Farbe aus dem Anwendungsfenster."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
-msgstr "Gib einen Hex-Code („\n"
-"#ff0000\") oder einen Farbnamen („red\") ein."
+msgstr "Gib einen Hex-Code (z.\\u00a0B. \"#ff0000\") oder einen Farbnamen (z.\\u00a0B. \"red\") ein."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
@@ -2444,7 +2447,7 @@ msgstr "Schnittmenge der Auswahlen"
 
 #. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
 msgid "Style:"
-msgstr "Style:"
+msgstr "Stil:"
 
 #. Refers to the text. Regular means that the text is not bold or italic.
 msgid "Regular"
@@ -2682,7 +2685,7 @@ msgid "Layer properties"
 msgstr "Ebenen-Eigenschaften"
 
 msgid "Cel properties"
-msgstr "Zelleigenschaften"
+msgstr "Zelleneigenschaften"
 
 msgid "Tag properties"
 msgstr "Tag-Eigenschaften"
@@ -2799,7 +2802,7 @@ msgstr "Multiplizieren"
 
 # .Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color burn"
-msgstr "Color burn"
+msgstr "Farbig nachbelichten"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Linear burn"
@@ -3002,6 +3005,54 @@ msgstr "Rückgängig: Frame-Dauer ändern"
 msgid "Redo: Change frame duration"
 msgstr "Wiederholen: Frame-Dauer ändern"
 
+msgid "Undo: Rename Layer"
+msgstr "Rückgängig: Ebene umbenennen"
+
+msgid "Redo: Rename Layer"
+msgstr "Wiederherstellen: Ebene umbenennen"
+
+msgid "Undo: Change Layer Opacity"
+msgstr "Rückgängig: Ebenendeckkraft ändern"
+
+msgid "Redo: Change Layer Opacity"
+msgstr "Wiederherstellen: Ebenendeckkraft ändern"
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
+msgid "Undo: Change Layer Onion Skinning Ignore Status"
+msgstr "Rückgängig: Onion-Skinning-Ignorierung der Ebene ändern"
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
+msgid "Redo: Change Layer Onion Skinning Ignore Status"
+msgstr "Wiederherstellen: Onion-Skinning-Ignorierung der Ebene ändern"
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos.
+msgid "Undo: Change Layer User Data"
+msgstr "Rückgängig: Ebenen-Benutzerdaten ändern"
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
+msgid "Redo: Change Layer User Data"
+msgstr "Wiederherstellen: Ebenen-Benutzerdaten ändern"
+
+msgid "Undo: Change Layer Color"
+msgstr "Rückgängig: Ebenenfarbe ändern"
+
+msgid "Redo: Change Layer Color"
+msgstr "Wiederherstellen: Ebenenfarbe ändern"
+
+msgid "Undo: Change Layer Visibility"
+msgstr "Rückgängig: Ebenensichtbarkeit ändern"
+
+msgid "Redo: Change Layer Visibility"
+msgstr "Wiederherstellen: Ebenensichtbarkeit ändern"
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos.
+msgid "Undo: Change Layer Locked Status"
+msgstr "Rückgängig: Sperrstatus der Ebene ändern"
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
+msgid "Redo: Change Layer Locked Status"
+msgstr "Wiederherstellen: Sperrstatus der Ebene ändern"
+
 msgid "Move Guide"
 msgstr "Hilfslinie verschieben"
 
@@ -3035,7 +3086,7 @@ msgid "Create Palette From Current Sprite"
 msgstr "Palette aus aktuellem Sprite erstellen"
 
 msgid "Palette Name:"
-msgstr "Palettenname"
+msgstr "Palettenname:"
 
 msgid "Color Name:"
 msgstr "Farbnamen:"
@@ -3194,7 +3245,7 @@ msgid "Eraser"
 msgstr "Radierer"
 
 msgid "Bucket"
-msgstr "Eimer"
+msgstr "Fülleimer"
 
 msgid "Shading Tool"
 msgstr "Schattierungs-Werkzeug"

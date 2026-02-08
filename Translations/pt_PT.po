@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-11-04 16:55\n"
+"PO-Revision-Date: 2026-02-07 22:31\n"
 
 msgid "OK"
 msgstr "OK"
@@ -139,11 +139,11 @@ msgstr "Refazer"
 
 #. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
 msgid "Undo History"
-msgstr ""
+msgstr "Histórico de Ações"
 
 #. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
 msgid "Initial state"
-msgstr ""
+msgstr "Estado inicial"
 
 msgid "Copy"
 msgstr "Copiar"
@@ -811,15 +811,15 @@ msgstr "Projeto Aseprite"
 
 #. Found in "Open" and "Save" file dialogs. Searches Krita project files only (.kra). Note that Krita is a software and should remain untranslated.
 msgid "Krita Project"
-msgstr ""
+msgstr "Projeto Krita"
 
 #. Found in "Open" and "Save" file dialogs. Searches Piskel project files only (.piskel). Note that Piskel is a software and should remain untranslated.
 msgid "Piskel Project"
-msgstr ""
+msgstr "Projeto Piskel"
 
 #. Found in "Open" and "Save" file dialogs. Searches Photoshop project files only (.psd). Note that Photoshop is a software and should remain untranslated.
 msgid "Photoshop Project"
-msgstr ""
+msgstr "Projeto Photoshop"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
@@ -963,7 +963,7 @@ msgstr "Tamanho do tipo de letra:"
 
 #. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
 msgid "Screen orientation:"
-msgstr ""
+msgstr "Orientação do ecrã:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Escurecer interface durante uma caixa de diálogo"
@@ -983,6 +983,10 @@ msgstr "Quando esta preferência está ativada, a janela de seleção de ficheir
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
 msgstr "Modo de janela única"
+
+#. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
+msgid "Collapse main menu"
+msgstr ""
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
@@ -1033,15 +1037,15 @@ msgstr "Cor de fundo:"
 
 #. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
 msgid "Single tool mode"
-msgstr ""
+msgstr "Modo de ferramenta única"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
 msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
-msgstr ""
+msgstr "Ao ativar, o botão direito do rato irá ativar a mesma ferramenta que o botão esquerdo."
 
 #. Found in the preferences, under the Tools category.
-msgid "Share options between the left and the right tools"
-msgstr "Partilhar opções entre as ferramentas da esquerda e da direita"
+msgid "Share options between left and right tools"
+msgstr ""
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
@@ -1997,7 +2001,7 @@ msgstr "Cor de borda 2:"
 
 #. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
 msgid "Transformation preview alpha:"
-msgstr ""
+msgstr "Transparência da pré-visualização da transformação:"
 
 msgid "Only custom preset can be modified"
 msgstr "Apenas presets personalizados podem ser modificados"
@@ -2318,7 +2322,7 @@ msgstr "Toda a seleção"
 
 #. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
 msgid "Fill regions from the merging of all layers"
-msgstr ""
+msgstr "Preencher regiões de uma mescla de todas as camadas"
 
 msgid "Fill with:"
 msgstr "Preencher com:"
@@ -2464,25 +2468,25 @@ msgstr "Escala de cinza"
 
 #. Refers to the color of a shape's edge.
 msgid "Edge Color"
-msgstr ""
+msgstr "Cor da Borda"
 
 #. Refers to the color of a tool.
 msgid "Tool color"
-msgstr ""
+msgstr "Cor da Ferramenta"
 
 msgid "Adjusted average"
-msgstr ""
+msgstr "Média ajustada"
 
 msgid "Blend at interface"
 msgstr ""
 
 #. Refers to the left face of a box shape.
 msgid "Left Face"
-msgstr ""
+msgstr "Face Esquerda"
 
 #. Refers to the right face of a box shape.
 msgid "Right Face"
-msgstr ""
+msgstr "Face Direita"
 
 msgid "Mirroring"
 msgstr "Espelhar"
@@ -2503,11 +2507,11 @@ msgstr "Habilitar o desenho espelhado verticalmente"
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↗) mirrored drawing"
-msgstr ""
+msgstr "Habilitar o desenho espelhado diagonalmente (↗)"
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↘) mirrored drawing"
-msgstr ""
+msgstr "Habilitar o desenho espelhado diagonalmente (↘)"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
@@ -2995,6 +2999,54 @@ msgstr "Desfazer: Alterar duração do fotograma"
 msgid "Redo: Change frame duration"
 msgstr "Refazer: Alterar duração do fotograma"
 
+msgid "Undo: Rename Layer"
+msgstr "Desfazer: Renomear Camada"
+
+msgid "Redo: Rename Layer"
+msgstr "Refazer: Renomear Camada"
+
+msgid "Undo: Change Layer Opacity"
+msgstr "Desfazer: Alterar Opacidade das Camadas"
+
+msgid "Redo: Change Layer Opacity"
+msgstr "Refazer: Alterar Opacidade das Camadas"
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
+msgid "Undo: Change Layer Onion Skinning Ignore Status"
+msgstr "Desfazer: Mudar Ignorar Onion Skinning da Camada"
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
+msgid "Redo: Change Layer Onion Skinning Ignore Status"
+msgstr "Refazer: Mudar Ignorar Onion Skinning da Camada"
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos.
+msgid "Undo: Change Layer User Data"
+msgstr "Desfazer: Mudar Dados do Utilizador da Camada"
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
+msgid "Redo: Change Layer User Data"
+msgstr "Refazer: Mudar Dados do Utilizador da Camada"
+
+msgid "Undo: Change Layer Color"
+msgstr "Desfazer: Mudar Cor da Camada"
+
+msgid "Redo: Change Layer Color"
+msgstr "Refazer: Mudar Cor da Camada"
+
+msgid "Undo: Change Layer Visibility"
+msgstr "Desfazer: Mudar Visibilidade da Camada"
+
+msgid "Redo: Change Layer Visibility"
+msgstr "Refazer: Mudar Visibilidade da Camada"
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos.
+msgid "Undo: Change Layer Locked Status"
+msgstr "Desfazer: Bloquear/Desbloquear Camada"
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
+msgid "Redo: Change Layer Locked Status"
+msgstr "Refazer: Bloquear/Desbloquear Camada"
+
 msgid "Move Guide"
 msgstr "Guias de Movimento"
 
@@ -3117,7 +3169,7 @@ msgstr "Remover todas as extensões"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all backups"
-msgstr ""
+msgstr "Remover todos os backups"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
@@ -3205,7 +3257,7 @@ msgid "Ellipse Tool"
 msgstr "Ferramenta de Elipse"
 
 msgid "Isometric Box Tool"
-msgstr ""
+msgstr "Ferramenta de Caixa Isométrica"
 
 msgid "Switch Colors"
 msgstr "Trocar cores"
@@ -3319,7 +3371,7 @@ msgid "Discard All"
 msgstr "Descartar tudo"
 
 msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
-msgstr ""
+msgstr "O Pixelorama não encerrou corretamente da última vez. Gostaria de restaurar uma sessão anterior?"
 
 msgid "Backup reloaded"
 msgstr "Cópia de segurança carregada"
@@ -3370,7 +3422,7 @@ msgstr "Criar uma nova palete"
 
 #. Title of a window where the user can create a new project palette. Project palettes are palettes that are stored inside the project files, and are only being used by that project.
 msgid "Create a new project palette"
-msgstr ""
+msgstr "Criar nova paleta do projeto"
 
 msgid "Comment:"
 msgstr "Comentar:"
