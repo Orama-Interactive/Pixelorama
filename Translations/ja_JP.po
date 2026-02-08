@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2025-11-04 18:28\n"
+"PO-Revision-Date: 2026-02-07 22:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -987,6 +987,10 @@ msgstr "この設定を有効にすると、Pixeloramaのカスタムダイア�
 msgid "Single window mode"
 msgstr "シングルウィンドウモード"
 
+#. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
+msgid "Collapse main menu"
+msgstr "メインメニューを折りたたむ"
+
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
 msgstr "この設定を有効にすると、Pixeloramaのサブウィンドウがメインウィンドウに埋め込まれます。そうでなければ、各ダイアログは個別のウィンドウになります。"
@@ -1043,8 +1047,8 @@ msgid "If this is enabled, the right mouse button will always activate the same 
 msgstr "これが有効な場合、マウスの右ボタンは常にマウスの左ボタンと同じツールが有効になります。"
 
 #. Found in the preferences, under the Tools category.
-msgid "Share options between the left and the right tools"
-msgstr "左と右のツール間でオプションを共有"
+msgid "Share options between left and right tools"
+msgstr ""
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
@@ -3001,6 +3005,54 @@ msgstr "元に戻す: フレームの長さを変更"
 
 msgid "Redo: Change frame duration"
 msgstr "やり直し: フレームの長さを変更"
+
+msgid "Undo: Rename Layer"
+msgstr "元に戻す: レイヤー名の変更"
+
+msgid "Redo: Rename Layer"
+msgstr ""
+
+msgid "Undo: Change Layer Opacity"
+msgstr "元に戻す: レイヤーの不透明度の変更"
+
+msgid "Redo: Change Layer Opacity"
+msgstr ""
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
+msgid "Undo: Change Layer Onion Skinning Ignore Status"
+msgstr ""
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
+msgid "Redo: Change Layer Onion Skinning Ignore Status"
+msgstr ""
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos.
+msgid "Undo: Change Layer User Data"
+msgstr ""
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
+msgid "Redo: Change Layer User Data"
+msgstr ""
+
+msgid "Undo: Change Layer Color"
+msgstr ""
+
+msgid "Redo: Change Layer Color"
+msgstr ""
+
+msgid "Undo: Change Layer Visibility"
+msgstr ""
+
+msgid "Redo: Change Layer Visibility"
+msgstr ""
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos.
+msgid "Undo: Change Layer Locked Status"
+msgstr ""
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
+msgid "Redo: Change Layer Locked Status"
+msgstr ""
 
 msgid "Move Guide"
 msgstr "ガイドを移動"
