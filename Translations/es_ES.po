@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2026-02-07 22:31\n"
+"PO-Revision-Date: 2026-02-08 09:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1045,7 +1045,7 @@ msgstr "Si está activado, el botón derecho del ratón siempre activará la mis
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between left and right tools"
-msgstr ""
+msgstr "Compartir opciones de herramientas de la izquierda y derecha"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
