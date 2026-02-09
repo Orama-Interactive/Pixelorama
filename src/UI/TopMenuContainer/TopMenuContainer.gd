@@ -309,7 +309,7 @@ func _setup_view_menu() -> void:
 		"Center Canvas": "center_canvas",
 		"Tile Mode": "",
 		"Tile Mode Offsets": "",
-		"Grayscale View": "",
+		"Grayscale View": &"grayscale_view",
 		"Mirror View": "mirror_view",
 		"Show Grid": "show_grid",
 		"Show Pixel Grid": "show_pixel_grid",
