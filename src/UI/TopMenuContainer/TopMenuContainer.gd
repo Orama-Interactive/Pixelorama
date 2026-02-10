@@ -1123,6 +1123,7 @@ func _toggle_fullscreen() -> void:
 	get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if !is_fullscreen else Window.MODE_WINDOWED
 	is_fullscreen = not is_fullscreen
 	window_menu.set_item_checked(Global.WindowMenu.FULLSCREEN_MODE, is_fullscreen)
+	get_tree().current_scene.set_mobile_fullscreen_safe_area()
 
 
 func project_menu_id_pressed(id: int) -> void:

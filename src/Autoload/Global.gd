@@ -259,6 +259,7 @@ var screen_orientation := DisplayServer.SCREEN_SENSOR:
 	set(value):
 		screen_orientation = value
 		DisplayServer.screen_set_orientation(screen_orientation)
+		control.set_mobile_fullscreen_safe_area()
 ## Found in Preferences. If [code]true[/code], the interface dims on popups.
 var dim_on_popup := true
 ## Found in Preferences. If [code]true[/code], notification labels appear.

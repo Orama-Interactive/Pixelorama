@@ -534,6 +534,7 @@ func _on_List_item_selected(index: int) -> void:
 
 func _on_shrink_apply_button_pressed() -> void:
 	Global.control.set_display_scale()
+	Global.control.set_mobile_fullscreen_safe_area()
 	hide()
 	popup_centered_clamped(Vector2(600, 400))
 	Global.dialog_open(true)

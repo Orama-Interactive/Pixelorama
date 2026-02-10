@@ -332,6 +332,7 @@ func _setup_application_window_size() -> void:
 			get_window().position = Global.config_cache.get_value("window", "position")
 		if Global.config_cache.has_section_key("window", "size"):
 			get_window().size = Global.config_cache.get_value("window", "size")
+	set_mobile_fullscreen_safe_area()
 
 
 func set_display_scale() -> void:
@@ -342,6 +343,25 @@ func set_display_scale() -> void:
 	root.min_size = Vector2(320, 200)
 	root.content_scale_factor = Global.shrink
 	set_custom_cursor()
+
+
+func set_mobile_fullscreen_safe_area() -> void:
+	if not OS.has_feature("mobile"):
+		return
+	await get_tree().process_frame
+	var is_fullscreen := (
+		(get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN)
+		or (get_window().mode == Window.MODE_FULLSCREEN)
+	)
+	var menu_and_ui: VBoxContainer = $MenuAndUI
+	if is_fullscreen:
+		var safe_area := DisplayServer.get_display_safe_area()
+		menu_and_ui.set_anchors_preset(Control.PRESET_TOP_LEFT)
+		var pos := safe_area.position / get_window().content_scale_factor
+		menu_and_ui.position = pos
+		menu_and_ui.size = (safe_area.size / get_window().content_scale_factor)
+	else:
+		menu_and_ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
 
 func set_custom_cursor() -> void:
