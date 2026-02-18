@@ -9,7 +9,8 @@ const ARRAY_TEXTURE_TYPES: Array[Texture2D] = [
 	preload("res://assets/graphics/layers/type_icons/layer_group.png"),
 	preload("res://assets/graphics/layers/type_icons/layer_3d.png"),
 	preload("res://assets/graphics/layers/type_icons/layer_tilemap.png"),
-	preload("res://assets/graphics/layers/type_icons/layer_sound.png")
+	preload("res://assets/graphics/layers/type_icons/layer_sound.png"),
+	preload("res://assets/graphics/layers/type_icons/layer_skeleton.png")
 ]
 
 var layer_index := 0:
@@ -167,7 +168,12 @@ func _play_audio(single_frame: bool) -> void:
 
 func update_buttons() -> void:
 	var layer := Global.current_project.layers[layer_index]
-	if layer is GroupLayer:
+	if layer is BoneLayer:
+		if layer.expanded:
+			Global.change_button_texturerect(expand_button.get_child(0), "skeleton_expanded.png")
+		else:
+			Global.change_button_texturerect(expand_button.get_child(0), "skeleton_collapsed.png")
+	elif layer is GroupLayer:
 		if layer.expanded:
 			Global.change_button_texturerect(expand_button.get_child(0), "group_expanded.png")
 		else:
