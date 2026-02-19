@@ -971,6 +971,10 @@ msgstr ""
 msgid "Single window mode"
 msgstr ""
 
+#. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
+msgid "Collapse main menu"
+msgstr ""
+
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
 msgstr ""
@@ -1027,7 +1031,7 @@ msgid "If this is enabled, the right mouse button will always activate the same 
 msgstr ""
 
 #. Found in the preferences, under the Tools category.
-msgid "Share options between the left and the right tools"
+msgid "Share options between left and right tools"
 msgstr ""
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.

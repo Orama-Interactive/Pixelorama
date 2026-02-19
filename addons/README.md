@@ -26,7 +26,7 @@
 ## godot-dockable-container
 
 - Upstream: https://github.com/gilzoide/godot-dockable-container
-- Version: Based on [3f10b9b6f24311090a6010da82d6eaf110e92836](https://github.com/OverloadedOrama/godot-dockable-container/commit/3f10b9b6f24311090a6010da82d6eaf110e92836), but with changes in layout.gd that add a `save_on_change` and `layout_reset_path` variables, and a `save()`, `copy_from()` and `reset()` methods, an added setter method for `layout_split` and deleted `set_split_cursor()` in split_handle.gd, a fix in dockable_container.gd's line 44, and another on dockable_panel.gd's lines 86 and 87.
+- Version: Based on [3f10b9b6f24311090a6010da82d6eaf110e92836](https://github.com/OverloadedOrama/godot-dockable-container/commit/3f10b9b6f24311090a6010da82d6eaf110e92836), but with changes in layout.gd that add a `save_on_change` and `layout_reset_path` variables, and a `save()`, `copy_from()` and `reset()` methods, an added setter method for `layout_split` and deleted `set_split_cursor()` in split_handle.gd, a fix in dockable_container.gd's line 44 and 315, and another on dockable_panel.gd's lines 86 and 87.
 - License: [CC0-1.0](https://github.com/gilzoide/godot-dockable-container/blob/main/LICENSE)
 
 ## SmartSlicer

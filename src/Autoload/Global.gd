@@ -19,6 +19,7 @@ signal cel_switched  ## Emitted whenever you select a different cel.
 signal project_data_changed(project: Project)  ## Emitted when project data is modified.
 @warning_ignore("unused_signal")
 signal font_loaded  ## Emitted when a new font has been loaded, or an old one gets unloaded.
+signal collapse_main_menu_changed  ## Emitted when [member collapse_main_menu] changes.
 signal single_tool_mode_changed(mode: bool)  ## Emitted when [member single_tool_mode] changes.
 ## Emitted when [member share_options_between_tools] changes.
 signal share_options_between_tools_changed(mode: bool)
@@ -258,6 +259,7 @@ var screen_orientation := DisplayServer.SCREEN_SENSOR:
 	set(value):
 		screen_orientation = value
 		DisplayServer.screen_set_orientation(screen_orientation)
+		control.set_mobile_fullscreen_safe_area()
 ## Found in Preferences. If [code]true[/code], the interface dims on popups.
 var dim_on_popup := true
 ## Found in Preferences. If [code]true[/code], notification labels appear.
@@ -273,6 +275,12 @@ var use_native_file_dialogs := false:
 			await tree_entered
 			await get_tree().process_frame
 		get_tree().set_group(&"FileDialogs", "use_native_dialog", value)
+var collapse_main_menu := OS.has_feature("mobile"):
+	set(value):
+		if value == collapse_main_menu:
+			return
+		collapse_main_menu = value
+		collapse_main_menu_changed.emit()
 ## Found in Preferences. If [code]true[/code], subwindows are embedded in the main window.
 var single_window_mode := true:
 	set(value):
@@ -760,6 +768,7 @@ func _init() -> void:
 	if config_cache.has_section_key("preferences", "locale"):
 		saved_locale = config_cache.get_value("preferences", "locale")
 	set_locale(saved_locale, false)  # If no language is saved, OS' locale is used
+	# Set Data Directories
 	if OS.has_feature("template"):
 		root_directory = OS.get_executable_path().get_base_dir()
 	if OS.get_name() == "macOS":
@@ -778,6 +787,12 @@ func _init() -> void:
 			# Create defaults
 			for default_loc in ["/usr/local/share", "/usr/share"]:
 				data_directories.append(default_loc.path_join(HOME_SUBDIR_NAME))
+	# Set Favourites list in File dialogs
+	if config_cache.has_section_key("FileDialog", "favourite_paths"):
+		FileDialog.set_favorite_list(
+			config_cache.get_value("FileDialog", "favourite_paths", PackedStringArray())
+		)
+	# Load overridden project settings
 	if ProjectSettings.get_setting("display/window/tablet_driver") == "winink":
 		tablet_driver = 1
 	single_window_mode = ProjectSettings.get_setting("display/window/subwindows/embed_subwindows")
@@ -881,6 +896,7 @@ func _initialize_keychain() -> void:
 		&"pixelize": Keychain.InputAction.new("", "Effects menu", true),
 		&"posterize": Keychain.InputAction.new("", "Effects menu", true),
 		&"center_canvas": Keychain.InputAction.new("", "View menu", true),
+		&"grayscale_view": Keychain.InputAction.new("", "View menu", true),
 		&"mirror_view": Keychain.InputAction.new("", "View menu", true),
 		&"show_grid": Keychain.InputAction.new("", "View menu", true),
 		&"show_pixel_grid": Keychain.InputAction.new("", "View menu", true),

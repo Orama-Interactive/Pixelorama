@@ -63,6 +63,8 @@ var backup_dialog := Dialog.new("res://src/UI/Dialogs/BackupRestoreDialog.tscn")
 @onready var main := $"../.." as Control
 @onready var main_ui := main.find_child("DockableContainer") as DockableContainer
 @onready var ui_elements := main_ui.get_children()
+@onready var main_menu_button: MenuButton = $MarginContainer/HBoxContainer/MainMenuButton
+@onready var menu_bar: MenuBar = $MarginContainer/HBoxContainer/MenuBar
 @onready var file_menu := $MarginContainer/HBoxContainer/MenuBar/File as PopupMenu
 @onready var edit_menu := $MarginContainer/HBoxContainer/MenuBar/Edit as PopupMenu
 @onready var select_menu := $MarginContainer/HBoxContainer/MenuBar/Select as PopupMenu
@@ -109,7 +111,9 @@ class Dialog:
 
 
 func _ready() -> void:
+	handle_main_menu_collapse()
 	main.save_file_dialog_opened.connect(func(opened: bool): can_save = not opened)
+	Global.collapse_main_menu_changed.connect(handle_main_menu_collapse)
 	Global.project_about_to_switch.connect(_on_project_about_to_switch)
 	Global.project_switched.connect(_on_project_switched)
 	Global.cel_switched.connect(_update_current_frame_mark)
@@ -147,6 +151,31 @@ func _notification(what: int) -> void:
 	elif what == NOTIFICATION_WM_CLOSE_REQUEST:
 		if zen_mode:
 			_toggle_zen_mode()
+
+
+func handle_main_menu_collapse() -> void:
+	var main_menu_button_popup := main_menu_button.get_popup()
+	if Global.collapse_main_menu:
+		if menu_bar.visible:
+			main_menu_button.visible = true
+			menu_bar.visible = false
+			var menu_options := menu_bar.get_children()
+			for menu_option in menu_options:
+				menu_bar.remove_child(menu_option)
+				main_menu_button_popup.add_submenu_node_item(menu_option.name, menu_option)
+	else:
+		if not menu_bar.visible:
+			main_menu_button.visible = false
+			menu_bar.visible = true
+			var menu_options: Array[PopupMenu]
+			for i in range(main_menu_button_popup.item_count - 1, -1, -1):
+				var submenu := main_menu_button_popup.get_item_submenu_node(i)
+				menu_options.append(submenu)
+				main_menu_button_popup.remove_item(i)
+				submenu.get_parent().remove_child(submenu)
+			menu_options.reverse()
+			for menu_option in menu_options:
+				menu_bar.add_child(menu_option)
 
 
 func _on_project_about_to_switch() -> void:
@@ -280,7 +309,7 @@ func _setup_view_menu() -> void:
 		"Center Canvas": "center_canvas",
 		"Tile Mode": "",
 		"Tile Mode Offsets": "",
-		"Grayscale View": "",
+		"Grayscale View": &"grayscale_view",
 		"Mirror View": "mirror_view",
 		"Show Grid": "show_grid",
 		"Show Pixel Grid": "show_pixel_grid",
@@ -1094,6 +1123,7 @@ func _toggle_fullscreen() -> void:
 	get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if !is_fullscreen else Window.MODE_WINDOWED
 	is_fullscreen = not is_fullscreen
 	window_menu.set_item_checked(Global.WindowMenu.FULLSCREEN_MODE, is_fullscreen)
+	get_tree().current_scene.set_mobile_fullscreen_safe_area()
 
 
 func project_menu_id_pressed(id: int) -> void:

@@ -38,6 +38,7 @@ var grid_selected: int = 0:
 		if grids.has(key):
 			load_grid_ui(grids[key])
 
+@onready var grids_count_slider: ValueSlider = $GridsCount
 @onready var grids_select_container: HFlowContainer = $GridsSelectContainer
 
 

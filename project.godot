@@ -1067,6 +1067,10 @@ mm_color_change_alpha={
 "deadzone": 0.2,
 "events": []
 }
+grayscale_view={
+"deadzone": 0.5,
+"events": []
+}
 
 [input_devices]
 

@@ -1,120 +1,124 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnjcs2l1ri38n"]
+[gd_scene format=3 uid="uid://dnjcs2l1ri38n"]
 
 [ext_resource type="Script" uid="uid://dy4j3c4fws8m" path="res://src/UI/Dialogs/ProjectProperties.gd" id="1_0n4uc"]
 [ext_resource type="Texture2D" uid="uid://fvgl2kl81v0h" path="res://assets/graphics/misc/search.svg" id="2_h0qhi"]
 
-[node name="ProjectProperties" type="AcceptDialog"]
+[node name="ProjectProperties" type="AcceptDialog" unique_id=1726090796]
 oversampling_override = 1.0
 title = "Project Properties"
 position = Vector2i(0, 36)
 size = Vector2i(300, 330)
 script = ExtResource("1_0n4uc")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1487218891]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 292.0
 offset_bottom = 280.0
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer" unique_id=208381282]
 layout_mode = 2
 columns = 2
 
-[node name="SizeLabel" type="Label" parent="VBoxContainer/GridContainer"]
+[node name="SizeLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=1304371628]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Size:"
 
-[node name="SizeValueLabel" type="Label" parent="VBoxContainer/GridContainer"]
+[node name="SizeValueLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=1983908098]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "64x64"
 
-[node name="ColorModeLabel" type="Label" parent="VBoxContainer/GridContainer"]
+[node name="ColorModeLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=4576633]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Color mode:"
 
-[node name="ColorModeValueLabel" type="Label" parent="VBoxContainer/GridContainer"]
+[node name="ColorModeValueLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=26883061]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "RGBA8"
 
-[node name="FramesLabel" type="Label" parent="VBoxContainer/GridContainer"]
+[node name="FramesLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=1641278413]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Frames:"
 
-[node name="FramesValueLabel" type="Label" parent="VBoxContainer/GridContainer"]
+[node name="FramesValueLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=787909465]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "1"
 
-[node name="LayersLabel" type="Label" parent="VBoxContainer/GridContainer"]
+[node name="LayersLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=534638043]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Layers:"
 
-[node name="LayersValueLabel" type="Label" parent="VBoxContainer/GridContainer"]
+[node name="LayersValueLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=1187052610]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "1"
 
-[node name="NameLabel" type="Label" parent="VBoxContainer/GridContainer"]
+[node name="NameLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=342871802]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Name:"
 
-[node name="NameLineEdit" type="LineEdit" parent="VBoxContainer/GridContainer"]
+[node name="NameLineEdit" type="LineEdit" parent="VBoxContainer/GridContainer" unique_id=792931128]
 layout_mode = 2
 placeholder_text = "Enter name... (Default \"untitled\")"
 
-[node name="UserDataLabel" type="Label" parent="VBoxContainer/GridContainer"]
+[node name="UserDataLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=844849061]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "User data:"
 
-[node name="UserDataTextEdit" type="TextEdit" parent="VBoxContainer/GridContainer"]
+[node name="UserDataTextEdit" type="TextEdit" parent="VBoxContainer/GridContainer" unique_id=371155840]
 layout_mode = 2
 size_flags_horizontal = 3
 scroll_fit_content_height = true
 
-[node name="TilesetsContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="TilesetsContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=2103412727]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TilesetsHeader" type="HBoxContainer" parent="VBoxContainer/TilesetsContainer"]
+[node name="TilesetsHeader" type="HBoxContainer" parent="VBoxContainer/TilesetsContainer" unique_id=321783819]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/TilesetsContainer/TilesetsHeader"]
+[node name="Label" type="Label" parent="VBoxContainer/TilesetsContainer/TilesetsHeader" unique_id=503743780]
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
 text = "Tilesets"
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TilesetsContainer/TilesetsHeader"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/TilesetsContainer/TilesetsHeader" unique_id=1646335172]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="FilterByNameEdit" type="LineEdit" parent="VBoxContainer/TilesetsContainer"]
+[node name="FilterByNameEdit" type="LineEdit" parent="VBoxContainer/TilesetsContainer" unique_id=190896135]
 unique_name_in_owner = true
 layout_mode = 2
 placeholder_text = "Filter by name"
 right_icon = ExtResource("2_h0qhi")
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/TilesetsContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/TilesetsContainer" unique_id=105788820]
 self_modulate = Color(0.6, 0.6, 0.6, 1)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TilesetsList" type="Tree" parent="VBoxContainer/TilesetsContainer/PanelContainer"]
+[node name="TilesetsList" type="Tree" parent="VBoxContainer/TilesetsContainer/PanelContainer" unique_id=493988161]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 3
 hide_root = true
+
+[node name="ExportTilesetFileDialog" type="FileDialog" parent="." unique_id=720414622 groups=["FileDialogs"]]
+access = 2
+filters = PackedStringArray("*.png ; PNG Image", "*.tres ; Godot TileSet Resource File")
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="text_changed" from="VBoxContainer/GridContainer/NameLineEdit" to="." method="_on_name_line_edit_text_changed"]
@@ -123,3 +127,4 @@ hide_root = true
 [connection signal="button_clicked" from="VBoxContainer/TilesetsContainer/PanelContainer/TilesetsList" to="." method="_on_tilesets_list_button_clicked"]
 [connection signal="item_activated" from="VBoxContainer/TilesetsContainer/PanelContainer/TilesetsList" to="." method="_on_tilesets_list_item_activated"]
 [connection signal="item_edited" from="VBoxContainer/TilesetsContainer/PanelContainer/TilesetsList" to="." method="_on_tilesets_list_item_edited"]
+[connection signal="file_selected" from="ExportTilesetFileDialog" to="." method="_on_export_tileset_file_dialog_file_selected"]
