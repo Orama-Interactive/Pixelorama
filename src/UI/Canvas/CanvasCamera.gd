@@ -98,8 +98,10 @@ func _input(event: InputEvent) -> void:
 		if dir != Vector2.ZERO and !_has_selection_tool():
 			offset = offset + (dir.rotated(camera_angle) / zoom) * CAMERA_SPEED_RATE
 
+
 func rotate_camera(dir: float) -> void:
 	camera_angle += PI / 180 * dir
+
 
 func zoom_camera(dir: float, event_pos := mouse_pos) -> void:
 	var viewport_size := viewport_container.size
