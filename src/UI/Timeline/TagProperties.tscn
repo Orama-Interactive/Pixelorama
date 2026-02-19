@@ -1,17 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6fyrnyt3663o"]
+[gd_scene load_steps=3 format=3 uid="uid://c6fyrnyt3663o"]
 
 [ext_resource type="Script" uid="uid://da66yrocd1l3g" path="res://src/UI/Timeline/TagProperties.gd" id="1_wbmaq"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="2_jh8b3"]
 
 [node name="TagProperties" type="ConfirmationDialog"]
 title = "Tag properties"
-size = Vector2i(303, 240)
+size = Vector2i(303, 311)
 script = ExtResource("1_wbmaq")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 295.0
-offset_bottom = 191.0
+offset_bottom = 262.0
 theme_override_constants/h_separation = 8
 theme_override_constants/v_separation = 8
 columns = 2
@@ -38,15 +39,24 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 color = Color(1, 0, 0, 1)
 
+[node name="DurationLabel" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Duration:"
+
+[node name="DurationSlider" parent="GridContainer" instance=ExtResource("2_jh8b3")]
+layout_mode = 2
+step = 0.01
+suffix = "sec"
+
 [node name="FromLabel" type="Label" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "From:"
 
-[node name="FromSpinBox" type="SpinBox" parent="GridContainer"]
+[node name="FromSlider" parent="GridContainer" instance=ExtResource("2_jh8b3")]
+custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-mouse_default_cursor_shape = 2
+theme_type_variation = &""
 min_value = 1.0
 value = 1.0
 allow_greater = true
@@ -56,10 +66,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "To:"
 
-[node name="ToSpinBox" type="SpinBox" parent="GridContainer"]
+[node name="ToSlider" parent="GridContainer" instance=ExtResource("2_jh8b3")]
+custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-mouse_default_cursor_shape = 2
+theme_type_variation = &""
 min_value = 1.0
 value = 1.0
 allow_greater = true
