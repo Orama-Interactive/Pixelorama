@@ -922,6 +922,8 @@ func _initialize_keychain() -> void:
 		&"next_project": Keychain.InputAction.new("", "Canvas"),
 		&"zoom_in": Keychain.InputAction.new("", "Canvas"),
 		&"zoom_out": Keychain.InputAction.new("", "Canvas"),
+		&"rotate_left": Keychain.InputAction.new("", "Canvas"),
+		&"rotate_right": Keychain.InputAction.new("", "Canvas"),
 		&"camera_left": Keychain.InputAction.new("", "Canvas"),
 		&"camera_right": Keychain.InputAction.new("", "Canvas"),
 		&"camera_up": Keychain.InputAction.new("", "Canvas"),
