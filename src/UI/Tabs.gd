@@ -78,3 +78,15 @@ func delete_tab(tab: int) -> void:
 			Global.current_project_index -= 1
 	if unsaved_changes_dialog.confirmed.is_connected(delete_tab):
 		unsaved_changes_dialog.confirmed.disconnect(delete_tab)
+
+
+func _can_drop_data(pos: Vector2, data) -> bool:
+	if typeof(data) != TYPE_ARRAY:
+		return false
+	if data[0] != "Frame":
+		return false
+	var hover_idx := get_tab_idx_at_point(pos)
+	if hover_idx >= 0 and hover_idx < Global.projects.size():
+		if hover_idx != current_tab:
+			current_tab = hover_idx
+	return false
