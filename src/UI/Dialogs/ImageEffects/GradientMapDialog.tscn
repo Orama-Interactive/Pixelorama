@@ -1,18 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjd5sjemyea4a"]
+[gd_scene format=3 uid="uid://cjd5sjemyea4a"]
 
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://bn4aw27dj7pwi" path="res://src/UI/Nodes/GradientEdit.tscn" id="2"]
 [ext_resource type="Script" uid="uid://duasprybsl7b2" path="res://src/UI/Dialogs/ImageEffects/GradientMapDialog.gd" id="3"]
 
-[node name="GradientMapDialog" instance=ExtResource("1")]
+[node name="GradientMapDialog" unique_id=1676743834 instance=ExtResource("1")]
 title = "Gradient Map"
 script = ExtResource("3")
 
-[node name="VBoxContainer" parent="." index="3"]
+[node name="VBoxContainer" parent="." index="2" unique_id=1773123238]
 offset_bottom = 342.0
 
-[node name="ShowAnimate" parent="VBoxContainer" index="0"]
+[node name="ShowAnimate" parent="VBoxContainer" index="0" unique_id=1452855547]
 visible = false
 
-[node name="GradientEdit" parent="VBoxContainer" index="2" instance=ExtResource("2")]
+[node name="GradientEdit" parent="VBoxContainer" index="2" unique_id=1789971382 instance=ExtResource("2")]
 layout_mode = 2

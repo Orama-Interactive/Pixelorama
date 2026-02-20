@@ -1,32 +1,32 @@
-[gd_scene load_steps=2 format=3 uid="uid://bs3dnnvnxyp68"]
+[gd_scene format=3 uid="uid://bs3dnnvnxyp68"]
 
 [ext_resource type="Script" uid="uid://celvwoogbqh5c" path="res://src/UI/Timeline/FrameProperties.gd" id="1"]
 
-[node name="FrameProperties" type="ConfirmationDialog"]
+[node name="FrameProperties" type="ConfirmationDialog" unique_id=1934216219]
 title = "Frame properties"
 size = Vector2i(224, 115)
 script = ExtResource("1")
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1006931699]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 216.0
 offset_bottom = 66.0
 columns = 2
 
-[node name="Frame" type="Label" parent="GridContainer"]
+[node name="Frame" type="Label" parent="GridContainer" unique_id=516839507]
 layout_mode = 2
 text = "Frame"
 
-[node name="FrameNum" type="Label" parent="GridContainer"]
+[node name="FrameNum" type="Label" parent="GridContainer" unique_id=809902154]
 layout_mode = 2
 text = "1"
 
-[node name="FrameDuration" type="Label" parent="GridContainer"]
+[node name="FrameDuration" type="Label" parent="GridContainer" unique_id=955521737]
 layout_mode = 2
 text = "Frame duration:"
 
-[node name="FrameTime" type="SpinBox" parent="GridContainer"]
+[node name="FrameTime" type="SpinBox" parent="GridContainer" unique_id=1478729542]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -36,13 +36,13 @@ value = 1.0
 allow_greater = true
 suffix = "x"
 
-[node name="UserDataLabel" type="Label" parent="GridContainer"]
+[node name="UserDataLabel" type="Label" parent="GridContainer" unique_id=294303177]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "User data:"
 
-[node name="UserDataTextEdit" type="TextEdit" parent="GridContainer"]
+[node name="UserDataTextEdit" type="TextEdit" parent="GridContainer" unique_id=1290376999]
 layout_mode = 2
 size_flags_horizontal = 3
 scroll_fit_content_height = true

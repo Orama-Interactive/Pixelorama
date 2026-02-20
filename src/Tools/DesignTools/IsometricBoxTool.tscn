@@ -1,13 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cop8ckecfyxli"]
+[gd_scene format=3 uid="uid://cop8ckecfyxli"]
 
 [ext_resource type="PackedScene" uid="uid://ubyatap3sylf" path="res://src/Tools/BaseDraw.tscn" id="1_a3u7o"]
 [ext_resource type="Script" uid="uid://8bbs5tywj2ya" path="res://src/Tools/DesignTools/IsometricBoxTool.gd" id="2_g8u0x"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="3_xw18e"]
 
-[node name="ToolOptions" instance=ExtResource("1_a3u7o")]
+[node name="ToolOptions" unique_id=2118272060 instance=ExtResource("1_a3u7o")]
 script = ExtResource("2_g8u0x")
 
-[node name="ThicknessSlider" parent="." index="2" instance=ExtResource("3_xw18e")]
+[node name="ThicknessSlider" parent="." index="2" unique_id=993746238 instance=ExtResource("3_xw18e")]
 layout_mode = 2
 min_value = 1.0
 value = 1.0
@@ -17,21 +17,21 @@ allow_global_input_events = true
 global_increment_action = "brush_size_increment"
 global_decrement_action = "brush_size_decrement"
 
-[node name="FillCheckbox" type="CheckBox" parent="." index="3"]
+[node name="FillCheckbox" type="CheckBox" parent="." index="3" unique_id=153226882]
 layout_mode = 2
 size_flags_horizontal = 0
 tooltip_text = "Fills the drawn shape with color, instead of drawing a hollow shape"
 mouse_default_cursor_shape = 2
 text = "Fill Shape"
 
-[node name="FillOptions" type="VBoxContainer" parent="." index="4"]
+[node name="FillOptions" type="VBoxContainer" parent="." index="4" unique_id=1537216363]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="FillOptions" index="0"]
+[node name="Label" type="Label" parent="FillOptions" index="0" unique_id=2120986562]
 layout_mode = 2
 text = "Edge Color"
 
-[node name="EdgeBehavior" type="OptionButton" parent="FillOptions" index="1"]
+[node name="EdgeBehavior" type="OptionButton" parent="FillOptions" index="1" unique_id=2147109645]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -47,7 +47,7 @@ popup/item_2/id = 2
 popup/item_3/text = "None"
 popup/item_3/id = 3
 
-[node name="ColorFromTool" type="CheckBox" parent="FillOptions" index="2"]
+[node name="ColorFromTool" type="CheckBox" parent="FillOptions" index="2" unique_id=906515588]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -55,11 +55,11 @@ size_flags_horizontal = 0
 mouse_default_cursor_shape = 2
 text = "From other tool"
 
-[node name="LeftFaceLabel" type="Label" parent="FillOptions" index="3"]
+[node name="LeftFaceLabel" type="Label" parent="FillOptions" index="3" unique_id=2088338163]
 layout_mode = 2
 text = "Left Face"
 
-[node name="LeftShadeOption" type="OptionButton" parent="FillOptions" index="4"]
+[node name="LeftShadeOption" type="OptionButton" parent="FillOptions" index="4" unique_id=835812370]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -70,7 +70,7 @@ popup/item_0/id = 0
 popup/item_1/text = "Darken"
 popup/item_1/id = 1
 
-[node name="LeftShadeSlider" parent="FillOptions" index="5" instance=ExtResource("3_xw18e")]
+[node name="LeftShadeSlider" parent="FillOptions" index="5" unique_id=839435554 instance=ExtResource("3_xw18e")]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 1.0
@@ -78,11 +78,11 @@ step = 0.01
 value = 0.5
 prefix = "Amount:"
 
-[node name="RightFaceLabel" type="Label" parent="FillOptions" index="6"]
+[node name="RightFaceLabel" type="Label" parent="FillOptions" index="6" unique_id=1386747304]
 layout_mode = 2
 text = "Right Face"
 
-[node name="RightShadeOption" type="OptionButton" parent="FillOptions" index="7"]
+[node name="RightShadeOption" type="OptionButton" parent="FillOptions" index="7" unique_id=708803817]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -93,7 +93,7 @@ popup/item_0/id = 0
 popup/item_1/text = "Darken"
 popup/item_1/id = 1
 
-[node name="RightShadeSlider" parent="FillOptions" index="8" instance=ExtResource("3_xw18e")]
+[node name="RightShadeSlider" parent="FillOptions" index="8" unique_id=593589170 instance=ExtResource("3_xw18e")]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 1.0
@@ -101,10 +101,10 @@ step = 0.01
 value = 0.5
 prefix = "Amount:"
 
-[node name="Brush" parent="." index="5"]
+[node name="Brush" parent="." index="5" unique_id=634582773]
 visible = false
 
-[node name="DoubleClickTimer" type="Timer" parent="." index="8"]
+[node name="DoubleClickTimer" type="Timer" parent="." index="8" unique_id=184725883]
 wait_time = 0.2
 one_shot = true
 

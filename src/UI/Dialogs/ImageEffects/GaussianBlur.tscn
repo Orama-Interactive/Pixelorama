@@ -1,37 +1,38 @@
-[gd_scene load_steps=5 format=3 uid="uid://beile55gp1bc"]
+[gd_scene format=3 uid="uid://beile55gp1bc"]
 
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1_cuu40"]
 [ext_resource type="Script" uid="uid://cxdxgy5xhcrcg" path="res://src/UI/Dialogs/ImageEffects/GaussianBlur.gd" id="2_37xhl"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="3_237k2"]
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="4_yprgi"]
 
-[node name="GaussianBlur" instance=ExtResource("1_cuu40")]
+[node name="GaussianBlur" unique_id=1069552875 instance=ExtResource("1_cuu40")]
 title = "Gaussian Blur"
 size = Vector2i(427, 437)
 script = ExtResource("2_37xhl")
 
-[node name="VBoxContainer" parent="." index="3"]
+[node name="VBoxContainer" parent="." index="2" unique_id=1773123238]
 offset_right = 419.0
 offset_bottom = 388.0
 
-[node name="ShowAnimate" parent="VBoxContainer" index="0"]
+[node name="ShowAnimate" parent="VBoxContainer" index="0" unique_id=1452855547]
 visible = false
 
-[node name="BlurOptions" type="GridContainer" parent="VBoxContainer" index="2"]
+[node name="BlurOptions" type="GridContainer" parent="VBoxContainer" index="2" unique_id=104790035]
 layout_mode = 2
 columns = 2
 
-[node name="BlurTypeLabel" type="Label" parent="VBoxContainer/BlurOptions" index="0"]
+[node name="BlurTypeLabel" type="Label" parent="VBoxContainer/BlurOptions" index="0" unique_id=544826844]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Blur type:"
 
-[node name="BlurType" type="OptionButton" parent="VBoxContainer/BlurOptions" index="1"]
+[node name="BlurType" type="OptionButton" parent="VBoxContainer/BlurOptions" index="1" unique_id=1318279768]
 layout_mode = 2
 size_flags_horizontal = 3
 selected = 0
 item_count = 4
 popup/item_0/text = "Xor's Gaussian Blur"
+popup/item_0/id = 0
 popup/item_1/text = "Monk's Multi-Pass Gaussian Blur"
 popup/item_1/id = 1
 popup/item_2/text = "NoDev's Single-Pass Gaussian Blur"
@@ -39,12 +40,12 @@ popup/item_2/id = 2
 popup/item_3/text = "NoDev's Multi-Pass Gaussian Blur"
 popup/item_3/id = 3
 
-[node name="BlurAmountLabel" type="Label" parent="VBoxContainer/BlurOptions" index="2"]
+[node name="BlurAmountLabel" type="Label" parent="VBoxContainer/BlurOptions" index="2" unique_id=362417502]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Blur amount:"
 
-[node name="BlurAmount" type="TextureProgressBar" parent="VBoxContainer/BlurOptions" index="3"]
+[node name="BlurAmount" type="TextureProgressBar" parent="VBoxContainer/BlurOptions" index="3" unique_id=2099666068]
 layout_mode = 2
 focus_mode = 2
 mouse_default_cursor_shape = 2
@@ -57,12 +58,12 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("3_237k2")
 
-[node name="BlurRadiusLabel" type="Label" parent="VBoxContainer/BlurOptions" index="4"]
+[node name="BlurRadiusLabel" type="Label" parent="VBoxContainer/BlurOptions" index="4" unique_id=301480874]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Blur radius:"
 
-[node name="BlurRadius" type="TextureProgressBar" parent="VBoxContainer/BlurOptions" index="5"]
+[node name="BlurRadius" type="TextureProgressBar" parent="VBoxContainer/BlurOptions" index="5" unique_id=1950433215]
 layout_mode = 2
 focus_mode = 2
 mouse_default_cursor_shape = 2
@@ -75,12 +76,12 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("3_237k2")
 
-[node name="BlurDirectionLabel" type="Label" parent="VBoxContainer/BlurOptions" index="6"]
+[node name="BlurDirectionLabel" type="Label" parent="VBoxContainer/BlurOptions" index="6" unique_id=1896444221]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Blur direction:"
 
-[node name="BlurDirection" parent="VBoxContainer/BlurOptions" index="7" instance=ExtResource("4_yprgi")]
+[node name="BlurDirection" parent="VBoxContainer/BlurOptions" index="7" unique_id=1190281163 instance=ExtResource("4_yprgi")]
 layout_mode = 2
 value = Vector2(1, 1)
 

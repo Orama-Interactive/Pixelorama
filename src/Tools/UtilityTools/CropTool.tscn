@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c35n21ii7onhe"]
+[gd_scene format=3 uid="uid://c35n21ii7onhe"]
 
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="2"]
@@ -6,30 +6,30 @@
 [ext_resource type="Texture2D" uid="uid://bgrq56ndc4ydj" path="res://assets/graphics/misc/unlocked_size.png" id="4"]
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="5"]
 
-[node name="ToolOptions" instance=ExtResource("1")]
+[node name="ToolOptions" unique_id=1159814523 instance=ExtResource("1")]
 script = ExtResource("3")
 
-[node name="ModeLabel" type="Label" parent="." index="2"]
+[node name="ModeLabel" type="Label" parent="." index="2" unique_id=804929409]
 layout_mode = 2
 text = "Mode:"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." index="3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="." index="3" unique_id=421001220]
 layout_mode = 2
 
-[node name="CropMode" type="OptionButton" parent="HBoxContainer" index="0"]
+[node name="CropMode" type="OptionButton" parent="HBoxContainer" index="0" unique_id=2106684403]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 clip_text = true
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "Margins"
 popup/item_0/id = 0
 popup/item_1/text = "Position + Size"
 popup/item_1/id = 1
 
-[node name="SizeLock" type="Button" parent="HBoxContainer" index="1"]
+[node name="SizeLock" type="Button" parent="HBoxContainer" index="1" unique_id=1878115841]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "Locked size
@@ -42,91 +42,91 @@ mouse_default_cursor_shape = 2
 toggle_mode = true
 icon = ExtResource("4")
 
-[node name="MarginsContainer" type="VBoxContainer" parent="." index="4"]
+[node name="MarginsContainer" type="VBoxContainer" parent="." index="4" unique_id=687858477]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="MarginsLabel" type="Label" parent="MarginsContainer" index="0"]
+[node name="MarginsLabel" type="Label" parent="MarginsContainer" index="0" unique_id=1754774436]
 layout_mode = 2
 text = "Margins:"
 
-[node name="Top" parent="MarginsContainer" index="1" instance=ExtResource("2")]
+[node name="Top" parent="MarginsContainer" index="1" unique_id=688061349 instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
 allow_greater = true
 allow_lesser = true
 prefix = "Top:"
 
-[node name="Bottom" parent="MarginsContainer" index="2" instance=ExtResource("2")]
+[node name="Bottom" parent="MarginsContainer" index="2" unique_id=739734631 instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
 allow_greater = true
 allow_lesser = true
 prefix = "Bottom:"
 
-[node name="Left" parent="MarginsContainer" index="3" instance=ExtResource("2")]
+[node name="Left" parent="MarginsContainer" index="3" unique_id=1074616429 instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
 allow_greater = true
 allow_lesser = true
 prefix = "Left:"
 
-[node name="Right" parent="MarginsContainer" index="4" instance=ExtResource("2")]
+[node name="Right" parent="MarginsContainer" index="4" unique_id=1345948867 instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
 allow_greater = true
 allow_lesser = true
 prefix = "Right:"
 
-[node name="RatioContainer" type="VBoxContainer" parent="." index="5"]
+[node name="RatioContainer" type="VBoxContainer" parent="." index="5" unique_id=530048396]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="AspectRatioLabel" type="Label" parent="RatioContainer" index="0"]
+[node name="AspectRatioLabel" type="Label" parent="RatioContainer" index="0" unique_id=898187992]
 layout_mode = 2
 text = "Aspect Ratio:"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="RatioContainer" index="1"]
+[node name="HBoxContainer" type="HBoxContainer" parent="RatioContainer" index="1" unique_id=533082050]
 layout_mode = 2
 
-[node name="RatioX" parent="RatioContainer/HBoxContainer" index="0" instance=ExtResource("2")]
+[node name="RatioX" parent="RatioContainer/HBoxContainer" index="0" unique_id=1522669245 instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
 min_value = 1.0
 value = 1.0
 allow_greater = true
 
-[node name="Label" type="Label" parent="RatioContainer/HBoxContainer" index="1"]
+[node name="Label" type="Label" parent="RatioContainer/HBoxContainer" index="1" unique_id=1224775819]
 layout_mode = 2
 text = ":"
 
-[node name="RatioY" parent="RatioContainer/HBoxContainer" index="2" instance=ExtResource("2")]
+[node name="RatioY" parent="RatioContainer/HBoxContainer" index="2" unique_id=1813607048 instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
 min_value = 1.0
 value = 1.0
 allow_greater = true
 
-[node name="PosSizeContainer" type="VBoxContainer" parent="." index="6"]
+[node name="PosSizeContainer" type="VBoxContainer" parent="." index="6" unique_id=1989866607]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="PositionLabel" type="Label" parent="PosSizeContainer" index="0"]
+[node name="PositionLabel" type="Label" parent="PosSizeContainer" index="0" unique_id=299283377]
 layout_mode = 2
 text = "Position:"
 
-[node name="Position" parent="PosSizeContainer" index="1" instance=ExtResource("5")]
+[node name="Position" parent="PosSizeContainer" index="1" unique_id=116509928 instance=ExtResource("5")]
 unique_name_in_owner = true
 layout_mode = 2
 allow_greater = true
 allow_lesser = true
 
-[node name="SizeLabel" type="Label" parent="PosSizeContainer" index="2"]
+[node name="SizeLabel" type="Label" parent="PosSizeContainer" index="2" unique_id=196994721]
 layout_mode = 2
 text = "Size:"
 
-[node name="Size" parent="PosSizeContainer" index="3" instance=ExtResource("5")]
+[node name="Size" parent="PosSizeContainer" index="3" unique_id=220993121 instance=ExtResource("5")]
 unique_name_in_owner = true
 layout_mode = 2
 value = Vector2(1, 1)
@@ -136,12 +136,12 @@ show_ratio = true
 prefix_x = "Width:"
 prefix_y = "Height:"
 
-[node name="Apply" type="Button" parent="." index="7"]
+[node name="Apply" type="Button" parent="." index="7" unique_id=211966480]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Apply"
 
-[node name="DimensionsLabel" type="Label" parent="." index="8"]
+[node name="DimensionsLabel" type="Label" parent="." index="8" unique_id=552473952]
 unique_name_in_owner = true
 layout_mode = 2
 

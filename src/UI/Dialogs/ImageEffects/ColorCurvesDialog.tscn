@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cthknpr74lawl"]
+[gd_scene format=3 uid="uid://cthknpr74lawl"]
 
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1_4g7xo"]
 [ext_resource type="Script" uid="uid://3trpt1yheuo1" path="res://src/UI/Dialogs/ImageEffects/ColorCurvesDialog.gd" id="2_xkivc"]
@@ -8,27 +8,27 @@
 _data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), 1.0, 0.0, 1, 0]
 point_count = 2
 
-[node name="ColorCurvesDialog" instance=ExtResource("1_4g7xo")]
+[node name="ColorCurvesDialog" unique_id=279970028 instance=ExtResource("1_4g7xo")]
 title = "Color Curves"
 size = Vector2i(362, 481)
 script = ExtResource("2_xkivc")
 
-[node name="VBoxContainer" parent="." index="3"]
+[node name="VBoxContainer" parent="." index="2" unique_id=1773123238]
 offset_bottom = 432.0
 
-[node name="ShowAnimate" parent="VBoxContainer" index="0"]
+[node name="ShowAnimate" parent="VBoxContainer" index="0" unique_id=1452855547]
 visible = false
 
-[node name="ColorOptions" type="GridContainer" parent="VBoxContainer" index="3"]
+[node name="ColorOptions" type="GridContainer" parent="VBoxContainer" index="3" unique_id=64416315]
 layout_mode = 2
 columns = 2
 
-[node name="ChannelLabel" type="Label" parent="VBoxContainer/ColorOptions" index="0"]
+[node name="ChannelLabel" type="Label" parent="VBoxContainer/ColorOptions" index="0" unique_id=268323767]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Channel:"
 
-[node name="ChannelOptionButton" type="OptionButton" parent="VBoxContainer/ColorOptions" index="1"]
+[node name="ChannelOptionButton" type="OptionButton" parent="VBoxContainer/ColorOptions" index="1" unique_id=497885469]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -36,6 +36,7 @@ mouse_default_cursor_shape = 2
 selected = 0
 item_count = 8
 popup/item_0/text = "RGB"
+popup/item_0/id = 0
 popup/item_1/text = "Red"
 popup/item_1/id = 1
 popup/item_2/text = "Green"
@@ -51,7 +52,7 @@ popup/item_6/id = 6
 popup/item_7/text = "Value"
 popup/item_7/id = 7
 
-[node name="CurveEdit" type="VBoxContainer" parent="VBoxContainer" index="4"]
+[node name="CurveEdit" type="VBoxContainer" parent="VBoxContainer" index="4" unique_id=760438900]
 custom_minimum_size = Vector2(32, 150)
 layout_mode = 2
 size_flags_vertical = 3

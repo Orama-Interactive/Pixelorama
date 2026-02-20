@@ -1,8 +1,6 @@
-[gd_resource type="Resource" script_class="AImgIOCRC32" load_steps=2 format=3 uid="uid://byrkfj6hsea5l"]
+[gd_resource type="Resource" script_class="AImgIOCRC32" format=3 uid="uid://byrkfj6hsea5l"]
 
 [ext_resource type="Script" uid="uid://bdrwi3rt1gvr6" path="res://addons/aimg_io/crc32.gd" id="1"]
 
 [resource]
 script = ExtResource("1")
-reversed_polynomial = 3988292384
-mask = 4294967295

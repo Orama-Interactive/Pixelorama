@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bnpb1aip3wdvw"]
+[gd_scene format=3 uid="uid://bnpb1aip3wdvw"]
 
 [ext_resource type="Script" uid="uid://qtjfdid13awe" path="res://src/UI/Dialogs/SplashDialog.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://d1oxrkwndy5fi" path="res://assets/graphics/timeline/move_arrow.png" id="3"]
@@ -42,14 +42,14 @@ font = SubResource("FontVariation_jexkq")
 [sub_resource type="LabelSettings" id="LabelSettings_32icc"]
 font_size = 12
 
-[node name="SplashDialog" type="AcceptDialog"]
+[node name="SplashDialog" type="AcceptDialog" unique_id=2039648546]
 canvas_item_default_texture_filter = 0
 oversampling_override = 1.0
 position = Vector2i(0, 36)
 size = Vector2i(758, 650)
 script = ExtResource("1")
 
-[node name="Contents" type="VBoxContainer" parent="."]
+[node name="Contents" type="VBoxContainer" parent="." unique_id=770203629]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -59,14 +59,14 @@ offset_right = -8.0
 offset_bottom = -49.0
 theme_override_constants/separation = 8
 
-[node name="SplashArt" type="TextureRect" parent="Contents"]
+[node name="SplashArt" type="TextureRect" parent="Contents" unique_id=847139683]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ChangeArtBtnLeft" type="Button" parent="Contents/SplashArt" groups=["UIButtons"]]
+[node name="ChangeArtBtnLeft" type="Button" parent="Contents/SplashArt" unique_id=1616739246 groups=["UIButtons"]]
 layout_direction = 2
 layout_mode = 0
 anchor_top = 0.5
@@ -81,7 +81,7 @@ theme_override_styles/pressed = SubResource("5")
 theme_override_styles/hover = SubResource("4")
 theme_override_styles/focus = SubResource("5")
 
-[node name="TextureRect" type="TextureRect" parent="Contents/SplashArt/ChangeArtBtnLeft"]
+[node name="TextureRect" type="TextureRect" parent="Contents/SplashArt/ChangeArtBtnLeft" unique_id=624534181]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -95,7 +95,7 @@ texture = ExtResource("3")
 expand_mode = 1
 flip_h = true
 
-[node name="ChangeArtBtnRight" type="Button" parent="Contents/SplashArt" groups=["UIButtons"]]
+[node name="ChangeArtBtnRight" type="Button" parent="Contents/SplashArt" unique_id=1637809233 groups=["UIButtons"]]
 layout_direction = 2
 layout_mode = 0
 anchor_left = 1.0
@@ -112,7 +112,7 @@ theme_override_styles/pressed = SubResource("5")
 theme_override_styles/hover = SubResource("5")
 theme_override_styles/focus = SubResource("5")
 
-[node name="TextureRect" type="TextureRect" parent="Contents/SplashArt/ChangeArtBtnRight"]
+[node name="TextureRect" type="TextureRect" parent="Contents/SplashArt/ChangeArtBtnRight" unique_id=1965713160]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -125,14 +125,14 @@ offset_bottom = 7.0
 texture = ExtResource("3")
 expand_mode = 1
 
-[node name="Overlay" type="HBoxContainer" parent="Contents/SplashArt"]
+[node name="Overlay" type="HBoxContainer" parent="Contents/SplashArt" unique_id=156260189]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 128.0
 offset_bottom = 40.0
 
-[node name="PixeloramaIcon" type="TextureRect" parent="Contents/SplashArt/Overlay"]
+[node name="PixeloramaIcon" type="TextureRect" parent="Contents/SplashArt/Overlay" unique_id=769467738]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -140,7 +140,7 @@ size_flags_vertical = 0
 texture = ExtResource("4")
 expand_mode = 1
 
-[node name="VersionText" type="TextureRect" parent="Contents/SplashArt/Overlay"]
+[node name="VersionText" type="TextureRect" parent="Contents/SplashArt/Overlay" unique_id=56130030]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(84, 12)
 layout_mode = 2
@@ -148,7 +148,7 @@ size_flags_vertical = 4
 texture = ExtResource("5")
 stretch_mode = 4
 
-[node name="Ambient" type="TextureRect" parent="Contents/SplashArt"]
+[node name="Ambient" type="TextureRect" parent="Contents/SplashArt" unique_id=308070042]
 unique_name_in_owner = true
 show_behind_parent = true
 layout_mode = 1
@@ -159,15 +159,15 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ArtBy" type="HBoxContainer" parent="Contents"]
+[node name="ArtBy" type="HBoxContainer" parent="Contents" unique_id=165411725]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="SpacerControl" type="Control" parent="Contents/ArtBy"]
+[node name="SpacerControl" type="Control" parent="Contents/ArtBy" unique_id=539103603]
 custom_minimum_size = Vector2(4, 0)
 layout_mode = 2
 
-[node name="ArtistName" type="Button" parent="Contents/ArtBy"]
+[node name="ArtistName" type="Button" parent="Contents/ArtBy" unique_id=1270407984]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "https://twitter.com/WishdreamStar"
@@ -175,60 +175,60 @@ mouse_default_cursor_shape = 2
 text = "Art by: %s"
 flat = true
 
-[node name="MarginContainer" type="MarginContainer" parent="Contents"]
+[node name="MarginContainer" type="MarginContainer" parent="Contents" unique_id=27154966]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_right = 4
 
-[node name="ButtonsPatronsLogos" type="HBoxContainer" parent="Contents/MarginContainer"]
+[node name="ButtonsPatronsLogos" type="HBoxContainer" parent="Contents/MarginContainer" unique_id=122713185]
 layout_mode = 2
 
-[node name="Buttons" type="VBoxContainer" parent="Contents/MarginContainer/ButtonsPatronsLogos"]
+[node name="Buttons" type="VBoxContainer" parent="Contents/MarginContainer/ButtonsPatronsLogos" unique_id=637432920]
 custom_minimum_size = Vector2(290, 0)
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 10
 
-[node name="NewBtn" type="Button" parent="Contents/MarginContainer/ButtonsPatronsLogos/Buttons"]
+[node name="NewBtn" type="Button" parent="Contents/MarginContainer/ButtonsPatronsLogos/Buttons" unique_id=1308783991]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "New"
 
-[node name="OpenBtn" type="Button" parent="Contents/MarginContainer/ButtonsPatronsLogos/Buttons"]
+[node name="OpenBtn" type="Button" parent="Contents/MarginContainer/ButtonsPatronsLogos/Buttons" unique_id=129651851]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Open"
 
-[node name="OpenLastBtn" type="Button" parent="Contents/MarginContainer/ButtonsPatronsLogos/Buttons"]
+[node name="OpenLastBtn" type="Button" parent="Contents/MarginContainer/ButtonsPatronsLogos/Buttons" unique_id=740398061]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Open Last Project"
 
-[node name="VSeparator" type="VSeparator" parent="Contents/MarginContainer/ButtonsPatronsLogos"]
+[node name="VSeparator" type="VSeparator" parent="Contents/MarginContainer/ButtonsPatronsLogos" unique_id=853318799]
 layout_mode = 2
 
-[node name="Info" type="HBoxContainer" parent="Contents/MarginContainer/ButtonsPatronsLogos"]
+[node name="Info" type="HBoxContainer" parent="Contents/MarginContainer/ButtonsPatronsLogos" unique_id=1674992536]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SpacerControl" type="Control" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info"]
+[node name="SpacerControl" type="Control" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info" unique_id=2037059274]
 custom_minimum_size = Vector2(6, 0)
 layout_mode = 2
 
-[node name="PatronContainer" type="VBoxContainer" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info"]
+[node name="PatronContainer" type="VBoxContainer" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info" unique_id=693078769]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PlatinumSponsor" type="Label" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/PatronContainer"]
+[node name="PlatinumSponsor" type="Label" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/PatronContainer" unique_id=1305732871]
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_rbw0r")
 text = "Platinum Sponsor:"
 label_settings = SubResource("LabelSettings_ehexy")
 
-[node name="PlatinumSponsor2" type="Label" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/PatronContainer"]
+[node name="PlatinumSponsor2" type="Label" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/PatronContainer" unique_id=1248665888]
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_rbw0r")
@@ -236,14 +236,14 @@ text = "Astropulse
 "
 label_settings = SubResource("LabelSettings_rbw0r")
 
-[node name="PatronsLabel" type="Label" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/PatronContainer"]
+[node name="PatronsLabel" type="Label" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/PatronContainer" unique_id=1956038801]
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_rbw0r")
 text = "Patrons:"
 label_settings = SubResource("LabelSettings_uckow")
 
-[node name="PatronsLabel2" type="Label" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/PatronContainer"]
+[node name="PatronsLabel2" type="Label" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/PatronContainer" unique_id=225994837]
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_rbw0r")
@@ -251,42 +251,42 @@ text = "ShikadiGum
 Hugo Locurcio
 Tronexer"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info" unique_id=908129450]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 5
 alignment = 2
 
-[node name="Branding" type="HBoxContainer" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/VBoxContainer"]
+[node name="Branding" type="HBoxContainer" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/VBoxContainer" unique_id=170192114]
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 2
 
-[node name="Links" type="VBoxContainer" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/VBoxContainer/Branding"]
+[node name="Links" type="VBoxContainer" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/VBoxContainer/Branding" unique_id=526362078]
 layout_mode = 2
 
-[node name="GithubButton" type="TextureButton" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links"]
+[node name="GithubButton" type="TextureButton" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links" unique_id=1962599931]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("10")
 
-[node name="DiscordButton" type="TextureButton" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links"]
+[node name="DiscordButton" type="TextureButton" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links" unique_id=1042177320]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("9")
 
-[node name="PatreonButton" type="TextureButton" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links"]
+[node name="PatreonButton" type="TextureButton" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info/VBoxContainer/Branding/Links" unique_id=3672648]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource("11")
 
-[node name="CopyrightLabel" type="Label" parent="Contents"]
+[node name="CopyrightLabel" type="Label" parent="Contents" unique_id=104128794]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "©2019-present by Orama Interactive and contributors"
 label_settings = SubResource("LabelSettings_32icc")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Contents/CopyrightLabel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Contents/CopyrightLabel" unique_id=458300439]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -297,7 +297,7 @@ size_flags_vertical = 0
 theme_override_constants/separation = 0
 alignment = 2
 
-[node name="ShowOnStartup" type="CheckBox" parent="Contents/CopyrightLabel/HBoxContainer"]
+[node name="ShowOnStartup" type="CheckBox" parent="Contents/CopyrightLabel/HBoxContainer" unique_id=1058130992]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0

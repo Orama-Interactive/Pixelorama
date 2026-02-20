@@ -1,42 +1,55 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0nuukjakmai2"]
+[gd_scene format=3 uid="uid://c0nuukjakmai2"]
 
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="1"]
 [ext_resource type="Script" uid="uid://c6o3x53fp0qcj" path="res://src/UI/Canvas/TileMode.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="2_ul2eq"]
 [ext_resource type="Script" uid="uid://cwchdmm147r0e" path="res://src/UI/Dialogs/TileModeOffsetsDialog.gd" id="3"]
+[ext_resource type="Shader" uid="uid://c50kmfvf635kb" path="res://src/Shaders/TransparentChecker.gdshader" id="5_kas5s"]
 
 [sub_resource type="CanvasItemMaterial" id="1"]
 blend_mode = 4
 
-[node name="TileModeOffsetsDialog" type="ConfirmationDialog"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fojx5"]
+shader = ExtResource("5_kas5s")
+shader_parameter/size = 10.0
+shader_parameter/alpha = 1.0
+shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
+shader_parameter/color2 = Color(1, 1, 1, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/scale = Vector2(0, 0)
+shader_parameter/rect_size = Vector2(200, 200)
+shader_parameter/follow_movement = false
+shader_parameter/follow_scale = false
+
+[node name="TileModeOffsetsDialog" type="ConfirmationDialog" unique_id=1946085161]
 canvas_item_default_texture_filter = 0
 title = "Tile Mode Offsets"
 position = Vector2i(0, 36)
 size = Vector2i(600, 536)
 script = ExtResource("3")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1384051848]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 592.0
 offset_bottom = 487.0
 
-[node name="TileModeOffsets" type="Label" parent="VBoxContainer"]
+[node name="TileModeOffsets" type="Label" parent="VBoxContainer" unique_id=573880438]
 layout_mode = 2
 text = "Tile Mode Offsets"
 
-[node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
+[node name="OptionsContainer" type="GridContainer" parent="VBoxContainer" unique_id=791997678]
 layout_mode = 2
 theme_override_constants/h_separation = 2
 theme_override_constants/v_separation = 4
 columns = 2
 
-[node name="XBasisLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
+[node name="XBasisLabel" type="Label" parent="VBoxContainer/OptionsContainer" unique_id=1915692134]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "X-basis:"
 
-[node name="XBasis" parent="VBoxContainer/OptionsContainer" instance=ExtResource("2_ul2eq")]
+[node name="XBasis" parent="VBoxContainer/OptionsContainer" unique_id=599009842 instance=ExtResource("2_ul2eq")]
 layout_mode = 2
 size_flags_horizontal = 3
 allow_greater = true
@@ -44,12 +57,12 @@ allow_lesser = true
 suffix_x = "px"
 suffix_y = "px"
 
-[node name="YBasisLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
+[node name="YBasisLabel" type="Label" parent="VBoxContainer/OptionsContainer" unique_id=1001606608]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Y-basis:"
 
-[node name="YBasis" parent="VBoxContainer/OptionsContainer" instance=ExtResource("2_ul2eq")]
+[node name="YBasis" parent="VBoxContainer/OptionsContainer" unique_id=1156313384 instance=ExtResource("2_ul2eq")]
 layout_mode = 2
 size_flags_horizontal = 3
 allow_greater = true
@@ -57,58 +70,58 @@ allow_lesser = true
 suffix_x = "px"
 suffix_y = "px"
 
-[node name="MaskingLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
+[node name="MaskingLabel" type="Label" parent="VBoxContainer/OptionsContainer" unique_id=1731481801]
 layout_mode = 2
 text = "Masking:"
 
-[node name="Masking" type="CheckButton" parent="VBoxContainer/OptionsContainer"]
+[node name="Masking" type="CheckButton" parent="VBoxContainer/OptionsContainer" unique_id=1570770726]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1063873817]
 layout_mode = 2
 
-[node name="Reset" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Reset" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1276991834]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Default"
 
-[node name="Isometric" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Isometric" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=947693603]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Isometric"
 
-[node name="HexagonalPointyTop" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="HexagonalPointyTop" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=605272800]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Hexagonal (pointy-top)"
 
-[node name="HexagonalFlatTop" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="HexagonalFlatTop" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=506195176]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Hexagonal (flat-top)"
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer" unique_id=2041981438]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Preview" type="Control" parent="VBoxContainer/AspectRatioContainer"]
+[node name="Preview" type="Control" parent="VBoxContainer/AspectRatioContainer" unique_id=36828862]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 
-[node name="TileMode" type="Node2D" parent="VBoxContainer/AspectRatioContainer/Preview"]
+[node name="TileMode" type="Node2D" parent="VBoxContainer/AspectRatioContainer/Preview" unique_id=30894503]
 material = SubResource("1")
 script = ExtResource("2")
 
-[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" instance=ExtResource("1")]
+[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" unique_id=1641053658 instance=ExtResource("1")]
 show_behind_parent = true
+material = SubResource("ShaderMaterial_fojx5")
 layout_mode = 0
-anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 

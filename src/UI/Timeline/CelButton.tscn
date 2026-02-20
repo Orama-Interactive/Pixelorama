@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dw7ci3uixjuev"]
+[gd_scene format=3 uid="uid://dw7ci3uixjuev"]
 
 [ext_resource type="Script" uid="uid://dgc2ea2ye53p8" path="res://src/UI/Timeline/CelButton.gd" id="1_iewgo"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2_mi8wp"]
@@ -17,7 +17,7 @@ shader_parameter/rect_size = Vector2(24, 24)
 shader_parameter/follow_movement = false
 shader_parameter/follow_scale = false
 
-[node name="CelButton" type="Button"]
+[node name="CelButton" type="Button" unique_id=1806832353]
 custom_minimum_size = Vector2(36, 36)
 offset_right = 36.0
 offset_bottom = 36.0
@@ -30,7 +30,7 @@ toggle_mode = true
 button_mask = 7
 script = ExtResource("1_iewgo")
 
-[node name="UIColorRect" type="ColorRect" parent="."]
+[node name="UIColorRect" type="ColorRect" parent="." unique_id=1365619820]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -40,7 +40,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
-[node name="Linked" type="ColorRect" parent="."]
+[node name="Linked" type="ColorRect" parent="." unique_id=274019792]
 visible = false
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 1
@@ -56,7 +56,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.4, 1, 0.4, 1)
 
-[node name="CelTexture" type="TextureRect" parent="."]
+[node name="CelTexture" type="TextureRect" parent="." unique_id=2135915997]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -72,19 +72,17 @@ size_flags_vertical = 0
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TransparentChecker" parent="CelTexture" instance=ExtResource("2_mi8wp")]
+[node name="TransparentChecker" parent="CelTexture" unique_id=329876372 instance=ExtResource("2_mi8wp")]
 show_behind_parent = true
 material = SubResource("1")
-layout_direction = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 
-[node name="ZIndexIndicator" type="TextureRect" parent="."]
+[node name="ZIndexIndicator" type="TextureRect" parent="." unique_id=657643632]
 visible = false
 layout_mode = 1
 anchors_preset = 3
@@ -101,7 +99,7 @@ grow_vertical = 0
 texture = ExtResource("4_64heq")
 stretch_mode = 5
 
-[node name="PopupMenu" type="PopupMenu" parent="."]
+[node name="PopupMenu" type="PopupMenu" parent="." unique_id=1219159384]
 item_count = 1
 item_0/text = "Properties"
 item_0/id = 0

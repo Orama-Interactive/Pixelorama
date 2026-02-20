@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cxhs8qy5ilufv"]
+[gd_scene format=3 uid="uid://cxhs8qy5ilufv"]
 
 [ext_resource type="Script" uid="uid://b3cwrpq6hfckk" path="res://src/UI/ReferenceImages/ReferencesPanel.gd" id="1"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="2_1qu4x"]
@@ -18,7 +18,7 @@ events = [SubResource("InputEventAction_unp5j")]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_adw61"]
 
-[node name="Reference Images" type="PanelContainer"]
+[node name="Reference Images" type="PanelContainer" unique_id=1910121871]
 custom_minimum_size = Vector2(300, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,35 +27,35 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1913945326]
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="Container" type="VBoxContainer" parent="ScrollContainer"]
+[node name="Container" type="VBoxContainer" parent="ScrollContainer" unique_id=346113183]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Header" type="HBoxContainer" parent="ScrollContainer/Container"]
+[node name="Header" type="HBoxContainer" parent="ScrollContainer/Container" unique_id=640638121]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="ScrollContainer/Container/Header"]
+[node name="Label" type="Label" parent="ScrollContainer/Container/Header" unique_id=2106618956]
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
 text = "Reference Images"
 
-[node name="Tip" type="Label" parent="ScrollContainer/Container"]
+[node name="Tip" type="Label" parent="ScrollContainer/Container" unique_id=1667876678]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 text = "Select an image below to change its properties.
 Note that you cannot draw while a reference image is selected."
 autowrap_mode = 2
 
-[node name="Tools" type="HBoxContainer" parent="ScrollContainer/Container"]
+[node name="Tools" type="HBoxContainer" parent="ScrollContainer/Container" unique_id=741164240]
 layout_mode = 2
 
-[node name="MoveImageLeftBtn" type="Button" parent="ScrollContainer/Container/Tools" groups=["UIButtons"]]
+[node name="MoveImageLeftBtn" type="Button" parent="ScrollContainer/Container/Tools" unique_id=325721617 groups=["UIButtons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
@@ -65,7 +65,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_uucm4")
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Container/Tools/MoveImageLeftBtn"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Container/Tools/MoveImageLeftBtn" unique_id=895397785]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -78,7 +78,7 @@ offset_bottom = 5.5
 texture = ExtResource("2_uqbp6")
 flip_h = true
 
-[node name="MoveImageRightBtn" type="Button" parent="ScrollContainer/Container/Tools" groups=["UIButtons"]]
+[node name="MoveImageRightBtn" type="Button" parent="ScrollContainer/Container/Tools" unique_id=1606810987 groups=["UIButtons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
@@ -88,7 +88,7 @@ focus_mode = 0
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_uucm4")
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Container/Tools/MoveImageRightBtn"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Container/Tools/MoveImageRightBtn" unique_id=2011126893]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -100,14 +100,14 @@ offset_right = 7.5
 offset_bottom = 5.5
 texture = ExtResource("2_uqbp6")
 
-[node name="Spacer" type="Control" parent="ScrollContainer/Container/Tools"]
+[node name="Spacer" type="Control" parent="ScrollContainer/Container/Tools" unique_id=1284902068]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TransformTools" type="HBoxContainer" parent="ScrollContainer/Container/Tools"]
+[node name="TransformTools" type="HBoxContainer" parent="ScrollContainer/Container/Tools" unique_id=2059969212]
 layout_mode = 2
 
-[node name="Select" type="Button" parent="ScrollContainer/Container/Tools/TransformTools" groups=["UIButtons"]]
+[node name="Select" type="Button" parent="ScrollContainer/Container/Tools/TransformTools" unique_id=2086598219 groups=["UIButtons"]]
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -119,7 +119,7 @@ button_pressed = true
 button_group = SubResource("ButtonGroup_adw61")
 shortcut = SubResource("Shortcut_uucm4")
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Container/Tools/TransformTools/Select"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Container/Tools/TransformTools/Select" unique_id=2074858137]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -134,7 +134,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_us8st")
 
-[node name="Move" type="Button" parent="ScrollContainer/Container/Tools/TransformTools" groups=["UIButtons"]]
+[node name="Move" type="Button" parent="ScrollContainer/Container/Tools/TransformTools" unique_id=1010360614 groups=["UIButtons"]]
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -145,7 +145,7 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_adw61")
 shortcut = SubResource("Shortcut_uucm4")
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Container/Tools/TransformTools/Move"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Container/Tools/TransformTools/Move" unique_id=964923268]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -160,7 +160,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("4_8mlcg")
 
-[node name="Rotate" type="Button" parent="ScrollContainer/Container/Tools/TransformTools" groups=["UIButtons"]]
+[node name="Rotate" type="Button" parent="ScrollContainer/Container/Tools/TransformTools" unique_id=1887348652 groups=["UIButtons"]]
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -171,7 +171,7 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_adw61")
 shortcut = SubResource("Shortcut_uucm4")
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Container/Tools/TransformTools/Rotate"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Container/Tools/TransformTools/Rotate" unique_id=2053129697]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -186,7 +186,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("5_ifey7")
 
-[node name="Scale" type="Button" parent="ScrollContainer/Container/Tools/TransformTools" groups=["UIButtons"]]
+[node name="Scale" type="Button" parent="ScrollContainer/Container/Tools/TransformTools" unique_id=1466428717 groups=["UIButtons"]]
 custom_minimum_size = Vector2(31, 31)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -197,7 +197,7 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_adw61")
 shortcut = SubResource("Shortcut_uucm4")
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Container/Tools/TransformTools/Scale"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/Container/Tools/TransformTools/Scale" unique_id=502800015]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -212,13 +212,13 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_7v0q5")
 
-[node name="Images" type="Panel" parent="ScrollContainer/Container"]
+[node name="Images" type="Panel" parent="ScrollContainer/Container" unique_id=819465132]
 clip_contents = true
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 mouse_filter = 1
 
-[node name="ImportTip" type="Label" parent="ScrollContainer/Container/Images"]
+[node name="ImportTip" type="Label" parent="ScrollContainer/Container/Images" unique_id=1582779925]
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -229,7 +229,7 @@ grow_vertical = 2
 text = "When opening an image, it may be imported as a reference."
 autowrap_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ScrollContainer/Container/Images"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ScrollContainer/Container/Images" unique_id=1509542747]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -237,31 +237,31 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="List" type="HFlowContainer" parent="ScrollContainer/Container/Images/ScrollContainer"]
+[node name="List" type="HFlowContainer" parent="ScrollContainer/Container/Images/ScrollContainer" unique_id=662381946]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ReferenceEdit" type="VBoxContainer" parent="ScrollContainer/Container" node_paths=PackedStringArray("references_panel")]
+[node name="ReferenceEdit" type="VBoxContainer" parent="ScrollContainer/Container" unique_id=1402913626 node_paths=PackedStringArray("references_panel")]
 layout_mode = 2
 script = ExtResource("3_skjtb")
 references_panel = NodePath("../../..")
 
-[node name="HSeparator" type="HSeparator" parent="ScrollContainer/Container/ReferenceEdit"]
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/Container/ReferenceEdit" unique_id=558166546]
 layout_mode = 2
 
-[node name="ImageOptions" type="HBoxContainer" parent="ScrollContainer/Container/ReferenceEdit"]
+[node name="ImageOptions" type="HBoxContainer" parent="ScrollContainer/Container/ReferenceEdit" unique_id=2128356201]
 layout_mode = 2
 
-[node name="WarningLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/ImageOptions"]
+[node name="WarningLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/ImageOptions" unique_id=1216242850]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.972549, 1, 0.545098, 1)
 text = "Image not found!"
 text_overrun_behavior = 3
 
-[node name="ImagePath" type="Button" parent="ScrollContainer/Container/ReferenceEdit/ImageOptions"]
+[node name="ImagePath" type="Button" parent="ScrollContainer/Container/ReferenceEdit/ImageOptions" unique_id=1116905021]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -270,118 +270,118 @@ text = "Image Path"
 alignment = 0
 text_overrun_behavior = 3
 
-[node name="Remove" type="Button" parent="ScrollContainer/Container/ReferenceEdit/ImageOptions"]
+[node name="Remove" type="Button" parent="ScrollContainer/Container/ReferenceEdit/ImageOptions" unique_id=840500749]
 layout_mode = 2
 tooltip_text = "Hold Shift while pressing to instantly remove."
 theme_override_colors/font_color = Color(1, 0.490196, 0.419608, 1)
 text = "Remove"
 
-[node name="Options" type="GridContainer" parent="ScrollContainer/Container/ReferenceEdit"]
+[node name="Options" type="GridContainer" parent="ScrollContainer/Container/ReferenceEdit" unique_id=859156728]
 layout_mode = 2
 size_flags_horizontal = 3
 columns = 2
 
-[node name="TransformLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options"]
+[node name="TransformLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=216669364]
 layout_mode = 2
 text = "Transform"
 
-[node name="Reset" type="Button" parent="ScrollContainer/Container/ReferenceEdit/Options"]
+[node name="Reset" type="Button" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=1600882682]
 layout_mode = 2
 text = "Reset Transform"
 
-[node name="PosLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options"]
+[node name="PosLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=1242060368]
 custom_minimum_size = Vector2(115, 0)
 layout_mode = 2
 text = "Position"
 
-[node name="Position" type="HBoxContainer" parent="ScrollContainer/Container/ReferenceEdit/Options"]
+[node name="Position" type="HBoxContainer" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=345550437]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="X" parent="ScrollContainer/Container/ReferenceEdit/Options/Position" instance=ExtResource("3_1w6gu")]
+[node name="X" parent="ScrollContainer/Container/ReferenceEdit/Options/Position" unique_id=1154386615 instance=ExtResource("3_1w6gu")]
 layout_mode = 2
 allow_greater = true
 allow_lesser = true
 
-[node name="Y" parent="ScrollContainer/Container/ReferenceEdit/Options/Position" instance=ExtResource("3_1w6gu")]
+[node name="Y" parent="ScrollContainer/Container/ReferenceEdit/Options/Position" unique_id=1257980441 instance=ExtResource("3_1w6gu")]
 layout_mode = 2
 allow_greater = true
 allow_lesser = true
 
-[node name="ScaleLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options"]
+[node name="ScaleLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=1274897389]
 custom_minimum_size = Vector2(115, 0)
 layout_mode = 2
 text = "Scale"
 
-[node name="Scale" parent="ScrollContainer/Container/ReferenceEdit/Options" instance=ExtResource("3_1w6gu")]
+[node name="Scale" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=1228250765 instance=ExtResource("3_1w6gu")]
 layout_mode = 2
 allow_greater = true
 allow_lesser = true
 
-[node name="RotationLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options"]
+[node name="RotationLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=1574450380]
 custom_minimum_size = Vector2(115, 0)
 layout_mode = 2
 text = "Rotation"
 
-[node name="Rotation" parent="ScrollContainer/Container/ReferenceEdit/Options" instance=ExtResource("3_1w6gu")]
+[node name="Rotation" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=1970090158 instance=ExtResource("3_1w6gu")]
 layout_mode = 2
 min_value = -180.0
 max_value = 180.0
 step = 0.01
 
-[node name="ColorLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options"]
+[node name="ColorLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=308576516]
 layout_mode = 2
 text = "Color options"
 
-[node name="Spacer2" type="Control" parent="ScrollContainer/Container/ReferenceEdit/Options"]
+[node name="Spacer2" type="Control" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=446641858]
 layout_mode = 2
 
-[node name="FilterLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options"]
+[node name="FilterLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=70809167]
 custom_minimum_size = Vector2(115, 0)
 layout_mode = 2
 text = "Filter"
 
-[node name="Filter" type="CheckButton" parent="ScrollContainer/Container/ReferenceEdit/Options"]
+[node name="Filter" type="CheckButton" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=2078777763]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Enabled"
 
-[node name="MonochromeLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options"]
+[node name="MonochromeLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=1241234474]
 custom_minimum_size = Vector2(115, 0)
 layout_mode = 2
 text = "Monochrome"
 
-[node name="Monochrome" type="CheckButton" parent="ScrollContainer/Container/ReferenceEdit/Options"]
+[node name="Monochrome" type="CheckButton" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=441390147]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Enabled"
 
-[node name="OverlayLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options"]
+[node name="OverlayLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=695979314]
 custom_minimum_size = Vector2(115, 0)
 layout_mode = 2
 text = "Overlay"
 
-[node name="Overlay" type="ColorPickerButton" parent="ScrollContainer/Container/ReferenceEdit/Options"]
+[node name="Overlay" type="ColorPickerButton" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=1594200672]
 custom_minimum_size = Vector2(48, 28)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 edit_alpha = false
 
-[node name="OpacityLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options"]
+[node name="OpacityLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=1461708378]
 custom_minimum_size = Vector2(115, 0)
 layout_mode = 2
 text = "Opacity"
 
-[node name="Opacity" parent="ScrollContainer/Container/ReferenceEdit/Options" instance=ExtResource("3_1w6gu")]
+[node name="Opacity" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=60287637 instance=ExtResource("3_1w6gu")]
 layout_mode = 2
 
-[node name="ColorClampingLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options"]
+[node name="ColorClampingLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=1968415575]
 custom_minimum_size = Vector2(115, 0)
 layout_mode = 2
 text = "Color Clamping"
 
-[node name="ColorClamping" type="TextureProgressBar" parent="ScrollContainer/Container/ReferenceEdit/Options"]
+[node name="ColorClamping" type="TextureProgressBar" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=1554443056]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -394,19 +394,19 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("2_1qu4x")
 
-[node name="Timer" type="Timer" parent="ScrollContainer/Container/ReferenceEdit"]
+[node name="Timer" type="Timer" parent="ScrollContainer/Container/ReferenceEdit" unique_id=2093083081]
 wait_time = 0.2
 one_shot = true
 
-[node name="ConfirmRemoveDialog" type="ConfirmationDialog" parent="ScrollContainer/Container/ReferenceEdit"]
+[node name="ConfirmRemoveDialog" type="ConfirmationDialog" parent="ScrollContainer/Container/ReferenceEdit" unique_id=1592631916]
 position = Vector2i(0, 36)
 size = Vector2i(454, 106)
 dialog_text = "Are you sure you want to remove this reference image? It will not be deleted from your file system."
 dialog_autowrap = true
 
-[node name="Overlay" type="CanvasLayer" parent="."]
+[node name="Overlay" type="CanvasLayer" parent="." unique_id=1572617690]
 
-[node name="DragHighlight" type="ColorRect" parent="Overlay"]
+[node name="DragHighlight" type="ColorRect" parent="Overlay" unique_id=1311141168]
 color = Color(0, 0.741176, 1, 0.501961)
 
 [connection signal="pressed" from="ScrollContainer/Container/Tools/MoveImageLeftBtn" to="." method="_on_move_image_left_pressed"]

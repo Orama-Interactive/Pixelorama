@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://nba3nryom3ud"]
+[gd_scene format=3 uid="uid://nba3nryom3ud"]
 
 [ext_resource type="Script" uid="uid://brtcr6mrev52o" path="res://src/UI/Dialogs/ImportPreviewDialog.gd" id="1_r16hn"]
 [ext_resource type="Script" uid="uid://bvn632m4s6crv" path="res://src/UI/Dialogs/HelperScripts/RowColumnLines.gd" id="2_yokw4"]
@@ -6,13 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="4_6umjk"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="4_nmo33"]
 
-[node name="ImportPreviewDialog" type="ConfirmationDialog"]
+[node name="ImportPreviewDialog" type="ConfirmationDialog" unique_id=1808919118]
 canvas_item_default_texture_filter = 0
 position = Vector2i(0, 36)
 size = Vector2i(316, 516)
 script = ExtResource("1_r16hn")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2089418098]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,30 +23,30 @@ offset_bottom = -49.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=1453704658]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer/VBoxContainer"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer/VBoxContainer" unique_id=394050770]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/VBoxContainer/AspectRatioContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/VBoxContainer/AspectRatioContainer" unique_id=766226089]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="RowColumnLines" type="Control" parent="VBoxContainer/VBoxContainer/AspectRatioContainer/TextureRect"]
+[node name="RowColumnLines" type="Control" parent="VBoxContainer/VBoxContainer/AspectRatioContainer/TextureRect" unique_id=283613391]
 unique_name_in_owner = true
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_yokw4")
 
-[node name="SmartSlice" type="Control" parent="VBoxContainer/VBoxContainer/AspectRatioContainer/TextureRect"]
+[node name="SmartSlice" type="Control" parent="VBoxContainer/VBoxContainer/AspectRatioContainer/TextureRect" unique_id=1718060734]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -56,67 +56,67 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_aeccv")
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/VBoxContainer" unique_id=1744510561]
 layout_mode = 2
 
-[node name="ApplyAll" type="CheckBox" parent="VBoxContainer/VBoxContainer"]
+[node name="ApplyAll" type="CheckBox" parent="VBoxContainer/VBoxContainer" unique_id=1939816526]
 visible = false
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Apply to all"
 
-[node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+[node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer" unique_id=987445479]
 layout_mode = 2
 theme_override_constants/separation = 32
 
-[node name="ImageSizeLabel" type="Label" parent="VBoxContainer/VBoxContainer/SizeContainer"]
+[node name="ImageSizeLabel" type="Label" parent="VBoxContainer/VBoxContainer/SizeContainer" unique_id=1124962955]
 layout_mode = 2
 text = "Image Size: 64×64"
 
-[node name="FrameSizeLabel" type="Label" parent="VBoxContainer/VBoxContainer/SizeContainer"]
+[node name="FrameSizeLabel" type="Label" parent="VBoxContainer/VBoxContainer/SizeContainer" unique_id=1107103823]
 visible = false
 layout_mode = 2
 text = "Frame size: 64×64"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer" unique_id=1303661883]
 layout_mode = 2
 
-[node name="ImportAsLabel" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="ImportAsLabel" type="Label" parent="VBoxContainer/VBoxContainer/HBoxContainer" unique_id=511277511]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Import as:"
 
-[node name="ImportOption" type="OptionButton" parent="VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="ImportOption" type="OptionButton" parent="VBoxContainer/VBoxContainer/HBoxContainer" unique_id=1219338380]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 mouse_default_cursor_shape = 2
 
-[node name="ImportOptionsContainer" type="FoldableContainer" parent="VBoxContainer"]
+[node name="ImportOptionsContainer" type="FoldableContainer" parent="VBoxContainer" unique_id=1323475885]
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
 folded = true
 title = "Import Options"
 
-[node name="ImportOptions" type="VBoxContainer" parent="VBoxContainer/ImportOptionsContainer"]
+[node name="ImportOptions" type="VBoxContainer" parent="VBoxContainer/ImportOptionsContainer" unique_id=131675547]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="SpritesheetOptions" type="VBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions"]
+[node name="SpritesheetOptions" type="VBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions" unique_id=1791237799]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Manual" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions"]
+[node name="Manual" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions" unique_id=709132492]
 layout_mode = 2
 
-[node name="SplitOptions" type="VBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual"]
+[node name="SplitOptions" type="VBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual" unique_id=751097073]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="FramesDivider" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual/SplitOptions" instance=ExtResource("4_6umjk")]
+[node name="FramesDivider" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual/SplitOptions" unique_id=966361385 instance=ExtResource("4_6umjk")]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -126,25 +126,25 @@ show_ratio = true
 prefix_x = "Horizontal frames:"
 prefix_y = "Vertical frames:"
 
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual"]
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual" unique_id=1584502570]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual" unique_id=795936199]
 layout_mode = 2
 
-[node name="FrameSizePresetLabel" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual/VBoxContainer"]
+[node name="FrameSizePresetLabel" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual/VBoxContainer" unique_id=985738062]
 layout_mode = 2
 text = "Presets:"
 
-[node name="FrameSizeOptionButton" type="OptionButton" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual/VBoxContainer"]
+[node name="FrameSizeOptionButton" type="OptionButton" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Manual/VBoxContainer" unique_id=1464071297]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Smart" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions"]
+[node name="Smart" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions" unique_id=1536328544]
 visible = false
 layout_mode = 2
 
-[node name="Threshold" type="TextureProgressBar" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart"]
+[node name="Threshold" type="TextureProgressBar" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart" unique_id=973364193]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -162,7 +162,7 @@ script = ExtResource("4_nmo33")
 prefix = "Threshold:"
 suffix = "px"
 
-[node name="MergeDist" type="TextureProgressBar" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart"]
+[node name="MergeDist" type="TextureProgressBar" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart" unique_id=1656745988]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -179,36 +179,36 @@ script = ExtResource("4_nmo33")
 prefix = "Merge distance:"
 suffix = "px"
 
-[node name="Slice" type="Button" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart"]
+[node name="Slice" type="Button" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/Smart" unique_id=2092311525]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Refresh"
 
-[node name="FlagToggles" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions"]
+[node name="FlagToggles" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions" unique_id=679779349]
 layout_mode = 2
 
-[node name="SmartSliceToggle" type="CheckBox" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/FlagToggles"]
+[node name="SmartSliceToggle" type="CheckBox" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/FlagToggles" unique_id=1022515303]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Smart Slice"
 
-[node name="IncludeEmptyArea" type="CheckBox" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/FlagToggles"]
+[node name="IncludeEmptyArea" type="CheckBox" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/SpritesheetOptions/FlagToggles" unique_id=463414402]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Include empty tiles"
 
-[node name="TilesetOptions" type="GridContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions"]
+[node name="TilesetOptions" type="GridContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions" unique_id=1522614112]
 visible = false
 layout_mode = 2
 columns = 2
 
-[node name="TileShapeLabel" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/TilesetOptions"]
+[node name="TileShapeLabel" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/TilesetOptions" unique_id=931044385]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Tile shape:"
 
-[node name="TileShapeOptionButton" type="OptionButton" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/TilesetOptions"]
+[node name="TileShapeOptionButton" type="OptionButton" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/TilesetOptions" unique_id=1574807088]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -221,12 +221,12 @@ popup/item_1/id = 1
 popup/item_2/text = "Hexagonal"
 popup/item_2/id = 3
 
-[node name="TileOffsetAxisLabel" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/TilesetOptions"]
+[node name="TileOffsetAxisLabel" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/TilesetOptions" unique_id=2123473254]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Tile offset axis:"
 
-[node name="TileOffsetAxisButton" type="OptionButton" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/TilesetOptions"]
+[node name="TileOffsetAxisButton" type="OptionButton" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/TilesetOptions" unique_id=1966077061]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "For all half-offset shapes (Isometric & Hexagonal), determines the offset axis."
@@ -238,45 +238,45 @@ popup/item_0/id = 0
 popup/item_1/text = "Vertical"
 popup/item_1/id = 1
 
-[node name="AtFrame" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions"]
+[node name="AtFrame" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions" unique_id=208558396]
 visible = false
 layout_mode = 2
 
-[node name="Label3" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/AtFrame"]
+[node name="Label3" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/AtFrame" unique_id=1423330608]
 layout_mode = 2
 text = "At frame:"
 
-[node name="AtFrameSpinbox" type="SpinBox" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/AtFrame"]
+[node name="AtFrameSpinbox" type="SpinBox" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/AtFrame" unique_id=644885241]
 layout_mode = 2
 size_flags_vertical = 0
 min_value = 1.0
 value = 1.0
 
-[node name="AtLayer" type="GridContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions"]
+[node name="AtLayer" type="GridContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions" unique_id=666387797]
 visible = false
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/AtLayer"]
+[node name="Label" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/AtLayer" unique_id=234488903]
 layout_mode = 2
 text = "At layer:"
 
-[node name="AtLayerOption" type="OptionButton" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/AtLayer"]
+[node name="AtLayerOption" type="OptionButton" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/AtLayer" unique_id=1264555406]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
-[node name="NewBrushOptions" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions"]
+[node name="NewBrushOptions" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions" unique_id=509158821]
 visible = false
 layout_mode = 2
 
-[node name="Type" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions"]
+[node name="Type" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions" unique_id=315598981]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions/Type"]
+[node name="Label" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions/Type" unique_id=1298068084]
 layout_mode = 2
 text = "Brush type:"
 
-[node name="BrushTypeOption" type="OptionButton" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions/Type"]
+[node name="BrushTypeOption" type="OptionButton" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions/Type" unique_id=1510951311]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 selected = 0
@@ -288,16 +288,16 @@ popup/item_1/id = 1
 popup/item_2/text = "Random brush"
 popup/item_2/id = 2
 
-[node name="BrushName" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions"]
+[node name="BrushName" type="HBoxContainer" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions" unique_id=2137388976]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions/BrushName"]
+[node name="Label" type="Label" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions/BrushName" unique_id=680989693]
 layout_mode = 2
 text = "Brush name:"
 
-[node name="BrushNameLineEdit" type="LineEdit" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions/BrushName"]
+[node name="BrushNameLineEdit" type="LineEdit" parent="VBoxContainer/ImportOptionsContainer/ImportOptions/NewBrushOptions/BrushName" unique_id=1639309611]
 layout_mode = 2
 
 [connection signal="about_to_popup" from="." to="." method="_on_ImportPreviewDialog_about_to_show"]

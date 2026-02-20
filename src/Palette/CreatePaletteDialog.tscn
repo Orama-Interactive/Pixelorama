@@ -1,14 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://68aakj2l6ee1"]
+[gd_scene format=3 uid="uid://68aakj2l6ee1"]
 
 [ext_resource type="Script" uid="uid://ddiwy0yrvpblt" path="res://src/Palette/CreatePaletteDialog.gd" id="1"]
 
-[node name="CreatePaletteDialog" type="ConfirmationDialog"]
+[node name="CreatePaletteDialog" type="ConfirmationDialog" unique_id=608696027]
 title = "Create a new project palette"
 position = Vector2i(0, 36)
 size = Vector2i(421, 315)
 script = ExtResource("1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=283160639]
 anchors_preset = -1
 anchor_left = 0.000793701
 anchor_right = 0.000793701
@@ -17,16 +17,16 @@ offset_top = 8.0
 offset_right = 412.666
 offset_bottom = 266.0
 
-[node name="PaletteMetadata" type="GridContainer" parent="VBoxContainer"]
+[node name="PaletteMetadata" type="GridContainer" parent="VBoxContainer" unique_id=1633343946]
 layout_mode = 2
 columns = 2
 
-[node name="PresetLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
+[node name="PresetLabel" type="Label" parent="VBoxContainer/PaletteMetadata" unique_id=394171995]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 text = "Preset:"
 
-[node name="Preset" type="OptionButton" parent="VBoxContainer/PaletteMetadata"]
+[node name="Preset" type="OptionButton" parent="VBoxContainer/PaletteMetadata" unique_id=1883062411]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -41,31 +41,31 @@ popup/item_2/id = 2
 popup/item_3/text = "From Current Selection"
 popup/item_3/id = 3
 
-[node name="NameLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
+[node name="NameLabel" type="Label" parent="VBoxContainer/PaletteMetadata" unique_id=1485236600]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "Name:"
 
-[node name="Name" type="LineEdit" parent="VBoxContainer/PaletteMetadata"]
+[node name="Name" type="LineEdit" parent="VBoxContainer/PaletteMetadata" unique_id=1825237239]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CommentLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
+[node name="CommentLabel" type="Label" parent="VBoxContainer/PaletteMetadata" unique_id=327247049]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "Comment:"
 
-[node name="Comment" type="TextEdit" parent="VBoxContainer/PaletteMetadata"]
+[node name="Comment" type="TextEdit" parent="VBoxContainer/PaletteMetadata" unique_id=1266643704]
 custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="WidthLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
+[node name="WidthLabel" type="Label" parent="VBoxContainer/PaletteMetadata" unique_id=205994458]
 layout_mode = 2
 text = "Width:"
 
-[node name="Width" type="SpinBox" parent="VBoxContainer/PaletteMetadata"]
+[node name="Width" type="SpinBox" parent="VBoxContainer/PaletteMetadata" unique_id=1379308149]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -73,11 +73,11 @@ min_value = 1.0
 max_value = 64.0
 value = 1.0
 
-[node name="HeightLabel" type="Label" parent="VBoxContainer/PaletteMetadata"]
+[node name="HeightLabel" type="Label" parent="VBoxContainer/PaletteMetadata" unique_id=1514092522]
 layout_mode = 2
 text = "Height:"
 
-[node name="Height" type="SpinBox" parent="VBoxContainer/PaletteMetadata"]
+[node name="Height" type="SpinBox" parent="VBoxContainer/PaletteMetadata" unique_id=230586321]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -85,26 +85,26 @@ min_value = 1.0
 max_value = 64.0
 value = 1.0
 
-[node name="ColorsSettings" type="VBoxContainer" parent="VBoxContainer"]
+[node name="ColorsSettings" type="VBoxContainer" parent="VBoxContainer" unique_id=905783038]
 visible = false
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/ColorsSettings"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/ColorsSettings" unique_id=1784011897]
 layout_mode = 2
 
-[node name="AddAlphaColors" type="CheckBox" parent="VBoxContainer/ColorsSettings"]
+[node name="AddAlphaColors" type="CheckBox" parent="VBoxContainer/ColorsSettings" unique_id=681946268]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 text = "Create colors with alpha component"
 
-[node name="GetColorsFrom" type="HBoxContainer" parent="VBoxContainer/ColorsSettings"]
+[node name="GetColorsFrom" type="HBoxContainer" parent="VBoxContainer/ColorsSettings" unique_id=1782770613]
 layout_mode = 2
 
-[node name="GetColorsFromLabel" type="Label" parent="VBoxContainer/ColorsSettings/GetColorsFrom"]
+[node name="GetColorsFromLabel" type="Label" parent="VBoxContainer/ColorsSettings/GetColorsFrom" unique_id=74476782]
 layout_mode = 2
 text = "Get colors from:"
 
-[node name="GetColorsFrom" type="OptionButton" parent="VBoxContainer/ColorsSettings/GetColorsFrom"]
+[node name="GetColorsFrom" type="OptionButton" parent="VBoxContainer/ColorsSettings/GetColorsFrom" unique_id=601962716]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -117,7 +117,7 @@ popup/item_1/id = 1
 popup/item_2/text = "All frames"
 popup/item_2/id = 2
 
-[node name="AlreadyExistsWarning" type="Label" parent="VBoxContainer"]
+[node name="AlreadyExistsWarning" type="Label" parent="VBoxContainer" unique_id=186762094]
 visible = false
 layout_mode = 2
 size_flags_vertical = 7
@@ -126,7 +126,7 @@ text = "Palette with the same name and path already exists!"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="EnterNameWarning" type="Label" parent="VBoxContainer"]
+[node name="EnterNameWarning" type="Label" parent="VBoxContainer" unique_id=1844457054]
 visible = false
 layout_mode = 2
 size_flags_vertical = 7

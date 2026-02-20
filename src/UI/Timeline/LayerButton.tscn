@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bai814sqvk68f"]
+[gd_scene format=3 uid="uid://bai814sqvk68f"]
 
 [ext_resource type="Script" uid="uid://dvexfklwk4l53" path="res://src/UI/Timeline/LayerButton.gd" id="1_6hlpe"]
 [ext_resource type="Texture2D" uid="uid://c2b3htff5yox8" path="res://assets/graphics/layers/layer_visible.png" id="2_ef6fb"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dv5y24sb8lxg2" path="res://assets/graphics/layers/layer_active_effect.png" id="8_7wf6f"]
 [ext_resource type="Texture2D" uid="uid://cjvk47bd56156" path="res://assets/graphics/layers/type_icons/layer_pixel.png" id="8_ce16y"]
 
-[node name="LayerButton" type="HBoxContainer"]
+[node name="LayerButton" type="HBoxContainer" unique_id=1570434002]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -20,12 +20,12 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 0
 script = ExtResource("1_6hlpe")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1094638573]
 custom_minimum_size = Vector2(84, 0)
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="VisibilityButton" type="Button" parent="HBoxContainer" groups=["UIButtons"]]
+[node name="VisibilityButton" type="Button" parent="HBoxContainer" unique_id=1339459623 groups=["UIButtons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(28, 22)
 layout_mode = 2
@@ -33,7 +33,7 @@ tooltip_text = "Toggle layer's visibility"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VisibilityButton"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VisibilityButton" unique_id=2003797487]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -47,7 +47,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("2_ef6fb")
 
-[node name="LockButton" type="Button" parent="HBoxContainer" groups=["UIButtons"]]
+[node name="LockButton" type="Button" parent="HBoxContainer" unique_id=264572520 groups=["UIButtons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(28, 22)
 layout_mode = 2
@@ -55,7 +55,7 @@ tooltip_text = "Lock/unlock layer"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/LockButton"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/LockButton" unique_id=1504547710]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -69,7 +69,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("3_ah1my")
 
-[node name="LinkButton" type="Button" parent="HBoxContainer" groups=["UIButtons"]]
+[node name="LinkButton" type="Button" parent="HBoxContainer" unique_id=775486227 groups=["UIButtons"]]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(28, 22)
@@ -80,7 +80,7 @@ Linked cels share content across multiple frames"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/LinkButton"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/LinkButton" unique_id=1915470760]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -94,7 +94,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("4_058qm")
 
-[node name="ExpandButton" type="Button" parent="HBoxContainer" groups=["UIButtons"]]
+[node name="ExpandButton" type="Button" parent="HBoxContainer" unique_id=1586808638 groups=["UIButtons"]]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(28, 22)
@@ -103,7 +103,7 @@ tooltip_text = "Expand/collapse group"
 focus_mode = 0
 mouse_default_cursor_shape = 2
 
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/ExpandButton"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/ExpandButton" unique_id=531611990]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -117,7 +117,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("2_enrtd")
 
-[node name="LayerMainButton" type="Button" parent="."]
+[node name="LayerMainButton" type="Button" parent="." unique_id=1707392079]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -127,7 +127,7 @@ theme_type_variation = &"LayerFrameButton"
 toggle_mode = true
 script = ExtResource("6_n8q6b")
 
-[node name="LayerUIColor" type="ColorRect" parent="LayerMainButton"]
+[node name="LayerUIColor" type="ColorRect" parent="LayerMainButton" unique_id=1683280268]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -137,7 +137,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
-[node name="LayerName" type="HBoxContainer" parent="LayerMainButton"]
+[node name="LayerName" type="HBoxContainer" parent="LayerMainButton" unique_id=1103935264]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -147,26 +147,26 @@ grow_vertical = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 
-[node name="HierarchySpacer" type="Control" parent="LayerMainButton/LayerName"]
+[node name="HierarchySpacer" type="Control" parent="LayerMainButton/LayerName" unique_id=784955876]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ClippingMask" type="TextureRect" parent="LayerMainButton/LayerName"]
+[node name="ClippingMask" type="TextureRect" parent="LayerMainButton/LayerName" unique_id=532219846]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 texture = ExtResource("6_73j5q")
 stretch_mode = 5
 
-[node name="LayerNameLabel" type="Label" parent="LayerMainButton/LayerName"]
+[node name="LayerNameLabel" type="Label" parent="LayerMainButton/LayerName" unique_id=574181518]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Layer 0"
 clip_text = true
 
-[node name="LayerNameLineEdit" type="LineEdit" parent="LayerMainButton/LayerName"]
+[node name="LayerNameLineEdit" type="LineEdit" parent="LayerMainButton/LayerName" unique_id=1729250632]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -177,7 +177,7 @@ editable = false
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="LayerFXTextureRect" type="TextureRect" parent="LayerMainButton/LayerName" groups=["UIButtons"]]
+[node name="LayerFXTextureRect" type="TextureRect" parent="LayerMainButton/LayerName" unique_id=561557841 groups=["UIButtons"]]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -185,18 +185,18 @@ texture = ExtResource("8_7wf6f")
 stretch_mode = 3
 flip_v = true
 
-[node name="LayerTypeTextureRect" type="TextureRect" parent="LayerMainButton/LayerName" groups=["UIButtons"]]
+[node name="LayerTypeTextureRect" type="TextureRect" parent="LayerMainButton/LayerName" unique_id=1553318290 groups=["UIButtons"]]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.498039)
 layout_mode = 2
 texture = ExtResource("8_ce16y")
 stretch_mode = 3
 
-[node name="MarginSpacer" type="Control" parent="LayerMainButton/LayerName"]
+[node name="MarginSpacer" type="Control" parent="LayerMainButton/LayerName" unique_id=453250867]
 custom_minimum_size = Vector2(4, 0)
 layout_mode = 2
 
-[node name="PopupMenu" type="PopupMenu" parent="."]
+[node name="PopupMenu" type="PopupMenu" parent="." unique_id=767376756]
 disable_3d = true
 item_count = 4
 item_0/text = "Properties"

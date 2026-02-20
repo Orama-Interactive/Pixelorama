@@ -1,15 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://clsp16gq4sng3"]
+[gd_scene format=3 uid="uid://clsp16gq4sng3"]
 
 [ext_resource type="Script" uid="uid://d4aa2j1wururl" path="res://src/UI/Dialogs/ImportTagDialog.gd" id="1_5fb6k"]
 
-[node name="ImportTagDialog" type="ConfirmationDialog"]
+[node name="ImportTagDialog" type="ConfirmationDialog" unique_id=360810277]
 title = "Import Tag"
 size = Vector2i(270, 300)
 min_size = Vector2i(250, 0)
 ok_button_text = "Import"
 script = ExtResource("1_5fb6k")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=26459724]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -20,34 +20,34 @@ offset_bottom = -49.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=767431895]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=862173018]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=987476694]
 layout_mode = 2
 text = "From: "
 
-[node name="ProjectList" type="OptionButton" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="ProjectList" type="OptionButton" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=828506384]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="CreateTags" type="CheckButton" parent="PanelContainer/VBoxContainer"]
+[node name="CreateTags" type="CheckButton" parent="PanelContainer/VBoxContainer" unique_id=87237535]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Create new tags"
 
-[node name="Instructions" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Instructions" type="Label" parent="PanelContainer/VBoxContainer" unique_id=1365658655]
 custom_minimum_size = Vector2(250, 23)
 layout_mode = 2
 text = "Available tags:"
 autowrap_mode = 3
 
-[node name="TagList" type="ItemList" parent="PanelContainer/VBoxContainer"]
+[node name="TagList" type="ItemList" parent="PanelContainer/VBoxContainer" unique_id=2070936022]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2

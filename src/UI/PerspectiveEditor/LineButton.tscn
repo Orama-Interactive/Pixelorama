@@ -1,29 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://collailpx6ft5"]
+[gd_scene format=3 uid="uid://collailpx6ft5"]
 
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="1"]
 
-[node name="LineButton" type="FoldableContainer"]
+[node name="LineButton" type="FoldableContainer" unique_id=1220517884]
 offset_right = 159.0
 offset_bottom = 84.0
 theme_type_variation = &"CollapsibleContainer"
 folded = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=673847790]
 visible = false
 layout_mode = 2
 
-[node name="Spacer" type="Control" parent="HBoxContainer"]
+[node name="Spacer" type="Control" parent="HBoxContainer" unique_id=2009568549]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer" unique_id=855574873]
 layout_mode = 2
 
-[node name="Properties" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Properties" type="VBoxContainer" parent="HBoxContainer" unique_id=1523513639]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AngleSlider" parent="HBoxContainer/Properties" instance=ExtResource("1")]
+[node name="AngleSlider" parent="HBoxContainer/Properties" unique_id=537797659 instance=ExtResource("1")]
 layout_mode = 2
 max_value = 359.999
 step = 0.001
@@ -31,7 +31,7 @@ allow_greater = true
 prefix = "Angle:"
 suffix = "°"
 
-[node name="LengthSlider" parent="HBoxContainer/Properties" instance=ExtResource("1")]
+[node name="LengthSlider" parent="HBoxContainer/Properties" unique_id=130890077 instance=ExtResource("1")]
 unique_name_in_owner = true
 layout_mode = 2
 min_value = 1.0
@@ -41,9 +41,9 @@ allow_greater = true
 prefix = "Length:"
 suffix = "px"
 
-[node name="Delete" type="Button" parent="HBoxContainer"]
+[node name="Delete" type="Button" parent="HBoxContainer" unique_id=1799368192]
 layout_mode = 2
 text = "Remove"
 
-[node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer" unique_id=803068629]
 layout_mode = 2

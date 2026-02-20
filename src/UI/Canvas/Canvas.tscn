@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ba24iuv55m4l3"]
+[gd_scene format=3 uid="uid://ba24iuv55m4l3"]
 
 [ext_resource type="Script" uid="uid://xagqbybf2bic" path="res://src/UI/Canvas/Canvas.gd" id="1"]
 [ext_resource type="Shader" uid="uid://b3cj543ir4o23" path="res://src/Shaders/BlendLayers.gdshader" id="1_253dh"]
@@ -48,77 +48,77 @@ shader = ExtResource("17_lowhf")
 shader_parameter/width = 0.05
 shader_parameter/hollow_shapes = true
 
-[node name="Canvas" type="Node2D"]
+[node name="Canvas" type="Node2D" unique_id=248802489]
 material = SubResource("ShaderMaterial_6b0ox")
 script = ExtResource("1")
 
-[node name="CurrentlyVisibleFrame" type="SubViewport" parent="."]
+[node name="CurrentlyVisibleFrame" type="SubViewport" parent="." unique_id=1575010261]
 disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="CurrentFrameDrawer" type="Node2D" parent="CurrentlyVisibleFrame"]
+[node name="CurrentFrameDrawer" type="Node2D" parent="CurrentlyVisibleFrame" unique_id=437531815]
 material = SubResource("ShaderMaterial_6b0ox")
 script = ExtResource("5")
 
-[node name="TileMode" type="Node2D" parent="."]
+[node name="TileMode" type="Node2D" parent="." unique_id=616806130]
 show_behind_parent = true
 material = SubResource("1")
 script = ExtResource("4")
 
-[node name="ColorIndex" type="Node2D" parent="."]
+[node name="ColorIndex" type="Node2D" parent="." unique_id=1922558684]
 material = SubResource("ShaderMaterial_ascg6")
 script = ExtResource("18_o3xx2")
 
-[node name="PixelGrid" type="Node2D" parent="."]
+[node name="PixelGrid" type="Node2D" parent="." unique_id=497674764]
 script = ExtResource("6")
 
-[node name="Grid" type="Node2D" parent="."]
+[node name="Grid" type="Node2D" parent="." unique_id=487125994]
 script = ExtResource("2")
 
-[node name="Selection" type="Node2D" parent="."]
+[node name="Selection" type="Node2D" parent="." unique_id=2051472332]
 script = ExtResource("8")
 
-[node name="TransformationHandles" type="Node2D" parent="Selection"]
+[node name="TransformationHandles" type="Node2D" parent="Selection" unique_id=1878849198]
 script = ExtResource("10_crpat")
 
-[node name="MarchingAntsOutline" type="Sprite2D" parent="Selection"]
+[node name="MarchingAntsOutline" type="Sprite2D" parent="Selection" unique_id=1581854965]
 material = SubResource("2")
 centered = false
 
-[node name="CropRect" type="Node2D" parent="."]
+[node name="CropRect" type="Node2D" parent="." unique_id=1029683026]
 visible = false
 script = ExtResource("13")
 
-[node name="Indicators" type="Node2D" parent="."]
+[node name="Indicators" type="Node2D" parent="." unique_id=201253381]
 script = ExtResource("3")
 
-[node name="Previews" type="Node2D" parent="."]
+[node name="Previews" type="Node2D" parent="." unique_id=844489526]
 material = SubResource("3")
 script = ExtResource("7")
 
-[node name="PreviewsSprite" type="Sprite2D" parent="."]
+[node name="PreviewsSprite" type="Sprite2D" parent="." unique_id=1590710631]
 material = SubResource("3")
 centered = false
 
-[node name="OnionPast" type="Node2D" parent="." groups=["canvas_onion_skinning"]]
+[node name="OnionPast" type="Node2D" parent="." unique_id=827291263 groups=["canvas_onion_skinning"]]
 script = ExtResource("12")
 
-[node name="OnionFuture" type="Node2D" parent="." groups=["canvas_onion_skinning"]]
+[node name="OnionFuture" type="Node2D" parent="." unique_id=630363001 groups=["canvas_onion_skinning"]]
 script = ExtResource("12")
 
-[node name="MouseGuideContainer" parent="." instance=ExtResource("11")]
+[node name="MouseGuideContainer" parent="." unique_id=1352013159 instance=ExtResource("11")]
 
-[node name="Gizmos3D" type="Node2D" parent="."]
+[node name="Gizmos3D" type="Node2D" parent="." unique_id=1219529280]
 script = ExtResource("14")
 
-[node name="Measurements" type="Node2D" parent="."]
+[node name="Measurements" type="Node2D" parent="." unique_id=1341129440]
 script = ExtResource("16_nxilb")
 
-[node name="ReferenceImages" type="Node2D" parent="."]
+[node name="ReferenceImages" type="Node2D" parent="." unique_id=573476337]
 script = ExtResource("17_qfjb4")
 
-[node name="TileModeIndices" type="Node2D" parent="."]
+[node name="TileModeIndices" type="Node2D" parent="." unique_id=1893337686]
 material = SubResource("ShaderMaterial_ascg6")
 script = ExtResource("19_7a6wb")

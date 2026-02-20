@@ -1,10 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://clgu8wb5o6oup"]
+[gd_scene format=3 uid="uid://clgu8wb5o6oup"]
 
 [ext_resource type="Script" uid="uid://cdgury33i7cuo" path="res://src/UI/Dialogs/ExportDialog.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2"]
+[ext_resource type="Shader" uid="uid://c50kmfvf635kb" path="res://src/Shaders/TransparentChecker.gdshader" id="3_lqo75"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="4"]
 
-[node name="ExportDialog" type="ConfirmationDialog"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_10k1i"]
+shader = ExtResource("3_lqo75")
+shader_parameter/size = 10.0
+shader_parameter/alpha = 1.0
+shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
+shader_parameter/color2 = Color(1, 1, 1, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/scale = Vector2(0, 0)
+shader_parameter/rect_size = Vector2(0, 0)
+shader_parameter/follow_movement = false
+shader_parameter/follow_scale = false
+
+[node name="ExportDialog" type="ConfirmationDialog" unique_id=1426064712]
 canvas_item_default_texture_filter = 0
 oversampling_override = 1.0
 title = "Export..."
@@ -13,7 +26,7 @@ size = Vector2i(700, 626)
 dialog_hide_on_ok = false
 script = ExtResource("1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=348001059]
 custom_minimum_size = Vector2(330, 0)
 offset_left = 8.0
 offset_top = 8.0
@@ -21,60 +34,60 @@ offset_right = 692.0
 offset_bottom = 577.0
 size_flags_vertical = 3
 
-[node name="TabBar" type="TabBar" parent="VBoxContainer"]
+[node name="TabBar" type="TabBar" parent="VBoxContainer" unique_id=1836588413]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=473865758]
 layout_mode = 2
 
-[node name="PreviewLabel" type="Label" parent="VBoxContainer"]
+[node name="PreviewLabel" type="Label" parent="VBoxContainer" unique_id=119891113]
 layout_mode = 2
 text = "Preview:"
 
-[node name="VSplitContainer" type="VSplitContainer" parent="VBoxContainer"]
+[node name="VSplitContainer" type="VSplitContainer" parent="VBoxContainer" unique_id=782890775]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PreviewPanel" type="Panel" parent="VBoxContainer/VSplitContainer"]
+[node name="PreviewPanel" type="Panel" parent="VBoxContainer/VSplitContainer" unique_id=2043859950]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TransparentChecker" parent="VBoxContainer/VSplitContainer/PreviewPanel" instance=ExtResource("2")]
+[node name="TransparentChecker" parent="VBoxContainer/VSplitContainer/PreviewPanel" unique_id=519657495 instance=ExtResource("2")]
 unique_name_in_owner = true
+material = SubResource("ShaderMaterial_10k1i")
 layout_mode = 0
-anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="PreviewScroll" type="ScrollContainer" parent="VBoxContainer/VSplitContainer/PreviewPanel"]
+[node name="PreviewScroll" type="ScrollContainer" parent="VBoxContainer/VSplitContainer/PreviewPanel" unique_id=2093796944]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Previews" type="GridContainer" parent="VBoxContainer/VSplitContainer/PreviewPanel/PreviewScroll"]
+[node name="Previews" type="GridContainer" parent="VBoxContainer/VSplitContainer/PreviewPanel/PreviewScroll" unique_id=989808210]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VSplitContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VSplitContainer" unique_id=1180691766]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer" unique_id=628494534]
 layout_mode = 2
 columns = 2
 
-[node name="OrientationLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
+[node name="OrientationLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=1935804455 groups=["ExportSpritesheetOptions"]]
 layout_mode = 2
 text = "Orientation:"
 
-[node name="Orientation" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
+[node name="Orientation" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=1755684015 groups=["ExportSpritesheetOptions"]]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -90,12 +103,12 @@ popup/item_2/id = 2
 popup/item_3/text = "Tags by column"
 popup/item_3/id = 3
 
-[node name="LinesCountLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
+[node name="LinesCountLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=407514683 groups=["ExportSpritesheetOptions"]]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Columns:"
 
-[node name="LinesCount" type="SpinBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" groups=["ExportSpritesheetOptions"]]
+[node name="LinesCount" type="SpinBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=1929384820 groups=["ExportSpritesheetOptions"]]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -104,12 +117,12 @@ min_value = 1.0
 max_value = 1000.0
 value = 1.0
 
-[node name="FramesLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+[node name="FramesLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=1494748304]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Frames:"
 
-[node name="Frames" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+[node name="Frames" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=165858202]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -120,11 +133,11 @@ popup/item_0/id = 0
 popup/item_1/text = "Selected frames"
 popup/item_1/id = 1
 
-[node name="LayersLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+[node name="LayersLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=391824330]
 layout_mode = 2
 text = "Layers:"
 
-[node name="Layers" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+[node name="Layers" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=969264357]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -134,11 +147,11 @@ popup/item_0/id = 0
 popup/item_1/text = "Selected layers"
 popup/item_1/id = 1
 
-[node name="DirectionLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+[node name="DirectionLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=952123787]
 layout_mode = 2
 text = "Direction:"
 
-[node name="Direction" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+[node name="Direction" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=72482042]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -152,12 +165,12 @@ popup/item_1/id = 1
 popup/item_2/text = "Ping-Pong"
 popup/item_2/id = 2
 
-[node name="ResizeLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+[node name="ResizeLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=1328656377]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 text = "Resize:"
 
-[node name="Resize" type="TextureProgressBar" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+[node name="Resize" type="TextureProgressBar" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=1687978601]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 2
@@ -177,14 +190,14 @@ script = ExtResource("4")
 suffix = "%"
 snap_step = 100.0
 
-[node name="QualityLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+[node name="QualityLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=850616859]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 text = "Quality:"
 
-[node name="Quality" type="TextureProgressBar" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+[node name="Quality" type="TextureProgressBar" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=848759587]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -199,47 +212,47 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("4")
 
-[node name="DimensionLabelText" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+[node name="DimensionLabelText" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=197737479]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Export dimensions:"
 
-[node name="DimensionLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer"]
+[node name="DimensionLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=1184422769]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "64×64"
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/VSplitContainer/VBoxContainer" unique_id=857749939]
 layout_mode = 2
 
-[node name="FilePath" type="GridContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
+[node name="FilePath" type="GridContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer" unique_id=2032253455]
 layout_mode = 2
 columns = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" groups=["NotHTML5"]]
+[node name="Label" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" unique_id=1118645622 groups=["NotHTML5"]]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 text = "Path:"
 
-[node name="PathLineEdit" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" groups=["NotHTML5"]]
+[node name="PathLineEdit" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" unique_id=938649692 groups=["NotHTML5"]]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="PathButton" type="Button" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" groups=["NotHTML5"]]
+[node name="PathButton" type="Button" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" unique_id=1878336224 groups=["NotHTML5"]]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Browse"
 
-[node name="Label2" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath"]
+[node name="Label2" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" unique_id=708447905]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 text = "File:"
 
-[node name="FileLineEdit" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath"]
+[node name="FileLineEdit" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" unique_id=88883980]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -247,33 +260,33 @@ text = "untitled"
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="FileFormat" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath"]
+[node name="FileFormat" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" unique_id=844726557]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
-[node name="HSeparator3" type="HSeparator" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer/VSplitContainer/VBoxContainer" unique_id=224516429]
 layout_mode = 2
 
-[node name="AdvancedOptions" type="FoldableContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer"]
+[node name="AdvancedOptions" type="FoldableContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer" unique_id=2057094974]
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
 folded = true
 title = "Advanced options"
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions"]
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions" unique_id=570447108]
 visible = false
 layout_mode = 2
 columns = 2
 
-[node name="InterpolationLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer"]
+[node name="InterpolationLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=601796929]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Interpolation:"
 
-[node name="Interpolation" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer"]
+[node name="Interpolation" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=354925425]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -291,52 +304,52 @@ popup/item_3/id = 3
 popup/item_4/text = "Lanczos"
 popup/item_4/id = 4
 
-[node name="SeparatorCharacterLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" groups=["ExportImageOptions"]]
+[node name="SeparatorCharacterLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=1144447347 groups=["ExportImageOptions"]]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Separator character(s):"
 
-[node name="SeparatorCharacter" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" groups=["ExportImageOptions", "ExportMultipleFilesEditableOptions"]]
+[node name="SeparatorCharacter" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=863531641 groups=["ExportImageOptions", "ExportMultipleFilesEditableOptions"]]
 layout_mode = 2
 tooltip_text = "The character(s) that separate the file name and the frame number"
 text = "_"
 
-[node name="ExportJSON" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer"]
+[node name="ExportJSON" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=459971663]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Export JSON data"
 
-[node name="SplitLayers" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" groups=["ExportImageOptions"]]
+[node name="SplitLayers" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=287230239 groups=["ExportImageOptions"]]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Split layers"
 
-[node name="IncludeTagsInFilename" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" groups=["ExportImageOptions", "ExportMultipleFilesOptions"]]
+[node name="IncludeTagsInFilename" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=64815569 groups=["ExportImageOptions", "ExportMultipleFilesOptions"]]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Include frame tags in the file name"
 
-[node name="MultipleAnimationsDirectories" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" groups=["ExportImageOptions", "ExportMultipleFilesOptions"]]
+[node name="MultipleAnimationsDirectories" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=2068197934 groups=["ExportImageOptions", "ExportMultipleFilesOptions"]]
 visible = false
 layout_mode = 2
 tooltip_text = "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
 mouse_default_cursor_shape = 2
 text = "Create new folder for each frame tag"
 
-[node name="TrimImages" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" groups=["ExportImageOptions", "ExportMultipleFilesOptions"]]
+[node name="TrimImages" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=1869114393 groups=["ExportImageOptions", "ExportMultipleFilesOptions"]]
 layout_mode = 2
 tooltip_text = "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
 mouse_default_cursor_shape = 2
 text = "Trim images"
 
-[node name="ClipSelection" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" groups=["ExportImageOptions"]]
+[node name="ClipSelection" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=1497115844 groups=["ExportImageOptions"]]
 layout_mode = 2
 tooltip_text = "Only export content that is within the bounds of a selected area."
 mouse_default_cursor_shape = 2
 text = "Clip image content to selection"
 
-[node name="PathDialog" type="FileDialog" parent="." groups=["FileDialogs"]]
+[node name="PathDialog" type="FileDialog" parent="." unique_id=746657325 groups=["FileDialogs"]]
 mode = 2
 title = "Open a Directory"
 size = Vector2i(675, 500)
@@ -345,22 +358,22 @@ ok_button_text = "Select Current Folder"
 file_mode = 2
 access = 2
 
-[node name="PathValidationAlert" type="AcceptDialog" parent="."]
+[node name="PathValidationAlert" type="AcceptDialog" parent="." unique_id=355024950]
 always_on_top = true
 dialog_text = "DirAccess path and file name are not valid!"
 
-[node name="FileExistsAlert" type="AcceptDialog" parent="."]
+[node name="FileExistsAlert" type="AcceptDialog" parent="." unique_id=2050038451]
 always_on_top = true
 dialog_text = "File %s already exists. Overwrite?"
 
-[node name="ExportProgressBar" type="Window" parent="."]
+[node name="ExportProgressBar" type="Window" parent="." unique_id=438204898]
 title = "Export Progress"
 size = Vector2i(400, 100)
 visible = false
 exclusive = true
 always_on_top = true
 
-[node name="MarginContainer" type="MarginContainer" parent="ExportProgressBar"]
+[node name="MarginContainer" type="MarginContainer" parent="ExportProgressBar" unique_id=285398078]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -369,12 +382,12 @@ offset_top = 5.0
 offset_right = -5.0
 offset_bottom = -5.0
 
-[node name="ProgressBar" type="ProgressBar" parent="ExportProgressBar/MarginContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="ExportProgressBar/MarginContainer" unique_id=1155984551]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="FrameTimer" type="Timer" parent="."]
+[node name="FrameTimer" type="Timer" parent="." unique_id=772001475]
 
 [connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
 [connection signal="confirmed" from="." to="." method="_on_confirmed"]

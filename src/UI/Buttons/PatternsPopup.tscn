@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1jyt8wleg8ft"]
+[gd_scene format=3 uid="uid://d1jyt8wleg8ft"]
 
 [ext_resource type="Script" uid="uid://cfj3y81pxid3d" path="res://src/UI/Buttons/PatternsPopup.gd" id="1"]
 
-[node name="PatternsPopup" type="PopupPanel"]
+[node name="PatternsPopup" type="PopupPanel" unique_id=1276766252]
 canvas_item_default_texture_filter = 0
+oversampling_override = 1.0
+visible = true
 script = ExtResource("1")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1920539584]
 custom_minimum_size = Vector2(0, 36)
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,6 +19,6 @@ offset_right = -4.0
 offset_bottom = -4.0
 size_flags_horizontal = 3
 
-[node name="PatternContainer" type="GridContainer" parent="ScrollContainer"]
+[node name="PatternContainer" type="GridContainer" parent="ScrollContainer" unique_id=1254570713]
 layout_mode = 2
 columns = 6

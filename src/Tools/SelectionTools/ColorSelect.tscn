@@ -1,13 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqr6hr0p3ew6a"]
+[gd_scene format=3 uid="uid://bqr6hr0p3ew6a"]
 
 [ext_resource type="PackedScene" uid="uid://bd62qfjn380wf" path="res://src/Tools/BaseSelectionTool.tscn" id="1"]
 [ext_resource type="Script" uid="uid://bngph1iacnggo" path="res://src/Tools/SelectionTools/ColorSelect.gd" id="2"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="3_44rxy"]
 
-[node name="ToolOptions" instance=ExtResource("1")]
+[node name="ToolOptions" unique_id=858653021 instance=ExtResource("1")]
 script = ExtResource("2")
 
-[node name="ToleranceSlider" type="TextureProgressBar" parent="." index="8"]
+[node name="ToleranceSlider" type="TextureProgressBar" parent="." index="8" unique_id=1055810785]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
 focus_mode = 2

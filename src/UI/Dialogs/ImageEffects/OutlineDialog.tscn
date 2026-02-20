@@ -1,28 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://ci2qpf6t3dyyr"]
+[gd_scene format=3 uid="uid://ci2qpf6t3dyyr"]
 
 [ext_resource type="Script" uid="uid://besbv80621ao5" path="res://src/UI/Dialogs/ImageEffects/OutlineDialog.gd" id="1"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="3"]
 
-[node name="OutlineDialog" instance=ExtResource("3")]
+[node name="OutlineDialog" unique_id=2140525660 instance=ExtResource("3")]
 title = "Outline"
 script = ExtResource("1")
 
-[node name="VBoxContainer" parent="." index="3"]
+[node name="VBoxContainer" parent="." index="2" unique_id=1773123238]
 offset_bottom = 354.0
 
-[node name="OutlineOptions" type="GridContainer" parent="VBoxContainer" index="2"]
+[node name="OutlineOptions" type="GridContainer" parent="VBoxContainer" index="2" unique_id=957543995]
 layout_mode = 2
 theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 4
 columns = 2
 
-[node name="ThickLabel" type="Label" parent="VBoxContainer/OutlineOptions" index="0"]
+[node name="ThickLabel" type="Label" parent="VBoxContainer/OutlineOptions" index="0" unique_id=238969786]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Thickness:"
 
-[node name="ThickValue" type="TextureProgressBar" parent="VBoxContainer/OutlineOptions" index="1"]
+[node name="ThickValue" type="TextureProgressBar" parent="VBoxContainer/OutlineOptions" index="1" unique_id=1898165399]
 layout_mode = 2
 focus_mode = 2
 mouse_default_cursor_shape = 2
@@ -38,39 +38,40 @@ stretch_margin_bottom = 3
 script = ExtResource("2")
 suffix = "px"
 
-[node name="OutlineColorLabel" type="Label" parent="VBoxContainer/OutlineOptions" index="2"]
+[node name="OutlineColorLabel" type="Label" parent="VBoxContainer/OutlineOptions" index="2" unique_id=557197261]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Fill with color:"
 
-[node name="OutlineColor" type="ColorPickerButton" parent="VBoxContainer/OutlineOptions" index="3"]
+[node name="OutlineColor" type="ColorPickerButton" parent="VBoxContainer/OutlineOptions" index="3" unique_id=1687721955]
 custom_minimum_size = Vector2(64, 20)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PatternLabel" type="Label" parent="VBoxContainer/OutlineOptions" index="4"]
+[node name="PatternLabel" type="Label" parent="VBoxContainer/OutlineOptions" index="4" unique_id=1323857316]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Brush:"
 
-[node name="PatternOptionButton" type="OptionButton" parent="VBoxContainer/OutlineOptions" index="5"]
+[node name="PatternOptionButton" type="OptionButton" parent="VBoxContainer/OutlineOptions" index="5" unique_id=300895786]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 selected = 0
 item_count = 3
 popup/item_0/text = "Diamond"
+popup/item_0/id = 0
 popup/item_1/text = "Circle"
 popup/item_1/id = 1
 popup/item_2/text = "Square"
 popup/item_2/id = 2
 
-[node name="InsideImageLabel" type="Label" parent="VBoxContainer/OutlineOptions" index="6"]
+[node name="InsideImageLabel" type="Label" parent="VBoxContainer/OutlineOptions" index="6" unique_id=1901092960]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Place inside image"
 
-[node name="InsideImageCheckBox" type="CheckBox" parent="VBoxContainer/OutlineOptions" index="7"]
+[node name="InsideImageCheckBox" type="CheckBox" parent="VBoxContainer/OutlineOptions" index="7" unique_id=267779864]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2

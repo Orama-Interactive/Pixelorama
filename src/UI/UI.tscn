@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://c8dsi6ggkqa7a"]
+[gd_scene format=3 uid="uid://c8dsi6ggkqa7a"]
 
 [ext_resource type="PackedScene" uid="uid://byu3rtoipuvoc" path="res://src/UI/ToolsPanel/Tools.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://c546tskdu53j1" path="res://src/UI/Canvas/CanvasPreview.tscn" id="2"]
@@ -213,7 +213,7 @@ shader_parameter/rect_size = Vector2(0, 0)
 shader_parameter/follow_movement = false
 shader_parameter/follow_scale = false
 
-[node name="UI" type="Panel"]
+[node name="UI" type="Panel" unique_id=1431137400]
 material = SubResource("26")
 anchors_preset = 15
 anchor_right = 1.0
@@ -223,7 +223,7 @@ size_flags_vertical = 3
 mouse_filter = 1
 script = ExtResource("37")
 
-[node name="DockableContainer" type="Container" parent="."]
+[node name="DockableContainer" type="Container" parent="." unique_id=1354851162]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -236,26 +236,26 @@ hide_single_tab = true
 layout = SubResource("Resource_b6o2t")
 clone_layout_on_ready = false
 
-[node name="Tools" parent="DockableContainer" instance=ExtResource("1")]
+[node name="Tools" parent="DockableContainer" unique_id=492601693 instance=ExtResource("1")]
 layout_mode = 2
 
-[node name="Main Canvas" type="VBoxContainer" parent="DockableContainer"]
+[node name="Main Canvas" type="VBoxContainer" parent="DockableContainer" unique_id=412148062]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="TabsContainer" type="PanelContainer" parent="DockableContainer/Main Canvas"]
+[node name="TabsContainer" type="PanelContainer" parent="DockableContainer/Main Canvas" unique_id=799763109]
 layout_mode = 2
 
-[node name="TabBar" type="TabBar" parent="DockableContainer/Main Canvas/TabsContainer"]
+[node name="TabBar" type="TabBar" parent="DockableContainer/Main Canvas/TabsContainer" unique_id=1423914850]
 auto_translate_mode = 2
 layout_mode = 2
 tab_close_display_policy = 2
 drag_to_rearrange_enabled = true
 script = ExtResource("3")
 
-[node name="HorizontalRuler" type="Button" parent="DockableContainer/Main Canvas" node_paths=PackedStringArray("viewport_container", "camera") groups=["CanvasRulers"]]
+[node name="HorizontalRuler" type="Button" parent="DockableContainer/Main Canvas" unique_id=278517062 node_paths=PackedStringArray("viewport_container", "camera") groups=["CanvasRulers"]]
 clip_contents = true
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
@@ -267,13 +267,13 @@ script = ExtResource("6")
 viewport_container = NodePath("../ViewportandVerticalRuler/SubViewportContainer")
 camera = NodePath("../ViewportandVerticalRuler/SubViewportContainer/SubViewport/Camera2D")
 
-[node name="ViewportandVerticalRuler" type="HBoxContainer" parent="DockableContainer/Main Canvas"]
+[node name="ViewportandVerticalRuler" type="HBoxContainer" parent="DockableContainer/Main Canvas" unique_id=1894081549]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="VerticalRuler" type="Button" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler" node_paths=PackedStringArray("viewport_container", "camera") groups=["CanvasRulers"]]
+[node name="VerticalRuler" type="Button" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler" unique_id=1614697544 node_paths=PackedStringArray("viewport_container", "camera") groups=["CanvasRulers"]]
 clip_contents = true
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
@@ -287,7 +287,7 @@ script = ExtResource("4")
 viewport_container = NodePath("../SubViewportContainer")
 camera = NodePath("../SubViewportContainer/SubViewport/Camera2D")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler" unique_id=1021631999]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -296,26 +296,24 @@ stretch = true
 script = ExtResource("23")
 camera_path = NodePath("SubViewport/Camera2D")
 
-[node name="SubViewport" type="SubViewport" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer" unique_id=1063035719]
 disable_3d = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(821, 515)
+size = Vector2i(809, 515)
 render_target_update_mode = 4
 
-[node name="TransparentChecker" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" instance=ExtResource("5")]
+[node name="TransparentChecker" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" unique_id=977983793 instance=ExtResource("5")]
 material = SubResource("2")
-layout_direction = 2
-mouse_filter = 2
 
-[node name="Canvas" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" instance=ExtResource("19")]
+[node name="Canvas" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" unique_id=1915759682 instance=ExtResource("19")]
 
-[node name="Camera2D" type="Node2D" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" groups=["CanvasCameras"]]
+[node name="Camera2D" type="Node2D" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" unique_id=1478356410 groups=["CanvasCameras"]]
 script = ExtResource("7")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport"]
+[node name="CanvasLayer" type="CanvasLayer" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" unique_id=1574676608]
 
-[node name="GreyscaleVision" type="ColorRect" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport/CanvasLayer"]
+[node name="GreyscaleVision" type="ColorRect" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport/CanvasLayer" unique_id=1489047676]
 visible = false
 material = SubResource("27")
 anchors_preset = 15
@@ -325,7 +323,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
 
-[node name="Second Canvas" type="SubViewportContainer" parent="DockableContainer"]
+[node name="Second Canvas" type="SubViewportContainer" parent="DockableContainer" unique_id=1483064810]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -333,73 +331,71 @@ stretch = true
 script = ExtResource("23")
 camera_path = NodePath("SubViewport/Camera2D2")
 
-[node name="SubViewport" type="SubViewport" parent="DockableContainer/Second Canvas"]
+[node name="SubViewport" type="SubViewport" parent="DockableContainer/Second Canvas" unique_id=2004501249]
 disable_3d = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 size = Vector2i(2, 2)
 render_target_update_mode = 0
 
-[node name="TransparentChecker" parent="DockableContainer/Second Canvas/SubViewport" instance=ExtResource("5")]
+[node name="TransparentChecker" parent="DockableContainer/Second Canvas/SubViewport" unique_id=799733885 instance=ExtResource("5")]
 material = SubResource("3")
-layout_direction = 2
-mouse_filter = 2
 
-[node name="CanvasPreview" parent="DockableContainer/Second Canvas/SubViewport" groups=["CanvasPreviews"] instance=ExtResource("2")]
+[node name="CanvasPreview" parent="DockableContainer/Second Canvas/SubViewport" unique_id=1394850393 groups=["CanvasPreviews"] instance=ExtResource("2")]
 
-[node name="Camera2D2" type="Node2D" parent="DockableContainer/Second Canvas/SubViewport" groups=["CanvasCameras"]]
+[node name="Camera2D2" type="Node2D" parent="DockableContainer/Second Canvas/SubViewport" unique_id=1003177582 groups=["CanvasCameras"]]
 script = ExtResource("7")
 index = 1
 
-[node name="Animation Timeline" parent="DockableContainer" instance=ExtResource("18")]
+[node name="Animation Timeline" parent="DockableContainer" unique_id=1139956430 instance=ExtResource("18")]
 layout_mode = 2
 
-[node name="Canvas Preview" parent="DockableContainer" instance=ExtResource("16")]
+[node name="Canvas Preview" parent="DockableContainer" unique_id=1753962058 instance=ExtResource("16")]
 visible = false
 layout_mode = 2
 
-[node name="Color Picker" parent="DockableContainer" instance=ExtResource("17")]
+[node name="Color Picker" parent="DockableContainer" unique_id=1359696669 instance=ExtResource("17")]
 layout_mode = 2
 
-[node name="Global Tool Options" parent="DockableContainer" instance=ExtResource("10")]
+[node name="Global Tool Options" parent="DockableContainer" unique_id=187407303 instance=ExtResource("10")]
 layout_mode = 2
 
-[node name="Left Tool Options" type="ScrollContainer" parent="DockableContainer"]
+[node name="Left Tool Options" type="ScrollContainer" parent="DockableContainer" unique_id=1020831561]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 
-[node name="LeftPanelContainer" type="MarginContainer" parent="DockableContainer/Left Tool Options"]
+[node name="LeftPanelContainer" type="MarginContainer" parent="DockableContainer/Left Tool Options" unique_id=1828034153]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Right Tool Options" type="ScrollContainer" parent="DockableContainer"]
+[node name="Right Tool Options" type="ScrollContainer" parent="DockableContainer" unique_id=2060219285]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 
-[node name="RightPanelContainer" type="MarginContainer" parent="DockableContainer/Right Tool Options"]
+[node name="RightPanelContainer" type="MarginContainer" parent="DockableContainer/Right Tool Options" unique_id=1053618903]
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Palettes" parent="DockableContainer" instance=ExtResource("20")]
+[node name="Palettes" parent="DockableContainer" unique_id=1759517791 instance=ExtResource("20")]
 layout_mode = 2
 
-[node name="Tiles" parent="DockableContainer" instance=ExtResource("23_wyr78")]
+[node name="Tiles" parent="DockableContainer" unique_id=1039496240 instance=ExtResource("23_wyr78")]
 visible = false
 layout_mode = 2
 
-[node name="Reference Images" parent="DockableContainer" instance=ExtResource("11")]
+[node name="Reference Images" parent="DockableContainer" unique_id=116474698 instance=ExtResource("11")]
 visible = false
 layout_mode = 2
 
-[node name="Perspective Editor" parent="DockableContainer" instance=ExtResource("12")]
+[node name="Perspective Editor" parent="DockableContainer" unique_id=1383565198 instance=ExtResource("12")]
 visible = false
 layout_mode = 2
 
-[node name="Recorder" parent="DockableContainer" instance=ExtResource("13")]
+[node name="Recorder" parent="DockableContainer" unique_id=184365863 instance=ExtResource("13")]
 visible = false
 layout_mode = 2
 

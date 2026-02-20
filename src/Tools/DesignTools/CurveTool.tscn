@@ -1,13 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckfvd8gf3oy4r"]
+[gd_scene format=3 uid="uid://ckfvd8gf3oy4r"]
 
 [ext_resource type="PackedScene" uid="uid://ubyatap3sylf" path="res://src/Tools/BaseDraw.tscn" id="1_rvuea"]
 [ext_resource type="Script" uid="uid://u1adalnj5cfh" path="res://src/Tools/DesignTools/CurveTool.gd" id="2_tjnp6"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="3_g0nav"]
 
-[node name="ToolOptions" instance=ExtResource("1_rvuea")]
+[node name="ToolOptions" unique_id=17636591 instance=ExtResource("1_rvuea")]
 script = ExtResource("2_tjnp6")
 
-[node name="ThicknessSlider" parent="." index="2" instance=ExtResource("3_g0nav")]
+[node name="ThicknessSlider" parent="." index="2" unique_id=721842996 instance=ExtResource("3_g0nav")]
 layout_mode = 2
 min_value = 1.0
 value = 1.0
@@ -17,15 +17,15 @@ allow_global_input_events = true
 global_increment_action = "brush_size_increment"
 global_decrement_action = "brush_size_decrement"
 
-[node name="BezierOptions" type="HBoxContainer" parent="." index="3"]
+[node name="BezierOptions" type="HBoxContainer" parent="." index="3" unique_id=1966803803]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="BezierOptions" index="0"]
+[node name="Label" type="Label" parent="BezierOptions" index="0" unique_id=1474254133]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Mode:"
 
-[node name="BezierMode" type="OptionButton" parent="BezierOptions" index="1"]
+[node name="BezierMode" type="OptionButton" parent="BezierOptions" index="1" unique_id=133195326]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Chained: Makes a chain of multiple bezier curves, similar to Krita's curve tool.
@@ -39,16 +39,16 @@ popup/item_0/id = 0
 popup/item_1/text = "Single"
 popup/item_1/id = 1
 
-[node name="FillCheckbox" type="CheckBox" parent="." index="4"]
+[node name="FillCheckbox" type="CheckBox" parent="." index="4" unique_id=374483038]
 layout_mode = 2
 tooltip_text = "Fills the drawn shape with color, instead of drawing a hollow shape"
 mouse_default_cursor_shape = 2
 text = "Fill Shape"
 
-[node name="Brush" parent="." index="5"]
+[node name="Brush" parent="." index="5" unique_id=634582773]
 visible = false
 
-[node name="DoubleClickTimer" type="Timer" parent="." index="8"]
+[node name="DoubleClickTimer" type="Timer" parent="." index="8" unique_id=33007697]
 wait_time = 0.2
 one_shot = true
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://wo0hqxkst808"]
+[gd_scene format=3 uid="uid://wo0hqxkst808"]
 
 [ext_resource type="Texture2D" uid="uid://cjrokejjsp5dm" path="res://assets/graphics/misc/horizontal_mirror_off.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://hiduvaa73fr6" path="res://assets/graphics/misc/vertical_mirror_off.png" id="2"]
@@ -56,27 +56,27 @@ gradient = SubResource("3")
 [sub_resource type="GradientTexture2D" id="5"]
 gradient = SubResource("3")
 
-[node name="Global Tool Options" type="PanelContainer"]
+[node name="Global Tool Options" type="PanelContainer" unique_id=1744736398]
 offset_left = 1.0
 offset_right = 307.0
 offset_bottom = 50.0
 script = ExtResource("3")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1428651689]
 custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="ScrollContainer" unique_id=1011913846]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="GridContainer" type="GridContainer" parent="ScrollContainer/CenterContainer"]
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer/CenterContainer" unique_id=1296961989]
 layout_mode = 2
 size_flags_vertical = 0
 columns = 8
 
-[node name="Horizontal" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
+[node name="Horizontal" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" unique_id=1430786735 groups=["UIButtons"]]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Enable horizontal mirrored drawing"
@@ -84,7 +84,7 @@ mouse_default_cursor_shape = 2
 toggle_mode = true
 shortcut = SubResource("Shortcut_eld87")
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Horizontal"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Horizontal" unique_id=2084418713]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -96,7 +96,7 @@ offset_bottom = 11.0
 grow_vertical = 2
 texture = ExtResource("1")
 
-[node name="Vertical" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
+[node name="Vertical" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" unique_id=1644815502 groups=["UIButtons"]]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Enable vertical mirrored drawing"
@@ -104,7 +104,7 @@ mouse_default_cursor_shape = 2
 toggle_mode = true
 shortcut = SubResource("Shortcut_ai7qc")
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Vertical"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Vertical" unique_id=1342587046]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -116,7 +116,7 @@ offset_bottom = 10.0
 grow_vertical = 2
 texture = ExtResource("2")
 
-[node name="DiagonalXY" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
+[node name="DiagonalXY" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" unique_id=412499936 groups=["UIButtons"]]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Enable diagonal (↗) mirrored drawing"
@@ -124,7 +124,7 @@ mouse_default_cursor_shape = 2
 toggle_mode = true
 shortcut = SubResource("Shortcut_ai7qc")
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/DiagonalXY"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/DiagonalXY" unique_id=381913575]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -136,7 +136,7 @@ offset_bottom = 10.0
 grow_vertical = 2
 texture = ExtResource("5_hcmgx")
 
-[node name="DiagonalXMinusY" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
+[node name="DiagonalXMinusY" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" unique_id=1676525896 groups=["UIButtons"]]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Enable diagonal (↘) mirrored drawing"
@@ -144,7 +144,7 @@ mouse_default_cursor_shape = 2
 toggle_mode = true
 shortcut = SubResource("Shortcut_ai7qc")
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/DiagonalXMinusY"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/DiagonalXMinusY" unique_id=2017737103]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -156,7 +156,7 @@ offset_bottom = 10.0
 grow_vertical = 2
 texture = ExtResource("6_sw8fy")
 
-[node name="MirrorOptions" type="MenuButton" parent="ScrollContainer/CenterContainer/GridContainer"]
+[node name="MirrorOptions" type="MenuButton" parent="ScrollContainer/CenterContainer/GridContainer" unique_id=1991402163]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
@@ -168,7 +168,7 @@ popup/item_0/id = 0
 popup/item_1/text = "Move to view center"
 popup/item_1/id = 1
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/MirrorOptions"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/MirrorOptions" unique_id=1094405293]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -184,7 +184,7 @@ grow_vertical = 2
 texture = ExtResource("3_faalk")
 stretch_mode = 3
 
-[node name="PixelPerfect" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
+[node name="PixelPerfect" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" unique_id=1257770485 groups=["UIButtons"]]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Pixel Perfect
@@ -193,7 +193,7 @@ mouse_default_cursor_shape = 2
 toggle_mode = true
 shortcut = SubResource("Shortcut_7kmom")
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/PixelPerfect"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/PixelPerfect" unique_id=208861589]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -205,7 +205,7 @@ offset_right = 11.0
 offset_bottom = 10.0
 texture = ExtResource("4")
 
-[node name="AlphaLock" type="Button" parent="ScrollContainer/CenterContainer/GridContainer"]
+[node name="AlphaLock" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" unique_id=535628166]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Lock alpha"
@@ -213,7 +213,7 @@ mouse_default_cursor_shape = 2
 toggle_mode = true
 shortcut = SubResource("Shortcut_vcyug")
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/AlphaLock"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/AlphaLock" unique_id=1554395905]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -225,14 +225,14 @@ offset_right = 11.0
 offset_bottom = 10.0
 texture = ExtResource("5_jv20x")
 
-[node name="Dynamics" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" groups=["UIButtons"]]
+[node name="Dynamics" type="Button" parent="ScrollContainer/CenterContainer/GridContainer" unique_id=2033294383 groups=["UIButtons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Dynamics"
 mouse_default_cursor_shape = 2
 
-[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Dynamics"]
+[node name="TextureRect" type="TextureRect" parent="ScrollContainer/CenterContainer/GridContainer/Dynamics" unique_id=870713854]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -244,27 +244,27 @@ offset_right = 11.0
 offset_bottom = 10.0
 texture = ExtResource("6")
 
-[node name="DynamicsPanel" type="PopupPanel" parent="."]
+[node name="DynamicsPanel" type="PopupPanel" parent="." unique_id=142986690]
 canvas_item_default_texture_filter = 0
 oversampling_override = 1.0
 size = Vector2i(300, 334)
 script = ExtResource("7_iqcw1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DynamicsPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DynamicsPanel" unique_id=1945514481]
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 296.0
 offset_bottom = 330.0
 
-[node name="StabilizerContainer" type="HBoxContainer" parent="DynamicsPanel/VBoxContainer"]
+[node name="StabilizerContainer" type="HBoxContainer" parent="DynamicsPanel/VBoxContainer" unique_id=1539855122]
 layout_mode = 2
 
-[node name="EnableStabilizer" type="CheckButton" parent="DynamicsPanel/VBoxContainer/StabilizerContainer"]
+[node name="EnableStabilizer" type="CheckButton" parent="DynamicsPanel/VBoxContainer/StabilizerContainer" unique_id=1844469668]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Stabilizer"
 
-[node name="StabilizerValue" type="TextureProgressBar" parent="DynamicsPanel/VBoxContainer/StabilizerContainer"]
+[node name="StabilizerValue" type="TextureProgressBar" parent="DynamicsPanel/VBoxContainer/StabilizerContainer" unique_id=217099507]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
@@ -281,30 +281,30 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="DynamicsOptions" type="GridContainer" parent="DynamicsPanel/VBoxContainer"]
+[node name="DynamicsOptions" type="GridContainer" parent="DynamicsPanel/VBoxContainer" unique_id=1379873237]
 layout_mode = 2
 columns = 3
 
-[node name="Control" type="Control" parent="DynamicsPanel/VBoxContainer/DynamicsOptions"]
+[node name="Control" type="Control" parent="DynamicsPanel/VBoxContainer/DynamicsOptions" unique_id=77374913]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PressureLabel" type="Label" parent="DynamicsPanel/VBoxContainer/DynamicsOptions"]
+[node name="PressureLabel" type="Label" parent="DynamicsPanel/VBoxContainer/DynamicsOptions" unique_id=1070547251]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Pressure"
 
-[node name="VelocityLabel" type="Label" parent="DynamicsPanel/VBoxContainer/DynamicsOptions"]
+[node name="VelocityLabel" type="Label" parent="DynamicsPanel/VBoxContainer/DynamicsOptions" unique_id=1366494522]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Velocity"
 
-[node name="AlphaLabel" type="Label" parent="DynamicsPanel/VBoxContainer/DynamicsOptions"]
+[node name="AlphaLabel" type="Label" parent="DynamicsPanel/VBoxContainer/DynamicsOptions" unique_id=1925095099]
 layout_mode = 2
 text = "Alpha"
 
-[node name="AlphaPressureButton" type="Button" parent="DynamicsPanel/VBoxContainer/DynamicsOptions" groups=["UIButtons"]]
+[node name="AlphaPressureButton" type="Button" parent="DynamicsPanel/VBoxContainer/DynamicsOptions" unique_id=1658302600 groups=["UIButtons"]]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -313,86 +313,86 @@ button_group = SubResource("ButtonGroup_ahrcw")
 icon_alignment = 1
 expand_icon = true
 
-[node name="TextureRect" type="TextureRect" parent="DynamicsPanel/VBoxContainer/DynamicsOptions/AlphaPressureButton"]
+[node name="TextureRect" type="TextureRect" parent="DynamicsPanel/VBoxContainer/DynamicsOptions/AlphaPressureButton" unique_id=2101576815]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource("7")
 expand_mode = 1
 
-[node name="AlphaVelocityButton" type="Button" parent="DynamicsPanel/VBoxContainer/DynamicsOptions" groups=["UIButtons"]]
+[node name="AlphaVelocityButton" type="Button" parent="DynamicsPanel/VBoxContainer/DynamicsOptions" unique_id=494678504 groups=["UIButtons"]]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_ahrcw")
 
-[node name="TextureRect" type="TextureRect" parent="DynamicsPanel/VBoxContainer/DynamicsOptions/AlphaVelocityButton"]
+[node name="TextureRect" type="TextureRect" parent="DynamicsPanel/VBoxContainer/DynamicsOptions/AlphaVelocityButton" unique_id=669085500]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource("7")
 expand_mode = 1
 
-[node name="SizeLabel" type="Label" parent="DynamicsPanel/VBoxContainer/DynamicsOptions"]
+[node name="SizeLabel" type="Label" parent="DynamicsPanel/VBoxContainer/DynamicsOptions" unique_id=122936316]
 layout_mode = 2
 text = "Size"
 
-[node name="SizePressureButton" type="Button" parent="DynamicsPanel/VBoxContainer/DynamicsOptions" groups=["UIButtons"]]
+[node name="SizePressureButton" type="Button" parent="DynamicsPanel/VBoxContainer/DynamicsOptions" unique_id=660654220 groups=["UIButtons"]]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_t01h7")
 
-[node name="TextureRect" type="TextureRect" parent="DynamicsPanel/VBoxContainer/DynamicsOptions/SizePressureButton"]
+[node name="TextureRect" type="TextureRect" parent="DynamicsPanel/VBoxContainer/DynamicsOptions/SizePressureButton" unique_id=1914099260]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource("7")
 expand_mode = 1
 
-[node name="SizeVelocityButton" type="Button" parent="DynamicsPanel/VBoxContainer/DynamicsOptions" groups=["UIButtons"]]
+[node name="SizeVelocityButton" type="Button" parent="DynamicsPanel/VBoxContainer/DynamicsOptions" unique_id=894422478 groups=["UIButtons"]]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_t01h7")
 
-[node name="TextureRect" type="TextureRect" parent="DynamicsPanel/VBoxContainer/DynamicsOptions/SizeVelocityButton"]
+[node name="TextureRect" type="TextureRect" parent="DynamicsPanel/VBoxContainer/DynamicsOptions/SizeVelocityButton" unique_id=1935205518]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource("7")
 expand_mode = 1
 
-[node name="LimitsHeader" type="HBoxContainer" parent="DynamicsPanel/VBoxContainer"]
+[node name="LimitsHeader" type="HBoxContainer" parent="DynamicsPanel/VBoxContainer" unique_id=1522388238]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="Label" type="Label" parent="DynamicsPanel/VBoxContainer/LimitsHeader"]
+[node name="Label" type="Label" parent="DynamicsPanel/VBoxContainer/LimitsHeader" unique_id=962072864]
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
 text = "Value limits"
 
-[node name="HSeparator" type="HSeparator" parent="DynamicsPanel/VBoxContainer/LimitsHeader"]
+[node name="HSeparator" type="HSeparator" parent="DynamicsPanel/VBoxContainer/LimitsHeader" unique_id=15437750]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="LimitContainer" type="VBoxContainer" parent="DynamicsPanel/VBoxContainer"]
+[node name="LimitContainer" type="VBoxContainer" parent="DynamicsPanel/VBoxContainer" unique_id=1707792232]
 layout_mode = 2
 
-[node name="AlphaLimits" type="HBoxContainer" parent="DynamicsPanel/VBoxContainer/LimitContainer" groups=["VisibleOnAlpha"]]
+[node name="AlphaLimits" type="HBoxContainer" parent="DynamicsPanel/VBoxContainer/LimitContainer" unique_id=1621071575 groups=["VisibleOnAlpha"]]
 visible = false
 layout_mode = 2
 
-[node name="AlphaLabel" type="Label" parent="DynamicsPanel/VBoxContainer/LimitContainer/AlphaLimits"]
+[node name="AlphaLabel" type="Label" parent="DynamicsPanel/VBoxContainer/LimitContainer/AlphaLimits" unique_id=2073040997]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Alpha"
 
-[node name="AlphaMin" type="TextureProgressBar" parent="DynamicsPanel/VBoxContainer/LimitContainer/AlphaLimits"]
+[node name="AlphaMin" type="TextureProgressBar" parent="DynamicsPanel/VBoxContainer/LimitContainer/AlphaLimits" unique_id=1556235059]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
@@ -410,7 +410,7 @@ script = ExtResource("5")
 prefix = "Start"
 snap_step = 0.1
 
-[node name="AlphaMax" type="TextureProgressBar" parent="DynamicsPanel/VBoxContainer/LimitContainer/AlphaLimits"]
+[node name="AlphaMax" type="TextureProgressBar" parent="DynamicsPanel/VBoxContainer/LimitContainer/AlphaLimits" unique_id=1226675110]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
@@ -428,16 +428,16 @@ script = ExtResource("5")
 prefix = "End"
 snap_step = 0.1
 
-[node name="SizeLimits" type="HBoxContainer" parent="DynamicsPanel/VBoxContainer/LimitContainer" groups=["VisibleOnSize"]]
+[node name="SizeLimits" type="HBoxContainer" parent="DynamicsPanel/VBoxContainer/LimitContainer" unique_id=936003525 groups=["VisibleOnSize"]]
 visible = false
 layout_mode = 2
 
-[node name="SizeLabel" type="Label" parent="DynamicsPanel/VBoxContainer/LimitContainer/SizeLimits"]
+[node name="SizeLabel" type="Label" parent="DynamicsPanel/VBoxContainer/LimitContainer/SizeLimits" unique_id=1374643510]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Size max:"
 
-[node name="SizeMaxIncrement" type="TextureProgressBar" parent="DynamicsPanel/VBoxContainer/LimitContainer/SizeLimits"]
+[node name="SizeMaxIncrement" type="TextureProgressBar" parent="DynamicsPanel/VBoxContainer/LimitContainer/SizeLimits" unique_id=993979843]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -457,40 +457,40 @@ stretch_margin_bottom = 3
 script = ExtResource("5")
 prefix = "Brush size +"
 
-[node name="ThresholdsHeader" type="HBoxContainer" parent="DynamicsPanel/VBoxContainer"]
+[node name="ThresholdsHeader" type="HBoxContainer" parent="DynamicsPanel/VBoxContainer" unique_id=838820615]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="Label" type="Label" parent="DynamicsPanel/VBoxContainer/ThresholdsHeader"]
+[node name="Label" type="Label" parent="DynamicsPanel/VBoxContainer/ThresholdsHeader" unique_id=385243725]
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
 text = "Thresholds"
 
-[node name="HSeparator" type="HSeparator" parent="DynamicsPanel/VBoxContainer/ThresholdsHeader"]
+[node name="HSeparator" type="HSeparator" parent="DynamicsPanel/VBoxContainer/ThresholdsHeader" unique_id=604592608]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ThresholdContainer" type="GridContainer" parent="DynamicsPanel/VBoxContainer"]
+[node name="ThresholdContainer" type="GridContainer" parent="DynamicsPanel/VBoxContainer" unique_id=221407890]
 layout_mode = 2
 columns = 2
 
-[node name="ThresholdPressureLabel" type="Label" parent="DynamicsPanel/VBoxContainer/ThresholdContainer" groups=["VisibleOnPressure"]]
+[node name="ThresholdPressureLabel" type="Label" parent="DynamicsPanel/VBoxContainer/ThresholdContainer" unique_id=1814798409 groups=["VisibleOnPressure"]]
 visible = false
 layout_mode = 2
 text = "Pressure"
 
-[node name="ThresholdPressure" parent="DynamicsPanel/VBoxContainer/ThresholdContainer" groups=["VisibleOnPressure"] instance=ExtResource("8")]
+[node name="ThresholdPressure" parent="DynamicsPanel/VBoxContainer/ThresholdContainer" unique_id=1969622875 groups=["VisibleOnPressure"] instance=ExtResource("8")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 start = 0.2
 end = 0.8
 
-[node name="TextureRect" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure" index="0"]
+[node name="TextureRect" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure" index="0" unique_id=1086824968]
 texture = SubResource("4")
 
-[node name="PressurePreview" type="ProgressBar" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure/TextureRect" index="0"]
+[node name="PressurePreview" type="ProgressBar" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure/TextureRect" index="0" unique_id=1400371720]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 0
@@ -500,28 +500,28 @@ max_value = 1.0
 step = 0.001
 value = 0.497
 
-[node name="Value" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure/TextureRect" index="1"]
+[node name="Value" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdPressure/TextureRect" index="1" unique_id=852397936]
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_right = 1.0
 offset_bottom = 23.0
 
-[node name="ThresholdVelocityLabel" type="Label" parent="DynamicsPanel/VBoxContainer/ThresholdContainer" groups=["VisibleOnVelocity"]]
+[node name="ThresholdVelocityLabel" type="Label" parent="DynamicsPanel/VBoxContainer/ThresholdContainer" unique_id=187362113 groups=["VisibleOnVelocity"]]
 visible = false
 layout_mode = 2
 text = "Velocity"
 
-[node name="ThresholdVelocity" parent="DynamicsPanel/VBoxContainer/ThresholdContainer" groups=["VisibleOnVelocity"] instance=ExtResource("8")]
+[node name="ThresholdVelocity" parent="DynamicsPanel/VBoxContainer/ThresholdContainer" unique_id=1054163450 groups=["VisibleOnVelocity"] instance=ExtResource("8")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 start = 0.2
 end = 0.8
 
-[node name="TextureRect" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity" index="0"]
+[node name="TextureRect" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity" index="0" unique_id=1086824968]
 texture = SubResource("5")
 
-[node name="VelocityPreview" type="ProgressBar" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity/TextureRect" index="0"]
+[node name="VelocityPreview" type="ProgressBar" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity/TextureRect" index="0" unique_id=1415260243]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.294118)
 layout_mode = 0
@@ -530,13 +530,13 @@ anchor_bottom = 1.0
 max_value = 1.0
 step = 0.001
 
-[node name="Value" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity/TextureRect" index="1"]
+[node name="Value" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity/TextureRect" index="1" unique_id=852397936]
 anchor_right = 0.0
 anchor_bottom = 0.0
 offset_right = 1.0
 offset_bottom = 23.0
 
-[node name="MaxVelocitySlider" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity" instance=ExtResource("14_d1yms")]
+[node name="MaxVelocitySlider" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity" unique_id=1339175976 instance=ExtResource("14_d1yms")]
 unique_name_in_owner = true
 layout_mode = 2
 min_value = 1.0

@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://coml8w5ajc2ru"]
 
-[node name="ThemeColorPreview" type="ColorRect"]
+[node name="ThemeColorPreview" type="ColorRect" unique_id=1261703384]
 custom_minimum_size = Vector2(50, 16)
 offset_right = 50.0
 offset_bottom = 14.0
 mouse_filter = 2
 color = Color(0.380392, 0.384314, 0.380392, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=840259230]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,14 +16,14 @@ offset_top = 3.0
 offset_right = -3.0
 offset_bottom = -3.0
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer" unique_id=1916634000]
 custom_minimum_size = Vector2(20, 10)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 color = Color(0.152941, 0.152941, 0.152941, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="HBoxContainer"]
+[node name="ColorRect2" type="ColorRect" parent="HBoxContainer" unique_id=425209868]
 custom_minimum_size = Vector2(20, 10)
 layout_mode = 2
 size_flags_horizontal = 3

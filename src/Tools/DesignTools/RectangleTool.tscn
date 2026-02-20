@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dhlab4q2dwu0a"]
+[gd_scene format=3 uid="uid://dhlab4q2dwu0a"]
 
 [ext_resource type="PackedScene" uid="uid://n40lhf8hm7o1" path="res://src/Tools/BaseShapeDrawer.tscn" id="1"]
 [ext_resource type="Script" uid="uid://bjb3e5dxu0b8c" path="res://src/Tools/DesignTools/RectangleTool.gd" id="2"]
 
-[node name="ToolOptions" instance=ExtResource("1")]
+[node name="ToolOptions" unique_id=1543714690 instance=ExtResource("1")]
 script = ExtResource("2")
