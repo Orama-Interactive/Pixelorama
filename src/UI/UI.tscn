@@ -301,7 +301,7 @@ camera_path = NodePath("SubViewport/Camera2D")
 disable_3d = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(767, 515)
+size = Vector2i(755, 515)
 render_target_update_mode = 4
 
 [node name="TransparentChecker" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" unique_id=977983793 instance=ExtResource("5")]
@@ -388,7 +388,7 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="3D Object Tree" parent="DockableContainer" instance=ExtResource("24_bf5mq")]
+[node name="3D Object Tree" parent="DockableContainer" unique_id=1457458732 instance=ExtResource("24_bf5mq")]
 visible = false
 layout_mode = 2
 
