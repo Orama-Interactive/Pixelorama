@@ -291,22 +291,22 @@ layout_mode = 2
 tooltip_text = "The character(s) that separate the file name and the frame number"
 text = "_"
 
-[node name="ExportJSON" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=459971663]
+[node name="ExportJSON" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=459971663 groups=["NotAndroid"]]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Export JSON data"
 
-[node name="SplitLayers" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=287230239 groups=["ExportImageOptions"]]
+[node name="SplitLayers" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=287230239 groups=["ExportImageOptions", "NotAndroid"]]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Split layers"
 
-[node name="IncludeTagsInFilename" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=64815569 groups=["ExportImageOptions", "ExportMultipleFilesOptions"]]
+[node name="IncludeTagsInFilename" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=64815569 groups=["ExportImageOptions", "ExportMultipleFilesOptions", "NotAndroid"]]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Include frame tags in the file name"
 
-[node name="MultipleAnimationsDirectories" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=2068197934 groups=["ExportImageOptions", "ExportMultipleFilesOptions"]]
+[node name="MultipleAnimationsDirectories" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=2068197934 groups=["ExportImageOptions", "ExportMultipleFilesOptions", "NotAndroid", "NotHTML5"]]
 visible = false
 layout_mode = 2
 tooltip_text = "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
@@ -331,6 +331,7 @@ size = Vector2i(675, 500)
 always_on_top = true
 ok_button_text = "Select Current Folder"
 access = 2
+overwrite_warning_enabled = false
 
 [node name="PathValidationAlert" type="AcceptDialog" parent="." unique_id=355024950]
 always_on_top = true

@@ -96,6 +96,10 @@ func show_tab() -> void:
 	set_preview()
 	update_dimensions_label()
 	tabs.current_tab = Export.current_tab
+	if OS.get_name() == "Web":
+		get_tree().call_group("NotHTML5", "hide")
+	elif OS.get_name() == "Android":
+		get_tree().call_group("NotAndroid", "hide")
 
 
 func set_preview() -> void:
@@ -279,7 +283,6 @@ func _on_about_to_popup() -> void:
 	var project := Global.current_project
 	# If we're on Web, don't let the user change the directory path
 	if OS.get_name() == "Web":
-		get_tree().call_group("NotHTML5", "hide")
 		project.export_directory_path = "user://"
 
 	if project.export_directory_path.is_empty():

@@ -358,6 +358,8 @@ func export_processed_images(
 	var multiple_files := false
 	if current_tab == ExportTab.IMAGE and not is_single_file_format(project):
 		multiple_files = true if processed_images.size() > 1 else false
+	if OS.get_name() == "Android":
+		multiple_files = false
 	# Check export paths
 	var export_paths: PackedStringArray = []
 	var paths_of_existing_files := ""
@@ -388,7 +390,7 @@ func export_processed_images(
 				paths_of_existing_files += export_path
 		export_paths.append(export_path)
 		# Only get one export path if single file animated image is exported
-		if is_single_file_format(project):
+		if is_single_file_format(project) or OS.get_name() == "Android":
 			break
 
 	if not paths_of_existing_files.is_empty():  # If files already exist
@@ -495,6 +497,8 @@ func export_processed_images(
 						tr("File failed to save. Error code %s (%s)") % [err, error_string(err)]
 					)
 					return false
+			if OS.get_name() == "Android":
+				break
 
 	Global.notification_label("File(s) exported")
 	# Store settings for quick export and when the dialog is opened again
