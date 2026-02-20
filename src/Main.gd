@@ -206,10 +206,11 @@ func _ready() -> void:
 	_handle_cmdline_arguments()
 	get_tree().root.files_dropped.connect(_on_files_dropped)
 	if OS.get_name() == "Android":
-		OS.request_permissions()
 		var intent_data := Applinks.get_data()
 		if not intent_data.is_empty():
 			_on_applinks_data_received(intent_data)
+	if not DisplayServer.has_feature(DisplayServer.FEATURE_NATIVE_DIALOG_FILE_EXTRA):
+		save_sprite_dialog.option_count = 0
 
 	# Detect if Pixelorama crashed last time.
 	var crashed_last_time := FileAccess.file_exists(RUNNING_FILE_PATH)
