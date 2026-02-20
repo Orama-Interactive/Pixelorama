@@ -834,7 +834,7 @@ func _ready() -> void:
 					update_grids(value)
 			else:
 				set(pref, value)
-	if OS.is_sandboxed():
+	if OS.is_sandboxed() or OS.has_feature("mobile"):
 		Global.use_native_file_dialogs = true
 	await get_tree().process_frame
 	project_switched.emit()

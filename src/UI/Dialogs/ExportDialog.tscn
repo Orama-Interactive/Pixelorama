@@ -13,7 +13,7 @@ shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
 shader_parameter/color2 = Color(1, 1, 1, 1)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/scale = Vector2(0, 0)
-shader_parameter/rect_size = Vector2(0, 0)
+shader_parameter/rect_size = Vector2(684, 234)
 shader_parameter/follow_movement = false
 shader_parameter/follow_scale = false
 
@@ -40,10 +40,6 @@ size_flags_vertical = 0
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=473865758]
 layout_mode = 2
-
-[node name="PreviewLabel" type="Label" parent="VBoxContainer" unique_id=119891113]
-layout_mode = 2
-text = "Preview:"
 
 [node name="VSplitContainer" type="VSplitContainer" parent="VBoxContainer" unique_id=782890775]
 layout_mode = 2
@@ -226,16 +222,15 @@ text = "64×64"
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer/VSplitContainer/VBoxContainer" unique_id=857749939]
 layout_mode = 2
 
-[node name="FilePath" type="GridContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer" unique_id=2032253455]
+[node name="FilePath" type="HBoxContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer" unique_id=799127972]
 layout_mode = 2
-columns = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" unique_id=1118645622 groups=["NotHTML5"]]
+[node name="Label" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" unique_id=1118645622]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 text = "Path:"
 
-[node name="PathLineEdit" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" unique_id=938649692 groups=["NotHTML5"]]
+[node name="PathLineEdit" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" unique_id=938649692]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -246,25 +241,6 @@ caret_blink_interval = 0.5
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Browse"
-
-[node name="Label2" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" unique_id=708447905]
-custom_minimum_size = Vector2(30, 0)
-layout_mode = 2
-text = "File:"
-
-[node name="FileLineEdit" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" unique_id=88883980]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-text = "untitled"
-caret_blink = true
-caret_blink_interval = 0.5
-
-[node name="FileFormat" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" unique_id=844726557]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(130, 0)
-layout_mode = 2
-mouse_default_cursor_shape = 2
 
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer/VSplitContainer/VBoxContainer" unique_id=224516429]
 layout_mode = 2
@@ -351,11 +327,9 @@ text = "Clip image content to selection"
 
 [node name="PathDialog" type="FileDialog" parent="." unique_id=746657325 groups=["FileDialogs"]]
 mode = 2
-title = "Open a Directory"
 size = Vector2i(675, 500)
 always_on_top = true
 ok_button_text = "Select Current Folder"
-file_mode = 2
 access = 2
 
 [node name="PathValidationAlert" type="AcceptDialog" parent="." unique_id=355024950]
@@ -402,8 +376,6 @@ size_flags_horizontal = 3
 [connection signal="value_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Quality" to="." method="_on_quality_value_changed"]
 [connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/PathLineEdit" to="." method="_on_path_line_edit_text_changed"]
 [connection signal="pressed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/PathButton" to="." method="_on_path_button_pressed"]
-[connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/FileLineEdit" to="." method="_on_file_line_edit_text_changed"]
-[connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/FileFormat" to="." method="_on_file_format_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/Interpolation" to="." method="_on_interpolation_item_selected"]
 [connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/SeparatorCharacter" to="." method="_on_separator_character_text_changed"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/ExportJSON" to="." method="_on_export_json_toggled"]
@@ -413,7 +385,7 @@ size_flags_horizontal = 3
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/TrimImages" to="." method="_on_trim_images_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/ClipSelection" to="." method="_on_clip_images_selection_toggled"]
 [connection signal="canceled" from="PathDialog" to="." method="_on_path_dialog_canceled"]
-[connection signal="dir_selected" from="PathDialog" to="." method="_on_path_dialog_dir_selected"]
+[connection signal="file_selected" from="PathDialog" to="." method="_on_path_dialog_file_selected"]
 [connection signal="confirmed" from="FileExistsAlert" to="." method="_on_file_exists_alert_confirmed"]
 [connection signal="custom_action" from="FileExistsAlert" to="." method="_on_file_exists_alert_custom_action"]
 [connection signal="timeout" from="FrameTimer" to="." method="_on_frame_timer_timeout"]

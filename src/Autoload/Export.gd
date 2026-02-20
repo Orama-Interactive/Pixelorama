@@ -342,6 +342,9 @@ func export_processed_images(
 	# Stop export if directory path or file name are not valid
 	var dir_exists := DirAccess.dir_exists_absolute(project.export_directory_path)
 	var is_valid_filename := project.file_name.is_valid_filename()
+	if project.export_directory_path.begins_with("content://"):
+		dir_exists = true
+		is_valid_filename = true
 	if not dir_exists:
 		if is_valid_filename:  # Directory path not valid, file name is valid
 			export_dialog.open_path_validation_alert_popup(0)

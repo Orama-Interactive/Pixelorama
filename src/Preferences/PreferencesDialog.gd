@@ -321,7 +321,12 @@ func _ready() -> void:
 		get_tree().call_group(&"DesktopOnly", &"free")
 	if not OS.has_feature("mobile"):
 		get_tree().call_group(&"MobileOnly", &"free")
-	if not DisplayServer.has_feature(DisplayServer.FEATURE_NATIVE_DIALOG_FILE):
+	if (
+		not DisplayServer.has_feature(DisplayServer.FEATURE_NATIVE_DIALOG_FILE)
+		or OS.get_name() == "Android"
+	):
+		# We want to force all file dialogs to be native in Android to use SAF,
+		# to avoid requesting permission, which Google discourages.
 		get_tree().call_group(&"NativeFileDialog", &"free")
 
 	for child in right_side.get_children():
