@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvpfnxblh1n3n"]
+[gd_scene format=3 uid="uid://dvpfnxblh1n3n"]
 
 [ext_resource type="Script" uid="uid://can6ogo08bxlm" path="res://src/UI/3DObjectTree.gd" id="1_udgli"]
 
@@ -8,7 +8,7 @@ action = &"delete"
 [sub_resource type="Shortcut" id="Shortcut_udgli"]
 events = [SubResource("InputEventAction_8sqgw")]
 
-[node name="3DObjectTree" type="PanelContainer"]
+[node name="3DObjectTree" type="PanelContainer" unique_id=365085463]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,14 +16,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_udgli")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1357424905]
 layout_mode = 2
 
-[node name="HandleObjects" type="GridContainer" parent="VBoxContainer"]
+[node name="HandleObjects" type="GridContainer" parent="VBoxContainer" unique_id=1456233255]
 layout_mode = 2
 columns = 2
 
-[node name="NewObjectMenuButton" type="MenuButton" parent="VBoxContainer/HandleObjects"]
+[node name="NewObjectMenuButton" type="MenuButton" parent="VBoxContainer/HandleObjects" unique_id=1347739888]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -32,7 +32,7 @@ mouse_default_cursor_shape = 2
 text = "Add new object"
 flat = false
 
-[node name="RemoveObject" type="Button" parent="VBoxContainer/HandleObjects"]
+[node name="RemoveObject" type="Button" parent="VBoxContainer/HandleObjects" unique_id=1012096677]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -41,11 +41,11 @@ disabled = true
 shortcut = SubResource("Shortcut_udgli")
 text = "Remove object"
 
-[node name="ObjectTree" type="Tree" parent="VBoxContainer"]
+[node name="ObjectTree" type="Tree" parent="VBoxContainer" unique_id=997114740]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="LoadModelDialog" type="FileDialog" parent="." groups=["FileDialogs"]]
+[node name="LoadModelDialog" type="FileDialog" parent="." unique_id=387962449 groups=["FileDialogs"]]
 mode = 1
 title = "Open File(s)"
 size = Vector2i(558, 300)
