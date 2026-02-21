@@ -53,6 +53,7 @@ var export_json := false
 var split_layers := false
 var trim_images := false
 var erase_unselected_area := false
+var overwrite_asked := false
 
 # Spritesheet options
 var orientation := Orientation.COLUMNS
@@ -393,7 +394,7 @@ func export_processed_images(
 		if is_single_file_format(project) or OS.get_name() == "Android":
 			break
 
-	if not paths_of_existing_files.is_empty():  # If files already exist
+	if not paths_of_existing_files.is_empty() and not overwrite_asked:  # If files already exist
 		# Ask user if they want to overwrite the files
 		export_dialog.open_file_exists_alert_popup(tr(file_exists_alert) % paths_of_existing_files)
 		# Stops the function until the user decides if they want to overwrite

@@ -300,6 +300,7 @@ func _on_about_to_popup() -> void:
 		path_line_edit.text = project.export_directory_path.path_join(project.file_name) + file_ext
 	path_dialog_popup.current_dir = project.export_directory_path
 	Export.cache_blended_frames()
+	Export.overwrite_asked = false
 	show_tab()
 
 	# Set the size of the preview checker
@@ -388,12 +389,14 @@ func _on_path_line_edit_text_changed(new_text: String) -> void:
 	var show_quality := file_format == Export.FileFormat.JPEG
 	%QualityLabel.visible = show_quality
 	%Quality.visible = show_quality
+	Export.overwrite_asked = false
 	set_preview()
 
 
 func _on_path_dialog_file_selected(path: String) -> void:
 	path_line_edit.text = path
 	_on_path_line_edit_text_changed(path)
+	Export.overwrite_asked = true
 	# Needed because if native file dialogs are enabled
 	# the export dialog closes when the path dialog closes
 	if not visible:
