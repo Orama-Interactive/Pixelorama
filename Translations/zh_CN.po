@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2025-11-30 12:35\n"
+"PO-Revision-Date: 2026-02-07 22:32\n"
 
 msgid "OK"
 msgstr "确定"
@@ -987,6 +987,10 @@ msgstr "启用此设置后，将使用操作系统的本机文件对话框，而
 msgid "Single window mode"
 msgstr "单窗口模式"
 
+#. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
+msgid "Collapse main menu"
+msgstr ""
+
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
 msgstr "启用此设置后，Pixelorama 的子窗口将嵌入主窗口中，否则每个对话框将是其自己的单独窗口。"
@@ -1043,8 +1047,8 @@ msgid "If this is enabled, the right mouse button will always activate the same 
 msgstr "如果启用此功能，则鼠标右键将始终激活与鼠标左键相同的工具。"
 
 #. Found in the preferences, under the Tools category.
-msgid "Share options between the left and the right tools"
-msgstr "在左侧和右侧工具之间共享选项"
+msgid "Share options between left and right tools"
+msgstr ""
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
@@ -1382,7 +1386,7 @@ msgid "Developed by Orama Interactive"
 msgstr "由 Orama Interactive 开发 - 简体中文翻译 By 大眼仔~旭（Anan）"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr "© 版权所有 2019~2025 - Orama Interactive 和贡献者"
+msgstr "© 版权所有 2019 Orama Interactive 和贡献者"
 
 msgid "Website"
 msgstr "网站"
@@ -3001,6 +3005,54 @@ msgstr "撤消：更改帧持续时间"
 
 msgid "Redo: Change frame duration"
 msgstr "重做：更改帧持续时间"
+
+msgid "Undo: Rename Layer"
+msgstr "撤销：重命名图层"
+
+msgid "Redo: Rename Layer"
+msgstr "重做：重命名图层"
+
+msgid "Undo: Change Layer Opacity"
+msgstr "撤销：更改图层不透明度"
+
+msgid "Redo: Change Layer Opacity"
+msgstr "重做：更改图层不透明度"
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
+msgid "Undo: Change Layer Onion Skinning Ignore Status"
+msgstr "撤销：更改图层洋葱皮忽略状态"
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
+msgid "Redo: Change Layer Onion Skinning Ignore Status"
+msgstr "重做：更改图层洋葱皮忽略状态"
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos.
+msgid "Undo: Change Layer User Data"
+msgstr "撤销：更改图层用户数据"
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
+msgid "Redo: Change Layer User Data"
+msgstr "重做：更改图层用户数据"
+
+msgid "Undo: Change Layer Color"
+msgstr "撤销：更改图层颜色"
+
+msgid "Redo: Change Layer Color"
+msgstr "重做：更改图层颜色"
+
+msgid "Undo: Change Layer Visibility"
+msgstr "撤销：更改图层可见性"
+
+msgid "Redo: Change Layer Visibility"
+msgstr "重做：更改图层可见性"
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos.
+msgid "Undo: Change Layer Locked Status"
+msgstr "撤销：更改图层锁定状态"
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
+msgid "Redo: Change Layer Locked Status"
+msgstr "重做：更改图层锁定状态"
 
 msgid "Move Guide"
 msgstr "移除辅助线"
