@@ -3,9 +3,17 @@
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="1"]
 [ext_resource type="Script" uid="uid://bw54cqc214ur8" path="res://src/UI/TopMenuContainer/TopMenuContainer.gd" id="2"]
 [ext_resource type="Script" uid="uid://c6oak0m37f3xg" path="res://src/UI/TopMenuContainer/undo_history_dialog.gd" id="3_5t7b8"]
+[ext_resource type="Script" uid="uid://cxiyeo4unmg3u" path="res://src/UI/TopMenuContainer/quick_access_buttons.gd" id="3_jyry5"]
+[ext_resource type="Texture2D" uid="uid://drrcnm2w0glru" path="res://assets/graphics/quick_access_panel/save.svg" id="3_p1o86"]
+[ext_resource type="Texture2D" uid="uid://dsb5lut4qfo11" path="res://assets/graphics/quick_access_panel/undo.svg" id="4_jyry5"]
+[ext_resource type="Texture2D" uid="uid://ciqtn0nqmn3nk" path="res://assets/graphics/quick_access_panel/redo.svg" id="5_vglpq"]
+[ext_resource type="Texture2D" uid="uid://btxf72xcqrn4c" path="res://assets/graphics/quick_access_panel/copy.svg" id="6_u31k5"]
+[ext_resource type="Texture2D" uid="uid://bblxfj2ey7p04" path="res://assets/graphics/quick_access_panel/cut.svg" id="7_1wx4i"]
+[ext_resource type="Texture2D" uid="uid://c6vu0iwn4qesr" path="res://assets/graphics/quick_access_panel/paste.svg" id="8_0yk3c"]
+[ext_resource type="Texture2D" uid="uid://b0wuerwimmxav" path="res://assets/graphics/quick_access_panel/remove.svg" id="9_24r3n"]
 
 [node name="TopMenuContainer" type="Panel" unique_id=1569386863]
-custom_minimum_size = Vector2(0, 28)
+custom_minimum_size = Vector2(0, 32)
 offset_right = 1280.0
 offset_bottom = 28.0
 script = ExtResource("2")
@@ -102,9 +110,156 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "[64×64]"
 
+[node name="QuickAccessButtons" type="VFlowContainer" parent="MarginContainer/HBoxContainer" unique_id=1032869178]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+script = ExtResource("3_jyry5")
+
+[node name="Save" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=17304904 groups=["UIButtons"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Save"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/QuickAccessButtons/Save" unique_id=2058503723]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("3_p1o86")
+stretch_mode = 3
+
+[node name="Undo" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=656560383 groups=["UIButtons"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Undo"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/QuickAccessButtons/Undo" unique_id=931602762]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("4_jyry5")
+stretch_mode = 3
+
+[node name="Redo" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=467903916 groups=["UIButtons"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Redo"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/QuickAccessButtons/Redo" unique_id=1983536949]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("5_vglpq")
+stretch_mode = 3
+
+[node name="Copy" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=1290832250 groups=["UIButtons"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Copy"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/QuickAccessButtons/Copy" unique_id=726001689]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("6_u31k5")
+stretch_mode = 3
+
+[node name="Cut" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=2124912130 groups=["UIButtons"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Cut"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/QuickAccessButtons/Cut" unique_id=1387879997]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("7_1wx4i")
+stretch_mode = 3
+
+[node name="Paste" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=601055831 groups=["UIButtons"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Paste"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/QuickAccessButtons/Paste" unique_id=712914534]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("8_0yk3c")
+stretch_mode = 3
+
+[node name="Delete" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=194898671 groups=["UIButtons"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Delete"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/QuickAccessButtons/Delete" unique_id=250624969]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("9_24r3n")
+stretch_mode = 3
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1819772476]
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 8
 alignment = 1
 
 [node name="CurrentFrame" type="Label" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=1572105713]
@@ -174,6 +329,13 @@ auto_translate_mode = 1
 title = "Delete Layout"
 dialog_text = "Are you sure you want to delete this layout?"
 
+[connection signal="pressed" from="MarginContainer/HBoxContainer/QuickAccessButtons/Save" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_save_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/QuickAccessButtons/Undo" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_undo_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/QuickAccessButtons/Redo" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_redo_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/QuickAccessButtons/Copy" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_copy_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/QuickAccessButtons/Cut" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_cut_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/QuickAccessButtons/Paste" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_paste_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/QuickAccessButtons/Delete" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_delete_pressed"]
 [connection signal="visibility_changed" from="UndoHistoryDialog" to="UndoHistoryDialog" method="_on_visibility_changed"]
 [connection signal="item_selected" from="UndoHistoryDialog/ItemList" to="UndoHistoryDialog" method="_on_item_list_item_selected"]
 [connection signal="confirmed" from="AddLayoutConfirmation" to="." method="_on_add_layout_confirmation_confirmed"]
