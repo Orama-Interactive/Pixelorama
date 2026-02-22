@@ -257,6 +257,33 @@ size_flags_vertical = 0
 texture = ExtResource("9_24r3n")
 stretch_mode = 3
 
+[node name="Shift" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=916742739]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = "Shift"
+
+[node name="Ctrl" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=744367413]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = "Ctrl"
+
+[node name="Alt" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=1331416086]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = "Alt"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1819772476]
 layout_mode = 2
 size_flags_horizontal = 8
@@ -336,6 +363,9 @@ dialog_text = "Are you sure you want to delete this layout?"
 [connection signal="pressed" from="MarginContainer/HBoxContainer/QuickAccessButtons/Cut" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_cut_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/QuickAccessButtons/Paste" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_paste_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/QuickAccessButtons/Delete" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_delete_pressed"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/QuickAccessButtons/Shift" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_shift_toggled"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/QuickAccessButtons/Ctrl" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_ctrl_toggled"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/QuickAccessButtons/Alt" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_alt_toggled"]
 [connection signal="visibility_changed" from="UndoHistoryDialog" to="UndoHistoryDialog" method="_on_visibility_changed"]
 [connection signal="item_selected" from="UndoHistoryDialog/ItemList" to="UndoHistoryDialog" method="_on_item_list_item_selected"]
 [connection signal="confirmed" from="AddLayoutConfirmation" to="." method="_on_add_layout_confirmation_confirmed"]
