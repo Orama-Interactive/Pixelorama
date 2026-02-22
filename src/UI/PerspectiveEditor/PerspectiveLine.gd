@@ -4,8 +4,8 @@ extends Line2D
 const LINE_WIDTH := 2
 const CIRCLE_RAD := 4
 
-var angle := 0
-var length := 19999
+var angle: float = 0.0
+var length: float = 19999.0
 
 var is_hidden := false
 var has_focus := false
