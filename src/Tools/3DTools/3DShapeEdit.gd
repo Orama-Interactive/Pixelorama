@@ -241,14 +241,14 @@ func _create_object_property_nodes(object: Node, title := "Node") -> Array[Folda
 				title = new_title
 				grid_container = fc.get_child(0)
 		var humanized_name := Keychain.humanize_snake_case(string_to_humanize, true)
-		var hint: PropertyHint = prop["hint"]
-		var hint_string: String = prop["hint_string"]
-		var node := Global.create_node_from_variable(
-			curr_value,
-			layer_3d.set_value_from_node.bind(object, prop_name),
-			hint_string,
-			hint,
-			func(): layer_3d.get_undo_data(object),
+		var node := (
+			Global
+			. create_node_from_variable(
+				curr_value,
+				layer_3d.set_value_from_node.bind(object, prop_name),
+				prop,
+				layer_3d.get_undo_data.bind(object),
+			)
 		)
 		if is_instance_valid(node):
 			node.name = prop_name
