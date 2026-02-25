@@ -172,6 +172,7 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	ShaderLoader.create_ui_for_shader_uniforms(
 		effect.shader,
 		effect.params,
+		effect.param_properties,
 		parameter_vbox,
 		_set_parameter.bind(effect),
 		_load_parameter_texture.bind(effect)
