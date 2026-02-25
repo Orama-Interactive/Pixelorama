@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2026-02-07 22:31\n"
+"PO-Revision-Date: 2026-02-25 09:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1047,7 +1047,7 @@ msgstr "Wenn diese Option aktiviert ist, verwendet die rechte Maustaste immer da
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between left and right tools"
-msgstr ""
+msgstr "Optionen zwischen linkem und rechtem Werkzeug übernehmen"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
