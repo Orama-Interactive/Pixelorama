@@ -100,21 +100,6 @@ static func create_ui_for_shader_uniforms(
 		var u_name := u_init[2]
 		if u_name in ["PXO_time", "PXO_frame_index", "PXO_layer_index"]:
 			continue
-		# Find custom data of the uniform, if any exists
-		# Right now it only checks if a uniform should have another type of node
-		# Such as integers having OptionButtons
-		# But in the future it could be expanded to include custom names or descriptions.
-		var custom_data: PackedStringArray = []
-		var type_override := ""
-		for data in uniform_data:
-			if u_name in data:
-				var line_to_examine := data.split(" ")
-				if line_to_examine[3] == "type::":
-					var temp_splitter := data.split("::")
-					if temp_splitter.size() > 1:
-						type_override = temp_splitter[1].strip_edges()
-
-				custom_data.append(data)
 		var humanized_u_name := Keychain.humanize_snake_case(u_name) + ":"
 
 		if u_type == "float" or u_type == "int":
