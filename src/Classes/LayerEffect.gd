@@ -7,6 +7,7 @@ var name := ""
 var shader: Shader
 var layer: BaseLayer
 var category := ""
+var enabled := true
 var params: Dictionary[String, Variant] = {}
 ## A Dictionary containing another Dictionary that
 ## maps the frame indices (int) to another Dictionary of value, trans, ease,
@@ -28,7 +29,22 @@ var params: Dictionary[String, Variant] = {}
 ##}
 ## [/codeblock]
 var animated_params: Dictionary[String, Dictionary] = {}
-var enabled := true
+
+## Inspired from [method Object.get_property_list], optionally contains extra properties
+## for parameters, that work as hints so that the editor knows which UI elements to use.
+## For example, a parameter that is an integer may need to be displayed as an OptionButton
+## because it works as an enumerator.
+## Example:
+## [codeblock]
+##{
+##	"brush":
+##	{
+##		"hint": PROPERTY_HINT_ENUM,
+##		"hint_string": "Diamond,Circle,Square",
+##	},
+##}
+## [/codeblock]
+var param_properties: Dictionary[String, Dictionary]
 
 
 func _init(
@@ -38,6 +54,7 @@ func _init(
 	shader = _shader
 	category = _category
 	params = _params
+	_set_params_from_shader()
 
 
 func duplicate() -> LayerEffect:
@@ -160,3 +177,10 @@ func deserialize(dict: Dictionary) -> void:
 			params = str_to_var(dict["params"])
 	if dict.has("animated_params"):
 		animated_params = str_to_var(dict["animated_params"])
+
+
+func _set_params_from_shader() -> void:
+	var uniforms := shader.get_shader_uniform_list()
+	for uniform in uniforms:
+		var u_name := uniform["name"] as String
+		param_properties[u_name] = uniform

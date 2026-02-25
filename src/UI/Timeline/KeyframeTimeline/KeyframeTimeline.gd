@@ -219,13 +219,17 @@ func select_keyframes() -> void:
 	value_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	properties_grid_container.add_child(value_label)
 	var property = dict[param_name][frame_index]["value"]
-	var trans_type = dict[param_name][frame_index]["trans"]
-	var ease_type = dict[param_name][frame_index]["ease"]
+	var track := key_button.get_parent() as KeyframeAnimationTrack
+	var property_properties := {}  # I apologize for the horrible name.
+	if track.type == KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT:
+		property_properties = track.effect.param_properties[param_name]
 	var node := Global.create_node_from_variable(
-		property, _on_keyframe_property_changed.bind("value")
+		property, _on_keyframe_property_changed.bind("value"), property_properties
 	)
 	if is_instance_valid(node):
 		properties_grid_container.add_child(node)
+	var trans_type = dict[param_name][frame_index]["trans"]
+	var ease_type = dict[param_name][frame_index]["ease"]
 
 	if LayerEffect.is_interpolatable_type(property):
 		var trans_label := Label.new()
