@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2026-02-07 22:32\n"
+"PO-Revision-Date: 2026-02-25 00:22\n"
 
 msgid "OK"
 msgstr "OK"
@@ -989,7 +989,7 @@ msgstr "Modalità finestra singola"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
 msgid "Collapse main menu"
-msgstr ""
+msgstr "Comprimi menu principale"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
@@ -1048,7 +1048,7 @@ msgstr "Se abilitato, il pulsante destro del mouse attiverà sempre lo stesso st
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between left and right tools"
-msgstr ""
+msgstr "Condividi le opzioni tra gli strumenti sinistro e destro"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
@@ -3006,16 +3006,16 @@ msgid "Redo: Change frame duration"
 msgstr "Ripeti: cambia la durata del frame"
 
 msgid "Undo: Rename Layer"
-msgstr ""
+msgstr "Annulla: Rinomina livello"
 
 msgid "Redo: Rename Layer"
-msgstr ""
+msgstr "Ripeti: Rinomina livello"
 
 msgid "Undo: Change Layer Opacity"
-msgstr ""
+msgstr "Annulla: Cambia opacità livelli"
 
 msgid "Redo: Change Layer Opacity"
-msgstr ""
+msgstr "Ripeti: Cambia opacità livelli"
 
 #. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
 msgid "Undo: Change Layer Onion Skinning Ignore Status"
@@ -3027,31 +3027,31 @@ msgstr ""
 
 #. Appears as a notification when the user data field of a layer is changed, and the user undos.
 msgid "Undo: Change Layer User Data"
-msgstr ""
+msgstr "Annulla: Cambia Dati Utente livello"
 
 #. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
 msgid "Redo: Change Layer User Data"
-msgstr ""
+msgstr "Ripeti: Cambia Dati Utente livello"
 
 msgid "Undo: Change Layer Color"
-msgstr ""
+msgstr "Annulla: Cambia Colore Livello"
 
 msgid "Redo: Change Layer Color"
-msgstr ""
+msgstr "Ripeti: Cambia Colore Livello"
 
 msgid "Undo: Change Layer Visibility"
-msgstr ""
+msgstr "Annulla: Cambia Visibilità Livello"
 
 msgid "Redo: Change Layer Visibility"
-msgstr ""
+msgstr "Ripeti: Cambia Visibilità Livello"
 
 #. Appears as a notification when a layer gets locked or unlocked, and the user undos.
 msgid "Undo: Change Layer Locked Status"
-msgstr ""
+msgstr "Annulla: Cambia Stato Blocco Livello"
 
 #. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
 msgid "Redo: Change Layer Locked Status"
-msgstr ""
+msgstr "Ripeti: Cambia Stato Blocco Livello"
 
 msgid "Move Guide"
 msgstr "Muovi la guida"
