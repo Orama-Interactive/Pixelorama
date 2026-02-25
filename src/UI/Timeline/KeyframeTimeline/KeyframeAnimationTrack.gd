@@ -41,7 +41,7 @@ func _gui_input(event: InputEvent) -> void:
 			keyframe_at = floori(snapped_event / KeyframeTimeline.frame_ui_size)
 			rect.position = event.global_position
 			rect.size = Vector2(100, 0)
-			popup_menu.popup(rect)
+			popup_menu.popup_on_parent(rect)
 
 
 func _draw() -> void:

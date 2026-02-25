@@ -1443,6 +1443,7 @@ func create_node_from_variable(
 				if type == TYPE_FLOAT:
 					slider.step = 0.01
 				if typeof(step) == type:
+					step = snapped(step, 0.000001)
 					slider.step = step
 				slider.allow_lesser = allow_lesser
 				slider.allow_greater = allow_greater

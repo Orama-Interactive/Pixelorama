@@ -35,6 +35,7 @@ static func load_dither_matrix_from_file(file_path: String) -> void:
 static func create_ui_for_shader_uniforms(
 	shader: Shader,
 	params: Dictionary,
+	param_properties: Dictionary,
 	parent_node: Control,
 	value_changed: Callable,
 	file_selected: Callable
@@ -122,101 +123,52 @@ static func create_ui_for_shader_uniforms(
 			label.text = humanized_u_name
 			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			hbox.add_child(label)
-			if type_override.begins_with("OptionButton"):
-				var option_button := OptionButton.new()
-				option_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				option_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-				option_button.item_selected.connect(value_changed.bind(u_name))
-				var items := (
-					type_override
-					. replace("OptionButton ", "")
-					. replace("[", "")
-					. replace("]", "")
-					. split("||")
-				)
-				for item in items:
-					option_button.add_item(item)
+			var value := 0.0
+			if u_type == "float":
 				if u_value != "":
-					option_button.select(int(u_value))
-				if params.has(u_name):
-					option_button.select(params[u_name])
-				else:
-					params[u_name] = option_button.selected
-				hbox.add_child(option_button)
+					value = float(u_value)
 			else:
-				var slider := ValueSlider.new()
-				slider.allow_greater = true
-				slider.allow_lesser = true
-				slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				var min_value := 0.0
-				var max_value := 255.0
-				var step := 1.0
-				var value := 0.0
-				var range_values_array: PackedStringArray
-				if "hint_range" in u_hint:
-					var range_values: String = u_hint.replace("hint_range(", "")
-					range_values = range_values.replace(")", "").strip_edges()
-					range_values_array = range_values.split(",")
-
-				if u_type == "float":
-					if range_values_array.size() >= 1:
-						min_value = float(range_values_array[0])
-					else:
-						min_value = 0.01
-
-					if range_values_array.size() >= 2:
-						max_value = float(range_values_array[1])
-
-					if range_values_array.size() >= 3:
-						step = float(range_values_array[2])
-					else:
-						step = 0.01
-
-					if u_value != "":
-						value = float(u_value)
+				if u_value != "":
+					value = int(u_value)
+			var editor_node := Global.create_node_from_variable(
+				value, value_changed.bind(u_name), param_properties[u_name]
+			)
+			if editor_node is ValueSlider:
+				editor_node.allow_greater = true
+				editor_node.allow_lesser = true
+			editor_node.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			editor_node.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+			if params.has(u_name):
+				if editor_node is OptionButton:
+					editor_node.select(params[u_name])
 				else:
-					if range_values_array.size() >= 1:
-						min_value = int(range_values_array[0])
-
-					if range_values_array.size() >= 2:
-						max_value = int(range_values_array[1])
-
-					if range_values_array.size() >= 3:
-						step = int(range_values_array[2])
-
-					if u_value != "":
-						value = int(u_value)
-				slider.min_value = min_value
-				slider.max_value = max_value
-				slider.step = step
-				slider.value = value
-				if params.has(u_name):
-					slider.value = params[u_name]
+					editor_node.value = params[u_name]
+			else:
+				if editor_node is OptionButton:
+					params[u_name] = editor_node.selected
 				else:
-					params[u_name] = slider.value
-				slider.value_changed.connect(value_changed.bind(u_name))
-				slider.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-				hbox.add_child(slider)
+					params[u_name] = editor_node.value
+			hbox.add_child(editor_node)
 			parent_node.add_child(hbox)
 		elif u_type == "vec2" or u_type == "ivec2" or u_type == "uvec2":
 			var label := Label.new()
 			label.text = humanized_u_name
 			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			var vector2 := _vec2str_to_vector2(u_value)
-			var slider := VALUE_SLIDER_V2_TSCN.instantiate() as ValueSliderV2
+			var value := _vec2str_to_vector2(u_value)
+			var slider := Global.create_node_from_variable(
+				value, value_changed.bind(u_name), param_properties[u_name]
+			)
 			slider.show_ratio = true
 			slider.allow_greater = true
 			if u_type != "uvec2":
 				slider.allow_lesser = true
-				if u_type != "ivec2":
-					slider.step = 0.01
+			if u_type == "ivec2":
+				slider.step = 1
 			slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			slider.value = vector2
 			if params.has(u_name):
 				slider.value = params[u_name]
 			else:
 				params[u_name] = slider.value
-			slider.value_changed.connect(value_changed.bind(u_name))
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
 			hbox.add_child(slider)
