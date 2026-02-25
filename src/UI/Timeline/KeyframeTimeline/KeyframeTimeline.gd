@@ -228,6 +228,9 @@ func select_keyframes() -> void:
 	)
 	if is_instance_valid(node):
 		properties_grid_container.add_child(node)
+		if node is ValueSlider or node is ValueSliderV2 or node is ValueSliderV3:
+			node.allow_greater = true
+			node.allow_lesser = true
 	var trans_type = dict[param_name][frame_index]["trans"]
 	var ease_type = dict[param_name][frame_index]["ease"]
 
