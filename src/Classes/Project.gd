@@ -389,7 +389,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 					layers.append(layer)
 					var scene_path_zip := "scene/%s" % layers_3d_count
 					if not zip_reader.file_exists(scene_path_zip):
-						layer.add_nodes(size)
+						layer.generate_nodes(size)
 						layers_3d_count += 1
 						continue
 					var scene_data := zip_reader.read_file(scene_path_zip)
@@ -399,7 +399,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 						# may have injected malicious code. To prevent the users,
 						# refuse to load scenes with scripts on them.
 						print("Script detected, there may be malicious code in the scene.")
-						layer.add_nodes(size)
+						layer.generate_nodes(size)
 						layers_3d_count += 1
 						continue
 					DirAccess.make_dir_absolute(Export.temp_path)

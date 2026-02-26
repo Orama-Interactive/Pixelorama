@@ -151,7 +151,7 @@ func _init(_project: Project, _name := "", from_pxo := false) -> void:
 	project = _project
 	name = _name
 	if not from_pxo:
-		add_nodes(project.size)
+		generate_nodes(project.size)
 	node_property_changed.connect(_on_node_property_changed)
 
 
@@ -161,7 +161,7 @@ func _notification(what: int) -> void:
 			viewport.queue_free()
 
 
-func add_nodes(size: Vector2i) -> void:
+func generate_nodes(size: Vector2i) -> void:
 	viewport = SubViewport.new()
 	viewport.size = size
 	viewport.own_world_3d = true
@@ -221,6 +221,21 @@ func load_scene(scene: PackedScene) -> void:
 		elif child is OmniLight3D:
 			Global.canvas.gizmos_3d.add_always_visible(child, OMNI_LIGHT_TEXTURE)
 	Global.canvas.add_child(viewport)
+
+
+func add_new_node(new_node: Node) -> void:
+	parent_node.add_child(new_node)
+	for child in _get_all_child_nodes(new_node):
+		# Needed so that the child nodes are included in the PackedScene
+		# of the saved pxo file.
+		child.owner = viewport
+
+
+func _get_all_child_nodes(in_node: Node, arr: Array[Node] = []) -> Array[Node]:
+	arr.push_back(in_node)
+	for child in in_node.get_children():
+		arr = _get_all_child_nodes(child, arr)
+	return arr
 
 
 func unselect() -> void:
