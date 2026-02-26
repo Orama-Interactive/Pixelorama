@@ -4,7 +4,10 @@ extends RefCounted
 signal keyframe_set
 
 var name := ""
-var shader: Shader
+var shader: Shader:
+	set(value):
+		shader = value
+		_set_params_from_shader()
 var layer: BaseLayer
 var category := ""
 var enabled := true
@@ -54,7 +57,6 @@ func _init(
 	shader = _shader
 	category = _category
 	params = _params
-	_set_params_from_shader()
 
 
 func duplicate() -> LayerEffect:
@@ -105,11 +107,7 @@ func set_keyframe(
 ) -> void:
 	if not animated_params.has(param_name):
 		animated_params[param_name] = {}
-	var id := layer.next_keyframe_id
-	animated_params[param_name][frame_index] = {
-		"id": id, "value": value, "trans": trans, "ease": ease_type
-	}
-	layer.next_keyframe_id += 1
+	animated_params[param_name][frame_index] = {"value": value, "trans": trans, "ease": ease_type}
 	keyframe_set.emit()
 
 
@@ -180,6 +178,8 @@ func deserialize(dict: Dictionary) -> void:
 
 
 func _set_params_from_shader() -> void:
+	if not is_instance_valid(shader):
+		return
 	var uniforms := shader.get_shader_uniform_list()
 	for uniform in uniforms:
 		var u_name := uniform["name"] as String
