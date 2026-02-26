@@ -130,8 +130,9 @@ func _cel_switched() -> void:
 	if is_instance_valid(selected):
 		layer_3d.selected = selected
 	else:
-		get_tree().call_group(FOLDABLE_CONTAINER_GROUP_NAME, &"queue_free")
-		_show_node_property_nodes()
+		if is_inside_tree():
+			get_tree().call_group(FOLDABLE_CONTAINER_GROUP_NAME, &"queue_free")
+			_show_node_property_nodes()
 
 
 func _object_property_changed(object: Node, prop_name: String, frame_index: int) -> void:

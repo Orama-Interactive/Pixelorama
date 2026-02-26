@@ -1088,9 +1088,11 @@ func open_3d_scene_file(path: String) -> void:
 	if error != OK:
 		return
 	var gltf_scene_root_node := gltf_document_load.generate_scene(gltf_state_load)
+	if not is_instance_valid(gltf_scene_root_node):
+		return
 	var project := Global.current_project
 	var new_layer := Layer3D.new(project, path.get_basename().get_file())
-	new_layer.parent_node.add_child(gltf_scene_root_node)
+	new_layer.add_new_node(gltf_scene_root_node)
 	Global.animation_timeline.add_layer(new_layer, project)
 
 
