@@ -43,7 +43,7 @@ jobs:
           cp -R ./pixelorama_data ./build/${EXPORT_NAME}-Windows-64bit
           rm ./build/${EXPORT_NAME}-Windows-64bit/pixelorama_data/.gdignore
       - name: Upload Artifact 🚀
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ${{env.EXPORT_NAME}}-Windows-64bit
           path: ./build/${{env.EXPORT_NAME}}-Windows-64bit/
@@ -85,13 +85,13 @@ jobs:
           tar zcvf ${EXPORT_NAME}-Linux-64bit.tar.gz ${EXPORT_NAME}-Linux-64bit
           tar zcvf ${EXPORT_NAME}-Linux-ARM64.tar.gz ${EXPORT_NAME}-Linux-ARM64
       - name: Upload Linux x86_64 Artifact 🚀
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ${{env.EXPORT_NAME}}-Linux-64bit
           path: ./build/${{env.EXPORT_NAME}}-Linux-64bit.tar.gz
           retention-days: 14
       - name: Upload Linux ARM64 Artifact 🚀
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ${{env.EXPORT_NAME}}-Linux-ARM64
           path: ./build/${{env.EXPORT_NAME}}-Linux-ARM64.tar.gz
@@ -145,7 +145,7 @@ jobs:
       - name: Create DMG archive 🔧
         run: hdiutil create -srcfolder ./build/mac -fs HFS+ -volname ${EXPORT_NAME} ./build/mac/${EXPORT_NAME}.dmg
       - name: Upload Artifact 🚀
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: ${{env.EXPORT_NAME}}-Mac
           path: ./build/mac/${{env.EXPORT_NAME}}.dmg
