@@ -51,7 +51,7 @@ jobs:
       - name: Remove existing click folder
         run: rm -r ./Misc/Clickable
       - name: Download click data
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: pixelorama_click_data
           path: ./Misc/Clickable
