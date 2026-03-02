@@ -48,6 +48,7 @@ jobs:
           name: ${{env.EXPORT_NAME}}-Windows-64bit
           path: ./build/${{env.EXPORT_NAME}}-Windows-64bit/
           retention-days: 14
+          archive: false
 
   export-linux:
     name: Linux Export 🐧
@@ -90,12 +91,14 @@ jobs:
           name: ${{env.EXPORT_NAME}}-Linux-64bit
           path: ./build/${{env.EXPORT_NAME}}-Linux-64bit.tar.gz
           retention-days: 14
+          archive: false
       - name: Upload Linux ARM64 Artifact 🚀
         uses: actions/upload-artifact@v7
         with:
           name: ${{env.EXPORT_NAME}}-Linux-ARM64
           path: ./build/${{env.EXPORT_NAME}}-Linux-ARM64.tar.gz
           retention-days: 14
+          archive: false
 
   export-mac:
     name: Mac Export 🍎
@@ -150,3 +153,4 @@ jobs:
           name: ${{env.EXPORT_NAME}}-Mac
           path: ./build/mac/${{env.EXPORT_NAME}}.dmg
           retention-days: 14
+          archive: false
