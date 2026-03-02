@@ -48,7 +48,6 @@ jobs:
           name: ${{env.EXPORT_NAME}}-Windows-64bit
           path: ./build/${{env.EXPORT_NAME}}-Windows-64bit/
           retention-days: 14
-          archive: false
 
   export-linux:
     name: Linux Export 🐧
