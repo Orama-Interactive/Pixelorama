@@ -20,7 +20,6 @@ font_size = 12
 oversampling_override = 1.0
 position = Vector2i(0, 36)
 size = Vector2i(700, 470)
-visible = true
 unresizable = false
 borderless = false
 script = ExtResource("1")

@@ -247,9 +247,7 @@ label_settings = SubResource("LabelSettings_uckow")
 custom_minimum_size = Vector2(230, 0)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_rbw0r")
-text = "ShikadiGum
-Hugo Locurcio
-Tronexer"
+text = "Hugo Locurcio"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Contents/MarginContainer/ButtonsPatronsLogos/Info" unique_id=908129450]
 layout_mode = 2
