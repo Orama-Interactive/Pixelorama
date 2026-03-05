@@ -792,6 +792,10 @@ func _init() -> void:
 		FileDialog.set_favorite_list(
 			config_cache.get_value("FileDialog", "favourite_paths", PackedStringArray())
 		)
+	if config_cache.has_section_key("FileDialog", "recent_paths"):
+		FileDialog.set_recent_list(
+			config_cache.get_value("FileDialog", "recent_paths", PackedStringArray())
+		)
 	# Load overridden project settings
 	if ProjectSettings.get_setting("display/window/tablet_driver") == "winink":
 		tablet_driver = 1

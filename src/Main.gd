@@ -664,9 +664,6 @@ func _on_QuitAndSaveDialog_confirmed() -> void:
 
 func _quit() -> void:
 	Global.pixelorama_about_to_close.emit()
-	# Save the favourite list of file dialogs for next session
-	Global.config_cache.set_value("FileDialog", "favourite_paths", FileDialog.get_favorite_list())
-	Global.config_cache.save(Global.CONFIG_PATH)
 	# Darken the UI to denote that the application is currently exiting
 	# (it won't respond to user input in this state).
 	modulate = Color(0.5, 0.5, 0.5)
@@ -713,6 +710,8 @@ func _exit_tree() -> void:
 	Global.config_cache.set_value(
 		"view_menu", "snap_to_perspective_guides", Global.snap_to_perspective_guides
 	)
+	Global.config_cache.set_value("FileDialog", "favourite_paths", FileDialog.get_favorite_list())
+	Global.config_cache.set_value("FileDialog", "recent_paths", FileDialog.get_recent_list())
 	Global.config_cache.save(Global.CONFIG_PATH)
 
 
