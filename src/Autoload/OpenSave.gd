@@ -365,7 +365,8 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 				if cel is CelTileMap:
 					cel.find_times_used_of_tiles()
 		zip_reader.close()
-	new_project.export_directory_path = path.get_base_dir()
+	if new_project.export_directory_path.is_empty():
+		new_project.export_directory_path = path.get_base_dir()
 
 	if empty_project:
 		new_project.change_project()
@@ -386,7 +387,9 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 		Global.config_cache.set_value("data", "last_project_path", path)
 		Global.config_cache.save(Global.CONFIG_PATH)
-		new_project.file_name = path.uri_decode().get_file().trim_suffix(".pxo")
+		prints(new_project.file_name, new_project.export_directory_path)
+		if new_project.file_name.is_empty():
+			new_project.file_name = path.uri_decode().get_file().trim_suffix(".pxo")
 		new_project.was_exported = false
 		Global.top_menu_container.file_menu.set_item_text(
 			Global.FileMenu.SAVE, tr("Save") + " %s" % path.uri_decode().get_file()
@@ -477,7 +480,6 @@ func save_pxo_file(
 	var temp_path := path
 	if FileAccess.file_exists(path) and not OS.get_name() == "Android":
 		temp_path = path + "1"
-	print(temp_path)
 	var zip_packer := ZIPPacker.new()
 	var err := zip_packer.open(temp_path)
 	if err != OK:
@@ -604,8 +606,9 @@ func save_pxo_file(
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 		Global.config_cache.set_value("data", "last_project_path", path)
 		Global.config_cache.save(Global.CONFIG_PATH)
-		if !project.was_exported:
+		if project.file_name.is_empty():
 			project.file_name = path.uri_decode().get_file().trim_suffix(".pxo")
+		if project.export_directory_path.is_empty():
 			project.export_directory_path = path.get_base_dir()
 		Global.top_menu_container.file_menu.set_item_text(
 			Global.FileMenu.SAVE, tr("Save") + " %s" % path.uri_decode().get_file()

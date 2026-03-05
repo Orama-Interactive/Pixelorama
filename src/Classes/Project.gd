@@ -324,6 +324,7 @@ func serialize() -> Dictionary:
 		"reference_images": reference_image_data,
 		"tilesets": tileset_data,
 		"vanishing_points": vanishing_points,
+		"export_directory_path": export_directory_path,
 		"export_file_name": file_name,
 		"export_file_format": file_format,
 		"fps": fps,
@@ -498,6 +499,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			x_symmetry_axis.points[point].y = floorf(y_symmetry_point / 2 + 1)
 		for point in y_symmetry_axis.points.size():
 			y_symmetry_axis.points[point].x = floorf(x_symmetry_point / 2 + 1)
+	export_directory_path = dict.get("export_directory_path", export_directory_path)
 	file_name = dict.get("export_file_name", file_name)
 	file_format = dict.get("export_file_format", file_name)
 	fps = dict.get("fps", file_name)
