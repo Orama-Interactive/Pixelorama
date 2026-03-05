@@ -1498,6 +1498,9 @@ msgstr ""
 msgid "Belarusian"
 msgstr ""
 
+msgid "Thai"
+msgstr ""
+
 #. Found in the About dialog.
 msgid "Lead Developer"
 msgstr ""
