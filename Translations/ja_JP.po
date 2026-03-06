@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2026-03-06 00:05\n"
+"PO-Revision-Date: 2026-03-06 10:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1517,7 +1517,7 @@ msgid "Belarusian"
 msgstr "ベラルーシ語"
 
 msgid "Thai"
-msgstr ""
+msgstr "タイ語"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
