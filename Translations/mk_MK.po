@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Macedonian\n"
 "Language: mk_MK\n"
-"PO-Revision-Date: 2026-02-07 22:32\n"
+"PO-Revision-Date: 2026-03-06 00:05\n"
 
 msgid "OK"
 msgstr ""
@@ -1507,6 +1507,9 @@ msgid "Dutch"
 msgstr ""
 
 msgid "Belarusian"
+msgstr ""
+
+msgid "Thai"
 msgstr ""
 
 #. Found in the About dialog.
