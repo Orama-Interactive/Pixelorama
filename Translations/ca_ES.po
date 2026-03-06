@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2026-02-07 22:31\n"
+"PO-Revision-Date: 2026-03-06 00:05\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -1511,6 +1511,9 @@ msgid "Dutch"
 msgstr "Neerlandès"
 
 msgid "Belarusian"
+msgstr ""
+
+msgid "Thai"
 msgstr ""
 
 #. Found in the About dialog.
