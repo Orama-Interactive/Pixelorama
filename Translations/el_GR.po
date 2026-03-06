@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2026-02-27 15:11\n"
+"PO-Revision-Date: 2026-03-06 00:05\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1515,6 +1515,9 @@ msgstr "Ολλανδικά"
 
 msgid "Belarusian"
 msgstr "Λευκορωσικά"
+
+msgid "Thai"
+msgstr ""
 
 #. Found in the About dialog.
 msgid "Lead Developer"
