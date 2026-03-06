@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2026-02-07 22:32\n"
+"PO-Revision-Date: 2026-03-06 00:06\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -1508,6 +1508,9 @@ msgid "Dutch"
 msgstr ""
 
 msgid "Belarusian"
+msgstr ""
+
+msgid "Thai"
 msgstr ""
 
 #. Found in the About dialog.
