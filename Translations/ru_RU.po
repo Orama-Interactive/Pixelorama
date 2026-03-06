@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2026-02-07 22:32\n"
+"PO-Revision-Date: 2026-03-06 00:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1513,6 +1513,9 @@ msgstr "Голландский"
 
 msgid "Belarusian"
 msgstr "Белорусский"
+
+msgid "Thai"
+msgstr ""
 
 #. Found in the About dialog.
 msgid "Lead Developer"
