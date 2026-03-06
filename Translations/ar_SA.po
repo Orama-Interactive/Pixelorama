@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2026-02-07 22:31\n"
+"PO-Revision-Date: 2026-03-06 00:05\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -1515,6 +1515,9 @@ msgstr "الهولندية"
 
 msgid "Belarusian"
 msgstr "البيلاروسية"
+
+msgid "Thai"
+msgstr ""
 
 #. Found in the About dialog.
 msgid "Lead Developer"
