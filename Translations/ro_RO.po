@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2026-03-06 00:05\n"
+"PO-Revision-Date: 2026-03-06 12:54\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1515,7 +1515,7 @@ msgid "Belarusian"
 msgstr "Belarusă"
 
 msgid "Thai"
-msgstr ""
+msgstr "Thailandeză"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
