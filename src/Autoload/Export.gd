@@ -221,6 +221,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 		var hh := 0
 		var vv := 0
 		var sheet_image := Image.create_empty(width, height, false, project.get_image_format())
+		var sheet_is_valid := false
 		for frame in frames:
 			if orientation == Orientation.ROWS:
 				if vv < spritesheet_columns:
@@ -282,19 +283,17 @@ func process_spritesheet(project := Global.current_project) -> void:
 				sheet_image.blend_rect(
 					blended_frames[frame], Rect2i(Vector2i.ZERO, project.size), origin
 				)
-				sprite_sheets.append(sheet_image)
+				sheet_is_valid = true
 			elif split_l < splitter_array.size():
 				var layer: BaseLayer = splitter_array[split_l]
-				if layer is AudioLayer:
-					continue
-				if layer.blend_mode == layer.BlendModes.PASS_THROUGH:
-					continue
 				sheet_image.blend_rect(
 					layer.display_effects(frame.cels[layer.index]),
 					Rect2i(Vector2i.ZERO, project.size),
 					origin
 				)
-				sprite_sheets.append(sheet_image)
+				sheet_is_valid = true
+		if sheet_is_valid:
+			sprite_sheets.append(sheet_image)
 		if splitter_array.is_empty():
 			break
 	if stack_sheets and sprite_sheets.size() > 1:
