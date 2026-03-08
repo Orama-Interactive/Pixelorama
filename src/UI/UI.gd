@@ -1,5 +1,7 @@
 extends Panel
 
+const UI_TRANSPARENCY_SHADER := preload("uid://bwtsxcdoe2ps1")
+
 var shader_disabled := false
 var transparency_material: ShaderMaterial
 
@@ -12,9 +14,12 @@ var transparency_material: ShaderMaterial
 func _ready() -> void:
 	Global.cel_switched.connect(_on_cel_switched)
 	Global.single_tool_mode_changed.connect(_on_single_tool_mode_changed)
-	transparency_material = material
-	main_canvas_container.property_list_changed.connect(_re_configure_shader)
-	update_transparent_shader()
+	if Global.window_transparency:
+		transparency_material = ShaderMaterial.new()
+		transparency_material.shader = UI_TRANSPARENCY_SHADER
+		material = transparency_material
+		main_canvas_container.property_list_changed.connect(_re_configure_shader)
+		update_transparent_shader()
 	await Global.pixelorama_opened
 	if Global.single_tool_mode:
 		dockable_container.set_control_hidden.call_deferred(right_tool_options, true)
@@ -50,7 +55,7 @@ func _on_main_canvas_visibility_changed() -> void:
 
 
 func update_transparent_shader() -> void:
-	if not is_instance_valid(main_canvas_container):
+	if not is_instance_valid(main_canvas_container) or not is_instance_valid(transparency_material):
 		return
 	# Works independently of the transparency feature
 	var canvas_size: Vector2 = (main_canvas_container.size - Vector2.DOWN * 2) * Global.shrink
