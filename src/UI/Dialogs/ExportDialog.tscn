@@ -287,13 +287,13 @@ popup/item_3/id = 3
 popup/item_4/text = "Lanczos"
 popup/item_4/id = 4
 
-[node name="SeparatorCharacterLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=1144447347 groups=["ExportImageOptions"]]
+[node name="SeparatorCharacterLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=1144447347 groups=["ExportImageOptions", "ExportSpritesheetOptions"]]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Separator character(s):"
 
-[node name="SeparatorCharacter" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=863531641 groups=["ExportImageOptions", "ExportMultipleFilesEditableOptions"]]
+[node name="SeparatorCharacter" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=863531641 groups=["ExportImageOptions", "ExportMultipleFilesEditableOptions", "ExportSpritesheetOptions"]]
 layout_mode = 2
 tooltip_text = "The character(s) that separate the file name and the frame number"
 text = "_"
@@ -303,10 +303,16 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Export JSON data"
 
-[node name="SplitLayers" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=287230239 groups=["ExportImageOptions", "NotAndroid"]]
+[node name="SplitLayers" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=287230239 groups=["ExportImageOptions", "ExportSpritesheetOptions", "NotAndroid"]]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Split layers"
+
+[node name="StackSheetsVertically" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=671604133 groups=["ExportImageOptions", "ExportSpritesheetOptions", "NotAndroid"]]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Stack spritesheets vertically"
 
 [node name="IncludeTagsInFilename" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=64815569 groups=["ExportImageOptions", "ExportMultipleFilesOptions", "NotAndroid"]]
 layout_mode = 2
@@ -388,6 +394,7 @@ size_flags_horizontal = 3
 [connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/SeparatorCharacter" to="." method="_on_separator_character_text_changed"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/ExportJSON" to="." method="_on_export_json_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/SplitLayers" to="." method="_on_split_layers_toggled"]
+[connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/StackSheetsVertically" to="." method="_on_stack_sheets_vertically_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/IncludeTagsInFilename" to="." method="_on_include_tags_in_filename_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/MultipleAnimationsDirectories" to="." method="_on_multiple_animations_directories_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/TrimImages" to="." method="_on_trim_images_toggled"]

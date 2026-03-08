@@ -55,6 +55,8 @@ class CLI:
 		["--direction", "-d"]: [CLI.set_direction, "[0, 1, 2] Specifies direction"],
 		["--json"]: [CLI.set_json, "Export the JSON data of the project"],
 		["--split-layers"]: [CLI.set_split_layers, "Each layer exports separately"],
+		["--stack-sheets"]:
+		[CLI.set_stack_sheets, "Spritesheets in split layer mode will stack vertically"],
 		["--help", "-h", "-?"]: [CLI.generate_help, "Displays this help page"],
 		["--scene"]: [CLI.dummy, "Used internally by Godot."]
 	}
@@ -169,6 +171,9 @@ some useful [SYSTEM OPTIONS] are:
 
 	static func set_split_layers(_project: Project, _next_arg: String) -> void:
 		Export.split_layers = true
+
+	static func set_stack_sheets(_project: Project, _next_arg: String) -> void:
+		Export.stack_sheets = true
 
 	static func dummy(_project: Project, _next_arg: String) -> void:
 		pass

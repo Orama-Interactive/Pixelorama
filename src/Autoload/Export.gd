@@ -52,6 +52,7 @@ var processed_images: Array[ProcessedImage] = []
 var blended_frames: Dictionary[Frame, Image] = {}
 var export_json := false
 var split_layers := false
+var stack_sheets := false
 var trim_images := false
 var erase_unselected_area := false
 var overwrite_asked := false
@@ -211,70 +212,104 @@ func process_spritesheet(project := Global.current_project) -> void:
 			spritesheet_columns = temp
 	var width := project.size.x * spritesheet_columns
 	var height := project.size.y * spritesheet_rows
-	var whole_image := Image.create(width, height, false, project.get_image_format())
-	var origin := Vector2i.ZERO
-	var hh := 0
-	var vv := 0
-	for frame in frames:
-		if orientation == Orientation.ROWS:
-			if vv < spritesheet_columns:
-				origin.x = project.size.x * vv
-				vv += 1
-			else:
-				hh += 1
-				origin.x = 0
-				vv = 1
-				origin.y = project.size.y * hh
-		elif orientation == Orientation.COLUMNS:
-			if hh < spritesheet_rows:
-				origin.y = project.size.y * hh
-				hh += 1
-			else:
-				vv += 1
-				origin.y = 0
-				hh = 1
-				origin.x = project.size.x * vv
-		elif orientation == Orientation.TAGS_BY_ROW:
-			var frame_index := project.frames.find(frame)
-			var frame_has_tag := false
-			for i in project.animation_tags.size():
-				var tag := project.animation_tags[i]
-				if tag.has_frame(frame_index):
-					origin.x = project.size.x * tag_origins[tag]
-					if frames_without_tag == 0:
-						# If all frames have a tag, remove the first row
-						origin.y = project.size.y * i
-					else:
-						origin.y = project.size.y * (i + 1)
-					tag_origins[tag] += 1
-					frame_has_tag = true
-					break
-			if not frame_has_tag:
-				origin.x = project.size.x * tag_origins[0]
-				origin.y = 0
-				tag_origins[0] += 1
-		elif orientation == Orientation.TAGS_BY_COLUMN:
-			var frame_index := project.frames.find(frame)
-			var frame_has_tag := false
-			for i in project.animation_tags.size():
-				var tag := project.animation_tags[i]
-				if tag.has_frame(frame_index):
-					origin.y = project.size.y * tag_origins[tag]
-					if frames_without_tag == 0:
-						# If all frames have a tag, remove the first row
-						origin.x = project.size.x * i
-					else:
-						origin.x = project.size.x * (i + 1)
-					tag_origins[tag] += 1
-					frame_has_tag = true
-					break
-			if not frame_has_tag:
-				origin.y = project.size.y * tag_origins[0]
-				origin.x = 0
-				tag_origins[0] += 1
-		whole_image.blend_rect(blended_frames[frame], Rect2i(Vector2i.ZERO, project.size), origin)
-
-	processed_images.append(ProcessedImage.new(whole_image, 0))
+	var splitter_array = project.layers if split_layers else []
+	var sprite_sheets: Array[Image]  # Array of all apritesheets
+	# This is an imitation of a do-while loop. The loop ends early if split_layers is empty
+	for split_l in splitter_array.size() + 1:
+		var origin := Vector2i.ZERO
+		var layer_tag_origins = tag_origins.duplicate()
+		var hh := 0
+		var vv := 0
+		var sheet_image := Image.create_empty(width, height, false, project.get_image_format())
+		var sheet_is_valid := false
+		for frame in frames:
+			if orientation == Orientation.ROWS:
+				if vv < spritesheet_columns:
+					origin.x = project.size.x * vv
+					vv += 1
+				else:
+					hh += 1
+					origin.x = 0
+					vv = 1
+					origin.y = project.size.y * hh
+			elif orientation == Orientation.COLUMNS:
+				if hh < spritesheet_rows:
+					origin.y = project.size.y * hh
+					hh += 1
+				else:
+					vv += 1
+					origin.y = 0
+					hh = 1
+					origin.x = project.size.x * vv
+			elif orientation == Orientation.TAGS_BY_ROW:
+				var frame_index := project.frames.find(frame)
+				var frame_has_tag := false
+				for i in project.animation_tags.size():
+					var tag := project.animation_tags[i]
+					if tag.has_frame(frame_index):
+						origin.x = project.size.x * layer_tag_origins[tag]
+						if frames_without_tag == 0:
+							# If all frames have a tag, remove the first row
+							origin.y = project.size.y * i
+						else:
+							origin.y = project.size.y * (i + 1)
+						layer_tag_origins[tag] += 1
+						frame_has_tag = true
+						break
+				if not frame_has_tag:
+					origin.x = project.size.x * layer_tag_origins[0]
+					origin.y = 0
+					layer_tag_origins[0] += 1
+			elif orientation == Orientation.TAGS_BY_COLUMN:
+				var frame_index := project.frames.find(frame)
+				var frame_has_tag := false
+				for i in project.animation_tags.size():
+					var tag := project.animation_tags[i]
+					if tag.has_frame(frame_index):
+						origin.y = project.size.y * layer_tag_origins[tag]
+						if frames_without_tag == 0:
+							# If all frames have a tag, remove the first row
+							origin.x = project.size.x * i
+						else:
+							origin.x = project.size.x * (i + 1)
+						layer_tag_origins[tag] += 1
+						frame_has_tag = true
+						break
+				if not frame_has_tag:
+					origin.y = project.size.y * layer_tag_origins[0]
+					origin.x = 0
+					layer_tag_origins[0] += 1
+			if not split_layers:
+				sheet_image.blend_rect(
+					blended_frames[frame], Rect2i(Vector2i.ZERO, project.size), origin
+				)
+				sheet_is_valid = true
+			elif split_l < splitter_array.size():
+				var layer: BaseLayer = splitter_array[split_l]
+				sheet_image.blend_rect(
+					layer.display_effects(frame.cels[layer.index]),
+					Rect2i(Vector2i.ZERO, project.size),
+					origin
+				)
+				sheet_is_valid = true
+		if sheet_is_valid:
+			sprite_sheets.append(sheet_image)
+		if splitter_array.is_empty():
+			break
+	if stack_sheets and sprite_sheets.size() > 1:
+		var big_image := Image.create(
+			width, height * sprite_sheets.size(), false, project.get_image_format()
+		)
+		for i in sprite_sheets.size():
+			big_image.blend_rect(
+				sprite_sheets[i],
+				Rect2i(Vector2i.ZERO, Vector2i(width, height)),
+				Vector2i(0, height * (sprite_sheets.size() - i - 1))
+			)
+		# Remove old sheets and add the stacked image
+		sprite_sheets = [big_image]
+	for sheet: Image in sprite_sheets:
+		processed_images.append(ProcessedImage.new(sheet, 0))
 
 
 func process_animation(project := Global.current_project) -> void:
@@ -358,7 +393,7 @@ func export_processed_images(
 		return false
 
 	var multiple_files := false
-	if current_tab == ExportTab.IMAGE and not is_single_file_format(project):
+	if not is_single_file_format(project):
 		multiple_files = true if processed_images.size() > 1 else false
 	if OS.get_name() == "Android":
 		multiple_files = false
@@ -379,7 +414,11 @@ func export_processed_images(
 		)
 		# If the user wants to create a new directory for each animation tag then check
 		# if directories exist, and create them if not
-		if multiple_files and new_dir_for_each_frame_tag:
+		if (
+			multiple_files
+			and new_dir_for_each_frame_tag
+			and not current_tab == ExportTab.SPRITESHEET
+		):
 			var frame_tag_directory := DirAccess.open(export_path.get_base_dir())
 			if not DirAccess.dir_exists_absolute(export_path.get_base_dir()):
 				frame_tag_directory = DirAccess.open(project.export_directory_path)
@@ -746,7 +785,12 @@ func _create_export_path(
 		if layer > -1:
 			var layer_name := project.layers[layer].name
 			path_extras += "(%s) " % layer_name
-		path_extras += separator_character + str(frame).pad_zeros(number_of_digits)
+		var counter: String = (
+			str(layer).pad_zeros(number_of_digits)
+			if current_tab == ExportTab.SPRITESHEET
+			else str(str(frame).pad_zeros(number_of_digits))
+		)
+		path_extras += separator_character + counter
 	var frame_tag_and_start_id := _get_processed_image_tag_name_and_start_id(
 		project, actual_frame_index
 	)

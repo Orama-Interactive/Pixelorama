@@ -34,6 +34,7 @@ var _preview_images: Array[Export.ProcessedImage]
 @onready var spritesheet_orientation: OptionButton = $"%Orientation"
 @onready var spritesheet_lines_count: SpinBox = $"%LinesCount"
 @onready var spritesheet_lines_count_label: Label = $"%LinesCountLabel"
+@onready var stack_sheets_vertically: CheckBox = %StackSheetsVertically
 
 @onready var frames_option_button: OptionButton = $"%Frames"
 @onready var layers_option_button: OptionButton = $"%Layers"
@@ -94,6 +95,7 @@ func show_tab() -> void:
 			spritesheet_orientation.selected = Export.orientation
 			spritesheet_lines_count.max_value = Export.number_of_frames
 			spritesheet_lines_count.value = Export.lines_count
+			stack_sheets_vertically.disabled = !Export.split_layers
 			get_tree().call_group("ExportSpritesheetOptions", "show")
 			_handle_orientation_ui()
 	set_preview()
@@ -393,6 +395,7 @@ func export() -> void:
 
 func _on_path_button_pressed() -> void:
 	path_dialog_popup.popup_centered_clamped()
+	path_dialog_popup.current_file = path_line_edit.text.get_file()
 
 
 func _on_path_line_edit_text_changed(new_text: String) -> void:
@@ -492,6 +495,13 @@ func _on_export_json_toggled(toggled_on: bool) -> void:
 
 func _on_split_layers_toggled(toggled_on: bool) -> void:
 	Export.split_layers = toggled_on
+	stack_sheets_vertically.disabled = !Export.split_layers
+	Export.process_data()
+	set_preview()
+
+
+func _on_stack_sheets_vertically_toggled(toggled_on: bool) -> void:
+	Export.stack_sheets = toggled_on
 	Export.process_data()
 	set_preview()
 
