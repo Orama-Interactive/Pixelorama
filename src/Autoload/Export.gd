@@ -214,7 +214,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 	var height := project.size.y * spritesheet_rows
 	var splitter_array = project.layers if split_layers else []
 	var sprite_sheets: Array[Image]  # Array of all apritesheets
-	# This is an immitation of a do-while loop. The loop ends early if split_layers is empty
+	# This is an imitation of a do-while loop. The loop ends early if split_layers is empty
 	for split_l in splitter_array.size() + 1:
 		var origin := Vector2i.ZERO
 		var layer_tag_origins = tag_origins.duplicate()
