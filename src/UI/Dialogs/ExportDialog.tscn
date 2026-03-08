@@ -287,13 +287,13 @@ popup/item_3/id = 3
 popup/item_4/text = "Lanczos"
 popup/item_4/id = 4
 
-[node name="SeparatorCharacterLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=1144447347 groups=["ExportImageOptions"]]
+[node name="SeparatorCharacterLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=1144447347 groups=["ExportImageOptions", "ExportSpritesheetOptions"]]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Separator character(s):"
 
-[node name="SeparatorCharacter" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=863531641 groups=["ExportImageOptions", "ExportMultipleFilesEditableOptions"]]
+[node name="SeparatorCharacter" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=863531641 groups=["ExportImageOptions", "ExportMultipleFilesEditableOptions", "ExportSpritesheetOptions"]]
 layout_mode = 2
 tooltip_text = "The character(s) that separate the file name and the frame number"
 text = "_"
