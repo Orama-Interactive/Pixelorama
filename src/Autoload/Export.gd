@@ -282,6 +282,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 				sheet_image.blend_rect(
 					blended_frames[frame], Rect2i(Vector2i.ZERO, project.size), origin
 				)
+				sprite_sheets.append(sheet_image)
 			elif split_l < splitter_array.size():
 				var layer: BaseLayer = splitter_array[split_l]
 				if layer is AudioLayer:
@@ -293,7 +294,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 					Rect2i(Vector2i.ZERO, project.size),
 					origin
 				)
-		sprite_sheets.append(sheet_image)
+				sprite_sheets.append(sheet_image)
 		if splitter_array.is_empty():
 			break
 	if stack_sheets and sprite_sheets.size() > 1:
