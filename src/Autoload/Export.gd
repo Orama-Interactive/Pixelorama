@@ -279,7 +279,9 @@ func process_spritesheet(project := Global.current_project) -> void:
 					origin.x = 0
 					layer_tag_origins[0] += 1
 			if not split_layers:
-				sheet_image.blend_rect(blended_frames[frame], Rect2i(Vector2i.ZERO, project.size), origin)
+				sheet_image.blend_rect(
+					blended_frames[frame], Rect2i(Vector2i.ZERO, project.size), origin
+				)
 			elif split_l < splitter_array.size():
 				var layer: BaseLayer = splitter_array[split_l]
 				if layer is AudioLayer:
