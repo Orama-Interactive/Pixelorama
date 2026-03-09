@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2026-03-09 14:13\n"
+"PO-Revision-Date: 2026-03-09 15:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3373,7 +3373,7 @@ msgstr "Exportă doar conținut care se află în limitele unei zone selectate."
 
 #. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
 msgid "Layers as separate files"
-msgstr ""
+msgstr "Straturi ca fișiere separate"
 
 msgid "Close"
 msgstr "Închide"
