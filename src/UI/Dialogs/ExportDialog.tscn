@@ -309,11 +309,11 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Export JSON data"
 
-[node name="StackSheetsVertically" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=671604133 groups=["ExportImageOptions", "ExportSpritesheetOptions", "NotAndroid"]]
+[node name="LayersAsSeparateFiles" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=671604133 groups=["ExportSpritesheetOptions", "NotAndroid"]]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "Stack spritesheets vertically"
+text = "Layers as separate files"
 
 [node name="IncludeTagsInFilename" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=64815569 groups=["ExportImageOptions", "ExportMultipleFilesOptions", "NotAndroid"]]
 layout_mode = 2
@@ -395,7 +395,7 @@ size_flags_horizontal = 3
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/Interpolation" to="." method="_on_interpolation_item_selected"]
 [connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/SeparatorCharacter" to="." method="_on_separator_character_text_changed"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/ExportJSON" to="." method="_on_export_json_toggled"]
-[connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/StackSheetsVertically" to="." method="_on_stack_sheets_vertically_toggled"]
+[connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/LayersAsSeparateFiles" to="." method="_on_layers_as_separate_files_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/IncludeTagsInFilename" to="." method="_on_include_tags_in_filename_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/MultipleAnimationsDirectories" to="." method="_on_multiple_animations_directories_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/TrimImages" to="." method="_on_trim_images_toggled"]

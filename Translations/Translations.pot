@@ -3283,6 +3283,10 @@ msgstr ""
 msgid "Only export content that is within the bounds of a selected area."
 msgstr ""
 
+#. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
+msgid "Layers as separate files"
+msgstr ""
+
 msgid "Close"
 msgstr ""
 

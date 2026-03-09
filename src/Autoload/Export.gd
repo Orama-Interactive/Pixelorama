@@ -52,7 +52,7 @@ var processed_images: Array[ProcessedImage] = []
 var blended_frames: Dictionary[Frame, Image] = {}
 var export_json := false
 var split_layers := false
-var stack_sheets := false
+var sheet_layers_as_separate_files := false
 var trim_images := false
 var erase_unselected_area := false
 var overwrite_asked := false
@@ -296,7 +296,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 			sprite_sheets.append(sheet_image)
 		if splitter_array.is_empty():
 			break
-	if stack_sheets and sprite_sheets.size() > 1:
+	if not sheet_layers_as_separate_files and sprite_sheets.size() > 1:
 		var big_image := Image.create(
 			width, height * sprite_sheets.size(), false, project.get_image_format()
 		)
