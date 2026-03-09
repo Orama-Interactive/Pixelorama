@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Croatian\n"
 "Language: hr_HR\n"
-"PO-Revision-Date: 2026-03-06 00:06\n"
+"PO-Revision-Date: 2026-03-09 14:14\n"
 
 msgid "OK"
 msgstr ""
@@ -3289,6 +3289,10 @@ msgstr ""
 
 #. Found in the export dialog. Tooltip of the "clip image content to selection" option.
 msgid "Only export content that is within the bounds of a selected area."
+msgstr ""
+
+#. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
+msgid "Layers as separate files"
 msgstr ""
 
 msgid "Close"
