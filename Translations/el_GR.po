@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2026-03-09 14:13\n"
+"PO-Revision-Date: 2026-03-09 17:40\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1517,7 +1517,7 @@ msgid "Belarusian"
 msgstr "Λευκορωσικά"
 
 msgid "Thai"
-msgstr ""
+msgstr "Ταϊλανδέζικα"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -3375,7 +3375,7 @@ msgstr "Εξαγωγή μόνο περιεχομένου που βρίσκετα
 
 #. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
 msgid "Layers as separate files"
-msgstr ""
+msgstr "Στρώσεις ως ξεχωριστά αρχεία"
 
 msgid "Close"
 msgstr "Κλείσιμο"
