@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2026-03-09 14:13\n"
+"PO-Revision-Date: 2026-03-09 15:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1048,7 +1048,7 @@ msgstr "これが有効な場合、マウスの右ボタンは常にマウスの
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between left and right tools"
-msgstr ""
+msgstr "左右のツール間でオプションを共有"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
@@ -3013,13 +3013,13 @@ msgid "Undo: Rename Layer"
 msgstr "元に戻す: レイヤー名の変更"
 
 msgid "Redo: Rename Layer"
-msgstr ""
+msgstr "やり直し: レイヤー名の変更"
 
 msgid "Undo: Change Layer Opacity"
 msgstr "元に戻す: レイヤーの不透明度の変更"
 
 msgid "Redo: Change Layer Opacity"
-msgstr ""
+msgstr "やり直し: レイヤーの不透明度を変更"
 
 #. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
 msgid "Undo: Change Layer Onion Skinning Ignore Status"
@@ -3027,35 +3027,35 @@ msgstr ""
 
 #. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
 msgid "Redo: Change Layer Onion Skinning Ignore Status"
-msgstr ""
+msgstr "やり直し: レイヤーオニオンスキンの無視状態の変更"
 
 #. Appears as a notification when the user data field of a layer is changed, and the user undos.
 msgid "Undo: Change Layer User Data"
-msgstr ""
+msgstr "元に戻す: レイヤーユーザーデータの変更"
 
 #. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
 msgid "Redo: Change Layer User Data"
-msgstr ""
+msgstr "やり直し: レイヤーユーザーデータの変更"
 
 msgid "Undo: Change Layer Color"
-msgstr ""
+msgstr "元に戻す: レイヤーカラーの変更"
 
 msgid "Redo: Change Layer Color"
-msgstr ""
+msgstr "やり直し: レイヤーカラーの変更"
 
 msgid "Undo: Change Layer Visibility"
-msgstr ""
+msgstr "元に戻す: レイヤーの表示を変更"
 
 msgid "Redo: Change Layer Visibility"
-msgstr ""
+msgstr "やり直し: レイヤーの表示を変更"
 
 #. Appears as a notification when a layer gets locked or unlocked, and the user undos.
 msgid "Undo: Change Layer Locked Status"
-msgstr ""
+msgstr "元に戻す: レイヤーのロック状態の変更"
 
 #. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
 msgid "Redo: Change Layer Locked Status"
-msgstr ""
+msgstr "やり直し: レイヤーのロック状態の変更"
 
 msgid "Move Guide"
 msgstr "ガイドを移動"
@@ -3376,7 +3376,7 @@ msgstr "選択領域の範囲内にあるコンテンツのみエクスポート
 
 #. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
 msgid "Layers as separate files"
-msgstr ""
+msgstr "レイヤーを別のファイルとして保存"
 
 msgid "Close"
 msgstr "閉じる"
