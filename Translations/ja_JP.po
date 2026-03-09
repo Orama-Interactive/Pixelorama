@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2026-03-06 10:58\n"
+"PO-Revision-Date: 2026-03-09 14:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3373,6 +3373,10 @@ msgstr "選択範囲に画像コンテンツをクリップ"
 #. Found in the export dialog. Tooltip of the "clip image content to selection" option.
 msgid "Only export content that is within the bounds of a selected area."
 msgstr "選択領域の範囲内にあるコンテンツのみエクスポートします。"
+
+#. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
+msgid "Layers as separate files"
+msgstr ""
 
 msgid "Close"
 msgstr "閉じる"
