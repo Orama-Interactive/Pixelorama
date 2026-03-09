@@ -13,7 +13,7 @@ shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
 shader_parameter/color2 = Color(1, 1, 1, 1)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/scale = Vector2(0, 0)
-shader_parameter/rect_size = Vector2(684, 234)
+shader_parameter/rect_size = Vector2(684, 261)
 shader_parameter/follow_movement = false
 shader_parameter/follow_scale = false
 
@@ -133,15 +133,24 @@ popup/item_1/id = 1
 layout_mode = 2
 text = "Layers:"
 
-[node name="Layers" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=969264357]
+[node name="LayersContainer" type="HBoxContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=575154252]
+layout_mode = 2
+
+[node name="Layers" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/LayersContainer" unique_id=969264357]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 item_count = 2
 popup/item_0/text = "Visible layers"
 popup/item_0/id = 0
 popup/item_1/text = "Selected layers"
 popup/item_1/id = 1
+
+[node name="SplitLayers" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/LayersContainer" unique_id=287230239 groups=["ExportImageOptions", "ExportSpritesheetOptions", "NotAndroid"]]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Split layers"
 
 [node name="DirectionLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=952123787]
 layout_mode = 2
@@ -166,9 +175,13 @@ custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 text = "Resize:"
 
-[node name="Resize" type="TextureProgressBar" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=1687978601]
+[node name="ResizeContainer" type="HBoxContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=1004267939]
+layout_mode = 2
+
+[node name="Resize" type="TextureProgressBar" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/ResizeContainer" unique_id=1687978601]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
@@ -185,6 +198,11 @@ stretch_margin_bottom = 3
 script = ExtResource("4")
 suffix = "%"
 snap_step = 100.0
+
+[node name="DimensionLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/ResizeContainer" unique_id=1184422769]
+unique_name_in_owner = true
+layout_mode = 2
+text = "64×64"
 
 [node name="QualityLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=850616859]
 unique_name_in_owner = true
@@ -207,17 +225,6 @@ stretch_margin_top = 3
 stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("4")
-
-[node name="DimensionLabelText" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=197737479]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Export dimensions:"
-
-[node name="DimensionLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=1184422769]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-text = "64×64"
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer/VSplitContainer/VBoxContainer" unique_id=857749939]
 layout_mode = 2
@@ -254,7 +261,6 @@ layout_mode = 2
 
 [node name="AdvancedOptions" type="FoldableContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer" unique_id=2057094974]
 layout_mode = 2
-theme_type_variation = &"CollapsibleContainer"
 folded = true
 title = "Advanced options"
 
@@ -302,11 +308,6 @@ text = "_"
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Export JSON data"
-
-[node name="SplitLayers" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=287230239 groups=["ExportImageOptions", "ExportSpritesheetOptions", "NotAndroid"]]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "Split layers"
 
 [node name="StackSheetsVertically" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=671604133 groups=["ExportImageOptions", "ExportSpritesheetOptions", "NotAndroid"]]
 unique_name_in_owner = true
@@ -383,9 +384,10 @@ size_flags_horizontal = 3
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Orientation" to="." method="_on_orientation_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/LinesCount" to="." method="_on_lines_count_value_changed"]
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Frames" to="." method="_on_frames_item_selected"]
-[connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Layers" to="." method="_on_layers_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/LayersContainer/Layers" to="." method="_on_layers_item_selected"]
+[connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/LayersContainer/SplitLayers" to="." method="_on_split_layers_toggled"]
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Direction" to="." method="_on_direction_item_selected"]
-[connection signal="value_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Resize" to="." method="_on_resize_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/ResizeContainer/Resize" to="." method="_on_resize_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Quality" to="." method="_on_quality_value_changed"]
 [connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/PathLineEdit" to="." method="_on_path_line_edit_text_changed"]
 [connection signal="pressed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/PathButton" to="." method="_on_path_button_pressed"]
@@ -393,7 +395,6 @@ size_flags_horizontal = 3
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/Interpolation" to="." method="_on_interpolation_item_selected"]
 [connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/SeparatorCharacter" to="." method="_on_separator_character_text_changed"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/ExportJSON" to="." method="_on_export_json_toggled"]
-[connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/SplitLayers" to="." method="_on_split_layers_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/StackSheetsVertically" to="." method="_on_stack_sheets_vertically_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/IncludeTagsInFilename" to="." method="_on_include_tags_in_filename_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/MultipleAnimationsDirectories" to="." method="_on_multiple_animations_directories_toggled"]
