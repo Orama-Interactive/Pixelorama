@@ -637,6 +637,7 @@ var display_layer_effects := true:
 		display_layer_effects = value
 		if is_instance_valid(top_menu_container):
 			top_menu_container.view_menu.set_item_checked(ViewMenu.DISPLAY_LAYER_EFFECTS, value)
+			canvas.update_all_layers = true
 			canvas.queue_redraw()
 ## If [code]true[/code], cursor snaps to the boundary of rectangular grid boxes.
 var snap_to_rectangular_grid_boundary := false
