@@ -308,7 +308,7 @@ func re_order_tilemap() -> void:
 
 
 func create_tilemap_layer_node() -> TileMapLayer:
-	var godot_tileset := TileSet.new()
+	var godot_tileset := tileset.godot_tileset.duplicate()
 	godot_tileset.tile_size = get_tile_size()
 	godot_tileset.tile_shape = get_tile_shape()
 	godot_tileset.tile_layout = tile_layout

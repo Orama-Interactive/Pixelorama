@@ -26,7 +26,12 @@ var tile_size: Vector2i
 ## The shape of each tile.
 var tile_shape := TileSet.TILE_SHAPE_SQUARE
 ## For all half-offset shapes (Isometric & Hexagonal), determines the offset axis.
-var tile_offset_axis := TileSet.TILE_OFFSET_AXIS_HORIZONTAL
+var tile_offset_axis := TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
+	set(value):
+		tile_offset_axis = value
+		godot_tileset.tile_offset_axis = tile_offset_axis
+var godot_tileset: TileSet
+var godot_tileset_atlas_source: TileSetAtlasSource
 ## If [code]true[/code], the code in [method handle_project_resize] does not execute.
 ## This variable is used to prevent multiple cels from clearing the tileset at the same time.
 ## In [method handle_project_resize], the variable is set to [code]true[/code], and then
@@ -78,6 +83,7 @@ func _init(
 	if add_empty_tile:
 		var empty_image := Image.create_empty(tile_size.x, tile_size.y, false, Image.FORMAT_RGBA8)
 		tiles.append(Tile.new(empty_image))
+	create_godot_tileset()
 
 
 func duplicate() -> TileSetCustom:
@@ -94,6 +100,11 @@ func add_tile(image: Image, cel: CelTileMap, times_used := 1) -> void:
 	tile.times_used = times_used
 	tiles.append(tile)
 	tile_added.emit(cel, tiles.size() - 1)
+	fill_godot_tileset_atlas()
+	#var tile_atlas_image := godot_tileset_atlas_source.texture.get_image()
+	#tile_atlas_image.crop(tile_atlas_image.get_width() + tile_size.x, tile_atlas_image.get_height())
+	#var origin := Vector2(tiles.size() * tile_size.x, 0)
+	#tile_atlas_image.blit_rect(image, Rect2i(Vector2i.ZERO, tile_size), origin)
 
 
 ## Adds a new [param image] as a tile in a given [param position] in the tileset.
@@ -103,6 +114,7 @@ func insert_tile(image: Image, position: int, cel: CelTileMap) -> void:
 	var tile := Tile.new(image)
 	tiles.insert(position, tile)
 	tile_added.emit(cel, position)
+	fill_godot_tileset_atlas()
 
 
 ## Reduces a tile's [member TileSetCustom.Tile.times_used] by one,
@@ -124,6 +136,7 @@ func unuse_tile_at_index(index: int, cel: CelTileMap) -> bool:
 func remove_tile_at_index(index: int, cel: CelTileMap) -> void:
 	tiles.remove_at(index)
 	tile_removed.emit(cel, index)
+	fill_godot_tileset_atlas()
 
 
 ## Replaces a tile in a given [param index] in the tileset with a [param new_tile].
@@ -131,6 +144,7 @@ func remove_tile_at_index(index: int, cel: CelTileMap) -> void:
 func replace_tile_at(new_tile: Image, index: int, cel: CelTileMap) -> void:
 	tiles[index].image.copy_from(new_tile)
 	tile_replaced.emit(cel, index)
+	fill_godot_tileset_atlas()
 
 
 ## Finds and returns the position of a tile [param image] inside the tileset.
@@ -241,23 +255,28 @@ func create_image_atlas(rows := 1, skip_first := true) -> Image:
 	return image
 
 
-func create_godot_tileset(rows := 1, shape := tile_shape, size := tile_size) -> TileSet:
-	var godot_tileset := TileSet.new()
-	godot_tileset.tile_size = size
-	godot_tileset.tile_shape = shape
+func create_godot_tileset() -> void:
+	godot_tileset = TileSet.new()
+	godot_tileset.tile_size = tile_size
+	godot_tileset.tile_shape = tile_shape
 	godot_tileset.tile_offset_axis = tile_offset_axis
-	var tileset_atlas_source := TileSetAtlasSource.new()
-	var image_atlas := create_image_atlas(rows)
-	tileset_atlas_source.texture = ImageTexture.create_from_image(image_atlas)
-	# This needs to be equal to tile_size and not size.
-	tileset_atlas_source.texture_region_size = tile_size
-	var grid_size := tileset_atlas_source.get_atlas_grid_size()
-	for y in grid_size.y:
-		for x in grid_size.x:
+	#fill_godot_tileset_atlas()
+
+
+func fill_godot_tileset_atlas() -> void:
+	for i in range(godot_tileset.get_source_count() - 1, -1, -1):
+		var id := godot_tileset.get_source_id(i)
+		godot_tileset.remove_source(id)
+	godot_tileset_atlas_source = TileSetAtlasSource.new()
+	godot_tileset.add_source(godot_tileset_atlas_source)
+	var image_atlas := create_image_atlas()
+	godot_tileset_atlas_source.texture = ImageTexture.create_from_image(image_atlas)
+	godot_tileset_atlas_source.texture_region_size = tile_size
+	var grid_size := godot_tileset_atlas_source.get_atlas_grid_size()
+	for x in grid_size.x:
+		for y in grid_size.y:
 			var coords := Vector2i(x, y)
-			tileset_atlas_source.create_tile(coords)
-	godot_tileset.add_source(tileset_atlas_source)
-	return godot_tileset
+			godot_tileset_atlas_source.create_tile(coords)
 
 
 ## Serializes the data of this class into the form of a [Dictionary],
