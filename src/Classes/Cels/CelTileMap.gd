@@ -338,27 +338,61 @@ func autotile_build_mask(cell_coords: Vector2i) -> PackedInt32Array:
 	mask.resize(16)
 	mask.fill(-1)
 	for i in mask.size():
-		var peering_offset := PEERING_OFFSETS[i]
-		var neighbor_pos := cell_coords + peering_offset
 		if not tileset.is_valid_terrain_peering_bit_for_mode(i):
 			continue
+		var peering_offset := PEERING_OFFSETS[i]
+		var neighbor_pos := cell_coords + peering_offset
 
-		if not cells.has(neighbor_pos) or cells[neighbor_pos].index == 0:
+		if not cells.has(neighbor_pos):
 			continue
 
-		mask[i] = 0 # Terrain id
+		var neighbor_cell := cells[neighbor_pos]
+		if neighbor_cell.index == 0:
+			continue
+
+		var neighbor_tile := tileset.tiles[neighbor_cell.index]
+		mask[i] = neighbor_tile.terrain_center_bit
 
 	return mask
 
 
 func autotile_find_best_tile(mask: PackedInt32Array, terrain_id := 0) -> int:
+	var best_tile := 1
+	var best_score := -999999
 	for i in range(1, tileset.tiles.size()):
 		var tile := tileset.tiles[i]
 		if tile.terrain_center_bit != terrain_id:
 			continue
-		if autotile_tile_matches_mask(tile, mask):
-			return i
-	return tileset.tiles.size() - 1
+		var score := score_tile(tile, mask)
+		score += tile_specificity(tile)
+		if score > best_score:
+			best_score = score
+			best_tile = i
+
+	return best_tile
+
+
+func score_tile(tile: TileSetCustom.Tile, mask: PackedInt32Array) -> int:
+	var score := 0
+	for i in mask.size():
+		var tile_bit := tile.terrain_peering_bits[i]
+		if tile_bit == -1:
+			continue
+		var neighbor := mask[i]
+		if neighbor == tile_bit:
+			score += 10
+		else:
+			score -= 2
+
+	return score
+
+
+func tile_specificity(tile: TileSetCustom.Tile) -> int:
+	var s := 0
+	for b in tile.terrain_peering_bits:
+		if b != -1:
+			s += 1
+	return s
 
 
 func autotile_tile_matches_mask(tile: TileSetCustom.Tile, mask: PackedInt32Array) -> bool:
@@ -392,22 +426,31 @@ func filter_corners(mask: PackedInt32Array, terrain_id:int) -> void:
 		mask[11] = -1
 
 
-func autotile_set_index(cell_coords: Vector2i) -> void:
+func autotile_compute_index(cell_coords: Vector2i) -> int:
 	var mask := autotile_build_mask(cell_coords)
 	filter_corners(mask, 0)
-	var tile_id := autotile_find_best_tile(mask)
-	prints(mask, tile_id)
-	var cell := get_cell_at(cell_coords)
-	set_index(cell, tile_id)
+	return autotile_find_best_tile(mask)
 
 
 func autotile_with_neighbors(cell_coords: Vector2i, godot_tilemap: TileMapLayer) -> void:
-	autotile_set_index(cell_coords)
-	var neighbors := godot_tilemap.get_surrounding_cells(cell_coords)
+	var queue: Array[Vector2i] = [cell_coords]
+	var visited: Dictionary[Vector2i, bool] = {}
 
-	for neighbor in neighbors:
-		if cells.has(neighbor) and cells[neighbor].index != 0:
-			autotile_set_index(neighbor)
+	while queue.size() > 0:
+		var pos: Vector2i = queue.pop_front()
+		if visited.has(pos) or not cells.has(pos):
+			continue
+		visited[pos] = true
+
+		var old_index := cells[pos].index
+		var new_index := autotile_compute_index(pos)
+
+		if new_index != old_index:
+			set_index(get_cell_at(pos), new_index)
+			var neighbors := godot_tilemap.get_surrounding_cells(pos)
+			for n in neighbors:
+				if cells.has(n) and cells[n].index != 0:
+					queue.append(n)
 
 
 func re_order_tilemap() -> void:
