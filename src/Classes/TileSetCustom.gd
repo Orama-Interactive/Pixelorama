@@ -49,9 +49,14 @@ class Tile:
 	var probability := 1.0
 	## User defined data for each individual tile.
 	var user_data := ""
+	var terrain_center_bit := -1
+	var terrain_peering_bits: Array[int]
 
 	func _init(_image: Image) -> void:
 		image = _image
+		terrain_peering_bits.resize(TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER + 1)
+		for i in TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER:
+			terrain_peering_bits[i] = randi_range(-1, 0)
 
 	## A method that checks if the tile should be removed from the tileset.
 	## Returns [code]true[/code] if the amount of [member times_used] is 0.
@@ -260,6 +265,8 @@ func create_godot_tileset() -> void:
 	godot_tileset.tile_size = tile_size
 	godot_tileset.tile_shape = tile_shape
 	godot_tileset.tile_offset_axis = tile_offset_axis
+	godot_tileset.add_terrain_set()
+	godot_tileset.add_terrain(0)
 	#fill_godot_tileset_atlas()
 
 
@@ -273,10 +280,22 @@ func fill_godot_tileset_atlas() -> void:
 	godot_tileset_atlas_source.texture = ImageTexture.create_from_image(image_atlas)
 	godot_tileset_atlas_source.texture_region_size = tile_size
 	var grid_size := godot_tileset_atlas_source.get_atlas_grid_size()
+	var tile_index := 0
 	for x in grid_size.x:
 		for y in grid_size.y:
 			var coords := Vector2i(x, y)
 			godot_tileset_atlas_source.create_tile(coords)
+			var tile_data := godot_tileset_atlas_source.get_tile_data(coords, 0)
+			var tile := tiles[tile_index]
+			tile_data.terrain_set = 0
+			tile_data.terrain = tile.terrain_center_bit
+			for i in tile.terrain_peering_bits.size():
+				var bit := tile.terrain_peering_bits[i]
+				if tile_data.is_valid_terrain_peering_bit(i):
+					tile_data.set_terrain_peering_bit(i, bit)
+			tile_index += 1
+			if tile_index >= tile.size():
+				break
 
 
 ## Serializes the data of this class into the form of a [Dictionary],
