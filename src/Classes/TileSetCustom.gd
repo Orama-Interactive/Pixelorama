@@ -293,8 +293,10 @@ func fill_godot_tileset_atlas() -> void:
 				var bit := tile.terrain_peering_bits[i]
 				if tile_data.is_valid_terrain_peering_bit(i):
 					tile_data.set_terrain_peering_bit(i, bit)
+				else:
+					tile.terrain_peering_bits[i] = -1
 			tile_index += 1
-			if tile_index >= tile.size():
+			if tile_index >= tiles.size():
 				break
 
 
@@ -360,3 +362,548 @@ func deserialize_undo_data(dict: Dictionary, _cel: CelTileMap) -> void:
 	updated.emit()
 	if tile_size != prev_tile_size:
 		resized_content.emit()
+
+
+func get_terrain_polygon() -> Array[Vector2]:
+	match tile_shape:
+		TileSet.TILE_SHAPE_SQUARE:
+			return _get_square_terrain_polygon(tile_size)
+
+		TileSet.TILE_SHAPE_ISOMETRIC:
+			return _get_isometric_terrain_polygon(tile_size)
+
+		_:
+			var overlap := 0.0
+
+			if tile_shape == TileSet.TILE_SHAPE_HEXAGON:
+				overlap = 0.25
+
+			return _get_half_offset_terrain_polygon(tile_size, overlap, tile_offset_axis)
+
+
+func get_terrain_peering_bit_polygon(p_terrain_set:int, p_bit:int) -> Array[Vector2]:
+
+	if p_terrain_set < 0 or p_terrain_set >= godot_tileset.get_terrain_sets_count():
+		return []
+
+	var terrain_mode := godot_tileset.get_terrain_set_mode(p_terrain_set)
+
+	match tile_shape:
+
+		TileSet.TILE_SHAPE_SQUARE:
+			match terrain_mode:
+				TileSet.TERRAIN_MODE_MATCH_CORNERS_AND_SIDES:
+					return _square_corner_side_polygon(tile_size, p_bit)
+				TileSet.TERRAIN_MODE_MATCH_CORNERS:
+					return _square_corner_polygon(tile_size, p_bit)
+				_:
+					return _square_side_polygon(tile_size, p_bit)
+
+		TileSet.TILE_SHAPE_ISOMETRIC:
+			match terrain_mode:
+				TileSet.TERRAIN_MODE_MATCH_CORNERS_AND_SIDES:
+					return _iso_corner_side_polygon(tile_size, p_bit)
+				TileSet.TERRAIN_MODE_MATCH_CORNERS:
+					return _iso_corner_polygon(tile_size, p_bit)
+				_:
+					return _iso_side_polygon(tile_size, p_bit)
+
+		_:
+			var overlap := 0.0
+			if tile_shape == TileSet.TILE_SHAPE_HEXAGON:
+				overlap = 0.25
+
+			match terrain_mode:
+				TileSet.TERRAIN_MODE_MATCH_CORNERS_AND_SIDES:
+					return _half_offset_corner_side(tile_size, overlap, tile_offset_axis, p_bit)
+				TileSet.TERRAIN_MODE_MATCH_CORNERS:
+					return _half_offset_corner(tile_size, overlap, tile_offset_axis, p_bit)
+				_:
+					return _half_offset_side(tile_size, overlap, tile_offset_axis, p_bit)
+
+
+func _get_square_terrain_polygon(size:Vector2i) -> Array[Vector2]:
+	var rect := Rect2(-Vector2(size)/6.0, Vector2(size)/3.0)
+	return _rect_to_polygon(rect)
+
+
+func _square_corner_side_polygon(size:Vector2i, bit:int) -> Array[Vector2]:
+
+	var offsets := {
+		TileSet.CELL_NEIGHBOR_RIGHT_SIDE: Vector2(1,-1),
+		TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER: Vector2(1,1),
+		TileSet.CELL_NEIGHBOR_BOTTOM_SIDE: Vector2(-1,1),
+		TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER: Vector2(-3,1),
+		TileSet.CELL_NEIGHBOR_LEFT_SIDE: Vector2(-3,-1),
+		TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER: Vector2(-3,-3),
+		TileSet.CELL_NEIGHBOR_TOP_SIDE: Vector2(-1,-3),
+		TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER: Vector2(1,-3)
+	}
+
+	if not offsets.has(bit):
+		return []
+
+	var rect := Rect2()
+	rect.size = Vector2(size)/3
+	rect.position = offsets[bit] * Vector2(size)/6.0
+
+	return _rect_to_polygon(rect)
+
+
+func _square_corner_polygon(size:Vector2i, bit:int) -> Array[Vector2]:
+
+	var points := [
+		Vector2(0,0),
+		Vector2(1,0),
+		Vector2(1,1),
+		Vector2(0,1)
+	]
+
+	var scale := Vector2(size)
+
+	for i in points.size():
+		points[i] *= scale
+
+	match bit:
+
+		TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER:
+			return _mirror_inner_polygon([
+				points[0]
+			])
+
+		TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER:
+			return _mirror_inner_polygon([
+				points[1]
+			])
+
+		TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER:
+			return _mirror_inner_polygon([
+				points[2]
+			])
+
+		TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER:
+			return _mirror_inner_polygon([
+				points[3]
+			])
+
+	return []
+
+
+func _square_side_polygon(size:Vector2i, bit:int) -> Array[Vector2]:
+
+	var points := [
+		Vector2(0,0),
+		Vector2(1,0),
+		Vector2(1,1),
+		Vector2(0,1)
+	]
+
+	var scale := Vector2(size)
+
+	for i in points.size():
+		points[i] *= scale
+
+	match bit:
+
+		TileSet.CELL_NEIGHBOR_TOP_SIDE:
+			return _mirror_inner_polygon([
+				points[0],
+				points[1]
+			])
+
+		TileSet.CELL_NEIGHBOR_RIGHT_SIDE:
+			return _mirror_inner_polygon([
+				points[1],
+				points[2]
+			])
+
+		TileSet.CELL_NEIGHBOR_BOTTOM_SIDE:
+			return _mirror_inner_polygon([
+				points[2],
+				points[3]
+			])
+
+		TileSet.CELL_NEIGHBOR_LEFT_SIDE:
+			return _mirror_inner_polygon([
+				points[3],
+				points[0]
+			])
+
+	return []
+
+
+func _get_isometric_terrain_polygon(size:Vector2i) -> Array[Vector2]:
+
+	var unit := Vector2(size)/6.0
+
+	return [
+		Vector2(1,0)*unit,
+		Vector2(0,1)*unit,
+		Vector2(-1,0)*unit,
+		Vector2(0,-1)*unit
+	]
+
+
+func _iso_corner_side_polygon(size:Vector2i, bit:int) -> Array[Vector2]:
+
+	var points := [
+		Vector2(0,-1),
+		Vector2(1,0),
+		Vector2(0,1),
+		Vector2(-1,0)
+	]
+
+	var unit := Vector2(size) / 2.0
+
+	for i in points.size():
+		points[i] *= unit
+
+	match bit:
+
+		TileSet.CELL_NEIGHBOR_TOP_SIDE:
+			return _mirror_inner_polygon([
+				points[0],
+				points[1]
+			])
+
+		TileSet.CELL_NEIGHBOR_RIGHT_SIDE:
+			return _mirror_inner_polygon([
+				points[1],
+				points[2]
+			])
+
+		TileSet.CELL_NEIGHBOR_BOTTOM_SIDE:
+			return _mirror_inner_polygon([
+				points[2],
+				points[3]
+			])
+
+		TileSet.CELL_NEIGHBOR_LEFT_SIDE:
+			return _mirror_inner_polygon([
+				points[3],
+				points[0]
+			])
+
+		TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER:
+			return _mirror_inner_polygon([
+				points[0],
+				points[1]
+			])
+
+		TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER:
+			return _mirror_inner_polygon([
+				points[1],
+				points[2]
+			])
+
+		TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER:
+			return _mirror_inner_polygon([
+				points[2],
+				points[3]
+			])
+
+		TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER:
+			return _mirror_inner_polygon([
+				points[3],
+				points[0]
+			])
+
+	return []
+
+
+func _iso_corner_polygon(size:Vector2i, bit:int) -> Array[Vector2]:
+
+	var unit := Vector2(size)/6.0
+
+	var shapes := {
+
+		TileSet.CELL_NEIGHBOR_RIGHT_CORNER: [
+			Vector2(0.5,-0.5),
+			Vector2(1.5,-1.5),
+			Vector2(3,0),
+			Vector2(1.5,1.5),
+			Vector2(0.5,0.5),
+			Vector2(1,0)
+		],
+
+		TileSet.CELL_NEIGHBOR_BOTTOM_CORNER: [
+			Vector2(-0.5,0.5),
+			Vector2(-1.5,1.5),
+			Vector2(0,3),
+			Vector2(1.5,1.5),
+			Vector2(0.5,0.5),
+			Vector2(0,1)
+		],
+
+		TileSet.CELL_NEIGHBOR_LEFT_CORNER: [
+			Vector2(-0.5,-0.5),
+			Vector2(-1.5,-1.5),
+			Vector2(-3,0),
+			Vector2(-1.5,1.5),
+			Vector2(-0.5,0.5),
+			Vector2(-1,0)
+		],
+
+		TileSet.CELL_NEIGHBOR_TOP_CORNER: [
+			Vector2(-0.5,-0.5),
+			Vector2(-1.5,-1.5),
+			Vector2(0,-3),
+			Vector2(1.5,-1.5),
+			Vector2(0.5,-0.5),
+			Vector2(0,-1)
+		]
+	}
+
+	if not shapes.has(bit):
+		return []
+
+	return _scale_points(shapes[bit], unit)
+
+
+func _iso_side_polygon(size:Vector2i, bit:int) -> Array[Vector2]:
+
+	var points := [
+		Vector2(0,-1),
+		Vector2(1,0),
+		Vector2(0,1),
+		Vector2(-1,0)
+	]
+
+	var unit := Vector2(size) / 2.0
+
+	for i in points.size():
+		points[i] *= unit
+
+	match bit:
+
+		TileSet.CELL_NEIGHBOR_TOP_SIDE:
+			return _mirror_inner_polygon([
+				points[0],
+				points[1]
+			])
+
+		TileSet.CELL_NEIGHBOR_RIGHT_SIDE:
+			return _mirror_inner_polygon([
+				points[1],
+				points[2]
+			])
+
+		TileSet.CELL_NEIGHBOR_BOTTOM_SIDE:
+			return _mirror_inner_polygon([
+				points[2],
+				points[3]
+			])
+
+		TileSet.CELL_NEIGHBOR_LEFT_SIDE:
+			return _mirror_inner_polygon([
+				points[3],
+				points[0]
+			])
+
+	return []
+
+
+func _get_half_offset_terrain_polygon(size:Vector2i, overlap:float, axis:int) -> Array[Vector2]:
+
+	var unit := Vector2(size) / 6.0
+
+	if axis == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
+		return _scale_points([
+			Vector2(1, 1.0 - overlap * 2.0),
+			Vector2(0, 1),
+			Vector2(-1, 1.0 - overlap * 2.0),
+			Vector2(-1, -1.0 + overlap * 2.0),
+			Vector2(0, -1),
+			Vector2(1, -1.0 + overlap * 2.0)
+		], unit)
+
+	else:
+		return _scale_points([
+			Vector2(1, 0),
+			Vector2(1.0 - overlap * 2.0, -1),
+			Vector2(-1.0 + overlap * 2.0, -1),
+			Vector2(-1, 0),
+			Vector2(-1.0 + overlap * 2.0, 1),
+			Vector2(1.0 - overlap * 2.0, 1)
+		], unit)
+
+
+func _half_offset_corner_side(size:Vector2i, overlap:float, axis:int, bit:int) -> Array[Vector2]:
+
+	var points := [
+		Vector2(3, (3 * (1 - overlap * 2)) / 2),
+		Vector2(3, 3 * (1 - overlap * 2)),
+		Vector2(2, 3 * (1 - (overlap * 2) * 2 / 3)),
+		Vector2(1, 3 - overlap * 2),
+		Vector2(0, 3),
+		Vector2(-1, 3 - overlap * 2),
+		Vector2(-2, 3 * (1 - (overlap * 2) * 2 / 3)),
+		Vector2(-3, 3 * (1 - overlap * 2)),
+		Vector2(-3, (3 * (1 - overlap * 2)) / 2),
+		Vector2(-3, -(3 * (1 - overlap * 2)) / 2),
+		Vector2(-3, -3 * (1 - overlap * 2)),
+		Vector2(-2, -3 * (1 - (overlap * 2) * 2 / 3)),
+		Vector2(-1, -(3 - overlap * 2)),
+		Vector2(0, -3),
+		Vector2(1, -(3 - overlap * 2)),
+		Vector2(2, -3 * (1 - (overlap * 2) * 2 / 3)),
+		Vector2(3, -3 * (1 - overlap * 2)),
+		Vector2(3, -(3 * (1 - overlap * 2)) / 2)
+	]
+
+	var unit := Vector2(size) / 6.0
+
+	if axis == TileSet.TILE_OFFSET_AXIS_VERTICAL:
+		for i in points.size():
+			points[i] = Vector2(points[i].y, points[i].x)
+
+	points = _scale_points(points, unit)
+
+	var map := {
+		TileSet.CELL_NEIGHBOR_RIGHT_SIDE: [17,0],
+		TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER: [0,1,2],
+		TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE: [2,3],
+		TileSet.CELL_NEIGHBOR_BOTTOM_CORNER: [3,4,5],
+		TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE: [5,6],
+		TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER: [6,7,8],
+		TileSet.CELL_NEIGHBOR_LEFT_SIDE: [8,9],
+		TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER: [9,10,11],
+		TileSet.CELL_NEIGHBOR_TOP_LEFT_SIDE: [11,12],
+		TileSet.CELL_NEIGHBOR_TOP_CORNER: [12,13,14],
+		TileSet.CELL_NEIGHBOR_TOP_RIGHT_SIDE: [14,15],
+		TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER: [15,16,17]
+	}
+
+	if not map.has(bit):
+		return []
+
+	var poly:Array[Vector2] = []
+	for i in map[bit]:
+		poly.append(points[i])
+
+	return _mirror_inner_polygon(poly)
+
+
+func _half_offset_corner(size:Vector2i, overlap:float, axis:int, bit:int) -> Array[Vector2]:
+
+	var points := [
+		Vector2(3,0),
+		Vector2(3,3*(1-overlap*2)),
+		Vector2(1.5,(3*(1-overlap*2)+3)/2),
+		Vector2(0,3),
+		Vector2(-1.5,(3*(1-overlap*2)+3)/2),
+		Vector2(-3,3*(1-overlap*2)),
+		Vector2(-3,0),
+		Vector2(-3,-3*(1-overlap*2)),
+		Vector2(-1.5,-(3*(1-overlap*2)+3)/2),
+		Vector2(0,-3),
+		Vector2(1.5,-(3*(1-overlap*2)+3)/2),
+		Vector2(3,-3*(1-overlap*2))
+	]
+
+	var unit := Vector2(size)/6.0
+
+	if axis == TileSet.TILE_OFFSET_AXIS_VERTICAL:
+		for i in points.size():
+			points[i] = Vector2(points[i].y, points[i].x)
+
+	points = _scale_points(points, unit)
+
+	var map := {
+		TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER: [0,1,2],
+		TileSet.CELL_NEIGHBOR_BOTTOM_CORNER: [2,3,4],
+		TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER: [4,5,6],
+		TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER: [6,7,8],
+		TileSet.CELL_NEIGHBOR_TOP_CORNER: [8,9,10],
+		TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER: [10,11,0]
+	}
+
+	if axis == TileSet.TILE_OFFSET_AXIS_VERTICAL:
+		map = {
+			TileSet.CELL_NEIGHBOR_RIGHT_CORNER:[2,3,4],
+			TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER:[0,1,2],
+			TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER:[10,11,0],
+			TileSet.CELL_NEIGHBOR_LEFT_CORNER:[8,9,10],
+			TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER:[6,7,8],
+			TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER:[4,5,6]
+		}
+
+	if not map.has(bit):
+		return []
+
+	var poly:Array[Vector2] = []
+	for i in map[bit]:
+		poly.append(points[i])
+
+	return _mirror_inner_polygon(poly)
+
+
+func _half_offset_side(size:Vector2i, overlap:float, axis:int, bit:int) -> Array[Vector2]:
+
+	var points := [
+		Vector2(3,3*(1-overlap*2)),
+		Vector2(0,3),
+		Vector2(-3,3*(1-overlap*2)),
+		Vector2(-3,-3*(1-overlap*2)),
+		Vector2(0,-3),
+		Vector2(3,-3*(1-overlap*2))
+	]
+
+	var unit := Vector2(size)/6.0
+
+	if axis == TileSet.TILE_OFFSET_AXIS_VERTICAL:
+		for i in points.size():
+			points[i] = Vector2(points[i].y, points[i].x)
+
+	points = _scale_points(points, unit)
+
+	var map := {
+		TileSet.CELL_NEIGHBOR_RIGHT_SIDE:[5,0],
+		TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE:[0,1],
+		TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE:[1,2],
+		TileSet.CELL_NEIGHBOR_LEFT_SIDE:[2,3],
+		TileSet.CELL_NEIGHBOR_TOP_LEFT_SIDE:[3,4],
+		TileSet.CELL_NEIGHBOR_TOP_RIGHT_SIDE:[4,5]
+	}
+
+	if axis == TileSet.TILE_OFFSET_AXIS_VERTICAL:
+		map = {
+			TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE:[0,1],
+			TileSet.CELL_NEIGHBOR_BOTTOM_SIDE:[5,0],
+			TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE:[4,5],
+			TileSet.CELL_NEIGHBOR_TOP_LEFT_SIDE:[3,4],
+			TileSet.CELL_NEIGHBOR_TOP_SIDE:[2,3],
+			TileSet.CELL_NEIGHBOR_TOP_RIGHT_SIDE:[1,2]
+		}
+
+	if not map.has(bit):
+		return []
+
+	var poly:Array[Vector2] = []
+	for i in map[bit]:
+		poly.append(points[i])
+
+	return _mirror_inner_polygon(poly)
+
+
+func _rect_to_polygon(rect: Rect2) -> Array[Vector2]:
+	return [
+		rect.position,
+		Vector2(rect.end.x, rect.position.y),
+		rect.end,
+		Vector2(rect.position.x, rect.end.y)
+	]
+
+
+func _scale_points(points: Array, scale: Vector2) -> Array[Vector2]:
+	var result: Array[Vector2] = []
+	for p in points:
+		result.append(p * scale)
+	return result
+
+
+func _mirror_inner_polygon(poly: Array[Vector2]) -> Array[Vector2]:
+	var half := poly.size()
+	for i in range(half):
+		poly.append(poly[half - 1 - i] / 3.0)
+	return poly
