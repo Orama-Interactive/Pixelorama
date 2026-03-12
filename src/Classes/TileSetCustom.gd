@@ -288,7 +288,7 @@ func fill_godot_tileset_atlas() -> void:
 	godot_tileset_atlas_source.texture = ImageTexture.create_from_image(image_atlas)
 	godot_tileset_atlas_source.texture_region_size = tile_size
 	var grid_size := godot_tileset_atlas_source.get_atlas_grid_size()
-	var tile_index := 0
+	var tile_index := 1
 	for x in grid_size.x:
 		for y in grid_size.y:
 			var coords := Vector2i(x, y)
