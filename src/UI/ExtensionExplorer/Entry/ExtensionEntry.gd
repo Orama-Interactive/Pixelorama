@@ -135,7 +135,7 @@ func announce_done(success: bool) -> void:
 ## Returns true if entry contains ALL tags in tag_array
 func tags_match(tag_array: PackedStringArray) -> bool:
 	if tags.size() > 0:
-		for tag in tag_array:
+		for tag: String in tag_array:
 			if !tag in tags:
 				return false
 		return true
