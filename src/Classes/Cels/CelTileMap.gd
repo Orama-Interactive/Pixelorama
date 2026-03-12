@@ -11,6 +11,33 @@ extends PixelCel
 ## information that specifies if that cell has a transformation applied to it,
 ## such as horizontal flipping, vertical flipping, or if it's transposed.
 
+const PEERING_OFFSETS: Dictionary[TileSet.CellNeighbor, Vector2i] = {
+	TileSet.CELL_NEIGHBOR_RIGHT_SIDE: Vector2i(1,0),
+	TileSet.CELL_NEIGHBOR_RIGHT_CORNER: Vector2i(1,-1),
+
+	TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE: Vector2i(1,1),
+	TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER: Vector2i(1,1),
+
+	TileSet.CELL_NEIGHBOR_BOTTOM_SIDE: Vector2i(0,1),
+	TileSet.CELL_NEIGHBOR_BOTTOM_CORNER: Vector2i(-1,1),
+
+	TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE: Vector2i(-1,1),
+	TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER: Vector2i(-1,1),
+
+	TileSet.CELL_NEIGHBOR_LEFT_SIDE: Vector2i(-1,0),
+	TileSet.CELL_NEIGHBOR_LEFT_CORNER: Vector2i(-1,-1),
+
+	TileSet.CELL_NEIGHBOR_TOP_LEFT_SIDE: Vector2i(-1,-1),
+	TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER: Vector2i(-1,-1),
+
+	TileSet.CELL_NEIGHBOR_TOP_SIDE: Vector2i(0,-1),
+	TileSet.CELL_NEIGHBOR_TOP_CORNER: Vector2i(1,-1),
+
+	TileSet.CELL_NEIGHBOR_TOP_RIGHT_SIDE: Vector2i(1,-1),
+	TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER: Vector2i(1,-1)
+}
+
+
 ## The [TileSetCustom] that this cel uses, passed down from the cel's [LayerTileMap].
 var tileset: TileSetCustom
 
@@ -298,6 +325,89 @@ func bucket_fill(cell_coords: Vector2i, index: int, callable: Callable) -> void:
 					to_check.push_back(around[i])
 			already_checked.append(coords)
 	godot_tilemap.queue_free()
+
+
+func autotile(cell_coords: Vector2i) -> void:
+	var godot_tilemap := create_tilemap_layer_node()
+	autotile_with_neighbors(cell_coords, godot_tilemap)
+	godot_tilemap.queue_free()
+
+
+func autotile_build_mask(cell_coords: Vector2i) -> PackedInt32Array:
+	var mask := PackedInt32Array()
+	mask.resize(16)
+	mask.fill(-1)
+	for i in mask.size():
+		var peering_offset := PEERING_OFFSETS[i]
+		var neighbor_pos := cell_coords + peering_offset
+		if not tileset.is_valid_terrain_peering_bit_for_mode(i):
+			continue
+
+		if not cells.has(neighbor_pos) or cells[neighbor_pos].index == 0:
+			continue
+
+		mask[i] = 0 # Terrain id
+
+	return mask
+
+
+func autotile_find_best_tile(mask: PackedInt32Array, terrain_id := 0) -> int:
+	for i in range(1, tileset.tiles.size()):
+		var tile := tileset.tiles[i]
+		if tile.terrain_center_bit != terrain_id:
+			continue
+		if autotile_tile_matches_mask(tile, mask):
+			return i
+	return tileset.tiles.size() - 1
+
+
+func autotile_tile_matches_mask(tile: TileSetCustom.Tile, mask: PackedInt32Array) -> bool:
+	for i in mask.size():
+		if not tileset.is_valid_terrain_peering_bit_for_mode(i):
+			continue
+		var tile_bit := tile.terrain_peering_bits[i]
+		if tile_bit == -1:
+			continue
+		if mask[i] != tile_bit:
+			return false
+
+	return true
+
+
+func filter_corners(mask: PackedInt32Array, terrain_id:int) -> void:
+	# top-right
+	if mask[12] != terrain_id or mask[0] != terrain_id:
+		mask[15] = -1
+
+	# bottom-right
+	if mask[0] != terrain_id or mask[4] != terrain_id:
+		mask[3] = -1
+
+	# bottom-left
+	if mask[4] != terrain_id or mask[8] != terrain_id:
+		mask[7] = -1
+
+	# top-left
+	if mask[8] != terrain_id or mask[12] != terrain_id:
+		mask[11] = -1
+
+
+func autotile_set_index(cell_coords: Vector2i) -> void:
+	var mask := autotile_build_mask(cell_coords)
+	filter_corners(mask, 0)
+	var tile_id := autotile_find_best_tile(mask)
+	prints(mask, tile_id)
+	var cell := get_cell_at(cell_coords)
+	set_index(cell, tile_id)
+
+
+func autotile_with_neighbors(cell_coords: Vector2i, godot_tilemap: TileMapLayer) -> void:
+	autotile_set_index(cell_coords)
+	var neighbors := godot_tilemap.get_surrounding_cells(cell_coords)
+
+	for neighbor in neighbors:
+		if cells.has(neighbor) and cells[neighbor].index != 0:
+			autotile_set_index(neighbor)
 
 
 func re_order_tilemap() -> void:

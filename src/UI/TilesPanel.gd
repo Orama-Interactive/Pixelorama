@@ -148,10 +148,10 @@ func _update_tileset() -> void:
 		tile_button_container.add_child(button)
 
 
-static func _modify_texture_resource(tile_idx, tileset: TileSetCustom, project: Project) -> void:
-	var tile = tileset.tiles[tile_idx]
+static func _modify_texture_resource(tile_idx: int, tileset: TileSetCustom, project: Project) -> void:
+	var tile := tileset.tiles[tile_idx]
 	if tile.image:
-		var v_proj_name = str(tileset.name, " Tile: ", tile_idx)
+		var v_proj_name := str(tileset.name, " Tile: ", tile_idx)
 		var resource_proj := ResourceProject.new([], v_proj_name, tile.image.get_size())
 		resource_proj.layers.append(PixelLayer.new(resource_proj))
 		resource_proj.frames.append(resource_proj.new_empty_frame())

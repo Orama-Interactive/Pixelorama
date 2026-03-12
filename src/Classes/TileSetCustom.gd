@@ -30,6 +30,7 @@ var tile_offset_axis := TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
 	set(value):
 		tile_offset_axis = value
 		godot_tileset.tile_offset_axis = tile_offset_axis
+var terrain_mode := TileSet.TERRAIN_MODE_MATCH_CORNERS_AND_SIDES
 var godot_tileset: TileSet
 var godot_tileset_atlas_source: TileSetAtlasSource
 ## If [code]true[/code], the code in [method handle_project_resize] does not execute.
@@ -80,8 +81,10 @@ class Tile:
 		probability = dict.get("probability", probability)
 		user_data = dict.get("user_data", user_data)
 		terrain_center_bit = dict.get("terrain_center_bit", terrain_center_bit)
-		terrain_peering_bits = dict.get("terrain_peering_bits", terrain_peering_bits)
-		print(terrain_peering_bits)
+		var tmp_peering_bits = dict.get("terrain_peering_bits", terrain_peering_bits)
+		for i in tmp_peering_bits.size():
+			var bit = tmp_peering_bits[i]
+			terrain_peering_bits[i] = bit
 
 
 func _init(
@@ -274,6 +277,7 @@ func create_godot_tileset() -> void:
 	godot_tileset.tile_shape = tile_shape
 	godot_tileset.tile_offset_axis = tile_offset_axis
 	godot_tileset.add_terrain_set()
+	godot_tileset.set_terrain_set_mode(0, terrain_mode)
 	godot_tileset.add_terrain(0)
 	#fill_godot_tileset_atlas()
 
@@ -372,28 +376,111 @@ func deserialize_undo_data(dict: Dictionary, _cel: CelTileMap) -> void:
 		resized_content.emit()
 
 
+func is_valid_terrain_peering_bit_for_mode(p_peering_bit: int) -> bool:
+	var sides: Array[TileSet.CellNeighbor] = []
+	var corners: Array[TileSet.CellNeighbor] = []
+
+	if tile_shape == TileSet.TILE_SHAPE_SQUARE:
+		sides = [
+			TileSet.CELL_NEIGHBOR_RIGHT_SIDE,
+			TileSet.CELL_NEIGHBOR_BOTTOM_SIDE,
+			TileSet.CELL_NEIGHBOR_LEFT_SIDE,
+			TileSet.CELL_NEIGHBOR_TOP_SIDE
+		]
+
+		corners = [
+			TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER,
+			TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER,
+			TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER,
+			TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER
+		]
+
+	elif tile_shape == TileSet.TILE_SHAPE_ISOMETRIC:
+		sides = [
+			TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE,
+			TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE,
+			TileSet.CELL_NEIGHBOR_TOP_LEFT_SIDE,
+			TileSet.CELL_NEIGHBOR_TOP_RIGHT_SIDE
+		]
+
+		corners = [
+			TileSet.CELL_NEIGHBOR_RIGHT_CORNER,
+			TileSet.CELL_NEIGHBOR_BOTTOM_CORNER,
+			TileSet.CELL_NEIGHBOR_LEFT_CORNER,
+			TileSet.CELL_NEIGHBOR_TOP_CORNER
+		]
+
+	else:
+		if tile_offset_axis == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
+			sides = [
+				TileSet.CELL_NEIGHBOR_RIGHT_SIDE,
+				TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE,
+				TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE,
+				TileSet.CELL_NEIGHBOR_LEFT_SIDE,
+				TileSet.CELL_NEIGHBOR_TOP_LEFT_SIDE,
+				TileSet.CELL_NEIGHBOR_TOP_RIGHT_SIDE
+			]
+
+			corners = [
+				TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER,
+				TileSet.CELL_NEIGHBOR_BOTTOM_CORNER,
+				TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER,
+				TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER,
+				TileSet.CELL_NEIGHBOR_TOP_CORNER,
+				TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER
+			]
+		else:
+			sides = [
+				TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE,
+				TileSet.CELL_NEIGHBOR_BOTTOM_SIDE,
+				TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE,
+				TileSet.CELL_NEIGHBOR_TOP_LEFT_SIDE,
+				TileSet.CELL_NEIGHBOR_TOP_SIDE,
+				TileSet.CELL_NEIGHBOR_TOP_RIGHT_SIDE
+			]
+
+			corners = [
+				TileSet.CELL_NEIGHBOR_RIGHT_CORNER,
+				TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER,
+				TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER,
+				TileSet.CELL_NEIGHBOR_LEFT_CORNER,
+				TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER,
+				TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER
+			]
+
+	if terrain_mode in [
+		TileSet.TERRAIN_MODE_MATCH_CORNERS_AND_SIDES,
+		TileSet.TERRAIN_MODE_MATCH_SIDES
+	]:
+		if p_peering_bit in sides:
+			return true
+
+	if terrain_mode in [
+		TileSet.TERRAIN_MODE_MATCH_CORNERS_AND_SIDES,
+		TileSet.TERRAIN_MODE_MATCH_CORNERS
+	]:
+		if p_peering_bit in corners:
+			return true
+
+	return false
+
+
 func get_terrain_polygon() -> Array[Vector2]:
 	match tile_shape:
 		TileSet.TILE_SHAPE_SQUARE:
 			return _get_square_terrain_polygon(tile_size)
-
 		TileSet.TILE_SHAPE_ISOMETRIC:
 			return _get_isometric_terrain_polygon(tile_size)
-
 		_:
 			var overlap := 0.0
-
 			if tile_shape == TileSet.TILE_SHAPE_HEXAGON:
 				overlap = 0.25
-
 			return _get_half_offset_terrain_polygon(tile_size, overlap, tile_offset_axis)
 
 
 func get_terrain_peering_bit_polygon(p_terrain_set: int, p_bit: int) -> Array[Vector2]:
 	if p_terrain_set < 0 or p_terrain_set >= godot_tileset.get_terrain_sets_count():
 		return []
-
-	var terrain_mode := godot_tileset.get_terrain_set_mode(p_terrain_set)
 
 	match tile_shape:
 		TileSet.TILE_SHAPE_SQUARE:
@@ -456,7 +543,7 @@ func _square_corner_side_polygon(size: Vector2i, bit: int) -> Array[Vector2]:
 
 
 func _square_corner_polygon(size: Vector2i, bit: int) -> Array[Vector2]:
-	var points := [Vector2(0, 0), Vector2(1, 0), Vector2(1, 1), Vector2(0, 1)]
+	var points: Array[Vector2] = [Vector2(0, 0), Vector2(1, 0), Vector2(1, 1), Vector2(0, 1)]
 
 	var scale := Vector2(size)
 
@@ -480,23 +567,18 @@ func _square_corner_polygon(size: Vector2i, bit: int) -> Array[Vector2]:
 
 
 func _square_side_polygon(size: Vector2i, bit: int) -> Array[Vector2]:
-	var points := [Vector2(0, 0), Vector2(1, 0), Vector2(1, 1), Vector2(0, 1)]
-
+	var points: Array[Vector2] = [Vector2(0, 0), Vector2(1, 0), Vector2(1, 1), Vector2(0, 1)]
 	var scale := Vector2(size)
-
 	for i in points.size():
 		points[i] *= scale
 
 	match bit:
 		TileSet.CELL_NEIGHBOR_TOP_SIDE:
 			return _mirror_inner_polygon([points[0], points[1]])
-
 		TileSet.CELL_NEIGHBOR_RIGHT_SIDE:
 			return _mirror_inner_polygon([points[1], points[2]])
-
 		TileSet.CELL_NEIGHBOR_BOTTOM_SIDE:
 			return _mirror_inner_polygon([points[2], points[3]])
-
 		TileSet.CELL_NEIGHBOR_LEFT_SIDE:
 			return _mirror_inner_polygon([points[3], points[0]])
 
@@ -512,35 +594,26 @@ func _get_isometric_terrain_polygon(size: Vector2i) -> Array[Vector2]:
 
 
 func _iso_corner_side_polygon(size: Vector2i, bit: int) -> Array[Vector2]:
-	var points := [Vector2(0, -1), Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0)]
-
+	var points: Array[Vector2] = [Vector2(0, -1), Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0)]
 	var unit := Vector2(size) / 2.0
-
 	for i in points.size():
 		points[i] *= unit
 
 	match bit:
 		TileSet.CELL_NEIGHBOR_TOP_SIDE:
 			return _mirror_inner_polygon([points[0], points[1]])
-
 		TileSet.CELL_NEIGHBOR_RIGHT_SIDE:
 			return _mirror_inner_polygon([points[1], points[2]])
-
 		TileSet.CELL_NEIGHBOR_BOTTOM_SIDE:
 			return _mirror_inner_polygon([points[2], points[3]])
-
 		TileSet.CELL_NEIGHBOR_LEFT_SIDE:
 			return _mirror_inner_polygon([points[3], points[0]])
-
 		TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER:
 			return _mirror_inner_polygon([points[0], points[1]])
-
 		TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER:
 			return _mirror_inner_polygon([points[1], points[2]])
-
 		TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER:
 			return _mirror_inner_polygon([points[2], points[3]])
-
 		TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER:
 			return _mirror_inner_polygon([points[3], points[0]])
 
@@ -596,7 +669,7 @@ func _iso_corner_polygon(size: Vector2i, bit: int) -> Array[Vector2]:
 
 
 func _iso_side_polygon(size: Vector2i, bit: int) -> Array[Vector2]:
-	var points := [Vector2(0, -1), Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0)]
+	var points: Array[Vector2] = [Vector2(0, -1), Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0)]
 
 	var unit := Vector2(size) / 2.0
 
@@ -652,7 +725,7 @@ func _get_half_offset_terrain_polygon(size: Vector2i, overlap: float, axis: int)
 func _half_offset_corner_side(
 	size: Vector2i, overlap: float, axis: int, bit: int
 ) -> Array[Vector2]:
-	var points := [
+	var points: Array[Vector2] = [
 		Vector2(3, (3 * (1 - overlap * 2)) / 2),
 		Vector2(3, 3 * (1 - overlap * 2)),
 		Vector2(2, 3 * (1 - (overlap * 2) * 2 / 3)),
@@ -707,7 +780,7 @@ func _half_offset_corner_side(
 
 
 func _half_offset_corner(size: Vector2i, overlap: float, axis: int, bit: int) -> Array[Vector2]:
-	var points := [
+	var points: Array[Vector2] = [
 		Vector2(3, 0),
 		Vector2(3, 3 * (1 - overlap * 2)),
 		Vector2(1.5, (3 * (1 - overlap * 2) + 3) / 2),
@@ -760,7 +833,7 @@ func _half_offset_corner(size: Vector2i, overlap: float, axis: int, bit: int) ->
 
 
 func _half_offset_side(size: Vector2i, overlap: float, axis: int, bit: int) -> Array[Vector2]:
-	var points := [
+	var points: Array[Vector2] = [
 		Vector2(3, 3 * (1 - overlap * 2)),
 		Vector2(0, 3),
 		Vector2(-3, 3 * (1 - overlap * 2)),
@@ -815,7 +888,7 @@ func _rect_to_polygon(rect: Rect2) -> Array[Vector2]:
 	]
 
 
-func _scale_points(points: Array, scale: Vector2) -> Array[Vector2]:
+func _scale_points(points: Array[Vector2], scale: Vector2) -> Array[Vector2]:
 	var result: Array[Vector2] = []
 	for p in points:
 		result.append(p * scale)
