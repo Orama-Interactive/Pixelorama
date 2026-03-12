@@ -55,8 +55,7 @@ class Tile:
 	func _init(_image: Image) -> void:
 		image = _image
 		terrain_peering_bits.resize(TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER + 1)
-		for i in TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER:
-			terrain_peering_bits[i] = randi_range(-1, 0)
+		terrain_peering_bits.fill(-1)
 
 	## A method that checks if the tile should be removed from the tileset.
 	## Returns [code]true[/code] if the amount of [member times_used] is 0.
@@ -64,7 +63,13 @@ class Tile:
 		return times_used <= 0
 
 	func serialize() -> Dictionary:
-		return {"times_used": times_used, "probability": probability, "user_data": user_data}
+		return {
+			"times_used": times_used,
+			"probability": probability,
+			"user_data": user_data,
+			"terrain_center_bit": terrain_center_bit,
+			"terrain_peering_bits": terrain_peering_bits,
+		}
 
 	func deserialize(dict: Dictionary, skip_times_used := false) -> void:
 		times_used = 0  # We have just now, created the tile and haven't placed it anywhere yet.
@@ -74,6 +79,9 @@ class Tile:
 			times_used = dict.get("times_used", times_used)
 		probability = dict.get("probability", probability)
 		user_data = dict.get("user_data", user_data)
+		terrain_center_bit = dict.get("terrain_center_bit", terrain_center_bit)
+		terrain_peering_bits = dict.get("terrain_peering_bits", terrain_peering_bits)
+		print(terrain_peering_bits)
 
 
 func _init(

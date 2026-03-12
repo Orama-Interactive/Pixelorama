@@ -253,6 +253,14 @@ Press %s to edit the last added basis""",
 		"res://src/Tools/3DTools/3DShapeEdit.tscn",
 		[Global.LayerTypes.THREE_D]
 	),
+	"TilesPropertyPainter":
+	Tool.new(
+		"TilesPropertyPainter",
+		"Tiles Property Painter",
+		"tilespropert_painter",
+		"res://src/Tools/UtilityTools/TilePropertyPainter.tscn",
+		[Global.LayerTypes.TILEMAP]
+	)
 }
 
 var _tool_button_scene := preload("res://src/UI/ToolsPanel/ToolButton.tscn")
