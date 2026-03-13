@@ -12,31 +12,23 @@ extends PixelCel
 ## such as horizontal flipping, vertical flipping, or if it's transposed.
 
 const PEERING_OFFSETS: Dictionary[TileSet.CellNeighbor, Vector2i] = {
-	TileSet.CELL_NEIGHBOR_RIGHT_SIDE: Vector2i(1,0),
-	TileSet.CELL_NEIGHBOR_RIGHT_CORNER: Vector2i(1,-1),
-
-	TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE: Vector2i(1,1),
-	TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER: Vector2i(1,1),
-
-	TileSet.CELL_NEIGHBOR_BOTTOM_SIDE: Vector2i(0,1),
-	TileSet.CELL_NEIGHBOR_BOTTOM_CORNER: Vector2i(-1,1),
-
-	TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE: Vector2i(-1,1),
-	TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER: Vector2i(-1,1),
-
-	TileSet.CELL_NEIGHBOR_LEFT_SIDE: Vector2i(-1,0),
-	TileSet.CELL_NEIGHBOR_LEFT_CORNER: Vector2i(-1,-1),
-
-	TileSet.CELL_NEIGHBOR_TOP_LEFT_SIDE: Vector2i(-1,-1),
-	TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER: Vector2i(-1,-1),
-
-	TileSet.CELL_NEIGHBOR_TOP_SIDE: Vector2i(0,-1),
-	TileSet.CELL_NEIGHBOR_TOP_CORNER: Vector2i(1,-1),
-
-	TileSet.CELL_NEIGHBOR_TOP_RIGHT_SIDE: Vector2i(1,-1),
-	TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER: Vector2i(1,-1)
+	TileSet.CELL_NEIGHBOR_RIGHT_SIDE: Vector2i(1, 0),
+	TileSet.CELL_NEIGHBOR_RIGHT_CORNER: Vector2i(1, -1),
+	TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE: Vector2i(1, 1),
+	TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER: Vector2i(1, 1),
+	TileSet.CELL_NEIGHBOR_BOTTOM_SIDE: Vector2i(0, 1),
+	TileSet.CELL_NEIGHBOR_BOTTOM_CORNER: Vector2i(-1, 1),
+	TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE: Vector2i(-1, 1),
+	TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER: Vector2i(-1, 1),
+	TileSet.CELL_NEIGHBOR_LEFT_SIDE: Vector2i(-1, 0),
+	TileSet.CELL_NEIGHBOR_LEFT_CORNER: Vector2i(-1, -1),
+	TileSet.CELL_NEIGHBOR_TOP_LEFT_SIDE: Vector2i(-1, -1),
+	TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER: Vector2i(-1, -1),
+	TileSet.CELL_NEIGHBOR_TOP_SIDE: Vector2i(0, -1),
+	TileSet.CELL_NEIGHBOR_TOP_CORNER: Vector2i(1, -1),
+	TileSet.CELL_NEIGHBOR_TOP_RIGHT_SIDE: Vector2i(1, -1),
+	TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER: Vector2i(1, -1)
 }
-
 
 ## The [TileSetCustom] that this cel uses, passed down from the cel's [LayerTileMap].
 var tileset: TileSetCustom
@@ -408,7 +400,7 @@ func autotile_tile_matches_mask(tile: TileSetCustom.Tile, mask: PackedInt32Array
 	return true
 
 
-func filter_corners(mask: PackedInt32Array, terrain_id:int) -> void:
+func filter_corners(mask: PackedInt32Array, terrain_id: int) -> void:
 	# top-right
 	if mask[12] != terrain_id or mask[0] != terrain_id:
 		mask[15] = -1

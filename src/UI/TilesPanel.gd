@@ -148,7 +148,9 @@ func _update_tileset() -> void:
 		tile_button_container.add_child(button)
 
 
-static func _modify_texture_resource(tile_idx: int, tileset: TileSetCustom, project: Project) -> void:
+static func _modify_texture_resource(
+	tile_idx: int, tileset: TileSetCustom, project: Project
+) -> void:
 	var tile := tileset.tiles[tile_idx]
 	if tile.image:
 		var v_proj_name := str(tileset.name, " Tile: ", tile_idx)

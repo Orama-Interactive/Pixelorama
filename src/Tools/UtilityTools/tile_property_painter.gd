@@ -79,9 +79,15 @@ func cursor_move(pos: Vector2i) -> void:
 func draw_indicator(_left: bool) -> void:
 	if _hovering_polygon.size() < 3:
 		return
-	Global.canvas.indicators.draw_set_transform(_hovering_polygon_pos, Global.canvas.indicators.rotation, Global.canvas.indicators.scale)
+	Global.canvas.indicators.draw_set_transform(
+		_hovering_polygon_pos, Global.canvas.indicators.rotation, Global.canvas.indicators.scale
+	)
 	Global.canvas.indicators.draw_colored_polygon(_hovering_polygon, Color.WHITE)
-	Global.canvas.indicators.draw_set_transform(Global.canvas.indicators.position, Global.canvas.indicators.rotation, Global.canvas.indicators.scale)
+	Global.canvas.indicators.draw_set_transform(
+		Global.canvas.indicators.position,
+		Global.canvas.indicators.rotation,
+		Global.canvas.indicators.scale
+	)
 
 
 func set_tile_bit(pos: Vector2i) -> void:

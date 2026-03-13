@@ -448,17 +448,17 @@ func is_valid_terrain_peering_bit_for_mode(p_peering_bit: int) -> bool:
 				TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER
 			]
 
-	if terrain_mode in [
-		TileSet.TERRAIN_MODE_MATCH_CORNERS_AND_SIDES,
-		TileSet.TERRAIN_MODE_MATCH_SIDES
-	]:
+	if (
+		terrain_mode
+		in [TileSet.TERRAIN_MODE_MATCH_CORNERS_AND_SIDES, TileSet.TERRAIN_MODE_MATCH_SIDES]
+	):
 		if p_peering_bit in sides:
 			return true
 
-	if terrain_mode in [
-		TileSet.TERRAIN_MODE_MATCH_CORNERS_AND_SIDES,
-		TileSet.TERRAIN_MODE_MATCH_CORNERS
-	]:
+	if (
+		terrain_mode
+		in [TileSet.TERRAIN_MODE_MATCH_CORNERS_AND_SIDES, TileSet.TERRAIN_MODE_MATCH_CORNERS]
+	):
 		if p_peering_bit in corners:
 			return true
 
