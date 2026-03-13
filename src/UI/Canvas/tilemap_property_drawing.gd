@@ -6,11 +6,6 @@ func _ready() -> void:
 	Tools.tool_changed.connect(_on_tool_changed)
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action("ctrl"):
-		queue_redraw()
-
-
 func _draw() -> void:
 	if not _has_tile_property_painter_tool():
 		return
@@ -31,7 +26,7 @@ func _draw() -> void:
 		if tile.terrain_center_bit > -1:
 			var terrain_id := tile.terrain_center_bit
 			var terrain_color := tileset.godot_tileset.get_terrain_color(0, terrain_id)
-			terrain_color.a = 0.5
+			terrain_color.a = 0.75
 			var polygon := tileset.get_terrain_polygon()
 			draw_set_transform(pos + half_size, rotation, scale)
 			draw_colored_polygon(polygon, terrain_color)
@@ -42,7 +37,7 @@ func _draw() -> void:
 			if terrain_id == -1:
 				continue
 			var terrain_color := tileset.godot_tileset.get_terrain_color(0, terrain_id)
-			terrain_color.a = 0.5
+			terrain_color.a = 0.75
 			var polygon := tileset.get_terrain_peering_bit_polygon(0, i)
 			if polygon.size() < 3:
 				continue
