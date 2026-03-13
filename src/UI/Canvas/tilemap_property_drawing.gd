@@ -1,12 +1,19 @@
 extends Node2D
 
 
+func _ready() -> void:
+	Global.cel_switched.connect(queue_redraw)
+	Tools.tool_changed.connect(_on_tool_changed)
+
+
 func _input(event: InputEvent) -> void:
 	if event.is_action("ctrl"):
 		queue_redraw()
 
 
 func _draw() -> void:
+	if not _has_tile_property_painter_tool():
+		return
 	var current_cel := Global.current_project.get_current_cel()
 	if not current_cel is CelTileMap:
 		return
@@ -28,13 +35,14 @@ func _draw() -> void:
 			var polygon := tileset.get_terrain_polygon()
 			draw_set_transform(pos + half_size, rotation, scale)
 			draw_colored_polygon(polygon, terrain_color)
-		for i in range(TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER + 1):
+		for i in tile.terrain_peering_bits.size():
+			if not tileset.is_valid_terrain_peering_bit_for_mode(i):
+				continue
 			var terrain_id := tile.terrain_peering_bits[i]
 			if terrain_id == -1:
 				continue
 			var terrain_color := tileset.godot_tileset.get_terrain_color(0, terrain_id)
 			terrain_color.a = 0.5
-			#if tileset.godot_tileset_atlas_source.is_va
 			var polygon := tileset.get_terrain_peering_bit_polygon(0, i)
 			if polygon.size() < 3:
 				continue
@@ -42,5 +50,16 @@ func _draw() -> void:
 			uvs.resize(polygon.size())
 			draw_set_transform(pos + half_size, rotation, scale)
 			draw_colored_polygon(polygon, terrain_color)
-		#draw_polygon()
 	draw_set_transform(position, rotation, scale)
+
+
+func _has_tile_property_painter_tool() -> bool:
+	for button in Tools._slots:
+		var slot := Tools._slots[button]
+		if slot.tool_node.kname == "tilespropertypainter":
+			return true
+	return false
+
+
+func _on_tool_changed(_tool_name: String, _button: int) -> void:
+	queue_redraw()
