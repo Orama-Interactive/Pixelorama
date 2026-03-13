@@ -531,35 +531,27 @@ func _square_corner_side_polygon(size: Vector2i, bit: int) -> Array[Vector2]:
 		TileSet.CELL_NEIGHBOR_TOP_SIDE: Vector2(-1, -3),
 		TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER: Vector2(1, -3)
 	}
-
 	if not offsets.has(bit):
 		return []
-
 	var rect := Rect2()
 	rect.size = Vector2(size) / 3
 	rect.position = offsets[bit] * Vector2(size) / 6.0
-
 	return _rect_to_polygon(rect)
 
 
 func _square_corner_polygon(size: Vector2i, bit: int) -> Array[Vector2]:
 	var points: Array[Vector2] = [Vector2(0, 0), Vector2(1, 0), Vector2(1, 1), Vector2(0, 1)]
-
 	var scale := Vector2(size)
-
 	for i in points.size():
 		points[i] *= scale
 
 	match bit:
 		TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER:
 			return _mirror_inner_polygon([points[0]])
-
 		TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER:
 			return _mirror_inner_polygon([points[1]])
-
 		TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER:
 			return _mirror_inner_polygon([points[2]])
-
 		TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER:
 			return _mirror_inner_polygon([points[3]])
 
@@ -587,37 +579,57 @@ func _square_side_polygon(size: Vector2i, bit: int) -> Array[Vector2]:
 
 func _get_isometric_terrain_polygon(size: Vector2i) -> Array[Vector2]:
 	var unit := Vector2(size) / 6.0
-
 	return [
 		Vector2(1, 0) * unit, Vector2(0, 1) * unit, Vector2(-1, 0) * unit, Vector2(0, -1) * unit
 	]
 
 
 func _iso_corner_side_polygon(size: Vector2i, bit: int) -> Array[Vector2]:
-	var points: Array[Vector2] = [Vector2(0, -1), Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0)]
-	var unit := Vector2(size) / 2.0
-	for i in points.size():
-		points[i] *= unit
-
+	var unit := Vector2(size) / 6.0
+	var polygon: Array[Vector2] = []
 	match bit:
-		TileSet.CELL_NEIGHBOR_TOP_SIDE:
-			return _mirror_inner_polygon([points[0], points[1]])
-		TileSet.CELL_NEIGHBOR_RIGHT_SIDE:
-			return _mirror_inner_polygon([points[1], points[2]])
-		TileSet.CELL_NEIGHBOR_BOTTOM_SIDE:
-			return _mirror_inner_polygon([points[2], points[3]])
-		TileSet.CELL_NEIGHBOR_LEFT_SIDE:
-			return _mirror_inner_polygon([points[3], points[0]])
-		TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER:
-			return _mirror_inner_polygon([points[0], points[1]])
-		TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER:
-			return _mirror_inner_polygon([points[1], points[2]])
-		TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER:
-			return _mirror_inner_polygon([points[2], points[3]])
-		TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER:
-			return _mirror_inner_polygon([points[3], points[0]])
+		TileSet.CELL_NEIGHBOR_RIGHT_CORNER:
+			polygon.push_back(Vector2(1, 0) * unit)
+			polygon.push_back(Vector2(2, -1) * unit)
+			polygon.push_back(Vector2(3, 0) * unit)
+			polygon.push_back(Vector2(2, 1) * unit)
+		TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE:
+			polygon.push_back(Vector2(0, 1) * unit)
+			polygon.push_back(Vector2(1, 2) * unit)
+			polygon.push_back(Vector2(2, 1) * unit)
+			polygon.push_back(Vector2(1, 0) * unit)
+		TileSet.CELL_NEIGHBOR_BOTTOM_CORNER:
+			polygon.push_back(Vector2(0, 1) * unit)
+			polygon.push_back(Vector2(-1, 2) * unit)
+			polygon.push_back(Vector2(0, 3) * unit)
+			polygon.push_back(Vector2(1, 2) * unit)
+		TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE:
+			polygon.push_back(Vector2(0, 1) * unit)
+			polygon.push_back(Vector2(-1, 2) * unit)
+			polygon.push_back(Vector2(-2, 1) * unit)
+			polygon.push_back(Vector2(-1, 0) * unit)
+		TileSet.CELL_NEIGHBOR_LEFT_CORNER:
+			polygon.push_back(Vector2(-1, 0) * unit)
+			polygon.push_back(Vector2(-2, -1) * unit)
+			polygon.push_back(Vector2(-3, 0) * unit)
+			polygon.push_back(Vector2(-2, 1) * unit)
+		TileSet.CELL_NEIGHBOR_TOP_LEFT_SIDE:
+			polygon.push_back(Vector2(0, -1) * unit)
+			polygon.push_back(Vector2(-1, -2) * unit)
+			polygon.push_back(Vector2(-2, -1) * unit)
+			polygon.push_back(Vector2(-1, 0) * unit)
+		TileSet.CELL_NEIGHBOR_TOP_CORNER:
+			polygon.push_back(Vector2(0, -1) * unit)
+			polygon.push_back(Vector2(-1, -2) * unit)
+			polygon.push_back(Vector2(0, -3) * unit)
+			polygon.push_back(Vector2(1, -2) * unit)
+		TileSet.CELL_NEIGHBOR_TOP_RIGHT_SIDE:
+			polygon.push_back(Vector2(0, -1) * unit)
+			polygon.push_back(Vector2(1, -2) * unit)
+			polygon.push_back(Vector2(2, -1) * unit)
+			polygon.push_back(Vector2(1, 0) * unit)
 
-	return []
+	return polygon
 
 
 func _iso_corner_polygon(size: Vector2i, bit: int) -> Array[Vector2]:
@@ -888,7 +900,7 @@ func _rect_to_polygon(rect: Rect2) -> Array[Vector2]:
 	]
 
 
-func _scale_points(points: Array[Vector2], scale: Vector2) -> Array[Vector2]:
+func _scale_points(points: Array, scale: Vector2) -> Array[Vector2]:
 	var result: Array[Vector2] = []
 	for p in points:
 		result.append(p * scale)
