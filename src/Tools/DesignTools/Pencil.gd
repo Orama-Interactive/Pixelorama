@@ -1,5 +1,7 @@
 extends BaseDrawTool
 
+const NUMBER_OF_PIXELS_FOR_SAMPLE: int = 5
+
 var _prev_mode := false
 var _last_position := Vector2i(Vector2.INF)
 var _changed := false
@@ -8,6 +10,10 @@ var _fill_inside := false
 var _fill_inside_rect := Rect2i()  ## The bounding box that surrounds the area that gets filled.
 var _draw_points := PackedVector2Array()
 var _old_spacing_mode := false  ## Needed to reset spacing mode in case we change it
+var _locked_centre := Vector2.INF
+var _locked_angle: float = INF
+var _last_n_pixels: Array[Vector2]
+var _is_drawing := false
 
 
 class PencilOp:
@@ -66,6 +72,41 @@ func _input(event: InputEvent) -> void:
 		overwrite_button.set_pressed_no_signal(_prev_mode)
 		_overwrite = overwrite_button.button_pressed
 
+	if !_draw_line and _is_drawing:
+		if !Input.is_action_pressed("draw_create_line"):
+			_last_n_pixels.append(Global.canvas.current_pixel)
+			if _last_n_pixels.size() > NUMBER_OF_PIXELS_FOR_SAMPLE:
+				_last_n_pixels.pop_front()
+			_locked_centre = Vector2.INF
+			_locked_angle = INF
+		else:
+			if _last_n_pixels.size() == NUMBER_OF_PIXELS_FOR_SAMPLE and _locked_angle == INF:
+				_locked_centre = _last_n_pixels.front()
+				_locked_angle = _last_n_pixels.front().direction_to(_last_n_pixels.back()).angle()
+				_last_n_pixels.clear()
+
+
+func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:
+	if !_draw_line:
+		if (
+			Input.is_action_pressed("draw_create_line")
+			and _locked_angle != INF
+			and _locked_centre != Vector2.INF
+			and _is_drawing
+		):
+			var difference := Vector2(pos) - _locked_centre
+			var distance := difference.length()
+			if _locked_angle != INF:
+				pos = (
+					_locked_centre + Vector2.from_angle(_locked_angle) * Vector2(distance, distance)
+				)
+			var guide_end = (
+				_locked_centre.direction_to(_locked_centre + Vector2.RIGHT.rotated(_locked_angle))
+				* 19999
+			)
+			Global.canvas.indicators.draw_line(_locked_centre, guide_end, Global.guide_color)
+	super.draw_indicator_at(pos, offset, color)
+
 
 func get_config() -> Dictionary:
 	var config := super.get_config()
@@ -112,6 +153,7 @@ func draw_start(pos: Vector2i) -> void:
 	_changed = false
 	_drawer.color_op.changed = false
 	_drawer.color_op.overwrite = _overwrite
+	_is_drawing = true
 	_draw_points = []
 
 	_drawer.reset()
@@ -137,6 +179,19 @@ func draw_start(pos: Vector2i) -> void:
 
 func draw_move(pos_i: Vector2i) -> void:
 	var pos := _get_stabilized_position(pos_i)
+	if !_draw_line:
+		if Input.is_action_pressed("draw_create_line"):
+			var difference := pos - _locked_centre
+			var distance := floori(difference.length())
+			if _locked_angle != INF:
+				pos = (
+					(
+						_locked_centre
+						+ Vector2.from_angle(_locked_angle) * Vector2(distance, distance)
+					)
+					. floor()
+				)
+
 	pos = snap_position(pos)
 	super.draw_move(pos)
 	if _picking_color:  # Still return even if we released Alt
@@ -200,6 +255,9 @@ func draw_end(pos: Vector2i) -> void:
 	cursor_text = ""
 	update_random_image()
 	_spacing_mode = _old_spacing_mode
+	_is_drawing = false
+	_locked_centre = Vector2.INF
+	_locked_angle = INF
 
 
 func _draw_brush_image(brush_image: Image, src_rect: Rect2i, dst: Vector2i) -> void:
