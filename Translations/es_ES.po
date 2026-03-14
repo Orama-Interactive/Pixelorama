@@ -10,10 +10,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2026-03-09 14:13\n"
+"PO-Revision-Date: 2026-03-14 18:41\n"
 
 msgid "OK"
-msgstr "OK"
+msgstr "Aceptar"
 
 msgid "Cancel"
 msgstr "Cancelar"
@@ -1514,7 +1514,7 @@ msgid "Belarusian"
 msgstr "Bielorruso"
 
 msgid "Thai"
-msgstr ""
+msgstr "Tailandés"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -3372,7 +3372,7 @@ msgstr "Solo exportar contenido que está dentro de los los límites de un área
 
 #. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
 msgid "Layers as separate files"
-msgstr ""
+msgstr "Capas como archivos separados"
 
 msgid "Close"
 msgstr "Cerrar"
