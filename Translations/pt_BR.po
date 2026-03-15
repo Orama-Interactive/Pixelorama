@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2025-11-04 16:56\n"
+"PO-Revision-Date: 2026-03-09 14:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -814,15 +814,15 @@ msgstr "Projeto Aseprite"
 
 #. Found in "Open" and "Save" file dialogs. Searches Krita project files only (.kra). Note that Krita is a software and should remain untranslated.
 msgid "Krita Project"
-msgstr ""
+msgstr "Projeto Krita"
 
 #. Found in "Open" and "Save" file dialogs. Searches Piskel project files only (.piskel). Note that Piskel is a software and should remain untranslated.
 msgid "Piskel Project"
-msgstr ""
+msgstr "Projeto Piskel"
 
 #. Found in "Open" and "Save" file dialogs. Searches Photoshop project files only (.psd). Note that Photoshop is a software and should remain untranslated.
 msgid "Photoshop Project"
-msgstr ""
+msgstr "Projeto Photoshop"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
@@ -966,7 +966,7 @@ msgstr "Tamanho da fonte:"
 
 #. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
 msgid "Screen orientation:"
-msgstr ""
+msgstr "Orientação da tela:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Escurecer a interface em um pop-up de diálogo"
@@ -986,6 +986,10 @@ msgstr "Quando essa configuração está ativada, a janela de seleção de arqui
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
 msgstr "Modo de janela única"
+
+#. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
+msgid "Collapse main menu"
+msgstr "Recolher \"menu\" principal"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
@@ -1036,15 +1040,15 @@ msgstr "Cor de fundo:"
 
 #. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
 msgid "Single tool mode"
-msgstr ""
+msgstr "Modo de ferramenta única"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
 msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
-msgstr ""
+msgstr "Se habilitado, o botão direito do mouse sempre ativará a mesma ferramenta que o botão esquerdo do mouse."
 
 #. Found in the preferences, under the Tools category.
-msgid "Share options between the left and the right tools"
-msgstr "Compartilhar opções entre as ferramentas esquerda e direita"
+msgid "Share options between left and right tools"
+msgstr "Compartilhar opções entre as ferramentas da esquerda e da direita"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
@@ -1511,6 +1515,9 @@ msgstr "Holandês"
 
 msgid "Belarusian"
 msgstr "Bielorrusso"
+
+msgid "Thai"
+msgstr ""
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -3002,6 +3009,54 @@ msgstr "Desfazer: Alterar a duração do quadro"
 msgid "Redo: Change frame duration"
 msgstr "Refazer: Mudar a duração do quadro"
 
+msgid "Undo: Rename Layer"
+msgstr "Desfazer: Renomear Camada"
+
+msgid "Redo: Rename Layer"
+msgstr "Refazer: Renomear Camada"
+
+msgid "Undo: Change Layer Opacity"
+msgstr "Desfazer: Alterar opacidade da camada"
+
+msgid "Redo: Change Layer Opacity"
+msgstr "Refazer: Alterar Opacidade da Camada"
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
+msgid "Undo: Change Layer Onion Skinning Ignore Status"
+msgstr "Desfazer: Alterar o \"status\" de ignorar a visualização em camadas (\"Onion Skinning\")"
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
+msgid "Redo: Change Layer Onion Skinning Ignore Status"
+msgstr "Refazer: Alterar o \"status\" de ignorar a visualização em camadas (\"Onion Skinning\")"
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos.
+msgid "Undo: Change Layer User Data"
+msgstr "Desfazer: Alterar dados do usuário da camada"
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
+msgid "Redo: Change Layer User Data"
+msgstr "Refazer: Alterar dados do usuário da camada"
+
+msgid "Undo: Change Layer Color"
+msgstr "Desfazer: Alterar Cor da Camada"
+
+msgid "Redo: Change Layer Color"
+msgstr "Refazer: Alterar Cor da Camada"
+
+msgid "Undo: Change Layer Visibility"
+msgstr "Desfazer: Alterar Visibilidade da Camada"
+
+msgid "Redo: Change Layer Visibility"
+msgstr "Refazer: Alterar Visibilidade da Camada"
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos.
+msgid "Undo: Change Layer Locked Status"
+msgstr "Desfazer: Alterar o \"status\" de bloqueio da camada"
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
+msgid "Redo: Change Layer Locked Status"
+msgstr "Refazer: Alterar \"Status\" da Camada Bloqueada"
+
 msgid "Move Guide"
 msgstr "Mover Guia"
 
@@ -3124,7 +3179,7 @@ msgstr "Remover todas as extensões"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all backups"
-msgstr ""
+msgstr "Remover todos os \"backups\""
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
@@ -3318,6 +3373,10 @@ msgstr "Cortar conteúdo da imagem para a seleção"
 #. Found in the export dialog. Tooltip of the "clip image content to selection" option.
 msgid "Only export content that is within the bounds of a selected area."
 msgstr "Exportar apenas o conteúdo que está dentro dos limites da área selecionada."
+
+#. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
+msgid "Layers as separate files"
+msgstr ""
 
 msgid "Close"
 msgstr "Fechar"
