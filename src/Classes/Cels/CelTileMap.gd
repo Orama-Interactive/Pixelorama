@@ -377,7 +377,7 @@ func autotile_build_mask(cell_coords: Vector2i) -> PackedInt32Array:
 
 
 func autotile_find_best_tile(mask: PackedInt32Array, terrain_id := 0) -> int:
-	var best_tile := 1
+	var best_tiles: PackedInt32Array
 	var best_score := -999999
 	for i in range(1, tileset.tiles.size()):
 		var tile := tileset.tiles[i]
@@ -387,9 +387,12 @@ func autotile_find_best_tile(mask: PackedInt32Array, terrain_id := 0) -> int:
 		score += tile_specificity(tile)
 		if score > best_score:
 			best_score = score
-			best_tile = i
+			best_tiles.clear()
+			best_tiles.append(i)
+		elif score == best_score:
+			best_tiles.append(i)
 
-	return best_tile
+	return tileset.pick_random_tile(best_tiles)
 
 
 func score_tile(tile: TileSetCustom.Tile, mask: PackedInt32Array) -> int:
