@@ -320,15 +320,42 @@ func bucket_fill(cell_coords: Vector2i, index: int, callable: Callable) -> void:
 	godot_tilemap.queue_free()
 
 
-func autotile(cell_coords: Vector2i) -> void:
+func autotile(cell_coords: Array[Vector2i], only_neighbors := false) -> void:
 	var godot_tilemap := create_tilemap_layer_node()
-	autotile_with_neighbors(cell_coords, godot_tilemap)
+	autotile_with_neighbors(cell_coords, godot_tilemap, only_neighbors)
 	godot_tilemap.queue_free()
+
+
+func autotile_with_neighbors(
+	cell_coords: Array[Vector2i], godot_tilemap: TileMapLayer, only_neighbors := false
+) -> void:
+	var queue: Array[Vector2i] = cell_coords.duplicate()
+	var visited: Dictionary[Vector2i, bool] = {}
+
+	while queue.size() > 0:
+		var pos: Vector2i = queue.pop_front()
+		if visited.has(pos) or not cells.has(pos):
+			continue
+		visited[pos] = true
+
+		var old_index := cells[pos].index
+		var new_index := autotile_compute_index(pos)
+		if only_neighbors and pos in cell_coords:
+			new_index = 0
+
+		if new_index != old_index:
+			set_index(get_cell_at(pos), new_index, true)
+			var neighbors := godot_tilemap.get_surrounding_cells(pos)
+			for n in neighbors:
+				if n in cell_coords:
+					continue
+				if cells.has(n) and cells[n].index != 0:
+					queue.append(n)
 
 
 func autotile_build_mask(cell_coords: Vector2i) -> PackedInt32Array:
 	var mask := PackedInt32Array()
-	mask.resize(16)
+	mask.resize(PEERING_OFFSETS.size())
 	mask.fill(-1)
 	for i in mask.size():
 		if not tileset.is_valid_terrain_peering_bit_for_mode(i):
@@ -423,27 +450,6 @@ func autotile_compute_index(cell_coords: Vector2i) -> int:
 	var mask := autotile_build_mask(cell_coords)
 	filter_corners(mask, 0)
 	return autotile_find_best_tile(mask)
-
-
-func autotile_with_neighbors(cell_coords: Vector2i, godot_tilemap: TileMapLayer) -> void:
-	var queue: Array[Vector2i] = [cell_coords]
-	var visited: Dictionary[Vector2i, bool] = {}
-
-	while queue.size() > 0:
-		var pos: Vector2i = queue.pop_front()
-		if visited.has(pos) or not cells.has(pos):
-			continue
-		visited[pos] = true
-
-		var old_index := cells[pos].index
-		var new_index := autotile_compute_index(pos)
-
-		if new_index != old_index:
-			set_index(get_cell_at(pos), new_index, true)
-			var neighbors := godot_tilemap.get_surrounding_cells(pos)
-			for n in neighbors:
-				if cells.has(n) and cells[n].index != 0:
-					queue.append(n)
 
 
 func re_order_tilemap() -> void:

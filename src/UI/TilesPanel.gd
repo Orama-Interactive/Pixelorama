@@ -41,6 +41,7 @@ static var is_transposed := false:
 		is_transposed = value
 		_call_update_brushes()
 static var current_tileset: TileSetCustom
+static var autotiling_enabled := true
 var button_size := 36:
 	set(value):
 		if button_size == value:
