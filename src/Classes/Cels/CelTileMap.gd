@@ -151,6 +151,7 @@ func set_tileset(new_tileset: TileSetCustom, reset_indices := true) -> void:
 func set_index(
 	cell: Cell,
 	index: int,
+	force_update := false,
 	flip_h := TileSetPanel.is_flipped_h,
 	flip_v := TileSetPanel.is_flipped_v,
 	transpose := TileSetPanel.is_transposed,
@@ -184,7 +185,7 @@ func set_index(
 			)
 		queue_update_cel_portions(true)
 	else:
-		_update_cell(cell, previous_index)
+		_update_cell(cell, previous_index, force_update)
 	Global.canvas.queue_redraw()
 
 
@@ -438,7 +439,7 @@ func autotile_with_neighbors(cell_coords: Vector2i, godot_tilemap: TileMapLayer)
 		var new_index := autotile_compute_index(pos)
 
 		if new_index != old_index:
-			set_index(get_cell_at(pos), new_index)
+			set_index(get_cell_at(pos), new_index, true)
 			var neighbors := godot_tilemap.get_surrounding_cells(pos)
 			for n in neighbors:
 				if cells.has(n) and cells[n].index != 0:
@@ -900,8 +901,8 @@ func _re_index_cells_after_index(index: int, decrease := true) -> void:
 
 ## Updates the [param source_image] data of the cell of the tilemap in [param cell_position],
 ## to ensure that it is the same as its mapped tile in the [member tileset].
-func _update_cell(cell: Cell, prev_index := -1) -> void:
-	if cell.updated_this_frame:
+func _update_cell(cell: Cell, prev_index := -1, force_update := false) -> void:
+	if cell.updated_this_frame and not force_update:
 		return
 	cell.updated_this_frame = true
 	cell.set_deferred("updated_this_frame", false)

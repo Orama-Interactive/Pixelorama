@@ -376,6 +376,7 @@ func deserialize_undo_data(dict: Dictionary, _cel: CelTileMap) -> void:
 		resized_content.emit()
 
 
+#region Methods needed for autotiling, taken from Godot's source code.
 func is_valid_terrain_peering_bit_for_mode(p_peering_bit: int) -> bool:
 	var sides: Array[TileSet.CellNeighbor] = []
 	var corners: Array[TileSet.CellNeighbor] = []
@@ -953,3 +954,4 @@ func _mirror_inner_polygon(poly: Array[Vector2]) -> Array[Vector2]:
 	for i in range(half):
 		poly.append(poly[half - 1 - i] / 3.0)
 	return poly
+#endregion
