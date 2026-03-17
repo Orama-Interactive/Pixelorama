@@ -4,6 +4,7 @@ var _prev_mode := false
 var _erase := false
 var _hovering_polygon: PackedVector2Array
 var _hovering_polygon_pos: Vector2
+var _undo_data := {}
 
 
 func _input(event: InputEvent) -> void:
@@ -30,6 +31,7 @@ func update_config() -> void:
 
 func draw_start(pos: Vector2i) -> void:
 	super(pos)
+	_undo_data = _get_undo_data()
 	_draw_cache.append(pos)
 	set_tile_bit(pos)
 
@@ -45,6 +47,7 @@ func draw_move(pos: Vector2i) -> void:
 func draw_end(pos: Vector2i) -> void:
 	super(pos)
 	set_tile_bit(pos)
+	commit_undo()
 
 
 func cursor_move(pos: Vector2i) -> void:
@@ -100,7 +103,7 @@ func set_tile_bit(pos: Vector2i) -> void:
 	var tile_index := cel.get_cell_index_at_coords(pos)
 	if tile_index == 0:
 		return
-	var terrain_id := 0
+	var terrain_id := TileSetPanel.current_terrain_index
 	if _erase:
 		terrain_id = -1
 	@warning_ignore("integer_division")
@@ -131,3 +134,32 @@ func _on_erase_toggled(toggled_on: bool) -> void:
 	_erase = toggled_on
 	update_config()
 	save_config()
+
+
+func _get_undo_data() -> Dictionary:
+	if Global.current_project.get_current_cel() is not CelTileMap:
+		return {}
+	var cel := Global.current_project.get_current_cel() as CelTileMap
+	var tileset := cel.tileset
+	var data := {}
+	data[tileset] = tileset.serialize_undo_data()
+	return data
+
+
+func commit_undo(action := "Set tile terrain bits") -> void:
+	var redo_data := _get_undo_data()
+	var undo_redo := Global.current_project.undo_redo
+	undo_redo.create_action(action)
+	for tileset: TileSetCustom in redo_data:
+		if tileset not in _undo_data:
+			printerr("Tileset not found in undo data! This should never happen.")
+			continue
+		var tileset_undo_data: Dictionary = _undo_data[tileset]
+		var tileset_redo_data: Dictionary = redo_data[tileset]
+		undo_redo.add_do_method(tileset.deserialize_undo_data.bind(tileset_redo_data, null))
+		undo_redo.add_undo_method(tileset.deserialize_undo_data.bind(tileset_undo_data, null))
+	undo_redo.add_do_method(Global.canvas.tilemap_property_drawing.queue_redraw)
+	undo_redo.add_undo_method(Global.canvas.tilemap_property_drawing.queue_redraw)
+	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	undo_redo.commit_action()

@@ -69,7 +69,7 @@ class Tile:
 			"probability": probability,
 			"user_data": user_data,
 			"terrain_center_bit": terrain_center_bit,
-			"terrain_peering_bits": terrain_peering_bits,
+			"terrain_peering_bits": terrain_peering_bits.duplicate(),
 		}
 
 	func deserialize(dict: Dictionary, skip_times_used := false) -> void:

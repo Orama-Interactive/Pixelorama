@@ -42,6 +42,7 @@ static var is_transposed := false:
 		_call_update_brushes()
 static var current_tileset: TileSetCustom
 static var autotiling_enabled := true
+static var current_terrain_index := 0
 var button_size := 36:
 	set(value):
 		if button_size == value:
