@@ -335,17 +335,18 @@ func autotile_with_neighbors(
 
 	while queue.size() > 0:
 		var pos: Vector2i = queue.pop_front()
-		if visited.has(pos) or not cells.has(pos):
+		if visited.has(pos):
 			continue
 		visited[pos] = true
 
-		var old_index := cells[pos].index
+		var cell := get_cell_at(pos)
+		var old_index := cell.index
 		var new_index := autotile_compute_index(pos)
 		if only_neighbors and pos in cell_coords:
 			new_index = 0
 
 		if new_index != old_index:
-			set_index(get_cell_at(pos), new_index, true)
+			set_index(cell, new_index, true)
 			var neighbors := godot_tilemap.get_surrounding_cells(pos)
 			for n in neighbors:
 				if n in cell_coords:
