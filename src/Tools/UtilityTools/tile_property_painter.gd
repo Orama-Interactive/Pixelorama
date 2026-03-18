@@ -30,6 +30,12 @@ func update_config() -> void:
 
 
 func draw_start(pos: Vector2i) -> void:
+	if Global.current_project.get_current_cel() is not CelTileMap:
+		return
+	var cel := Global.current_project.get_current_cel() as CelTileMap
+	if cel.place_only_mode:
+		Global.notification_label("Cannot set tile properties when place only mode is enabled.")
+		return
 	super(pos)
 	_undo_data = _get_undo_data()
 	_draw_cache.append(pos)
@@ -37,6 +43,8 @@ func draw_start(pos: Vector2i) -> void:
 
 
 func draw_move(pos: Vector2i) -> void:
+	if _draw_cache.is_empty():
+		return
 	super(pos)
 	if pos in _draw_cache:
 		return
@@ -45,6 +53,8 @@ func draw_move(pos: Vector2i) -> void:
 
 
 func draw_end(pos: Vector2i) -> void:
+	if _draw_cache.is_empty():
+		return
 	super(pos)
 	set_tile_bit(pos)
 	commit_undo()
@@ -56,6 +66,8 @@ func cursor_move(pos: Vector2i) -> void:
 	if Global.current_project.get_current_cel() is not CelTileMap:
 		return
 	var cel := Global.current_project.get_current_cel() as CelTileMap
+	if cel.place_only_mode:
+		return
 	var tile_index := cel.get_cell_index_at_coords(pos)
 	if tile_index == 0:
 		return

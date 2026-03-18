@@ -385,11 +385,13 @@ func deserialize_undo_data(dict: Dictionary, _cel: CelTileMap) -> void:
 
 
 #region Methods needed for autotiling, taken from Godot's source code.
-func is_valid_terrain_peering_bit_for_mode(p_peering_bit: int) -> bool:
+func is_valid_terrain_peering_bit_for_mode(
+	peering_bit: int, shape := tile_shape, offset_axis := tile_offset_axis
+) -> bool:
 	var sides: Array[TileSet.CellNeighbor] = []
 	var corners: Array[TileSet.CellNeighbor] = []
 
-	if tile_shape == TileSet.TILE_SHAPE_SQUARE:
+	if shape == TileSet.TILE_SHAPE_SQUARE:
 		sides = [
 			TileSet.CELL_NEIGHBOR_RIGHT_SIDE,
 			TileSet.CELL_NEIGHBOR_BOTTOM_SIDE,
@@ -404,7 +406,7 @@ func is_valid_terrain_peering_bit_for_mode(p_peering_bit: int) -> bool:
 			TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER
 		]
 
-	elif tile_shape == TileSet.TILE_SHAPE_ISOMETRIC:
+	elif shape == TileSet.TILE_SHAPE_ISOMETRIC:
 		sides = [
 			TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE,
 			TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE,
@@ -420,7 +422,7 @@ func is_valid_terrain_peering_bit_for_mode(p_peering_bit: int) -> bool:
 		]
 
 	else:
-		if tile_offset_axis == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
+		if offset_axis == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
 			sides = [
 				TileSet.CELL_NEIGHBOR_RIGHT_SIDE,
 				TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE,
@@ -461,64 +463,63 @@ func is_valid_terrain_peering_bit_for_mode(p_peering_bit: int) -> bool:
 		terrain_mode
 		in [TileSet.TERRAIN_MODE_MATCH_CORNERS_AND_SIDES, TileSet.TERRAIN_MODE_MATCH_SIDES]
 	):
-		if p_peering_bit in sides:
+		if peering_bit in sides:
 			return true
 
 	if (
 		terrain_mode
 		in [TileSet.TERRAIN_MODE_MATCH_CORNERS_AND_SIDES, TileSet.TERRAIN_MODE_MATCH_CORNERS]
 	):
-		if p_peering_bit in corners:
+		if peering_bit in corners:
 			return true
 
 	return false
 
 
-func get_terrain_polygon() -> Array[Vector2]:
-	match tile_shape:
+func get_terrain_polygon(
+	shape := tile_shape, size := tile_size, offset_axis := tile_offset_axis
+) -> Array[Vector2]:
+	match shape:
 		TileSet.TILE_SHAPE_SQUARE:
-			return _get_square_terrain_polygon(tile_size)
+			return _get_square_terrain_polygon(size)
 		TileSet.TILE_SHAPE_ISOMETRIC:
-			return _get_isometric_terrain_polygon(tile_size)
+			return _get_isometric_terrain_polygon(size)
 		_:
-			var overlap := 0.0
-			if tile_shape == TileSet.TILE_SHAPE_HEXAGON:
-				overlap = 0.25
-			return _get_half_offset_terrain_polygon(tile_size, overlap, tile_offset_axis)
+			var overlap := 0.25 if shape == TileSet.TILE_SHAPE_HEXAGON else 0.0
+			return _get_half_offset_terrain_polygon(size, overlap, offset_axis)
 
 
-func get_terrain_peering_bit_polygon(p_bit: int) -> Array[Vector2]:
-	match tile_shape:
+func get_terrain_peering_bit_polygon(
+	bit: int, shape := tile_shape, size := tile_size, offset_axis := tile_offset_axis
+) -> Array[Vector2]:
+	match shape:
 		TileSet.TILE_SHAPE_SQUARE:
 			match terrain_mode:
 				TileSet.TERRAIN_MODE_MATCH_CORNERS_AND_SIDES:
-					return _square_corner_side_polygon(tile_size, p_bit)
+					return _square_corner_side_polygon(size, bit)
 				TileSet.TERRAIN_MODE_MATCH_CORNERS:
-					return _square_corner_polygon(tile_size, p_bit)
+					return _square_corner_polygon(size, bit)
 				_:
-					return _square_side_polygon(tile_size, p_bit)
+					return _square_side_polygon(size, bit)
 
 		TileSet.TILE_SHAPE_ISOMETRIC:
 			match terrain_mode:
 				TileSet.TERRAIN_MODE_MATCH_CORNERS_AND_SIDES:
-					return _iso_corner_side_polygon(tile_size, p_bit)
+					return _iso_corner_side_polygon(size, bit)
 				TileSet.TERRAIN_MODE_MATCH_CORNERS:
-					return _iso_corner_polygon(tile_size, p_bit)
+					return _iso_corner_polygon(size, bit)
 				_:
-					return _iso_side_polygon(tile_size, p_bit)
+					return _iso_side_polygon(size, bit)
 
 		_:
-			var overlap := 0.0
-			if tile_shape == TileSet.TILE_SHAPE_HEXAGON:
-				overlap = 0.25
-
+			var overlap := 0.25 if shape == TileSet.TILE_SHAPE_HEXAGON else 0.0
 			match terrain_mode:
 				TileSet.TERRAIN_MODE_MATCH_CORNERS_AND_SIDES:
-					return _half_offset_corner_side(tile_size, overlap, tile_offset_axis, p_bit)
+					return _half_offset_corner_side(size, overlap, offset_axis, bit)
 				TileSet.TERRAIN_MODE_MATCH_CORNERS:
-					return _half_offset_corner(tile_size, overlap, tile_offset_axis, p_bit)
+					return _half_offset_corner(size, overlap, offset_axis, bit)
 				_:
-					return _half_offset_side(tile_size, overlap, tile_offset_axis, p_bit)
+					return _half_offset_side(size, overlap, offset_axis, bit)
 
 
 func _get_square_terrain_polygon(size: Vector2i) -> Array[Vector2]:
@@ -546,7 +547,7 @@ func _square_corner_side_polygon(size: Vector2i, bit: int) -> Array[Vector2]:
 
 
 func _square_corner_polygon(size: Vector2i, bit: int) -> Array[Vector2]:
-	var unit = Vector2(size) / 6.0
+	var unit := Vector2(size) / 6.0
 	var polygon: Array[Vector2] = []
 
 	match bit:
