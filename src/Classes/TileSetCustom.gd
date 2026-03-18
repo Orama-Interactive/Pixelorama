@@ -27,7 +27,7 @@ var tile_size: Vector2i
 var tile_shape := TileSet.TILE_SHAPE_SQUARE
 ## For all half-offset shapes (Isometric & Hexagonal), determines the offset axis.
 var tile_offset_axis := TileSet.TILE_OFFSET_AXIS_HORIZONTAL
-var terrains: Array[Terrain]
+var terrains: Array[Terrain] = [Terrain.new()]
 var terrain_mode := TileSet.TERRAIN_MODE_MATCH_CORNERS_AND_SIDES
 ## If [code]true[/code], the code in [method handle_project_resize] does not execute.
 ## This variable is used to prevent multiple cels from clearing the tileset at the same time.
@@ -86,6 +86,13 @@ class Tile:
 class Terrain:
 	var name := ""
 	var color := Color("805840")
+
+	func serialize() -> Dictionary:
+		return {"name": name, "color": var_to_str(color)}
+
+	func deserialize(dict: Dictionary) -> void:
+		name = dict.get("name", name)
+		color = str_to_var(dict.get("color", color))
 
 
 func _init(
@@ -311,6 +318,11 @@ func serialize() -> Dictionary:
 	for i in tiles.size():
 		tile_data[i] = tiles[i].serialize()
 	dict["tile_data"] = tile_data
+
+	var terrain_data: Array[Dictionary] = []
+	for terrain in terrains:
+		terrain_data.append(terrain.serialize())
+	dict["terrain_data"] = terrain_data
 	return dict
 
 
@@ -330,6 +342,13 @@ func deserialize(dict: Dictionary) -> void:
 		else:
 			tile = tiles[i]
 		tile.deserialize(tile_data[i_str], true)
+	var terrain_data := dict.get("terrain_data", []) as Array
+	if not terrain_data.is_empty():
+		terrains.clear()
+		for terrain_dict: Dictionary in terrain_data:
+			var terrain := Terrain.new()
+			terrain.deserialize(terrain_dict)
+			terrains.append(terrain)
 
 
 ## Serializes the data of each tile in [member tiles] into the form of a [Dictionary],
