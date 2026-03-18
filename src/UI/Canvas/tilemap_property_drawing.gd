@@ -27,18 +27,29 @@ func _draw() -> void:
 			var terrain_id := tile.terrain_center_bit
 			var terrain_color := tileset.terrains[terrain_id].color
 			terrain_color.a = 0.75
-			var polygon := tileset.get_terrain_polygon()
+			var polygon := tileset.get_terrain_polygon(
+				tilemap_cel.get_tile_shape(),
+				tilemap_cel.get_tile_size(),
+				tilemap_cel.get_tile_offset_axis()
+			)
 			draw_set_transform(pos + half_size, rotation, scale)
 			draw_colored_polygon(polygon, terrain_color)
 		for i in tile.terrain_peering_bits.size():
-			if not tileset.is_valid_terrain_peering_bit_for_mode(i):
+			if not tileset.is_valid_terrain_peering_bit_for_mode(
+				i, tilemap_cel.get_tile_shape(), tilemap_cel.get_tile_offset_axis()
+			):
 				continue
 			var terrain_id := tile.terrain_peering_bits[i]
 			if terrain_id == -1:
 				continue
 			var terrain_color := tileset.terrains[terrain_id].color
 			terrain_color.a = 0.75
-			var polygon := tileset.get_terrain_peering_bit_polygon(i)
+			var polygon := tileset.get_terrain_peering_bit_polygon(
+				i,
+				tilemap_cel.get_tile_shape(),
+				tilemap_cel.get_tile_size(),
+				tilemap_cel.get_tile_offset_axis()
+			)
 			if polygon.size() < 3:
 				continue
 			var uvs := PackedVector2Array()

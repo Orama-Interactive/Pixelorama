@@ -32,10 +32,6 @@ func update_config() -> void:
 func draw_start(pos: Vector2i) -> void:
 	if Global.current_project.get_current_cel() is not CelTileMap:
 		return
-	var cel := Global.current_project.get_current_cel() as CelTileMap
-	if cel.place_only_mode:
-		Global.notification_label("Cannot set tile properties when place only mode is enabled.")
-		return
 	super(pos)
 	_undo_data = _get_undo_data()
 	_draw_cache.append(pos)
@@ -66,8 +62,6 @@ func cursor_move(pos: Vector2i) -> void:
 	if Global.current_project.get_current_cel() is not CelTileMap:
 		return
 	var cel := Global.current_project.get_current_cel() as CelTileMap
-	if cel.place_only_mode:
-		return
 	var tile_index := cel.get_cell_index_at_coords(pos)
 	if tile_index == 0:
 		return
@@ -122,13 +116,19 @@ func get_appropriate_bit(pos: Vector2i, cel: CelTileMap, tile: TileSetCustom.Til
 	var cell_position := get_cell_position(pos)
 	var cell_position_pixel_coords := cel.get_pixel_coords(cell_position)
 	var final_pos := pos - cell_position_pixel_coords - half_size
-	var polygon := tileset.get_terrain_polygon()
+	var polygon := tileset.get_terrain_polygon(
+		cel.get_tile_shape(), cel.get_tile_size(), cel.get_tile_offset_axis()
+	)
 	if Geometry2D.is_point_in_polygon(final_pos, polygon):
 		return [-1, polygon, cell_position_pixel_coords + half_size]
 	for i in tile.terrain_peering_bits.size():
-		if not tileset.is_valid_terrain_peering_bit_for_mode(i):
+		if not tileset.is_valid_terrain_peering_bit_for_mode(
+			i, cel.get_tile_shape(), cel.get_tile_offset_axis()
+		):
 			continue
-		polygon = tileset.get_terrain_peering_bit_polygon(i)
+		polygon = tileset.get_terrain_peering_bit_polygon(
+			i, cel.get_tile_shape(), cel.get_tile_size(), cel.get_tile_offset_axis()
+		)
 		if polygon.size() < 3:
 			continue
 		if Geometry2D.is_point_in_polygon(final_pos, polygon):
