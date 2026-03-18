@@ -41,7 +41,7 @@ static var is_transposed := false:
 		is_transposed = value
 		_call_update_brushes()
 static var current_tileset: TileSetCustom
-static var autotiling_enabled := true
+static var autotiling_enabled := false
 static var current_terrain_index := 0
 var button_size := 36:
 	set(value):
@@ -340,6 +340,10 @@ func _on_rotate_pressed(clockwise: bool) -> void:
 			is_flipped_v = ROTATION_MATRIX[final_i * 3 + 1]
 			is_transposed = ROTATION_MATRIX[final_i * 3 + 2]
 			break
+
+
+func _on_autotiling_check_button_toggled(toggled_on: bool) -> void:
+	autotiling_enabled = toggled_on
 
 
 func _on_option_button_pressed() -> void:
