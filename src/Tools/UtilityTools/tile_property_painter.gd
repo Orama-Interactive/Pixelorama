@@ -73,7 +73,7 @@ func cursor_move(pos: Vector2i) -> void:
 	for i in range(TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER + 1):
 		if not tileset.is_valid_terrain_peering_bit_for_mode(i):
 			continue
-		polygon = tileset.get_terrain_peering_bit_polygon(0, i)
+		polygon = tileset.get_terrain_peering_bit_polygon(i)
 		if polygon.size() < 3:
 			continue
 		if Geometry2D.is_point_in_polygon(final_pos, polygon):
@@ -121,7 +121,7 @@ func set_tile_bit(pos: Vector2i) -> void:
 	for i in tile.terrain_peering_bits.size():
 		if not tileset.is_valid_terrain_peering_bit_for_mode(i):
 			continue
-		polygon = tileset.get_terrain_peering_bit_polygon(0, i)
+		polygon = tileset.get_terrain_peering_bit_polygon(i)
 		if polygon.size() < 3:
 			continue
 		if Geometry2D.is_point_in_polygon(final_pos, polygon):

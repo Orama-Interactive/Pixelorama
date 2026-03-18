@@ -320,6 +320,7 @@ func bucket_fill(cell_coords: Vector2i, index: int, callable: Callable) -> void:
 	godot_tilemap.queue_free()
 
 
+#region Autotiling
 func autotile(cell_coords: Array[Vector2i], only_neighbors := false) -> void:
 	var godot_tilemap := create_tilemap_layer_node()
 	autotile_with_neighbors(cell_coords, godot_tilemap, only_neighbors)
@@ -383,8 +384,8 @@ func autotile_find_best_tile(mask: PackedInt32Array, terrain_id := 0) -> int:
 		var tile := tileset.tiles[i]
 		if tile.terrain_center_bit != terrain_id:
 			continue
-		var score := score_tile(tile, mask)
-		score += tile_specificity(tile)
+		var score := autotile_score_tile(tile, mask)
+		score += autotile_tile_specificity(tile)
 		if score > best_score:
 			best_score = score
 			best_tiles.clear()
@@ -395,7 +396,7 @@ func autotile_find_best_tile(mask: PackedInt32Array, terrain_id := 0) -> int:
 	return tileset.pick_random_tile(best_tiles)
 
 
-func score_tile(tile: TileSetCustom.Tile, mask: PackedInt32Array) -> int:
+func autotile_score_tile(tile: TileSetCustom.Tile, mask: PackedInt32Array) -> int:
 	var score := 0
 	for i in mask.size():
 		var tile_bit := tile.terrain_peering_bits[i]
@@ -410,7 +411,7 @@ func score_tile(tile: TileSetCustom.Tile, mask: PackedInt32Array) -> int:
 	return score
 
 
-func tile_specificity(tile: TileSetCustom.Tile) -> int:
+func autotile_tile_specificity(tile: TileSetCustom.Tile) -> int:
 	var s := 0
 	for b in tile.terrain_peering_bits:
 		if b != -1:
@@ -431,7 +432,7 @@ func autotile_tile_matches_mask(tile: TileSetCustom.Tile, mask: PackedInt32Array
 	return true
 
 
-func filter_corners(mask: PackedInt32Array, terrain_id: int) -> void:
+func autotile_filter_corners(mask: PackedInt32Array, terrain_id: int) -> void:
 	# top-right
 	if mask[12] != terrain_id or mask[0] != terrain_id:
 		mask[15] = -1
@@ -451,8 +452,11 @@ func filter_corners(mask: PackedInt32Array, terrain_id: int) -> void:
 
 func autotile_compute_index(cell_coords: Vector2i) -> int:
 	var mask := autotile_build_mask(cell_coords)
-	filter_corners(mask, 0)
+	autotile_filter_corners(mask, 0)
 	return autotile_find_best_tile(mask)
+
+
+#endregion
 
 
 func re_order_tilemap() -> void:
@@ -463,7 +467,7 @@ func re_order_tilemap() -> void:
 
 
 func create_tilemap_layer_node() -> TileMapLayer:
-	var godot_tileset := tileset.godot_tileset.duplicate()
+	var godot_tileset := TileSet.new()
 	godot_tileset.tile_size = get_tile_size()
 	godot_tileset.tile_shape = get_tile_shape()
 	godot_tileset.tile_layout = tile_layout

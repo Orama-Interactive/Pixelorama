@@ -25,7 +25,7 @@ func _draw() -> void:
 		var pos := tilemap_cel.get_pixel_coords(cell_coords)
 		if tile.terrain_center_bit > -1:
 			var terrain_id := tile.terrain_center_bit
-			var terrain_color := tileset.godot_tileset.get_terrain_color(0, terrain_id)
+			var terrain_color := tileset.terrains[terrain_id].color
 			terrain_color.a = 0.75
 			var polygon := tileset.get_terrain_polygon()
 			draw_set_transform(pos + half_size, rotation, scale)
@@ -36,9 +36,9 @@ func _draw() -> void:
 			var terrain_id := tile.terrain_peering_bits[i]
 			if terrain_id == -1:
 				continue
-			var terrain_color := tileset.godot_tileset.get_terrain_color(0, terrain_id)
+			var terrain_color := tileset.terrains[terrain_id].color
 			terrain_color.a = 0.75
-			var polygon := tileset.get_terrain_peering_bit_polygon(0, i)
+			var polygon := tileset.get_terrain_peering_bit_polygon(i)
 			if polygon.size() < 3:
 				continue
 			var uvs := PackedVector2Array()

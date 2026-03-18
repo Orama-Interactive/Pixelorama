@@ -26,13 +26,9 @@ var tile_size: Vector2i
 ## The shape of each tile.
 var tile_shape := TileSet.TILE_SHAPE_SQUARE
 ## For all half-offset shapes (Isometric & Hexagonal), determines the offset axis.
-var tile_offset_axis := TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
-	set(value):
-		tile_offset_axis = value
-		godot_tileset.tile_offset_axis = tile_offset_axis
+var tile_offset_axis := TileSet.TILE_OFFSET_AXIS_HORIZONTAL
+var terrains: Array[Terrain]
 var terrain_mode := TileSet.TERRAIN_MODE_MATCH_CORNERS_AND_SIDES
-var godot_tileset: TileSet
-var godot_tileset_atlas_source: TileSetAtlasSource
 ## If [code]true[/code], the code in [method handle_project_resize] does not execute.
 ## This variable is used to prevent multiple cels from clearing the tileset at the same time.
 ## In [method handle_project_resize], the variable is set to [code]true[/code], and then
@@ -87,6 +83,11 @@ class Tile:
 			terrain_peering_bits[i] = bit
 
 
+class Terrain:
+	var name := ""
+	var color := Color("805840")
+
+
 func _init(
 	_tile_size: Vector2i,
 	_name := "",
@@ -99,7 +100,6 @@ func _init(
 	if add_empty_tile:
 		var empty_image := Image.create_empty(tile_size.x, tile_size.y, false, Image.FORMAT_RGBA8)
 		tiles.append(Tile.new(empty_image))
-	create_godot_tileset()
 
 
 func duplicate() -> TileSetCustom:
@@ -116,11 +116,6 @@ func add_tile(image: Image, cel: CelTileMap, times_used := 1) -> void:
 	tile.times_used = times_used
 	tiles.append(tile)
 	tile_added.emit(cel, tiles.size() - 1)
-	fill_godot_tileset_atlas()
-	#var tile_atlas_image := godot_tileset_atlas_source.texture.get_image()
-	#tile_atlas_image.crop(tile_atlas_image.get_width() + tile_size.x, tile_atlas_image.get_height())
-	#var origin := Vector2(tiles.size() * tile_size.x, 0)
-	#tile_atlas_image.blit_rect(image, Rect2i(Vector2i.ZERO, tile_size), origin)
 
 
 ## Adds a new [param image] as a tile in a given [param position] in the tileset.
@@ -130,7 +125,6 @@ func insert_tile(image: Image, position: int, cel: CelTileMap) -> void:
 	var tile := Tile.new(image)
 	tiles.insert(position, tile)
 	tile_added.emit(cel, position)
-	fill_godot_tileset_atlas()
 
 
 ## Reduces a tile's [member TileSetCustom.Tile.times_used] by one,
@@ -152,7 +146,6 @@ func unuse_tile_at_index(index: int, cel: CelTileMap) -> bool:
 func remove_tile_at_index(index: int, cel: CelTileMap) -> void:
 	tiles.remove_at(index)
 	tile_removed.emit(cel, index)
-	fill_godot_tileset_atlas()
 
 
 ## Replaces a tile in a given [param index] in the tileset with a [param new_tile].
@@ -160,7 +153,6 @@ func remove_tile_at_index(index: int, cel: CelTileMap) -> void:
 func replace_tile_at(new_tile: Image, index: int, cel: CelTileMap) -> void:
 	tiles[index].image.copy_from(new_tile)
 	tile_replaced.emit(cel, index)
-	fill_godot_tileset_atlas()
 
 
 ## Finds and returns the position of a tile [param image] inside the tileset.
@@ -271,22 +263,18 @@ func create_image_atlas(rows := 1, skip_first := true) -> Image:
 	return image
 
 
-func create_godot_tileset() -> void:
-	godot_tileset = TileSet.new()
+func create_godot_tileset() -> TileSet:
+	var godot_tileset := TileSet.new()
 	godot_tileset.tile_size = tile_size
 	godot_tileset.tile_shape = tile_shape
 	godot_tileset.tile_offset_axis = tile_offset_axis
 	godot_tileset.add_terrain_set()
 	godot_tileset.set_terrain_set_mode(0, terrain_mode)
 	godot_tileset.add_terrain(0)
-	#fill_godot_tileset_atlas()
-
-
-func fill_godot_tileset_atlas() -> void:
 	for i in range(godot_tileset.get_source_count() - 1, -1, -1):
 		var id := godot_tileset.get_source_id(i)
 		godot_tileset.remove_source(id)
-	godot_tileset_atlas_source = TileSetAtlasSource.new()
+	var godot_tileset_atlas_source := TileSetAtlasSource.new()
 	godot_tileset.add_source(godot_tileset_atlas_source)
 	var image_atlas := create_image_atlas()
 	godot_tileset_atlas_source.texture = ImageTexture.create_from_image(image_atlas)
@@ -310,6 +298,7 @@ func fill_godot_tileset_atlas() -> void:
 			tile_index += 1
 			if tile_index >= tiles.size():
 				break
+	return godot_tileset
 
 
 ## Serializes the data of this class into the form of a [Dictionary],
@@ -479,10 +468,7 @@ func get_terrain_polygon() -> Array[Vector2]:
 			return _get_half_offset_terrain_polygon(tile_size, overlap, tile_offset_axis)
 
 
-func get_terrain_peering_bit_polygon(p_terrain_set: int, p_bit: int) -> Array[Vector2]:
-	if p_terrain_set < 0 or p_terrain_set >= godot_tileset.get_terrain_sets_count():
-		return []
-
+func get_terrain_peering_bit_polygon(p_bit: int) -> Array[Vector2]:
 	match tile_shape:
 		TileSet.TILE_SHAPE_SQUARE:
 			match terrain_mode:
