@@ -4,6 +4,7 @@ const SAVE_TEXTURE := preload("uid://cvc120a27s57m")
 const DUPLICATE_TEXTURE := preload("res://assets/graphics/timeline/copy_frame.png")
 const REMOVE_TEXTURE := preload("res://assets/graphics/misc/close.png")
 
+var export_tileset_rows := 1
 var _selected_tileset: TileSetCustom
 var _current_tileset_name_filter: String
 
@@ -16,6 +17,8 @@ var _current_tileset_name_filter: String
 @onready var tilesets_container := $VBoxContainer/TilesetsContainer as VBoxContainer
 @onready var tilesets_list := %TilesetsList as Tree
 @onready var filter_by_name_edit := %FilterByNameEdit as LineEdit
+@onready
+var export_tileset_confirmation_dialog: ConfirmationDialog = $ExportTilesetConfirmationDialog
 @onready var export_tileset_file_dialog: FileDialog = $ExportTilesetFileDialog
 
 
@@ -174,7 +177,7 @@ func _on_tilesets_list_button_clicked(item: TreeItem, column: int, id: int, _mbi
 		tileset = project.tilesets[-1]
 	_selected_tileset = tileset
 	if id == 0:  # Export
-		export_tileset_file_dialog.popup_centered_clamped()
+		export_tileset_confirmation_dialog.popup_centered_clamped()
 	elif id == 1:  # Duplicate
 		var new_tileset := tileset.duplicate()
 		for i in range(1, tileset.tiles.size()):
@@ -201,14 +204,22 @@ func _on_tilesets_list_button_clicked(item: TreeItem, column: int, id: int, _mbi
 		item.free()
 
 
+func _on_rows_value_slider_value_changed(value: float) -> void:
+	export_tileset_rows = value
+
+
+func _on_export_tileset_confirmation_dialog_confirmed() -> void:
+	export_tileset_file_dialog.popup_centered_clamped()
+
+
 func _on_export_tileset_file_dialog_file_selected(path: String) -> void:
 	if not is_instance_valid(_selected_tileset):
 		return
 	match path.get_extension().to_lower():
 		"png":
-			var image := _selected_tileset.create_image_atlas()
+			var image := _selected_tileset.create_image_atlas(export_tileset_rows)
 			if is_instance_valid(image) and not image.is_empty():
 				image.save_png(path)
 		"tres":
-			var godot_tileset := _selected_tileset.create_godot_tileset()
+			var godot_tileset := _selected_tileset.create_godot_tileset(export_tileset_rows)
 			ResourceSaver.save(godot_tileset, path)

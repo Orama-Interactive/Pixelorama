@@ -241,18 +241,18 @@ func create_image_atlas(rows := 1, skip_first := true) -> Image:
 	return image
 
 
-func create_godot_tileset() -> TileSet:
+func create_godot_tileset(rows := 1) -> TileSet:
 	var godot_tileset := TileSet.new()
 	godot_tileset.tile_size = tile_size
 	godot_tileset.tile_shape = tile_shape
 	godot_tileset.tile_offset_axis = tile_offset_axis
 	var tileset_atlas_source := TileSetAtlasSource.new()
-	var image_atlas := create_image_atlas()
+	var image_atlas := create_image_atlas(rows)
 	tileset_atlas_source.texture = ImageTexture.create_from_image(image_atlas)
 	tileset_atlas_source.texture_region_size = tile_size
 	var grid_size := tileset_atlas_source.get_atlas_grid_size()
-	for x in grid_size.x:
-		for y in grid_size.y:
+	for y in grid_size.y:
+		for x in grid_size.x:
 			var coords := Vector2i(x, y)
 			tileset_atlas_source.create_tile(coords)
 	godot_tileset.add_source(tileset_atlas_source)

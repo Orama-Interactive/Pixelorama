@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" uid="uid://dy4j3c4fws8m" path="res://src/UI/Dialogs/ProjectProperties.gd" id="1_0n4uc"]
 [ext_resource type="Texture2D" uid="uid://fvgl2kl81v0h" path="res://assets/graphics/misc/search.svg" id="2_h0qhi"]
+[ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="3_70jg7"]
 
 [node name="ProjectProperties" type="AcceptDialog" unique_id=1726090796]
 oversampling_override = 1.0
 title = "Project Properties"
 position = Vector2i(0, 36)
-size = Vector2i(300, 330)
+size = Vector2i(300, 360)
 script = ExtResource("1_0n4uc")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1487218891]
@@ -116,6 +117,39 @@ layout_mode = 2
 size_flags_vertical = 3
 hide_root = true
 
+[node name="ExportTilesetConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=92423122]
+oversampling_override = 1.0
+ok_button_text = "Export"
+
+[node name="GridContainer" type="GridContainer" parent="ExportTilesetConfirmationDialog" unique_id=1820814272]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 192.0
+offset_bottom = 51.0
+columns = 2
+
+[node name="RowsLabel" type="Label" parent="ExportTilesetConfirmationDialog/GridContainer" unique_id=1596238876]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Rows:"
+
+[node name="RowsValueSlider" type="TextureProgressBar" parent="ExportTilesetConfirmationDialog/GridContainer" unique_id=1034217444]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+theme_type_variation = &"ValueSlider"
+min_value = 1.0
+max_value = 16.0
+value = 1.0
+allow_greater = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("3_70jg7")
+metadata/_custom_type_script = "uid://tfdhqto6j5j0"
+
 [node name="ExportTilesetFileDialog" type="FileDialog" parent="." unique_id=720414622 groups=["FileDialogs"]]
 access = 2
 filters = PackedStringArray("*.png ; PNG Image", "*.tres ; Godot TileSet Resource File")
@@ -127,4 +161,6 @@ filters = PackedStringArray("*.png ; PNG Image", "*.tres ; Godot TileSet Resourc
 [connection signal="button_clicked" from="VBoxContainer/TilesetsContainer/PanelContainer/TilesetsList" to="." method="_on_tilesets_list_button_clicked"]
 [connection signal="item_activated" from="VBoxContainer/TilesetsContainer/PanelContainer/TilesetsList" to="." method="_on_tilesets_list_item_activated"]
 [connection signal="item_edited" from="VBoxContainer/TilesetsContainer/PanelContainer/TilesetsList" to="." method="_on_tilesets_list_item_edited"]
+[connection signal="confirmed" from="ExportTilesetConfirmationDialog" to="." method="_on_export_tileset_confirmation_dialog_confirmed"]
+[connection signal="value_changed" from="ExportTilesetConfirmationDialog/GridContainer/RowsValueSlider" to="." method="_on_rows_value_slider_value_changed"]
 [connection signal="file_selected" from="ExportTilesetFileDialog" to="." method="_on_export_tileset_file_dialog_file_selected"]
