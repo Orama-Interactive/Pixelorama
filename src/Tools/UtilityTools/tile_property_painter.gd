@@ -71,27 +71,12 @@ func cursor_move(pos: Vector2i) -> void:
 	var tile_index := cel.get_cell_index_at_coords(pos)
 	if tile_index == 0:
 		return
-	@warning_ignore("integer_division")
-	var half_size := cel.tile_size / 2
-	var tileset := cel.tileset
-	var cell_position := get_cell_position(pos)
-	var cell_position_pixel_coords := cel.get_pixel_coords(cell_position)
-	var final_pos := pos - cell_position_pixel_coords - half_size
-	var polygon := tileset.get_terrain_polygon()
-	if Geometry2D.is_point_in_polygon(final_pos, polygon):
-		_hovering_polygon = polygon
-		_hovering_polygon_pos = cell_position_pixel_coords + half_size
+	var tile := cel.tileset.tiles[tile_index]
+	var bit_info := get_appropriate_bit(pos, cel, tile)
+	if bit_info.is_empty():
 		return
-	for i in range(TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER + 1):
-		if not tileset.is_valid_terrain_peering_bit_for_mode(i):
-			continue
-		polygon = tileset.get_terrain_peering_bit_polygon(i)
-		if polygon.size() < 3:
-			continue
-		if Geometry2D.is_point_in_polygon(final_pos, polygon):
-			_hovering_polygon = polygon
-			_hovering_polygon_pos = cell_position_pixel_coords + half_size
-			break
+	_hovering_polygon = bit_info[1]
+	_hovering_polygon_pos = bit_info[2]
 
 
 func draw_indicator(_left: bool) -> void:
@@ -118,18 +103,28 @@ func set_tile_bit(pos: Vector2i) -> void:
 	var terrain_id := TileSetPanel.current_terrain_index
 	if _erase:
 		terrain_id = -1
+	var tile := cel.tileset.tiles[tile_index]
+	var bit_info := get_appropriate_bit(pos, cel, tile)
+	if bit_info.is_empty():
+		return
+	var bit := bit_info[0] as int
+	if bit == -1:
+		tile.terrain_center_bit = terrain_id
+	else:
+		tile.terrain_peering_bits[bit] = terrain_id
+	Global.canvas.tilemap_property_drawing.queue_redraw()
+
+
+func get_appropriate_bit(pos: Vector2i, cel: CelTileMap, tile: TileSetCustom.Tile) -> Array:
 	@warning_ignore("integer_division")
 	var half_size := cel.tile_size / 2
 	var tileset := cel.tileset
 	var cell_position := get_cell_position(pos)
 	var cell_position_pixel_coords := cel.get_pixel_coords(cell_position)
 	var final_pos := pos - cell_position_pixel_coords - half_size
-	var tile := tileset.tiles[tile_index]
 	var polygon := tileset.get_terrain_polygon()
 	if Geometry2D.is_point_in_polygon(final_pos, polygon):
-		tile.terrain_center_bit = terrain_id
-		Global.canvas.tilemap_property_drawing.queue_redraw()
-		return
+		return [-1, polygon, cell_position_pixel_coords + half_size]
 	for i in tile.terrain_peering_bits.size():
 		if not tileset.is_valid_terrain_peering_bit_for_mode(i):
 			continue
@@ -137,9 +132,8 @@ func set_tile_bit(pos: Vector2i) -> void:
 		if polygon.size() < 3:
 			continue
 		if Geometry2D.is_point_in_polygon(final_pos, polygon):
-			tile.terrain_peering_bits[i] = terrain_id
-			Global.canvas.tilemap_property_drawing.queue_redraw()
-			return
+			return [i, polygon, cell_position_pixel_coords + half_size]
+	return []
 
 
 func _on_erase_toggled(toggled_on: bool) -> void:
