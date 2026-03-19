@@ -89,7 +89,7 @@ var preferences: Array[Preference] = [
 	),
 	Preference.new(
 		"global_palettes_readonly",
-		"Palettes/PaletteOptions/GlobalPalettesReadonly2",
+		"Palettes/PaletteOptions/GlobalPalettesReadonly",
 		"button_pressed",
 		true
 	),
