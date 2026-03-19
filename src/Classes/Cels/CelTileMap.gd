@@ -143,6 +143,9 @@ func set_index(
 			tileset.tiles[previous_index].times_used -= 1
 		tileset.tiles[index].times_used += 1
 		cell.index = index
+	var was_flipped_h := cell.flip_h
+	var was_flipped_v := cell.flip_v
+	var was_transposed := cell.transpose
 	cell.flip_h = flip_h
 	cell.flip_v = flip_v
 	cell.transpose = transpose
@@ -151,6 +154,7 @@ func set_index(
 			var cell_coords := cells.find_key(cell) as Vector2i
 			var coords := get_pixel_coords(cell_coords)
 			var prev_tile := tileset.tiles[previous_index].image
+			prev_tile = transform_tile(prev_tile, was_flipped_h, was_flipped_v, was_transposed)
 			var prev_tile_size := prev_tile.get_size()
 			var blank := Image.create_empty(
 				prev_tile_size.x, prev_tile_size.y, false, prev_tile.get_format()
