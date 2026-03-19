@@ -101,9 +101,7 @@ func save_palette(palette: Palette = current_palette) -> void:
 
 
 ## Copies the current_palette and assigns it as the new current palette
-func copy_current_palette(
-	new_palette_name := current_palette.name, is_global := false
-) -> void:
+func copy_current_palette(new_palette_name := current_palette.name, is_global := false) -> void:
 	new_palette_name = get_valid_name(new_palette_name)
 	var comment := current_palette.comment
 	_create_new_palette_from_current_palette(new_palette_name, comment, is_global)

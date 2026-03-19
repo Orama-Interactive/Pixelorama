@@ -99,9 +99,8 @@ func undo_redo_get_or_create_local_version(palette: Palette, undo_redo: UndoRedo
 func undo_redo_make_palette_local(palette: Palette, undo_redo: UndoRedo) -> void:
 	palette.is_project_palette = true
 	Palettes.undo_redo_add_palette(palette, false)
-	undo_redo.add_undo_method(
-		Palettes.palette_delete_and_reselect.bind(true, palette)
-	)
+	undo_redo.add_undo_method(Palettes.palette_delete_and_reselect.bind(true, palette))
+
 
 ## Setup palettes selector with available palettes
 func setup_palettes_selector() -> void:
