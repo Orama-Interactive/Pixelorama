@@ -1,9 +1,9 @@
 extends ConfirmationDialog
 
-enum { GLOBAL_PALETTE, PROJECT_PALETTE }
-
 ## Emitted when user confirms their changes
 signal saved(preset, name, comment, width, height, add_alpha_colors, colors_from)
+
+enum { GLOBAL_PALETTE, PROJECT_PALETTE }
 
 ## Reference to current palette stored when dialog opens
 var current_palette: Palette
