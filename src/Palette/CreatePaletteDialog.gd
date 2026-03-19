@@ -1,5 +1,7 @@
 extends ConfirmationDialog
 
+enum { GLOBAL_PALETTE, PROJECT_PALETTE }
+
 ## Emitted when user confirms their changes
 signal saved(preset, name, comment, width, height, add_alpha_colors, colors_from)
 
@@ -19,6 +21,12 @@ var current_palette: Palette
 @onready var colors_settings := $VBoxContainer/ColorsSettings as VBoxContainer
 @onready var already_exists_warning := $VBoxContainer/AlreadyExistsWarning as Label
 @onready var enter_name_warning := $VBoxContainer/EnterNameWarning as Label
+@onready var palette_type_option := $VBoxContainer/PaletteMetadata/PaletteTypeOption as OptionButton
+
+
+func _ready() -> void:
+	palette_type_option.add_item("Global Palette", GLOBAL_PALETTE)
+	palette_type_option.add_item("Project Palette", PROJECT_PALETTE)
 
 
 ## Opens dialog
@@ -55,6 +63,9 @@ func set_default_values() -> void:
 	height_input.value = Palette.DEFAULT_HEIGHT
 	alpha_colors_input.button_pressed = true
 	get_colors_from_input.selected = Palettes.GetColorsFrom.CURRENT_FRAME
+	palette_type_option.set_item_disabled(GLOBAL_PALETTE, Global.global_palettes_readonly)
+	if Global.global_palettes_readonly:
+		palette_type_option.select(palette_type_option.get_item_index(PROJECT_PALETTE))
 
 
 ## Shows/hides a warning when palette already exists
@@ -83,7 +94,7 @@ func _on_CreatePaletteDialog_confirmed() -> void:
 		height_input.value,
 		alpha_colors_input.button_pressed,
 		get_colors_from_input.selected,
-		not Global.global_palettes_readonly
+		true if palette_type_option.selected == GLOBAL_PALETTE else false
 	)
 
 
