@@ -306,8 +306,7 @@ func manage_undo_redo_palettes() -> void:
 		# and is still global
 		if palette_has_color or Palettes.auto_add_colors:
 			palette_in_focus = palette_in_focus.duplicate()
-			palette_in_focus.is_project_palette = true
-			Palettes.undo_redo_add_palette(palette_in_focus)
+			Palettes.undo_redo_add_palette(palette_in_focus, false)
 	if Palettes.auto_add_colors and not palette_has_color:
 		# Get an estimate of where the color will end up (used for undo)
 		var index := 0

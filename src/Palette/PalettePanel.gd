@@ -1,6 +1,6 @@
 class_name PalettePanel
 extends Container
-
+# search for palette_focus_local
 const CREATE_PALETTE_SCENE_PATH := "res://src/Palette/CreatePaletteDialog.tscn"
 const EDIT_PALETTE_SCENE_PATH := "res://src/Palette/EditPaletteDialog.tscn"
 
@@ -83,6 +83,27 @@ func _ready() -> void:
 	hidden_color_picker.get_picker().presets_visible = false
 	hidden_color_picker.get_picker().visibility_changed.connect(_on_colorpicker_visibility_changed)
 
+
+## returns same palette back if it's local, otherwise attempt to make local copy
+func undo_redo_get_or_create_local_version(palette: Palette, undo_redo: UndoRedo) -> Palette:
+	if not palette.is_project_palette:
+		if not Global.auto_convert_global_palettes:
+			return null
+		var project_palette = palette.duplicate()
+		Palettes.undo_redo_add_palette(project_palette, false)
+		undo_redo.add_do_property(
+			palette_grid, "grid_window_origin", palette_grid.grid_window_origin
+		)
+		return project_palette
+	return palette
+
+
+func undo_redo_make_palette_local(palette: Palette, undo_redo: UndoRedo) -> void:
+	palette.is_project_palette = true
+	Palettes.undo_redo_add_palette(palette, false)
+	undo_redo.add_undo_method(
+		Palettes.palette_delete_and_reselect.bind(true, palette)
+	)
 
 ## Setup palettes selector with available palettes
 func setup_palettes_selector() -> void:
@@ -199,18 +220,30 @@ func sort_pressed(id: Palettes.SortOptions) -> void:
 	if id == Palettes.SortOptions.NEW_PALETTE:
 		sort_submenu.set_item_checked(Palettes.SortOptions.NEW_PALETTE, not new_palette)
 		return
-	if Palettes.current_palette.is_project_palette or new_palette:
-		var palette_to_sort := Palettes.current_palette
-		var undo_redo := Global.current_project.undo_redo
-		undo_redo.create_action("Sort Palette")
-		if new_palette:
-			palette_to_sort = palette_to_sort.duplicate()
-			palette_to_sort.is_project_palette = true
-			Palettes.undo_redo_add_palette(palette_to_sort)
+
+	# Make duplicates if required
+	var palette_to_sort := Palettes.current_palette
+	var undo_redo := Global.current_project.undo_redo
+	var undo_redo_action_created := false
+	if new_palette:
+		palette_to_sort = palette_to_sort.duplicate()
+		if Global.auto_convert_global_palettes:
+			undo_redo.create_action("Sort Palette")
+			undo_redo_action_created = true
+			Palettes.undo_redo_add_palette(palette_to_sort, false)
 			undo_redo.add_undo_method(
 				Palettes.palette_delete_and_reselect.bind(true, palette_to_sort)
 			)
 		else:
+			Palettes.copy_current_palette()
+			# This line is not really needed but it's goof to mention current_palette has changed.
+			palette_to_sort = Palettes.current_palette
+
+	# Start sorting
+	if palette_to_sort.is_project_palette:
+		if not undo_redo_action_created:
+			undo_redo.create_action("Sort Palette")
+		if not new_palette:  # Duplicate project data if we didn't just create palette
 			var old_colors := Palette.duplicate_color_data(palette_to_sort.colors)
 			undo_redo.add_undo_method(palette_to_sort.set_color_data.bind(old_colors))
 			undo_redo.add_undo_method(redraw_current_palette)
@@ -271,7 +304,7 @@ func _on_PaletteGrid_swatch_dropped(s_index: int, t_index: int) -> void:
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Swatch dropped")
 	var palette_in_focus = Palettes.current_palette
-	if not palette_in_focus.is_project_palette:
+	if not palette_in_focus.is_project_palette and Global.auto_convert_global_palettes:
 		palette_in_focus = palette_in_focus.duplicate()
 		palette_in_focus.is_project_palette = true
 		undo_redo.add_do_method(Palettes.add_palette_as_project_palette.bind(palette_in_focus))
@@ -425,13 +458,6 @@ func _current_palette_undo_redo_add_color(color: Color, start_index := 0) -> voi
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Add palette color")
 	var palette_in_focus = Palettes.current_palette
-	if not palette_in_focus.is_project_palette:
-		palette_in_focus = palette_in_focus.duplicate()
-		palette_in_focus.is_project_palette = true
-		Palettes.undo_redo_add_palette(palette_in_focus)
-		undo_redo.add_do_property(
-			palette_grid, "grid_window_origin", palette_grid.grid_window_origin
-		)
 	# Get an estimate of where the color will end up (used for undo)
 	var index := start_index
 	var color_max: int = palette_in_focus.colors_max
@@ -442,13 +468,15 @@ func _current_palette_undo_redo_add_color(color: Color, start_index := 0) -> voi
 		if not palette_in_focus.colors.has(i):
 			index = i
 			break
-	undo_redo.add_do_method(palette_in_focus.add_color.bind(color, start_index))
-	undo_redo.add_undo_method(palette_in_focus.remove_color.bind(index))
-	undo_redo.add_do_method(redraw_current_palette)
-	undo_redo.add_undo_method(redraw_current_palette)
-	undo_redo.add_do_method(toggle_add_delete_buttons)
-	undo_redo.add_undo_method(toggle_add_delete_buttons)
-	commit_undo()
+	var palette_focus_local = undo_redo_get_or_create_local_version(palette_in_focus, undo_redo)
+	if palette_focus_local:  # Global palettes successfully localized
+		undo_redo.add_do_method(palette_focus_local.add_color.bind(color, start_index))
+		undo_redo.add_undo_method(palette_focus_local.remove_color.bind(index))
+		undo_redo.add_do_method(redraw_current_palette)
+		undo_redo.add_undo_method(redraw_current_palette)
+		undo_redo.add_do_method(toggle_add_delete_buttons)
+		undo_redo.add_undo_method(toggle_add_delete_buttons)
+		commit_undo()
 
 
 func _current_palette_undo_redo_remove_color(index := 0) -> void:
@@ -456,17 +484,12 @@ func _current_palette_undo_redo_remove_color(index := 0) -> void:
 	undo_redo.create_action("Remove palette color")
 	var old_color := Palettes.current_palette_get_color(index)
 	var palette_in_focus = Palettes.current_palette
-	if not palette_in_focus.is_project_palette:
-		palette_in_focus = palette_in_focus.duplicate()
-		palette_in_focus.is_project_palette = true
-		Palettes.undo_redo_add_palette(palette_in_focus)
-		undo_redo.add_do_property(
-			palette_grid, "grid_window_origin", palette_grid.grid_window_origin
-		)
-	undo_redo.add_do_method(palette_in_focus.remove_color.bind(index))
-	undo_redo.add_undo_method(palette_in_focus.add_color.bind(old_color, index))
-	undo_redo.add_do_method(redraw_current_palette)
-	undo_redo.add_do_method(toggle_add_delete_buttons)
-	undo_redo.add_undo_method(redraw_current_palette)
-	undo_redo.add_undo_method(toggle_add_delete_buttons)
-	commit_undo()
+	var palette_focus_local = undo_redo_get_or_create_local_version(palette_in_focus, undo_redo)
+	if palette_focus_local:  # Global palettes successfully localized
+		undo_redo.add_do_method(palette_focus_local.remove_color.bind(index))
+		undo_redo.add_undo_method(palette_focus_local.add_color.bind(old_color, index))
+		undo_redo.add_do_method(redraw_current_palette)
+		undo_redo.add_do_method(toggle_add_delete_buttons)
+		undo_redo.add_undo_method(redraw_current_palette)
+		undo_redo.add_undo_method(toggle_add_delete_buttons)
+		commit_undo()

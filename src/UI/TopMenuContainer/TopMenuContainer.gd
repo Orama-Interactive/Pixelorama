@@ -885,8 +885,7 @@ func _color_mode_submenu_id_pressed(id: ColorModes) -> void:
 	var palette_in_focus = Palettes.current_palette
 	if not palette_in_focus.is_project_palette and project.color_mode == Project.INDEXED_MODE:
 		palette_in_focus = palette_in_focus.duplicate()
-		palette_in_focus.is_project_palette = true
-		Palettes.undo_redo_add_palette(palette_in_focus)
+		Palettes.undo_redo_add_palette(palette_in_focus, false)
 	project.undo_redo.add_do_property(project, "color_mode", project.color_mode)
 	project.undo_redo.add_undo_property(project, "color_mode", old_color_mode)
 	project.deserialize_cel_undo_data(redo_data, undo_data)
