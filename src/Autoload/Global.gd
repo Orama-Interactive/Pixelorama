@@ -326,7 +326,8 @@ var clear_color_from := ColorFrom.THEME:
 			return
 		clear_color_from = value
 		Themes.change_clear_color()
-var auto_convert_global_palettes := true
+## Found in Preferences. Controls the readonly mode of global palettes.
+var global_palettes_readonly := true
 ## Found in Preferences. The selected size mode of tool buttons using [enum ButtonSize] enum.
 var tool_button_size := ButtonSize.SMALL:
 	set(value):

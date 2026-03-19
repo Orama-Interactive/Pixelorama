@@ -226,7 +226,7 @@ func sort_pressed(id: Palettes.SortOptions) -> void:
 	var undo_redo_action_created := false
 	if new_palette:
 		palette_to_sort = palette_to_sort.duplicate()
-		if Global.auto_convert_global_palettes:
+		if Global.global_palettes_readonly:
 			undo_redo.create_action(action_name)
 			undo_redo_action_created = true
 			Palettes.undo_redo_add_palette(palette_to_sort, false)
@@ -305,7 +305,7 @@ func _on_PaletteGrid_swatch_dropped(s_index: int, t_index: int) -> void:
 	var undo_redo := Global.current_project.undo_redo
 	var palette_in_focus := Palettes.current_palette
 	var palette_is_local := palette_in_focus.is_project_palette
-	if not palette_is_local and Global.auto_convert_global_palettes:
+	if not palette_is_local and Global.global_palettes_readonly:
 		# Convert palette and create action
 		palette_in_focus = palette_in_focus.duplicate()
 		undo_redo.create_action(action_name)
@@ -379,12 +379,15 @@ func _on_ColorPicker_color_changed(color: Color) -> void:
 
 
 func _on_colorpicker_visibility_changed() -> void:
+	# Abort if the palette's not local and palette conversion is disabled
+	if not Palettes.current_palette.is_project_palette and not Global.global_palettes_readonly:
+		return
 	var undo_redo := Global.current_project.undo_redo
-	if hidden_color_picker.get_picker().is_visible_in_tree():
+	if hidden_color_picker.get_picker().is_visible_in_tree():  # Editing started
 		undo_redo.create_action("Change swatch color")
 		var old_color := Palettes.current_palette_get_color(edited_swatch_index)
 		if not Palettes.current_palette.is_project_palette:
-			# Reset color on the original palette, and make a copy instead
+			# Reset color on the original palette, and make a local copy instead
 			undo_redo.add_do_method(
 				Palettes.current_palette_set_color.bind(edited_swatch_index, old_color)
 			)
@@ -395,7 +398,7 @@ func _on_colorpicker_visibility_changed() -> void:
 		undo_redo.add_undo_method(
 			palette_grid.set_swatch_color.bind(edited_swatch_index, old_color)
 		)
-	else:
+	else:  # Editing finished
 		undo_redo.add_do_method(
 			Palettes.current_palette_set_color.bind(edited_swatch_index, edited_swatch_color)
 		)
@@ -482,7 +485,7 @@ func _current_palette_add_color(color: Color, start_index := 0) -> void:
 			break
 	var undo_redo := Global.current_project.undo_redo
 	# Localize global palettes if possible
-	if palette_in_focus.is_project_palette or Global.auto_convert_global_palettes:
+	if palette_in_focus.is_project_palette or Global.global_palettes_readonly:
 		undo_redo.create_action("Add palette color")
 		palette_in_focus = undo_redo_get_or_create_local_version(palette_in_focus, undo_redo)
 		undo_redo.add_do_method(palette_in_focus.add_color.bind(color, start_index))
@@ -503,7 +506,7 @@ func _current_palette_undo_redo_remove_color(index := 0) -> void:
 	var palette_in_focus = Palettes.current_palette
 	var undo_redo := Global.current_project.undo_redo
 	# Localize global palettes if possible
-	if palette_in_focus.is_project_palette or Global.auto_convert_global_palettes:
+	if palette_in_focus.is_project_palette or Global.global_palettes_readonly:
 		undo_redo.create_action("Remove palette color")
 		palette_in_focus = undo_redo_get_or_create_local_version(palette_in_focus, undo_redo)
 		undo_redo.add_do_method(palette_in_focus.remove_color.bind(index))

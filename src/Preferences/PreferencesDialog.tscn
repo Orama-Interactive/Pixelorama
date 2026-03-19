@@ -1081,6 +1081,28 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 color = Color(0.992157, 0.427451, 0.0784314, 1)
 
+[node name="Palettes" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide" unique_id=1780868494]
+visible = false
+layout_mode = 2
+
+[node name="PaletteOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Palettes" unique_id=613896065]
+layout_mode = 2
+columns = 3
+
+[node name="GlobalPalettesReadonlyLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Palettes/PaletteOptions" unique_id=307136421]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
+mouse_filter = 1
+text = "Make global palettes readonly."
+
+[node name="GlobalPalettesReadonly" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Palettes/PaletteOptions" unique_id=1082179765]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "If this is enabled, global palettes will be readonly and changes to them will be applied on a project wide copy instead."
+mouse_default_cursor_shape = 2
+text = "On"
+
 [node name="Selection" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide" unique_id=1692342142]
 visible = false
 layout_mode = 2
