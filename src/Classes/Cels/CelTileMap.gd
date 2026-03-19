@@ -964,6 +964,14 @@ func set_content(content, texture: ImageTexture = null) -> void:
 	find_times_used_of_tiles()
 
 
+func create_empty_content() -> Array:
+	var empty := Image.create(image.get_width(), image.get_height(), false, image.get_format())
+	var new_image := ImageExtended.new()
+	new_image.copy_from_custom(empty, image.is_indexed)
+	var empty_cells: Dictionary[Vector2i, Cell] = {}
+	return [new_image, empty_cells]
+
+
 func copy_content() -> Array:
 	var tmp_image := Image.create_from_data(
 		image.get_width(), image.get_height(), false, image.get_format(), image.get_data()

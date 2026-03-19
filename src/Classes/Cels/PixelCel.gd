@@ -48,7 +48,7 @@ func set_content(content, texture: ImageTexture = null) -> void:
 		image_texture.update(image)
 
 
-func create_empty_content() -> ImageExtended:
+func create_empty_content() -> Variant:
 	var empty := Image.create(image.get_width(), image.get_height(), false, image.get_format())
 	var new_image := ImageExtended.new()
 	new_image.copy_from_custom(empty, image.is_indexed)
