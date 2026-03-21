@@ -270,10 +270,12 @@ func create_image_atlas(rows := 1, skip_first := true) -> Image:
 	return image
 
 
-func create_godot_tileset(rows := 1) -> TileSet:
+func create_godot_tileset(rows := 1, shape := tile_shape, size := tile_size) -> TileSet:
 	var godot_tileset := TileSet.new()
 	godot_tileset.tile_size = tile_size
 	godot_tileset.tile_shape = tile_shape
+	godot_tileset.tile_size = size
+	godot_tileset.tile_shape = shape
 	godot_tileset.tile_offset_axis = tile_offset_axis
 	godot_tileset.add_terrain_set()
 	godot_tileset.set_terrain_set_mode(0, terrain_mode)
@@ -285,6 +287,7 @@ func create_godot_tileset(rows := 1) -> TileSet:
 	godot_tileset.add_source(godot_tileset_atlas_source)
 	var image_atlas := create_image_atlas(rows)
 	godot_tileset_atlas_source.texture = ImageTexture.create_from_image(image_atlas)
+	# This needs to be equal to tile_size and not size.
 	godot_tileset_atlas_source.texture_region_size = tile_size
 	var grid_size := godot_tileset_atlas_source.get_atlas_grid_size()
 	var tile_index := 1
