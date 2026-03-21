@@ -341,6 +341,8 @@ func _on_PaletteGrid_swatch_dropped(s_index: int, t_index: int) -> void:
 		undo_redo.add_do_method(redraw_current_palette)
 		undo_redo.add_undo_method(redraw_current_palette)
 		commit_undo()
+	else:
+		redraw_current_palette()
 
 
 func _on_PaletteGrid_swatch_pressed(mouse_button: int, index: int) -> void:
