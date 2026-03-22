@@ -392,7 +392,7 @@ func _on_colorpicker_visibility_changed() -> void:
 			undo_redo.add_do_method(
 				Palettes.current_palette_set_color.bind(edited_swatch_index, old_color)
 			)
-			Palettes.copy_current_palette(Palettes.current_palette.name)
+			Palettes.copy_current_palette(false)
 		undo_redo.add_undo_method(
 			Palettes.current_palette_set_color.bind(edited_swatch_index, old_color)
 		)

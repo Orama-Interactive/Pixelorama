@@ -100,8 +100,9 @@ func save_palette(palette: Palette = current_palette) -> void:
 		Global.popup_error("Failed to save palette. Error code %s (%s)" % [err, error_string(err)])
 
 
-## Copies the current_palette and assigns it as the new current palette
-func copy_current_palette(new_palette_name := current_palette.name, is_global := false) -> void:
+## Copies the current_palette and assigns it as the new current palette. Note that if
+## [param is_global] is set to false, a project.undo_redo action has to be created prior.
+func copy_current_palette(is_global := true, new_palette_name := current_palette.name) -> void:
 	new_palette_name = get_valid_name(new_palette_name)
 	var comment := current_palette.comment
 	_create_new_palette_from_current_palette(new_palette_name, comment, is_global)
@@ -123,6 +124,8 @@ func add_palette_as_project_palette(new_palette: Palette) -> void:
 	new_palette.name = get_valid_name(new_palette.name)
 	Global.current_project.palettes[new_palette.name] = new_palette
 	current_palette = new_palette
+	# Project.project_current_palette_name will update when new_palette_created is emitted
+	# which redraws palette UI
 	new_palette_created.emit()
 
 
@@ -134,9 +137,15 @@ func undo_redo_add_palette(new_palette: Palette, is_global: bool):
 		new_palette.name = get_valid_name(new_palette.name)
 		save_palette(new_palette)
 		palettes[new_palette.name] = new_palette
-		select_palette(new_palette.name)
+		current_palette = new_palette
+		# Project.project_current_palette_name will update when new_palette_created is emitted
+		# which redraws palette UI
+		new_palette_created.emit()
 	else:
 		var undo_redo := Global.current_project.undo_redo
+		# it gets done in add_do_method as well but setting it here makes it immediately available
+		# for other methods in current stack frame
+		new_palette.is_project_palette = true
 		undo_redo.add_do_method(add_palette_as_project_palette.bind(new_palette))
 		undo_redo.add_undo_method(palette_delete_and_reselect.bind(true, new_palette))
 		if is_instance_valid(current_palette):
