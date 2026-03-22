@@ -305,6 +305,7 @@ func _on_PaletteGrid_swatch_dropped(s_index: int, t_index: int) -> void:
 	var palette_in_focus := Palettes.current_palette
 	var palette_is_local := palette_in_focus.is_project_palette
 	if not palette_is_local:
+		# If palette is read only, make a local copy and create action.
 		if Global.global_palettes_readonly:
 			# Convert palette and create action
 			palette_in_focus = palette_in_focus.duplicate()
@@ -312,7 +313,7 @@ func _on_PaletteGrid_swatch_dropped(s_index: int, t_index: int) -> void:
 			Palettes.undo_redo_add_palette(palette_in_focus, false)
 			palette_is_local = true
 	else:
-		# Palette already converted, just create action
+		# It is a project palette, create action for it.
 		undo_redo.create_action(action_name)
 	if Input.is_key_pressed(KEY_SHIFT):
 		if palette_is_local:
