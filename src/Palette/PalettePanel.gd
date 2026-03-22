@@ -225,7 +225,7 @@ func sort_pressed(id: Palettes.SortOptions) -> void:
 	var undo_redo_action_created := false
 	if new_palette:
 		palette_to_sort = palette_to_sort.duplicate()
-		if Global.global_palettes_readonly:
+		if Global.global_palettes_readonly or Palettes.current_palette.is_project_palette:
 			undo_redo.create_action(action_name)
 			undo_redo_action_created = true
 			Palettes.undo_redo_add_palette(palette_to_sort, false)
@@ -234,7 +234,7 @@ func sort_pressed(id: Palettes.SortOptions) -> void:
 			)
 		else:
 			Palettes.copy_current_palette()
-			# This line is not really needed but it's goof to mention current_palette has changed.
+			# This line is not really needed but it's good to mention current_palette has changed.
 			palette_to_sort = Palettes.current_palette
 
 	# Start sorting
