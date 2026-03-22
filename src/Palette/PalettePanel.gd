@@ -304,12 +304,13 @@ func _on_PaletteGrid_swatch_dropped(s_index: int, t_index: int) -> void:
 	var undo_redo := Global.current_project.undo_redo
 	var palette_in_focus := Palettes.current_palette
 	var palette_is_local := palette_in_focus.is_project_palette
-	if not palette_is_local and Global.global_palettes_readonly:
-		# Convert palette and create action
-		palette_in_focus = palette_in_focus.duplicate()
-		undo_redo.create_action(action_name)
-		Palettes.undo_redo_add_palette(palette_in_focus, false)
-		palette_is_local = true
+	if not palette_is_local:
+		if Global.global_palettes_readonly:
+			# Convert palette and create action
+			palette_in_focus = palette_in_focus.duplicate()
+			undo_redo.create_action(action_name)
+			Palettes.undo_redo_add_palette(palette_in_focus, false)
+			palette_is_local = true
 	else:
 		# Palette already converted, just create action
 		undo_redo.create_action(action_name)
