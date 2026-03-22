@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://ddiwy0yrvpblt" path="res://src/Palette/CreatePaletteDialog.gd" id="1"]
 
 [node name="CreatePaletteDialog" type="ConfirmationDialog" unique_id=608696027]
-title = "Create a new project palette"
+oversampling_override = 1.0
+title = "Create a new palette"
 position = Vector2i(0, 36)
 size = Vector2i(421, 315)
 script = ExtResource("1")
@@ -12,9 +13,9 @@ script = ExtResource("1")
 anchors_preset = -1
 anchor_left = 0.000793701
 anchor_right = 0.000793701
-offset_left = 7.66585
+offset_left = 7.665852
 offset_top = 8.0
-offset_right = 412.666
+offset_right = 412.66586
 offset_bottom = 266.0
 
 [node name="PaletteMetadata" type="GridContainer" parent="VBoxContainer" unique_id=1633343946]
@@ -50,6 +51,13 @@ text = "Name:"
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="PaletteTypeLabel" type="Label" parent="VBoxContainer/PaletteMetadata" unique_id=2013798205]
+layout_mode = 2
+text = "Type:"
+
+[node name="PaletteTypeOption" type="OptionButton" parent="VBoxContainer/PaletteMetadata" unique_id=66072679]
+layout_mode = 2
 
 [node name="CommentLabel" type="Label" parent="VBoxContainer/PaletteMetadata" unique_id=327247049]
 custom_minimum_size = Vector2(50, 0)

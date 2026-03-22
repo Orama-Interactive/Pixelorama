@@ -88,6 +88,12 @@ var preferences: Array[Preference] = [
 		"right_tool_color", "Tools/ToolOptions/RightToolColorButton", "color", Color("fd6d14")
 	),
 	Preference.new(
+		"global_palettes_readonly",
+		"Palettes/PaletteOptions/GlobalPalettesReadonly",
+		"button_pressed",
+		true
+	),
+	Preference.new(
 		"tool_button_size",
 		"Interface/ButtonOptions/ToolButtonSizeOptionButton",
 		"selected",
