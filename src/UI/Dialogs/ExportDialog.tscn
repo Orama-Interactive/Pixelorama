@@ -342,24 +342,21 @@ text = "Clip image content to selection"
 [node name="PathDialog" type="FileDialog" parent="." unique_id=746657325 groups=["FileDialogs"]]
 mode = 2
 size = Vector2i(675, 500)
-always_on_top = true
 ok_button_text = "Select Current Folder"
 access = 2
 
 [node name="PathValidationAlert" type="AcceptDialog" parent="." unique_id=355024950]
-always_on_top = true
 dialog_text = "DirAccess path and file name are not valid!"
 
 [node name="FileExistsAlert" type="AcceptDialog" parent="." unique_id=2050038451]
-always_on_top = true
 dialog_text = "File %s already exists. Overwrite?"
 
 [node name="ExportProgressBar" type="Window" parent="." unique_id=438204898]
 title = "Export Progress"
 size = Vector2i(400, 100)
 visible = false
+transient = true
 exclusive = true
-always_on_top = true
 
 [node name="MarginContainer" type="MarginContainer" parent="ExportProgressBar" unique_id=285398078]
 anchors_preset = 15
