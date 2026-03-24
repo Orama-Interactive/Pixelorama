@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2026-03-14 18:41\n"
+"PO-Revision-Date: 2026-03-24 19:48\n"
 
 msgid "OK"
 msgstr "Aceptar"
@@ -1059,8 +1059,12 @@ msgstr "Color de la herramienta izquierda:"
 msgid "Right tool color:"
 msgstr "Color de la herramienta derecha:"
 
-msgid "Tool button size:"
-msgstr "Tamaño de boton de herramienta:"
+msgid "Right tool color:"
+msgstr ""
+
+#. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
+msgid "Make global palettes read-only"
+msgstr ""
 
 msgid "Small"
 msgstr "Pequeño"
