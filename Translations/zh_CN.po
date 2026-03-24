@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2026-03-09 14:13\n"
+"PO-Revision-Date: 2026-03-24 12:02\n"
 
 msgid "OK"
 msgstr "确定"
@@ -989,7 +989,7 @@ msgstr "单窗口模式"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
 msgid "Collapse main menu"
-msgstr ""
+msgstr "收起主菜单"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
@@ -1048,7 +1048,7 @@ msgstr "如果启用此功能，则鼠标右键将始终激活与鼠标左键相
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between left and right tools"
-msgstr ""
+msgstr "左右工具之间的共享选项"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
@@ -1517,7 +1517,7 @@ msgid "Belarusian"
 msgstr "白俄罗斯语"
 
 msgid "Thai"
-msgstr ""
+msgstr "泰语"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -3376,7 +3376,7 @@ msgstr "仅导出在选定区域界限内的内容。"
 
 #. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
 msgid "Layers as separate files"
-msgstr ""
+msgstr "作为单独的图层文件"
 
 msgid "Close"
 msgstr "关闭"
