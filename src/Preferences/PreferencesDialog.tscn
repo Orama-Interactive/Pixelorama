@@ -1094,7 +1094,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "If this is enabled, global palettes will be readonly and changes to them will be applied on a project wide copy instead."
 mouse_filter = 1
-text = "Make global palettes readonly"
+text = "Make global palettes read-only"
 
 [node name="GlobalPalettesReadonly" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Palettes/PaletteOptions" unique_id=1082179765]
 layout_mode = 2
