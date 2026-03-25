@@ -54,10 +54,8 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_pressed():
-		var indices := Global.current_project.selected_cels.duplicate()
-		if [frame, layer] in indices:
-			popup_menu.activate_item_by_event(event)
+	if event.is_pressed() and [frame, layer] in Global.current_project.selected_cels:
+		popup_menu.activate_item_by_event(event)
 
 
 func _set_menu_shortcut(
