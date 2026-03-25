@@ -272,7 +272,7 @@ func _clone_cel_content() -> void:
 		if !new_selected_cels.has(new_frame_layer):
 			new_selected_cels.append(new_frame_layer)
 		var selected_cel := project.frames[frame_index].cels[layer_index]
-		var next_cel :PixelCel
+		var next_cel: PixelCel = null
 		var is_using_new_frame := false
 		if new_frame_layer[0] >= project.frames.size():
 			if not new_end_frame:
