@@ -402,8 +402,25 @@ func _update_layers() -> void:
 func add_frame() -> void:
 	var project := Global.current_project
 	var frame_add_index := project.current_frame + 1
-	var frame := project.new_empty_frame()
 	project.undo_redo.create_action("Add Frame")
+	undo_redo_add_frame(frame_add_index)
+	project.undo_redo.add_do_method(project.change_cel.bind(project.current_frame + 1))
+	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.commit_action()
+	# It doesn't update properly without awaits
+	await get_tree().process_frame
+	await get_tree().process_frame
+	adjust_scroll_container()
+
+
+## This method adds a new frame assuming that an undo action is already created, hence it can be
+## reused in multiple undo actions like adding frame, cloning cel etc. Returns the new frame for
+## further adjustment outside of this method.
+func undo_redo_add_frame(frame_add_index: int) -> Frame:
+	var project := Global.current_project
+	var frame := project.new_empty_frame()
 	for l in range(project.layers.size()):
 		if project.layers[l].new_cels_linked:  # If the link button is pressed
 			var prev_cel := project.frames[project.current_frame].cels[l]
@@ -430,19 +447,11 @@ func add_frame() -> void:
 			tag.from += 1
 			tag.to += 1
 
-	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_do_method(project.add_frames.bind([frame], [frame_add_index]))
 	project.undo_redo.add_undo_method(project.remove_frames.bind([frame_add_index]))
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
-	project.undo_redo.add_do_method(project.change_cel.bind(project.current_frame + 1))
-	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
-	project.undo_redo.commit_action()
-	# It doesn't update properly without awaits
-	await get_tree().process_frame
-	await get_tree().process_frame
-	adjust_scroll_container()
+	return frame
 
 
 func _on_DeleteFrame_pressed() -> void:
