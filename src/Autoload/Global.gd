@@ -958,6 +958,7 @@ func _initialize_keychain() -> void:
 		&"merge_down_layer": Keychain.InputAction.new("", "Timeline"),
 		&"add_frame": Keychain.InputAction.new("", "Timeline"),
 		&"remove_frame": Keychain.InputAction.new("", "Timeline"),
+		&"clone_cel": Keychain.InputAction.new("", "Timeline"),
 		&"clone_frame": Keychain.InputAction.new("", "Timeline"),
 		&"move_frame_left": Keychain.InputAction.new("", "Timeline"),
 		&"move_frame_right": Keychain.InputAction.new("", "Timeline"),
