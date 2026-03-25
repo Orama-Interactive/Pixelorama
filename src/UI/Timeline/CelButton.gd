@@ -8,7 +8,7 @@ var cel: BaseCel
 
 var _is_guide_stylebox := false
 
-@onready var popup_menu: PopupMenu = get_node_or_null("PopupMenu")
+@onready var popup_menu: PopupMenu = $PopupMenu
 @onready var ui_color_rect: ColorRect = $UIColorRect
 @onready var linked_rect: ColorRect = $Linked
 @onready var cel_texture: TextureRect = $CelTexture
@@ -53,7 +53,13 @@ func _ready() -> void:
 		transparent_checker.visible = false
 
 
-## For some reason this isn't working
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_pressed():
+		var indices := Global.current_project.selected_cels.duplicate()
+		if [frame, layer] in indices:
+			popup_menu.activate_item_by_event(event)
+
+
 func _set_menu_shortcut(
 	action: StringName,
 	menu: PopupMenu,
@@ -160,18 +166,17 @@ func _on_CelButton_pressed() -> void:
 
 
 func _on_PopupMenu_id_pressed(id: int) -> void:
-	print(popup_menu.get_item_shortcut(popup_menu.get_item_index(id)))
 	var project := Global.current_project
+	var layer_class := project.layers[layer]
 	match id:
 		MenuOptions.PROPERTIES:
 			properties.cel_indices = _get_cel_indices()
 			properties.popup_centered_clamped()
-		MenuOptions.SELECT_PIXELS:
-			var layer_class := project.layers[layer]
+		MenuOptions.PLAY_AUDIO:
 			if layer_class is AudioLayer:
 				layer_class.playback_frame = frame
-			else:
-				Global.canvas.selection.select_cel_pixels(layer_class, project.frames[frame])
+		MenuOptions.SELECT_PIXELS:
+			Global.canvas.selection.select_cel_pixels(layer_class, project.frames[frame])
 		MenuOptions.DELETE:
 			_delete_cel_content()
 
