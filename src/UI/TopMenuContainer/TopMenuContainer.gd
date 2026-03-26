@@ -879,7 +879,12 @@ func _color_mode_submenu_id_pressed(id: ColorModes) -> void:
 		project.color_mode = Image.FORMAT_RGBA8
 	else:
 		project.color_mode = Project.INDEXED_MODE
-	project.update_tilemaps(undo_data, TileSetPanel.TileEditingMode.AUTO)
+	var used_tilesets := project.update_tilemaps(undo_data, TileSetPanel.TileEditingMode.AUTO)
+	var layers_to_update := PackedInt32Array()
+	for l in Global.current_project.layers:
+		if l is LayerTileMap:
+			if l.tileset in used_tilesets:
+				layers_to_update.append(l.index)
 	project.serialize_cel_undo_data(pixel_cels, redo_data)
 	project.undo_redo.create_action("Change color mode")
 	var palette_in_focus = Palettes.current_palette
@@ -890,6 +895,13 @@ func _color_mode_submenu_id_pressed(id: ColorModes) -> void:
 	project.undo_redo.add_do_property(project, "color_mode", project.color_mode)
 	project.undo_redo.add_undo_property(project, "color_mode", old_color_mode)
 	project.deserialize_cel_undo_data(redo_data, undo_data)
+	# we may be a different layer during undo/redo
+	Global.current_project.undo_redo.add_do_property(
+		Global.canvas, "mandatory_update_layers", layers_to_update
+	)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.canvas, "mandatory_update_layers", layers_to_update
+	)
 	project.undo_redo.add_do_method(_check_color_mode_submenu_item.bind(project))
 	project.undo_redo.add_undo_method(_check_color_mode_submenu_item.bind(project))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))

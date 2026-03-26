@@ -993,10 +993,15 @@ func add_tileset(tileset: TileSetCustom) -> void:
 
 
 ## Loops through all cels in [param cel_dictionary], and for [CelTileMap]s,
-## it calls [method CelTileMap.update_tilemap].
+## it calls [method CelTileMap.update_tilemap]. Returns an array of used tilesets that can be used
+## as reference to update layers during undo/redo.
 func update_tilemaps(
 	cel_dictionary: Dictionary, tile_editing_mode := TileSetPanel.tile_editing_mode
-) -> void:
+) -> Array[TileSetCustom]:
+	var used_tilesets: Array[TileSetCustom]
 	for cel in cel_dictionary:
 		if cel is CelTileMap:
 			(cel as CelTileMap).update_tilemap(tile_editing_mode)
+			if cel.tileset and not cel.tileset in used_tilesets:
+				used_tilesets.append(cel.tileset)
+	return used_tilesets

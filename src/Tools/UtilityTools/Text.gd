@@ -168,7 +168,7 @@ func text_to_pixels() -> void:
 func commit_undo(action: String, undo_data: Dictionary) -> void:
 	var project := Global.current_project
 	Global.canvas.update_selected_cels_textures(project)
-	project.update_tilemaps(undo_data)
+	var used_tilesets := project.update_tilemaps(undo_data)
 	var redo_data := _get_undo_data()
 	var frame := -1
 	var layer := -1
@@ -177,7 +177,19 @@ func commit_undo(action: String, undo_data: Dictionary) -> void:
 		layer = project.current_layer
 
 	project.undo_redo.create_action(action)
+	var layers_to_update := PackedInt32Array()
+	for l in Global.current_project.layers:
+		if l is LayerTileMap:
+			if l.tileset in used_tilesets:
+				layers_to_update.append(l.index)
 	project.deserialize_cel_undo_data(redo_data, undo_data)
+	# we may be a different layer during undo/redo
+	Global.current_project.undo_redo.add_do_property(
+		Global.canvas, "mandatory_update_layers", layers_to_update
+	)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.canvas, "mandatory_update_layers", layers_to_update
+	)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
 	project.undo_redo.commit_action()
