@@ -895,7 +895,7 @@ func _color_mode_submenu_id_pressed(id: ColorModes) -> void:
 	project.undo_redo.add_do_property(project, "color_mode", project.color_mode)
 	project.undo_redo.add_undo_property(project, "color_mode", old_color_mode)
 	project.deserialize_cel_undo_data(redo_data, undo_data)
-	# we may be a different layer during undo/redo
+	# we may be on a different layer during undo/redo
 	Global.current_project.undo_redo.add_do_property(
 		Global.canvas, "mandatory_update_layers", layers_to_update
 	)

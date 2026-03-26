@@ -630,7 +630,7 @@ func commit_undo() -> void:
 			if l.tileset in used_tilesets:
 				layers_to_update.append(l.index)
 	project.deserialize_cel_undo_data(redo_data, _undo_data)
-	# we may be a different layer during undo/redo
+	# we may be on a different layer during undo/redo
 	Global.current_project.undo_redo.add_do_property(
 		Global.canvas, "mandatory_update_layers", layers_to_update
 	)
