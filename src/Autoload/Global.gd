@@ -1082,7 +1082,7 @@ func session_crashed_last_time() -> bool:
 	# Callable for time updater
 	var update_monitoring_time = func():
 		# NOTE: Only create the file at RUNNING_FILE_PATH through timeout signal. Creating them
-		# instantly ar session startup would cause conflicts between consequtive calls of the
+		# instantly ar session startup would cause conflicts between consecutive calls of the
 		# session_crashed_last_time method.
 		var m_file := FileAccess.open(RUNNING_FILE_PATH, FileAccess.WRITE)
 		m_file.store_line(var_to_str(int(Time.get_unix_time_from_system())))
@@ -1115,7 +1115,6 @@ func session_crashed_last_time() -> bool:
 			if int(Time.get_unix_time_from_system()) - last_update_time <= ping_timer.wait_time:
 				return false
 		# If this line is reached then it's likely that the app crashed last session
-		DirAccess.remove_absolute(RUNNING_FILE_PATH)
 		return true
 	return false
 
