@@ -211,6 +211,7 @@ func _ready() -> void:
 	Import.import_patterns(Global.path_join_array(Global.data_directories, "Patterns"))
 
 	quit_and_save_dialog.add_button("Exit without saving", false, "ExitWithoutSaving")
+	var last_project_path := get_last_project_path()
 	_handle_cmdline_arguments()
 	get_tree().root.files_dropped.connect(_on_files_dropped)
 	if OS.get_name() == "Android":
@@ -230,7 +231,7 @@ func _ready() -> void:
 	FileAccess.open(RUNNING_FILE_PATH, FileAccess.WRITE)
 	await get_tree().process_frame
 	if Global.open_last_project:
-		load_last_project()
+		load_last_project(last_project_path, true)
 	_setup_application_window_size()
 	_show_splash_screen()
 	Global.pixelorama_opened.emit()
@@ -530,14 +531,25 @@ func _on_files_dropped(files: PackedStringArray) -> void:
 		splash_dialog.hide()
 
 
-func load_last_project() -> void:
-	if OS.get_name() == "Web":
-		return
+func get_last_project_path() -> String:
 	# Check if any project was saved or opened last time
 	if Global.config_cache.has_section_key("data", "last_project_path"):
 		# Check if file still exists on disk
-		var file_path = Global.config_cache.get_value("data", "last_project_path")
-		load_recent_project_file(file_path)
+		return Global.config_cache.get_value("data", "last_project_path")
+	return ""
+
+
+func load_last_project(last_project_path_override: String = "", use_override := false) -> void:
+	# NOTE: When projects are loaded through CLI, the last_project_path gets overriden, and we
+	# have to pass an override path in that senario.
+	if OS.get_name() == "Web":
+		return
+	# Check if any project was saved or opened last time
+	var last_project_path := get_last_project_path()
+	if use_override:
+		last_project_path = last_project_path_override
+	if not last_project_path.is_empty():
+		load_recent_project_file(last_project_path)
 		(func(): Global.cel_switched.emit()).call_deferred()
 
 
