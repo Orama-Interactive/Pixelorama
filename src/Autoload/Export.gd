@@ -4,7 +4,7 @@ enum ExportTab { IMAGE, SPRITESHEET }
 enum Orientation { COLUMNS, ROWS, TAGS_BY_ROW, TAGS_BY_COLUMN }
 enum AnimationDirection { FORWARD, BACKWARDS, PING_PONG }
 ## See file_format_string, file_format_description, and ExportDialog.gd
-enum FileFormat { PNG, WEBP, JPEG, GIF, APNG, MP4, AVI, OGV, MKV, WEBM }
+enum FileFormat { PNG, WEBP, JPEG, EXR, GIF, APNG, MP4, AVI, OGV, MKV, WEBM }
 enum { VISIBLE_LAYERS, SELECTED_LAYERS }
 enum ExportFrames { ALL_FRAMES, SELECTED_FRAMES }
 
@@ -30,6 +30,7 @@ var file_format_dictionary: Dictionary[FileFormat, Array] = {
 	FileFormat.PNG: [".png", "PNG Image"],
 	FileFormat.WEBP: [".webp", "WebP Image"],
 	FileFormat.JPEG: [".jpg", "JPG Image"],
+	FileFormat.EXR: [".exr", "EXR Image"],
 	FileFormat.GIF: [".gif", "GIF Image"],
 	FileFormat.APNG: [".apng", "APNG Image"],
 	FileFormat.MP4: [".mp4", "MPEG-4 Video"],
@@ -51,8 +52,10 @@ var processed_images: Array[ProcessedImage] = []
 var blended_frames: Dictionary[Frame, Image] = {}
 var export_json := false
 var split_layers := false
+var sheet_layers_as_separate_files := false
 var trim_images := false
 var erase_unselected_area := false
+var overwrite_asked := false
 
 # Spritesheet options
 var orientation := Orientation.COLUMNS
@@ -209,70 +212,104 @@ func process_spritesheet(project := Global.current_project) -> void:
 			spritesheet_columns = temp
 	var width := project.size.x * spritesheet_columns
 	var height := project.size.y * spritesheet_rows
-	var whole_image := Image.create(width, height, false, project.get_image_format())
-	var origin := Vector2i.ZERO
-	var hh := 0
-	var vv := 0
-	for frame in frames:
-		if orientation == Orientation.ROWS:
-			if vv < spritesheet_columns:
-				origin.x = project.size.x * vv
-				vv += 1
-			else:
-				hh += 1
-				origin.x = 0
-				vv = 1
-				origin.y = project.size.y * hh
-		elif orientation == Orientation.COLUMNS:
-			if hh < spritesheet_rows:
-				origin.y = project.size.y * hh
-				hh += 1
-			else:
-				vv += 1
-				origin.y = 0
-				hh = 1
-				origin.x = project.size.x * vv
-		elif orientation == Orientation.TAGS_BY_ROW:
-			var frame_index := project.frames.find(frame)
-			var frame_has_tag := false
-			for i in project.animation_tags.size():
-				var tag := project.animation_tags[i]
-				if tag.has_frame(frame_index):
-					origin.x = project.size.x * tag_origins[tag]
-					if frames_without_tag == 0:
-						# If all frames have a tag, remove the first row
-						origin.y = project.size.y * i
-					else:
-						origin.y = project.size.y * (i + 1)
-					tag_origins[tag] += 1
-					frame_has_tag = true
-					break
-			if not frame_has_tag:
-				origin.x = project.size.x * tag_origins[0]
-				origin.y = 0
-				tag_origins[0] += 1
-		elif orientation == Orientation.TAGS_BY_COLUMN:
-			var frame_index := project.frames.find(frame)
-			var frame_has_tag := false
-			for i in project.animation_tags.size():
-				var tag := project.animation_tags[i]
-				if tag.has_frame(frame_index):
-					origin.y = project.size.y * tag_origins[tag]
-					if frames_without_tag == 0:
-						# If all frames have a tag, remove the first row
-						origin.x = project.size.x * i
-					else:
-						origin.x = project.size.x * (i + 1)
-					tag_origins[tag] += 1
-					frame_has_tag = true
-					break
-			if not frame_has_tag:
-				origin.y = project.size.y * tag_origins[0]
-				origin.x = 0
-				tag_origins[0] += 1
-		whole_image.blend_rect(blended_frames[frame], Rect2i(Vector2i.ZERO, project.size), origin)
-
-	processed_images.append(ProcessedImage.new(whole_image, 0))
+	var splitter_array = project.layers if split_layers else []
+	var sprite_sheets: Array[Image]  # Array of all apritesheets
+	# This is an imitation of a do-while loop. The loop ends early if split_layers is empty
+	for split_l in splitter_array.size() + 1:
+		var origin := Vector2i.ZERO
+		var layer_tag_origins = tag_origins.duplicate()
+		var hh := 0
+		var vv := 0
+		var sheet_image := Image.create_empty(width, height, false, project.get_image_format())
+		var sheet_is_valid := false
+		for frame in frames:
+			if orientation == Orientation.ROWS:
+				if vv < spritesheet_columns:
+					origin.x = project.size.x * vv
+					vv += 1
+				else:
+					hh += 1
+					origin.x = 0
+					vv = 1
+					origin.y = project.size.y * hh
+			elif orientation == Orientation.COLUMNS:
+				if hh < spritesheet_rows:
+					origin.y = project.size.y * hh
+					hh += 1
+				else:
+					vv += 1
+					origin.y = 0
+					hh = 1
+					origin.x = project.size.x * vv
+			elif orientation == Orientation.TAGS_BY_ROW:
+				var frame_index := project.frames.find(frame)
+				var frame_has_tag := false
+				for i in project.animation_tags.size():
+					var tag := project.animation_tags[i]
+					if tag.has_frame(frame_index):
+						origin.x = project.size.x * layer_tag_origins[tag]
+						if frames_without_tag == 0:
+							# If all frames have a tag, remove the first row
+							origin.y = project.size.y * i
+						else:
+							origin.y = project.size.y * (i + 1)
+						layer_tag_origins[tag] += 1
+						frame_has_tag = true
+						break
+				if not frame_has_tag:
+					origin.x = project.size.x * layer_tag_origins[0]
+					origin.y = 0
+					layer_tag_origins[0] += 1
+			elif orientation == Orientation.TAGS_BY_COLUMN:
+				var frame_index := project.frames.find(frame)
+				var frame_has_tag := false
+				for i in project.animation_tags.size():
+					var tag := project.animation_tags[i]
+					if tag.has_frame(frame_index):
+						origin.y = project.size.y * layer_tag_origins[tag]
+						if frames_without_tag == 0:
+							# If all frames have a tag, remove the first row
+							origin.x = project.size.x * i
+						else:
+							origin.x = project.size.x * (i + 1)
+						layer_tag_origins[tag] += 1
+						frame_has_tag = true
+						break
+				if not frame_has_tag:
+					origin.y = project.size.y * layer_tag_origins[0]
+					origin.x = 0
+					layer_tag_origins[0] += 1
+			if not split_layers:
+				sheet_image.blend_rect(
+					blended_frames[frame], Rect2i(Vector2i.ZERO, project.size), origin
+				)
+				sheet_is_valid = true
+			elif split_l < splitter_array.size():
+				var layer: BaseLayer = splitter_array[split_l]
+				sheet_image.blend_rect(
+					layer.display_effects(frame.cels[layer.index]),
+					Rect2i(Vector2i.ZERO, project.size),
+					origin
+				)
+				sheet_is_valid = true
+		if sheet_is_valid:
+			sprite_sheets.append(sheet_image)
+		if splitter_array.is_empty():
+			break
+	if not sheet_layers_as_separate_files and sprite_sheets.size() > 1:
+		var big_image := Image.create(
+			width, height * sprite_sheets.size(), false, project.get_image_format()
+		)
+		for i in sprite_sheets.size():
+			big_image.blend_rect(
+				sprite_sheets[i],
+				Rect2i(Vector2i.ZERO, Vector2i(width, height)),
+				Vector2i(0, height * (sprite_sheets.size() - i - 1))
+			)
+		# Remove old sheets and add the stacked image
+		sprite_sheets = [big_image]
+	for sheet: Image in sprite_sheets:
+		processed_images.append(ProcessedImage.new(sheet, 0))
 
 
 func process_animation(project := Global.current_project) -> void:
@@ -342,6 +379,9 @@ func export_processed_images(
 	# Stop export if directory path or file name are not valid
 	var dir_exists := DirAccess.dir_exists_absolute(project.export_directory_path)
 	var is_valid_filename := project.file_name.is_valid_filename()
+	if project.export_directory_path.begins_with("content://"):
+		dir_exists = true
+		is_valid_filename = true
 	if not dir_exists:
 		if is_valid_filename:  # Directory path not valid, file name is valid
 			export_dialog.open_path_validation_alert_popup(0)
@@ -353,8 +393,10 @@ func export_processed_images(
 		return false
 
 	var multiple_files := false
-	if current_tab == ExportTab.IMAGE and not is_single_file_format(project):
+	if not is_single_file_format(project):
 		multiple_files = true if processed_images.size() > 1 else false
+	if OS.get_name() == "Android":
+		multiple_files = false
 	# Check export paths
 	var export_paths: PackedStringArray = []
 	var paths_of_existing_files := ""
@@ -372,7 +414,11 @@ func export_processed_images(
 		)
 		# If the user wants to create a new directory for each animation tag then check
 		# if directories exist, and create them if not
-		if multiple_files and new_dir_for_each_frame_tag:
+		if (
+			multiple_files
+			and new_dir_for_each_frame_tag
+			and not current_tab == ExportTab.SPRITESHEET
+		):
 			var frame_tag_directory := DirAccess.open(export_path.get_base_dir())
 			if not DirAccess.dir_exists_absolute(export_path.get_base_dir()):
 				frame_tag_directory = DirAccess.open(project.export_directory_path)
@@ -385,10 +431,10 @@ func export_processed_images(
 				paths_of_existing_files += export_path
 		export_paths.append(export_path)
 		# Only get one export path if single file animated image is exported
-		if is_single_file_format(project):
+		if is_single_file_format(project) or OS.get_name() == "Android":
 			break
 
-	if not paths_of_existing_files.is_empty():  # If files already exist
+	if not paths_of_existing_files.is_empty() and not overwrite_asked:  # If files already exist
 		# Ask user if they want to overwrite the files
 		export_dialog.open_file_exists_alert_popup(tr(file_exists_alert) % paths_of_existing_files)
 		# Stops the function until the user decides if they want to overwrite
@@ -460,13 +506,7 @@ func export_processed_images(
 	else:
 		for i in range(processed_images.size()):
 			if OS.has_feature("web"):
-				if project.file_format == FileFormat.PNG:
-					JavaScriptBridge.download_buffer(
-						processed_images[i].image.save_png_to_buffer(),
-						export_paths[i].get_file(),
-						"image/png"
-					)
-				elif project.file_format == FileFormat.WEBP:
+				if project.file_format == FileFormat.WEBP:
 					JavaScriptBridge.download_buffer(
 						processed_images[i].image.save_webp_to_buffer(),
 						export_paths[i].get_file(),
@@ -478,6 +518,12 @@ func export_processed_images(
 						export_paths[i].get_file(),
 						"image/jpeg"
 					)
+				else:
+					JavaScriptBridge.download_buffer(
+						processed_images[i].image.save_png_to_buffer(),
+						export_paths[i].get_file(),
+						"image/png"
+					)
 
 			else:
 				var err: Error
@@ -487,11 +533,15 @@ func export_processed_images(
 					err = processed_images[i].image.save_webp(export_paths[i])
 				elif project.file_format == FileFormat.JPEG:
 					err = processed_images[i].image.save_jpg(export_paths[i], save_quality)
+				elif project.file_format == FileFormat.EXR:
+					err = processed_images[i].image.save_exr(export_paths[i])
 				if err != OK:
 					Global.popup_error(
 						tr("File failed to save. Error code %s (%s)") % [err, error_string(err)]
 					)
 					return false
+			if OS.get_name() == "Android":
+				break
 
 	Global.notification_label("File(s) exported")
 	# Store settings for quick export and when the dialog is opened again
@@ -735,7 +785,12 @@ func _create_export_path(
 		if layer > -1:
 			var layer_name := project.layers[layer].name
 			path_extras += "(%s) " % layer_name
-		path_extras += separator_character + str(frame).pad_zeros(number_of_digits)
+		var counter: String = (
+			str(layer).pad_zeros(number_of_digits)
+			if current_tab == ExportTab.SPRITESHEET
+			else str(str(frame).pad_zeros(number_of_digits))
+		)
+		path_extras += separator_character + counter
 	var frame_tag_and_start_id := _get_processed_image_tag_name_and_start_id(
 		project, actual_frame_index
 	)

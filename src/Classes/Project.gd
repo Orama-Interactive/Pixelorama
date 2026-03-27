@@ -39,8 +39,10 @@ var has_changed := false:
 		if value:
 			Global.project_data_changed.emit(self)
 			Global.tabs.set_tab_title(Global.tabs.current_tab, name + "(*)")
+			JavaScriptBridge.eval("setUnsavedChanges(true);")
 		else:
 			Global.tabs.set_tab_title(Global.tabs.current_tab, name)
+			JavaScriptBridge.eval("setUnsavedChanges(false);")
 # frames and layers Arrays should generally only be modified directly when
 # opening/creating a project. When modifying the current project, use
 # the add/remove/move/swap_frames/layers methods
@@ -322,6 +324,7 @@ func serialize() -> Dictionary:
 		"reference_images": reference_image_data,
 		"tilesets": tileset_data,
 		"vanishing_points": vanishing_points,
+		"export_directory_path": export_directory_path,
 		"export_file_name": file_name,
 		"export_file_format": file_format,
 		"fps": fps,
@@ -496,6 +499,9 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			x_symmetry_axis.points[point].y = floorf(y_symmetry_point / 2 + 1)
 		for point in y_symmetry_axis.points.size():
 			y_symmetry_axis.points[point].x = floorf(x_symmetry_point / 2 + 1)
+	export_directory_path = dict.get("export_directory_path", export_directory_path)
+	if not DirAccess.dir_exists_absolute(export_directory_path):
+		export_directory_path = ""
 	file_name = dict.get("export_file_name", file_name)
 	file_format = dict.get("export_file_format", file_name)
 	fps = dict.get("fps", file_name)
@@ -987,10 +993,15 @@ func add_tileset(tileset: TileSetCustom) -> void:
 
 
 ## Loops through all cels in [param cel_dictionary], and for [CelTileMap]s,
-## it calls [method CelTileMap.update_tilemap].
+## it calls [method CelTileMap.update_tilemap]. Returns an array of used tilesets that can be used
+## as reference to update layers during undo/redo.
 func update_tilemaps(
 	cel_dictionary: Dictionary, tile_editing_mode := TileSetPanel.tile_editing_mode
-) -> void:
+) -> Array[TileSetCustom]:
+	var used_tilesets: Array[TileSetCustom]
 	for cel in cel_dictionary:
 		if cel is CelTileMap:
 			(cel as CelTileMap).update_tilemap(tile_editing_mode)
+			if cel.tileset and not cel.tileset in used_tilesets:
+				used_tilesets.append(cel.tileset)
+	return used_tilesets

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://wplk62pbgih4"]
+[gd_scene format=3 uid="uid://wplk62pbgih4"]
 
 [ext_resource type="Texture2D" uid="uid://biyn51upnlxle" path="res://assets/graphics/palette/edit.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://d1urikaf1lxwl" path="res://assets/graphics/timeline/new_frame.png" id="2_j1lig"]
@@ -21,25 +21,25 @@ action = &"new_palette"
 [sub_resource type="Shortcut" id="Shortcut_6f4gc"]
 events = [SubResource("InputEventAction_mdfjt")]
 
-[node name="PalettePanel" type="MarginContainer"]
+[node name="PalettePanel" type="MarginContainer" unique_id=499798294]
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("8")
 
-[node name="PaletteVBoxContainer" type="VBoxContainer" parent="."]
+[node name="PaletteVBoxContainer" type="VBoxContainer" parent="." unique_id=1686199193]
 layout_mode = 2
 
-[node name="PaletteButtons" type="HBoxContainer" parent="PaletteVBoxContainer"]
+[node name="PaletteButtons" type="HBoxContainer" parent="PaletteVBoxContainer" unique_id=290481916]
 layout_mode = 2
 
-[node name="AddColor" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=["UIButtons"]]
+[node name="AddColor" type="Button" parent="PaletteVBoxContainer/PaletteButtons" unique_id=1738955467 groups=["UIButtons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 tooltip_text = "Add a new color"
 mouse_default_cursor_shape = 2
 
-[node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/AddColor"]
+[node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/AddColor" unique_id=2104564033]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -56,14 +56,14 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("2_j1lig")
 
-[node name="DeleteColor" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=["UIButtons"]]
+[node name="DeleteColor" type="Button" parent="PaletteVBoxContainer/PaletteButtons" unique_id=1984983129 groups=["UIButtons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 tooltip_text = "Remove a selected color"
 mouse_default_cursor_shape = 2
 
-[node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/DeleteColor"]
+[node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/DeleteColor" unique_id=1443491847]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -80,7 +80,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("3_0e27e")
 
-[node name="Sort" type="MenuButton" parent="PaletteVBoxContainer/PaletteButtons" groups=["UIButtons"]]
+[node name="Sort" type="MenuButton" parent="PaletteVBoxContainer/PaletteButtons" unique_id=1626175714 groups=["UIButtons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
@@ -88,7 +88,7 @@ tooltip_text = "Sort palette"
 mouse_default_cursor_shape = 2
 flat = false
 
-[node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/Sort"]
+[node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/Sort" unique_id=1569204056]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -105,7 +105,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("4_hcsuy")
 
-[node name="LockGrid" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=["UIButtons"]]
+[node name="LockGrid" type="Button" parent="PaletteVBoxContainer/PaletteButtons" unique_id=396920274 groups=["UIButtons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
@@ -114,7 +114,7 @@ mouse_default_cursor_shape = 2
 toggle_mode = true
 button_pressed = true
 
-[node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/LockGrid"]
+[node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/LockGrid" unique_id=2071442706]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -131,7 +131,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 texture = ExtResource("5_unk2t")
 
-[node name="PaletteSelect" type="OptionButton" parent="PaletteVBoxContainer/PaletteButtons"]
+[node name="PaletteSelect" type="OptionButton" parent="PaletteVBoxContainer/PaletteButtons" unique_id=837684490]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
@@ -141,14 +141,14 @@ mouse_default_cursor_shape = 2
 alignment = 1
 clip_text = true
 
-[node name="EditPalette" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=["UIButtons"]]
+[node name="EditPalette" type="Button" parent="PaletteVBoxContainer/PaletteButtons" unique_id=2044011141 groups=["UIButtons"]]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 tooltip_text = "Edit currently selected palette"
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_jl8vt")
 
-[node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/EditPalette"]
+[node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/EditPalette" unique_id=1462799397]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -160,14 +160,14 @@ size_flags_vertical = 0
 texture = ExtResource("2")
 stretch_mode = 3
 
-[node name="AddPalette" type="Button" parent="PaletteVBoxContainer/PaletteButtons" groups=["UIButtons"]]
+[node name="AddPalette" type="Button" parent="PaletteVBoxContainer/PaletteButtons" unique_id=10393364 groups=["UIButtons"]]
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 tooltip_text = "Create a new palette"
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_6f4gc")
 
-[node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/AddPalette"]
+[node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/AddPalette" unique_id=786826714]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -179,16 +179,16 @@ size_flags_vertical = 0
 texture = ExtResource("3")
 stretch_mode = 3
 
-[node name="HSeparator" type="HSeparator" parent="PaletteVBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="PaletteVBoxContainer" unique_id=1598266660]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="PaletteVBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PaletteVBoxContainer" unique_id=1411394111]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PaletteGrid" type="GridContainer" parent="PaletteVBoxContainer/ScrollContainer"]
+[node name="PaletteGrid" type="GridContainer" parent="PaletteVBoxContainer/ScrollContainer" unique_id=779665014]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -197,7 +197,7 @@ theme_override_constants/h_separation = 3
 theme_override_constants/v_separation = 3
 script = ExtResource("5")
 
-[node name="HiddenColorPickerButton" type="ColorPickerButton" parent="."]
+[node name="HiddenColorPickerButton" type="ColorPickerButton" parent="." unique_id=169510189]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2

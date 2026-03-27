@@ -6,17 +6,44 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v1.1.9] - Unreleased
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@Bartkk0](https://github.com/Bartkk0)
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@Bartkk0](https://github.com/Bartkk0), Akane Angèle ([@AkaneAngele](https://github.com/AkaneAngele)), [@AlRado](https://github.com/AlRado),  Vance Palacio ([@vanceism7](https://github.com/vanceism7)), Olof Knight ([@InsaneAwesomeTony](https://github.com/InsaneAwesomeTony)), [@magley](https://github.com/magley)
 
-Built using Godot 4.6
+Built using Godot 4.6.1
 
 ### Added
+- It is now finally possible to split layers when exporting spritesheets! [#1456](https://github.com/Orama-Interactive/Pixelorama/pull/1456)
+- Implemented the ability to export tilesets as images or Godot `TileSet` resources from the Project Properties window.
+- A search bar has been added in the Preferences.
+- You can now load and save exr image files on desktop platforms.
+- Added a "Collapse main menu" preference that unites the menu bar into a single "Main menu" button. This preference is turned on by default on mobiles, but turned off by default on other platforms.
+- On mobile, quick access buttons for save, undo, redo, copy, cut, paste, delete as well as Shift, Control and Alt have been added on the top bar next to the menu.
+- On the web version, a confirmation message when the user attempts to close the tab and has unsaved changes has been added.
+- A max velocity setting for mice is now exposed in the dynamics panel. [#1430](https://github.com/Orama-Interactive/Pixelorama/pull/1430)
+- Added new image size presets when creating a new project. [#1455](https://github.com/Orama-Interactive/Pixelorama/pull/1455)
+- Added a shortcut for canvas rotation. [#1449](https://github.com/Orama-Interactive/Pixelorama/pull/1449)
+- It is now possible to set a shortcut for the Grayscale View menu option. [#1443](https://github.com/Orama-Interactive/Pixelorama/pull/1443)
+
+### Changed
+- The export dialog's file browser has changed. Now, users select the entire path of the exported file from there, instead of just the folder, and the file name text field has been removed.
+- The mimetype of pxo files has been changed to `application/x-pixelorama`.
+- The export file directory & name are stored inside pxo files.
 - Undo/redo now works for layer properties. [#1413](https://github.com/Orama-Interactive/Pixelorama/pull/#1413)
+- The brush size found in the dynamics panel is now relative to the brush size in the tool properties. [#1430](https://github.com/Orama-Interactive/Pixelorama/pull/1430)
+- Marking folders as favorites in the file manager windows is now saved between sessions. Recent folders are also being saved. [#1434](https://github.com/Orama-Interactive/Pixelorama/pull/1434)
+- The Android version no longer requires storage permissions, as now we are using the Storage Access Framework — thanks to the update to Godot 4.6.
 
 ### Fixed
+- Fixed major slowdown when pasting an image into a tilemap cel, or when deleting the entire cel.
 - Brush size no longer changes in odd increments if share tool options is enabled.
-- Fixed right tool not selected by stylus when invert button is pressed. [#1426](https://github.com/Orama-Interactive/Pixelorama/pull/#1426)
+- On mobile, the UI is no longer getting cut on fullscreen by camera notches and curved sides.
+- Fixed right tool not selected by stylus when invert button is pressed. [#1426](https://github.com/Orama-Interactive/Pixelorama/pull/1426)
+- Fixed various visual bugs during undo/redo. [#1432](https://github.com/Orama-Interactive/Pixelorama/pull/1432)
+- Fixed toggling the "Display Layer Effects" option not updating the effects of the unselected layers. [#1457](https://github.com/Orama-Interactive/Pixelorama/pull/1457)
+- In dynamics, fixed tools having a non-zero velocity even when it just started drawing. This previously caused unpredictability when modifying alpha through velocity. [#1430](https://github.com/Orama-Interactive/Pixelorama/pull/1430)
+- Fixed horizontal/vertical/diagonal mirror button shortcuts not being unique.
 - Fixed animation tags not being visible if the last project gets loaded on startup.
+- Fixed the "add extension" file dialog ignoring the "Use native file dialogs" preference.
+- Fixed precision loss in perspective lines. [#1450](https://github.com/Orama-Interactive/Pixelorama/pull/1450)
 
 ## [v1.1.8] - 2025-12-31
 This update has been brought to you by the contributions of:

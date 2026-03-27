@@ -1,6 +1,6 @@
 extends Button
 
-enum MenuOptions { PROPERTIES, SELECT_PIXELS, DELETE, LINK, UNLINK }
+enum MenuOptions { PROPERTIES, PLAY_AUDIO, SELECT_PIXELS, DELETE, LINK, UNLINK, CLONE_CEL }
 
 var frame := 0
 var layer := 0
@@ -8,7 +8,7 @@ var cel: BaseCel
 
 var _is_guide_stylebox := false
 
-@onready var popup_menu: PopupMenu = get_node_or_null("PopupMenu")
+@onready var popup_menu: PopupMenu = $PopupMenu
 @onready var ui_color_rect: ColorRect = $UIColorRect
 @onready var linked_rect: ColorRect = $Linked
 @onready var cel_texture: TextureRect = $CelTexture
@@ -33,8 +33,9 @@ func _ready() -> void:
 	for selected in Global.current_project.selected_cels:
 		if selected[1] == layer and selected[0] == frame:
 			button_pressed = true
+	popup_menu.add_item("Properties", MenuOptions.PROPERTIES)
 	if cel is AudioCel:
-		popup_menu.add_item("Play audio here")
+		popup_menu.add_item("Play audio here", MenuOptions.PLAY_AUDIO)
 		_is_playing_audio()
 		Global.cel_switched.connect(_is_playing_audio)
 		Themes.theme_switched.connect(_is_playing_audio)
@@ -42,13 +43,34 @@ func _ready() -> void:
 		Global.current_project.layers[layer].audio_changed.connect(_is_playing_audio)
 		Global.current_project.layers[layer].playback_frame_changed.connect(_is_playing_audio)
 	else:
-		popup_menu.add_item("Select pixels")
+		popup_menu.add_item("Select pixels", MenuOptions.SELECT_PIXELS)
 	if cel is PixelCel:
-		popup_menu.add_item("Delete")
-		popup_menu.add_item("Link cels to")
-		popup_menu.add_item("Unlink cels")
+		popup_menu.add_item("Delete", MenuOptions.DELETE)
+		popup_menu.add_item("Link cels to", MenuOptions.LINK)
+		popup_menu.add_item("Unlink cels", MenuOptions.UNLINK)
+		_set_menu_shortcut(&"clone_cel", popup_menu, "Clone Cel", MenuOptions.CLONE_CEL, true)
 	elif cel is GroupCel:
 		transparent_checker.visible = false
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_pressed() and [frame, layer] in Global.current_project.selected_cels:
+		popup_menu.activate_item_by_event(event)
+
+
+func _set_menu_shortcut(
+	action: StringName,
+	menu: PopupMenu,
+	label: String,
+	id: int,
+	echo := false,
+) -> void:
+	var menu_shortcut := Shortcut.new()
+	var event := InputEventAction.new()
+	event.action = action
+	menu_shortcut.events.append(event)
+	menu.add_shortcut(menu_shortcut, id, false, echo)
+	menu.set_item_text(menu.get_item_index(id), label)
 
 
 func _notification(what: int) -> void:
@@ -143,16 +165,16 @@ func _on_CelButton_pressed() -> void:
 
 func _on_PopupMenu_id_pressed(id: int) -> void:
 	var project := Global.current_project
+	var layer_class := project.layers[layer]
 	match id:
 		MenuOptions.PROPERTIES:
 			properties.cel_indices = _get_cel_indices()
 			properties.popup_centered_clamped()
-		MenuOptions.SELECT_PIXELS:
-			var layer_class := project.layers[layer]
+		MenuOptions.PLAY_AUDIO:
 			if layer_class is AudioLayer:
 				layer_class.playback_frame = frame
-			else:
-				Global.canvas.selection.select_cel_pixels(layer_class, project.frames[frame])
+		MenuOptions.SELECT_PIXELS:
+			Global.canvas.selection.select_cel_pixels(layer_class, project.frames[frame])
 		MenuOptions.DELETE:
 			_delete_cel_content()
 
@@ -234,6 +256,55 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 			project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 			project.undo_redo.commit_action()
+
+		MenuOptions.CLONE_CEL:
+			_clone_cel_content()
+
+
+## Clones the cel content only (skips other properties like duration, opacity etc...)
+func _clone_cel_content() -> void:
+	var indices := _get_cel_indices()
+	var project := Global.current_project
+	project.undo_redo.create_action("Draw")
+	var new_selected_cels := []
+	var new_end_frame: Frame = null  # Frame to be added at end of timeline if required
+	for cel_index in indices:
+		var frame_index: int = cel_index[0]
+		var layer_index: int = cel_index[1]
+		var new_frame_layer := [frame_index + 1, layer_index]
+		if !new_selected_cels.has(new_frame_layer):
+			new_selected_cels.append(new_frame_layer)
+		var selected_cel := project.frames[frame_index].cels[layer_index]
+		var next_cel: PixelCel = null
+		var is_using_new_frame := false
+		if new_frame_layer[0] >= project.frames.size():
+			if not new_end_frame:
+				new_end_frame = Global.animation_timeline.undo_redo_add_frame(new_frame_layer[0])
+			next_cel = new_end_frame.cels[new_frame_layer[1]]
+			is_using_new_frame = true
+		else:
+			next_cel = project.frames[new_frame_layer[0]].cels[new_frame_layer[1]]
+		var old_content = next_cel.get_content()
+		var new_content = selected_cel.copy_content()
+		if next_cel.link_set == null:
+			project.undo_redo.add_do_method(next_cel.set_content.bind(new_content))
+			project.undo_redo.add_undo_method(next_cel.set_content.bind(old_content))
+		else:
+			for linked_cel in next_cel.link_set["cels"]:
+				project.undo_redo.add_do_method(linked_cel.set_content.bind(new_content))
+				project.undo_redo.add_undo_method(linked_cel.set_content.bind(old_content))
+		project.undo_redo.add_do_method(
+			Global.undo_or_redo.bind(false, frame_index + 1, layer_index, project)
+		)
+		if not is_using_new_frame:
+			project.undo_redo.add_undo_method(
+				Global.undo_or_redo.bind(true, frame_index + 1, layer_index, project)
+			)
+	project.undo_redo.add_do_property(project, "selected_cels", new_selected_cels)
+	project.undo_redo.add_do_method(project.change_cel.bind(new_selected_cels[0][0]))
+	project.undo_redo.add_undo_property(project, "selected_cels", indices)
+	project.undo_redo.add_undo_method(project.change_cel.bind(indices[0][0]))
+	project.undo_redo.commit_action()
 
 
 func _delete_cel_content() -> void:

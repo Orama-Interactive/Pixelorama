@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bd62qfjn380wf"]
+[gd_scene format=3 uid="uid://bd62qfjn380wf"]
 
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
 [ext_resource type="Script" uid="uid://coj8ex4hmag1m" path="res://src/Tools/BaseSelectionTool.gd" id="2"]
@@ -7,19 +7,19 @@
 [ext_resource type="Texture2D" uid="uid://bnc78807k1xjv" path="res://assets/graphics/misc/close.png" id="4_ad04n"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="6_2bdjf"]
 
-[node name="ToolOptions" instance=ExtResource("1")]
+[node name="ToolOptions" unique_id=1688504516 instance=ExtResource("1")]
 script = ExtResource("2")
 
-[node name="ConfirmButtons" type="HBoxContainer" parent="." index="2" groups=["ShowOnActiveTransformation"]]
+[node name="ConfirmButtons" type="HBoxContainer" parent="." index="2" unique_id=1545057007 groups=["ShowOnActiveTransformation"]]
 layout_mode = 2
 
-[node name="ConfirmButton" type="Button" parent="ConfirmButtons" index="0"]
+[node name="ConfirmButton" type="Button" parent="ConfirmButtons" index="0" unique_id=805588168]
 custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 
-[node name="TextureRect" type="TextureRect" parent="ConfirmButtons/ConfirmButton" index="0" groups=["UIButtons"]]
+[node name="TextureRect" type="TextureRect" parent="ConfirmButtons/ConfirmButton" index="0" unique_id=612616159 groups=["UIButtons"]]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,13 +29,13 @@ grow_vertical = 2
 texture = ExtResource("3_mtv71")
 stretch_mode = 3
 
-[node name="CancelButton" type="Button" parent="ConfirmButtons" index="1"]
+[node name="CancelButton" type="Button" parent="ConfirmButtons" index="1" unique_id=1890483355]
 custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 
-[node name="TextureRect" type="TextureRect" parent="ConfirmButtons/CancelButton" index="0" groups=["UIButtons"]]
+[node name="TextureRect" type="TextureRect" parent="ConfirmButtons/CancelButton" index="0" unique_id=1095591270 groups=["UIButtons"]]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,32 +45,32 @@ grow_vertical = 2
 texture = ExtResource("4_ad04n")
 stretch_mode = 3
 
-[node name="ModeLabel" type="Label" parent="." index="3"]
+[node name="ModeLabel" type="Label" parent="." index="3" unique_id=598109485]
 layout_mode = 2
 text = "Mode:"
 
-[node name="Modes" type="OptionButton" parent="." index="4"]
+[node name="Modes" type="OptionButton" parent="." index="4" unique_id=1993262786]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
-[node name="Algorithm" type="OptionButton" parent="." index="5"]
+[node name="Algorithm" type="OptionButton" parent="." index="5" unique_id=915163476]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
-[node name="PositionLabel" type="Label" parent="." index="6"]
+[node name="PositionLabel" type="Label" parent="." index="6" unique_id=1872947077]
 layout_mode = 2
 text = "Position:"
 
-[node name="Position" parent="." index="7" instance=ExtResource("4")]
+[node name="Position" parent="." index="7" unique_id=278681099 instance=ExtResource("4")]
 layout_mode = 2
 allow_greater = true
 allow_lesser = true
 
-[node name="SizeLabel" type="Label" parent="." index="8"]
+[node name="SizeLabel" type="Label" parent="." index="8" unique_id=1456635026]
 layout_mode = 2
 text = "Size:"
 
-[node name="Size" parent="." index="9" instance=ExtResource("4")]
+[node name="Size" parent="." index="9" unique_id=223058514 instance=ExtResource("4")]
 layout_mode = 2
 value = Vector2(1, 1)
 min_value = Vector2(1, 1)
@@ -79,11 +79,11 @@ show_ratio = true
 prefix_x = "Width:"
 prefix_y = "Height:"
 
-[node name="RotationLabel" type="Label" parent="." index="10" groups=["ShowOnActiveTransformation"]]
+[node name="RotationLabel" type="Label" parent="." index="10" unique_id=209242353 groups=["ShowOnActiveTransformation"]]
 layout_mode = 2
 text = "Rotation:"
 
-[node name="Rotation" type="TextureProgressBar" parent="." index="11" groups=["ShowOnActiveTransformation"]]
+[node name="Rotation" type="TextureProgressBar" parent="." index="11" unique_id=260307741 groups=["ShowOnActiveTransformation"]]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 focus_mode = 2
@@ -101,7 +101,7 @@ script = ExtResource("6_2bdjf")
 suffix = "°"
 metadata/_custom_type_script = "uid://tfdhqto6j5j0"
 
-[node name="Shear" type="TextureProgressBar" parent="." index="12" groups=["ShowOnActiveTransformation"]]
+[node name="Shear" type="TextureProgressBar" parent="." index="12" unique_id=1423914130 groups=["ShowOnActiveTransformation"]]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 focus_mode = 2

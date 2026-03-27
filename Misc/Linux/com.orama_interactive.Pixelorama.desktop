@@ -24,4 +24,4 @@ Keywords=pixel;retro;animation;art;image;2d;sprite;graphics;drawing;editor;
 Keywords[el]=pixel;retro;animation;art;image;2d;sprite;graphics;drawing;editor;πίξελ;ρετρό;κίνηση;τέχνη;εικόνα;2δ;γραφικά;ζωγραφιά;ζωγραφική;επεξεργαστής;σχέδιο;
 Keywords[ru]=pixel;retro;animation;art;image;2d;sprite;graphics;drawing;editor;пиксель;ретро;анимация;арт;изображение;2д;спрайт;графика;рисование;редактор;
 Keywords[uk]=pixel;retro;animation;art;image;2d;sprite;graphics;drawing;editor;піксель;ретро;анімація;арт;зображення;2д;спрайт;графіка;малювання;редактор;
-MimeType=image/pxo;image/png;image/bmp;image/vnd.radiance;image/jpeg;image/svg+xml;image/x-tga;image/webp;x-scheme-handler/lospec-palette;
+MimeType=application/x-pixelorama;image/png;image/bmp;image/vnd.radiance;image/jpeg;image/svg+xml;image/x-tga;image/webp;x-scheme-handler/lospec-palette;

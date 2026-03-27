@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ccsihk3yxwei5"]
+[gd_scene format=3 uid="uid://ccsihk3yxwei5"]
 
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="1"]
 [ext_resource type="Shader" uid="uid://c50kmfvf635kb" path="res://src/Shaders/TransparentChecker.gdshader" id="2"]
@@ -20,28 +20,28 @@ shader_parameter/rect_size = Vector2(0, 0)
 shader_parameter/follow_movement = false
 shader_parameter/follow_scale = false
 
-[node name="CanvasPreviewContainer" type="PanelContainer"]
+[node name="CanvasPreviewContainer" type="PanelContainer" unique_id=1665289064]
 custom_minimum_size = Vector2(0, 110)
 offset_right = 328.0
 offset_bottom = 174.0
 script = ExtResource("4")
 
-[node name="VBox" type="VBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="." unique_id=449623774]
 layout_mode = 2
 
-[node name="HBox" type="HBoxContainer" parent="VBox"]
+[node name="HBox" type="HBoxContainer" parent="VBox" unique_id=359535911]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBox/HBox"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBox/HBox" unique_id=1082567405]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBox/HBox/VBoxContainer"]
+[node name="Label" type="Label" parent="VBox/HBox/VBoxContainer" unique_id=2123199402]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "+"
 
-[node name="PreviewZoomSlider" type="VSlider" parent="VBox/HBox/VBoxContainer"]
+[node name="PreviewZoomSlider" type="VSlider" parent="VBox/HBox/VBoxContainer" unique_id=1185696676]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -51,40 +51,39 @@ max_value = 5.0
 step = 0.01
 value = 1.0
 
-[node name="Label2" type="Label" parent="VBox/HBox/VBoxContainer"]
+[node name="Label2" type="Label" parent="VBox/HBox/VBoxContainer" unique_id=745124252]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "-"
 
-[node name="PreviewViewportContainer" type="SubViewportContainer" parent="VBox/HBox"]
+[node name="PreviewViewportContainer" type="SubViewportContainer" parent="VBox/HBox" unique_id=573890257]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="VBox/HBox/PreviewViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="VBox/HBox/PreviewViewportContainer" unique_id=1001948000]
 transparent_bg = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 size = Vector2i(308, 139)
 render_target_update_mode = 4
 
-[node name="TransparentChecker" parent="VBox/HBox/PreviewViewportContainer/SubViewport" instance=ExtResource("1")]
+[node name="TransparentChecker" parent="VBox/HBox/PreviewViewportContainer/SubViewport" unique_id=834267784 instance=ExtResource("1")]
 material = SubResource("1")
-anchors_preset = 0
 
-[node name="CanvasPreview" parent="VBox/HBox/PreviewViewportContainer/SubViewport" groups=["CanvasPreviews"] instance=ExtResource("5")]
+[node name="CanvasPreview" parent="VBox/HBox/PreviewViewportContainer/SubViewport" unique_id=2109276218 groups=["CanvasPreviews"] instance=ExtResource("5")]
 unique_name_in_owner = true
 
-[node name="CameraPreview" type="Node2D" parent="VBox/HBox/PreviewViewportContainer/SubViewport" groups=["CanvasCameras"]]
+[node name="CameraPreview" type="Node2D" parent="VBox/HBox/PreviewViewportContainer/SubViewport" unique_id=177284600 groups=["CanvasCameras"]]
 unique_name_in_owner = true
 script = ExtResource("5_ge2km")
 index = 2
 
-[node name="Animation" type="HBoxContainer" parent="VBox"]
+[node name="Animation" type="HBoxContainer" parent="VBox" unique_id=1328469717]
 layout_mode = 2
 
-[node name="PlayButton" type="Button" parent="VBox/Animation" groups=["UIButtons"]]
+[node name="PlayButton" type="Button" parent="VBox/Animation" unique_id=1578705779 groups=["UIButtons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
@@ -92,7 +91,7 @@ size_flags_vertical = 4
 mouse_default_cursor_shape = 2
 toggle_mode = true
 
-[node name="TextureRect" type="TextureRect" parent="VBox/Animation/PlayButton"]
+[node name="TextureRect" type="TextureRect" parent="VBox/Animation/PlayButton" unique_id=514261216]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -105,18 +104,18 @@ offset_bottom = 6.0
 mouse_default_cursor_shape = 2
 texture = ExtResource("6")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBox/Animation"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBox/Animation" unique_id=524830466]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Mode" type="HBoxContainer" parent="VBox/Animation/VBoxContainer"]
+[node name="Mode" type="HBoxContainer" parent="VBox/Animation/VBoxContainer" unique_id=2086290509]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBox/Animation/VBoxContainer/Mode"]
+[node name="Label" type="Label" parent="VBox/Animation/VBoxContainer/Mode" unique_id=1920647195]
 layout_mode = 2
 text = "Animation mode:"
 
-[node name="OptionButton" type="OptionButton" parent="VBox/Animation/VBoxContainer/Mode"]
+[node name="OptionButton" type="OptionButton" parent="VBox/Animation/VBoxContainer/Mode" unique_id=646642218]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -128,19 +127,19 @@ popup/item_0/id = 0
 popup/item_1/text = "Current frame as spritesheet"
 popup/item_1/id = 1
 
-[node name="Options" type="FoldableContainer" parent="VBox/Animation/VBoxContainer"]
+[node name="Options" type="FoldableContainer" parent="VBox/Animation/VBoxContainer" unique_id=968849488]
 visible = false
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
 folded = true
 title = "Spritesheet options"
 
-[node name="GridContainer" type="GridContainer" parent="VBox/Animation/VBoxContainer/Options"]
+[node name="GridContainer" type="GridContainer" parent="VBox/Animation/VBoxContainer/Options" unique_id=1886995117]
 visible = false
 layout_mode = 2
 columns = 2
 
-[node name="HFrames" type="TextureProgressBar" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
+[node name="HFrames" type="TextureProgressBar" parent="VBox/Animation/VBoxContainer/Options/GridContainer" unique_id=926775710]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -158,7 +157,7 @@ stretch_margin_bottom = 3
 script = ExtResource("8")
 prefix = "Horizontal frames:"
 
-[node name="VFrames" type="TextureProgressBar" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
+[node name="VFrames" type="TextureProgressBar" parent="VBox/Animation/VBoxContainer/Options/GridContainer" unique_id=393251188]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -176,7 +175,7 @@ stretch_margin_bottom = 3
 script = ExtResource("8")
 prefix = "Vertical frames:"
 
-[node name="StartFrame" type="TextureProgressBar" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
+[node name="StartFrame" type="TextureProgressBar" parent="VBox/Animation/VBoxContainer/Options/GridContainer" unique_id=1427742430]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
@@ -195,7 +194,7 @@ stretch_margin_bottom = 3
 script = ExtResource("8")
 prefix = "Start frame:"
 
-[node name="EndFrame" type="TextureProgressBar" parent="VBox/Animation/VBoxContainer/Options/GridContainer"]
+[node name="EndFrame" type="TextureProgressBar" parent="VBox/Animation/VBoxContainer/Options/GridContainer" unique_id=1405399283]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2

@@ -1,32 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://cul5mpy17ebfl"]
+[gd_scene format=3 uid="uid://cul5mpy17ebfl"]
 
 [ext_resource type="PackedScene" uid="uid://ubyatap3sylf" path="res://src/Tools/BaseDraw.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="2"]
 [ext_resource type="Script" uid="uid://bks78g787tsu8" path="res://src/Tools/DesignTools/Pencil.gd" id="3"]
 
-[node name="ToolOptions" instance=ExtResource("1")]
+[node name="ToolOptions" unique_id=450758674 instance=ExtResource("1")]
 script = ExtResource("3")
 
-[node name="Overwrite" type="CheckBox" parent="." index="5"]
+[node name="Overwrite" type="CheckBox" parent="." index="5" unique_id=1395956544]
 layout_mode = 2
 size_flags_horizontal = 0
 tooltip_text = "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 mouse_default_cursor_shape = 2
 text = "Overwrite color"
 
-[node name="FillInside" type="CheckBox" parent="." index="6"]
+[node name="FillInside" type="CheckBox" parent="." index="6" unique_id=43994212]
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_default_cursor_shape = 2
 text = "Fill inside"
 
-[node name="SpacingMode" type="CheckBox" parent="." index="7"]
+[node name="SpacingMode" type="CheckBox" parent="." index="7" unique_id=955332983]
 layout_mode = 2
 size_flags_horizontal = 0
 mouse_default_cursor_shape = 2
 text = "Spacing"
 
-[node name="Spacing" parent="." index="8" instance=ExtResource("2")]
+[node name="Spacing" parent="." index="8" unique_id=1685223422 instance=ExtResource("2")]
 visible = false
 layout_mode = 2
 allow_greater = true

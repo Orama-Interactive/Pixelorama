@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ubyatap3sylf"]
+[gd_scene format=3 uid="uid://ubyatap3sylf"]
 
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="2"]
@@ -50,14 +50,14 @@ action = &"tile_flip_vertical"
 [sub_resource type="Shortcut" id="Shortcut_bx5hb"]
 events = [SubResource("InputEventAction_18g3a")]
 
-[node name="ToolOptions" instance=ExtResource("2")]
+[node name="ToolOptions" unique_id=1048755954 instance=ExtResource("2")]
 script = ExtResource("3")
 
-[node name="Brush" type="HBoxContainer" parent="." index="2"]
+[node name="Brush" type="HBoxContainer" parent="." index="2" unique_id=634582773]
 layout_mode = 2
 alignment = 1
 
-[node name="Type" type="Button" parent="Brush" index="0"]
+[node name="Type" type="Button" parent="Brush" index="0" unique_id=1704216512]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -69,14 +69,14 @@ theme_override_styles/hover = SubResource("1")
 theme_override_styles/disabled = SubResource("2")
 theme_override_styles/focus = SubResource("2")
 
-[node name="Texture" type="TextureRect" parent="Brush/Type" index="0"]
+[node name="Texture" type="TextureRect" parent="Brush/Type" index="0" unique_id=1497597906]
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
 expand_mode = 1
 stretch_mode = 5
 
-[node name="BrushSize" parent="Brush" index="1" instance=ExtResource("1")]
+[node name="BrushSize" parent="Brush" index="1" unique_id=1200951505 instance=ExtResource("1")]
 layout_mode = 2
 min_value = 1.0
 max_value = 25.0
@@ -88,20 +88,20 @@ allow_global_input_events = true
 global_increment_action = "brush_size_increment"
 global_decrement_action = "brush_size_decrement"
 
-[node name="TransformButtonsContainer" type="HFlowContainer" parent="." index="3"]
+[node name="TransformButtonsContainer" type="HFlowContainer" parent="." index="3" unique_id=811103715]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RotateLeftButton" type="Button" parent="TransformButtonsContainer" index="0" groups=["UIButtons"]]
+[node name="RotateLeftButton" type="Button" parent="TransformButtonsContainer" index="0" unique_id=1906109048 groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 tooltip_text = "Rotate tile left (counterclockwise)"
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_vtp7k")
 
-[node name="TextureRect" type="TextureRect" parent="TransformButtonsContainer/RotateLeftButton" index="0"]
+[node name="TextureRect" type="TextureRect" parent="TransformButtonsContainer/RotateLeftButton" index="0" unique_id=951838921]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -111,14 +111,14 @@ grow_vertical = 2
 texture = ExtResource("4_c1cak")
 stretch_mode = 3
 
-[node name="RotateRightButton" type="Button" parent="TransformButtonsContainer" index="1" groups=["UIButtons"]]
+[node name="RotateRightButton" type="Button" parent="TransformButtonsContainer" index="1" unique_id=843772651 groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 tooltip_text = "Rotate tile right (clockwise)"
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_lc5ui")
 
-[node name="TextureRect" type="TextureRect" parent="TransformButtonsContainer/RotateRightButton" index="0"]
+[node name="TextureRect" type="TextureRect" parent="TransformButtonsContainer/RotateRightButton" index="0" unique_id=1524044749]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -129,14 +129,14 @@ texture = ExtResource("4_c1cak")
 stretch_mode = 3
 flip_h = true
 
-[node name="FlipHorizontalButton" type="Button" parent="TransformButtonsContainer" index="2" groups=["UIButtons"]]
+[node name="FlipHorizontalButton" type="Button" parent="TransformButtonsContainer" index="2" unique_id=1045934498 groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 tooltip_text = "Flip tile horizontally"
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_mr3k5")
 
-[node name="TextureRect" type="TextureRect" parent="TransformButtonsContainer/FlipHorizontalButton" index="0"]
+[node name="TextureRect" type="TextureRect" parent="TransformButtonsContainer/FlipHorizontalButton" index="0" unique_id=324033996]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -146,14 +146,14 @@ grow_vertical = 2
 texture = ExtResource("5_4qg2a")
 stretch_mode = 3
 
-[node name="FlipVerticalButton" type="Button" parent="TransformButtonsContainer" index="3" groups=["UIButtons"]]
+[node name="FlipVerticalButton" type="Button" parent="TransformButtonsContainer" index="3" unique_id=572356882 groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 tooltip_text = "Flip tile vertically"
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_bx5hb")
 
-[node name="TextureRect" type="TextureRect" parent="TransformButtonsContainer/FlipVerticalButton" index="0"]
+[node name="TextureRect" type="TextureRect" parent="TransformButtonsContainer/FlipVerticalButton" index="0" unique_id=1413896938]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -163,7 +163,7 @@ grow_vertical = 2
 texture = ExtResource("6_p5353")
 stretch_mode = 3
 
-[node name="DensityValueSlider" type="TextureProgressBar" parent="." index="4"]
+[node name="DensityValueSlider" type="TextureProgressBar" parent="." index="4" unique_id=1434866758]
 visible = false
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
@@ -181,7 +181,7 @@ script = ExtResource("5_kdxku")
 prefix = "Density:"
 suffix = "%"
 
-[node name="ColorInterpolation" parent="." index="5" instance=ExtResource("1")]
+[node name="ColorInterpolation" parent="." index="5" unique_id=1234982812 instance=ExtResource("1")]
 visible = false
 layout_mode = 2
 tooltip_text = "0: Color from the brush itself, 100: the currently selected color"

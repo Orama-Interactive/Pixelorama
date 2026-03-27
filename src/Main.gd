@@ -55,6 +55,11 @@ class CLI:
 		["--direction", "-d"]: [CLI.set_direction, "[0, 1, 2] Specifies direction"],
 		["--json"]: [CLI.set_json, "Export the JSON data of the project"],
 		["--split-layers"]: [CLI.set_split_layers, "Each layer exports separately"],
+		["--sheet_layers_as_separate_files"]:
+		[
+			CLI.set_sheet_layers_as_separate_files,
+			"Spritesheets in split layer mode will export multiple files for each layer."
+		],
 		["--help", "-h", "-?"]: [CLI.generate_help, "Displays this help page"],
 		["--scene"]: [CLI.dummy, "Used internally by Godot."]
 	}
@@ -170,6 +175,9 @@ some useful [SYSTEM OPTIONS] are:
 	static func set_split_layers(_project: Project, _next_arg: String) -> void:
 		Export.split_layers = true
 
+	static func set_sheet_layers_as_separate_files(_project: Project, _next_arg: String) -> void:
+		Export.sheet_layers_as_separate_files = true
+
 	static func dummy(_project: Project, _next_arg: String) -> void:
 		pass
 
@@ -206,10 +214,11 @@ func _ready() -> void:
 	_handle_cmdline_arguments()
 	get_tree().root.files_dropped.connect(_on_files_dropped)
 	if OS.get_name() == "Android":
-		OS.request_permissions()
 		var intent_data := Applinks.get_data()
 		if not intent_data.is_empty():
 			_on_applinks_data_received(intent_data)
+	if not DisplayServer.has_feature(DisplayServer.FEATURE_NATIVE_DIALOG_FILE_EXTRA):
+		save_sprite_dialog.option_count = 0
 
 	# Detect if Pixelorama crashed last time.
 	var crashed_last_time := FileAccess.file_exists(RUNNING_FILE_PATH)
@@ -332,6 +341,7 @@ func _setup_application_window_size() -> void:
 			get_window().position = Global.config_cache.get_value("window", "position")
 		if Global.config_cache.has_section_key("window", "size"):
 			get_window().size = Global.config_cache.get_value("window", "size")
+	set_mobile_fullscreen_safe_area()
 
 
 func set_display_scale() -> void:
@@ -342,6 +352,25 @@ func set_display_scale() -> void:
 	root.min_size = Vector2(320, 200)
 	root.content_scale_factor = Global.shrink
 	set_custom_cursor()
+
+
+func set_mobile_fullscreen_safe_area() -> void:
+	if not OS.has_feature("mobile"):
+		return
+	await get_tree().process_frame
+	var is_fullscreen := (
+		(get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN)
+		or (get_window().mode == Window.MODE_FULLSCREEN)
+	)
+	var menu_and_ui: VBoxContainer = $MenuAndUI
+	if is_fullscreen:
+		var safe_area := DisplayServer.get_display_safe_area()
+		menu_and_ui.set_anchors_preset(Control.PRESET_TOP_LEFT)
+		var pos := safe_area.position / get_window().content_scale_factor
+		menu_and_ui.position = pos
+		menu_and_ui.size = (safe_area.size / get_window().content_scale_factor)
+	else:
+		menu_and_ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
 
 func set_custom_cursor() -> void:
@@ -689,6 +718,8 @@ func _exit_tree() -> void:
 	Global.config_cache.set_value(
 		"view_menu", "snap_to_perspective_guides", Global.snap_to_perspective_guides
 	)
+	Global.config_cache.set_value("FileDialog", "favourite_paths", FileDialog.get_favorite_list())
+	Global.config_cache.set_value("FileDialog", "recent_paths", FileDialog.get_recent_list())
 	Global.config_cache.save(Global.CONFIG_PATH)
 
 

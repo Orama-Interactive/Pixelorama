@@ -12,6 +12,7 @@ var image_exports: Array[Export.FileFormat] = [
 	Export.FileFormat.PNG,
 	Export.FileFormat.WEBP,
 	Export.FileFormat.JPEG,
+	Export.FileFormat.EXR,
 	Export.FileFormat.GIF,
 	Export.FileFormat.APNG,
 	Export.FileFormat.MP4,
@@ -21,7 +22,7 @@ var image_exports: Array[Export.FileFormat] = [
 	Export.FileFormat.WEBM,
 ]
 var spritesheet_exports: Array[Export.FileFormat] = [
-	Export.FileFormat.PNG, Export.FileFormat.WEBP, Export.FileFormat.JPEG
+	Export.FileFormat.PNG, Export.FileFormat.WEBP, Export.FileFormat.JPEG, Export.FileFormat.EXR
 ]
 
 var _preview_images: Array[Export.ProcessedImage]
@@ -33,6 +34,7 @@ var _preview_images: Array[Export.ProcessedImage]
 @onready var spritesheet_orientation: OptionButton = $"%Orientation"
 @onready var spritesheet_lines_count: SpinBox = $"%LinesCount"
 @onready var spritesheet_lines_count_label: Label = $"%LinesCountLabel"
+@onready var spritesheet_layers_as_separate_files: CheckBox = %LayersAsSeparateFiles
 
 @onready var frames_option_button: OptionButton = $"%Frames"
 @onready var layers_option_button: OptionButton = $"%Layers"
@@ -40,9 +42,7 @@ var _preview_images: Array[Export.ProcessedImage]
 @onready var dimension_label: Label = $"%DimensionLabel"
 
 @onready var path_line_edit: LineEdit = $"%PathLineEdit"
-@onready var file_line_edit: LineEdit = $"%FileLineEdit"
 @onready var file_format_options: OptionButton = $"%FileFormat"
-
 @onready var options_interpolation: OptionButton = $"%Interpolation"
 
 @onready var file_exists_alert_popup: AcceptDialog = $FileExistsAlert
@@ -62,6 +62,8 @@ func _ready() -> void:
 		file_exists_alert_popup.add_button("Cancel Export", true, "cancel")
 	else:
 		file_exists_alert_popup.add_button("Cancel Export", false, "cancel")
+		if OS.get_name() == "Web" or OS.get_name() == "Android":
+			file_format_options.show()
 
 	# TODO: Remove the loop when https://github.com/godotengine/godot/issues/92848 gets fixed.
 	for dialog_child in path_dialog_popup.find_children("", "Window", true, false):
@@ -93,11 +95,16 @@ func show_tab() -> void:
 			spritesheet_orientation.selected = Export.orientation
 			spritesheet_lines_count.max_value = Export.number_of_frames
 			spritesheet_lines_count.value = Export.lines_count
+			spritesheet_layers_as_separate_files.disabled = !Export.split_layers
 			get_tree().call_group("ExportSpritesheetOptions", "show")
 			_handle_orientation_ui()
 	set_preview()
 	update_dimensions_label()
 	tabs.current_tab = Export.current_tab
+	if OS.get_name() == "Web":
+		get_tree().call_group("NotHTML5", "hide")
+	elif OS.get_name() == "Android":
+		get_tree().call_group("NotAndroid", "hide")
 
 
 func set_preview() -> void:
@@ -184,12 +191,6 @@ func set_file_format_selector() -> void:
 	match Export.current_tab:
 		Export.ExportTab.IMAGE:
 			_set_file_format_selector_suitable_file_formats(image_exports)
-			if Export.is_ffmpeg_installed():
-				for format in Export.ffmpeg_formats:
-					file_format_options.set_item_disabled(format, false)
-			else:
-				for format in Export.ffmpeg_formats:
-					file_format_options.set_item_disabled(format, true)
 		Export.ExportTab.SPRITESHEET:
 			_set_file_format_selector_suitable_file_formats(spritesheet_exports)
 
@@ -199,15 +200,31 @@ func set_file_format_selector() -> void:
 func _set_file_format_selector_suitable_file_formats(formats: Array[Export.FileFormat]) -> void:
 	var project := Global.current_project
 	file_format_options.clear()
+	path_dialog_popup.clear_filters()
+	var ffmpeg_installed := Export.is_ffmpeg_installed()
 	var needs_update := true
 	for i in formats:
+		if i == Export.FileFormat.EXR:
+			if OS.get_name() == "Android" or OS.get_name() == "Web":
+				continue
 		if project.file_format == i:
 			needs_update = false
+		if not ffmpeg_installed:
+			if i in Export.ffmpeg_formats:
+				continue
 		var label := Export.file_format_string(i) + "; " + Export.file_format_description(i)
 		file_format_options.add_item(label, i)
+		if OS.get_name() != "Android":
+			path_dialog_popup.add_filter(
+				"*" + Export.file_format_string(i), Export.file_format_description(i)
+			)
 	if needs_update:
 		project.file_format = formats[0]
 	file_format_options.selected = file_format_options.get_item_index(project.file_format)
+	if OS.get_name() == "Android":
+		var file_ext_str := "*" + Export.file_format_string(project.file_format)
+		var file_format_description := Export.file_format_description(project.file_format)
+		path_dialog_popup.add_filter(file_ext_str, file_format_description)
 
 
 func create_frame_tag_list() -> void:
@@ -283,7 +300,6 @@ func _on_about_to_popup() -> void:
 	var project := Global.current_project
 	# If we're on Web, don't let the user change the directory path
 	if OS.get_name() == "Web":
-		get_tree().call_group("NotHTML5", "hide")
 		project.export_directory_path = "user://"
 
 	if project.export_directory_path.is_empty():
@@ -294,11 +310,14 @@ func _on_about_to_popup() -> void:
 	# If export already occurred - sets GUI to show previous settings
 	options_resize.value = Export.resize
 	options_interpolation.selected = Export.interpolation
-	path_line_edit.text = project.export_directory_path
+	var file_ext := Export.file_format_string(project.file_format)
+	if OS.get_name() == "Web":
+		path_line_edit.text = project.file_name + file_ext
+	else:
+		path_line_edit.text = project.export_directory_path.path_join(project.file_name) + file_ext
 	path_dialog_popup.current_dir = project.export_directory_path
-	file_line_edit.text = project.file_name
-	file_format_options.selected = project.file_format
 	Export.cache_blended_frames()
+	Export.overwrite_asked = false
 	show_tab()
 
 	# Set the size of the preview checker
@@ -362,6 +381,13 @@ func _on_interpolation_item_selected(id: Image.Interpolation) -> void:
 
 
 func _on_confirmed() -> void:
+	if OS.get_name() == "Android":
+		path_dialog_popup.popup_centered_clamped()
+		return
+	export()
+
+
+func export() -> void:
 	Global.current_project.export_overwrite = false
 	if await Export.export_processed_images(false, self, Global.current_project):
 		hide()
@@ -369,19 +395,36 @@ func _on_confirmed() -> void:
 
 func _on_path_button_pressed() -> void:
 	path_dialog_popup.popup_centered_clamped()
+	path_dialog_popup.current_file = path_line_edit.text.get_file()
 
 
 func _on_path_line_edit_text_changed(new_text: String) -> void:
-	Global.current_project.export_directory_path = new_text
+	Global.current_project.export_directory_path = new_text.get_base_dir()
+	Global.current_project.file_name = new_text.get_file().get_basename()
+	var file_format := Export.get_file_format_from_extension(new_text.get_extension())
+	Global.current_project.file_format = file_format
+	if not Export.is_single_file_format():
+		get_tree().set_group("ExportMultipleFilesOptions", "disabled", false)
+		get_tree().set_group("ExportMultipleFilesEditableOptions", "editable", true)
+		frame_timer.stop()
+	else:
+		get_tree().set_group("ExportMultipleFilesOptions", "disabled", true)
+		get_tree().set_group("ExportMultipleFilesEditableOptions", "editable", false)
+
+	var show_quality := file_format == Export.FileFormat.JPEG
+	%QualityLabel.visible = show_quality
+	%Quality.visible = show_quality
+	Export.overwrite_asked = false
+	set_preview()
 
 
-func _on_file_line_edit_text_changed(new_text: String) -> void:
-	Global.current_project.file_name = new_text
-
-
-func _on_path_dialog_dir_selected(dir: String) -> void:
-	path_line_edit.text = dir
-	Global.current_project.export_directory_path = dir
+func _on_path_dialog_file_selected(path: String) -> void:
+	path_line_edit.text = path
+	_on_path_line_edit_text_changed(path)
+	Export.overwrite_asked = true
+	if OS.get_name() == "Android":
+		export()
+		return
 	# Needed because if native file dialogs are enabled
 	# the export dialog closes when the path dialog closes
 	if not visible:
@@ -395,21 +438,17 @@ func _on_path_dialog_canceled() -> void:
 		show()
 
 
-func _on_file_format_item_selected(idx: int) -> void:
-	var id := file_format_options.get_item_id(idx) as Export.FileFormat
-	Global.current_project.file_format = id
-	if not Export.is_single_file_format():
-		get_tree().set_group("ExportMultipleFilesOptions", "disabled", false)
-		get_tree().set_group("ExportMultipleFilesEditableOptions", "editable", true)
-		frame_timer.stop()
-	else:
-		get_tree().set_group("ExportMultipleFilesOptions", "disabled", true)
-		get_tree().set_group("ExportMultipleFilesEditableOptions", "editable", false)
-
-	var show_quality := id == Export.FileFormat.JPEG
-	%QualityLabel.visible = show_quality
-	%Quality.visible = show_quality
-	set_preview()
+func _on_file_format_item_selected(index: int) -> void:
+	var id := file_format_options.get_item_id(index) as Export.FileFormat
+	var ext_string := Export.file_format_string(id)
+	var path := path_line_edit.text
+	path = path.replace("." + path.get_extension(), ext_string)
+	path_line_edit.text = path
+	_on_path_line_edit_text_changed(path)
+	if OS.get_name() == "Android":
+		path_dialog_popup.clear_filters()
+		var file_format_description := Export.file_format_description(id)
+		path_dialog_popup.add_filter("*" + ext_string, file_format_description)
 
 
 ## Overwrite existing file
@@ -456,6 +495,13 @@ func _on_export_json_toggled(toggled_on: bool) -> void:
 
 func _on_split_layers_toggled(toggled_on: bool) -> void:
 	Export.split_layers = toggled_on
+	spritesheet_layers_as_separate_files.disabled = !Export.split_layers
+	Export.process_data()
+	set_preview()
+
+
+func _on_layers_as_separate_files_toggled(toggled_on: bool) -> void:
+	Export.sheet_layers_as_separate_files = toggled_on
 	Export.process_data()
 	set_preview()
 

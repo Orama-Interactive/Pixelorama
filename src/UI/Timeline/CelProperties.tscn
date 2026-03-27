@@ -1,44 +1,44 @@
-[gd_scene load_steps=3 format=3 uid="uid://clbjfkdupw52l"]
+[gd_scene format=3 uid="uid://clbjfkdupw52l"]
 
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="1_85pb7"]
 [ext_resource type="Script" uid="uid://cgfqibodaesbs" path="res://src/UI/Timeline/CelProperties.gd" id="1_lyy7i"]
 
-[node name="CelProperties" type="AcceptDialog"]
+[node name="CelProperties" type="AcceptDialog" unique_id=72887414]
 title = "Cel properties"
 size = Vector2i(300, 227)
 script = ExtResource("1_lyy7i")
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="GridContainer" type="GridContainer" parent="." unique_id=958267295]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 292.0
 offset_bottom = 178.0
 columns = 2
 
-[node name="Frame" type="Label" parent="GridContainer"]
+[node name="Frame" type="Label" parent="GridContainer" unique_id=1135035970]
 layout_mode = 2
 text = "Frame"
 
-[node name="FrameNum" type="Label" parent="GridContainer"]
+[node name="FrameNum" type="Label" parent="GridContainer" unique_id=844340628]
 layout_mode = 2
 text = "1"
 horizontal_alignment = 1
 
-[node name="Layer" type="Label" parent="GridContainer"]
+[node name="Layer" type="Label" parent="GridContainer" unique_id=1782215541]
 layout_mode = 2
 text = "Layer"
 
-[node name="LayerNum" type="Label" parent="GridContainer"]
+[node name="LayerNum" type="Label" parent="GridContainer" unique_id=1948007373]
 layout_mode = 2
 text = "1"
 horizontal_alignment = 1
 
-[node name="OpacityLabel" type="Label" parent="GridContainer" groups=["VisualCels"]]
+[node name="OpacityLabel" type="Label" parent="GridContainer" unique_id=518808234 groups=["VisualCels"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Opacity:"
 
-[node name="OpacitySlider" type="TextureProgressBar" parent="GridContainer" groups=["VisualCels"]]
+[node name="OpacitySlider" type="TextureProgressBar" parent="GridContainer" unique_id=923000872 groups=["VisualCels"]]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
@@ -52,12 +52,12 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("1_85pb7")
 
-[node name="ZIndexLabel" type="Label" parent="GridContainer" groups=["VisualCels"]]
+[node name="ZIndexLabel" type="Label" parent="GridContainer" unique_id=788528214 groups=["VisualCels"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Z-Index:"
 
-[node name="ZIndexSlider" type="TextureProgressBar" parent="GridContainer" groups=["VisualCels"]]
+[node name="ZIndexSlider" type="TextureProgressBar" parent="GridContainer" unique_id=1620974568 groups=["VisualCels"]]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 2
@@ -74,24 +74,24 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("1_85pb7")
 
-[node name="UserDataLabel" type="Label" parent="GridContainer"]
+[node name="UserDataLabel" type="Label" parent="GridContainer" unique_id=47118706]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "User data:"
 
-[node name="UserDataTextEdit" type="TextEdit" parent="GridContainer"]
+[node name="UserDataTextEdit" type="TextEdit" parent="GridContainer" unique_id=1453337817]
 layout_mode = 2
 size_flags_horizontal = 3
 scroll_fit_content_height = true
 
-[node name="UIColorLabel" type="Label" parent="GridContainer"]
+[node name="UIColorLabel" type="Label" parent="GridContainer" unique_id=281573064]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "Color:"
 
-[node name="UIColorPickerButton" type="ColorPickerButton" parent="GridContainer"]
+[node name="UIColorPickerButton" type="ColorPickerButton" parent="GridContainer" unique_id=1025398052]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 

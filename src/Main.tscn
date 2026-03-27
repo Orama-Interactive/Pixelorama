@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dbylw5k04ulp8"]
+[gd_scene format=3 uid="uid://dbylw5k04ulp8"]
 
 [ext_resource type="Theme" uid="uid://dog5j8wjiwikc" path="res://assets/themes/dark/theme.tres" id="1"]
 [ext_resource type="Script" uid="uid://dlxqc0hc51xu4" path="res://src/Main.gd" id="2"]
@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://clbjfkdupw52l" path="res://src/UI/Timeline/CelProperties.tscn" id="17_ucs64"]
 [ext_resource type="PackedScene" uid="uid://clgu8wb5o6oup" path="res://src/UI/Dialogs/ExportDialog.tscn" id="39"]
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" unique_id=1088730198]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,84 +30,84 @@ mouse_filter = 1
 theme = ExtResource("1")
 script = ExtResource("2")
 
-[node name="MenuAndUI" type="VBoxContainer" parent="."]
+[node name="MenuAndUI" type="VBoxContainer" parent="." unique_id=481271712]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme_override_constants/separation = 0
 
-[node name="TopMenuContainer" parent="MenuAndUI" instance=ExtResource("3")]
+[node name="TopMenuContainer" parent="MenuAndUI" unique_id=24159826 instance=ExtResource("3")]
 layout_mode = 2
 
-[node name="UI" parent="MenuAndUI" instance=ExtResource("4")]
+[node name="UI" parent="MenuAndUI" unique_id=1965471564 instance=ExtResource("4")]
 layout_mode = 2
 
-[node name="Dialogs" type="Control" parent="."]
+[node name="Dialogs" type="Control" parent="." unique_id=1816933375]
 anchors_preset = 0
 mouse_filter = 2
 
-[node name="BrushesPopup" parent="Dialogs" instance=ExtResource("6")]
+[node name="BrushesPopup" parent="Dialogs" unique_id=1807948416 instance=ExtResource("6")]
 
-[node name="PatternsPopup" parent="Dialogs" instance=ExtResource("5")]
+[node name="PatternsPopup" parent="Dialogs" unique_id=1460330370 instance=ExtResource("5")]
 
-[node name="OpenSprite" parent="Dialogs" instance=ExtResource("12")]
+[node name="OpenSprite" parent="Dialogs" unique_id=1925344067 instance=ExtResource("12")]
 
-[node name="SaveSprite" parent="Dialogs" instance=ExtResource("11")]
+[node name="SaveSprite" parent="Dialogs" unique_id=464926544 instance=ExtResource("11")]
 
-[node name="SaveSpriteHTML5" parent="Dialogs" instance=ExtResource("8")]
+[node name="SaveSpriteHTML5" parent="Dialogs" unique_id=836849037 instance=ExtResource("8")]
 
-[node name="ExportDialog" parent="Dialogs" instance=ExtResource("39")]
+[node name="ExportDialog" parent="Dialogs" unique_id=875979980 instance=ExtResource("39")]
 
-[node name="UnsavedCanvasDialog" type="ConfirmationDialog" parent="Dialogs"]
+[node name="UnsavedCanvasDialog" type="ConfirmationDialog" parent="Dialogs" unique_id=1933103769]
 title = "Unsaved Image"
 dialog_text = "You have unsaved changes. If you proceed, the progress you have made will be lost."
 
-[node name="QuitDialog" type="ConfirmationDialog" parent="Dialogs"]
+[node name="QuitDialog" type="ConfirmationDialog" parent="Dialogs" unique_id=695542545]
 dialog_text = "Are you sure you want to exit Pixelorama?"
 
-[node name="QuitAndSaveDialog" type="ConfirmationDialog" parent="Dialogs"]
+[node name="QuitAndSaveDialog" type="ConfirmationDialog" parent="Dialogs" unique_id=1193937743]
 title = "Save before exiting?"
 ok_button_text = "Save & Exit"
 dialog_text = "Project %s has unsaved progress. How do you wish to proceed?"
 
-[node name="RestoreSessionConfirmationDialog" type="ConfirmationDialog" parent="Dialogs"]
+[node name="RestoreSessionConfirmationDialog" type="ConfirmationDialog" parent="Dialogs" unique_id=1360804656]
 dialog_text = "Pixelorama did not close properly last time. Would you like to restore a previous session?"
 
-[node name="ErrorDialog" type="AcceptDialog" parent="Dialogs"]
+[node name="ErrorDialog" type="AcceptDialog" parent="Dialogs" unique_id=1836925387]
 dialog_text = "This is an error message!"
 
-[node name="CelProperties" parent="Dialogs" instance=ExtResource("17_ucs64")]
+[node name="CelProperties" parent="Dialogs" unique_id=555411532 instance=ExtResource("17_ucs64")]
 
-[node name="FrameProperties" parent="Dialogs" instance=ExtResource("9")]
+[node name="FrameProperties" parent="Dialogs" unique_id=551734942 instance=ExtResource("9")]
 size = Vector2i(224, 146)
 
-[node name="LayerProperties" parent="Dialogs" instance=ExtResource("13_4dhva")]
+[node name="LayerProperties" parent="Dialogs" unique_id=2111319245 instance=ExtResource("13_4dhva")]
 
-[node name="TagProperties" parent="Dialogs" instance=ExtResource("14_fw6cf")]
+[node name="TagProperties" parent="Dialogs" unique_id=273757866 instance=ExtResource("14_fw6cf")]
 
-[node name="ImportTagDialog" parent="Dialogs" instance=ExtResource("16_ohhks")]
+[node name="ImportTagDialog" parent="Dialogs" unique_id=1798947291 instance=ExtResource("16_ohhks")]
 popup_window = true
 
-[node name="TileModeOffsetsDialog" parent="Dialogs" instance=ExtResource("14")]
+[node name="TileModeOffsetsDialog" parent="Dialogs" unique_id=640395109 instance=ExtResource("14")]
 
-[node name="DownloadImageConfirmationDialog" type="ConfirmationDialog" parent="Dialogs"]
+[node name="DownloadImageConfirmationDialog" type="ConfirmationDialog" parent="Dialogs" unique_id=2074938928]
 size = Vector2i(400, 200)
 dialog_text = "Do you want to download the image from %s?"
 dialog_autowrap = true
 
-[node name="Extensions" type="Control" parent="."]
+[node name="Extensions" type="Control" parent="." unique_id=181783269]
 anchors_preset = 0
 script = ExtResource("15_v0k2h")
 
-[node name="LeftCursor" type="Sprite2D" parent="."]
+[node name="LeftCursor" type="Sprite2D" parent="." unique_id=299532283]
 visible = false
 
-[node name="RightCursor" type="Sprite2D" parent="."]
+[node name="RightCursor" type="Sprite2D" parent="." unique_id=331472447]
 visible = false
 
-[node name="ImageRequest" type="HTTPRequest" parent="."]
+[node name="ImageRequest" type="HTTPRequest" parent="." unique_id=1031132651]
 
-[node name="SteamManager" type="Node" parent="."]
+[node name="SteamManager" type="Node" parent="." unique_id=2008731856]
 script = ExtResource("17_k1xhp")
 
 [connection signal="files_selected" from="Dialogs/OpenSprite" to="." method="_on_OpenSprite_files_selected"]

@@ -96,10 +96,11 @@ func _add_internal_extensions() -> void:
 
 
 func install_extension(path: String) -> void:
-	var file_name := path.get_file()
+	var file_name := path.uri_decode().get_file()
 	var err := DirAccess.copy_absolute(path, EXTENSIONS_PATH.path_join(file_name))
 	if err != OK:
-		print(err)
+		var msg := tr("Extension failed to install. Error code %s (%s)") % [err, error_string(err)]
+		Global.popup_error(msg)
 		return
 	_add_extension(file_name)
 
@@ -125,13 +126,16 @@ func _add_extension(file_name: String) -> void:
 
 
 func _load_extension(extension_file_or_folder_name: StringName, internal := false) -> void:
-	var file_name_no_ext := extension_file_or_folder_name.get_basename()
+	var file_name_no_ext := extension_file_or_folder_name.uri_decode().get_basename()
 	var extension_path := "res://src/Extensions/%s/" % file_name_no_ext
 	var extension_config_file_path := extension_path.path_join("extension.json")
 	var extension_config_file := FileAccess.open(extension_config_file_path, FileAccess.READ)
 	var err := FileAccess.get_open_error()
 	if err != OK:
-		print("Error loading config file: ", err, " (", error_string(err), ")")
+		var msg := (
+			tr("Error loading extension config file. Error code %s (%s)") % [err, error_string(err)]
+		)
+		Global.popup_error(msg)
 		if extension_config_file:
 			extension_config_file.close()
 		return
@@ -142,7 +146,7 @@ func _load_extension(extension_file_or_folder_name: StringName, internal := fals
 	extension_config_file.close()
 
 	if not extension_json:
-		print("No JSON data found.")
+		Global.popup_error(tr("No JSON data found in the extension."))
 		return
 
 	if extension_json.has("supported_api_versions"):

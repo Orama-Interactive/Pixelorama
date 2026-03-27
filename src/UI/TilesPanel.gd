@@ -364,9 +364,12 @@ func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
 	elif index == 2:  # Delete
 		if tile_index_menu_popped == 0:
 			return
-		var select_copy = selected_tiles.duplicate()
-		select_copy.sort()
-		select_copy.reverse()
+		var select_copy := selected_tiles.duplicate()
+		if tile_index_menu_popped in select_copy:
+			select_copy.sort()
+			select_copy.reverse()
+		else:
+			select_copy = [tile_index_menu_popped]
 		var action_started := false
 		var project := Global.current_project
 		var undo_data_tileset := current_tileset.serialize_undo_data()

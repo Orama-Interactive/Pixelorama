@@ -1,49 +1,49 @@
-[gd_scene load_steps=5 format=3 uid="uid://omm7xmtf5kbj"]
+[gd_scene format=3 uid="uid://omm7xmtf5kbj"]
 
 [ext_resource type="Script" uid="uid://cavkfeuobk4b7" path="res://src/UI/Dialogs/ImageEffects/ScaleImage.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://kd10jfc1dxf5" path="res://assets/graphics/misc/lock_aspect_guides.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://cancw70yw0pv7" path="res://assets/graphics/misc/lock_aspect_2.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://beqermx8s5q8y" path="res://assets/graphics/misc/lock_aspect.png" id="4"]
 
-[node name="ScaleImage" type="ConfirmationDialog"]
+[node name="ScaleImage" type="ConfirmationDialog" unique_id=983457645]
 title = "Scale Image"
 size = Vector2i(206, 325)
 script = ExtResource("1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1226169504]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 198.0
 offset_bottom = 276.0
 size_flags_horizontal = 3
 
-[node name="ImageSize" type="Label" parent="VBoxContainer"]
+[node name="ImageSize" type="Label" parent="VBoxContainer" unique_id=1801109776]
 layout_mode = 2
 text = "Image Size"
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=968276569]
 layout_mode = 2
 
-[node name="PixelsLabel" type="Label" parent="VBoxContainer"]
+[node name="PixelsLabel" type="Label" parent="VBoxContainer" unique_id=188274872]
 layout_mode = 2
 text = "Pixels"
 
-[node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=931815317]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/SizeContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/SizeContainer" unique_id=403878218]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="WidthContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/VBoxContainer"]
+[node name="WidthContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/VBoxContainer" unique_id=1826763412]
 layout_mode = 2
 
-[node name="WidthLabel" type="Label" parent="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer"]
+[node name="WidthLabel" type="Label" parent="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer" unique_id=2115578316]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 text = "Width:"
 
-[node name="WidthValue" type="SpinBox" parent="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer"]
+[node name="WidthValue" type="SpinBox" parent="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer" unique_id=1873781887]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -52,15 +52,15 @@ max_value = 16384.0
 value = 64.0
 suffix = "px"
 
-[node name="HeightContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/VBoxContainer"]
+[node name="HeightContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/VBoxContainer" unique_id=1764596553]
 layout_mode = 2
 
-[node name="Height" type="Label" parent="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer"]
+[node name="Height" type="Label" parent="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer" unique_id=1214204881]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 text = "Height:"
 
-[node name="HeightValue" type="SpinBox" parent="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer"]
+[node name="HeightValue" type="SpinBox" parent="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer" unique_id=1802030194]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -69,11 +69,11 @@ max_value = 16384.0
 value = 64.0
 suffix = "px"
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeContainer" groups=["UIButtons"]]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeContainer" unique_id=297045059 groups=["UIButtons"]]
 layout_mode = 2
 texture = ExtResource("2")
 
-[node name="AspectRatioButton" type="TextureButton" parent="VBoxContainer/SizeContainer/TextureRect" groups=["UIButtons"]]
+[node name="AspectRatioButton" type="TextureButton" parent="VBoxContainer/SizeContainer/TextureRect" unique_id=1797838591 groups=["UIButtons"]]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
@@ -90,25 +90,25 @@ button_pressed = true
 texture_normal = ExtResource("3")
 texture_pressed = ExtResource("4")
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer" unique_id=1775205099]
 layout_mode = 2
 
-[node name="PercentageLabel" type="Label" parent="VBoxContainer"]
+[node name="PercentageLabel" type="Label" parent="VBoxContainer" unique_id=1204991671]
 layout_mode = 2
 text = "Percentage"
 
-[node name="PercentageContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="PercentageContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=282221354]
 layout_mode = 2
 
-[node name="WidthContainer" type="HBoxContainer" parent="VBoxContainer/PercentageContainer"]
+[node name="WidthContainer" type="HBoxContainer" parent="VBoxContainer/PercentageContainer" unique_id=1712516213]
 layout_mode = 2
 
-[node name="WidthLabel" type="Label" parent="VBoxContainer/PercentageContainer/WidthContainer"]
+[node name="WidthLabel" type="Label" parent="VBoxContainer/PercentageContainer/WidthContainer" unique_id=1997179104]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 text = "Width:"
 
-[node name="WidthValuePerc" type="SpinBox" parent="VBoxContainer/PercentageContainer/WidthContainer"]
+[node name="WidthValuePerc" type="SpinBox" parent="VBoxContainer/PercentageContainer/WidthContainer" unique_id=309043972]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -118,15 +118,15 @@ step = 0.01
 value = 100.0
 suffix = "%"
 
-[node name="HeightContainer" type="HBoxContainer" parent="VBoxContainer/PercentageContainer"]
+[node name="HeightContainer" type="HBoxContainer" parent="VBoxContainer/PercentageContainer" unique_id=1728934209]
 layout_mode = 2
 
-[node name="Height" type="Label" parent="VBoxContainer/PercentageContainer/HeightContainer"]
+[node name="Height" type="Label" parent="VBoxContainer/PercentageContainer/HeightContainer" unique_id=134684570]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 text = "Height:"
 
-[node name="HeightValuePerc" type="SpinBox" parent="VBoxContainer/PercentageContainer/HeightContainer"]
+[node name="HeightValuePerc" type="SpinBox" parent="VBoxContainer/PercentageContainer/HeightContainer" unique_id=1927454536]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -136,18 +136,18 @@ step = 0.01
 value = 100.0
 suffix = "%"
 
-[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer" unique_id=930064252]
 layout_mode = 2
 
-[node name="InterpolationContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="InterpolationContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1823024469]
 layout_mode = 2
 
-[node name="InterpolationLabel" type="Label" parent="VBoxContainer/InterpolationContainer"]
+[node name="InterpolationLabel" type="Label" parent="VBoxContainer/InterpolationContainer" unique_id=1574638875]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 text = "Interpolation:"
 
-[node name="InterpolationType" type="OptionButton" parent="VBoxContainer/InterpolationContainer"]
+[node name="InterpolationType" type="OptionButton" parent="VBoxContainer/InterpolationContainer" unique_id=1839689815]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2

@@ -39,12 +39,17 @@ func _draw() -> void:
 			var index := index_image.get_pixel(x, y).r8
 			if index == 0:
 				continue
+			var pos := Vector2(x, y)
+			if Global.mirror_view:
+				pos.x = project.size.x - pos.x - 1
+			pos = pos * 20 + Vector2.DOWN * 16
+			var font_size := FONT_SIZE if (index < 100) else int(FONT_SIZE / 1.5)
 			draw_string(
 				font,
-				Vector2(x, y) * 20 + Vector2.DOWN * 16,
+				pos,
 				text_server.format_number(str(index)),
 				HORIZONTAL_ALIGNMENT_LEFT,
 				-1,
-				FONT_SIZE if (index < 100) else int(FONT_SIZE / 1.5)
+				font_size
 			)
 	draw_set_transform(position, rotation, scale)

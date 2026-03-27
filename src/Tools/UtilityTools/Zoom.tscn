@@ -1,17 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://qyxbkvju2fbb"]
+[gd_scene format=3 uid="uid://qyxbkvju2fbb"]
 
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
 [ext_resource type="Script" uid="uid://gofqkox1cbvw" path="res://src/Tools/UtilityTools/Zoom.gd" id="2"]
 
-[node name="ToolOptions" instance=ExtResource("1")]
+[node name="ToolOptions" unique_id=1013280209 instance=ExtResource("1")]
 script = ExtResource("2")
 
-[node name="Mode" type="Label" parent="." index="2"]
+[node name="Mode" type="Label" parent="." index="2" unique_id=1621096171]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Mode:"
 
-[node name="ModeOptions" type="OptionButton" parent="." index="3"]
+[node name="ModeOptions" type="OptionButton" parent="." index="3" unique_id=1565823199]
 custom_minimum_size = Vector2(92, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -21,18 +21,18 @@ popup/item_0/id = 0
 popup/item_1/text = "Zoom in"
 popup/item_1/id = 1
 
-[node name="Options" type="Label" parent="." index="4"]
+[node name="Options" type="Label" parent="." index="4" unique_id=1324144552]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Options:"
 
-[node name="FitToFrame" type="Button" parent="." index="5"]
+[node name="FitToFrame" type="Button" parent="." index="5" unique_id=1652046134]
 custom_minimum_size = Vector2(92, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Fit to frame"
 
-[node name="100%" type="Button" parent="." index="6"]
+[node name="100%" type="Button" parent="." index="6" unique_id=746701739]
 custom_minimum_size = Vector2(92, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2

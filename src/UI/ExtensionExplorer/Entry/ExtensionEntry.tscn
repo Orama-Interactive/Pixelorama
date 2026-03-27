@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dnjpemuehkxsn"]
+[gd_scene format=3 uid="uid://dnjpemuehkxsn"]
 
 [ext_resource type="Script" uid="uid://h7jyiytmkdki" path="res://src/UI/ExtensionExplorer/Entry/ExtensionEntry.gd" id="1_3no3v"]
 [ext_resource type="Texture2D" uid="uid://b47r0c6auaqk6" path="res://assets/graphics/icons/icon.png" id="2_qhsve"]
 [ext_resource type="Texture2D" uid="uid://3v78ojo0pkfg" path="res://assets/graphics/misc/external_link.svg" id="3_ujt8o"]
 
-[node name="ExtensionEntry" type="PanelContainer"]
+[node name="ExtensionEntry" type="PanelContainer" unique_id=1881106896]
 self_modulate = Color(0.411765, 0.411765, 0.411765, 1)
 custom_minimum_size = Vector2(300, 150)
 offset_right = 310.0
@@ -13,13 +13,13 @@ size_flags_horizontal = 3
 mouse_filter = 1
 script = ExtResource("1_3no3v")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1094394058]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=96990676]
 layout_mode = 2
 
-[node name="Picture" type="TextureButton" parent="MarginContainer/HBoxContainer"]
+[node name="Picture" type="TextureButton" parent="MarginContainer/HBoxContainer" unique_id=1476296285]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
@@ -29,16 +29,16 @@ texture_normal = ExtResource("2_qhsve")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=432585963]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ExtensionName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="ExtensionName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=132603146]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Extension Name..."
 
-[node name="ExtensionDescription" type="TextEdit" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="ExtensionDescription" type="TextEdit" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=13459591]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -46,58 +46,58 @@ placeholder_text = "Description"
 editable = false
 wrap_mode = 1
 
-[node name="Done" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Done" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=879906378]
 unique_name_in_owner = true
 visible = false
 self_modulate = Color(0.337255, 1, 0, 1)
 layout_mode = 2
 text = "Downloaded successfully"
 
-[node name="DoneDelay" type="Timer" parent="MarginContainer/HBoxContainer/VBoxContainer/Done"]
+[node name="DoneDelay" type="Timer" parent="MarginContainer/HBoxContainer/VBoxContainer/Done" unique_id=1972090002]
 wait_time = 2.0
 
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=2136145404]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="ProgressTimer" type="Timer" parent="MarginContainer/HBoxContainer/VBoxContainer/ProgressBar"]
+[node name="ProgressTimer" type="Timer" parent="MarginContainer/HBoxContainer/VBoxContainer/ProgressBar" unique_id=3333731]
 wait_time = 0.1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=140065226]
 layout_mode = 2
 
-[node name="DownloadButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="DownloadButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=199732654]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Download"
 
-[node name="ReadmeButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="ReadmeButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1249978397]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 text = "README"
 icon = ExtResource("3_ujt8o")
 
-[node name="RequestDelay" type="Timer" parent="."]
+[node name="RequestDelay" type="Timer" parent="." unique_id=1930770207]
 unique_name_in_owner = true
 one_shot = true
 autostart = true
 
-[node name="ImageRequest" type="HTTPRequest" parent="."]
+[node name="ImageRequest" type="HTTPRequest" parent="." unique_id=2139344464]
 unique_name_in_owner = true
 
-[node name="DownloadRequest" type="HTTPRequest" parent="."]
+[node name="DownloadRequest" type="HTTPRequest" parent="." unique_id=775601248]
 unique_name_in_owner = true
 
-[node name="Alert" type="AcceptDialog" parent="."]
+[node name="Alert" type="AcceptDialog" parent="." unique_id=458474820]
 unique_name_in_owner = true
 size = Vector2i(421, 106)
 always_on_top = true
 
-[node name="Text" type="Label" parent="Alert"]
+[node name="Text" type="Label" parent="Alert" unique_id=1527818396]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -107,7 +107,7 @@ offset_right = -8.0
 offset_bottom = -49.0
 horizontal_alignment = 1
 
-[node name="EnlargedThumbnail" type="Window" parent="."]
+[node name="EnlargedThumbnail" type="Window" parent="." unique_id=834764916]
 title = "Image"
 position = Vector2i(0, 36)
 size = Vector2i(440, 360)
@@ -116,7 +116,7 @@ transient = true
 exclusive = true
 always_on_top = true
 
-[node name="Enlarged" type="TextureRect" parent="EnlargedThumbnail"]
+[node name="Enlarged" type="TextureRect" parent="EnlargedThumbnail" unique_id=946380148]
 unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0

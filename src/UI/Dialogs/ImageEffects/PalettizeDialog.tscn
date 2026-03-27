@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://d4gbo50bjenut"]
+[gd_scene format=3 uid="uid://d4gbo50bjenut"]
 
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1_cux3a"]
 [ext_resource type="Script" uid="uid://j42mc8alwnlf" path="res://src/UI/Dialogs/ImageEffects/PalettizeDialog.gd" id="2_4517g"]
 
-[node name="PalettizeDialog" instance=ExtResource("1_cux3a")]
+[node name="PalettizeDialog" unique_id=5934067 instance=ExtResource("1_cux3a")]
 title = "Palettize"
 script = ExtResource("2_4517g")
 
-[node name="ShowAnimate" parent="VBoxContainer" index="0"]
+[node name="ShowAnimate" parent="VBoxContainer" parent_id_path=PackedInt32Array(1773123238) index="0" unique_id=1452855547]
 visible = false

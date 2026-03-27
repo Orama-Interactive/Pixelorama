@@ -63,6 +63,8 @@ var backup_dialog := Dialog.new("res://src/UI/Dialogs/BackupRestoreDialog.tscn")
 @onready var main := $"../.." as Control
 @onready var main_ui := main.find_child("DockableContainer") as DockableContainer
 @onready var ui_elements := main_ui.get_children()
+@onready var main_menu_button: MenuButton = $MarginContainer/HBoxContainer/MainMenuButton
+@onready var menu_bar: MenuBar = $MarginContainer/HBoxContainer/MenuBar
 @onready var file_menu := $MarginContainer/HBoxContainer/MenuBar/File as PopupMenu
 @onready var edit_menu := $MarginContainer/HBoxContainer/MenuBar/Edit as PopupMenu
 @onready var select_menu := $MarginContainer/HBoxContainer/MenuBar/Select as PopupMenu
@@ -109,7 +111,9 @@ class Dialog:
 
 
 func _ready() -> void:
+	handle_main_menu_collapse()
 	main.save_file_dialog_opened.connect(func(opened: bool): can_save = not opened)
+	Global.collapse_main_menu_changed.connect(handle_main_menu_collapse)
 	Global.project_about_to_switch.connect(_on_project_about_to_switch)
 	Global.project_switched.connect(_on_project_switched)
 	Global.cel_switched.connect(_update_current_frame_mark)
@@ -147,6 +151,31 @@ func _notification(what: int) -> void:
 	elif what == NOTIFICATION_WM_CLOSE_REQUEST:
 		if zen_mode:
 			_toggle_zen_mode()
+
+
+func handle_main_menu_collapse() -> void:
+	var main_menu_button_popup := main_menu_button.get_popup()
+	if Global.collapse_main_menu:
+		if menu_bar.visible:
+			main_menu_button.visible = true
+			menu_bar.visible = false
+			var menu_options := menu_bar.get_children()
+			for menu_option in menu_options:
+				menu_bar.remove_child(menu_option)
+				main_menu_button_popup.add_submenu_node_item(menu_option.name, menu_option)
+	else:
+		if not menu_bar.visible:
+			main_menu_button.visible = false
+			menu_bar.visible = true
+			var menu_options: Array[PopupMenu]
+			for i in range(main_menu_button_popup.item_count - 1, -1, -1):
+				var submenu := main_menu_button_popup.get_item_submenu_node(i)
+				menu_options.append(submenu)
+				main_menu_button_popup.remove_item(i)
+				submenu.get_parent().remove_child(submenu)
+			menu_options.reverse()
+			for menu_option in menu_options:
+				menu_bar.add_child(menu_option)
 
 
 func _on_project_about_to_switch() -> void:
@@ -280,7 +309,7 @@ func _setup_view_menu() -> void:
 		"Center Canvas": "center_canvas",
 		"Tile Mode": "",
 		"Tile Mode Offsets": "",
-		"Grayscale View": "",
+		"Grayscale View": &"grayscale_view",
 		"Mirror View": "mirror_view",
 		"Show Grid": "show_grid",
 		"Show Pixel Grid": "show_pixel_grid",
@@ -850,17 +879,29 @@ func _color_mode_submenu_id_pressed(id: ColorModes) -> void:
 		project.color_mode = Image.FORMAT_RGBA8
 	else:
 		project.color_mode = Project.INDEXED_MODE
-	project.update_tilemaps(undo_data, TileSetPanel.TileEditingMode.AUTO)
+	var used_tilesets := project.update_tilemaps(undo_data, TileSetPanel.TileEditingMode.AUTO)
+	var layers_to_update := PackedInt32Array()
+	for l in Global.current_project.layers:
+		if l is LayerTileMap:
+			if l.tileset in used_tilesets:
+				layers_to_update.append(l.index)
 	project.serialize_cel_undo_data(pixel_cels, redo_data)
 	project.undo_redo.create_action("Change color mode")
 	var palette_in_focus = Palettes.current_palette
 	if not palette_in_focus.is_project_palette and project.color_mode == Project.INDEXED_MODE:
-		palette_in_focus = palette_in_focus.duplicate()
-		palette_in_focus.is_project_palette = true
-		Palettes.undo_redo_add_palette(palette_in_focus)
+		if Global.global_palettes_readonly:
+			palette_in_focus = palette_in_focus.duplicate()
+			Palettes.undo_redo_add_palette(palette_in_focus, false)
 	project.undo_redo.add_do_property(project, "color_mode", project.color_mode)
 	project.undo_redo.add_undo_property(project, "color_mode", old_color_mode)
 	project.deserialize_cel_undo_data(redo_data, undo_data)
+	# we may be on a different layer during undo/redo
+	Global.current_project.undo_redo.add_do_property(
+		Global.canvas, "mandatory_update_layers", layers_to_update
+	)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.canvas, "mandatory_update_layers", layers_to_update
+	)
 	project.undo_redo.add_do_method(_check_color_mode_submenu_item.bind(project))
 	project.undo_redo.add_undo_method(_check_color_mode_submenu_item.bind(project))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
@@ -1094,6 +1135,7 @@ func _toggle_fullscreen() -> void:
 	get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if !is_fullscreen else Window.MODE_WINDOWED
 	is_fullscreen = not is_fullscreen
 	window_menu.set_item_checked(Global.WindowMenu.FULLSCREEN_MODE, is_fullscreen)
+	get_tree().current_scene.set_mobile_fullscreen_safe_area()
 
 
 func project_menu_id_pressed(id: int) -> void:

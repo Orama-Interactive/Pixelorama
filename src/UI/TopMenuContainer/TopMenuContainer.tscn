@@ -1,16 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsgwar3l6qtgv"]
+[gd_scene format=3 uid="uid://bsgwar3l6qtgv"]
 
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="1"]
 [ext_resource type="Script" uid="uid://bw54cqc214ur8" path="res://src/UI/TopMenuContainer/TopMenuContainer.gd" id="2"]
 [ext_resource type="Script" uid="uid://c6oak0m37f3xg" path="res://src/UI/TopMenuContainer/undo_history_dialog.gd" id="3_5t7b8"]
+[ext_resource type="Script" uid="uid://cxiyeo4unmg3u" path="res://src/UI/TopMenuContainer/quick_access_buttons.gd" id="3_jyry5"]
+[ext_resource type="Texture2D" uid="uid://drrcnm2w0glru" path="res://assets/graphics/quick_access_panel/save.svg" id="3_p1o86"]
+[ext_resource type="Texture2D" uid="uid://dsb5lut4qfo11" path="res://assets/graphics/quick_access_panel/undo.svg" id="4_jyry5"]
+[ext_resource type="Texture2D" uid="uid://ciqtn0nqmn3nk" path="res://assets/graphics/quick_access_panel/redo.svg" id="5_vglpq"]
+[ext_resource type="Texture2D" uid="uid://btxf72xcqrn4c" path="res://assets/graphics/quick_access_panel/copy.svg" id="6_u31k5"]
+[ext_resource type="Texture2D" uid="uid://bblxfj2ey7p04" path="res://assets/graphics/quick_access_panel/cut.svg" id="7_1wx4i"]
+[ext_resource type="Texture2D" uid="uid://c6vu0iwn4qesr" path="res://assets/graphics/quick_access_panel/paste.svg" id="8_0yk3c"]
+[ext_resource type="Texture2D" uid="uid://b0wuerwimmxav" path="res://assets/graphics/quick_access_panel/remove.svg" id="9_24r3n"]
 
-[node name="TopMenuContainer" type="Panel"]
-custom_minimum_size = Vector2(0, 28)
+[node name="TopMenuContainer" type="Panel" unique_id=1569386863]
+custom_minimum_size = Vector2(0, 32)
 offset_right = 1280.0
 offset_bottom = 28.0
 script = ExtResource("2")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1524615853]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -19,36 +27,42 @@ grow_vertical = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_right = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1819716554]
 layout_mode = 2
 
-[node name="MenuBar" type="MenuBar" parent="MarginContainer/HBoxContainer"]
+[node name="MainMenuButton" type="MenuButton" parent="MarginContainer/HBoxContainer" unique_id=146980267]
+visible = false
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Main Menu"
+
+[node name="MenuBar" type="MenuBar" parent="MarginContainer/HBoxContainer" unique_id=359350634]
 layout_mode = 2
 size_flags_horizontal = 2
 flat = true
 
-[node name="File" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+[node name="File" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=1224741301]
 
-[node name="Edit" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+[node name="Edit" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=894854999]
 
-[node name="Select" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+[node name="Select" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=1630003755]
 
-[node name="Project" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+[node name="Project" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=1172244258]
 
-[node name="Effects" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+[node name="Effects" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=77521974]
 
-[node name="View" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+[node name="View" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=1075900013]
 
-[node name="Window" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+[node name="Window" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=506854729]
 
-[node name="Help" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar"]
+[node name="Help" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=2064979441]
 
-[node name="TopLabels" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="TopLabels" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1935929971]
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_constants/separation = 20
 
-[node name="RotationSlider" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/TopLabels"]
+[node name="RotationSlider" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/TopLabels" unique_id=204642904]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(70, 20)
 layout_mode = 2
@@ -70,7 +84,7 @@ script = ExtResource("1")
 suffix = "°"
 snap_step = 45.0
 
-[node name="ZoomSlider" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/TopLabels"]
+[node name="ZoomSlider" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/TopLabels" unique_id=1489184637]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 20)
 layout_mode = 2
@@ -91,34 +105,208 @@ script = ExtResource("1")
 suffix = "%"
 snap_step = 100.0
 
-[node name="CursorPosition" type="Label" parent="MarginContainer/HBoxContainer/TopLabels"]
+[node name="CursorPosition" type="Label" parent="MarginContainer/HBoxContainer/TopLabels" unique_id=669818577]
 unique_name_in_owner = true
 layout_mode = 2
 text = "[64×64]"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="QuickAccessButtons" type="VFlowContainer" parent="MarginContainer/HBoxContainer" unique_id=1032869178]
+visible = false
 layout_mode = 2
-size_flags_horizontal = 10
+size_flags_horizontal = 3
+alignment = 1
+script = ExtResource("3_jyry5")
+
+[node name="Undo" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=656560383 groups=["UIButtons"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Undo"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/QuickAccessButtons/Undo" unique_id=931602762]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("4_jyry5")
+stretch_mode = 3
+
+[node name="Redo" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=467903916 groups=["UIButtons"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Redo"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/QuickAccessButtons/Redo" unique_id=1983536949]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("5_vglpq")
+stretch_mode = 3
+
+[node name="Save" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=17304904 groups=["UIButtons"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Save"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/QuickAccessButtons/Save" unique_id=2058503723]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("3_p1o86")
+stretch_mode = 3
+
+[node name="Copy" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=1290832250 groups=["UIButtons"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Copy"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/QuickAccessButtons/Copy" unique_id=726001689]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("6_u31k5")
+stretch_mode = 3
+
+[node name="Cut" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=2124912130 groups=["UIButtons"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Cut"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/QuickAccessButtons/Cut" unique_id=1387879997]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("7_1wx4i")
+stretch_mode = 3
+
+[node name="Paste" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=601055831 groups=["UIButtons"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Paste"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/QuickAccessButtons/Paste" unique_id=712914534]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("8_0yk3c")
+stretch_mode = 3
+
+[node name="Delete" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=194898671 groups=["UIButtons"]]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Delete"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/QuickAccessButtons/Delete" unique_id=250624969]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("9_24r3n")
+stretch_mode = 3
+
+[node name="Shift" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=916742739]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = "Shift"
+
+[node name="Ctrl" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=744367413]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = "Ctrl"
+
+[node name="Alt" type="Button" parent="MarginContainer/HBoxContainer/QuickAccessButtons" unique_id=1331416086]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = "Alt"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1819772476]
+layout_mode = 2
+size_flags_horizontal = 8
 alignment = 1
 
-[node name="CurrentFrame" type="Label" parent="MarginContainer/HBoxContainer/HBoxContainer"]
+[node name="CurrentFrame" type="Label" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=1572105713]
 layout_mode = 2
 size_flags_vertical = 1
 text = "Current frame:"
 
-[node name="CurrentFrameMark" type="Label" parent="MarginContainer/HBoxContainer/HBoxContainer"]
+[node name="CurrentFrameMark" type="Label" parent="MarginContainer/HBoxContainer/HBoxContainer" unique_id=1844494753]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 1
 text = "1/1"
 
-[node name="UndoHistoryDialog" type="AcceptDialog" parent="."]
+[node name="UndoHistoryDialog" type="AcceptDialog" parent="." unique_id=935198027]
 oversampling_override = 1.0
 title = "Undo History"
 size = Vector2i(400, 300)
 script = ExtResource("3_5t7b8")
 
-[node name="ItemList" type="ItemList" parent="UndoHistoryDialog"]
+[node name="ItemList" type="ItemList" parent="UndoHistoryDialog" unique_id=1724670920]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -129,32 +317,32 @@ offset_bottom = -49.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AddLayoutConfirmation" type="ConfirmationDialog" parent="."]
+[node name="AddLayoutConfirmation" type="ConfirmationDialog" parent="." unique_id=1872394877]
 auto_translate_mode = 1
 title = "Add Layout"
 size = Vector2i(246, 123)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="AddLayoutConfirmation"]
+[node name="VBoxContainer" type="VBoxContainer" parent="AddLayoutConfirmation" unique_id=1812847554]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 238.0
 offset_bottom = 74.0
 
-[node name="LayoutName" type="LineEdit" parent="AddLayoutConfirmation/VBoxContainer"]
+[node name="LayoutName" type="LineEdit" parent="AddLayoutConfirmation/VBoxContainer" unique_id=704901556]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Insert name"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="AddLayoutConfirmation/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="AddLayoutConfirmation/VBoxContainer" unique_id=2083838297]
 layout_mode = 2
 
-[node name="LayoutFromLabel" type="Label" parent="AddLayoutConfirmation/VBoxContainer/HBoxContainer"]
+[node name="LayoutFromLabel" type="Label" parent="AddLayoutConfirmation/VBoxContainer/HBoxContainer" unique_id=356502800]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Copy from"
 
-[node name="LayoutFrom" type="OptionButton" parent="AddLayoutConfirmation/VBoxContainer/HBoxContainer"]
+[node name="LayoutFrom" type="OptionButton" parent="AddLayoutConfirmation/VBoxContainer/HBoxContainer" unique_id=977450996]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -163,11 +351,21 @@ item_count = 1
 popup/item_0/text = "Current layout"
 popup/item_0/id = 0
 
-[node name="DeleteLayoutConfirmation" type="ConfirmationDialog" parent="."]
+[node name="DeleteLayoutConfirmation" type="ConfirmationDialog" parent="." unique_id=984107300]
 auto_translate_mode = 1
 title = "Delete Layout"
 dialog_text = "Are you sure you want to delete this layout?"
 
+[connection signal="pressed" from="MarginContainer/HBoxContainer/QuickAccessButtons/Undo" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_undo_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/QuickAccessButtons/Redo" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_redo_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/QuickAccessButtons/Save" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_save_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/QuickAccessButtons/Copy" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_copy_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/QuickAccessButtons/Cut" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_cut_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/QuickAccessButtons/Paste" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_paste_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/QuickAccessButtons/Delete" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_delete_pressed"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/QuickAccessButtons/Shift" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_shift_toggled"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/QuickAccessButtons/Ctrl" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_ctrl_toggled"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/QuickAccessButtons/Alt" to="MarginContainer/HBoxContainer/QuickAccessButtons" method="_on_alt_toggled"]
 [connection signal="visibility_changed" from="UndoHistoryDialog" to="UndoHistoryDialog" method="_on_visibility_changed"]
 [connection signal="item_selected" from="UndoHistoryDialog/ItemList" to="UndoHistoryDialog" method="_on_item_list_item_selected"]
 [connection signal="confirmed" from="AddLayoutConfirmation" to="." method="_on_add_layout_confirmation_confirmed"]

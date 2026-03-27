@@ -44,6 +44,28 @@ var templates: Array[Template] = [
 	Template.new(Vector2i(320, 200), "C64"),
 	# Sinclair
 	Template.new(Vector2i(256, 192), "ZX Spectrum"),
+	# Tile Maps/1:1 Presets
+	Template.new(Vector2i(8, 8), "Tile Maps/1:1 Presets"),
+	Template.new(Vector2i(16, 16), "Tile Maps/1:1 Presets"),
+	Template.new(Vector2i(32, 32), "Tile Maps/1:1 Presets"),
+	Template.new(Vector2i(64, 64), "Tile Maps/1:1 Presets"),
+	Template.new(Vector2i(48, 48), "Tile Maps/1:1 Presets"),
+	Template.new(Vector2i(80, 80), "Tile Maps/1:1 Presets"),
+	Template.new(Vector2i(144, 144), "Tile Maps/1:1 Presets"),
+	Template.new(Vector2i(320, 320), "Tile Maps/1:1 Presets"),
+	# 4:3 Presets
+	Template.new(Vector2i(160, 120), "4:3 Presets"),
+	Template.new(Vector2i(200, 150), "4:3 Presets"),
+	Template.new(Vector2i(320, 240), "4:3 Presets"),
+	Template.new(Vector2i(400, 300), "4:3 Presets"),
+	# 16:9 Presets
+	Template.new(Vector2i(192, 108), "16:9 Presets"),
+	Template.new(Vector2i(240, 135), "16:9 Presets"),
+	Template.new(Vector2i(320, 180), "16:9 Presets"),
+	Template.new(Vector2i(480, 270), "16:9 Presets"),
+	# Paper Presets
+	Template.new(Vector2i(298, 421), "A4 Portrait"),
+	Template.new(Vector2i(210, 297), "A5 Portrait"),
 ]
 
 @onready var templates_options := %TemplatesOptions as OptionButton

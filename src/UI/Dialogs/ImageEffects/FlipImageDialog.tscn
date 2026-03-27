@@ -1,30 +1,30 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7hnynip21y6u"]
+[gd_scene format=3 uid="uid://c7hnynip21y6u"]
 
 [ext_resource type="Script" uid="uid://b4btwmk6uad5b" path="res://src/UI/Dialogs/ImageEffects/FlipImageDialog.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="2"]
 
-[node name="FlipImageDialog" instance=ExtResource("2")]
+[node name="FlipImageDialog" unique_id=735855738 instance=ExtResource("2")]
 title = "Mirror Image"
 script = ExtResource("1")
 
-[node name="VBoxContainer" parent="." index="2"]
+[node name="VBoxContainer" parent="." index="2" unique_id=1773123238]
 offset_bottom = 288.0
 
-[node name="ShowAnimate" parent="VBoxContainer" index="0"]
+[node name="ShowAnimate" parent="VBoxContainer" index="0" unique_id=1452855547]
 visible = false
 
-[node name="FlipOptions" type="GridContainer" parent="VBoxContainer" index="2"]
+[node name="FlipOptions" type="GridContainer" parent="VBoxContainer" index="2" unique_id=588459611]
 layout_mode = 2
 columns = 2
 
-[node name="FlipHorizontal" type="CheckBox" parent="VBoxContainer/FlipOptions" index="0"]
+[node name="FlipHorizontal" type="CheckBox" parent="VBoxContainer/FlipOptions" index="0" unique_id=715877864]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 button_pressed = true
 text = "Horizontal"
 
-[node name="FlipVertical" type="CheckBox" parent="VBoxContainer/FlipOptions" index="1"]
+[node name="FlipVertical" type="CheckBox" parent="VBoxContainer/FlipOptions" index="1" unique_id=1564867989]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbnqcxa20a5a5"]
+[gd_scene format=3 uid="uid://bbnqcxa20a5a5"]
 
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="1"]
 [ext_resource type="Script" uid="uid://oxv0tle867v3" path="res://src/UI/Nodes/Sliders/ValueSliderV2.gd" id="2"]
@@ -6,16 +6,16 @@
 [ext_resource type="Texture2D" uid="uid://kd10jfc1dxf5" path="res://assets/graphics/misc/lock_aspect_guides.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://beqermx8s5q8y" path="res://assets/graphics/misc/lock_aspect.png" id="5"]
 
-[node name="ValueSliderV2" type="HBoxContainer"]
+[node name="ValueSliderV2" type="HBoxContainer" unique_id=62854647]
 offset_right = 45.0
 offset_bottom = 52.0
 script = ExtResource("2")
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="GridContainer" type="GridContainer" parent="." unique_id=856442517]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="X" type="TextureProgressBar" parent="GridContainer"]
+[node name="X" type="TextureProgressBar" parent="GridContainer" unique_id=2110274121]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -30,7 +30,7 @@ stretch_margin_bottom = 3
 script = ExtResource("1")
 prefix = "X:"
 
-[node name="Y" type="TextureProgressBar" parent="GridContainer"]
+[node name="Y" type="TextureProgressBar" parent="GridContainer" unique_id=1672350223]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -45,24 +45,25 @@ stretch_margin_bottom = 3
 script = ExtResource("1")
 prefix = "Y:"
 
-[node name="Ratio" type="Control" parent="."]
+[node name="Ratio" type="Control" parent="." unique_id=566507468]
 visible = false
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="RatioGuides" type="NinePatchRect" parent="Ratio" groups=["UIButtons"]]
+[node name="RatioGuides" type="NinePatchRect" parent="Ratio" unique_id=403778984 groups=["UIButtons"]]
 custom_minimum_size = Vector2(9, 0)
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 9.0
+grow_vertical = 2
 pivot_offset = Vector2(4, 26)
 texture = ExtResource("4")
 region_rect = Rect2(0, 0, 9, 44)
 patch_margin_top = 15
 patch_margin_bottom = 13
 
-[node name="RatioButton" type="TextureButton" parent="Ratio" groups=["UIButtons"]]
+[node name="RatioButton" type="TextureButton" parent="Ratio" unique_id=1932303527 groups=["UIButtons"]]
 unique_name_in_owner = true
 layout_mode = 0
 anchor_left = 0.5

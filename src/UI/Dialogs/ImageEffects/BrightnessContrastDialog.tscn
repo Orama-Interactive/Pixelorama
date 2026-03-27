@@ -1,19 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://7hslmewq0w4a"]
+[gd_scene format=3 uid="uid://7hslmewq0w4a"]
 
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1_5wfra"]
 [ext_resource type="Script" uid="uid://c4ihv84e8wk1g" path="res://src/UI/Dialogs/ImageEffects/BrightnessContrastDialog.gd" id="2_msv0o"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="3_2epr4"]
 
-[node name="BrightnessContrastDialog" instance=ExtResource("1_5wfra")]
+[node name="BrightnessContrastDialog" unique_id=954387416 instance=ExtResource("1_5wfra")]
 oversampling_override = 1.0
 title = "Adjust Brightness/Contrast"
 size = Vector2i(362, 540)
 script = ExtResource("2_msv0o")
 
-[node name="VBoxContainer" parent="." index="2"]
+[node name="VBoxContainer" parent="." index="2" unique_id=1773123238]
 offset_bottom = 491.0
 
-[node name="BrightnessSlider" type="TextureProgressBar" parent="VBoxContainer" index="2"]
+[node name="BrightnessSlider" type="TextureProgressBar" parent="VBoxContainer" index="2" unique_id=738643021]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
 focus_mode = 2
@@ -28,7 +28,7 @@ stretch_margin_bottom = 3
 script = ExtResource("3_2epr4")
 prefix = "Brightness:"
 
-[node name="ContrastSlider" type="TextureProgressBar" parent="VBoxContainer" index="3"]
+[node name="ContrastSlider" type="TextureProgressBar" parent="VBoxContainer" index="3" unique_id=719668350]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
 focus_mode = 2
@@ -44,7 +44,7 @@ stretch_margin_bottom = 3
 script = ExtResource("3_2epr4")
 prefix = "Contrast:"
 
-[node name="SaturationSlider" type="TextureProgressBar" parent="VBoxContainer" index="4"]
+[node name="SaturationSlider" type="TextureProgressBar" parent="VBoxContainer" index="4" unique_id=450016837]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
 focus_mode = 2
@@ -60,7 +60,7 @@ stretch_margin_bottom = 3
 script = ExtResource("3_2epr4")
 prefix = "Saturation:"
 
-[node name="RedSlider" type="TextureProgressBar" parent="VBoxContainer" index="5"]
+[node name="RedSlider" type="TextureProgressBar" parent="VBoxContainer" index="5" unique_id=1115794383]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
 focus_mode = 2
@@ -75,7 +75,7 @@ stretch_margin_bottom = 3
 script = ExtResource("3_2epr4")
 prefix = "Red value:"
 
-[node name="GreenSlider" type="TextureProgressBar" parent="VBoxContainer" index="6"]
+[node name="GreenSlider" type="TextureProgressBar" parent="VBoxContainer" index="6" unique_id=1456343987]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
 focus_mode = 2
@@ -90,7 +90,7 @@ stretch_margin_bottom = 3
 script = ExtResource("3_2epr4")
 prefix = "Green value:"
 
-[node name="BlueSlider" type="TextureProgressBar" parent="VBoxContainer" index="7"]
+[node name="BlueSlider" type="TextureProgressBar" parent="VBoxContainer" index="7" unique_id=2082911472]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
 focus_mode = 2
@@ -105,21 +105,21 @@ stretch_margin_bottom = 3
 script = ExtResource("3_2epr4")
 prefix = "Blue value:"
 
-[node name="TintColorContainer" type="HBoxContainer" parent="VBoxContainer" index="8"]
+[node name="TintColorContainer" type="HBoxContainer" parent="VBoxContainer" index="8" unique_id=975945355]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/TintColorContainer" index="0"]
+[node name="Label" type="Label" parent="VBoxContainer/TintColorContainer" index="0" unique_id=1180119593]
 layout_mode = 2
 text = "Tint color:"
 
-[node name="TintColor" type="ColorPickerButton" parent="VBoxContainer/TintColorContainer" index="1"]
+[node name="TintColor" type="ColorPickerButton" parent="VBoxContainer/TintColorContainer" index="1" unique_id=1882223003]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 color = Color(1, 1, 1, 1)
 
-[node name="TintSlider" type="TextureProgressBar" parent="VBoxContainer" index="9"]
+[node name="TintSlider" type="TextureProgressBar" parent="VBoxContainer" index="9" unique_id=1493212009]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
 focus_mode = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://chy5d42l72crk"]
+[gd_scene format=3 uid="uid://chy5d42l72crk"]
 
 [ext_resource type="Script" uid="uid://3gweeb1iyr4l" path="res://src/UI/ExtensionExplorer/ExtensionExplorer.gd" id="1_pwcwi"]
 [ext_resource type="Script" uid="uid://bax7ba3s0gq6a" path="res://src/UI/ExtensionExplorer/Subscripts/SearchManager.gd" id="2_uqsvm"]
@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://nu4gcburux0v" path="res://src/UI/ExtensionExplorer/Subscripts/CustomRepositoryLinks.gd" id="3_dk1xf"]
 [ext_resource type="Texture2D" uid="uid://d1urikaf1lxwl" path="res://assets/graphics/timeline/new_frame.png" id="4_ntl7p"]
 
-[node name="ExtensionExplorer" type="Window"]
+[node name="ExtensionExplorer" type="Window" unique_id=566187874]
 title = "Explore Online"
 position = Vector2i(0, 36)
 size = Vector2i(760, 470)
@@ -16,7 +16,7 @@ exclusive = true
 always_on_top = true
 script = ExtResource("1_pwcwi")
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="TabContainer" type="TabContainer" parent="." unique_id=1552507201]
 unique_name_in_owner = true
 clip_contents = true
 anchors_preset = 15
@@ -28,104 +28,104 @@ offset_right = -7.0
 offset_bottom = -8.0
 current_tab = 0
 
-[node name="Extension Explorer" type="MarginContainer" parent="TabContainer"]
+[node name="Extension Explorer" type="MarginContainer" parent="TabContainer" unique_id=838264733]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="StoreMainContainer" type="HSplitContainer" parent="TabContainer/Extension Explorer"]
+[node name="StoreMainContainer" type="HSplitContainer" parent="TabContainer/Extension Explorer" unique_id=1811375853]
 layout_mode = 2
 
-[node name="Parameters" type="VBoxContainer" parent="TabContainer/Extension Explorer/StoreMainContainer"]
+[node name="Parameters" type="VBoxContainer" parent="TabContainer/Extension Explorer/StoreMainContainer" unique_id=1136058535]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="SearchManager" type="LineEdit" parent="TabContainer/Extension Explorer/StoreMainContainer/Parameters"]
+[node name="SearchManager" type="LineEdit" parent="TabContainer/Extension Explorer/StoreMainContainer/Parameters" unique_id=668195234]
 unique_name_in_owner = true
 layout_mode = 2
 placeholder_text = "Search..."
 script = ExtResource("2_uqsvm")
 
-[node name="Header" type="Label" parent="TabContainer/Extension Explorer/StoreMainContainer/Parameters"]
+[node name="Header" type="Label" parent="TabContainer/Extension Explorer/StoreMainContainer/Parameters" unique_id=985165587]
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
 text = "Tags:"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Extension Explorer/StoreMainContainer/Parameters"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Extension Explorer/StoreMainContainer/Parameters" unique_id=2060533486]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
-[node name="TagList" type="VBoxContainer" parent="TabContainer/Extension Explorer/StoreMainContainer/Parameters/ScrollContainer"]
+[node name="TagList" type="VBoxContainer" parent="TabContainer/Extension Explorer/StoreMainContainer/Parameters/ScrollContainer" unique_id=1054309338]
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Extension Explorer/StoreMainContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Extension Explorer/StoreMainContainer" unique_id=1977498893]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Extension Explorer/StoreMainContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Extension Explorer/StoreMainContainer/VBoxContainer" unique_id=1309776449]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="TabContainer/Extension Explorer/StoreMainContainer/VBoxContainer/HBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Extension Explorer/StoreMainContainer/VBoxContainer/HBoxContainer" unique_id=13956883]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ReportIssue" type="Button" parent="TabContainer/Extension Explorer/StoreMainContainer/VBoxContainer/HBoxContainer"]
+[node name="ReportIssue" type="Button" parent="TabContainer/Extension Explorer/StoreMainContainer/VBoxContainer/HBoxContainer" unique_id=1389595315]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Report issue with an extension"
 icon = ExtResource("3_6lb58")
 
-[node name="ContentScrollContainer" type="ScrollContainer" parent="TabContainer/Extension Explorer/StoreMainContainer/VBoxContainer"]
+[node name="ContentScrollContainer" type="ScrollContainer" parent="TabContainer/Extension Explorer/StoreMainContainer/VBoxContainer" unique_id=1840091176]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Content" type="VBoxContainer" parent="TabContainer/Extension Explorer/StoreMainContainer/VBoxContainer/ContentScrollContainer"]
+[node name="Content" type="VBoxContainer" parent="TabContainer/Extension Explorer/StoreMainContainer/VBoxContainer/ContentScrollContainer" unique_id=67644364]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Options" type="MarginContainer" parent="TabContainer"]
+[node name="Options" type="MarginContainer" parent="TabContainer" unique_id=1515693093]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Options"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Options" unique_id=675443141]
 layout_mode = 2
 
-[node name="CustomStoreLinks" type="VBoxContainer" parent="TabContainer/Options/ScrollContainer"]
+[node name="CustomStoreLinks" type="VBoxContainer" parent="TabContainer/Options/ScrollContainer" unique_id=388496557]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("3_dk1xf")
 
-[node name="Header" type="Label" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks"]
+[node name="Header" type="Label" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks" unique_id=859717412]
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
 text = "Repository links:"
 
-[node name="MainStoreLink" type="LineEdit" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks"]
+[node name="MainStoreLink" type="LineEdit" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks" unique_id=1458991633]
 unique_name_in_owner = true
 layout_mode = 2
 editable = false
 
-[node name="Links" type="VBoxContainer" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks"]
+[node name="Links" type="VBoxContainer" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks" unique_id=381047335]
 layout_mode = 2
 
-[node name="ButtonContainer" type="HBoxContainer" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks"]
+[node name="ButtonContainer" type="HBoxContainer" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks" unique_id=650590758]
 layout_mode = 2
 
-[node name="Guide" type="Button" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer"]
+[node name="Guide" type="Button" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer" unique_id=1559187190]
 visible = false
 layout_mode = 2
 text = "Guide to making a repository file"
 
-[node name="NewLink" type="Button" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer"]
+[node name="NewLink" type="Button" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer" unique_id=1957883373]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="TextureRect" type="TextureRect" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer/NewLink"]
+[node name="TextureRect" type="TextureRect" parent="TabContainer/Options/ScrollContainer/CustomStoreLinks/ButtonContainer/NewLink" unique_id=153206581]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -139,7 +139,7 @@ grow_vertical = 2
 texture = ExtResource("4_ntl7p")
 stretch_mode = 5
 
-[node name="ProgressContainer" type="VBoxContainer" parent="."]
+[node name="ProgressContainer" type="VBoxContainer" parent="." unique_id=1224669755]
 unique_name_in_owner = true
 visible = false
 anchors_preset = 15
@@ -151,25 +151,25 @@ offset_right = -37.0
 offset_bottom = -5.0
 alignment = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="ProgressContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="ProgressContainer" unique_id=667431866]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ProgressContainer"]
+[node name="Label" type="Label" parent="ProgressContainer" unique_id=1625797705]
 layout_mode = 2
 text = "Fetching data from remote repository.
 Please wait."
 horizontal_alignment = 1
 
-[node name="UpdateTimer" type="Timer" parent="ProgressContainer"]
+[node name="UpdateTimer" type="Timer" parent="ProgressContainer" unique_id=1068676872]
 unique_name_in_owner = true
 wait_time = 0.1
 
-[node name="StoreInformationDownloader" type="HTTPRequest" parent="."]
+[node name="StoreInformationDownloader" type="HTTPRequest" parent="." unique_id=1823062891]
 unique_name_in_owner = true
 
-[node name="Error" type="AcceptDialog" parent="."]
+[node name="Error" type="AcceptDialog" parent="." unique_id=1754437895]
 unique_name_in_owner = true
 position = Vector2i(0, 36)
 size = Vector2i(511, 326)
@@ -177,7 +177,7 @@ unresizable = true
 always_on_top = true
 popup_window = true
 
-[node name="Content" type="VBoxContainer" parent="Error"]
+[node name="Content" type="VBoxContainer" parent="Error" unique_id=443249857]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -188,7 +188,7 @@ offset_bottom = -49.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Error/Content"]
+[node name="Label" type="Label" parent="Error/Content" unique_id=1811997562]
 custom_minimum_size = Vector2(495, 180)
 layout_mode = 2
 text = "Unable to get info from remote repository.
@@ -197,34 +197,34 @@ text = "Unable to get info from remote repository.
 - If you are using the Flatpak version of Pixelorama, you need to grant it permission to connect to the internet. To do that, you can run the following command on your terminal:"
 autowrap_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Error/Content"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Error/Content" unique_id=884813541]
 layout_mode = 2
 
-[node name="LineEdit" type="LineEdit" parent="Error/Content/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="Error/Content/HBoxContainer" unique_id=1777086647]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "sudo flatpak override com.orama_interactive.Pixelorama --share=network"
 editable = false
 
-[node name="CopyCommand" type="Button" parent="Error/Content/HBoxContainer"]
+[node name="CopyCommand" type="Button" parent="Error/Content/HBoxContainer" unique_id=946016318]
 layout_mode = 2
 text = "Copy"
 
-[node name="Label2" type="Label" parent="Error/Content"]
+[node name="Label2" type="Label" parent="Error/Content" unique_id=2079448320]
 custom_minimum_size = Vector2(495, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Alternatively, you can download Flatseal and set permissions for Flatpak apps there."
 autowrap_mode = 3
 
-[node name="ErrorCustom" type="AcceptDialog" parent="."]
+[node name="ErrorCustom" type="AcceptDialog" parent="." unique_id=1450592042]
 unique_name_in_owner = true
 position = Vector2i(0, 36)
 size = Vector2i(357, 110)
 always_on_top = true
 popup_window = true
 
-[node name="Content" type="VBoxContainer" parent="ErrorCustom"]
+[node name="Content" type="VBoxContainer" parent="ErrorCustom" unique_id=1277869508]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -233,11 +233,11 @@ offset_top = 8.0
 offset_right = -8.0
 offset_bottom = -49.0
 
-[node name="Label" type="Label" parent="ErrorCustom/Content"]
+[node name="Label" type="Label" parent="ErrorCustom/Content" unique_id=1155753648]
 layout_mode = 2
 text = "Unable to get info from remote repository."
 
-[node name="FaultyLinks" type="Label" parent="ErrorCustom/Content"]
+[node name="FaultyLinks" type="Label" parent="ErrorCustom/Content" unique_id=1996995262]
 unique_name_in_owner = true
 layout_mode = 2
 

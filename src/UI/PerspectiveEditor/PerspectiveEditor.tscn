@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cap1bhavhi33g"]
+[gd_scene format=3 uid="uid://cap1bhavhi33g"]
 
 [ext_resource type="Script" uid="uid://okyo6k7lrdnn" path="res://src/UI/PerspectiveEditor/PerspectiveEditor.gd" id="1"]
 
-[node name="PerspectiveEditor" type="PanelContainer"]
+[node name="PerspectiveEditor" type="PanelContainer" unique_id=2027870115]
 custom_minimum_size = Vector2(270, 10)
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,40 +13,40 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1423715990]
 self_modulate = Color(0.698039, 0.698039, 0.698039, 0.698039)
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Header" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Header" type="HBoxContainer" parent="VBoxContainer" unique_id=1264982951]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/Header"]
+[node name="Label" type="Label" parent="VBoxContainer/Header" unique_id=1800024056]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"HeaderSmall"
 text = "Perspective Editor"
 
-[node name="AddPoint" type="Button" parent="VBoxContainer/Header"]
+[node name="AddPoint" type="Button" parent="VBoxContainer/Header" unique_id=1721908663]
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 text = "+"
 clip_text = true
 
-[node name="TrackerLines" type="CheckButton" parent="VBoxContainer"]
+[node name="TrackerLines" type="CheckButton" parent="VBoxContainer" unique_id=1028185828]
 layout_mode = 2
 text = "Tracker Lines"
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=736235058]
 layout_mode = 2
 
-[node name="Content" type="ScrollContainer" parent="VBoxContainer"]
+[node name="Content" type="ScrollContainer" parent="VBoxContainer" unique_id=487326006]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VanishingPointContainer" type="VBoxContainer" parent="VBoxContainer/Content"]
+[node name="VanishingPointContainer" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=79121185]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

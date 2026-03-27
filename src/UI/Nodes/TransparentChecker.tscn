@@ -1,7 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://3pmb60gpst7b"]
+[gd_scene format=3 uid="uid://3pmb60gpst7b"]
 
+[ext_resource type="Shader" uid="uid://c50kmfvf635kb" path="res://src/Shaders/TransparentChecker.gdshader" id="1_b6eda"]
 [ext_resource type="Script" uid="uid://idvb5vdtc6vy" path="res://src/UI/Nodes/TransparentChecker.gd" id="2"]
 
-[node name="TransparentChecker" type="ColorRect"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b6eda"]
+shader = ExtResource("1_b6eda")
+shader_parameter/size = 10.0
+shader_parameter/alpha = 1.0
+shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
+shader_parameter/color2 = Color(1, 1, 1, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/scale = Vector2(0, 0)
+shader_parameter/rect_size = Vector2(0, 0)
+shader_parameter/follow_movement = false
+shader_parameter/follow_scale = false
+
+[node name="TransparentChecker" type="ColorRect" unique_id=296956342]
+material = SubResource("ShaderMaterial_b6eda")
+layout_direction = 2
+mouse_filter = 2
 script = ExtResource("2")
 metadata/_edit_use_anchors_ = true

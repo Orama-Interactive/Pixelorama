@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bdregpkflev7u"]
+[gd_scene format=3 uid="uid://bdregpkflev7u"]
 
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1_1q6ub"]
 [ext_resource type="Script" uid="uid://jidmtna3jc4y" path="res://src/Tools/UtilityTools/Text.gd" id="2_ql5g6"]
@@ -19,21 +19,21 @@
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_jplns"]
 
-[node name="ToolOptions" instance=ExtResource("1_1q6ub")]
+[node name="ToolOptions" unique_id=88395253 instance=ExtResource("1_1q6ub")]
 script = ExtResource("2_ql5g6")
 metadata/_edit_vertical_guides_ = [-9.0]
 
-[node name="ConfirmButtons" type="HBoxContainer" parent="." index="2"]
+[node name="ConfirmButtons" type="HBoxContainer" parent="." index="2" unique_id=1202368220]
 visible = false
 layout_mode = 2
 
-[node name="ConfirmButton" type="Button" parent="ConfirmButtons" index="0" groups=["UIButtons"]]
+[node name="ConfirmButton" type="Button" parent="ConfirmButtons" index="0" unique_id=1834447363 groups=["UIButtons"]]
 custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 
-[node name="TextureRect" type="TextureRect" parent="ConfirmButtons/ConfirmButton" index="0"]
+[node name="TextureRect" type="TextureRect" parent="ConfirmButtons/ConfirmButton" index="0" unique_id=2101779184]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,13 +43,13 @@ grow_vertical = 2
 texture = ExtResource("3_novww")
 stretch_mode = 3
 
-[node name="CancelButton" type="Button" parent="ConfirmButtons" index="1" groups=["UIButtons"]]
+[node name="CancelButton" type="Button" parent="ConfirmButtons" index="1" unique_id=865786363 groups=["UIButtons"]]
 custom_minimum_size = Vector2(0, 26)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 
-[node name="TextureRect" type="TextureRect" parent="ConfirmButtons/CancelButton" index="0"]
+[node name="TextureRect" type="TextureRect" parent="ConfirmButtons/CancelButton" index="0" unique_id=689664199]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,7 +59,7 @@ grow_vertical = 2
 texture = ExtResource("4_nhcnn")
 stretch_mode = 3
 
-[node name="TextSizeSlider" type="TextureProgressBar" parent="." index="3"]
+[node name="TextSizeSlider" type="TextureProgressBar" parent="." index="3" unique_id=751931878]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 focus_mode = 2
@@ -81,31 +81,31 @@ allow_global_input_events = true
 global_increment_action = "brush_size_increment"
 global_decrement_action = "brush_size_decrement"
 
-[node name="GridContainer" type="GridContainer" parent="." index="4"]
+[node name="GridContainer" type="GridContainer" parent="." index="4" unique_id=1005494357]
 layout_mode = 2
 columns = 2
 
-[node name="FontLabel" type="Label" parent="GridContainer" index="0"]
+[node name="FontLabel" type="Label" parent="GridContainer" index="0" unique_id=1307343024]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Font:"
 
-[node name="FontOptionButton" type="OptionButton" parent="GridContainer" index="1"]
+[node name="FontOptionButton" type="OptionButton" parent="GridContainer" index="1" unique_id=25472526]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 fit_to_longest_item = false
 
-[node name="StyleButtonContainer" type="HBoxContainer" parent="." index="5"]
+[node name="StyleButtonContainer" type="HBoxContainer" parent="." index="5" unique_id=1185557076]
 layout_mode = 2
 
-[node name="BoldButton" type="Button" parent="StyleButtonContainer" index="0" groups=["UIButtons"]]
+[node name="BoldButton" type="Button" parent="StyleButtonContainer" index="0" unique_id=650071589 groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 toggle_mode = true
 
-[node name="TextureRect" type="TextureRect" parent="StyleButtonContainer/BoldButton" index="0"]
+[node name="TextureRect" type="TextureRect" parent="StyleButtonContainer/BoldButton" index="0" unique_id=751649768]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -115,13 +115,13 @@ grow_vertical = 2
 texture = ExtResource("6_44cpf")
 stretch_mode = 3
 
-[node name="ItalicButton" type="Button" parent="StyleButtonContainer" index="1" groups=["UIButtons"]]
+[node name="ItalicButton" type="Button" parent="StyleButtonContainer" index="1" unique_id=1205920878 groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 toggle_mode = true
 
-[node name="TextureRect" type="TextureRect" parent="StyleButtonContainer/ItalicButton" index="0"]
+[node name="TextureRect" type="TextureRect" parent="StyleButtonContainer/ItalicButton" index="0" unique_id=464286797]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,10 +131,10 @@ grow_vertical = 2
 texture = ExtResource("7_vnai6")
 stretch_mode = 3
 
-[node name="HorizontalAlignmentContainer" type="HBoxContainer" parent="." index="6"]
+[node name="HorizontalAlignmentContainer" type="HBoxContainer" parent="." index="6" unique_id=1357713691]
 layout_mode = 2
 
-[node name="HorizontalAlignmentLeftButton" type="Button" parent="HorizontalAlignmentContainer" index="0" groups=["UIButtons"]]
+[node name="HorizontalAlignmentLeftButton" type="Button" parent="HorizontalAlignmentContainer" index="0" unique_id=1685157862 groups=["UIButtons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -143,7 +143,7 @@ toggle_mode = true
 button_pressed = true
 button_group = SubResource("ButtonGroup_ikyyu")
 
-[node name="TextureRect" type="TextureRect" parent="HorizontalAlignmentContainer/HorizontalAlignmentLeftButton" index="0"]
+[node name="TextureRect" type="TextureRect" parent="HorizontalAlignmentContainer/HorizontalAlignmentLeftButton" index="0" unique_id=1469495756]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -153,14 +153,14 @@ grow_vertical = 2
 texture = ExtResource("8_krqdj")
 stretch_mode = 3
 
-[node name="HorizontalAlignmentLeftButton2" type="Button" parent="HorizontalAlignmentContainer" index="1" groups=["UIButtons"]]
+[node name="HorizontalAlignmentLeftButton2" type="Button" parent="HorizontalAlignmentContainer" index="1" unique_id=1832797136 groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_ikyyu")
 
-[node name="TextureRect" type="TextureRect" parent="HorizontalAlignmentContainer/HorizontalAlignmentLeftButton2" index="0"]
+[node name="TextureRect" type="TextureRect" parent="HorizontalAlignmentContainer/HorizontalAlignmentLeftButton2" index="0" unique_id=1788416211]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -170,14 +170,14 @@ grow_vertical = 2
 texture = ExtResource("9_icae5")
 stretch_mode = 3
 
-[node name="HorizontalAlignmentLeftButton3" type="Button" parent="HorizontalAlignmentContainer" index="2" groups=["UIButtons"]]
+[node name="HorizontalAlignmentLeftButton3" type="Button" parent="HorizontalAlignmentContainer" index="2" unique_id=804103826 groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_ikyyu")
 
-[node name="TextureRect" type="TextureRect" parent="HorizontalAlignmentContainer/HorizontalAlignmentLeftButton3" index="0"]
+[node name="TextureRect" type="TextureRect" parent="HorizontalAlignmentContainer/HorizontalAlignmentLeftButton3" index="0" unique_id=1843848436]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -187,14 +187,14 @@ grow_vertical = 2
 texture = ExtResource("10_s8jkt")
 stretch_mode = 3
 
-[node name="HorizontalAlignmentLeftButton4" type="Button" parent="HorizontalAlignmentContainer" index="3" groups=["UIButtons"]]
+[node name="HorizontalAlignmentLeftButton4" type="Button" parent="HorizontalAlignmentContainer" index="3" unique_id=114489334 groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_ikyyu")
 
-[node name="TextureRect" type="TextureRect" parent="HorizontalAlignmentContainer/HorizontalAlignmentLeftButton4" index="0"]
+[node name="TextureRect" type="TextureRect" parent="HorizontalAlignmentContainer/HorizontalAlignmentLeftButton4" index="0" unique_id=816608930]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -204,10 +204,10 @@ grow_vertical = 2
 texture = ExtResource("11_wdbj6")
 stretch_mode = 3
 
-[node name="AntiAliasingButtonContainer" type="HBoxContainer" parent="." index="7"]
+[node name="AntiAliasingButtonContainer" type="HBoxContainer" parent="." index="7" unique_id=304903914]
 layout_mode = 2
 
-[node name="AAOffButton" type="Button" parent="AntiAliasingButtonContainer" index="0" groups=["UIButtons"]]
+[node name="AAOffButton" type="Button" parent="AntiAliasingButtonContainer" index="0" unique_id=1494774598 groups=["UIButtons"]]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -216,7 +216,7 @@ toggle_mode = true
 button_pressed = true
 button_group = SubResource("ButtonGroup_jplns")
 
-[node name="TextureRect" type="TextureRect" parent="AntiAliasingButtonContainer/AAOffButton" index="0"]
+[node name="TextureRect" type="TextureRect" parent="AntiAliasingButtonContainer/AAOffButton" index="0" unique_id=478902294]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -226,14 +226,14 @@ grow_vertical = 2
 texture = ExtResource("12_25fng")
 stretch_mode = 3
 
-[node name="AAGrayscaleButton" type="Button" parent="AntiAliasingButtonContainer" index="1" groups=["UIButtons"]]
+[node name="AAGrayscaleButton" type="Button" parent="AntiAliasingButtonContainer" index="1" unique_id=1657126603 groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_jplns")
 
-[node name="TextureRect" type="TextureRect" parent="AntiAliasingButtonContainer/AAGrayscaleButton" index="0"]
+[node name="TextureRect" type="TextureRect" parent="AntiAliasingButtonContainer/AAGrayscaleButton" index="0" unique_id=947082635]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -243,14 +243,14 @@ grow_vertical = 2
 texture = ExtResource("13_y175e")
 stretch_mode = 3
 
-[node name="AALCDButton" type="Button" parent="AntiAliasingButtonContainer" index="2" groups=["UIButtons"]]
+[node name="AALCDButton" type="Button" parent="AntiAliasingButtonContainer" index="2" unique_id=1278165184 groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_jplns")
 
-[node name="TextureRect" type="TextureRect" parent="AntiAliasingButtonContainer/AALCDButton" index="0"]
+[node name="TextureRect" type="TextureRect" parent="AntiAliasingButtonContainer/AALCDButton" index="0" unique_id=887071209]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

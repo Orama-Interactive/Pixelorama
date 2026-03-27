@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://by3300fom3plf"]
+[gd_scene format=3 uid="uid://by3300fom3plf"]
 
 [ext_resource type="Script" uid="uid://4uxpn601pvm4" path="res://src/UI/ReferenceImages/ReferenceImageButton.gd" id="1_nf0dd"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="2_mf5ob"]
+[ext_resource type="Shader" uid="uid://c50kmfvf635kb" path="res://src/Shaders/TransparentChecker.gdshader" id="3_rgm5p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ytt38"]
 bg_color = Color(0, 0, 0, 0.470588)
@@ -15,19 +16,32 @@ border_width_bottom = 2
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tuwm6"]
 
-[node name="ReferenceImageButton" type="Button"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l3nwx"]
+shader = ExtResource("3_rgm5p")
+shader_parameter/size = 10.0
+shader_parameter/alpha = 1.0
+shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
+shader_parameter/color2 = Color(1, 1, 1, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/scale = Vector2(0, 0)
+shader_parameter/rect_size = Vector2(64, 64)
+shader_parameter/follow_movement = false
+shader_parameter/follow_scale = false
+
+[node name="ReferenceImageButton" type="Button" unique_id=2024515045]
 custom_minimum_size = Vector2(64, 64)
 theme_override_styles/normal = SubResource("StyleBoxFlat_ytt38")
-theme_override_styles/hover = SubResource("StyleBoxFlat_ytt38")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_53xjd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ytt38")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_tuwm6")
 toggle_mode = true
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("1_nf0dd")
 
-[node name="TransparentChecker" parent="." instance=ExtResource("2_mf5ob")]
+[node name="TransparentChecker" parent="." unique_id=1028790428 instance=ExtResource("2_mf5ob")]
 show_behind_parent = true
+material = SubResource("ShaderMaterial_l3nwx")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

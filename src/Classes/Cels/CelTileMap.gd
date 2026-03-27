@@ -143,6 +143,9 @@ func set_index(
 			tileset.tiles[previous_index].times_used -= 1
 		tileset.tiles[index].times_used += 1
 		cell.index = index
+	var was_flipped_h := cell.flip_h
+	var was_flipped_v := cell.flip_v
+	var was_transposed := cell.transpose
 	cell.flip_h = flip_h
 	cell.flip_v = flip_v
 	cell.transpose = transpose
@@ -151,6 +154,7 @@ func set_index(
 			var cell_coords := cells.find_key(cell) as Vector2i
 			var coords := get_pixel_coords(cell_coords)
 			var prev_tile := tileset.tiles[previous_index].image
+			prev_tile = transform_tile(prev_tile, was_flipped_h, was_flipped_v, was_transposed)
 			var prev_tile_size := prev_tile.get_size()
 			var blank := Image.create_empty(
 				prev_tile_size.x, prev_tile_size.y, false, prev_tile.get_format()
@@ -186,13 +190,7 @@ func get_cell_position(pixel_coords: Vector2i) -> Vector2i:
 	var cell_coords := Vector2i()
 	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 		offset_coords -= get_tile_size() / 2
-		var godot_tileset := TileSet.new()
-		godot_tileset.tile_size = get_tile_size()
-		godot_tileset.tile_shape = get_tile_shape()
-		godot_tileset.tile_layout = tile_layout
-		godot_tileset.tile_offset_axis = get_tile_offset_axis()
-		var godot_tilemap := TileMapLayer.new()
-		godot_tilemap.tile_set = godot_tileset
+		var godot_tilemap := create_tilemap_layer_node()
 		cell_coords = godot_tilemap.local_to_map(offset_coords)
 		godot_tilemap.queue_free()
 	else:
@@ -210,13 +208,7 @@ func get_cell_index_at_coords(coords: Vector2i) -> int:
 
 func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
 	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
-		var godot_tileset := TileSet.new()
-		godot_tileset.tile_size = get_tile_size()
-		godot_tileset.tile_shape = get_tile_shape()
-		godot_tileset.tile_layout = tile_layout
-		godot_tileset.tile_offset_axis = get_tile_offset_axis()
-		var godot_tilemap := TileMapLayer.new()
-		godot_tilemap.tile_set = godot_tileset
+		var godot_tilemap := create_tilemap_layer_node()
 		var pixel_coords := godot_tilemap.map_to_local(cell_coords).floor() as Vector2i
 		if get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
 			var quarter_tile_size := get_tile_size() / 4
@@ -244,10 +236,10 @@ func get_image_portion(rect: Rect2i, source_image := image, force_disable_clip :
 				or force_disable_clip
 			):
 				_should_clip_tiles = false
-			var grid_coord = (
+			var grid_coord := (
 				(Vector2(rect.position - offset) * 2 / Vector2(get_tile_size())).round()
 			)
-			var is_smaller_tile = int(grid_coord.y) % 2 != 0
+			var is_smaller_tile := int(grid_coord.y) % 2 != 0
 			DrawingAlgos.generate_isometric_rectangle(mask, is_smaller_tile and _should_clip_tiles)
 			_should_clip_tiles = old_clip
 		elif get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
@@ -285,13 +277,7 @@ func get_tile_offset_axis() -> TileSet.TileOffsetAxis:
 
 
 func bucket_fill(cell_coords: Vector2i, index: int, callable: Callable) -> void:
-	var godot_tileset := TileSet.new()
-	godot_tileset.tile_size = get_tile_size()
-	godot_tileset.tile_shape = get_tile_shape()
-	godot_tileset.tile_layout = tile_layout
-	godot_tileset.tile_offset_axis = get_tile_offset_axis()
-	var godot_tilemap := TileMapLayer.new()
-	godot_tilemap.tile_set = godot_tileset
+	var godot_tilemap := create_tilemap_layer_node()
 	var source_cell := get_cell_at(cell_coords)
 	var source_index := source_cell.index
 	var already_checked: Array[Vector2i]
@@ -319,6 +305,17 @@ func re_order_tilemap() -> void:
 		return
 	image.fill(Color(0, 0, 0, 0))
 	update_cel_portions(true)
+
+
+func create_tilemap_layer_node() -> TileMapLayer:
+	var godot_tileset := TileSet.new()
+	godot_tileset.tile_size = get_tile_size()
+	godot_tileset.tile_shape = get_tile_shape()
+	godot_tileset.tile_layout = tile_layout
+	godot_tileset.tile_offset_axis = get_tile_offset_axis()
+	var godot_tilemap := TileMapLayer.new()
+	godot_tilemap.tile_set = godot_tileset
+	return godot_tilemap
 
 
 ## Returns [code]true[/code] if the tile at cell position [param cell_position]
@@ -965,6 +962,14 @@ func set_content(content, texture: ImageTexture = null) -> void:
 	super.set_content(content[0], texture)
 	cells = content[1]
 	find_times_used_of_tiles()
+
+
+func create_empty_content() -> Array:
+	var empty := Image.create(image.get_width(), image.get_height(), false, image.get_format())
+	var new_image := ImageExtended.new()
+	new_image.copy_from_custom(empty, image.is_indexed)
+	var empty_cells: Dictionary[Vector2i, Cell] = {}
+	return [new_image, empty_cells]
 
 
 func copy_content() -> Array:

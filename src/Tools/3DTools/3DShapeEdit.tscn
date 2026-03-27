@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cg7d36746on67"]
+[gd_scene format=3 uid="uid://cg7d36746on67"]
 
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1"]
 [ext_resource type="Script" uid="uid://d3my38wgqe4hq" path="res://src/Tools/3DTools/3DShapeEdit.gd" id="2"]
@@ -13,19 +13,19 @@ action = &"delete"
 [sub_resource type="Shortcut" id="34"]
 events = [SubResource("InputEventAction_8sqgw")]
 
-[node name="3DShapeEdit" instance=ExtResource("1")]
+[node name="3DShapeEdit" unique_id=2145680012 instance=ExtResource("1")]
 script = ExtResource("2")
 
-[node name="HandleObjects" type="GridContainer" parent="." index="2"]
+[node name="HandleObjects" type="GridContainer" parent="." index="2" unique_id=1066985903]
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="HandleObjects" index="0"]
+[node name="Label" type="Label" parent="HandleObjects" index="0" unique_id=471683529]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Selected object:"
 
-[node name="ObjectOptionButton" type="OptionButton" parent="HandleObjects" index="1"]
+[node name="ObjectOptionButton" type="OptionButton" parent="HandleObjects" index="1" unique_id=217489563]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -35,7 +35,7 @@ item_count = 1
 popup/item_0/text = "None"
 popup/item_0/id = 0
 
-[node name="NewObjectMenuButton" type="MenuButton" parent="HandleObjects" index="2"]
+[node name="NewObjectMenuButton" type="MenuButton" parent="HandleObjects" index="2" unique_id=300945232]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -44,7 +44,7 @@ mouse_default_cursor_shape = 2
 text = "Add new object"
 flat = false
 
-[node name="RemoveObject" type="Button" parent="HandleObjects" index="3"]
+[node name="RemoveObject" type="Button" parent="HandleObjects" index="3" unique_id=1344321820]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -53,26 +53,26 @@ disabled = true
 shortcut = SubResource("34")
 text = "Remove object"
 
-[node name="CelOptions" type="VBoxContainer" parent="." index="3"]
+[node name="CelOptions" type="VBoxContainer" parent="." index="3" unique_id=1302306296]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CameraOptions" type="FoldableContainer" parent="CelOptions" index="0"]
+[node name="CameraOptions" type="FoldableContainer" parent="CelOptions" index="0" unique_id=336861911]
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
 title = "Camera"
 
-[node name="GridContainer" type="GridContainer" parent="CelOptions/CameraOptions" index="0"]
+[node name="GridContainer" type="GridContainer" parent="CelOptions/CameraOptions" index="0" unique_id=1126153504]
 layout_mode = 2
 columns = 2
 
-[node name="ProjectionLabel" type="Label" parent="CelOptions/CameraOptions/GridContainer" index="0"]
+[node name="ProjectionLabel" type="Label" parent="CelOptions/CameraOptions/GridContainer" index="0" unique_id=853186325]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Projection:"
 
-[node name="ProjectionOptionButton" type="OptionButton" parent="CelOptions/CameraOptions/GridContainer" index="1"]
+[node name="ProjectionOptionButton" type="OptionButton" parent="CelOptions/CameraOptions/GridContainer" index="1" unique_id=1820040174]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -86,13 +86,13 @@ popup/item_1/id = 1
 popup/item_2/text = "Frustum"
 popup/item_2/id = 2
 
-[node name="RotationLabel" type="Label" parent="CelOptions/CameraOptions/GridContainer" index="2"]
+[node name="RotationLabel" type="Label" parent="CelOptions/CameraOptions/GridContainer" index="2" unique_id=2069813670]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "Rotation:"
 
-[node name="CameraRotation" parent="CelOptions/CameraOptions/GridContainer" index="3" instance=ExtResource("7")]
+[node name="CameraRotation" parent="CelOptions/CameraOptions/GridContainer" index="3" unique_id=258320751 instance=ExtResource("7")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -103,11 +103,11 @@ suffix_x = "°"
 suffix_y = "°"
 suffix_z = "°"
 
-[node name="CameraFOVLabel" type="Label" parent="CelOptions/CameraOptions/GridContainer" index="4"]
+[node name="CameraFOVLabel" type="Label" parent="CelOptions/CameraOptions/GridContainer" index="4" unique_id=1184875876]
 layout_mode = 2
 text = "FOV:"
 
-[node name="CameraFOV" type="TextureProgressBar" parent="CelOptions/CameraOptions/GridContainer" index="5"]
+[node name="CameraFOV" type="TextureProgressBar" parent="CelOptions/CameraOptions/GridContainer" index="5" unique_id=1831511771]
 unique_name_in_owner = true
 layout_mode = 2
 focus_mode = 2
@@ -124,12 +124,12 @@ stretch_margin_bottom = 3
 script = ExtResource("5")
 suffix = "°"
 
-[node name="CameraSizeLabel" type="Label" parent="CelOptions/CameraOptions/GridContainer" index="6"]
+[node name="CameraSizeLabel" type="Label" parent="CelOptions/CameraOptions/GridContainer" index="6" unique_id=1281861599]
 visible = false
 layout_mode = 2
 text = "Size:"
 
-[node name="CameraSize" type="TextureProgressBar" parent="CelOptions/CameraOptions/GridContainer" index="7"]
+[node name="CameraSize" type="TextureProgressBar" parent="CelOptions/CameraOptions/GridContainer" index="7" unique_id=975100824]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -148,34 +148,34 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="EnvironmentOptions" type="FoldableContainer" parent="CelOptions" index="1"]
+[node name="EnvironmentOptions" type="FoldableContainer" parent="CelOptions" index="1" unique_id=1094643040]
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
 folded = true
 title = "Environments"
 
-[node name="GridContainer" type="GridContainer" parent="CelOptions/EnvironmentOptions" index="0"]
+[node name="GridContainer" type="GridContainer" parent="CelOptions/EnvironmentOptions" index="0" unique_id=339026710]
 visible = false
 layout_mode = 2
 columns = 2
 
-[node name="AmbientColorLabel" type="Label" parent="CelOptions/EnvironmentOptions/GridContainer" index="0"]
+[node name="AmbientColorLabel" type="Label" parent="CelOptions/EnvironmentOptions/GridContainer" index="0" unique_id=536074701]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Ambient color:"
 
-[node name="AmbientColorPickerButton" type="ColorPickerButton" parent="CelOptions/EnvironmentOptions/GridContainer" index="1"]
+[node name="AmbientColorPickerButton" type="ColorPickerButton" parent="CelOptions/EnvironmentOptions/GridContainer" index="1" unique_id=382186294]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 edit_alpha = false
 
-[node name="AmbientEnergyLabel" type="Label" parent="CelOptions/EnvironmentOptions/GridContainer" index="2"]
+[node name="AmbientEnergyLabel" type="Label" parent="CelOptions/EnvironmentOptions/GridContainer" index="2" unique_id=548796255]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Ambient color energy:"
 
-[node name="AmbientEnergy" parent="CelOptions/EnvironmentOptions/GridContainer" index="3" instance=ExtResource("4")]
+[node name="AmbientEnergy" parent="CelOptions/EnvironmentOptions/GridContainer" index="3" unique_id=786108021 instance=ExtResource("4")]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 16.0
@@ -183,46 +183,46 @@ step = 0.01
 value = 1.0
 allow_greater = true
 
-[node name="ObjectOptions" type="VBoxContainer" parent="." index="4"]
+[node name="ObjectOptions" type="VBoxContainer" parent="." index="4" unique_id=880101581]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="GlobalOptions" type="GridContainer" parent="ObjectOptions" index="0"]
+[node name="GlobalOptions" type="GridContainer" parent="ObjectOptions" index="0" unique_id=1728453322]
 layout_mode = 2
 columns = 2
 
-[node name="VisibleLabel" type="Label" parent="ObjectOptions/GlobalOptions" index="0"]
+[node name="VisibleLabel" type="Label" parent="ObjectOptions/GlobalOptions" index="0" unique_id=354260059]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Visible:"
 
-[node name="VisibleCheckBox" type="CheckBox" parent="ObjectOptions/GlobalOptions" index="1"]
+[node name="VisibleCheckBox" type="CheckBox" parent="ObjectOptions/GlobalOptions" index="1" unique_id=956607773]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "On"
 
-[node name="TransformOptions" type="FoldableContainer" parent="ObjectOptions" index="1"]
+[node name="TransformOptions" type="FoldableContainer" parent="ObjectOptions" index="1" unique_id=1019671605]
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
 folded = true
 title = "Transform"
 
-[node name="GridContainer" type="GridContainer" parent="ObjectOptions/TransformOptions" index="0"]
+[node name="GridContainer" type="GridContainer" parent="ObjectOptions/TransformOptions" index="0" unique_id=1540974643]
 visible = false
 layout_mode = 2
 columns = 2
 
-[node name="PositionLabel" type="Label" parent="ObjectOptions/TransformOptions/GridContainer" index="0"]
+[node name="PositionLabel" type="Label" parent="ObjectOptions/TransformOptions/GridContainer" index="0" unique_id=1059470272]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Position:"
 
-[node name="ObjectPosition" parent="ObjectOptions/TransformOptions/GridContainer" index="1" instance=ExtResource("7")]
+[node name="ObjectPosition" parent="ObjectOptions/TransformOptions/GridContainer" index="1" unique_id=970274019 instance=ExtResource("7")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -235,13 +235,13 @@ suffix_x = "m"
 suffix_y = "m"
 suffix_z = "m"
 
-[node name="RotationLabel" type="Label" parent="ObjectOptions/TransformOptions/GridContainer" index="2"]
+[node name="RotationLabel" type="Label" parent="ObjectOptions/TransformOptions/GridContainer" index="2" unique_id=1126137064]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Rotation:"
 
-[node name="ObjectRotation" parent="ObjectOptions/TransformOptions/GridContainer" index="3" instance=ExtResource("7")]
+[node name="ObjectRotation" parent="ObjectOptions/TransformOptions/GridContainer" index="3" unique_id=1865090974 instance=ExtResource("7")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -252,13 +252,13 @@ suffix_x = "°"
 suffix_y = "°"
 suffix_z = "°"
 
-[node name="ScaleLabel" type="Label" parent="ObjectOptions/TransformOptions/GridContainer" index="4"]
+[node name="ScaleLabel" type="Label" parent="ObjectOptions/TransformOptions/GridContainer" index="4" unique_id=1643435068]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 text = "Scale:"
 
-[node name="ObjectScale" parent="ObjectOptions/TransformOptions/GridContainer" index="5" instance=ExtResource("7")]
+[node name="ObjectScale" parent="ObjectOptions/TransformOptions/GridContainer" index="5" unique_id=1924391232 instance=ExtResource("7")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -272,25 +272,25 @@ suffix_x = "%"
 suffix_y = "%"
 suffix_z = "%"
 
-[node name="MeshOptions" type="FoldableContainer" parent="ObjectOptions" index="2"]
+[node name="MeshOptions" type="FoldableContainer" parent="ObjectOptions" index="2" unique_id=1320702849]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
 folded = true
 title = "Mesh"
 
-[node name="GridContainer" type="GridContainer" parent="ObjectOptions/MeshOptions" index="0"]
+[node name="GridContainer" type="GridContainer" parent="ObjectOptions/MeshOptions" index="0" unique_id=693549055]
 visible = false
 layout_mode = 2
 columns = 2
 
-[node name="MeshSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="0"]
+[node name="MeshSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="0" unique_id=1387150538]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Size:"
 clip_text = true
 
-[node name="MeshSize" parent="ObjectOptions/MeshOptions/GridContainer" index="1" instance=ExtResource("7")]
+[node name="MeshSize" parent="ObjectOptions/MeshOptions/GridContainer" index="1" unique_id=112023562 instance=ExtResource("7")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -299,13 +299,13 @@ step = 0.01
 allow_greater = true
 show_ratio = true
 
-[node name="MeshSizeLabel2" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="2"]
+[node name="MeshSizeLabel2" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="2" unique_id=606267323]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Size:"
 clip_text = true
 
-[node name="MeshSizeV2" parent="ObjectOptions/MeshOptions/GridContainer" index="3" instance=ExtResource("3")]
+[node name="MeshSizeV2" parent="ObjectOptions/MeshOptions/GridContainer" index="3" unique_id=1689263742 instance=ExtResource("3")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -314,13 +314,13 @@ allow_greater = true
 show_ratio = true
 snap_step = 0.01
 
-[node name="MeshLeftToRightLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="4"]
+[node name="MeshLeftToRightLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="4" unique_id=1190174772]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Left to right:"
 clip_text = true
 
-[node name="MeshLeftToRight" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="5"]
+[node name="MeshLeftToRight" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="5" unique_id=443018665]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -338,13 +338,13 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="MeshRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="6"]
+[node name="MeshRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="6" unique_id=1696851766]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Radius:"
 clip_text = true
 
-[node name="MeshRadius" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="7"]
+[node name="MeshRadius" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="7" unique_id=704593557]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -363,13 +363,13 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="MeshHeightLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="8"]
+[node name="MeshHeightLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="8" unique_id=62513076]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Height:"
 clip_text = true
 
-[node name="MeshHeight" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="9"]
+[node name="MeshHeight" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="9" unique_id=19281918]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -388,13 +388,13 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="MeshRadialSegmentsLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="10"]
+[node name="MeshRadialSegmentsLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="10" unique_id=826909241]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Radial segments:"
 clip_text = true
 
-[node name="MeshRadialSegments" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="11"]
+[node name="MeshRadialSegments" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="11" unique_id=1632146037]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -412,13 +412,13 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="MeshRingsLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="12"]
+[node name="MeshRingsLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="12" unique_id=852324034]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Rings:"
 clip_text = true
 
-[node name="MeshRings" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="13"]
+[node name="MeshRings" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="13" unique_id=1146482395]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -436,26 +436,26 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="MeshIsHemisphereLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="14"]
+[node name="MeshIsHemisphereLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="14" unique_id=1107529868]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Is hemisphere:"
 clip_text = true
 
-[node name="MeshIsHemisphere" type="CheckBox" parent="ObjectOptions/MeshOptions/GridContainer" index="15"]
+[node name="MeshIsHemisphere" type="CheckBox" parent="ObjectOptions/MeshOptions/GridContainer" index="15" unique_id=1464990505]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "On"
 
-[node name="MeshTopRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="16"]
+[node name="MeshTopRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="16" unique_id=502447802]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Top radius:"
 clip_text = true
 
-[node name="MeshTopRadius" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="17"]
+[node name="MeshTopRadius" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="17" unique_id=792208491]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -473,13 +473,13 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="MeshBottomRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="18"]
+[node name="MeshBottomRadiusLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="18" unique_id=251510391]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Bottom radius:"
 clip_text = true
 
-[node name="MeshBottomRadius" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="19"]
+[node name="MeshBottomRadius" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="19" unique_id=1730964690]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -497,37 +497,37 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="MeshTextLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="20"]
+[node name="MeshTextLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="20" unique_id=824577669]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Text:"
 clip_text = true
 
-[node name="MeshText" type="TextEdit" parent="ObjectOptions/MeshOptions/GridContainer" index="21"]
+[node name="MeshText" type="TextEdit" parent="ObjectOptions/MeshOptions/GridContainer" index="21" unique_id=545214850]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MeshFontLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="22"]
+[node name="MeshFontLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="22" unique_id=816324059]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Font:"
 clip_text = true
 
-[node name="MeshFont" type="OptionButton" parent="ObjectOptions/MeshOptions/GridContainer" index="23"]
+[node name="MeshFont" type="OptionButton" parent="ObjectOptions/MeshOptions/GridContainer" index="23" unique_id=502458364]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 
-[node name="MeshPixelSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="24"]
+[node name="MeshPixelSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="24" unique_id=1309120134]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Pixel size:"
 clip_text = true
 
-[node name="MeshPixelSize" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="25"]
+[node name="MeshPixelSize" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="25" unique_id=1940868591]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -547,13 +547,13 @@ stretch_margin_bottom = 3
 script = ExtResource("5")
 snap_step = 0.01
 
-[node name="MeshFontSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="26"]
+[node name="MeshFontSizeLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="26" unique_id=1322894483]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Font size:"
 clip_text = true
 
-[node name="MeshFontSize" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="27"]
+[node name="MeshFontSize" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="27" unique_id=1834817798]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -572,13 +572,13 @@ stretch_margin_bottom = 3
 script = ExtResource("5")
 snap_step = 2.0
 
-[node name="MeshDepthLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="28"]
+[node name="MeshDepthLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="28" unique_id=2041122736]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Depth:"
 clip_text = true
 
-[node name="MeshDepth" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="29"]
+[node name="MeshDepth" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="29" unique_id=275752566]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -596,13 +596,13 @@ stretch_margin_bottom = 3
 script = ExtResource("5")
 snap_step = 2.0
 
-[node name="MeshOffsetLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="30"]
+[node name="MeshOffsetLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="30" unique_id=698301515]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Offset:"
 clip_text = true
 
-[node name="MeshOffsetV2" parent="ObjectOptions/MeshOptions/GridContainer" index="31" instance=ExtResource("3")]
+[node name="MeshOffsetV2" parent="ObjectOptions/MeshOptions/GridContainer" index="31" unique_id=1140012552 instance=ExtResource("3")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -612,13 +612,13 @@ allow_lesser = true
 show_ratio = true
 snap_step = 0.01
 
-[node name="MeshCurveStepLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="32"]
+[node name="MeshCurveStepLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="32" unique_id=323150605]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Curve step:"
 clip_text = true
 
-[node name="MeshCurveStep" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="33"]
+[node name="MeshCurveStep" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="33" unique_id=419694810]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -637,13 +637,13 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="MeshHorizontalAlignmentLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="34"]
+[node name="MeshHorizontalAlignmentLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="34" unique_id=1457101320]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Horizontal alignment:"
 clip_text = true
 
-[node name="MeshHorizontalAlignment" type="OptionButton" parent="ObjectOptions/MeshOptions/GridContainer" index="35"]
+[node name="MeshHorizontalAlignment" type="OptionButton" parent="ObjectOptions/MeshOptions/GridContainer" index="35" unique_id=348406104]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -659,13 +659,13 @@ popup/item_2/id = 2
 popup/item_3/text = "Fill"
 popup/item_3/id = 3
 
-[node name="MeshVerticalAlignmentLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="36"]
+[node name="MeshVerticalAlignmentLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="36" unique_id=515682422]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Vertical alignment:"
 clip_text = true
 
-[node name="MeshVerticalAlignment" type="OptionButton" parent="ObjectOptions/MeshOptions/GridContainer" index="37"]
+[node name="MeshVerticalAlignment" type="OptionButton" parent="ObjectOptions/MeshOptions/GridContainer" index="37" unique_id=1112603599]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -679,13 +679,13 @@ popup/item_1/id = 1
 popup/item_2/text = "Bottom"
 popup/item_2/id = 2
 
-[node name="MeshLineSpacingLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="38"]
+[node name="MeshLineSpacingLabel" type="Label" parent="ObjectOptions/MeshOptions/GridContainer" index="38" unique_id=375682330]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Line spacing:"
 clip_text = true
 
-[node name="MeshLineSpacing" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="39"]
+[node name="MeshLineSpacing" type="TextureProgressBar" parent="ObjectOptions/MeshOptions/GridContainer" index="39" unique_id=1621242240]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -704,36 +704,36 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="LightOptions" type="FoldableContainer" parent="ObjectOptions" index="3"]
+[node name="LightOptions" type="FoldableContainer" parent="ObjectOptions" index="3" unique_id=1006001452]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"CollapsibleContainer"
 folded = true
 title = "Light"
 
-[node name="GridContainer" type="GridContainer" parent="ObjectOptions/LightOptions" index="0"]
+[node name="GridContainer" type="GridContainer" parent="ObjectOptions/LightOptions" index="0" unique_id=1278001876]
 visible = false
 layout_mode = 2
 columns = 2
 
-[node name="LightColorLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="0"]
+[node name="LightColorLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="0" unique_id=219534442]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Color:"
 
-[node name="LightColor" type="ColorPickerButton" parent="ObjectOptions/LightOptions/GridContainer" index="1"]
+[node name="LightColor" type="ColorPickerButton" parent="ObjectOptions/LightOptions/GridContainer" index="1" unique_id=1422343874]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 color = Color(1, 1, 1, 1)
 edit_alpha = false
 
-[node name="LightEnergyLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="2"]
+[node name="LightEnergyLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="2" unique_id=1794680360]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Energy:"
 
-[node name="LightEnergy" parent="ObjectOptions/LightOptions/GridContainer" index="3" instance=ExtResource("4")]
+[node name="LightEnergy" parent="ObjectOptions/LightOptions/GridContainer" index="3" unique_id=279226699 instance=ExtResource("4")]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 16.0
@@ -741,36 +741,36 @@ step = 0.01
 value = 1.0
 allow_greater = true
 
-[node name="LightNegativeLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="4"]
+[node name="LightNegativeLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="4" unique_id=3680005]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Negative:"
 
-[node name="LightNegative" type="CheckBox" parent="ObjectOptions/LightOptions/GridContainer" index="5"]
+[node name="LightNegative" type="CheckBox" parent="ObjectOptions/LightOptions/GridContainer" index="5" unique_id=2119082630]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "On"
 
-[node name="ShadowEnabledLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="6"]
+[node name="ShadowEnabledLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="6" unique_id=867775493]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Shadow:"
 
-[node name="ShadowEnabled" type="CheckBox" parent="ObjectOptions/LightOptions/GridContainer" index="7"]
+[node name="ShadowEnabled" type="CheckBox" parent="ObjectOptions/LightOptions/GridContainer" index="7" unique_id=1972639974]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "On"
 
-[node name="OmniRangeLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="8"]
+[node name="OmniRangeLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="8" unique_id=1948818859]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Range:"
 
-[node name="OmniRange" type="TextureProgressBar" parent="ObjectOptions/LightOptions/GridContainer" index="9"]
+[node name="OmniRange" type="TextureProgressBar" parent="ObjectOptions/LightOptions/GridContainer" index="9" unique_id=507923644]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -787,12 +787,12 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="SpotRangeLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="10"]
+[node name="SpotRangeLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="10" unique_id=840284471]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Range:"
 
-[node name="SpotRange" type="TextureProgressBar" parent="ObjectOptions/LightOptions/GridContainer" index="11"]
+[node name="SpotRange" type="TextureProgressBar" parent="ObjectOptions/LightOptions/GridContainer" index="11" unique_id=1524630043]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -809,12 +809,12 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="SpotAngleLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="12"]
+[node name="SpotAngleLabel" type="Label" parent="ObjectOptions/LightOptions/GridContainer" index="12" unique_id=1902109345]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Angle:"
 
-[node name="SpotAngle" type="TextureProgressBar" parent="ObjectOptions/LightOptions/GridContainer" index="13"]
+[node name="SpotAngle" type="TextureProgressBar" parent="ObjectOptions/LightOptions/GridContainer" index="13" unique_id=1023810561]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -831,11 +831,11 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("5")
 
-[node name="UndoRedoTimer" type="Timer" parent="." index="5"]
+[node name="UndoRedoTimer" type="Timer" parent="." index="5" unique_id=55379558]
 wait_time = 0.2
 one_shot = true
 
-[node name="LoadModelDialog" type="FileDialog" parent="." index="6" groups=["FileDialogs"]]
+[node name="LoadModelDialog" type="FileDialog" parent="." index="6" unique_id=59467752 groups=["FileDialogs"]]
 mode = 1
 title = "Open File(s)"
 size = Vector2i(558, 300)
