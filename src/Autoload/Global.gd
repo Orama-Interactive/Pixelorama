@@ -1116,7 +1116,8 @@ func session_crashed_last_time() -> bool:
 				return false
 		# If this line is reached then it's likely that the app crashed last session
 		DirAccess.remove_absolute(RUNNING_FILE_PATH)
-	return true
+		return true
+	return false
 
 
 ## Generates an animated notification label showing [param text].
