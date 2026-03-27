@@ -350,6 +350,7 @@ func _fill_blend_modes_option_button() -> void:
 		blend_modes_button.add_item("Pass through", BaseLayer.BlendModes.PASS_THROUGH)
 	blend_modes_button.add_item("Normal", BaseLayer.BlendModes.NORMAL)
 	blend_modes_button.add_item("Erase", BaseLayer.BlendModes.ERASE)
+	blend_modes_button.add_item("Intersection", BaseLayer.BlendModes.INTERSECTION)
 	blend_modes_button.add_separator("Darken")
 	blend_modes_button.add_item("Darken", BaseLayer.BlendModes.DARKEN)
 	blend_modes_button.add_item("Multiply", BaseLayer.BlendModes.MULTIPLY)
