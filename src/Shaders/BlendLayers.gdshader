@@ -63,6 +63,7 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_layer_color, vec4 prev_
 		if (blend_type != 2 && blend_type != 3){
 			return prev_blend_result;
 		}
+		// Using Intersect and Logical AND blending, but opacity itself is zreo.
 		if (opacity <= 0.001){
 			return prev_blend_result;
 		}
@@ -81,10 +82,6 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_layer_color, vec4 prev_
 			current_color.a = alpha;
 			prev_blend_result.a = alpha;
 			result.rgb = current_color.rgb;
-			result.a = alpha;
-			//if (result.a > 0.001){
-				//should_blend_alpha = false;
-			//}
 			break;
 		case 3: // Logical AND
 			if (current_color != prev_blend_result){
@@ -205,7 +202,6 @@ void fragment() {
 	vec4 result_color = texture(layers, vec3(UV - first_origin, 0.0));
 	result_color.a = border_trim(result_color, UV - first_origin);
 	result_color.a *= first_opacity;
-	vec4 past_result_color = vec4(0.0);
 	for(int i = 1; i < metadata_size.x + 1; i++) // Loops through every layer
 	{
 		float layer_index = float(i) / metadata_size_float.x;
@@ -213,15 +209,6 @@ void fragment() {
 		// Blend modes are being stored as integers divided by 255, so convert them back to
 		// their integer form
 		int current_blend_mode = int(floor(blend_mode_float * 255.0));
-		
-		// Check if we are going to need a past result in future, store it if required.
-		if (i + 1 <= metadata_size.x){
-			float next_blend_mode_float =  texture(metadata, vec2(layer_index + 1.0, 0.0)).r;
-			int next_blend_mode = int(floor(next_blend_mode_float * 255.0));
-			if (current_blend_mode == 1 || next_blend_mode == 2 || next_blend_mode == 3){
-				past_result_color = result_color;
-			}
-		}
 		
 		vec2 current_origin = texture(metadata, vec2(layer_index, 2.0 / metadata_size_float.y)).rg;
 		if (!origin_x_positive) {
@@ -248,12 +235,6 @@ void fragment() {
 		layer_color.a *= prev_layer_color.a * step(0.5, clipping_mask) + 1.0 * step(clipping_mask, 0.5);
 		layer_color.a = border_trim(layer_color, uv);
 		result_color = blend(current_blend_mode, layer_color, prev_layer_color, result_color, current_opacity);
-		//// Refill erased colors using a past stored result as reference.
-		//if (current_blend_mode == 1 || current_blend_mode == 2 || current_blend_mode == 3){
-			//if (result_color.a <= 0.001){
-				//result_color.rgba = past_result_color.rgba;
-			//}
-		//}
 	}
 	COLOR = result_color;
 }
