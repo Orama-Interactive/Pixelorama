@@ -20,6 +20,7 @@ var splash_dialog: AcceptDialog:
 			splash_dialog = load(SPLASH_DIALOG_SCENE_PATH).instantiate()
 			add_child(splash_dialog)
 		return splash_dialog
+var _last_session_last_project := ""
 
 @onready var top_menu_container := $MenuAndUI/TopMenuContainer as Panel
 @onready var main_ui := $MenuAndUI/UI/DockableContainer as DockableContainer
@@ -211,6 +212,7 @@ func _ready() -> void:
 	Import.import_patterns(Global.path_join_array(Global.data_directories, "Patterns"))
 
 	quit_and_save_dialog.add_button("Exit without saving", false, "ExitWithoutSaving")
+	_last_session_last_project = get_last_project_path()
 	_handle_cmdline_arguments()
 	get_tree().root.files_dropped.connect(_on_files_dropped)
 	if OS.get_name() == "Android":
@@ -230,7 +232,7 @@ func _ready() -> void:
 	FileAccess.open(RUNNING_FILE_PATH, FileAccess.WRITE)
 	await get_tree().process_frame
 	if Global.open_last_project:
-		load_last_project()
+		load_last_project(true)
 	_setup_application_window_size()
 	_show_splash_screen()
 	Global.pixelorama_opened.emit()
@@ -433,6 +435,9 @@ func _handle_cmdline_arguments() -> void:
 					file_path = str(output[0]).strip_edges().path_join(arg)
 		# Do one last failsafe to see everything is in order
 		if FileAccess.file_exists(file_path):
+			# If a last session is being opened through command line then clear it
+			if _last_session_last_project == file_path:  # Pixelorama project file
+				_last_session_last_project = ""
 			OpenSave.handle_loading_file(file_path)
 
 	var project := Global.current_project
@@ -530,14 +535,25 @@ func _on_files_dropped(files: PackedStringArray) -> void:
 		splash_dialog.hide()
 
 
-func load_last_project() -> void:
-	if OS.get_name() == "Web":
-		return
+func get_last_project_path() -> String:
 	# Check if any project was saved or opened last time
 	if Global.config_cache.has_section_key("data", "last_project_path"):
 		# Check if file still exists on disk
-		var file_path = Global.config_cache.get_value("data", "last_project_path")
-		load_recent_project_file(file_path)
+		return Global.config_cache.get_value("data", "last_project_path")
+	return ""
+
+
+func load_last_project(using_previous_session := false) -> void:
+	# NOTE: When projects are loaded through CLI, the last_project_path gets overridden, and we
+	# have to pass an override path in that scenario.
+	if OS.get_name() == "Web":
+		return
+	# Check if any project was saved or opened last time
+	var last_project_path := get_last_project_path()
+	if using_previous_session:
+		last_project_path = _last_session_last_project
+	if not last_project_path.is_empty():
+		load_recent_project_file(last_project_path)
 		(func(): Global.cel_switched.emit()).call_deferred()
 
 
