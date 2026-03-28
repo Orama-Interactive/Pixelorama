@@ -544,8 +544,8 @@ func get_last_project_path() -> String:
 
 
 func load_last_project(using_previous_session := false) -> void:
-	# NOTE: When projects are loaded through CLI, the last_project_path gets overriden, and we
-	# have to pass an override path in that senario.
+	# NOTE: When projects are loaded through CLI, the last_project_path gets overridden, and we
+	# have to pass an override path in that scenario.
 	if OS.get_name() == "Web":
 		return
 	# Check if any project was saved or opened last time
