@@ -87,7 +87,7 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 		case 3: // Logical AND
 			result.rgb = current_color.rgb;
 			if (current_color != prev_color){
-				// Whereever colors are different, use transparent color.
+				// Wherever colors are different, use transparent color.
 				// NOTE: setting prev_color.a = 0 will force the mixer to return current_color which
 				// we have set to transparent. for reference, see the equation below:
 				// mix(current_color, result, 0.0) --> current_color (which is transparent)
