@@ -55,7 +55,7 @@ vec3 rgb_to_hsl(vec3 rgb)
 }
 
 
-vec4 blend(int blend_type, vec4 current_color, vec4 prev_layer_color, vec4 prev_blend_result, float opacity) {
+vec4 blend(int blend_type, vec4 current_color, vec4 prev_blend_result, float opacity) {
 	current_color.a *= opacity;  // Combine the layer opacity
 	if (current_color.a <= 0.001) {
 		//return prev_blend_result;
@@ -234,7 +234,7 @@ void fragment() {
 		float clipping_mask = texture(metadata, vec2(layer_index, 3.0 / metadata_size_float.y)).r;
 		layer_color.a *= prev_layer_color.a * step(0.5, clipping_mask) + 1.0 * step(clipping_mask, 0.5);
 		layer_color.a = border_trim(layer_color, uv);
-		result_color = blend(current_blend_mode, layer_color, prev_layer_color, result_color, current_opacity);
+		result_color = blend(current_blend_mode, layer_color, result_color, current_opacity);
 	}
 	COLOR = result_color;
 }
