@@ -83,10 +83,17 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 			if (current_color.a * prev_color.a <= 0.001){
 				current_color.a = 0.0;
 				prev_color.a = 0.0;
+			}
 			break;
 		case 3: // Logical AND
-			result.rgb = current_color.rgb;
-			if (current_color != prev_color){
+			result = current_color;
+			bool similar_colors = (
+				abs(current_color.r - prev_color.r) <= 0.001
+				&& abs(current_color.g - prev_color.g) <= 0.001
+				&& abs(current_color.b - prev_color.b) <= 0.001
+				&& abs(current_color.a - prev_color.a) <= 0.001
+			);
+			if (!similar_colors){
 				// Wherever colors are different, use transparent color.
 				// NOTE: setting prev_color.a = 0 will force the mixer to return current_color which
 				// we have set to transparent. for reference, see the equation below:
@@ -94,6 +101,7 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 				prev_color.a = 0.0;
 				current_color = vec4(0.0);
 			}
+			should_blend_alpha = false;
 			break;
 		case 4: // Darken
 			result.rgb = min(prev_color.rgb, current_color.rgb);
@@ -164,7 +172,6 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 			result.rgb = current_color.rgb;
 			break;
 	}
-	// Crop result using current layer alpha as mask.
 	result.rgb = mix(prev_color.rgb, result.rgb, current_color.a);
 	if (should_blend_alpha){
 		result.a = prev_color.a * (1.0 - current_color.a) + current_color.a;
