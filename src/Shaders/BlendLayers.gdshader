@@ -77,10 +77,9 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 			result.rgb = current_color.rgb;
 			// Perform an Alpha focused relaxed intersection (In those pixels where current_color
 			// has alpha, but prev_color doesn't and vice versa, make them transparent)
-			// NOTE: setting prev_color.a = 0 will force the mixer to return current_color which
-			// we have set to transparent. for reference, see the equation below:
-			// mix(current_color, result, 0.0) --> current_color (which is transparent)
 			if (current_color.a * prev_color.a <= 0.001){
+				// NOTE: Setting both prev_color.a and current_color.a to zero gives the net result
+				// of the pixel being transparent.
 				current_color.a = 0.0;
 				prev_color.a = 0.0;
 			}
@@ -93,11 +92,10 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 				&& abs(current_color.b - prev_color.b) <= 0.001
 				&& abs(current_color.a - prev_color.a) <= 0.001
 			);
+			// Wherever colors are different, use transparent color.
 			if (!similar_colors){
-				// Wherever colors are different, use transparent color.
-				// NOTE: setting prev_color.a = 0 will force the mixer to return current_color which
-				// we have set to transparent. for reference, see the equation below:
-				// mix(current_color, result, 0.0) --> current_color (which is transparent)
+				// NOTE: Setting both prev_color and current_color to zero gives the net result
+				// of the pixel being transparent.
 				prev_color.a = 0.0;
 				current_color = vec4(0.0);
 			}
