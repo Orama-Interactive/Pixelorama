@@ -74,17 +74,26 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 			should_blend_alpha = false;
 			break;
 		case 2: // Intersection
-			float alpha = current_color.a * prev_color.a;
-			current_color.a = alpha;
-			prev_color.a = alpha;
 			result.rgb = current_color.rgb;
-			break;
-		case 3: // Logical AND
-			if (current_color != prev_color){
+			// Perform an Alpha focused relaxed intersection (In those pixels where current_color
+			// has alpha, but prev_color doesn't and vice versa, make them transparent)
+			// NOTE: setting prev_color.a = 0 will force the mixer to return current_color which
+			// we have set to transparent. for reference, see the equation below:
+			// mix(current_color, result, 0.0) --> current_color (which is transparent)
+			if (current_color.a * prev_color.a <= 0.001){
 				current_color.a = 0.0;
 				prev_color.a = 0.0;
-			}
+			break;
+		case 3: // Logical AND
 			result.rgb = current_color.rgb;
+			if (current_color != prev_color){
+				// Whereever colors are different, use transparent color.
+				// NOTE: setting prev_color.a = 0 will force the mixer to return current_color which
+				// we have set to transparent. for reference, see the equation below:
+				// mix(current_color, result, 0.0) --> current_color (which is transparent)
+				prev_color.a = 0.0;
+				current_color = vec4(0.0);
+			}
 			break;
 		case 4: // Darken
 			result.rgb = min(prev_color.rgb, current_color.rgb);
@@ -155,11 +164,13 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 			result.rgb = current_color.rgb;
 			break;
 	}
+	// Crop result using current layer alpha as mask.
 	result.rgb = mix(prev_color.rgb, result.rgb, current_color.a);
 	if (should_blend_alpha){
 		result.a = prev_color.a * (1.0 - current_color.a) + current_color.a;
 	}
 	result = clamp(result, 0.0, 1.0);
+	// Show blended result proportional to how much previous color had alpha there.
 	return mix(current_color, result, prev_color.a);
 }
 
