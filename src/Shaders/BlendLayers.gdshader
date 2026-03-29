@@ -71,6 +71,7 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 		case 1: // Erase
 			result = prev_color;
 			result.a -= current_color.a;  // clamping will be done at the end so not doing it here.
+			current_color.a = 0.0;
 			should_blend_alpha = false;
 			break;
 		case 2: // Intersection
