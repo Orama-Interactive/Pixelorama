@@ -33,14 +33,14 @@ var _skip_color_picker_update := false
 @onready var expand_button: Button = $ScrollContainer/VerticalContainer/ExpandButton
 
 @onready
-var _mm_change_hue: Keychain.MouseMovementInputAction = Keychain.actions[&"mm_color_change_hue"] as Keychain.MouseMovementInputAction
-@onready var _mm_change_sat: Keychain.MouseMovementInputAction = (
+var _mm_change_hue := Keychain.actions[&"mm_color_change_hue"] as Keychain.MouseMovementInputAction
+@onready var _mm_change_sat := (
 	Keychain.actions[&"mm_color_change_saturation"] as Keychain.MouseMovementInputAction
 )
-@onready var _mm_change_value: Keychain.MouseMovementInputAction = (
+@onready var _mm_change_value := (
 	Keychain.actions[&"mm_color_change_value"] as Keychain.MouseMovementInputAction
 )
-@onready var _mm_change_alpha: Keychain.MouseMovementInputAction = (
+@onready var _mm_change_alpha := (
 	Keychain.actions[&"mm_color_change_alpha"] as Keychain.MouseMovementInputAction
 )
 
@@ -121,10 +121,10 @@ func _notification(what: int) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	var hue_value: float = _mm_change_hue.get_action_distance(event)
-	var sat_value: float = _mm_change_sat.get_action_distance(event)
-	var value_value: float = _mm_change_value.get_action_distance(event)
-	var alpha_value: float = _mm_change_alpha.get_action_distance(event)
+	var hue_value := _mm_change_hue.get_action_distance(event)
+	var sat_value := _mm_change_sat.get_action_distance(event)
+	var value_value := _mm_change_value.get_action_distance(event)
+	var alpha_value := _mm_change_alpha.get_action_distance(event)
 	if (
 		is_zero_approx(hue_value)
 		and is_zero_approx(sat_value)
