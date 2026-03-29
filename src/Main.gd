@@ -418,22 +418,13 @@ func _handle_cmdline_arguments() -> void:
 		# 2. The file is relative to the working directory.
 		if file_path.is_relative_path():
 			# we first try to convert it to be relative to executable
-			if file_path.is_relative_path():
-				file_path = OS.get_executable_path().get_base_dir().path_join(arg)
+			file_path = OS.get_executable_path().get_base_dir().path_join(arg)
 			if !FileAccess.file_exists(file_path):
 				# it is not relative to executable so we have to convert it to an
 				# absolute path instead (this is when file is relative to working directory)
-				var output = []
-				match OS.get_name():
-					"Linux":
-						OS.execute("pwd", [], output)
-					"macOS":
-						OS.execute("pwd", [], output)
-					"Windows":
-						OS.execute("cd", [], output)
-				if output.size() > 0:
-					file_path = str(output[0]).strip_edges().path_join(arg)
-		# Do one last failsafe to see everything is in order
+				var pwd := OS.get_environment("PWD")
+				file_path = pwd.path_join(arg)
+		# Do one last failsafe to see everything is in order.
 		if FileAccess.file_exists(file_path):
 			# If a last session is being opened through command line then clear it
 			if _last_session_last_project == file_path:  # Pixelorama project file
