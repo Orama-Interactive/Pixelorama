@@ -229,6 +229,12 @@ var preferences: Array[Preference] = [
 		false
 	),
 	Preference.new(
+		"always_redraw",
+		"Performance/PerformanceContainer/AlwaysRedrawSwitch",
+		"button_pressed",
+		false
+	),
+	Preference.new(
 		"window_transparency",
 		"Performance/PerformanceContainer/WindowTransparency",
 		"button_pressed",

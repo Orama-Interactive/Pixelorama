@@ -18,6 +18,7 @@ oversampling_override = 1.0
 title = "Preferences"
 position = Vector2i(0, 36)
 size = Vector2i(800, 500)
+visible = true
 script = ExtResource("1")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="." unique_id=628880388]
@@ -1269,7 +1270,6 @@ value = 1.1
 suffix = "minute(s)"
 
 [node name="Performance" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide" unique_id=1548055898]
-visible = false
 layout_mode = 2
 
 [node name="PerformanceHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance" unique_id=315490513 groups=["HeaderLabels"]]
@@ -1330,6 +1330,21 @@ text = "Pause application when it loses focus"
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
+mouse_default_cursor_shape = 2
+button_pressed = true
+text = "On"
+
+[node name="AlwaysRedrawLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer" unique_id=1915393446]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "If this is toggled on, the application will always redraw the window, even when it is unfocused (Does something diferent from \"Update continuously\")"
+mouse_filter = 1
+text = "Always redraw"
+
+[node name="AlwaysRedrawSwitch" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance/PerformanceContainer" unique_id=1952815932]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "If this is toggled on, the application will always redraw the window, even when it is unfocused (Does something diferent from \"Update continuously\")"
 mouse_default_cursor_shape = 2
 button_pressed = true
 text = "On"

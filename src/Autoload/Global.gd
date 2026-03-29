@@ -230,6 +230,8 @@ var integer_zoom := false:
 			zoom_slider.step = 1
 		zoom_slider.value = zoom_slider.value  # to trigger signal emission
 
+## If the game should redraw everything even when the window is unfocused
+var always_redraw := false
 ## Found in Preferences. The scale of the interface.
 var shrink := 1.0
 ## The default value of the scale of the interface.

@@ -22,6 +22,8 @@ var splash_dialog: AcceptDialog:
 		return splash_dialog
 var _last_session_last_project := ""
 
+@onready var menu_and_ui: VBoxContainer = $MenuAndUI
+@onready var screen_faker: TextureRect = $ScreenFaker
 @onready var top_menu_container := $MenuAndUI/TopMenuContainer as Panel
 @onready var main_ui := $MenuAndUI/UI/DockableContainer as DockableContainer
 ## Dialog used to open images and project (.pxo) files.
@@ -216,7 +218,7 @@ func _ready() -> void:
 	_handle_cmdline_arguments()
 	get_tree().root.files_dropped.connect(_on_files_dropped)
 	if OS.get_name() == "Android":
-		var intent_data := Applinks.get_data()
+		var intent_data: String = Applinks.get_data()
 		if not intent_data.is_empty():
 			_on_applinks_data_received(intent_data)
 	if not DisplayServer.has_feature(DisplayServer.FEATURE_NATIVE_DIALOG_FILE_EXTRA):
@@ -364,7 +366,6 @@ func set_mobile_fullscreen_safe_area() -> void:
 		(get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN)
 		or (get_window().mode == Window.MODE_FULLSCREEN)
 	)
-	var menu_and_ui: VBoxContainer = $MenuAndUI
 	if is_fullscreen:
 		var safe_area := DisplayServer.get_display_safe_area()
 		menu_and_ui.set_anchors_preset(Control.PRESET_TOP_LEFT)
@@ -496,6 +497,11 @@ func _notification(what: int) -> void:
 		NOTIFICATION_APPLICATION_FOCUS_OUT:
 			if Global.pause_when_unfocused:
 				get_tree().paused = true
+				
+				if !Global.always_redraw :
+					menu_and_ui.visible = false
+					screen_faker.visible = true
+					screen_faker.texture = ImageTexture.create_from_image(get_tree().root.get_viewport().get_texture().get_image())
 		NOTIFICATION_WM_MOUSE_EXIT:
 			# Do not pause the application if the mouse leaves the main window
 			# but there are child subwindows opened, because that makes them unresponsive.
@@ -507,6 +513,11 @@ func _notification(what: int) -> void:
 			get_tree().paused = false
 		NOTIFICATION_APPLICATION_FOCUS_IN:
 			get_tree().paused = false
+			
+			if !Global.always_redraw :
+				menu_and_ui.visible = true
+				screen_faker.visible = false
+				screen_faker.texture = null
 
 
 func _on_files_dropped(files: PackedStringArray) -> void:

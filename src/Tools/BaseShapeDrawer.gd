@@ -98,7 +98,7 @@ func _input(event: InputEvent) -> void:
 		# otherwise it will be changed twice on both left and right tools.
 		if tool_slot.button == MOUSE_BUTTON_RIGHT and Global.share_options_between_tools:
 			return
-		var brush_size_value := _mm_action.get_action_distance_int(event)
+		var brush_size_value: int = _mm_action.get_action_distance_int(event)
 		$ThicknessSlider.value += brush_size_value
 
 
