@@ -44,7 +44,6 @@ flat = true
 [node name="File" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=1224741301]
 
 [node name="Edit" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=894854999]
-oversampling_override = 1.0
 
 [node name="Select" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=1630003755]
 
