@@ -18,7 +18,6 @@ oversampling_override = 1.0
 title = "Preferences"
 position = Vector2i(0, 36)
 size = Vector2i(800, 500)
-visible = true
 script = ExtResource("1")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="." unique_id=628880388]
