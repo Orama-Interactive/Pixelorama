@@ -44,7 +44,7 @@ var _last_session_last_project := ""
 class CLI:
 	static var args_list := {
 		["rel-dir="]:
-		[dummy, "(Default=$PWD) The directory using which relative paths are resolved."],
+		[dummy, "(Default='PWD') The directory using which relative paths are resolved."],
 		["--version", "--pixelorama-version"]:
 		[CLI.print_version, "Prints current Pixelorama version"],
 		["--size"]: [CLI.print_project_size, "Prints size of the given project"],
@@ -68,7 +68,8 @@ class CLI:
 	}
 
 	static func generate_help(_project: Project, _next_arg: String):
-		var win_path_msg := "NOTE: If your files are using relative paths (e.g. example.pxo instead of path/to/example.pxo) it is recommended to set [color=green]rel-dir=%CD%[/color] (for Windows).\n"
+		# gdlint: ignore=max-line-length
+		var win_path_msg := "NOTE: If your files are using relative paths (e.g. example.pxo instead of path/to/example.pxo) it is recommended to set [color=green]rel-dir='%CD%'[/color] (for Windows).\n"
 		var help := str(
 			(
 				"""
