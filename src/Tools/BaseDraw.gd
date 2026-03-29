@@ -67,7 +67,7 @@ func _input(event: InputEvent) -> void:
 	# otherwise it will be changed twice on both left and right tools.
 	if tool_slot.button == MOUSE_BUTTON_RIGHT and Global.share_options_between_tools:
 		return
-	var brush_size_value: int = _mm_action.get_action_distance_int(event, true)
+	var brush_size_value := _mm_action.get_action_distance_int(event, true)
 	$Brush/BrushSize.value += brush_size_value
 
 
@@ -879,7 +879,7 @@ func _update_mm_action(action_name: String) -> void:
 	if action_name != "mm_change_brush_size":
 		return
 	_mm_action = Keychain.actions[&"mm_change_brush_size"] as Keychain.MouseMovementInputAction
-	var new_mm_action: Keychain.MouseMovementInputAction = Keychain.MouseMovementInputAction.new()
+	var new_mm_action := Keychain.MouseMovementInputAction.new()
 	new_mm_action.action_name = &"mm_change_brush_size"
 	new_mm_action.mouse_dir = _mm_action.mouse_dir
 	new_mm_action.sensitivity = _mm_action.sensitivity
