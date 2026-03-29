@@ -1269,6 +1269,7 @@ value = 1.1
 suffix = "minute(s)"
 
 [node name="Performance" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide" unique_id=1548055898]
+visible = false
 layout_mode = 2
 
 [node name="PerformanceHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Performance" unique_id=315490513 groups=["HeaderLabels"]]
