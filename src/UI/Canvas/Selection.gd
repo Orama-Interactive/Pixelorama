@@ -43,6 +43,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _draw() -> void:
+	marching_ants_outline.visible = Global.current_project.has_selection
 	transformation_handles.queue_redraw()
 
 
