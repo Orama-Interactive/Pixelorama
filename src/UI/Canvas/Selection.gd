@@ -15,6 +15,7 @@ var is_pasting := false
 
 var preview_selection_map := SelectionMap.new()
 var preview_selection_texture := ImageTexture.new()
+var _marching_ants_time_elapsed := 0.0
 
 @onready var canvas := get_parent() as Canvas
 @onready var transformation_handles := $TransformationHandles as TransformationHandles
@@ -22,6 +23,7 @@ var preview_selection_texture := ImageTexture.new()
 
 
 func _ready() -> void:
+	set_process(false)
 	# Ensure to only call _input() if the cursor is inside the main canvas viewport
 	Global.main_viewport.mouse_entered.connect(set_process_input.bind(true))
 	Global.main_viewport.mouse_exited.connect(set_process_input.bind(false))
@@ -34,6 +36,11 @@ func _ready() -> void:
 	Global.camera.zoom_changed.connect(_update_on_zoom)
 
 
+func _process(delta: float) -> void:
+	_marching_ants_time_elapsed += delta
+	marching_ants_outline.material.set_shader_parameter("time", _marching_ants_time_elapsed)
+
+
 func _input(event: InputEvent) -> void:
 	if transformation_handles.is_transforming_content():
 		if event.is_action_pressed(&"transformation_confirm"):
@@ -44,6 +51,10 @@ func _input(event: InputEvent) -> void:
 
 func _draw() -> void:
 	marching_ants_outline.visible = Global.current_project.has_selection
+	if Global.current_project.has_selection and Global.selection_animated_borders:
+		set_process(true)
+	else:
+		set_process(false)
 	transformation_handles.queue_redraw()
 
 
