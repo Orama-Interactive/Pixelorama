@@ -62,7 +62,9 @@ func _ready() -> void:
 		file_exists_alert_popup.add_button("Cancel Export", true, "cancel")
 	else:
 		file_exists_alert_popup.add_button("Cancel Export", false, "cancel")
-		if OS.get_name() == "Web" or OS.get_name() == "Android":
+		if OS.get_name() == "Android":
+			path_dialog_popup.file_mode = FileDialog.FILE_MODE_OPEN_DIR
+		elif OS.get_name() == "Web":
 			file_format_options.show()
 
 	# TODO: Remove the loop when https://github.com/godotengine/godot/issues/92848 gets fixed.
@@ -311,7 +313,7 @@ func _on_about_to_popup() -> void:
 	options_resize.value = Export.resize
 	options_interpolation.selected = Export.interpolation
 	var file_ext := Export.file_format_string(project.file_format)
-	if OS.get_name() == "Web":
+	if OS.get_name() == "Web" or OS.get_name() == "Android":
 		path_line_edit.text = project.file_name + file_ext
 	else:
 		path_line_edit.text = project.export_directory_path.path_join(project.file_name) + file_ext
@@ -381,9 +383,6 @@ func _on_interpolation_item_selected(id: Image.Interpolation) -> void:
 
 
 func _on_confirmed() -> void:
-	if OS.get_name() == "Android":
-		path_dialog_popup.popup_centered_clamped()
-		return
 	export()
 
 
@@ -399,7 +398,8 @@ func _on_path_button_pressed() -> void:
 
 
 func _on_path_line_edit_text_changed(new_text: String) -> void:
-	Global.current_project.export_directory_path = new_text.get_base_dir()
+	if OS.get_name() != "Android":
+		Global.current_project.export_directory_path = new_text.get_base_dir()
 	Global.current_project.file_name = new_text.get_file().get_basename()
 	var file_format := Export.get_file_format_from_extension(new_text.get_extension())
 	Global.current_project.file_format = file_format
@@ -422,13 +422,14 @@ func _on_path_dialog_file_selected(path: String) -> void:
 	path_line_edit.text = path
 	_on_path_line_edit_text_changed(path)
 	Export.overwrite_asked = true
-	if OS.get_name() == "Android":
-		export()
-		return
 	# Needed because if native file dialogs are enabled
 	# the export dialog closes when the path dialog closes
 	if not visible:
 		show()
+
+
+func _on_path_dialog_dir_selected(dir: String) -> void:
+	Global.current_project.export_directory_path = dir
 
 
 func _on_path_dialog_canceled() -> void:

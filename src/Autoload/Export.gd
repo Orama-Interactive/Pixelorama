@@ -395,8 +395,6 @@ func export_processed_images(
 	var multiple_files := false
 	if not is_single_file_format(project):
 		multiple_files = true if processed_images.size() > 1 else false
-	if OS.get_name() == "Android":
-		multiple_files = false
 	# Check export paths
 	var export_paths: PackedStringArray = []
 	var paths_of_existing_files := ""
@@ -431,7 +429,7 @@ func export_processed_images(
 				paths_of_existing_files += export_path
 		export_paths.append(export_path)
 		# Only get one export path if single file animated image is exported
-		if is_single_file_format(project) or OS.get_name() == "Android":
+		if is_single_file_format(project):
 			break
 
 	if not paths_of_existing_files.is_empty() and not overwrite_asked:  # If files already exist
@@ -540,8 +538,6 @@ func export_processed_images(
 						tr("File failed to save. Error code %s (%s)") % [err, error_string(err)]
 					)
 					return false
-			if OS.get_name() == "Android":
-				break
 
 	Global.notification_label("File(s) exported")
 	# Store settings for quick export and when the dialog is opened again
@@ -555,7 +551,8 @@ func export_processed_images(
 		Global.top_menu_container.file_menu.set_item_text(
 			Global.FileMenu.EXPORT, tr("Export") + " %s" % file_name_with_ext
 		)
-	project.export_directory_path = export_paths[0].get_base_dir()
+	if OS.get_name() != "Android":
+		project.export_directory_path = export_paths[0].get_base_dir()
 	Global.config_cache.set_value("data", "current_dir", project.export_directory_path)
 	return true
 
@@ -817,6 +814,8 @@ func _create_export_path(
 			)
 	path += path_extras
 
+	if OS.get_name() == "Android":
+		return project.export_directory_path + "#" + path + file_format_string(project.file_format)
 	return project.export_directory_path.path_join(path + file_format_string(project.file_format))
 
 
