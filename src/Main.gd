@@ -3,7 +3,6 @@ extends Control
 ## Needed because it is not possible to detect if a native file dialog is open or not.
 signal save_file_dialog_opened(opened: bool)
 
-const RUNNING_FILE_PATH := "user://.running"
 const SPLASH_DIALOG_SCENE_PATH := "res://src/UI/Dialogs/SplashDialog.tscn"
 
 var opensprite_file_selected := false
@@ -223,13 +222,8 @@ func _ready() -> void:
 		save_sprite_dialog.option_count = 0
 
 	# Detect if Pixelorama crashed last time.
-	var crashed_last_time := FileAccess.file_exists(RUNNING_FILE_PATH)
-	if crashed_last_time and OpenSave.had_backups_on_startup:
+	if Global.session_crashed_last_time() and OpenSave.had_backups_on_startup:
 		restore_session_confirmation_dialog.popup_centered_clamped()
-	# Create a file that only exists while Pixelorama is running,
-	# and delete it when it closes. If Pixelorama opens and this file exists,
-	# it means that Pixelorama crashed last time.
-	FileAccess.open(RUNNING_FILE_PATH, FileAccess.WRITE)
 	await get_tree().process_frame
 	if Global.open_last_project:
 		load_last_project(true)
@@ -678,7 +672,6 @@ func _on_QuitAndSaveDialog_confirmed() -> void:
 
 
 func _quit() -> void:
-	Global.pixelorama_about_to_close.emit()
 	# Darken the UI to denote that the application is currently exiting
 	# (it won't respond to user input in this state).
 	modulate = Color(0.5, 0.5, 0.5)
@@ -686,7 +679,7 @@ func _quit() -> void:
 
 
 func _exit_tree() -> void:
-	DirAccess.remove_absolute(RUNNING_FILE_PATH)
+	Global.pixelorama_about_to_close.emit()
 	for project in Global.projects:
 		project.remove()
 	if DisplayServer.get_name() == "headless":

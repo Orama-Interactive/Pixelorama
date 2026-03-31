@@ -125,6 +125,7 @@ const LANGUAGES_DICT := {
 const SUPPORTED_IMAGE_TYPES: PackedStringArray = [
 	"png", "bmp", "hdr", "jpg", "jpeg", "svg", "tga", "webp", "exr"
 ]
+const RUNNING_FILE_PATH := "user://.running"
 ## The file path used for the [member config_cache] file.
 const CONFIG_PATH := "user://config.ini"
 ## The file used to save preferences that use [method _save_to_override_file].
@@ -1073,6 +1074,49 @@ func _initialize_keychain() -> void:
 		"Mouse drag": Keychain.InputGroup.new(),
 	}
 	Keychain.ignore_actions = ["left_mouse", "right_mouse", "middle_mouse", "shift", "ctrl"]
+
+
+## This method serves the purpose of both initializing (first time it's called), and retrieving
+## crash info of last session
+func session_crashed_last_time() -> bool:
+	# Callable for time updater
+	var update_monitoring_time = func():
+		# NOTE: Only create the file at RUNNING_FILE_PATH through timeout signal. Creating them
+		# instantly ar session startup would cause conflicts between consecutive calls of the
+		# session_crashed_last_time method.
+		var m_file := FileAccess.open(RUNNING_FILE_PATH, FileAccess.WRITE)
+		m_file.store_line(var_to_str(int(Time.get_unix_time_from_system())))
+		m_file.close()
+
+	# Add a ping timer (this serves as a heart beat that announces that session is still alive
+	# every wait_time seconds).
+	var ping_timer: Timer = get_tree().get_first_node_in_group("SessionPingTimer")
+	if not ping_timer:
+		ping_timer = Timer.new()  # Used to ping that at least one session is alive during Timer's run.
+		ping_timer.process_mode = Node.PROCESS_MODE_ALWAYS
+		ping_timer.add_to_group("SessionPingTimer")
+		ping_timer.wait_time = 5  # Ping that at least one session is alive during this time
+		ping_timer.name = "SessionPingTimer"
+		add_child(ping_timer)
+		# Connect this file to ping timer.
+		ping_timer.timeout.connect(update_monitoring_time)
+		pixelorama_about_to_close.connect(func(): DirAccess.remove_absolute(RUNNING_FILE_PATH))
+		ping_timer.start()
+
+	# This is the file the ping timer announces to
+	if FileAccess.file_exists(RUNNING_FILE_PATH):
+		# This code will decide if pixelorama crashed or not
+		var monitor_file := FileAccess.open(RUNNING_FILE_PATH, FileAccess.READ)
+		var last_update_time = str_to_var(monitor_file.get_line())
+		monitor_file.close()
+		if typeof(last_update_time) == TYPE_INT:
+			# If the time difference detected in file is less than wait_time, it's likely that
+			# this or some other session is still pinging this file
+			if int(Time.get_unix_time_from_system()) - last_update_time <= ping_timer.wait_time:
+				return false
+		# If this line is reached then it's likely that the app crashed last session
+		return true
+	return false
 
 
 ## Generates an animated notification label showing [param text].
