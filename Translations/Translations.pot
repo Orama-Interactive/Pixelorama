@@ -1045,9 +1045,6 @@ msgstr ""
 msgid "Right tool color:"
 msgstr ""
 
-msgid "Right tool color:"
-msgstr ""
-
 #. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
 msgid "Make global palettes read-only"
 msgstr ""
