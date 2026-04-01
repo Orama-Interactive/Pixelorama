@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2026-03-24 19:49\n"
+"PO-Revision-Date: 2026-04-01 00:47\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -1051,9 +1051,6 @@ msgid "If this is enabled, options will be synced between the left and the right
 msgstr ""
 
 msgid "Left tool color:"
-msgstr ""
-
-msgid "Right tool color:"
 msgstr ""
 
 msgid "Right tool color:"
