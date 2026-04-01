@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2026-04-01 00:46\n"
+"PO-Revision-Date: 2026-04-01 10:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1063,7 +1063,7 @@ msgstr "Farbe des rechten Werkzeugs:"
 
 #. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
 msgid "Make global palettes read-only"
-msgstr ""
+msgstr "Globale Paletten schreibschützen"
 
 msgid "Small"
 msgstr "Klein"
@@ -1517,7 +1517,7 @@ msgid "Belarusian"
 msgstr "Belarussisch"
 
 msgid "Thai"
-msgstr ""
+msgstr "Thailändisch"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -3376,7 +3376,7 @@ msgstr "Nur Inhalte exportieren, die innerhalb der Grenzen eines ausgewählten B
 
 #. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
 msgid "Layers as separate files"
-msgstr ""
+msgstr "Jede Ebene als eigene Datei"
 
 msgid "Close"
 msgstr "Schließen"
