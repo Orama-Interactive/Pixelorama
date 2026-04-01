@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2026-03-25 11:50\n"
+"PO-Revision-Date: 2026-04-01 00:46\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1061,9 +1061,6 @@ msgstr "左侧工具颜色："
 
 msgid "Right tool color:"
 msgstr "左侧工具颜色："
-
-msgid "Right tool color:"
-msgstr "右侧工具颜色："
 
 #. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
 msgid "Make global palettes read-only"
