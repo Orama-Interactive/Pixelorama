@@ -42,6 +42,8 @@ var _last_session_last_project := ""
 
 class CLI:
 	static var args_list := {
+		["rel-dir="]:
+		[dummy, "(Default='PWD') The directory using which relative paths are resolved."],
 		["--version", "--pixelorama-version"]:
 		[CLI.print_version, "Prints current Pixelorama version"],
 		["--size"]: [CLI.print_project_size, "Prints size of the given project"],
@@ -65,6 +67,8 @@ class CLI:
 	}
 
 	static func generate_help(_project: Project, _next_arg: String):
+		# gdlint: ignore=max-line-length
+		var win_path_msg := "NOTE: If your files are using relative paths (e.g. example.pxo instead of path/to/example.pxo) it is recommended to set [color=green]rel-dir='%CD%'[/color] (for Windows).\n"
 		var help := str(
 			(
 				"""
@@ -72,32 +76,37 @@ class CLI:
 Help for Pixelorama's CLI.
 
 Usage:
-\t%s [SYSTEM OPTIONS] -- [USER OPTIONS] [FILES]...
+\t[b]%s[/b] [color=orange][SYSTEM OPTIONS][/color] -- [color=green][USER OPTIONS][/color] [FILES]...
 
 Use -h in place of [SYSTEM OPTIONS] to see [SYSTEM OPTIONS].
 Or use -h in place of [USER OPTIONS] to see [USER OPTIONS].
 
-some useful [SYSTEM OPTIONS] are:
---headless     Run in headless mode.
---quit         Close pixelorama after current command.
+some useful [b][SYSTEM OPTIONS][/b] are:
+[color=orange]--headless[/color]     Run in headless mode.
+[color=orange]--quit[/color]         Close pixelorama after current command.
 
 
-[USER OPTIONS]:\n
+[b][USER OPTIONS][/b]:\n
 (The terms in [ ] reflect the valid type for corresponding argument).
-
+%s
 """
-				% OS.get_executable_path().get_file()
+				% [
+					OS.get_executable_path().get_file(),
+					win_path_msg if OS.get_name() == "Windows" else ""
+				]
 			)
 		)
 		for command_group: Array in args_list.keys():
 			help += str(
+				"[color=green][b]",
 				var_to_str(command_group).replace("[", "").replace("]", "").replace('"', ""),
+				"[/b][/color]",
 				"\t\t".c_unescape(),
 				args_list[command_group][1],
 				"\n".c_unescape()
 			)
 		help += "========================================================================="
-		print(help)
+		print_rich(help)
 
 	## Dedicated place for command line args callables
 	static func print_version(_project: Project, _next_arg: String) -> void:
@@ -398,6 +407,8 @@ func _show_splash_screen() -> void:
 
 func _handle_cmdline_arguments() -> void:
 	var args := OS.get_cmdline_args()
+	var working_directory := ""
+	var wdir_searching := false
 	args.append_array(OS.get_cmdline_user_args())
 	if args.is_empty():
 		return
@@ -406,6 +417,14 @@ func _handle_cmdline_arguments() -> void:
 		if arg.begins_with("lospec-palette://"):
 			Palettes.import_lospec_palette(arg)
 			break
+		if arg.begins_with("rel-dir=") or wdir_searching:
+			working_directory = arg.trim_prefix("rel-dir=")
+			if not DirAccess.dir_exists_absolute(working_directory):
+				wdir_searching = true
+				working_directory = ""
+			else:
+				wdir_searching = false
+			continue
 		var file_path := arg
 		# if we think the file could be a potential relative path it can mean two things:
 		# 1. The file is relative to executable
@@ -417,6 +436,8 @@ func _handle_cmdline_arguments() -> void:
 				# it is not relative to executable so we have to convert it to an
 				# absolute path instead (this is when file is relative to working directory)
 				var pwd := OS.get_environment("PWD")
+				if not working_directory.is_empty():
+					pwd = working_directory
 				file_path = pwd.path_join(arg)
 		# Do one last failsafe to see everything is in order.
 		if FileAccess.file_exists(file_path):
