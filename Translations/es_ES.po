@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2026-03-24 21:47\n"
+"PO-Revision-Date: 2026-04-01 00:46\n"
 
 msgid "OK"
 msgstr "Aceptar"
@@ -1055,9 +1055,6 @@ msgstr "Si está activado, se sincronizarán las opciones entre las herramientas
 
 msgid "Left tool color:"
 msgstr "Color de la herramienta izquierda:"
-
-msgid "Right tool color:"
-msgstr "Color de la herramienta derecha:"
 
 msgid "Right tool color:"
 msgstr "Color de la herramienta derecha:"
