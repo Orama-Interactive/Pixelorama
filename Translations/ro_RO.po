@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2026-03-26 11:18\n"
+"PO-Revision-Date: 2026-04-01 00:46\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1056,9 +1056,6 @@ msgstr "Dacă această setare este activată, opțiunile vor fi sincronizate în
 
 msgid "Left tool color:"
 msgstr "Culoarea instrumentului din stânga:"
-
-msgid "Right tool color:"
-msgstr "Culoarea instrumentului din dreapta:"
 
 msgid "Right tool color:"
 msgstr "Culoarea instrumentului din dreapta:"
