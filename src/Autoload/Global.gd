@@ -121,6 +121,7 @@ const LANGUAGES_DICT := {
 	"tr_TR": ["Türkçe", "Turkish"],
 	"ja_JP": ["日本語", "Japanese"],
 	"uk_UA": ["Українська", "Ukrainian"],
+	"th_TH": ["ภาษาไทย", "Thai"],
 }
 const SUPPORTED_IMAGE_TYPES: PackedStringArray = [
 	"png", "bmp", "hdr", "jpg", "jpeg", "svg", "tga", "webp", "exr"
