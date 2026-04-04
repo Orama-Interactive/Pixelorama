@@ -1096,6 +1096,11 @@ pointing/android/enable_pan_and_scale_gestures=true
 
 locale/translations=PackedStringArray("res://Translations/en_US.po")
 
+[physics]
+
+2d/physics_engine="Dummy"
+3d/physics_engine="Dummy"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
