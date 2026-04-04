@@ -281,7 +281,8 @@ func open_path_validation_alert_popup(path_or_name: int = -1) -> void:
 
 
 func open_file_exists_alert_popup(text: String) -> void:
-	file_exists_alert_popup.dialog_text = text
+	var file_exists_label := file_exists_alert_popup.get_node(^"ScrollContainer/Label") as Label
+	file_exists_label.text = text
 	file_exists_alert_popup.popup_centered_clamped()
 
 
@@ -454,7 +455,8 @@ func _on_file_format_item_selected(index: int) -> void:
 
 ## Overwrite existing file
 func _on_file_exists_alert_confirmed() -> void:
-	file_exists_alert_popup.dialog_text = Export.file_exists_alert
+	var file_exists_label := file_exists_alert_popup.get_node(^"ScrollContainer/Label") as Label
+	file_exists_label.text = Export.file_exists_alert
 	Export.stop_export = false
 	resume_export_function.emit()
 
@@ -462,7 +464,8 @@ func _on_file_exists_alert_confirmed() -> void:
 func _on_file_exists_alert_custom_action(action: StringName) -> void:
 	if action == &"cancel":
 		# Cancel export
-		file_exists_alert_popup.dialog_text = Export.file_exists_alert
+		var file_exists_label := file_exists_alert_popup.get_node(^"ScrollContainer/Label") as Label
+		file_exists_label.text = Export.file_exists_alert
 		Export.stop_export = true
 		resume_export_function.emit()
 		file_exists_alert_popup.hide()

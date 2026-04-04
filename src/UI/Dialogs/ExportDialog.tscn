@@ -349,7 +349,18 @@ access = 2
 dialog_text = "DirAccess path and file name are not valid!"
 
 [node name="FileExistsAlert" type="AcceptDialog" parent="." unique_id=2050038451]
-dialog_text = "File %s already exists. Overwrite?"
+oversampling_override = 1.0
+size = Vector2i(400, 300)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="FileExistsAlert" unique_id=1400960240]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 392.0
+offset_bottom = 251.0
+
+[node name="Label" type="Label" parent="FileExistsAlert/ScrollContainer" unique_id=1256306510]
+layout_mode = 2
+text = "File %s already exists. Overwrite?"
 
 [node name="ExportProgressBar" type="Window" parent="." unique_id=438204898]
 title = "Export Progress"
