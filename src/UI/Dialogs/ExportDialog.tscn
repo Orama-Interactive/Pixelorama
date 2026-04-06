@@ -13,7 +13,7 @@ shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
 shader_parameter/color2 = Color(1, 1, 1, 1)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/scale = Vector2(0, 0)
-shader_parameter/rect_size = Vector2(684, 261)
+shader_parameter/rect_size = Vector2(684, 234)
 shader_parameter/follow_movement = false
 shader_parameter/follow_scale = false
 
@@ -228,6 +228,15 @@ script = ExtResource("4")
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer/VSplitContainer/VBoxContainer" unique_id=857749939]
 layout_mode = 2
+
+[node name="DirectoryPathLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer" unique_id=973388495]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "/data/user/0/com.oramainteractive.pixelorama/cache"
+clip_text = true
 
 [node name="FilePath" type="HBoxContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer" unique_id=799127972]
 layout_mode = 2

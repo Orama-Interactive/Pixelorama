@@ -41,6 +41,7 @@ var _preview_images: Array[Export.ProcessedImage]
 @onready var options_resize: ValueSlider = $"%Resize"
 @onready var dimension_label: Label = $"%DimensionLabel"
 
+@onready var directory_path_label: Label = %DirectoryPathLabel
 @onready var path_line_edit: LineEdit = $"%PathLineEdit"
 @onready var file_format_options: OptionButton = $"%FileFormat"
 @onready var options_interpolation: OptionButton = $"%Interpolation"
@@ -64,9 +65,9 @@ func _ready() -> void:
 		file_exists_alert_popup.add_button("Cancel Export", false, "cancel")
 		if OS.get_name() == "Android":
 			path_dialog_popup.file_mode = FileDialog.FILE_MODE_OPEN_DIR
+			directory_path_label.visible = true
 		elif OS.get_name() == "Web":
 			file_format_options.show()
-
 	# TODO: Remove the loop when https://github.com/godotengine/godot/issues/92848 gets fixed.
 	for dialog_child in path_dialog_popup.find_children("", "Window", true, false):
 		if dialog_child is Window:
@@ -313,6 +314,7 @@ func _on_about_to_popup() -> void:
 	# If export already occurred - sets GUI to show previous settings
 	options_resize.value = Export.resize
 	options_interpolation.selected = Export.interpolation
+	directory_path_label.text = project.export_directory_path
 	var file_ext := Export.file_format_string(project.file_format)
 	if OS.get_name() == "Web" or OS.get_name() == "Android":
 		path_line_edit.text = project.file_name + file_ext
@@ -430,6 +432,7 @@ func _on_path_dialog_file_selected(path: String) -> void:
 
 
 func _on_path_dialog_dir_selected(dir: String) -> void:
+	directory_path_label.text = dir
 	Global.current_project.export_directory_path = dir
 
 
