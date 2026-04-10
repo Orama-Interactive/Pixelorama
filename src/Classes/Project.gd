@@ -14,6 +14,10 @@ signal tags_changed
 
 const INDEXED_MODE := -1
 
+const WARNING_LOADING_3D_LAYERS_MSG := """Projects with 3D layers exported with a Pixelorama version
+older than 1.2 are no longer compatible with current versions. If you want to keep the 3D data
+of this project, please close it and finish your work using version 1.1.9.
+Do NOT save over this file using version 1.2 and on, otherwise your 3D data will be lost!"""
 var name := "":
 	set(value):
 		name = value
@@ -407,6 +411,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 					if not zip_reader.file_exists(scene_path_zip):
 						layer.generate_nodes(size)
 						layers_3d_count += 1
+						Global.popup_error(WARNING_LOADING_3D_LAYERS_MSG)
 						continue
 					var scene_data := zip_reader.read_file(scene_path_zip)
 					var scene_data_text := scene_data.get_string_from_utf8()
