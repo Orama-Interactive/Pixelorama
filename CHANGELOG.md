@@ -4,11 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v1.1.9] - Unreleased
+## [v1.1.9] - 2026-04-12
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@Bartkk0](https://github.com/Bartkk0), Akane Angèle ([@AkaneAngele](https://github.com/AkaneAngele)), [@AlRado](https://github.com/AlRado),  Vance Palacio ([@vanceism7](https://github.com/vanceism7)), Olof Knight ([@InsaneAwesomeTony](https://github.com/InsaneAwesomeTony)), [@magley](https://github.com/magley), [@makinori](https://github.com/makinori)
 
-Built using Godot 4.6.1
+Built using Godot 4.6.2
 
 ### Added
 - It is now finally possible to split layers when exporting spritesheets! [#1456](https://github.com/Orama-Interactive/Pixelorama/pull/1456)
