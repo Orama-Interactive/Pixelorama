@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-04-14 17:03\n"
+"PO-Revision-Date: 2026-04-14 20:48\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -510,10 +510,10 @@ msgid "Replace cel"
 msgstr ""
 
 msgid "New layer"
-msgstr ""
+msgstr "Nova tavolo"
 
 msgid "New reference image"
-msgstr ""
+msgstr "Nova referenca bildo"
 
 msgid "New palette"
 msgstr "Nova paletro"
@@ -522,7 +522,7 @@ msgid "New brush"
 msgstr "Nova peniko"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Nova ŝablono"
 
 msgid "Horizontal frames:"
 msgstr "Horizontalaj filmeroj:"
