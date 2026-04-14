@@ -32,6 +32,7 @@ var layer_metadata_texture := ImageTexture.new()
 @onready var gizmos_3d := $Gizmos3D as Node2D
 @onready var measurements := $Measurements as Node2D
 @onready var reference_image_container := $ReferenceImages as Node2D
+@onready var tilemap_property_drawing := $TilemapPropertyDrawing as Node2D
 
 
 func _ready() -> void:

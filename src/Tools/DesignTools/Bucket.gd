@@ -233,7 +233,10 @@ func cancel_tool() -> void:
 
 
 func draw_tile(cell_coords: Vector2i, index: int, tilemap_cel: CelTileMap) -> void:
-	tilemap_cel.set_index(tilemap_cel.get_cell_at(cell_coords), index)
+	if TileSetPanel.autotiling_enabled:
+		tilemap_cel.autotile([cell_coords], index == 0)
+	else:
+		tilemap_cel.set_index(tilemap_cel.get_cell_at(cell_coords), index)
 
 
 func fill(pos: Vector2i) -> void:
@@ -258,7 +261,11 @@ func fill_in_color(pos: Vector2i) -> void:
 			for cell_coords: Vector2i in tilemap_cel.cells:
 				var cell := tilemap_cel.get_cell_at(cell_coords)
 				if cell.index == tile_index:
-					tilemap_cel.set_index(cell, TileSetPanel.selected_tile_index)
+					var paint_index := TileSetPanel.selected_tile_index
+					if TileSetPanel.autotiling_enabled:
+						tilemap_cel.autotile([cell_coords], paint_index == 0)
+					else:
+						tilemap_cel.set_index(cell, paint_index)
 		return
 	var color := project.get_current_cel().get_image().get_pixelv(pos)
 	var images := _get_selected_draw_images()

@@ -11,6 +11,25 @@ extends PixelCel
 ## information that specifies if that cell has a transformation applied to it,
 ## such as horizontal flipping, vertical flipping, or if it's transposed.
 
+const PEERING_OFFSETS: Dictionary[TileSet.CellNeighbor, Vector2i] = {
+	TileSet.CELL_NEIGHBOR_RIGHT_SIDE: Vector2i(1, 0),
+	TileSet.CELL_NEIGHBOR_RIGHT_CORNER: Vector2i(1, -1),
+	TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE: Vector2i(1, 1),
+	TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER: Vector2i(1, 1),
+	TileSet.CELL_NEIGHBOR_BOTTOM_SIDE: Vector2i(0, 1),
+	TileSet.CELL_NEIGHBOR_BOTTOM_CORNER: Vector2i(-1, 1),
+	TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE: Vector2i(-1, 1),
+	TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER: Vector2i(-1, 1),
+	TileSet.CELL_NEIGHBOR_LEFT_SIDE: Vector2i(-1, 0),
+	TileSet.CELL_NEIGHBOR_LEFT_CORNER: Vector2i(-1, -1),
+	TileSet.CELL_NEIGHBOR_TOP_LEFT_SIDE: Vector2i(-1, -1),
+	TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER: Vector2i(-1, -1),
+	TileSet.CELL_NEIGHBOR_TOP_SIDE: Vector2i(0, -1),
+	TileSet.CELL_NEIGHBOR_TOP_CORNER: Vector2i(1, -1),
+	TileSet.CELL_NEIGHBOR_TOP_RIGHT_SIDE: Vector2i(1, -1),
+	TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER: Vector2i(1, -1)
+}
+
 ## The [TileSetCustom] that this cel uses, passed down from the cel's [LayerTileMap].
 var tileset: TileSetCustom
 
@@ -132,6 +151,7 @@ func set_tileset(new_tileset: TileSetCustom, reset_indices := true) -> void:
 func set_index(
 	cell: Cell,
 	index: int,
+	force_update := false,
 	flip_h := TileSetPanel.is_flipped_h,
 	flip_v := TileSetPanel.is_flipped_v,
 	transpose := TileSetPanel.is_transposed,
@@ -165,7 +185,7 @@ func set_index(
 			)
 		queue_update_cel_portions(true)
 	else:
-		_update_cell(cell, previous_index)
+		_update_cell(cell, previous_index, force_update)
 	Global.canvas.queue_redraw()
 
 
@@ -298,6 +318,146 @@ func bucket_fill(cell_coords: Vector2i, index: int, callable: Callable) -> void:
 					to_check.push_back(around[i])
 			already_checked.append(coords)
 	godot_tilemap.queue_free()
+
+
+#region Autotiling
+func autotile(cell_coords: Array[Vector2i], only_neighbors := false) -> void:
+	var godot_tilemap := create_tilemap_layer_node()
+	autotile_with_neighbors(cell_coords, godot_tilemap, only_neighbors)
+	godot_tilemap.queue_free()
+
+
+func autotile_with_neighbors(
+	cell_coords: Array[Vector2i], godot_tilemap: TileMapLayer, only_neighbors := false
+) -> void:
+	var queue: Array[Vector2i] = cell_coords.duplicate()
+	var visited: Dictionary[Vector2i, bool] = {}
+
+	while queue.size() > 0:
+		var pos: Vector2i = queue.pop_front()
+		if visited.has(pos):
+			continue
+		visited[pos] = true
+
+		var cell := get_cell_at(pos)
+		var old_index := cell.index
+		var new_index := autotile_compute_index(pos)
+		if only_neighbors and pos in cell_coords:
+			new_index = 0
+
+		if new_index != old_index:
+			set_index(cell, new_index, true)
+			var neighbors := godot_tilemap.get_surrounding_cells(pos)
+			for n in neighbors:
+				if n in cell_coords:
+					continue
+				if cells.has(n) and cells[n].index != 0:
+					queue.append(n)
+
+
+func autotile_build_mask(cell_coords: Vector2i) -> PackedInt32Array:
+	var mask := PackedInt32Array()
+	mask.resize(PEERING_OFFSETS.size())
+	mask.fill(-1)
+	for i in mask.size():
+		if not tileset.is_valid_terrain_peering_bit_for_mode(i):
+			continue
+		var peering_offset := PEERING_OFFSETS[i]
+		var neighbor_pos := cell_coords + peering_offset
+
+		if not cells.has(neighbor_pos):
+			continue
+
+		var neighbor_cell := cells[neighbor_pos]
+		if neighbor_cell.index == 0:
+			continue
+
+		var neighbor_tile := tileset.tiles[neighbor_cell.index]
+		mask[i] = neighbor_tile.terrain_center_bit
+
+	return mask
+
+
+func autotile_find_best_tile(mask: PackedInt32Array, terrain_id := 0) -> int:
+	var best_tiles: PackedInt32Array
+	var best_score := -999999
+	for i in range(1, tileset.tiles.size()):
+		var tile := tileset.tiles[i]
+		if tile.terrain_center_bit != terrain_id:
+			continue
+		var score := autotile_score_tile(tile, mask)
+		score += autotile_tile_specificity(tile)
+		if score > best_score:
+			best_score = score
+			best_tiles.clear()
+			best_tiles.append(i)
+		elif score == best_score:
+			best_tiles.append(i)
+
+	return tileset.pick_random_tile(best_tiles)
+
+
+func autotile_score_tile(tile: TileSetCustom.Tile, mask: PackedInt32Array) -> int:
+	var score := 0
+	for i in mask.size():
+		var tile_bit := tile.terrain_peering_bits[i]
+		if tile_bit == -1:
+			continue
+		var neighbor := mask[i]
+		if neighbor == tile_bit:
+			score += 10
+		else:
+			score -= 2
+
+	return score
+
+
+func autotile_tile_specificity(tile: TileSetCustom.Tile) -> int:
+	var s := 0
+	for b in tile.terrain_peering_bits:
+		if b != -1:
+			s += 1
+	return s
+
+
+func autotile_tile_matches_mask(tile: TileSetCustom.Tile, mask: PackedInt32Array) -> bool:
+	for i in mask.size():
+		if not tileset.is_valid_terrain_peering_bit_for_mode(i):
+			continue
+		var tile_bit := tile.terrain_peering_bits[i]
+		if tile_bit == -1:
+			continue
+		if mask[i] != tile_bit:
+			return false
+
+	return true
+
+
+func autotile_filter_corners(mask: PackedInt32Array, terrain_id: int) -> void:
+	# top-right
+	if mask[12] != terrain_id or mask[0] != terrain_id:
+		mask[15] = -1
+
+	# bottom-right
+	if mask[0] != terrain_id or mask[4] != terrain_id:
+		mask[3] = -1
+
+	# bottom-left
+	if mask[4] != terrain_id or mask[8] != terrain_id:
+		mask[7] = -1
+
+	# top-left
+	if mask[8] != terrain_id or mask[12] != terrain_id:
+		mask[11] = -1
+
+
+func autotile_compute_index(cell_coords: Vector2i) -> int:
+	var mask := autotile_build_mask(cell_coords)
+	autotile_filter_corners(mask, 0)
+	return autotile_find_best_tile(mask)
+
+
+#endregion
 
 
 func re_order_tilemap() -> void:
@@ -755,8 +915,8 @@ func _re_index_cells_after_index(index: int, decrease := true) -> void:
 
 ## Updates the [param source_image] data of the cell of the tilemap in [param cell_position],
 ## to ensure that it is the same as its mapped tile in the [member tileset].
-func _update_cell(cell: Cell, prev_index := -1) -> void:
-	if cell.updated_this_frame:
+func _update_cell(cell: Cell, prev_index := -1, force_update := false) -> void:
+	if cell.updated_this_frame and not force_update:
 		return
 	cell.updated_this_frame = true
 	cell.set_deferred("updated_this_frame", false)

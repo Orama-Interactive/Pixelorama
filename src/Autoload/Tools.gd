@@ -1,6 +1,7 @@
 # gdlint: ignore=max-public-methods
 extends Node
 
+signal tool_changed(tool_name: String, button: int)
 signal color_changed(color_info: Dictionary, button: int)
 @warning_ignore("unused_signal")
 signal selected_tile_index_changed(tile_index: int)
@@ -253,6 +254,14 @@ Press %s to edit the last added basis""",
 		"res://src/Tools/3DTools/3DShapeEdit.tscn",
 		[Global.LayerTypes.THREE_D]
 	),
+	"TilesPropertyPainter":
+	Tool.new(
+		"TilesPropertyPainter",
+		"Tiles Property Painter",
+		"tilespropertypainter",
+		"res://src/Tools/UtilityTools/TilePropertyPainter.tscn",
+		[Global.LayerTypes.TILEMAP]
+	)
 }
 
 var _tool_button_scene := preload("res://src/UI/ToolsPanel/ToolButton.tscn")
@@ -515,6 +524,7 @@ func set_tool(tool_name: String, button: int) -> void:
 	if not config_changed.is_connected(attempt_config_share):
 		config_changed.connect(attempt_config_share)
 	attempt_config_share(config_slot)  # Sync it with the other tool
+	tool_changed.emit(tool_name, button)
 
 
 func get_tool(button: int) -> Slot:

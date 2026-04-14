@@ -37,6 +37,7 @@ var _line_polylines := []
 var _stroke_project: Project
 var _stroke_images: Array[ImageExtended] = []
 var _is_mask_size_zero := true
+var _drawn_tiles: Dictionary[Vector2i, bool]
 var _circle_tool_shortcut: Array[Vector2i]
 var _mm_action: Keychain.MouseMovementInputAction
 
@@ -398,6 +399,7 @@ func draw_end(pos: Vector2i) -> void:
 			_stroke_dimensions = _brush_image.get_size()
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
+	_drawn_tiles.clear()
 
 
 func cancel_tool() -> void:
@@ -418,15 +420,22 @@ func draw_tile(pos: Vector2i) -> void:
 	var tile_positions: Array[Vector2i] = []
 	tile_positions.resize(mirrored_positions.size() + 1)
 	tile_positions[0] = get_cell_position(pos)
+	if tile_positions[0] in _drawn_tiles:
+		return
+	_drawn_tiles[tile_positions[0]] = true
 	for i in mirrored_positions.size():
 		var mirrored_position := mirrored_positions[i]
 		tile_positions[i + 1] = get_cell_position(mirrored_position)
 	for cel in _get_selected_draw_cels():
 		if cel is not CelTileMap:
 			return
-		for tile_position in tile_positions:
-			var cell := (cel as CelTileMap).get_cell_at(tile_position)
-			(cel as CelTileMap).set_index(cell, tile_index)
+		var tilemap_cel := cel as CelTileMap
+		if TileSetPanel.autotiling_enabled:
+			tilemap_cel.autotile(tile_positions, tile_index == 0)
+		else:
+			for tile_position in tile_positions:
+				var cell := tilemap_cel.get_cell_at(tile_position)
+				tilemap_cel.set_index(cell, tile_index)
 
 
 func _prepare_tool() -> void:
