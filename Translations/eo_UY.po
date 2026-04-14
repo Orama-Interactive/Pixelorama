@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-04-01 00:47\n"
+"PO-Revision-Date: 2026-04-14 15:34\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -74,7 +74,7 @@ msgstr "Bildo"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "Projekto"
 
 msgid "Effects"
 msgstr "Efektoj"
