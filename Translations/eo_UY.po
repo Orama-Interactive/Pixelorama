@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-04-14 15:34\n"
+"PO-Revision-Date: 2026-04-14 17:03\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -99,13 +99,13 @@ msgstr "Konservi kiel..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr ""
+msgstr "Inkluzivi kunfanditajn bildojn"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr ""
+msgstr "Se ŝaltita, la finaj kunfanditaj bildoj ankaŭ estos konservita en la PXO-dosiero, por ĉiu kadro. Tio pligrandigas la PXO-dosieron, kaj estas uzinda por enportado de aliaj programoj aŭ elportado per komandlinia interfaco. Ŝarĝado de PXO-dosieroj en Pixelorama ne devigas ŝaltadon de tiu ĉi agordo."
 
 msgid "Import"
 msgstr "Importi"
@@ -139,11 +139,11 @@ msgstr "Refari"
 
 #. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
 msgid "Undo History"
-msgstr ""
+msgstr "Historio de malfaroj"
 
 #. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
 msgid "Initial state"
-msgstr ""
+msgstr "Komenca stato"
 
 msgid "Copy"
 msgstr "Kopii"
@@ -159,17 +159,17 @@ msgstr "Enmeti en lokon"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
-msgstr ""
+msgstr "Alglui de tondejo"
 
 msgid "Delete"
 msgstr "Forigi"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Forigi porĉiame"
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
-msgstr ""
+msgstr "Movigi al rubujon"
 
 msgid "New Brush"
 msgstr "Nova peniko"
@@ -181,44 +181,44 @@ msgid "Pixels"
 msgstr "Rastrumeroj"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Elcentaĵo"
 
 #. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
 msgid "Color mode:"
-msgstr ""
+msgstr "Kolora reĝimo:"
 
 #. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
 msgid "Color Mode"
-msgstr ""
+msgstr "Kolora reĝimo"
 
 #. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
 msgid "Indexed"
-msgstr ""
+msgstr "Indeksita"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr ""
+msgstr "Stuci al elekto"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr ""
+msgstr "Stuci al enhavo"
 
 msgid "Resize Canvas"
 msgstr "Ŝanĝi la dimensiojn de la tavolo"
 
 msgid "Offset Image"
-msgstr ""
+msgstr "Deŝovi bildon"
 
 msgid "Offset:"
-msgstr ""
+msgstr "Deŝovo:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
-msgstr ""
+msgstr "Konekti flankojn dum deŝovo:"
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
-msgstr ""
+msgstr "Centrigi kadrojn"
 
 msgid "Rotate Image"
 msgstr "Turni bildon"
@@ -236,61 +236,61 @@ msgid "Tolerance:"
 msgstr ""
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Komenca angulo:"
 
 #. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
 msgid "Wrap Strokes"
-msgstr ""
+msgstr "Konekti flankojn"
 
 msgid "Clear"
-msgstr ""
+msgstr "Vakigi"
 
 msgid "Invert"
-msgstr ""
+msgstr "Inversigi"
 
 #. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
 msgid "Select cel area"
-msgstr ""
+msgstr "Elekti areon de animaciero"
 
 msgid "Modify"
-msgstr ""
+msgstr "Modifi"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users expand the active selection.
 msgid "Expand"
-msgstr ""
+msgstr "Pligrandigi"
 
 #. Title of a window that lets users expand the active selection.
 msgid "Expand Selection"
-msgstr ""
+msgstr "Pligrandigi elekton"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users shrink the active selection.
 msgid "Shrink"
-msgstr ""
+msgstr "Plimalgrandigi"
 
 #. Title of a window that lets users shrink the active selection.
 msgid "Shrink Selection"
-msgstr ""
+msgstr "Plimalgrandigi elekton"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users create a border of the active selection.
 msgid "Border"
-msgstr ""
+msgstr "Randigi"
 
 #. Title of a window that lets users create a border of the active selection.
 msgid "Border Selection"
-msgstr ""
+msgstr "Randigi elekton"
 
 #. Refers to a diamond-like shape.
 msgid "Diamond"
-msgstr ""
+msgstr "Romba"
 
 msgid "Circle"
-msgstr ""
+msgstr "Cirkla"
 
 msgid "Square"
-msgstr ""
+msgstr "Kvadrata"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "Grizoskala vido"
 
 msgid "Mirror Image"
 msgstr "Renversi bildon"
@@ -306,7 +306,7 @@ msgstr "Agordoj"
 
 #. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
 msgid "Procedural"
-msgstr ""
+msgstr "Proceduraj"
 
 #. Refers to effects that blur the image.
 msgid "Blur"
@@ -314,17 +314,17 @@ msgstr ""
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loaded"
-msgstr ""
+msgstr "Ŝarĝitaj"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr ""
+msgstr "Centrigi tolon"
 
 msgid "Tile Mode"
 msgstr "Kahela reĝimo"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "Deŝovoj de kaheleca reĝimo"
 
 #. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
 msgid "X-basis:"
@@ -362,13 +362,13 @@ msgid "Panel Layout"
 msgstr "Poziciaro de paneloj"
 
 msgid "Panels"
-msgstr ""
+msgstr "Paneloj"
 
 msgid "Layouts"
 msgstr "Poziciaroj"
 
 msgid "Moveable Panels"
-msgstr ""
+msgstr "Moveblaj paneloj"
 
 #. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
 msgid "Make Floating"
@@ -673,27 +673,27 @@ msgid "Selected frames"
 msgstr ""
 
 msgid "Layers:"
-msgstr ""
+msgstr "Tavoloj:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Videblaj tavoloj"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "Elektitaj tavoloj"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Bildera tavolo:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Grupa tavolo:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "3D tavolo:"
 
 msgid "Direction:"
 msgstr "Direkto:"
@@ -702,7 +702,7 @@ msgid "Forward"
 msgstr "Antaŭen"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Malantaŭen"
 
 msgid "Ping-Pong"
 msgstr ""
@@ -732,16 +732,16 @@ msgid "Export dimensions:"
 msgstr ""
 
 msgid "Save a File"
-msgstr ""
+msgstr "Konservi dosieron"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "Iri al malsekva dosierujo."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "Iri al sekva dosierujo."
 
 msgid "Go to parent folder."
-msgstr ""
+msgstr "Iri al parenca dosierujo."
 
 msgid "Path:"
 msgstr "Vojo:"
@@ -750,7 +750,7 @@ msgid "Refresh files."
 msgstr ""
 
 msgid "Toggle the visibility of hidden files."
-msgstr ""
+msgstr "Baskuligi videblecon de kaŝitaj dosieroj."
 
 msgid "Directories & Files:"
 msgstr "Dosieroj kaj -ujoj:"
@@ -763,15 +763,15 @@ msgstr "Dosiero:"
 
 #. Found in "Open" and "Save" file dialogs. Searches all file types.
 msgid "All Files"
-msgstr ""
+msgstr "Ĉiuj dosieroj"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
-msgstr ""
+msgstr "Ĉiuj konataj"
 
 #. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
 msgid "Pixelorama Project"
-msgstr ""
+msgstr "Projekto de Pixelorama"
 
 #. Found in the "Open" file dialog. Searches PNG files only. (Note that PNG is a file type and should remain untranslated)
 msgid "PNG Image"
@@ -2411,7 +2411,7 @@ msgid "Adjusted average"
 msgstr ""
 
 msgid "Blend at interface"
-msgstr ""
+msgstr "Kunfandi ĉe interfaco"
 
 #. Refers to the left face of a box shape.
 msgid "Left Face"
@@ -2707,95 +2707,95 @@ msgstr ""
 
 #. Found in the layer's section of the timeline. Refers to layer blend modes, for more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Blend mode:"
-msgstr ""
+msgstr "Tipo de kunfandigo:"
 
 #. Found in the layer's section of the timeline, as a blend mode option, only available for group layers. If enabled, group blending is disabled and the group simply acts as a way to organize layers instead of affecting blending.
 msgid "Pass through"
-msgstr ""
+msgstr "Trapaso"
 
 #. Adjective, refers to something usual/regular, such as the normal blend mode.
 msgid "Normal"
-msgstr ""
+msgstr "Norma"
 
 #. Found in the layer's section of the timeline, as a blend mode option. Uses the opacity of pixels in this layer to erase pixels from the layers under it.
 msgid "Erase"
-msgstr ""
+msgstr "Skrapado"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Multiply"
-msgstr ""
+msgstr "Multipliko"
 
 # .Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color burn"
-msgstr ""
+msgstr "Malheligado"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Linear burn"
-msgstr ""
+msgstr "Linea malheligado"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Screen"
-msgstr ""
+msgstr "Ekrano"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color dodge"
-msgstr ""
+msgstr "Heligado"
 
 #. Found in the layer's section of the timeline, as category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Contrast"
-msgstr ""
+msgstr "Kontrasto"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Overlay"
-msgstr ""
+msgstr "Tegado"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Soft light"
-msgstr ""
+msgstr "Mola lumo"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hard light"
-msgstr ""
+msgstr "Akra lumo"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Inversion"
-msgstr ""
+msgstr "Inversigado"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Difference"
-msgstr ""
+msgstr "Diferenco"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Exclusion"
-msgstr ""
+msgstr "Ekskluzivigo"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Subtract"
-msgstr ""
+msgstr "Subtraho"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Divide"
-msgstr ""
+msgstr "Divido"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Component"
-msgstr ""
+msgstr "Komponanto"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Hue"
-msgstr ""
+msgstr "Kolornuanco"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Saturation"
-msgstr ""
+msgstr "Intenseco"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Color"
-msgstr ""
+msgstr "Koloro"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Luminosity"
-msgstr ""
+msgstr "Lumintenseco"
 
 msgid "Opacity:"
 msgstr "Opakeco:"
