@@ -16,7 +16,6 @@ var damaged_extensions := PackedStringArray()
 var prev_damaged_extensions := PackedStringArray()
 ## Extensions built using the versions in this array are considered compatible with the current Api
 var legacy_api_versions := []
-var sane_timer := Timer.new()  # Used to ping that at least one session is alive during Timer's run.
 
 
 class Extension:
@@ -53,7 +52,7 @@ class Extension:
 
 func _ready() -> void:
 	_add_internal_extensions()
-	prev_damaged_extensions = initialize_extension_monitor()
+	prev_damaged_extensions = get_crashed_session_extensions()
 	if !prev_damaged_extensions.is_empty():
 		if prev_damaged_extensions.size() == 1:
 			# gdlint: ignore=max-line-length
@@ -269,33 +268,23 @@ func uninstall_extension(file_name := "", remove_mode := UninstallMode.REMOVE_PE
 	extension_uninstalled.emit(file_name)
 
 
-func initialize_extension_monitor() -> PackedStringArray:
-	var tester_file: FileAccess  # For testing and deleting damaged extensions
-	# Remove any extension that was proven guilty before this extension is loaded
-	sane_timer.wait_time = 10  # Ping that at least one session is alive during this time
-	add_child(sane_timer)
-	sane_timer.timeout.connect(update_monitoring_time)
-	sane_timer.start()
-	if FileAccess.file_exists(EXTENSIONS_PATH.path_join("Monitoring.ini")):
-		# This code will decide if pixelorama crashed or not
-		var faulty_path := EXTENSIONS_PATH.path_join("Monitoring.ini")
-		tester_file = FileAccess.open(faulty_path, FileAccess.READ)
-		var last_update_time = str_to_var(tester_file.get_line())
-		var damaged_extension_names = str_to_var(tester_file.get_line())
-		tester_file.close()
-		if typeof(last_update_time) == TYPE_INT:
-			if int(Time.get_unix_time_from_system()) - last_update_time <= sane_timer.wait_time:
-				return PackedStringArray()  # Assume the file is still in use (session didn't crash)
-		# If this line is reached then it's likely that the app crashed last session
-		DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Monitoring.ini"))
+func get_crashed_session_extensions() -> PackedStringArray:
+	var extension_monitor_path := EXTENSIONS_PATH.path_join("Monitoring.ini")
+	if Global.session_crashed_last_time() and FileAccess.file_exists(extension_monitor_path):
+		# retrieve last session's open extensions, and remove monitor file.
+		var monitor_file = FileAccess.open(extension_monitor_path, FileAccess.READ)
+		var damaged_extension_names = str_to_var(monitor_file.get_line())
+		monitor_file.close()
+		DirAccess.remove_absolute(extension_monitor_path)
 		if typeof(damaged_extension_names) == TYPE_PACKED_STRING_ARRAY:
 			if damaged_extension_names.size() == 1:  # We are certain which extension crashed
 				# NOTE: get_file() is used as a countermeasure towards possible malicious tampering
-				# with Monitoring.ini file (to inject paths leading outside EXTENSIONS_PATH using "../")
+				# with Monitoring.ini file (to inject paths leading outside
+				# EXTENSIONS_PATH using "../")
 				var extension_name = damaged_extension_names[0].get_file()
 				DirAccess.make_dir_recursive_absolute(BUG_EXTENSIONS_PATH)
 				if FileAccess.file_exists(EXTENSIONS_PATH.path_join(extension_name)):
-					# don't delete the extension permanently
+					# Don't delete the extension permanently
 					# (so that it may be given to the developer in the bug report)
 					DirAccess.rename_absolute(
 						EXTENSIONS_PATH.path_join(extension_name),
@@ -330,16 +319,3 @@ func clear_suspicion(extension_name: StringName):
 		tester_file.close()
 	else:
 		DirAccess.remove_absolute(EXTENSIONS_PATH.path_join("Monitoring.ini"))
-
-
-func update_monitoring_time():
-	var tester_file := FileAccess.open(EXTENSIONS_PATH.path_join("Monitoring.ini"), FileAccess.READ)
-	var active_extensions_str: String
-	if FileAccess.get_open_error() == OK:
-		tester_file.get_line()  # Ignore first line
-		active_extensions_str = tester_file.get_line()
-		tester_file.close()
-	tester_file = FileAccess.open(EXTENSIONS_PATH.path_join("Monitoring.ini"), FileAccess.WRITE)
-	tester_file.store_line(var_to_str(int(Time.get_unix_time_from_system())))
-	tester_file.store_line(active_extensions_str)
-	tester_file.close()

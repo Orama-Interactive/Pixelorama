@@ -13,7 +13,7 @@ shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
 shader_parameter/color2 = Color(1, 1, 1, 1)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/scale = Vector2(0, 0)
-shader_parameter/rect_size = Vector2(684, 261)
+shader_parameter/rect_size = Vector2(684, 234)
 shader_parameter/follow_movement = false
 shader_parameter/follow_scale = false
 
@@ -229,6 +229,15 @@ script = ExtResource("4")
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer/VSplitContainer/VBoxContainer" unique_id=857749939]
 layout_mode = 2
 
+[node name="DirectoryPathLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer" unique_id=973388495]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "/data/user/0/com.oramainteractive.pixelorama/cache"
+clip_text = true
+
 [node name="FilePath" type="HBoxContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer" unique_id=799127972]
 layout_mode = 2
 
@@ -237,24 +246,24 @@ custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 text = "Path:"
 
-[node name="PathLineEdit" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" unique_id=938649692 groups=["NotAndroid"]]
+[node name="PathLineEdit" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" unique_id=938649692]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 caret_blink = true
 caret_blink_interval = 0.5
 
-[node name="PathButton" type="Button" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" unique_id=1878336224 groups=["NotAndroid", "NotHTML5"]]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "Browse"
-
-[node name="FileFormat" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" unique_id=844726557]
+[node name="FileFormat" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" unique_id=844726557 groups=["NotAndroid"]]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
+
+[node name="PathButton" type="Button" parent="VBoxContainer/VSplitContainer/VBoxContainer/FilePath" unique_id=1878336224 groups=["NotHTML5"]]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Browse"
 
 [node name="HSeparator3" type="HSeparator" parent="VBoxContainer/VSplitContainer/VBoxContainer" unique_id=224516429]
 layout_mode = 2
@@ -349,7 +358,18 @@ access = 2
 dialog_text = "DirAccess path and file name are not valid!"
 
 [node name="FileExistsAlert" type="AcceptDialog" parent="." unique_id=2050038451]
-dialog_text = "File %s already exists. Overwrite?"
+oversampling_override = 1.0
+size = Vector2i(400, 300)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="FileExistsAlert" unique_id=1400960240]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 392.0
+offset_bottom = 251.0
+
+[node name="Label" type="Label" parent="FileExistsAlert/ScrollContainer" unique_id=1256306510]
+layout_mode = 2
+text = "File %s already exists. Overwrite?"
 
 [node name="ExportProgressBar" type="Window" parent="." unique_id=438204898]
 title = "Export Progress"
@@ -387,8 +407,8 @@ size_flags_horizontal = 3
 [connection signal="value_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/ResizeContainer/Resize" to="." method="_on_resize_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Quality" to="." method="_on_quality_value_changed"]
 [connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/PathLineEdit" to="." method="_on_path_line_edit_text_changed"]
-[connection signal="pressed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/PathButton" to="." method="_on_path_button_pressed"]
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/FileFormat" to="." method="_on_file_format_item_selected"]
+[connection signal="pressed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/PathButton" to="." method="_on_path_button_pressed"]
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/Interpolation" to="." method="_on_interpolation_item_selected"]
 [connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/SeparatorCharacter" to="." method="_on_separator_character_text_changed"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/ExportJSON" to="." method="_on_export_json_toggled"]
@@ -398,6 +418,7 @@ size_flags_horizontal = 3
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/TrimImages" to="." method="_on_trim_images_toggled"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/ClipSelection" to="." method="_on_clip_images_selection_toggled"]
 [connection signal="canceled" from="PathDialog" to="." method="_on_path_dialog_canceled"]
+[connection signal="dir_selected" from="PathDialog" to="." method="_on_path_dialog_dir_selected"]
 [connection signal="file_selected" from="PathDialog" to="." method="_on_path_dialog_file_selected"]
 [connection signal="confirmed" from="FileExistsAlert" to="." method="_on_file_exists_alert_confirmed"]
 [connection signal="custom_action" from="FileExistsAlert" to="." method="_on_file_exists_alert_custom_action"]

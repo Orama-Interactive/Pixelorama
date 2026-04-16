@@ -45,6 +45,8 @@ const AUTHORS: PackedStringArray = [
 	"Kinwailo",
 	"kleonc",
 	"Laurenz Reinthaler (Schweini07)",
+	"magley",
+	"makinori",
 	"Marco Galli (Gaarco)",
 	"Mariano Semelman (msemelman)",
 	"Marquis Kurt (alicerunsonfedora)",
