@@ -25,10 +25,11 @@ var button_pressed := false:
 		return main_button.button_pressed
 var animation_running := false
 var audio_playing_at_frame := 0
+var audio_player: AudioStreamPlayer
+
 var _old_camera_auto_release_gui_focus: bool
 var _old_is_writing_text: bool
 
-var audio_player: AudioStreamPlayer
 @onready var properties: AcceptDialog = Global.control.find_child("LayerProperties")
 @onready var main_button := %LayerMainButton as Button
 @onready var expand_button := %ExpandButton as BaseButton
