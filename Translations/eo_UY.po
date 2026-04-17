@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-04-17 08:09\n"
+"PO-Revision-Date: 2026-04-17 23:34\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -864,7 +864,7 @@ msgid "General"
 msgstr "Ĝeneralaj"
 
 msgid "Startup"
-msgstr ""
+msgstr "Ekfunkciigo"
 
 msgid "Language"
 msgstr "Lingvo"
@@ -923,7 +923,7 @@ msgstr "Senskua skalado"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Smooth Zoom".
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Aldoni pli glatan transiron dum zomado"
 
 #. Found in the preferences, under Canvas.
 msgid "Integer Zoom"
@@ -934,13 +934,13 @@ msgid "Restricts the value to be an integer multiple of 100%"
 msgstr "Devigas, ke zoma valoro estas entjera oblo de 100%"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Sentemo de tabula premforto:"
 
 msgid "None"
 msgstr "Neniu"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Efiki sur alfa-kanalo de peniko"
 
 msgid "Color:"
 msgstr "Koloro:"
@@ -979,19 +979,19 @@ msgstr "Uzi operciumajn dosierajn dialogojn"
 
 #. Found in the preferences, tooltip of the "Use native file dialogs" option.
 msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
-msgstr ""
+msgstr "Se ĉi tiu agordo estas ŝaltita, operaciumaj dialogoj por elekto de dosiero estas uzataj anstataŭ tiuj de Pixelorama."
 
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
-msgstr ""
+msgstr "Reĝimo de unuopa ilo"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
 msgid "Collapse main menu"
-msgstr ""
+msgstr "Kunfandi ĉefmenuon"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
-msgstr ""
+msgstr "Se ĉi tiu agordo estas ŝaltita, la subfenestroj de Pixelorama estos enkorpigita ene de la ĉeffenestro, anstataŭe ĉiu dialogo estos sia propra fenestro."
 
 msgid "Dark"
 msgstr "Malhela"
@@ -1042,16 +1042,17 @@ msgstr "Reĝimo de unuopa ilo"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
 msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
-msgstr ""
+msgstr "Se ĉi tui agordo estas ŝaltita, la maldekstra kaj dekstra musbutono ambaŭ aktivigos la saman ilon."
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between left and right tools"
-msgstr ""
+msgstr "Kundividi agordojn inter maldekstra kaj dekstra iloj"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
 "For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
-msgstr ""
+msgstr "Se ĉi tio estas ŝaltita, la agordoj estos samigitaj inter la maldekstra kaj dekstra iloj.\n"
+"Ekzemple, ambaŭ iloj kunhavos la saman penikograndecon, kaj ties ŝanĝado por unu de iloj tuje ŝanĝas la agordon de alia."
 
 msgid "Left tool color:"
 msgstr "Koloro de la maldekstra ilo:"
@@ -1061,7 +1062,7 @@ msgstr "Koloro de la dekstra ilo:"
 
 #. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
 msgid "Make global palettes read-only"
-msgstr ""
+msgstr "Malŝanĝebligi mallokajn paletrojn"
 
 msgid "Small"
 msgstr "Malgranda"
@@ -1073,10 +1074,10 @@ msgid "Only affect selection"
 msgstr "Nur post elektado"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Elektitaj animacieroj"
 
 msgid "Current cel"
-msgstr ""
+msgstr "Aktuala animaciero"
 
 msgid "Current frame"
 msgstr "Aktuala filmero"
@@ -1085,26 +1086,26 @@ msgid "All frames"
 msgstr "Ĉiuj filmeroj"
 
 msgid "All projects"
-msgstr ""
+msgstr "Ĉiuj projektoj"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Inversigi kolorojn"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "Modifi ruĝan kanalon"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "Modifi verdan kanalon"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "Modifi bluan kanalon"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "Modifi alfa-kanalon"
 
 #. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
-msgstr ""
+msgstr "Deintensigo de koloro"
 
 #. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Outline"
@@ -1115,10 +1116,10 @@ msgid "Drop Shadow"
 msgstr "Ĵeti ombron"
 
 msgid "Offset X:"
-msgstr ""
+msgstr "X-deŝovo:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "Y-deŝovo:"
 
 msgid "Shadow color:"
 msgstr "Koloro de la ombro:"
