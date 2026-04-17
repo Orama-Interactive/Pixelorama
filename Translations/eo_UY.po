@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-04-14 22:19\n"
+"PO-Revision-Date: 2026-04-17 06:10\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -224,16 +224,16 @@ msgid "Rotate Image"
 msgstr "Turni bildon"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "X de pivoto:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "Y de pivoto:"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Agordoj de ŝmirado:"
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Toleremo:"
 
 msgid "Initial angle:"
 msgstr "Komenca angulo:"
@@ -310,7 +310,7 @@ msgstr "Proceduraj"
 
 #. Refers to effects that blur the image.
 msgid "Blur"
-msgstr ""
+msgstr "Malklarigi"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loaded"
@@ -328,35 +328,35 @@ msgstr "Deŝovoj de kaheleca reĝimo"
 
 #. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
 msgid "X-basis:"
-msgstr ""
+msgstr "X-bazo:"
 
 #. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
 msgid "Y-basis:"
-msgstr ""
+msgstr "Y-bazo:"
 
 #. Found under "Tile Mode Offsets". It's a button that when pressed, enables masking for tile mode. Masking essentially limits drawing to the visible pixels of the image, thus preventing from drawing on transparent pixels.
 msgid "Masking:"
-msgstr ""
+msgstr "Maskado:"
 
 #. Verb, resets something.
 msgid "Reset"
-msgstr ""
+msgstr "Restarigi"
 
 #. Verb, resets something.
 msgid "Reset %s"
-msgstr ""
+msgstr "Restarigi je %s"
 
 msgid "Use Current Frame"
 msgstr "Uzu aktualan filmeron"
 
 msgid "Reset Mask"
-msgstr ""
+msgstr "Restarigi maskon"
 
 msgid "Window Opacity"
-msgstr ""
+msgstr "Opakeco de fenestro"
 
 msgid "Window opacity does not work on fullscreen mode."
-msgstr ""
+msgstr "Opakeco de fenestro ne funkcias en plenekrana reĝimo."
 
 msgid "Panel Layout"
 msgstr "Poziciaro de paneloj"
@@ -372,14 +372,14 @@ msgstr "Moveblaj paneloj"
 
 #. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
 msgid "Make Floating"
-msgstr ""
+msgstr "Glitigi"
 
 msgid "Manage Layouts"
 msgstr "Administri poziciarojn"
 
 #. Noun, a preview of something
 msgid "Preview"
-msgstr ""
+msgstr "Antaŭvido"
 
 msgid "Add"
 msgstr "Aldoni"
@@ -389,20 +389,20 @@ msgstr "Aldoni poziciaron"
 
 #. Verb, deletes something.
 msgid "Delete %s"
-msgstr ""
+msgstr "Forigi \"%s\""
 
 msgid "Copy from"
-msgstr ""
+msgstr "Kopii el"
 
 msgid "Rename"
-msgstr ""
+msgstr "Alinomi"
 
 msgid "Rename Layout"
-msgstr ""
+msgstr "Alinomi poziciaron"
 
 #. Refers to the current layout of the user interface.
 msgid "Current layout"
-msgstr ""
+msgstr "Nuna poziciaro"
 
 msgid "Are you sure you want to delete this layout?"
 msgstr "Ĉu vi vere volas forigi tiun ĉi poziciaron?"
@@ -414,13 +414,13 @@ msgid "Tallscreen"
 msgstr "Altekrana"
 
 msgid "Mirror View"
-msgstr ""
+msgstr "Spegulita vido"
 
 msgid "Show Grid"
 msgstr "Montri kradreton"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Montri bilderan kradon"
 
 msgid "Show Rulers"
 msgstr "Montri liniilojn"
@@ -430,31 +430,31 @@ msgstr "Montri direktliniojn"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
-msgstr ""
+msgstr "Montri musgvidilojn"
 
 #. Found under the View menu.
 msgid "Show Reference Images"
-msgstr ""
+msgstr "Montri referencajn bildojn"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
-msgstr ""
+msgstr "Montri tavolajn efikojn"
 
 #. Found under the View menu.
 msgid "Snap To"
-msgstr ""
+msgstr "Kapti per"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Boundary"
-msgstr ""
+msgstr "Randoj de rektangula krado"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Center"
-msgstr ""
+msgstr "Centroj de rektangula krado"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
-msgstr ""
+msgstr "Gvidlinoj"
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
