@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-04-17 06:10\n"
+"PO-Revision-Date: 2026-04-17 08:09\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -458,7 +458,7 @@ msgstr "Gvidlinoj"
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
-msgstr ""
+msgstr "Perspektivaj gvidlinioj"
 
 msgid "Show Animation Timeline"
 msgstr "Montri animacian kronologion"
@@ -467,7 +467,7 @@ msgid "Zen Mode"
 msgstr "Zena reĝimo"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Plenekrana reĝimo"
 
 msgid "Fill with color:"
 msgstr "Plenigi per koloro:"
@@ -479,35 +479,35 @@ msgid "Open File(s)"
 msgstr "Malfermi dosiero(j)n"
 
 msgid "Import Options"
-msgstr ""
+msgstr "Agordoj de enportado"
 
 msgid "Import as:"
-msgstr ""
+msgstr "Enporti kiel:"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Apply to all"
-msgstr ""
+msgstr "Apliki al ĉiuj"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Lastatempaj projektoj"
 
 msgid "New project"
-msgstr ""
+msgstr "Nova projekto"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "Bildaro (nova projekto)"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Bildaro (nova tavolo)"
 
 msgid "New frame"
 msgstr "Nova filmero"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Replace cel"
-msgstr ""
+msgstr "Anstataŭigi animacieron"
 
 msgid "New layer"
 msgstr "Nova tavolo"
@@ -596,13 +596,13 @@ msgstr "La sekvaj dosieroj jam ekzistas. Ĉu vi certas, ke vi volas superskribi 
 "%s"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Dosieruja adreso estas malvalida!"
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Nomo de dosiero estas malvalida!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Adreso de dosierujo kaj nomo de dosiero estas malvalidaj!"
 
 msgid "Exporting in progress..."
 msgstr "Esportado estas faradata..."
@@ -630,7 +630,7 @@ msgid "All Frames"
 msgstr "Ĉiuj kadroj"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Bildaro"
 
 msgid "Animation"
 msgstr "Animacio"
@@ -652,16 +652,16 @@ msgstr "Reskali:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Kvalito:"
 
 msgid "Cancel Export"
 msgstr "Nuligi eksporton"
 
 msgid "Alert!"
-msgstr ""
+msgstr "Averto!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Elekti aktualan dosierujon"
 
 msgid "Open a Directory"
 msgstr "Malfermi dosierujon"
@@ -706,7 +706,7 @@ msgid "Backwards"
 msgstr "Malantaŭen"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Tien kaj reen"
 
 msgid "Columns"
 msgstr "Kolumnoj"
@@ -722,15 +722,15 @@ msgstr "Vicoj:"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new column.
 msgid "Tags by column"
-msgstr ""
+msgstr "Etikedoj per kolumnoj"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new row.
 msgid "Tags by row"
-msgstr ""
+msgstr "Etikedoj per vicoj"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "Dimensioj de elportaĵo:"
 
 msgid "Save a File"
 msgstr "Konservi dosieron"
@@ -1264,15 +1264,15 @@ msgstr "Bluvaloro:"
 
 #. Refers to a color that tints an image.
 msgid "Tint color:"
-msgstr ""
+msgstr "Koloro de kolorado:"
 
 #. Refers to the factor (how much) a color tints an image.
 msgid "Tint effect factor:"
-msgstr ""
+msgstr "Forto de kolorado:"
 
 #. An image effect that adjusts the colors of the image by using curves.
 msgid "Color Curves"
-msgstr ""
+msgstr "Koloraj kurboj"
 
 #. Refers to a color channel, such as the red, green, blue or alpha channels.
 msgid "Channel:"
@@ -1311,60 +1311,60 @@ msgstr ""
 
 #. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Palettize"
-msgstr ""
+msgstr "Paletrigi"
 
 #. An image effect. It makes the input image pixelated. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Pixelize"
-msgstr ""
+msgstr "Blokigi"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
-msgstr ""
+msgstr "Afiŝigi kolorojn"
 
 #. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize levels:"
-msgstr ""
+msgstr "Kolor-niveloj:"
 
 #. An option for the posterize image effect.
 msgid "Dither intensity:"
-msgstr ""
+msgstr "Intenseco de difuzado:"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Vidi komencan ekranon"
 
 msgid "Online Docs"
 msgstr "Enreta dokumentaro"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Problem-spurilo"
 
 #. Found under the Help menu. When selected, it opens a window with a list of backups of projects opened in previous sessions.
 msgid "Restore Backup"
-msgstr ""
+msgstr "Restaŭri savkopion"
 
 #. Found in the Restore Backup dialog.
 msgid "Past sessions"
-msgstr ""
+msgstr "Pasintaj seancoj"
 
 #. Found in the Restore Backup dialog.
 msgid "Double click to load an entire session, or a specific project."
-msgstr ""
+msgstr "Duoble alklaku por ŝarĝi la tutan seancon, aŭ specifan projekton."
 
 #. Found in the Restore Backup dialog.
 msgid "Sessions"
-msgstr ""
+msgstr "Seancoj"
 
 #. Found in the Restore Backup dialog.
 msgid "Projects"
-msgstr ""
+msgstr "Projektoj"
 
 #. Found in the Restore Backup dialog.
 msgid "(Current Session)"
-msgstr ""
+msgstr "(Nuna seanco)"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
-msgstr ""
+msgstr "Malfermi datumajn dosierojn de programo"
 
 msgid "Changelog"
 msgstr "Ŝanĝprotokolo"
@@ -1374,23 +1374,23 @@ msgstr "Pri Pixelorama"
 
 #. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
 msgid "Support Pixelorama's Development"
-msgstr ""
+msgstr "Subteni disvolvadon de Pixelorama"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Pixelorama - bilderigu viajn revojn!"
 
 msgid "Developed by Orama Interactive"
 msgstr "Ellaborita de Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019-estanteco, Orama Interactive kaj kontribuantoj"
 
 msgid "Website"
 msgstr "Retejo"
 
 #. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
 msgid "Source Code"
-msgstr ""
+msgstr "Fontkodo"
 
 msgid "Donate"
 msgstr "Donaci"
@@ -1409,19 +1409,19 @@ msgstr "Tradukistoj"
 
 #. Refers to software licenses. https://en.wikipedia.org/wiki/Software_license
 msgid "Licenses"
-msgstr ""
+msgstr "Permesiloj"
 
 #. Refers to a software license. https://en.wikipedia.org/wiki/Software_license
 msgid "License"
-msgstr ""
+msgstr "Permesilo"
 
 #. Refers to the licenses of the software that are used by the Godot Engine. https://en.wikipedia.org/wiki/Software_license
 msgid "Godot Licenses"
-msgstr ""
+msgstr "Permesiloj de Godot"
 
 #. Refers to software licenses that are not a part of Pixelorama or Godot. https://en.wikipedia.org/wiki/Software_license
 msgid "Third-party Licenses"
-msgstr ""
+msgstr "Tria-partaj permesiloj"
 
 msgid "English"
 msgstr "Angla"
@@ -1571,7 +1571,9 @@ msgstr "Rektangula elekto\n\n"
 msgid "Elliptical Selection\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Elipsa elekto\n\n"
+"%s por maldekstra musbutono\n"
+"%s por dekstra musbutono"
 
 msgid "Polygonal Selection\n\n"
 "%s for left mouse button\n"
