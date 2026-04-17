@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2026-04-01 00:47\n"
+"PO-Revision-Date: 2026-04-17 16:42\n"
 
 msgid "OK"
 msgstr "OK"
@@ -988,7 +988,7 @@ msgstr "Tryb pojedynczego okna"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
 msgid "Collapse main menu"
-msgstr ""
+msgstr "Zwiń menu główne"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
@@ -1047,7 +1047,7 @@ msgstr "Jeśli ta opcja jest włączona, prawy przycisk myszy będzie zawsze akt
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between left and right tools"
-msgstr ""
+msgstr "Udostępniaj opcje między narzędziami lewymi i prawymi"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
@@ -1062,7 +1062,7 @@ msgstr "Kolor prawego narzędzia:"
 
 #. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
 msgid "Make global palettes read-only"
-msgstr ""
+msgstr "Ustaw palety globalne jako tylko do odczytu"
 
 msgid "Small"
 msgstr "Mały"
