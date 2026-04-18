@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-04-17 23:34\n"
+"PO-Revision-Date: 2026-04-18 00:31\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -1126,61 +1126,62 @@ msgstr "Koloro de la ombro:"
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "Gaŭsa malklarigo"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
-msgstr ""
+msgstr "Tipo de malklarigo:"
 
 #. The applied amount of Gaussian blur, an image effect.
 msgid "Blur amount:"
-msgstr ""
+msgstr "Forto de malklarigo:"
 
 #. The applied radius of Gaussian blur, an image effect.
 msgid "Blur radius:"
-msgstr ""
+msgstr "Radiuso de malklarigo:"
 
 #. The applied direction of Gaussian blur, an image effect.
 msgid "Blur direction:"
-msgstr ""
+msgstr "Direkto de malklarigo:"
 
 msgid "Gradient"
 msgstr "Gradiento"
 
 msgid "Gradient Map"
-msgstr ""
+msgstr "Gradienta mapo"
 
 msgid "Interpolation"
-msgstr ""
+msgstr "Interpolado"
 
 #. Verb, refers to the action of reversing something.
 msgid "Reverse"
-msgstr ""
+msgstr "Inversigi"
 
 #. An option found in gradient edit widgets. When selected, all points of a gradient are being evenly distributed across the gradient.
 msgid "Evenly distribute points"
-msgstr ""
+msgstr "Distribui punktojn ebene"
 
 #. An option found in gradient edit widgets. When selected, the gradient is being split into equal parts.
 msgid "Divide into equal parts"
-msgstr ""
+msgstr "Dividi en egalajn partojn"
 
 msgid "Parts:"
-msgstr ""
+msgstr "Partoj:"
 
 msgid "Add point at the end"
-msgstr ""
+msgstr "Aldoni punkton ĉe fino"
 
 msgid "If this is enabled, the last point gets added at the end of the gradient.\n"
 "Disable this if you wish to convert the gradient to have constant interpolation, so that the last color will be taken into account."
-msgstr ""
+msgstr "Se ĉi tio estas ŝaltita, la lasta punkto estos aldonita ĉe la fino de gradiento.\n"
+"Malŝaltu ĉi tion, se vi volas konverti la gradienton por havi konstantan interpoladon, por ke la lasta koloro estos konsiderata."
 
 #. A tooltip of a button found in gradient edit widgets. When the button is pressed, the gradient is saved to presets.
 msgid "Save to presets"
-msgstr ""
+msgstr "Konservi kiel antaŭagordo"
 
 msgid "Shape:"
-msgstr ""
+msgstr "Formo:"
 
 msgid "Linear"
 msgstr "Lineara"
@@ -1190,22 +1191,22 @@ msgstr "Radiusa"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat:"
-msgstr ""
+msgstr "Ripeto:"
 
 #. Found in the Gradient dialog, under the image menu. Specifies if the gradient will repeat or not.
 msgid "Repeat"
-msgstr ""
+msgstr "Ripeto"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options.
 msgid "Mirror"
-msgstr ""
+msgstr "Spegulado"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
-msgstr ""
+msgstr "Tranĉi"
 
 msgid "Transition size:"
-msgstr ""
+msgstr "Grandeco de transiro:"
 
 msgid "Center:"
 msgstr "Centro:"
@@ -1221,31 +1222,31 @@ msgstr "Angulo:"
 
 #. An image effect. Adjusts the hue, saturation and value of the colors of an image. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Adjust Hue/Saturation/Value"
-msgstr ""
+msgstr "Alĝustigi HSV-valorojn"
 
 #. HSV stands for Hue, Saturation & Value.
 msgid "Adjust HSV"
-msgstr ""
+msgstr "Alĝustigi HSVon"
 
 #. Refers to the hue of the colors of an image.
 msgid "Hue:"
-msgstr ""
+msgstr "Nuanco:"
 
 #. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
-msgstr ""
+msgstr "Intenseco:"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
-msgstr ""
+msgstr "Valoro:"
 
 #. An image effect. Adjusts the brightness and contrast of the colors of an image.
 msgid "Adjust Brightness/Contrast"
-msgstr ""
+msgstr "Alĝustigi lumecon/kontraston"
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
-msgstr ""
+msgstr "Lumeco:"
 
 #. Refers to the contrast of the colors of an image.
 msgid "Contrast:"
@@ -1872,7 +1873,7 @@ msgid "Grid color:"
 msgstr "Koloro de krado:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "Koloro de la krado"
 
 msgid "Pixel Grid"
 msgstr "Bildera krado"
@@ -1881,141 +1882,141 @@ msgid "Show at zoom:"
 msgstr "Montri dum zomo:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "La minimuma zomo, en kiu la bilderkrado montriĝos"
 
 msgid "Pixel grid color:"
 msgstr "Koloro de bildera krado:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "Koloro de la bilderkrado"
 
 msgid "Transparency"
 msgstr "Travidebleco"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "Grandeco de ŝaktabulkvadratoj:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Grandeco de kvadratoj de ŝaktabuleca fono"
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "Ŝaktabula koloro 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Unua koloro de kvadratoj de ŝaktabuleca fono"
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "Ŝaktabula koloro 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "Dua koloro de kvadratoj de ŝaktabuleca fono"
 
 msgid "Follow Canvas Movement"
-msgstr ""
+msgstr "Sekvi movadon de kanvaso"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr ""
+msgstr "La ŝaktabuleca fono sekvos la movadon de kanvaso"
 
 msgid "Follow Canvas Zoom Level"
-msgstr ""
+msgstr "Sekvi zomnivelon de kanvaso"
 
 msgid "The transparent checker follow the zoom level of canvas"
-msgstr ""
+msgstr "La ŝaktabuleca fono sekvos la zomnivelon de kanvaso"
 
 #. Found in the Preferences, under Timeline. If this is enabled, clicking on the layer buttons (such as lock, invisible etc) will automatically select that layer.
 msgid "Select layer when clicking on one of its buttons:"
-msgstr ""
+msgstr "Elekti tavolon per alklikado de ties butono:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning past color:"
-msgstr ""
+msgstr "Koloro de pasintaj animacieroj en travidebla reĝimo:"
 
 #. Found in the Preferences, under Timeline. Changes the color of the past (previous) frames in onion skinning, if color mode is enabled.
 msgid "Onion skinning future color:"
-msgstr ""
+msgstr "Koloro de estontaj animacieroj en travidebla reĝimo:"
 
 msgid "Animated selection borders"
-msgstr ""
+msgstr "Animacii randojn de elekto"
 
 msgid "Border color 1:"
-msgstr ""
+msgstr "Randokoloro 1:"
 
 msgid "Border color 2:"
-msgstr ""
+msgstr "Randokoloro 2:"
 
 #. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
 msgid "Transformation preview alpha:"
-msgstr ""
+msgstr "Travidebleco de transforma antaŭvido:"
 
 msgid "Only custom preset can be modified"
-msgstr ""
+msgstr "Nur la uzanti-agordata antaŭagordo povas esti modifita"
 
 msgid "Set application FPS limit:"
-msgstr ""
+msgstr "Limigi kadrooftecon de programo:"
 
 msgid "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
-msgstr "Agordas la kvoto de renoviĝoj de bildo po sekundo. Ju malpli estas la numero, des malpli multe da procesora tempo estas uzata, sed la programo iĝas malpli rapida kaj reagema. 0 signifas, ke ne ekzistas limo."
+msgstr "Agordas la kvoton de renoviĝoj de bildo po sekundo. Ju malpli estas la numero, des malpli multe da procesora tempo estas uzata, sed la programo iĝas malpli rapida kaj reagema. 0 signifas, ke ne ekzistas limo."
 
 #. Found in the Preferences, under the Performance section. Changes the value of the maximum undo steps projects can use.
 msgid "Max undo steps:"
-msgstr ""
+msgstr "Maks. paŝoj de malfaro:"
 
 #. An option found in the preferences, under the Performance section.
 msgid "Pause application when it loses focus"
-msgstr ""
+msgstr "Paŭzigi programon dum malfokusado"
 
 #. Found in the preferences, hint of the "Pause application when it loses focus" option.
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
-msgstr ""
+msgstr "Se ĉi tio estas ŝaltita, kiam la programa fenestro perdas fokuson, ĝi estas paŭzita. Ĉi tio helpas malpliigi uzadon de procesoro dum malaktiva. La programo estos malpaŭzita, kiam la muskursoro eniras la programan fenestron."
 
 #. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
 msgid "Update continuously"
-msgstr ""
+msgstr "Daŭre aktualigi ekranon"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
-msgstr ""
+msgstr "Se ĉi tio estas ŝaltita, la programo daŭre rebildigos la ekranon, eĉ se ne uzata. Malŝaltigo helpos malpliigi uzadon de ĉefa kaj grafika procesoro dum malaktiva."
 
 #. An option found in the preferences, under the Performance section.
 msgid "Enable window transparency"
-msgstr ""
+msgstr "Ŝalti travideblecon de fenestro"
 
 #. Found in the preferences, hint of the "Enable window transparency" option.
 msgid "If enabled, the application window can become transparent. This affects performance, so keep it off if you don't need it."
-msgstr ""
+msgstr "Se ŝaltita, la programa fenestro povas iĝi travidebla. Ĉi tio influas rendimenton, do malŝaltu ĉi tiun agordon, se vi ne bezonas ĝin."
 
 #. An option found in the preferences, under the Performance section. A dummy driver is basically a driver that doesn't do anything. When this option is enabled, audio does not play, but it can help save some performance.
 msgid "Use dummy audio driver"
-msgstr ""
+msgstr "Uzi senefikan aŭdiopelilon"
 
 #. Found in the Preferences, under Drivers. Specifies the renderer/video driver being used.
 msgid "Renderer:"
-msgstr ""
+msgstr "Bildigilo:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the renderer option.
 msgid "Specifies the renderer/video driver being used. GLES2 is better for older and low-end devices, but GLES3 may offer more features."
-msgstr ""
+msgstr "Specifas la uzatan bildigilon/videopelilon. GLES2 estas pli bona por pli malnovaj kaj malfortaj aparatoj, sed GLES3 povas havi pli da funkcioj."
 
 #. Found in the Preferences, under Drivers. Specifies the tablet driver being used on Windows.
 msgid "Tablet driver:"
-msgstr ""
+msgstr "Pelilo de grafiktabulo:"
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
-msgstr ""
+msgstr "Specifas la pelilon, uzatan por subteni grafiktabulon en Windows. Se Windows Ink estas ŝaltita, elektu \"winink\"."
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
-msgstr ""
+msgstr "Aldoni aldonaĵon"
 
 msgid "Enable"
-msgstr ""
+msgstr "Ŝalti"
 
 msgid "Disable"
-msgstr ""
+msgstr "Malŝalti"
 
 msgid "Uninstall"
-msgstr ""
+msgstr "Malinstali"
 
 msgid "Open Folder"
 msgstr "Malfermi dosierujon"
@@ -2024,60 +2025,63 @@ msgstr "Malfermi dosierujon"
 #: src/Preferences/PreferencesDialog.tscn
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Explore Online"
-msgstr ""
+msgstr "Esplori enrete"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Title of the tab that shows the extension explorer, where you can download extensions.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Extension Explorer"
-msgstr ""
+msgstr "Esplorilo de etendaĵoj"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Text field to search for extensions.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Search..."
-msgstr ""
+msgstr "Serĉi..."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Refers to the tags used to filter extensions in the explorer.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Tags:"
-msgstr ""
+msgstr "Etikedoj:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Report issue with an extension"
-msgstr ""
+msgstr "Raporti problemon pri etendaĵo"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Download"
-msgstr ""
+msgstr "Elŝuti"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension repositories.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Repository links:"
-msgstr ""
+msgstr "Ligiloj de deponejoj:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Fetching data from remote repository.\n"
 "Please wait."
-msgstr ""
+msgstr "Elŝutado de datumoj el fora deponejo.\n"
+"Bonvolu atendu."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Flatpak is a utility for software deployment and package management for Linux, so this word should not be translated.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Unable to get info from remote repository.\n\n"
 "- Make sure you are connected to the internet.\n"
 "- If you are using the Flatpak version of Pixelorama, you need to grant it permission to connect to the internet. To do that, you can run the following command on your terminal:"
-msgstr ""
+msgstr "Eraro dum elŝutado de informo el fora deponejo.\n\n"
+"- Certiĝu, ke vi estas konektita al la interreto.\n"
+"- Se vi uzas version de Pixelorama de Flatpak, vi devas permesi al ĝi atingi la interreton. Por fari tion, vi povas ruli la sekvan komandon en via konsolo:"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Flatpak is a utility for software deployment and package management for Linux and Flatseal is an application that manages permissions for Flatpak apps, so these words should not be translated.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Alternatively, you can download Flatseal and set permissions for Flatpak apps there."
-msgstr ""
+msgstr "Alternative, vi povas elŝuti la programon \"Flatseal\" kaj agordi permesojn de Flatpak-apoj per ĝi."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Unable to get info from remote repository."
-msgstr ""
+msgstr "Eraro dum elŝutado de informo el fora deponejo."
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions repository. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste repository link, given by the repository owner. If left empty, it will automatically be removed."
