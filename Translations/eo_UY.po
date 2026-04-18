@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-04-18 16:12\n"
+"PO-Revision-Date: 2026-04-18 17:14\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -1589,7 +1589,7 @@ msgstr "Plurlatera elekto\n\n"
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Elektado per koloro\n\n"
+msgstr "Elekti per koloro\n\n"
 "%s por maldekstra musbutono\n"
 "%s por dekstra musbutono"
 
@@ -1610,56 +1610,78 @@ msgstr "Kaptoŝnuro / libera elekto\n\n"
 msgid "Select by Drawing\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Elekti per desegnado\n\n"
+"%s por maldekstra musbutono\n"
+"%s por dekstra musbutono"
 
 msgid "Move\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Movi\n\n"
+"%s por maldekstra musbutono\n"
+"%s por dekstra musbutono"
 
 msgid "Zoom\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Zomi\n\n"
+"%s por maldekstra musbutono\n"
+"%s por dekstra musbutono"
 
 msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Movi vidon\n\n"
+"%s por maldekstra musbutono\n"
+"%s por dekstra musbutono"
 
 msgid "Color Picker\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Select a color from a pixel of the sprite"
-msgstr ""
+msgstr "Elekti koloron\n\n"
+"%s por maldekstra musbutono\n"
+"%s por dekstra musbutono"
 
 msgid "Crop\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Resize the canvas"
-msgstr ""
+msgstr "Stuci\n\n"
+"%s por maldekstra musbutono\n"
+"%s por dekstra musbutono"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "Krajono\n\n"
+"%s por maldekstra musbutono\n"
+"%s por dekstra musbutono\n\n"
+"Premu la butonon %s por desegni linion"
 
 msgid "Eraser\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button\n\n"
 "Hold %s to make a line"
-msgstr ""
+msgstr "Skrapileto\n\n"
+"%s por maldekstra musbutono\n"
+"%s por dekstra musbutono\n\n"
+"Premu la butonon %s por skrapi linion"
 
 msgid "Bucket\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Plenigo\n\n"
+"%s por maldekstra musbutono\n"
+"%s por dekstra musbutono"
 
 msgid "Shading Tool\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Ombrilo\n\n"
+"%s por maldekstra musbutono\n"
+"%s por dekstra musbutono"
 
 msgid "Line Tool\n\n"
 "%s for left mouse button\n"
@@ -1667,7 +1689,12 @@ msgid "Line Tool\n\n"
 "Hold %s to snap the angle of the line\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Linio\n\n"
+"%s por maldekstra musbutono\n"
+"%s por dekstra musbutono\n\n"
+"Premu je %s por fiksi angulon de la linio\n"
+"Premu je %s por centri la figuron ĉe ekpunkto\n"
+"Premu je %s por deŝovi la figuron"
 
 msgid "Curve Tool\n\n"
 "%s for left mouse button\n"
@@ -1677,7 +1704,14 @@ msgid "Curve Tool\n\n"
 "Double-click to finish drawing the curve\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
-msgstr ""
+msgstr "Kurbo\n\n"
+"%s por maldekstra musbutono\n"
+"%s por dekstra musbutono\n\n"
+"Desegnas kurboj de Bézier\n"
+"Premu je %s/%s por aldoni povajn punktojn\n"
+"Duoble alklaku por fini la desegnadon de kurbo\n"
+"Premu kaj trenu por kontroli la kurbadon\n"
+"Premu je %s por forigi la lastan aldonitan punkton"
 
 msgid "Rectangle Tool\n\n"
 "%s for left mouse button\n"
@@ -1685,7 +1719,12 @@ msgid "Rectangle Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Rektangulo\n\n"
+"%s por maldekstra musbutono\n"
+"%s por dekstra musbutono\n\n"
+"Premu je %s por krei kvadraton\n"
+"Premu je %s por centrigi la figuron ĉe ekpunkto\n"
+"Premu je %s por deŝovi la figuron"
 
 msgid "Ellipse Tool\n\n"
 "%s for left mouse button\n"
@@ -1693,7 +1732,12 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr ""
+msgstr "Elipso\n\n"
+"%s por maldekstra musbutono\n"
+"%s por dekstra musbutono\n\n"
+"Premu je %s por krei cirklon\n"
+"Premu je %s por centrigi la figuron ĉe ekpunkto\n"
+"Premu je %s por deŝovi la figuron"
 
 msgid "Isometric Box Tool\n\n"
 "%s for left mouse button\n"
@@ -1703,67 +1747,76 @@ msgid "Isometric Box Tool\n\n"
 "Hold %s to snap the angle of the basis point\n"
 "Hold %s to displace the shape's origin\n"
 "Press %s to edit the last added basis"
-msgstr ""
+msgstr "Izometria briko\n\n"
+"%s por maldekstra musbutono\n"
+"%s por dekstra musbutono\n\n"
+"Desegnas izometriajn brikojn\n"
+"Premu je %s/%s por aldoni bazan punkton\n"
+"Premu je %s por fiksi la angulon de la baza punkto\n"
+"Premu je %s por deŝovi la figuron\n"
+"Premu je %s por redakti la lastan aldonitan bazon"
 
 msgid "Text\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr ""
+msgstr "Teksto\n\n"
+"%s por maldekstra musbutono\n"
+"%s por dekstra musbutono"
 
 msgid "Rectangle"
-msgstr ""
+msgstr "Rektangulo"
 
 msgid "Ellipse"
-msgstr ""
+msgstr "Elipso"
 
 msgid "Choose a color for the left tool"
-msgstr ""
+msgstr "Elekti koloron por la maldekstra ilo"
 
 msgid "Choose a color for the right tool"
-msgstr ""
+msgstr "Elekti koloron por la dekstra ilo"
 
 #. Tooltip of the switch colors button found in the color picker panel.
 msgid "Switch left and right colors."
-msgstr ""
+msgstr "Interŝanĝi la maldekstra kaj dekstra koloroj."
 
 #. Tooltip of the average color button, found in the color picker panel. Shows the average color between the two selected.
 msgid "Average Color:"
 msgstr "Meznombra koloro:"
 
 msgid "Reset the colors to their default state (black for left, white for right)"
-msgstr ""
+msgstr "Reagordi la kolorojn per defaŭltoj (nigro maldekstre, blanko dekstre)"
 
 #. Tooltip of the screen color picker button found in the color picker panel.
 msgid "Pick a color from the application window."
-msgstr ""
+msgstr "Elekti koloron el la fenestro de programo."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
-msgstr ""
+msgstr "Entajpu la koloron per 16-uma kodo (\"#ff0000\") aŭ angla nomo (\"red\")."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
-msgstr ""
+msgstr "Elekti la formon de kolorelektilo."
 
 #. Refers to color-related options such as sliders that set color channel values like R, G, B and A.
 msgid "Color options"
-msgstr ""
+msgstr "Agordoj de koloro"
 
 #. Tooltip of the button with three dots found under color options in the color picker panel that lets users change the mode of the color picker/sliders.
 msgid "Select a picker mode."
-msgstr ""
+msgstr "Elekti reĝimon de kolorelektilo."
 
 #. Checkbox found in the menu of the button with three dots found under color options in the color picker panel.
 msgid "Colorized Sliders"
-msgstr ""
+msgstr "Kolorigi ŝovilojn"
 
 #. Shows saved colors in certain color picker menus.
 msgid "Swatches"
-msgstr ""
+msgstr "Kolorbutonoj"
 
 #. Found under color options in the color picker panel.
 msgid "Recent Colors"
-msgstr ""
+msgstr "Lastatempaj koloroj"
 
 msgid "Left tool"
 msgstr "Maldekstra ilo"
@@ -1775,31 +1828,31 @@ msgid "Left pixel indicator"
 msgstr "Indikatoro de maldekstra rastrumero"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Montri la indikilon de la maldekstra musbutono sur kanvaso dum desegnado"
 
 msgid "Right pixel indicator"
 msgstr "Indikatoro de dekstra rastrumero"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Montri la indikilon de la dekstra musbutono sur kanvaso dum desegnado"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "Montri bildsimbolon de maldekstra ilo"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Montras bildsimbolon de la elektita maldekstra ilo apud la kursoro sur kanvaso"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "Montri bildsimbolon de dekstra ilo"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
-msgstr ""
+msgstr "Montras bildsimbolon de la elektita dekstra ilo apud la kursoro sur kanvaso"
 
 msgid "Use native mouse cursors"
-msgstr ""
+msgstr "Uzi operaciumajn muskursorojn"
 
 msgid "Use cross cursor for the canvas"
-msgstr ""
+msgstr "Uzi krucoforman kursoron por la kanvaso"
 
 msgid "Guides"
 msgstr "Direktlinioj"
@@ -1808,7 +1861,7 @@ msgid "Guides color:"
 msgstr "Koloro de direktlinioj:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "Koloro de rektilaj gvidlinioj, montritaj sur la kanvaso"
 
 #. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping"
@@ -1816,11 +1869,11 @@ msgstr "Alkradigo"
 
 #. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr ""
+msgstr "Kaptodistanco:"
 
 #. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
-msgstr ""
+msgstr "Ĉi tiu estas distanco, en bilderoj, ene de kiu muskaptado per gvidlinioj kaj kradlinioj estas ŝaltita."
 
 msgid "Grid"
 msgstr "Krado"
@@ -1829,7 +1882,7 @@ msgid "Grid type:"
 msgstr "Tipo de krado:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr ""
+msgstr "Agordas la tipon de krado inter rektangula, izometria aŭ ambaŭ"
 
 msgid "Rectangular"
 msgstr "Rektangula"
@@ -1870,13 +1923,13 @@ msgstr "Deŝovo de krado:"
 
 #. Found in the Preferences, in the Canvas category. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Agordas la deŝovon de krado relative de ekpunkto de bildo (supra-maldekstra angulo)"
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Montri sur kahelaĵoj:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Se malŝaltita, la grido estos montrita nur sur la originala bildo"
 
 msgid "Grid color:"
 msgstr "Koloro de krado:"
@@ -2314,7 +2367,7 @@ msgid "Color Replace"
 msgstr ""
 
 msgid "Please select a color from the palette."
-msgstr ""
+msgstr "Bonvolu elektu koloron el la paletro."
 
 #. Found in the shading tool options, in "Color Replace" mode. Parameter that specifies how many colors to the right of the selected color in the palette should be included for the shading.
 msgid "Colors right:"
@@ -2331,85 +2384,86 @@ msgstr "Dekstra koloro"
 
 #. Found in the color picker tool options. Specifies what mode should be used for picking a color.
 msgid "Pick mode:"
-msgstr ""
+msgstr "Reĝimo de elektado:"
 
 #. Found in the color picker tool options, as a pick mode. Picks the top color from the canvas in the selected pixel.
 msgid "Top Color"
-msgstr ""
+msgstr "Malsupra koloro"
 
 #. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
 msgid "Current Layer"
-msgstr ""
+msgstr "Aktuala tavolo"
 
 msgid "Mode:"
-msgstr ""
+msgstr "Reĝimo:"
 
 msgid "Zoom in"
-msgstr ""
+msgstr "Enzomi"
 
 msgid "Zoom out"
-msgstr ""
+msgstr "Elzomi"
 
 #. Refers to a mode of the curve tool. Single mode mimics the Aseprite curve tool behavior.
 msgid "Single"
-msgstr ""
+msgstr "Unuopa"
 
 #. Refers to a mode of the curve tool. Chained mode mimics the Krita curve tool behavior.
 msgid "Chained"
-msgstr ""
+msgstr "Konektita"
 
 #. Tooltip of the curve tool's "mode" option button.
 msgid "Chained: Makes a chain of multiple bezier curves, similar to Krita's curve tool.\n"
 "Single: Makes a single bezier curve, similar to Aseprite's curve tool."
-msgstr ""
+msgstr "Konektita: Faras ĉenon de multopaj bezieraj kurboj, simile al kurvo-desegnilo de Krita.\n"
+"Unuopa: Faras unu bezieran kurbon, simile al kurvo-desegnilo de Aseprite."
 
 msgid "Options"
-msgstr ""
+msgstr "Agordoj"
 
 msgid "Options:"
 msgstr "Agordoj:"
 
 msgid "Fit to frame"
-msgstr ""
+msgstr "Adapti al kadro"
 
 msgid "100% Zoom"
-msgstr ""
+msgstr "Zomi je 100%"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Replace selection"
-msgstr ""
+msgstr "Anstataŭigi elekton"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Add to selection"
-msgstr ""
+msgstr "Aldoni al elekto"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Subtract from selection"
-msgstr ""
+msgstr "Subtrahi el elekto"
 
 #. One of the modes of a selection tool. Found in the tool options, when a selection tool is active.
 msgid "Intersection of selections"
-msgstr ""
+msgstr "Intersekco de elektoj"
 
 #. Refers to the style of something, such as the style of a text, meaning whether it's regular, bold, italic, etc.
 msgid "Style:"
-msgstr ""
+msgstr "Stilo:"
 
 #. Refers to the text. Regular means that the text is not bold or italic.
 msgid "Regular"
-msgstr ""
+msgstr "Regula"
 
 #. Refers to text that is bold.
 msgid "Bold"
-msgstr ""
+msgstr "Grasa"
 
 #. Refers to text that is italic.
 msgid "Italic"
-msgstr ""
+msgstr "Kursiva"
 
 #. Refers to text that is bold and italic.
 msgid "Bold Italic"
-msgstr ""
+msgstr "Grasa kursiva"
 
 #. https://en.wikipedia.org/wiki/Anti-aliasing
 msgid "Antialiasing"
