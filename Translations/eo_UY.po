@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-04-18 20:33\n"
+"PO-Revision-Date: 2026-04-19 06:32\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -3433,10 +3433,10 @@ msgstr "Krei novan paletron"
 
 #. Title of a window where the user can create a new project palette. Project palettes are palettes that are stored inside the project files, and are only being used by that project.
 msgid "Create a new project palette"
-msgstr ""
+msgstr "Krei novan projektan paletron"
 
 msgid "Comment:"
-msgstr ""
+msgstr "Komento:"
 
 msgid "Empty"
 msgstr "Malplena"
@@ -3613,11 +3613,11 @@ msgstr "Cilindro"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Prism"
-msgstr ""
+msgstr "Prismo"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Torus"
-msgstr ""
+msgstr "Toro"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
