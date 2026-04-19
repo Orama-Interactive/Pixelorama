@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-04-19 06:32\n"
+"PO-Revision-Date: 2026-04-19 07:52\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -40,7 +40,7 @@ msgid "Canvas Size"
 msgstr "Grando de la tolo"
 
 msgid "Frame Size"
-msgstr "Dimensio de filmero"
+msgstr "Dimensio de kadro"
 
 msgid "Size:"
 msgstr "Grandeco:"
@@ -52,7 +52,7 @@ msgid "Height:"
 msgstr "Alto:"
 
 msgid "Center"
-msgstr "Centro"
+msgstr "Centrigi"
 
 msgid "File"
 msgstr "Dosiero"
@@ -61,10 +61,10 @@ msgid "Edit"
 msgstr "Redakti"
 
 msgid "Select"
-msgstr "Elekti"
+msgstr "Elekto"
 
 msgid "View"
-msgstr "Montri"
+msgstr "Vido"
 
 msgid "Window"
 msgstr "Fenestro"
@@ -347,7 +347,7 @@ msgid "Reset %s"
 msgstr "Restarigi je %s"
 
 msgid "Use Current Frame"
-msgstr "Uzu aktualan filmeron"
+msgstr "Uzi aktualan kadron"
 
 msgid "Reset Mask"
 msgstr "Restarigi maskon"
@@ -417,7 +417,7 @@ msgid "Mirror View"
 msgstr "Spegulita vido"
 
 msgid "Show Grid"
-msgstr "Montri kradreton"
+msgstr "Montri kradon"
 
 msgid "Show Pixel Grid"
 msgstr "Montri bilderan kradon"
@@ -503,7 +503,7 @@ msgid "Spritesheet (new layer)"
 msgstr "Bildaro (nova tavolo)"
 
 msgid "New frame"
-msgstr "Nova filmero"
+msgstr "Nova kadro"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Replace cel"
@@ -525,10 +525,10 @@ msgid "New pattern"
 msgstr "Nova ŝablono"
 
 msgid "Horizontal frames:"
-msgstr "Horizontalaj filmeroj:"
+msgstr "Horizontalaj kadroj:"
 
 msgid "Vertical frames:"
-msgstr "Vertikalaj filmeroj:"
+msgstr "Vertikalaj kadroj:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
@@ -555,13 +555,13 @@ msgid "Refresh"
 msgstr "Aktualigi"
 
 msgid "Start frame:"
-msgstr "Komenca filmero:"
+msgstr "Komenca kadro:"
 
 msgid "End frame:"
 msgstr "Fina kadro:"
 
 msgid "At frame:"
-msgstr "En filmero:"
+msgstr "En kadro:"
 
 msgid "At layer:"
 msgstr "En tavolo:"
@@ -1080,10 +1080,10 @@ msgid "Current cel"
 msgstr "Aktuala animaciero"
 
 msgid "Current frame"
-msgstr "Aktuala filmero"
+msgstr "Aktuala kadro"
 
 msgid "All frames"
-msgstr "Ĉiuj filmeroj"
+msgstr "Ĉiuj kadroj"
 
 msgid "All projects"
 msgstr "Ĉiuj projektoj"
@@ -2529,13 +2529,13 @@ msgid "Move to view center"
 msgstr "Movi al vidocentro"
 
 msgid "Current frame:"
-msgstr "Aktuala filmero:"
+msgstr "Aktuala kadro:"
 
 msgid "Animation mode:"
 msgstr "Reĝimo de animacio:"
 
 msgid "Current frame as spritesheet"
-msgstr ""
+msgstr "Aktuala kadro kiel bildaro"
 
 msgid "Jump to the first frame"
 msgstr "Salti al la unua kadro"
@@ -2579,7 +2579,7 @@ msgid "Onion Skinning:"
 msgstr "Animacia travidebleco:"
 
 msgid "Past Frames"
-msgstr "Estintaj kadroj"
+msgstr "Pasintaj kadroj"
 
 msgid "Future Frames"
 msgstr "Estontaj kadroj"
@@ -2923,136 +2923,136 @@ msgid "Choose a palette"
 msgstr "Elekti paletron"
 
 msgid "Undo: Draw"
-msgstr "Malfaritas: Pentri"
+msgstr "Malfarita: pentrado"
 
 msgid "Redo: Draw"
-msgstr "Refaritas: Pentri"
+msgstr "Refarita: pentrado"
 
 msgid "Undo: Select"
-msgstr ""
+msgstr "Malfarita: elektado"
 
 msgid "Redo: Select"
-msgstr ""
+msgstr "Refarita: elektado"
 
 msgid "Undo: Scale"
-msgstr "Malfaritas: Skali"
+msgstr "Malfarita: skalado"
 
 msgid "Redo: Scale"
-msgstr "Refaritas: Skali"
+msgstr "Refarita: skalado"
 
 msgid "Undo: Add Layer"
-msgstr "Malfaritas: Aldoni tavolon"
+msgstr "Malfarita: aldonado de tavolo"
 
 msgid "Redo: Add Layer"
-msgstr "Refaritas: Aldoni tavolon"
+msgstr "Refarita: aldonado de tavolo"
 
 msgid "Undo: Remove Layer"
-msgstr "Malfaritas: Forigi tavolon"
+msgstr "Malfarita: forigado de tavolo"
 
 msgid "Redo: Remove Layer"
-msgstr "Refaritas: Forigi tavolon"
+msgstr "Refarita: forigado de tavolo"
 
 msgid "Undo: Merge Layer"
-msgstr "Malfaritas: Kunfandi tavolon"
+msgstr "Malfarita: kunfandado de tavolo"
 
 msgid "Redo: Merge Layer"
-msgstr "Refaritas: Kunfandi tavolon"
+msgstr "Refarita: kunfandado de tavolo"
 
 msgid "Undo: Change Layer Order"
-msgstr "Malfaritas: Ŝanĝi ordon de tavoloj"
+msgstr "Malfarita: ŝanĝo de ordo de tavoloj"
 
 msgid "Redo: Change Layer Order"
-msgstr "Refaritas: Ŝanĝi ordon de tavoloj"
+msgstr "Refarita: ŝanĝo de ordo de tavoloj"
 
 msgid "Undo: Add Frame"
-msgstr "Malfaritas: Aldoni kadron"
+msgstr "Malfarita: aldonado de kadro"
 
 msgid "Redo: Add Frame"
-msgstr "Refaritas: Aldoni filmeron"
+msgstr "Refarita: aldonado de kadro"
 
 msgid "Undo: Remove Frame"
-msgstr "Malfaritas: Forigi filmeron"
+msgstr "Malfarita: forigado de kadro"
 
 msgid "Redo: Remove Frame"
-msgstr "Refaritas: Forigi filmeron"
+msgstr "Refarita: forigado de kadro"
 
 msgid "Undo: Change Frame Order"
-msgstr "Malfaritas: Ŝanĝi ordon de filmeroj"
+msgstr "Malfarita: ŝanĝo de ordo de kadroj"
 
 msgid "Redo: Change Frame Order"
-msgstr "Refaritas: Ŝanĝi ordon de filmeroj"
+msgstr "Refarita: ŝanĝo de ordo de kadroj"
 
 msgid "Undo: Delete Custom Brush"
-msgstr "Malfaritas: Forigi propran penikon"
+msgstr "Malfarita: forigado de propra peniko"
 
 msgid "Redo: Delete Custom Brush"
-msgstr "Refaritas: Forigi propran penikon"
+msgstr "Refarita: forigado de propra peniko"
 
 msgid "Undo: Modify Frame Tag"
-msgstr ""
+msgstr "Malfarita: modifikado de kadra etikedo"
 
 msgid "Redo: Modify Frame Tag"
-msgstr ""
+msgstr "Refarita: modifado de kadra etikedo"
 
 msgid "Undo: Delete Frame Tag"
-msgstr ""
+msgstr "Malfarita: forigado de kadra etikedo"
 
 msgid "Redo: Delete Frame Tag"
-msgstr ""
+msgstr "Refarita: forigado de kadra etikedo"
 
 msgid "Undo: Change frame duration"
-msgstr "Malfari: Ŝanĝi daŭron de filmero"
+msgstr "Malfarita: ŝanĝo de kadra daŭro"
 
 msgid "Redo: Change frame duration"
-msgstr "Refari: Ŝanĝi daŭron de filmero"
+msgstr "Refarita: ŝanĝo de kadra daŭro"
 
 msgid "Undo: Rename Layer"
-msgstr ""
+msgstr "Malfarita: alinomado de tavolo"
 
 msgid "Redo: Rename Layer"
-msgstr ""
+msgstr "Refarita: alinomado de tavolo"
 
 msgid "Undo: Change Layer Opacity"
-msgstr ""
+msgstr "Malfarita: ŝanĝo de tavola opakeco"
 
 msgid "Redo: Change Layer Opacity"
-msgstr ""
+msgstr "Refarita: ŝanĝo de tavola opakeco"
 
 #. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
 msgid "Undo: Change Layer Onion Skinning Ignore Status"
-msgstr ""
+msgstr "Malfarita: ŝanĝo de stato \"ignori reĝimon de travidebla animacio\" de tavolo"
 
 #. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
 msgid "Redo: Change Layer Onion Skinning Ignore Status"
-msgstr ""
+msgstr "Refarita: ŝanĝo de stato \"ignori reĝimon de travidebla animacio\" de tavolo"
 
 #. Appears as a notification when the user data field of a layer is changed, and the user undos.
 msgid "Undo: Change Layer User Data"
-msgstr ""
+msgstr "Malfarita: ŝanĝo de uzantaj datumoj de tavolo"
 
 #. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
 msgid "Redo: Change Layer User Data"
-msgstr ""
+msgstr "Refarita: ŝanĝo de uzantaj datumoj de tavolo"
 
 msgid "Undo: Change Layer Color"
-msgstr ""
+msgstr "Malfarita: ŝanĝo de tavola koloro"
 
 msgid "Redo: Change Layer Color"
-msgstr ""
+msgstr "Refarita: ŝanĝo de tavola koloro"
 
 msgid "Undo: Change Layer Visibility"
-msgstr ""
+msgstr "Malfarita: ŝanĝo de tavola videbleco"
 
 msgid "Redo: Change Layer Visibility"
-msgstr ""
+msgstr "Refarita: ŝanĝo de tavola videbleco"
 
 #. Appears as a notification when a layer gets locked or unlocked, and the user undos.
 msgid "Undo: Change Layer Locked Status"
-msgstr ""
+msgstr "Malfarita: ŝanĝo de ŝlosstato de tavolo"
 
 #. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
 msgid "Redo: Change Layer Locked Status"
-msgstr ""
+msgstr "Refarita: ŝanĝo de ŝlosstato de tavolo"
 
 msgid "Move Guide"
 msgstr "Movi direktlinion"
@@ -3084,7 +3084,7 @@ msgid "Import Palette"
 msgstr "Enporti paletron"
 
 msgid "Create Palette From Current Sprite"
-msgstr ""
+msgstr "Krei paletron el aktuala bildo"
 
 msgid "Palette Name:"
 msgstr "Nomo de paletro:"
@@ -3249,7 +3249,7 @@ msgid "Bucket"
 msgstr "Plenigado"
 
 msgid "Shading Tool"
-msgstr ""
+msgstr "Ombrilo"
 
 msgid "Line Tool"
 msgstr "Linio"
@@ -3403,10 +3403,10 @@ msgid "and"
 msgstr "kaj"
 
 msgid "Move the selected frame to the left."
-msgstr "Movas la elektitan filmeron maldekstren."
+msgstr "Movi la elektitan kadron maldekstren."
 
 msgid "Move the selected frame to the right."
-msgstr "Movas la elektitan filmeron dekstren."
+msgstr "Movi la elektitan kadron dekstren."
 
 #. Refers to the duration of the frame. Found in the frame properties.
 msgid "Frame duration:"
@@ -3445,7 +3445,7 @@ msgid "From Current Palette"
 msgstr "El aktuala paletro"
 
 msgid "From Current Sprite"
-msgstr ""
+msgstr "El aktuala bildo"
 
 msgid "From Current Selection"
 msgstr "El aktuala elekto"
@@ -3593,7 +3593,7 @@ msgstr "Ŝlosado de grandeco\n\n"
 
 #. A tool used in 3D layers, that edits 3D objects.
 msgid "3D Shape Edit"
-msgstr "Redaktado de 3D-figuroj"
+msgstr "3D-figuro"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Box"
@@ -3621,88 +3621,88 @@ msgstr "Toro"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Plane"
-msgstr ""
+msgstr "Ebeno"
 
 msgid "Text"
-msgstr ""
+msgstr "Teksto"
 
 #. Used in 3D layers. A type of light.
 msgid "Directional light"
-msgstr ""
+msgstr "Direkta lumo"
 
 #. Used in 3D layers. A type of light.
 msgid "Spotlight"
-msgstr ""
+msgstr "Area lumo"
 
 #. Used in 3D layers. A type of light.
 msgid "Point light"
-msgstr ""
+msgstr "Punkta lumo"
 
 #. Used in 3D layers. A type of 3D object.
 msgid "Custom model"
-msgstr ""
+msgstr "Propra modelo"
 
 msgid "Selected object:"
-msgstr ""
+msgstr "Elektita objekto:"
 
 msgid "Add new object"
-msgstr ""
+msgstr "Aldoni novan objekton"
 
 msgid "Remove object"
-msgstr ""
+msgstr "Forigi objekton"
 
 msgid "Camera"
-msgstr ""
+msgstr "Kamerao"
 
 #. Found in the tool options of the 3D Shape Edit tool. Refers to camera projection mode.
 msgid "Projection:"
-msgstr ""
+msgstr "Projekcio:"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Perspective"
-msgstr ""
+msgstr "Perspektiva"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Orthogonal"
-msgstr ""
+msgstr "Orta"
 
 #. Found in the tool options of the 3D Shape Edit tool. One of the modes of camera projection.
 msgid "Frustum"
-msgstr ""
+msgstr "Trunko"
 
 msgid "Rotation:"
-msgstr ""
+msgstr "Rotacio:"
 
 msgid "Scale:"
-msgstr ""
+msgstr "Skalo:"
 
 #. Found in the tool options of the 3D Shape Edit tool.
 msgid "Environment"
-msgstr ""
+msgstr "Medio"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color:"
-msgstr ""
+msgstr "Media koloro:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Environment category.
 msgid "Ambient color energy:"
-msgstr ""
+msgstr "Energio de media koloro:"
 
 #. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
-msgstr ""
+msgstr "Videbla:"
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
-msgstr ""
+msgstr "Transformado"
 
 #. Found in the tool options of the 3D Shape Edit tool. A category with mesh-related options.
 msgid "Mesh"
-msgstr ""
+msgstr "Maŝo"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Prism is selected. Refers to the displacement of the upper edge along the X axis.
 msgid "Left to right:"
-msgstr ""
+msgstr "Flanka deŝovo:"
 
 #. Radius of a circle/spherical object.
 msgid "Radius:"
@@ -3710,81 +3710,81 @@ msgstr "Radiuso:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected.
 msgid "Radial segments:"
-msgstr ""
+msgstr "Radiusaj segmentoj:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a spherical object is selected. Refers to the number of segments along the height of the sphere.
 msgid "Rings:"
-msgstr ""
+msgstr "Ringoj:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Sphere is selected. If true, a hemisphere is created rather than a full sphere.
 msgid "Is hemisphere:"
-msgstr ""
+msgstr "Duonsfero:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Top radius:"
-msgstr ""
+msgstr "Supra radiuso:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Cylinder is selected.
 msgid "Bottom radius:"
-msgstr ""
+msgstr "Suba radiuso:"
 
 msgid "Text:"
-msgstr ""
+msgstr "Teksto:"
 
 #. Refers to the depth of something, such as the depth of a 3D object.
 msgid "Depth:"
-msgstr ""
+msgstr "Profundeco:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
-msgstr ""
+msgstr "Bildergrandeco:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Step (in pixels) used to approximate Bézier curves.
 msgid "Curve step:"
-msgstr ""
+msgstr "Paŝo de kurbo:"
 
 msgid "Horizontal alignment:"
-msgstr ""
+msgstr "Horizontala ĝisrandigo:"
 
 msgid "Vertical alignment:"
-msgstr ""
+msgstr "Vertikala ĝisrandigo:"
 
 msgid "Left"
-msgstr ""
+msgstr "Maldekstra"
 
 msgid "Right"
-msgstr ""
+msgstr "Dekstra"
 
 #. Refers to the vertical space between lines in a text.
 msgid "Line spacing:"
-msgstr ""
+msgstr "Interspaco de linioj:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. Refers to the energy of the light. The more energy, the brighter it shines.
 msgid "Energy:"
-msgstr ""
+msgstr "Energio:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Light category if a light is selected. If true, the light's effect is reversed, darkening areas and casting bright shadows.
 msgid "Negative:"
-msgstr ""
+msgstr "Negativa:"
 
 msgid "Shadow:"
-msgstr ""
+msgstr "Ombro:"
 
 #. Refers to the range of something, like the range of a spotlight.
 msgid "Range:"
-msgstr ""
+msgstr "Amplekso:"
 
 #. Found under certain image effects that support properties that can be animated.
 msgid "Animatable Properties"
-msgstr ""
+msgstr "Animacieblaj ecoj"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the frame that is currently being previewed.
 msgid "Preview frame:"
-msgstr ""
+msgstr "Antaŭvida kadro:"
 
 #. Found under certain image effects that support properties that can be animated. It is a checkbox that toggles whether a property should be animated or not.
 msgid "Animate"
-msgstr ""
+msgstr "Animacii"
 
 #. Found under certain image effects that support properties that can be animated. Refers to the initial value of the property.
 msgid "Initial value:"
@@ -4017,70 +4017,70 @@ msgstr "Stakitaj"
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stacked offset"
-msgstr ""
+msgstr "Deŝovo de stakado"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stairs right"
-msgstr ""
+msgstr "Ŝtupeca, dekstren"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Stairs down"
-msgstr ""
+msgstr "Ŝtupeca, suben"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Diamond right"
-msgstr ""
+msgstr "Diamanteca, dekstren"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Diamond down"
-msgstr ""
+msgstr "Diamanteca, suben"
 
 #. A button that toggles place-only mode on for a tilemap layer. This mode is used to only place tiles in a tilemap, without the ability to modify them.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Place-only mode:"
-msgstr ""
+msgstr "Nurmeta reĝimo:"
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr ""
+msgstr "Ŝaltado de nurmeta reĝimo estas porĉiama ago. Ekde ŝaltita, nur metado de kalehoj estos ebla, kaj vi ne povos modifi ekzistantajn kahelojn sur tiu ĉi tavolo."
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
-msgstr ""
+msgstr "Elektu kahelon por meti ĝin en la kanvaso."
 
 #: src/UI/TilesPanel.gd
 msgid "Modify tiles on the canvas."
-msgstr ""
+msgstr "Modifi kahelojn en la kanvaso."
 
 #: src/UI/TilesPanel.tscn
 msgid "Draw tiles"
-msgstr ""
+msgstr "Desegni kahelojn"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile left (counterclockwise)"
-msgstr ""
+msgstr "Rotacii kahelon maldekstrume"
 
 #: src/UI/TilesPanel.tscn
 msgid "Rotate tile right (clockwise)"
-msgstr ""
+msgstr "Rotacii kahelon dekstrume"
 
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile horizontally"
-msgstr ""
+msgstr "Inversigi kahelon horizontale"
 
 #: src/UI/TilesPanel.tscn
 msgid "Flip tile vertically"
-msgstr ""
+msgstr "Inversigi kahelon vertikale"
 
 #. Refers to manual mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Manual"
-msgstr ""
+msgstr "Permana"
 
 #. Refers to auto (automatic) mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
@@ -4090,7 +4090,7 @@ msgstr "Aŭtomata"
 #. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
-msgstr ""
+msgstr "Staka"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
