@@ -1724,7 +1724,8 @@ func _on_onion_skinning_opacity_value_changed(value: float) -> void:
 
 func _on_global_visibility_button_pressed() -> void:
 	var project = Global.current_project
-	project.undo_redo.create_action("Change Layer Visibility")
+	if Global.layer_visibility_undoable:
+		project.undo_redo.create_action("Change Layer Visibility")
 
 	var layer_visible := !global_layer_visibility
 	var mandatory_update := PackedInt32Array()
@@ -1732,21 +1733,29 @@ func _on_global_visibility_button_pressed() -> void:
 		var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
 		if layer.parent == null and layer.visible != layer_visible:
 			mandatory_update.append(layer.index)
-			project.undo_redo.add_do_property(layer, "visible", layer_visible)
-			project.undo_redo.add_undo_property(layer, "visible", layer.visible)
+			if Global.layer_visibility_undoable:
+				project.undo_redo.add_do_property(layer, "visible", layer_visible)
+				project.undo_redo.add_undo_property(layer, "visible", layer.visible)
+			else:
+				layer.visible = layer_visible
 
 	# Multiple layers need to be redrawn
-	project.undo_redo.add_do_property(Global.canvas, "mandatory_update_layers", mandatory_update)
-	project.undo_redo.add_undo_property(Global.canvas, "mandatory_update_layers", mandatory_update)
+	if Global.layer_visibility_undoable:
+		project.undo_redo.add_do_property(Global.canvas, "mandatory_update_layers", mandatory_update)
+		project.undo_redo.add_undo_property(Global.canvas, "mandatory_update_layers", mandatory_update)
 
-	project.undo_redo.add_do_method(update_global_layer_buttons)
-	project.undo_redo.add_undo_method(update_global_layer_buttons)
-	project.undo_redo.add_do_method(_toggle_layer_buttons)
-	project.undo_redo.add_undo_method(_toggle_layer_buttons)
-	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+		project.undo_redo.add_do_method(update_global_layer_buttons)
+		project.undo_redo.add_undo_method(update_global_layer_buttons)
+		project.undo_redo.add_do_method(_toggle_layer_buttons)
+		project.undo_redo.add_undo_method(_toggle_layer_buttons)
+		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 
-	project.undo_redo.commit_action()
+		project.undo_redo.commit_action()
+	else:
+		Global.canvas.mandatory_update_layers = mandatory_update
+		update_global_layer_buttons()
+		_toggle_layer_buttons()
 
 
 func _on_global_lock_button_pressed() -> void:

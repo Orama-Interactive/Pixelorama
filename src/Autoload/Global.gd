@@ -531,6 +531,7 @@ var max_undo_steps := 0:
 		max_undo_steps = value
 		for project in projects:
 			project.undo_redo.max_steps = max_undo_steps
+var layer_visibility_undoable := false
 ## Found in Preferences. Affects the per_pixel_transparency project setting.
 ## If [code]true[/code], it allows for the window to be transparent.
 ## This affects performance, so keep it [code]false[/code] if you don't need it.
