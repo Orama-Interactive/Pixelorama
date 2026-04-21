@@ -302,7 +302,9 @@ func _on_visibility_button_pressed() -> void:
 		for other_layer in Global.current_project.layers:
 			if other_layer != layer and other_layer not in layer.get_ancestors():
 				if Global.layer_visibility_undoable:
-					project.undo_redo.add_do_property(other_layer, "visible", one_hidden_by_other_layer)
+					project.undo_redo.add_do_property(
+						other_layer, "visible", one_hidden_by_other_layer
+					)
 					project.undo_redo.add_undo_property(other_layer, "visible", other_layer.visible)
 				else:
 					other_layer.visible = one_hidden_by_other_layer
@@ -348,12 +350,11 @@ func _on_visibility_button_pressed() -> void:
 		_update_buttons_all_layers()
 
 
-
 func _on_lock_button_pressed() -> void:
 	var project = Global.current_project
 	Global.canvas.selection.transform_content_confirm()
 	var layer := Global.current_project.layers[layer_index]
-	
+
 	if Global.layer_locking_undoable:
 		project.undo_redo.create_action("Change Layer Locked Status")
 		project.undo_redo.add_do_property(layer, "locked", not layer.locked)
