@@ -995,6 +995,46 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 color = Color(0, 0, 1, 1)
 
+[node name="LayerBlendModeUndoableLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions" unique_id=1108196600]
+layout_mode = 2
+text = "Layer blend mode changes undoable"
+
+[node name="LayerBlendModeUndoableButton" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions" unique_id=650313406]
+layout_mode = 2
+text = "On"
+
+[node name="LayerLockingUndoableLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions" unique_id=1480303644]
+layout_mode = 2
+text = "Layer lock changes undoable"
+
+[node name="LayerLockingUndoableButton" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions" unique_id=2023726878]
+layout_mode = 2
+text = "On"
+
+[node name="LayerVisibilityUndoableLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions" unique_id=429127991]
+layout_mode = 2
+text = "Layer visibility changes undoable"
+
+[node name="LayerVisibilityUndoableButton" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions" unique_id=1905052006]
+layout_mode = 2
+text = "On"
+
+[node name="LayerOpacityUndoableLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions" unique_id=1381513029]
+layout_mode = 2
+text = "Layer opacity changes undoable"
+
+[node name="LayerOpacityUndoableButton" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions" unique_id=1529250723]
+layout_mode = 2
+text = "On"
+
+[node name="CelOpacityUndoableLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions" unique_id=2055553604]
+layout_mode = 2
+text = "Cel opacity changes undoable"
+
+[node name="CelOpacityUndoableButton" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions" unique_id=1528540294]
+layout_mode = 2
+text = "On"
+
 [node name="Tools" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide" unique_id=718539927]
 visible = false
 layout_mode = 2

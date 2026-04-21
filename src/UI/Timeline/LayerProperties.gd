@@ -126,23 +126,31 @@ func _on_opacity_slider_value_changed(value: float) -> void:
 		return
 
 	var project: Project = Global.current_project
-	project.undo_redo.create_action("Change Layer Opacity", UndoRedo.MergeMode.MERGE_ENDS)
-	for layer_index in layer_indices:
-		var layer := Global.current_project.layers[layer_index]
-		var new_opacity = value / 100.0
+	var new_opacity = value / 100.0
+	if Global.layer_opacity_undoable:
+		project.undo_redo.create_action("Change Layer Opacity", UndoRedo.MergeMode.MERGE_ENDS)
+		for layer_index in layer_indices:
+			var layer := Global.current_project.layers[layer_index]
 
-		project.undo_redo.add_do_property(layer, "opacity", new_opacity)
-		project.undo_redo.add_undo_property(layer, "opacity", layer.opacity)
-		project.undo_redo.add_do_property(Global.canvas, "update_all_layers", true)
-		project.undo_redo.add_undo_property(Global.canvas, "update_all_layers", true)
-		project.undo_redo.add_do_method(Global.canvas.queue_redraw)
-		project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
-		project.undo_redo.add_do_method(_emit_layer_property_signal)
-		project.undo_redo.add_undo_method(_emit_layer_property_signal)
-		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+			project.undo_redo.add_do_property(layer, "opacity", new_opacity)
+			project.undo_redo.add_undo_property(layer, "opacity", layer.opacity)
+			project.undo_redo.add_do_property(Global.canvas, "update_all_layers", true)
+			project.undo_redo.add_undo_property(Global.canvas, "update_all_layers", true)
+			project.undo_redo.add_do_method(Global.canvas.queue_redraw)
+			project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
+			project.undo_redo.add_do_method(_emit_layer_property_signal)
+			project.undo_redo.add_undo_method(_emit_layer_property_signal)
+			project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+			project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 
-	project.undo_redo.commit_action()
+		project.undo_redo.commit_action()
+	else:
+		for layer_index in layer_indices:
+			var layer := Global.current_project.layers[layer_index]
+			layer.opacity = new_opacity
+			Global.canvas.update_all_layers = true
+			Global.canvas.queue_redraw()
+			_emit_layer_property_signal()
 
 
 func _on_blend_mode_option_button_item_selected(index: BaseLayer.BlendModes) -> void:

@@ -476,6 +476,17 @@ var onion_skinning_future_color := Color.BLUE:
 			canvas.onion_future.blue_red_color = value
 			canvas.onion_future.queue_redraw()
 
+## Found in Preferences. Determines if changes in layer blend modes are undoable.
+var layer_blend_mode_undoable := true
+## Found in Preferences. Determines if changes in layer locking are undoable.
+var layer_locking_undoable := true
+## Found in Preferences. Determines if changes in layer visibility are undoable.
+var layer_visibility_undoable := true
+## Found in Preferences. Determines if changes in layer opacity are undoable.
+var layer_opacity_undoable := true
+## Found in Preferences. Determines if changes in cel opacity are undoable.
+var cel_opacity_undoable := true
+
 ## Found in Preferences. If [code]true[/code], the selection rect has animated borders.
 var selection_animated_borders := true:
 	set(value):
@@ -531,7 +542,6 @@ var max_undo_steps := 0:
 		max_undo_steps = value
 		for project in projects:
 			project.undo_redo.max_steps = max_undo_steps
-var layer_visibility_undoable := false
 ## Found in Preferences. Affects the per_pixel_transparency project setting.
 ## If [code]true[/code], it allows for the window to be transparent.
 ## This affects performance, so keep it [code]false[/code] if you don't need it.
