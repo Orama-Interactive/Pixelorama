@@ -30,7 +30,6 @@ vec3 hsb2rgb(vec3 c){
 					6.0)-3.0)-1.0,
 					0.0,
 					1.0 );
-	rgb = rgb*rgb*(3.0-2.0*rgb);
 	return c.z * mix(vec3(1.0), rgb, c.y);
 }
 
@@ -41,24 +40,24 @@ void fragment() {
 
 	vec3 col = original_color.rgb;
 	vec3 hsb = rgb2hsb(col);
+
+	// Apply the shifting (this is incremental, not by percentage of original).
 	// If not greyscale
 	if(!is_equal_approx(col[0], col[1]) || !is_equal_approx(col[1], col[2])) {
 		// Shift the color by shift_amount, but rolling over the value goes over 1
 		hsb.x = mod(hsb.x + hue, 1.0);
 	}
 	if(saturation > 0.0) {
-		hsb.y =  mix(hsb.y, 1 , saturation);
+		hsb.y = mod(hsb.y + saturation, 1.0);
 	}
-	else if (saturation < 0.0) {
-		hsb.y =  mix(0, hsb.y , 1.0 - abs(saturation));
-	}
-
 	if(value > 0.0) {
-		hsb.z =  mix(hsb.z, 1 , value);
+		hsb.z = mod(hsb.z + value, 1.0);
 	}
-	else if (value < 0.0) {
-		hsb.z =  mix(0, hsb.z , 1.0 - abs(value));
-	}
+	// Minimize uncertanities by scaling up to the standardized values, round and then scale down.
+	// I don't think removing this will will cause problems, but it's better to place it here.
+	hsb.x = round(hsb.x * 360.0) / 360.0;
+	hsb.y = round(hsb.y * 100.0) / 100.0;
+	hsb.z = round(hsb.z * 100.0) / 100.0;
 
 	col = hsb2rgb(hsb);
 	vec3 output = mix(original_color.rgb, col, selection_color.a);
