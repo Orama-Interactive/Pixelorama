@@ -351,8 +351,8 @@ text = "Clip image content to selection"
 [node name="PathDialog" type="FileDialog" parent="." unique_id=746657325 groups=["FileDialogs"]]
 mode = 2
 size = Vector2i(675, 500)
-ok_button_text = "Select Current Folder"
 access = 2
+overwrite_warning_enabled = false
 
 [node name="PathValidationAlert" type="AcceptDialog" parent="." unique_id=355024950]
 dialog_text = "DirAccess path and file name are not valid!"
