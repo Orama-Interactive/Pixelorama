@@ -121,7 +121,7 @@ func set_layer_metadata_image(
 		image.set_pixel(index, 3, Color.RED)
 	else:
 		image.set_pixel(index, 3, Color.BLACK)
-	if not include:
+	if layer.is_blended_by_ancestor():
 		# Store a small red value as a way to indicate that this layer should be skipped
 		# Used for layers such as child layers of a group, so that the group layer itself can
 		# successfully be used as a clipping mask with the layer below it.
