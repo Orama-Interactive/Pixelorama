@@ -45,13 +45,22 @@ void fragment() {
 	// If not greyscale
 	if(!is_equal_approx(col[0], col[1]) || !is_equal_approx(col[1], col[2])) {
 		// Shift the color by shift_amount, but rolling over the value goes over 1
-		hsb.x = mod(hsb.x + hue, 1.0);
+		if (hsb.x + hue > 1.0 || hsb.x + hue < 0.0){
+			hsb.x = mod(hsb.x + hue, 1.0);
+		}
+		else hsb.x += hue;
 	}
-	if(saturation > 0.0) {
-		hsb.y = mod(hsb.y + saturation, 1.0);
+	if (!is_equal_approx(saturation, 0)){
+		if (hsb.y + saturation > 1.0 || hsb.y + saturation < 0.0){
+			hsb.y = mod(hsb.y + saturation, 1.0);
+		}
+		else hsb.y += saturation;
 	}
-	if(value > 0.0) {
-		hsb.z = mod(hsb.z + value, 1.0);
+	if (!is_equal_approx(value, 0)){
+		if (hsb.z + value > 1.0 || hsb.z + value < 0.0){
+			hsb.z = mod(hsb.z + value, 1.0);
+		}
+		else hsb.z += value;
 	}
 	// Minimize uncertanities by scaling up to the standardized values, round and then scale down.
 	// I don't think removing this will will cause problems, but it's better to place it here.
