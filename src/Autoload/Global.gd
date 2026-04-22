@@ -579,6 +579,14 @@ var tablet_driver := 0:
 		tablet_driver = value
 		var tablet_driver_name := DisplayServer.tablet_get_driver_name(tablet_driver)
 		DisplayServer.tablet_set_current_driver(tablet_driver_name)
+## Found in Preferences. The displayed name of the current project author.
+var author_display_name := ""
+## Found in Preferences. The real name of the current project author.
+var author_real_name := ""
+## Found in Preferences. The contact info of the current project author.
+var author_contact := ""
+## Found in Preferences. The company name of the current project author.
+var author_company := ""
 
 # Tools & options
 ## Found in Preferences. If [code]true[/code], the cursor's left tool icon is visible.

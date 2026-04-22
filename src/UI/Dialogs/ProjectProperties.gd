@@ -1,5 +1,7 @@
 extends AcceptDialog
 
+enum Tabs { GENERAL, TILESETS, AUTHOR }
+
 const SAVE_TEXTURE := preload("uid://cvc120a27s57m")
 const DUPLICATE_TEXTURE := preload("res://assets/graphics/timeline/copy_frame.png")
 const REMOVE_TEXTURE := preload("res://assets/graphics/misc/close.png")
@@ -7,16 +9,24 @@ const REMOVE_TEXTURE := preload("res://assets/graphics/misc/close.png")
 var _selected_tileset: TileSetCustom
 var _current_tileset_name_filter: String
 
-@onready var size_value_label := $VBoxContainer/GridContainer/SizeValueLabel as Label
-@onready var color_mode_value_label := $VBoxContainer/GridContainer/ColorModeValueLabel as Label
-@onready var frames_value_label := $VBoxContainer/GridContainer/FramesValueLabel as Label
-@onready var layers_value_label := $VBoxContainer/GridContainer/LayersValueLabel as Label
-@onready var name_line_edit := $VBoxContainer/GridContainer/NameLineEdit as LineEdit
-@onready var license_text_edit := $VBoxContainer/GridContainer/LicenseTextEdit as TextEdit
-@onready var user_data_text_edit := $VBoxContainer/GridContainer/UserDataTextEdit as TextEdit
-@onready var tilesets_container := $VBoxContainer/TilesetsContainer as VBoxContainer
+@onready var general_container := %GeneralContainer as VBoxContainer
+@onready var size_value_label := %SizeValueLabel as Label
+@onready var color_mode_value_label := %ColorModeValueLabel as Label
+@onready var frames_value_label := %FramesValueLabel as Label
+@onready var layers_value_label := %LayersValueLabel as Label
+@onready var name_line_edit := %NameLineEdit as LineEdit
+@onready var license_text_edit := %LicenseTextEdit as TextEdit
+@onready var user_data_text_edit := %UserDataTextEdit as TextEdit
+
+@onready var tilesets_container := %TilesetsContainer as VBoxContainer
 @onready var tilesets_list := %TilesetsList as Tree
 @onready var filter_by_name_edit := %FilterByNameEdit as LineEdit
+
+@onready var author_container := %AuthorContainer as VBoxContainer
+@onready var display_name_value_label := %DisplayNameValueLabel as Label
+@onready var real_name_value_label := %RealNameValueLabel as Label
+@onready var contact_value_label := %ContactValueLabel as Label
+@onready var company_studio_value_label := %CompanyStudioValueLabel as Label
 @onready
 var export_tileset_confirmation_dialog: ConfirmationDialog = $ExportTilesetConfirmationDialog
 @onready var export_tileset_file_dialog: FileDialog = $ExportTilesetFileDialog
@@ -31,24 +41,41 @@ func _ready() -> void:
 
 func _on_visibility_changed() -> void:
 	Global.dialog_open(visible)
-	size_value_label.text = str(Global.current_project.size)
-	if Global.current_project.get_image_format() == Image.FORMAT_RGBA8:
+	var project := Global.current_project
+	size_value_label.text = str(project.size)
+	if project.get_image_format() == Image.FORMAT_RGBA8:
 		color_mode_value_label.text = "RGBA8"
 	else:
-		color_mode_value_label.text = str(Global.current_project.get_image_format())
-	if Global.current_project.is_indexed():
+		color_mode_value_label.text = str(project.get_image_format())
+	if project.is_indexed():
 		color_mode_value_label.text += " (%s)" % tr("Indexed")
-	frames_value_label.text = str(Global.current_project.frames.size())
-	layers_value_label.text = str(Global.current_project.layers.size())
-	name_line_edit.text = Global.current_project.name
-	license_text_edit.text = Global.current_project.license
-	user_data_text_edit.text = Global.current_project.user_data
-	tilesets_container.visible = Global.current_project.tilesets.size() > 0
+	frames_value_label.text = str(project.frames.size())
+	layers_value_label.text = str(project.layers.size())
+	name_line_edit.text = project.name
+	license_text_edit.text = project.license
+	user_data_text_edit.text = project.user_data
 	filter_by_name_edit.text = ""
+	display_name_value_label.text = project.author_display_name
+	real_name_value_label.text = project.author_real_name
+	contact_value_label.text = project.author_contact
+	company_studio_value_label.text = project.author_company
 	tilesets_list.clear()
 	var root_item := tilesets_list.create_item()
 	for i in Global.current_project.tilesets.size():
 		_create_tileset_tree_item(i, root_item)
+
+
+func _on_list_item_selected(index: int) -> void:
+	general_container.hide()
+	tilesets_container.hide()
+	author_container.hide()
+	match index:
+		Tabs.GENERAL:
+			general_container.show()
+		Tabs.TILESETS:
+			tilesets_container.show()
+		Tabs.AUTHOR:
+			author_container.show()
 
 
 func _on_filter_by_name_line_edit_text_changed(new_text: String) -> void:

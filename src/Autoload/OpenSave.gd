@@ -461,6 +461,7 @@ func open_v0_pxo_file(path: String, empty_project: bool) -> Project:
 func save_pxo_file(
 	path: String, autosave: bool, include_blended := false, project := Global.current_project
 ) -> bool:
+	project.initialize_author_data()
 	if not autosave:
 		project.name = path.uri_decode().get_file().trim_suffix(".pxo")
 	var serialized_data := project.serialize()

@@ -242,7 +242,11 @@ var preferences: Array[Preference] = [
 		false,
 		true
 	),
-	Preference.new("tablet_driver", "Drivers/DriversContainer/TabletDriver", "selected", 0)
+	Preference.new("tablet_driver", "Drivers/DriversContainer/TabletDriver", "selected", 0),
+	Preference.new("author_display_name", "Author/AuthorContainer/DisplayName", "text", ""),
+	Preference.new("author_real_name", "Author/AuthorContainer/RealName", "text", ""),
+	Preference.new("author_contact", "Author/AuthorContainer/Contact", "text", ""),
+	Preference.new("author_company", "Author/AuthorContainer/CompanyStudio", "text", ""),
 ]
 
 var content_list := PackedStringArray([])

@@ -75,6 +75,10 @@ var fps := 6.0:
 		fps_changed.emit()
 var license := ""  ## The license of the project, set in the project properties.
 var user_data := ""  ## User defined data, set in the project properties.
+var author_display_name := ""  ## The displayed name of the project author.
+var author_real_name := ""  ## The real name of the project author.
+var author_contact := ""  ## The contact info of the project author.
+var author_company := ""  ## The company name of the project author.
 
 var x_symmetry_point: float
 var y_symmetry_point: float
@@ -157,7 +161,15 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 		export_directory_path = Global.config_cache.get_value(
 			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 		)
+	initialize_author_data()
 	Global.project_created.emit(self)
+
+
+func initialize_author_data() -> void:
+	author_display_name = Global.author_display_name
+	author_real_name = Global.author_real_name
+	author_contact = Global.author_contact
+	author_company = Global.author_company
 
 
 func remove() -> void:
@@ -331,6 +343,10 @@ func serialize() -> Dictionary:
 		"fps": fps,
 		"license": license,
 		"user_data": user_data,
+		"author_display_name": author_display_name,
+		"author_real_name": author_real_name,
+		"author_contact": author_contact,
+		"author_company": author_company,
 		"metadata": metadata
 	}
 
@@ -512,6 +528,10 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 	file_format = dict.get("export_file_format", file_name)
 	fps = dict.get("fps", file_name)
 	license = dict.get("license", license)
+	author_display_name = dict.get("author_display_name", author_display_name)
+	author_real_name = dict.get("author_real_name", author_real_name)
+	author_contact = dict.get("author_contact", author_contact)
+	author_company = dict.get("author_company", author_company)
 	user_data = dict.get("user_data", user_data)
 	var loaded_current_frame = dict.get("current_frame", current_frame)
 	var loaded_current_layer = dict.get("current_layer", current_layer)

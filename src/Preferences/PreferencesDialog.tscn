@@ -1375,6 +1375,72 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "On"
 
+[node name="Author" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide" unique_id=1483485289]
+visible = false
+layout_mode = 2
+
+[node name="AuthorHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author" unique_id=633189250 groups=["HeaderLabels"]]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorHeader" unique_id=2101647471]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Author"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorHeader" unique_id=1443319414]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="AuthorContainer" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author" unique_id=1415249693]
+layout_mode = 2
+columns = 3
+
+[node name="DisplayNameLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorContainer" unique_id=778042227]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+mouse_filter = 1
+text = "Display name:"
+
+[node name="DisplayName" type="LineEdit" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorContainer" unique_id=1417754898]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RealNameLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorContainer" unique_id=959034553]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+mouse_filter = 1
+text = "Real name:"
+
+[node name="RealName" type="LineEdit" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorContainer" unique_id=849693492]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ContactLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorContainer" unique_id=993045809]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+mouse_filter = 1
+text = "Contact:"
+
+[node name="Contact" type="LineEdit" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorContainer" unique_id=1879197820]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CompanyStudioLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorContainer" unique_id=326685751]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
+mouse_filter = 1
+text = "Company/Studio:"
+
+[node name="CompanyStudio" type="LineEdit" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorContainer" unique_id=1643027864]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="Drivers" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide" unique_id=1209566191]
 visible = false
 layout_mode = 2
