@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hindi\n"
 "Language: hi_IN\n"
-"PO-Revision-Date: 2026-04-22 19:22\n"
+"PO-Revision-Date: 2026-04-22 22:10\n"
 
 msgid "OK"
 msgstr "ठीक है"
@@ -889,6 +889,10 @@ msgid "Backup"
 msgstr ""
 
 msgid "Performance"
+msgstr ""
+
+#. Found in the Preferences. Refers to the author of the current project.
+msgid "Author"
 msgstr ""
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
@@ -1994,6 +1998,26 @@ msgstr ""
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
+msgstr ""
+
+#. Found in the Preferences. Refers to the displayed name of the current project author.
+msgid "Display name:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the real name of the current project author.
+msgid "Real name:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the contact info of the current project author.
+msgid "Contact:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the company name of the current project author.
+msgid "Company/Studio:"
+msgstr ""
+
+#. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
+msgid "Last saved by"
 msgstr ""
 
 #. Found in the Preferences, under Extensions.
