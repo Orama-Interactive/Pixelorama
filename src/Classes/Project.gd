@@ -12,7 +12,7 @@ signal layers_updated
 signal frames_updated
 signal tags_changed
 
-const INDEXED_MODE := Image.FORMAT_MAX + 1
+const INDEXED_MODE := -1
 
 var name := "":
 	set(value):
@@ -215,7 +215,7 @@ func get_current_cel() -> BaseCel:
 
 
 func get_image_format() -> Image.Format:
-	if color_mode == INDEXED_MODE:
+	if is_indexed():
 		return Image.FORMAT_RGBA8
 	return color_mode as Image.Format
 
@@ -347,6 +347,10 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 		tiles.tile_size = size
 		selection_map.crop(size.x, size.y)
 	color_mode = dict.get("color_mode", color_mode)
+	if pxo_version <= 5:
+		# Compatibility for older projects with indexed mode
+		if color_mode == 40 or color_mode == 48:
+			color_mode = -1
 	if dict.has("tile_mode_x_basis_x") and dict.has("tile_mode_x_basis_y"):
 		tiles.x_basis.x = dict.tile_mode_x_basis_x
 		tiles.x_basis.y = dict.tile_mode_x_basis_y
