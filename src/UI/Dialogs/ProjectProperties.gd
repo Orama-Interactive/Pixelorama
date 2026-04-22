@@ -41,6 +41,7 @@ func _on_visibility_changed() -> void:
 	frames_value_label.text = str(Global.current_project.frames.size())
 	layers_value_label.text = str(Global.current_project.layers.size())
 	name_line_edit.text = Global.current_project.name
+	license_text_edit.text = Global.current_project.license
 	user_data_text_edit.text = Global.current_project.user_data
 	tilesets_container.visible = Global.current_project.tilesets.size() > 0
 	filter_by_name_edit.text = ""
