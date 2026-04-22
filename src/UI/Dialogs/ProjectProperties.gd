@@ -12,6 +12,7 @@ var _current_tileset_name_filter: String
 @onready var frames_value_label := $VBoxContainer/GridContainer/FramesValueLabel as Label
 @onready var layers_value_label := $VBoxContainer/GridContainer/LayersValueLabel as Label
 @onready var name_line_edit := $VBoxContainer/GridContainer/NameLineEdit as LineEdit
+@onready var license_text_edit := $VBoxContainer/GridContainer/LicenseTextEdit as TextEdit
 @onready var user_data_text_edit := $VBoxContainer/GridContainer/UserDataTextEdit as TextEdit
 @onready var tilesets_container := $VBoxContainer/TilesetsContainer as VBoxContainer
 @onready var tilesets_list := %TilesetsList as Tree
@@ -163,6 +164,10 @@ func _on_name_line_edit_text_changed(new_text: String) -> void:
 	if new_text.is_empty() or !new_text.is_valid_filename():
 		new_text = tr("untitled")
 	Global.current_project.name = new_text
+
+
+func _on_license_text_edit_text_changed() -> void:
+	Global.current_project.license = license_text_edit.text
 
 
 func _on_user_data_text_edit_text_changed() -> void:

@@ -71,6 +71,17 @@ text = "Name:"
 layout_mode = 2
 placeholder_text = "Enter name... (Default \"untitled\")"
 
+[node name="LicenseLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=1166992948]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "License:"
+
+[node name="LicenseTextEdit" type="TextEdit" parent="VBoxContainer/GridContainer" unique_id=1864680016]
+layout_mode = 2
+size_flags_horizontal = 3
+scroll_fit_content_height = true
+
 [node name="UserDataLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=844849061]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -192,6 +203,7 @@ filters = PackedStringArray("*.png ; PNG Image", "*.tres ; Godot TileSet Resourc
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="text_changed" from="VBoxContainer/GridContainer/NameLineEdit" to="." method="_on_name_line_edit_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/GridContainer/LicenseTextEdit" to="." method="_on_license_text_edit_text_changed"]
 [connection signal="text_changed" from="VBoxContainer/GridContainer/UserDataTextEdit" to="." method="_on_user_data_text_edit_text_changed"]
 [connection signal="text_changed" from="VBoxContainer/TilesetsContainer/FilterByNameEdit" to="." method="_on_filter_by_name_line_edit_text_changed"]
 [connection signal="button_clicked" from="VBoxContainer/TilesetsContainer/PanelContainer/TilesetsList" to="." method="_on_tilesets_list_button_clicked"]

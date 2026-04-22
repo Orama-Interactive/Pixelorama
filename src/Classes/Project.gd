@@ -73,6 +73,7 @@ var fps := 6.0:
 	set(value):
 		fps = value
 		fps_changed.emit()
+var license := ""  ## The license of the project, set in the project properties.
 var user_data := ""  ## User defined data, set in the project properties.
 
 var x_symmetry_point: float
@@ -328,6 +329,7 @@ func serialize() -> Dictionary:
 		"export_file_name": file_name,
 		"export_file_format": file_format,
 		"fps": fps,
+		"license": license,
 		"user_data": user_data,
 		"metadata": metadata
 	}
@@ -509,6 +511,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 	file_name = dict.get("export_file_name", file_name)
 	file_format = dict.get("export_file_format", file_name)
 	fps = dict.get("fps", file_name)
+	license = dict.get("user_data", license)
 	user_data = dict.get("user_data", user_data)
 	var loaded_current_frame = dict.get("current_frame", current_frame)
 	var loaded_current_layer = dict.get("current_layer", current_layer)
