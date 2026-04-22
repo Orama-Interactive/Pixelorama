@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2026-04-01 00:47\n"
+"PO-Revision-Date: 2026-04-22 19:22\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -3400,6 +3400,10 @@ msgstr "Seçili kareyi sağa taşı."
 #. Refers to the duration of the frame. Found in the frame properties.
 msgid "Frame duration:"
 msgstr "Kare süresi:"
+
+#. Refers to the license of a project, which can be set from the project properties.
+msgid "License:"
+msgstr ""
 
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
