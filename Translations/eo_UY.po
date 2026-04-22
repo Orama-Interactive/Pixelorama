@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-04-19 07:52\n"
+"PO-Revision-Date: 2026-04-22 19:21\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -3411,6 +3411,10 @@ msgstr "Movi la elektitan kadron dekstren."
 #. Refers to the duration of the frame. Found in the frame properties.
 msgid "Frame duration:"
 msgstr "Daŭro de kadro:"
+
+#. Refers to the license of a project, which can be set from the project properties.
+msgid "License:"
+msgstr ""
 
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
