@@ -853,6 +853,7 @@ func _ready() -> void:
 				set(pref, value)
 	if OS.is_sandboxed() or OS.has_feature("mobile"):
 		Global.use_native_file_dialogs = true
+	current_project.initialize_author_data()
 	await get_tree().process_frame
 	project_switched.emit()
 	canvas.color_index.enabled = show_pixel_indices  # Initialize color index preview

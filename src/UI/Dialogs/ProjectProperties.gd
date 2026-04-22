@@ -9,6 +9,7 @@ const REMOVE_TEXTURE := preload("res://assets/graphics/misc/close.png")
 var _selected_tileset: TileSetCustom
 var _current_tileset_name_filter: String
 
+@onready var list := $HSplitContainer/List as ItemList
 @onready var general_container := %GeneralContainer as VBoxContainer
 @onready var size_value_label := %SizeValueLabel as Label
 @onready var color_mode_value_label := %ColorModeValueLabel as Label
@@ -36,6 +37,7 @@ var export_tileset_confirmation_dialog: ConfirmationDialog = $ExportTilesetConfi
 
 
 func _ready() -> void:
+	list.select(0)
 	export_tileset_file_dialog.use_native_dialog = Global.use_native_file_dialogs
 
 
