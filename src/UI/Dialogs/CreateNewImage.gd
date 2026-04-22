@@ -149,7 +149,7 @@ func _on_CreateNewImage_confirmed() -> void:
 	Global.config_cache.set_value("templates", "recent_sizes", recent_sizes)
 	var fill_color := fill_color_node.color
 	var proj_name := name_input.text
-	if !proj_name.is_valid_filename():
+	if proj_name.is_empty() or not proj_name.is_valid_filename():
 		proj_name = tr("untitled")
 
 	var new_project := Project.new([], proj_name, image_size)
