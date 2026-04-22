@@ -6,6 +6,7 @@ var shader := preload("res://src/Shaders/Effects/HSV.gdshader")
 @onready var hue_slider := $VBoxContainer/HueSlider as ValueSlider
 @onready var sat_slider := $VBoxContainer/SaturationSlider as ValueSlider
 @onready var val_slider := $VBoxContainer/ValueSlider as ValueSlider
+@onready var overflow_check_box := $VBoxContainer/OverflowCheckBox as CheckBox
 
 
 func _ready() -> void:
@@ -33,7 +34,13 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 		var selection := project.selection_map.return_cropped_copy(project, project.size)
 		selection_tex = ImageTexture.create_from_image(selection)
 
-	var params := {"hue": hue, "saturation": sat, "value": val, "selection": selection_tex}
+	var params := {
+		"hue": hue,
+		"saturation": sat,
+		"value": val,
+		"selection": selection_tex,
+		"wrap_overflowing": overflow_check_box.button_pressed
+	}
 	if !has_been_confirmed:
 		for param in params:
 			preview.material.set_shader_parameter(param, params[param])
@@ -58,4 +65,8 @@ func _on_SaturationSlider_value_changed(_value: float) -> void:
 
 
 func _on_ValueSlider_value_changed(_value: float) -> void:
+	update_preview()
+
+
+func _on_overflow_check_box_toggled(_toggled_on: bool) -> void:
 	update_preview()
