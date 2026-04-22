@@ -25,8 +25,11 @@ var button_pressed := false:
 		return main_button.button_pressed
 var animation_running := false
 var audio_playing_at_frame := 0
-
 var audio_player: AudioStreamPlayer
+
+var _old_camera_auto_release_gui_focus: bool
+var _old_is_writing_text: bool
+
 @onready var properties: AcceptDialog = Global.control.find_child("LayerProperties")
 @onready var main_button := %LayerMainButton as Button
 @onready var expand_button := %ExpandButton as BaseButton
@@ -213,6 +216,21 @@ func _update_buttons_all_layers() -> void:
 
 func _input(event: InputEvent) -> void:
 	if (
+		Input.is_action_just_pressed(&"rename_layer")
+		and layer_index == Global.current_project.current_layer
+		and line_edit.visible == false
+	):
+		_old_camera_auto_release_gui_focus = Global.camera.auto_release_gui_focus
+		Global.camera.auto_release_gui_focus = false
+		_old_is_writing_text = get_tree().current_scene.is_writing_text
+		get_tree().current_scene.is_writing_text = true
+		label.visible = false
+		line_edit.visible = true
+		line_edit.editable = true
+		line_edit.grab_focus()
+		line_edit.select_all()
+		line_edit.caret_column = line_edit.text.length()
+	elif (
 		(event.is_action_released(&"ui_accept") or event.is_action_released(&"ui_cancel"))
 		and line_edit.visible
 		and event.keycode != KEY_SPACE
@@ -265,6 +283,8 @@ func _on_layer_name_line_edit_focus_exited() -> void:
 
 
 func _save_layer_name(new_name: String) -> void:
+	Global.camera.auto_release_gui_focus = _old_camera_auto_release_gui_focus
+	get_tree().current_scene.is_writing_text = _old_is_writing_text
 	label.visible = true
 	line_edit.visible = false
 	line_edit.editable = false

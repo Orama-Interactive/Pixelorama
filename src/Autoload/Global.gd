@@ -952,6 +952,7 @@ func _initialize_keychain() -> void:
 		&"diagonal_x_minus_y_mirror": Keychain.InputAction.new("", "Global tool options"),
 		&"pixel_perfect": Keychain.InputAction.new("", "Global tool options"),
 		&"alpha_lock": Keychain.InputAction.new("", "Global tool options"),
+		&"rename_layer": Keychain.InputAction.new("", "Timeline"),
 		&"new_layer": Keychain.InputAction.new("", "Timeline"),
 		&"remove_layer": Keychain.InputAction.new("", "Timeline"),
 		&"move_layer_up": Keychain.InputAction.new("", "Timeline"),
