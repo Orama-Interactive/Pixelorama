@@ -1,9 +1,9 @@
 shader_type canvas_item;
 render_mode unshaded;
 
-uniform float hue : hint_range(-1, 1);
-uniform float saturation : hint_range(-1, 1);
-uniform float value : hint_range(-1, 1);
+uniform int hue : hint_range(-180, 180);
+uniform int saturation : hint_range(-100, 100);
+uniform int value : hint_range(-100, 100);
 uniform bool wrap_overflowing = false;
 uniform sampler2D selection : filter_nearest;
 
@@ -15,7 +15,8 @@ float fmod(float x, float y) {
     return x - y * trunc(x / y);
 }
 
-// Inspired from Color::get_h(), Color::get_s() and Color::get_v() in godot's color.cpp
+// Inspired from Color::get_h(), Color::get_s() and Color::get_v() in godot's color.cpp.
+// All color ranges are from set [0,1].
 vec3 rgb2hsv(vec3 rgb) {
 	float h, s, v;
 	float min_val = min(rgb.r, rgb.g);
@@ -48,7 +49,7 @@ vec3 rgb2hsv(vec3 rgb) {
 	return vec3(h, s, v);
 }
 
-// Inspired from Color::set_hsv in godot's color.cpp
+// Inspired from Color::set_hsv in godot's color.cpp. All color ranges are from set [0,1].
 vec3 hsv2rgb(vec3 hsv) {
 	int i;
 	float f, p, q, t;
@@ -88,32 +89,30 @@ void fragment() {
 	vec4 selection_color = texture(selection, UV);
 
 	vec3 col = original_color.rgb;
-	vec3 hsb = rgb2hsv(col);
+	ivec3 hsv_8 = ivec3(round(rgb2hsv(col) * vec3(360.0, 100.0, 100.0)));
 
 	// Apply the shifting (this is incremental, not by percentage of original).
 	// If not greyscale
 	if(!is_equal_approx(col[0], col[1]) || !is_equal_approx(col[1], col[2])) {
 		// Shift the color by shift_amount, but rolling over ih the value goes over 1
-		if (wrap_overflowing && (hsb.x + hue > 1.0 || hsb.x + hue < 0.0)){
-			hsb.x = mod(hsb.x + hue, 1.0);
+		if (wrap_overflowing && (hsv_8.x + hue > 360 || hsv_8.x + hue < 0)){
+			hsv_8.x = int(mod(float(hsv_8.x) + float(hue), 360));
 		}
-		else hsb.x = clamp(hsb.x + hue, 0.0, 1.0);
+		else hsv_8.x = clamp(hsv_8.x + hue, 0, 360);
 	}
-	if (!is_equal_approx(saturation, 0)){
-		if (wrap_overflowing && (hsb.y + saturation > 1.0 || hsb.y + saturation < 0.0)){
-			hsb.y = mod(hsb.y + saturation, 1.0);
+	if (saturation != 0){
+		if (wrap_overflowing && (hsv_8.y + saturation > 100 || hsv_8.y + saturation < 0)){
+			hsv_8.y = int(mod(float(hsv_8.y) + float(saturation), 100));
 		}
-		else hsb.y = clamp(hsb.y + saturation, 0.0, 1.0);
+		else hsv_8.y = clamp(hsv_8.y + saturation, 0, 100);
 	}
-	if (!is_equal_approx(value, 0)){
-		if (wrap_overflowing && (hsb.z + value > 1.0 || hsb.z + value < 0.0)){
-			hsb.z = mod(hsb.z + value, 1.0);
+	if (value != 0){
+		if (wrap_overflowing && (hsv_8.z + value > 100 || hsv_8.z + value < 0)){
+			hsv_8.z = int(mod(float(hsv_8.z) + float(value), 100));
 		}
-		else hsb.z = clamp(hsb.z + value, 0.0, 1.0);
+		else hsv_8.z = clamp(hsv_8.z + value, 0, 100);
 	}
-	col = vec3(hue, 0.1, value);
-	//col = hsb - rgb2hsv(original_color.rgb);
-	//col = hsv2rgb(hsb);
+	col = hsv2rgb(vec3(hsv_8) / vec3(360, 100, 100));
 	vec3 output = mix(original_color.rgb, col, selection_color.a);
 	COLOR = vec4(output.rgb, original_color.a);
 }
