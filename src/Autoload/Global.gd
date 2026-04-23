@@ -480,14 +480,14 @@ var onion_skinning_future_color := Color.BLUE:
 var layer_locking_undoable := true
 ## Found in Preferences. Determines if changes in layer visibility are undoable.
 var layer_visibility_undoable := true
-## Determines if changes in layer blend modes are undoable. Not exposed in prefferences
-## to avoid cluttering prefferences for users this option is meant to be changed through api.
+## Determines if changes in layer blend modes are undoable. Not exposed in preferences
+## to avoid cluttering preferences for users this option is meant to be changed through api.
 var layer_blend_mode_undoable := true
-## Determines if changes in layer opacity are undoable. Not exposed in prefferences
-## to avoid cluttering prefferences for users this option is meant to be changed through api.
+## Determines if changes in layer opacity are undoable. Not exposed in preferences
+## to avoid cluttering preferences for users this option is meant to be changed through api.
 var layer_opacity_undoable := true
-## Determines if changes in cel opacity are undoable. Not exposed in prefferences
-## to avoid cluttering prefferences for users this option is meant to be changed through api.
+## Determines if changes in cel opacity are undoable. Not exposed in preferences
+## to avoid cluttering preferences for users this option is meant to be changed through api.
 var cel_opacity_undoable := true
 
 ## Found in Preferences. If [code]true[/code], the selection rect has animated borders.
