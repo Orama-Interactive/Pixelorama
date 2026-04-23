@@ -1,8 +1,21 @@
 extends ImageEffect
 
-enum Animate { BRIGHTNESS, CONTRAST, SATURATION, RED, GREEN, BLUE, TINT_EFFECT_FACTOR }
+enum Animate {
+	RED_SHIFT,
+	GREEN_SHIFT,
+	BLUE_SHIFT,
+	BRIGHTNESS,
+	CONTRAST,
+	SATURATION,
+	RED,
+	GREEN,
+	BLUE,
+	TINT_EFFECT_FACTOR
+}
 
 var shader := preload("res://src/Shaders/Effects/BrightnessContrast.gdshader")
+
+@onready var overflow_check_box := $VBoxContainer/OverflowCheckBox as CheckBox
 
 
 func _ready() -> void:
@@ -10,16 +23,22 @@ func _ready() -> void:
 	var sm := ShaderMaterial.new()
 	sm.shader = shader
 	preview.set_material(sm)
+	animate_panel.add_float_property("Red shift", $VBoxContainer/RedShift)
+	animate_panel.add_float_property("Green shift", $VBoxContainer/GreenShift)
+	animate_panel.add_float_property("Blue shift", $VBoxContainer/BlueShift)
 	animate_panel.add_float_property("Brightness", $VBoxContainer/BrightnessSlider)
 	animate_panel.add_float_property("Contrast", $VBoxContainer/ContrastSlider)
 	animate_panel.add_float_property("Saturation", $VBoxContainer/SaturationSlider)
-	animate_panel.add_float_property("Red", $VBoxContainer/RedSlider)
-	animate_panel.add_float_property("Green", $VBoxContainer/GreenSlider)
-	animate_panel.add_float_property("Blue", $VBoxContainer/BlueSlider)
+	animate_panel.add_float_property("Red contribution", $VBoxContainer/RedSlider)
+	animate_panel.add_float_property("Green contribution", $VBoxContainer/GreenSlider)
+	animate_panel.add_float_property("Blue contribution", $VBoxContainer/BlueSlider)
 	animate_panel.add_float_property("Tint effect factor", $VBoxContainer/TintSlider)
 
 
 func commit_action(cel: Image, project := Global.current_project) -> void:
+	var red_shift := animate_panel.get_animated_value(commit_idx, Animate.RED_SHIFT) / 255.0
+	var green_shift := animate_panel.get_animated_value(commit_idx, Animate.GREEN_SHIFT) / 255.0
+	var blue_shift := animate_panel.get_animated_value(commit_idx, Animate.BLUE_SHIFT) / 255.0
 	var brightness := animate_panel.get_animated_value(commit_idx, Animate.BRIGHTNESS) / 100.0
 	var contrast := animate_panel.get_animated_value(commit_idx, Animate.CONTRAST) / 100.0
 	var saturation := animate_panel.get_animated_value(commit_idx, Animate.SATURATION) / 100.0
@@ -34,8 +53,10 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	if selection_checkbox.button_pressed and project.has_selection:
 		var selection := project.selection_map.return_cropped_copy(project, project.size)
 		selection_tex = ImageTexture.create_from_image(selection)
-
 	var params := {
+		"red_shift": red_shift,
+		"green_shift": green_shift,
+		"blue_shift": blue_shift,
 		"brightness": brightness,
 		"contrast": contrast,
 		"saturation": saturation,
@@ -44,6 +65,7 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 		"green_value": green,
 		"tint_color": tint_color,
 		"tint_effect_factor": tint_effect_factor,
+		"wrap_overflowing": overflow_check_box.button_pressed,
 		"selection": selection_tex
 	}
 
@@ -53,6 +75,18 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	else:
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(cel, shader, params, project.size)
+
+
+func _on_red_shift_value_changed(_value: float) -> void:
+	update_preview()
+
+
+func _on_green_shift_value_changed(_value: float) -> void:
+	update_preview()
+
+
+func _on_blue_shift_value_changed(_value: float) -> void:
+	update_preview()
 
 
 func _on_brightness_slider_value_changed(_value: float) -> void:
@@ -84,4 +118,8 @@ func _on_tint_color_color_changed(_color: Color) -> void:
 
 
 func _on_tint_slider_value_changed(_value: float) -> void:
+	update_preview()
+
+
+func _on_overflow_check_box_toggled(_toggled_on: bool) -> void:
 	update_preview()

@@ -112,6 +112,8 @@ func _refresh_properties(idx: int):
 	# Nodes setup
 	var property_node: Range = properties[idx]["range_node"]
 	if property_node is ValueSlider:
+		initial_value.suffix = property_node.suffix
+		final_value.suffix = property_node.suffix
 		final_value.snap_step = property_node.snap_step
 		initial_value.snap_step = property_node.snap_step
 	final_value.allow_greater = property_node.allow_greater
