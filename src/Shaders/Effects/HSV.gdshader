@@ -26,6 +26,24 @@ vec3 rgb2hsb(vec3 c){
 				q.x);
 }
 
+// another algorithm based on https://stackoverflow.com/questions/51203917/math-behind-hsv-to-rgb-conversion-of-colors
+//vec3 hsb2rgb(vec3 c){
+    //float i = floor(c.x * 6.0);
+    //float f = c.x * 6.0 - i;
+    //float p = c.z * (1.0 - c.y);
+    //float q = c.z * (1.0 - f * c.y);
+    //float t = c.z * (1.0 - (1.0 - f) * c.y);
+//
+    //switch (int(i) % 6){
+        //case 0: return vec3(c.z, t, p);
+        //case 1: return vec3(q, c.z, p);
+        //case 2: return vec3(p, c.z, t);
+        //case 3: return vec3(p, q, c.z);
+        //case 4: return vec3(t, p, c.z);
+        //case 5: return vec3(c.z, p, q);
+    //}
+//}
+
 vec3 hsb2rgb(vec3 c){
 	vec3 rgb = clamp(abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),
 					6.0)-3.0)-1.0,
@@ -55,20 +73,19 @@ void fragment() {
 		if (wrap_overflowing && (hsb.y + saturation > 1.0 || hsb.y + saturation < 0.0)){
 			hsb.y = mod(hsb.y + saturation, 1.0);
 		}
-		else hsb.y = clamp(hsb.x + saturation, 0.0, 1.0);
+		else hsb.y = clamp(hsb.y + saturation, 0.0, 1.0);
 	}
 	if (!is_equal_approx(value, 0)){
 		if (wrap_overflowing && (hsb.z + value > 1.0 || hsb.z + value < 0.0)){
 			hsb.z = mod(hsb.z + value, 1.0);
 		}
-		else hsb.z = clamp(hsb.x + value, 0.0, 1.0);
+		else hsb.z = clamp(hsb.z + value, 0.0, 1.0);
 	}
 	// Minimize uncertanities by scaling up to the standardized values, round and then scale down.
 	// I don't think removing this will will cause problems, but it's better to place it here.
 	hsb.x = round(hsb.x * 360.0) / 360.0;
 	hsb.y = round(hsb.y * 100.0) / 100.0;
 	hsb.z = round(hsb.z * 100.0) / 100.0;
-
 	col = hsb2rgb(hsb);
 	vec3 output = mix(original_color.rgb, col, selection_color.a);
 	COLOR = vec4(output.rgb, original_color.a);
