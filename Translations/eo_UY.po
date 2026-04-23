@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-04-22 22:09\n"
+"PO-Revision-Date: 2026-04-23 19:54\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Dimensio de kadro"
 
 msgid "Size:"
-msgstr "Grandeco:"
+msgstr "Grande:"
 
 msgid "Width:"
 msgstr "Larĝo:"
@@ -896,7 +896,7 @@ msgstr "Rendimento"
 
 #. Found in the Preferences. Refers to the author of the current project.
 msgid "Author"
-msgstr ""
+msgstr "Aŭtoro"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
@@ -964,7 +964,7 @@ msgstr "Tiparo:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
-msgstr "Grandeco de tiparo:"
+msgstr "Grando de tiparo:"
 
 #. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
 msgid "Screen orientation:"
@@ -1056,7 +1056,7 @@ msgstr "Kundividi agordojn inter maldekstra kaj dekstra iloj"
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
 "For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
 msgstr "Se ĉi tio estas ŝaltita, la agordoj estos samigitaj inter la maldekstra kaj dekstra iloj.\n"
-"Ekzemple, ambaŭ iloj kunhavos la saman penikograndecon, kaj ties ŝanĝado por unu de iloj tuje ŝanĝas la agordon de alia."
+"Ekzemple, ambaŭ iloj kunhavos la saman penikograndon, kaj ties ŝanĝado por unu de iloj tuje ŝanĝas la agordon de alia."
 
 msgid "Left tool color:"
 msgstr "Koloro de la maldekstra ilo:"
@@ -1210,7 +1210,7 @@ msgid "Truncate"
 msgstr "Tranĉi"
 
 msgid "Transition size:"
-msgstr "Grandeco de transiro:"
+msgstr "Grando de transiro:"
 
 msgid "Center:"
 msgstr "Centro:"
@@ -1960,10 +1960,10 @@ msgid "Transparency"
 msgstr "Travidebleco"
 
 msgid "Checker size:"
-msgstr "Grandeco de ŝaktabulkvadratoj:"
+msgstr "Grando de ŝaktabulkvadratoj:"
 
 msgid "Size of the transparent checker background"
-msgstr "Grandeco de kvadratoj de ŝaktabuleca fono"
+msgstr "Grando de kvadratoj de ŝaktabuleca fono"
 
 msgid "Checker color 1:"
 msgstr "Ŝaktabula koloro 1:"
@@ -2073,23 +2073,23 @@ msgstr "Specifas la pelilon, uzatan por subteni grafiktabulon en Windows. Se Win
 
 #. Found in the Preferences. Refers to the displayed name of the current project author.
 msgid "Display name:"
-msgstr ""
+msgstr "Publika nomo:"
 
 #. Found in the Preferences. Refers to the real name of the current project author.
 msgid "Real name:"
-msgstr ""
+msgstr "Fakta nomo:"
 
 #. Found in the Preferences. Refers to the contact info of the current project author.
 msgid "Contact:"
-msgstr ""
+msgstr "Kontakta informo:"
 
 #. Found in the Preferences. Refers to the company name of the current project author.
 msgid "Company/Studio:"
-msgstr ""
+msgstr "Kompanio/studio:"
 
 #. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
 msgid "Last saved by"
-msgstr ""
+msgstr "Laste konservita je"
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
@@ -2271,7 +2271,7 @@ msgid "Custom brush"
 msgstr "Propra peniklo"
 
 msgid "Brush size:"
-msgstr "Grandeco de la peniko:"
+msgstr "Grando de la peniko:"
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. It's a dropdown that shows rotation options for the brush.
 msgid "Rotation options"
@@ -2642,7 +2642,7 @@ msgstr "Se elektita, la animacio ludos nur la kadroj, kiuj havas la saman etiked
 
 #. Found in the timeline, inside the timeline settings. It's a slider that sets the size of the cel buttons in the timeline.
 msgid "Cel size:"
-msgstr "Grandeco de animacieroj:"
+msgstr "Grando de animacieroj:"
 
 #. Found in the timeline, inside the timeline settings. If this is enabled, the past and future frames will have appear tinted.
 msgid "Color mode"
@@ -3438,7 +3438,7 @@ msgstr "Daŭro de kadro:"
 
 #. Refers to the license of a project, which can be set from the project properties.
 msgid "License:"
-msgstr ""
+msgstr "Licenco:"
 
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
@@ -3589,7 +3589,7 @@ msgid "Margins"
 msgstr "Marĝenoj"
 
 msgid "Position + Size"
-msgstr "Pozicio + grandeco"
+msgstr "Pozicio + grando"
 
 msgid "Locked Aspect Ratio"
 msgstr "Ekranformato ŝlosita"
@@ -3765,7 +3765,7 @@ msgstr "Profundeco:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Refers to the size of one pixel's width on the text to scale it in 3D.
 msgid "Pixel size:"
-msgstr "Bildergrandeco:"
+msgstr "Bildergrando:"
 
 #. Found in the tool options of the 3D Shape Edit tool, under the Mesh category if a Text object is selected. Step (in pixels) used to approximate Bézier curves.
 msgid "Curve step:"
@@ -4012,7 +4012,7 @@ msgstr "Nomo de kahelaro:"
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Tile size:"
-msgstr "Grandeco de kaheloj:"
+msgstr "Grando de kaheloj:"
 
 #. The shape of each tile in a tileset (rectangular, isometric, hexagonal).
 #: src/UI/Timeline/NewTileMapLayerDialog.tscn
@@ -4122,7 +4122,7 @@ msgstr "Staka"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
-msgstr "Grandeco de la kahelaj butonoj:"
+msgstr "Grando de la kahelaj butonoj:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Show empty tile:"
