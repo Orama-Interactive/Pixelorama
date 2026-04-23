@@ -4,11 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v1.1.9] - Unreleased
+## [v1.1.9] - 2026-04-12
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@Bartkk0](https://github.com/Bartkk0), Akane Angèle ([@AkaneAngele](https://github.com/AkaneAngele)), [@AlRado](https://github.com/AlRado),  Vance Palacio ([@vanceism7](https://github.com/vanceism7)), Olof Knight ([@InsaneAwesomeTony](https://github.com/InsaneAwesomeTony)), [@magley](https://github.com/magley), [@makinori](https://github.com/makinori)
 
-Built using Godot 4.6.1
+Built using Godot 4.6.2
 
 ### Added
 - It is now finally possible to split layers when exporting spritesheets! [#1456](https://github.com/Orama-Interactive/Pixelorama/pull/1456)
@@ -24,6 +24,7 @@ Built using Godot 4.6.1
 - Added new image size presets when creating a new project. [#1455](https://github.com/Orama-Interactive/Pixelorama/pull/1455)
 - Added a shortcut for canvas rotation. [#1449](https://github.com/Orama-Interactive/Pixelorama/pull/1449)
 - It is now possible to set a shortcut for the Grayscale View menu option. [#1443](https://github.com/Orama-Interactive/Pixelorama/pull/1443)
+- Implemented support for the Thai language.
 
 ### Changed
 - The export dialog's file browser has changed. Now, users select the entire path of the exported file from there, instead of just the folder, and the file name text field has been removed.
@@ -55,6 +56,7 @@ Built using Godot 4.6.1
 - The cel button texture gets properly updated when importing an image to replace a cel. [#1469](https://github.com/Orama-Interactive/Pixelorama/pull/1469)
 - Fixed measurements, color & tilemap indices not mirroring when "Mirror View" is toggled on. [#1465](https://github.com/Orama-Interactive/Pixelorama/issues/1465)
 - Fixed project opened twice when "open last project" is enabled. [#1473](https://github.com/Orama-Interactive/Pixelorama/pull/1473)
+- Fixed file override confirmation dialog from being overflown with text when exporting.
 - Fixed animation tags not being visible if the last project gets loaded on startup.
 - Fixed the "add extension" file dialog ignoring the "Use native file dialogs" preference.
 - Fixed precision loss in perspective lines. [#1450](https://github.com/Orama-Interactive/Pixelorama/pull/1450)
