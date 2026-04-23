@@ -200,12 +200,6 @@ var preferences: Array[Preference] = [
 		Color.BLUE
 	),
 	Preference.new(
-		"layer_blend_mode_undoable",
-		"Timeline/TimelineOptions/LayerBlendModeUndoableButton",
-		"button_pressed",
-		true
-	),
-	Preference.new(
 		"layer_locking_undoable",
 		"Timeline/TimelineOptions/LayerLockingUndoableButton",
 		"button_pressed",
@@ -214,18 +208,6 @@ var preferences: Array[Preference] = [
 	Preference.new(
 		"layer_visibility_undoable",
 		"Timeline/TimelineOptions/LayerVisibilityUndoableButton",
-		"button_pressed",
-		true
-	),
-	Preference.new(
-		"layer_opacity_undoable",
-		"Timeline/TimelineOptions/LayerOpacityUndoableButton",
-		"button_pressed",
-		true
-	),
-	Preference.new(
-		"cel_opacity_undoable",
-		"Timeline/TimelineOptions/CelOpacityUndoableButton",
 		"button_pressed",
 		true
 	),
