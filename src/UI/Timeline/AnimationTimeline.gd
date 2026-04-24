@@ -379,19 +379,26 @@ func _fill_blend_modes_option_button() -> void:
 func _on_blend_modes_item_selected(index: int) -> void:
 	var project := Global.current_project
 	var current_mode := blend_modes_button.get_item_id(index)
-	project.undo_redo.create_action("Set Blend Mode")
-	for idx_pair in project.selected_cels:
-		var layer := project.layers[idx_pair[1]]
-		var previous_mode := layer.blend_mode
-		project.undo_redo.add_do_property(layer, "blend_mode", current_mode)
-		project.undo_redo.add_undo_property(layer, "blend_mode", previous_mode)
-	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	project.undo_redo.add_do_method(_update_layer_settings_ui)
-	project.undo_redo.add_do_method(_update_layers)
-	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
-	project.undo_redo.add_undo_method(_update_layer_settings_ui)
-	project.undo_redo.add_undo_method(_update_layers)
-	project.undo_redo.commit_action()
+	if Global.layer_blend_mode_undoable:
+		project.undo_redo.create_action("Set Blend Mode")
+		for idx_pair in project.selected_cels:
+			var layer := project.layers[idx_pair[1]]
+			var previous_mode := layer.blend_mode
+			project.undo_redo.add_do_property(layer, "blend_mode", current_mode)
+			project.undo_redo.add_undo_property(layer, "blend_mode", previous_mode)
+		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		project.undo_redo.add_do_method(_update_layer_settings_ui)
+		project.undo_redo.add_do_method(_update_layers)
+		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+		project.undo_redo.add_undo_method(_update_layer_settings_ui)
+		project.undo_redo.add_undo_method(_update_layers)
+		project.undo_redo.commit_action()
+	else:
+		for idx_pair in project.selected_cels:
+			var layer := project.layers[idx_pair[1]]
+			layer.blend_mode = current_mode as BaseLayer.BlendModes
+			_update_layer_settings_ui()
+			_update_layers()
 
 
 func _update_layers() -> void:
@@ -1377,20 +1384,27 @@ func _on_opacity_slider_value_changed(value: float) -> void:
 	var new_opacity := value / 100.0
 
 	var project: Project = Global.current_project
-	project.undo_redo.create_action("Change Layer Opacity", UndoRedo.MergeMode.MERGE_ENDS)
-	for idx_pair in Global.current_project.selected_cels:
-		var layer := Global.current_project.layers[idx_pair[1]]
+	if Global.layer_opacity_undoable:
+		project.undo_redo.create_action("Change Layer Opacity", UndoRedo.MergeMode.MERGE_ENDS)
+		for idx_pair in Global.current_project.selected_cels:
+			var layer := Global.current_project.layers[idx_pair[1]]
 
-		project.undo_redo.add_do_property(layer, "opacity", new_opacity)
-		project.undo_redo.add_undo_property(layer, "opacity", layer.opacity)
-		project.undo_redo.add_do_method(Global.canvas.queue_redraw)
-		project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
-		project.undo_redo.add_do_method(_update_layer_settings_ui)
-		project.undo_redo.add_undo_method(_update_layer_settings_ui)
-		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+			project.undo_redo.add_do_property(layer, "opacity", new_opacity)
+			project.undo_redo.add_undo_property(layer, "opacity", layer.opacity)
+			project.undo_redo.add_do_method(Global.canvas.queue_redraw)
+			project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
+			project.undo_redo.add_do_method(_update_layer_settings_ui)
+			project.undo_redo.add_undo_method(_update_layer_settings_ui)
+			project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+			project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 
-	project.undo_redo.commit_action()
+		project.undo_redo.commit_action()
+	else:
+		for idx_pair in Global.current_project.selected_cels:
+			var layer := Global.current_project.layers[idx_pair[1]]
+			layer.opacity = new_opacity
+			Global.canvas.queue_redraw()
+			_update_layer_settings_ui()
 
 
 func _on_timeline_settings_close_requested() -> void:
@@ -1724,7 +1738,8 @@ func _on_onion_skinning_opacity_value_changed(value: float) -> void:
 
 func _on_global_visibility_button_pressed() -> void:
 	var project = Global.current_project
-	project.undo_redo.create_action("Change Layer Visibility")
+	if Global.layer_visibility_undoable:
+		project.undo_redo.create_action("Change Layer Visibility")
 
 	var layer_visible := !global_layer_visibility
 	var mandatory_update := PackedInt32Array()
@@ -1732,42 +1747,61 @@ func _on_global_visibility_button_pressed() -> void:
 		var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
 		if layer.parent == null and layer.visible != layer_visible:
 			mandatory_update.append(layer.index)
-			project.undo_redo.add_do_property(layer, "visible", layer_visible)
-			project.undo_redo.add_undo_property(layer, "visible", layer.visible)
+			if Global.layer_visibility_undoable:
+				project.undo_redo.add_do_property(layer, "visible", layer_visible)
+				project.undo_redo.add_undo_property(layer, "visible", layer.visible)
+			else:
+				layer.visible = layer_visible
 
 	# Multiple layers need to be redrawn
-	project.undo_redo.add_do_property(Global.canvas, "mandatory_update_layers", mandatory_update)
-	project.undo_redo.add_undo_property(Global.canvas, "mandatory_update_layers", mandatory_update)
+	if Global.layer_visibility_undoable:
+		project.undo_redo.add_do_property(
+			Global.canvas, "mandatory_update_layers", mandatory_update
+		)
+		project.undo_redo.add_undo_property(
+			Global.canvas, "mandatory_update_layers", mandatory_update
+		)
 
-	project.undo_redo.add_do_method(update_global_layer_buttons)
-	project.undo_redo.add_undo_method(update_global_layer_buttons)
-	project.undo_redo.add_do_method(_toggle_layer_buttons)
-	project.undo_redo.add_undo_method(_toggle_layer_buttons)
-	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+		project.undo_redo.add_do_method(update_global_layer_buttons)
+		project.undo_redo.add_undo_method(update_global_layer_buttons)
+		project.undo_redo.add_do_method(_toggle_layer_buttons)
+		project.undo_redo.add_undo_method(_toggle_layer_buttons)
+		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 
-	project.undo_redo.commit_action()
+		project.undo_redo.commit_action()
+	else:
+		Global.canvas.mandatory_update_layers = mandatory_update
+		update_global_layer_buttons()
+		_toggle_layer_buttons()
 
 
 func _on_global_lock_button_pressed() -> void:
 	var project = Global.current_project
-	project.undo_redo.create_action("Change Layer Locked Status")
-
 	var locked := !global_layer_lock
-	for layer_button: LayerButton in layer_vbox.get_children():
-		var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
-		if layer.parent == null and layer.locked != locked:
-			project.undo_redo.add_do_property(layer, "locked", locked)
-			project.undo_redo.add_undo_property(layer, "locked", layer.locked)
+	if Global.layer_locking_undoable:
+		project.undo_redo.create_action("Change Layer Locked Status")
 
-	project.undo_redo.add_do_method(update_global_layer_buttons)
-	project.undo_redo.add_undo_method(update_global_layer_buttons)
-	project.undo_redo.add_do_method(_toggle_layer_buttons)
-	project.undo_redo.add_undo_method(_toggle_layer_buttons)
-	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+		for layer_button: LayerButton in layer_vbox.get_children():
+			var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
+			if layer.parent == null and layer.locked != locked:
+				project.undo_redo.add_do_property(layer, "locked", locked)
+				project.undo_redo.add_undo_property(layer, "locked", layer.locked)
 
-	project.undo_redo.commit_action()
+		project.undo_redo.add_do_method(update_global_layer_buttons)
+		project.undo_redo.add_undo_method(update_global_layer_buttons)
+		project.undo_redo.add_do_method(_toggle_layer_buttons)
+		project.undo_redo.add_undo_method(_toggle_layer_buttons)
+		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+		project.undo_redo.commit_action()
+	else:
+		for layer_button: LayerButton in layer_vbox.get_children():
+			var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
+			if layer.parent == null and layer.locked != locked:
+				layer.locked = locked
+		update_global_layer_buttons()
+		_toggle_layer_buttons()
 
 
 func _on_global_expand_button_pressed() -> void:

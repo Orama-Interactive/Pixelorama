@@ -200,6 +200,18 @@ var preferences: Array[Preference] = [
 		Color.BLUE
 	),
 	Preference.new(
+		"layer_locking_undoable",
+		"Timeline/TimelineOptions/LayerLockingUndoableButton",
+		"button_pressed",
+		true
+	),
+	Preference.new(
+		"layer_visibility_undoable",
+		"Timeline/TimelineOptions/LayerVisibilityUndoableButton",
+		"button_pressed",
+		true
+	),
+	Preference.new(
 		"selection_animated_borders", "Selection/SelectionOptions/Animate", "button_pressed", true
 	),
 	Preference.new(

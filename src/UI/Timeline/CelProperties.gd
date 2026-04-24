@@ -36,11 +36,26 @@ func _on_visibility_changed() -> void:
 func _on_opacity_slider_value_changed(value: float) -> void:
 	if cel_indices.size() == 0:
 		return
-	for cel_index in cel_indices:
-		var cel := Global.current_project.frames[cel_index[0]].cels[cel_index[1]]
-		cel.opacity = value / 100.0
-	Global.canvas.update_all_layers = true
-	Global.canvas.queue_redraw()
+	if Global.cel_opacity_undoable:
+		var project: Project = Global.current_project
+		project.undo_redo.create_action("Change Cel Opacity", UndoRedo.MergeMode.MERGE_ENDS)
+		for cel_index in cel_indices:
+			var cel := Global.current_project.frames[cel_index[0]].cels[cel_index[1]]
+			project.undo_redo.add_do_property(cel, "opacity", value / 100.0)
+			project.undo_redo.add_undo_property(cel, "opacity", cel.opacity)
+		project.undo_redo.add_do_property(Global.canvas, "update_all_layers", true)
+		project.undo_redo.add_undo_property(Global.canvas, "update_all_layers", true)
+		project.undo_redo.add_do_method(Global.canvas.queue_redraw)
+		project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
+		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+		project.undo_redo.commit_action()
+	else:
+		for cel_index in cel_indices:
+			var cel := Global.current_project.frames[cel_index[0]].cels[cel_index[1]]
+			cel.opacity = value / 100.0
+		Global.canvas.update_all_layers = true
+		Global.canvas.queue_redraw()
 
 
 func _on_z_index_slider_value_changed(value: float) -> void:

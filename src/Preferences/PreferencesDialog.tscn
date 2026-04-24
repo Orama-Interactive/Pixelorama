@@ -995,6 +995,22 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 color = Color(0, 0, 1, 1)
 
+[node name="LayerLockingUndoableLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions" unique_id=1480303644]
+layout_mode = 2
+text = "Layer lock changes undoable"
+
+[node name="LayerLockingUndoableButton" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions" unique_id=2023726878]
+layout_mode = 2
+text = "On"
+
+[node name="LayerVisibilityUndoableLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions" unique_id=429127991]
+layout_mode = 2
+text = "Layer visibility changes undoable"
+
+[node name="LayerVisibilityUndoableButton" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Timeline/TimelineOptions" unique_id=1905052006]
+layout_mode = 2
+text = "On"
+
 [node name="Tools" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide" unique_id=718539927]
 visible = false
 layout_mode = 2
