@@ -20,6 +20,7 @@ static func open_kra_file(path: String) -> void:
 	var xml_as_string := data_xml.get_string_from_utf8()
 	var has_animation := xml_as_string.contains("keyframes")
 	var new_project := Project.new([Frame.new()], path.get_file().get_basename())
+	new_project.clear_author_data()
 	var selected_layer: BaseLayer
 	var group_layer_found := false
 	var current_stack: Array[GroupLayer] = []
@@ -352,6 +353,14 @@ static func open_documentinfo_xml(zip_reader: ZIPReader, new_project: Project) -
 		elif parser.get_node_type() == XMLParser.NODE_TEXT:
 			if current_node_name == "license":
 				new_project.license = parser.get_node_data()
+			elif current_node_name == "full-name":
+				new_project.author_display_name = parser.get_node_data()
+			elif current_node_name == "creator-first-name":
+				new_project.author_real_name = parser.get_node_data()
+			elif current_node_name == "creator-last-name":
+				new_project.author_real_name += parser.get_node_data()
+			elif current_node_name == "company":
+				new_project.author_company = parser.get_node_data()
 		elif parser.get_node_type() == XMLParser.NODE_CDATA:
 			if current_node_name == "abstract":
 				new_project.user_data = parser.get_node_name()

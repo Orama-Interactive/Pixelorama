@@ -63,6 +63,7 @@ static func open_aseprite_file(path: String) -> void:
 	var project_size := Vector2i(project_width, project_height)
 	var new_project := Project.new([], path.get_file().get_basename(), project_size)
 	new_project.fps = 1.0
+	new_project.clear_author_data()
 	var color_depth := ase_file.get_16()
 	var image_format := Image.FORMAT_RGBA8
 	var pixel_byte := 4
