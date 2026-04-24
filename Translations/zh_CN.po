@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2026-04-22 22:10\n"
+"PO-Revision-Date: 2026-04-24 07:21\n"
 
 msgid "OK"
 msgstr "确定"
@@ -898,7 +898,7 @@ msgstr "性能"
 
 #. Found in the Preferences. Refers to the author of the current project.
 msgid "Author"
-msgstr ""
+msgstr "作者"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
