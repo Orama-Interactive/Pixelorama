@@ -15,6 +15,8 @@ enum LoopType { NO, CYCLE, PINGPONG }
 const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
 const ANIMATION_TAG_TSCN := preload("res://src/UI/Timeline/AnimationTagUI.tscn")
 const LAYER_FX_SCENE_PATH := "res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.tscn"
+## Do not let [member min_cel_size] go below 22, as this is the size of the layer icons.
+const CEL_MIN_SIZE_HARD_LIMIT := 22
 const CEL_MIN_SIZE_OFFSET := 15
 
 var is_animation_running := false
@@ -29,7 +31,7 @@ var cel_size := 36:
 	set = _cel_size_changed
 var min_cel_size := 36:
 	set(value):
-		min_cel_size = value
+		min_cel_size = clampi(value, CEL_MIN_SIZE_HARD_LIMIT, max_cel_size)
 		if is_instance_valid(cel_size_slider):
 			cel_size_slider.min_value = min_cel_size
 var max_cel_size := 144
@@ -146,7 +148,7 @@ func _notification(what: int) -> void:
 			layer_header_container.custom_minimum_size.x = layer_container.custom_minimum_size.x
 
 
-func clear_highlight():
+func clear_highlight() -> void:
 	if not drag_highlight.visible:
 		for connection: Dictionary in drag_highlight.draw.get_connections():
 			var callable: Callable = connection.get("callable", null)
