@@ -271,8 +271,8 @@ func uninstall_extension(file_name := "", remove_mode := UninstallMode.REMOVE_PE
 func get_crashed_session_extensions() -> PackedStringArray:
 	var extension_monitor_path := EXTENSIONS_PATH.path_join("Monitoring.ini")
 	if Global.session_crashed_last_time() and FileAccess.file_exists(extension_monitor_path):
-		# retrieve last session's open extensions, and remove monitor file.
-		var monitor_file = FileAccess.open(extension_monitor_path, FileAccess.READ)
+		# Retrieve last session's open extensions, and remove monitor file.
+		var monitor_file := FileAccess.open(extension_monitor_path, FileAccess.READ)
 		var damaged_extension_names = str_to_var(monitor_file.get_line())
 		monitor_file.close()
 		DirAccess.remove_absolute(extension_monitor_path)
@@ -281,7 +281,7 @@ func get_crashed_session_extensions() -> PackedStringArray:
 				# NOTE: get_file() is used as a countermeasure towards possible malicious tampering
 				# with Monitoring.ini file (to inject paths leading outside
 				# EXTENSIONS_PATH using "../")
-				var extension_name = damaged_extension_names[0].get_file()
+				var extension_name: String = damaged_extension_names[0].get_file()
 				DirAccess.make_dir_recursive_absolute(BUG_EXTENSIONS_PATH)
 				if FileAccess.file_exists(EXTENSIONS_PATH.path_join(extension_name)):
 					# Don't delete the extension permanently
@@ -294,19 +294,18 @@ func get_crashed_session_extensions() -> PackedStringArray:
 	return PackedStringArray()
 
 
-func add_suspicion(extension_name: StringName):
-	# The new (about to load) extension will be considered guilty till it's proven innocent
+func add_suspicion(extension_name: StringName) -> void:
+	# The new (about to load) extension will be considered guilty till it's proven innocent.
 	if not extension_name in damaged_extensions:
 		var tester_file := FileAccess.open(
 			EXTENSIONS_PATH.path_join("Monitoring.ini"), FileAccess.WRITE
 		)
 		damaged_extensions.append(extension_name)
-		tester_file.store_line(var_to_str(int(Time.get_unix_time_from_system())))
 		tester_file.store_line(var_to_str(damaged_extensions))
 		tester_file.close()
 
 
-func clear_suspicion(extension_name: StringName):
+func clear_suspicion(extension_name: StringName) -> void:
 	if extension_name in damaged_extensions:
 		damaged_extensions.remove_at(damaged_extensions.find(extension_name))
 	# Delete the faulty.txt, if there are no more damaged extensions, else update it
@@ -314,7 +313,6 @@ func clear_suspicion(extension_name: StringName):
 		var tester_file := FileAccess.open(
 			EXTENSIONS_PATH.path_join("Monitoring.ini"), FileAccess.WRITE
 		)
-		tester_file.store_line(var_to_str(int(Time.get_unix_time_from_system())))
 		tester_file.store_line(var_to_str(damaged_extensions))
 		tester_file.close()
 	else:
