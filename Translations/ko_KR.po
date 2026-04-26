@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2026-04-22 22:09\n"
+"PO-Revision-Date: 2026-04-26 12:43\n"
 
 msgid "OK"
 msgstr "예"
@@ -577,15 +577,6 @@ msgstr "프로젝트 브러시"
 
 msgid "Random brush"
 msgstr "랜덤 브러시"
-
-msgid "Save Sprite as .pxo"
-msgstr "스프라이트를 .pxo로 저장"
-
-msgid "Export Sprite as .png"
-msgstr "스프라이트를 .png로 내보내기"
-
-msgid "Export Sprite"
-msgstr "스프라이트 내보내기"
 
 msgid "File Exists, Overwrite?"
 msgstr "파일이 이미 존재합니다, 덮어씌우시겠습니까?"
@@ -3078,9 +3069,6 @@ msgstr "새 빈 팔레트"
 msgid "Import Palette"
 msgstr "팔레트 불러오기"
 
-msgid "Create Palette From Current Sprite"
-msgstr "현재 스프라이트에서 팔레트 생성"
-
 msgid "Palette Name:"
 msgstr "팔레트 이름:"
 
@@ -3443,8 +3431,8 @@ msgstr "비어 있음"
 msgid "From Current Palette"
 msgstr "현재 팔레트에서"
 
-msgid "From Current Sprite"
-msgstr "현재 스프라이트에서"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "현재 선택된 영역부터"
