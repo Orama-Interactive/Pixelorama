@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-04-25 18:26\n"
+"PO-Revision-Date: 2026-04-26 12:43\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -577,15 +577,6 @@ msgstr "Projekta peniko"
 
 msgid "Random brush"
 msgstr "Hazarda peniko"
-
-msgid "Save Sprite as .pxo"
-msgstr "Konservi spriton kiel .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Elporti spriton kiel .png"
-
-msgid "Export Sprite"
-msgstr "Elporti spriton"
 
 msgid "File Exists, Overwrite?"
 msgstr "Dosiero ekzistas, ĉu rekonservi?"
@@ -3107,9 +3098,6 @@ msgstr "Nova malplena paletro"
 msgid "Import Palette"
 msgstr "Enporti paletron"
 
-msgid "Create Palette From Current Sprite"
-msgstr "Krei paletron el aktuala bildo"
-
 msgid "Palette Name:"
 msgstr "Nomo de paletro:"
 
@@ -3472,8 +3460,8 @@ msgstr "Malplena"
 msgid "From Current Palette"
 msgstr "El aktuala paletro"
 
-msgid "From Current Sprite"
-msgstr "El aktuala bildo"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "El aktuala elekto"
