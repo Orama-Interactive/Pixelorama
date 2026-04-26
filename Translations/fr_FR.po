@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
-"PO-Revision-Date: 2026-04-22 22:09\n"
+"PO-Revision-Date: 2026-04-26 12:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -578,15 +578,6 @@ msgstr "Pinceau du projet"
 
 msgid "Random brush"
 msgstr "Pinceau aléatoire"
-
-msgid "Save Sprite as .pxo"
-msgstr "Enregistrer le sprite au format .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Exporter le Sprite en .png"
-
-msgid "Export Sprite"
-msgstr "Exporter le sprite"
 
 msgid "File Exists, Overwrite?"
 msgstr "Le fichier existe déjà, voulez-vous le remplacer ?"
@@ -3086,9 +3077,6 @@ msgstr "Nouvelle palette vide"
 msgid "Import Palette"
 msgstr "Importer une palette"
 
-msgid "Create Palette From Current Sprite"
-msgstr "Créer une palette à partir du sprite actuel"
-
 msgid "Palette Name:"
 msgstr "Nom de la palette:"
 
@@ -3451,8 +3439,8 @@ msgstr "Vide"
 msgid "From Current Palette"
 msgstr "À partir de la palette actuelle"
 
-msgid "From Current Sprite"
-msgstr "À partir du sprite actuel"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "À partir de la sélection actuelle"
