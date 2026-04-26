@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2026-04-24 10:53\n"
+"PO-Revision-Date: 2026-04-26 12:43\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -579,15 +579,6 @@ msgstr "Πινέλο από project"
 
 msgid "Random brush"
 msgstr "Τυχαίο πινέλο"
-
-msgid "Save Sprite as .pxo"
-msgstr "Αποθήκευση εικόνας ως .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Εξαγωγή εικόνας ως .png"
-
-msgid "Export Sprite"
-msgstr "Εξαγωγή εικόνας"
 
 msgid "File Exists, Overwrite?"
 msgstr "Το άρχειο υπάρχει, να γίνει αντικατάσταση;"
@@ -3110,9 +3101,6 @@ msgstr "Νέα Κενή Παλέτα"
 msgid "Import Palette"
 msgstr "Εισαγωγή Παλέτας"
 
-msgid "Create Palette From Current Sprite"
-msgstr "Δημιουργία παλέτας από την τρέχουσα εικόνα"
-
 msgid "Palette Name:"
 msgstr "Όνομα Παλέτας:"
 
@@ -3475,8 +3463,8 @@ msgstr "Κενή"
 msgid "From Current Palette"
 msgstr "Από την τρέχουσα παλέτα"
 
-msgid "From Current Sprite"
-msgstr "Από την τρέχουσα εικόνα"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "Από την τρέχουσα επιλογή"
