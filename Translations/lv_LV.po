@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Latvian\n"
 "Language: lv_LV\n"
-"PO-Revision-Date: 2026-04-22 22:10\n"
+"PO-Revision-Date: 2026-04-26 12:44\n"
 
 msgid "OK"
 msgstr "Labi"
@@ -577,15 +577,6 @@ msgstr ""
 
 msgid "Random brush"
 msgstr ""
-
-msgid "Save Sprite as .pxo"
-msgstr "Saglabāt animāciju kā .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Eksportēt animāciju kā .png"
-
-msgid "Export Sprite"
-msgstr "Eksportēt animāciju"
 
 msgid "File Exists, Overwrite?"
 msgstr "Fails eksistē, pārrakstīt?"
@@ -3038,9 +3029,6 @@ msgstr "Jauna tukša palete"
 msgid "Import Palette"
 msgstr "Importēt paleti"
 
-msgid "Create Palette From Current Sprite"
-msgstr ""
-
 msgid "Palette Name:"
 msgstr "Paletes nosaukums:"
 
@@ -3403,7 +3391,7 @@ msgstr ""
 msgid "From Current Palette"
 msgstr ""
 
-msgid "From Current Sprite"
+msgid "From Current Cel"
 msgstr ""
 
 msgid "From Current Selection"
