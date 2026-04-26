@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Belarusian\n"
 "Language: be_BY\n"
-"PO-Revision-Date: 2026-04-22 22:09\n"
+"PO-Revision-Date: 2026-04-26 12:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -577,15 +577,6 @@ msgstr "Пэндзаль праекта"
 
 msgid "Random brush"
 msgstr "Выпадковы пэндзаль"
-
-msgid "Save Sprite as .pxo"
-msgstr ""
-
-msgid "Export Sprite as .png"
-msgstr ""
-
-msgid "Export Sprite"
-msgstr ""
 
 msgid "File Exists, Overwrite?"
 msgstr "Файл існуе. Перазапісаць?"
@@ -3039,9 +3030,6 @@ msgstr ""
 msgid "Import Palette"
 msgstr ""
 
-msgid "Create Palette From Current Sprite"
-msgstr ""
-
 msgid "Palette Name:"
 msgstr ""
 
@@ -3404,7 +3392,7 @@ msgstr ""
 msgid "From Current Palette"
 msgstr ""
 
-msgid "From Current Sprite"
+msgid "From Current Cel"
 msgstr ""
 
 msgid "From Current Selection"
