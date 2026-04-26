@@ -301,6 +301,10 @@ func copy() -> void:
 	else:
 		var selection_rect := project.selection_map.get_selection_rect(project)
 		if transformation_handles.is_transforming_content():
+			if transformation_handles.only_transforms_selection:
+				transform_content_confirm()
+				selection_rect = project.selection_map.get_selection_rect(project)
+		if transformation_handles.is_transforming_content():
 			to_copy.copy_from(transformation_handles.transformed_image)
 			cl_selection_map = preview_selection_map
 		else:
