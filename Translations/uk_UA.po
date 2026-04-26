@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2026-04-22 22:10\n"
+"PO-Revision-Date: 2026-04-26 12:44\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -579,15 +579,6 @@ msgstr "Пензель проєкту"
 
 msgid "Random brush"
 msgstr "Випадковий пензель"
-
-msgid "Save Sprite as .pxo"
-msgstr "Зберегти спрайт як .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Експортувати спрайт в .png"
-
-msgid "Export Sprite"
-msgstr "Експортувати спрайт"
 
 msgid "File Exists, Overwrite?"
 msgstr "Файл існує, перезаписати?"
@@ -3085,9 +3076,6 @@ msgstr "Нова пуста палітра"
 msgid "Import Palette"
 msgstr "Імпортувати палітру"
 
-msgid "Create Palette From Current Sprite"
-msgstr "Створити палітру з поточного спрайту"
-
 msgid "Palette Name:"
 msgstr "Назва палітри:"
 
@@ -3450,8 +3438,8 @@ msgstr "Пуста"
 msgid "From Current Palette"
 msgstr "З поточної палітри"
 
-msgid "From Current Sprite"
-msgstr "З поточного спрайту"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "З поточного виділення"
