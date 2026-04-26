@@ -184,7 +184,7 @@ func remove() -> void:
 func commit_undo() -> void:
 	if not can_undo:
 		return
-	if Global.canvas.selection.transformation_handles.is_transforming_content():
+	if Global.canvas.selection.transformation_handles.is_transforming():
 		Global.canvas.selection.transform_content_cancel()
 	else:
 		undo_redo.undo()

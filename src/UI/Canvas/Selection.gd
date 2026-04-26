@@ -42,7 +42,7 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if transformation_handles.is_transforming_content():
+	if transformation_handles.is_transforming():
 		if event.is_action_pressed(&"transformation_confirm"):
 			transform_content_confirm()
 		elif event.is_action_pressed(&"transformation_cancel"):
@@ -105,7 +105,7 @@ func select_rect(rect: Rect2i, operation := SelectionOperation.ADD) -> void:
 
 
 func transform_content_confirm(should_emit_signal := true) -> void:
-	if not transformation_handles.is_transforming_content():
+	if not transformation_handles.is_transforming():
 		return
 	var project := Global.current_project
 	var preview_image := transformation_handles.pre_transformed_image
@@ -159,7 +159,7 @@ func transform_content_confirm(should_emit_signal := true) -> void:
 
 
 func transform_content_cancel() -> void:
-	if not transformation_handles.is_transforming_content():
+	if not transformation_handles.is_transforming():
 		return
 	var project := Global.current_project
 	project.selection_offset = transformation_handles.pre_transform_selection_offset
@@ -268,7 +268,7 @@ func get_enclosed_image() -> Image:
 
 	var image := project.get_current_cel().get_image()
 	var enclosed_img := Image.new()
-	if transformation_handles.is_transforming_content():
+	if transformation_handles.is_transforming():
 		enclosed_img.copy_from(transformation_handles.transformed_image)
 	else:
 		enclosed_img = get_selected_image(image)
@@ -300,11 +300,11 @@ func copy() -> void:
 		cl_big_bounding_rectangle = Rect2(Vector2.ZERO, project.size)
 	else:
 		var selection_rect := project.selection_map.get_selection_rect(project)
-		if transformation_handles.is_transforming_content():
+		if transformation_handles.is_transforming():
 			if transformation_handles.only_transforms_selection:
 				transform_content_confirm()
 				selection_rect = project.selection_map.get_selection_rect(project)
-		if transformation_handles.is_transforming_content():
+		if transformation_handles.is_transforming():
 			to_copy.copy_from(transformation_handles.transformed_image)
 			cl_selection_map = preview_selection_map
 		else:
@@ -360,7 +360,7 @@ func paste(in_place := false) -> void:
 	if clipboard.image.is_empty():
 		return
 
-	if transformation_handles.is_transforming_content():
+	if transformation_handles.is_transforming():
 		transform_content_confirm()
 	undo_data = get_undo_data(true)
 	clear_selection()
@@ -453,7 +453,7 @@ func paste_from_clipboard() -> void:
 	var clipboard_image := DisplayServer.clipboard_get_image()
 	if clipboard_image.is_empty() or clipboard_image.is_invisible():
 		return
-	if transformation_handles.is_transforming_content():
+	if transformation_handles.is_transforming():
 		transform_content_confirm()
 	undo_data = get_undo_data(true)
 	clear_selection()
@@ -486,7 +486,7 @@ func delete(selected_cels := true) -> void:
 	var project := Global.current_project
 	if !project.layers[project.current_layer].can_layer_get_drawn():
 		return
-	if transformation_handles.is_transforming_content():
+	if transformation_handles.is_transforming():
 		if (
 			transformation_handles.transformed_image.is_empty()
 			or transformation_handles.transformed_image.is_invisible()

@@ -350,7 +350,9 @@ func is_rotated_or_skewed() -> bool:
 	return preview_transform.get_rotation() != 0 or preview_transform.get_skew() != 0
 
 
-func is_transforming_content() -> bool:
+## Returns [code]true[/code] both when transforming the selection with content,
+## and when transforming the selection without the content.
+func is_transforming() -> bool:
 	return currently_transforming
 
 
