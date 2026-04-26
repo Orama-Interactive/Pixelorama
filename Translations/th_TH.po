@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Thai\n"
 "Language: th_TH\n"
-"PO-Revision-Date: 2026-04-22 22:10\n"
+"PO-Revision-Date: 2026-04-26 12:44\n"
 
 msgid "OK"
 msgstr "ตกลง"
@@ -579,15 +579,6 @@ msgstr "หัวแปรงของโปรเจกต์"
 
 msgid "Random brush"
 msgstr "หัวแปรงแบบสุ่ม"
-
-msgid "Save Sprite as .pxo"
-msgstr "บันทึกสไปรท์เป็น .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "ส่งออกสไปรท์เป็น .png"
-
-msgid "Export Sprite"
-msgstr "ส่งออกสไปรท์"
 
 msgid "File Exists, Overwrite?"
 msgstr "ไฟล์มีอยู่แล้ว ต้องการเขียนทับหรือไม่?"
@@ -3111,9 +3102,6 @@ msgstr "จานสีเปล่าใหม่"
 msgid "Import Palette"
 msgstr "นำเข้าจานสี"
 
-msgid "Create Palette From Current Sprite"
-msgstr "สร้างจานสีจากสไปรท์ปัจจุบัน"
-
 msgid "Palette Name:"
 msgstr "ชื่อจานสี:"
 
@@ -3476,8 +3464,8 @@ msgstr "ว่างเปล่า"
 msgid "From Current Palette"
 msgstr "จากจานสีปัจจุบัน"
 
-msgid "From Current Sprite"
-msgstr "จากสไปรท์ปัจจุบัน"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "จากส่วนที่เลือกปัจจุบัน"
