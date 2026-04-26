@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2026-04-22 22:10\n"
+"PO-Revision-Date: 2026-04-26 12:44\n"
 
 msgid "OK"
 msgstr "確定"
@@ -577,15 +577,6 @@ msgstr "專案畫筆"
 
 msgid "Random brush"
 msgstr "隨機畫筆"
-
-msgid "Save Sprite as .pxo"
-msgstr "儲存圖片為 .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "輸出圖片為 .png"
-
-msgid "Export Sprite"
-msgstr "輸出圖片"
 
 msgid "File Exists, Overwrite?"
 msgstr "檔案已存在，要覆寫嗎？"
@@ -3039,9 +3030,6 @@ msgstr "新增空的色盤"
 msgid "Import Palette"
 msgstr "匯入色盤"
 
-msgid "Create Palette From Current Sprite"
-msgstr "從圖片中的顏色創建色盤"
-
 msgid "Palette Name:"
 msgstr "色盤名稱："
 
@@ -3404,8 +3392,8 @@ msgstr "空色盤"
 msgid "From Current Palette"
 msgstr "以當前色盤爲顏色來源"
 
-msgid "From Current Sprite"
-msgstr "以這個專案爲顏色來源"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr ""
