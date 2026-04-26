@@ -185,11 +185,11 @@ func draw_move(pos: Vector2i) -> void:
 	if _drawing and _bezier_mode == Bezier.CHAINED:
 		_editing_bezier = true
 		var current_position := (
-			_curve.get_point_position(_curve.point_count - 1) - Vector2(pos)
-		) + Vector2(0.5, 0.5)
+			(_curve.get_point_position(_curve.point_count - 1) - Vector2(pos)) - Vector2(0.5, 0.5)
+		)
 		if not _editing_out_control_point:
 			_curve.set_point_in(_curve.point_count - 1, current_position)
-		_curve.set_point_out(_curve.point_count - 1, - current_position)
+		_curve.set_point_out(_curve.point_count - 1, -current_position)
 
 
 func draw_end(pos: Vector2i) -> void:
