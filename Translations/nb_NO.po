@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Norwegian Bokmal\n"
 "Language: nb_NO\n"
-"PO-Revision-Date: 2026-04-22 22:10\n"
+"PO-Revision-Date: 2026-04-26 12:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -577,15 +577,6 @@ msgstr "Prosjektbørste"
 
 msgid "Random brush"
 msgstr "Tilfeldig børste"
-
-msgid "Save Sprite as .pxo"
-msgstr "Lagre Figur som .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Eksportér Figur som .png"
-
-msgid "Export Sprite"
-msgstr "Eksportér Figur"
 
 msgid "File Exists, Overwrite?"
 msgstr "Filen Eksisterer, Overskrive?"
@@ -3077,9 +3068,6 @@ msgstr "Ny Tom Palett"
 msgid "Import Palette"
 msgstr "Importer Palett"
 
-msgid "Create Palette From Current Sprite"
-msgstr "Opprett Palett Fra Gjeldene Figur"
-
 msgid "Palette Name:"
 msgstr "Palettnavn:"
 
@@ -3442,8 +3430,8 @@ msgstr "Tom"
 msgid "From Current Palette"
 msgstr "Fra Nåværende Palett"
 
-msgid "From Current Sprite"
-msgstr "Fra Nåværende Figur"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "Fra Nåværende Markert Område"
