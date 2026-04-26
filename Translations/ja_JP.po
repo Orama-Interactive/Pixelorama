@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2026-04-26 12:43\n"
+"PO-Revision-Date: 2026-04-26 16:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3465,7 +3465,7 @@ msgid "From Current Palette"
 msgstr "現在のパレットから"
 
 msgid "From Current Cel"
-msgstr ""
+msgstr "現在のセルから"
 
 msgid "From Current Selection"
 msgstr "現在の選択範囲から"
