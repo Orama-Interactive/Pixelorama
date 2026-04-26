@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2026-04-23 03:17\n"
+"PO-Revision-Date: 2026-04-26 12:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -579,15 +579,6 @@ msgstr "プロジェクトブラシ"
 
 msgid "Random brush"
 msgstr "ランダムブラシ"
-
-msgid "Save Sprite as .pxo"
-msgstr "スプライトを .pxo として保存"
-
-msgid "Export Sprite as .png"
-msgstr ".png としてエクスポート"
-
-msgid "Export Sprite"
-msgstr "スプライトをエクスポート"
 
 msgid "File Exists, Overwrite?"
 msgstr "ファイルが存在します。上書きしますか？"
@@ -3111,9 +3102,6 @@ msgstr "新しい空のパレット"
 msgid "Import Palette"
 msgstr "パレットをインポート"
 
-msgid "Create Palette From Current Sprite"
-msgstr "現在のスプライトからパレットを作成"
-
 msgid "Palette Name:"
 msgstr "パレット名:"
 
@@ -3476,8 +3464,8 @@ msgstr "空"
 msgid "From Current Palette"
 msgstr "現在のパレットから"
 
-msgid "From Current Sprite"
-msgstr "現在のスプライトから"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "現在の選択範囲から"
