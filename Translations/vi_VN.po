@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Vietnamese\n"
 "Language: vi_VN\n"
-"PO-Revision-Date: 2026-04-26 13:45\n"
+"PO-Revision-Date: 2026-04-26 15:14\n"
 
 msgid "OK"
 msgstr "OK"
@@ -446,7 +446,7 @@ msgstr "Hút vào"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Boundary"
-msgstr "Hút vào cạnh lưới"
+msgstr "Hút vào cạnh Lưới"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Center"
@@ -461,7 +461,7 @@ msgid "Snap to Perspective Guides"
 msgstr "Hút vào Đường dẫn Phối Cảnh"
 
 msgid "Show Animation Timeline"
-msgstr ""
+msgstr "Hiển thị Animation Timeline"
 
 msgid "Zen Mode"
 msgstr "Chế độ Tập trung"
@@ -507,203 +507,205 @@ msgstr "Frame mới"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Replace cel"
-msgstr ""
+msgstr "Thay thế Cel"
 
 msgid "New layer"
-msgstr ""
+msgstr "Layer mới"
 
 msgid "New reference image"
-msgstr ""
+msgstr "Hình ảnh tham chiếu mới"
 
 msgid "New palette"
-msgstr ""
+msgstr "Bảng màu mới"
 
 msgid "New brush"
-msgstr ""
+msgstr "Cọ vẽ mới"
 
 msgid "New pattern"
-msgstr ""
+msgstr "Mẫu mới"
 
 msgid "Horizontal frames:"
-msgstr ""
+msgstr "Frames ngang:"
 
 msgid "Vertical frames:"
-msgstr ""
+msgstr "Frames dọc:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet. If it's enabled, the software will slice it into frames automatically.
 msgid "Smart Slice"
-msgstr ""
+msgstr "Cắt thông minh"
 
 #. A value that is a threshold
 msgid "Threshold:"
-msgstr ""
+msgstr "Ngưỡng Threshold:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
 msgid "Images that have any one side smaller than this value will cross the threshold"
-msgstr ""
+msgstr "Ảnh có bất kỳ cạnh nào nhỏ hơn giá trị này sẽ vượt qua ngưỡng Threshold"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Merge is an adjective, it refers to the distance where images get merged.
 msgid "Merge distance:"
-msgstr ""
+msgstr "Khoảng cách gộp:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Merge distance" value slider.
 msgid "Images which crossed the threshold will get merged into a larger image, if they are within this distance"
-msgstr ""
+msgstr "Hình ảnh vượt qua ngưỡng Threshold sẽ được hợp nhất thành một hình ảnh lớn hơn, nếu chúng nằm trong phạm vi khoảng cách này"
 
 #. A button that, when pressed, refreshes something. Used to apply certain settings again after they changed. Currently it's only used in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled.
 msgid "Refresh"
-msgstr ""
+msgstr "Làm mới"
 
 msgid "Start frame:"
-msgstr ""
+msgstr "Bắt đầu frame:"
 
 msgid "End frame:"
-msgstr ""
+msgstr "Kết thúc frame:"
 
 msgid "At frame:"
-msgstr ""
+msgstr "Tại frame:"
 
 msgid "At layer:"
-msgstr ""
+msgstr "Tại layer:"
 
 msgid "Brush type:"
-msgstr ""
+msgstr "Loại cọ vẽ:"
 
 msgid "File brush"
-msgstr ""
+msgstr "Tệp Cọ vẽ"
 
 msgid "Project brush"
-msgstr ""
+msgstr "Dự án Cọ vẽ"
 
 msgid "Random brush"
-msgstr ""
+msgstr "Cọ vẽ ngẫu nhiên"
 
 msgid "File Exists, Overwrite?"
-msgstr ""
+msgstr "Tệp đã tồn tại, Ghì đè?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
-msgstr ""
+msgstr "Các tệp sau đây đã tồn tại. Bạn có muốn ghi đè nó không? %s"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Đường dẫn không hợp lệ!"
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Tên tệp không hợp lệ!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Đường dẫn và Tên tệp không hợp lệ!"
 
 msgid "Exporting in progress..."
-msgstr ""
+msgstr "Đang xuất..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "Không thể tải tệp '%s'."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr ""
+msgstr "Không thể tải tệp '%s'.\n"
+"Mã lỗi: %s"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "Không thể tải tệp '%s'.\n"
+"Đây không phải là tệp tin bảng màu hợp lệ."
 
 msgid "Frame"
-msgstr ""
+msgstr "Frame"
 
 msgid "Frames:"
-msgstr ""
+msgstr "Frames:"
 
 msgid "All Frames"
-msgstr ""
+msgstr "Tất cả Frames"
 
 msgid "Spritesheet"
-msgstr ""
+msgstr "Spritesheet"
 
 msgid "Animation"
-msgstr ""
+msgstr "Animation"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Xem trước:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Frame:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Hướng:"
 
 msgid "Browse"
-msgstr ""
+msgstr "Duyệt"
 
 msgid "Resize:"
-msgstr ""
+msgstr "Kích thước:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Chất lượng:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Hủy Xuất"
 
 msgid "Alert!"
-msgstr ""
+msgstr "Báo động!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Chọn Thư Mục Hiện Tại"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Mở Đường Dẫn"
 
 msgid "Background:"
-msgstr ""
+msgstr "Background:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "Frames đã chọn"
 
 msgid "Layers:"
-msgstr ""
+msgstr "Layers:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Hiển thị Layers"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "Layers đã chọn"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Pixel layer:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Nhóm layer:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "3D layer:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Chiều:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Phía trước"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Phía sau"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Ping-Pong"
 
 msgid "Columns"
-msgstr ""
+msgstr "Cột dọc"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Cột dọc:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Hàng ngang"
 
 msgid "Rows:"
 msgstr ""
@@ -880,176 +882,177 @@ msgid "Backup"
 msgstr ""
 
 msgid "Performance"
-msgstr ""
+msgstr "Hiệu năng"
 
 #. Found in the Preferences. Refers to the author of the current project.
 msgid "Author"
-msgstr ""
+msgstr "Tác giả"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
-msgstr ""
+msgstr "Drivers"
 
 msgid "Extensions"
-msgstr ""
+msgstr "Tiện ích mở rộng"
 
 msgid "Cursors"
-msgstr ""
+msgstr "Trỏ chuột"
 
 msgid "Indicators"
-msgstr ""
+msgstr "Chỉ số"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
-msgstr ""
+msgstr "Bạn cần khởi động lại Pixelorama để các thay đổi có hiệu lực."
 
 msgid "On"
-msgstr ""
+msgstr "Trên"
 
 msgid "Restore default value"
-msgstr ""
+msgstr "Khôi phục về giá trị mặc định"
 
 #. Found in the preferences, under Canvas.
 msgid "Smooth Zoom"
-msgstr ""
+msgstr "Smooth Zoom"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Smooth Zoom".
 msgid "Adds a smoother transition when zooming in or out"
-msgstr ""
+msgstr "Giúp chuyển cảnh mượt mà hơn khi phóng to hoặc thu nhỏ"
 
 #. Found in the preferences, under Canvas.
 msgid "Integer Zoom"
-msgstr ""
+msgstr "Integer Zoom"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
-msgstr ""
+msgstr "Giới hạn giá trị là bội số nguyên của 100%"
 
 msgid "Tablet pressure sensitivity:"
-msgstr ""
+msgstr "Độ nhạy áp lực của máy tính bảng:"
 
 msgid "None"
-msgstr ""
+msgstr "Không có gì"
 
 msgid "Affect Brush's Alpha"
-msgstr ""
+msgstr "Ảnh hưởng Alpha Cọ vẽ"
 
 msgid "Color:"
-msgstr ""
+msgstr "Màu:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Màu Guild:"
 
 msgid "System Language"
-msgstr ""
+msgstr "Ngôn ngữ Hệ Thống"
 
 msgid "Display scale:"
-msgstr ""
+msgstr "Kích thước hiển thị:"
 
 #. Refers to the font of a text.
 msgid "Font:"
-msgstr ""
+msgstr "Phông chữ:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
-msgstr ""
+msgstr "Kích thước phông chữ:"
 
 #. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
 msgid "Screen orientation:"
-msgstr ""
+msgstr "Hướng màn hình:"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Làm mờ giao diện khi cửa sổ thoại bật lên"
 
 #. Found in the preferences, under the interface section. If enabled, the notification labels appear in the canvas when performing an action, such as when undoing/redoing.
 msgid "Show notification labels"
-msgstr ""
+msgstr "Hiện thanh thông báo"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
-msgstr ""
+msgstr "Sử dụng hộp thoại tệp gốc"
 
 #. Found in the preferences, tooltip of the "Use native file dialogs" option.
 msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
-msgstr ""
+msgstr "Khi tùy chọn này được bật, các hộp thoại quản lý tập tin mặc định của hệ điều hành sẽ được sử dụng, thay vì các hộp thoại tùy chỉnh của Pixelorama."
 
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
-msgstr ""
+msgstr "Chế độ cửa sổ đơn"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
 msgid "Collapse main menu"
-msgstr ""
+msgstr "Thu gọn menu chính"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
-msgstr ""
+msgstr "Khi tùy chọn này được bật, các cửa sổ phụ của Pixelorama sẽ được nhúng vào cửa sổ chính, ngược lại, mỗi hộp thoại sẽ là một cửa sổ riêng biệt."
 
 msgid "Dark"
-msgstr ""
+msgstr "Tối"
 
 msgid "Gray"
-msgstr ""
+msgstr "Xám"
 
 msgid "Blue"
-msgstr ""
+msgstr "Xanh dương"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Caramel"
 
 msgid "Light"
-msgstr ""
+msgstr "Sáng"
 
 msgid "Purple"
-msgstr ""
+msgstr "Tím"
 
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
-msgstr ""
+msgstr "Hồng cánh hoa"
 
 msgid "Theme"
-msgstr ""
+msgstr "Giao diện"
 
 msgid "Buttons"
-msgstr ""
+msgstr "Nút bấm"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Màu Icon từ:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Màu Icon:"
 
 msgid "Background"
-msgstr ""
+msgstr "Background"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "Màu Background từ:"
 
 msgid "Background color:"
-msgstr ""
+msgstr "Màu Background:"
 
 #. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
 msgid "Single tool mode"
-msgstr ""
+msgstr "Chế độ công cụ đơn"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
 msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
-msgstr ""
+msgstr "Nếu tùy chọn này được bật, chuột phải sẽ luôn kích hoạt cùng một công cụ như chuột trái."
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between left and right tools"
-msgstr ""
+msgstr "Chia sẻ tùy chọn giữa công cụ bên trái và bên phải"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
 "For example, both tools will share the same brush size, and changing it on one tool will instantly change on the other."
-msgstr ""
+msgstr "Nếu tùy chọn này được bật, các tùy chọn sẽ được đồng bộ giữa công cụ bên trái và bên phải.\n"
+"Ví dụ, cả hai công cụ sẽ dùng chung kích thước cọ, và việc thay đổi kích thước cọ trên một công cụ sẽ ngay lập tức thay đổi trên công cụ kia."
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "Màu công cụ trái:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "Màu công cụ phải:"
 
 #. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
 msgid "Make global palettes read-only"
