@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2026-04-22 22:09\n"
+"PO-Revision-Date: 2026-04-26 12:43\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -577,15 +577,6 @@ msgstr "Projekt ecset"
 
 msgid "Random brush"
 msgstr "Véletlenszerű ecset"
-
-msgid "Save Sprite as .pxo"
-msgstr "Kép mentése mint .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Kép exportálása mint .png"
-
-msgid "Export Sprite"
-msgstr "Kép exportálása"
 
 msgid "File Exists, Overwrite?"
 msgstr "Fájl létezik, fölülírja?"
@@ -3041,9 +3032,6 @@ msgstr "Új üres paletta"
 msgid "Import Palette"
 msgstr "Paletta importálása"
 
-msgid "Create Palette From Current Sprite"
-msgstr "Paletta készítése a mostani képből"
-
 msgid "Palette Name:"
 msgstr "Paletta neve:"
 
@@ -3406,8 +3394,8 @@ msgstr "Üres"
 msgid "From Current Palette"
 msgstr "Jelenlegi palettából"
 
-msgid "From Current Sprite"
-msgstr "Az aktuális képből"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr ""
