@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2026-04-22 22:10\n"
+"PO-Revision-Date: 2026-04-26 12:44\n"
 
 msgid "OK"
 msgstr "Iya"
@@ -579,15 +579,6 @@ msgstr "Kuas proyek"
 
 msgid "Random brush"
 msgstr "Kuas acak"
-
-msgid "Save Sprite as .pxo"
-msgstr "Simpan \"sprite\" sebagai .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Ekspor \"sprite\" sebagai .png"
-
-msgid "Export Sprite"
-msgstr "Ekspor \"sprite\""
 
 msgid "File Exists, Overwrite?"
 msgstr "Ada berkasnya. Timpa saja?"
@@ -3111,9 +3102,6 @@ msgstr "Palet Kosong Baru"
 msgid "Import Palette"
 msgstr "Impor palet"
 
-msgid "Create Palette From Current Sprite"
-msgstr "Buat Palet dari Sprite Saat Ini"
-
 msgid "Palette Name:"
 msgstr "Nama palet:"
 
@@ -3476,8 +3464,8 @@ msgstr "Kosong"
 msgid "From Current Palette"
 msgstr "Dari Palet Saat Ini"
 
-msgid "From Current Sprite"
-msgstr "Dari Sprite Saat Ini"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "Dari Seleksi Saat Ini"
