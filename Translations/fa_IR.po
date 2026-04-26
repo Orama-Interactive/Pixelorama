@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Persian\n"
 "Language: fa_IR\n"
-"PO-Revision-Date: 2026-04-22 22:10\n"
+"PO-Revision-Date: 2026-04-26 12:44\n"
 
 msgid "OK"
 msgstr "باشه"
@@ -579,15 +579,6 @@ msgstr "قلم‌موی پروژه"
 
 msgid "Random brush"
 msgstr "قلم‌موی تصادفی"
-
-msgid "Save Sprite as .pxo"
-msgstr "ذخیره‌سازی اسپرایت به‌عنوان .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "برون‌برد اسپرایت به‌عنوان .png"
-
-msgid "Export Sprite"
-msgstr "برون‌برد اسپرایت"
 
 msgid "File Exists, Overwrite?"
 msgstr "پرونده وجود دارد، بازنویسی شود؟"
@@ -3087,9 +3078,6 @@ msgstr ""
 msgid "Import Palette"
 msgstr ""
 
-msgid "Create Palette From Current Sprite"
-msgstr ""
-
 msgid "Palette Name:"
 msgstr ""
 
@@ -3452,7 +3440,7 @@ msgstr ""
 msgid "From Current Palette"
 msgstr ""
 
-msgid "From Current Sprite"
+msgid "From Current Cel"
 msgstr ""
 
 msgid "From Current Selection"
