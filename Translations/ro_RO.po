@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2026-04-23 09:23\n"
+"PO-Revision-Date: 2026-04-26 12:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -577,15 +577,6 @@ msgstr "Pensulă de proiect"
 
 msgid "Random brush"
 msgstr "Pensulă aleatorie"
-
-msgid "Save Sprite as .pxo"
-msgstr "Salvare grafic bidimensional ca .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Exportare grafic bidimensional ca .png"
-
-msgid "Export Sprite"
-msgstr "Exportare grafic bidimensional"
 
 msgid "File Exists, Overwrite?"
 msgstr "Fișierul există deja. Suprascrii?"
@@ -3108,9 +3099,6 @@ msgstr "Paletă nouă goală"
 msgid "Import Palette"
 msgstr "Importare paletă"
 
-msgid "Create Palette From Current Sprite"
-msgstr "Creare paletă din graficul bidimensional actual"
-
 msgid "Palette Name:"
 msgstr "Numele paletei:"
 
@@ -3473,8 +3461,8 @@ msgstr "Goală"
 msgid "From Current Palette"
 msgstr "Din paleta actuală"
 
-msgid "From Current Sprite"
-msgstr "Din graficul bidimensional actual"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "Din selecția actuală"
