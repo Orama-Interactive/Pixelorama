@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Vietnamese\n"
 "Language: vi_VN\n"
-"PO-Revision-Date: 2026-04-26 12:44\n"
+"PO-Revision-Date: 2026-04-26 13:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Tên Tệp:"
 
 msgid "Project Name:"
-msgstr ""
+msgstr "Tên dự án:"
 
 msgid "Image Size"
 msgstr "Kích thước hình ảnh"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Kích thước khung hình"
 
 msgid "Size:"
-msgstr ""
+msgstr "Kích thước:"
 
 msgid "Width:"
 msgstr "Rộng:"
@@ -61,20 +61,20 @@ msgid "Edit"
 msgstr "Chỉnh sửa"
 
 msgid "Select"
-msgstr ""
+msgstr "Chọn"
 
 msgid "View"
 msgstr "Xem"
 
 msgid "Window"
-msgstr ""
+msgstr "Cửa sổ"
 
 msgid "Image"
 msgstr "Hình ảnh"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "Dự án"
 
 msgid "Effects"
 msgstr "Hiệu ứng"
@@ -95,155 +95,155 @@ msgid "Save..."
 msgstr "Lưu..."
 
 msgid "Save as..."
-msgstr ""
+msgstr "Lưu dưới dạng..."
 
 #. Checkbox found in the Save project dialog. If enabled, the final blended images are being stored also in the pxo, for each frame.
 msgid "Include blended images"
-msgstr ""
+msgstr "Bao gồm hình ảnh hòa trộn"
 
 #. Hint tooltip of the "Include blended images" checkbox found in the Save project dialog.
 msgid "If enabled, the final blended images are also being stored in the pxo, for each frame.\n"
 "This makes the pxo file larger and is useful for importing by third-party software\n"
 "or CLI exporting. Loading pxo files in Pixelorama does not need this option to be enabled."
-msgstr ""
+msgstr "Nếu bật, các hình ảnh hòa trộn cuối cùng cũng sẽ được lưu vào tệp tin pxo cho mỗi khung hình.Điều này làm tệp tin pxo nặng hơn nhưng sẽ hữu ích khi nhập vào phần mềm bên thứ ba hoặc xuất tệp tin bằng dòng lệnh CLI.Việc mở tệp tin pxo trong Pixelorama không cần thiết phải bật tùy chọn này."
 
 msgid "Import"
-msgstr ""
+msgstr "Nhập"
 
 msgid "Export"
-msgstr ""
+msgstr "Xuất"
 
 msgid "Overwrite"
-msgstr ""
+msgstr "Ghi đè"
 
 msgid "Export..."
-msgstr ""
+msgstr "Xuất..."
 
 msgid "Export as..."
-msgstr ""
+msgstr "Xuất dưới dạng..."
 
 msgid "Export PNG..."
-msgstr ""
+msgstr "Xuất PNG..."
 
 msgid "Export PNG as..."
-msgstr ""
+msgstr "Xuất PNG dưới dạng..."
 
 msgid "Quit"
-msgstr ""
+msgstr "Thoát"
 
 msgid "Undo"
-msgstr ""
+msgstr "Hoàn tác"
 
 msgid "Redo"
-msgstr ""
+msgstr "Làm lại"
 
 #. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
 msgid "Undo History"
-msgstr ""
+msgstr "Lịch sử Hoàn tác"
 
 #. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
 msgid "Initial state"
-msgstr ""
+msgstr "Trạng thái ban đầu"
 
 msgid "Copy"
-msgstr ""
+msgstr "Sao chép"
 
 msgid "Cut"
-msgstr ""
+msgstr "Cắt"
 
 msgid "Paste"
-msgstr ""
+msgstr "Dán"
 
 msgid "Paste in Place"
-msgstr ""
+msgstr "Dán vào Vị trí"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
-msgstr ""
+msgstr "Dán từ Clipboard"
 
 msgid "Delete"
-msgstr ""
+msgstr "Xóa"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Xóa Vĩnh viễn"
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
-msgstr ""
+msgstr "Di chuyển đến Thùng rác"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Cọ vẽ mới"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Thu nhỏ hình ảnh"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Pixels"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Phần trăm"
 
 #. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
 msgid "Color mode:"
-msgstr ""
+msgstr "Chế độ màu:"
 
 #. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
 msgid "Color Mode"
-msgstr ""
+msgstr "Chế Độ Màu"
 
 #. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
 msgid "Indexed"
-msgstr ""
+msgstr "Chỉ mục"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr ""
+msgstr "Cắt theo vùng chọn"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr ""
+msgstr "Cắt theo nội dung"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Kích thước khung vẽ"
 
 msgid "Offset Image"
-msgstr ""
+msgstr "Hình ảnh Offset"
 
 msgid "Offset:"
-msgstr ""
+msgstr "Offset:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
-msgstr ""
+msgstr "Wrap around:"
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
-msgstr ""
+msgstr "Frames trung tâm"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Xoay hình ảnh"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "Trục xoay x:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "Trục xoay y:"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Tùy chọn Smear:"
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Độ lệch màu:"
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Góc ban đầu:"
 
 #. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
 msgid "Wrap Strokes"
-msgstr ""
+msgstr "Wrap Strokes"
 
 msgid "Clear"
-msgstr ""
+msgstr "Xóa sạch"
 
 msgid "Invert"
 msgstr ""
@@ -417,93 +417,93 @@ msgid "Mirror View"
 msgstr ""
 
 msgid "Show Grid"
-msgstr ""
+msgstr "Hiển thị Lưới"
 
 msgid "Show Pixel Grid"
-msgstr ""
+msgstr "Hiển thị Lưới pixel"
 
 msgid "Show Rulers"
-msgstr ""
+msgstr "Hiển thị Thước kẻ"
 
 msgid "Show Guides"
-msgstr ""
+msgstr "Hiện đường dẫn hướng"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
-msgstr ""
+msgstr "Hiện đường dẫn hướng chuột"
 
 #. Found under the View menu.
 msgid "Show Reference Images"
-msgstr ""
+msgstr "Hiện Ảnh tham chiếu"
 
 #. Found under the View menu. When enabled, non-destructive layer effects will be visible on the canvas.
 msgid "Display Layer Effects"
-msgstr ""
+msgstr "Hiện hiệu ứng Layer"
 
 #. Found under the View menu.
 msgid "Snap To"
-msgstr ""
+msgstr "Hút vào"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Boundary"
-msgstr ""
+msgstr "Hút vào cạnh lưới"
 
 #. Found under the View menu.
 msgid "Snap to Rectangular Grid Center"
-msgstr ""
+msgstr "Hút vào tâm Lưới"
 
 #. Found under the View menu.
 msgid "Snap to Guides"
-msgstr ""
+msgstr "Hút vào Đường dẫn"
 
 #. Found under the View menu.
 msgid "Snap to Perspective Guides"
-msgstr ""
+msgstr "Hút vào Đường dẫn Phối Cảnh"
 
 msgid "Show Animation Timeline"
 msgstr ""
 
 msgid "Zen Mode"
-msgstr ""
+msgstr "Chế độ Tập trung"
 
 msgid "Fullscreen Mode"
-msgstr ""
+msgstr "Chế độ Toàn màn hình"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Tô màu:"
 
 msgid "Open a File"
-msgstr ""
+msgstr "Mở Tệp"
 
 msgid "Open File(s)"
-msgstr ""
+msgstr "Mở (các) Tệp"
 
 msgid "Import Options"
-msgstr ""
+msgstr "Tùy chọn Nhập"
 
 msgid "Import as:"
-msgstr ""
+msgstr "Nhập dưới dạng:"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Apply to all"
-msgstr ""
+msgstr "Áp dụng tất cả"
 
 msgid "Recent projects"
-msgstr ""
+msgstr "Dự án gần đây"
 
 msgid "New project"
-msgstr ""
+msgstr "Dự án mới"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new project)"
-msgstr ""
+msgstr "Spritesheet (dự án mới)"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new layer)"
-msgstr ""
+msgstr "Spritesheet (Layer mới)"
 
 msgid "New frame"
-msgstr ""
+msgstr "Frame mới"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Replace cel"
