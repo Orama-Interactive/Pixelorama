@@ -104,7 +104,7 @@ func select_rect(rect: Rect2i, operation := SelectionOperation.ADD) -> void:
 		project.selection_map.move_bitmap_values(project)
 
 
-func transform_content_confirm() -> void:
+func transform_content_confirm(should_emit_signal := true) -> void:
 	if not transformation_handles.is_transforming_content():
 		return
 	var project := Global.current_project
@@ -151,9 +151,11 @@ func transform_content_confirm() -> void:
 	commit_undo("Move Selection", undo_data)
 
 	is_pasting = false
+	transformation_handles.only_transforms_selection = false
 	queue_redraw()
 	canvas.queue_redraw()
-	transformation_confirmed.emit()
+	if should_emit_signal:
+		transformation_confirmed.emit()
 
 
 func transform_content_cancel() -> void:
@@ -175,6 +177,7 @@ func transform_content_cancel() -> void:
 	for cel_index in project.selected_cels:
 		canvas.update_texture(cel_index[1])
 	is_pasting = false
+	transformation_handles.only_transforms_selection = false
 	queue_redraw()
 	canvas.queue_redraw()
 	transformation_canceled.emit()

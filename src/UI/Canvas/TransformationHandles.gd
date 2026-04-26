@@ -594,18 +594,24 @@ func begin_transform(
 	force_move_content := false,
 	force_move_selection_only := false
 ) -> void:
-	currently_transforming = true
 	var selection_only_action := Input.is_action_pressed(&"transform_move_selection_only", true)
 	var move_selection_only := selection_only_action or force_move_selection_only
 	if move_selection_only and not force_move_content:
 		if not only_transforms_selection:
+			if currently_transforming:
+				# If we are transforming the content and we want to only transform the selection,
+				# confirm the transformation and begin a new one, that does not include the content.
+				selection_node.transform_content_confirm(false)
 			selection_node.undo_data = selection_node.get_undo_data(false)
 			only_transforms_selection = true
+		currently_transforming = true
 		return
 	else:
 		if only_transforms_selection:
-			selection_node.transform_content_confirm()
-			only_transforms_selection = false
+			# If we are only transforming selection and we want to transform the content as well,
+			# confirm the transformation and begin a new one, that includes the content.
+			selection_node.transform_content_confirm(false)
+	currently_transforming = true
 	if not pre_transformed_image.is_empty():
 		return
 	if is_instance_valid(image):
