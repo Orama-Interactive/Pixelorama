@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2026-04-22 22:10\n"
+"PO-Revision-Date: 2026-04-26 12:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -579,15 +579,6 @@ msgstr "Pincel do projeto"
 
 msgid "Random brush"
 msgstr "Pincel aleatório"
-
-msgid "Save Sprite as .pxo"
-msgstr "Salvar Sprite como .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Exportar Sprite como .png"
-
-msgid "Export Sprite"
-msgstr "Exportar Sprite"
 
 msgid "File Exists, Overwrite?"
 msgstr "Arquivo Já Existe, Substituir?"
@@ -3111,9 +3102,6 @@ msgstr "Nova Paleta Vazia"
 msgid "Import Palette"
 msgstr "Importar Paleta"
 
-msgid "Create Palette From Current Sprite"
-msgstr "Criar paleta a partir do sprite atual"
-
 msgid "Palette Name:"
 msgstr "Nome da Paleta:"
 
@@ -3476,8 +3464,8 @@ msgstr "Vazio"
 msgid "From Current Palette"
 msgstr "Da Paleta atual"
 
-msgid "From Current Sprite"
-msgstr "Do Sprite Atual"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "Da Seleção Atual"
