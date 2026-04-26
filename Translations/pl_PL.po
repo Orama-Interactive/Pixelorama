@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2026-04-22 22:09\n"
+"PO-Revision-Date: 2026-04-26 12:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -579,15 +579,6 @@ msgstr "Pędzel projektu"
 
 msgid "Random brush"
 msgstr "Losowy pędzel"
-
-msgid "Save Sprite as .pxo"
-msgstr "Zapisz obraz jako .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Eksportuj obraz jako .png"
-
-msgid "Export Sprite"
-msgstr "Eksportuj obraz"
 
 msgid "File Exists, Overwrite?"
 msgstr "Plik już istnieje, Nadpisać?"
@@ -3106,9 +3097,6 @@ msgstr "Nowa pusta paleta kolorów"
 msgid "Import Palette"
 msgstr "Importuj paletę kolorów"
 
-msgid "Create Palette From Current Sprite"
-msgstr "Utwórz paletę z aktualnego Sprite'a"
-
 msgid "Palette Name:"
 msgstr "Nazwa palety kolorów:"
 
@@ -3471,8 +3459,8 @@ msgstr "Pusta"
 msgid "From Current Palette"
 msgstr "Z bieżącej palety"
 
-msgid "From Current Sprite"
-msgstr "Z bieżącego obrazu"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "Z bieżącego zaznaczenia"
