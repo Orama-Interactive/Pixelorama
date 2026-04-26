@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2026-04-22 22:09\n"
+"PO-Revision-Date: 2026-04-26 12:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -578,15 +578,6 @@ msgstr "Кисть проекта"
 
 msgid "Random brush"
 msgstr "Случайная кисть"
-
-msgid "Save Sprite as .pxo"
-msgstr "Сохранить спрайт как .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Экспортировать спрайт как .png"
-
-msgid "Export Sprite"
-msgstr "Экспортировать спрайт"
 
 msgid "File Exists, Overwrite?"
 msgstr "Файл уже существует, перезаписать?"
@@ -3100,9 +3091,6 @@ msgstr "Создать пустую палитру"
 msgid "Import Palette"
 msgstr "Импорт Палитры"
 
-msgid "Create Palette From Current Sprite"
-msgstr "Создать палитру из текущего спрайта"
-
 msgid "Palette Name:"
 msgstr "Название палитры:"
 
@@ -3465,8 +3453,8 @@ msgstr "Пустой"
 msgid "From Current Palette"
 msgstr "Из текущей палитры"
 
-msgid "From Current Sprite"
-msgstr "Из текущего спрайта"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "Из выделенного"
