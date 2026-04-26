@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Slovenian\n"
 "Language: sl_SI\n"
-"PO-Revision-Date: 2026-04-22 22:10\n"
+"PO-Revision-Date: 2026-04-26 12:44\n"
 
 msgid "OK"
 msgstr ""
@@ -576,15 +576,6 @@ msgid "Project brush"
 msgstr ""
 
 msgid "Random brush"
-msgstr ""
-
-msgid "Save Sprite as .pxo"
-msgstr ""
-
-msgid "Export Sprite as .png"
-msgstr ""
-
-msgid "Export Sprite"
 msgstr ""
 
 msgid "File Exists, Overwrite?"
@@ -3028,9 +3019,6 @@ msgstr ""
 msgid "Import Palette"
 msgstr ""
 
-msgid "Create Palette From Current Sprite"
-msgstr ""
-
 msgid "Palette Name:"
 msgstr ""
 
@@ -3393,7 +3381,7 @@ msgstr ""
 msgid "From Current Palette"
 msgstr ""
 
-msgid "From Current Sprite"
+msgid "From Current Cel"
 msgstr ""
 
 msgid "From Current Selection"
