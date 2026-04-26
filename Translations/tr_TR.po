@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2026-04-22 22:10\n"
+"PO-Revision-Date: 2026-04-26 12:44\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -579,15 +579,6 @@ msgstr "Proje fırçası"
 
 msgid "Random brush"
 msgstr "Rastgele fırça"
-
-msgid "Save Sprite as .pxo"
-msgstr "Sprite'ı .pxo Olarak Kaydet"
-
-msgid "Export Sprite as .png"
-msgstr "Sprite'ı .png Olarak Dışa Aktar"
-
-msgid "Export Sprite"
-msgstr "Sprite'ı Dışa Aktar"
 
 msgid "File Exists, Overwrite?"
 msgstr "Dosya Zaten Var, Üzerine Yazılsın mı?"
@@ -3096,9 +3087,6 @@ msgstr "Yeni Boş Palet"
 msgid "Import Palette"
 msgstr "Paleti İçe Aktar"
 
-msgid "Create Palette From Current Sprite"
-msgstr "Geçerli Hareketli Sayfadan Palet Oluştur"
-
 msgid "Palette Name:"
 msgstr "Palet Adı:"
 
@@ -3461,8 +3449,8 @@ msgstr "Boş"
 msgid "From Current Palette"
 msgstr "Geçerli Paletten"
 
-msgid "From Current Sprite"
-msgstr "Geçerli Sprite'dan"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "Geçerli Seçimden"
