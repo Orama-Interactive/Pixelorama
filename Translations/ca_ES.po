@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
-"PO-Revision-Date: 2026-04-22 22:09\n"
+"PO-Revision-Date: 2026-04-26 12:43\n"
 
 msgid "OK"
 msgstr "D'acord"
@@ -579,15 +579,6 @@ msgstr "Pinzell del projecte"
 
 msgid "Random brush"
 msgstr "Pinzell aleatori"
-
-msgid "Save Sprite as .pxo"
-msgstr "Desar Sprite com a .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Exportar Sprite com a .png"
-
-msgid "Export Sprite"
-msgstr "Exportar Sprite"
 
 msgid "File Exists, Overwrite?"
 msgstr "El fitxer existeix, sobrescriure?"
@@ -3081,9 +3072,6 @@ msgstr "Nova Paleta Buida"
 msgid "Import Palette"
 msgstr "Importar Paleta"
 
-msgid "Create Palette From Current Sprite"
-msgstr ""
-
 msgid "Palette Name:"
 msgstr "Nom de la Paleta:"
 
@@ -3446,7 +3434,7 @@ msgstr ""
 msgid "From Current Palette"
 msgstr ""
 
-msgid "From Current Sprite"
+msgid "From Current Cel"
 msgstr ""
 
 msgid "From Current Selection"
