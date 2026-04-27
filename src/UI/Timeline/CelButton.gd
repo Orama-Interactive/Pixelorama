@@ -286,7 +286,7 @@ func _clone_cel_content() -> void:
 			next_cel = project.frames[new_frame_layer[0]].cels[new_frame_layer[1]]
 		var old_content = next_cel.get_content()
 		var new_content = selected_cel.copy_content()
-		if next_cel.link_set == null:
+		if next_cel.link_set == null or next_cel.link_set.is_empty():
 			project.undo_redo.add_do_method(next_cel.set_content.bind(new_content))
 			project.undo_redo.add_undo_method(next_cel.set_content.bind(old_content))
 		else:
