@@ -18,12 +18,14 @@ Built using Godot 4.6.2
 - Exposed preferences that allow users to choose whether they want changing the visibility and the locked status of a layer to be included in the undo history. [#1488](https://github.com/Orama-Interactive/Pixelorama/pull/1488)
 
 ### Changed
+- Made the adjust hue, saturation & value effect produce more predictable results. [#1494](https://github.com/Orama-Interactive/Pixelorama/pull/1494)
 - Disabled the overwrite file warning that appeared in the Export dialog's "Browse" file dialog. Instead, only show the warning when clicking on Export. [#1492](https://github.com/Orama-Interactive/Pixelorama/issues/1492)
 
 ### Fixed
 - Fixed a critical regression from v1.1.9, which ruined projects with indexed mode that were saved in version 1.1.8 or older. [#1491](https://github.com/Orama-Interactive/Pixelorama/issues/1491)
+- Fixed issues when, during transformations, the user switched to from a selection with content transformation to a selection-only transformation (by holding <kbd>Alt</kbD> by default), and vice versa.
+- Fixed copying not working when a selection-only ransformation was active.
 - Fixed final images on the export dialog, that have clipping masks and invisible layers, being wrongly rendered. [#1493](https://github.com/Orama-Interactive/Pixelorama/issues/1493)
-- Made the adjust hue, saturation & value effect produce more predictable results. [#1494](https://github.com/Orama-Interactive/Pixelorama/pull/1494)
 - Fixed layers and cels being misaligned in the timeline when the font size is too small. [#1441](https://github.com/Orama-Interactive/Pixelorama/issues/1441)
 
 ## [v1.1.9] - 2026-04-12
