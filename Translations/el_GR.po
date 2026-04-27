@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2026-04-26 12:43\n"
+"PO-Revision-Date: 2026-04-27 10:17\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -3464,7 +3464,7 @@ msgid "From Current Palette"
 msgstr "Από την τρέχουσα παλέτα"
 
 msgid "From Current Cel"
-msgstr ""
+msgstr "Από το τρέχον cel"
 
 msgid "From Current Selection"
 msgstr "Από την τρέχουσα επιλογή"
