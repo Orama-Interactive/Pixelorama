@@ -102,12 +102,18 @@ func _input(event: InputEvent) -> void:
 				# if bezier's curvature is being changed in SINGLE mode
 				if _current_state == SingleState.MIDDLE_A:
 					_curve.set_point_out(
-						0, Vector2(_last_mouse_position) - _curve.get_point_position(0)
+						0,
+						(
+							Vector2(_last_mouse_position)
+							+ Vector2(0.5, 0.5)
+							- _curve.get_point_position(0)
+						)
 					)
 				_curve.set_point_in(
 					1,
 					(
 						Vector2(_last_mouse_position)
+						+ Vector2(0.5, 0.5)
 						- _curve.get_point_position(_curve.point_count - 1)
 					)
 				)
@@ -163,7 +169,7 @@ func draw_start(pos: Vector2i) -> void:
 		_current_state = SingleState.START
 	# NOTE: _current_state of CHAINED mode is always SingleState.START so it will always pass this.
 	if _current_state == SingleState.START or _current_state == SingleState.END:
-		_curve.add_point(pos)
+		_curve.add_point(Vector2(pos) + Vector2(0.5, 0.5))
 	if _bezier_mode == Bezier.SINGLE:
 		_current_state += 1
 	_fill_inside_rect = Rect2i(pos, Vector2i.ZERO)
@@ -178,7 +184,9 @@ func draw_move(pos: Vector2i) -> void:
 		return
 	if _drawing and _bezier_mode == Bezier.CHAINED:
 		_editing_bezier = true
-		var current_position := _curve.get_point_position(_curve.point_count - 1) - Vector2(pos)
+		var current_position := (
+			(_curve.get_point_position(_curve.point_count - 1) - Vector2(pos)) - Vector2(0.5, 0.5)
+		)
 		if not _editing_out_control_point:
 			_curve.set_point_in(_curve.point_count - 1, current_position)
 		_curve.set_point_out(_curve.point_count - 1, -current_position)
@@ -305,7 +313,7 @@ func _bezier() -> Array[Vector2i]:
 		# Mirror the last point of the curve
 		last_pixel.x = (Global.current_project.size.x - 1) - last_pixel.x
 	if _current_state <= SingleState.END:  # this is general for both modes
-		_curve.add_point(last_pixel)
+		_curve.add_point(last_pixel + Vector2(0.5, 0.5))
 	var points := _curve.get_baked_points()
 	if _current_state <= SingleState.END:  # this is general for both modes
 		_curve.remove_point(_curve.point_count - 1)
