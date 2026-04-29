@@ -720,12 +720,20 @@ func _scale_processed_images() -> void:
 		image.resize(image.get_size().x * resize_f, image.get_size().y * resize_f, interpolation)
 
 
-func file_format_string(format_enum: int) -> String:
+## Returns the format string (.png, .jpg etc...). For formats added through extensions, a unique id
+## is attached to the string, [param true_formats] returns the original extension format
+## without the id attached
+func file_format_string(format_enum: int, true_formats := false) -> String:
 	if file_format_dictionary.has(format_enum):
 		return file_format_dictionary[format_enum][0]
 	# If a file format description is not found, try generating one
 	if custom_exporter_generators.has(format_enum):
-		return custom_exporter_generators[format_enum][1]
+		if true_formats:
+			return custom_exporter_generators[format_enum][1]
+		# Else
+		return "%s_id-%s" % [
+			custom_exporter_generators[format_enum][1], str(format_enum)
+		]
 	return ""
 
 
@@ -746,6 +754,12 @@ func get_file_format_from_extension(file_extension: String) -> FileFormat:
 		var extension: String = file_format_dictionary[format][0]
 		if file_extension.to_lower() == extension:
 			return format
+	var custom_format_string := file_extension.split("-", false)
+	if not custom_file_formats.is_empty():
+		var extension_id := custom_format_string[-1].to_int()
+		if extension_id in custom_exporter_generators:
+			@warning_ignore("int_as_enum_without_cast")
+			return extension_id
 	return FileFormat.PNG
 
 
@@ -808,13 +822,17 @@ func _create_export_path(
 		if new_dir_for_each_frame_tag:
 			path += path_extras
 			return project.export_directory_path.path_join(frame_tag_dir).path_join(
-				path + file_format_string(project.file_format)
+				path + file_format_string(project.file_format, true)
 			)
 	path += path_extras
 
 	if OS.get_name() == "Android":
-		return project.export_directory_path + "#" + path + file_format_string(project.file_format)
-	return project.export_directory_path.path_join(path + file_format_string(project.file_format))
+		return project.export_directory_path + "#" + path + file_format_string(
+			project.file_format, true
+		)
+	return project.export_directory_path.path_join(
+		path + file_format_string(project.file_format, true)
+	)
 
 
 func _get_processed_image_tag_name_and_start_id(project: Project, processed_image_id: int) -> Array:
