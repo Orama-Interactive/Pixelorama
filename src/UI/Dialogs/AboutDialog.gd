@@ -191,6 +191,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Agnis Aldiņš (NeZvers)": ["Latvian"],
 	"Edgars Korns (Eddy11)": ["Latvian"],
 	"Teashrock": ["Esperanto"],
+	"/dev/urandom": ["Esperanto"],
 	"Blend_Smile": ["Indonesian"],
 	"NoahParaduck": ["Indonesian"],
 	"Channeling": ["Indonesian"],
