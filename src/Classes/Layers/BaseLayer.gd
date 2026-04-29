@@ -15,7 +15,9 @@ signal ui_color_changed  ## Emits when [member ui_color] is changed.
 enum BlendModes {
 	PASS_THROUGH = -2,  ## Only for group layers. Ignores group blending, like it doesn't exist.
 	NORMAL = 0,  ## The blend layer colors are simply placed on top of the base colors.
-	ERASE,  ## Erases the non-transparent areas of the upper layer from the lower layer's alpha.
+	ERASE,  ## Erases the upper layer's alpha from the alpha of base layers.
+	INTERSECTION,  ## Erases the un-common areas between the blend and the base layers.
+	LOGICAL_AND,  ## Performs Logical AND on colors between the blend and the base layers.
 	DARKEN,  ## Keeps the darker colors between the blend and the base layers.
 	MULTIPLY,  ## Multiplies the numerical values of the two colors, giving a darker result.
 	COLOR_BURN,  ## Darkens by increasing the contrast between the blend and base colors.
