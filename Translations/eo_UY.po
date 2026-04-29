@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-04-26 12:43\n"
+"PO-Revision-Date: 2026-04-29 15:46\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -3461,7 +3461,7 @@ msgid "From Current Palette"
 msgstr "El aktuala paletro"
 
 msgid "From Current Cel"
-msgstr ""
+msgstr "El aktuala animaciero"
 
 msgid "From Current Selection"
 msgstr "El aktuala elekto"
