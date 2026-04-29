@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2026-04-01 00:46\n"
+"PO-Revision-Date: 2026-04-27 19:53\n"
 
 msgid "OK"
 msgstr "Aceptar"
@@ -578,15 +578,6 @@ msgstr "Pincel del proyecto"
 msgid "Random brush"
 msgstr "Pincel al azar"
 
-msgid "Save Sprite as .pxo"
-msgstr "Guardar sprite como .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Exportar sprite como .png"
-
-msgid "Export Sprite"
-msgstr "Exportar Sprite"
-
 msgid "File Exists, Overwrite?"
 msgstr "Si el archivo existe, ¿sobreescribirlo?"
 
@@ -892,6 +883,10 @@ msgstr "Copia de seguridad"
 
 msgid "Performance"
 msgstr "Rendimiento"
+
+#. Found in the Preferences. Refers to the author of the current project.
+msgid "Author"
+msgstr "Autor"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
@@ -2068,6 +2063,26 @@ msgstr "Controlador de tableta:"
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "Especifica el controlador de tableta usado en Windows. Si tienes Windows Ink activado, selecciona winink."
 
+#. Found in the Preferences. Refers to the displayed name of the current project author.
+msgid "Display name:"
+msgstr "Nombre para mostrar:"
+
+#. Found in the Preferences. Refers to the real name of the current project author.
+msgid "Real name:"
+msgstr "Nombre real:"
+
+#. Found in the Preferences. Refers to the contact info of the current project author.
+msgid "Contact:"
+msgstr "Contacto:"
+
+#. Found in the Preferences. Refers to the company name of the current project author.
+msgid "Company/Studio:"
+msgstr "Compañía/Estudio:"
+
+#. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
+msgid "Last saved by"
+msgstr "Última vez guardado por"
+
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
 msgstr "Agregar Extensión"
@@ -3083,9 +3098,6 @@ msgstr "Nueva Paleta Vacía"
 msgid "Import Palette"
 msgstr "Importar Paleta"
 
-msgid "Create Palette From Current Sprite"
-msgstr "Crear paleta a partir del sprite actual"
-
 msgid "Palette Name:"
 msgstr "Nombre de la Paleta:"
 
@@ -3412,6 +3424,10 @@ msgstr "Mueve el fotograma seleccionado hacia la derecha."
 msgid "Frame duration:"
 msgstr "Duración de los fotogramas:"
 
+#. Refers to the license of a project, which can be set from the project properties.
+msgid "License:"
+msgstr "Licencia:"
+
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
 msgstr "Datos del usuario:"
@@ -3444,8 +3460,8 @@ msgstr "Vacío"
 msgid "From Current Palette"
 msgstr "Desde la Paleta actual"
 
-msgid "From Current Sprite"
-msgstr "Desde el Sprite Actual"
+msgid "From Current Cel"
+msgstr "Desde la celda actual"
 
 msgid "From Current Selection"
 msgstr "Desde la Selección Actual"

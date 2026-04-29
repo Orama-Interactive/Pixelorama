@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2026-04-05 14:09\n"
+"PO-Revision-Date: 2026-04-26 12:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -580,15 +580,6 @@ msgstr "Pennello del progetto"
 msgid "Random brush"
 msgstr "Pennello casuale"
 
-msgid "Save Sprite as .pxo"
-msgstr "Salva lo Sprite come .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Esporta lo Sprite come .png"
-
-msgid "Export Sprite"
-msgstr "Esporta lo Sprite"
-
 msgid "File Exists, Overwrite?"
 msgstr "Il file esiste già, vuoi sovrascrivere?"
 
@@ -895,6 +886,10 @@ msgstr "Backup"
 
 msgid "Performance"
 msgstr "Prestazioni"
+
+#. Found in the Preferences. Refers to the author of the current project.
+msgid "Author"
+msgstr ""
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
@@ -2070,6 +2065,26 @@ msgstr "Driver tablet:"
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "Specifica il driver del tablet utilizzato su Windows. Se è abilitato Windows Ink, selezionare winink."
 
+#. Found in the Preferences. Refers to the displayed name of the current project author.
+msgid "Display name:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the real name of the current project author.
+msgid "Real name:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the contact info of the current project author.
+msgid "Contact:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the company name of the current project author.
+msgid "Company/Studio:"
+msgstr ""
+
+#. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
+msgid "Last saved by"
+msgstr ""
+
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
 msgstr "Aggiungi estensione"
@@ -3086,9 +3101,6 @@ msgstr "Nuova palette vuota"
 msgid "Import Palette"
 msgstr "Importa Palette"
 
-msgid "Create Palette From Current Sprite"
-msgstr "Crea palette dallo sprite attuale"
-
 msgid "Palette Name:"
 msgstr "Nome Palette:"
 
@@ -3415,6 +3427,10 @@ msgstr "Sposta il riquadro selezionato a destra."
 msgid "Frame duration:"
 msgstr "Durata del frame:"
 
+#. Refers to the license of a project, which can be set from the project properties.
+msgid "License:"
+msgstr ""
+
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
 msgstr "Dati utente:"
@@ -3447,8 +3463,8 @@ msgstr "Vuoto"
 msgid "From Current Palette"
 msgstr "Dalla Tavolozza Corrente"
 
-msgid "From Current Sprite"
-msgstr "Dallo Sprite Corrente"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "Dalla Selezione Corrente"

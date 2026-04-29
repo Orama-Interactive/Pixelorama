@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Thai\n"
 "Language: th_TH\n"
-"PO-Revision-Date: 2026-04-01 00:47\n"
+"PO-Revision-Date: 2026-04-26 12:44\n"
 
 msgid "OK"
 msgstr "ตกลง"
@@ -580,15 +580,6 @@ msgstr "หัวแปรงของโปรเจกต์"
 msgid "Random brush"
 msgstr "หัวแปรงแบบสุ่ม"
 
-msgid "Save Sprite as .pxo"
-msgstr "บันทึกสไปรท์เป็น .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "ส่งออกสไปรท์เป็น .png"
-
-msgid "Export Sprite"
-msgstr "ส่งออกสไปรท์"
-
 msgid "File Exists, Overwrite?"
 msgstr "ไฟล์มีอยู่แล้ว ต้องการเขียนทับหรือไม่?"
 
@@ -895,6 +886,10 @@ msgstr "สำรองข้อมูล"
 
 msgid "Performance"
 msgstr "ประสิทธิภาพ"
+
+#. Found in the Preferences. Refers to the author of the current project.
+msgid "Author"
+msgstr ""
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
@@ -2071,6 +2066,26 @@ msgstr "ไดรเวอร์แท็บเล็ต:"
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "ระบุไดรเวอร์แท็บเล็ตที่ใช้บน Windows หากคุณเปิดใช้งาน Windows Ink ให้เลือก winink"
 
+#. Found in the Preferences. Refers to the displayed name of the current project author.
+msgid "Display name:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the real name of the current project author.
+msgid "Real name:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the contact info of the current project author.
+msgid "Contact:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the company name of the current project author.
+msgid "Company/Studio:"
+msgstr ""
+
+#. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
+msgid "Last saved by"
+msgstr ""
+
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
 msgstr "เพิ่มส่วนขยาย"
@@ -3087,9 +3102,6 @@ msgstr "จานสีเปล่าใหม่"
 msgid "Import Palette"
 msgstr "นำเข้าจานสี"
 
-msgid "Create Palette From Current Sprite"
-msgstr "สร้างจานสีจากสไปรท์ปัจจุบัน"
-
 msgid "Palette Name:"
 msgstr "ชื่อจานสี:"
 
@@ -3416,6 +3428,10 @@ msgstr "ย้ายเฟรมที่เลือกไปทางขวา
 msgid "Frame duration:"
 msgstr "ระยะเวลาเฟรม:"
 
+#. Refers to the license of a project, which can be set from the project properties.
+msgid "License:"
+msgstr ""
+
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
 msgstr "ข้อมูลผู้ใช้:"
@@ -3448,8 +3464,8 @@ msgstr "ว่างเปล่า"
 msgid "From Current Palette"
 msgstr "จากจานสีปัจจุบัน"
 
-msgid "From Current Sprite"
-msgstr "จากสไปรท์ปัจจุบัน"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "จากส่วนที่เลือกปัจจุบัน"

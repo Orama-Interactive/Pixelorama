@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2026-04-01 00:46\n"
+"PO-Revision-Date: 2026-04-26 13:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -578,15 +578,6 @@ msgstr "Pensulă de proiect"
 msgid "Random brush"
 msgstr "Pensulă aleatorie"
 
-msgid "Save Sprite as .pxo"
-msgstr "Salvare grafic bidimensional ca .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Exportare grafic bidimensional ca .png"
-
-msgid "Export Sprite"
-msgstr "Exportare grafic bidimensional"
-
 msgid "File Exists, Overwrite?"
 msgstr "Fișierul există deja. Suprascrii?"
 
@@ -893,6 +884,10 @@ msgstr "Copie de rezervă"
 
 msgid "Performance"
 msgstr "Performanță"
+
+#. Found in the Preferences. Refers to the author of the current project.
+msgid "Author"
+msgstr "Autor"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
@@ -2068,6 +2063,26 @@ msgstr "Driver tabletă:"
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "Specifică driverul tabletei utilizat pe Windows. Dacă ai Windows Ink activat, selectează winink."
 
+#. Found in the Preferences. Refers to the displayed name of the current project author.
+msgid "Display name:"
+msgstr "Nume afișat:"
+
+#. Found in the Preferences. Refers to the real name of the current project author.
+msgid "Real name:"
+msgstr "Nume real:"
+
+#. Found in the Preferences. Refers to the contact info of the current project author.
+msgid "Contact:"
+msgstr "Date de contact:"
+
+#. Found in the Preferences. Refers to the company name of the current project author.
+msgid "Company/Studio:"
+msgstr "Companie/studio:"
+
+#. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
+msgid "Last saved by"
+msgstr "Ultima salvare efectuată de"
+
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
 msgstr "Adăugare extensie"
@@ -3084,9 +3099,6 @@ msgstr "Paletă nouă goală"
 msgid "Import Palette"
 msgstr "Importare paletă"
 
-msgid "Create Palette From Current Sprite"
-msgstr "Creare paletă din graficul bidimensional actual"
-
 msgid "Palette Name:"
 msgstr "Numele paletei:"
 
@@ -3413,6 +3425,10 @@ msgstr "Deplasează cadrul selectat la dreapta."
 msgid "Frame duration:"
 msgstr "Durata cadrului:"
 
+#. Refers to the license of a project, which can be set from the project properties.
+msgid "License:"
+msgstr "Licență:"
+
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
 msgstr "Datele utilizatorului:"
@@ -3445,8 +3461,8 @@ msgstr "Goală"
 msgid "From Current Palette"
 msgstr "Din paleta actuală"
 
-msgid "From Current Sprite"
-msgstr "Din graficul bidimensional actual"
+msgid "From Current Cel"
+msgstr "Din celul actual"
 
 msgid "From Current Selection"
 msgstr "Din selecția actuală"

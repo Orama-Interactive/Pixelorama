@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2026-04-01 00:47\n"
+"PO-Revision-Date: 2026-04-26 16:23\n"
 
 msgid "OK"
 msgstr "OK"
@@ -580,15 +580,6 @@ msgstr "プロジェクトブラシ"
 msgid "Random brush"
 msgstr "ランダムブラシ"
 
-msgid "Save Sprite as .pxo"
-msgstr "スプライトを .pxo として保存"
-
-msgid "Export Sprite as .png"
-msgstr ".png としてエクスポート"
-
-msgid "Export Sprite"
-msgstr "スプライトをエクスポート"
-
 msgid "File Exists, Overwrite?"
 msgstr "ファイルが存在します。上書きしますか？"
 
@@ -896,6 +887,10 @@ msgstr "バックアップ"
 msgid "Performance"
 msgstr "パフォーマンス"
 
+#. Found in the Preferences. Refers to the author of the current project.
+msgid "Author"
+msgstr "著者"
+
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
 msgstr "ドライバー"
@@ -1064,7 +1059,7 @@ msgstr "右ツールの色:"
 
 #. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
 msgid "Make global palettes read-only"
-msgstr ""
+msgstr "グローバルパレットを読み取り専用にする"
 
 msgid "Small"
 msgstr "小"
@@ -2070,6 +2065,26 @@ msgstr "タブレットドライバー:"
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "Windowsで使用されているタブレットドライバを指定します。Windows Inkが有効になっている場合は、wininkを選択してください。"
+
+#. Found in the Preferences. Refers to the displayed name of the current project author.
+msgid "Display name:"
+msgstr "表示名:"
+
+#. Found in the Preferences. Refers to the real name of the current project author.
+msgid "Real name:"
+msgstr "本名:"
+
+#. Found in the Preferences. Refers to the contact info of the current project author.
+msgid "Contact:"
+msgstr "連絡先:"
+
+#. Found in the Preferences. Refers to the company name of the current project author.
+msgid "Company/Studio:"
+msgstr "会社/スタジオ:"
+
+#. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
+msgid "Last saved by"
+msgstr "最終保存者"
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
@@ -3087,9 +3102,6 @@ msgstr "新しい空のパレット"
 msgid "Import Palette"
 msgstr "パレットをインポート"
 
-msgid "Create Palette From Current Sprite"
-msgstr "現在のスプライトからパレットを作成"
-
 msgid "Palette Name:"
 msgstr "パレット名:"
 
@@ -3416,6 +3428,10 @@ msgstr "選択したフレームを右に移動します。"
 msgid "Frame duration:"
 msgstr "フレームの長さ:"
 
+#. Refers to the license of a project, which can be set from the project properties.
+msgid "License:"
+msgstr "ライセンス:"
+
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
 msgstr "ユーザーデータ:"
@@ -3448,8 +3464,8 @@ msgstr "空"
 msgid "From Current Palette"
 msgstr "現在のパレットから"
 
-msgid "From Current Sprite"
-msgstr "現在のスプライトから"
+msgid "From Current Cel"
+msgstr "現在のセルから"
 
 msgid "From Current Selection"
 msgstr "現在の選択範囲から"

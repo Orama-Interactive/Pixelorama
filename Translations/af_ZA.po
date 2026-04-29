@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Afrikaans\n"
 "Language: af_ZA\n"
-"PO-Revision-Date: 2026-04-01 00:46\n"
+"PO-Revision-Date: 2026-04-26 12:43\n"
 
 msgid "OK"
 msgstr "Goed"
@@ -578,15 +578,6 @@ msgstr ""
 msgid "Random brush"
 msgstr ""
 
-msgid "Save Sprite as .pxo"
-msgstr ""
-
-msgid "Export Sprite as .png"
-msgstr ""
-
-msgid "Export Sprite"
-msgstr ""
-
 msgid "File Exists, Overwrite?"
 msgstr ""
 
@@ -889,6 +880,10 @@ msgid "Backup"
 msgstr ""
 
 msgid "Performance"
+msgstr ""
+
+#. Found in the Preferences. Refers to the author of the current project.
+msgid "Author"
 msgstr ""
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
@@ -1996,6 +1991,26 @@ msgstr ""
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr ""
 
+#. Found in the Preferences. Refers to the displayed name of the current project author.
+msgid "Display name:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the real name of the current project author.
+msgid "Real name:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the contact info of the current project author.
+msgid "Contact:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the company name of the current project author.
+msgid "Company/Studio:"
+msgstr ""
+
+#. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
+msgid "Last saved by"
+msgstr ""
+
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
 msgstr ""
@@ -3004,9 +3019,6 @@ msgstr ""
 msgid "Import Palette"
 msgstr ""
 
-msgid "Create Palette From Current Sprite"
-msgstr ""
-
 msgid "Palette Name:"
 msgstr ""
 
@@ -3333,6 +3345,10 @@ msgstr ""
 msgid "Frame duration:"
 msgstr ""
 
+#. Refers to the license of a project, which can be set from the project properties.
+msgid "License:"
+msgstr ""
+
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
 msgstr ""
@@ -3365,7 +3381,7 @@ msgstr ""
 msgid "From Current Palette"
 msgstr ""
 
-msgid "From Current Sprite"
+msgid "From Current Cel"
 msgstr ""
 
 msgid "From Current Selection"

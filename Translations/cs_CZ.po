@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2026-04-01 00:46\n"
+"PO-Revision-Date: 2026-04-26 12:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -578,15 +578,6 @@ msgstr "Štětec z projektu"
 msgid "Random brush"
 msgstr "Náhodný štětec"
 
-msgid "Save Sprite as .pxo"
-msgstr "Uložit obrázek jako .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Exportovat obrázek jako .png"
-
-msgid "Export Sprite"
-msgstr "Exportovat obrázek"
-
 msgid "File Exists, Overwrite?"
 msgstr "Soubor existuje, přepsat?"
 
@@ -893,6 +884,10 @@ msgstr "Zálohování"
 
 msgid "Performance"
 msgstr "Výkon"
+
+#. Found in the Preferences. Refers to the author of the current project.
+msgid "Author"
+msgstr ""
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
@@ -2049,6 +2044,26 @@ msgstr "Ovladač tabletu:"
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "Specifikuje ovladač tabletu používaného ve Windows. Pokud máte povolen Windows Ink, vyberte winink."
 
+#. Found in the Preferences. Refers to the displayed name of the current project author.
+msgid "Display name:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the real name of the current project author.
+msgid "Real name:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the contact info of the current project author.
+msgid "Contact:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the company name of the current project author.
+msgid "Company/Studio:"
+msgstr ""
+
+#. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
+msgid "Last saved by"
+msgstr ""
+
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
 msgstr "Přidat rozšíření"
@@ -3061,9 +3076,6 @@ msgstr "Nová prázdná paleta"
 msgid "Import Palette"
 msgstr "Importovat paletu"
 
-msgid "Create Palette From Current Sprite"
-msgstr "Vytvořit paletu z aktuálního spritu"
-
 msgid "Palette Name:"
 msgstr "Název palety:"
 
@@ -3390,6 +3402,10 @@ msgstr "Přesunout vybraný snímek doprava."
 msgid "Frame duration:"
 msgstr ""
 
+#. Refers to the license of a project, which can be set from the project properties.
+msgid "License:"
+msgstr ""
+
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
 msgstr "Uživatelská data:"
@@ -3422,8 +3438,8 @@ msgstr "Prázdná"
 msgid "From Current Palette"
 msgstr "Z aktuální palety"
 
-msgid "From Current Sprite"
-msgstr "Z aktuálního obrázku"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "Z aktuálního výběru"
