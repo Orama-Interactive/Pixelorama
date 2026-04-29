@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://bpp7sufx80fs4" path="res://src/UI/Canvas/ReferenceImages.gd" id="17_qfjb4"]
 [ext_resource type="Script" uid="uid://dfmjalcuvsqqf" path="res://src/UI/Canvas/color_index.gd" id="18_o3xx2"]
 [ext_resource type="Script" uid="uid://w5recpwdrsat" path="res://src/UI/Canvas/TileModeIndices.gd" id="19_7a6wb"]
+[ext_resource type="Script" uid="uid://ce2qasmla5a23" path="res://src/UI/Canvas/tilemap_property_drawing.gd" id="21_iv77e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6b0ox"]
 shader = ExtResource("1_253dh")
@@ -122,3 +123,6 @@ script = ExtResource("17_qfjb4")
 [node name="TileModeIndices" type="Node2D" parent="." unique_id=1893337686]
 material = SubResource("ShaderMaterial_ascg6")
 script = ExtResource("19_7a6wb")
+
+[node name="TilemapPropertyDrawing" type="Node2D" parent="." unique_id=1501102342]
+script = ExtResource("21_iv77e")

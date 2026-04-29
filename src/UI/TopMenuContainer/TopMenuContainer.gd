@@ -455,7 +455,7 @@ func _setup_panels_submenu(item: String) -> void:
 	panels_submenu.set_name("panels_submenu")
 	panels_submenu.hide_on_checkable_item_selection = false
 	for element in ui_elements:
-		if element.name == "Tiles":
+		if element.name == "Tiles" or element.name == "3D Object Tree":
 			continue
 		var id := ui_elements.find(element)
 		panels_submenu.add_check_item(element.name, id)

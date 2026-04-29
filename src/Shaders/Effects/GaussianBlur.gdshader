@@ -2,10 +2,9 @@
 // Licensed under MIT.
 shader_type canvas_item;
 
-// uniform_data blur_type type:: OptionButton [Xor's Gaussian Blur||Monk's Multi-Pass Gaussian Blur||NoDev's Single-Pass Gaussian Blur||NoDev's Multi-Pass Gaussian Blur]
-uniform int blur_type : hint_range(0, 3, 1) = 0;
-uniform int blur_amount = 16;
-uniform float blur_radius = 1.0;
+uniform int blur_type : hint_enum("Xor's Gaussian Blur", "Monk's Multi-Pass Gaussian Blur", "NoDev's Single-Pass Gaussian Blur", "NoDev's Multi-Pass Gaussian Blur") = 0;
+uniform int blur_amount : hint_range(0, 100, 1) = 16;
+uniform float blur_radius : hint_range(0.0, 100.0, 1.0) = 1.0;
 uniform vec2 blur_direction = vec2(1, 1);
 uniform sampler2D selection : filter_nearest;
 

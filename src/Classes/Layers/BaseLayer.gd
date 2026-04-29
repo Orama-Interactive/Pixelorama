@@ -255,13 +255,14 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 	if not effects_enabled:
 		return image
 	var image_size := image.get_size()
+	var frame := cel.get_frame(project)
+	var frame_index := project.frames.find(frame)
 	for effect in effects:
 		if not effect.enabled or not is_instance_valid(effect.shader):
 			continue
-		var params := effect.params
-		var frame := cel.get_frame(project)
+		var params := effect.get_params(frame_index)
 		params["PXO_time"] = frame.position_in_seconds(project)
-		params["PXO_frame_index"] = project.frames.find(frame)
+		params["PXO_frame_index"] = frame_index
 		params["PXO_layer_index"] = index
 		var shader_image_effect := ShaderImageEffect.new()
 		shader_image_effect.generate_image(image, effect.shader, params, image_size)
@@ -274,8 +275,12 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 		for effect in ancestor.effects:
 			if not effect.enabled:
 				continue
+			var params := effect.get_params(frame_index)
+			params["PXO_time"] = frame.position_in_seconds(project)
+			params["PXO_frame_index"] = frame_index
+			params["PXO_layer_index"] = index
 			var shader_image_effect := ShaderImageEffect.new()
-			shader_image_effect.generate_image(image, effect.shader, effect.params, image_size)
+			shader_image_effect.generate_image(image, effect.shader, params, image_size)
 	return image
 
 
@@ -312,7 +317,7 @@ func serialize() -> Dictionary:
 		"opacity": opacity,
 		"ui_color": ui_color,
 		"parent": parent.index if is_instance_valid(parent) else -1,
-		"effects": effect_data
+		"effects": effect_data,
 	}
 	if not user_data.is_empty():
 		dict["user_data"] = user_data
@@ -363,6 +368,7 @@ func deserialize(dict: Dictionary) -> void:
 				print("Loading effect failed, not a dictionary.")
 				continue
 			var effect := LayerEffect.new()
+			effect.layer = self
 			effect.deserialize(effect_dict)
 			effects.append(effect)
 

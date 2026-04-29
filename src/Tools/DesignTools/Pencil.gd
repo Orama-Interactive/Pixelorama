@@ -117,6 +117,13 @@ func draw_start(pos: Vector2i) -> void:
 	_drawer.reset()
 
 	_draw_line = Input.is_action_pressed("draw_create_line")
+	var project := Global.current_project
+	var draw_pos := pos
+	if project.get_current_cel() is Cel3D:
+		var layer := project.layers[project.current_layer] as Layer3D
+		draw_pos = draw_on_3d_object(pos, layer)
+		if draw_pos == Vector2i(Vector2.INF):
+			return
 	if _draw_line:
 		_spacing_mode = false  # spacing mode is disabled during line mode
 		if Global.mirror_view:
@@ -129,7 +136,7 @@ func draw_start(pos: Vector2i) -> void:
 		if _fill_inside:
 			_draw_points.append(pos)
 			_fill_inside_rect = Rect2i(pos, Vector2i.ZERO)
-		draw_tool(pos)
+		draw_tool(draw_pos)
 		_last_position = pos
 		Global.canvas.sprite_changed_this_frame = true
 	cursor_text = ""
@@ -154,6 +161,8 @@ func draw_move(pos_i: Vector2i) -> void:
 		cursor_text = d.text
 		update_line_polylines(_line_start, _line_end)
 	else:
+		if _last_position == Vector2i(Vector2.INF):
+			return
 		draw_fill_gap(_last_position, pos)
 		_last_position = pos
 		cursor_text = ""
@@ -195,8 +204,8 @@ func draw_end(pos: Vector2i) -> void:
 							draw_tool(v)
 
 	_fill_inside_rect = Rect2i()
-	super.draw_end(pos)
 	commit_undo()
+	super.draw_end(pos)
 	cursor_text = ""
 	update_random_image()
 	_spacing_mode = _old_spacing_mode
@@ -221,3 +230,4 @@ func _draw_brush_image(brush_image: Image, src_rect: Rect2i, dst: Vector2i) -> v
 			else:
 				draw_image.blend_rect(brush_image, src_rect, dst)
 			draw_image.convert_rgb_to_indexed()
+	update_materials(images)

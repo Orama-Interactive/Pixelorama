@@ -310,6 +310,16 @@ layout_mode = 2
 size_flags_horizontal = 3
 columns = 2
 
+[node name="AutotilingLabel" type="Label" parent="Options/MarginContainer/ScrollContainer/GridContainer" unique_id=308149135]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Autotiling:"
+
+[node name="AutotilingCheckButton" type="CheckButton" parent="Options/MarginContainer/ScrollContainer/GridContainer" unique_id=292213219]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "On"
+
 [node name="TileSizeLabel" type="Label" parent="Options/MarginContainer/ScrollContainer/GridContainer" unique_id=258276035]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -411,6 +421,7 @@ scroll_fit_content_height = true
 [connection signal="toggled" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer/Auto" to="." method="_on_auto_toggled"]
 [connection signal="toggled" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/ModeButtonsContainer/Stack" to="." method="_on_stack_toggled"]
 [connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/Buttons/OptionButton" to="." method="_on_option_button_pressed"]
+[connection signal="toggled" from="Options/MarginContainer/ScrollContainer/GridContainer/AutotilingCheckButton" to="." method="_on_autotiling_check_button_toggled"]
 [connection signal="value_changed" from="Options/MarginContainer/ScrollContainer/GridContainer/TileSizeSlider" to="." method="_on_tile_size_slider_value_changed"]
 [connection signal="toggled" from="Options/MarginContainer/ScrollContainer/GridContainer/ShowEmptyTile" to="." method="_on_show_empty_tile_toggled"]
 [connection signal="index_pressed" from="TileButtonPopupMenu" to="." method="_on_tile_button_popup_menu_index_pressed"]

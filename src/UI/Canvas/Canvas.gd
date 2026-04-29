@@ -32,6 +32,7 @@ var layer_metadata_texture := ImageTexture.new()
 @onready var gizmos_3d := $Gizmos3D as Node2D
 @onready var measurements := $Measurements as Node2D
 @onready var reference_image_container := $ReferenceImages as Node2D
+@onready var tilemap_property_drawing := $TilemapPropertyDrawing as Node2D
 
 
 func _ready() -> void:
@@ -104,7 +105,16 @@ func _input(event: InputEvent) -> void:
 
 func queue_redraw_all_layers() -> void:
 	project_changed = true
-	queue_redraw()
+	var project := Global.current_project
+	var current_cel := project.get_current_cel()
+	if current_cel is Cel3D:
+		var layer_3d := project.layers[project.current_layer] as Layer3D
+		layer_3d.animation_player.speed_scale = project.fps
+		layer_3d.animation.length = project.frames.size()
+		layer_3d.animation_player.seek(project.current_frame, true)
+		current_cel.update_texture()
+	else:
+		queue_redraw()
 
 
 func camera_zoom() -> void:

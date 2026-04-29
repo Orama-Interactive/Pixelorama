@@ -1,6 +1,7 @@
 # gdlint: ignore=max-public-methods
 extends Node
 
+signal tool_changed(tool_name: String, button: int)
 signal color_changed(color_info: Dictionary, button: int)
 @warning_ignore("unused_signal")
 signal selected_tile_index_changed(tile_index: int)
@@ -130,7 +131,7 @@ var tools: Dictionary[String, Tool] = {
 		"Pencil",
 		"pencil",
 		"res://src/Tools/DesignTools/Pencil.tscn",
-		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP, Global.LayerTypes.THREE_D],
 		"Hold %s to make a line",
 		["draw_create_line"]
 	),
@@ -253,6 +254,14 @@ Press %s to edit the last added basis""",
 		"res://src/Tools/3DTools/3DShapeEdit.tscn",
 		[Global.LayerTypes.THREE_D]
 	),
+	"TilesPropertyPainter":
+	Tool.new(
+		"TilesPropertyPainter",
+		"Tiles Property Painter",
+		"tilespropertypainter",
+		"res://src/Tools/UtilityTools/TilePropertyPainter.tscn",
+		[Global.LayerTypes.TILEMAP]
+	)
 }
 
 var _tool_button_scene := preload("res://src/UI/ToolsPanel/ToolButton.tscn")
@@ -413,11 +422,12 @@ func _ready() -> void:
 	)
 	assign_color(color_value, MOUSE_BUTTON_RIGHT, false)
 	update_tool_cursors()
+
+	# Await is necessary to hide tools irrelevant to the current layer (That may have been
+	# added by extensions), And to make sure projects loaded at startup have correct visible tools
+	await get_tree().process_frame
 	var layer: BaseLayer = Global.current_project.layers[Global.current_project.current_layer]
 	var layer_type := layer.get_layer_type()
-
-	# Await is necessary to hide irrelevant tools added by extensions
-	await get_tree().process_frame
 	_show_relevant_tools(layer_type)
 
 
@@ -514,6 +524,7 @@ func set_tool(tool_name: String, button: int) -> void:
 	if not config_changed.is_connected(attempt_config_share):
 		config_changed.connect(attempt_config_share)
 	attempt_config_share(config_slot)  # Sync it with the other tool
+	tool_changed.emit(tool_name, button)
 
 
 func get_tool(button: int) -> Slot:

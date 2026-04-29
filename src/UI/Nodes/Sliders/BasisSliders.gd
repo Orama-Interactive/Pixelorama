@@ -3,6 +3,12 @@ class_name BasisSliders
 extends HBoxContainer
 
 signal value_changed(value: Basis)
+@warning_ignore("unused_signal")
+signal drag_started
+## Emitted when the grabber stops being dragged.
+## If value_changed is true, [member value] is different from the value
+## when the dragging was started.
+signal drag_ended(value_changed: bool)
 
 @export var value: Basis:
 	set(val):
@@ -41,6 +47,12 @@ signal value_changed(value: Basis)
 			slider.allow_lesser = val
 
 var _can_emit_signal := true
+
+
+func _ready() -> void:
+	for slider in get_sliders():
+		slider.drag_started.connect(emit_signal.bind(&"drag_started"))
+		slider.drag_ended.connect(func(changed: bool): drag_ended.emit(changed))
 
 
 func get_sliders() -> Array[ValueSliderV3]:
