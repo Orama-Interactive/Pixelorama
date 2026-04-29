@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-04-29 15:46\n"
+"PO-Revision-Date: 2026-04-29 17:40\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -43,7 +43,7 @@ msgid "Frame Size"
 msgstr "Dimensio de kadro"
 
 msgid "Size:"
-msgstr "Grande:"
+msgstr "Grando:"
 
 msgid "Width:"
 msgstr "Larĝo:"
