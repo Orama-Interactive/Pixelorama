@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2026-04-26 12:43\n"
+"PO-Revision-Date: 2026-04-30 20:52\n"
 
 msgid "OK"
 msgstr "OK"
@@ -888,7 +888,7 @@ msgstr "Leistung"
 
 #. Found in the Preferences. Refers to the author of the current project.
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
@@ -2066,23 +2066,23 @@ msgstr "Gibt den auf Windows verwendeten Tablet-Treiber an. Wenn du Windows Ink 
 
 #. Found in the Preferences. Refers to the displayed name of the current project author.
 msgid "Display name:"
-msgstr ""
+msgstr "Anzeigename:"
 
 #. Found in the Preferences. Refers to the real name of the current project author.
 msgid "Real name:"
-msgstr ""
+msgstr "Echter Name:"
 
 #. Found in the Preferences. Refers to the contact info of the current project author.
 msgid "Contact:"
-msgstr ""
+msgstr "Kontakt:"
 
 #. Found in the Preferences. Refers to the company name of the current project author.
 msgid "Company/Studio:"
-msgstr ""
+msgstr "Firma/Studio:"
 
 #. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
 msgid "Last saved by"
-msgstr ""
+msgstr "Zuletzt gespeichert von"
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
@@ -3429,7 +3429,7 @@ msgstr "Frame-Dauer:"
 
 #. Refers to the license of a project, which can be set from the project properties.
 msgid "License:"
-msgstr ""
+msgstr "Lizenz:"
 
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
@@ -3464,7 +3464,7 @@ msgid "From Current Palette"
 msgstr "Aus aktueller Palette"
 
 msgid "From Current Cel"
-msgstr ""
+msgstr "Von aktueller Zelle"
 
 msgid "From Current Selection"
 msgstr "Aus aktueller Auswahl"
