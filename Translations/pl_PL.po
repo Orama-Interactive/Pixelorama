@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2026-04-26 12:43\n"
+"PO-Revision-Date: 2026-05-03 10:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2063,23 +2063,23 @@ msgstr "Wybiera sterownik tabletu na Windowsie, jeżeli masz włączony \"Window
 
 #. Found in the Preferences. Refers to the displayed name of the current project author.
 msgid "Display name:"
-msgstr ""
+msgstr "Wyświetlana nazwa:"
 
 #. Found in the Preferences. Refers to the real name of the current project author.
 msgid "Real name:"
-msgstr ""
+msgstr "Imię i nazwisko:"
 
 #. Found in the Preferences. Refers to the contact info of the current project author.
 msgid "Contact:"
-msgstr ""
+msgstr "Kontakt:"
 
 #. Found in the Preferences. Refers to the company name of the current project author.
 msgid "Company/Studio:"
-msgstr ""
+msgstr "Firma/Studio:"
 
 #. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
 msgid "Last saved by"
-msgstr ""
+msgstr "Ostatnio zapisany przez"
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
@@ -2919,7 +2919,7 @@ msgstr "Wczytaj plik"
 
 #. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
 msgid "Play at frame:"
-msgstr ""
+msgstr "Odtwórz klatkę:"
 
 msgid "Palette"
 msgstr "Paleta kolorów"
