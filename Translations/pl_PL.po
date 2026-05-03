@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2026-05-03 10:32\n"
+"PO-Revision-Date: 2026-05-03 11:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3021,16 +3021,16 @@ msgid "Redo: Change frame duration"
 msgstr "Przywróć: Zmień czas trwania klatki"
 
 msgid "Undo: Rename Layer"
-msgstr ""
+msgstr "Cofnij: Zmień nazwę warstwy"
 
 msgid "Redo: Rename Layer"
-msgstr ""
+msgstr "Powtórz: Zmień nazwę warstwy"
 
 msgid "Undo: Change Layer Opacity"
-msgstr ""
+msgstr "Cofnij: Zmień krycie warstwy"
 
 msgid "Redo: Change Layer Opacity"
-msgstr ""
+msgstr "Powtórz: Zmień krycie warstwy"
 
 #. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
 msgid "Undo: Change Layer Onion Skinning Ignore Status"
