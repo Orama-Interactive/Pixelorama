@@ -830,7 +830,7 @@ func _create_export_path(
 			+ "#"
 			+ path
 			+ file_format_string(project.file_format, true)
- 		)
+		)
 
 	return project.export_directory_path.path_join(
 		path + file_format_string(project.file_format, true)
