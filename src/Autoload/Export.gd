@@ -731,9 +731,7 @@ func file_format_string(format_enum: int, true_formats := false) -> String:
 		if true_formats:
 			return custom_exporter_generators[format_enum][1]
 		# Else
-		return "%s_id-%s" % [
-			custom_exporter_generators[format_enum][1], str(format_enum)
-		]
+		return "%s_id-%s" % [custom_exporter_generators[format_enum][1], str(format_enum)]
 	return ""
 
 
@@ -827,9 +825,13 @@ func _create_export_path(
 	path += path_extras
 
 	if OS.get_name() == "Android":
-		return project.export_directory_path + "#" + path + file_format_string(
-			project.file_format, true
-		)
+		return (
+			project.export_directory_path
+			+ "#"
+			+ path
+			+ file_format_string(project.file_format, true)
+ 		)
+
 	return project.export_directory_path.path_join(
 		path + file_format_string(project.file_format, true)
 	)
