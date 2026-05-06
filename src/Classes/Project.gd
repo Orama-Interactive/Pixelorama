@@ -451,6 +451,8 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 						layer.audio = stream
 					layers.append(layer)
 					audio_layers += 1
+				Global.LayerTypes.BONE:
+					layers.append(BoneLayer.new(self))
 
 		var frame_i := 0
 		for frame in dict.frames:
@@ -477,6 +479,8 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 						cels.append(new_cel)
 					Global.LayerTypes.AUDIO:
 						cels.append(AudioCel.new())
+					Global.LayerTypes.BONE:
+						cels.append(BoneCel.new())
 				cel["pxo_version"] = pxo_version
 				cels[cel_i].deserialize(cel)
 				_deserialize_metadata(cels[cel_i], cel)
@@ -698,6 +702,16 @@ func get_all_pixel_cels() -> Array[PixelCel]:
 	for frame in frames:
 		for cel in frame.cels:
 			if cel is PixelCel:
+				cels.append(cel)
+	return cels
+
+
+## Returns an [Array] of type [PixelCel] containing all of the pixel cels of the project.
+func get_all_bone_cels() -> Array[BoneCel]:
+	var cels: Array[BoneCel]
+	for frame in frames:
+		for cel in frame.cels:
+			if cel is BoneCel:
 				cels.append(cel)
 	return cels
 

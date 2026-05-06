@@ -117,6 +117,34 @@ func recreate_timeline() -> void:
 	#region Add tracks for animatable objects.
 	# Await is needed so that the params get added to the layer effect.
 	await get_tree().process_frame
+	if current_layer is BoneLayer:
+		var bone_section := add_section(
+			"Bone:%s" % current_layer.name, KeyframeAnimationTrack.TrackTypes.BONE
+		)
+		var animatable_props = BoneLayer.default_bone_params()
+		for param_name in animatable_props.keys():
+			var value = animatable_props[param_name]
+			if not AnimatableObject.is_animatable_type(value):
+				continue
+			add_property(
+				param_name, KeyframeAnimationTrack.TrackTypes.BONE, bone_section, current_layer.animator
+			)
+		var child_bones: Array[BoneLayer] = current_layer.get_child_bones(true)
+		child_bones.reverse()
+		for child_bone in child_bones:
+			var child_bone_section := add_section(
+				"Bone:%s" % child_bone.name, KeyframeAnimationTrack.TrackTypes.BONE
+			)
+			for param_name in animatable_props.keys():
+				var value = animatable_props[param_name]
+				if not LayerEffect.is_animatable_type(value):
+					continue
+				add_property(
+					param_name,
+					KeyframeAnimationTrack.TrackTypes.BONE,
+					child_bone_section,
+					child_bone.animator
+				)
 	for effect in current_layer.effects:
 		var effect_item := add_section(effect.name, KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT)
 		for param_name in effect.params:
@@ -170,8 +198,11 @@ func add_property(
 	param_track.custom_minimum_size.y = tree_item_area_rect.size.y
 	track_container.add_child(param_track)
 	match param_track.type:
+		# TODO: Resolve them later.
 		KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT:
-			param_track.effect = animatable_object
+			param_track.animatable_object = animatable_object
+		KeyframeAnimationTrack.TrackTypes.BONE:
+			param_track.animatable_object = animatable_object
 
 	var animation_dictionary: Dictionary[String, Dictionary] = animatable_object.get(
 		animation_dictionary_name
@@ -255,7 +286,7 @@ func select_keyframes() -> void:
 	var track := key_button.get_parent() as KeyframeAnimationTrack
 	var property_properties := {}  # I apologize for the horrible name.
 	if track.type == KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT:
-		property_properties = track.effect.param_properties[param_name]
+		property_properties = track.animatable_object.param_properties[param_name]
 	var node := Global.create_node_from_variable(
 		property, _on_keyframe_property_changed.bind("value"), property_properties
 	)
@@ -365,6 +396,8 @@ func _on_keyframe_property_changed(new_value, property_name: String) -> void:
 		undo_redo.add_do_method(func(): dict[param_name][frame_index][property_name] = new_value)
 		undo_redo.add_undo_method(func(): dict[param_name][frame_index][property_name] = old_value)
 		last_key_button = key_button
+		if param_name in ["start_point", "bone_rotation"]:
+			Global.canvas.skeleton.queue_redraw()
 	var last_dict := last_key_button.dict
 	var last_param_name := last_key_button.param_name
 	var last_frame_index := last_key_button.frame_index
@@ -411,12 +444,14 @@ func _update_keyframe_property_ui(dict: Dictionary, keyframe_id: int) -> void:
 		ease_type_options.select(ease_type)
 
 
-func add_effect_keyframe(effect: LayerEffect, frame_index: int, param_name: String) -> void:
+func add_keyframe(
+	anim_obj: AnimatableObject, frame_index: int, param_name: String
+) -> void:
 	selected_keyframes = [next_keyframe_id]
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Add keyframe")
-	undo_redo.add_do_method(effect.set_keyframe.bind(param_name, frame_index))
-	undo_redo.add_undo_method(func(): effect.animated_params[param_name].erase(frame_index))
+	undo_redo.add_do_method(anim_obj.set_keyframe.bind(param_name, frame_index))
+	undo_redo.add_undo_method(anim_obj.unset_keyframe.bind(param_name, frame_index))
 	undo_redo.add_undo_method(unselect_keyframe.bind(next_keyframe_id))
 	undo_redo.add_do_method(recreate_timeline)
 	undo_redo.add_undo_method(recreate_timeline)
