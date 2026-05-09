@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2026-04-26 12:44\n"
+"PO-Revision-Date: 2026-05-09 08:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -886,7 +886,7 @@ msgstr "Performance"
 
 #. Found in the Preferences. Refers to the author of the current project.
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
@@ -981,7 +981,7 @@ msgstr "Modo de janela única"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
 msgid "Collapse main menu"
-msgstr ""
+msgstr "Fechar o menu principal"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
@@ -1040,7 +1040,7 @@ msgstr "Ao ativar, o botão direito do rato irá ativar a mesma ferramenta que o
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between left and right tools"
-msgstr ""
+msgstr "Partilhar opções entre ferramentas da esquerda e da direita"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
@@ -1056,7 +1056,7 @@ msgstr "Cor da ferramenta direita:"
 
 #. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
 msgid "Make global palettes read-only"
-msgstr ""
+msgstr "Fazer paletas globais read-only"
 
 msgid "Small"
 msgstr "Pequeno"
@@ -1510,7 +1510,7 @@ msgid "Belarusian"
 msgstr "Bielorrusso"
 
 msgid "Thai"
-msgstr ""
+msgstr "Tailandês"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -2061,23 +2061,23 @@ msgstr "Especifica a driver de tablet a ser usada em Windows. Se tiver Windows I
 
 #. Found in the Preferences. Refers to the displayed name of the current project author.
 msgid "Display name:"
-msgstr ""
+msgstr "Nome de exibição:"
 
 #. Found in the Preferences. Refers to the real name of the current project author.
 msgid "Real name:"
-msgstr ""
+msgstr "Nome real:"
 
 #. Found in the Preferences. Refers to the contact info of the current project author.
 msgid "Contact:"
-msgstr ""
+msgstr "Contacto:"
 
 #. Found in the Preferences. Refers to the company name of the current project author.
 msgid "Company/Studio:"
-msgstr ""
+msgstr "Empresa/Estúdio:"
 
 #. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
 msgid "Last saved by"
-msgstr ""
+msgstr "Ultima vez guardado por"
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
@@ -2497,7 +2497,7 @@ msgid "Adjusted average"
 msgstr "Média ajustada"
 
 msgid "Blend at interface"
-msgstr ""
+msgstr "Misturar na interface"
 
 #. Refers to the left face of a box shape.
 msgid "Left Face"
@@ -3382,7 +3382,7 @@ msgstr "Exportar apenas o conteúdo que está numa área selecionada."
 
 #. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
 msgid "Layers as separate files"
-msgstr ""
+msgstr "Camadas como ficheiros separados"
 
 msgid "Close"
 msgstr "Fechar"
@@ -3423,7 +3423,7 @@ msgstr "Duração do frame:"
 
 #. Refers to the license of a project, which can be set from the project properties.
 msgid "License:"
-msgstr ""
+msgstr "Licença:"
 
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
@@ -3458,7 +3458,7 @@ msgid "From Current Palette"
 msgstr "Da palete atual"
 
 msgid "From Current Cel"
-msgstr ""
+msgstr "Da Célula Atual"
 
 msgid "From Current Selection"
 msgstr "Da seleção atual"
