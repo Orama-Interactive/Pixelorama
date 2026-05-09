@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2026-04-26 12:44\n"
+"PO-Revision-Date: 2026-05-09 08:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1337,11 +1337,11 @@ msgstr "Баг трекер"
 
 #. Found under the Help menu. When selected, it opens a window with a list of backups of projects opened in previous sessions.
 msgid "Restore Backup"
-msgstr ""
+msgstr "Восстановить резервную копию"
 
 #. Found in the Restore Backup dialog.
 msgid "Past sessions"
-msgstr ""
+msgstr "Прошлые сессии"
 
 #. Found in the Restore Backup dialog.
 msgid "Double click to load an entire session, or a specific project."
@@ -1349,15 +1349,15 @@ msgstr ""
 
 #. Found in the Restore Backup dialog.
 msgid "Sessions"
-msgstr ""
+msgstr "Сессии"
 
 #. Found in the Restore Backup dialog.
 msgid "Projects"
-msgstr ""
+msgstr "Проекты"
 
 #. Found in the Restore Backup dialog.
 msgid "(Current Session)"
-msgstr ""
+msgstr "(Текущая сессия)"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
@@ -1511,7 +1511,7 @@ msgid "Belarusian"
 msgstr "Белорусский"
 
 msgid "Thai"
-msgstr ""
+msgstr "Тайский"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -2057,19 +2057,19 @@ msgstr "Укажите драйвер планшета, используемый
 
 #. Found in the Preferences. Refers to the displayed name of the current project author.
 msgid "Display name:"
-msgstr ""
+msgstr "Отображаемое имя:"
 
 #. Found in the Preferences. Refers to the real name of the current project author.
 msgid "Real name:"
-msgstr ""
+msgstr "Настоящее имя:"
 
 #. Found in the Preferences. Refers to the contact info of the current project author.
 msgid "Contact:"
-msgstr ""
+msgstr "Контакты:"
 
 #. Found in the Preferences. Refers to the company name of the current project author.
 msgid "Company/Studio:"
-msgstr ""
+msgstr "Компания/Студия:"
 
 #. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
 msgid "Last saved by"
@@ -2483,11 +2483,11 @@ msgstr "Оттенки серого"
 
 #. Refers to the color of a shape's edge.
 msgid "Edge Color"
-msgstr ""
+msgstr "Цвет контура"
 
 #. Refers to the color of a tool.
 msgid "Tool color"
-msgstr ""
+msgstr "Цвет инструмента"
 
 msgid "Adjusted average"
 msgstr ""
