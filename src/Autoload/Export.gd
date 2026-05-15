@@ -64,6 +64,7 @@ var frame_current_tag := 0  ## Export only current frame tag
 var export_layers := 0
 var number_of_frames := 1
 var direction := AnimationDirection.FORWARD
+var repeat_count := 0
 var resize := 100
 var save_quality := 0.75  ## Used when saving jpg and webp images. Goes from 0 to 1.
 var interpolation := Image.INTERPOLATE_NEAREST
@@ -150,7 +151,7 @@ func external_export(project := Global.current_project) -> void:
 
 func process_data(project := Global.current_project) -> void:
 	var frames := _calculate_frames(project)
-	if frames.size() > blended_frames.size():
+	if frames.size() * (repeat_count + 1) > blended_frames.size():
 		cache_blended_frames(project)
 	match current_tab:
 		ExportTab.IMAGE:
@@ -172,6 +173,12 @@ func process_spritesheet(project := Global.current_project) -> void:
 	processed_images.clear()
 	# Range of frames determined by tags
 	var frames := _calculate_frames(project)
+	# Add additional repeated animation (Doing it here instead of _calculate_frames() to save
+	# compute power
+	if repeat_count > 0:
+		var frames_copy := frames.duplicate()
+		for _r in repeat_count:
+			frames.append_array(frames_copy)
 	# Then store the size of frames for other functions
 	number_of_frames = frames.size()
 	# Used when the orientation is based off the animation tags
@@ -340,6 +347,18 @@ func process_animation(project := Global.current_project) -> void:
 				image = image.get_region(image.get_used_rect())
 			var duration := frame.get_duration_in_seconds(project.fps)
 			processed_images.append(ProcessedImage.new(image, project.frames.find(frame), duration))
+	# Add additional repeated animation (Doing it here instead of _calculate_frames() to save
+	# compute power
+	var un_repeated_size: int = processed_images.size()
+	for _r in repeat_count:
+		for i in un_repeated_size:
+			processed_images.append(
+				ProcessedImage.new(
+					processed_images[i].image,
+					processed_images[i].frame_index,
+					processed_images[i].duration
+				)
+			)
 
 
 func _calculate_frames(project := Global.current_project) -> Array[Frame]:
