@@ -373,7 +373,7 @@ static func get_clipboard_size(app_clipboard: bool) -> Vector2i:
 			var clipboard_image := DisplayServer.clipboard_get_image()
 			if not clipboard_image.is_empty():
 				return clipboard_image.get_size()
-	return Vector2i.ZERO
+	return Vector2i.ONE  # The minimum valid size of an image
 
 
 ## Pastes the selection content.
