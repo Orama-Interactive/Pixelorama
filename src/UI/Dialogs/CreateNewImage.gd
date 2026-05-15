@@ -112,7 +112,8 @@ func _on_CreateNewImage_about_to_show():
 		size_from_popup.get_item_index(SizeFrom.CLIPBOARD_APP), !SelectionNode.has_app_clipboard()
 	)
 	size_from_popup.set_item_disabled(
-		size_from_popup.get_item_index(SizeFrom.CLIPBOARD_SYSTEM), !SelectionNode.has_system_clipboard()
+		size_from_popup.get_item_index(SizeFrom.CLIPBOARD_SYSTEM),
+		!SelectionNode.has_system_clipboard()
 	)
 
 
