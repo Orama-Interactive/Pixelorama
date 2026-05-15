@@ -346,6 +346,36 @@ func copy() -> void:
 		container.get_child(0).get_child(0).texture = tex
 
 
+static func has_app_clipboard() -> bool:
+	return FileAccess.file_exists(CLIPBOARD_FILE_PATH)
+
+
+static func has_system_clipboard() -> bool:
+	return DisplayServer.clipboard_has_image()
+
+
+static func get_clipboard_size(app_clipboard: bool) -> Vector2i:
+	if app_clipboard:
+		if FileAccess.file_exists(CLIPBOARD_FILE_PATH):
+			var clipboard_file := FileAccess.open(CLIPBOARD_FILE_PATH, FileAccess.READ)
+			var clipboard = clipboard_file.get_var(true)
+			clipboard_file.close()
+			if (
+				typeof(clipboard) == TYPE_DICTIONARY
+				and clipboard.has_all(
+					["image", "selection_map", "big_bounding_rectangle", "selection_offset"]
+				)
+				and not clipboard.image.is_empty()
+			):
+				return clipboard.image.get_size()
+	else:
+		if DisplayServer.clipboard_has_image():
+			var clipboard_image := DisplayServer.clipboard_get_image()
+			if not clipboard_image.is_empty():
+				return clipboard_image.get_size()
+	return Vector2i.ZERO
+
+
 ## Pastes the selection content.
 func paste(in_place := false) -> void:
 	if !FileAccess.file_exists(CLIPBOARD_FILE_PATH):

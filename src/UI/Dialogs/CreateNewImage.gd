@@ -1,5 +1,6 @@
 extends ConfirmationDialog
 
+enum SizeFrom { CLIPBOARD_APP, CLIPBOARD_SYSTEM }
 var aspect_ratio := 1.0
 var recent_sizes := []
 var templates: Array[Template] = [
@@ -72,6 +73,7 @@ var templates: Array[Template] = [
 @onready var ratio_box := %AspectRatioButton as TextureButton
 @onready var width_value := %WidthValue as SpinBox
 @onready var height_value := %HeightValue as SpinBox
+@onready var clipboard_size_menu := %SizeFromMenu as MenuButton
 @onready var portrait_button := %PortraitButton as Button
 @onready var landscape_button := %LandscapeButton as Button
 @onready var name_input := $VBoxContainer/FillColorContainer/NameInput as LineEdit
@@ -95,13 +97,23 @@ func _ready() -> void:
 	aspect_ratio = width_value.value / height_value.value
 	fill_color_node.color = Global.default_fill_color
 	fill_color_node.get_picker().presets_visible = false
-
+	var size_from_popup := clipboard_size_menu.get_popup()
+	size_from_popup.add_item("App Clipboard", SizeFrom.CLIPBOARD_APP)
+	size_from_popup.add_item("System Clipboard", SizeFrom.CLIPBOARD_SYSTEM)
+	size_from_popup.id_pressed.connect(_on_clipboard_size_from_id_pressed)
 	_create_option_list()
 
 
 func _on_CreateNewImage_about_to_show():
 	recent_sizes = Global.config_cache.get_value("templates", "recent_sizes", [])
 	_create_recent_list()
+	var size_from_popup := clipboard_size_menu.get_popup()
+	size_from_popup.set_item_disabled(
+		size_from_popup.get_item_index(SizeFrom.CLIPBOARD_APP), !SelectionNode.has_app_clipboard()
+	)
+	size_from_popup.set_item_disabled(
+		size_from_popup.get_item_index(SizeFrom.CLIPBOARD_SYSTEM), !SelectionNode.has_system_clipboard()
+	)
 
 
 func _create_option_list() -> void:
@@ -231,6 +243,12 @@ func _on_LandscapeButton_toggled(button_pressed: bool) -> void:
 		toggle_size_buttons()
 		return
 	switch_width_height()
+
+
+func _on_clipboard_size_from_id_pressed(id: int) -> void:
+	var image_size := SelectionNode.get_clipboard_size(id == SizeFrom.CLIPBOARD_APP)
+	width_value.value = image_size.x
+	height_value.value = image_size.y
 
 
 func switch_width_height() -> void:
