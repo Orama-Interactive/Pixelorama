@@ -107,7 +107,11 @@ func set_keyframe(
 ) -> void:
 	if not animated_params.has(param_name):
 		animated_params[param_name] = {}
-	animated_params[param_name][frame_index] = {"value": value, "trans": trans, "ease": ease_type}
+	var id := KeyframeTimeline.next_keyframe_id
+	animated_params[param_name][frame_index] = {
+		"id": id, "value": value, "trans": trans, "ease": ease_type
+	}
+	KeyframeTimeline.next_keyframe_id += 1
 	keyframe_set.emit()
 
 
