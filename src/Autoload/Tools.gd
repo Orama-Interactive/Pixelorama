@@ -23,6 +23,7 @@ var diagonal_xy_mirror := false
 var diagonal_x_minus_y_mirror := false
 var pixel_perfect := false
 var alpha_locked := false
+var prev_tool_name := ""
 
 # Dynamics
 var stabilizer_enabled := false
@@ -167,7 +168,7 @@ var tools: Dictionary[String, Tool] = {
 		. new(
 			"LineTool",
 			"Line Tool",
-			"linetool",
+			"line",
 			"res://src/Tools/DesignTools/LineTool.tscn",
 			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Hold %s to snap the angle of the line
@@ -182,7 +183,7 @@ Hold %s to displace the shape's origin""",
 		. new(
 			"CurveTool",
 			"Curve Tool",
-			"curvetool",
+			"curve",
 			"res://src/Tools/DesignTools/CurveTool.tscn",
 			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Draws bezier curves
@@ -199,7 +200,7 @@ Press %s to remove the last added point""",
 		. new(
 			"RectangleTool",
 			"Rectangle Tool",
-			"rectangletool",
+			"rectangle",
 			"res://src/Tools/DesignTools/RectangleTool.tscn",
 			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Hold %s to create a 1:1 shape
@@ -214,7 +215,7 @@ Hold %s to displace the shape's origin""",
 		. new(
 			"EllipseTool",
 			"Ellipse Tool",
-			"ellipsetool",
+			"ellipse",
 			"res://src/Tools/DesignTools/EllipseTool.tscn",
 			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Hold %s to create a 1:1 shape
@@ -229,7 +230,7 @@ Hold %s to displace the shape's origin""",
 		. new(
 			"IsometricBoxTool",
 			"Isometric Box Tool",
-			"isometricboxtool",
+			"isometric_box",
 			"res://src/Tools/DesignTools/IsometricBoxTool.tscn",
 			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Draws an isometric box
@@ -381,9 +382,14 @@ func _ready() -> void:
 		add_tool_button(tools[t])
 		var tool_shortcut: String = tools[t].shortcut
 		var left_tool_shortcut := "left_%s_tool" % tool_shortcut
+		if InputMap.has_action(left_tool_shortcut):
+			Keychain.actions[left_tool_shortcut] = Keychain.InputAction.new("", "Left")
 		var right_tool_shortcut := "right_%s_tool" % tool_shortcut
-		Keychain.actions[left_tool_shortcut] = Keychain.InputAction.new("", "Left")
-		Keychain.actions[right_tool_shortcut] = Keychain.InputAction.new("", "Right")
+		if InputMap.has_action(right_tool_shortcut):
+			Keychain.actions[right_tool_shortcut] = Keychain.InputAction.new("", "Right")
+		var quick_tool_shortcut := "quick_%s_tool" % tool_shortcut
+		if InputMap.has_action(quick_tool_shortcut):
+			Keychain.actions[quick_tool_shortcut] = Keychain.InputAction.new("", "Quick tools")
 
 	_slots[MOUSE_BUTTON_LEFT] = Slot.new("Left tool")
 	_slots[MOUSE_BUTTON_RIGHT] = Slot.new("Right tool")
@@ -547,6 +553,18 @@ func assign_tool(tool_name: String, button: int, allow_refresh := false) -> void
 	update_tool_buttons()
 	update_tool_cursors()
 	Global.config_cache.set_value(slot.kname, "tool", tool_name)
+
+
+func quick_assign_tool(
+	tool_name: String, released: bool, button: int, allow_refresh := false
+) -> void:
+	if released:
+		if not prev_tool_name.is_empty():
+			assign_tool(prev_tool_name, button, allow_refresh)
+		prev_tool_name = ""
+	else:
+		prev_tool_name = get_tool(button).tool_node.name
+		assign_tool(tool_name, button, allow_refresh)
 
 
 func default_color() -> void:

@@ -7,7 +7,6 @@ const COLOR_REPLACE_SHADER := preload("res://src/Shaders/ColorReplace.gdshader")
 const PATTERN_FILL_SHADER := preload("res://src/Shaders/PatternFill.gdshader")
 
 var _undo_data := {}
-var _picking_color := false
 var _prev_mode := 0
 var _pattern: Patterns.Pattern
 var _tolerance := 0.003
@@ -173,11 +172,6 @@ func update_pattern() -> void:
 
 func draw_start(pos: Vector2i) -> void:
 	super.draw_start(pos)
-	if Input.is_action_pressed(&"draw_color_picker", true):
-		_picking_color = true
-		_pick_color(pos)
-		return
-	_picking_color = false
 	Global.canvas.selection.transform_content_confirm()
 	_undo_data = _get_undo_data()
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
@@ -201,10 +195,6 @@ func draw_start(pos: Vector2i) -> void:
 
 func draw_move(pos: Vector2i) -> void:
 	super.draw_move(pos)
-	if _picking_color:  # Still return even if we released Alt
-		if Input.is_action_pressed(&"draw_color_picker", true):
-			_pick_color(pos)
-		return
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
 	if not Global.current_project.can_pixel_get_drawn(pos):
@@ -214,8 +204,6 @@ func draw_move(pos: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	super.draw_end(pos)
-	if _picking_color:
-		return
 	_sample_masks.clear()
 	commit_undo()
 

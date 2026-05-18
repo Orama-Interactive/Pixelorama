@@ -410,39 +410,6 @@ func _get_selected_draw_images() -> Array[ImageExtended]:
 	return images
 
 
-func _pick_color(pos: Vector2i) -> void:
-	var project := Global.current_project
-	pos = project.tiles.get_canon_position(pos)
-
-	if pos.x < 0 or pos.y < 0:
-		return
-	if Tools.is_placing_tiles():
-		var cel := Global.current_project.get_current_cel() as CelTileMap
-		Tools.selected_tile_index_changed.emit(cel.get_cell_index_at_coords(pos))
-		return
-	var image := Image.new()
-	image.copy_from(_get_draw_image())
-	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1:
-		return
-
-	var color := Color(0, 0, 0, 0)
-	var palette_index = -1
-	var curr_frame: Frame = project.frames[project.current_frame]
-	for layer in project.layers.size():
-		var idx := (project.layers.size() - 1) - layer
-		if project.layers[idx].is_visible_in_hierarchy():
-			var cel := curr_frame.cels[idx]
-			image = cel.get_image()
-			color = image.get_pixelv(pos)
-			# If image is indexed then get index as well
-			if cel is PixelCel:
-				if cel.image.is_indexed:
-					palette_index = cel.image.indices_image.get_pixel(pos.x, pos.y).r8 - 1
-			if not is_zero_approx(color.a) or palette_index > -1:
-				break
-	Tools.assign_color(color, tool_slot.button, false, palette_index)
-
-
 func _flip_rect(rect: Rect2, rect_size: Vector2, horiz: bool, vert: bool) -> Rect2:
 	var result := rect
 	if horiz:

@@ -24,22 +24,36 @@ func _input(event: InputEvent) -> void:
 	for action in ["undo", "redo"]:
 		if event.is_action_pressed(action):
 			return
+	if (
+		Input.is_action_pressed(&"activate_left_tool")
+		or Input.is_action_pressed(&"activate_right_tool")
+	):
+		return
 
 	for tool_name in Tools.tools:  # Handle tool shortcuts
 		if not get_node(tool_name).visible:
 			continue
 		var t: Tools.Tool = Tools.tools[tool_name]
 		var right_tool_shortcut := "right_" + t.shortcut + "_tool"
-		var left_tool_shortcut := "left_" + t.shortcut + "_tool"
 		if not Global.single_tool_mode and InputMap.has_action(right_tool_shortcut):
 			if event.is_action_pressed(right_tool_shortcut, false, true):
 				# Shortcut for right button (with Alt)
 				Tools.assign_tool(t.name, MOUSE_BUTTON_RIGHT)
 				return
+		var left_tool_shortcut := "left_" + t.shortcut + "_tool"
 		if InputMap.has_action(left_tool_shortcut):
 			if event.is_action_pressed(left_tool_shortcut, false, true):
 				# Shortcut for left button
 				Tools.assign_tool(t.name, MOUSE_BUTTON_LEFT)
+				return
+
+		var quick_tool_shortcut := "quick_" + t.shortcut + "_tool"
+		if InputMap.has_action(quick_tool_shortcut):
+			if event.is_action_pressed(quick_tool_shortcut, false, true):
+				Tools.quick_assign_tool(t.name, false, MOUSE_BUTTON_LEFT)
+				return
+			if event.is_action_released(quick_tool_shortcut):
+				Tools.quick_assign_tool(t.name, true, MOUSE_BUTTON_LEFT)
 				return
 
 

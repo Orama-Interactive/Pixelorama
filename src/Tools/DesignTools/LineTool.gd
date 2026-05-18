@@ -90,11 +90,6 @@ func _input(event: InputEvent) -> void:
 func draw_start(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_start(pos)
-	if Input.is_action_pressed("shape_displace"):
-		_picking_color = true
-		_pick_color(pos)
-		return
-	_picking_color = false
 
 	Global.canvas.selection.transform_content_confirm()
 	update_mask()
@@ -112,10 +107,6 @@ func draw_start(pos: Vector2i) -> void:
 func draw_move(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_move(pos)
-	if _picking_color:  # Still return even if we released Alt
-		if Input.is_action_pressed("shape_displace"):
-			_pick_color(pos)
-		return
 
 	if _drawing:
 		if Global.mirror_view:
@@ -136,9 +127,6 @@ func draw_move(pos: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
-	if _picking_color:
-		super.draw_end(pos)
-		return
 
 	if _drawing:
 		if Global.mirror_view:

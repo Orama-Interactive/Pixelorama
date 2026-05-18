@@ -17,8 +17,6 @@ var _orignal_brush_image := Image.new()  ## Contains the original _brush_image, 
 var _brush_texture := ImageTexture.new()
 var _strength := 1.0
 var _is_eraser := false
-@warning_ignore("unused_private_class_variable")
-var _picking_color := false
 
 var _undo_data := {}
 var _drawer := Drawer.new()
