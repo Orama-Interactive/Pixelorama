@@ -563,7 +563,8 @@ func quick_assign_tool(
 			assign_tool(prev_tool_name, button, allow_refresh)
 		prev_tool_name = ""
 	else:
-		prev_tool_name = get_tool(button).tool_node.name
+		if prev_tool_name.is_empty():
+			prev_tool_name = get_tool(button).tool_node.name
 		assign_tool(tool_name, button, allow_refresh)
 
 
