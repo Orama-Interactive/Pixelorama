@@ -181,12 +181,16 @@ func handle_main_menu_collapse() -> void:
 func _on_project_about_to_switch() -> void:
 	var project := Global.current_project
 	project.resized.disconnect(_on_project_resized)
+	project.selection_changed.disconnect(_on_project_selection_changed)
 
 
 func _on_project_switched() -> void:
 	var project := Global.current_project
 	if not project.resized.is_connected(_on_project_resized):
 		project.resized.connect(_on_project_resized)
+	if not project.selection_changed.is_connected(_on_project_selection_changed):
+		project.selection_changed.connect(_on_project_selection_changed)
+	_on_project_selection_changed()
 	var project_size_text := "[%s×%s]" % [project.size.x, project.size.y]
 	_on_cursor_position_text_changed(project_size_text)
 	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, not project.has_selection)
@@ -201,6 +205,16 @@ func _on_project_resized() -> void:
 	var project := Global.current_project
 	var project_size_text := "[%s×%s]" % [project.size.x, project.size.y]
 	_on_cursor_position_text_changed(project_size_text)
+
+
+func _on_project_selection_changed() -> void:
+	var project := Global.current_project
+	var has_selection := project.has_selection
+	var can_reselect := has_selection or project.prev_selection_map.is_invisible()
+	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, not has_selection)
+	select_menu.set_item_disabled(Global.SelectMenu.CLEAR, not has_selection)
+	select_menu.set_item_disabled(Global.SelectMenu.RESELECT, can_reselect)
+	project_menu.set_item_disabled(Global.ProjectMenu.CROP_TO_SELECTION, not has_selection)
 
 
 func _on_cursor_position_text_changed(text: String) -> void:
@@ -596,6 +610,7 @@ func _setup_select_menu() -> void:
 	var select_menu_items := {
 		"All": "select_all",
 		"Clear": "clear_selection",
+		"Reselect": "reselect",
 		"Invert": "invert_selection",
 		"Select cel area": "select_cel_area",
 		"Wrap Strokes": "",
@@ -1214,8 +1229,10 @@ func select_menu_id_pressed(id: int) -> void:
 	match id:
 		Global.SelectMenu.SELECT_ALL:
 			Global.canvas.selection.select_all()
-		Global.SelectMenu.CLEAR_SELECTION:
+		Global.SelectMenu.CLEAR:
 			Global.canvas.selection.clear_selection(true)
+		Global.SelectMenu.RESELECT:
+			Global.canvas.selection.reselect()
 		Global.SelectMenu.INVERT:
 			Global.canvas.selection.invert()
 		Global.SelectMenu.SELECT_CEL_AREA:

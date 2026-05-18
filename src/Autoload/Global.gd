@@ -82,7 +82,7 @@ enum ProjectMenu {
 	CROP_TO_CONTENT,
 }
 ## Enumeration of items present in the Select Menu.
-enum SelectMenu { SELECT_ALL, CLEAR_SELECTION, INVERT, SELECT_CEL_AREA, WRAP_STROKES, MODIFY }
+enum SelectMenu { SELECT_ALL, CLEAR, RESELECT, INVERT, SELECT_CEL_AREA, WRAP_STROKES, MODIFY }
 ## Enumeration of items present in the Help Menu.
 enum HelpMenu {
 	VIEW_SPLASH_SCREEN,
@@ -1209,7 +1209,6 @@ func undo_or_redo(
 						cel.size_changed(project.size)
 					canvas.update_texture(j, i, project, undo)
 
-		canvas.selection.queue_redraw()
 		if action_name == "Scale":
 			for i in project.frames.size():
 				for j in project.layers.size():
@@ -1222,6 +1221,7 @@ func undo_or_redo(
 			project.selection_map_changed()
 
 	canvas.queue_redraw()
+	canvas.selection.queue_redraw()
 	for canvas_preview in get_tree().get_nodes_in_group("CanvasPreviews"):
 		canvas_preview.queue_redraw()
 	if !project.has_changed:

@@ -613,7 +613,7 @@ func invert() -> void:
 ## Clears the selection.
 func clear_selection(use_undo := false) -> void:
 	var project := Global.current_project
-	if !project.has_selection:
+	if not project.has_selection:
 		return
 	transform_content_confirm()
 	var undo_data_tmp := get_undo_data(false)
@@ -623,6 +623,15 @@ func clear_selection(use_undo := false) -> void:
 	queue_redraw()
 	if use_undo:
 		commit_undo("Clear Selection", undo_data_tmp)
+
+
+func reselect() -> void:
+	var project := Global.current_project
+	if project.has_selection or project.prev_selection_map.is_invisible():
+		return
+	var undo_data_tmp := get_undo_data(false)
+	project.selection_map.copy_from(project.prev_selection_map)
+	commit_undo("Reselect", undo_data_tmp)
 
 
 func select_cel_rect() -> void:

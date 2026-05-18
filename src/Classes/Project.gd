@@ -7,6 +7,7 @@ signal removed
 signal serialized(dict: Dictionary)
 signal about_to_deserialize(dict: Dictionary)
 signal resized
+signal selection_changed
 signal fps_changed
 signal layers_updated
 signal frames_updated
@@ -94,6 +95,7 @@ var diagonal_xy_symmetry_axis := SymmetryGuide.new()
 var diagonal_x_minus_y_symmetry_axis := SymmetryGuide.new()
 
 var selection_map := SelectionMap.new()
+var prev_selection_map := SelectionMap.new()
 ## This is useful for when the selection is outside of the canvas boundaries,
 ## on the left and/or above (negative coords)
 var selection_offset := Vector2i.ZERO:
@@ -236,6 +238,8 @@ func is_indexed() -> bool:
 
 func selection_map_changed() -> void:
 	has_selection = !selection_map.is_invisible()
+	if has_selection:
+		prev_selection_map.copy_from(selection_map)
 	var transformation_handles := Global.canvas.selection.transformation_handles
 	if has_selection:
 		var used_map := SelectionMap.new()
@@ -243,10 +247,7 @@ func selection_map_changed() -> void:
 		transformation_handles.set_selection(used_map, selection_map.get_selection_rect(self))
 	else:
 		transformation_handles.set_selection(null, Rect2i())
-	Global.top_menu_container.edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
-	Global.top_menu_container.project_menu.set_item_disabled(
-		Global.ProjectMenu.CROP_TO_SELECTION, !has_selection
-	)
+	selection_changed.emit()
 
 
 func change_project() -> void:
