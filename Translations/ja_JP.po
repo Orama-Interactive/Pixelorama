@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2026-05-18 16:37\n"
+"PO-Revision-Date: 2026-05-18 18:51\n"
 
 msgid "OK"
 msgstr "OK"
@@ -209,11 +209,11 @@ msgid "Resize Canvas"
 msgstr "キャンバスサイズを変更"
 
 msgid "Offset & Scale Image"
-msgstr ""
+msgstr "画像のオフセット & 拡大縮小"
 
 #. Refers to the "Offset & Scale" layer effect.
 msgid "Offset & Scale"
-msgstr ""
+msgstr "オフセット & 拡大縮小"
 
 msgid "Offset:"
 msgstr "オフセット:"
@@ -2520,7 +2520,7 @@ msgstr "右面"
 
 #. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
 msgid "Erase bits"
-msgstr ""
+msgstr "ビットを削除"
 
 msgid "Mirroring"
 msgstr "ミラーリング"
@@ -3292,7 +3292,7 @@ msgstr "アイソメトリックボックスツール"
 
 #. A tool that exists only for tilemap layers, and is responsible for setting some properties for the tiles. Currently, it is only used for setting the autotiling bits for a tile.
 msgid "Tiles Property Painter"
-msgstr ""
+msgstr "タイル設定ペインター"
 
 msgid "Switch Colors"
 msgstr "色の切り替え"
@@ -3892,35 +3892,35 @@ msgstr "両端で最も速く、中央で遅く"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts slowly and speeds up towards the end", but with a shortened name.
 msgid "Ease in"
-msgstr ""
+msgstr "イーズイン"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts quickly and slows down towards the end", but with a shortened name.
 msgid "Ease out"
-msgstr ""
+msgstr "イーズアウト"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Slowest at both ends, fast at middle", but with a shortened name.
 msgid "Ease in out"
-msgstr ""
+msgstr "イーズインアウト"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Fast at both ends, slow at middle", but with a shortened name.
 msgid "Ease out in"
-msgstr ""
+msgstr "イーズアウトイン"
 
 #. Found in the keyframe timeline on the right panel when there is no keyframe selected.
 msgid "No key selected"
-msgstr ""
+msgstr "キーが選択されていません"
 
 #. Found in the keyframe timeline when right clicking on a track. When selected, a new keyframe is being inserted at the selected frame.
 msgid "Insert keyframe"
-msgstr ""
+msgstr "キーフレームを挿入"
 
 #. A button found in the keyframe timeline on the right panel when there is a keyframe selected. When clicked, it deletes the currently selected keyframe.
 msgid "Delete keyframe"
-msgstr ""
+msgstr "キーフレームを削除"
 
 #. A button found in the keyframe timeline on the right panel when two or more keyframes are selected. When clicked, it deletes the currently selected keyframes.
 msgid "Delete keyframes"
-msgstr ""
+msgstr "キーフレームを削除"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
@@ -4159,7 +4159,7 @@ msgstr "スタック"
 #. A checkbox that toggles autotiling on or off for tilemap layers.
 #: src/UI/TilesPanel.tscn
 msgid "Autotiling:"
-msgstr ""
+msgstr "自動タイル:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
