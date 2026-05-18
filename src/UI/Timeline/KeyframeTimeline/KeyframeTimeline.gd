@@ -509,6 +509,7 @@ func _on_track_scroll_container_resized() -> void:
 
 
 func _on_track_scroll_container_sort_children() -> void:
+	_on_track_scroll_container_resized()
 	keyframe_timeline_frame_display.x_offset = track_scroll_container.scroll_horizontal
 	keyframe_timeline_frame_display.queue_redraw()
 	if is_instance_valid(layer_element_tree_vscrollbar):
