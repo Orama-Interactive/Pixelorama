@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Thai\n"
 "Language: th_TH\n"
-"PO-Revision-Date: 2026-04-26 12:44\n"
+"PO-Revision-Date: 2026-05-18 16:37\n"
 
 msgid "OK"
 msgstr "ตกลง"
@@ -208,8 +208,12 @@ msgstr "ครอปตามเนื้อหา"
 msgid "Resize Canvas"
 msgstr "ปรับขนาดแคนวาส"
 
-msgid "Offset Image"
-msgstr "เลื่อนรูปภาพ (Offset)"
+msgid "Offset & Scale Image"
+msgstr ""
+
+#. Refers to the "Offset & Scale" layer effect.
+msgid "Offset & Scale"
+msgstr ""
 
 msgid "Offset:"
 msgstr "ระยะเลื่อน:"
@@ -2514,6 +2518,10 @@ msgstr "ด้านซ้าย"
 msgid "Right Face"
 msgstr "ด้านขวา"
 
+#. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
+msgid "Erase bits"
+msgstr ""
+
 msgid "Mirroring"
 msgstr "การทำกระจก"
 
@@ -3282,6 +3290,10 @@ msgstr "เครื่องมือวงรี"
 msgid "Isometric Box Tool"
 msgstr "เครื่องมือกล่อง Isometric"
 
+#. A tool that exists only for tilemap layers, and is responsible for setting some properties for the tiles. Currently, it is only used for setting the autotiling bits for a tile.
+msgid "Tiles Property Painter"
+msgstr ""
+
 msgid "Switch Colors"
 msgstr "สลับสี"
 
@@ -3814,26 +3826,6 @@ msgstr "ค่าเริ่มต้น:"
 msgid "Final value:"
 msgstr "ค่าสุดท้าย:"
 
-#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
-msgid "Ease type:"
-msgstr "ประเภท Ease:"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Starts slowly and speeds up towards the end"
-msgstr "เริ่มช้าและเร่งความเร็วในตอนท้าย"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Starts quickly and slows down towards the end"
-msgstr "เริ่มเร็วและช้าลงในตอนท้าย"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Slowest at both ends, fast at middle"
-msgstr "ช้าที่สุดที่ปลายทั้งสองข้าง เร็วตรงกลาง"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Fast at both ends, slow at middle"
-msgstr "เร็วที่ปลายทั้งสองข้าง ช้าตรงกลาง"
-
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
 msgstr "Quadratic (กำลัง 2)"
@@ -3877,6 +3869,58 @@ msgstr "ถอยออกที่ปลาย"
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Spring towards the end"
 msgstr "สปริงไปยังตอนท้าย"
+
+#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
+msgid "Ease type:"
+msgstr "ประเภท Ease:"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts slowly and speeds up towards the end"
+msgstr "เริ่มช้าและเร่งความเร็วในตอนท้าย"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts quickly and slows down towards the end"
+msgstr "เริ่มเร็วและช้าลงในตอนท้าย"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Slowest at both ends, fast at middle"
+msgstr "ช้าที่สุดที่ปลายทั้งสองข้าง เร็วตรงกลาง"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Fast at both ends, slow at middle"
+msgstr "เร็วที่ปลายทั้งสองข้าง ช้าตรงกลาง"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts slowly and speeds up towards the end", but with a shortened name.
+msgid "Ease in"
+msgstr ""
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts quickly and slows down towards the end", but with a shortened name.
+msgid "Ease out"
+msgstr ""
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Slowest at both ends, fast at middle", but with a shortened name.
+msgid "Ease in out"
+msgstr ""
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Fast at both ends, slow at middle", but with a shortened name.
+msgid "Ease out in"
+msgstr ""
+
+#. Found in the keyframe timeline on the right panel when there is no keyframe selected.
+msgid "No key selected"
+msgstr ""
+
+#. Found in the keyframe timeline when right clicking on a track. When selected, a new keyframe is being inserted at the selected frame.
+msgid "Insert keyframe"
+msgstr ""
+
+#. A button found in the keyframe timeline on the right panel when there is a keyframe selected. When clicked, it deletes the currently selected keyframe.
+msgid "Delete keyframe"
+msgstr ""
+
+#. A button found in the keyframe timeline on the right panel when two or more keyframes are selected. When clicked, it deletes the currently selected keyframes.
+msgid "Delete keyframes"
+msgstr ""
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
@@ -4111,6 +4155,11 @@ msgstr "อัตโนมัติ"
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
 msgstr "ซ้อนทับ"
+
+#. A checkbox that toggles autotiling on or off for tilemap layers.
+#: src/UI/TilesPanel.tscn
+msgid "Autotiling:"
+msgstr ""
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
