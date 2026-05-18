@@ -13,7 +13,7 @@ shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
 shader_parameter/color2 = Color(1, 1, 1, 1)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/scale = Vector2(0, 0)
-shader_parameter/rect_size = Vector2(684, 234)
+shader_parameter/rect_size = Vector2(684, 226)
 shader_parameter/follow_movement = false
 shader_parameter/follow_scale = false
 
@@ -169,6 +169,18 @@ popup/item_1/text = "Backwards"
 popup/item_1/id = 1
 popup/item_2/text = "Ping-Pong"
 popup/item_2/id = 2
+
+[node name="RepeatLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=549034955]
+layout_mode = 2
+text = "Repeat times:"
+
+[node name="RepeatCount" type="SpinBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=1383852018]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "The number of times the animation is repeated in addition to the original animation."
+mouse_default_cursor_shape = 2
+max_value = 1000.0
+allow_greater = true
 
 [node name="ResizeLabel" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=1328656377]
 custom_minimum_size = Vector2(30, 0)
@@ -404,6 +416,7 @@ size_flags_horizontal = 3
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/LayersContainer/Layers" to="." method="_on_layers_item_selected"]
 [connection signal="toggled" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/LayersContainer/SplitLayers" to="." method="_on_split_layers_toggled"]
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Direction" to="." method="_on_direction_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/RepeatCount" to="." method="_on_repeat_count_changed"]
 [connection signal="value_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/ResizeContainer/Resize" to="." method="_on_resize_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Quality" to="." method="_on_quality_value_changed"]
 [connection signal="text_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/FilePath/PathLineEdit" to="." method="_on_path_line_edit_text_changed"]

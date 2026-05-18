@@ -368,6 +368,16 @@ func _on_direction_item_selected(id: Export.AnimationDirection) -> void:
 	preview_current_frame = 0
 	Export.process_data()
 	set_preview()
+	spritesheet_lines_count.max_value = Export.number_of_frames
+	update_dimensions_label()
+
+
+func _on_repeat_count_changed(value: int) -> void:
+	Export.repeat_count = value
+	preview_current_frame = 0
+	Export.process_data()
+	set_preview()
+	spritesheet_lines_count.max_value = Export.number_of_frames
 	update_dimensions_label()
 
 
