@@ -249,13 +249,17 @@ func select_keyframes() -> void:
 	no_key_selected_label.visible = false
 	properties_grid_container.visible = not no_key_selected_label.visible
 	delete_keyframe_button.visible = not no_key_selected_label.visible
+	if selected_keyframes.size() == 1:
+		delete_keyframe_button.text = "Delete keyframe"
+	else:
+		delete_keyframe_button.text = "Delete keyframes"
 	var value_label := Label.new()
 	value_label.text = "Value:"
 	value_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	properties_grid_container.add_child(value_label)
 	var property = dict[param_name][frame_index]["value"]
 	var track := key_button.get_parent() as KeyframeAnimationTrack
-	var property_properties := {}  # I apologize for the horrible name.
+	var property_properties := {}  # I apologize for the horrible variable name.
 	if track.type == KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT:
 		property_properties = track.effect.param_properties[param_name]
 	var node := Global.create_node_from_variable(
@@ -271,7 +275,7 @@ func select_keyframes() -> void:
 
 	if LayerEffect.is_interpolatable_type(property):
 		var trans_label := Label.new()
-		trans_label.text = "Transition:"
+		trans_label.text = "Interpolation:"
 		trans_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		properties_grid_container.add_child(trans_label)
 		var trans_type_options := OptionButton.new()
@@ -279,24 +283,25 @@ func select_keyframes() -> void:
 		trans_type_options.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		trans_type_options.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 		trans_type_options.add_item("Linear", Tween.TRANS_LINEAR)
-		trans_type_options.add_item("Quadratic", Tween.TRANS_QUAD)
-		trans_type_options.add_item("Cubic", Tween.TRANS_CUBIC)
-		trans_type_options.add_item("Quartic", Tween.TRANS_QUART)
-		trans_type_options.add_item("Quintic", Tween.TRANS_QUINT)
-		trans_type_options.add_item("Exponential", Tween.TRANS_EXPO)
+		trans_type_options.add_item("Quadratic (power of 2)", Tween.TRANS_QUAD)
+		trans_type_options.add_item("Cubic (power of 3)", Tween.TRANS_CUBIC)
+		trans_type_options.add_item("Quartic (power of 4)", Tween.TRANS_QUART)
+		trans_type_options.add_item("Quintic (power of 5)", Tween.TRANS_QUINT)
+		trans_type_options.add_item("Exponential (power of x)", Tween.TRANS_EXPO)
 		trans_type_options.add_item("Square root", Tween.TRANS_CIRC)
 		trans_type_options.add_item("Sine", Tween.TRANS_SINE)
-		trans_type_options.add_item("Elastic", Tween.TRANS_ELASTIC)
-		trans_type_options.add_item("Bounce", Tween.TRANS_BOUNCE)
-		trans_type_options.add_item("Back", Tween.TRANS_BACK)
-		trans_type_options.add_item("Spring", Tween.TRANS_SPRING)
+		trans_type_options.add_item("Wiggling around the edges", Tween.TRANS_ELASTIC)
+		trans_type_options.add_item("Bouncing at the end", Tween.TRANS_BOUNCE)
+		trans_type_options.add_item("Backing out at ends", Tween.TRANS_BACK)
+		trans_type_options.add_item("Spring towards the end", Tween.TRANS_SPRING)
 		trans_type_options.add_item("Constant", Tween.TRANS_SPRING + 1)
 		trans_type_options.select(trans_type)
 		trans_type_options.item_selected.connect(_on_keyframe_property_changed.bind("trans"))
+		trans_type_options.fit_to_longest_item = false
 		properties_grid_container.add_child(trans_type_options)
 
 		var easing_label := Label.new()
-		easing_label.text = "Easing:"
+		easing_label.text = "Ease type:"
 		easing_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		properties_grid_container.add_child(easing_label)
 		var ease_type_options := OptionButton.new()
