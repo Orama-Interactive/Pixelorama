@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2026-05-18 16:37\n"
+"PO-Revision-Date: 2026-05-19 10:49\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -209,11 +209,11 @@ msgid "Resize Canvas"
 msgstr "Αλλαγή μεγέθους καμβά"
 
 msgid "Offset & Scale Image"
-msgstr ""
+msgstr "Μετατόπιση & κλιμάκωση εικόνας"
 
 #. Refers to the "Offset & Scale" layer effect.
 msgid "Offset & Scale"
-msgstr ""
+msgstr "Μετατόπιση & κλιμάκωση"
 
 msgid "Offset:"
 msgstr "Μετατόπιση:"
@@ -2519,7 +2519,7 @@ msgstr "Δεξιά όψη"
 
 #. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
 msgid "Erase bits"
-msgstr ""
+msgstr "Διαγραφή bits"
 
 msgid "Mirroring"
 msgstr "Κατοπτρισμός"
@@ -3291,7 +3291,7 @@ msgstr "Εργαλείο ισομετρικού κουτιού"
 
 #. A tool that exists only for tilemap layers, and is responsible for setting some properties for the tiles. Currently, it is only used for setting the autotiling bits for a tile.
 msgid "Tiles Property Painter"
-msgstr ""
+msgstr "Μολύβι ιδιοτήτων πλακιδίων"
 
 msgid "Switch Colors"
 msgstr "Εναλλαγή χρωμάτων"
@@ -3890,35 +3890,35 @@ msgstr "Γρήγορα και στα δύο άκρα, αργά στη μέση"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts slowly and speeds up towards the end", but with a shortened name.
 msgid "Ease in"
-msgstr ""
+msgstr "Επιτάχυνση"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts quickly and slows down towards the end", but with a shortened name.
 msgid "Ease out"
-msgstr ""
+msgstr "Επιβράδυνση"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Slowest at both ends, fast at middle", but with a shortened name.
 msgid "Ease in out"
-msgstr ""
+msgstr "Επιτάχυνση–Επιβράδυνση"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Fast at both ends, slow at middle", but with a shortened name.
 msgid "Ease out in"
-msgstr ""
+msgstr "Επιβράδυνση–Επιτάχυνση"
 
 #. Found in the keyframe timeline on the right panel when there is no keyframe selected.
 msgid "No key selected"
-msgstr ""
+msgstr "Δεν επιλέχθηκε κλειδί"
 
 #. Found in the keyframe timeline when right clicking on a track. When selected, a new keyframe is being inserted at the selected frame.
 msgid "Insert keyframe"
-msgstr ""
+msgstr "Εισαγωγή καρέ-κλειδιού"
 
 #. A button found in the keyframe timeline on the right panel when there is a keyframe selected. When clicked, it deletes the currently selected keyframe.
 msgid "Delete keyframe"
-msgstr ""
+msgstr "Διαγραφή καρέ-κλειδιού"
 
 #. A button found in the keyframe timeline on the right panel when two or more keyframes are selected. When clicked, it deletes the currently selected keyframes.
 msgid "Delete keyframes"
-msgstr ""
+msgstr "Διαγραφή καρέ-κλειδιών"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
@@ -4157,7 +4157,7 @@ msgstr "Στοίβα"
 #. A checkbox that toggles autotiling on or off for tilemap layers.
 #: src/UI/TilesPanel.tscn
 msgid "Autotiling:"
-msgstr ""
+msgstr "Αυτόματη τοποθέτηση πλακιδίων:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
