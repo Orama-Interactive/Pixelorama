@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2026-05-20 15:48\n"
+"PO-Revision-Date: 2026-05-20 18:53\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2899,15 +2899,15 @@ msgstr "Luminozitate"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. Contains blend modes that do masking operations between layers, such as the "Intersection" and "Match colors" blend modes.
 msgid "Masking"
-msgstr ""
+msgstr "Mascare"
 
 #. Found in the layer's section of the timeline, as a blend mode option. This blend mode belongs to the "Masking" category, and it erases the un-common areas between the blend and the base layers.
 msgid "Intersection"
-msgstr ""
+msgstr "Intersecție"
 
 #. Found in the layer's section of the timeline, as a blend mode option.  This blend mode belongs to the "Masking" category, and it only shows the same colors between the blend and the base layers.
 msgid "Match colors"
-msgstr ""
+msgstr "Potrivire culori"
 
 msgid "Opacity:"
 msgstr "Opacitate:"
