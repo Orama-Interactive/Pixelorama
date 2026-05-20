@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2026-05-20 15:48\n"
+"PO-Revision-Date: 2026-05-20 21:19\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -2901,15 +2901,15 @@ msgstr "Φωτεινότητα"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. Contains blend modes that do masking operations between layers, such as the "Intersection" and "Match colors" blend modes.
 msgid "Masking"
-msgstr ""
+msgstr "Μάσκα"
 
 #. Found in the layer's section of the timeline, as a blend mode option. This blend mode belongs to the "Masking" category, and it erases the un-common areas between the blend and the base layers.
 msgid "Intersection"
-msgstr ""
+msgstr "Τομή"
 
 #. Found in the layer's section of the timeline, as a blend mode option.  This blend mode belongs to the "Masking" category, and it only shows the same colors between the blend and the base layers.
 msgid "Match colors"
-msgstr ""
+msgstr "Ταίριασμα χρωμάτων"
 
 msgid "Opacity:"
 msgstr "Αδιαφάνεια:"
