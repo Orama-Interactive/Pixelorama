@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.2] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+
+Built using Godot 4.6.2
+
+### Added
+- Added a keyframe-based view on the timeline, allowing users to animate layer effects with interpolation support. [#1417](https://github.com/Orama-Interactive/Pixelorama/pull/1417)
+- Implemented autotiling support for tilemap layers, with a new tool for tilemap layers that allows users to set the autotiling bits on each tile. [#1482](https://github.com/Orama-Interactive/Pixelorama/pull/1482)
+- The 3D layer system has been completely re-written! 3D objects are now shared across all cels of a layer, instead of each cel having its own objects, making it possible to animate an object's properties. This re-write also allows for some other new features, such as material property editing (and animating!), importing GLTF scenes, and even drawing directly on 3D objects using the pencil tool! **IMPORTANT NOTE:** Due to this, the 3D layer data of pxo files is NO LONGER COMPATIBLE between v1.2 and older versions. The pxo files themselves should load just fine, but the 3D layers will be EMPTY. [#1429](https://github.com/Orama-Interactive/Pixelorama/pull/1429)
+- Added quick tool activation shortcuts. When a quick tool shortcut is being held, that tool gets activated until the shortcut is released. By default, only the color picker tool has a shortcut, which ic set to <kbd>Alt</kbd>, but you can set shortcuts for every other tool in the Preferences.
+- Added a new "Reselect" option in the Selection menu, which re-creates a previously cleared selection. By default, its shortcut is set to <kbd>Control + Shift + D</kbd>.
+- Added new blend modes: Intersect and Match colors! [#1474](https://github.com/Orama-Interactive/Pixelorama/pull/1474)
+- Added an option in the export dialog to repeat the animation as many times as you want. [#1508](https://github.com/Orama-Interactive/Pixelorama/pull/1508)
+- When creating a new project, it is now possible to set its size based on the clipboard image size, if there is one. [#1507](https://github.com/Orama-Interactive/Pixelorama/pull/1507)
+
+### Fixed
+- Fixed extension exporters not working. [#1497](https://github.com/Orama-Interactive/Pixelorama/pull/1497)
+
 ## [v1.1.10] - 2026-04-30
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
