@@ -59,8 +59,8 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 	current_color.a *= opacity;  // Combine the layer opacity
 	if (current_color.a <= 0.001) {
 		// NOTE: Unless the layer itself is transparent, we need transparent colors as well in
-		// Intersect and Logical AND blending.
-		if ((blend_type != 2 && blend_type != 3) || opacity <= 0.001){
+		// Intersect and Match colors blending.
+		if ((blend_type != 21 && blend_type != 22) || opacity <= 0.001){
 			return prev_color;
 		}
 	}
@@ -74,7 +74,72 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 			current_color.a = 0.0;
 			should_blend_alpha = false;
 			break;
-		case 2: // Intersection
+		case 2: // Darken
+			result.rgb = min(prev_color.rgb, current_color.rgb);
+			break;
+		case 3: // Multiply
+			result.rgb = prev_color.rgb * current_color.rgb;
+			break;
+		case 4: // Color burn
+			result.rgb = 1.0 - (1.0 - prev_color.rgb) / current_color.rgb;
+			break;
+		case 5: // Linear burn
+			result.rgb = prev_color.rgb + current_color.rgb - 1.0;
+			break;
+		case 6: // Lighten
+			result.rgb = max(prev_color.rgb, current_color.rgb);
+			break;
+		case 7: // Screen
+			result.rgb = 1.0 - (1.0 - prev_color.rgb) * (1.0 - current_color.rgb);
+			break;
+		case 8: // Color dodge
+			result.rgb = prev_color.rgb / (1.0 - current_color.rgb);
+			break;
+		case 9: // Add (linear dodge)
+			result.rgb = prev_color.rgb + current_color.rgb;
+			break;
+		case 10: // Overlay
+			result.rgb = mix(2.0 * prev_color.rgb * current_color.rgb, 1.0 - 2.0 * (1.0 - current_color.rgb) * (1.0 - prev_color.rgb), round(prev_color.rgb));
+			break;
+		case 11: // Soft light
+			result.rgb = mix(2.0 * prev_color.rgb * current_color.rgb + prev_color.rgb * prev_color.rgb * (1.0 - 2.0 * current_color.rgb), sqrt(prev_color.rgb) * (2.0 * current_color.rgb - 1.0) + (2.0 * prev_color.rgb) * (1.0 - current_color.rgb), round(prev_color.rgb));
+			break;
+		case 12: // Hard light
+			result.rgb = mix(2.0 * prev_color.rgb * current_color.rgb, 1.0 - 2.0 * (1.0 - current_color.rgb) * (1.0 - prev_color.rgb), round(current_color.rgb));
+			break;
+		case 13: // Difference
+			result.rgb = abs(prev_color.rgb - current_color.rgb);
+			break;
+		case 14: // Exclusion
+			result.rgb = prev_color.rgb + current_color.rgb - 2.0 * prev_color.rgb * current_color.rgb;
+			break;
+		case 15: // Subtract
+			result.rgb = prev_color.rgb - current_color.rgb;
+			break;
+		case 16: // Divide
+			result.rgb = prev_color.rgb / current_color.rgb;
+			break;
+		case 17: // Hue
+			vec3 current_hsl = rgb_to_hsl(current_color.rgb);
+			vec3 prev_hsl = rgb_to_hsl(prev_color.rgb);
+			result.rgb = hsl_to_rgb(vec3(current_hsl.r, prev_hsl.g, prev_hsl.b));
+			break;
+		case 18: // Saturation
+			vec3 current_hsl = rgb_to_hsl(current_color.rgb);
+			vec3 prev_hsl = rgb_to_hsl(prev_color.rgb);
+			result.rgb = hsl_to_rgb(vec3(prev_hsl.r, current_hsl.g, prev_hsl.b));
+			break;
+		case 19: // Color
+			vec3 current_hsl = rgb_to_hsl(current_color.rgb);
+			vec3 prev_hsl = rgb_to_hsl(prev_color.rgb);
+			result.rgb = hsl_to_rgb(vec3(current_hsl.r, current_hsl.g, prev_hsl.b));
+			break;
+		case 20: // Luminosity
+			vec3 current_hsl = rgb_to_hsl(current_color.rgb);
+			vec3 prev_hsl = rgb_to_hsl(prev_color.rgb);
+			result.rgb = hsl_to_rgb(vec3(prev_hsl.r, prev_hsl.g, current_hsl.b));
+			break;
+		case 21: // Intersection
 			result.rgb = current_color.rgb;
 			// Perform an Alpha focused relaxed intersection (In those pixels where current_color
 			// has alpha, but prev_color doesn't and vice versa, make them transparent)
@@ -85,7 +150,7 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 				prev_color.a = 0.0;
 			}
 			break;
-		case 3: // Logical AND
+		case 22: // Match colors
 			result = current_color;
 			bool similar_colors = (
 				abs(current_color.r - prev_color.r) <= 0.001
@@ -101,71 +166,6 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 				current_color = vec4(0.0);
 			}
 			should_blend_alpha = false;
-			break;
-		case 4: // Darken
-			result.rgb = min(prev_color.rgb, current_color.rgb);
-			break;
-		case 5: // Multiply
-			result.rgb = prev_color.rgb * current_color.rgb;
-			break;
-		case 6: // Color burn
-			result.rgb = 1.0 - (1.0 - prev_color.rgb) / current_color.rgb;
-			break;
-		case 7: // Linear burn
-			result.rgb = prev_color.rgb + current_color.rgb - 1.0;
-			break;
-		case 8: // Lighten
-			result.rgb = max(prev_color.rgb, current_color.rgb);
-			break;
-		case 9: // Screen
-			result.rgb = 1.0 - (1.0 - prev_color.rgb) * (1.0 - current_color.rgb);
-			break;
-		case 10: // Color dodge
-			result.rgb = prev_color.rgb / (1.0 - current_color.rgb);
-			break;
-		case 11: // Add (linear dodge)
-			result.rgb = prev_color.rgb + current_color.rgb;
-			break;
-		case 12: // Overlay
-			result.rgb = mix(2.0 * prev_color.rgb * current_color.rgb, 1.0 - 2.0 * (1.0 - current_color.rgb) * (1.0 - prev_color.rgb), round(prev_color.rgb));
-			break;
-		case 13: // Soft light
-			result.rgb = mix(2.0 * prev_color.rgb * current_color.rgb + prev_color.rgb * prev_color.rgb * (1.0 - 2.0 * current_color.rgb), sqrt(prev_color.rgb) * (2.0 * current_color.rgb - 1.0) + (2.0 * prev_color.rgb) * (1.0 - current_color.rgb), round(prev_color.rgb));
-			break;
-		case 14: // Hard light
-			result.rgb = mix(2.0 * prev_color.rgb * current_color.rgb, 1.0 - 2.0 * (1.0 - current_color.rgb) * (1.0 - prev_color.rgb), round(current_color.rgb));
-			break;
-		case 15: // Difference
-			result.rgb = abs(prev_color.rgb - current_color.rgb);
-			break;
-		case 16: // Exclusion
-			result.rgb = prev_color.rgb + current_color.rgb - 2.0 * prev_color.rgb * current_color.rgb;
-			break;
-		case 17: // Subtract
-			result.rgb = prev_color.rgb - current_color.rgb;
-			break;
-		case 18: // Divide
-			result.rgb = prev_color.rgb / current_color.rgb;
-			break;
-		case 19: // Hue
-			vec3 current_hsl = rgb_to_hsl(current_color.rgb);
-			vec3 prev_hsl = rgb_to_hsl(prev_color.rgb);
-			result.rgb = hsl_to_rgb(vec3(current_hsl.r, prev_hsl.g, prev_hsl.b));
-			break;
-		case 20: // Saturation
-			vec3 current_hsl = rgb_to_hsl(current_color.rgb);
-			vec3 prev_hsl = rgb_to_hsl(prev_color.rgb);
-			result.rgb = hsl_to_rgb(vec3(prev_hsl.r, current_hsl.g, prev_hsl.b));
-			break;
-		case 21: // Color
-			vec3 current_hsl = rgb_to_hsl(current_color.rgb);
-			vec3 prev_hsl = rgb_to_hsl(prev_color.rgb);
-			result.rgb = hsl_to_rgb(vec3(current_hsl.r, current_hsl.g, prev_hsl.b));
-			break;
-		case 22: // Luminosity
-			vec3 current_hsl = rgb_to_hsl(current_color.rgb);
-			vec3 prev_hsl = rgb_to_hsl(prev_color.rgb);
-			result.rgb = hsl_to_rgb(vec3(prev_hsl.r, prev_hsl.g, current_hsl.b));
 			break;
 		default: // Normal (case 0)
 			result.rgb = current_color.rgb;

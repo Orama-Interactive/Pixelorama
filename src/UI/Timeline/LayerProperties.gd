@@ -83,8 +83,6 @@ func _fill_blend_modes_option_button() -> void:
 		blend_modes_button.add_item("Pass through", BaseLayer.BlendModes.PASS_THROUGH)
 	blend_modes_button.add_item("Normal", BaseLayer.BlendModes.NORMAL)
 	blend_modes_button.add_item("Erase", BaseLayer.BlendModes.ERASE)
-	blend_modes_button.add_item("Intersection", BaseLayer.BlendModes.INTERSECTION)
-	blend_modes_button.add_item("Logical AND", BaseLayer.BlendModes.LOGICAL_AND)
 	blend_modes_button.add_item("Darken", BaseLayer.BlendModes.DARKEN)
 	blend_modes_button.add_item("Multiply", BaseLayer.BlendModes.MULTIPLY)
 	blend_modes_button.add_item("Color burn", BaseLayer.BlendModes.COLOR_BURN)
@@ -104,6 +102,8 @@ func _fill_blend_modes_option_button() -> void:
 	blend_modes_button.add_item("Saturation", BaseLayer.BlendModes.SATURATION)
 	blend_modes_button.add_item("Color", BaseLayer.BlendModes.COLOR)
 	blend_modes_button.add_item("Luminosity", BaseLayer.BlendModes.LUMINOSITY)
+	blend_modes_button.add_item("Intersection", BaseLayer.BlendModes.INTERSECTION)
+	blend_modes_button.add_item("Match colors", BaseLayer.BlendModes.MATCH_COLORS)
 
 
 func _on_name_line_edit_text_changed(new_text: String) -> void:

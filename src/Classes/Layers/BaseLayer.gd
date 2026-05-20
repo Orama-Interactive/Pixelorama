@@ -16,8 +16,6 @@ enum BlendModes {
 	PASS_THROUGH = -2,  ## Only for group layers. Ignores group blending, like it doesn't exist.
 	NORMAL = 0,  ## The blend layer colors are simply placed on top of the base colors.
 	ERASE,  ## Erases the upper layer's alpha from the alpha of base layers.
-	INTERSECTION,  ## Erases the un-common areas between the blend and the base layers.
-	LOGICAL_AND,  ## Performs Logical AND on colors between the blend and the base layers.
 	DARKEN,  ## Keeps the darker colors between the blend and the base layers.
 	MULTIPLY,  ## Multiplies the numerical values of the two colors, giving a darker result.
 	COLOR_BURN,  ## Darkens by increasing the contrast between the blend and base colors.
@@ -36,7 +34,9 @@ enum BlendModes {
 	HUE,  ## Uses the blend hue while preserving the base saturation and luminosity.
 	SATURATION,  ## Uses the blend saturation while preserving the base hue and luminosity.
 	COLOR,  ## Uses the blend hue and saturation while preserving the base luminosity.
-	LUMINOSITY  ## Uses the blend luminosity while preserving the base hue and saturation.
+	LUMINOSITY,  ## Uses the blend luminosity while preserving the base hue and saturation.
+	INTERSECTION,  ## Erases the un-common areas between the blend and the base layers.
+	MATCH_COLORS,  ## Only shows the same colors between the blend and the base layers.
 }
 
 var name := "":  ## Name of the layer.
