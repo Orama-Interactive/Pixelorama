@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-05-20 15:49\n"
+"PO-Revision-Date: 2026-05-21 19:11\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -207,11 +207,11 @@ msgid "Resize Canvas"
 msgstr "Ŝanĝi la dimensiojn de la tavolo"
 
 msgid "Offset & Scale Image"
-msgstr ""
+msgstr "Deŝovi kaj skali bildon"
 
 #. Refers to the "Offset & Scale" layer effect.
 msgid "Offset & Scale"
-msgstr ""
+msgstr "Deŝovo kaj skalado"
 
 msgid "Offset:"
 msgstr "Deŝovo:"
@@ -1308,7 +1308,7 @@ msgid "Colors:"
 msgstr "Koloroj:"
 
 msgid "Steps:"
-msgstr ""
+msgstr "Ŝtupoj:"
 
 #. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Palettize"
@@ -2516,7 +2516,7 @@ msgstr "Dekstra faco"
 
 #. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
 msgid "Erase bits"
-msgstr ""
+msgstr "Forigi bitojn"
 
 msgid "Mirroring"
 msgstr "Spegulado"
@@ -2898,15 +2898,15 @@ msgstr "Lumintenseco"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. Contains blend modes that do masking operations between layers, such as the "Intersection" and "Match colors" blend modes.
 msgid "Masking"
-msgstr ""
+msgstr "Maskado"
 
 #. Found in the layer's section of the timeline, as a blend mode option. This blend mode belongs to the "Masking" category, and it erases the un-common areas between the blend and the base layers.
 msgid "Intersection"
-msgstr ""
+msgstr "Intersekco"
 
 #. Found in the layer's section of the timeline, as a blend mode option.  This blend mode belongs to the "Masking" category, and it only shows the same colors between the blend and the base layers.
 msgid "Match colors"
-msgstr ""
+msgstr "Kongruaj koloroj"
 
 msgid "Opacity:"
 msgstr "Opakeco:"
@@ -3300,7 +3300,7 @@ msgstr "Izometria briko"
 
 #. A tool that exists only for tilemap layers, and is responsible for setting some properties for the tiles. Currently, it is only used for setting the autotiling bits for a tile.
 msgid "Tiles Property Painter"
-msgstr ""
+msgstr "Pentrilo de kahelaj ecoj"
 
 msgid "Switch Colors"
 msgstr "Interŝanĝi kolorojn"
@@ -3900,35 +3900,35 @@ msgstr "Rapida ĉe ambaŭ finoj, malrapida ĉe mezo"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts slowly and speeds up towards the end", but with a shortened name.
 msgid "Ease in"
-msgstr ""
+msgstr "Akcelanta"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts quickly and slows down towards the end", but with a shortened name.
 msgid "Ease out"
-msgstr ""
+msgstr "Malakcelanta"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Slowest at both ends, fast at middle", but with a shortened name.
 msgid "Ease in out"
-msgstr ""
+msgstr "Rapida en mezo"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Fast at both ends, slow at middle", but with a shortened name.
 msgid "Ease out in"
-msgstr ""
+msgstr "Malrapida en mezo"
 
 #. Found in the keyframe timeline on the right panel when there is no keyframe selected.
 msgid "No key selected"
-msgstr ""
+msgstr "Neniu ĉefkadro elektita"
 
 #. Found in the keyframe timeline when right clicking on a track. When selected, a new keyframe is being inserted at the selected frame.
 msgid "Insert keyframe"
-msgstr ""
+msgstr "Inserti ĉefkadron"
 
 #. A button found in the keyframe timeline on the right panel when there is a keyframe selected. When clicked, it deletes the currently selected keyframe.
 msgid "Delete keyframe"
-msgstr ""
+msgstr "Forigi ĉefkadron"
 
 #. A button found in the keyframe timeline on the right panel when two or more keyframes are selected. When clicked, it deletes the currently selected keyframes.
 msgid "Delete keyframes"
-msgstr ""
+msgstr "Forigi ĉefkadrojn"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
@@ -4167,7 +4167,7 @@ msgstr "Staka"
 #. A checkbox that toggles autotiling on or off for tilemap layers.
 #: src/UI/TilesPanel.tscn
 msgid "Autotiling:"
-msgstr ""
+msgstr "Aŭtokahelado:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
