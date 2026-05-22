@@ -17,6 +17,28 @@ signal tile_replaced(cel: CelTileMap, index)
 ## Emitted when the size of the tile images changes.
 signal resized_content
 
+const RECT_TO_ISO := {
+	TileSet.CELL_NEIGHBOR_RIGHT_SIDE: TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE,
+	TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER: TileSet.CELL_NEIGHBOR_BOTTOM_CORNER,
+	TileSet.CELL_NEIGHBOR_BOTTOM_SIDE: TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE,
+	TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER: TileSet.CELL_NEIGHBOR_LEFT_CORNER,
+	TileSet.CELL_NEIGHBOR_LEFT_SIDE: TileSet.CELL_NEIGHBOR_TOP_LEFT_SIDE,
+	TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER: TileSet.CELL_NEIGHBOR_TOP_CORNER,
+	TileSet.CELL_NEIGHBOR_TOP_SIDE: TileSet.CELL_NEIGHBOR_TOP_RIGHT_SIDE,
+	TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER: TileSet.CELL_NEIGHBOR_RIGHT_CORNER,
+}
+
+const ISO_TO_RECT := {
+	TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE: TileSet.CELL_NEIGHBOR_RIGHT_SIDE,
+	TileSet.CELL_NEIGHBOR_BOTTOM_CORNER: TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER,
+	TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_SIDE: TileSet.CELL_NEIGHBOR_BOTTOM_SIDE,
+	TileSet.CELL_NEIGHBOR_LEFT_CORNER: TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER,
+	TileSet.CELL_NEIGHBOR_TOP_LEFT_SIDE: TileSet.CELL_NEIGHBOR_LEFT_SIDE,
+	TileSet.CELL_NEIGHBOR_TOP_CORNER: TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER,
+	TileSet.CELL_NEIGHBOR_TOP_RIGHT_SIDE: TileSet.CELL_NEIGHBOR_TOP_SIDE,
+	TileSet.CELL_NEIGHBOR_RIGHT_CORNER: TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER,
+}
+
 ## The tileset's name.
 var name := ""
 ## The collection of tiles in the form of an [Array] of type [TileSetCustom.Tile].
@@ -300,15 +322,29 @@ func create_godot_tileset(rows := 1, shape := tile_shape, size := tile_size) -> 
 			tile_data.terrain_set = 0
 			tile_data.terrain = tile.terrain_center_bit
 			for i in tile.terrain_peering_bits.size():
-				var bit := tile.terrain_peering_bits[i]
-				if tile_data.is_valid_terrain_peering_bit(i):
-					tile_data.set_terrain_peering_bit(i, bit)
-				else:
-					tile.terrain_peering_bits[i] = -1
+				var terrain_id := tile.terrain_peering_bits[i]
+				var peering_bit := convert_peering_bit(i, tile_shape, shape)
+				if tile_data.is_valid_terrain_peering_bit(peering_bit):
+					tile_data.set_terrain_peering_bit(peering_bit, terrain_id)
 			tile_index += 1
 			if tile_index >= tiles.size():
 				break
+		if tile_index >= tiles.size():
+			break
 	return godot_tileset
+
+
+func convert_peering_bit(bit: int, from_shape: int, to_shape: int) -> int:
+	if from_shape == to_shape or to_shape == TileSet.TILE_SHAPE_HEXAGON:
+		return bit
+
+	if from_shape == TileSet.TILE_SHAPE_SQUARE and to_shape == TileSet.TILE_SHAPE_ISOMETRIC:
+		return RECT_TO_ISO.get(bit, -1)
+
+	if from_shape == TileSet.TILE_SHAPE_ISOMETRIC and to_shape == TileSet.TILE_SHAPE_SQUARE:
+		return ISO_TO_RECT.get(bit, -1)
+
+	return -1
 
 
 ## Serializes the data of this class into the form of a [Dictionary],

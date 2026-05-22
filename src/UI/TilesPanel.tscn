@@ -290,6 +290,7 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="Options" type="Popup" parent="." unique_id=583438229]
+oversampling_override = 1.0
 position = Vector2i(0, 36)
 size = Vector2i(210, 100)
 unresizable = false
@@ -346,7 +347,7 @@ script = ExtResource("10_wfr6s")
 layout_mode = 2
 text = "Show empty tile:"
 
-[node name="ShowEmptyTile" type="CheckBox" parent="Options/MarginContainer/ScrollContainer/GridContainer" unique_id=1181971006]
+[node name="ShowEmptyTile" type="CheckButton" parent="Options/MarginContainer/ScrollContainer/GridContainer" unique_id=441019750]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 button_pressed = true
