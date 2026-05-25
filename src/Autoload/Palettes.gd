@@ -613,9 +613,7 @@ func export_gpl(palette: Palette, path: String) -> void:
 		if i in palette.colors:
 			color = palette.colors[i].color
 			comment = color.to_html(false)
-		palette_file.store_line(
-			str(color.r8, "\t", color.g8, "\t", color.b8, "\t", comment)
-		)
+		palette_file.store_line(str(color.r8, "\t", color.g8, "\t", color.b8, "\t", comment))
 	palette_file.close()
 
 
