@@ -147,11 +147,11 @@ func deserialize_from_dictionary(data: Dictionary) -> void:
 	colors_max = width * height
 
 
-func save_to_file() -> Error:
+func save_to_file(custom_path: String = path) -> Error:
 	if is_project_palette:
 		# Project palettes are not a physical file so nothing needs to be saved
 		return OK
-	var file := FileAccess.open(path, FileAccess.WRITE)
+	var file := FileAccess.open(custom_path, FileAccess.WRITE)
 	if not is_instance_valid(file):
 		return FileAccess.get_open_error()
 	file.store_string(serialize())

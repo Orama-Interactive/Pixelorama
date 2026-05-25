@@ -592,6 +592,33 @@ func import_palette_from_path(path: String, make_copy := false, is_initialising 
 		Global.popup_error(tr("Can't load file '%s'.\nThis is not a valid palette file.") % [path])
 
 
+func export_gpl(palette: Palette, path: String) -> void:
+	var palette_file := FileAccess.open(path, FileAccess.WRITE)
+	if FileAccess.get_open_error() != OK:
+		return
+	palette_file.store_line("GIMP Palette")
+	# Metadata
+	palette_file.store_line("#Palette Name: %s" % palette.name)
+	palette_file.store_line(
+		"#Description: %s" % palette.comment.replace("\n", " ").replace("\r", "")
+	)
+	palette_file.store_line("#Colors: %s" % palette.colors_max)
+	# Set columns
+	if palette.width < 255:
+		palette_file.store_line("Columns: %s" % str(palette.width))
+	# Colors
+	for i in palette.colors_max:
+		var color := Color.BLACK
+		var comment: String = "PixeloramaEmptySlot"
+		if i in palette.colors:
+			color = palette.colors[i].color
+			comment = color.to_html(false)
+		palette_file.store_line(
+			str(color.r8, "\t", color.g8, "\t", color.b8, "\t", comment)
+		)
+	palette_file.close()
+
+
 ## Refer to app/core/gimppalette-load.c of the GNU Image Manipulation Program for the "living spec"
 func _import_gpl(path: String, text: String) -> Palette:
 	var result: Palette = null
@@ -600,6 +627,7 @@ func _import_gpl(path: String, text: String) -> Palette:
 	var palette_name := path.get_basename().get_file()
 	var comments := ""
 	var columns := 0
+	var empty_slots := PackedInt32Array()
 	var colors := PackedColorArray()
 
 	for line in lines:
@@ -630,15 +658,33 @@ func _import_gpl(path: String, text: String) -> Palette:
 			var blue: float = color_data[2].to_float() / 255.0
 			var color := Color(red, green, blue)
 			if color_data.size() >= 4:
-				# Ignore color name for now - result.add_color(color, color_data[3])
 				colors.append(color)
+				if color_data[3] == "PixeloramaEmptySlot":
+					empty_slots.append(colors.size() - 1)  # Pixelorama is meant to ignore this slot
 			else:
 				colors.append(color)
 		line_number += 1
 
 	if line_number > 0:
-		return fill_imported_palette_with_colors(palette_name, colors, comments, columns)
+		return fill_imported_palette_with_colors(
+			palette_name, colors, comments, columns, empty_slots
+		)
 	return result
+
+
+func export_pal_palette(palette: Palette, path: String) -> void:
+	var palette_file := FileAccess.open(path, FileAccess.WRITE)
+	if FileAccess.get_open_error() != OK:
+		return
+	palette_file.store_line("JASC-PAL")
+	palette_file.store_line("0100")
+	palette_file.store_line(str(palette.colors.size()))
+	var palette_indices := palette.colors.keys()
+	palette_indices.sort()
+	for i in palette_indices:
+		var color: Color = palette.colors[i].color
+		palette_file.store_line(str(color.r8, " ", color.g8, " ", color.b8))
+	palette_file.close()
 
 
 func _import_pal_palette(path: String, text: String) -> Palette:
@@ -652,6 +698,11 @@ func _import_pal_palette(path: String, text: String) -> Palette:
 	var num_colors := int(lines[2])
 
 	for i in range(3, num_colors + 3):
+		if i >= lines.size():
+			printerr("Pal palette has less colors than expected")
+			break
+		if lines[i].strip_edges().is_empty():
+			continue
 		var color_data := lines[i].split(" ")
 		var red := color_data[0].to_float() / 255.0
 		var green := color_data[1].to_float() / 255.0
@@ -686,6 +737,7 @@ func fill_imported_palette_with_colors(
 	colors: PackedColorArray,
 	comment := "",
 	width := Palette.DEFAULT_WIDTH,
+	empty_indices := PackedInt32Array()
 ) -> Palette:
 	if width <= 0:
 		width = Palette.DEFAULT_WIDTH
@@ -694,8 +746,12 @@ func fill_imported_palette_with_colors(
 	if height == 1:
 		width = colors.size()
 	var result := Palette.new(palette_name, width, height, comment)
+	var start_idx := 0
 	for color in colors:
-		result.add_color(color)
+		# ignore color if the index it fills is meant to be empty
+		if not start_idx in empty_indices:
+			result.add_color(color, start_idx)
+		start_idx += 1
 
 	return result
 
