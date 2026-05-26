@@ -264,7 +264,7 @@ func pick_random_tile(selected_tile_indices: Array[int]) -> int:
 	return 0
 
 
-func create_image_atlas(rows := 1, skip_first := true) -> Image:
+func create_image_atlas(rows := 1, transpose := false, skip_first := true) -> Image:
 	var tiles_size := tiles.size()
 	if skip_first:
 		tiles_size -= 1
@@ -275,24 +275,25 @@ func create_image_atlas(rows := 1, skip_first := true) -> Image:
 	var height := tile_size.y * rows
 	var image := Image.create_empty(width, height, false, tiles[0].image.get_format())
 	var origin := Vector2i.ZERO
-	var hh := 0
-	var vv := 0
+	var index := 0
 	for tile in tiles:
 		if skip_first and tile == tiles[0]:
 			continue
-		if vv < columns:
-			origin.x = tile_size.x * vv
-			vv += 1
-		else:
-			hh += 1
-			origin.x = 0
-			vv = 1
-			origin.y = tile_size.y * hh
+		var x := index / rows
+		var y := index % rows
+		if not transpose:
+			x = index % columns
+			y = index / columns
+
+		origin = Vector2i(x * tile_size.x, y * tile_size.y)
 		image.blend_rect(tile.image, Rect2i(Vector2i.ZERO, tile_size), origin)
+		index += 1
 	return image
 
 
-func create_godot_tileset(rows := 1, shape := tile_shape, size := tile_size) -> TileSet:
+func create_godot_tileset(
+	rows := 1, transpose := false, shape := tile_shape, size := tile_size
+) -> TileSet:
 	var godot_tileset := TileSet.new()
 	godot_tileset.tile_size = tile_size
 	godot_tileset.tile_shape = tile_shape
@@ -307,7 +308,7 @@ func create_godot_tileset(rows := 1, shape := tile_shape, size := tile_size) -> 
 		godot_tileset.remove_source(id)
 	var godot_tileset_atlas_source := TileSetAtlasSource.new()
 	godot_tileset.add_source(godot_tileset_atlas_source)
-	var image_atlas := create_image_atlas(rows)
+	var image_atlas := create_image_atlas(rows, transpose)
 	godot_tileset_atlas_source.texture = ImageTexture.create_from_image(image_atlas)
 	# This needs to be equal to tile_size and not size.
 	godot_tileset_atlas_source.texture_region_size = tile_size
