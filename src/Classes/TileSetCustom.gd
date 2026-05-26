@@ -314,9 +314,16 @@ func create_godot_tileset(
 	godot_tileset_atlas_source.texture_region_size = tile_size
 	var grid_size := godot_tileset_atlas_source.get_atlas_grid_size()
 	var tile_index := 1
-	for y in grid_size.y:
-		for x in grid_size.x:
+	var first_dimension := grid_size.y
+	var second_dimension := grid_size.x
+	if transpose:
+		first_dimension = grid_size.x
+		second_dimension = grid_size.y
+	for y in first_dimension:
+		for x in second_dimension:
 			var coords := Vector2i(x, y)
+			if transpose:
+				coords = Vector2i(y, x)
 			godot_tileset_atlas_source.create_tile(coords)
 			var tile_data := godot_tileset_atlas_source.get_tile_data(coords, 0)
 			var tile := tiles[tile_index]
