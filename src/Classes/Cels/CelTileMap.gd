@@ -1082,12 +1082,17 @@ func _on_tileset_tile_removed(cel: CelTileMap, index: int) -> void:
 
 ## If a tile has been replaced in the tileset by another [param cel]
 ## when using manual mode, also update its image.
-func _on_tileset_tile_replaced(cel: CelTileMap, _index: int) -> void:
+func _on_tileset_tile_replaced(cel: CelTileMap, index: int) -> void:
 	if cel == self:
 		return
 	if link_set != null and cel in link_set["cels"]:
 		return
-	update_cel_portions(true)
+	var cell_keys := cells.keys()
+	cell_keys.sort()
+	for cell_coords in cell_keys:
+		var cell := cells[cell_coords]
+		if cell.index == index:
+			_update_cell(cell)
 	Global.canvas.update_all_layers = true
 	Global.canvas.queue_redraw.call_deferred()
 
