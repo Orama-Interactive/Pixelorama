@@ -18,9 +18,13 @@ Built using Godot 4.6.2
 - Added a new "Reselect" option in the Selection menu, which re-creates a previously cleared selection. By default, its shortcut is set to <kbd>Control + Shift + D</kbd>.
 - Added new blend modes: Intersect and Match colors! [#1474](https://github.com/Orama-Interactive/Pixelorama/pull/1474)
 - Added an option in the export dialog to repeat the animation as many times as you want. [#1508](https://github.com/Orama-Interactive/Pixelorama/pull/1508)
+- Added a preview and a transpose option when exporting tilesets.
 - When creating a new project, it is now possible to set its size based on the clipboard image size, if there is one. [#1507](https://github.com/Orama-Interactive/Pixelorama/pull/1507)
 
 ### Fixed
+- Fixed resizing selection not being snapped to the pixel grid.
+- Fixed crash when switching to a different project while a transformation is active on a tilemap layer.
+- Fixed manual mode in tilemap layers not updating all cells when there is more than one tilemap layer sharing the same tileset.
 - Fixed extension exporters not working. [#1497](https://github.com/Orama-Interactive/Pixelorama/pull/1497)
 
 ## [v1.1.10] - 2026-04-30
