@@ -136,6 +136,8 @@ func _on_cel_switched() -> void:
 func _update_tileset() -> void:
 	_tileset_updated_this_frame = false
 	_clear_tile_buttons()
+	if not is_instance_valid(current_tileset):
+		return
 	for tile_index in selected_tiles:
 		if tile_index >= current_tileset.tiles.size():
 			selected_tiles.erase(tile_index)
