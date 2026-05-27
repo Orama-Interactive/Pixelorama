@@ -327,6 +327,7 @@ func create_godot_tileset(
 			godot_tileset_atlas_source.create_tile(coords)
 			var tile_data := godot_tileset_atlas_source.get_tile_data(coords, 0)
 			var tile := tiles[tile_index]
+			tile_data.probability = tile.probability
 			tile_data.terrain_set = 0
 			tile_data.terrain = tile.terrain_center_bit
 			for i in tile.terrain_peering_bits.size():
