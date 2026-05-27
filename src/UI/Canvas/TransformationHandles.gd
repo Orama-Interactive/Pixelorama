@@ -434,6 +434,11 @@ func resize_transform_handle(
 			return t
 		drag_start = drag_start.snapped(tilemap.get_tile_size())
 		delta = delta.snapped(tilemap.get_tile_size())
+	else:
+		# Snap to pixel grid, otherwise the transformation handles can be in sub-pixel
+		# positions, causing weird results when resizing.
+		drag_start = drag_start.snapped(Vector2.ONE)
+		delta = delta.snapped(Vector2.ONE)
 	var image_size := transformed_selection_map.get_size() as Vector2
 	# Step 1: Convert drag to local space
 	var local_start := t.affine_inverse() * drag_start
