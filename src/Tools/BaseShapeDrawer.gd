@@ -56,20 +56,20 @@ func _on_FillCheckbox_toggled(button_pressed: bool) -> void:
 
 
 func get_config() -> Dictionary:
-	var config := super.get_config()
+	var config := super()
 	config["fill_inside"] = _fill_inside
 	config["thickness"] = _thickness
 	return config
 
 
 func set_config(config: Dictionary) -> void:
-	super.set_config(config)
+	super(config)
 	_fill_inside = config.get("fill_inside", _fill_inside)
 	_thickness = config.get("thickness", _thickness)
 
 
 func update_config() -> void:
-	super.update_config()
+	super()
 	$FillCheckbox.button_pressed = _fill_inside
 	$ThicknessSlider.value = _thickness
 
