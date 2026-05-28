@@ -6,9 +6,8 @@ var _radius := 0
 func _get_shape_points_filled(shape_size: Vector2i) -> Array[Vector2i]:
 	if _radius <= 0:
 		var array: Array[Vector2i] = []
-		var t_of := _thickness - 1
-		for y in range(shape_size.y + t_of):
-			for x in range(shape_size.x + t_of):
+		for y in range(shape_size.y):
+			for x in range(shape_size.x):
 				array.append(Vector2i(x, y))
 		return array
 
@@ -16,7 +15,7 @@ func _get_shape_points_filled(shape_size: Vector2i) -> Array[Vector2i]:
 
 
 func _get_shape_points(shape_size: Vector2i) -> Array[Vector2i]:
-	return DrawingAlgos.get_rounded_rect_points(Vector2i.ZERO, shape_size, _radius, _thickness)
+	return DrawingAlgos.get_rounded_rect_points(Vector2i.ZERO, shape_size, _radius, 1)
 
 
 func get_config() -> Dictionary:

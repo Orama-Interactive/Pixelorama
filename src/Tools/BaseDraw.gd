@@ -468,7 +468,7 @@ func _prepare_tool() -> void:
 
 ## Make sure to always have invoked _prepare_tool() before this. This computes the coordinates to be
 ## drawn if it can (except for the generic brush, when it's actually drawing them)
-func _draw_tool(pos: Vector2) -> PackedVector2Array:
+func _draw_tool(pos: Vector2, draw_brush := true) -> PackedVector2Array:
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return PackedVector2Array()  # empty fallback
 	if Tools.is_placing_tiles():
@@ -481,7 +481,8 @@ func _draw_tool(pos: Vector2) -> PackedVector2Array:
 		Brushes.FILLED_CIRCLE:
 			return _compute_draw_tool_circle(pos, true)
 		_:
-			draw_tool_brush(pos)
+			if draw_brush:
+				draw_tool_brush(pos)
 	return PackedVector2Array()  # empty fallback
 
 
@@ -782,8 +783,15 @@ func _set_pixel_no_cache(pos: Vector2i, ignore_mirroring := false) -> void:
 	update_materials(images)
 
 
-func _draw_brush_image(_image: Image, _src_rect: Rect2i, _dst: Vector2i) -> void:
-	pass
+func _draw_brush_image(brush_image: Image, src_rect: Rect2i, dst: Vector2i) -> void:
+	var images := _get_selected_draw_images()
+	for draw_image in images:
+		if Tools.alpha_locked:
+			var mask := draw_image.get_region(Rect2i(dst, brush_image.get_size()))
+			draw_image.blit_rect_mask(brush_image, mask, src_rect, dst)
+		else:
+			draw_image.blit_rect(brush_image, src_rect, dst)
+		draw_image.convert_rgb_to_indexed()
 
 
 func _create_blended_brush_image(image: Image) -> Image:

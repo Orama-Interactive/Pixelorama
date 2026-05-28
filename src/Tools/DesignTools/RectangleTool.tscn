@@ -7,7 +7,7 @@
 [node name="ToolOptions" unique_id=1543714690 instance=ExtResource("1")]
 script = ExtResource("2")
 
-[node name="RadiusValueSlider" type="TextureProgressBar" parent="." index="8" unique_id=2003319434]
+[node name="RadiusValueSlider" type="TextureProgressBar" parent="." index="6" unique_id=2003319434]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 focus_mode = 2
