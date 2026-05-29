@@ -398,6 +398,7 @@ func draw_end(pos: Vector2i) -> void:
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
 	_drawn_tiles.clear()
+	SteamManager.set_achievement("ACH_FIRST_PIXEL")
 
 
 func cancel_tool() -> void:
