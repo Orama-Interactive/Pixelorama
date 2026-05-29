@@ -515,7 +515,11 @@ func draw_fill_gap(start: Vector2i, end: Vector2i) -> void:
 
 
 func get_coords_to_draw(points: Array[Vector2i], draw_brush := true) -> PackedVector2Array:
-	if _brush_size == 1 and _brush.type in [Brushes.PIXEL, Brushes.CIRCLE, Brushes.FILLED_CIRCLE]:
+	if (
+		_brush_size == 1
+		and not _spacing_mode
+		and _brush.type in [Brushes.PIXEL, Brushes.CIRCLE, Brushes.FILLED_CIRCLE]
+	):
 		return points
 	# This needs to be a dictionary to ensure duplicate coordinates are not being added
 	var coords_to_draw: Dictionary[Vector2, int] = {}

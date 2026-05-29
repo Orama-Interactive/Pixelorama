@@ -16,7 +16,7 @@ func _init() -> void:
 func update_indicator() -> void:
 	var indicator := BitMap.new()
 	var rect := _get_result_rect(_start, _dest)
-	var points := _get_points(rect.size)
+	var points := _get_points(Vector2i.ZERO, rect.size)
 	var t_offset := _brush_size - 1
 	var t_offsetv := Vector2i(t_offset, t_offset)
 	indicator.create(rect.size + t_offsetv)
@@ -54,11 +54,11 @@ func _create_brush_indicator() -> BitMap:
 	return _indicator
 
 
-func _get_shape_points(_size: Vector2i) -> Array[Vector2i]:
+func _get_shape_points(_pos: Vector2i, _size: Vector2i) -> Array[Vector2i]:
 	return []
 
 
-func _get_shape_points_filled(_size: Vector2i) -> Array[Vector2i]:
+func _get_shape_points_filled(_pos: Vector2i, _size: Vector2i) -> Array[Vector2i]:
 	return []
 
 
@@ -136,7 +136,7 @@ func draw_preview() -> void:
 		return
 	var canvas := Global.canvas.previews_sprite
 	var rect := _get_result_rect(_start, _dest)
-	var points := _get_points(rect.size)
+	var points := _get_points(Vector2i.ZERO, rect.size)
 	var final_points := get_coords_to_draw(points, false)
 
 	var image := Image.create(
@@ -156,13 +156,12 @@ func draw_preview() -> void:
 
 func _draw_shape(origin: Vector2i, dest: Vector2i) -> void:
 	var rect := _get_result_rect(origin, dest)
-	var rect_pos := Vector2(rect.position)
-	var points := _get_points(rect.size)
+	var points := _get_points(rect.position, rect.size)
 	prepare_undo()
 	_prepare_tool()
 	var final_points := get_coords_to_draw(points)
 	for point in final_points:
-		_set_pixel(point + rect_pos)
+		_set_pixel(point)
 
 	commit_undo("Draw Shape")
 
@@ -199,8 +198,10 @@ func _get_result_rect(origin: Vector2i, dest: Vector2i) -> Rect2i:
 	return rect
 
 
-func _get_points(shape_size: Vector2i) -> Array[Vector2i]:
-	return _get_shape_points_filled(shape_size) if _fill_inside else _get_shape_points(shape_size)
+func _get_points(pos: Vector2i, shape_size: Vector2i) -> Array[Vector2i]:
+	if _fill_inside:
+		return _get_shape_points_filled(pos, shape_size)
+	return _get_shape_points(pos, shape_size)
 
 
 func _set_cursor_text(rect: Rect2i) -> void:

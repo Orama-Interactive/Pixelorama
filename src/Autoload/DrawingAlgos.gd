@@ -170,7 +170,7 @@ func get_rounded_rect_points(
 		return points
 
 	# Remove the inner rectangle to produce a hollow shape.
-	var thickness_vector := Vector2i(thickness, thickness)
+	var thickness_vector := pos + Vector2i(thickness, thickness)
 	var inner_radius := maxi(0, radius - thickness)
 	var inner := get_rounded_rect_points_filled(thickness_vector, inner_size, inner_radius)
 	for p in inner:
@@ -184,7 +184,7 @@ func get_rounded_rect_points_filled(pos: Vector2i, size: Vector2i, radius: int) 
 	if radius <= 0:
 		for y in range(size.y):
 			for x in range(size.x):
-				points.append(Vector2i(x, y))
+				points.append(pos + Vector2i(x, y))
 		return points
 
 	@warning_ignore("integer_division")

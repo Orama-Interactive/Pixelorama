@@ -3,19 +3,12 @@ extends "res://src/Tools/BaseShapeDrawer.gd"
 var _radius := 0
 
 
-func _get_shape_points_filled(shape_size: Vector2i) -> Array[Vector2i]:
-	if _radius <= 0:
-		var array: Array[Vector2i] = []
-		for y in range(shape_size.y):
-			for x in range(shape_size.x):
-				array.append(Vector2i(x, y))
-		return array
-
-	return DrawingAlgos.get_rounded_rect_points_filled(Vector2.ZERO, shape_size, _radius)
+func _get_shape_points_filled(pos: Vector2i, shape_size: Vector2i) -> Array[Vector2i]:
+	return DrawingAlgos.get_rounded_rect_points_filled(pos, shape_size, _radius)
 
 
-func _get_shape_points(shape_size: Vector2i) -> Array[Vector2i]:
-	return DrawingAlgos.get_rounded_rect_points(Vector2i.ZERO, shape_size, _radius, 1)
+func _get_shape_points(pos: Vector2i, shape_size: Vector2i) -> Array[Vector2i]:
+	return DrawingAlgos.get_rounded_rect_points(pos, shape_size, _radius, 1)
 
 
 func get_config() -> Dictionary:
