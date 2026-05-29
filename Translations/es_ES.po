@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2026-05-20 15:48\n"
+"PO-Revision-Date: 2026-05-29 15:29\n"
 
 msgid "OK"
 msgstr "Aceptar"
@@ -207,11 +207,11 @@ msgid "Resize Canvas"
 msgstr "Redimensionar lienzo"
 
 msgid "Offset & Scale Image"
-msgstr ""
+msgstr "Desplazamiento y escala de imagen"
 
 #. Refers to the "Offset & Scale" layer effect.
 msgid "Offset & Scale"
-msgstr ""
+msgstr "Desplazamiento y escala"
 
 msgid "Offset:"
 msgstr "Desplazamiento:"
@@ -2898,15 +2898,15 @@ msgstr "Luminosidad"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. Contains blend modes that do masking operations between layers, such as the "Intersection" and "Match colors" blend modes.
 msgid "Masking"
-msgstr ""
+msgstr "Enmascaramiento"
 
 #. Found in the layer's section of the timeline, as a blend mode option. This blend mode belongs to the "Masking" category, and it erases the un-common areas between the blend and the base layers.
 msgid "Intersection"
-msgstr ""
+msgstr "Intersección"
 
 #. Found in the layer's section of the timeline, as a blend mode option.  This blend mode belongs to the "Masking" category, and it only shows the same colors between the blend and the base layers.
 msgid "Match colors"
-msgstr ""
+msgstr "Coincidir colores"
 
 msgid "Opacity:"
 msgstr "Opacidad:"
@@ -3300,7 +3300,7 @@ msgstr "Herramienta de Caja Isométrica"
 
 #. A tool that exists only for tilemap layers, and is responsible for setting some properties for the tiles. Currently, it is only used for setting the autotiling bits for a tile.
 msgid "Tiles Property Painter"
-msgstr ""
+msgstr "Pintor de propiedades de mosaicos"
 
 msgid "Switch Colors"
 msgstr "Cambiar colores"
@@ -3900,35 +3900,35 @@ msgstr "Rápido en ambos extremos, lento en medio"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts slowly and speeds up towards the end", but with a shortened name.
 msgid "Ease in"
-msgstr ""
+msgstr "Entrada suave"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts quickly and slows down towards the end", but with a shortened name.
 msgid "Ease out"
-msgstr ""
+msgstr "Salida suave"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Slowest at both ends, fast at middle", but with a shortened name.
 msgid "Ease in out"
-msgstr ""
+msgstr "Entrada y salida suave"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Fast at both ends, slow at middle", but with a shortened name.
 msgid "Ease out in"
-msgstr ""
+msgstr "Salida y entrada suave"
 
 #. Found in the keyframe timeline on the right panel when there is no keyframe selected.
 msgid "No key selected"
-msgstr ""
+msgstr "No se ha seleccionado ningun fotograma clave"
 
 #. Found in the keyframe timeline when right clicking on a track. When selected, a new keyframe is being inserted at the selected frame.
 msgid "Insert keyframe"
-msgstr ""
+msgstr "Insertar fotograma clave"
 
 #. A button found in the keyframe timeline on the right panel when there is a keyframe selected. When clicked, it deletes the currently selected keyframe.
 msgid "Delete keyframe"
-msgstr ""
+msgstr "Eliminar fotograma clave"
 
 #. A button found in the keyframe timeline on the right panel when two or more keyframes are selected. When clicked, it deletes the currently selected keyframes.
 msgid "Delete keyframes"
-msgstr ""
+msgstr "Eliminar fotogramas clave"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
@@ -4167,7 +4167,7 @@ msgstr "Pila"
 #. A checkbox that toggles autotiling on or off for tilemap layers.
 #: src/UI/TilesPanel.tscn
 msgid "Autotiling:"
-msgstr ""
+msgstr "Teselado automático:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
