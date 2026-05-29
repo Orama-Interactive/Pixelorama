@@ -484,6 +484,8 @@ func _draw_tool(pos: Vector2, draw_brush := true) -> PackedVector2Array:
 		_:
 			if draw_brush:
 				draw_tool_brush(pos)
+			else:
+				return _compute_draw_tool_image(pos, _brush_image)
 	return PackedVector2Array()  # empty fallback
 
 
@@ -515,11 +517,7 @@ func draw_fill_gap(start: Vector2i, end: Vector2i) -> void:
 
 
 func get_coords_to_draw(points: Array[Vector2i], draw_brush := true) -> PackedVector2Array:
-	if (
-		_brush_size == 1
-		and not _spacing_mode
-		and _brush.type in [Brushes.PIXEL, Brushes.CIRCLE, Brushes.FILLED_CIRCLE]
-	):
+	if _brush_size == 1 and not _spacing_mode and not is_image_brush():
 		return points
 	# This needs to be a dictionary to ensure duplicate coordinates are not being added
 	var coords_to_draw: Dictionary[Vector2, int] = {}
@@ -529,6 +527,10 @@ func get_coords_to_draw(points: Array[Vector2i], draw_brush := true) -> PackedVe
 		for coord in _draw_tool(current_pixel_coord, draw_brush):
 			coords_to_draw[coord] = 0
 	return coords_to_draw.keys()
+
+
+func is_image_brush() -> bool:
+	return _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
 
 
 func draw_on_3d_object(pos: Vector2, layer: Layer3D, clear_mat := true) -> Vector2:
@@ -621,6 +623,21 @@ func _compute_draw_tool_circle(pos: Vector2i, fill := false) -> Array[Vector2i]:
 		result = DrawingAlgos.get_ellipse_points_filled(offset_pos, brush_size)
 	else:
 		result = DrawingAlgos.get_ellipse_points(offset_pos, brush_size)
+	return result
+
+
+## Compute the array of coordinates that should be drawn.
+## Used for previewing only and NOT actual drawing.
+func _compute_draw_tool_image(pos: Vector2i, image: Image) -> Array[Vector2i]:
+	var brush_size := _brush_image.get_size()
+	var dst := pos - (brush_size / 2)
+	var result: Array[Vector2i]
+	for x in image.get_width():
+		for y in image.get_height():
+			var pixel := image.get_pixel(x, y)
+			if not is_zero_approx(pixel.a):
+				result.append(dst + Vector2i(x, y))
+
 	return result
 
 

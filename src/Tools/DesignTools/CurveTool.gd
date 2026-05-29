@@ -225,6 +225,9 @@ func _draw_shape() -> void:
 		_set_pixel(point)
 
 	if _fill_inside:
+		if is_image_brush():
+			for point in points:
+				_fill_inside_rect = _fill_inside_rect.expand(point)
 		var v := Vector2i()
 		for x in _fill_inside_rect.size.x:
 			v.x = x + _fill_inside_rect.position.x
