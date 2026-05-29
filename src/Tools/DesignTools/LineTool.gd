@@ -30,14 +30,6 @@ func set_config(config: Dictionary) -> void:
 	super.set_config(config)
 
 
-func _get_shape_points(_size: Vector2i) -> Array[Vector2i]:
-	return []
-
-
-func _get_shape_points_filled(_size: Vector2i) -> Array[Vector2i]:
-	return []
-
-
 func _input(event: InputEvent) -> void:
 	if _drawing:
 		if event.is_action_pressed("shape_displace"):
@@ -121,9 +113,7 @@ func draw_preview() -> void:
 		return
 	var canvas := Global.canvas.previews_sprite
 	var points := Geometry2D.bresenham_line(_start, _dest)
-	var final_points: PackedVector2Array
-	for point in points:
-		final_points.append_array(_draw_tool(point, false))
+	var final_points := get_coords_to_draw(points, false)
 	var image := Image.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_LA8
 	)
@@ -142,10 +132,9 @@ func _draw_shape() -> void:
 	var points := Geometry2D.bresenham_line(_start, _dest)
 	prepare_undo()
 	_prepare_tool()
-	for point in points:
-		var coords_to_draw := _draw_tool(point)
-		for coord in coords_to_draw:
-			_set_pixel(coord)
+	var final_points := get_coords_to_draw(points)
+	for point in final_points:
+		_set_pixel(point)
 
 	commit_undo("Draw Shape")
 

@@ -137,15 +137,13 @@ func draw_preview() -> void:
 	var canvas := Global.canvas.previews_sprite
 	var rect := _get_result_rect(_start, _dest)
 	var points := _get_points(rect.size)
-	var final_points: Array[Vector2i]
-	for point in points:
-		final_points.append_array(_draw_tool(point, false))
+	var final_points := get_coords_to_draw(points, false)
 
 	var image := Image.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_LA8
 	)
 	for i in final_points.size():
-		final_points[i] += rect.position
+		final_points[i] += Vector2(rect.position)
 		if Rect2i(Vector2i.ZERO, image.get_size()).has_point(final_points[i]):
 			image.set_pixelv(final_points[i], Color.WHITE)
 	# Handle mirroring
@@ -158,13 +156,14 @@ func draw_preview() -> void:
 
 func _draw_shape(origin: Vector2i, dest: Vector2i) -> void:
 	var rect := _get_result_rect(origin, dest)
+	var rect_pos := Vector2(rect.position)
 	var points := _get_points(rect.size)
 	prepare_undo()
 	_prepare_tool()
-	for point in points:
-		var coords_to_draw := _draw_tool(point + rect.position)
-		for coord in coords_to_draw:
-			_set_pixel(coord)
+	var final_points := get_coords_to_draw(points)
+	for point in final_points:
+		_set_pixel(point + rect_pos)
+
 	commit_undo("Draw Shape")
 
 

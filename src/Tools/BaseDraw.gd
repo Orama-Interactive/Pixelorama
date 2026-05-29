@@ -496,8 +496,6 @@ func draw_fill_gap(start: Vector2i, end: Vector2i) -> void:
 			start.x += 1
 			end.x += 1
 	_prepare_tool()
-	# This needs to be a dictionary to ensure duplicate coordinates are not being added
-	var coords_to_draw := {}
 	var pixel_coords := Geometry2D.bresenham_line(start, end)
 	pixel_coords.pop_front()
 	if project.get_current_cel() is Cel3D:
@@ -508,15 +506,24 @@ func draw_fill_gap(start: Vector2i, end: Vector2i) -> void:
 			if draw_pos == Vector2.INF:
 				return
 			pixel_coords[i] = Vector2i(draw_pos)
-	for current_pixel_coord in pixel_coords:
-		if _spacing_mode:
-			current_pixel_coord = get_spacing_position(current_pixel_coord)
-		for coord in _draw_tool(current_pixel_coord):
-			coords_to_draw[coord] = 0
-	for c in coords_to_draw.keys():
+	var coords_to_draw := get_coords_to_draw(pixel_coords)
+	for c in coords_to_draw:
 		_set_pixel_no_cache(c)
 	if project.has_selection:
 		project.selection_map.lock_selection_rect(project, false)
+
+
+func get_coords_to_draw(points: Array[Vector2i], draw_brush := true) -> PackedVector2Array:
+	if _brush_size == 1 and _brush.type in [Brushes.PIXEL, Brushes.CIRCLE, Brushes.FILLED_CIRCLE]:
+		return points
+	# This needs to be a dictionary to ensure duplicate coordinates are not being added
+	var coords_to_draw: Dictionary[Vector2, int] = {}
+	for current_pixel_coord in points:
+		if _spacing_mode:
+			current_pixel_coord = get_spacing_position(current_pixel_coord)
+		for coord in _draw_tool(current_pixel_coord, draw_brush):
+			coords_to_draw[coord] = 0
+	return coords_to_draw.keys()
 
 
 func draw_on_3d_object(pos: Vector2, layer: Layer3D, clear_mat := true) -> Vector2:

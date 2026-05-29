@@ -146,7 +146,25 @@ func blend_layers_headless(
 func get_rounded_rect_points(
 	pos: Vector2i, size: Vector2i, radius: int, thickness: int
 ) -> Array[Vector2i]:
-	var points := get_rounded_rect_points_filled(pos, size, radius)
+	var points: Array[Vector2i] = []
+	if radius <= 0:
+		var y1 := size.y + pos.y - 1
+		for x in range(pos.x, size.x + pos.x):
+			var t := Vector2i(x, pos.y)
+			var b := Vector2i(x, y1)
+			points.append(t)
+			points.append(b)
+
+		var x1 := size.x + pos.x - 1
+		for y in range(pos.y + 1, size.y + pos.y):
+			var l := Vector2i(pos.x, y)
+			var r := Vector2i(x1, y)
+			points.append(l)
+			points.append(r)
+
+		return points
+
+	points = get_rounded_rect_points_filled(pos, size, radius)
 	var inner_size := size - Vector2i.ONE * (thickness * 2)
 	if inner_size.x <= 0 or inner_size.y <= 0:
 		return points
@@ -163,17 +181,20 @@ func get_rounded_rect_points(
 
 func get_rounded_rect_points_filled(pos: Vector2i, size: Vector2i, radius: int) -> Array[Vector2i]:
 	var points: Array[Vector2i] = []
-	var w := size.x
-	var h := size.y
+	if radius <= 0:
+		for y in range(size.y):
+			for x in range(size.x):
+				points.append(Vector2i(x, y))
+		return points
 
 	@warning_ignore("integer_division")
-	radius = min(radius, w / 2, h / 2)
+	radius = min(radius, size.x / 2, size.y / 2)
 	var radius_squared := radius * radius
 
 	var left := pos.x
-	var right := pos.x + w - 1
+	var right := pos.x + size.x - 1
 	var top := pos.y
-	var bottom := pos.y + h - 1
+	var bottom := pos.y + size.y - 1
 
 	for y in range(top, bottom + 1):
 		var start_x := left

@@ -165,9 +165,7 @@ func draw_preview() -> void:
 		return
 	var previews := Global.canvas.previews_sprite
 	var points := _bezier()
-	var final_points: PackedVector2Array
-	for point in points:
-		final_points.append_array(_draw_tool(point, false))
+	var final_points := get_coords_to_draw(points, false)
 	var image := Image.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_LA8
 	)
@@ -221,11 +219,11 @@ func _draw_shape() -> void:
 	var points := _bezier()
 	prepare_undo()
 	_prepare_tool()
-	for point in points:
+	var final_points := get_coords_to_draw(points)
+	for point in final_points:
 		_fill_inside_rect = _fill_inside_rect.expand(point)
-		var coords_to_draw := _draw_tool(point)
-		for coord in coords_to_draw:
-			_set_pixel(coord)
+		_set_pixel(point)
+
 	if _fill_inside:
 		var v := Vector2i()
 		for x in _fill_inside_rect.size.x:
