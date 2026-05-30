@@ -14,12 +14,15 @@ Built using Godot 4.6.2
 - Added a keyframe-based view on the timeline, allowing users to animate layer effects with interpolation support. [#1417](https://github.com/Orama-Interactive/Pixelorama/pull/1417)
 - Implemented autotiling support for tilemap layers, with a new tool for tilemap layers that allows users to set the autotiling bits on each tile. [#1482](https://github.com/Orama-Interactive/Pixelorama/pull/1482)
 - The 3D layer system has been completely re-written! 3D objects are now shared across all cels of a layer, instead of each cel having its own objects, making it possible to animate an object's properties. This re-write also allows for some other new features, such as material property editing (and animating!), importing GLTF scenes, and even drawing directly on 3D objects using the pencil tool! **IMPORTANT NOTE:** Due to this, the 3D layer data of pxo files is NO LONGER COMPATIBLE between v1.2 and older versions. The pxo files themselves should load just fine, but the 3D layers will be EMPTY. [#1429](https://github.com/Orama-Interactive/Pixelorama/pull/1429)
+- The shape tools now support drawing with brushes.
+- Implement rounded rectangle drawing in the rectangle tool.
 - Added quick tool activation shortcuts. When a quick tool shortcut is being held, that tool gets activated until the shortcut is released. By default, only the color picker tool has a shortcut, which ic set to <kbd>Alt</kbd>, but you can set shortcuts for every other tool in the Preferences.
 - Added a new "Reselect" option in the Selection menu, which re-creates a previously cleared selection. By default, its shortcut is set to <kbd>Control + Shift + D</kbd>.
 - Added new blend modes: Intersect and Match colors! [#1474](https://github.com/Orama-Interactive/Pixelorama/pull/1474)
 - Added an option in the export dialog to repeat the animation as many times as you want. [#1508](https://github.com/Orama-Interactive/Pixelorama/pull/1508)
 - Added a preview and a transpose option when exporting tilesets.
 - When creating a new project, it is now possible to set its size based on the clipboard image size, if there is one. [#1507](https://github.com/Orama-Interactive/Pixelorama/pull/1507)
+- Exporting a tileset as a Godot TileSet resource now saves the probability of each tile.
 
 ### Fixed
 - Fixed resizing selection not being snapped to the pixel grid.
