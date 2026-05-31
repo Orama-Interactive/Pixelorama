@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2026-05-28 01:39\n"
+"PO-Revision-Date: 2026-05-31 12:32\n"
 
 msgid "OK"
 msgstr "确定"
@@ -2519,8 +2519,8 @@ msgid "Right Face"
 msgstr "右面"
 
 #. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
-msgid "Erase bits"
-msgstr "擦除位"
+msgid "Eraser mode"
+msgstr ""
 
 msgid "Mirroring"
 msgstr "镜像"
