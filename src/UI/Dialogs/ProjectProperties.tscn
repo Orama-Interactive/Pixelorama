@@ -2,8 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dy4j3c4fws8m" path="res://src/UI/Dialogs/ProjectProperties.gd" id="1_0n4uc"]
 [ext_resource type="Texture2D" uid="uid://fvgl2kl81v0h" path="res://assets/graphics/misc/search.svg" id="2_h0qhi"]
-[ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="3_70jg7"]
-[ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="4_yfnro"]
+[ext_resource type="PackedScene" uid="uid://dgfrs1y8sqfwu" path="res://src/UI/Dialogs/export_tileset_confirmation_dialog.tscn" id="3_70jg7"]
 
 [node name="ProjectProperties" type="AcceptDialog" unique_id=1726090796]
 oversampling_override = 1.0
@@ -250,96 +249,7 @@ size_flags_horizontal = 3
 tooltip_text = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 mouse_filter = 1
 
-[node name="ExportTilesetConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=92423122]
-oversampling_override = 1.0
-position = Vector2i(0, 36)
-size = Vector2i(300, 300)
-ok_button_text = "Export"
-
-[node name="VBoxContainer" type="VSplitContainer" parent="ExportTilesetConfirmationDialog" unique_id=1418113344]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 292.0
-offset_bottom = 251.0
-
-[node name="TileSetPreview" type="TextureRect" parent="ExportTilesetConfirmationDialog/VBoxContainer" unique_id=889212960]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-expand_mode = 1
-stretch_mode = 5
-
-[node name="GridContainer" type="GridContainer" parent="ExportTilesetConfirmationDialog/VBoxContainer" unique_id=1820814272]
-layout_mode = 2
-columns = 2
-
-[node name="TileSetRowsLabel" type="Label" parent="ExportTilesetConfirmationDialog/VBoxContainer/GridContainer" unique_id=1596238876]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Rows:"
-
-[node name="TileSetRowsValueSlider" type="TextureProgressBar" parent="ExportTilesetConfirmationDialog/VBoxContainer/GridContainer" unique_id=1034217444]
-layout_mode = 2
-size_flags_horizontal = 3
-focus_mode = 2
-theme_type_variation = &"ValueSlider"
-min_value = 1.0
-max_value = 16.0
-value = 1.0
-allow_greater = true
-nine_patch_stretch = true
-stretch_margin_left = 3
-stretch_margin_top = 3
-stretch_margin_right = 3
-stretch_margin_bottom = 3
-script = ExtResource("3_70jg7")
-metadata/_custom_type_script = "uid://tfdhqto6j5j0"
-
-[node name="TransposeLabel" type="Label" parent="ExportTilesetConfirmationDialog/VBoxContainer/GridContainer" unique_id=302700194]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Transpose:"
-
-[node name="TransposeCheckButton" type="CheckButton" parent="ExportTilesetConfirmationDialog/VBoxContainer/GridContainer" unique_id=1157072508]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "On"
-
-[node name="TileSetShapeLabel" type="Label" parent="ExportTilesetConfirmationDialog/VBoxContainer/GridContainer" unique_id=455915820]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Shape:"
-
-[node name="TileSetShapeOptionButton" type="OptionButton" parent="ExportTilesetConfirmationDialog/VBoxContainer/GridContainer" unique_id=1711094644]
-unique_name_in_owner = true
-layout_mode = 2
-selected = 0
-item_count = 3
-popup/item_0/text = "Rectangular"
-popup/item_0/id = 0
-popup/item_1/text = "Isometric"
-popup/item_1/id = 1
-popup/item_2/text = "Hexagonal"
-popup/item_2/id = 3
-
-[node name="TileSetSizeLabel" type="Label" parent="ExportTilesetConfirmationDialog/VBoxContainer/GridContainer" unique_id=693620309]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Size:"
-
-[node name="TileSetSizeValueSlider" parent="ExportTilesetConfirmationDialog/VBoxContainer/GridContainer" unique_id=62854647 instance=ExtResource("4_yfnro")]
-unique_name_in_owner = true
-layout_mode = 2
-value = Vector2(16, 16)
-min_value = Vector2(1, 1)
-max_value = Vector2(128, 128)
-allow_greater = true
-show_ratio = true
-
-[node name="ExportTilesetFileDialog" type="FileDialog" parent="." unique_id=720414622 groups=["FileDialogs"]]
-oversampling_override = 1.0
-access = 2
-filters = PackedStringArray("*.png ; PNG Image", "*.tres ; Godot TileSet Resource File")
+[node name="ExportTilesetConfirmationDialog" parent="." unique_id=423699341 instance=ExtResource("3_70jg7")]
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="item_selected" from="HSplitContainer/List" to="." method="_on_list_item_selected"]
@@ -350,8 +260,3 @@ filters = PackedStringArray("*.png ; PNG Image", "*.tres ; Godot TileSet Resourc
 [connection signal="button_clicked" from="HSplitContainer/VBoxContainer/TilesetsContainer/PanelContainer/TilesetsList" to="." method="_on_tilesets_list_button_clicked"]
 [connection signal="item_activated" from="HSplitContainer/VBoxContainer/TilesetsContainer/PanelContainer/TilesetsList" to="." method="_on_tilesets_list_item_activated"]
 [connection signal="item_edited" from="HSplitContainer/VBoxContainer/TilesetsContainer/PanelContainer/TilesetsList" to="." method="_on_tilesets_list_item_edited"]
-[connection signal="about_to_popup" from="ExportTilesetConfirmationDialog" to="." method="_on_export_tileset_confirmation_dialog_about_to_popup"]
-[connection signal="confirmed" from="ExportTilesetConfirmationDialog" to="." method="_on_export_tileset_confirmation_dialog_confirmed"]
-[connection signal="value_changed" from="ExportTilesetConfirmationDialog/VBoxContainer/GridContainer/TileSetRowsValueSlider" to="." method="_on_tile_set_rows_value_slider_value_changed"]
-[connection signal="toggled" from="ExportTilesetConfirmationDialog/VBoxContainer/GridContainer/TransposeCheckButton" to="." method="_on_transpose_check_button_toggled"]
-[connection signal="file_selected" from="ExportTilesetFileDialog" to="." method="_on_export_tileset_file_dialog_file_selected"]

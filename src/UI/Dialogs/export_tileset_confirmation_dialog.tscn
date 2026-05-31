@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://dgfrs1y8sqfwu"]
+
+[ext_resource type="Script" uid="uid://mm0hfvrvcqxa" path="res://src/UI/Dialogs/export_tileset_confirmation_dialog.gd" id="1_47cqd"]
+[ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="2_uvwai"]
+[ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="3_nuc86"]
+
+[node name="ExportTilesetConfirmationDialog" type="ConfirmationDialog" unique_id=423699341]
+oversampling_override = 1.0
+position = Vector2i(0, 36)
+size = Vector2i(300, 300)
+ok_button_text = "Export"
+script = ExtResource("1_47cqd")
+
+[node name="VBoxContainer" type="VSplitContainer" parent="." unique_id=1508156390]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 292.0
+offset_bottom = 251.0
+
+[node name="TileSetPreview" type="TextureRect" parent="VBoxContainer" unique_id=1747917669]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer" unique_id=550709097]
+layout_mode = 2
+columns = 2
+
+[node name="TileSetRowsLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=153854645]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Rows:"
+
+[node name="TileSetRowsValueSlider" type="TextureProgressBar" parent="VBoxContainer/GridContainer" unique_id=2114313087]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+min_value = 1.0
+max_value = 16.0
+value = 1.0
+allow_greater = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("2_uvwai")
+metadata/_custom_type_script = "uid://tfdhqto6j5j0"
+
+[node name="TransposeLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=2040087987]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Transpose:"
+
+[node name="TransposeCheckButton" type="CheckButton" parent="VBoxContainer/GridContainer" unique_id=1905525288]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "On"
+
+[node name="TileSetShapeLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=927444564]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Shape:"
+
+[node name="TileSetShapeOptionButton" type="OptionButton" parent="VBoxContainer/GridContainer" unique_id=701021891]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Rectangular"
+popup/item_0/id = 0
+popup/item_1/text = "Isometric"
+popup/item_1/id = 1
+popup/item_2/text = "Hexagonal"
+popup/item_2/id = 3
+
+[node name="TileSetSizeLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=1255782694]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Size:"
+
+[node name="TileSetSizeValueSlider" parent="VBoxContainer/GridContainer" unique_id=62854647 instance=ExtResource("3_nuc86")]
+unique_name_in_owner = true
+layout_mode = 2
+value = Vector2(16, 16)
+min_value = Vector2(1, 1)
+max_value = Vector2(128, 128)
+allow_greater = true
+show_ratio = true
+
+[node name="ExportTilesetFileDialog" type="FileDialog" parent="." unique_id=68668487 groups=["FileDialogs"]]
+oversampling_override = 1.0
+access = 2
+filters = PackedStringArray("*.png ; PNG Image", "*.tres ; Godot TileSet Resource File")
+
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
+[connection signal="confirmed" from="." to="." method="_on_confirmed"]
+[connection signal="value_changed" from="VBoxContainer/GridContainer/TileSetRowsValueSlider" to="." method="_on_tile_set_rows_value_slider_value_changed"]
+[connection signal="toggled" from="VBoxContainer/GridContainer/TransposeCheckButton" to="." method="_on_transpose_check_button_toggled"]
+[connection signal="file_selected" from="ExportTilesetFileDialog" to="." method="_on_export_tileset_file_dialog_file_selected"]

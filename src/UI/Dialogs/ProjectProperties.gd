@@ -8,8 +8,6 @@ const REMOVE_TEXTURE := preload("res://assets/graphics/misc/close.png")
 
 var _selected_tileset: TileSetCustom
 var _current_tileset_name_filter: String
-var _tileset_rows := 1
-var _tileset_transpose := false
 
 @onready var list := $HSplitContainer/List as ItemList
 @onready var general_container := %GeneralContainer as VBoxContainer
@@ -32,15 +30,10 @@ var _tileset_transpose := false
 @onready var company_studio_value_label := %CompanyStudioValueLabel as Label
 @onready
 var export_tileset_confirmation_dialog: ConfirmationDialog = $ExportTilesetConfirmationDialog
-@onready var tile_set_preview: TextureRect = %TileSetPreview
-@onready var tile_set_shape_option_button: OptionButton = %TileSetShapeOptionButton
-@onready var tile_set_size_value_slider: ValueSliderV2 = %TileSetSizeValueSlider
-@onready var export_tileset_file_dialog: FileDialog = $ExportTilesetFileDialog
 
 
 func _ready() -> void:
 	list.select(0)
-	export_tileset_file_dialog.use_native_dialog = Global.use_native_file_dialogs
 
 
 func _on_visibility_changed() -> void:
@@ -216,6 +209,7 @@ func _on_tilesets_list_button_clicked(item: TreeItem, column: int, id: int, _mbi
 		tileset = project.tilesets[-1]
 	_selected_tileset = tileset
 	if id == 0:  # Export
+		export_tileset_confirmation_dialog.selected_tileset = _selected_tileset
 		export_tileset_confirmation_dialog.popup_centered_clamped()
 	elif id == 1:  # Duplicate
 		var new_tileset := tileset.duplicate()
@@ -241,45 +235,3 @@ func _on_tilesets_list_button_clicked(item: TreeItem, column: int, id: int, _mbi
 		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 		project.undo_redo.commit_action()
 		item.free()
-
-
-func _update_tileset_preview() -> void:
-	var image := _selected_tileset.create_image_atlas(_tileset_rows, _tileset_transpose)
-	tile_set_preview.texture = ImageTexture.create_from_image(image)
-
-
-func _on_export_tileset_confirmation_dialog_about_to_popup() -> void:
-	tile_set_shape_option_button.select(_selected_tileset.tile_shape)
-	tile_set_size_value_slider.value = _selected_tileset.tile_size
-	_update_tileset_preview()
-
-
-func _on_tile_set_rows_value_slider_value_changed(value: float) -> void:
-	_tileset_rows = value
-	_update_tileset_preview()
-
-
-func _on_transpose_check_button_toggled(toggled_on: bool) -> void:
-	_tileset_transpose = toggled_on
-	_update_tileset_preview()
-
-
-func _on_export_tileset_confirmation_dialog_confirmed() -> void:
-	export_tileset_file_dialog.popup_centered_clamped()
-
-
-func _on_export_tileset_file_dialog_file_selected(path: String) -> void:
-	if not is_instance_valid(_selected_tileset):
-		return
-	var tile_shape := tile_set_shape_option_button.selected
-	var tile_size := tile_set_size_value_slider.value
-	match path.get_extension().to_lower():
-		"png":
-			var image := _selected_tileset.create_image_atlas(_tileset_rows, _tileset_transpose)
-			if is_instance_valid(image) and not image.is_empty():
-				image.save_png(path)
-		"tres":
-			var godot_tileset := _selected_tileset.create_godot_tileset(
-				_tileset_rows, _tileset_transpose, tile_shape, tile_size
-			)
-			ResourceSaver.save(godot_tileset, path)

@@ -20,6 +20,8 @@ var layer_indices: PackedInt32Array
 @onready var tile_offset_axis_button: OptionButton = $GridContainer/TileOffsetAxisButton
 @onready var audio_file_dialog := $AudioFileDialog as FileDialog
 @onready var place_only_confirmation_dialog: ConfirmationDialog = $PlaceOnlyConfirmationDialog
+@onready
+var export_tileset_confirmation_dialog: ConfirmationDialog = $ExportTilesetConfirmationDialog
 
 
 func _ready() -> void:
@@ -416,3 +418,14 @@ func _on_tile_offset_axis_button_item_selected(index: TileSet.TileOffsetAxis) ->
 	project.undo_redo.add_undo_method(func(): Global.canvas.queue_redraw())
 	project.undo_redo.add_undo_method(func(): Global.canvas.grid.queue_redraw())
 	project.undo_redo.commit_action()
+
+
+func _on_export_tileset_button_pressed() -> void:
+	var layer: LayerTileMap
+	var project := Global.current_project
+	for i in layer_indices:
+		if project.layers[i] is LayerTileMap:
+			layer = project.layers[i]
+			break
+	export_tileset_confirmation_dialog.selected_tileset = layer.tileset
+	export_tileset_confirmation_dialog.popup_centered_clamped()

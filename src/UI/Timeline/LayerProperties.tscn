@@ -3,18 +3,20 @@
 [ext_resource type="Script" uid="uid://4onxshv5pult" path="res://src/UI/Timeline/LayerProperties.gd" id="1_54q1t"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="2_bwpwc"]
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="3_dij20"]
+[ext_resource type="PackedScene" uid="uid://dgfrs1y8sqfwu" path="res://src/UI/Dialogs/export_tileset_confirmation_dialog.tscn" id="4_v64gv"]
 
 [node name="LayerProperties" type="AcceptDialog" unique_id=1588068417]
+oversampling_override = 1.0
 title = "Layer properties"
 position = Vector2i(0, 36)
-size = Vector2i(425, 402)
+size = Vector2i(425, 437)
 script = ExtResource("1_54q1t")
 
 [node name="GridContainer" type="GridContainer" parent="." unique_id=1311623414]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 417.0
-offset_bottom = 353.0
+offset_bottom = 388.0
 columns = 2
 
 [node name="NameLabel" type="Label" parent="GridContainer" unique_id=478466887]
@@ -213,6 +215,11 @@ text = "Color:"
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
+[node name="ExportTilesetButton" type="Button" parent="GridContainer" unique_id=1063203091 groups=["TilemapLayers"]]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Export tileset"
+
 [node name="AudioFileDialog" type="FileDialog" parent="." unique_id=1593154512]
 title = "Open a File"
 size = Vector2i(870, 400)
@@ -226,6 +233,8 @@ filters = PackedStringArray("*.mp3 ; MP3 Audio", "*.wav; WAV Audio")
 size = Vector2i(300, 200)
 dialog_text = "Enabling place-only mode is a permanent action. Once activated, you will only be able to place, duplicate and edit existing tiles, and you won't be able to use Manual, Auto and Stack modes."
 dialog_autowrap = true
+
+[node name="ExportTilesetConfirmationDialog" parent="." unique_id=423699341 instance=ExtResource("4_v64gv")]
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="text_changed" from="GridContainer/NameLineEdit" to="." method="_on_name_line_edit_text_changed"]
@@ -242,5 +251,6 @@ dialog_autowrap = true
 [connection signal="item_selected" from="GridContainer/TileOffsetAxisButton" to="." method="_on_tile_offset_axis_button_item_selected"]
 [connection signal="text_changed" from="GridContainer/UserDataTextEdit" to="." method="_on_user_data_text_edit_text_changed"]
 [connection signal="color_changed" from="GridContainer/UIColorPickerButton" to="." method="_on_ui_color_picker_button_color_changed"]
+[connection signal="pressed" from="GridContainer/ExportTilesetButton" to="." method="_on_export_tileset_button_pressed"]
 [connection signal="file_selected" from="AudioFileDialog" to="." method="_on_audio_file_dialog_file_selected"]
 [connection signal="confirmed" from="PlaceOnlyConfirmationDialog" to="." method="_on_place_only_confirmation_dialog_confirmed"]
