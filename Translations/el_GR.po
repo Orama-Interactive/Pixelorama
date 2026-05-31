@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2026-05-31 12:32\n"
+"PO-Revision-Date: 2026-05-31 18:53\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -2519,7 +2519,7 @@ msgstr "Δεξιά όψη"
 
 #. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
 msgid "Eraser mode"
-msgstr ""
+msgstr "Λειτουργία διαγραφής"
 
 msgid "Mirroring"
 msgstr "Κατοπτρισμός"
