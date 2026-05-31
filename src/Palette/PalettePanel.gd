@@ -454,7 +454,7 @@ func _on_edit_palette_dialog_exported(path := "") -> void:
 		)
 	if path.is_empty():
 		return
-	var extension := path.get_extension()
+	var extension := path.get_extension().to_lower()
 	match extension:
 		"png":
 			image.save_png(path)
@@ -462,6 +462,12 @@ func _on_edit_palette_dialog_exported(path := "") -> void:
 			image.save_jpg(path)
 		"webp":
 			image.save_webp(path)
+		"pal":
+			Palettes.export_pal_palette(Palettes.current_palette, path)
+		"gpl":
+			Palettes.export_gpl(Palettes.current_palette, path)
+		"json":
+			Palettes.current_palette.save_to_file(path)
 
 
 ## Helper methods for undo/redo

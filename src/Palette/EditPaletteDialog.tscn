@@ -125,7 +125,7 @@ vertical_alignment = 1
 [node name="ExportFileDialog" type="FileDialog" parent="." unique_id=1245396939 groups=["FileDialogs"]]
 size = Vector2i(677, 400)
 access = 2
-filters = PackedStringArray("*.png ; PNG Image", "*.jpg,*.jpeg ; JPEG Image", "*.webp ; WebP Image")
+filters = PackedStringArray("*.png ; PNG Image", "*.jpg,*.jpeg ; JPEG Image", "*.webp ; WebP Image", "*.pal ; JASC Palette", "*.gpl; GIMP palette", "*.json; Pixelorama palette")
 
 [connection signal="confirmed" from="." to="." method="_on_EditPaletteDialog_confirmed"]
 [connection signal="custom_action" from="." to="." method="_on_EditPaletteDialog_custom_action"]
