@@ -2431,7 +2431,7 @@ msgid "Right Face"
 msgstr ""
 
 #. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
-msgid "Erase bits"
+msgid "Eraser mode"
 msgstr ""
 
 msgid "Mirroring"
