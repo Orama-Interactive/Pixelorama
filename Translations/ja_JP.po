@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2026-05-31 12:32\n"
+"PO-Revision-Date: 2026-06-01 03:13\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2520,7 +2520,7 @@ msgstr "右面"
 
 #. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
 msgid "Eraser mode"
-msgstr ""
+msgstr "消しゴムモード"
 
 msgid "Mirroring"
 msgstr "ミラーリング"
