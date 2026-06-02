@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dek2dqmbe5dt3" path="res://src/Preferences/PreferencesDialog.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://0ij8aasy3k3b" path="res://addons/keychain/assets/search.svg" id="2_praud"]
 [ext_resource type="PackedScene" uid="uid://bq7ibhm0txl5p" path="res://addons/keychain/ShortcutEdit.tscn" id="3"]
-[ext_resource type="Script" uid="uid://dx8vbnfkoahh6" path="res://src/Preferences/ThemesPreferences.gd" id="3_nvl8k"]
 [ext_resource type="Script" uid="uid://cybud13k7nk1c" path="res://src/Preferences/GridPreferences.gd" id="4_76iff"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="5_rlmsh"]
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="7"]
@@ -238,6 +237,7 @@ text = "Font:"
 [node name="FontOptionButton" type="OptionButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions" unique_id=1451717562]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_default_cursor_shape = 2
 
 [node name="ScreenOrientationLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions" unique_id=1833295930 groups=["MobileOnly"]]
 layout_mode = 2
@@ -246,6 +246,7 @@ text = "Screen orientation:"
 
 [node name="ScreenOrientationOptionButton" type="OptionButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions" unique_id=394327867 groups=["MobileOnly"]]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 selected = 0
 item_count = 3
 popup/item_0/text = "Auto"
@@ -331,18 +332,20 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Themes" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface" unique_id=153560318]
+[node name="ThemeOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface" unique_id=17449181]
 layout_mode = 2
-script = ExtResource("3_nvl8k")
+columns = 3
 
-[node name="ThemeButtons" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/Themes" unique_id=370270642]
+[node name="ThemePresetLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ThemeOptions" unique_id=2105936984]
 layout_mode = 2
 size_flags_horizontal = 3
+text = "Preset:"
 
-[node name="ThemeColors" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/Themes" unique_id=322880514]
+[node name="ThemePresetOptionButton" type="OptionButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ThemeOptions" unique_id=1980268861]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 16
+mouse_default_cursor_shape = 2
 
 [node name="ButtonHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface" unique_id=4954884 groups=["HeaderLabels"]]
 layout_mode = 2

@@ -48,6 +48,7 @@ var preferences: Array[Preference] = [
 			OS.has_feature("mobile"),
 		)
 	),
+	Preference.new("theme_preset_index", "%ThemePresetOptionButton", "selected", 0),
 	Preference.new(
 		"icon_color_from",
 		"Interface/ButtonOptions/IconColorOptionButton",
@@ -269,10 +270,10 @@ var selected_item := 0
 @onready var right_side: VBoxContainer = $"%RightSide"
 @onready var language: VBoxContainer = %Language
 @onready var system_language := language.get_node(^"System Language") as CheckBox
+@onready var theme_preset_option_button: OptionButton = %ThemePresetOptionButton
 @onready var grid_options: GridContainer = %GridOptions
 @onready var autosave_container: Container = right_side.get_node("Backup/AutosaveContainer")
 @onready var autosave_interval: SpinBox = autosave_container.get_node("AutosaveInterval")
-@onready var themes: BoxContainer = right_side.get_node("Interface/Themes")
 @onready var shortcuts: Control = right_side.get_node("Shortcuts/ShortcutEdit")
 @onready var tablet_driver_label: Label = $"%TabletDriverLabel"
 @onready var tablet_driver: OptionButton = $"%TabletDriver"
@@ -307,6 +308,8 @@ class Preference:
 
 func _ready() -> void:
 	Global.font_loaded.connect(_add_fonts)
+	Themes.theme_added.connect(_update_themes)
+	Themes.theme_removed.connect(_update_themes)
 	# Replace OK since preference changes are being applied immediately, not after OK confirmation
 	get_ok_button().text = "Close"
 	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -370,6 +373,7 @@ func _ready() -> void:
 		button.pressed.connect(_on_language_pressed.bind(button.get_index()))
 
 	_add_fonts()
+	_update_themes()
 
 	for pref in preferences:
 		if not right_side.has_node(pref.node_path):
@@ -452,6 +456,13 @@ func _add_fonts() -> void:
 	%FontOptionButton.select(Global.theme_font_index)
 
 
+func _update_themes(_theme: Theme = null) -> void:
+	theme_preset_option_button.clear()
+	for theme_var in Themes.themes:
+		theme_preset_option_button.add_item(theme_var.get_name())
+	theme_preset_option_button.select(Global.theme_preset_index)
+
+
 func preference_update(require_restart := false) -> void:
 	if require_restart:
 		must_restart.visible = true
@@ -491,7 +502,6 @@ func _on_PreferencesDialog_visibility_changed() -> void:
 func _on_search_line_edit_text_changed(new_text: String) -> void:
 	if new_text.is_empty():
 		# If the text is empty/the search bar gets cleared.
-		themes.visible = true
 		get_tree().call_group(&"HeaderLabels", &"show")
 		for pref in preferences:
 			if not right_side.has_node(pref.node_path):
@@ -512,7 +522,6 @@ func _on_search_line_edit_text_changed(new_text: String) -> void:
 	for child in right_side.get_children():
 		child.visible = true
 	language.visible = false
-	themes.visible = false
 	shortcuts.get_parent().visible = false
 	extensions.visible = false
 	reset_category.visible = false
@@ -597,8 +606,6 @@ func _on_reset_options_confirmation_confirmed() -> void:
 	if %ResetPreferences.button_pressed:
 		system_language.button_pressed = true
 		_on_language_pressed(0)
-		themes.buttons_container.get_child(0).button_pressed = true
-		Themes.change_theme(0)
 		for pref in preferences:
 			var property_name := pref.prop_name
 			var default_value = pref.default_value

@@ -290,6 +290,13 @@ var single_window_mode := true:
 			return
 		single_window_mode = value
 		_save_to_override_file()
+## Found in Preferences. The index of the current theme preset.
+var theme_preset_index := 0:
+	set(value):
+		if value == theme_preset_index:
+			return
+		theme_preset_index = value
+		Themes.change_theme(theme_preset_index)
 ## Found in Preferences. The modulation color (or simply color) of icons.
 var modulate_icon_color := Color.GRAY
 ## Found in Preferences. Determines if [member modulate_icon_color] uses custom or theme color.

@@ -42,6 +42,11 @@ class ThemeVariation:
 		accent_color = _accent_color
 		contrast = _contrast
 
+	func get_name() -> String:
+		if name.is_empty():
+			return theme.resource_name
+		return name
+
 	func get_base_color() -> Color:
 		if base_color.is_equal_approx(Color.TRANSPARENT):
 			var panel_stylebox := theme.get_stylebox(&"panel", &"Panel")
@@ -91,14 +96,18 @@ func add_theme(
 	theme: Theme,
 	theme_name := "",
 	base_color := Color.TRANSPARENT,
-	accent_color := Color.TRANSPARENT
+	accent_color := Color.TRANSPARENT,
+	contrast := 0.3
 ) -> void:
-	themes.append(theme)
+	var theme_var := ThemeVariation.new(theme, theme_name, base_color, accent_color, contrast)
+	themes.append(theme_var)
 	theme_added.emit(theme)
 
 
 func remove_theme(theme: Theme) -> void:
-	themes.erase(theme)
+	for theme_var in themes:
+		if theme_var.theme == theme:
+			themes.erase(theme_var)
 	theme_removed.emit(theme)
 
 
