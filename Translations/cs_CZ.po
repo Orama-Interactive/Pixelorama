@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
-"PO-Revision-Date: 2025-11-04 16:55\n"
+"PO-Revision-Date: 2026-04-26 12:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -578,15 +578,6 @@ msgstr "Štětec z projektu"
 msgid "Random brush"
 msgstr "Náhodný štětec"
 
-msgid "Save Sprite as .pxo"
-msgstr "Uložit obrázek jako .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Exportovat obrázek jako .png"
-
-msgid "Export Sprite"
-msgstr "Exportovat obrázek"
-
 msgid "File Exists, Overwrite?"
 msgstr "Soubor existuje, přepsat?"
 
@@ -894,6 +885,10 @@ msgstr "Zálohování"
 msgid "Performance"
 msgstr "Výkon"
 
+#. Found in the Preferences. Refers to the author of the current project.
+msgid "Author"
+msgstr ""
+
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
 msgstr "Ovladače"
@@ -985,6 +980,10 @@ msgstr "Pokud je toto nastavení povoleno, je použit systémový dialog pro vý
 msgid "Single window mode"
 msgstr "Režim jednoho okna"
 
+#. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
+msgid "Collapse main menu"
+msgstr ""
+
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
 msgstr "Pokud je toto nastavení zapnuto, tak jsou dialogy Pixeloramy zobrazeny v rámci hlavního okna, v opačném případě jsou všechny dialogy zobrazeny jako samostatná okna."
@@ -1041,7 +1040,7 @@ msgid "If this is enabled, the right mouse button will always activate the same 
 msgstr ""
 
 #. Found in the preferences, under the Tools category.
-msgid "Share options between the left and the right tools"
+msgid "Share options between left and right tools"
 msgstr ""
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
@@ -1055,8 +1054,9 @@ msgstr "Barva levého nástroje:"
 msgid "Right tool color:"
 msgstr "Barva pravého nástroje:"
 
-msgid "Tool button size:"
-msgstr "Velkost tlačítek nástrojů:"
+#. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
+msgid "Make global palettes read-only"
+msgstr ""
 
 msgid "Small"
 msgstr "Malá"
@@ -1507,6 +1507,9 @@ msgstr "Nizozemština"
 
 msgid "Belarusian"
 msgstr "Běloruština"
+
+msgid "Thai"
+msgstr ""
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -2040,6 +2043,26 @@ msgstr "Ovladač tabletu:"
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "Specifikuje ovladač tabletu používaného ve Windows. Pokud máte povolen Windows Ink, vyberte winink."
+
+#. Found in the Preferences. Refers to the displayed name of the current project author.
+msgid "Display name:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the real name of the current project author.
+msgid "Real name:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the contact info of the current project author.
+msgid "Contact:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the company name of the current project author.
+msgid "Company/Studio:"
+msgstr ""
+
+#. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
+msgid "Last saved by"
+msgstr ""
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
@@ -2976,6 +2999,54 @@ msgstr "Zpět: Upravit délku snímku"
 msgid "Redo: Change frame duration"
 msgstr "Znovu: Upravit délku snímku"
 
+msgid "Undo: Rename Layer"
+msgstr ""
+
+msgid "Redo: Rename Layer"
+msgstr ""
+
+msgid "Undo: Change Layer Opacity"
+msgstr ""
+
+msgid "Redo: Change Layer Opacity"
+msgstr ""
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
+msgid "Undo: Change Layer Onion Skinning Ignore Status"
+msgstr ""
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
+msgid "Redo: Change Layer Onion Skinning Ignore Status"
+msgstr ""
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos.
+msgid "Undo: Change Layer User Data"
+msgstr ""
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
+msgid "Redo: Change Layer User Data"
+msgstr ""
+
+msgid "Undo: Change Layer Color"
+msgstr ""
+
+msgid "Redo: Change Layer Color"
+msgstr ""
+
+msgid "Undo: Change Layer Visibility"
+msgstr ""
+
+msgid "Redo: Change Layer Visibility"
+msgstr ""
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos.
+msgid "Undo: Change Layer Locked Status"
+msgstr ""
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
+msgid "Redo: Change Layer Locked Status"
+msgstr ""
+
 msgid "Move Guide"
 msgstr "Přesunout vodítko"
 
@@ -3004,9 +3075,6 @@ msgstr "Nová prázdná paleta"
 
 msgid "Import Palette"
 msgstr "Importovat paletu"
-
-msgid "Create Palette From Current Sprite"
-msgstr "Vytvořit paletu z aktuálního spritu"
 
 msgid "Palette Name:"
 msgstr "Název palety:"
@@ -3293,6 +3361,10 @@ msgstr "Oříznout obsah obrázku na výběr"
 msgid "Only export content that is within the bounds of a selected area."
 msgstr "Exportovat pouze obsah, který je v rámci označené oblasti."
 
+#. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
+msgid "Layers as separate files"
+msgstr ""
+
 msgid "Close"
 msgstr "Zavřít"
 
@@ -3330,6 +3402,10 @@ msgstr "Přesunout vybraný snímek doprava."
 msgid "Frame duration:"
 msgstr ""
 
+#. Refers to the license of a project, which can be set from the project properties.
+msgid "License:"
+msgstr ""
+
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
 msgstr "Uživatelská data:"
@@ -3362,8 +3438,8 @@ msgstr "Prázdná"
 msgid "From Current Palette"
 msgstr "Z aktuální palety"
 
-msgid "From Current Sprite"
-msgstr "Z aktuálního obrázku"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "Z aktuálního výběru"

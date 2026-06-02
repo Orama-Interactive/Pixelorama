@@ -300,13 +300,17 @@ size_flags_horizontal = 3
 
 [node name="X" parent="ScrollContainer/Container/ReferenceEdit/Options/Position" unique_id=1154386615 instance=ExtResource("3_1w6gu")]
 layout_mode = 2
+step = 0.01
 allow_greater = true
 allow_lesser = true
+snap_by_default = true
 
 [node name="Y" parent="ScrollContainer/Container/ReferenceEdit/Options/Position" unique_id=1257980441 instance=ExtResource("3_1w6gu")]
 layout_mode = 2
+step = 0.01
 allow_greater = true
 allow_lesser = true
+snap_by_default = true
 
 [node name="ScaleLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=1274897389]
 custom_minimum_size = Vector2(115, 0)
@@ -315,8 +319,10 @@ text = "Scale"
 
 [node name="Scale" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=1228250765 instance=ExtResource("3_1w6gu")]
 layout_mode = 2
+step = 0.01
 allow_greater = true
 allow_lesser = true
+snap_by_default = true
 
 [node name="RotationLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=1574450380]
 custom_minimum_size = Vector2(115, 0)

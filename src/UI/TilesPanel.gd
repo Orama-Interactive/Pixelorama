@@ -41,6 +41,8 @@ static var is_transposed := false:
 		is_transposed = value
 		_call_update_brushes()
 static var current_tileset: TileSetCustom
+static var autotiling_enabled := false
+static var current_terrain_index := 0
 var button_size := 36:
 	set(value):
 		if button_size == value:
@@ -134,6 +136,8 @@ func _on_cel_switched() -> void:
 func _update_tileset() -> void:
 	_tileset_updated_this_frame = false
 	_clear_tile_buttons()
+	if not is_instance_valid(current_tileset):
+		return
 	for tile_index in selected_tiles:
 		if tile_index >= current_tileset.tiles.size():
 			selected_tiles.erase(tile_index)
@@ -148,10 +152,12 @@ func _update_tileset() -> void:
 		tile_button_container.add_child(button)
 
 
-static func _modify_texture_resource(tile_idx, tileset: TileSetCustom, project: Project) -> void:
-	var tile = tileset.tiles[tile_idx]
+static func _modify_texture_resource(
+	tile_idx: int, tileset: TileSetCustom, project: Project
+) -> void:
+	var tile := tileset.tiles[tile_idx]
 	if tile.image:
-		var v_proj_name = str(tileset.name, " Tile: ", tile_idx)
+		var v_proj_name := str(tileset.name, " Tile: ", tile_idx)
 		var resource_proj := ResourceProject.new([], v_proj_name, tile.image.get_size())
 		resource_proj.layers.append(PixelLayer.new(resource_proj))
 		resource_proj.frames.append(resource_proj.new_empty_frame())
@@ -338,6 +344,10 @@ func _on_rotate_pressed(clockwise: bool) -> void:
 			break
 
 
+func _on_autotiling_check_button_toggled(toggled_on: bool) -> void:
+	autotiling_enabled = toggled_on
+
+
 func _on_option_button_pressed() -> void:
 	var pos := Vector2i(option_button.global_position) - options.size
 	options.popup_on_parent(Rect2i(pos.x - 16, pos.y + 32, options.size.x, options.size.y))
@@ -364,9 +374,12 @@ func _on_tile_button_popup_menu_index_pressed(index: int) -> void:
 	elif index == 2:  # Delete
 		if tile_index_menu_popped == 0:
 			return
-		var select_copy = selected_tiles.duplicate()
-		select_copy.sort()
-		select_copy.reverse()
+		var select_copy := selected_tiles.duplicate()
+		if tile_index_menu_popped in select_copy:
+			select_copy.sort()
+			select_copy.reverse()
+		else:
+			select_copy = [tile_index_menu_popped]
 		var action_started := false
 		var project := Global.current_project
 		var undo_data_tileset := current_tileset.serialize_undo_data()

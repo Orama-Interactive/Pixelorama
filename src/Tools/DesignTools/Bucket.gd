@@ -7,7 +7,6 @@ const COLOR_REPLACE_SHADER := preload("res://src/Shaders/ColorReplace.gdshader")
 const PATTERN_FILL_SHADER := preload("res://src/Shaders/PatternFill.gdshader")
 
 var _undo_data := {}
-var _picking_color := false
 var _prev_mode := 0
 var _pattern: Patterns.Pattern
 var _tolerance := 0.003
@@ -173,11 +172,6 @@ func update_pattern() -> void:
 
 func draw_start(pos: Vector2i) -> void:
 	super.draw_start(pos)
-	if Input.is_action_pressed(&"draw_color_picker", true):
-		_picking_color = true
-		_pick_color(pos)
-		return
-	_picking_color = false
 	Global.canvas.selection.transform_content_confirm()
 	_undo_data = _get_undo_data()
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
@@ -201,10 +195,6 @@ func draw_start(pos: Vector2i) -> void:
 
 func draw_move(pos: Vector2i) -> void:
 	super.draw_move(pos)
-	if _picking_color:  # Still return even if we released Alt
-		if Input.is_action_pressed(&"draw_color_picker", true):
-			_pick_color(pos)
-		return
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return
 	if not Global.current_project.can_pixel_get_drawn(pos):
@@ -214,8 +204,6 @@ func draw_move(pos: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	super.draw_end(pos)
-	if _picking_color:
-		return
 	_sample_masks.clear()
 	commit_undo()
 
@@ -233,7 +221,10 @@ func cancel_tool() -> void:
 
 
 func draw_tile(cell_coords: Vector2i, index: int, tilemap_cel: CelTileMap) -> void:
-	tilemap_cel.set_index(tilemap_cel.get_cell_at(cell_coords), index)
+	if TileSetPanel.autotiling_enabled:
+		tilemap_cel.autotile([cell_coords], index == 0)
+	else:
+		tilemap_cel.set_index(tilemap_cel.get_cell_at(cell_coords), index)
 
 
 func fill(pos: Vector2i) -> void:
@@ -258,7 +249,11 @@ func fill_in_color(pos: Vector2i) -> void:
 			for cell_coords: Vector2i in tilemap_cel.cells:
 				var cell := tilemap_cel.get_cell_at(cell_coords)
 				if cell.index == tile_index:
-					tilemap_cel.set_index(cell, TileSetPanel.selected_tile_index)
+					var paint_index := TileSetPanel.selected_tile_index
+					if TileSetPanel.autotiling_enabled:
+						tilemap_cel.autotile([cell_coords], paint_index == 0)
+					else:
+						tilemap_cel.set_index(cell, paint_index)
 		return
 	var color := project.get_current_cel().get_image().get_pixelv(pos)
 	var images := _get_selected_draw_images()
@@ -615,7 +610,7 @@ func commit_undo() -> void:
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	if TileSetPanel.placing_tiles:
 		tile_editing_mode = TileSetPanel.TileEditingMode.STACK
-	project.update_tilemaps(_undo_data, tile_editing_mode)
+	var used_tilesets := project.update_tilemaps(_undo_data, tile_editing_mode)
 	var redo_data := _get_undo_data()
 	var frame := -1
 	var layer := -1
@@ -624,7 +619,19 @@ func commit_undo() -> void:
 		layer = project.current_layer
 
 	project.undo_redo.create_action("Draw")
+	var layers_to_update := PackedInt32Array()
+	for l in Global.current_project.layers:
+		if l is LayerTileMap:
+			if l.tileset in used_tilesets:
+				layers_to_update.append(l.index)
 	project.deserialize_cel_undo_data(redo_data, _undo_data)
+	# we may be on a different layer during undo/redo
+	Global.current_project.undo_redo.add_do_property(
+		Global.canvas, "mandatory_update_layers", layers_to_update
+	)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.canvas, "mandatory_update_layers", layers_to_update
+	)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
 	project.undo_redo.commit_action()

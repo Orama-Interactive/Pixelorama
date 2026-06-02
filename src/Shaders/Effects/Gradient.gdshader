@@ -13,15 +13,13 @@ uniform sampler2D gradient_texture_no_interpolation : filter_nearest;
 uniform sampler2D gradient_offset_texture : filter_nearest;
 
 group_uniforms gradient_options;
-// uniform_data shape type:: OptionButton [Linear||Radial]
-uniform int shape = 0;
-// uniform_data repeat type:: OptionButton [None||Repeat||Mirrored||Truncate]
-uniform int repeat = 0;
+uniform int shape : hint_enum("Linear", "Radial") = 0;
+uniform int repeat : hint_enum("None", "Repeat", "Mirrored", "Truncate") = 0;
 uniform bool use_dithering = false;
 uniform sampler2D dither_texture : filter_nearest, repeat_enable;
-uniform float position : hint_range(-0.5, 0.5) = 0.0;
-uniform float size : hint_range(0.01, 2.0) = 1.0;
-uniform float angle : hint_range(0.0, 360.0) = 0.0;
+uniform float position : hint_range(-0.5, 0.5, 0.01) = 0.0;
+uniform float size : hint_range(0.01, 2.0, 0.01) = 1.0;
+uniform float angle : hint_range(0.0, 360.0, 0.01) = 0.0;
 uniform vec2 center = vec2(0.5);
 uniform vec2 radius = vec2(1.0);
 

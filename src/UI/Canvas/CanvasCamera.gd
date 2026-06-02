@@ -41,6 +41,7 @@ var drag := false
 var rotation_slider: ValueSlider
 var zoom_slider: ValueSlider
 var should_tween := true
+var auto_release_gui_focus := true
 
 @onready var viewport := get_viewport()
 
@@ -63,7 +64,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if not DisplayServer.is_touchscreen_available():
+	if not DisplayServer.is_touchscreen_available() and auto_release_gui_focus:
 		get_window().gui_release_focus()
 	if !Global.can_draw:
 		drag = false

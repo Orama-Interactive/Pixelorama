@@ -52,11 +52,9 @@ var processed_images: Array[ProcessedImage] = []
 var blended_frames: Dictionary[Frame, Image] = {}
 var export_json := false
 var split_layers := false
-var stack_sheets := false
+var sheet_layers_as_separate_files := false
 var trim_images := false
 var erase_unselected_area := false
-var overwrite_asked := false
-
 # Spritesheet options
 var orientation := Orientation.COLUMNS
 var lines_count := 1  ## How many rows/columns before new line is added
@@ -66,6 +64,7 @@ var frame_current_tag := 0  ## Export only current frame tag
 var export_layers := 0
 var number_of_frames := 1
 var direction := AnimationDirection.FORWARD
+var repeat_count := 0
 var resize := 100
 var save_quality := 0.75  ## Used when saving jpg and webp images. Goes from 0 to 1.
 var interpolation := Image.INTERPOLATE_NEAREST
@@ -152,7 +151,7 @@ func external_export(project := Global.current_project) -> void:
 
 func process_data(project := Global.current_project) -> void:
 	var frames := _calculate_frames(project)
-	if frames.size() > blended_frames.size():
+	if frames.size() * (repeat_count + 1) > blended_frames.size():
 		cache_blended_frames(project)
 	match current_tab:
 		ExportTab.IMAGE:
@@ -174,6 +173,12 @@ func process_spritesheet(project := Global.current_project) -> void:
 	processed_images.clear()
 	# Range of frames determined by tags
 	var frames := _calculate_frames(project)
+	# Add additional repeated animation (Doing it here instead of _calculate_frames() to save
+	# compute power
+	if repeat_count > 0:
+		var frames_copy := frames.duplicate()
+		for _r in repeat_count:
+			frames.append_array(frames_copy)
 	# Then store the size of frames for other functions
 	number_of_frames = frames.size()
 	# Used when the orientation is based off the animation tags
@@ -296,7 +301,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 			sprite_sheets.append(sheet_image)
 		if splitter_array.is_empty():
 			break
-	if stack_sheets and sprite_sheets.size() > 1:
+	if not sheet_layers_as_separate_files and sprite_sheets.size() > 1:
 		var big_image := Image.create(
 			width, height * sprite_sheets.size(), false, project.get_image_format()
 		)
@@ -342,6 +347,18 @@ func process_animation(project := Global.current_project) -> void:
 				image = image.get_region(image.get_used_rect())
 			var duration := frame.get_duration_in_seconds(project.fps)
 			processed_images.append(ProcessedImage.new(image, project.frames.find(frame), duration))
+	# Add additional repeated animation (Doing it here instead of _calculate_frames() to save
+	# compute power
+	var un_repeated_size: int = processed_images.size()
+	for _r in repeat_count:
+		for i in un_repeated_size:
+			processed_images.append(
+				ProcessedImage.new(
+					processed_images[i].image,
+					processed_images[i].frame_index,
+					processed_images[i].duration
+				)
+			)
 
 
 func _calculate_frames(project := Global.current_project) -> Array[Frame]:
@@ -395,8 +412,6 @@ func export_processed_images(
 	var multiple_files := false
 	if not is_single_file_format(project):
 		multiple_files = true if processed_images.size() > 1 else false
-	if OS.get_name() == "Android":
-		multiple_files = false
 	# Check export paths
 	var export_paths: PackedStringArray = []
 	var paths_of_existing_files := ""
@@ -431,10 +446,10 @@ func export_processed_images(
 				paths_of_existing_files += export_path
 		export_paths.append(export_path)
 		# Only get one export path if single file animated image is exported
-		if is_single_file_format(project) or OS.get_name() == "Android":
+		if is_single_file_format(project):
 			break
 
-	if not paths_of_existing_files.is_empty() and not overwrite_asked:  # If files already exist
+	if not paths_of_existing_files.is_empty():  # If files already exist
 		# Ask user if they want to overwrite the files
 		export_dialog.open_file_exists_alert_popup(tr(file_exists_alert) % paths_of_existing_files)
 		# Stops the function until the user decides if they want to overwrite
@@ -540,8 +555,6 @@ func export_processed_images(
 						tr("File failed to save. Error code %s (%s)") % [err, error_string(err)]
 					)
 					return false
-			if OS.get_name() == "Android":
-				break
 
 	Global.notification_label("File(s) exported")
 	# Store settings for quick export and when the dialog is opened again
@@ -555,7 +568,8 @@ func export_processed_images(
 		Global.top_menu_container.file_menu.set_item_text(
 			Global.FileMenu.EXPORT, tr("Export") + " %s" % file_name_with_ext
 		)
-	project.export_directory_path = export_paths[0].get_base_dir()
+	if OS.get_name() != "Android":
+		project.export_directory_path = export_paths[0].get_base_dir()
 	Global.config_cache.set_value("data", "current_dir", project.export_directory_path)
 	return true
 
@@ -725,12 +739,18 @@ func _scale_processed_images() -> void:
 		image.resize(image.get_size().x * resize_f, image.get_size().y * resize_f, interpolation)
 
 
-func file_format_string(format_enum: int) -> String:
+## Returns the format string (.png, .jpg etc...). For formats added through extensions, a unique id
+## is attached to the string, [param true_formats] returns the original extension format
+## without the id attached
+func file_format_string(format_enum: int, true_formats := false) -> String:
 	if file_format_dictionary.has(format_enum):
 		return file_format_dictionary[format_enum][0]
 	# If a file format description is not found, try generating one
 	if custom_exporter_generators.has(format_enum):
-		return custom_exporter_generators[format_enum][1]
+		if true_formats:
+			return custom_exporter_generators[format_enum][1]
+		# Else
+		return "%s_id-%s" % [custom_exporter_generators[format_enum][1], str(format_enum)]
 	return ""
 
 
@@ -751,6 +771,12 @@ func get_file_format_from_extension(file_extension: String) -> FileFormat:
 		var extension: String = file_format_dictionary[format][0]
 		if file_extension.to_lower() == extension:
 			return format
+	var custom_format_string := file_extension.split("-", false)
+	if not custom_file_formats.is_empty():
+		var extension_id := custom_format_string[-1].to_int()
+		if extension_id in custom_exporter_generators:
+			@warning_ignore("int_as_enum_without_cast")
+			return extension_id
 	return FileFormat.PNG
 
 
@@ -813,11 +839,21 @@ func _create_export_path(
 		if new_dir_for_each_frame_tag:
 			path += path_extras
 			return project.export_directory_path.path_join(frame_tag_dir).path_join(
-				path + file_format_string(project.file_format)
+				path + file_format_string(project.file_format, true)
 			)
 	path += path_extras
 
-	return project.export_directory_path.path_join(path + file_format_string(project.file_format))
+	if OS.get_name() == "Android":
+		return (
+			project.export_directory_path
+			+ "#"
+			+ path
+			+ file_format_string(project.file_format, true)
+		)
+
+	return project.export_directory_path.path_join(
+		path + file_format_string(project.file_format, true)
+	)
 
 
 func _get_processed_image_tag_name_and_start_id(project: Project, processed_image_id: int) -> Array:

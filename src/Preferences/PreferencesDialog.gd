@@ -88,6 +88,12 @@ var preferences: Array[Preference] = [
 		"right_tool_color", "Tools/ToolOptions/RightToolColorButton", "color", Color("fd6d14")
 	),
 	Preference.new(
+		"global_palettes_readonly",
+		"Palettes/PaletteOptions/GlobalPalettesReadonly",
+		"button_pressed",
+		true
+	),
+	Preference.new(
 		"tool_button_size",
 		"Interface/ButtonOptions/ToolButtonSizeOptionButton",
 		"selected",
@@ -194,6 +200,18 @@ var preferences: Array[Preference] = [
 		Color.BLUE
 	),
 	Preference.new(
+		"layer_locking_undoable",
+		"Timeline/TimelineOptions/LayerLockingUndoableButton",
+		"button_pressed",
+		true
+	),
+	Preference.new(
+		"layer_visibility_undoable",
+		"Timeline/TimelineOptions/LayerVisibilityUndoableButton",
+		"button_pressed",
+		true
+	),
+	Preference.new(
 		"selection_animated_borders", "Selection/SelectionOptions/Animate", "button_pressed", true
 	),
 	Preference.new(
@@ -236,7 +254,11 @@ var preferences: Array[Preference] = [
 		false,
 		true
 	),
-	Preference.new("tablet_driver", "Drivers/DriversContainer/TabletDriver", "selected", 0)
+	Preference.new("tablet_driver", "Drivers/DriversContainer/TabletDriver", "selected", 0),
+	Preference.new("author_display_name", "Author/AuthorContainer/DisplayName", "text", ""),
+	Preference.new("author_real_name", "Author/AuthorContainer/RealName", "text", ""),
+	Preference.new("author_contact", "Author/AuthorContainer/Contact", "text", ""),
+	Preference.new("author_company", "Author/AuthorContainer/CompanyStudio", "text", ""),
 ]
 
 var content_list := PackedStringArray([])

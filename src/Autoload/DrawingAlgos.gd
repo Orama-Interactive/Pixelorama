@@ -121,7 +121,7 @@ func set_layer_metadata_image(
 		image.set_pixel(index, 3, Color.RED)
 	else:
 		image.set_pixel(index, 3, Color.BLACK)
-	if not include:
+	if layer.is_blended_by_ancestor():
 		# Store a small red value as a way to indicate that this layer should be skipped
 		# Used for layers such as child layers of a group, so that the group layer itself can
 		# successfully be used as a clipping mask with the layer below it.
@@ -141,6 +141,82 @@ func blend_layers_headless(
 				pixel_color.a *= opacity
 				cel_image.set_pixel(xx, yy, pixel_color)
 	image.blend_rect(cel_image, Rect2i(Vector2i.ZERO, project.size), origin)
+
+
+func get_rounded_rect_points(
+	pos: Vector2i, size: Vector2i, radius: int, thickness: int
+) -> Array[Vector2i]:
+	var points: Array[Vector2i] = []
+	if radius <= 0:
+		var y1 := size.y + pos.y - 1
+		for x in range(pos.x, size.x + pos.x):
+			var t := Vector2i(x, pos.y)
+			var b := Vector2i(x, y1)
+			points.append(t)
+			points.append(b)
+
+		var x1 := size.x + pos.x - 1
+		for y in range(pos.y + 1, size.y + pos.y):
+			var l := Vector2i(pos.x, y)
+			var r := Vector2i(x1, y)
+			points.append(l)
+			points.append(r)
+
+		return points
+
+	points = get_rounded_rect_points_filled(pos, size, radius)
+	var inner_size := size - Vector2i.ONE * (thickness * 2)
+	if inner_size.x <= 0 or inner_size.y <= 0:
+		return points
+
+	# Remove the inner rectangle to produce a hollow shape.
+	var thickness_vector := pos + Vector2i(thickness, thickness)
+	var inner_radius := maxi(0, radius - thickness)
+	var inner := get_rounded_rect_points_filled(thickness_vector, inner_size, inner_radius)
+	for p in inner:
+		points.erase(p)
+
+	return points
+
+
+func get_rounded_rect_points_filled(pos: Vector2i, size: Vector2i, radius: int) -> Array[Vector2i]:
+	var points: Array[Vector2i] = []
+	if radius <= 0:
+		for y in range(size.y):
+			for x in range(size.x):
+				points.append(pos + Vector2i(x, y))
+		return points
+
+	@warning_ignore("integer_division")
+	radius = min(radius, size.x / 2, size.y / 2)
+	var radius_squared := radius * radius
+
+	var left := pos.x
+	var right := pos.x + size.x - 1
+	var top := pos.y
+	var bottom := pos.y + size.y - 1
+
+	for y in range(top, bottom + 1):
+		var start_x := left
+		var end_x := right
+
+		# Top rounded region
+		if y < top + radius:
+			var dy := (top + radius) - y
+			var dx := floori(sqrt(radius_squared - dy * dy))
+			start_x = left + radius - dx
+			end_x = right - radius + dx
+
+		# Bottom rounded region
+		elif y > bottom - radius:
+			var dy := y - (bottom - radius)
+			var dx := floori(sqrt(radius_squared - dy * dy))
+			start_x = left + radius - dx
+			end_x = right - radius + dx
+
+		points.append_array(Geometry2D.bresenham_line(Vector2i(start_x, y), Vector2i(end_x, y)))
+
+	return points
 
 
 ## Algorithm based on http://members.chello.at/easyfilter/bresenham.html

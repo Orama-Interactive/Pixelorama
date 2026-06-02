@@ -8,9 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://kd10jfc1dxf5" path="res://assets/graphics/misc/lock_aspect_guides.png" id="6"]
 
 [node name="CreateNewImage" type="ConfirmationDialog" unique_id=1694280343]
+oversampling_override = 1.0
 title = "New..."
 position = Vector2i(0, 36)
-size = Vector2i(434, 330)
+size = Vector2i(457, 333)
 script = ExtResource("1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=354469239]
@@ -48,14 +49,23 @@ text = "Templates:"
 
 [node name="TemplatesOptions" type="OptionButton" parent="VBoxContainer/SizeContainer/SizeOptions/TemplatesContainer" unique_id=556511745]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 toggle_mode = false
+text_overrun_behavior = 3
 selected = 0
+fit_to_longest_item = false
 item_count = 1
 popup/item_0/text = "Default"
 popup/item_0/id = 0
+
+[node name="SizeFromMenu" type="MenuButton" parent="VBoxContainer/SizeContainer/SizeOptions/TemplatesContainer" unique_id=1116921977]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Size from"
+flat = false
 
 [node name="WidthHeightContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/SizeOptions" unique_id=2117963120]
 layout_mode = 2

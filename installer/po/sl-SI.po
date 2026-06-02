@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-07 04:44\n"
-"PO-Revision-Date: 2024-08-03 00:15\n"
+"PO-Revision-Date: 2026-01-04 00:35\n"
 "Last-Translator: \n"
 "Language-Team: Slovenian\n"
 "Language: sl_SI\n"
@@ -20,50 +20,50 @@ msgstr ""
 #. SecInstall
 #: ..\pixelorama.nsi:84
 msgid "Install ${APPNAME}"
-msgstr ""
+msgstr "Namesti ${APPNAME}"
 
 #. SecStartmenu
 #: ..\pixelorama.nsi:85
 msgid "Create Start Menu shortcuts (optional)"
-msgstr ""
+msgstr "Ustvari bližnjice v meniju Start (neobvezno)"
 
 #. SecDesktop
 #: ..\pixelorama.nsi:86
 msgid "Create shortcut on Desktop (optional)"
-msgstr ""
+msgstr "Ustvari bližnjico na namizju (neobvezno)"
 
 #. un.SecUninstall
 #: ..\pixelorama.nsi:87
 msgid "Uninstall ${APPNAME} ${APPVERSION}"
-msgstr ""
+msgstr "Odstrani ${APPNAME} ${APPVERSION}"
 
 #. un.SecConfig
 #: ..\pixelorama.nsi:88
 msgid "Remove configuration files (optional)"
-msgstr ""
+msgstr "Odstrani konfiguracijske datoteke (neobvezno)"
 
 #. DESC_SecInstall
 #: ..\pixelorama.nsi:200
 msgid "Installs ${APPNAME} ${APPVERSION}."
-msgstr ""
+msgstr "Namesti ${APPNAME} ${APPVERSION}."
 
 #. DESC_SecStartmenu
 #: ..\pixelorama.nsi:201
 msgid "Creates Start Menu shortcuts for ${APPNAME}."
-msgstr ""
+msgstr "Ustvari bližnjice v meniju Start za ${APPNAME}."
 
 #. DESC_SecDesktop
 #: ..\pixelorama.nsi:202
 msgid "Creates a Desktop shortcut for ${APPNAME}."
-msgstr ""
+msgstr "Ustvari bližnjico na namizju za ${APPNAME}."
 
 #. DESC_un.SecUninstall
 #: ..\pixelorama.nsi:203
 msgid "Uninstalls ${APPNAME} ${APPVERSION} and removes all shortcuts."
-msgstr ""
+msgstr "Odstrani ${APPNAME} ${APPVERSION} in vse bližnjice."
 
 #. DESC_un.SecConfig
 #: ..\pixelorama.nsi:204
 msgid "Removes configuration files for ${APPNAME}."
-msgstr ""
+msgstr "Odstrani konfiguracijske datoteke za ${APPNAME}."
 

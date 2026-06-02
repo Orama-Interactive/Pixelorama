@@ -6,7 +6,7 @@ const DOCS_URL := "https://www.pixelorama.org/Introduction/"
 const ISSUES_URL := "https://github.com/Orama-Interactive/Pixelorama/issues"
 const SUPPORT_URL := "https://www.patreon.com/OramaInteractive"
 # gdlint: ignore=max-line-length
-const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v118---2025-12-31"
+const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v1110---2026-04-30"
 const EXTERNAL_LINK_ICON := preload("res://assets/graphics/misc/external_link.svg")
 const PIXELORAMA_ICON := preload("res://assets/graphics/icons/icon_16x16.png")
 const HEART_ICON := preload("res://assets/graphics/misc/heart.svg")
@@ -181,12 +181,16 @@ func handle_main_menu_collapse() -> void:
 func _on_project_about_to_switch() -> void:
 	var project := Global.current_project
 	project.resized.disconnect(_on_project_resized)
+	project.selection_changed.disconnect(_on_project_selection_changed)
 
 
 func _on_project_switched() -> void:
 	var project := Global.current_project
 	if not project.resized.is_connected(_on_project_resized):
 		project.resized.connect(_on_project_resized)
+	if not project.selection_changed.is_connected(_on_project_selection_changed):
+		project.selection_changed.connect(_on_project_selection_changed)
+	_on_project_selection_changed()
 	var project_size_text := "[%s×%s]" % [project.size.x, project.size.y]
 	_on_cursor_position_text_changed(project_size_text)
 	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, not project.has_selection)
@@ -201,6 +205,16 @@ func _on_project_resized() -> void:
 	var project := Global.current_project
 	var project_size_text := "[%s×%s]" % [project.size.x, project.size.y]
 	_on_cursor_position_text_changed(project_size_text)
+
+
+func _on_project_selection_changed() -> void:
+	var project := Global.current_project
+	var has_selection := project.has_selection
+	var can_reselect := has_selection or project.prev_selection_map.is_invisible()
+	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, not has_selection)
+	select_menu.set_item_disabled(Global.SelectMenu.CLEAR, not has_selection)
+	select_menu.set_item_disabled(Global.SelectMenu.RESELECT, can_reselect)
+	project_menu.set_item_disabled(Global.ProjectMenu.CROP_TO_SELECTION, not has_selection)
 
 
 func _on_cursor_position_text_changed(text: String) -> void:
@@ -455,7 +469,7 @@ func _setup_panels_submenu(item: String) -> void:
 	panels_submenu.set_name("panels_submenu")
 	panels_submenu.hide_on_checkable_item_selection = false
 	for element in ui_elements:
-		if element.name == "Tiles":
+		if element.name == "Tiles" or element.name == "3D Object Tree":
 			continue
 		var id := ui_elements.find(element)
 		panels_submenu.add_check_item(element.name, id)
@@ -596,6 +610,7 @@ func _setup_select_menu() -> void:
 	var select_menu_items := {
 		"All": "select_all",
 		"Clear": "clear_selection",
+		"Reselect": "reselect",
 		"Invert": "invert_selection",
 		"Select cel area": "select_cel_area",
 		"Wrap Strokes": "",
@@ -879,17 +894,29 @@ func _color_mode_submenu_id_pressed(id: ColorModes) -> void:
 		project.color_mode = Image.FORMAT_RGBA8
 	else:
 		project.color_mode = Project.INDEXED_MODE
-	project.update_tilemaps(undo_data, TileSetPanel.TileEditingMode.AUTO)
+	var used_tilesets := project.update_tilemaps(undo_data, TileSetPanel.TileEditingMode.AUTO)
+	var layers_to_update := PackedInt32Array()
+	for l in Global.current_project.layers:
+		if l is LayerTileMap:
+			if l.tileset in used_tilesets:
+				layers_to_update.append(l.index)
 	project.serialize_cel_undo_data(pixel_cels, redo_data)
 	project.undo_redo.create_action("Change color mode")
 	var palette_in_focus = Palettes.current_palette
 	if not palette_in_focus.is_project_palette and project.color_mode == Project.INDEXED_MODE:
-		palette_in_focus = palette_in_focus.duplicate()
-		palette_in_focus.is_project_palette = true
-		Palettes.undo_redo_add_palette(palette_in_focus)
+		if Global.global_palettes_readonly:
+			palette_in_focus = palette_in_focus.duplicate()
+			Palettes.undo_redo_add_palette(palette_in_focus, false)
 	project.undo_redo.add_do_property(project, "color_mode", project.color_mode)
 	project.undo_redo.add_undo_property(project, "color_mode", old_color_mode)
 	project.deserialize_cel_undo_data(redo_data, undo_data)
+	# we may be on a different layer during undo/redo
+	Global.current_project.undo_redo.add_do_property(
+		Global.canvas, "mandatory_update_layers", layers_to_update
+	)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.canvas, "mandatory_update_layers", layers_to_update
+	)
 	project.undo_redo.add_do_method(_check_color_mode_submenu_item.bind(project))
 	project.undo_redo.add_undo_method(_check_color_mode_submenu_item.bind(project))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
@@ -1202,8 +1229,10 @@ func select_menu_id_pressed(id: int) -> void:
 	match id:
 		Global.SelectMenu.SELECT_ALL:
 			Global.canvas.selection.select_all()
-		Global.SelectMenu.CLEAR_SELECTION:
+		Global.SelectMenu.CLEAR:
 			Global.canvas.selection.clear_selection(true)
+		Global.SelectMenu.RESELECT:
+			Global.canvas.selection.reselect()
 		Global.SelectMenu.INVERT:
 			Global.canvas.selection.invert()
 		Global.SelectMenu.SELECT_CEL_AREA:

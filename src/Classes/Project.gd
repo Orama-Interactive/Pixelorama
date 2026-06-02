@@ -7,13 +7,18 @@ signal removed
 signal serialized(dict: Dictionary)
 signal about_to_deserialize(dict: Dictionary)
 signal resized
+signal selection_changed
 signal fps_changed
 signal layers_updated
 signal frames_updated
 signal tags_changed
 
-const INDEXED_MODE := Image.FORMAT_MAX + 1
+const INDEXED_MODE := -1
 
+const WARNING_LOADING_3D_LAYERS_MSG := """Projects with 3D layers exported with a Pixelorama version
+older than 1.2 are no longer compatible with current versions. If you want to keep the 3D data
+of this project, please close it and finish your work using version 1.1.9.
+Do NOT save over this file using version 1.2 and on, otherwise your 3D data will be lost!"""
 var name := "":
 	set(value):
 		name = value
@@ -73,7 +78,12 @@ var fps := 6.0:
 	set(value):
 		fps = value
 		fps_changed.emit()
+var license := ""  ## The license of the project, set in the project properties.
 var user_data := ""  ## User defined data, set in the project properties.
+var author_display_name := ""  ## The displayed name of the project author.
+var author_real_name := ""  ## The real name of the project author.
+var author_contact := ""  ## The contact info of the project author.
+var author_company := ""  ## The company name of the project author.
 
 var x_symmetry_point: float
 var y_symmetry_point: float
@@ -85,6 +95,7 @@ var diagonal_xy_symmetry_axis := SymmetryGuide.new()
 var diagonal_x_minus_y_symmetry_axis := SymmetryGuide.new()
 
 var selection_map := SelectionMap.new()
+var prev_selection_map := SelectionMap.new()
 ## This is useful for when the selection is outside of the canvas boundaries,
 ## on the left and/or above (negative coords)
 var selection_offset := Vector2i.ZERO:
@@ -156,6 +167,7 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 		export_directory_path = Global.config_cache.get_value(
 			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 		)
+	initialize_author_data()
 	Global.project_created.emit(self)
 
 
@@ -178,7 +190,7 @@ func remove() -> void:
 func commit_undo() -> void:
 	if not can_undo:
 		return
-	if Global.canvas.selection.transformation_handles.is_transforming_content():
+	if Global.canvas.selection.transformation_handles.is_transforming():
 		Global.canvas.selection.transform_content_cancel()
 	else:
 		undo_redo.undo()
@@ -215,7 +227,7 @@ func get_current_cel() -> BaseCel:
 
 
 func get_image_format() -> Image.Format:
-	if color_mode == INDEXED_MODE:
+	if is_indexed():
 		return Image.FORMAT_RGBA8
 	return color_mode as Image.Format
 
@@ -226,6 +238,8 @@ func is_indexed() -> bool:
 
 func selection_map_changed() -> void:
 	has_selection = !selection_map.is_invisible()
+	if has_selection:
+		prev_selection_map.copy_from(selection_map)
 	var transformation_handles := Global.canvas.selection.transformation_handles
 	if has_selection:
 		var used_map := SelectionMap.new()
@@ -233,10 +247,7 @@ func selection_map_changed() -> void:
 		transformation_handles.set_selection(used_map, selection_map.get_selection_rect(self))
 	else:
 		transformation_handles.set_selection(null, Rect2i())
-	Global.top_menu_container.edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
-	Global.top_menu_container.project_menu.set_item_disabled(
-		Global.ProjectMenu.CROP_TO_SELECTION, !has_selection
-	)
+	selection_changed.emit()
 
 
 func change_project() -> void:
@@ -328,7 +339,12 @@ func serialize() -> Dictionary:
 		"export_file_name": file_name,
 		"export_file_format": file_format,
 		"fps": fps,
+		"license": license,
 		"user_data": user_data,
+		"author_display_name": author_display_name,
+		"author_real_name": author_real_name,
+		"author_contact": author_contact,
+		"author_company": author_company,
 		"metadata": metadata
 	}
 
@@ -347,6 +363,10 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 		tiles.tile_size = size
 		selection_map.crop(size.x, size.y)
 	color_mode = dict.get("color_mode", color_mode)
+	if pxo_version <= 5:
+		# Compatibility for older projects with indexed mode
+		if color_mode == 40 or color_mode == 48:
+			color_mode = -1
 	if dict.has("tile_mode_x_basis_x") and dict.has("tile_mode_x_basis_y"):
 		tiles.x_basis.x = dict.tile_mode_x_basis_x
 		tiles.x_basis.y = dict.tile_mode_x_basis_y
@@ -377,6 +397,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 				palettes[corrected_palette_name] = palette
 		project_current_palette_name = current_palette_name
 	if dict.has("frames") and dict.has("layers"):
+		var layers_3d_count := 0
 		var audio_layers := 0
 		for saved_layer in dict.layers:
 			match int(saved_layer.get("type", Global.LayerTypes.PIXEL)):
@@ -385,7 +406,36 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 				Global.LayerTypes.GROUP:
 					layers.append(GroupLayer.new(self))
 				Global.LayerTypes.THREE_D:
-					layers.append(Layer3D.new(self))
+					var layer := Layer3D.new(self, "", true)
+					layers.append(layer)
+					var scene_path_zip := "scene/%s" % layers_3d_count
+					if not zip_reader.file_exists(scene_path_zip):
+						layer.generate_nodes(size)
+						layers_3d_count += 1
+						Global.popup_error(WARNING_LOADING_3D_LAYERS_MSG)
+						continue
+					var scene_data := zip_reader.read_file(scene_path_zip)
+					var scene_data_text := scene_data.get_string_from_utf8()
+					if 'resource type="Script"' in scene_data_text:
+						# If a script is detected inside the scene, it's possible someone
+						# may have injected malicious code. To prevent the users,
+						# refuse to load scenes with scripts on them.
+						print("Script detected, there may be malicious code in the scene.")
+						layer.generate_nodes(size)
+						layers_3d_count += 1
+						continue
+					DirAccess.make_dir_absolute(Export.temp_path)
+					var scene_path_file := (
+						Export.temp_path.path_join(str(layers_3d_count)) + ".tscn"
+					)
+					var scene_file := FileAccess.open(scene_path_file, FileAccess.WRITE)
+					scene_file.store_buffer(scene_data)
+					scene_file.close()
+					var scene := load(scene_path_file) as PackedScene
+					layer.load_scene(scene)
+					DirAccess.remove_absolute(scene_path_file)
+					DirAccess.remove_absolute(Export.temp_path)
+					layers_3d_count += 1
 				Global.LayerTypes.TILEMAP:
 					layers.append(LayerTileMap.new(self, null))
 				Global.LayerTypes.AUDIO:
@@ -419,7 +469,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 						if is_instance_valid(file):  # For pxo files saved in 0.x
 							# Don't do anything with it, just read it so that the file can move on
 							file.get_buffer(size.x * size.y * 4)
-						cels.append(Cel3D.new(size, true))
+						cels.append(layer.new_empty_cel())
 					Global.LayerTypes.TILEMAP:
 						var image := _load_image_from_pxo(frame_i, cel_i, zip_reader, file)
 						var tileset_index = dict.layers[cel_i].tileset_index
@@ -505,6 +555,11 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 	file_name = dict.get("export_file_name", file_name)
 	file_format = dict.get("export_file_format", file_name)
 	fps = dict.get("fps", file_name)
+	license = dict.get("license", license)
+	author_display_name = dict.get("author_display_name", "")
+	author_real_name = dict.get("author_real_name", "")
+	author_contact = dict.get("author_contact", "")
+	author_company = dict.get("author_company", "")
 	user_data = dict.get("user_data", user_data)
 	var loaded_current_frame = dict.get("current_frame", current_frame)
 	var loaded_current_layer = dict.get("current_layer", current_layer)
@@ -646,6 +701,14 @@ func get_all_pixel_cels() -> Array[PixelCel]:
 			if cel is PixelCel:
 				cels.append(cel)
 	return cels
+
+
+func get_all_3d_layers() -> Array[Layer3D]:
+	var layers_3d: Array[Layer3D]
+	for layer in layers:
+		if layer is Layer3D:
+			layers_3d.append(layer)
+	return layers_3d
 
 
 func get_all_audio_layers(only_valid_streams := true) -> Array[AudioLayer]:
@@ -842,11 +905,12 @@ func remove_layers(indices: PackedInt32Array) -> void:
 	selected_cels.clear()
 	for i in indices.size():
 		# With each removed index, future indices need to be lowered, so subtract by i
-		layers.remove_at(indices[i] - i)
+		var layer_index := indices[i] - i
+		layers.remove_at(layer_index)
 		for frame in frames:
-			frame.cels[indices[i] - i].on_remove()
-			frame.cels.remove_at(indices[i] - i)
-		Global.animation_timeline.project_layer_removed(indices[i] - i)
+			frame.cels[layer_index].on_remove()
+			frame.cels.remove_at(layer_index)
+		Global.animation_timeline.project_layer_removed(layer_index)
 	layers_updated.emit()
 
 
@@ -993,10 +1057,29 @@ func add_tileset(tileset: TileSetCustom) -> void:
 
 
 ## Loops through all cels in [param cel_dictionary], and for [CelTileMap]s,
-## it calls [method CelTileMap.update_tilemap].
+## it calls [method CelTileMap.update_tilemap]. Returns an array of used tilesets that can be used
+## as reference to update layers during undo/redo.
 func update_tilemaps(
 	cel_dictionary: Dictionary, tile_editing_mode := TileSetPanel.tile_editing_mode
-) -> void:
+) -> Array[TileSetCustom]:
+	var used_tilesets: Array[TileSetCustom]
 	for cel in cel_dictionary:
 		if cel is CelTileMap:
 			(cel as CelTileMap).update_tilemap(tile_editing_mode)
+			if cel.tileset and not cel.tileset in used_tilesets:
+				used_tilesets.append(cel.tileset)
+	return used_tilesets
+
+
+func initialize_author_data() -> void:
+	author_display_name = Global.author_display_name
+	author_real_name = Global.author_real_name
+	author_contact = Global.author_contact
+	author_company = Global.author_company
+
+
+func clear_author_data() -> void:
+	author_display_name = ""
+	author_real_name = ""
+	author_contact = ""
+	author_company = ""

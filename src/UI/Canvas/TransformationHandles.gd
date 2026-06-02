@@ -350,7 +350,9 @@ func is_rotated_or_skewed() -> bool:
 	return preview_transform.get_rotation() != 0 or preview_transform.get_skew() != 0
 
 
-func is_transforming_content() -> bool:
+## Returns [code]true[/code] both when transforming the selection with content,
+## and when transforming the selection without the content.
+func is_transforming() -> bool:
 	return currently_transforming
 
 
@@ -432,6 +434,11 @@ func resize_transform_handle(
 			return t
 		drag_start = drag_start.snapped(tilemap.get_tile_size())
 		delta = delta.snapped(tilemap.get_tile_size())
+	else:
+		# Snap to pixel grid, otherwise the transformation handles can be in sub-pixel
+		# positions, causing weird results when resizing.
+		drag_start = drag_start.snapped(Vector2.ONE)
+		delta = delta.snapped(Vector2.ONE)
 	var image_size := transformed_selection_map.get_size() as Vector2
 	# Step 1: Convert drag to local space
 	var local_start := t.affine_inverse() * drag_start
@@ -594,18 +601,24 @@ func begin_transform(
 	force_move_content := false,
 	force_move_selection_only := false
 ) -> void:
-	currently_transforming = true
 	var selection_only_action := Input.is_action_pressed(&"transform_move_selection_only", true)
 	var move_selection_only := selection_only_action or force_move_selection_only
 	if move_selection_only and not force_move_content:
 		if not only_transforms_selection:
+			if currently_transforming:
+				# If we are transforming the content and we want to only transform the selection,
+				# confirm the transformation and begin a new one, that does not include the content.
+				selection_node.transform_content_confirm(false)
 			selection_node.undo_data = selection_node.get_undo_data(false)
 			only_transforms_selection = true
+		currently_transforming = true
 		return
 	else:
 		if only_transforms_selection:
-			selection_node.transform_content_confirm()
-			only_transforms_selection = false
+			# If we are only transforming selection and we want to transform the content as well,
+			# confirm the transformation and begin a new one, that includes the content.
+			selection_node.transform_content_confirm(false)
+	currently_transforming = true
 	if not pre_transformed_image.is_empty():
 		return
 	if is_instance_valid(image):

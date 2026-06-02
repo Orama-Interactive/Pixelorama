@@ -25,8 +25,11 @@ var button_pressed := false:
 		return main_button.button_pressed
 var animation_running := false
 var audio_playing_at_frame := 0
-
 var audio_player: AudioStreamPlayer
+
+var _old_camera_auto_release_gui_focus: bool
+var _old_is_writing_text: bool
+
 @onready var properties: AcceptDialog = Global.control.find_child("LayerProperties")
 @onready var main_button := %LayerMainButton as Button
 @onready var expand_button := %ExpandButton as BaseButton
@@ -213,6 +216,21 @@ func _update_buttons_all_layers() -> void:
 
 func _input(event: InputEvent) -> void:
 	if (
+		Input.is_action_just_pressed(&"rename_layer")
+		and layer_index == Global.current_project.current_layer
+		and line_edit.visible == false
+	):
+		_old_camera_auto_release_gui_focus = Global.camera.auto_release_gui_focus
+		Global.camera.auto_release_gui_focus = false
+		_old_is_writing_text = get_tree().current_scene.is_writing_text
+		get_tree().current_scene.is_writing_text = true
+		label.visible = false
+		line_edit.visible = true
+		line_edit.editable = true
+		line_edit.grab_focus()
+		line_edit.select_all()
+		line_edit.caret_column = line_edit.text.length()
+	elif (
 		(event.is_action_released(&"ui_accept") or event.is_action_released(&"ui_cancel"))
 		and line_edit.visible
 		and event.keycode != KEY_SPACE
@@ -265,6 +283,8 @@ func _on_layer_name_line_edit_focus_exited() -> void:
 
 
 func _save_layer_name(new_name: String) -> void:
+	Global.camera.auto_release_gui_focus = _old_camera_auto_release_gui_focus
+	get_tree().current_scene.is_writing_text = _old_is_writing_text
 	label.visible = true
 	line_edit.visible = false
 	line_edit.editable = false
@@ -288,7 +308,8 @@ func _on_expand_button_pressed() -> void:
 
 func _on_visibility_button_pressed() -> void:
 	var project = Global.current_project
-	project.undo_redo.create_action("Change Layer Visibility")
+	if Global.layer_visibility_undoable:
+		project.undo_redo.create_action("Change Layer Visibility")
 
 	Global.canvas.selection.transform_content_confirm()
 	var layer := Global.current_project.layers[layer_index]
@@ -300,58 +321,82 @@ func _on_visibility_button_pressed() -> void:
 				break
 		for other_layer in Global.current_project.layers:
 			if other_layer != layer and other_layer not in layer.get_ancestors():
-				project.undo_redo.add_do_property(other_layer, "visible", one_hidden_by_other_layer)
-				project.undo_redo.add_undo_property(other_layer, "visible", other_layer.visible)
+				if Global.layer_visibility_undoable:
+					project.undo_redo.add_do_property(
+						other_layer, "visible", one_hidden_by_other_layer
+					)
+					project.undo_redo.add_undo_property(other_layer, "visible", other_layer.visible)
+				else:
+					other_layer.visible = one_hidden_by_other_layer
 			else:
-				project.undo_redo.add_do_property(other_layer, "visible", true)
-				project.undo_redo.add_undo_property(other_layer, "visible", other_layer.visible)
+				if Global.layer_visibility_undoable:
+					project.undo_redo.add_do_property(other_layer, "visible", true)
+					project.undo_redo.add_undo_property(other_layer, "visible", other_layer.visible)
+				else:
+					other_layer.visible = true
 
-			project.undo_redo.add_do_property(
-				other_layer, "hidden_by_other_layer", not one_hidden_by_other_layer
-			)
-			project.undo_redo.add_undo_property(
-				other_layer, "hidden_by_other_layer", other_layer.hidden_by_other_layer
-			)
+			if Global.layer_visibility_undoable:
+				project.undo_redo.add_do_property(
+					other_layer, "hidden_by_other_layer", not one_hidden_by_other_layer
+				)
+				project.undo_redo.add_undo_property(
+					other_layer, "hidden_by_other_layer", other_layer.hidden_by_other_layer
+				)
+			else:
+				other_layer.hidden_by_other_layer = not one_hidden_by_other_layer
 	else:
-		project.undo_redo.add_do_property(layer, "visible", not layer.visible)
-		project.undo_redo.add_undo_property(layer, "visible", layer.visible)
+		if Global.layer_visibility_undoable:
+			project.undo_redo.add_do_property(layer, "visible", not layer.visible)
+			project.undo_redo.add_undo_property(layer, "visible", layer.visible)
+		else:
+			layer.visible = not layer.visible
 
 	if Global.select_layer_on_button_click:
 		_select_current_layer()
 
-	project.undo_redo.add_do_property(Global.canvas, "update_all_layers", true)
-	project.undo_redo.add_undo_property(Global.canvas, "update_all_layers", true)
-	project.undo_redo.add_do_method(Global.canvas.queue_redraw)
-	project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
-	project.undo_redo.add_do_method(_update_buttons_all_layers)
-	project.undo_redo.add_undo_method(_update_buttons_all_layers)
-	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
-
-	project.undo_redo.commit_action()
+	if Global.layer_visibility_undoable:
+		project.undo_redo.add_do_property(Global.canvas, "update_all_layers", true)
+		project.undo_redo.add_undo_property(Global.canvas, "update_all_layers", true)
+		project.undo_redo.add_do_method(Global.canvas.queue_redraw)
+		project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
+		project.undo_redo.add_do_method(_update_buttons_all_layers)
+		project.undo_redo.add_undo_method(_update_buttons_all_layers)
+		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+		project.undo_redo.commit_action()
+	else:
+		Global.canvas.update_all_layers = true
+		Global.canvas.queue_redraw()
+		_update_buttons_all_layers()
 
 
 func _on_lock_button_pressed() -> void:
 	var project = Global.current_project
-	project.undo_redo.create_action("Change Layer Locked Status")
-
 	Global.canvas.selection.transform_content_confirm()
 	var layer := Global.current_project.layers[layer_index]
 
-	project.undo_redo.add_do_property(layer, "locked", not layer.locked)
-	project.undo_redo.add_undo_property(layer, "locked", layer.locked)
+	if Global.layer_locking_undoable:
+		project.undo_redo.create_action("Change Layer Locked Status")
+		project.undo_redo.add_do_property(layer, "locked", not layer.locked)
+		project.undo_redo.add_undo_property(layer, "locked", layer.locked)
+	else:
+		layer.locked = not layer.locked
 
 	if Global.select_layer_on_button_click:
 		_select_current_layer()
 
-	project.undo_redo.add_do_method(_update_buttons_all_layers)
-	project.undo_redo.add_undo_method(_update_buttons_all_layers)
-	project.undo_redo.add_do_method(_update_delete_layer_button)
-	project.undo_redo.add_undo_method(_update_delete_layer_button)
-	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	if Global.layer_locking_undoable:
+		project.undo_redo.add_do_method(_update_buttons_all_layers)
+		project.undo_redo.add_undo_method(_update_buttons_all_layers)
+		project.undo_redo.add_do_method(_update_delete_layer_button)
+		project.undo_redo.add_undo_method(_update_delete_layer_button)
+		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 
-	project.undo_redo.commit_action()
+		project.undo_redo.commit_action()
+	else:
+		_update_buttons_all_layers()
+		_update_delete_layer_button()
 
 
 func _update_delete_layer_button() -> void:

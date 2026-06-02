@@ -178,13 +178,8 @@ func cursor_move(pos: Vector2i) -> void:
 func draw_start(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_start(pos)
-	if Input.is_action_pressed("shape_displace"):
-		_picking_color = true
-		_pick_color(pos)
-		return
 	cursor_move(pos)
 	pos = angle_constraint(Vector2(pos))
-	_picking_color = false  # fixes _picking_color being true indefinitely after we pick color
 	Global.canvas.selection.transform_content_confirm()
 	update_mask()
 	if !_drawing:
@@ -201,10 +196,6 @@ func draw_start(pos: Vector2i) -> void:
 func draw_move(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_move(pos)
-	if _picking_color:  # Still return even if we released Alt
-		if Input.is_action_pressed("shape_displace"):
-			_pick_color(pos)
-		return
 
 
 func draw_end(pos: Vector2i) -> void:

@@ -120,6 +120,7 @@ func _on_effect_list_pressed(menu_item_index: int, menu: PopupMenu) -> void:
 	var index: int = menu.get_item_metadata(menu_item_index)
 	var layer := Global.current_project.layers[Global.current_project.current_layer]
 	var effect := effects[index].duplicate()
+	effect.layer = layer
 	Global.current_project.undo_redo.create_action("Add layer effect")
 	Global.current_project.undo_redo.add_do_method(func(): layer.effects.append(effect))
 	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)
@@ -171,6 +172,7 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	ShaderLoader.create_ui_for_shader_uniforms(
 		effect.shader,
 		effect.params,
+		effect.param_properties,
 		parameter_vbox,
 		_set_parameter.bind(effect),
 		_load_parameter_texture.bind(effect)
@@ -241,7 +243,7 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 			undo_data[cel_image.indices_image] = cel_image.indices_image.data
 		undo_data[cel_image] = cel_image.data
 		var image_size := cel_image.get_size()
-		var params := effect.params
+		var params := effect.get_params(i)
 		params["PXO_time"] = frame.position_in_seconds(project)
 		params["PXO_frame_index"] = i
 		params["PXO_layer_index"] = layer.index
@@ -251,7 +253,7 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
 		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
-	project.update_tilemaps(undo_data, tile_editing_mode)
+	var used_tilesets := project.update_tilemaps(undo_data, tile_editing_mode)
 	for frame in project.frames:
 		var cel := frame.cels[layer.index]
 		var cel_image := cel.get_image()
@@ -261,7 +263,19 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 			redo_data[cel_image.indices_image] = cel_image.indices_image.data
 		redo_data[cel_image] = cel_image.data
 	project.undo_redo.create_action("Apply layer effect")
+	var layers_to_update := PackedInt32Array()
+	for l in Global.current_project.layers:
+		if l is LayerTileMap:
+			if l.tileset in used_tilesets:
+				layers_to_update.append(l.index)
 	project.deserialize_cel_undo_data(redo_data, undo_data)
+	# we may be on a different layer during undo/redo
+	Global.current_project.undo_redo.add_do_property(
+		Global.canvas, "mandatory_update_layers", layers_to_update
+	)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.canvas, "mandatory_update_layers", layers_to_update
+	)
 	project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
 	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)
 	# we may be a different layer during redo

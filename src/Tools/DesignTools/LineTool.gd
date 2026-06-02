@@ -6,7 +6,6 @@ var _offset := Vector2i.ZERO
 var _dest := Vector2i.ZERO
 var _drawing := false
 var _displace_origin := false
-var _thickness := 1
 
 
 func _init() -> void:
@@ -14,62 +13,21 @@ func _init() -> void:
 	update_indicator()
 
 
-func _ready() -> void:
-	super()
-	if tool_slot.button == MOUSE_BUTTON_RIGHT:
-		$ThicknessSlider.allow_global_input_events = not Global.share_options_between_tools
-		Global.share_options_between_tools_changed.connect(
-			func(enabled): $ThicknessSlider.allow_global_input_events = not enabled
-		)
-
-
-func update_brush() -> void:
-	pass
-
-
-func _on_Thickness_value_changed(value: int) -> void:
-	_thickness = value
-
-	update_indicator()
-	update_config()
-	save_config()
-
-
 func update_indicator() -> void:
 	var bitmap := BitMap.new()
-	bitmap.create(Vector2i.ONE * _thickness)
-	bitmap.set_bit_rect(Rect2i(Vector2i.ZERO, Vector2i.ONE * _thickness), true)
+	bitmap.create(Vector2i.ONE)
+	bitmap.set_bit_rect(Rect2i(Vector2i.ZERO, Vector2i.ONE), true)
 	_indicator = bitmap
 	_polylines = _create_polylines(_indicator)
 
 
 func get_config() -> Dictionary:
 	var config := super.get_config()
-	config["thickness"] = _thickness
 	return config
 
 
 func set_config(config: Dictionary) -> void:
 	super.set_config(config)
-	_thickness = config.get("thickness", _thickness)
-
-
-func update_config() -> void:
-	super.update_config()
-	$ThicknessSlider.value = _thickness
-
-
-## This tool has no brush, so just return the indicator as it is.
-func _create_brush_indicator() -> BitMap:
-	return _indicator
-
-
-func _get_shape_points(_size: Vector2i) -> Array[Vector2i]:
-	return []
-
-
-func _get_shape_points_filled(_size: Vector2i) -> Array[Vector2i]:
-	return []
 
 
 func _input(event: InputEvent) -> void:
@@ -79,22 +37,12 @@ func _input(event: InputEvent) -> void:
 		elif event.is_action_released("shape_displace"):
 			_displace_origin = false
 	else:
-		# If options are being shared, no need to change the brush size on the right tool slots,
-		# otherwise it will be changed twice on both left and right tools.
-		if tool_slot.button == MOUSE_BUTTON_RIGHT and Global.share_options_between_tools:
-			return
-		var brush_size_value := _mm_action.get_action_distance_int(event)
-		$ThicknessSlider.value += brush_size_value
+		super(event)
 
 
 func draw_start(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_start(pos)
-	if Input.is_action_pressed("shape_displace"):
-		_picking_color = true
-		_pick_color(pos)
-		return
-	_picking_color = false
 
 	Global.canvas.selection.transform_content_confirm()
 	update_mask()
@@ -112,10 +60,6 @@ func draw_start(pos: Vector2i) -> void:
 func draw_move(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_move(pos)
-	if _picking_color:  # Still return even if we released Alt
-		if Input.is_action_pressed("shape_displace"):
-			_pick_color(pos)
-		return
 
 	if _drawing:
 		if Global.mirror_view:
@@ -136,9 +80,6 @@ func draw_move(pos: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
-	if _picking_color:
-		super.draw_end(pos)
-		return
 
 	if _drawing:
 		if Global.mirror_view:
@@ -147,11 +88,6 @@ func draw_end(pos: Vector2i) -> void:
 			_start.x = (Global.current_project.size.x - 1) - _start.x
 			_offset.x = (Global.current_project.size.x - 1) - _offset.x
 			_dest.x = (Global.current_project.size.x - 1) - _dest.x
-			if _thickness % 2 == 0:
-				_original_pos.x += 1
-				_start.x += 1
-				_offset.x += 1
-				_dest.x += 1
 		_draw_shape()
 		_reset_tool()
 	super.draw_end(pos)
@@ -173,37 +109,32 @@ func _reset_tool() -> void:
 
 
 func draw_preview() -> void:
+	if not _drawing:
+		return
 	var canvas := Global.canvas.previews_sprite
-	if _drawing:
-		var points := bresenham_line_thickness(_start, _dest, _thickness)
-		var image := Image.create(
-			Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_LA8
-		)
-		for point in points:
-			if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
-				image.set_pixelv(point, Color.WHITE)
-		# Handle mirroring
-		for point in mirror_array(points):
-			if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
-				image.set_pixelv(point, Color.WHITE)
-		var texture := ImageTexture.create_from_image(image)
-		canvas.texture = texture
+	var points := Geometry2D.bresenham_line(_start, _dest)
+	var final_points := get_coords_to_draw(points, false)
+	var image := Image.create(
+		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_LA8
+	)
+	for point in final_points:
+		if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
+			image.set_pixelv(point, Color.WHITE)
+	# Handle mirroring
+	for point in mirror_array(final_points):
+		if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
+			image.set_pixelv(point, Color.WHITE)
+	var texture := ImageTexture.create_from_image(image)
+	canvas.texture = texture
 
 
 func _draw_shape() -> void:
-	var points := bresenham_line_thickness(_start, _dest, _thickness)
+	var points := Geometry2D.bresenham_line(_start, _dest)
 	prepare_undo()
-	var images := _get_selected_draw_images()
-	for point in points:
-		# Reset drawer every time because pixel perfect sometimes breaks the tool
-		_drawer.reset()
-		if Tools.is_placing_tiles():
-			draw_tile(point)
-		else:
-			# Draw each point offsetted based on the shape's thickness
-			if Global.current_project.can_pixel_get_drawn(point):
-				for image in images:
-					_drawer.set_pixel(image, point, tool_slot.color)
+	_prepare_tool()
+	var final_points := get_coords_to_draw(points)
+	for point in final_points:
+		_set_pixel(point)
 
 	commit_undo("Draw Shape")
 

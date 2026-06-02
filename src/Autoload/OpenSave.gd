@@ -94,6 +94,8 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 		var new_path := SHADERS_DIRECTORY.path_join(file.uri_decode().get_file())
 		DirAccess.copy_absolute(file, new_path)
 		shader_copied.emit(new_path)
+	elif file_ext == "gltf" or file_ext == "glb":  # 3D scene
+		open_3d_scene_file(file)
 	elif file_ext == "mp3" or file_ext == "wav":  # Audio file
 		open_audio_file(file)
 	elif file_ext in FONT_FILE_EXTENSIONS:
@@ -465,6 +467,7 @@ func open_v0_pxo_file(path: String, empty_project: bool) -> Project:
 func save_pxo_file(
 	path: String, autosave: bool, include_blended := false, project := Global.current_project
 ) -> bool:
+	project.initialize_author_data()
 	if not autosave:
 		project.name = path.uri_decode().get_file().trim_suffix(".pxo")
 	var serialized_data := project.serialize()
@@ -567,6 +570,25 @@ func save_pxo_file(
 			zip_packer.start_file(tileset_path.path_join(str(j)))
 			zip_packer.write_file(tile.image.get_data())
 			zip_packer.close_file()
+	var layers_3d := project.get_all_3d_layers()
+	for i in layers_3d.size():
+		var layer := layers_3d[i]
+		DirAccess.make_dir_absolute(Export.temp_path)
+		var scene_path_zip := "scene/%s" % i
+		var scene_path_file := Export.temp_path.path_join(str(i)) + ".tscn"
+		var node_to_pack := layer.viewport
+		var scene := PackedScene.new()
+		scene.pack(node_to_pack)
+		var scene_err := ResourceSaver.save(scene, scene_path_file)
+		if scene_err == OK:
+			var scene_file := FileAccess.open(scene_path_file, FileAccess.READ)
+			if is_instance_valid(scene_file):
+				zip_packer.start_file(scene_path_zip)
+				zip_packer.write_file(scene_file.get_buffer(scene_file.get_length()))
+				zip_packer.close_file()
+				scene_file.close()
+		DirAccess.remove_absolute(scene_path_file)
+		DirAccess.remove_absolute(Export.temp_path)
 	var audio_layers := project.get_all_audio_layers()
 	for i in audio_layers.size():
 		var layer := audio_layers[i]
@@ -865,6 +887,7 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 	if cel is CelTileMap:
 		undo_data[cel] = (cel as CelTileMap).serialize_undo_data()
 	cel_image.add_data_to_dictionary(undo_data)
+	cel_image.fill(0)
 	cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
 	cel_image.convert_rgb_to_indexed()
 	var redo_data := {}
@@ -881,6 +904,8 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 	project.undo_redo.add_undo_method(
 		project.change_cel.bind(project.current_frame, project.current_layer)
 	)
+	project.undo_redo.add_do_method(cel.update_texture)
+	project.undo_redo.add_undo_method(cel.update_texture)
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.commit_action()
 
@@ -1060,6 +1085,21 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 		Global.tabs.delete_tab(prev_project_pos)
 
 
+func open_3d_scene_file(path: String) -> void:
+	var gltf_document_load := GLTFDocument.new()
+	var gltf_state_load := GLTFState.new()
+	var error = gltf_document_load.append_from_file(path, gltf_state_load)
+	if error != OK:
+		return
+	var gltf_scene_root_node := gltf_document_load.generate_scene(gltf_state_load)
+	if not is_instance_valid(gltf_scene_root_node):
+		return
+	var project := Global.current_project
+	var new_layer := Layer3D.new(project, path.get_basename().get_file())
+	new_layer.add_new_node(gltf_scene_root_node)
+	Global.animation_timeline.add_layer(new_layer, project)
+
+
 func open_audio_file(path: String) -> void:
 	var audio_stream: AudioStream
 	if path.get_extension().to_lower() == "mp3":
@@ -1137,6 +1177,7 @@ func open_ora_file(path: String) -> void:
 		zip_reader.close()
 		return
 	var new_project := Project.new([Frame.new()], path.uri_decode().get_file().get_basename())
+	new_project.clear_author_data()
 	var selected_layer: BaseLayer
 	var stacks_found := 0
 	var current_stack: Array[GroupLayer] = []
@@ -1243,6 +1284,7 @@ func open_piskel_file(path: String) -> void:
 	var piskel: Dictionary = file_json.piskel
 	var project_name: String = piskel.get("name", path.uri_decode().get_file().get_basename())
 	var new_project := Project.new([], project_name)
+	new_project.clear_author_data()
 	new_project.size = Vector2i(piskel.width, piskel.height)
 	new_project.fps = piskel.fps
 	new_project.save_path = path.get_basename() + ".pxo"

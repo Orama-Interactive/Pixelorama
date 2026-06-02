@@ -149,7 +149,6 @@ func _on_X_value_changed(val: float) -> void:
 	if _locked_ratio:
 		value.y = maxf(min_value.y, (value.x / ratio.x) * ratio.y)
 		value.z = maxf(min_value.z, (value.x / ratio.x) * ratio.z)
-	value_changed.emit(value)
 
 
 func _on_Y_value_changed(val: float) -> void:
@@ -157,7 +156,6 @@ func _on_Y_value_changed(val: float) -> void:
 	if _locked_ratio:
 		value.x = maxf(min_value.x, (value.y / ratio.y) * ratio.x)
 		value.z = maxf(min_value.z, (value.y / ratio.y) * ratio.z)
-	value_changed.emit(value)
 
 
 func _on_Z_value_changed(val: float) -> void:
@@ -165,7 +163,6 @@ func _on_Z_value_changed(val: float) -> void:
 	if _locked_ratio:
 		value.x = maxf(min_value.x, (value.z / ratio.z) * ratio.x)
 		value.y = maxf(min_value.y, (value.z / ratio.z) * ratio.y)
-	value_changed.emit(value)
 
 
 func _on_RatioButton_toggled(button_pressed: bool) -> void:

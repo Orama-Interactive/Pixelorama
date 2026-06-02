@@ -15,6 +15,7 @@ var is_pasting := false
 
 var preview_selection_map := SelectionMap.new()
 var preview_selection_texture := ImageTexture.new()
+var _marching_ants_time_elapsed := 0.0
 
 @onready var canvas := get_parent() as Canvas
 @onready var transformation_handles := $TransformationHandles as TransformationHandles
@@ -22,6 +23,7 @@ var preview_selection_texture := ImageTexture.new()
 
 
 func _ready() -> void:
+	set_process(false)
 	# Ensure to only call _input() if the cursor is inside the main canvas viewport
 	Global.main_viewport.mouse_entered.connect(set_process_input.bind(true))
 	Global.main_viewport.mouse_exited.connect(set_process_input.bind(false))
@@ -34,8 +36,13 @@ func _ready() -> void:
 	Global.camera.zoom_changed.connect(_update_on_zoom)
 
 
+func _process(delta: float) -> void:
+	_marching_ants_time_elapsed += delta
+	marching_ants_outline.material.set_shader_parameter("time", _marching_ants_time_elapsed)
+
+
 func _input(event: InputEvent) -> void:
-	if transformation_handles.is_transforming_content():
+	if transformation_handles.is_transforming():
 		if event.is_action_pressed(&"transformation_confirm"):
 			transform_content_confirm()
 		elif event.is_action_pressed(&"transformation_cancel"):
@@ -43,6 +50,11 @@ func _input(event: InputEvent) -> void:
 
 
 func _draw() -> void:
+	marching_ants_outline.visible = Global.current_project.has_selection
+	if Global.current_project.has_selection and Global.selection_animated_borders:
+		set_process(true)
+	else:
+		set_process(false)
 	transformation_handles.queue_redraw()
 
 
@@ -92,8 +104,8 @@ func select_rect(rect: Rect2i, operation := SelectionOperation.ADD) -> void:
 		project.selection_map.move_bitmap_values(project)
 
 
-func transform_content_confirm() -> void:
-	if not transformation_handles.is_transforming_content():
+func transform_content_confirm(should_emit_signal := true) -> void:
+	if not transformation_handles.is_transforming():
 		return
 	var project := Global.current_project
 	var preview_image := transformation_handles.pre_transformed_image
@@ -139,13 +151,15 @@ func transform_content_confirm() -> void:
 	commit_undo("Move Selection", undo_data)
 
 	is_pasting = false
+	transformation_handles.only_transforms_selection = false
 	queue_redraw()
 	canvas.queue_redraw()
-	transformation_confirmed.emit()
+	if should_emit_signal:
+		transformation_confirmed.emit()
 
 
 func transform_content_cancel() -> void:
-	if not transformation_handles.is_transforming_content():
+	if not transformation_handles.is_transforming():
 		return
 	var project := Global.current_project
 	project.selection_offset = transformation_handles.pre_transform_selection_offset
@@ -163,6 +177,7 @@ func transform_content_cancel() -> void:
 	for cel_index in project.selected_cels:
 		canvas.update_texture(cel_index[1])
 	is_pasting = false
+	transformation_handles.only_transforms_selection = false
 	queue_redraw()
 	canvas.queue_redraw()
 	transformation_canceled.emit()
@@ -241,7 +256,9 @@ func _get_selected_draw_images(tile_cel_pointer: Array[CelTileMap]) -> Array[Ima
 			tile_cel_pointer.append(cel)
 			continue
 		if project.layers[cel_index[1]].can_layer_get_drawn():
-			images.append(cel.get_image())
+			var image := cel.get_image()
+			if is_instance_valid(image) and image is ImageExtended:  # Avoid type conflicts
+				images.append(cel.get_image())
 	return images
 
 
@@ -253,7 +270,7 @@ func get_enclosed_image() -> Image:
 
 	var image := project.get_current_cel().get_image()
 	var enclosed_img := Image.new()
-	if transformation_handles.is_transforming_content():
+	if transformation_handles.is_transforming():
 		enclosed_img.copy_from(transformation_handles.transformed_image)
 	else:
 		enclosed_img = get_selected_image(image)
@@ -285,7 +302,11 @@ func copy() -> void:
 		cl_big_bounding_rectangle = Rect2(Vector2.ZERO, project.size)
 	else:
 		var selection_rect := project.selection_map.get_selection_rect(project)
-		if transformation_handles.is_transforming_content():
+		if transformation_handles.is_transforming():
+			if transformation_handles.only_transforms_selection:
+				transform_content_confirm()
+				selection_rect = project.selection_map.get_selection_rect(project)
+		if transformation_handles.is_transforming():
 			to_copy.copy_from(transformation_handles.transformed_image)
 			cl_selection_map = preview_selection_map
 		else:
@@ -325,6 +346,36 @@ func copy() -> void:
 		container.get_child(0).get_child(0).texture = tex
 
 
+static func has_app_clipboard() -> bool:
+	return FileAccess.file_exists(CLIPBOARD_FILE_PATH)
+
+
+static func has_system_clipboard() -> bool:
+	return DisplayServer.clipboard_has_image()
+
+
+static func get_clipboard_size(app_clipboard: bool) -> Vector2i:
+	if app_clipboard:
+		if FileAccess.file_exists(CLIPBOARD_FILE_PATH):
+			var clipboard_file := FileAccess.open(CLIPBOARD_FILE_PATH, FileAccess.READ)
+			var clipboard = clipboard_file.get_var(true)
+			clipboard_file.close()
+			if (
+				typeof(clipboard) == TYPE_DICTIONARY
+				and clipboard.has_all(
+					["image", "selection_map", "big_bounding_rectangle", "selection_offset"]
+				)
+				and not clipboard.image.is_empty()
+			):
+				return clipboard.image.get_size()
+	else:
+		if DisplayServer.clipboard_has_image():
+			var clipboard_image := DisplayServer.clipboard_get_image()
+			if not clipboard_image.is_empty():
+				return clipboard_image.get_size()
+	return Vector2i.ONE  # The minimum valid size of an image
+
+
 ## Pastes the selection content.
 func paste(in_place := false) -> void:
 	if !FileAccess.file_exists(CLIPBOARD_FILE_PATH):
@@ -341,7 +392,7 @@ func paste(in_place := false) -> void:
 	if clipboard.image.is_empty():
 		return
 
-	if transformation_handles.is_transforming_content():
+	if transformation_handles.is_transforming():
 		transform_content_confirm()
 	undo_data = get_undo_data(true)
 	clear_selection()
@@ -434,7 +485,7 @@ func paste_from_clipboard() -> void:
 	var clipboard_image := DisplayServer.clipboard_get_image()
 	if clipboard_image.is_empty() or clipboard_image.is_invisible():
 		return
-	if transformation_handles.is_transforming_content():
+	if transformation_handles.is_transforming():
 		transform_content_confirm()
 	undo_data = get_undo_data(true)
 	clear_selection()
@@ -467,7 +518,7 @@ func delete(selected_cels := true) -> void:
 	var project := Global.current_project
 	if !project.layers[project.current_layer].can_layer_get_drawn():
 		return
-	if transformation_handles.is_transforming_content():
+	if transformation_handles.is_transforming():
 		if (
 			transformation_handles.transformed_image.is_empty()
 			or transformation_handles.transformed_image.is_invisible()
@@ -488,7 +539,10 @@ func delete(selected_cels := true) -> void:
 	if selected_cels:
 		images = _get_selected_draw_images(tile_cels)
 	else:
-		images = [project.get_current_cel().get_image()]
+		var current_cel_image := project.get_current_cel().get_image()
+		# Avoid type conflict
+		if is_instance_valid(current_cel_image) and current_cel_image is ImageExtended:
+			images = [current_cel_image]
 		if project.get_current_cel() is CelTileMap:
 			if Tools.is_placing_tiles():
 				images.clear()
@@ -559,7 +613,7 @@ func invert() -> void:
 ## Clears the selection.
 func clear_selection(use_undo := false) -> void:
 	var project := Global.current_project
-	if !project.has_selection:
+	if not project.has_selection:
 		return
 	transform_content_confirm()
 	var undo_data_tmp := get_undo_data(false)
@@ -569,6 +623,15 @@ func clear_selection(use_undo := false) -> void:
 	queue_redraw()
 	if use_undo:
 		commit_undo("Clear Selection", undo_data_tmp)
+
+
+func reselect() -> void:
+	var project := Global.current_project
+	if project.has_selection or project.prev_selection_map.is_invisible():
+		return
+	var undo_data_tmp := get_undo_data(false)
+	project.selection_map.copy_from(project.prev_selection_map)
+	commit_undo("Reselect", undo_data_tmp)
 
 
 func select_cel_rect() -> void:

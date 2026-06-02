@@ -95,6 +95,17 @@ resource_name = "Tabs"
 script = ExtResource("1_t44r1")
 names = PackedStringArray("Animation Timeline")
 
+[sub_resource type="Resource" id="Resource_t48i1"]
+resource_name = "Tabs"
+script = ExtResource("1_t44r1")
+names = PackedStringArray("3D Object Tree")
+
+[sub_resource type="Resource" id="Resource_h161e"]
+resource_name = "Split"
+script = ExtResource("2_rngtv")
+first = SubResource("Resource_m3axb")
+second = SubResource("Resource_t48i1")
+
 [sub_resource type="Resource" id="Resource_8dhxy"]
 resource_name = "Tabs"
 script = ExtResource("1_t44r1")
@@ -103,7 +114,7 @@ names = PackedStringArray("Tiles")
 [sub_resource type="Resource" id="Resource_j3q3h"]
 resource_name = "Split"
 script = ExtResource("2_rngtv")
-first = SubResource("Resource_m3axb")
+first = SubResource("Resource_h161e")
 second = SubResource("Resource_8dhxy")
 
 [sub_resource type="Resource" id="Resource_af0bk"]
@@ -133,6 +144,7 @@ resource_name = "Tallscreen"
 script = ExtResource("3_v86xb")
 root = SubResource("Resource_6dytr")
 hidden_tabs = {
+"3D Object Tree": true,
 "Perspective Editor": true,
 "Recorder": true,
 "Second Canvas": true,

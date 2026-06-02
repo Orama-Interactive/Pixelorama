@@ -34,13 +34,14 @@ var _preview_images: Array[Export.ProcessedImage]
 @onready var spritesheet_orientation: OptionButton = $"%Orientation"
 @onready var spritesheet_lines_count: SpinBox = $"%LinesCount"
 @onready var spritesheet_lines_count_label: Label = $"%LinesCountLabel"
-@onready var stack_sheets_vertically: CheckBox = %StackSheetsVertically
+@onready var spritesheet_layers_as_separate_files: CheckBox = %LayersAsSeparateFiles
 
 @onready var frames_option_button: OptionButton = $"%Frames"
 @onready var layers_option_button: OptionButton = $"%Layers"
 @onready var options_resize: ValueSlider = $"%Resize"
 @onready var dimension_label: Label = $"%DimensionLabel"
 
+@onready var directory_path_label: Label = %DirectoryPathLabel
 @onready var path_line_edit: LineEdit = $"%PathLineEdit"
 @onready var file_format_options: OptionButton = $"%FileFormat"
 @onready var options_interpolation: OptionButton = $"%Interpolation"
@@ -62,9 +63,11 @@ func _ready() -> void:
 		file_exists_alert_popup.add_button("Cancel Export", true, "cancel")
 	else:
 		file_exists_alert_popup.add_button("Cancel Export", false, "cancel")
-		if OS.get_name() == "Web" or OS.get_name() == "Android":
+		if OS.get_name() == "Android":
+			path_dialog_popup.file_mode = FileDialog.FILE_MODE_OPEN_DIR
+			directory_path_label.visible = true
+		elif OS.get_name() == "Web":
 			file_format_options.show()
-
 	# TODO: Remove the loop when https://github.com/godotengine/godot/issues/92848 gets fixed.
 	for dialog_child in path_dialog_popup.find_children("", "Window", true, false):
 		if dialog_child is Window:
@@ -95,7 +98,7 @@ func show_tab() -> void:
 			spritesheet_orientation.selected = Export.orientation
 			spritesheet_lines_count.max_value = Export.number_of_frames
 			spritesheet_lines_count.value = Export.lines_count
-			stack_sheets_vertically.disabled = !Export.split_layers
+			spritesheet_layers_as_separate_files.disabled = !Export.split_layers
 			get_tree().call_group("ExportSpritesheetOptions", "show")
 			_handle_orientation_ui()
 	set_preview()
@@ -279,7 +282,8 @@ func open_path_validation_alert_popup(path_or_name: int = -1) -> void:
 
 
 func open_file_exists_alert_popup(text: String) -> void:
-	file_exists_alert_popup.dialog_text = text
+	var file_exists_label := file_exists_alert_popup.get_node(^"ScrollContainer/Label") as Label
+	file_exists_label.text = text
 	file_exists_alert_popup.popup_centered_clamped()
 
 
@@ -310,14 +314,14 @@ func _on_about_to_popup() -> void:
 	# If export already occurred - sets GUI to show previous settings
 	options_resize.value = Export.resize
 	options_interpolation.selected = Export.interpolation
+	directory_path_label.text = project.export_directory_path
 	var file_ext := Export.file_format_string(project.file_format)
-	if OS.get_name() == "Web":
+	if OS.get_name() == "Web" or OS.get_name() == "Android":
 		path_line_edit.text = project.file_name + file_ext
 	else:
 		path_line_edit.text = project.export_directory_path.path_join(project.file_name) + file_ext
 	path_dialog_popup.current_dir = project.export_directory_path
 	Export.cache_blended_frames()
-	Export.overwrite_asked = false
 	show_tab()
 
 	# Set the size of the preview checker
@@ -364,6 +368,16 @@ func _on_direction_item_selected(id: Export.AnimationDirection) -> void:
 	preview_current_frame = 0
 	Export.process_data()
 	set_preview()
+	spritesheet_lines_count.max_value = Export.number_of_frames
+	update_dimensions_label()
+
+
+func _on_repeat_count_changed(value: int) -> void:
+	Export.repeat_count = value
+	preview_current_frame = 0
+	Export.process_data()
+	set_preview()
+	spritesheet_lines_count.max_value = Export.number_of_frames
 	update_dimensions_label()
 
 
@@ -381,9 +395,6 @@ func _on_interpolation_item_selected(id: Image.Interpolation) -> void:
 
 
 func _on_confirmed() -> void:
-	if OS.get_name() == "Android":
-		path_dialog_popup.popup_centered_clamped()
-		return
 	export()
 
 
@@ -399,7 +410,8 @@ func _on_path_button_pressed() -> void:
 
 
 func _on_path_line_edit_text_changed(new_text: String) -> void:
-	Global.current_project.export_directory_path = new_text.get_base_dir()
+	if OS.get_name() != "Android":
+		Global.current_project.export_directory_path = new_text.get_base_dir()
 	Global.current_project.file_name = new_text.get_file().get_basename()
 	var file_format := Export.get_file_format_from_extension(new_text.get_extension())
 	Global.current_project.file_format = file_format
@@ -414,21 +426,21 @@ func _on_path_line_edit_text_changed(new_text: String) -> void:
 	var show_quality := file_format == Export.FileFormat.JPEG
 	%QualityLabel.visible = show_quality
 	%Quality.visible = show_quality
-	Export.overwrite_asked = false
 	set_preview()
 
 
 func _on_path_dialog_file_selected(path: String) -> void:
 	path_line_edit.text = path
 	_on_path_line_edit_text_changed(path)
-	Export.overwrite_asked = true
-	if OS.get_name() == "Android":
-		export()
-		return
 	# Needed because if native file dialogs are enabled
 	# the export dialog closes when the path dialog closes
 	if not visible:
 		show()
+
+
+func _on_path_dialog_dir_selected(dir: String) -> void:
+	directory_path_label.text = dir
+	Global.current_project.export_directory_path = dir
 
 
 func _on_path_dialog_canceled() -> void:
@@ -453,7 +465,8 @@ func _on_file_format_item_selected(index: int) -> void:
 
 ## Overwrite existing file
 func _on_file_exists_alert_confirmed() -> void:
-	file_exists_alert_popup.dialog_text = Export.file_exists_alert
+	var file_exists_label := file_exists_alert_popup.get_node(^"ScrollContainer/Label") as Label
+	file_exists_label.text = Export.file_exists_alert
 	Export.stop_export = false
 	resume_export_function.emit()
 
@@ -461,7 +474,8 @@ func _on_file_exists_alert_confirmed() -> void:
 func _on_file_exists_alert_custom_action(action: StringName) -> void:
 	if action == &"cancel":
 		# Cancel export
-		file_exists_alert_popup.dialog_text = Export.file_exists_alert
+		var file_exists_label := file_exists_alert_popup.get_node(^"ScrollContainer/Label") as Label
+		file_exists_label.text = Export.file_exists_alert
 		Export.stop_export = true
 		resume_export_function.emit()
 		file_exists_alert_popup.hide()
@@ -495,13 +509,13 @@ func _on_export_json_toggled(toggled_on: bool) -> void:
 
 func _on_split_layers_toggled(toggled_on: bool) -> void:
 	Export.split_layers = toggled_on
-	stack_sheets_vertically.disabled = !Export.split_layers
+	spritesheet_layers_as_separate_files.disabled = !Export.split_layers
 	Export.process_data()
 	set_preview()
 
 
-func _on_stack_sheets_vertically_toggled(toggled_on: bool) -> void:
-	Export.stack_sheets = toggled_on
+func _on_layers_as_separate_files_toggled(toggled_on: bool) -> void:
+	Export.sheet_layers_as_separate_files = toggled_on
 	Export.process_data()
 	set_preview()
 

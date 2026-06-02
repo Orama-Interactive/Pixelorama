@@ -20,6 +20,7 @@ static func open_kra_file(path: String) -> void:
 	var xml_as_string := data_xml.get_string_from_utf8()
 	var has_animation := xml_as_string.contains("keyframes")
 	var new_project := Project.new([Frame.new()], path.get_file().get_basename())
+	new_project.clear_author_data()
 	var selected_layer: BaseLayer
 	var group_layer_found := false
 	var current_stack: Array[GroupLayer] = []
@@ -223,6 +224,7 @@ static func open_kra_file(path: String) -> void:
 			if node_name == "layers":
 				current_stack.pop_back()
 
+	open_documentinfo_xml(zip_reader, new_project)
 	zip_reader.close()
 	new_project.order_layers()
 	new_project.selected_cels.clear()
@@ -335,6 +337,35 @@ static func read_krita_image(image_data: PackedByteArray) -> Image:
 		)
 
 	return image
+
+
+static func open_documentinfo_xml(zip_reader: ZIPReader, new_project: Project) -> void:
+	var data_xml := zip_reader.read_file("documentinfo.xml")
+	var parser := XMLParser.new()
+	var err := parser.open_buffer(data_xml)
+	if err != OK:
+		printerr("Error parsing documentinfo XML from kra file: ", error_string(err))
+		return
+	var current_node_name := ""
+	while parser.read() != ERR_FILE_EOF:
+		if parser.get_node_type() == XMLParser.NODE_ELEMENT:
+			current_node_name = parser.get_node_name()
+		elif parser.get_node_type() == XMLParser.NODE_TEXT:
+			if current_node_name == "license":
+				new_project.license = parser.get_node_data()
+			elif current_node_name == "full-name":
+				new_project.author_display_name = parser.get_node_data()
+			elif current_node_name == "creator-first-name":
+				new_project.author_real_name = parser.get_node_data()
+			elif current_node_name == "creator-last-name":
+				new_project.author_real_name += parser.get_node_data()
+			elif current_node_name == "company":
+				new_project.author_company = parser.get_node_data()
+		elif parser.get_node_type() == XMLParser.NODE_CDATA:
+			if current_node_name == "abstract":
+				new_project.user_data = parser.get_node_name()
+		elif parser.get_node_type() == XMLParser.NODE_ELEMENT_END:
+			current_node_name = ""
 
 
 # gdlint: ignore=max-line-length

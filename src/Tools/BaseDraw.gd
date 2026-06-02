@@ -17,8 +17,6 @@ var _orignal_brush_image := Image.new()  ## Contains the original _brush_image, 
 var _brush_texture := ImageTexture.new()
 var _strength := 1.0
 var _is_eraser := false
-@warning_ignore("unused_private_class_variable")
-var _picking_color := false
 
 var _undo_data := {}
 var _drawer := Drawer.new()
@@ -37,6 +35,7 @@ var _line_polylines := []
 var _stroke_project: Project
 var _stroke_images: Array[ImageExtended] = []
 var _is_mask_size_zero := true
+var _drawn_tiles: Dictionary[Vector2i, bool]
 var _circle_tool_shortcut: Array[Vector2i]
 var _mm_action: Keychain.MouseMovementInputAction
 
@@ -271,24 +270,54 @@ func prepare_undo() -> void:
 
 func commit_undo(action := "Draw") -> void:
 	var project := Global.current_project
-	Global.canvas.update_selected_cels_textures(project)
-	var tile_editing_mode := TileSetPanel.tile_editing_mode
-	if TileSetPanel.placing_tiles:
-		tile_editing_mode = TileSetPanel.TileEditingMode.STACK
-	project.update_tilemaps(_undo_data, tile_editing_mode)
-	var redo_data := _get_undo_data()
-	var frame := -1
-	var layer := -1
-	if Global.animation_timeline.animation_timer.is_stopped() and project.selected_cels.size() == 1:
-		frame = project.current_frame
-		layer = project.current_layer
-
-	project.undo_redo.create_action(action)
-	manage_undo_redo_palettes()
-	project.deserialize_cel_undo_data(redo_data, _undo_data)
-	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
-	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
-	project.undo_redo.commit_action()
+	var layer := project.layers[project.current_layer]
+	if layer is Layer3D:
+		var properties: Array[Layer3D.Property]
+		for mat in materials_3d:
+			var image := materials_3d[mat][0] as Image
+			var surface_index := materials_3d[mat][1] as int
+			var original_tex := ImageTexture.create_from_image(image)
+			var new_tex := ImageTexture.create_from_image(mat.albedo_texture.get_image())
+			mat.albedo_texture.update(image)
+			var property_path := "mesh:surface_%s/material:albedo_texture" % surface_index
+			if drawing_on_3d_node.mesh is PrimitiveMesh:
+				property_path = "mesh:material:albedo_texture"
+			var property := Layer3D.Property.new(property_path, new_tex, original_tex)
+			properties.append(property)
+		layer.update_animation_track(drawing_on_3d_node, properties, project.current_frame)
+	else:
+		Global.canvas.update_selected_cels_textures(project)
+		var tile_editing_mode := TileSetPanel.tile_editing_mode
+		if TileSetPanel.placing_tiles:
+			tile_editing_mode = TileSetPanel.TileEditingMode.STACK
+		var used_tilesets := project.update_tilemaps(_undo_data, tile_editing_mode)
+		var redo_data := _get_undo_data()
+		var frame_index := -1
+		var layer_index := -1
+		if (
+			Global.animation_timeline.animation_timer.is_stopped()
+			and project.selected_cels.size() == 1
+		):
+			frame_index = project.current_frame
+			layer_index = project.current_layer
+		var layers_to_update := PackedInt32Array()
+		for l in Global.current_project.layers:
+			if l is LayerTileMap:
+				if l.tileset in used_tilesets:
+					layers_to_update.append(l.index)
+		project.undo_redo.create_action(action)
+		manage_undo_redo_palettes()
+		project.deserialize_cel_undo_data(redo_data, _undo_data)
+		# we may be on a different layer during undo/redo
+		Global.current_project.undo_redo.add_do_property(
+			Global.canvas, "mandatory_update_layers", layers_to_update
+		)
+		Global.current_project.undo_redo.add_undo_property(
+			Global.canvas, "mandatory_update_layers", layers_to_update
+		)
+		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame_index, layer_index))
+		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame_index, layer_index))
+		project.undo_redo.commit_action()
 
 	_undo_data.clear()
 
@@ -301,34 +330,38 @@ func manage_undo_redo_palettes() -> void:
 	if not is_instance_valid(palette_in_focus):
 		return
 	var palette_has_color := Palettes.current_palette.has_theme_color(tool_slot.color)
-	if not palette_in_focus.is_project_palette:
+	if not palette_in_focus.is_project_palette and Global.global_palettes_readonly:
 		# Make a project copy of the palette if it has (or about to have) the color
-		# and is still global
+		# and is still global (in readonly mode).
 		if palette_has_color or Palettes.auto_add_colors:
 			palette_in_focus = palette_in_focus.duplicate()
-			palette_in_focus.is_project_palette = true
-			Palettes.undo_redo_add_palette(palette_in_focus)
+			Palettes.undo_redo_add_palette(palette_in_focus, false)
 	if Palettes.auto_add_colors and not palette_has_color:
 		# Get an estimate of where the color will end up (used for undo)
-		var index := 0
-		var color_max: int = palette_in_focus.colors_max
-		# If palette is full automatically increase the palette height
-		if palette_in_focus.is_full():
-			color_max = palette_in_focus.width * (palette_in_focus.height + 1)
-		for i in range(0, color_max):
-			if not palette_in_focus.colors.has(i):
-				index = i
-				break
-		var undo_redo := Global.current_project.undo_redo
-		undo_redo.add_do_method(palette_in_focus.add_color.bind(tool_slot.color, 0))
-		undo_redo.add_undo_method(palette_in_focus.remove_color.bind(index))
-		if not Global.palette_panel:  # Failsafe
-			printerr("Missing global reference to PalettePanel")
-			return
-		undo_redo.add_do_method(Global.palette_panel.redraw_current_palette)
-		undo_redo.add_undo_method(Global.palette_panel.redraw_current_palette)
-		undo_redo.add_do_method(Global.palette_panel.toggle_add_delete_buttons)
-		undo_redo.add_undo_method(Global.palette_panel.toggle_add_delete_buttons)
+		if not palette_in_focus.is_project_palette:  ## readonly mode disabled
+			palette_in_focus.add_color(tool_slot.color, 0)
+			Global.palette_panel.redraw_current_palette()
+			Global.palette_panel.toggle_add_delete_buttons()
+		else:
+			var index := 0
+			var color_max: int = palette_in_focus.colors_max
+			# If palette is full automatically increase the palette height
+			if palette_in_focus.is_full():
+				color_max = palette_in_focus.width * (palette_in_focus.height + 1)
+			for i in range(0, color_max):
+				if not palette_in_focus.colors.has(i):
+					index = i
+					break
+			var undo_redo := Global.current_project.undo_redo
+			undo_redo.add_do_method(palette_in_focus.add_color.bind(tool_slot.color, 0))
+			undo_redo.add_undo_method(palette_in_focus.remove_color.bind(index))
+			if not Global.palette_panel:  # Failsafe
+				printerr("Missing global reference to PalettePanel")
+				return
+			undo_redo.add_do_method(Global.palette_panel.redraw_current_palette)
+			undo_redo.add_undo_method(Global.palette_panel.redraw_current_palette)
+			undo_redo.add_do_method(Global.palette_panel.toggle_add_delete_buttons)
+			undo_redo.add_undo_method(Global.palette_panel.toggle_add_delete_buttons)
 
 
 func draw_tool(pos: Vector2i) -> void:
@@ -351,6 +384,8 @@ func draw_end(pos: Vector2i) -> void:
 	super.draw_end(pos)
 	_stroke_project = null
 	_stroke_images = []
+	drawing_on_3d_node = null
+	materials_3d = {}
 	_circle_tool_shortcut = []
 	_brush_size_dynamics = _brush_size
 	match _brush.type:
@@ -362,6 +397,8 @@ func draw_end(pos: Vector2i) -> void:
 			_stroke_dimensions = _brush_image.get_size()
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
+	_drawn_tiles.clear()
+	SteamManager.set_achievement("ACH_FIRST_PIXEL")
 
 
 func cancel_tool() -> void:
@@ -382,15 +419,22 @@ func draw_tile(pos: Vector2i) -> void:
 	var tile_positions: Array[Vector2i] = []
 	tile_positions.resize(mirrored_positions.size() + 1)
 	tile_positions[0] = get_cell_position(pos)
+	if tile_positions[0] in _drawn_tiles:
+		return
+	_drawn_tiles[tile_positions[0]] = true
 	for i in mirrored_positions.size():
 		var mirrored_position := mirrored_positions[i]
 		tile_positions[i + 1] = get_cell_position(mirrored_position)
 	for cel in _get_selected_draw_cels():
 		if cel is not CelTileMap:
 			return
-		for tile_position in tile_positions:
-			var cell := (cel as CelTileMap).get_cell_at(tile_position)
-			(cel as CelTileMap).set_index(cell, tile_index)
+		var tilemap_cel := cel as CelTileMap
+		if TileSetPanel.autotiling_enabled:
+			tilemap_cel.autotile(tile_positions, tile_index == 0)
+		else:
+			for tile_position in tile_positions:
+				var cell := tilemap_cel.get_cell_at(tile_position)
+				tilemap_cel.set_index(cell, tile_index)
 
 
 func _prepare_tool() -> void:
@@ -425,7 +469,7 @@ func _prepare_tool() -> void:
 
 ## Make sure to always have invoked _prepare_tool() before this. This computes the coordinates to be
 ## drawn if it can (except for the generic brush, when it's actually drawing them)
-func _draw_tool(pos: Vector2) -> PackedVector2Array:
+func _draw_tool(pos: Vector2, draw_brush := true) -> PackedVector2Array:
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return PackedVector2Array()  # empty fallback
 	if Tools.is_placing_tiles():
@@ -438,7 +482,10 @@ func _draw_tool(pos: Vector2) -> PackedVector2Array:
 		Brushes.FILLED_CIRCLE:
 			return _compute_draw_tool_circle(pos, true)
 		_:
-			draw_tool_brush(pos)
+			if draw_brush:
+				draw_tool_brush(pos)
+			else:
+				return _compute_draw_tool_image(pos, _brush_image)
 	return PackedVector2Array()  # empty fallback
 
 
@@ -452,19 +499,89 @@ func draw_fill_gap(start: Vector2i, end: Vector2i) -> void:
 			start.x += 1
 			end.x += 1
 	_prepare_tool()
-	# This needs to be a dictionary to ensure duplicate coordinates are not being added
-	var coords_to_draw := {}
 	var pixel_coords := Geometry2D.bresenham_line(start, end)
 	pixel_coords.pop_front()
-	for current_pixel_coord in pixel_coords:
-		if _spacing_mode:
-			current_pixel_coord = get_spacing_position(current_pixel_coord)
-		for coord in _draw_tool(current_pixel_coord):
-			coords_to_draw[coord] = 0
-	for c in coords_to_draw.keys():
+	if project.get_current_cel() is Cel3D:
+		var layer := project.layers[project.current_layer] as Layer3D
+		for i in pixel_coords.size():
+			var pos := pixel_coords[i]
+			var draw_pos := draw_on_3d_object(pos, layer, false)
+			if draw_pos == Vector2.INF:
+				return
+			pixel_coords[i] = Vector2i(draw_pos)
+	var coords_to_draw := get_coords_to_draw(pixel_coords)
+	for c in coords_to_draw:
 		_set_pixel_no_cache(c)
 	if project.has_selection:
 		project.selection_map.lock_selection_rect(project, false)
+
+
+func get_coords_to_draw(points: Array[Vector2i], draw_brush := true) -> PackedVector2Array:
+	if _brush_size == 1 and not _spacing_mode and not is_image_brush():
+		return points
+	# This needs to be a dictionary to ensure duplicate coordinates are not being added
+	var coords_to_draw: Dictionary[Vector2, int] = {}
+	for current_pixel_coord in points:
+		if _spacing_mode:
+			current_pixel_coord = get_spacing_position(current_pixel_coord)
+		for coord in _draw_tool(current_pixel_coord, draw_brush):
+			coords_to_draw[coord] = 0
+	return coords_to_draw.keys()
+
+
+func is_image_brush() -> bool:
+	return _brush.type in [Brushes.FILE, Brushes.RANDOM_FILE, Brushes.CUSTOM]
+
+
+func draw_on_3d_object(pos: Vector2, layer: Layer3D, clear_mat := true) -> Vector2:
+	var object_data := get_3d_node_uvs(pos, layer.camera)
+	if object_data.is_empty():
+		if clear_mat:
+			drawing_on_3d_node = null
+			materials_3d = {}
+		return Vector2.INF
+	var mesh_instance := object_data[0] as MeshInstance3D
+	if mesh_instance.mesh.get_surface_count() == 0:
+		if clear_mat:
+			drawing_on_3d_node = null
+			materials_3d = {}
+		return Vector2.INF
+	var uv := object_data[1] as Vector2
+	var surface_index := object_data[2] as int
+	var image: ImageExtended
+	if mesh_instance.mesh.surface_get_material(surface_index) == null:
+		var mat := StandardMaterial3D.new()
+		mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		mesh_instance.mesh.surface_set_material(surface_index, mat)
+		image = ImageExtended.create_custom(
+			64, 64, false, Global.current_project.get_image_format(), false
+		)
+		mat.albedo_texture = ImageTexture.create_from_image(image)
+		drawing_on_3d_node = mesh_instance
+		materials_3d[mat] = [image, surface_index]
+	else:
+		var mat := mesh_instance.mesh.surface_get_material(surface_index) as BaseMaterial3D
+		if not is_instance_valid(mat.albedo_texture):
+			image = ImageExtended.create_custom(
+				64, 64, false, Global.current_project.get_image_format(), false
+			)
+			image.fill(Color.WHITE)
+			mat.albedo_texture = ImageTexture.create_from_image(image)
+		var temp_image := mat.albedo_texture.get_image()
+		image = ImageExtended.new()
+		image.copy_from_custom(temp_image)
+		if not materials_3d.has(mat):
+			drawing_on_3d_node = mesh_instance
+			materials_3d[mat] = [image, surface_index]
+	return uv * Vector2(image.get_size())
+
+
+func update_materials(images: Array[ImageExtended]) -> void:
+	if not materials_3d.is_empty():
+		for i in materials_3d.size():
+			var mat := materials_3d.keys()[i] as BaseMaterial3D
+			if i < images.size():
+				mat.albedo_texture.update(images[i])
 
 
 ## Calls [method Geometry2D.bresenham_line] and takes [param thickness] into account.
@@ -506,6 +623,21 @@ func _compute_draw_tool_circle(pos: Vector2i, fill := false) -> Array[Vector2i]:
 		result = DrawingAlgos.get_ellipse_points_filled(offset_pos, brush_size)
 	else:
 		result = DrawingAlgos.get_ellipse_points(offset_pos, brush_size)
+	return result
+
+
+## Compute the array of coordinates that should be drawn.
+## Used for previewing only and NOT actual drawing.
+func _compute_draw_tool_image(pos: Vector2i, image: Image) -> Array[Vector2i]:
+	var brush_size := _brush_image.get_size()
+	var dst := pos - (brush_size / 2)
+	var result: Array[Vector2i]
+	for x in image.get_width():
+		for y in image.get_height():
+			var pixel := image.get_pixel(x, y)
+			if not is_zero_approx(pixel.a):
+				result.append(dst + Vector2i(x, y))
+
 	return result
 
 
@@ -677,10 +809,18 @@ func _set_pixel_no_cache(pos: Vector2i, ignore_mirroring := false) -> void:
 		else:
 			for image in images:
 				_drawer.set_pixel(image, pos, tool_slot.color, ignore_mirroring)
+	update_materials(images)
 
 
-func _draw_brush_image(_image: Image, _src_rect: Rect2i, _dst: Vector2i) -> void:
-	pass
+func _draw_brush_image(brush_image: Image, src_rect: Rect2i, dst: Vector2i) -> void:
+	var images := _get_selected_draw_images()
+	for draw_image in images:
+		if Tools.alpha_locked:
+			var mask := draw_image.get_region(Rect2i(dst, brush_image.get_size()))
+			draw_image.blit_rect_mask(brush_image, mask, src_rect, dst)
+		else:
+			draw_image.blit_rect(brush_image, src_rect, dst)
+		draw_image.convert_rgb_to_indexed()
 
 
 func _create_blended_brush_image(image: Image) -> Image:

@@ -5,11 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="3"]
 
 [node name="HSVDialog" unique_id=1520656639 instance=ExtResource("2")]
+oversampling_override = 1.0
 title = "Adjust Hue/Saturation/Value"
+size = Vector2i(362, 435)
 script = ExtResource("1")
 
 [node name="VBoxContainer" parent="." index="2" unique_id=1773123238]
-offset_bottom = 344.0
+offset_bottom = 386.0
 
 [node name="HueSlider" parent="VBoxContainer" index="2" unique_id=161711944 instance=ExtResource("3")]
 layout_mode = 2
@@ -27,6 +29,11 @@ layout_mode = 2
 min_value = -100.0
 prefix = "Value:"
 
+[node name="OverflowCheckBox" type="CheckBox" parent="VBoxContainer" index="5" unique_id=1305313863]
+layout_mode = 2
+text = "Wrap overflowing values"
+
 [connection signal="value_changed" from="VBoxContainer/HueSlider" to="." method="_on_HueSlider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/SaturationSlider" to="." method="_on_SaturationSlider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/ValueSlider" to="." method="_on_ValueSlider_value_changed"]
+[connection signal="toggled" from="VBoxContainer/OverflowCheckBox" to="." method="_on_overflow_check_box_toggled"]

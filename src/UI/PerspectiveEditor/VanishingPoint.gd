@@ -8,11 +8,11 @@ var color := Color(randf(), randf(), randf(), 1)
 
 var tracker_line: PerspectiveLine
 @onready var perspective_editor := get_parent().get_parent().get_parent().get_parent()
-@onready var color_picker_button := $"%ColorPickerButton" as ColorPickerButton
-@onready var title := $"%PointCollapseContainer"
-@onready var pos_y := $"%Y" as ValueSlider
-@onready var pos_x := $"%X" as ValueSlider
-@onready var line_buttons_container := $"%LinesContainer"
+@onready var color_picker_button := %ColorPickerButton as ColorPickerButton
+@onready var title := %PointCollapseContainer
+@onready var pos_y := %Y as ValueSlider
+@onready var pos_x := %X as ValueSlider
+@onready var line_buttons_container := %LinesContainer
 @onready var boundary_l := $Content/BoundaryL
 @onready var boundary_r := $Content/BoundaryR
 @onready var boundary_b := $Content/VBoxContainer/BoundaryB
@@ -61,6 +61,8 @@ func initiate(start_data := {}, idx := -1) -> void:
 	color_picker_button.color_changed.connect(_on_color_changed)
 	pos_x.value_changed.connect(_on_pos_value_changed)
 	pos_y.value_changed.connect(_on_pos_value_changed)
+	pos_x.max_value = Global.current_project.size.x
+	pos_y.max_value = Global.current_project.size.y
 
 
 func update_boundary_color() -> void:

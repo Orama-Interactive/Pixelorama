@@ -3,7 +3,6 @@ extends Control
 ## Needed because it is not possible to detect if a native file dialog is open or not.
 signal save_file_dialog_opened(opened: bool)
 
-const RUNNING_FILE_PATH := "user://.running"
 const SPLASH_DIALOG_SCENE_PATH := "res://src/UI/Dialogs/SplashDialog.tscn"
 
 var opensprite_file_selected := false
@@ -20,6 +19,7 @@ var splash_dialog: AcceptDialog:
 			splash_dialog = load(SPLASH_DIALOG_SCENE_PATH).instantiate()
 			add_child(splash_dialog)
 		return splash_dialog
+var _last_session_last_project := ""
 
 @onready var top_menu_container := $MenuAndUI/TopMenuContainer as Panel
 @onready var main_ui := $MenuAndUI/UI/DockableContainer as DockableContainer
@@ -42,6 +42,8 @@ var splash_dialog: AcceptDialog:
 
 class CLI:
 	static var args_list := {
+		["rel-dir="]:
+		[dummy, "(Default='PWD') The directory using which relative paths are resolved."],
 		["--version", "--pixelorama-version"]:
 		[CLI.print_version, "Prints current Pixelorama version"],
 		["--size"]: [CLI.print_project_size, "Prints size of the given project"],
@@ -55,13 +57,18 @@ class CLI:
 		["--direction", "-d"]: [CLI.set_direction, "[0, 1, 2] Specifies direction"],
 		["--json"]: [CLI.set_json, "Export the JSON data of the project"],
 		["--split-layers"]: [CLI.set_split_layers, "Each layer exports separately"],
-		["--stack-sheets"]:
-		[CLI.set_stack_sheets, "Spritesheets in split layer mode will stack vertically"],
+		["--sheet_layers_as_separate_files"]:
+		[
+			CLI.set_sheet_layers_as_separate_files,
+			"Spritesheets in split layer mode will export multiple files for each layer."
+		],
 		["--help", "-h", "-?"]: [CLI.generate_help, "Displays this help page"],
 		["--scene"]: [CLI.dummy, "Used internally by Godot."]
 	}
 
 	static func generate_help(_project: Project, _next_arg: String):
+		# gdlint: ignore=max-line-length
+		var win_path_msg := "NOTE: If your files are using relative paths (e.g. example.pxo instead of path/to/example.pxo) it is recommended to set [color=green]rel-dir='%CD%'[/color] (for Windows).\n"
 		var help := str(
 			(
 				"""
@@ -69,32 +76,37 @@ class CLI:
 Help for Pixelorama's CLI.
 
 Usage:
-\t%s [SYSTEM OPTIONS] -- [USER OPTIONS] [FILES]...
+\t[b]%s[/b] [color=orange][SYSTEM OPTIONS][/color] -- [color=green][USER OPTIONS][/color] [FILES]...
 
 Use -h in place of [SYSTEM OPTIONS] to see [SYSTEM OPTIONS].
 Or use -h in place of [USER OPTIONS] to see [USER OPTIONS].
 
-some useful [SYSTEM OPTIONS] are:
---headless     Run in headless mode.
---quit         Close pixelorama after current command.
+some useful [b][SYSTEM OPTIONS][/b] are:
+[color=orange]--headless[/color]     Run in headless mode.
+[color=orange]--quit[/color]         Close pixelorama after current command.
 
 
-[USER OPTIONS]:\n
+[b][USER OPTIONS][/b]:\n
 (The terms in [ ] reflect the valid type for corresponding argument).
-
+%s
 """
-				% OS.get_executable_path().get_file()
+				% [
+					OS.get_executable_path().get_file(),
+					win_path_msg if OS.get_name() == "Windows" else ""
+				]
 			)
 		)
 		for command_group: Array in args_list.keys():
 			help += str(
+				"[color=green][b]",
 				var_to_str(command_group).replace("[", "").replace("]", "").replace('"', ""),
+				"[/b][/color]",
 				"\t\t".c_unescape(),
 				args_list[command_group][1],
 				"\n".c_unescape()
 			)
 		help += "========================================================================="
-		print(help)
+		print_rich(help)
 
 	## Dedicated place for command line args callables
 	static func print_version(_project: Project, _next_arg: String) -> void:
@@ -172,8 +184,8 @@ some useful [SYSTEM OPTIONS] are:
 	static func set_split_layers(_project: Project, _next_arg: String) -> void:
 		Export.split_layers = true
 
-	static func set_stack_sheets(_project: Project, _next_arg: String) -> void:
-		Export.stack_sheets = true
+	static func set_sheet_layers_as_separate_files(_project: Project, _next_arg: String) -> void:
+		Export.sheet_layers_as_separate_files = true
 
 	static func dummy(_project: Project, _next_arg: String) -> void:
 		pass
@@ -208,6 +220,7 @@ func _ready() -> void:
 	Import.import_patterns(Global.path_join_array(Global.data_directories, "Patterns"))
 
 	quit_and_save_dialog.add_button("Exit without saving", false, "ExitWithoutSaving")
+	_last_session_last_project = get_last_project_path()
 	_handle_cmdline_arguments()
 	get_tree().root.files_dropped.connect(_on_files_dropped)
 	if OS.get_name() == "Android":
@@ -218,16 +231,11 @@ func _ready() -> void:
 		save_sprite_dialog.option_count = 0
 
 	# Detect if Pixelorama crashed last time.
-	var crashed_last_time := FileAccess.file_exists(RUNNING_FILE_PATH)
-	if crashed_last_time and OpenSave.had_backups_on_startup:
+	if Global.session_crashed_last_time() and OpenSave.had_backups_on_startup:
 		restore_session_confirmation_dialog.popup_centered_clamped()
-	# Create a file that only exists while Pixelorama is running,
-	# and delete it when it closes. If Pixelorama opens and this file exists,
-	# it means that Pixelorama crashed last time.
-	FileAccess.open(RUNNING_FILE_PATH, FileAccess.WRITE)
 	await get_tree().process_frame
 	if Global.open_last_project:
-		load_last_project()
+		load_last_project(true)
 	_setup_application_window_size()
 	_show_splash_screen()
 	Global.pixelorama_opened.emit()
@@ -250,10 +258,6 @@ func _input(event: InputEvent) -> void:
 		Global.main_viewport.get_child(0).push_input(event)
 	left_cursor.position = get_global_mouse_position() + Vector2(-32, 32)
 	right_cursor.position = get_global_mouse_position() + Vector2(32, 32)
-
-	if event is InputEventKey and (event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER):
-		if get_viewport().gui_get_focus_owner() is LineEdit:
-			get_viewport().gui_get_focus_owner().release_focus()
 
 
 func _project_switched() -> void:
@@ -399,6 +403,8 @@ func _show_splash_screen() -> void:
 
 func _handle_cmdline_arguments() -> void:
 	var args := OS.get_cmdline_args()
+	var working_directory := ""
+	var wdir_searching := false
 	args.append_array(OS.get_cmdline_user_args())
 	if args.is_empty():
 		return
@@ -407,29 +413,33 @@ func _handle_cmdline_arguments() -> void:
 		if arg.begins_with("lospec-palette://"):
 			Palettes.import_lospec_palette(arg)
 			break
+		if arg.begins_with("rel-dir=") or wdir_searching:
+			working_directory = arg.trim_prefix("rel-dir=")
+			if not DirAccess.dir_exists_absolute(working_directory):
+				wdir_searching = true
+				working_directory = ""
+			else:
+				wdir_searching = false
+			continue
 		var file_path := arg
 		# if we think the file could be a potential relative path it can mean two things:
 		# 1. The file is relative to executable
 		# 2. The file is relative to the working directory.
 		if file_path.is_relative_path():
 			# we first try to convert it to be relative to executable
-			if file_path.is_relative_path():
-				file_path = OS.get_executable_path().get_base_dir().path_join(arg)
+			file_path = OS.get_executable_path().get_base_dir().path_join(arg)
 			if !FileAccess.file_exists(file_path):
 				# it is not relative to executable so we have to convert it to an
 				# absolute path instead (this is when file is relative to working directory)
-				var output = []
-				match OS.get_name():
-					"Linux":
-						OS.execute("pwd", [], output)
-					"macOS":
-						OS.execute("pwd", [], output)
-					"Windows":
-						OS.execute("cd", [], output)
-				if output.size() > 0:
-					file_path = str(output[0]).strip_edges().path_join(arg)
-		# Do one last failsafe to see everything is in order
+				var pwd := OS.get_environment("PWD")
+				if not working_directory.is_empty():
+					pwd = working_directory
+				file_path = pwd.path_join(arg)
+		# Do one last failsafe to see everything is in order.
 		if FileAccess.file_exists(file_path):
+			# If a last session is being opened through command line then clear it
+			if _last_session_last_project == file_path:  # Pixelorama project file
+				_last_session_last_project = ""
 			OpenSave.handle_loading_file(file_path)
 
 	var project := Global.current_project
@@ -527,14 +537,25 @@ func _on_files_dropped(files: PackedStringArray) -> void:
 		splash_dialog.hide()
 
 
-func load_last_project() -> void:
-	if OS.get_name() == "Web":
-		return
+func get_last_project_path() -> String:
 	# Check if any project was saved or opened last time
 	if Global.config_cache.has_section_key("data", "last_project_path"):
 		# Check if file still exists on disk
-		var file_path = Global.config_cache.get_value("data", "last_project_path")
-		load_recent_project_file(file_path)
+		return Global.config_cache.get_value("data", "last_project_path")
+	return ""
+
+
+func load_last_project(using_previous_session := false) -> void:
+	# NOTE: When projects are loaded through CLI, the last_project_path gets overridden, and we
+	# have to pass an override path in that scenario.
+	if OS.get_name() == "Web":
+		return
+	# Check if any project was saved or opened last time
+	var last_project_path := get_last_project_path()
+	if using_previous_session:
+		last_project_path = _last_session_last_project
+	if not last_project_path.is_empty():
+		load_recent_project_file(last_project_path)
 		(func(): Global.cel_switched.emit()).call_deferred()
 
 
@@ -668,7 +689,6 @@ func _on_QuitAndSaveDialog_confirmed() -> void:
 
 
 func _quit() -> void:
-	Global.pixelorama_about_to_close.emit()
 	# Darken the UI to denote that the application is currently exiting
 	# (it won't respond to user input in this state).
 	modulate = Color(0.5, 0.5, 0.5)
@@ -676,7 +696,7 @@ func _quit() -> void:
 
 
 func _exit_tree() -> void:
-	DirAccess.remove_absolute(RUNNING_FILE_PATH)
+	Global.pixelorama_about_to_close.emit()
 	for project in Global.projects:
 		project.remove()
 	if DisplayServer.get_name() == "headless":

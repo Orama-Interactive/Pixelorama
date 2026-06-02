@@ -1,6 +1,7 @@
 # gdlint: ignore=max-public-methods
 extends Node
 
+signal tool_changed(tool_name: String, button: int)
 signal color_changed(color_info: Dictionary, button: int)
 @warning_ignore("unused_signal")
 signal selected_tile_index_changed(tile_index: int)
@@ -22,6 +23,7 @@ var diagonal_xy_mirror := false
 var diagonal_x_minus_y_mirror := false
 var pixel_perfect := false
 var alpha_locked := false
+var prev_tool_name := ""
 
 # Dynamics
 var stabilizer_enabled := false
@@ -130,7 +132,7 @@ var tools: Dictionary[String, Tool] = {
 		"Pencil",
 		"pencil",
 		"res://src/Tools/DesignTools/Pencil.tscn",
-		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP, Global.LayerTypes.THREE_D],
 		"Hold %s to make a line",
 		["draw_create_line"]
 	),
@@ -166,7 +168,7 @@ var tools: Dictionary[String, Tool] = {
 		. new(
 			"LineTool",
 			"Line Tool",
-			"linetool",
+			"line",
 			"res://src/Tools/DesignTools/LineTool.tscn",
 			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Hold %s to snap the angle of the line
@@ -181,7 +183,7 @@ Hold %s to displace the shape's origin""",
 		. new(
 			"CurveTool",
 			"Curve Tool",
-			"curvetool",
+			"curve",
 			"res://src/Tools/DesignTools/CurveTool.tscn",
 			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Draws bezier curves
@@ -198,7 +200,7 @@ Press %s to remove the last added point""",
 		. new(
 			"RectangleTool",
 			"Rectangle Tool",
-			"rectangletool",
+			"rectangle",
 			"res://src/Tools/DesignTools/RectangleTool.tscn",
 			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Hold %s to create a 1:1 shape
@@ -213,7 +215,7 @@ Hold %s to displace the shape's origin""",
 		. new(
 			"EllipseTool",
 			"Ellipse Tool",
-			"ellipsetool",
+			"ellipse",
 			"res://src/Tools/DesignTools/EllipseTool.tscn",
 			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Hold %s to create a 1:1 shape
@@ -228,7 +230,7 @@ Hold %s to displace the shape's origin""",
 		. new(
 			"IsometricBoxTool",
 			"Isometric Box Tool",
-			"isometricboxtool",
+			"isometric_box",
 			"res://src/Tools/DesignTools/IsometricBoxTool.tscn",
 			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Draws an isometric box
@@ -253,6 +255,14 @@ Press %s to edit the last added basis""",
 		"res://src/Tools/3DTools/3DShapeEdit.tscn",
 		[Global.LayerTypes.THREE_D]
 	),
+	"TilesPropertyPainter":
+	Tool.new(
+		"TilesPropertyPainter",
+		"Tiles Property Painter",
+		"tilespropertypainter",
+		"res://src/Tools/UtilityTools/TilePropertyPainter.tscn",
+		[Global.LayerTypes.TILEMAP]
+	)
 }
 
 var _tool_button_scene := preload("res://src/UI/ToolsPanel/ToolButton.tscn")
@@ -372,9 +382,14 @@ func _ready() -> void:
 		add_tool_button(tools[t])
 		var tool_shortcut: String = tools[t].shortcut
 		var left_tool_shortcut := "left_%s_tool" % tool_shortcut
+		if InputMap.has_action(left_tool_shortcut):
+			Keychain.actions[left_tool_shortcut] = Keychain.InputAction.new("", "Left")
 		var right_tool_shortcut := "right_%s_tool" % tool_shortcut
-		Keychain.actions[left_tool_shortcut] = Keychain.InputAction.new("", "Left")
-		Keychain.actions[right_tool_shortcut] = Keychain.InputAction.new("", "Right")
+		if InputMap.has_action(right_tool_shortcut):
+			Keychain.actions[right_tool_shortcut] = Keychain.InputAction.new("", "Right")
+		var quick_tool_shortcut := "quick_%s_tool" % tool_shortcut
+		if InputMap.has_action(quick_tool_shortcut):
+			Keychain.actions[quick_tool_shortcut] = Keychain.InputAction.new("", "Quick tools")
 
 	_slots[MOUSE_BUTTON_LEFT] = Slot.new("Left tool")
 	_slots[MOUSE_BUTTON_RIGHT] = Slot.new("Right tool")
@@ -413,11 +428,12 @@ func _ready() -> void:
 	)
 	assign_color(color_value, MOUSE_BUTTON_RIGHT, false)
 	update_tool_cursors()
+
+	# Await is necessary to hide tools irrelevant to the current layer (That may have been
+	# added by extensions), And to make sure projects loaded at startup have correct visible tools
+	await get_tree().process_frame
 	var layer: BaseLayer = Global.current_project.layers[Global.current_project.current_layer]
 	var layer_type := layer.get_layer_type()
-
-	# Await is necessary to hide irrelevant tools added by extensions
-	await get_tree().process_frame
 	_show_relevant_tools(layer_type)
 
 
@@ -514,6 +530,7 @@ func set_tool(tool_name: String, button: int) -> void:
 	if not config_changed.is_connected(attempt_config_share):
 		config_changed.connect(attempt_config_share)
 	attempt_config_share(config_slot)  # Sync it with the other tool
+	tool_changed.emit(tool_name, button)
 
 
 func get_tool(button: int) -> Slot:
@@ -536,6 +553,19 @@ func assign_tool(tool_name: String, button: int, allow_refresh := false) -> void
 	update_tool_buttons()
 	update_tool_cursors()
 	Global.config_cache.set_value(slot.kname, "tool", tool_name)
+
+
+func quick_assign_tool(
+	tool_name: String, released: bool, button: int, allow_refresh := false
+) -> void:
+	if released:
+		if not prev_tool_name.is_empty():
+			assign_tool(prev_tool_name, button, allow_refresh)
+		prev_tool_name = ""
+	else:
+		if prev_tool_name.is_empty():
+			prev_tool_name = get_tool(button).tool_node.name
+		assign_tool(tool_name, button, allow_refresh)
 
 
 func default_color() -> void:

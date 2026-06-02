@@ -12,10 +12,11 @@ const STORE_INFORMATION_FILE := STORE_NAME + ".md"
 const EXTENSION_ENTRY_TSCN := preload("res://src/UI/ExtensionExplorer/Entry/ExtensionEntry.tscn")
 
 # Variables placed here due to their frequent use
-var extension_path: String  ## The path where extensions will be stored (obtained from pixelorama)
-var custom_links_remaining: int  ## Remaining custom links to be processed
-var redirects: Array[String]
-var faulty_custom_links: Array[String]
+var _extension_path := ProjectSettings.globalize_path(Extensions.EXTENSIONS_PATH)
+var _custom_links_remaining: int  ## Remaining custom links to be processed
+var _redirects: Array[String]
+var _faulty_custom_links: Array[String]
+var _extension_name_sorter: PackedStringArray
 
 # node references used in this script
 @onready var content: VBoxContainer = $"%Content"
@@ -34,13 +35,15 @@ var faulty_custom_links: Array[String]
 func _ready() -> void:
 	# Basic setup
 	main_store_link.text = STORE_LINK
-	# Get the path that pixelorama uses to store extensions
-	extension_path = ProjectSettings.globalize_path(Extensions.EXTENSIONS_PATH)
 	# tell the downloader where to download the repository information
-	store_info_downloader.download_file = extension_path.path_join(STORE_INFORMATION_FILE)
+	store_info_downloader.download_file = _extension_path.path_join(STORE_INFORMATION_FILE)
 
 
 func _on_Store_about_to_show() -> void:
+	fetch_repositories()
+
+
+func fetch_repositories() -> void:
 	# Clear old tags
 	search_manager.available_tags = PackedStringArray()
 	for tag in search_manager.tag_list.get_children():
@@ -48,8 +51,9 @@ func _on_Store_about_to_show() -> void:
 	# Clear old entries
 	for entry in content.get_children():
 		entry.queue_free()
-	faulty_custom_links.clear()
-	custom_links_remaining = custom_store_links.custom_links.size()
+	_faulty_custom_links.clear()
+	_custom_links_remaining = custom_store_links.custom_links.size()
+	_extension_name_sorter.clear()
 	fetch_info(STORE_LINK)
 
 
@@ -58,7 +62,7 @@ func _on_close_requested() -> void:
 
 
 func fetch_info(link: String) -> void:
-	if extension_path != "":  # Did everything went smoothly in _ready() function?
+	if _extension_path != "":  # Did everything went smoothly in _ready() function?
 		# everything is ready, now request the repository information
 		# so that available extensions could be displayed
 		var error := store_info_downloader.request(link)
@@ -74,7 +78,7 @@ func _on_StoreInformation_request_completed(
 	result: int, _response_code: int, _headers: PackedStringArray, _body: PackedByteArray
 ) -> void:
 	if result == HTTPRequest.RESULT_SUCCESS:
-		var file_path := extension_path.path_join(STORE_INFORMATION_FILE)
+		var file_path := _extension_path.path_join(STORE_INFORMATION_FILE)
 		# process the info contained in the file
 		var file := FileAccess.open(file_path, FileAccess.READ)
 		while not file.eof_reached():
@@ -92,19 +96,19 @@ func close_progress() -> void:
 	progress_bar.get_parent().visible = false
 	tab_container.visible = true
 	update_timer.stop()
-	if redirects.size() > 0:
-		var next_link := redirects.pop_front() as String
+	if _redirects.size() > 0:
+		var next_link := _redirects.pop_front() as String
 		fetch_info(next_link)
 	else:
 		# no more redirects, jump to the next store
-		custom_links_remaining -= 1
-		if custom_links_remaining >= 0:
-			var next_link: String = custom_store_links.custom_links[custom_links_remaining]
+		_custom_links_remaining -= 1
+		if _custom_links_remaining >= 0:
+			var next_link: String = custom_store_links.custom_links[_custom_links_remaining]
 			fetch_info(next_link)
 		else:
-			if faulty_custom_links.size() > 0:  # manage custom faulty links
+			if _faulty_custom_links.size() > 0:  # manage custom faulty links
 				faulty_links_label.text = ""
-				for link in faulty_custom_links:
+				for link in _faulty_custom_links:
 					faulty_links_label.text += str(link, "\n")
 				custom_link_error.popup_centered_clamped()
 
@@ -124,19 +128,24 @@ func _on_CopyCommand_pressed() -> void:
 ## Adds a new extension entry to the "content"
 func add_entry(info: Dictionary) -> void:
 	var entry := EXTENSION_ENTRY_TSCN.instantiate()
+	var extension_name: String = info.get("name", "")
+	_extension_name_sorter.append(extension_name)
+	_extension_name_sorter.sort()
 	content.add_child(entry)
-	entry.set_info(info, extension_path)
+	content.move_child(entry, _extension_name_sorter.find(extension_name))
+	entry.set_info(info, _extension_path)
+	search_manager.add_new_tags(info.get("tags", PackedStringArray()))
 
 
 ## Gets called when data couldn't be fetched from remote repository
 func error_getting_info(result: int) -> void:
 	# Shows a popup if error is from main link (i-e MainStore)
 	# Popups for errors in custom_links are handled in close_progress()
-	if custom_links_remaining == custom_store_links.custom_links.size():
+	if _custom_links_remaining == custom_store_links.custom_links.size():
 		error_get_info.popup_centered_clamped()
 		error_get_info.title = error_string(result)
 	else:
-		faulty_custom_links.append(custom_store_links.custom_links[custom_links_remaining])
+		_faulty_custom_links.append(custom_store_links.custom_links[_custom_links_remaining])
 	close_progress()
 
 
@@ -179,8 +188,8 @@ func process_line(line: String) -> void:
 		TYPE_STRING:
 			# it's most probably a repository link
 			var link: String = raw_data.strip_edges()
-			if !link in redirects and link.begins_with("http") and "://" in link:
-				redirects.append(link)
+			if !link in _redirects and link.begins_with("http") and "://" in link:
+				_redirects.append(link)
 
 
 func parse_extension_data(raw_data: Array) -> Dictionary:
@@ -207,8 +216,12 @@ func parse_extension_data(raw_data: Array) -> Dictionary:
 					"download_link":
 						result["download_link"] = item[0]
 					"tags":  # (this should remain as an array)
-						result["tags"] = item
-						search_manager.add_new_tags(item)
+						var tags: Array = item.map(
+							func(element):
+								if typeof(element) == TYPE_STRING:
+									return element.capitalize()
+						)
+						result["tags"] = tags
 	return result
 
 

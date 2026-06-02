@@ -2,16 +2,46 @@
 <!-- Copyright (c) 2019-present Orama Interactive and contributors -->
 <component type="desktop">
   <id>com.orama_interactive.Pixelorama.desktop</id>
+
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+
   <name>Pixelorama</name>
-  <summary>2D sprite editor with animation support</summary>
+  <summary>Pixel Art & Animation</summary>
+
+  <developer id="com.oramainteractive">
+    <name>Orama Interactive</name>
+  </developer>
+
   <description>
     <p>
       Unleash your creativity with Pixelorama, a powerful and accessible open-source pixel art multitool. Whether you want to create sprites, tiles, animations, or just express yourself in the language of pixel art, this software will realize your pixel-perfect dreams with a vast toolbox of features.
     </p>
   </description>
-  <metadata_license>CC0-1.0</metadata_license>
-  <project_license>MIT</project_license>
-  <developer_name>Orama Interactive</developer_name>
+
+  <categories>
+    <category>Graphics</category>
+  </categories>
+
+  <keywords>
+    <keyword>Graphics</keyword>
+    <keyword>Pixel</keyword>
+    <keyword>Art</keyword>
+    <keyword>Retro</keyword>
+    <keyword>Animation</keyword>
+    <keyword>Tile</keyword>
+    <keyword>2D</keyword>
+    <keyword>Drawing</keyword>
+    <keyword>Sprite</keyword>
+  </keywords>
+
+  <branding>
+    <color type="primary" scheme_preference="light">#e9ce9f</color>
+    <color type="primary" scheme_preference="dark">#4a374a</color>
+  </branding>
+
+  <content_rating type="oars-1.1"/>
+
   <url type="homepage">https://pixelorama.org/</url>
   <url type="bugtracker">https://github.com/Orama-Interactive/Pixelorama/issues</url>
   <url type="faq">https://pixelorama.org/faq</url>
@@ -20,6 +50,7 @@
   <url type="translate">https://crowdin.com/project/pixelorama</url>
   <url type="vcs-browser">https://github.com/Orama-Interactive/Pixelorama/</url>
   <url type="contribute">https://pixelorama.org/development_and_contributing</url>
+
   <screenshots>
     <screenshot type="default" width="1920" height="1080">
       <image type="source">https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2779170/ss_354ea5cfde19549cd19fbfe3d68fc1d66b67763e.1920x1080.jpg</image>
@@ -42,8 +73,10 @@
       <caption>A screenshot of Pixelorama's User Interface</caption>
     </screenshot>
   </screenshots>
-  <content_rating type="oars-1.1"/>
+
   <releases>
+	<release version="1.1.10" date="2026-04-30"/>
+	<release version="1.1.9" date="2026-04-12"/>
 	<release version="1.1.8" date="2025-12-31"/>
 	<release version="1.1.7" date="2025-11-29"/>
 	<release version="1.1.6" date="2025-10-31"/>
@@ -78,5 +111,13 @@
     <release version="0.7" date="2020-05-16"/>
     <release version="0.6.2" date="2020-02-17"/>
   </releases>
+
+  <supports>
+    <control>keyboard</control>
+    <control>pointing</control>
+    <control>touch</control>
+    <control>tablet</control>
+  </supports>
+
   <update_contact>hugo.locurcio@hugo.pro</update_contact>
 </component>

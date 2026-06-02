@@ -20,6 +20,8 @@ var layer_indices: PackedInt32Array
 @onready var tile_offset_axis_button: OptionButton = $GridContainer/TileOffsetAxisButton
 @onready var audio_file_dialog := $AudioFileDialog as FileDialog
 @onready var place_only_confirmation_dialog: ConfirmationDialog = $PlaceOnlyConfirmationDialog
+@onready
+var export_tileset_confirmation_dialog: ConfirmationDialog = $ExportTilesetConfirmationDialog
 
 
 func _ready() -> void:
@@ -102,6 +104,8 @@ func _fill_blend_modes_option_button() -> void:
 	blend_modes_button.add_item("Saturation", BaseLayer.BlendModes.SATURATION)
 	blend_modes_button.add_item("Color", BaseLayer.BlendModes.COLOR)
 	blend_modes_button.add_item("Luminosity", BaseLayer.BlendModes.LUMINOSITY)
+	blend_modes_button.add_item("Intersection", BaseLayer.BlendModes.INTERSECTION)
+	blend_modes_button.add_item("Match colors", BaseLayer.BlendModes.MATCH_COLORS)
 
 
 func _on_name_line_edit_text_changed(new_text: String) -> void:
@@ -126,23 +130,31 @@ func _on_opacity_slider_value_changed(value: float) -> void:
 		return
 
 	var project: Project = Global.current_project
-	project.undo_redo.create_action("Change Layer Opacity", UndoRedo.MergeMode.MERGE_ENDS)
-	for layer_index in layer_indices:
-		var layer := Global.current_project.layers[layer_index]
-		var new_opacity = value / 100.0
+	var new_opacity = value / 100.0
+	if Global.layer_opacity_undoable:
+		project.undo_redo.create_action("Change Layer Opacity", UndoRedo.MergeMode.MERGE_ENDS)
+		for layer_index in layer_indices:
+			var layer := Global.current_project.layers[layer_index]
 
-		project.undo_redo.add_do_property(layer, "opacity", new_opacity)
-		project.undo_redo.add_undo_property(layer, "opacity", layer.opacity)
-		project.undo_redo.add_do_property(Global.canvas, "update_all_layers", true)
-		project.undo_redo.add_undo_property(Global.canvas, "update_all_layers", true)
-		project.undo_redo.add_do_method(Global.canvas.queue_redraw)
-		project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
-		project.undo_redo.add_do_method(_emit_layer_property_signal)
-		project.undo_redo.add_undo_method(_emit_layer_property_signal)
-		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+			project.undo_redo.add_do_property(layer, "opacity", new_opacity)
+			project.undo_redo.add_undo_property(layer, "opacity", layer.opacity)
+			project.undo_redo.add_do_property(Global.canvas, "update_all_layers", true)
+			project.undo_redo.add_undo_property(Global.canvas, "update_all_layers", true)
+			project.undo_redo.add_do_method(Global.canvas.queue_redraw)
+			project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
+			project.undo_redo.add_do_method(_emit_layer_property_signal)
+			project.undo_redo.add_undo_method(_emit_layer_property_signal)
+			project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+			project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 
-	project.undo_redo.commit_action()
+		project.undo_redo.commit_action()
+	else:
+		for layer_index in layer_indices:
+			var layer := Global.current_project.layers[layer_index]
+			layer.opacity = new_opacity
+			Global.canvas.update_all_layers = true
+			Global.canvas.queue_redraw()
+			_emit_layer_property_signal()
 
 
 func _on_blend_mode_option_button_item_selected(index: BaseLayer.BlendModes) -> void:
@@ -406,3 +418,14 @@ func _on_tile_offset_axis_button_item_selected(index: TileSet.TileOffsetAxis) ->
 	project.undo_redo.add_undo_method(func(): Global.canvas.queue_redraw())
 	project.undo_redo.add_undo_method(func(): Global.canvas.grid.queue_redraw())
 	project.undo_redo.commit_action()
+
+
+func _on_export_tileset_button_pressed() -> void:
+	var layer: LayerTileMap
+	var project := Global.current_project
+	for i in layer_indices:
+		if project.layers[i] is LayerTileMap:
+			layer = project.layers[i]
+			break
+	export_tileset_confirmation_dialog.selected_tileset = layer.tileset
+	export_tileset_confirmation_dialog.popup_centered_clamped()
