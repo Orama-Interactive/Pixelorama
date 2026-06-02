@@ -299,7 +299,7 @@ var icon_color_from := ColorFrom.THEME:
 			return
 		icon_color_from = value
 		if icon_color_from == ColorFrom.THEME:
-			var current_theme := Themes.themes[Themes.theme_index]
+			var current_theme := Themes.themes[Themes.theme_index].theme
 			modulate_icon_color = current_theme.get_color("modulate_color", "Icons")
 		else:
 			modulate_icon_color = custom_icon_color

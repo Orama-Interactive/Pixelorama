@@ -19,9 +19,12 @@ func _on_theme_pressed(index: int) -> void:
 	Themes.change_theme(index)
 
 
-func _add_theme(theme: Theme) -> void:
+func _add_theme(theme_var: Themes.ThemeVariation) -> void:
 	var button := CheckBox.new()
-	var theme_name := theme.resource_name
+	var theme := theme_var.theme
+	var theme_name := theme_var.name
+	if theme_name.is_empty():
+		theme_name = theme.resource_name
 	button.name = theme_name
 	button.text = theme_name
 	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
@@ -29,16 +32,12 @@ func _add_theme(theme: Theme) -> void:
 	button.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	buttons_container.add_child(button)
 	button.pressed.connect(_on_theme_pressed.bind(button.get_index()))
-
-	var panel_stylebox: StyleBox = theme.get_stylebox("panel", "Panel")
-	var panel_container_stylebox: StyleBox = theme.get_stylebox("panel", "PanelContainer")
-	if panel_stylebox is StyleBoxFlat and panel_container_stylebox is StyleBoxFlat:
-		var theme_color_preview: ColorRect = theme_color_preview_scene.instantiate()
-		var color1: Color = panel_stylebox.bg_color
-		var color2: Color = panel_container_stylebox.bg_color
-		theme_color_preview.get_child(0).get_child(0).color = color1
-		theme_color_preview.get_child(0).get_child(1).color = color2
-		colors_container.add_child(theme_color_preview)
+	var base_color := theme_var.get_base_color()
+	var accent_color := theme_var.get_accent_color()
+	var theme_color_preview: ColorRect = theme_color_preview_scene.instantiate()
+	theme_color_preview.get_child(0).get_child(0).color = base_color
+	theme_color_preview.get_child(0).get_child(1).color = accent_color
+	colors_container.add_child(theme_color_preview)
 
 
 func _remove_theme(theme: Theme) -> void:

@@ -7,16 +7,68 @@ signal theme_removed(theme: Theme)
 ## main theme gets switched to another.
 signal theme_switched
 
+const MAIN_THEME := preload("uid://dog5j8wjiwikc")
+
 var theme_index := 0
-var themes: Array[Theme] = [
-	preload("res://assets/themes/dark/theme.tres"),
-	preload("res://assets/themes/gray/theme.tres"),
-	preload("res://assets/themes/blue/theme.tres"),
-	preload("res://assets/themes/caramel/theme.tres"),
-	preload("res://assets/themes/light/theme.tres"),
-	preload("res://assets/themes/purple/theme.tres"),
-	preload("res://assets/themes/rose/theme.tres"),
+var themes: Array[ThemeVariation] = [
+	ThemeVariation.new(MAIN_THEME, "Dark"),
+	ThemeVariation.new(MAIN_THEME, "Gray", Color("333339"), Color("a7b2ea")),
+	ThemeVariation.new(MAIN_THEME, "Blue", Color("47526e"), Color("92a8e0")),
+	ThemeVariation.new(MAIN_THEME, "Caramel", Color("b16832"), Color("ffcd86")),
+	ThemeVariation.new(MAIN_THEME, "Light", Color("e7f1f7"), Color("484b68")),
+	ThemeVariation.new(MAIN_THEME, "Purple", Color("433057"), Color("d093dd")),
+	ThemeVariation.new(MAIN_THEME, "Rose", Color("a53753"), Color("f69bb2")),
+	ThemeVariation.new(MAIN_THEME, "Black (OLED)", Color("000"), Color("7c8dbf")),
+	ThemeVariation.new(ThemeDB.get_default_theme(), "Godot"),
 ]
+
+
+class ThemeVariation:
+	var theme: Theme
+	var name := ""
+	var base_color: Color
+	var accent_color: Color
+
+	func _init(
+		_theme: Theme,
+		_name: String,
+		_base_color := Color.TRANSPARENT,
+		_accent_color := Color.TRANSPARENT,
+	) -> void:
+		theme = _theme
+		name = _name
+		base_color = _base_color
+		accent_color = _accent_color
+
+	func get_base_color() -> Color:
+		if base_color.is_equal_approx(Color.TRANSPARENT):
+			var panel_stylebox := theme.get_stylebox(&"panel", &"Panel")
+			if panel_stylebox is StyleBoxFlat:
+				return panel_stylebox.bg_color
+			elif panel_stylebox is StyleBoxTexture:
+				var sub_region := (panel_stylebox as StyleBoxTexture).region_rect
+				var image := (panel_stylebox as StyleBoxTexture).texture.get_image()
+				image = image.get_region(sub_region)
+				return image.get_pixel(0, 0)
+		return base_color
+
+	func get_accent_color() -> Color:
+		if accent_color.is_equal_approx(Color.TRANSPARENT):
+			var button_stylebox := theme.get_stylebox(&"pressed", &"Button")
+			if button_stylebox is StyleBoxFlat:
+				return button_stylebox.border_color
+			elif button_stylebox is StyleBoxTexture:
+				var sub_region := (button_stylebox as StyleBoxTexture).region_rect
+				var image := (button_stylebox as StyleBoxTexture).texture.get_image()
+				image = image.get_region(sub_region)
+				return image.get_pixel(0, 0)
+		return accent_color
+
+	func has_custom_colors() -> bool:
+		return not (
+			base_color.is_equal_approx(Color.TRANSPARENT)
+			or accent_color.is_equal_approx(Color.TRANSPARENT)
+		)
 
 
 func _ready() -> void:
@@ -33,7 +85,12 @@ func _ready() -> void:
 		change_icon_colors()
 
 
-func add_theme(theme: Theme) -> void:
+func add_theme(
+	theme: Theme,
+	theme_name := "",
+	base_color := Color.TRANSPARENT,
+	accent_color := Color.TRANSPARENT
+) -> void:
 	themes.append(theme)
 	theme_added.emit(theme)
 
@@ -45,7 +102,7 @@ func remove_theme(theme: Theme) -> void:
 
 func change_theme(id: int) -> void:
 	theme_index = id
-	var theme := themes[id]
+	var theme := ThemeUtils.generate_theme(themes[id])
 	Global.theme_font_index = Global.theme_font_index  # Trigger the setter
 	if theme.default_font != Global.theme_font:
 		theme.default_font = Global.theme_font
