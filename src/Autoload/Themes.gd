@@ -9,16 +9,15 @@ signal theme_switched
 
 const MAIN_THEME := preload("uid://dog5j8wjiwikc")
 
-var theme_index := 0
 var themes: Array[ThemeVariation] = [
 	ThemeVariation.new(MAIN_THEME, "Dark"),
-	ThemeVariation.new(MAIN_THEME, "Gray", Color("333339"), Color("a7b2ea")),
+	ThemeVariation.new(MAIN_THEME, "Gray", Color("333333"), Color("a7b2ea")),
 	ThemeVariation.new(MAIN_THEME, "Blue", Color("47526e"), Color("92a8e0")),
 	ThemeVariation.new(MAIN_THEME, "Caramel", Color("b16832"), Color("ffcd86")),
 	ThemeVariation.new(MAIN_THEME, "Light", Color("e7f1f7"), Color("484b68")),
 	ThemeVariation.new(MAIN_THEME, "Purple", Color("433057"), Color("d093dd")),
 	ThemeVariation.new(MAIN_THEME, "Rose", Color("a53753"), Color("f69bb2")),
-	ThemeVariation.new(MAIN_THEME, "Black (OLED)", Color("000"), Color("7c8dbf"), 0.0),
+	ThemeVariation.new(MAIN_THEME, "Black (OLED)", Color.BLACK, Color("7c8dbf"), 0.0),
 ]
 
 
@@ -79,17 +78,12 @@ class ThemeVariation:
 
 
 func _ready() -> void:
-	var theme_id: int = Global.config_cache.get_value("preferences", "theme", 0)
-	## Wait two frames so that extensions are loaded
-	await get_tree().process_frame
-	await get_tree().process_frame
+	var theme_id: int = Global.config_cache.get_value("preferences", "theme_preset_index", 0)
+	## Wait so that extensions are loaded
+	await Global.pixelorama_opened
 	if theme_id >= themes.size():
 		theme_id = 0
-	if theme_id != 0:
-		change_theme(theme_id)
-	else:
-		change_clear_color()
-		change_icon_colors()
+	Global.theme_preset_index = theme_id
 
 
 func add_theme(
@@ -105,14 +99,16 @@ func add_theme(
 
 
 func remove_theme(theme: Theme) -> void:
-	for theme_var in themes:
+	for i in themes.size():
+		var theme_var := themes[i]
 		if theme_var.theme == theme:
+			if i == Global.theme_preset_index:
+				Global.theme_preset_index = 0
 			themes.erase(theme_var)
 	theme_removed.emit(theme)
 
 
 func change_theme(id: int) -> void:
-	theme_index = id
 	var theme := ThemeUtils.generate_theme(themes[id])
 	Global.theme_font_index = Global.theme_font_index  # Trigger the setter
 	if theme.default_font != Global.theme_font:

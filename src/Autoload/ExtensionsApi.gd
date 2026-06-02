@@ -482,7 +482,13 @@ class ThemeAPI:
 
 	## Returns index of the [param theme] in preferences.
 	func find_theme_index(theme: Theme) -> int:
-		return Themes.themes.find(theme)
+		var index := -1
+		for i in Themes.themes.size():
+			var theme_var := Themes.themes[i]
+			if theme_var.theme == theme:
+				index = i
+				break
+		return index
 
 	## Returns the current theme resource.
 	func get_theme() -> Theme:
@@ -492,7 +498,7 @@ class ThemeAPI:
 	## return [code]true[/code], else [code]false[/code].
 	func set_theme(idx: int) -> bool:
 		if idx >= 0 and idx < Themes.themes.size():
-			Themes.change_theme(idx)
+			Global.theme_preset_index = idx
 			return true
 		else:
 			push_error("No theme found at index: ", idx)

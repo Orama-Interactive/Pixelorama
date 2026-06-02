@@ -142,6 +142,7 @@ const FONTS_DIR_PATH := "user://fonts"
 
 ## It is path to the executable's base drectory.
 var root_directory := "."
+var pixelorama_has_loaded := false
 ## The path where preferences and other subdirectories for stuff like layouts, extensions, logs etc.
 ## will get stored by Pixelorama.
 var home_data_directory := OS.get_data_dir().path_join(HOME_SUBDIR_NAME)
@@ -293,10 +294,11 @@ var single_window_mode := true:
 ## Found in Preferences. The index of the current theme preset.
 var theme_preset_index := 0:
 	set(value):
-		if value == theme_preset_index:
-			return
 		theme_preset_index = value
-		Themes.change_theme(theme_preset_index)
+		if pixelorama_has_loaded:
+			# Do not change theme before Pixelorama has finished loading.
+			# Because this is being handled in Themes' ready method.
+			Themes.change_theme(theme_preset_index)
 ## Found in Preferences. The modulation color (or simply color) of icons.
 var modulate_icon_color := Color.GRAY
 ## Found in Preferences. Determines if [member modulate_icon_color] uses custom or theme color.
@@ -306,7 +308,7 @@ var icon_color_from := ColorFrom.THEME:
 			return
 		icon_color_from = value
 		if icon_color_from == ColorFrom.THEME:
-			var current_theme := Themes.themes[Themes.theme_index].theme
+			var current_theme := Themes.themes[theme_preset_index].theme
 			modulate_icon_color = current_theme.get_color("modulate_color", "Icons")
 		else:
 			modulate_icon_color = custom_icon_color
