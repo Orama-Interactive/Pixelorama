@@ -18,8 +18,7 @@ var themes: Array[ThemeVariation] = [
 	ThemeVariation.new(MAIN_THEME, "Light", Color("e7f1f7"), Color("484b68")),
 	ThemeVariation.new(MAIN_THEME, "Purple", Color("433057"), Color("d093dd")),
 	ThemeVariation.new(MAIN_THEME, "Rose", Color("a53753"), Color("f69bb2")),
-	ThemeVariation.new(MAIN_THEME, "Black (OLED)", Color("000"), Color("7c8dbf")),
-	ThemeVariation.new(ThemeDB.get_default_theme(), "Godot"),
+	ThemeVariation.new(MAIN_THEME, "Black (OLED)", Color("000"), Color("7c8dbf"), 0.0),
 ]
 
 
@@ -28,28 +27,31 @@ class ThemeVariation:
 	var name := ""
 	var base_color: Color
 	var accent_color: Color
+	var contrast := 0.3
 
 	func _init(
 		_theme: Theme,
 		_name: String,
 		_base_color := Color.TRANSPARENT,
 		_accent_color := Color.TRANSPARENT,
+		_contrast := 0.3
 	) -> void:
 		theme = _theme
 		name = _name
 		base_color = _base_color
 		accent_color = _accent_color
+		contrast = _contrast
 
 	func get_base_color() -> Color:
 		if base_color.is_equal_approx(Color.TRANSPARENT):
 			var panel_stylebox := theme.get_stylebox(&"panel", &"Panel")
 			if panel_stylebox is StyleBoxFlat:
-				return panel_stylebox.bg_color
+				return Color(panel_stylebox.bg_color, 1.0)
 			elif panel_stylebox is StyleBoxTexture:
 				var sub_region := (panel_stylebox as StyleBoxTexture).region_rect
 				var image := (panel_stylebox as StyleBoxTexture).texture.get_image()
 				image = image.get_region(sub_region)
-				return image.get_pixel(0, 0)
+				return Color(image.get_pixel(0, 0), 1.0)
 		return base_color
 
 	func get_accent_color() -> Color:

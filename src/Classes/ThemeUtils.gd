@@ -135,7 +135,6 @@ static var theme_properties: Dictionary[String, Array] = {
 		ThemeProperty.new(&"font_hover_color", &"MenuBar"),
 		ThemeProperty.new(&"font_hovered_color", &"ItemList"),
 		ThemeProperty.new(&"hover_font_color", &"FoldableContainer"),
-		ThemeProperty.new(&"modulate_color", &"Icons"),
 		ThemeProperty.new(&"panel", &"TooltipPanel", Theme.DATA_TYPE_STYLEBOX, true),
 	],
 	"Accent #2":
@@ -145,6 +144,8 @@ static var theme_properties: Dictionary[String, Array] = {
 	"Text color":
 	[
 		ThemeProperty.new(&"font_color", &"Button"),
+		ThemeProperty.new(&"font_color", &"CheckBox"),
+		ThemeProperty.new(&"font_color", &"CheckButton"),
 		ThemeProperty.new(&"font_color", &"MenuButton"),
 		ThemeProperty.new(&"font_color", &"MenuBar"),
 		ThemeProperty.new(&"font_color", &"PopupMenu"),
@@ -163,6 +164,7 @@ static var theme_properties: Dictionary[String, Array] = {
 		ThemeProperty.new(&"font_unselected_color", &"TabContainer"),
 		ThemeProperty.new(&"title_color", &"Window"),
 		ThemeProperty.new(&"font_color", &"TooltipLabel"),
+		ThemeProperty.new(&"modulate_color", &"Icons"),
 		ThemeProperty.new(
 			&"children_hl_line_color", &"Tree", Theme.DATA_TYPE_COLOR, false, _set_alpha.bind(0.15)
 		),
@@ -277,13 +279,14 @@ class ThemePalette:
 
 static func generate_theme(theme_var: Themes.ThemeVariation) -> Theme:
 	var theme := theme_var.theme.duplicate(true) as Theme
-	var palette := generate_palette(theme_var.get_base_color(), theme_var.get_accent_color())
-
+	var palette := generate_palette(
+		theme_var.get_base_color(), theme_var.get_accent_color(), theme_var.contrast
+	)
 	if not theme_var.has_custom_colors():
 		var bg := palette[0]
 		var primary := palette[1]
 		var secondary := palette[2]
-		var accent_color := palette[3]
+		var text_color := palette[5]
 		if not theme.is_type_variation(&"ValueSlider", &"TextureProgressBar"):
 			theme.set_type_variation(&"ValueSlider", &"TextureProgressBar")
 		if not theme.has_color(&"under_color", &"ValueSlider"):
@@ -293,7 +296,7 @@ static func generate_theme(theme_var: Themes.ThemeVariation) -> Theme:
 		if not theme.has_color(&"clear_color", &"Misc"):
 			theme.set_color(&"clear_color", &"Misc", primary)
 		if not theme.has_color(&"modulate_color", &"Icons"):
-			theme.set_color(&"modulate_color", &"Icons", accent_color)
+			theme.set_color(&"modulate_color", &"Icons", text_color)
 		return theme
 	var i := 0
 	for color_group in theme_properties:
@@ -305,41 +308,28 @@ static func generate_theme(theme_var: Themes.ThemeVariation) -> Theme:
 	return theme
 
 
-static func generate_palette(base_color: Color, accent_color: Color) -> PackedColorArray:
+static func generate_palette(
+	base_color: Color, accent_color: Color, contrast: float
+) -> PackedColorArray:
 	var is_dark := base_color.get_luminance() < 0.5
 	var background := base_color
-	var primary: Color
-	var secondary: Color
+	var primary := get_surface_color(base_color, contrast, 0.15)
+	var secondary := get_surface_color(base_color, contrast, 0.5)
+	var window_border := get_surface_color(base_color, contrast, 1.0)
 	var accent := accent_color
-	var accent2: Color
-	var text_color: Color
-	var window_border: Color
-
-	if is_dark:
-		# Surface ramp
-		primary = background.lerp(Color.WHITE, 0.06)
-		secondary = background.lerp(Color.WHITE, 0.16)
-		# Accent ramp
-		accent2 = accent.lerp(background, 0.20)
-		# Text
-		text_color = accent.lerp(Color.WHITE, 0.15)
-		# Border
-		window_border = background.lerp(Color.WHITE, 0.25)
-
-	else:
-		# Surface ramp
-		primary = background.lerp(Color.BLACK, 0.04)
-		secondary = background.lerp(Color.BLACK, 0.12)
-		# Accent ramp
-		accent2 = accent.lerp(background, 0.35)
-		# Text
-		text_color = accent.darkened(0.15)
-		# Border
-		window_border = background.lerp(Color.BLACK, 0.20)
+	var accent2_weight := 0.20 if is_dark else 0.35
+	var accent2 := accent.lerp(background, accent2_weight)
+	var text_base := Color.WHITE if is_dark else Color.BLACK
+	var text_color := text_base * Color(1, 1, 1, 0.75)
 
 	return PackedColorArray(
 		[background, primary, secondary, accent, accent2, text_color, window_border]
 	)
+
+
+static func get_surface_color(base_color: Color, contrast: float, offset: float) -> Color:
+	var mono := Color.WHITE if base_color.get_luminance() < 0.5 else Color.BLACK
+	return base_color.lerp(mono, clampf(contrast * offset, 0.0, 1.0))
 
 
 static func _invert_color(color: Color) -> Color:
