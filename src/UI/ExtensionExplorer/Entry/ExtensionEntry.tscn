@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://3v78ojo0pkfg" path="res://assets/graphics/misc/external_link.svg" id="3_ujt8o"]
 
 [node name="ExtensionEntry" type="PanelContainer" unique_id=1881106896]
-self_modulate = Color(0.411765, 0.411765, 0.411765, 1)
 custom_minimum_size = Vector2(300, 150)
 offset_right = 310.0
 offset_bottom = 150.0
@@ -72,12 +71,14 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
 text = "Download"
 
 [node name="ReadmeButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1249978397]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "README"
 icon = ExtResource("3_ujt8o")
 

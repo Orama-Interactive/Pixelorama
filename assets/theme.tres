@@ -117,20 +117,11 @@ content_margin_top = 4.0
 content_margin_bottom = 4.0
 draw_center = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4dymj"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wms38"]
 content_margin_top = 4.0
 content_margin_bottom = 4.0
-draw_center = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4jbvl"]
-content_margin_top = 4.0
-content_margin_bottom = 4.0
-draw_center = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eoilh"]
-content_margin_top = 4.0
-content_margin_bottom = 4.0
-draw_center = false
+bg_color = Color(0.231373, 0.231373, 0.231373, 0.5)
+border_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dr6kc"]
 content_margin_top = 4.0
@@ -143,21 +134,6 @@ content_margin_bottom = 4.0
 draw_center = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d140b"]
-content_margin_top = 4.0
-content_margin_bottom = 4.0
-draw_center = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k7wcw"]
-content_margin_top = 4.0
-content_margin_bottom = 4.0
-draw_center = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j786n"]
-content_margin_top = 4.0
-content_margin_bottom = 4.0
-draw_center = false
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_viauy"]
 content_margin_top = 4.0
 content_margin_bottom = 4.0
 draw_center = false
@@ -812,15 +788,13 @@ CheckBox/icons/radio_unchecked_disabled = ExtResource("1_fq388")
 CheckBox/icons/unchecked = ExtResource("2_hvjga")
 CheckBox/icons/unchecked_disabled = ExtResource("2_hvjga")
 CheckBox/styles/disabled = SubResource("StyleBoxFlat_lbyuh")
-CheckBox/styles/focus = SubResource("StyleBoxFlat_4dymj")
-CheckBox/styles/hover = SubResource("StyleBoxFlat_4jbvl")
-CheckBox/styles/hover_pressed = SubResource("StyleBoxFlat_eoilh")
+CheckBox/styles/hover = SubResource("StyleBoxFlat_wms38")
+CheckBox/styles/hover_pressed = SubResource("StyleBoxFlat_wms38")
 CheckBox/styles/normal = SubResource("StyleBoxFlat_dr6kc")
 CheckBox/styles/pressed = SubResource("StyleBoxFlat_8hsnf")
 CheckButton/styles/disabled = SubResource("StyleBoxFlat_d140b")
-CheckButton/styles/focus = SubResource("StyleBoxFlat_k7wcw")
-CheckButton/styles/hover = SubResource("StyleBoxFlat_j786n")
-CheckButton/styles/hover_pressed = SubResource("StyleBoxFlat_viauy")
+CheckButton/styles/hover = SubResource("StyleBoxFlat_wms38")
+CheckButton/styles/hover_pressed = SubResource("StyleBoxFlat_wms38")
 CheckButton/styles/normal = SubResource("StyleBoxFlat_ygru1")
 CheckButton/styles/pressed = SubResource("StyleBoxFlat_h750t")
 CollapsibleContainer/base_type = &"VBoxContainer"

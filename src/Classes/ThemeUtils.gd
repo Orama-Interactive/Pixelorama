@@ -71,6 +71,8 @@ static var theme_properties: Dictionary[String, Array] = {
 		),
 		ThemeProperty.new(&"progress_color", &"ValueSlider"),
 		ThemeProperty.new(&"hover", &"Button", Theme.DATA_TYPE_STYLEBOX, false, _halve_alpha),
+		ThemeProperty.new(&"hover", &"CheckBox", Theme.DATA_TYPE_STYLEBOX, false, _halve_alpha),
+		ThemeProperty.new(&"hover", &"CheckButton", Theme.DATA_TYPE_STYLEBOX, false, _halve_alpha),
 		ThemeProperty.new(&"hover", &"CelButton", Theme.DATA_TYPE_STYLEBOX, false, _halve_alpha),
 		ThemeProperty.new(&"hover", &"PopupMenu", Theme.DATA_TYPE_STYLEBOX, false, _halve_alpha),
 		ThemeProperty.new(&"hover", &"PopupMenu", Theme.DATA_TYPE_STYLEBOX, false, _halve_alpha),
@@ -143,7 +145,24 @@ static var theme_properties: Dictionary[String, Array] = {
 		ThemeProperty.new(&"font_color", &"ProgressBar"),
 		ThemeProperty.new(&"font_color", &"Label"),
 		ThemeProperty.new(&"font_color", &"LineEdit"),
+		ThemeProperty.new(
+			&"font_placeholder_color",
+			&"LineEdit",
+			Theme.DATA_TYPE_COLOR,
+			false,
+			_set_alpha.bind(0.6)
+		),
 		ThemeProperty.new(&"font_color", &"TextEdit"),
+		ThemeProperty.new(
+			&"font_placeholder_color",
+			&"TextEdit",
+			Theme.DATA_TYPE_COLOR,
+			false,
+			_set_alpha.bind(0.6)
+		),
+		ThemeProperty.new(
+			&"font_readonly_color", &"TextEdit", Theme.DATA_TYPE_COLOR, false, _set_alpha.bind(0.6)
+		),
 		ThemeProperty.new(&"font_color", &"ItemList"),
 		ThemeProperty.new(&"font_color", &"Tree"),
 		ThemeProperty.new(&"font_color", &"FoldableContainer"),
