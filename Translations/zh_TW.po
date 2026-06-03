@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Traditional\n"
 "Language: zh_TW\n"
-"PO-Revision-Date: 2026-05-31 12:33\n"
+"PO-Revision-Date: 2026-06-03 18:55\n"
 
 msgid "OK"
 msgstr "確定"
@@ -1009,6 +1009,22 @@ msgstr "紫色"
 
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
+msgstr ""
+
+#. A theme. Black (#000000) is set as the main color so these pixels can be turned off on OLED screens.
+msgid "Black (OLED)"
+msgstr ""
+
+#. A theme. "System" refers to the Operating System.
+msgid "System"
+msgstr ""
+
+#. Refers to the base color of a theme.
+msgid "Base color:"
+msgstr ""
+
+#. Refers to the accent color of a theme.
+msgid "Accent color:"
 msgstr ""
 
 msgid "Theme"
