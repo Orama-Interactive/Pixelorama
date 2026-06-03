@@ -901,6 +901,17 @@ class ImportAPI:
 		OpenSave.custom_importer_scenes.erase(id)
 		ExtensionsApi.remove_action("ImportAPI", "add_import_option")
 
+	## Adds a callback function for opening files with custom extensions. Whenever a file with the
+	## given extension is opened, the given callback will be called with the file path as argument.
+	func add_open_callback(extension: String, callback: Callable) -> void:
+		OpenSave.register_custom_open_callback(extension, callback)
+		ExtensionsApi.add_action("ImportAPI", "add_open_callback")
+
+	## Removes the callback function for the given extension.
+	func remove_open_callback(extension: String) -> void:
+		OpenSave.unregister_custom_open_callback(extension)
+		ExtensionsApi.remove_action("ImportAPI", "add_open_callback")
+
 
 ## Gives access to palette related stuff.
 class PaletteAPI:
