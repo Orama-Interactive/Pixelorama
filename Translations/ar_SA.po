@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2026-05-31 12:32\n"
+"PO-Revision-Date: 2026-06-03 18:54\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -1016,6 +1016,22 @@ msgstr "بنفسجي"
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
 msgstr "وردي"
+
+#. A theme. Black (#000000) is set as the main color so these pixels can be turned off on OLED screens.
+msgid "Black (OLED)"
+msgstr ""
+
+#. A theme. "System" refers to the Operating System.
+msgid "System"
+msgstr ""
+
+#. Refers to the base color of a theme.
+msgid "Base color:"
+msgstr ""
+
+#. Refers to the accent color of a theme.
+msgid "Accent color:"
+msgstr ""
 
 msgid "Theme"
 msgstr "المظهر"
