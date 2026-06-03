@@ -16,14 +16,14 @@ var system_theme := ThemeVariation.new(MAIN_THEME, "System", system_base_color, 
 var system_theme_index := -1
 var themes: Array[ThemeVariation] = [
 	ThemeVariation.new(MAIN_THEME, "Dark"),
+	system_theme,
+	ThemeVariation.new(MAIN_THEME, "Light", Color("e7f1f7"), Color("484b68")),
+	ThemeVariation.new(MAIN_THEME, "Black (OLED)", Color.BLACK, Color("7c8dbf"), 0.0),
 	ThemeVariation.new(MAIN_THEME, "Gray", Color("333333"), Color("a7b2ea")),
 	ThemeVariation.new(MAIN_THEME, "Blue", Color("47526e"), Color("92a8e0")),
 	ThemeVariation.new(MAIN_THEME, "Caramel", Color("b16832"), Color("ffcd86")),
-	ThemeVariation.new(MAIN_THEME, "Light", Color("e7f1f7"), Color("484b68")),
 	ThemeVariation.new(MAIN_THEME, "Purple", Color("433057"), Color("d093dd")),
 	ThemeVariation.new(MAIN_THEME, "Rose", Color("a53753"), Color("f69bb2")),
-	ThemeVariation.new(MAIN_THEME, "Black (OLED)", Color.BLACK, Color("7c8dbf"), 0.0),
-	system_theme
 ]
 
 
