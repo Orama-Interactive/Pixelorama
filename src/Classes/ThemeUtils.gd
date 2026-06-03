@@ -118,16 +118,6 @@ static var theme_properties: Dictionary[String, Array] = {
 		ThemeProperty.new(&"font_hover_color", &"Button"),
 		ThemeProperty.new(&"font_hover_pressed_color", &"Button"),
 		ThemeProperty.new(&"font_pressed_color", &"Button"),
-		ThemeProperty.new(&"icon_normal_color", &"Button"),
-		ThemeProperty.new(
-			&"icon_pressed_color", &"Button", Theme.DATA_TYPE_COLOR, false, _lighten.bind(0.2)
-		),
-		ThemeProperty.new(
-			&"icon_hover_pressed_color", &"Button", Theme.DATA_TYPE_COLOR, false, _lighten.bind(0.2)
-		),
-		ThemeProperty.new(
-			&"icon_hover_color", &"Button", Theme.DATA_TYPE_COLOR, false, _lighten.bind(0.3)
-		),
 		ThemeProperty.new(&"font_hover_color", &"PopupMenu"),
 		ThemeProperty.new(&"font_pressed_color", &"MenuButton"),
 		ThemeProperty.new(&"font_hover_color", &"MenuButton"),
@@ -164,6 +154,16 @@ static var theme_properties: Dictionary[String, Array] = {
 		ThemeProperty.new(&"font_unselected_color", &"TabContainer"),
 		ThemeProperty.new(&"title_color", &"Window"),
 		ThemeProperty.new(&"font_color", &"TooltipLabel"),
+		ThemeProperty.new(&"icon_normal_color", &"Button"),
+		ThemeProperty.new(
+			&"icon_pressed_color", &"Button", Theme.DATA_TYPE_COLOR, false, _lighten.bind(0.2)
+		),
+		ThemeProperty.new(
+			&"icon_hover_pressed_color", &"Button", Theme.DATA_TYPE_COLOR, false, _lighten.bind(0.2)
+		),
+		ThemeProperty.new(
+			&"icon_hover_color", &"Button", Theme.DATA_TYPE_COLOR, false, _lighten.bind(0.3)
+		),
 		ThemeProperty.new(&"modulate_color", &"Icons"),
 		ThemeProperty.new(
 			&"children_hl_line_color", &"Tree", Theme.DATA_TYPE_COLOR, false, _set_alpha.bind(0.15)
