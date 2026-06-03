@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2026-06-01 03:13\n"
+"PO-Revision-Date: 2026-06-03 18:55\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1015,6 +1015,22 @@ msgstr "紫"
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
 msgstr "ローズ"
+
+#. A theme. Black (#000000) is set as the main color so these pixels can be turned off on OLED screens.
+msgid "Black (OLED)"
+msgstr "黒 (OLED)"
+
+#. A theme. "System" refers to the Operating System.
+msgid "System"
+msgstr "システム"
+
+#. Refers to the base color of a theme.
+msgid "Base color:"
+msgstr "ベースカラー:"
+
+#. Refers to the accent color of a theme.
+msgid "Accent color:"
+msgstr "アクセントカラー:"
 
 msgid "Theme"
 msgstr "テーマ"
