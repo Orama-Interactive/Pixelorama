@@ -14,6 +14,11 @@ signal drag_ended(value_changed: bool)
 
 enum { NORMAL, HELD, SLIDING, TYPING }
 
+const VALUE_ARROW_ICON := preload("uid://ct8wn8m6x4m54")
+const VALUE_ARROW_HOVER_ICON := preload("uid://bq8h66v4ie8xl")
+const VALUE_ARROW_PRESS_ICON := preload("uid://hhxenhteahv6")
+const VALUE_SLIDER_ICON := preload("uid://c7u0yofrpm50a")
+
 @export var editable := true:
 	set(v):
 		editable = v
@@ -300,21 +305,39 @@ func _reset_display(theme_has_changed := false) -> void:
 	_line_edit.selecting_enabled = false  # Remove the selection
 	_line_edit.editable = false
 	if theme_has_changed and not Engine.is_editor_hint():
-		texture_under = get_theme_icon("texture_under", "ValueSlider")
-#		texture_over = get_theme_icon("texture_over", "ValueSlider")
-		texture_progress = get_theme_icon("texture_progress", "ValueSlider")
-		_value_up_button.texture_normal = get_theme_icon("arrow_normal", "ValueSlider")
-		_value_up_button.texture_pressed = get_theme_icon("arrow_pressed", "ValueSlider")
-		_value_up_button.texture_hover = get_theme_icon("arrow_hover", "ValueSlider")
+		if has_theme_icon(&"texture_under", &"ValueSlider"):
+			texture_under = get_theme_icon(&"texture_under", &"ValueSlider")
+		else:
+			texture_under = VALUE_SLIDER_ICON
 
-		_value_down_button.texture_normal = get_theme_icon("arrow_normal", "ValueSlider")
-		_value_down_button.texture_pressed = get_theme_icon("arrow_pressed", "ValueSlider")
-		_value_down_button.texture_hover = get_theme_icon("arrow_hover", "ValueSlider")
+#		texture_over = get_theme_icon("texture_over", "ValueSlider")
+		if has_theme_icon(&"texture_under", &"ValueSlider"):
+			texture_progress = get_theme_icon(&"texture_progress", &"ValueSlider")
+		else:
+			texture_progress = VALUE_SLIDER_ICON
+		if has_theme_icon(&"arrow_normal", &"ValueSlider"):
+			_value_up_button.texture_normal = get_theme_icon(&"arrow_normal", &"ValueSlider")
+			_value_down_button.texture_normal = get_theme_icon(&"arrow_normal", &"ValueSlider")
+		else:
+			_value_up_button.texture_normal = VALUE_ARROW_ICON
+			_value_down_button.texture_normal = VALUE_ARROW_ICON
+		if has_theme_icon(&"arrow_pressed", &"ValueSlider"):
+			_value_up_button.texture_pressed = get_theme_icon(&"arrow_pressed", &"ValueSlider")
+			_value_down_button.texture_pressed = get_theme_icon(&"arrow_pressed", &"ValueSlider")
+		else:
+			_value_up_button.texture_pressed = VALUE_ARROW_PRESS_ICON
+			_value_down_button.texture_pressed = VALUE_ARROW_PRESS_ICON
+		if has_theme_icon(&"arrow_pressed", &"ValueSlider"):
+			_value_up_button.texture_hover = get_theme_icon(&"arrow_pressed", &"ValueSlider")
+			_value_down_button.texture_hover = get_theme_icon(&"arrow_pressed", &"ValueSlider")
+		else:
+			_value_up_button.texture_hover = VALUE_ARROW_HOVER_ICON
+			_value_down_button.texture_hover = VALUE_ARROW_HOVER_ICON
 
 		editable = editable  # Call the setter
-		tint_under = get_theme_color("under_color", "ValueSlider")
+		tint_under = get_theme_color(&"under_color", &"ValueSlider")
 		if show_progress:
-			tint_progress = get_theme_color("progress_color", "ValueSlider")
+			tint_progress = get_theme_color(&"progress_color", &"ValueSlider")
 		else:
 			tint_progress = Color.TRANSPARENT
 	_line_edit.text = _format_float_string()

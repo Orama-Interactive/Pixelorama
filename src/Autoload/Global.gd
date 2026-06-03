@@ -31,9 +31,6 @@ signal dynamics_changed
 
 enum LayerTypes { PIXEL, GROUP, THREE_D, TILEMAP, AUDIO }
 enum GridTypes { CARTESIAN, ISOMETRIC, HEXAGONAL_POINTY_TOP, HEXAGONAL_FLAT_TOP }
-## ## Used to tell whether a color is being taken from the current theme,
-## or if it is a custom color.
-enum ColorFrom { THEME, CUSTOM }
 enum ButtonSize { SMALL, BIG }
 enum MeasurementMode { NONE, DISPLAY_RECT, MOVE }
 
@@ -142,6 +139,7 @@ const FONTS_DIR_PATH := "user://fonts"
 
 ## It is path to the executable's base drectory.
 var root_directory := "."
+var pixelorama_has_loaded := false
 ## The path where preferences and other subdirectories for stuff like layouts, extensions, logs etc.
 ## will get stored by Pixelorama.
 var home_data_directory := OS.get_data_dir().path_join(HOME_SUBDIR_NAME)
@@ -290,29 +288,45 @@ var single_window_mode := true:
 			return
 		single_window_mode = value
 		_save_to_override_file()
+## Found in Preferences. The index of the current theme preset.
+var theme_preset_index := 0:
+	set(value):
+		theme_preset_index = value
+		if pixelorama_has_loaded:
+			# Do not change theme before Pixelorama has finished loading.
+			# Because this is being handled in Themes' ready method.
+			Themes.change_theme(theme_preset_index)
+var theme_base_color := Color.BLACK:
+	set(value):
+		theme_base_color = value
+		if pixelorama_has_loaded and theme_preset_index == Themes.CUSTOM_THEME_INDEX:
+			# Do not change theme before Pixelorama has finished loading.
+			# Because this is being handled in Themes' ready method.
+			Themes.change_theme(theme_preset_index)
+var theme_accent_color := Color.WHITE:
+	set(value):
+		theme_accent_color = value
+		if pixelorama_has_loaded and theme_preset_index == Themes.CUSTOM_THEME_INDEX:
+			# Do not change theme before Pixelorama has finished loading.
+			# Because this is being handled in Themes' ready method.
+			Themes.change_theme(theme_preset_index)
+var theme_color_contrast := 0.3:
+	set(value):
+		theme_color_contrast = value
+		if pixelorama_has_loaded and theme_preset_index == Themes.CUSTOM_THEME_INDEX:
+			# Do not change theme before Pixelorama has finished loading.
+			# Because this is being handled in Themes' ready method.
+			Themes.change_theme(theme_preset_index)
 ## Found in Preferences. The modulation color (or simply color) of icons.
 var modulate_icon_color := Color.GRAY
-## Found in Preferences. Determines if [member modulate_icon_color] uses custom or theme color.
-var icon_color_from := ColorFrom.THEME:
-	set(value):
-		if value == icon_color_from:
-			return
-		icon_color_from = value
-		if icon_color_from == ColorFrom.THEME:
-			var current_theme := Themes.themes[Themes.theme_index]
-			modulate_icon_color = current_theme.get_color("modulate_color", "Icons")
-		else:
-			modulate_icon_color = custom_icon_color
-		Themes.change_icon_colors()
-## Found in Preferences. Color of icons when [member icon_color_from] is set to use custom colors.
+## Found in Preferences. Color of icons.
 var custom_icon_color := Color.GRAY:
 	set(value):
 		if value == custom_icon_color:
 			return
 		custom_icon_color = value
-		if icon_color_from == ColorFrom.CUSTOM:
-			modulate_icon_color = custom_icon_color
-			Themes.change_icon_colors()
+		modulate_icon_color = custom_icon_color
+		Themes.change_icon_colors()
 ## Found in Preferences. The modulation color (or simply color) of canvas background
 ## (aside from checker background).
 var modulate_clear_color := Color.GRAY:
@@ -320,13 +334,6 @@ var modulate_clear_color := Color.GRAY:
 		if value == modulate_clear_color:
 			return
 		modulate_clear_color = value
-		Themes.change_clear_color()
-## Found in Preferences. Determines if [member modulate_clear_color] uses custom or theme color.
-var clear_color_from := ColorFrom.THEME:
-	set(value):
-		if value == clear_color_from:
-			return
-		clear_color_from = value
 		Themes.change_clear_color()
 ## Found in Preferences. Controls the readonly mode of global palettes.
 var global_palettes_readonly := true

@@ -238,6 +238,7 @@ func _ready() -> void:
 		load_last_project(true)
 	_setup_application_window_size()
 	_show_splash_screen()
+	Global.pixelorama_has_loaded = true
 	Global.pixelorama_opened.emit()
 
 
