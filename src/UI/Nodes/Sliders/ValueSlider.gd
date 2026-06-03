@@ -8,9 +8,9 @@ extends TextureProgressBar
 ## This is emitted before the corresponding [signal Range.value_changed] signal.
 signal drag_started
 ## Emitted when the grabber stops being dragged.
-## If value_changed is true, [member Range.value] is different from the value
+## If value_has_changed is true, [member Range.value] is different from the value
 ## when the dragging was started.
-signal drag_ended(value_changed: bool)
+signal drag_ended(value_has_changed: bool)
 
 enum { NORMAL, HELD, SLIDING, TYPING }
 
@@ -156,16 +156,7 @@ func _gui_input(event: InputEvent) -> void:
 				get_viewport().set_input_as_handled()
 	elif state == HELD:
 		if event.is_action_released("left_mouse"):
-			state = TYPING
-			drag_started.emit()
-			_start_value = value
-			_line_edit.text = _format_float_string(true)
-			_line_edit.editable = true
 			_line_edit.grab_focus()
-			_line_edit.selecting_enabled = true
-			_line_edit.select_all()
-			_line_edit.caret_column = _line_edit.text.length()
-			tint_progress = Color.TRANSPARENT
 		elif event is InputEventMouseMotion:
 			if get_meta("mouse_start_position").distance_to(get_local_mouse_position()) > 2:
 				state = SLIDING
@@ -210,16 +201,18 @@ func _gui_input(event: InputEvent) -> void:
 
 
 func _setup_nodes() -> void:  ## Only called once on _ready()
-	focus_mode = Control.FOCUS_ALL
+	focus_mode = Control.FOCUS_NONE
 	_line_edit.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_line_edit.anchor_right = 1
 	_line_edit.anchor_bottom = 1
 	_line_edit.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_line_edit.focus_mode = Control.FOCUS_ALL
 	_line_edit.add_theme_stylebox_override("read_only", StyleBoxEmpty.new())
 	_line_edit.add_theme_stylebox_override("normal", StyleBoxEmpty.new())
-	_line_edit.text_submitted.connect(_on_LineEdit_text_entered)
+	_line_edit.text_submitted.connect(_on_line_edit_text_entered)
+	_line_edit.focus_entered.connect(_on_line_edit_focus_entered)
 	_line_edit.focus_exited.connect(_confirm_text)
-	_line_edit.gui_input.connect(_on_LineEdit_gui_input)
+	_line_edit.gui_input.connect(_on_line_edit_gui_input)
 	add_child(_line_edit)
 
 	var value_up_texture_size := Vector2.ONE
@@ -249,7 +242,7 @@ func _setup_nodes() -> void:  ## Only called once on _ready()
 	_value_down_button.offset_top = -value_up_texture_size.y
 	_value_down_button.offset_right = -3
 	_value_down_button.offset_bottom = 0
-	_value_up_button.focus_mode = Control.FOCUS_NONE
+	_value_down_button.focus_mode = Control.FOCUS_NONE
 	_value_down_button.add_to_group("UIButtons")
 	_value_down_button.button_down.connect(_on_value_button_down.bind(-1))
 	_value_down_button.button_up.connect(_on_value_button_up)
@@ -259,20 +252,32 @@ func _setup_nodes() -> void:  ## Only called once on _ready()
 	add_child(_timer)
 
 
-func _on_LineEdit_gui_input(event: InputEvent) -> void:
+func _on_value_changed(_value: float) -> void:
+	_reset_display()
+
+
+func _on_line_edit_gui_input(event: InputEvent) -> void:
 	if state == TYPING:
 		if event is InputEventKey and event.keycode == KEY_ESCAPE:
 			_confirm_text(false)  # Cancel
 			_line_edit.release_focus()
 
 
-func _on_value_changed(_value: float) -> void:
-	_reset_display()
-
-
 ## When pressing enter, release focus, which will call _confirm_text on focus_exited signal
-func _on_LineEdit_text_entered(_new_text: String) -> void:
+func _on_line_edit_text_entered(_new_text: String) -> void:
 	_line_edit.release_focus()
+
+
+func _on_line_edit_focus_entered() -> void:
+	state = TYPING
+	drag_started.emit()
+	_start_value = value
+	_line_edit.text = _format_float_string(true)
+	_line_edit.editable = true
+	_line_edit.selecting_enabled = true
+	_line_edit.select_all()
+	_line_edit.caret_column = _line_edit.text.length()
+	tint_progress = Color.TRANSPARENT
 
 
 ## Called on LineEdit's focus_exited signal

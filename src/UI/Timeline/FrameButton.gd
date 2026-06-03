@@ -33,7 +33,7 @@ func _update_tooltip() -> void:
 
 
 func _button_pressed() -> void:
-	if Input.is_action_just_released("left_mouse"):
+	if Input.is_action_just_released(&"left_mouse") or Input.is_action_just_released(&"ui_accept"):
 		Global.canvas.selection.transform_content_confirm()
 		var prev_curr_frame := Global.current_project.current_frame
 		if Input.is_action_pressed("shift"):

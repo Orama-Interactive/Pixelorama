@@ -57,8 +57,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_tool_pressed(tool_pressed: BaseButton) -> void:
-	var button := -1
-	button = MOUSE_BUTTON_LEFT if Input.is_action_just_released("left_mouse") else button
+	var button := MOUSE_BUTTON_LEFT
 	if not Global.single_tool_mode:
 		button = (
 			MOUSE_BUTTON_RIGHT
@@ -68,5 +67,5 @@ func _on_tool_pressed(tool_pressed: BaseButton) -> void:
 			)
 			else button
 		)
-	if button != -1:
+	if button in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT]:
 		Tools.assign_tool(tool_pressed.name, button)

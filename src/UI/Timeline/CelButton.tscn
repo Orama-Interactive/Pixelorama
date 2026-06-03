@@ -23,7 +23,6 @@ offset_right = 36.0
 offset_bottom = 36.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_type_variation = &"CelButton"
 toggle_mode = true

@@ -33,12 +33,14 @@ layout_mode = 2
 [node name="MainMenuButton" type="MenuButton" parent="MarginContainer/HBoxContainer" unique_id=146980267]
 visible = false
 layout_mode = 2
+focus_mode = 2
 mouse_default_cursor_shape = 2
 text = "Main Menu"
 
 [node name="MenuBar" type="MenuBar" parent="MarginContainer/HBoxContainer" unique_id=359350634]
 layout_mode = 2
 size_flags_horizontal = 2
+focus_mode = 2
 flat = true
 
 [node name="File" type="PopupMenu" parent="MarginContainer/HBoxContainer/MenuBar" unique_id=1224741301]

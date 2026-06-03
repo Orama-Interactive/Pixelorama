@@ -30,7 +30,6 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(28, 22)
 layout_mode = 2
 tooltip_text = "Toggle layer's visibility"
-focus_mode = 0
 mouse_default_cursor_shape = 2
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/VisibilityButton" unique_id=2003797487]
@@ -52,7 +51,6 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(28, 22)
 layout_mode = 2
 tooltip_text = "Lock/unlock layer"
-focus_mode = 0
 mouse_default_cursor_shape = 2
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/LockButton" unique_id=1504547710]
@@ -77,7 +75,6 @@ layout_mode = 2
 tooltip_text = "Enable/disable automatic linking of new cels when creating new frames
 
 Linked cels share content across multiple frames"
-focus_mode = 0
 mouse_default_cursor_shape = 2
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/LinkButton" unique_id=1915470760]
@@ -100,7 +97,6 @@ visible = false
 custom_minimum_size = Vector2(28, 22)
 layout_mode = 2
 tooltip_text = "Expand/collapse group"
-focus_mode = 0
 mouse_default_cursor_shape = 2
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer/ExpandButton" unique_id=531611990]
@@ -121,7 +117,6 @@ texture = ExtResource("2_enrtd")
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-focus_mode = 0
 mouse_default_cursor_shape = 2
 theme_type_variation = &"LayerFrameButton"
 toggle_mode = true

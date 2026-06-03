@@ -116,7 +116,7 @@ func button_setup() -> void:
 
 func _on_CelButton_pressed() -> void:
 	var project := Global.current_project
-	if Input.is_action_just_released("left_mouse"):
+	if Input.is_action_just_released(&"left_mouse") or Input.is_action_just_released(&"ui_accept"):
 		Global.canvas.selection.transform_content_confirm()
 		var change_cel := true
 		if Input.is_action_pressed("shift"):
