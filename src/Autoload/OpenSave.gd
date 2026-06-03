@@ -1380,22 +1380,26 @@ func save_project_to_recent_list(path: String) -> void:
 	top_menu_container.update_recent_projects_submenu()
 
 
-# Custom open callbacks are used to add support for opening files with extensions that are not natively supported by Pixelorama.
+# Custom open callbacks are used to add support for opening files with extensions that are not
+# natively supported by Pixelorama.
 # This allows users to extend the functionality of Pixelorama without modifying the core code.
 func register_custom_open_callback(extension: String, callback: Callable) -> void:
 	custom_open_callbacks[extension] = callback
 
 
 # Unregister a custom open callback for a specific file extension.
-# This can be used when the support for that file type is no longer needed or if the user wants to change the callback function for that extension.
+# This can be used when the support for that file type is no longer needed or if the user
+# wants to change the callback function for that extension.
 func unregister_custom_open_callback(extension: String) -> void:
 	if custom_open_callbacks.has(extension):
 		custom_open_callbacks.erase(extension)
 
 
 # Execute the custom open callback for a given file extension and path.
-# This function checks if there is a registered callback for the specified extension and, if so, calls it with the provided path.
-# This allows the application to handle opening files with custom logic defined in the callback function.
+# This function checks if there is a registered callback for the specified extension and, if so,
+# calls it with the provided path.
+# This allows the application to handle opening files with custom logic defined
+# in the callback function.
 func execute_custom_open_callback(extension: String, path: String) -> void:
 	if not custom_open_callbacks.has(extension):
 		return
