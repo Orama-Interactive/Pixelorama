@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
 
-Built using Godot 4.6.2
+Built using Godot 4.6.3
 
 ### Added
 - Added a keyframe-based view on the timeline, allowing users to animate layer effects with interpolation support. [#1417](https://github.com/Orama-Interactive/Pixelorama/pull/1417)
