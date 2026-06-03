@@ -26,6 +26,7 @@ var custom_importer_scenes := {}  ## Contains ids keys and import option preload
 # custom open callbacks for extensions, with file extension as key and callback function as value
 var custom_open_callbacks: Dictionary = {}
 
+
 func _ready() -> void:
 	autosave_timer = Timer.new()
 	autosave_timer.one_shot = false
@@ -1378,30 +1379,31 @@ func save_project_to_recent_list(path: String) -> void:
 	top_menu_container.recent_projects_submenu.clear()
 	top_menu_container.update_recent_projects_submenu()
 
-# Custom open callbacks are used to add support for opening files with extensions that are not natively supported by Pixelorama. 
+
+# Custom open callbacks are used to add support for opening files with extensions that are not natively supported by Pixelorama.
 # This allows users to extend the functionality of Pixelorama without modifying the core code.
 func register_custom_open_callback(extension: String, callback: Callable) -> void:
 	custom_open_callbacks[extension] = callback
 
 
-# Unregister a custom open callback for a specific file extension. 
+# Unregister a custom open callback for a specific file extension.
 # This can be used when the support for that file type is no longer needed or if the user wants to change the callback function for that extension.
 func unregister_custom_open_callback(extension: String) -> void:
 	if custom_open_callbacks.has(extension):
 		custom_open_callbacks.erase(extension)
 
 
-# Execute the custom open callback for a given file extension and path. 
-# This function checks if there is a registered callback for the specified extension and, if so, calls it with the provided path. 
+# Execute the custom open callback for a given file extension and path.
+# This function checks if there is a registered callback for the specified extension and, if so, calls it with the provided path.
 # This allows the application to handle opening files with custom logic defined in the callback function.
 func execute_custom_open_callback(extension: String, path: String) -> void:
 	if not custom_open_callbacks.has(extension):
 		return
-	
+
 	var callback: Callable = custom_open_callbacks[extension]
 	callback.call(path)
 
 
-# Check if there is a custom open callback registered for a specific file extension. 
+# Check if there is a custom open callback registered for a specific file extension.
 func has_custom_open_callbacks(extension: String) -> bool:
 	return custom_open_callbacks.has(extension)
