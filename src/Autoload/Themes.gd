@@ -8,7 +8,12 @@ signal theme_removed(theme: Theme)
 signal theme_switched
 
 const MAIN_THEME := preload("uid://dog5j8wjiwikc")
+const CUSTOM_THEME_INDEX := -99999
 
+var system_base_color := Color(DisplayServer.get_base_color(), 1.0)
+var system_accent_color := Color(DisplayServer.get_accent_color(), 1.0)
+var system_theme := ThemeVariation.new(MAIN_THEME, "System", system_base_color, system_accent_color)
+var system_theme_index := -1
 var themes: Array[ThemeVariation] = [
 	ThemeVariation.new(MAIN_THEME, "Dark"),
 	ThemeVariation.new(MAIN_THEME, "Gray", Color("333333"), Color("a7b2ea")),
@@ -18,6 +23,7 @@ var themes: Array[ThemeVariation] = [
 	ThemeVariation.new(MAIN_THEME, "Purple", Color("433057"), Color("d093dd")),
 	ThemeVariation.new(MAIN_THEME, "Rose", Color("a53753"), Color("f69bb2")),
 	ThemeVariation.new(MAIN_THEME, "Black (OLED)", Color.BLACK, Color("7c8dbf"), 0.0),
+	system_theme
 ]
 
 
@@ -78,6 +84,8 @@ class ThemeVariation:
 
 
 func _ready() -> void:
+	DisplayServer.set_system_theme_change_callback(_on_set_system_theme_changed)
+	system_theme_index = themes.find(system_theme)
 	var theme_id: int = Global.config_cache.get_value("preferences", "theme_preset_index", 0)
 	## Wait so that extensions are loaded
 	await Global.pixelorama_opened
@@ -109,20 +117,40 @@ func remove_theme(theme: Theme) -> void:
 
 
 func change_theme(id: int) -> void:
-	var theme := ThemeUtils.generate_theme(themes[id])
+	if id != CUSTOM_THEME_INDEX:
+		var theme_var := themes[id]
+		Global.theme_base_color = theme_var.get_base_color()
+		Global.theme_accent_color = theme_var.get_accent_color()
+		Global.theme_color_contrast = theme_var.contrast
+		apply_theme(theme_var)
+	else:
+		# Custom
+		apply_theme(themes[0])
+
+
+func apply_theme(base_theme_var: ThemeVariation) -> void:
+	var base_theme := base_theme_var.theme
+	var theme_var := base_theme_var
+	if base_theme == MAIN_THEME:
+		theme_var = ThemeVariation.new(
+			base_theme,
+			"",
+			Global.theme_base_color,
+			Global.theme_accent_color,
+			Global.theme_color_contrast
+		)
+	var theme := ThemeUtils.generate_theme(theme_var)
 	Global.theme_font_index = Global.theme_font_index  # Trigger the setter
 	if theme.default_font != Global.theme_font:
 		theme.default_font = Global.theme_font
 	theme.default_font_size = Global.font_size
 	theme.set_font_size("font_size", "HeaderSmall", Global.font_size + 2)
 	var icon_color := theme.get_color("modulate_color", "Icons")
-	if Global.icon_color_from == Global.ColorFrom.THEME:
-		Global.modulate_icon_color = icon_color
+	Global.modulate_icon_color = icon_color
 
 	Global.control.theme = theme
 	change_clear_color()
 	change_icon_colors()
-	Global.config_cache.set_value("preferences", "theme", id)
 	Global.config_cache.save(Global.CONFIG_PATH)
 	theme_switched.emit()
 
@@ -135,10 +163,8 @@ func change_clear_color() -> void:
 			clear_color = panel_stylebox.bg_color
 		else:
 			clear_color = Color.GRAY
-	if Global.clear_color_from == Global.ColorFrom.THEME:
-		RenderingServer.set_default_clear_color(clear_color)
-	else:
-		RenderingServer.set_default_clear_color(Global.modulate_clear_color)
+	Global.modulate_clear_color = clear_color
+	RenderingServer.set_default_clear_color(Global.modulate_clear_color)
 
 
 func change_icon_colors() -> void:
@@ -171,3 +197,12 @@ func get_font_size() -> int:
 	if Global.control.theme.has_default_font_size():
 		return Global.control.theme.default_font_size
 	return ThemeDB.fallback_font_size
+
+
+func _on_set_system_theme_changed() -> void:
+	system_base_color = Color(DisplayServer.get_base_color(), 1.0)
+	system_accent_color = Color(DisplayServer.get_accent_color(), 1.0)
+	system_theme = ThemeVariation.new(MAIN_THEME, "System", system_base_color, system_accent_color)
+	themes[system_theme_index] = system_theme
+	if Global.theme_preset_index == system_theme_index:
+		change_theme(system_theme_index)

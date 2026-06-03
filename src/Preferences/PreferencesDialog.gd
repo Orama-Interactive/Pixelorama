@@ -1,5 +1,30 @@
 extends AcceptDialog
 
+var pref_theme_base_color := Preference.new(
+	"theme_base_color",
+	"Interface/ThemeOptions/BaseColor",
+	"color",
+	Color.GRAY,
+	false,
+	_on_theme_color_changed
+)
+var pref_theme_accent_color := Preference.new(
+	"theme_accent_color",
+	"Interface/ThemeOptions/AccentColor",
+	"color",
+	Color.GRAY,
+	false,
+	_on_theme_color_changed
+)
+var pref_theme_color_contrast := Preference.new(
+	"theme_color_contrast",
+	"Interface/ThemeOptions/ContrastSlider",
+	"value",
+	0.3,
+	false,
+	_on_theme_color_changed
+)
+
 var preferences: Array[Preference] = [
 	Preference.new(
 		"open_last_project", "Startup/StartupContainer/OpenLastProject", "button_pressed", false
@@ -49,15 +74,9 @@ var preferences: Array[Preference] = [
 		)
 	),
 	Preference.new("theme_preset_index", "%ThemePresetOptionButton", "selected", 0),
-	Preference.new(
-		"icon_color_from",
-		"Interface/ButtonOptions/IconColorOptionButton",
-		"selected",
-		Global.ColorFrom.THEME
-	),
-	Preference.new(
-		"custom_icon_color", "Interface/ButtonOptions/IconColorButton", "color", Color.GRAY
-	),
+	pref_theme_base_color,
+	pref_theme_accent_color,
+	pref_theme_color_contrast,
 	Preference.new(
 		"reset_swap_on_shortcut_release",
 		"Tools/ToolOptions/ResetSwapCheckBox",
@@ -96,7 +115,7 @@ var preferences: Array[Preference] = [
 	),
 	Preference.new(
 		"tool_button_size",
-		"Interface/ButtonOptions/ToolButtonSizeOptionButton",
+		"Interface/InterfaceOptions/ToolButtonSizeOptionButton",
 		"selected",
 		Global.ButtonSize.SMALL
 	),
@@ -173,15 +192,6 @@ var preferences: Array[Preference] = [
 		"checker_follow_scale", "Canvas/CheckerOptions/CheckerFollowScale", "button_pressed", false
 	),
 	Preference.new("tilemode_opacity", "Canvas/CheckerOptions/TileModeOpacity", "value", 1.0),
-	Preference.new(
-		"clear_color_from",
-		"Canvas/BackgroundOptions/ColorOptionButton",
-		"selected",
-		Global.ColorFrom.THEME
-	),
-	Preference.new(
-		"modulate_clear_color", "Canvas/BackgroundOptions/BackgroundColor", "color", Color.GRAY
-	),
 	Preference.new(
 		"select_layer_on_button_click",
 		"Timeline/TimelineOptions/SelectLayerOnButton",
@@ -288,13 +298,16 @@ class Preference:
 	var value_type: String
 	var default_value
 	var require_restart := false
+	var callable: Callable
+	var default_button: RestoreDefaultButton
 
 	func _init(
 		_prop_name: String,
 		_node_path: String,
 		_value_type: String,
 		_default_value = null,
-		_require_restart := false
+		_require_restart := false,
+		_callable := Callable(),
 	) -> void:
 		prop_name = _prop_name
 		node_path = _node_path
@@ -304,12 +317,14 @@ class Preference:
 			default_value = _default_value
 		else:
 			default_value = Global.get(prop_name)
+		callable = _callable
 
 
 func _ready() -> void:
 	Global.font_loaded.connect(_add_fonts)
 	Themes.theme_added.connect(_update_themes)
 	Themes.theme_removed.connect(_update_themes)
+	Themes.theme_switched.connect(_on_theme_switched)
 	# Replace OK since preference changes are being applied immediately, not after OK confirmation
 	get_ok_button().text = "Close"
 	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -385,6 +400,7 @@ func _ready() -> void:
 		restore_default_button.default_value = pref.default_value
 		restore_default_button.require_restart = pref.require_restart
 		restore_default_button.node = node
+		pref.default_button = restore_default_button
 		if pref.node_path in ["%ShrinkSlider", "%FontSizeSlider"]:
 			# Add the default button to the shrink slider's grandparent
 			var node_position := node.get_parent().get_index()
@@ -395,28 +411,22 @@ func _ready() -> void:
 			node.get_parent().add_child(restore_default_button)
 			node.get_parent().move_child(restore_default_button, node_position)
 
+		var callable := pref.callable
+		if not callable.is_valid():
+			callable = _on_Preference_value_changed
+		callable = callable.bind(pref, restore_default_button)
 		match pref.value_type:
 			"button_pressed":
-				node.toggled.connect(
-					_on_Preference_value_changed.bind(pref, restore_default_button)
-				)
+				node.toggled.connect(callable)
 			"value":
-				node.value_changed.connect(
-					_on_Preference_value_changed.bind(pref, restore_default_button)
-				)
+				node.value_changed.connect(callable)
 			"color":
 				node.get_picker().presets_visible = false
-				node.color_changed.connect(
-					_on_Preference_value_changed.bind(pref, restore_default_button)
-				)
+				node.color_changed.connect(callable)
 			"selected":
-				node.item_selected.connect(
-					_on_Preference_value_changed.bind(pref, restore_default_button)
-				)
+				node.item_selected.connect(callable)
 			"text":
-				node.text_changed.connect(
-					_on_Preference_value_changed.bind(pref, restore_default_button)
-				)
+				node.text_changed.connect(callable)
 
 		var value = Global.get(pref.prop_name)
 		if node is OptionButton:
@@ -429,6 +439,7 @@ func _ready() -> void:
 		if typeof(value) == TYPE_VECTOR2 or typeof(value) == TYPE_COLOR:
 			is_default = value.is_equal_approx(pref.default_value)
 		disable_restore_default_button(restore_default_button, is_default)
+	_on_theme_switched()
 	SteamManager.set_achievement("ACH_PREFERENCES")
 
 
@@ -460,7 +471,28 @@ func _update_themes(_theme: Theme = null) -> void:
 	theme_preset_option_button.clear()
 	for theme_var in Themes.themes:
 		theme_preset_option_button.add_item(theme_var.get_name())
-	theme_preset_option_button.select(Global.theme_preset_index)
+	theme_preset_option_button.add_item("Custom", Themes.CUSTOM_THEME_INDEX)
+	var idx := theme_preset_option_button.get_item_index(Global.theme_preset_index)
+	theme_preset_option_button.select(idx)
+
+
+func _on_theme_switched() -> void:
+	if Global.theme_preset_index == Themes.CUSTOM_THEME_INDEX:
+		return
+	var theme_color_preferences: Array[Preference] = [
+		pref_theme_base_color, pref_theme_accent_color, pref_theme_color_contrast
+	]
+	for pref in theme_color_preferences:
+		var value = Global.get(pref.prop_name)
+		_on_Preference_value_changed(value, pref, pref.default_button)
+		var node := right_side.get_node(pref.node_path)
+		pref.default_value = value
+		pref.default_button.default_value = pref.default_value
+		disable_restore_default_button(pref.default_button, true)
+		if node is ValueSlider:
+			node.set_value_no_signal_update_display(value)
+		else:
+			node.set(pref.value_type, value)
 
 
 func preference_update(require_restart := false) -> void:
@@ -650,3 +682,11 @@ func _on_reset_options_confirmation_confirmed() -> void:
 		Global.top_menu_container.recent_projects_submenu.clear()
 
 	Global.config_cache.save(Global.CONFIG_PATH)
+
+
+func _on_theme_color_changed(value, pref: Preference, button: RestoreDefaultButton) -> void:
+	Global.theme_preset_index = Themes.CUSTOM_THEME_INDEX
+	Global.config_cache.set_value("preferences", "theme_preset_index", Global.theme_preset_index)
+	var idx := theme_preset_option_button.get_item_index(Global.theme_preset_index)
+	theme_preset_option_button.select(idx)
+	_on_Preference_value_changed(value, pref, button)

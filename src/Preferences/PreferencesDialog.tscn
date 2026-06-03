@@ -239,6 +239,22 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
+[node name="ToolButtonSizeLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions" unique_id=1972884047]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tool button size:"
+
+[node name="ToolButtonSizeOptionButton" type="OptionButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions" unique_id=651072558]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Small"
+popup/item_0/id = 0
+popup/item_1/text = "Big"
+popup/item_1/id = 1
+
 [node name="ScreenOrientationLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/InterfaceOptions" unique_id=1833295930 groups=["MobileOnly"]]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -347,63 +363,50 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 
-[node name="ButtonHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface" unique_id=4954884 groups=["HeaderLabels"]]
+[node name="BaseColorLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ThemeOptions" unique_id=1821735562]
 layout_mode = 2
-theme_override_constants/separation = 0
+mouse_filter = 1
+text = "Base color:"
 
-[node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ButtonHeader" unique_id=314586079]
-layout_mode = 2
-theme_type_variation = &"HeaderSmall"
-text = "Buttons"
-
-[node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ButtonHeader" unique_id=1766494602]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-
-[node name="ButtonOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface" unique_id=1600284949]
-layout_mode = 2
-columns = 3
-
-[node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ButtonOptions" unique_id=1972884047]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Tool button size:"
-
-[node name="ToolButtonSizeOptionButton" type="OptionButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ButtonOptions" unique_id=651072558]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_default_cursor_shape = 2
-selected = 0
-item_count = 2
-popup/item_0/text = "Small"
-popup/item_0/id = 0
-popup/item_1/text = "Big"
-popup/item_1/id = 1
-
-[node name="Label2" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ButtonOptions" unique_id=250908542]
-layout_mode = 2
-text = "Icon color from:"
-
-[node name="IconColorOptionButton" type="OptionButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ButtonOptions" unique_id=990110604]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-selected = 0
-item_count = 2
-popup/item_0/text = "Theme"
-popup/item_0/id = 0
-popup/item_1/text = "Custom"
-popup/item_1/id = 1
-
-[node name="Label3" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ButtonOptions" unique_id=1863691022]
-layout_mode = 2
-text = "Icon color:"
-
-[node name="IconColorButton" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ButtonOptions" unique_id=1048917968]
+[node name="BaseColor" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ThemeOptions" unique_id=779482947]
 custom_minimum_size = Vector2(64, 20)
 layout_mode = 2
 mouse_default_cursor_shape = 2
-color = Color(0.75, 0.75, 0.75, 1)
+color = Color(0.470588, 0.470588, 0.470588, 1)
+
+[node name="AccentColorLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ThemeOptions" unique_id=989334678]
+layout_mode = 2
+mouse_filter = 1
+text = "Accent color:"
+
+[node name="AccentColor" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ThemeOptions" unique_id=1642156326]
+custom_minimum_size = Vector2(64, 20)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+color = Color(0.470588, 0.470588, 0.470588, 1)
+
+[node name="ContrastLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ThemeOptions" unique_id=1267417911]
+layout_mode = 2
+mouse_filter = 1
+text = "Contrast:"
+
+[node name="ContrastSlider" type="TextureProgressBar" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ThemeOptions" unique_id=1029001160]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "This is the distance in screen pixels where guide and grid snapping gets activated."
+focus_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+max_value = 1.0
+step = 0.01
+value = 0.3
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("8")
+snap_step = 0.5
 
 [node name="Canvas" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide" unique_id=1561441708]
 visible = false
@@ -888,55 +891,6 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("8")
 snap_step = 0.1
-
-[node name="BackgroundHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas" unique_id=1147276346 groups=["HeaderLabels"]]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/BackgroundHeader" unique_id=1128383153]
-layout_mode = 2
-theme_type_variation = &"HeaderSmall"
-text = "Background"
-
-[node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/BackgroundHeader" unique_id=1790630177]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-
-[node name="BackgroundOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas" unique_id=202912210]
-layout_mode = 2
-theme_override_constants/h_separation = 4
-theme_override_constants/v_separation = 4
-columns = 3
-
-[node name="ColorFromLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/BackgroundOptions" unique_id=1320026830]
-custom_minimum_size = Vector2(110, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 1
-text = "Background color from:"
-
-[node name="ColorOptionButton" type="OptionButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/BackgroundOptions" unique_id=318317743]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_default_cursor_shape = 2
-selected = 0
-item_count = 2
-popup/item_0/text = "Theme"
-popup/item_0/id = 0
-popup/item_1/text = "Custom"
-popup/item_1/id = 1
-
-[node name="ColorLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/BackgroundOptions" unique_id=1530363288]
-layout_mode = 2
-mouse_filter = 1
-text = "Background color:"
-
-[node name="BackgroundColor" type="ColorPickerButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/BackgroundOptions" unique_id=1003812793]
-custom_minimum_size = Vector2(64, 20)
-layout_mode = 2
-mouse_default_cursor_shape = 2
-color = Color(0.470588, 0.470588, 0.470588, 1)
 
 [node name="Timeline" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide" unique_id=1361637336]
 visible = false
