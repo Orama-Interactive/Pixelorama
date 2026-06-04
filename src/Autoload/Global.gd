@@ -319,14 +319,6 @@ var theme_color_contrast := 0.3:
 			Themes.change_theme(theme_preset_index)
 ## Found in Preferences. The modulation color (or simply color) of icons.
 var modulate_icon_color := Color.GRAY
-## Found in Preferences. Color of icons.
-var custom_icon_color := Color.GRAY:
-	set(value):
-		if value == custom_icon_color:
-			return
-		custom_icon_color = value
-		modulate_icon_color = custom_icon_color
-		Themes.change_icon_colors()
 ## Found in Preferences. The modulation color (or simply color) of canvas background
 ## (aside from checker background).
 var modulate_clear_color := Color.GRAY:
