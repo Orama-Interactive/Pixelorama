@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Korean\n"
 "Language: ko_KR\n"
-"PO-Revision-Date: 2026-06-03 18:55\n"
+"PO-Revision-Date: 2026-06-04 23:58\n"
 
 msgid "OK"
 msgstr "예"
@@ -30,11 +30,8 @@ msgstr "확인이 필요합니다..."
 msgid "File Name:"
 msgstr "파일 이름:"
 
-msgid "Project Name:"
-msgstr "프로젝트 이름:"
-
-msgid "Image Size"
-msgstr "이미지 크기"
+msgid "Project name:"
+msgstr ""
 
 msgid "Canvas Size"
 msgstr "캔버스 크기"
@@ -3210,8 +3207,28 @@ msgstr "세로"
 msgid "Landscape"
 msgstr "가로"
 
+# Found in the "New project" window. Refers to the content of the new project, whether it will just be a blank canvas, or if it will be created with data from the clipboard.
+msgid "Content:"
+msgstr ""
+
+# Found in the "New project" window. Refers to the content of the new project, set to be just a blank canvas.
+msgid "Blank canvas"
+msgstr ""
+
+# Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
+msgid "App clipboard"
+msgstr ""
+
+# Found in the "New project" window. Refers to the content of the clipboard of the (operating) system.
+msgid "System clipboard"
+msgstr ""
+
 msgid "Templates:"
 msgstr "템플릿:"
+
+# Found in the "New project" window. Refers to recent project sizes.
+msgid "Recent:"
+msgstr ""
 
 msgid "Preset"
 msgstr "사전 설정"
