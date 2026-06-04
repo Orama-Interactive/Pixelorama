@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-06-03 18:56\n"
+"PO-Revision-Date: 2026-06-04 23:59\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -30,11 +30,8 @@ msgstr "Bonvolu konfirmu..."
 msgid "File Name:"
 msgstr "Nomo de dosiero:"
 
-msgid "Project Name:"
-msgstr "Nomo de projekto:"
-
-msgid "Image Size"
-msgstr "Mezuro de bildo"
+msgid "Project name:"
+msgstr ""
 
 msgid "Canvas Size"
 msgstr "Grando de la kanvaso"
@@ -3239,8 +3236,28 @@ msgstr "Vertikala"
 msgid "Landscape"
 msgstr "Horizontala"
 
+# Found in the "New project" window. Refers to the content of the new project, whether it will just be a blank canvas, or if it will be created with data from the clipboard.
+msgid "Content:"
+msgstr ""
+
+# Found in the "New project" window. Refers to the content of the new project, set to be just a blank canvas.
+msgid "Blank canvas"
+msgstr ""
+
+# Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
+msgid "App clipboard"
+msgstr ""
+
+# Found in the "New project" window. Refers to the content of the clipboard of the (operating) system.
+msgid "System clipboard"
+msgstr ""
+
 msgid "Templates:"
 msgstr "Ŝablonoj:"
+
+# Found in the "New project" window. Refers to recent project sizes.
+msgid "Recent:"
+msgstr ""
 
 msgid "Preset"
 msgstr "Antaŭagordo"
