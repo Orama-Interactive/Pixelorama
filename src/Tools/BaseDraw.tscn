@@ -78,6 +78,7 @@ stretch_mode = 5
 
 [node name="BrushSize" parent="Brush" index="1" unique_id=1200951505 instance=ExtResource("1")]
 layout_mode = 2
+focus_mode = 0
 min_value = 1.0
 max_value = 25.0
 value = 1.0
@@ -163,11 +164,17 @@ grow_vertical = 2
 texture = ExtResource("6_p5353")
 stretch_mode = 3
 
-[node name="DensityValueSlider" type="TextureProgressBar" parent="." index="4" unique_id=1434866758]
+[node name="ColorInterpolation" parent="." index="4" unique_id=1234982812 instance=ExtResource("1")]
+visible = false
+layout_mode = 2
+tooltip_text = "0: Color from the brush itself, 100: the currently selected color"
+focus_mode = 0
+prefix = "Brush color from:"
+
+[node name="DensityValueSlider" type="TextureProgressBar" parent="." index="5" unique_id=1434866758]
 visible = false
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = 1.0
@@ -181,17 +188,11 @@ script = ExtResource("5_kdxku")
 prefix = "Density:"
 suffix = "%"
 
-[node name="ColorInterpolation" parent="." index="5" unique_id=1234982812 instance=ExtResource("1")]
-visible = false
-layout_mode = 2
-tooltip_text = "0: Color from the brush itself, 100: the currently selected color"
-prefix = "Brush color from:"
-
 [connection signal="pressed" from="Brush/Type" to="." method="_on_BrushType_pressed"]
 [connection signal="value_changed" from="Brush/BrushSize" to="." method="_on_BrushSize_value_changed"]
 [connection signal="pressed" from="TransformButtonsContainer/RotateLeftButton" to="." method="_on_rotate_pressed" binds= [false]]
 [connection signal="pressed" from="TransformButtonsContainer/RotateRightButton" to="." method="_on_rotate_pressed" binds= [true]]
 [connection signal="pressed" from="TransformButtonsContainer/FlipHorizontalButton" to="." method="_on_flip_horizontal_button_pressed"]
 [connection signal="pressed" from="TransformButtonsContainer/FlipVerticalButton" to="." method="_on_flip_vertical_button_pressed"]
-[connection signal="value_changed" from="DensityValueSlider" to="." method="_on_density_value_slider_value_changed"]
 [connection signal="value_changed" from="ColorInterpolation" to="." method="_on_InterpolateFactor_value_changed"]
+[connection signal="value_changed" from="DensityValueSlider" to="." method="_on_density_value_slider_value_changed"]
