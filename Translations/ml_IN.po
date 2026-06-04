@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malayalam\n"
 "Language: ml_IN\n"
-"PO-Revision-Date: 2026-06-03 18:56\n"
+"PO-Revision-Date: 2026-06-04 23:59\n"
 
 msgid "OK"
 msgstr "ഓക്കേ"
@@ -30,11 +30,8 @@ msgstr "ദയവായി ഉറപ്പിക്കുക..."
 msgid "File Name:"
 msgstr "ഫയലിന്റെ പേര് :"
 
-msgid "Project Name:"
-msgstr "പ്രോജക്ടിന്റെ പേര് :"
-
-msgid "Image Size"
-msgstr "ചിത്രത്തിന്റെ വലുപ്പം"
+msgid "Project name:"
+msgstr ""
 
 msgid "Canvas Size"
 msgstr "ക്യാന്വാസിന്റെ വലുപ്പം"
@@ -3160,7 +3157,27 @@ msgstr ""
 msgid "Landscape"
 msgstr ""
 
+# Found in the "New project" window. Refers to the content of the new project, whether it will just be a blank canvas, or if it will be created with data from the clipboard.
+msgid "Content:"
+msgstr ""
+
+# Found in the "New project" window. Refers to the content of the new project, set to be just a blank canvas.
+msgid "Blank canvas"
+msgstr ""
+
+# Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
+msgid "App clipboard"
+msgstr ""
+
+# Found in the "New project" window. Refers to the content of the clipboard of the (operating) system.
+msgid "System clipboard"
+msgstr ""
+
 msgid "Templates:"
+msgstr ""
+
+# Found in the "New project" window. Refers to recent project sizes.
+msgid "Recent:"
 msgstr ""
 
 msgid "Preset"
