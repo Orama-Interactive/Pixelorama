@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2026-06-03 18:54\n"
+"PO-Revision-Date: 2026-06-04 01:57\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1018,19 +1018,19 @@ msgstr "玫瑰"
 
 #. A theme. Black (#000000) is set as the main color so these pixels can be turned off on OLED screens.
 msgid "Black (OLED)"
-msgstr ""
+msgstr "黑色 (OLED)"
 
 #. A theme. "System" refers to the Operating System.
 msgid "System"
-msgstr ""
+msgstr "系统"
 
 #. Refers to the base color of a theme.
 msgid "Base color:"
-msgstr ""
+msgstr "基本颜色："
 
 #. Refers to the accent color of a theme.
 msgid "Accent color:"
-msgstr ""
+msgstr "强调颜色："
 
 msgid "Theme"
 msgstr "主题"
@@ -2536,7 +2536,7 @@ msgstr "右面"
 
 #. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
 msgid "Eraser mode"
-msgstr ""
+msgstr "擦除模式"
 
 msgid "Mirroring"
 msgstr "镜像"
