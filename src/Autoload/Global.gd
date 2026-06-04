@@ -940,6 +940,7 @@ func _initialize_keychain() -> void:
 		&"zen_mode": Keychain.InputAction.new("", "Window menu", true),
 		&"toggle_fullscreen": Keychain.InputAction.new("", "Window menu", true),
 		&"clear_selection": Keychain.InputAction.new("", "Select menu", true),
+		&"reselect": Keychain.InputAction.new("", "Select menu", true),
 		&"select_all": Keychain.InputAction.new("", "Select menu", true),
 		&"invert_selection": Keychain.InputAction.new("", "Select menu", true),
 		&"select_cel_area": Keychain.InputAction.new("", "Select menu", true),
