@@ -1,10 +1,14 @@
 extends ConfirmationDialog
 
-enum SizeFrom { CLIPBOARD_APP, CLIPBOARD_SYSTEM }
+enum Content { BLANK, CLIPBOARD_APP, CLIPBOARD_SYSTEM }
+
+var current_content := Content.BLANK
 var aspect_ratio := 1.0
 var recent_sizes := []
 var templates: Array[Template] = [
 	# Basic
+	Template.new(Vector2.ONE, "App clipboard"),
+	Template.new(Vector2.ONE, "System clipboard"),
 	Template.new(Vector2i(16, 16)),
 	Template.new(Vector2i(32, 32)),
 	Template.new(Vector2i(64, 64)),
@@ -25,7 +29,7 @@ var templates: Array[Template] = [
 	Template.new(Vector2i(320, 224), "MD (NTSC)"),
 	Template.new(Vector2i(320, 240), "MD (PAL)"),
 	# NEC
-	Template.new(Vector2i(256, 239), "PC Engine"),  #256×224 to 512×242 (mostly 256×239)
+	Template.new(Vector2i(256, 239), "PC Engine"),  # 256×224 to 512×242 (mostly 256×239)
 	# DOS
 	Template.new(Vector2i(320, 200), "DOS EGA"),
 	Template.new(Vector2i(320, 200), "DOS VGA"),
@@ -68,12 +72,11 @@ var templates: Array[Template] = [
 	Template.new(Vector2i(298, 421), "A4 Portrait"),
 	Template.new(Vector2i(210, 297), "A5 Portrait"),
 ]
-
+@onready var content_options := %ContentOptions as OptionButton
 @onready var templates_options := %TemplatesOptions as OptionButton
 @onready var ratio_box := %AspectRatioButton as TextureButton
 @onready var width_value := %WidthValue as SpinBox
 @onready var height_value := %HeightValue as SpinBox
-@onready var clipboard_size_menu := %SizeFromMenu as MenuButton
 @onready var portrait_button := %PortraitButton as Button
 @onready var landscape_button := %LandscapeButton as Button
 @onready var name_input := $VBoxContainer/FillColorContainer/NameInput as LineEdit
@@ -97,49 +100,35 @@ func _ready() -> void:
 	aspect_ratio = width_value.value / height_value.value
 	fill_color_node.color = Global.default_fill_color
 	fill_color_node.get_picker().presets_visible = false
-	var size_from_popup := clipboard_size_menu.get_popup()
-	size_from_popup.add_item("App Clipboard", SizeFrom.CLIPBOARD_APP)
-	size_from_popup.add_item("System Clipboard", SizeFrom.CLIPBOARD_SYSTEM)
-	size_from_popup.id_pressed.connect(_on_clipboard_size_from_id_pressed)
 	_create_option_list()
 
 
-func _on_CreateNewImage_about_to_show():
+func _on_about_to_popup() -> void:
 	recent_sizes = Global.config_cache.get_value("templates", "recent_sizes", [])
 	_create_recent_list()
-	var size_from_popup := clipboard_size_menu.get_popup()
-	size_from_popup.set_item_disabled(
-		size_from_popup.get_item_index(SizeFrom.CLIPBOARD_APP), !SelectionNode.has_app_clipboard()
-	)
-	size_from_popup.set_item_disabled(
-		size_from_popup.get_item_index(SizeFrom.CLIPBOARD_SYSTEM),
-		!SelectionNode.has_system_clipboard()
-	)
+	templates[0].resolution = SelectionNode.get_clipboard_size(true)
+	templates[1].resolution = SelectionNode.get_clipboard_size(false)
+	for i in range(1, 3):
+		var template := templates[i - 1]
+		var item_name := "{width}x{height} - {name}".format(
+			{"width": template.resolution.x, "height": template.resolution.y, "name": template.name}
+		)
+		templates_options.set_item_text(i, item_name)
+	content_options.set_item_disabled(1, not SelectionNode.has_app_clipboard())
+	content_options.set_item_disabled(2, not SelectionNode.has_system_clipboard())
+	templates_options.set_item_disabled(1, not SelectionNode.has_app_clipboard())
+	templates_options.set_item_disabled(2, not SelectionNode.has_system_clipboard())
 
 
 func _create_option_list() -> void:
-	var i := 1
-	for template in templates:
+	for i in range(1, templates.size()):
+		var template := templates[i - 1]
+		var item_name := "{width}x{height}".format(
+			{"width": template.resolution.x, "height": template.resolution.y}
+		)
 		if template.name != "":
-			templates_options.add_item(
-				"{width}x{height} - {name}".format(
-					{
-						"width": template.resolution.x,
-						"height": template.resolution.y,
-						"name": template.name
-					}
-				),
-				i
-			)
-		else:
-			templates_options.add_item(
-				"{width}x{height}".format(
-					{"width": template.resolution.x, "height": template.resolution.y}
-				),
-				i
-			)
-
-		i += 1
+			item_name += " - {name}".format({"name": tr(template.name)})
+		templates_options.add_item(item_name, i)
 
 
 func _create_recent_list() -> void:
@@ -150,7 +139,7 @@ func _create_recent_list() -> void:
 		)
 
 
-func _on_CreateNewImage_confirmed() -> void:
+func _on_confirmed() -> void:
 	var width: int = width_value.value
 	var height: int = height_value.value
 	var image_size := Vector2i(width, height)
@@ -171,6 +160,13 @@ func _on_CreateNewImage_confirmed() -> void:
 	new_project.layers.append(PixelLayer.new(new_project))
 	new_project.fill_color = fill_color
 	new_project.frames.append(new_project.new_empty_frame())
+	if current_content > Content.BLANK:
+		var cel_image := new_project.frames[0].cels[0].get_image()
+		var clipboard_img := SelectionNode.get_clipboard_image(
+			current_content == Content.CLIPBOARD_APP
+		)
+		var clipboad_rect := Rect2i(Vector2i.ZERO, clipboard_img.get_size())
+		cel_image.blit_rect(clipboard_img, clipboad_rect, Vector2i.ZERO)
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	Global.canvas.camera_zoom()
@@ -200,8 +196,20 @@ func toggle_size_buttons() -> void:
 	landscape_button.toggled.connect(_on_LandscapeButton_toggled)
 
 
+func _on_content_options_item_selected(index: Content) -> void:
+	current_content = index
+	if index == Content.CLIPBOARD_APP:
+		var clip_size := SelectionNode.get_clipboard_size(true)
+		width_value.value = clip_size.x
+		height_value.value = clip_size.y
+	elif index == Content.CLIPBOARD_SYSTEM:
+		var clip_size := SelectionNode.get_clipboard_size(false)
+		width_value.value = clip_size.x
+		height_value.value = clip_size.y
+
+
 func _on_TemplatesOptions_item_selected(id: int) -> void:
-	# If a template is chosen while "ratio button" is pressed then temporarily release it
+	# If a template is chosen while "ratio button" is pressed then temporarily release it.
 	var temporary_release := false
 	if ratio_box.button_pressed:
 		ratio_box.button_pressed = false
@@ -218,9 +226,9 @@ func _on_TemplatesOptions_item_selected(id: int) -> void:
 		ratio_box.button_pressed = true
 
 
-func _on_RecentTemplates_item_selected(id):
-	#if a template is chosen while "ratio button" is pressed then temporarily release it
-	var temporary_release = false
+func _on_RecentTemplates_item_selected(id: int) -> void:
+	# If a template is chosen while "ratio button" is pressed, then temporarily release it.
+	var temporary_release := false
 	if ratio_box.button_pressed:
 		ratio_box.button_pressed = false
 		temporary_release = true
@@ -244,12 +252,6 @@ func _on_LandscapeButton_toggled(button_pressed: bool) -> void:
 		toggle_size_buttons()
 		return
 	switch_width_height()
-
-
-func _on_clipboard_size_from_id_pressed(id: int) -> void:
-	var image_size := SelectionNode.get_clipboard_size(id == SizeFrom.CLIPBOARD_APP)
-	width_value.value = image_size.x
-	height_value.value = image_size.y
 
 
 func switch_width_height() -> void:

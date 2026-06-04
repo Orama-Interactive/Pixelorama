@@ -11,7 +11,7 @@
 oversampling_override = 1.0
 title = "New..."
 position = Vector2i(0, 36)
-size = Vector2i(457, 333)
+size = Vector2i(457, 377)
 script = ExtResource("1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=354469239]
@@ -24,12 +24,17 @@ offset_right = -8.0
 offset_bottom = -49.0
 size_flags_horizontal = 0
 
-[node name="ImageSize" type="Label" parent="VBoxContainer" unique_id=1213505276]
+[node name="SizeHeader" type="HBoxContainer" parent="VBoxContainer" unique_id=1517669953]
 layout_mode = 2
-text = "Image Size"
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=1697698153]
+[node name="SizeLabel" type="Label" parent="VBoxContainer/SizeHeader" unique_id=1213505276]
 layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Size"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/SizeHeader" unique_id=1697698153]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1477493765]
 layout_mode = 2
@@ -39,8 +44,32 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TemplatesContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/SizeOptions" unique_id=1395521626]
+[node name="TemplatesContainer" type="GridContainer" parent="VBoxContainer/SizeContainer/SizeOptions" unique_id=1892749108]
 layout_mode = 2
+columns = 2
+
+[node name="ContentLabel" type="Label" parent="VBoxContainer/SizeContainer/SizeOptions/TemplatesContainer" unique_id=584611302]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Content:"
+
+[node name="ContentOptions" type="OptionButton" parent="VBoxContainer/SizeContainer/SizeOptions/TemplatesContainer" unique_id=453273137]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+toggle_mode = false
+text_overrun_behavior = 3
+selected = 0
+fit_to_longest_item = false
+item_count = 3
+popup/item_0/text = "Blank canvas"
+popup/item_0/id = 0
+popup/item_1/text = "App clipboard"
+popup/item_1/id = 1
+popup/item_2/text = "System clipboard"
+popup/item_2/id = 2
 
 [node name="TemplatesLabel" type="Label" parent="VBoxContainer/SizeContainer/SizeOptions/TemplatesContainer" unique_id=519859473]
 custom_minimum_size = Vector2(100, 0)
@@ -61,28 +90,20 @@ item_count = 1
 popup/item_0/text = "Default"
 popup/item_0/id = 0
 
-[node name="SizeFromMenu" type="MenuButton" parent="VBoxContainer/SizeContainer/SizeOptions/TemplatesContainer" unique_id=1116921977]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Size from"
-flat = false
-
 [node name="WidthHeightContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/SizeOptions" unique_id=2117963120]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer" unique_id=870976107]
+[node name="SizeContainer" type="GridContainer" parent="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer" unique_id=136674073]
 layout_mode = 2
 size_flags_horizontal = 3
+columns = 2
 
-[node name="WidthContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer/VBoxContainer" unique_id=1992253137]
-layout_mode = 2
-
-[node name="WidthLabel" type="Label" parent="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer/VBoxContainer/WidthContainer" unique_id=532569851]
+[node name="WidthLabel" type="Label" parent="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer/SizeContainer" unique_id=532569851]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Width:"
 
-[node name="WidthValue" type="SpinBox" parent="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer/VBoxContainer/WidthContainer" unique_id=730898689]
+[node name="WidthValue" type="SpinBox" parent="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer/SizeContainer" unique_id=730898689]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -92,15 +113,12 @@ max_value = 16384.0
 value = 64.0
 suffix = "px"
 
-[node name="HeightContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer/VBoxContainer" unique_id=676739656]
-layout_mode = 2
-
-[node name="HeightLabel" type="Label" parent="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer/VBoxContainer/HeightContainer" unique_id=1442112056]
+[node name="HeightLabel" type="Label" parent="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer/SizeContainer" unique_id=1442112056]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Height:"
 
-[node name="HeightValue" type="SpinBox" parent="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer/VBoxContainer/HeightContainer" unique_id=1921126848]
+[node name="HeightValue" type="SpinBox" parent="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer/SizeContainer" unique_id=1921126848]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -110,21 +128,28 @@ max_value = 16384.0
 value = 64.0
 suffix = "px"
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer" unique_id=1291480259 groups=["UIButtons"]]
+[node name="RatioGuides" type="NinePatchRect" parent="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer" unique_id=1023365872 groups=["UIButtons"]]
+custom_minimum_size = Vector2(9, 0)
 layout_mode = 2
 texture = ExtResource("6")
+region_rect = Rect2(0, 0, 9, 44)
+patch_margin_top = 15
+patch_margin_bottom = 13
 
-[node name="AspectRatioButton" type="TextureButton" parent="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer/TextureRect" unique_id=139144517 groups=["UIButtons"]]
+[node name="AspectRatioButton" type="TextureButton" parent="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer/RatioGuides" unique_id=139144517 groups=["UIButtons"]]
 unique_name_in_owner = true
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -4.5
-offset_top = -9.0
-offset_right = 11.5
-offset_bottom = 7.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
 tooltip_text = "Lock aspect ratio"
 mouse_default_cursor_shape = 2
 toggle_mode = true
@@ -186,7 +211,7 @@ layout_mode = 2
 focus_mode = 2
 mouse_filter = 0
 
-[node name="Label" type="Label" parent="VBoxContainer/SizeContainer/VBoxContainer" unique_id=1702747430]
+[node name="RecentLabel" type="Label" parent="VBoxContainer/SizeContainer/VBoxContainer" unique_id=1702747430]
 layout_mode = 2
 text = "Recent:"
 
@@ -208,12 +233,12 @@ columns = 2
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Project Name:"
+text = "Project name:"
 
 [node name="NameInput" type="LineEdit" parent="VBoxContainer/FillColorContainer" unique_id=896854503]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Enter name... (Default \"untitled\")"
+text = "untitled"
 
 [node name="FillColorLabel" type="Label" parent="VBoxContainer/FillColorContainer" unique_id=1713063690]
 custom_minimum_size = Vector2(100, 0)
@@ -245,13 +270,14 @@ popup/item_0/id = 0
 popup/item_1/text = "Indexed"
 popup/item_1/id = 1
 
-[connection signal="about_to_popup" from="." to="." method="_on_CreateNewImage_about_to_show"]
-[connection signal="confirmed" from="." to="." method="_on_CreateNewImage_confirmed"]
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
+[connection signal="confirmed" from="." to="." method="_on_confirmed"]
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="item_selected" from="VBoxContainer/SizeContainer/SizeOptions/TemplatesContainer/ContentOptions" to="." method="_on_content_options_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/SizeContainer/SizeOptions/TemplatesContainer/TemplatesOptions" to="." method="_on_TemplatesOptions_item_selected"]
-[connection signal="value_changed" from="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer/VBoxContainer/WidthContainer/WidthValue" to="." method="_on_SizeValue_value_changed"]
-[connection signal="value_changed" from="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer/VBoxContainer/HeightContainer/HeightValue" to="." method="_on_SizeValue_value_changed"]
-[connection signal="toggled" from="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer/TextureRect/AspectRatioButton" to="." method="_on_AspectRatioButton_toggled"]
+[connection signal="value_changed" from="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer/SizeContainer/WidthValue" to="." method="_on_SizeValue_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer/SizeContainer/HeightValue" to="." method="_on_SizeValue_value_changed"]
+[connection signal="toggled" from="VBoxContainer/SizeContainer/SizeOptions/WidthHeightContainer/RatioGuides/AspectRatioButton" to="." method="_on_AspectRatioButton_toggled"]
 [connection signal="toggled" from="VBoxContainer/SizeContainer/SizeOptions/SizeButtonsContainer/PortraitButton" to="." method="_on_PortraitButton_toggled"]
 [connection signal="toggled" from="VBoxContainer/SizeContainer/SizeOptions/SizeButtonsContainer/LandscapeButton" to="." method="_on_LandscapeButton_toggled"]
 [connection signal="item_selected" from="VBoxContainer/SizeContainer/VBoxContainer/RecentTemplates" to="." method="_on_RecentTemplates_item_selected"]

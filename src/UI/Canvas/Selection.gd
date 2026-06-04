@@ -355,8 +355,16 @@ static func has_system_clipboard() -> bool:
 
 
 static func get_clipboard_size(app_clipboard: bool) -> Vector2i:
+	var image := get_clipboard_image(app_clipboard)
+	if is_instance_valid(image) and not image.is_empty():
+		return image.get_size()
+	return Vector2i.ONE  # The minimum valid size of an image
+
+
+static func get_clipboard_image(app_clipboard: bool) -> Image:
+	var image: Image
 	if app_clipboard:
-		if FileAccess.file_exists(CLIPBOARD_FILE_PATH):
+		if has_app_clipboard():
 			var clipboard_file := FileAccess.open(CLIPBOARD_FILE_PATH, FileAccess.READ)
 			var clipboard = clipboard_file.get_var(true)
 			clipboard_file.close()
@@ -367,13 +375,11 @@ static func get_clipboard_size(app_clipboard: bool) -> Vector2i:
 				)
 				and not clipboard.image.is_empty()
 			):
-				return clipboard.image.get_size()
+				image = clipboard.image
 	else:
-		if DisplayServer.clipboard_has_image():
-			var clipboard_image := DisplayServer.clipboard_get_image()
-			if not clipboard_image.is_empty():
-				return clipboard_image.get_size()
-	return Vector2i.ONE  # The minimum valid size of an image
+		if has_system_clipboard():
+			image = DisplayServer.clipboard_get_image()
+	return image
 
 
 ## Pastes the selection content.
