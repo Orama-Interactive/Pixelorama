@@ -133,7 +133,7 @@ func _on_grid_pref_value_changed(value, pref: GridPreference, button: RestoreDef
 			disable = (prop in special_flags) == default_value if !disable else disable
 		if typeof(value) == TYPE_COLOR:
 			disable = value.is_equal_approx(default_value)
-		disable_restore_default_button(button, disable)
+		button.set_disabled_status(disable)
 	Global.config_cache.set_value("preferences", "grids", grids)
 	manage_button_disabling(grid_info)
 
@@ -177,16 +177,6 @@ func create_default_properties() -> Dictionary:
 	for pref in grid_preferences:
 		grid_info[pref.prop_name] = pref.default_value
 	return grid_info
-
-
-func disable_restore_default_button(button: RestoreDefaultButton, disable: bool) -> void:
-	button.disabled = disable
-	if disable:
-		button.mouse_default_cursor_shape = Control.CURSOR_ARROW
-		button.tooltip_text = ""
-	else:
-		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		button.tooltip_text = "Restore default value"
 
 
 func add_remove_select_button(grid_idx: int, remove := false):
