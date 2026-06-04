@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2026-06-03 18:54\n"
+"PO-Revision-Date: 2026-06-04 06:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1016,19 +1016,19 @@ msgstr "Trandafiriu"
 
 #. A theme. Black (#000000) is set as the main color so these pixels can be turned off on OLED screens.
 msgid "Black (OLED)"
-msgstr ""
+msgstr "Negru (OLED)"
 
 #. A theme. "System" refers to the Operating System.
 msgid "System"
-msgstr ""
+msgstr "Sistem"
 
 #. Refers to the base color of a theme.
 msgid "Base color:"
-msgstr ""
+msgstr "Culoare de bază:"
 
 #. Refers to the accent color of a theme.
 msgid "Accent color:"
-msgstr ""
+msgstr "Culoare accent:"
 
 msgid "Theme"
 msgstr "Temă"
