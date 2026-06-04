@@ -16,19 +16,28 @@ Built using Godot 4.6.3
 - The 3D layer system has been completely re-written! 3D objects are now shared across all cels of a layer, instead of each cel having its own objects, making it possible to animate an object's properties. This re-write also allows for some other new features, such as material property editing (and animating!), importing GLTF scenes, and even drawing directly on 3D objects using the pencil tool! **IMPORTANT NOTE:** Due to this, the 3D layer data of pxo files is NO LONGER COMPATIBLE between v1.2 and older versions. The pxo files themselves should load just fine, but the 3D layers will be EMPTY. [#1429](https://github.com/Orama-Interactive/Pixelorama/pull/1429)
 - The shape tools now support drawing with brushes.
 - Implement rounded rectangle drawing in the rectangle tool.
+- Users can now change the colors of the UI by changing the theme's base color, accent color & contrast directly from the Preferences, making Pixelorama even more configurable & accessible, without having to rely on extensions. [#1515](https://github.com/Orama-Interactive/Pixelorama/pull/1515)
+- Added two new themes: `Black (OLED)` and `System`. `System` is a special theme that follows the Operating System's base & accent colors, and it even automatically updates if the OS' theme changes while Pixelorama is running! This should work for Windows, macOS and Android, while Linux only supports accent color at the moment. [#1515](https://github.com/Orama-Interactive/Pixelorama/pull/1515)
 - Added quick tool activation shortcuts. When a quick tool shortcut is being held, that tool gets activated until the shortcut is released. By default, only the color picker tool has a shortcut, which ic set to <kbd>Alt</kbd>, but you can set shortcuts for every other tool in the Preferences.
 - Added a new "Reselect" option in the Selection menu, which re-creates a previously cleared selection. By default, its shortcut is set to <kbd>Control + Shift + D</kbd>.
 - Added new blend modes: Intersect and Match colors! [#1474](https://github.com/Orama-Interactive/Pixelorama/pull/1474)
 - Added an option in the export dialog to repeat the animation as many times as you want. [#1508](https://github.com/Orama-Interactive/Pixelorama/pull/1508)
+- Exporting tilesets is now also possible from the layer properties of a tilemap layer.
 - Added a preview and a transpose option when exporting tilesets.
-- When creating a new project, it is now possible to set its size based on the clipboard image size, if there is one. [#1507](https://github.com/Orama-Interactive/Pixelorama/pull/1507)
+- New projects can now have the clipboard image (either app or system clipboard) as their content. Clipboard sizes have also been added in the Template list, if you just want to get the clipboard size but not the image itself.
 - Exporting a tileset as a Godot TileSet resource now saves the probability of each tile.
+
+### Changed
+- Made some UI elements, such as tool, cel, layer & frame buttons be focusable with the keyboard and activatable by pressing <kbd>Space</kbd> and/or <kbd>Enter</kbd>.
 
 ### Fixed
 - Fixed resizing selection not being snapped to the pixel grid.
 - Fixed crash when switching to a different project while a transformation is active on a tilemap layer.
 - Fixed manual mode in tilemap layers not updating all cells when there is more than one tilemap layer sharing the same tileset.
 - Fixed extension exporters not working. [#1497](https://github.com/Orama-Interactive/Pixelorama/pull/1497)
+
+### Removed
+- Removed tool & background color options from the Preferences in favor of the new theming system. If there is enough demand for them, we could add them again. [#1515](https://github.com/Orama-Interactive/Pixelorama/pull/1515)
 
 ## [v1.1.10] - 2026-04-30
 This update has been brought to you by the contributions of:
