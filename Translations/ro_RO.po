@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2026-06-04 23:58\n"
+"PO-Revision-Date: 2026-06-05 07:18\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Numele fișierului:"
 
 msgid "Project name:"
-msgstr ""
+msgstr "Numele proiectului:"
 
 msgid "Canvas Size"
 msgstr "Dimensiunea pânzei"
@@ -3239,15 +3239,15 @@ msgstr "Peisaj"
 
 # Found in the "New project" window. Refers to the content of the new project, whether it will just be a blank canvas, or if it will be created with data from the clipboard.
 msgid "Content:"
-msgstr ""
+msgstr "Conținut:"
 
 # Found in the "New project" window. Refers to the content of the new project, set to be just a blank canvas.
 msgid "Blank canvas"
-msgstr ""
+msgstr "Pânză goală"
 
 # Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
 msgid "App clipboard"
-msgstr ""
+msgstr "Memorie intermediară aplicație"
 
 # Found in the "New project" window. Refers to the content of the clipboard of the (operating) system.
 msgid "System clipboard"
