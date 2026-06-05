@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2026-06-04 23:58\n"
+"PO-Revision-Date: 2026-06-05 02:33\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Όνομα αρχείου:"
 
 msgid "Project name:"
-msgstr ""
+msgstr "Όνομα έργου:"
 
 msgid "Canvas Size"
 msgstr "Μέγεθος Καμβά"
@@ -3241,26 +3241,26 @@ msgstr "Οριζόντιος προσανατολισμός"
 
 # Found in the "New project" window. Refers to the content of the new project, whether it will just be a blank canvas, or if it will be created with data from the clipboard.
 msgid "Content:"
-msgstr ""
+msgstr "Περιεχόμενο:"
 
 # Found in the "New project" window. Refers to the content of the new project, set to be just a blank canvas.
 msgid "Blank canvas"
-msgstr ""
+msgstr "Κενός καμβάς"
 
 # Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
 msgid "App clipboard"
-msgstr ""
+msgstr "Πρόχειρο εφαρμογής"
 
 # Found in the "New project" window. Refers to the content of the clipboard of the (operating) system.
 msgid "System clipboard"
-msgstr ""
+msgstr "Πρόχειρο συστήματος"
 
 msgid "Templates:"
 msgstr "Πρότυπα:"
 
 # Found in the "New project" window. Refers to recent project sizes.
 msgid "Recent:"
-msgstr ""
+msgstr "Πρόσφατα:"
 
 msgid "Preset"
 msgstr "Προκαθορισμένο"
