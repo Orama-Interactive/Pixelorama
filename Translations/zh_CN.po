@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2026-06-04 23:58\n"
+"PO-Revision-Date: 2026-06-05 01:20\n"
 
 msgid "OK"
 msgstr "确定"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "文件名称："
 
 msgid "Project name:"
-msgstr ""
+msgstr "项目名称："
 
 msgid "Canvas Size"
 msgstr "画布尺寸"
@@ -3242,26 +3242,26 @@ msgstr "横向"
 
 # Found in the "New project" window. Refers to the content of the new project, whether it will just be a blank canvas, or if it will be created with data from the clipboard.
 msgid "Content:"
-msgstr ""
+msgstr "内容："
 
 # Found in the "New project" window. Refers to the content of the new project, set to be just a blank canvas.
 msgid "Blank canvas"
-msgstr ""
+msgstr "空白画布"
 
 # Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
 msgid "App clipboard"
-msgstr ""
+msgstr "应用程序剪贴板"
 
 # Found in the "New project" window. Refers to the content of the clipboard of the (operating) system.
 msgid "System clipboard"
-msgstr ""
+msgstr "系统剪贴板"
 
 msgid "Templates:"
 msgstr "模板："
 
 # Found in the "New project" window. Refers to recent project sizes.
 msgid "Recent:"
-msgstr ""
+msgstr "最近："
 
 msgid "Preset"
 msgstr "预设"
