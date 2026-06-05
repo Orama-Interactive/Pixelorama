@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2026-06-04 23:58\n"
+"PO-Revision-Date: 2026-06-05 11:38\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "ファイル名:"
 
 msgid "Project name:"
-msgstr ""
+msgstr "プロジェクト名:"
 
 msgid "Canvas Size"
 msgstr "キャンバス サイズ"
@@ -3242,26 +3242,26 @@ msgstr "横"
 
 # Found in the "New project" window. Refers to the content of the new project, whether it will just be a blank canvas, or if it will be created with data from the clipboard.
 msgid "Content:"
-msgstr ""
+msgstr "コンテンツ:"
 
 # Found in the "New project" window. Refers to the content of the new project, set to be just a blank canvas.
 msgid "Blank canvas"
-msgstr ""
+msgstr "空白のキャンバス"
 
 # Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
 msgid "App clipboard"
-msgstr ""
+msgstr "アプリのクリップボード"
 
 # Found in the "New project" window. Refers to the content of the clipboard of the (operating) system.
 msgid "System clipboard"
-msgstr ""
+msgstr "システムのクリップボード"
 
 msgid "Templates:"
 msgstr "テンプレート:"
 
 # Found in the "New project" window. Refers to recent project sizes.
 msgid "Recent:"
-msgstr ""
+msgstr "最近のプロジェクト:"
 
 msgid "Preset"
 msgstr "プリセット"
