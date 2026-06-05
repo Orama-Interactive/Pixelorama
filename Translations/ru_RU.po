@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2026-06-04 23:58\n"
+"PO-Revision-Date: 2026-06-05 02:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Имя файла:"
 
 msgid "Project name:"
-msgstr ""
+msgstr "Название проекта:"
 
 msgid "Canvas Size"
 msgstr "Размер холста"
