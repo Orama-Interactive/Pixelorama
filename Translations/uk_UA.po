@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Ukrainian\n"
 "Language: uk_UA\n"
-"PO-Revision-Date: 2026-06-04 23:59\n"
+"PO-Revision-Date: 2026-06-05 02:33\n"
 
 msgid "OK"
 msgstr "Гаразд"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Ім'я файлу:"
 
 msgid "Project name:"
-msgstr ""
+msgstr "Назва проєкту:"
 
 msgid "Canvas Size"
 msgstr "Розмір полотна"
