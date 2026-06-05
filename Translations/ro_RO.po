@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2026-06-05 07:18\n"
+"PO-Revision-Date: 2026-06-05 09:09\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3247,18 +3247,18 @@ msgstr "Pânză goală"
 
 # Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
 msgid "App clipboard"
-msgstr "Memorie intermediară aplicație"
+msgstr "Memorie temporară aplicație"
 
 # Found in the "New project" window. Refers to the content of the clipboard of the (operating) system.
 msgid "System clipboard"
-msgstr ""
+msgstr "Memorie temporară sistem"
 
 msgid "Templates:"
 msgstr "Șabloane:"
 
 # Found in the "New project" window. Refers to recent project sizes.
 msgid "Recent:"
-msgstr ""
+msgstr "Recent:"
 
 msgid "Preset"
 msgstr "Presetare"
