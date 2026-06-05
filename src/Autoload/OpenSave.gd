@@ -376,8 +376,8 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 		new_project.export_directory_path = path.get_base_dir()
 
 	if empty_project:
-		new_project.change_project()
 		Global.project_switched.emit()
+		new_project.change_project()
 		Global.cel_switched.emit()
 	else:
 		Global.projects.append(new_project)
