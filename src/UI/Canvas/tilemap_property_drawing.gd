@@ -15,7 +15,7 @@ func _draw() -> void:
 	var tilemap_cel := current_cel as CelTileMap
 	var tileset := tilemap_cel.tileset
 	@warning_ignore("integer_division")
-	var half_size := tilemap_cel.tile_size / 2
+	var half_size := tileset.tile_size / 2
 	for cell_coords: Vector2i in tilemap_cel.cells:
 		var cell := tilemap_cel.get_cell_at(cell_coords)
 		var tile_index := cell.index
