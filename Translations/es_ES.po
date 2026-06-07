@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2026-06-04 23:58\n"
+"PO-Revision-Date: 2026-06-07 19:02\n"
 
 msgid "OK"
 msgstr "Aceptar"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Nombre del archivo:"
 
 msgid "Project name:"
-msgstr ""
+msgstr "Nombre del proyecto:"
 
 msgid "Canvas Size"
 msgstr "Tamaño del lienzo"
@@ -1012,19 +1012,19 @@ msgstr "Rosa"
 
 #. A theme. Black (#000000) is set as the main color so these pixels can be turned off on OLED screens.
 msgid "Black (OLED)"
-msgstr ""
+msgstr "Negro (OLED)"
 
 #. A theme. "System" refers to the Operating System.
 msgid "System"
-msgstr ""
+msgstr "Sistema"
 
 #. Refers to the base color of a theme.
 msgid "Base color:"
-msgstr ""
+msgstr "Color base:"
 
 #. Refers to the accent color of a theme.
 msgid "Accent color:"
-msgstr ""
+msgstr "Color de acento:"
 
 msgid "Theme"
 msgstr "Tema"
@@ -2529,7 +2529,7 @@ msgstr "Cara derecha"
 
 #. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
 msgid "Eraser mode"
-msgstr ""
+msgstr "Modo de borrado"
 
 msgid "Mirroring"
 msgstr "Espejar"
@@ -3238,26 +3238,26 @@ msgstr "Paisaje"
 
 # Found in the "New project" window. Refers to the content of the new project, whether it will just be a blank canvas, or if it will be created with data from the clipboard.
 msgid "Content:"
-msgstr ""
+msgstr "Contenido:"
 
 # Found in the "New project" window. Refers to the content of the new project, set to be just a blank canvas.
 msgid "Blank canvas"
-msgstr ""
+msgstr "Lienzo en negro"
 
 # Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
 msgid "App clipboard"
-msgstr ""
+msgstr "Portapapeles de la aplicación"
 
 # Found in the "New project" window. Refers to the content of the clipboard of the (operating) system.
 msgid "System clipboard"
-msgstr ""
+msgstr "Portapeles del sistema"
 
 msgid "Templates:"
 msgstr "Plantillas:"
 
 # Found in the "New project" window. Refers to recent project sizes.
 msgid "Recent:"
-msgstr ""
+msgstr "Recientes:"
 
 msgid "Preset"
 msgstr "Ajuste preestablecido"
