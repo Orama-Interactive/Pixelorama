@@ -230,6 +230,13 @@ static var theme_properties: Dictionary[String, Array] = {
 	"Window border":
 	[
 		ThemeProperty.new(&"embedded_border", &"Window", Theme.DATA_TYPE_STYLEBOX),
+		ThemeProperty.new(
+			&"embedded_unfocused_border",
+			&"Window",
+			Theme.DATA_TYPE_STYLEBOX,
+			false,
+			_change_brightness.bind(0.2)
+		),
 	]
 }
 
