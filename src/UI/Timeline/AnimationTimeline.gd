@@ -62,6 +62,7 @@ var global_layer_expand := true
 @onready var move_down_layer := %MoveDownLayer as Button
 @onready var merge_down_layer := %MergeDownLayer as Button
 @onready var layer_fx := %LayerFX as Button
+@onready var effects_timeline_button := %EffectsTimelineButton as Button
 @onready var blend_modes_button := %BlendModes as OptionButton
 @onready var opacity_slider := %OpacitySlider as ValueSlider
 @onready var frame_scroll_container := %FrameScrollContainer as Control
@@ -1855,8 +1856,14 @@ func _on_layer_frame_h_split_dragged(offset: int) -> void:
 		layer_frame_h_split.split_offset = offset
 
 
-func _on_keyframe_timeline_check_button_toggled(toggled_on: bool) -> void:
-	keyframe_timeline.visible = toggled_on
-	tag_scroll_container.visible = not toggled_on
-	layer_frame_header_h_split.get_parent().visible = not toggled_on
-	frame_scroll_container.get_parent().visible = not toggled_on
+func _on_effects_timeline_button_pressed() -> void:
+	var keyframe_timeline_enabled := keyframe_timeline.visible
+	keyframe_timeline.visible = not keyframe_timeline_enabled
+	tag_scroll_container.visible = keyframe_timeline_enabled
+	layer_frame_header_h_split.get_parent().visible = keyframe_timeline_enabled
+	frame_scroll_container.get_parent().visible = keyframe_timeline_enabled
+	var texture_button: TextureRect = effects_timeline_button.get_child(0)
+	if keyframe_timeline_enabled:
+		Global.change_button_texturerect(texture_button, "keyframe_based_timeline_button.png")
+	else:
+		Global.change_button_texturerect(texture_button, "cel_based_timeline_button.png")
