@@ -917,10 +917,11 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="FrameScrollHeaderContainer" type="Container" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit/MarginContainer" unique_id=746870714 node_paths=PackedStringArray("h_scroll_bar")]
+[node name="FrameScrollHeaderContainer" type="Container" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit/MarginContainer" unique_id=746870714 node_paths=PackedStringArray("keyframe_timeline", "h_scroll_bar")]
 clip_contents = true
 layout_mode = 2
 script = ExtResource("11")
+keyframe_timeline = NodePath("../../../../TimelineScroll/MarginContainer/LayerFrameHSplit/KeyframeTimeline")
 h_scroll_bar = NodePath("../../../../FrameScrollBar")
 
 [node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/MarginContainer/LayerFrameHeaderHSplit/MarginContainer/FrameScrollHeaderContainer" unique_id=276847305]
@@ -974,11 +975,12 @@ theme_override_constants/margin_top = -2
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="FrameScrollContainer" type="Container" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/MarginContainer" unique_id=1654715957 node_paths=PackedStringArray("h_scroll_bar")]
+[node name="FrameScrollContainer" type="Container" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/MarginContainer" unique_id=1654715957 node_paths=PackedStringArray("keyframe_timeline", "h_scroll_bar")]
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 2
 script = ExtResource("11")
+keyframe_timeline = NodePath("../../KeyframeTimeline")
 h_scroll_bar = NodePath("../../../../../FrameScrollBar")
 
 [node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer/TimelineScroll/MarginContainer/LayerFrameHSplit/MarginContainer/FrameScrollContainer" unique_id=1912675353]

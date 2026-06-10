@@ -1857,11 +1857,11 @@ func _on_layer_frame_h_split_dragged(offset: int) -> void:
 
 
 func _on_effects_timeline_button_pressed() -> void:
-	var keyframe_timeline_enabled := keyframe_timeline.visible
-	keyframe_timeline.visible = not keyframe_timeline_enabled
-	tag_scroll_container.visible = keyframe_timeline_enabled
-	layer_frame_header_h_split.get_parent().visible = keyframe_timeline_enabled
-	frame_scroll_container.get_parent().visible = keyframe_timeline_enabled
+	var keyframe_timeline_enabled := not keyframe_timeline.visible
+	keyframe_timeline.visible = keyframe_timeline_enabled
+	tag_scroll_container.visible = not keyframe_timeline_enabled
+	layer_frame_header_h_split.get_parent().visible = not keyframe_timeline_enabled
+	frame_scroll_container.get_parent().visible = not keyframe_timeline_enabled
 	var texture_button: TextureRect = effects_timeline_button.get_child(0)
 	if keyframe_timeline_enabled:
 		Global.change_button_texturerect(texture_button, "keyframe_based_timeline_button.png")
