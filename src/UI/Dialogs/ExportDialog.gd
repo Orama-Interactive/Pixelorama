@@ -40,6 +40,8 @@ var _preview_images: Array[Export.ProcessedImage]
 @onready var layers_option_button: OptionButton = $"%Layers"
 @onready var options_resize: ValueSlider = $"%Resize"
 @onready var dimension_label: Label = $"%DimensionLabel"
+@onready var crop_image_option: OptionButton = %CropImages
+@onready var erase_outside_selection: CheckBox = %EraseOutsideSelection
 
 @onready var directory_path_label: Label = %DirectoryPathLabel
 @onready var path_line_edit: LineEdit = $"%PathLineEdit"
@@ -57,6 +59,9 @@ var _preview_images: Array[Export.ProcessedImage]
 func _ready() -> void:
 	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	get_cancel_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	crop_image_option.add_item("None", Export.CropMode.NONE)
+	crop_image_option.add_item("Content", Export.CropMode.CONTENT)
+	crop_image_option.add_item("Selection", Export.CropMode.SELECTION)
 	tabs.add_tab("Image")
 	tabs.add_tab("Spritesheet")
 	if OS.get_name() == "Windows":
@@ -528,8 +533,9 @@ func _on_multiple_animations_directories_toggled(button_pressed: bool) -> void:
 	Export.new_dir_for_each_frame_tag = button_pressed
 
 
-func _on_trim_images_toggled(toggled_on: bool) -> void:
-	Export.trim_images = toggled_on
+func _on_crop_image_option_selected(index: int) -> void:
+	Export.crop_mode = index as Export.CropMode
+	erase_outside_selection.disabled = index == Export.CropMode.SELECTION
 	Export.process_data()
 	set_preview()
 
