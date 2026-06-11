@@ -86,6 +86,7 @@ func _on_readme_button_pressed() -> void:
 func _on_Download_pressed() -> void:
 	down_button.disabled = true
 	extension_downloader.download_file = download_path
+	download_link = "https://camo.githubusercontent.com/5f04d23f4c2d8e0c12f3e7d2c14cac06c305c5dc2b501455fbebb214fb41e93a/68747470733a2f2f7368617265642e616b616d61692e737465616d7374617469632e636f6d2f73746f72655f6974656d5f6173736574732f737465616d2f617070732f323737393137302f73735f353433393530343063323562323433636238326133626436383737386531396530346234336164652e3139323078313038302e6a70673f743d31373139343234383938"
 	print("Proceeding to send request to: ", download_link)
 	var error := extension_downloader.request(download_link)
 	if error == OK:
