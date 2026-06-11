@@ -1864,6 +1864,6 @@ func _on_effects_timeline_button_pressed() -> void:
 	frame_scroll_container.get_parent().visible = not keyframe_timeline_enabled
 	var texture_button: TextureRect = effects_timeline_button.get_child(0)
 	if keyframe_timeline_enabled:
-		Global.change_button_texturerect(texture_button, "keyframe_based_timeline_button.png")
-	else:
 		Global.change_button_texturerect(texture_button, "cel_based_timeline_button.png")
+	else:
+		Global.change_button_texturerect(texture_button, "keyframe_based_timeline_button.png")
