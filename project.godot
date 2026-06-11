@@ -1195,6 +1195,10 @@ locale/translations=PackedStringArray("res://Translations/en_US.po")
 2d/navigation_engine="Dummy"
 3d/navigation_engine="Dummy"
 
+[network]
+
+tls/enable_tls_v1.3=false
+
 [physics]
 
 2d/physics_engine="Dummy"
