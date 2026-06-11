@@ -123,7 +123,7 @@ func _on_DownloadRequest_request_completed(
 				")"
 			)
 		)
-	DirAccess.remove_absolute(download_path)
+	#DirAccess.remove_absolute(download_path)
 
 
 func _show_error_message(message: String) -> void:
