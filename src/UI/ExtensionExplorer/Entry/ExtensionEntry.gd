@@ -86,14 +86,22 @@ func _on_readme_button_pressed() -> void:
 func _on_Download_pressed() -> void:
 	down_button.disabled = true
 	extension_downloader.download_file = download_path
-	extension_downloader.request(download_link)
-	prepare_progress()
+	print("Proceeding to send request to: ", download_link)
+	var error := extension_downloader.request(download_link)
+	if error == OK:
+		prepare_progress()
+	else:
+		printerr(str("Unable to send request, Code: ", error, " (", error_string(error), ")"))
+		_show_error_message(
+			str("Unable to send request,\nCode: ", error, " (", error_string(error), ")")
+		)
 
 
 ## Called after the extension downloader has finished its job
 func _on_DownloadRequest_request_completed(
 	result: int, _response_code: int, _headers: PackedStringArray, _body: PackedByteArray
 ) -> void:
+	print("Is file present: ", download_path, ", ", FileAccess.file_exists(download_path))
 	if result == HTTPRequest.RESULT_SUCCESS:
 		if FileAccess.get_sha256(download_path) == sha256:
 			# Add extension
