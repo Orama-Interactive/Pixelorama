@@ -95,7 +95,10 @@ func set_tile_bit(pos: Vector2i) -> void:
 	if tile_index == 0:
 		return
 	var terrain_id := TileSetPanel.current_terrain_index
-	if _erase:
+	var should_erase := _erase
+	if Global.single_tool_mode and tool_slot.button == MOUSE_BUTTON_RIGHT:
+		should_erase = not should_erase
+	if should_erase:
 		terrain_id = -1
 	var tile := cel.tileset.tiles[tile_index]
 	var bit_info := get_appropriate_bit(pos, cel, tile)
