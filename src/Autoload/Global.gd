@@ -1551,7 +1551,11 @@ func create_node_from_variable(
 			line_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			line_edit.text = curr_value
 			if started_editing.is_valid():
-				line_edit.editing_toggled.connect(started_editing)
+				line_edit.editing_toggled.connect(
+					func(toggled_on: bool):
+						if toggled_on:
+							started_editing.call()
+				)
 			if value_changed.is_valid():
 				line_edit.text_submitted.connect(value_changed)
 			return line_edit
