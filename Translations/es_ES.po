@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2026-06-07 19:02\n"
+"PO-Revision-Date: 2026-06-12 00:22\n"
 
 msgid "OK"
 msgstr "Aceptar"
@@ -3424,21 +3424,17 @@ msgstr "Separar carácter(es):"
 msgid "The character(s) that separate the file name and the frame number"
 msgstr "El(los) carácter(es) que separan Él nombre del archivo y Él número de fotograma"
 
-#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
-msgid "Trim images"
-msgstr "Recortar imágenes"
+#. Found in the export dialog. It is an option button that allows users to removes the transparent area around non-transparent pixels of the exported images, or to remove every pixel outside of the selection.
+msgid "Crop mode:"
+msgstr ""
+
+#. Refers to the content of an image.
+msgid "Content"
+msgstr ""
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
 msgstr "Recorta las imágenes exportadas a su porción visible, considerando cada píxel con un canal de alfa diferente a cero como visible."
-
-#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
-msgid "Clip image content to selection"
-msgstr "Recortar contenido de la imagen a la selección"
-
-#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
-msgid "Only export content that is within the bounds of a selected area."
-msgstr "Solo exportar contenido que está dentro de los los límites de un área seleccionada."
 
 #. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
 msgid "Layers as separate files"
