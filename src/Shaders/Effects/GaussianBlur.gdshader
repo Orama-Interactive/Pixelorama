@@ -26,7 +26,7 @@ vec4 texture_xorgaussian(sampler2D tex, vec2 uv, vec2 pixel_size, float blurrine
 	vec3 blur_color_sum = center.rgb * center.a;
 	float blur_alpha_sum = center.a;
 
-	// Add up the colors of pixels arround the center pixel according to their gaussian weights.
+	// Add up the colors of pixels around the center pixel according to their gaussian weights.
 	for(float d = 0.0; d < TAU; d += TAU / float(iterations)) {
 		for(float i = 1.0 / float(quality); i <= 1.0; i += 1.0 / float(quality)) {
 			vec2 directions = uv + vec2(cos(d), sin(d)) * radius * i;
