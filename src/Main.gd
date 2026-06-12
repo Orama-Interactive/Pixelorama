@@ -240,6 +240,7 @@ func _ready() -> void:
 	_show_splash_screen()
 	Global.pixelorama_has_loaded = true
 	Global.pixelorama_opened.emit()
+	print("Time Pixelorama took to open: %sms" % Time.get_ticks_msec())
 
 
 func _input(event: InputEvent) -> void:
