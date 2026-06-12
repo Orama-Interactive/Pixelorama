@@ -117,6 +117,8 @@ func show_tab() -> void:
 
 func set_preview() -> void:
 	_preview_images = Export.processed_images
+	if _preview_images.is_empty():
+		return
 	var preview_data := {
 		"exporter_id": Global.current_project.file_format,
 		"export_tab": Export.current_tab,
