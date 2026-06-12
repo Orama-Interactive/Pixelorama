@@ -87,7 +87,7 @@ func _on_readme_button_pressed() -> void:
 func _on_Download_pressed() -> void:
 	down_button.disabled = true
 	extension_downloader.download_file = download_path
-	download_link = "https://github.com/Variable-ind/Pixelorama-Extensions/raw/refs/heads/4.0/Extensions/InputDetector.pck"
+	#download_link = "https://raw.githubusercontent.com/Variable-ind/Pixelorama-Extensions/4.0/Extensions/InputDetector.pck"
 	print("Proceeding to send request to: ", download_link)
 	var error := extension_downloader.request(download_link)
 	if error == OK:
@@ -114,15 +114,7 @@ func _on_DownloadRequest_request_completed(
 		else:
 			_show_error_message("Unable to download extension.\nSHA256 mismatch")
 	else:
-		_show_error_message(
-			str(
-				"Unable to download extension.\nHttp Code: ",
-				result,
-				" (",
-				error_string(result),
-				")"
-			)
-		)
+		_show_error_message(str("Unable to download extension.\nHttp Code: ", result))
 	#DirAccess.remove_absolute(download_path)
 
 
