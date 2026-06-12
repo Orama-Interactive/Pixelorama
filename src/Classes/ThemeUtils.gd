@@ -230,6 +230,13 @@ static var theme_properties: Dictionary[String, Array] = {
 	"Window border":
 	[
 		ThemeProperty.new(&"embedded_border", &"Window", Theme.DATA_TYPE_STYLEBOX),
+		ThemeProperty.new(
+			&"embedded_unfocused_border",
+			&"Window",
+			Theme.DATA_TYPE_STYLEBOX,
+			false,
+			_change_brightness.bind(0.2)
+		),
 	]
 }
 
@@ -333,7 +340,7 @@ static func generate_palette(
 	var is_dark := base_color.get_luminance() < 0.5
 	var background := base_color
 	var primary := get_surface_color(base_color, contrast, 0.15)
-	var secondary := get_surface_color(base_color, contrast, 0.5)
+	var secondary := get_surface_color(base_color, maxf(0.2, contrast), 0.5)
 	var window_border := get_surface_color(base_color, contrast, 1.0)
 	var accent := accent_color
 	var accent2_weight := 0.20 if is_dark else 0.35
