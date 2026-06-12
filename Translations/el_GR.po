@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2026-06-05 02:33\n"
+"PO-Revision-Date: 2026-06-12 00:22\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -3427,21 +3427,17 @@ msgstr "Διαχωριστικοί χαρακτήρες:"
 msgid "The character(s) that separate the file name and the frame number"
 msgstr "Οι χαρακτήρες που διαχωρίζουν το όνομα του αρχείου και τον αριθμό του καρέ"
 
-#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
-msgid "Trim images"
-msgstr "Περικοπή εικόνων"
+#. Found in the export dialog. It is an option button that allows users to removes the transparent area around non-transparent pixels of the exported images, or to remove every pixel outside of the selection.
+msgid "Crop mode:"
+msgstr ""
+
+#. Refers to the content of an image.
+msgid "Content"
+msgstr ""
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
 msgstr "Περικοπή των εξαγόμενων εικόνων στο ορατό τμήμα τους, θεωρώντας κάθε pixel με ένα μη μηδενικό alpha κανάλι ως ορατό."
-
-#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
-msgid "Clip image content to selection"
-msgstr "Αποκοπή περιεχομένου εικόνας στην επιλογή"
-
-#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
-msgid "Only export content that is within the bounds of a selected area."
-msgstr "Εξαγωγή μόνο περιεχομένου που βρίσκεται εντός των ορίων μιας επιλεγμένης περιοχής."
 
 #. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
 msgid "Layers as separate files"
