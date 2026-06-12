@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2026-06-12 00:22\n"
+"PO-Revision-Date: 2026-06-12 17:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Dateiname:"
 
 msgid "Project name:"
-msgstr ""
+msgstr "Projektname:"
 
 msgid "Canvas Size"
 msgstr "Leinwandgröße"
@@ -1014,19 +1014,19 @@ msgstr "Rosa"
 
 #. A theme. Black (#000000) is set as the main color so these pixels can be turned off on OLED screens.
 msgid "Black (OLED)"
-msgstr ""
+msgstr "Schwarz (OLED)"
 
 #. A theme. "System" refers to the Operating System.
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #. Refers to the base color of a theme.
 msgid "Base color:"
-msgstr ""
+msgstr "Primärfarbe:"
 
 #. Refers to the accent color of a theme.
 msgid "Accent color:"
-msgstr ""
+msgstr "Akzentfarbe:"
 
 msgid "Theme"
 msgstr "Design"
@@ -2532,7 +2532,7 @@ msgstr "Rechte Seite"
 
 #. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
 msgid "Eraser mode"
-msgstr ""
+msgstr "Löschmodus"
 
 msgid "Mirroring"
 msgstr "Spiegeln"
@@ -3241,26 +3241,26 @@ msgstr "Querformat"
 
 # Found in the "New project" window. Refers to the content of the new project, whether it will just be a blank canvas, or if it will be created with data from the clipboard.
 msgid "Content:"
-msgstr ""
+msgstr "Inhalt:"
 
 # Found in the "New project" window. Refers to the content of the new project, set to be just a blank canvas.
 msgid "Blank canvas"
-msgstr ""
+msgstr "Leere Leinwand"
 
 # Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
 msgid "App clipboard"
-msgstr ""
+msgstr "Zwischenablage der App"
 
 # Found in the "New project" window. Refers to the content of the clipboard of the (operating) system.
 msgid "System clipboard"
-msgstr ""
+msgstr "Zwischenablage des Systems"
 
 msgid "Templates:"
 msgstr "Vorlagen:"
 
 # Found in the "New project" window. Refers to recent project sizes.
 msgid "Recent:"
-msgstr ""
+msgstr "Kürzlich:"
 
 msgid "Preset"
 msgstr "Voreinstellung"
@@ -3429,11 +3429,11 @@ msgstr "Die Zeichen, die den Dateinamen und die Frame-Nummer trennen"
 
 #. Found in the export dialog. It is an option button that allows users to removes the transparent area around non-transparent pixels of the exported images, or to remove every pixel outside of the selection.
 msgid "Crop mode:"
-msgstr ""
+msgstr "Bild zuschneiden:"
 
 #. Refers to the content of an image.
 msgid "Content"
-msgstr ""
+msgstr "Inhalt"
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
