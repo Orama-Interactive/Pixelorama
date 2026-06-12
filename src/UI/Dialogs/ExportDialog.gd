@@ -333,7 +333,7 @@ func _on_about_to_popup() -> void:
 	checker.size = checker.get_parent().size
 
 
-func _on_tab_bar_tab_clicked(tab: Export.ExportTab) -> void:
+func _on_tab_bar_tab_changed(tab: Export.ExportTab) -> void:
 	Export.current_tab = tab
 	show_tab()
 

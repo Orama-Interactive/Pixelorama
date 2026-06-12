@@ -37,6 +37,7 @@ size_flags_vertical = 3
 [node name="TabBar" type="TabBar" parent="VBoxContainer" unique_id=1836588413]
 layout_mode = 2
 size_flags_vertical = 0
+close_with_middle_mouse = false
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=473865758]
 layout_mode = 2
@@ -353,7 +354,7 @@ tooltip_text = "Only export content that is within the bounds of a selected area
 mouse_default_cursor_shape = 2
 text = "Erase area outside selection"
 
-[node name="CropImageContainer" type="HBoxContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=1889461263]
+[node name="CropImageContainer" type="HBoxContainer" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=1889461263 groups=["ExportImageOptions"]]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/CropImageContainer" unique_id=272996786]
@@ -361,7 +362,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Crop mode:"
 
-[node name="CropImages" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/CropImageContainer" unique_id=259572152 groups=["ExportImageOptions", "ExportMultipleFilesOptions"]]
+[node name="CropImages" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer/CropImageContainer" unique_id=259572152]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -417,7 +418,7 @@ size_flags_horizontal = 3
 [connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
 [connection signal="confirmed" from="." to="." method="_on_confirmed"]
 [connection signal="visibility_changed" from="." to="." method="_on_ExportDialog_visibility_changed"]
-[connection signal="tab_clicked" from="VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_clicked"]
+[connection signal="tab_changed" from="VBoxContainer/TabBar" to="." method="_on_tab_bar_tab_changed"]
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Orientation" to="." method="_on_orientation_item_selected"]
 [connection signal="value_changed" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/LinesCount" to="." method="_on_lines_count_value_changed"]
 [connection signal="item_selected" from="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/Frames" to="." method="_on_frames_item_selected"]
