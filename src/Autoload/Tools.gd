@@ -23,7 +23,10 @@ var diagonal_xy_mirror := false
 var diagonal_x_minus_y_mirror := false
 var pixel_perfect := false
 var alpha_locked := false
-var prev_tool_name := ""
+var prev_tool_names: Dictionary[int, String] = {
+	MOUSE_BUTTON_LEFT: "",
+	MOUSE_BUTTON_RIGHT: "",
+}
 
 # Dynamics
 var stabilizer_enabled := false
@@ -556,15 +559,15 @@ func assign_tool(tool_name: String, button: int, allow_refresh := false) -> void
 
 
 func quick_assign_tool(tool_name: String, button: int, allow_refresh := false) -> void:
-	if prev_tool_name.is_empty():
-		prev_tool_name = get_tool(button).tool_node.name
+	if prev_tool_names[button].is_empty():
+		prev_tool_names[button] = get_tool(button).tool_node.name
 	assign_tool(tool_name, button, allow_refresh)
 
 
 func quick_assign_tool_revert(button: int, allow_refresh := false) -> void:
-	if not prev_tool_name.is_empty():
-		assign_tool(prev_tool_name, button, allow_refresh)
-	prev_tool_name = ""
+	if not prev_tool_names[button].is_empty():
+		assign_tool(prev_tool_names[button], button, allow_refresh)
+	prev_tool_names[button] = ""
 
 
 func default_color() -> void:

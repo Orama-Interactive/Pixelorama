@@ -52,9 +52,11 @@ func _input(event: InputEvent) -> void:
 				and not _ignore_shortcuts
 			):
 				Tools.quick_assign_tool(t.name, MOUSE_BUTTON_LEFT)
+				Tools.quick_assign_tool(t.name, MOUSE_BUTTON_RIGHT)
 				return
 			if event.is_action_released(quick_tool_shortcut):
 				Tools.quick_assign_tool_revert(MOUSE_BUTTON_LEFT)
+				Tools.quick_assign_tool_revert(MOUSE_BUTTON_RIGHT)
 				return
 
 
