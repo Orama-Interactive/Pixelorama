@@ -36,12 +36,14 @@ func _input(event: InputEvent) -> void:
 			if event.is_action_pressed(right_tool_shortcut, false, true) and not _ignore_shortcuts:
 				# Shortcut for right button (with Alt)
 				Tools.assign_tool(t.name, MOUSE_BUTTON_RIGHT)
+				Tools.prev_tool_names[MOUSE_BUTTON_RIGHT] = ""
 				return
 		var left_tool_shortcut := "left_" + t.shortcut + "_tool"
 		if InputMap.has_action(left_tool_shortcut):
 			if event.is_action_pressed(left_tool_shortcut, false, true) and not _ignore_shortcuts:
 				# Shortcut for left button
 				Tools.assign_tool(t.name, MOUSE_BUTTON_LEFT)
+				Tools.prev_tool_names[MOUSE_BUTTON_LEFT] = ""
 				return
 
 		var quick_tool_shortcut := "quick_" + t.shortcut + "_tool"
@@ -54,7 +56,7 @@ func _input(event: InputEvent) -> void:
 				Tools.quick_assign_tool(t.name, MOUSE_BUTTON_LEFT)
 				Tools.quick_assign_tool(t.name, MOUSE_BUTTON_RIGHT)
 				return
-			if event.is_action_released(quick_tool_shortcut):
+			if event.is_action_released(quick_tool_shortcut, true):
 				Tools.quick_assign_tool_revert(MOUSE_BUTTON_LEFT)
 				Tools.quick_assign_tool_revert(MOUSE_BUTTON_RIGHT)
 				return
