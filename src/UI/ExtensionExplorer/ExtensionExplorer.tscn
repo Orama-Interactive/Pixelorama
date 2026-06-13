@@ -168,6 +168,7 @@ wait_time = 0.1
 
 [node name="StoreInformationDownloader" type="HTTPRequest" parent="." unique_id=1823062891]
 unique_name_in_owner = true
+timeout = 10.0
 
 [node name="Error" type="AcceptDialog" parent="." unique_id=1754437895]
 unique_name_in_owner = true
