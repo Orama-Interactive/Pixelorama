@@ -220,16 +220,7 @@ func _input(event: InputEvent) -> void:
 		and layer_index == Global.current_project.current_layer
 		and line_edit.visible == false
 	):
-		_old_camera_auto_release_gui_focus = Global.camera.auto_release_gui_focus
-		Global.camera.auto_release_gui_focus = false
-		_old_is_writing_text = get_tree().current_scene.is_writing_text
-		get_tree().current_scene.is_writing_text = true
-		label.visible = false
-		line_edit.visible = true
-		line_edit.editable = true
-		line_edit.grab_focus()
-		line_edit.select_all()
-		line_edit.caret_column = line_edit.text.length()
+		_show_rename_edit()
 	elif (
 		(event.is_action_released(&"ui_accept") or event.is_action_released(&"ui_cancel"))
 		and line_edit.visible
@@ -267,12 +258,7 @@ func _on_main_button_gui_input(event: InputEvent) -> void:
 		return
 	if event.button_index == MOUSE_BUTTON_LEFT:
 		if event.double_click:
-			label.visible = false
-			line_edit.visible = true
-			line_edit.editable = true
-			line_edit.grab_focus()
-			line_edit.select_all()
-			line_edit.caret_column = line_edit.text.length()
+			_show_rename_edit()
 
 	elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 		popup_menu.popup_on_parent(Rect2(get_global_mouse_position(), Vector2.ONE))
@@ -280,6 +266,20 @@ func _on_main_button_gui_input(event: InputEvent) -> void:
 
 func _on_layer_name_line_edit_focus_exited() -> void:
 	_save_layer_name(line_edit.text)
+
+
+func _show_rename_edit():
+	# temporarily disable gui focus release mechanism when renaming layer
+	_old_camera_auto_release_gui_focus = Global.camera.auto_release_gui_focus
+	Global.camera.auto_release_gui_focus = false
+	_old_is_writing_text = get_tree().current_scene.is_writing_text
+	get_tree().current_scene.is_writing_text = true
+	label.visible = false
+	line_edit.visible = true
+	line_edit.editable = true
+	line_edit.grab_focus()
+	line_edit.select_all()
+	line_edit.caret_column = line_edit.text.length()
 
 
 func _save_layer_name(new_name: String) -> void:
