@@ -188,6 +188,7 @@ const licenses = {
 @onready var preset_options: MenuButton = $PresetOptions
 @onready var licence_name: LineEdit = $LicenceName
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var popup: PopupMenu = preset_options.get_popup()
