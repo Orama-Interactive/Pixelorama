@@ -1,6 +1,6 @@
 extends GridContainer
 
-const licenses = {
+const LICENSES = {
 	"CC0-1.0":
 	{
 		"attribution_required": false,
@@ -192,7 +192,7 @@ const licenses = {
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var popup: PopupMenu = preset_options.get_popup()
-	for license in licenses:
+	for license in LICENSES:
 		popup.add_item(license)
 		var prperties := (
 			"""
@@ -205,15 +205,15 @@ HIGHLIGHTS:
 """
 			. format(
 				{
-					"description": licenses[license]["description"],
+					"description": LICENSES[license]["description"],
 					"attribution_required":
-					"Yes" if licenses[license]["attribution_required"] else "Optional",
+					"Yes" if LICENSES[license]["attribution_required"] else "Optional",
 					"commercial_use_allowed":
-					"Allowed" if licenses[license]["commercial_use_allowed"] else "Forbidden",
+					"Allowed" if LICENSES[license]["commercial_use_allowed"] else "Forbidden",
 					"derivatives_allowed":
-					"Allowed" if licenses[license]["derivatives_allowed"] else "Forbidden",
+					"Allowed" if LICENSES[license]["derivatives_allowed"] else "Forbidden",
 					"share_alike_required":
-					"Yes" if licenses[license]["share_alike_required"] else "No"
+					"Yes" if LICENSES[license]["share_alike_required"] else "No"
 				}
 			)
 		)
