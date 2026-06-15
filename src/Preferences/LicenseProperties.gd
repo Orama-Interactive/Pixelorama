@@ -201,7 +201,7 @@ HIGHLIGHTS:
 => Requires attribution: {attribution_required}
 => Commercial use: {commercial_use_allowed}
 => Derivatives: {derivatives_allowed}
-=> Adaptions to be licensed under the same license?: {share_alike_required}
+=> Require adaptions of work to use the same license?: {share_alike_required}
 """
 			. format(
 				{
