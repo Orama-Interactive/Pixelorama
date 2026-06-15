@@ -261,15 +261,13 @@ func select_keyframes() -> void:
 	var track := key_button.get_parent() as KeyframeAnimationTrack
 	var property_properties := {}  # I apologize for the horrible variable name.
 	if track.type == KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT:
-		property_properties = track.effect.param_properties[param_name]
+		property_properties = track.effect.param_properties[param_name].duplicate()
+	property_properties["hint_string"] = "or_less,or_greater"
 	var node := Global.create_node_from_variable(
 		property, _on_keyframe_property_changed.bind("value"), property_properties
 	)
 	if is_instance_valid(node):
 		properties_grid_container.add_child(node)
-		if node is ValueSlider or node is ValueSliderV2 or node is ValueSliderV3:
-			node.allow_greater = true
-			node.allow_lesser = true
 	var trans_type = dict[param_name][frame_index]["trans"]
 	var ease_type = dict[param_name][frame_index]["ease"]
 

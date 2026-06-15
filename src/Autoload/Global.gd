@@ -804,7 +804,7 @@ func _init() -> void:
 			root_directory.path_join("../Resources").path_join(CONFIG_SUBDIR_NAME)
 		)
 	data_directories.append(root_directory.path_join(CONFIG_SUBDIR_NAME))
-	if OS.get_name() in ["Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD"]:
+	if is_linux_or_bsd():
 		# Checks the list of files var, and processes them.
 		if OS.has_environment("XDG_DATA_DIRS"):
 			var raw_env_var := OS.get_environment("XDG_DATA_DIRS")  # includes empties.
@@ -835,6 +835,7 @@ func _init() -> void:
 
 
 func _ready() -> void:
+	print(get_system_info())
 	if DirAccess.dir_exists_absolute(FONTS_DIR_PATH):
 		var fonts_dir := DirAccess.open(FONTS_DIR_PATH)
 		var files := fonts_dir.get_files()
@@ -874,7 +875,68 @@ func _ready() -> void:
 	canvas.color_index.enabled = show_pixel_indices  # Initialize color index preview
 
 
-func update_grids(grids_data: Dictionary):
+func is_linux_or_bsd() -> bool:
+	return OS.get_name() in ["Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD"]
+
+
+## Print this when Pixelorama launches so it can be stored in the log files.
+## This info may help us better debug issues certain users may have.
+func get_system_info() -> String:
+	var pixelorama_ver := "Pixelorama " + current_version
+	var distribution_name := OS.get_distribution_name()
+	if distribution_name.is_empty():
+		distribution_name = OS.get_name()
+	if distribution_name.is_empty():
+		distribution_name = "Other"
+
+	var distribution_version := OS.get_version_alias()
+	var display_session_type := ""
+	var display_driver_window_mode := ""
+	var distribution_display_session_type := distribution_name
+	if is_linux_or_bsd():
+		var xdg_session_type := OS.get_environment("XDG_SESSION_TYPE")
+		var space_char := ord(" ")
+		display_session_type = xdg_session_type.capitalize().remove_char(space_char)
+		display_driver_window_mode = (
+			DisplayServer.get_name().capitalize().remove_char(space_char) + " display driver"
+		)
+	if not distribution_version.is_empty():
+		distribution_display_session_type += " " + distribution_version
+
+	if not display_session_type.is_empty():
+		distribution_display_session_type += " on " + display_session_type
+
+	if not display_driver_window_mode.is_empty():
+		display_driver_window_mode += ", "
+
+	var embedded_subwindows := get_viewport().is_embedding_subwindows()
+	display_driver_window_mode += "Single-window" if embedded_subwindows else "Multi-window"
+
+	var screen_count := DisplayServer.get_screen_count()
+	if screen_count == 1:
+		display_driver_window_mode += ", " + str(screen_count) + " monitor"
+	else:
+		display_driver_window_mode += ", " + str(screen_count) + " monitors"
+
+	var is_sandboxed := "is sandboxed" if OS.is_sandboxed() else "is not sandboxed"
+	var processor_name := OS.get_processor_name()
+	var processor_count := OS.get_processor_count()
+	var system_ram: int = OS.get_memory_info()["physical"]
+
+	var audio_driver_name := AudioServer.get_driver_name()
+	var info := PackedStringArray()
+	info.push_back(pixelorama_ver)
+	info.push_back(distribution_display_session_type)
+	info.push_back(display_driver_window_mode)
+	info.push_back(is_sandboxed)
+	info.push_back("%s (%d threads)" % [processor_name, processor_count])
+	if system_ram > 0:
+		info.push_back("%s memory" % String.humanize_size(system_ram))
+	info.push_back(audio_driver_name)
+	return String(" - ").join(info)
+
+
+func update_grids(grids_data: Dictionary) -> void:
 	# Remove old grids
 	grids.clear()
 	if is_instance_valid(Global.canvas.grid):
@@ -1553,7 +1615,11 @@ func create_node_from_variable(
 			line_edit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			line_edit.text = curr_value
 			if started_editing.is_valid():
-				line_edit.editing_toggled.connect(started_editing)
+				line_edit.editing_toggled.connect(
+					func(toggled_on: bool):
+						if toggled_on:
+							started_editing.call()
+				)
 			if value_changed.is_valid():
 				line_edit.text_submitted.connect(value_changed)
 			return line_edit

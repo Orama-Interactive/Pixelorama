@@ -101,7 +101,7 @@ func get_params(frame_index: int) -> Dictionary:
 func set_keyframe(
 	param_name: String,
 	frame_index: int,
-	value: Variant = params[param_name],
+	value: Variant = get_params(frame_index)[param_name],
 	trans := Tween.TRANS_LINEAR,
 	ease_type := Tween.EASE_IN
 ) -> void:
