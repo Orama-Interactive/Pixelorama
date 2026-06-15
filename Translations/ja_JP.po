@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2026-04-26 16:23\n"
+"PO-Revision-Date: 2026-06-12 09:17\n"
 
 msgid "OK"
 msgstr "OK"
@@ -30,11 +30,8 @@ msgstr "確認して下さい"
 msgid "File Name:"
 msgstr "ファイル名:"
 
-msgid "Project Name:"
+msgid "Project name:"
 msgstr "プロジェクト名:"
-
-msgid "Image Size"
-msgstr "画像サイズ"
 
 msgid "Canvas Size"
 msgstr "キャンバス サイズ"
@@ -208,8 +205,12 @@ msgstr "コンテンツにトリミング"
 msgid "Resize Canvas"
 msgstr "キャンバスサイズを変更"
 
-msgid "Offset Image"
-msgstr "オフセット画像"
+msgid "Offset & Scale Image"
+msgstr "画像のオフセット & 拡大縮小"
+
+#. Refers to the "Offset & Scale" layer effect.
+msgid "Offset & Scale"
+msgstr "オフセット & 拡大縮小"
 
 msgid "Offset:"
 msgstr "オフセット:"
@@ -1011,6 +1012,22 @@ msgstr "紫"
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
 msgstr "ローズ"
+
+#. A theme. Black (#000000) is set as the main color so these pixels can be turned off on OLED screens.
+msgid "Black (OLED)"
+msgstr "黒 (OLED)"
+
+#. A theme. "System" refers to the Operating System.
+msgid "System"
+msgstr "システム"
+
+#. Refers to the base color of a theme.
+msgid "Base color:"
+msgstr "ベースカラー:"
+
+#. Refers to the accent color of a theme.
+msgid "Accent color:"
+msgstr "アクセントカラー:"
 
 msgid "Theme"
 msgstr "テーマ"
@@ -2514,6 +2531,10 @@ msgstr "左面"
 msgid "Right Face"
 msgstr "右面"
 
+#. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
+msgid "Eraser mode"
+msgstr "消しゴムモード"
+
 msgid "Mirroring"
 msgstr "ミラーリング"
 
@@ -2892,6 +2913,18 @@ msgstr "色"
 msgid "Luminosity"
 msgstr "輝度"
 
+#. Found in the layer's section of the timeline, as a category of blend modes. Contains blend modes that do masking operations between layers, such as the "Intersection" and "Match colors" blend modes.
+msgid "Masking"
+msgstr "マスキング"
+
+#. Found in the layer's section of the timeline, as a blend mode option. This blend mode belongs to the "Masking" category, and it erases the un-common areas between the blend and the base layers.
+msgid "Intersection"
+msgstr "交差"
+
+#. Found in the layer's section of the timeline, as a blend mode option.  This blend mode belongs to the "Masking" category, and it only shows the same colors between the blend and the base layers.
+msgid "Match colors"
+msgstr "色の一致"
+
 msgid "Opacity:"
 msgstr "不透明度:"
 
@@ -3207,8 +3240,28 @@ msgstr "縦"
 msgid "Landscape"
 msgstr "横"
 
+# Found in the "New project" window. Refers to the content of the new project, whether it will just be a blank canvas, or if it will be created with data from the clipboard.
+msgid "Content:"
+msgstr "コンテンツ:"
+
+# Found in the "New project" window. Refers to the content of the new project, set to be just a blank canvas.
+msgid "Blank canvas"
+msgstr "空白のキャンバス"
+
+# Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
+msgid "App clipboard"
+msgstr "アプリのクリップボード"
+
+# Found in the "New project" window. Refers to the content of the clipboard of the (operating) system.
+msgid "System clipboard"
+msgstr "システムのクリップボード"
+
 msgid "Templates:"
 msgstr "テンプレート:"
+
+# Found in the "New project" window. Refers to recent project sizes.
+msgid "Recent:"
+msgstr "最近のプロジェクト:"
 
 msgid "Preset"
 msgstr "プリセット"
@@ -3281,6 +3334,10 @@ msgstr "楕円形ツール"
 
 msgid "Isometric Box Tool"
 msgstr "アイソメトリックボックスツール"
+
+#. A tool that exists only for tilemap layers, and is responsible for setting some properties for the tiles. Currently, it is only used for setting the autotiling bits for a tile.
+msgid "Tiles Property Painter"
+msgstr "タイル設定ペインター"
 
 msgid "Switch Colors"
 msgstr "色の切り替え"
@@ -3371,21 +3428,17 @@ msgstr "区切り文字:"
 msgid "The character(s) that separate the file name and the frame number"
 msgstr "ファイル名とフレーム番号を区切る文字"
 
-#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
-msgid "Trim images"
-msgstr "画像をトリム"
+#. Found in the export dialog. It is an option button that allows users to removes the transparent area around non-transparent pixels of the exported images, or to remove every pixel outside of the selection.
+msgid "Crop mode:"
+msgstr "クロップモード:"
+
+#. Refers to the content of an image.
+msgid "Content"
+msgstr "コンテンツ"
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
 msgstr "エクスポートされた画像を可視部分にトリミングします。各ピクセルをゼロではないアルファチャンネルを可視とします。"
-
-#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
-msgid "Clip image content to selection"
-msgstr "選択範囲に画像コンテンツをクリップ"
-
-#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
-msgid "Only export content that is within the bounds of a selected area."
-msgstr "選択領域の範囲内にあるコンテンツのみエクスポートします。"
 
 #. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
 msgid "Layers as separate files"
@@ -3814,26 +3867,6 @@ msgstr "初期値:"
 msgid "Final value:"
 msgstr "最終値"
 
-#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
-msgid "Ease type:"
-msgstr "イースタイプ:"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Starts slowly and speeds up towards the end"
-msgstr "ゆっくり開始し、終わりに向かってスピードアップします"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Starts quickly and slows down towards the end"
-msgstr "素早く開始し、終わりに向かってスローダウンします"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Slowest at both ends, fast at middle"
-msgstr "両端で最も遅く、中央で速く"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Fast at both ends, slow at middle"
-msgstr "両端で最も速く、中央で遅く"
-
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
 msgstr "二次(2乗)"
@@ -3877,6 +3910,58 @@ msgstr "終了時にバックアウト"
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Spring towards the end"
 msgstr "終了へ向かって跳ぶ"
+
+#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
+msgid "Ease type:"
+msgstr "イースタイプ:"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts slowly and speeds up towards the end"
+msgstr "ゆっくり開始し、終わりに向かってスピードアップします"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts quickly and slows down towards the end"
+msgstr "素早く開始し、終わりに向かってスローダウンします"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Slowest at both ends, fast at middle"
+msgstr "両端で最も遅く、中央で速く"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Fast at both ends, slow at middle"
+msgstr "両端で最も速く、中央で遅く"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts slowly and speeds up towards the end", but with a shortened name.
+msgid "Ease in"
+msgstr "イーズイン"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts quickly and slows down towards the end", but with a shortened name.
+msgid "Ease out"
+msgstr "イーズアウト"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Slowest at both ends, fast at middle", but with a shortened name.
+msgid "Ease in out"
+msgstr "イーズインアウト"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Fast at both ends, slow at middle", but with a shortened name.
+msgid "Ease out in"
+msgstr "イーズアウトイン"
+
+#. Found in the keyframe timeline on the right panel when there is no keyframe selected.
+msgid "No key selected"
+msgstr "キーが選択されていません"
+
+#. Found in the keyframe timeline when right clicking on a track. When selected, a new keyframe is being inserted at the selected frame.
+msgid "Insert keyframe"
+msgstr "キーフレームを挿入"
+
+#. A button found in the keyframe timeline on the right panel when there is a keyframe selected. When clicked, it deletes the currently selected keyframe.
+msgid "Delete keyframe"
+msgstr "キーフレームを削除"
+
+#. A button found in the keyframe timeline on the right panel when two or more keyframes are selected. When clicked, it deletes the currently selected keyframes.
+msgid "Delete keyframes"
+msgstr "キーフレームを削除"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
@@ -4111,6 +4196,11 @@ msgstr "オート"
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
 msgstr "スタック"
+
+#. A checkbox that toggles autotiling on or off for tilemap layers.
+#: src/UI/TilesPanel.tscn
+msgid "Autotiling:"
+msgstr "自動タイル:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"

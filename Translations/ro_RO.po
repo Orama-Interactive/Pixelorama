@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2026-04-26 13:45\n"
+"PO-Revision-Date: 2026-06-12 05:57\n"
 
 msgid "OK"
 msgstr "OK"
@@ -30,11 +30,8 @@ msgstr "Confirmă alegerea..."
 msgid "File Name:"
 msgstr "Numele fișierului:"
 
-msgid "Project Name:"
+msgid "Project name:"
 msgstr "Numele proiectului:"
-
-msgid "Image Size"
-msgstr "Dimensiunea imaginii"
 
 msgid "Canvas Size"
 msgstr "Dimensiunea pânzei"
@@ -206,8 +203,12 @@ msgstr "Trunchiere la conținut"
 msgid "Resize Canvas"
 msgstr "Redimensionare pânză"
 
-msgid "Offset Image"
-msgstr "Decalare imagine"
+msgid "Offset & Scale Image"
+msgstr "Decalare și scalare imagine"
+
+#. Refers to the "Offset & Scale" layer effect.
+msgid "Offset & Scale"
+msgstr "Decalare și scalare"
 
 msgid "Offset:"
 msgstr "Decalaj:"
@@ -1009,6 +1010,22 @@ msgstr "Mov"
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
 msgstr "Trandafiriu"
+
+#. A theme. Black (#000000) is set as the main color so these pixels can be turned off on OLED screens.
+msgid "Black (OLED)"
+msgstr "Negru (OLED)"
+
+#. A theme. "System" refers to the Operating System.
+msgid "System"
+msgstr "Sistem"
+
+#. Refers to the base color of a theme.
+msgid "Base color:"
+msgstr "Culoare de bază:"
+
+#. Refers to the accent color of a theme.
+msgid "Accent color:"
+msgstr "Culoare accent:"
 
 msgid "Theme"
 msgstr "Temă"
@@ -2511,6 +2528,10 @@ msgstr "Latura stângă"
 msgid "Right Face"
 msgstr "Latura dreaptă"
 
+#. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
+msgid "Eraser mode"
+msgstr "Mod Radieră"
+
 msgid "Mirroring"
 msgstr "Oglindire"
 
@@ -2889,6 +2910,18 @@ msgstr "Culoare"
 msgid "Luminosity"
 msgstr "Luminozitate"
 
+#. Found in the layer's section of the timeline, as a category of blend modes. Contains blend modes that do masking operations between layers, such as the "Intersection" and "Match colors" blend modes.
+msgid "Masking"
+msgstr "Mascare"
+
+#. Found in the layer's section of the timeline, as a blend mode option. This blend mode belongs to the "Masking" category, and it erases the un-common areas between the blend and the base layers.
+msgid "Intersection"
+msgstr "Intersecție"
+
+#. Found in the layer's section of the timeline, as a blend mode option.  This blend mode belongs to the "Masking" category, and it only shows the same colors between the blend and the base layers.
+msgid "Match colors"
+msgstr "Potrivire culori"
+
 msgid "Opacity:"
 msgstr "Opacitate:"
 
@@ -3204,8 +3237,28 @@ msgstr "Portret"
 msgid "Landscape"
 msgstr "Peisaj"
 
+# Found in the "New project" window. Refers to the content of the new project, whether it will just be a blank canvas, or if it will be created with data from the clipboard.
+msgid "Content:"
+msgstr "Conținut:"
+
+# Found in the "New project" window. Refers to the content of the new project, set to be just a blank canvas.
+msgid "Blank canvas"
+msgstr "Pânză goală"
+
+# Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
+msgid "App clipboard"
+msgstr "Memorie temporară aplicație"
+
+# Found in the "New project" window. Refers to the content of the clipboard of the (operating) system.
+msgid "System clipboard"
+msgstr "Memorie temporară sistem"
+
 msgid "Templates:"
 msgstr "Șabloane:"
+
+# Found in the "New project" window. Refers to recent project sizes.
+msgid "Recent:"
+msgstr "Recent:"
 
 msgid "Preset"
 msgstr "Presetare"
@@ -3278,6 +3331,10 @@ msgstr "Instrument Elipsă"
 
 msgid "Isometric Box Tool"
 msgstr "Instrument Cutie izometrică"
+
+#. A tool that exists only for tilemap layers, and is responsible for setting some properties for the tiles. Currently, it is only used for setting the autotiling bits for a tile.
+msgid "Tiles Property Painter"
+msgstr "Descriptor de proprietăți pentru dale"
 
 msgid "Switch Colors"
 msgstr "Comutare culori"
@@ -3368,21 +3425,17 @@ msgstr "Caractere separatoare:"
 msgid "The character(s) that separate the file name and the frame number"
 msgstr "Caracterele care separă numele fișierului și numărul cadrului"
 
-#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
-msgid "Trim images"
-msgstr "Trunchiere imagini"
+#. Found in the export dialog. It is an option button that allows users to removes the transparent area around non-transparent pixels of the exported images, or to remove every pixel outside of the selection.
+msgid "Crop mode:"
+msgstr "Mod decupare:"
+
+#. Refers to the content of an image.
+msgid "Content"
+msgstr "Conținut"
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
 msgstr "Trunchiază imaginile exportate până la porțiunea lor vizibilă, considerând fiecare pixel cu un canal alfa non-zero ca fiind vizibil."
-
-#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
-msgid "Clip image content to selection"
-msgstr "Decupează conținutul imaginii la selecție"
-
-#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
-msgid "Only export content that is within the bounds of a selected area."
-msgstr "Exportă doar conținut care se află în limitele unei zone selectate."
 
 #. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
 msgid "Layers as separate files"
@@ -3811,26 +3864,6 @@ msgstr "Valoare inițială:"
 msgid "Final value:"
 msgstr "Valoare finală:"
 
-#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
-msgid "Ease type:"
-msgstr "Tip de tranziție pentru animare:"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Starts slowly and speeds up towards the end"
-msgstr "Pornește lent și accelerează spre final"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Starts quickly and slows down towards the end"
-msgstr "Pornește repede și încetinește spre final"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Slowest at both ends, fast at middle"
-msgstr "Lent la ambele capete, rapid la mijloc"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Fast at both ends, slow at middle"
-msgstr "Rapid la ambele capete, lent la mijloc"
-
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
 msgstr "Pătratic (puterea lui 2)"
@@ -3874,6 +3907,58 @@ msgstr "În retragere la capete"
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Spring towards the end"
 msgstr "Salt spre final"
+
+#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
+msgid "Ease type:"
+msgstr "Tip de tranziție pentru animare:"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts slowly and speeds up towards the end"
+msgstr "Pornește lent și accelerează spre final"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts quickly and slows down towards the end"
+msgstr "Pornește repede și încetinește spre final"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Slowest at both ends, fast at middle"
+msgstr "Lent la ambele capete, rapid la mijloc"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Fast at both ends, slow at middle"
+msgstr "Rapid la ambele capete, lent la mijloc"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts slowly and speeds up towards the end", but with a shortened name.
+msgid "Ease in"
+msgstr "Începe lent și accelerează spre final"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts quickly and slows down towards the end", but with a shortened name.
+msgid "Ease out"
+msgstr "Începe rapid și încetinește spre final"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Slowest at both ends, fast at middle", but with a shortened name.
+msgid "Ease in out"
+msgstr "Cel mai lent la ambele capete, rapid în mijloc"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Fast at both ends, slow at middle", but with a shortened name.
+msgid "Ease out in"
+msgstr "Rapid la ambele capete, lent în mijloc"
+
+#. Found in the keyframe timeline on the right panel when there is no keyframe selected.
+msgid "No key selected"
+msgstr "Niciun cadru-cheie selectat"
+
+#. Found in the keyframe timeline when right clicking on a track. When selected, a new keyframe is being inserted at the selected frame.
+msgid "Insert keyframe"
+msgstr "Introducere cadru-cheie"
+
+#. A button found in the keyframe timeline on the right panel when there is a keyframe selected. When clicked, it deletes the currently selected keyframe.
+msgid "Delete keyframe"
+msgstr "Ștergere cadru-cheie"
+
+#. A button found in the keyframe timeline on the right panel when two or more keyframes are selected. When clicked, it deletes the currently selected keyframes.
+msgid "Delete keyframes"
+msgstr "Ștergere cadre-cheie"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
@@ -4108,6 +4193,11 @@ msgstr "Auto"
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
 msgstr "Stivă"
+
+#. A checkbox that toggles autotiling on or off for tilemap layers.
+#: src/UI/TilesPanel.tscn
+msgid "Autotiling:"
+msgstr "Plasare automată a dalelor:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"

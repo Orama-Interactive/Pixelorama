@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2026-04-27 19:53\n"
+"PO-Revision-Date: 2026-06-12 18:36\n"
 
 msgid "OK"
 msgstr "Aceptar"
@@ -30,11 +30,8 @@ msgstr "Confirma por favor..."
 msgid "File Name:"
 msgstr "Nombre del archivo:"
 
-msgid "Project Name:"
+msgid "Project name:"
 msgstr "Nombre del proyecto:"
-
-msgid "Image Size"
-msgstr "Tamaño de la imagen"
 
 msgid "Canvas Size"
 msgstr "Tamaño del lienzo"
@@ -206,8 +203,12 @@ msgstr "Recortar según los contenidos"
 msgid "Resize Canvas"
 msgstr "Redimensionar lienzo"
 
-msgid "Offset Image"
-msgstr "Desplazar imagen"
+msgid "Offset & Scale Image"
+msgstr "Desplazamiento y escala de imagen"
+
+#. Refers to the "Offset & Scale" layer effect.
+msgid "Offset & Scale"
+msgstr "Desplazamiento y escala"
 
 msgid "Offset:"
 msgstr "Desplazamiento:"
@@ -1008,6 +1009,22 @@ msgstr "Morado"
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
 msgstr "Rosa"
+
+#. A theme. Black (#000000) is set as the main color so these pixels can be turned off on OLED screens.
+msgid "Black (OLED)"
+msgstr "Negro (OLED)"
+
+#. A theme. "System" refers to the Operating System.
+msgid "System"
+msgstr "Sistema"
+
+#. Refers to the base color of a theme.
+msgid "Base color:"
+msgstr "Color base:"
+
+#. Refers to the accent color of a theme.
+msgid "Accent color:"
+msgstr "Color de acento:"
 
 msgid "Theme"
 msgstr "Tema"
@@ -2510,6 +2527,10 @@ msgstr "Cara izquierda"
 msgid "Right Face"
 msgstr "Cara derecha"
 
+#. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
+msgid "Eraser mode"
+msgstr "Modo de borrado"
+
 msgid "Mirroring"
 msgstr "Espejar"
 
@@ -2888,6 +2909,18 @@ msgstr "Color"
 msgid "Luminosity"
 msgstr "Luminosidad"
 
+#. Found in the layer's section of the timeline, as a category of blend modes. Contains blend modes that do masking operations between layers, such as the "Intersection" and "Match colors" blend modes.
+msgid "Masking"
+msgstr "Enmascaramiento"
+
+#. Found in the layer's section of the timeline, as a blend mode option. This blend mode belongs to the "Masking" category, and it erases the un-common areas between the blend and the base layers.
+msgid "Intersection"
+msgstr "Intersección"
+
+#. Found in the layer's section of the timeline, as a blend mode option.  This blend mode belongs to the "Masking" category, and it only shows the same colors between the blend and the base layers.
+msgid "Match colors"
+msgstr "Coincidir colores"
+
 msgid "Opacity:"
 msgstr "Opacidad:"
 
@@ -3203,8 +3236,28 @@ msgstr "Retrato"
 msgid "Landscape"
 msgstr "Paisaje"
 
+# Found in the "New project" window. Refers to the content of the new project, whether it will just be a blank canvas, or if it will be created with data from the clipboard.
+msgid "Content:"
+msgstr "Contenido:"
+
+# Found in the "New project" window. Refers to the content of the new project, set to be just a blank canvas.
+msgid "Blank canvas"
+msgstr "Lienzo en negro"
+
+# Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
+msgid "App clipboard"
+msgstr "Portapapeles de la aplicación"
+
+# Found in the "New project" window. Refers to the content of the clipboard of the (operating) system.
+msgid "System clipboard"
+msgstr "Portapeles del sistema"
+
 msgid "Templates:"
 msgstr "Plantillas:"
+
+# Found in the "New project" window. Refers to recent project sizes.
+msgid "Recent:"
+msgstr "Recientes:"
 
 msgid "Preset"
 msgstr "Ajuste preestablecido"
@@ -3277,6 +3330,10 @@ msgstr "Herramienta de Elipse"
 
 msgid "Isometric Box Tool"
 msgstr "Herramienta de Caja Isométrica"
+
+#. A tool that exists only for tilemap layers, and is responsible for setting some properties for the tiles. Currently, it is only used for setting the autotiling bits for a tile.
+msgid "Tiles Property Painter"
+msgstr "Pintor de propiedades de mosaicos"
 
 msgid "Switch Colors"
 msgstr "Cambiar colores"
@@ -3367,21 +3424,17 @@ msgstr "Separar carácter(es):"
 msgid "The character(s) that separate the file name and the frame number"
 msgstr "El(los) carácter(es) que separan Él nombre del archivo y Él número de fotograma"
 
-#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
-msgid "Trim images"
-msgstr "Recortar imágenes"
+#. Found in the export dialog. It is an option button that allows users to removes the transparent area around non-transparent pixels of the exported images, or to remove every pixel outside of the selection.
+msgid "Crop mode:"
+msgstr "Modo recorte:"
+
+#. Refers to the content of an image.
+msgid "Content"
+msgstr "Contenido"
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
 msgstr "Recorta las imágenes exportadas a su porción visible, considerando cada píxel con un canal de alfa diferente a cero como visible."
-
-#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
-msgid "Clip image content to selection"
-msgstr "Recortar contenido de la imagen a la selección"
-
-#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
-msgid "Only export content that is within the bounds of a selected area."
-msgstr "Solo exportar contenido que está dentro de los los límites de un área seleccionada."
 
 #. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
 msgid "Layers as separate files"
@@ -3810,26 +3863,6 @@ msgstr "Valor inicial:"
 msgid "Final value:"
 msgstr "Valor final:"
 
-#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
-msgid "Ease type:"
-msgstr "Tipo base:"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Starts slowly and speeds up towards the end"
-msgstr "Empieza lentamente y acelera hacia el final"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Starts quickly and slows down towards the end"
-msgstr "Comienza rápidamente y desciende hacia el final"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Slowest at both ends, fast at middle"
-msgstr "Lento en ambos extremos, rápido en medio"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Fast at both ends, slow at middle"
-msgstr "Rápido en ambos extremos, lento en medio"
-
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
 msgstr "Cuadrático (potencia de 2)"
@@ -3873,6 +3906,58 @@ msgstr "Sincronizar al final"
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Spring towards the end"
 msgstr "Movimiento súbito en el final"
+
+#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
+msgid "Ease type:"
+msgstr "Tipo base:"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts slowly and speeds up towards the end"
+msgstr "Empieza lentamente y acelera hacia el final"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts quickly and slows down towards the end"
+msgstr "Comienza rápidamente y desciende hacia el final"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Slowest at both ends, fast at middle"
+msgstr "Lento en ambos extremos, rápido en medio"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Fast at both ends, slow at middle"
+msgstr "Rápido en ambos extremos, lento en medio"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts slowly and speeds up towards the end", but with a shortened name.
+msgid "Ease in"
+msgstr "Entrada suave"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts quickly and slows down towards the end", but with a shortened name.
+msgid "Ease out"
+msgstr "Salida suave"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Slowest at both ends, fast at middle", but with a shortened name.
+msgid "Ease in out"
+msgstr "Entrada y salida suave"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Fast at both ends, slow at middle", but with a shortened name.
+msgid "Ease out in"
+msgstr "Salida y entrada suave"
+
+#. Found in the keyframe timeline on the right panel when there is no keyframe selected.
+msgid "No key selected"
+msgstr "No se ha seleccionado ningun fotograma clave"
+
+#. Found in the keyframe timeline when right clicking on a track. When selected, a new keyframe is being inserted at the selected frame.
+msgid "Insert keyframe"
+msgstr "Insertar fotograma clave"
+
+#. A button found in the keyframe timeline on the right panel when there is a keyframe selected. When clicked, it deletes the currently selected keyframe.
+msgid "Delete keyframe"
+msgstr "Eliminar fotograma clave"
+
+#. A button found in the keyframe timeline on the right panel when two or more keyframes are selected. When clicked, it deletes the currently selected keyframes.
+msgid "Delete keyframes"
+msgstr "Eliminar fotogramas clave"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
@@ -4107,6 +4192,11 @@ msgstr "Automático"
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
 msgstr "Pila"
+
+#. A checkbox that toggles autotiling on or off for tilemap layers.
+#: src/UI/TilesPanel.tscn
+msgid "Autotiling:"
+msgstr "Teselado automático:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
