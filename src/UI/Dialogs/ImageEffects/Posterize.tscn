@@ -1,21 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnryslyvxv4ye"]
+[gd_scene format=3 uid="uid://cnryslyvxv4ye"]
 
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="2"]
 [ext_resource type="Script" uid="uid://bexcvmnwffd4e" path="res://src/UI/Dialogs/ImageEffects/Posterize.gd" id="3"]
 
-[node name="Posterize" instance=ExtResource("1")]
+[node name="Posterize" unique_id=589852486 instance=ExtResource("1")]
 title = "Posterize"
 size = Vector2i(360, 348)
 script = ExtResource("3")
 
-[node name="VBoxContainer" parent="." index="3"]
+[node name="VBoxContainer" parent="." index="2" unique_id=1773123238]
 offset_bottom = 299.0
 
-[node name="ShowAnimate" parent="VBoxContainer" index="0"]
+[node name="ShowAnimate" parent="VBoxContainer" index="0" unique_id=1452855547]
 visible = false
 
-[node name="LevelsSlider" type="TextureProgressBar" parent="VBoxContainer" index="2"]
+[node name="LevelsSlider" type="TextureProgressBar" parent="VBoxContainer" index="2" unique_id=774982548]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 focus_mode = 2
@@ -34,7 +34,7 @@ script = ExtResource("2")
 prefix = "Posterize levels:"
 snap_by_default = true
 
-[node name="DitherSlider" type="TextureProgressBar" parent="VBoxContainer" index="3"]
+[node name="DitherSlider" type="TextureProgressBar" parent="VBoxContainer" index="3" unique_id=734547818]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 focus_mode = 2

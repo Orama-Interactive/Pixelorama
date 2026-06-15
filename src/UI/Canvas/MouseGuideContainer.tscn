@@ -1,15 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://no3w7e2264u4"]
+[gd_scene format=3 uid="uid://no3w7e2264u4"]
 
 [ext_resource type="Script" uid="uid://ca5vb3n0qtpl5" path="res://src/UI/Canvas/MouseGuide.gd" id="2"]
 
-[node name="MouseGuideContainer" type="Node2D"]
+[node name="MouseGuideContainer" type="Node2D" unique_id=1866113840]
 
-[node name="Vertical" type="Line2D" parent="."]
+[node name="Vertical" type="Line2D" parent="." unique_id=1879310]
 visible = false
 points = PackedVector2Array(0, 19999, 0, -19999)
 script = ExtResource("2")
 
-[node name="Horizontal" type="Line2D" parent="."]
+[node name="Horizontal" type="Line2D" parent="." unique_id=1814959576]
 visible = false
 points = PackedVector2Array(-19999, 0, 19999, 0)
 script = ExtResource("2")

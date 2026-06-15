@@ -63,6 +63,7 @@ static func open_aseprite_file(path: String) -> void:
 	var project_size := Vector2i(project_width, project_height)
 	var new_project := Project.new([], path.get_file().get_basename(), project_size)
 	new_project.fps = 1.0
+	new_project.clear_author_data()
 	var color_depth := ase_file.get_16()
 	var image_format := Image.FORMAT_RGBA8
 	var pixel_byte := 4
@@ -236,7 +237,9 @@ static func open_aseprite_file(path: String) -> void:
 								var flip_h := transformed_bit & 128 == 128
 								var flip_v := transformed_bit & 64 == 64
 								var transpose := transformed_bit & 32 == 32
-								tilemap_cel.set_index(cell, cell_index, flip_h, flip_v, transpose)
+								tilemap_cel.set_index(
+									cell, cell_index, false, flip_h, flip_v, transpose
+								)
 
 					# Add in-between GroupCels, if there are any.
 					# This is needed because Aseprite's group cels do not store any data

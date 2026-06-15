@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bry4ltxur56u7"]
+[gd_scene format=3 uid="uid://bry4ltxur56u7"]
 
 [ext_resource type="PackedScene" uid="uid://bd62qfjn380wf" path="res://src/Tools/BaseSelectionTool.tscn" id="1"]
 [ext_resource type="Script" uid="uid://bg6dn55wb74b8" path="res://src/Tools/SelectionTools/PaintSelect.gd" id="2"]
@@ -22,33 +22,33 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 anti_aliasing = false
 
-[node name="ToolOptions" instance=ExtResource("1")]
+[node name="ToolOptions" unique_id=830652910 instance=ExtResource("1")]
 script = ExtResource("2")
 
-[node name="Brush" type="HBoxContainer" parent="." index="2"]
+[node name="Brush" type="HBoxContainer" parent="." index="2" unique_id=321773034]
 layout_mode = 2
 alignment = 1
 
-[node name="Type" type="Button" parent="Brush" index="0"]
+[node name="Type" type="Button" parent="Brush" index="0" unique_id=1538616610]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 0
 tooltip_text = "Select a brush"
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("1")
-theme_override_styles/hover = SubResource("1")
 theme_override_styles/pressed = SubResource("1")
+theme_override_styles/hover = SubResource("1")
 theme_override_styles/disabled = SubResource("2")
 theme_override_styles/focus = SubResource("2")
 
-[node name="Texture2D" type="TextureRect" parent="Brush/Type" index="0"]
+[node name="Texture2D" type="TextureRect" parent="Brush/Type" index="0" unique_id=969487181]
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
 expand_mode = 1
 stretch_mode = 5
 
-[node name="BrushSize" parent="Brush" index="1" instance=ExtResource("3")]
+[node name="BrushSize" parent="Brush" index="1" unique_id=1428740001 instance=ExtResource("3")]
 layout_mode = 2
 min_value = 1.0
 max_value = 25.0
@@ -56,7 +56,6 @@ value = 1.0
 allow_greater = true
 prefix = "Size:"
 suffix = "px"
-is_global = true
 
 [connection signal="pressed" from="Brush/Type" to="." method="_on_BrushType_pressed"]
 [connection signal="value_changed" from="Brush/BrushSize" to="." method="_on_BrushSize_value_changed"]

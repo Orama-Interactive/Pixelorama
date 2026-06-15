@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2025-10-14 15:51\n"
+"PO-Revision-Date: 2026-04-26 13:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -578,15 +578,6 @@ msgstr "Pensulă de proiect"
 msgid "Random brush"
 msgstr "Pensulă aleatorie"
 
-msgid "Save Sprite as .pxo"
-msgstr "Salvare grafic bidimensional ca .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Exportare grafic bidimensional ca .png"
-
-msgid "Export Sprite"
-msgstr "Exportare grafic bidimensional"
-
 msgid "File Exists, Overwrite?"
 msgstr "Fișierul există deja. Suprascrii?"
 
@@ -894,6 +885,10 @@ msgstr "Copie de rezervă"
 msgid "Performance"
 msgstr "Performanță"
 
+#. Found in the Preferences. Refers to the author of the current project.
+msgid "Author"
+msgstr "Autor"
+
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
 msgstr "Drivere"
@@ -962,6 +957,10 @@ msgstr "Font:"
 msgid "Font size:"
 msgstr "Dimensiunea fontului:"
 
+#. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
+msgid "Screen orientation:"
+msgstr "Orientarea ecranului:"
+
 msgid "Dim interface on dialog popup"
 msgstr "Întunecă interfața la apariția ferestrei de dialog"
 
@@ -980,6 +979,10 @@ msgstr "Când această setare este activată, sunt folosite dialogurile native d
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
 msgstr "Mod fereastră simplă"
+
+#. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
+msgid "Collapse main menu"
+msgstr "Restrângere meniu principal"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
@@ -1028,8 +1031,16 @@ msgstr "Culoare de fundal din:"
 msgid "Background color:"
 msgstr "Culoare de fundal:"
 
+#. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
+msgid "Single tool mode"
+msgstr "Mod instrument unic"
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
+msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
+msgstr "Dacă această opțiune este activată, butonul din dreapta al mausului va activa întotdeauna același instrument ca butonul din stânga al mausului."
+
 #. Found in the preferences, under the Tools category.
-msgid "Share options between the left and the right tools"
+msgid "Share options between left and right tools"
 msgstr "Sincronizează opțiunile între instrumentele din stânga și cele din dreapta"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
@@ -1044,8 +1055,9 @@ msgstr "Culoarea instrumentului din stânga:"
 msgid "Right tool color:"
 msgstr "Culoarea instrumentului din dreapta:"
 
-msgid "Tool button size:"
-msgstr "Mărimea butonului instrumentului:"
+#. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
+msgid "Make global palettes read-only"
+msgstr "Transformă paletele globale doar în citire"
 
 msgid "Small"
 msgstr "Mică"
@@ -1497,6 +1509,9 @@ msgstr "Neerlandeză"
 
 msgid "Belarusian"
 msgstr "Belarusă"
+
+msgid "Thai"
+msgstr "Thailandeză"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -2047,6 +2062,26 @@ msgstr "Driver tabletă:"
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "Specifică driverul tabletei utilizat pe Windows. Dacă ai Windows Ink activat, selectează winink."
+
+#. Found in the Preferences. Refers to the displayed name of the current project author.
+msgid "Display name:"
+msgstr "Nume afișat:"
+
+#. Found in the Preferences. Refers to the real name of the current project author.
+msgid "Real name:"
+msgstr "Nume real:"
+
+#. Found in the Preferences. Refers to the contact info of the current project author.
+msgid "Contact:"
+msgstr "Date de contact:"
+
+#. Found in the Preferences. Refers to the company name of the current project author.
+msgid "Company/Studio:"
+msgstr "Companie/studio:"
+
+#. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
+msgid "Last saved by"
+msgstr "Ultima salvare efectuată de"
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
@@ -2987,6 +3022,54 @@ msgstr "Anulare: modificarea duratei cadrului"
 msgid "Redo: Change frame duration"
 msgstr "Refacere: modificarea duratei cadrului"
 
+msgid "Undo: Rename Layer"
+msgstr "Anulare: redenumire strat"
+
+msgid "Redo: Rename Layer"
+msgstr "Refacere: redenumire strat"
+
+msgid "Undo: Change Layer Opacity"
+msgstr "Anulare: modificarea opacității stratului"
+
+msgid "Redo: Change Layer Opacity"
+msgstr "Refacere: modificarea opacității stratului"
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
+msgid "Undo: Change Layer Onion Skinning Ignore Status"
+msgstr "Anulare: modificare stare ignorare strat în cadre multiple simultane"
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
+msgid "Redo: Change Layer Onion Skinning Ignore Status"
+msgstr "Refacere: modificare stare ignorare strat în cadre multiple simultane"
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos.
+msgid "Undo: Change Layer User Data"
+msgstr ""
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
+msgid "Redo: Change Layer User Data"
+msgstr ""
+
+msgid "Undo: Change Layer Color"
+msgstr "Anulare: modificarea culorii stratului"
+
+msgid "Redo: Change Layer Color"
+msgstr "Refacere: modificarea culorii stratului"
+
+msgid "Undo: Change Layer Visibility"
+msgstr "Anulare: modificarea vizibilității stratului"
+
+msgid "Redo: Change Layer Visibility"
+msgstr "Refacere: modificarea vizibilității stratului"
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos.
+msgid "Undo: Change Layer Locked Status"
+msgstr "Anulare: modificare stare strat blocat"
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
+msgid "Redo: Change Layer Locked Status"
+msgstr "Refacere: modificare stare strat blocat"
+
 msgid "Move Guide"
 msgstr "Deplasare ghidaj"
 
@@ -3015,9 +3098,6 @@ msgstr "Paletă nouă goală"
 
 msgid "Import Palette"
 msgstr "Importare paletă"
-
-msgid "Create Palette From Current Sprite"
-msgstr "Creare paletă din graficul bidimensional actual"
 
 msgid "Palette Name:"
 msgstr "Numele paletei:"
@@ -3106,6 +3186,10 @@ msgstr "Resetați toate opțiunile de instrumente"
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
 msgstr "Elimină toate extensiile"
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all backups"
+msgstr "Elimină toate copiile de rezervă"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
@@ -3300,6 +3384,10 @@ msgstr "Decupează conținutul imaginii la selecție"
 msgid "Only export content that is within the bounds of a selected area."
 msgstr "Exportă doar conținut care se află în limitele unei zone selectate."
 
+#. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
+msgid "Layers as separate files"
+msgstr "Straturi ca fișiere separate"
+
 msgid "Close"
 msgstr "Închide"
 
@@ -3337,6 +3425,10 @@ msgstr "Deplasează cadrul selectat la dreapta."
 msgid "Frame duration:"
 msgstr "Durata cadrului:"
 
+#. Refers to the license of a project, which can be set from the project properties.
+msgid "License:"
+msgstr "Licență:"
+
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
 msgstr "Datele utilizatorului:"
@@ -3369,8 +3461,8 @@ msgstr "Goală"
 msgid "From Current Palette"
 msgstr "Din paleta actuală"
 
-msgid "From Current Sprite"
-msgstr "Din graficul bidimensional actual"
+msgid "From Current Cel"
+msgstr "Din celul actual"
 
 msgid "From Current Selection"
 msgstr "Din selecția actuală"

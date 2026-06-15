@@ -17,7 +17,8 @@ func export_animation(
 	_fps_hint: float,
 	progress_report_obj: Object,
 	progress_report_method,
-	progress_report_args
+	progress_report_args,
+	buffer_file: FileAccess = null
 ) -> PackedByteArray:
 	var first_frame: AImgIOFrame = frames[0]
 	var first_img := first_frame.content
@@ -25,5 +26,14 @@ func export_animation(
 	for v in frames:
 		var frame: AImgIOFrame = v
 		exporter.add_frame(frame.content, frame.duration, MedianCutQuantization)
+		# Directly store data to buffer file if it is given, this preserves
+		# GIF if export is canceled for some reason
+		if buffer_file:
+			buffer_file.store_buffer(exporter.data)
+			exporter.data.clear()  # Clear data so it can be filled with next frame data
 		progress_report_obj.callv(progress_report_method, progress_report_args)
+		await RenderingServer.frame_post_draw
+	if buffer_file:
+		buffer_file.store_buffer(exporter.export_file_data())
+		return PackedByteArray()
 	return exporter.export_file_data()

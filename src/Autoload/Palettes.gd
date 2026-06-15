@@ -100,13 +100,12 @@ func save_palette(palette: Palette = current_palette) -> void:
 		Global.popup_error("Failed to save palette. Error code %s (%s)" % [err, error_string(err)])
 
 
-## Copies the current_palette and assigns it as the new current palette
-func copy_current_palette(
-	new_palette_name := current_palette.name, is_global := false, is_undoable := true
-) -> void:
+## Copies the current_palette and assigns it as the new current palette. Note that if
+## [param is_global] is set to false, a project.undo_redo action has to be created prior.
+func copy_current_palette(is_global := true, new_palette_name := current_palette.name) -> void:
 	new_palette_name = get_valid_name(new_palette_name)
 	var comment := current_palette.comment
-	_create_new_palette_from_current_palette(new_palette_name, comment, is_global, is_undoable)
+	_create_new_palette_from_current_palette(new_palette_name, comment, is_global)
 
 
 ## De-lists the palette from the project and global palette dictionaries
@@ -119,20 +118,38 @@ func unparent_palette(palette: Palette):
 			Global.current_project.palettes.erase(palette.name)
 
 
+## Adds the given palette as a new project palette
 func add_palette_as_project_palette(new_palette: Palette) -> void:
 	new_palette.is_project_palette = true
 	new_palette.name = get_valid_name(new_palette.name)
 	Global.current_project.palettes[new_palette.name] = new_palette
 	current_palette = new_palette
+	# Project.project_current_palette_name will update when new_palette_created is emitted
+	# which redraws palette UI
 	new_palette_created.emit()
 
 
-func undo_redo_add_palette(new_palette: Palette):
-	var undo_redo := Global.current_project.undo_redo
-	undo_redo.add_do_method(add_palette_as_project_palette.bind(new_palette))
-	undo_redo.add_undo_method(palette_delete_and_reselect.bind(true, new_palette))
-	if is_instance_valid(current_palette):
-		undo_redo.add_undo_method(select_palette.bind(current_palette.name))
+## Adds the given palette as either the project or a global palette, Depending on
+## the value of [param is_global]. Note that for adding a project palette an undo action
+## must be created before calling it.
+func undo_redo_add_palette(new_palette: Palette, is_global: bool):
+	if is_global:
+		new_palette.name = get_valid_name(new_palette.name)
+		save_palette(new_palette)
+		palettes[new_palette.name] = new_palette
+		current_palette = new_palette
+		# Project.project_current_palette_name will update when new_palette_created is emitted
+		# which redraws palette UI
+		new_palette_created.emit()
+	else:
+		var undo_redo := Global.current_project.undo_redo
+		# it gets done in add_do_method as well but setting it here makes it immediately available
+		# for other methods in current stack frame
+		new_palette.is_project_palette = true
+		undo_redo.add_do_method(add_palette_as_project_palette.bind(new_palette))
+		undo_redo.add_undo_method(palette_delete_and_reselect.bind(true, new_palette))
+		if is_instance_valid(current_palette):
+			undo_redo.add_undo_method(select_palette.bind(current_palette.name))
 
 
 func get_valid_name(initial_palette_name: String, project := Global.current_project) -> String:
@@ -197,16 +214,11 @@ func _create_new_empty_palette(
 	palette_name: String, comment: String, width: int, height: int, is_global: bool
 ) -> void:
 	var new_palette := Palette.new(palette_name, width, height, comment)
-	if is_global:
-		save_palette(new_palette)
-		palettes[palette_name] = new_palette
-		select_palette(palette_name)
-	else:
-		undo_redo_add_palette(new_palette)
+	undo_redo_add_palette(new_palette, is_global)
 
 
 func _create_new_palette_from_current_palette(
-	palette_name: String, comment: String, is_global: bool, is_undoable := true
+	palette_name: String, comment: String, is_global: bool
 ) -> void:
 	if !current_palette:
 		return
@@ -215,16 +227,7 @@ func _create_new_palette_from_current_palette(
 	new_palette.comment = comment
 	new_palette.is_project_palette = false
 	new_palette.path = palettes_write_path.path_join(new_palette.name) + ".json"
-	if is_global:
-		save_palette(new_palette)
-		palettes[palette_name] = new_palette
-		select_palette(palette_name)
-	else:
-		if is_undoable:
-			undo_redo_add_palette(new_palette)
-		else:
-			add_palette_as_project_palette(new_palette)
-			select_palette(palette_name)
+	undo_redo_add_palette(new_palette, is_global)
 
 
 func _create_new_palette_from_current_selection(
@@ -301,12 +304,7 @@ func _fill_new_palette_with_colors(
 					color.a = 1
 				if not new_palette.has_theme_color(color):
 					new_palette.add_color(color)
-	if is_global:
-		save_palette(new_palette)
-		palettes[new_palette.name] = new_palette
-		select_palette(new_palette.name)
-	else:
-		undo_redo_add_palette(new_palette)
+	undo_redo_add_palette(new_palette, is_global)
 
 
 func current_palette_edit(
@@ -343,7 +341,7 @@ func current_palette_edit(
 		# Edit the data and re-parent the palette. Note that the conflicts in name will be auto
 		# resolved when [method add_palette_as_project_palette] is called.
 		undo_redo.add_do_method(palette_to_edit.edit.bind(palette_name, width, height, comment))
-		undo_redo_add_palette(palette_to_edit)
+		undo_redo_add_palette(palette_to_edit, false)
 		if not palette_just_added:
 			# if the palette was already existing then re-set old data. Note that the conflicts in
 			# name will be auto resolved when [method add_palette_as_project_palette] is called.
@@ -557,26 +555,24 @@ func import_palette_from_path(path: String, make_copy := false, is_initialising 
 		return
 
 	var palette: Palette = null
-	match path.to_lower().get_extension():
-		"gpl":
-			if FileAccess.file_exists(path):
-				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
-				palette = _import_gpl(path, text)
-		"pal":
-			if FileAccess.file_exists(path):
-				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
-				palette = _import_pal_palette(path, text)
-		"png", "bmp", "hdr", "jpg", "jpeg", "svg", "tga", "webp":
+	if FileAccess.file_exists(path):
+		var palette_ext := path.to_lower().get_extension()
+		if palette_ext in Global.SUPPORTED_IMAGE_TYPES:
 			var image := Image.new()
 			var err := image.load(path)
 			if !err:
 				palette = _import_image_palette(path, image)
-		"json":
-			if FileAccess.file_exists(path):
-				var text := FileAccess.open(path, FileAccess.READ).get_as_text()
-				palette = Palette.new(path.get_basename().get_file())
-				palette.path = path
-				palette.deserialize(text)
+		elif palette_ext == "gpl":
+			var text := FileAccess.open(path, FileAccess.READ).get_as_text()
+			palette = _import_gpl(path, text)
+		elif palette_ext == "pal":
+			var text := FileAccess.open(path, FileAccess.READ).get_as_text()
+			palette = _import_pal_palette(path, text)
+		elif palette_ext == "json":
+			var text := FileAccess.open(path, FileAccess.READ).get_as_text()
+			palette = Palette.new(path.get_basename().get_file())
+			palette.path = path
+			palette.deserialize(text)
 
 	if is_instance_valid(palette):
 		if make_copy:
@@ -596,6 +592,31 @@ func import_palette_from_path(path: String, make_copy := false, is_initialising 
 		Global.popup_error(tr("Can't load file '%s'.\nThis is not a valid palette file.") % [path])
 
 
+func export_gpl(palette: Palette, path: String) -> void:
+	var palette_file := FileAccess.open(path, FileAccess.WRITE)
+	if FileAccess.get_open_error() != OK:
+		return
+	palette_file.store_line("GIMP Palette")
+	# Metadata
+	palette_file.store_line("#Palette Name: %s" % palette.name)
+	palette_file.store_line(
+		"#Description: %s" % palette.comment.replace("\n", " ").replace("\r", "")
+	)
+	palette_file.store_line("#Colors: %s" % palette.colors_max)
+	# Set columns
+	if palette.width < 255:
+		palette_file.store_line("Columns: %s" % str(palette.width))
+	# Colors
+	for i in palette.colors_max:
+		var color := Color.BLACK
+		var comment: String = "PixeloramaEmptySlot"
+		if i in palette.colors:
+			color = palette.colors[i].color
+			comment = color.to_html(false)
+		palette_file.store_line(str(color.r8, "\t", color.g8, "\t", color.b8, "\t", comment))
+	palette_file.close()
+
+
 ## Refer to app/core/gimppalette-load.c of the GNU Image Manipulation Program for the "living spec"
 func _import_gpl(path: String, text: String) -> Palette:
 	var result: Palette = null
@@ -604,6 +625,7 @@ func _import_gpl(path: String, text: String) -> Palette:
 	var palette_name := path.get_basename().get_file()
 	var comments := ""
 	var columns := 0
+	var empty_slots := PackedInt32Array()
 	var colors := PackedColorArray()
 
 	for line in lines:
@@ -634,15 +656,33 @@ func _import_gpl(path: String, text: String) -> Palette:
 			var blue: float = color_data[2].to_float() / 255.0
 			var color := Color(red, green, blue)
 			if color_data.size() >= 4:
-				# Ignore color name for now - result.add_color(color, color_data[3])
 				colors.append(color)
+				if color_data[3] == "PixeloramaEmptySlot":
+					empty_slots.append(colors.size() - 1)  # Pixelorama is meant to ignore this slot
 			else:
 				colors.append(color)
 		line_number += 1
 
 	if line_number > 0:
-		return fill_imported_palette_with_colors(palette_name, colors, comments, columns)
+		return fill_imported_palette_with_colors(
+			palette_name, colors, comments, columns, empty_slots
+		)
 	return result
+
+
+func export_pal_palette(palette: Palette, path: String) -> void:
+	var palette_file := FileAccess.open(path, FileAccess.WRITE)
+	if FileAccess.get_open_error() != OK:
+		return
+	palette_file.store_line("JASC-PAL")
+	palette_file.store_line("0100")
+	palette_file.store_line(str(palette.colors.size()))
+	var palette_indices := palette.colors.keys()
+	palette_indices.sort()
+	for i in palette_indices:
+		var color: Color = palette.colors[i].color
+		palette_file.store_line(str(color.r8, " ", color.g8, " ", color.b8))
+	palette_file.close()
 
 
 func _import_pal_palette(path: String, text: String) -> Palette:
@@ -656,6 +696,11 @@ func _import_pal_palette(path: String, text: String) -> Palette:
 	var num_colors := int(lines[2])
 
 	for i in range(3, num_colors + 3):
+		if i >= lines.size():
+			printerr("Pal palette has less colors than expected")
+			break
+		if lines[i].strip_edges().is_empty():
+			continue
 		var color_data := lines[i].split(" ")
 		var red := color_data[0].to_float() / 255.0
 		var green := color_data[1].to_float() / 255.0
@@ -690,6 +735,7 @@ func fill_imported_palette_with_colors(
 	colors: PackedColorArray,
 	comment := "",
 	width := Palette.DEFAULT_WIDTH,
+	empty_indices := PackedInt32Array()
 ) -> Palette:
 	if width <= 0:
 		width = Palette.DEFAULT_WIDTH
@@ -698,8 +744,12 @@ func fill_imported_palette_with_colors(
 	if height == 1:
 		width = colors.size()
 	var result := Palette.new(palette_name, width, height, comment)
+	var start_idx := 0
 	for color in colors:
-		result.add_color(color)
+		# ignore color if the index it fills is meant to be empty
+		if not start_idx in empty_indices:
+			result.add_color(color, start_idx)
+		start_idx += 1
 
 	return result
 

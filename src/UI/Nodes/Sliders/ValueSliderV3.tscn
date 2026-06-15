@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dpoteid430evf"]
+[gd_scene format=3 uid="uid://dpoteid430evf"]
 
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="1"]
 [ext_resource type="Script" uid="uid://bh0j3xuxipol2" path="res://src/UI/Nodes/Sliders/ValueSliderV3.gd" id="2"]
@@ -6,16 +6,16 @@
 [ext_resource type="Texture2D" uid="uid://kd10jfc1dxf5" path="res://assets/graphics/misc/lock_aspect_guides.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://beqermx8s5q8y" path="res://assets/graphics/misc/lock_aspect.png" id="5"]
 
-[node name="ValueSliderV3" type="HBoxContainer"]
+[node name="ValueSliderV3" type="HBoxContainer" unique_id=1598144620]
 offset_right = 45.0
 offset_bottom = 52.0
 script = ExtResource("2")
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1139624135]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="X" type="TextureProgressBar" parent="GridContainer"]
+[node name="X" type="TextureProgressBar" parent="GridContainer" unique_id=848475342]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -30,7 +30,7 @@ stretch_margin_bottom = 3
 script = ExtResource("1")
 prefix = "X:"
 
-[node name="Y" type="TextureProgressBar" parent="GridContainer"]
+[node name="Y" type="TextureProgressBar" parent="GridContainer" unique_id=309494055]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -45,7 +45,7 @@ stretch_margin_bottom = 3
 script = ExtResource("1")
 prefix = "Y:"
 
-[node name="Z" type="TextureProgressBar" parent="GridContainer"]
+[node name="Z" type="TextureProgressBar" parent="GridContainer" unique_id=1287811694]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -60,12 +60,12 @@ stretch_margin_bottom = 3
 script = ExtResource("1")
 prefix = "Z:"
 
-[node name="Ratio" type="Control" parent="."]
+[node name="Ratio" type="Control" parent="." unique_id=1219824224]
 visible = false
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 
-[node name="RatioGuides" type="NinePatchRect" parent="Ratio" groups=["UIButtons"]]
+[node name="RatioGuides" type="NinePatchRect" parent="Ratio" unique_id=340187576 groups=["UIButtons"]]
 custom_minimum_size = Vector2(9, 0)
 layout_mode = 0
 anchor_bottom = 1.0
@@ -76,7 +76,7 @@ region_rect = Rect2(0, 0, 9, 44)
 patch_margin_top = 15
 patch_margin_bottom = 13
 
-[node name="RatioButton" type="TextureButton" parent="Ratio" groups=["UIButtons"]]
+[node name="RatioButton" type="TextureButton" parent="Ratio" unique_id=1253633895 groups=["UIButtons"]]
 unique_name_in_owner = true
 layout_mode = 0
 anchor_left = 0.5

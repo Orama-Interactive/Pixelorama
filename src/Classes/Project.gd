@@ -7,11 +7,18 @@ signal removed
 signal serialized(dict: Dictionary)
 signal about_to_deserialize(dict: Dictionary)
 signal resized
-signal timeline_updated
+signal selection_changed
 signal fps_changed
+signal layers_updated
+signal frames_updated
+signal tags_changed
 
-const INDEXED_MODE := Image.FORMAT_MAX + 1
+const INDEXED_MODE := -1
 
+const WARNING_LOADING_3D_LAYERS_MSG := """Projects with 3D layers exported with a Pixelorama version
+older than 1.2 are no longer compatible with current versions. If you want to keep the 3D data
+of this project, please close it and finish your work using version 1.1.9.
+Do NOT save over this file using version 1.2 and on, otherwise your 3D data will be lost!"""
 var name := "":
 	set(value):
 		name = value
@@ -37,8 +44,10 @@ var has_changed := false:
 		if value:
 			Global.project_data_changed.emit(self)
 			Global.tabs.set_tab_title(Global.tabs.current_tab, name + "(*)")
+			JavaScriptBridge.eval("setUnsavedChanges(true);")
 		else:
 			Global.tabs.set_tab_title(Global.tabs.current_tab, name)
+			JavaScriptBridge.eval("setUnsavedChanges(false);")
 # frames and layers Arrays should generally only be modified directly when
 # opening/creating a project. When modifying the current project, use
 # the add/remove/move/swap_frames/layers methods
@@ -54,7 +63,9 @@ var selected_cels := [[0, 0]]  ## Array of Arrays of 2 integers (frame & layer)
 var ordered_layers: Array[int] = [0]
 
 var animation_tags: Array[AnimationTag] = []:
-	set = _animation_tags_changed
+	set(value):
+		animation_tags = value
+		tags_changed.emit()
 var guides: Array[Guide] = []
 var brushes: Array[Image] = []
 var palettes: Dictionary[String, Palette] = {}
@@ -67,7 +78,12 @@ var fps := 6.0:
 	set(value):
 		fps = value
 		fps_changed.emit()
+var license := ""  ## The license of the project, set in the project properties.
 var user_data := ""  ## User defined data, set in the project properties.
+var author_display_name := ""  ## The displayed name of the project author.
+var author_real_name := ""  ## The real name of the project author.
+var author_contact := ""  ## The contact info of the project author.
+var author_company := ""  ## The company name of the project author.
 
 var x_symmetry_point: float
 var y_symmetry_point: float
@@ -79,6 +95,7 @@ var diagonal_xy_symmetry_axis := SymmetryGuide.new()
 var diagonal_x_minus_y_symmetry_axis := SymmetryGuide.new()
 
 var selection_map := SelectionMap.new()
+var prev_selection_map := SelectionMap.new()
 ## This is useful for when the selection is outside of the canvas boundaries,
 ## on the left and/or above (negative coords)
 var selection_offset := Vector2i.ZERO:
@@ -103,8 +120,6 @@ var file_format := Export.FileFormat.PNG
 var was_exported := false
 var export_overwrite := false
 var backup_path := ""
-
-var animation_tag_node := preload("res://src/UI/Timeline/AnimationTagUI.tscn")
 
 
 func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2i(64, 64)) -> void:
@@ -152,6 +167,7 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 		export_directory_path = Global.config_cache.get_value(
 			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 		)
+	initialize_author_data()
 	Global.project_created.emit(self)
 
 
@@ -159,12 +175,6 @@ func remove() -> void:
 	undo_redo.free()
 	for ri in reference_images:
 		ri.queue_free()
-	if self == Global.current_project:
-		# If the project is not current_project then the points need not be removed
-		for point_idx in vanishing_points.size():
-			var editor = Global.perspective_editor
-			for c in editor.vanishing_point_container.get_children():
-				c.queue_free()
 	for guide in guides:
 		guide.queue_free()
 	for frame in frames:
@@ -180,7 +190,7 @@ func remove() -> void:
 func commit_undo() -> void:
 	if not can_undo:
 		return
-	if Global.canvas.selection.transformation_handles.is_transforming_content():
+	if Global.canvas.selection.transformation_handles.is_transforming():
 		Global.canvas.selection.transform_content_cancel()
 	else:
 		undo_redo.undo()
@@ -217,7 +227,7 @@ func get_current_cel() -> BaseCel:
 
 
 func get_image_format() -> Image.Format:
-	if color_mode == INDEXED_MODE:
+	if is_indexed():
 		return Image.FORMAT_RGBA8
 	return color_mode as Image.Format
 
@@ -228,6 +238,8 @@ func is_indexed() -> bool:
 
 func selection_map_changed() -> void:
 	has_selection = !selection_map.is_invisible()
+	if has_selection:
+		prev_selection_map.copy_from(selection_map)
 	var transformation_handles := Global.canvas.selection.transformation_handles
 	if has_selection:
 		var used_map := SelectionMap.new()
@@ -235,14 +247,10 @@ func selection_map_changed() -> void:
 		transformation_handles.set_selection(used_map, selection_map.get_selection_rect(self))
 	else:
 		transformation_handles.set_selection(null, Rect2i())
-	Global.top_menu_container.edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, !has_selection)
-	Global.top_menu_container.project_menu.set_item_disabled(
-		Global.ProjectMenu.CROP_TO_SELECTION, !has_selection
-	)
+	selection_changed.emit()
 
 
 func change_project() -> void:
-	Global.animation_timeline.project_changed()
 	animation_tags = animation_tags
 	# Change the project brushes
 	Brushes.clear_project_brush()
@@ -327,10 +335,16 @@ func serialize() -> Dictionary:
 		"reference_images": reference_image_data,
 		"tilesets": tileset_data,
 		"vanishing_points": vanishing_points,
+		"export_directory_path": export_directory_path,
 		"export_file_name": file_name,
 		"export_file_format": file_format,
 		"fps": fps,
+		"license": license,
 		"user_data": user_data,
+		"author_display_name": author_display_name,
+		"author_real_name": author_real_name,
+		"author_contact": author_contact,
+		"author_company": author_company,
 		"metadata": metadata
 	}
 
@@ -349,6 +363,10 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 		tiles.tile_size = size
 		selection_map.crop(size.x, size.y)
 	color_mode = dict.get("color_mode", color_mode)
+	if pxo_version <= 5:
+		# Compatibility for older projects with indexed mode
+		if color_mode == 40 or color_mode == 48:
+			color_mode = -1
 	if dict.has("tile_mode_x_basis_x") and dict.has("tile_mode_x_basis_y"):
 		tiles.x_basis.x = dict.tile_mode_x_basis_x
 		tiles.x_basis.y = dict.tile_mode_x_basis_y
@@ -379,6 +397,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 				palettes[corrected_palette_name] = palette
 		project_current_palette_name = current_palette_name
 	if dict.has("frames") and dict.has("layers"):
+		var layers_3d_count := 0
 		var audio_layers := 0
 		for saved_layer in dict.layers:
 			match int(saved_layer.get("type", Global.LayerTypes.PIXEL)):
@@ -387,7 +406,36 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 				Global.LayerTypes.GROUP:
 					layers.append(GroupLayer.new(self))
 				Global.LayerTypes.THREE_D:
-					layers.append(Layer3D.new(self))
+					var layer := Layer3D.new(self, "", true)
+					layers.append(layer)
+					var scene_path_zip := "scene/%s" % layers_3d_count
+					if not zip_reader.file_exists(scene_path_zip):
+						layer.generate_nodes(size)
+						layers_3d_count += 1
+						Global.popup_error(WARNING_LOADING_3D_LAYERS_MSG)
+						continue
+					var scene_data := zip_reader.read_file(scene_path_zip)
+					var scene_data_text := scene_data.get_string_from_utf8()
+					if 'resource type="Script"' in scene_data_text:
+						# If a script is detected inside the scene, it's possible someone
+						# may have injected malicious code. To prevent the users,
+						# refuse to load scenes with scripts on them.
+						print("Script detected, there may be malicious code in the scene.")
+						layer.generate_nodes(size)
+						layers_3d_count += 1
+						continue
+					DirAccess.make_dir_absolute(Export.temp_path)
+					var scene_path_file := (
+						Export.temp_path.path_join(str(layers_3d_count)) + ".tscn"
+					)
+					var scene_file := FileAccess.open(scene_path_file, FileAccess.WRITE)
+					scene_file.store_buffer(scene_data)
+					scene_file.close()
+					var scene := load(scene_path_file) as PackedScene
+					layer.load_scene(scene)
+					DirAccess.remove_absolute(scene_path_file)
+					DirAccess.remove_absolute(Export.temp_path)
+					layers_3d_count += 1
 				Global.LayerTypes.TILEMAP:
 					layers.append(LayerTileMap.new(self, null))
 				Global.LayerTypes.AUDIO:
@@ -421,7 +469,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 						if is_instance_valid(file):  # For pxo files saved in 0.x
 							# Don't do anything with it, just read it so that the file can move on
 							file.get_buffer(size.x * size.y * 4)
-						cels.append(Cel3D.new(size, true))
+						cels.append(layer.new_empty_cel())
 					Global.LayerTypes.TILEMAP:
 						var image := _load_image_from_pxo(frame_i, cel_i, zip_reader, file)
 						var tileset_index = dict.layers[cel_i].tileset_index
@@ -494,7 +542,6 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			Global.canvas.reference_image_container.add_child(ri)
 	if dict.has("vanishing_points"):
 		vanishing_points = dict.vanishing_points
-		Global.perspective_editor.queue_redraw()
 	if dict.has("symmetry_points"):
 		x_symmetry_point = dict.symmetry_points[0]
 		y_symmetry_point = dict.symmetry_points[1]
@@ -502,9 +549,17 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			x_symmetry_axis.points[point].y = floorf(y_symmetry_point / 2 + 1)
 		for point in y_symmetry_axis.points.size():
 			y_symmetry_axis.points[point].x = floorf(x_symmetry_point / 2 + 1)
+	export_directory_path = dict.get("export_directory_path", export_directory_path)
+	if not DirAccess.dir_exists_absolute(export_directory_path):
+		export_directory_path = ""
 	file_name = dict.get("export_file_name", file_name)
 	file_format = dict.get("export_file_format", file_name)
 	fps = dict.get("fps", file_name)
+	license = dict.get("license", license)
+	author_display_name = dict.get("author_display_name", "")
+	author_real_name = dict.get("author_real_name", "")
+	author_contact = dict.get("author_contact", "")
+	author_company = dict.get("author_company", "")
 	user_data = dict.get("user_data", user_data)
 	var loaded_current_frame = dict.get("current_frame", current_frame)
 	var loaded_current_layer = dict.get("current_layer", current_layer)
@@ -584,37 +639,9 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 	if new_layer < 0:
 		new_layer = current_layer
 	Global.canvas.selection.transform_content_confirm()
-	# Unpress all buttons
-	for i in frames.size():
-		var frame_button: BaseButton = Global.frame_hbox.get_child(i)
-		frame_button.button_pressed = false  # Unpress all frame buttons
-		for cel_hbox in Global.cel_vbox.get_children():
-			if i < cel_hbox.get_child_count():
-				cel_hbox.get_child(i).button_pressed = false  # Unpress all cel buttons
-
-	for layer_button in Global.layer_vbox.get_children():
-		layer_button.button_pressed = false  # Unpress all layer buttons
 
 	if selected_cels.is_empty():
 		selected_cels.append([new_frame, new_layer])
-	for cel in selected_cels:  # Press selected buttons
-		var frame: int = cel[0]
-		var layer: int = cel[1]
-		if frame < Global.frame_hbox.get_child_count():
-			var frame_button: BaseButton = Global.frame_hbox.get_child(frame)
-			frame_button.button_pressed = true  # Press selected frame buttons
-
-		var layer_vbox_child_count: int = Global.layer_vbox.get_child_count()
-		if layer < layer_vbox_child_count:
-			var layer_button = Global.layer_vbox.get_child(layer_vbox_child_count - 1 - layer)
-			layer_button.button_pressed = true  # Press selected layer buttons
-
-		var cel_vbox_child_count: int = Global.cel_vbox.get_child_count()
-		if layer < cel_vbox_child_count:
-			var cel_hbox: Container = Global.cel_vbox.get_child(cel_vbox_child_count - 1 - layer)
-			if frame < cel_hbox.get_child_count():
-				var cel_button: BaseButton = cel_hbox.get_child(frame)
-				cel_button.button_pressed = true  # Press selected cel buttons
 
 	if new_frame != current_frame:  # If the frame has changed
 		current_frame = new_frame
@@ -625,34 +652,6 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 	order_layers()
 	Global.transparent_checker.update_rect()
 	Global.cel_switched.emit()
-
-
-func _animation_tags_changed(value: Array[AnimationTag]) -> void:
-	animation_tags = value
-	for child in Global.tag_container.get_children():
-		child.queue_free()
-
-	for tag in animation_tags:
-		var tag_c := animation_tag_node.instantiate()
-		tag_c.tag = tag
-		Global.tag_container.add_child(tag_c)
-		var tag_position := Global.tag_container.get_child_count() - 1
-		Global.tag_container.move_child(tag_c, tag_position)
-
-	_set_timeline_first_and_last_frames()
-
-
-func _set_timeline_first_and_last_frames() -> void:
-	# This is useful in case tags get modified DURING the animation is playing
-	# otherwise, this code is useless in this context, since these values are being set
-	# when the play buttons get pressed anyway
-	Global.animation_timeline.first_frame = 0
-	Global.animation_timeline.last_frame = frames.size() - 1
-	if Global.play_only_tags:
-		for tag in animation_tags:
-			if current_frame + 1 >= tag.from && current_frame + 1 <= tag.to:
-				Global.animation_timeline.first_frame = tag.from - 1
-				Global.animation_timeline.last_frame = mini(frames.size() - 1, tag.to - 1)
 
 
 func is_empty() -> bool:
@@ -702,6 +701,14 @@ func get_all_pixel_cels() -> Array[PixelCel]:
 			if cel is PixelCel:
 				cels.append(cel)
 	return cels
+
+
+func get_all_3d_layers() -> Array[Layer3D]:
+	var layers_3d: Array[Layer3D]
+	for layer in layers:
+		if layer is Layer3D:
+			layers_3d.append(layer)
+	return layers_3d
 
 
 func get_all_audio_layers(only_valid_streams := true) -> Array[AudioLayer]:
@@ -813,7 +820,7 @@ func add_frames(new_frames: Array, indices: PackedInt32Array) -> void:
 		# Add frame
 		frames.insert(indices[i], new_frames[i])
 		Global.animation_timeline.project_frame_added(indices[i])
-	_update_frame_ui()
+	frames_updated.emit()
 
 
 func remove_frames(indices: PackedInt32Array) -> void:  # indices should be in ascending order
@@ -832,7 +839,7 @@ func remove_frames(indices: PackedInt32Array) -> void:  # indices should be in a
 		# Remove frame
 		frames.remove_at(indices[i] - i)
 		Global.animation_timeline.project_frame_removed(indices[i] - i)
-	_update_frame_ui()
+	frames_updated.emit()
 
 
 # from_indices and to_indicies should be in ascending order
@@ -847,7 +854,7 @@ func move_frames(from_indices: PackedInt32Array, to_indices: PackedInt32Array) -
 	for i in to_indices.size():
 		frames.insert(to_indices[i], removed_frames[i])
 		Global.animation_timeline.project_frame_added(to_indices[i])
-	_update_frame_ui()
+	frames_updated.emit()
 
 
 func swap_frame(a_index: int, b_index: int) -> void:
@@ -860,7 +867,7 @@ func swap_frame(a_index: int, b_index: int) -> void:
 	Global.animation_timeline.project_frame_added(a_index)
 	Global.animation_timeline.project_frame_removed(b_index)
 	Global.animation_timeline.project_frame_added(b_index)
-	_set_timeline_first_and_last_frames()
+	Global.animation_timeline.set_timeline_first_and_last_frames()
 
 
 func reverse_frames(frame_indices: PackedInt32Array) -> void:
@@ -876,7 +883,7 @@ func reverse_frames(frame_indices: PackedInt32Array) -> void:
 		Global.animation_timeline.project_frame_added(index)
 		Global.animation_timeline.project_frame_removed(reverse_index)
 		Global.animation_timeline.project_frame_added(reverse_index)
-	_set_timeline_first_and_last_frames()
+	Global.animation_timeline.set_timeline_first_and_last_frames()
 	change_cel(-1)
 
 
@@ -890,7 +897,7 @@ func add_layers(new_layers: Array, indices: PackedInt32Array, cels: Array) -> vo
 			frames[f].cels.insert(indices[i], cels[i][f])
 		new_layers[i].project = self
 		Global.animation_timeline.project_layer_added(indices[i])
-	_update_layer_ui()
+	layers_updated.emit()
 
 
 func remove_layers(indices: PackedInt32Array) -> void:
@@ -898,12 +905,13 @@ func remove_layers(indices: PackedInt32Array) -> void:
 	selected_cels.clear()
 	for i in indices.size():
 		# With each removed index, future indices need to be lowered, so subtract by i
-		layers.remove_at(indices[i] - i)
+		var layer_index := indices[i] - i
+		layers.remove_at(layer_index)
 		for frame in frames:
-			frame.cels[indices[i] - i].on_remove()
-			frame.cels.remove_at(indices[i] - i)
-		Global.animation_timeline.project_layer_removed(indices[i] - i)
-	_update_layer_ui()
+			frame.cels[layer_index].on_remove()
+			frame.cels.remove_at(layer_index)
+		Global.animation_timeline.project_layer_removed(layer_index)
+	layers_updated.emit()
 
 
 # from_indices and to_indicies should be in ascending order
@@ -931,7 +939,7 @@ func move_layers(
 		if Global.current_project == self:
 			Global.animation_timeline.project_layer_added(to_indices[i])
 	if Global.current_project == self:
-		_update_layer_ui()
+		layers_updated.emit()
 
 
 # "a" and "b" should both contain "from", "to", and "to_parents" arrays.
@@ -970,7 +978,7 @@ func swap_layers(a: Dictionary, b: Dictionary) -> void:
 		for f in frames.size():
 			frames[f].cels.insert(b.to[i], b_cels[i][f])
 		Global.animation_timeline.project_layer_added(b.to[i])
-	_update_layer_ui()
+	layers_updated.emit()
 
 
 ## Moves multiple cels between different frames, but on the same layer.
@@ -1003,10 +1011,7 @@ func move_cels_same_layer(
 		Global.animation_timeline.project_cel_added(to_indices[i], layer)
 
 	# Update the cel buttons for this layer:
-	var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - layer)
-	for f in frames.size():
-		cel_hbox.get_child(f).frame = f
-		cel_hbox.get_child(f).button_setup()
+	Global.animation_timeline.update_cel_button_ui(layer)
 
 
 func swap_cel(a_frame: int, a_layer: int, b_frame: int, b_layer: int) -> void:
@@ -1019,32 +1024,6 @@ func swap_cel(a_frame: int, a_layer: int, b_frame: int, b_layer: int) -> void:
 	Global.animation_timeline.project_cel_added(a_frame, a_layer)
 	Global.animation_timeline.project_cel_removed(b_frame, b_layer)
 	Global.animation_timeline.project_cel_added(b_frame, b_layer)
-
-
-func _update_frame_ui() -> void:
-	for f in frames.size():  # Update the frames and frame buttons
-		Global.frame_hbox.get_child(f).frame = f
-		Global.frame_hbox.get_child(f).text = str(f + 1)
-
-	for l in layers.size():  # Update the cel buttons
-		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
-		for f in frames.size():
-			cel_hbox.get_child(f).frame = f
-			cel_hbox.get_child(f).button_setup()
-	_set_timeline_first_and_last_frames()
-	timeline_updated.emit()
-
-
-## Update the layer indices and layer/cel buttons
-func _update_layer_ui() -> void:
-	for l in layers.size():
-		layers[l].index = l
-		Global.layer_vbox.get_child(layers.size() - 1 - l).layer_index = l
-		var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(layers.size() - 1 - l)
-		for f in frames.size():
-			cel_hbox.get_child(f).layer = l
-			cel_hbox.get_child(f).button_setup()
-	timeline_updated.emit()
 
 
 ## Change the current reference image
@@ -1078,10 +1057,29 @@ func add_tileset(tileset: TileSetCustom) -> void:
 
 
 ## Loops through all cels in [param cel_dictionary], and for [CelTileMap]s,
-## it calls [method CelTileMap.update_tilemap].
+## it calls [method CelTileMap.update_tilemap]. Returns an array of used tilesets that can be used
+## as reference to update layers during undo/redo.
 func update_tilemaps(
 	cel_dictionary: Dictionary, tile_editing_mode := TileSetPanel.tile_editing_mode
-) -> void:
+) -> Array[TileSetCustom]:
+	var used_tilesets: Array[TileSetCustom]
 	for cel in cel_dictionary:
 		if cel is CelTileMap:
 			(cel as CelTileMap).update_tilemap(tile_editing_mode)
+			if cel.tileset and not cel.tileset in used_tilesets:
+				used_tilesets.append(cel.tileset)
+	return used_tilesets
+
+
+func initialize_author_data() -> void:
+	author_display_name = Global.author_display_name
+	author_real_name = Global.author_real_name
+	author_contact = Global.author_contact
+	author_company = Global.author_company
+
+
+func clear_author_data() -> void:
+	author_display_name = ""
+	author_real_name = ""
+	author_contact = ""
+	author_company = ""

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: pixelorama\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-07 04:44\n"
-"PO-Revision-Date: 2021-05-21 17:41\n"
+"PO-Revision-Date: 2026-04-26 11:29\n"
 "Last-Translator: \n"
 "Language-Team: Vietnamese\n"
 "Language: vi_VN\n"
@@ -20,50 +20,50 @@ msgstr ""
 #. SecInstall
 #: ..\pixelorama.nsi:84
 msgid "Install ${APPNAME}"
-msgstr ""
+msgstr "Cài đặt ${APPNAME}"
 
 #. SecStartmenu
 #: ..\pixelorama.nsi:85
 msgid "Create Start Menu shortcuts (optional)"
-msgstr ""
+msgstr "Tạo lối tắt trong Start Menu (tùy chọn)"
 
 #. SecDesktop
 #: ..\pixelorama.nsi:86
 msgid "Create shortcut on Desktop (optional)"
-msgstr ""
+msgstr "Tạo lối tắt ngoài màn hình nền (tùy chọn)"
 
 #. un.SecUninstall
 #: ..\pixelorama.nsi:87
 msgid "Uninstall ${APPNAME} ${APPVERSION}"
-msgstr ""
+msgstr "Gỡ cài đặt ${APPNAME} ${APPVERSION}"
 
 #. un.SecConfig
 #: ..\pixelorama.nsi:88
 msgid "Remove configuration files (optional)"
-msgstr ""
+msgstr "Xóa toàn bộ các tệp cấu hình (tùy chọn)"
 
 #. DESC_SecInstall
 #: ..\pixelorama.nsi:200
 msgid "Installs ${APPNAME} ${APPVERSION}."
-msgstr ""
+msgstr "Cài đặt ${APPNAME} ${APPVERSION}."
 
 #. DESC_SecStartmenu
 #: ..\pixelorama.nsi:201
 msgid "Creates Start Menu shortcuts for ${APPNAME}."
-msgstr ""
+msgstr "Tạo lối tắt trong Start Menu cho ${APPNAME}."
 
 #. DESC_SecDesktop
 #: ..\pixelorama.nsi:202
 msgid "Creates a Desktop shortcut for ${APPNAME}."
-msgstr ""
+msgstr "Tạo lối tắt ngoài màn hình nền cho ${APPNAME}."
 
 #. DESC_un.SecUninstall
 #: ..\pixelorama.nsi:203
 msgid "Uninstalls ${APPNAME} ${APPVERSION} and removes all shortcuts."
-msgstr ""
+msgstr "Gỡ cài đặt ${APPNAME} ${APPVERSION} và xóa toàn bộ lối tắt."
 
 #. DESC_un.SecConfig
 #: ..\pixelorama.nsi:204
 msgid "Removes configuration files for ${APPNAME}."
-msgstr ""
+msgstr "Xóa toàn bộ các tệp cấu hình cho ${APPNAME}."
 

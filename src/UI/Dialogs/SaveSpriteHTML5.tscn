@@ -1,30 +1,30 @@
 [gd_scene format=3 uid="uid://cltlo2whtiejd"]
 
-[node name="SaveSpriteHTML5" type="ConfirmationDialog"]
+[node name="SaveSpriteHTML5" type="ConfirmationDialog" unique_id=12184517]
 size = Vector2i(205, 111)
 ok_button_text = "Save"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1470543369]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 197.0
 offset_bottom = 66.0
 
-[node name="FileNameContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="FileNameContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1777114866]
 layout_mode = 2
 
-[node name="FileNameLabel" type="Label" parent="VBoxContainer/FileNameContainer"]
+[node name="FileNameLabel" type="Label" parent="VBoxContainer/FileNameContainer" unique_id=331032616]
 layout_mode = 2
 text = "File Name:"
 
-[node name="FileNameLineEdit" type="LineEdit" parent="VBoxContainer/FileNameContainer"]
+[node name="FileNameLineEdit" type="LineEdit" parent="VBoxContainer/FileNameContainer" unique_id=1069527347]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 text = "untitled"
 
-[node name="IncludeBlended" type="CheckBox" parent="VBoxContainer"]
+[node name="IncludeBlended" type="CheckBox" parent="VBoxContainer" unique_id=681212419]
 unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "If enabled, the final blended images are also being stored in the pxo, for each frame.

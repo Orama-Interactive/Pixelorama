@@ -8,11 +8,16 @@ extends TextureProgressBar
 ## This is emitted before the corresponding [signal Range.value_changed] signal.
 signal drag_started
 ## Emitted when the grabber stops being dragged.
-## If value_changed is true, [member Range.value] is different from the value
+## If value_has_changed is true, [member Range.value] is different from the value
 ## when the dragging was started.
-signal drag_ended(value_changed: bool)
+signal drag_ended(value_has_changed: bool)
 
 enum { NORMAL, HELD, SLIDING, TYPING }
+
+const VALUE_ARROW_ICON := preload("uid://ct8wn8m6x4m54")
+const VALUE_ARROW_HOVER_ICON := preload("uid://bq8h66v4ie8xl")
+const VALUE_ARROW_PRESS_ICON := preload("uid://hhxenhteahv6")
+const VALUE_SLIDER_ICON := preload("uid://c7u0yofrpm50a")
 
 @export var editable := true:
 	set(v):
@@ -50,6 +55,10 @@ enum { NORMAL, HELD, SLIDING, TYPING }
 		_value_up_button.visible = v
 		_value_down_button.visible = v
 @export var echo_arrow_time := 0.075
+@export var allow_global_input_events := false:
+	set(v):
+		allow_global_input_events = v
+		set_process_unhandled_input(allow_global_input_events)
 @export var global_increment_action := ""  ## Global shortcut to increment
 @export var global_decrement_action := ""  ## Global shortcut to decrement
 
@@ -79,7 +88,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	value_changed.connect(_on_value_changed)
-	set_process_input(!global_increment_action.is_empty() and !global_decrement_action.is_empty())
+	set_process_unhandled_input(allow_global_input_events)
 	_reset_display(true)
 	if not Engine.is_editor_hint():  # Pixelorama specific code
 		_value_up_button.modulate = Global.modulate_icon_color
@@ -128,29 +137,26 @@ func _gui_input(event: InputEvent) -> void:
 				state = HELD
 				set_meta("mouse_start_position", get_local_mouse_position())
 			elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				drag_started.emit()
+				_start_value = value
 				if snap_by_default:
 					value += step if event.ctrl_pressed else snap_step
 				else:
 					value += snap_step if event.ctrl_pressed else step
+				drag_ended.emit(not is_equal_approx(_start_value, value))
 				get_viewport().set_input_as_handled()
 			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				drag_started.emit()
+				_start_value = value
 				if snap_by_default:
 					value -= step if event.ctrl_pressed else snap_step
 				else:
 					value -= snap_step if event.ctrl_pressed else step
+				drag_ended.emit(not is_equal_approx(_start_value, value))
 				get_viewport().set_input_as_handled()
 	elif state == HELD:
 		if event.is_action_released("left_mouse"):
-			state = TYPING
-			drag_started.emit()
-			_start_value = value
-			_line_edit.text = _format_float_string(true)
-			_line_edit.editable = true
 			_line_edit.grab_focus()
-			_line_edit.selecting_enabled = true
-			_line_edit.select_all()
-			_line_edit.caret_column = _line_edit.text.length()
-			tint_progress = Color.TRANSPARENT
 		elif event is InputEventMouseMotion:
 			if get_meta("mouse_start_position").distance_to(get_local_mouse_position()) > 2:
 				state = SLIDING
@@ -195,16 +201,18 @@ func _gui_input(event: InputEvent) -> void:
 
 
 func _setup_nodes() -> void:  ## Only called once on _ready()
-	focus_mode = Control.FOCUS_ALL
+	focus_mode = Control.FOCUS_NONE
 	_line_edit.alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_line_edit.anchor_right = 1
 	_line_edit.anchor_bottom = 1
 	_line_edit.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_line_edit.focus_mode = Control.FOCUS_ALL
 	_line_edit.add_theme_stylebox_override("read_only", StyleBoxEmpty.new())
 	_line_edit.add_theme_stylebox_override("normal", StyleBoxEmpty.new())
-	_line_edit.text_submitted.connect(_on_LineEdit_text_entered)
+	_line_edit.text_submitted.connect(_on_line_edit_text_entered)
+	_line_edit.focus_entered.connect(_on_line_edit_focus_entered)
 	_line_edit.focus_exited.connect(_confirm_text)
-	_line_edit.gui_input.connect(_on_LineEdit_gui_input)
+	_line_edit.gui_input.connect(_on_line_edit_gui_input)
 	add_child(_line_edit)
 
 	var value_up_texture_size := Vector2.ONE
@@ -234,7 +242,7 @@ func _setup_nodes() -> void:  ## Only called once on _ready()
 	_value_down_button.offset_top = -value_up_texture_size.y
 	_value_down_button.offset_right = -3
 	_value_down_button.offset_bottom = 0
-	_value_up_button.focus_mode = Control.FOCUS_NONE
+	_value_down_button.focus_mode = Control.FOCUS_NONE
 	_value_down_button.add_to_group("UIButtons")
 	_value_down_button.button_down.connect(_on_value_button_down.bind(-1))
 	_value_down_button.button_up.connect(_on_value_button_up)
@@ -244,20 +252,32 @@ func _setup_nodes() -> void:  ## Only called once on _ready()
 	add_child(_timer)
 
 
-func _on_LineEdit_gui_input(event: InputEvent) -> void:
+func _on_value_changed(_value: float) -> void:
+	_reset_display()
+
+
+func _on_line_edit_gui_input(event: InputEvent) -> void:
 	if state == TYPING:
 		if event is InputEventKey and event.keycode == KEY_ESCAPE:
 			_confirm_text(false)  # Cancel
 			_line_edit.release_focus()
 
 
-func _on_value_changed(_value: float) -> void:
-	_reset_display()
-
-
 ## When pressing enter, release focus, which will call _confirm_text on focus_exited signal
-func _on_LineEdit_text_entered(_new_text: String) -> void:
+func _on_line_edit_text_entered(_new_text: String) -> void:
 	_line_edit.release_focus()
+
+
+func _on_line_edit_focus_entered() -> void:
+	state = TYPING
+	drag_started.emit()
+	_start_value = value
+	_line_edit.text = _format_float_string(true)
+	_line_edit.editable = true
+	_line_edit.selecting_enabled = true
+	_line_edit.select_all()
+	_line_edit.caret_column = _line_edit.text.length()
+	tint_progress = Color.TRANSPARENT
 
 
 ## Called on LineEdit's focus_exited signal
@@ -290,21 +310,39 @@ func _reset_display(theme_has_changed := false) -> void:
 	_line_edit.selecting_enabled = false  # Remove the selection
 	_line_edit.editable = false
 	if theme_has_changed and not Engine.is_editor_hint():
-		texture_under = get_theme_icon("texture_under", "ValueSlider")
-#		texture_over = get_theme_icon("texture_over", "ValueSlider")
-		texture_progress = get_theme_icon("texture_progress", "ValueSlider")
-		_value_up_button.texture_normal = get_theme_icon("arrow_normal", "ValueSlider")
-		_value_up_button.texture_pressed = get_theme_icon("arrow_pressed", "ValueSlider")
-		_value_up_button.texture_hover = get_theme_icon("arrow_hover", "ValueSlider")
+		if has_theme_icon(&"texture_under", &"ValueSlider"):
+			texture_under = get_theme_icon(&"texture_under", &"ValueSlider")
+		else:
+			texture_under = VALUE_SLIDER_ICON
 
-		_value_down_button.texture_normal = get_theme_icon("arrow_normal", "ValueSlider")
-		_value_down_button.texture_pressed = get_theme_icon("arrow_pressed", "ValueSlider")
-		_value_down_button.texture_hover = get_theme_icon("arrow_hover", "ValueSlider")
+#		texture_over = get_theme_icon("texture_over", "ValueSlider")
+		if has_theme_icon(&"texture_under", &"ValueSlider"):
+			texture_progress = get_theme_icon(&"texture_progress", &"ValueSlider")
+		else:
+			texture_progress = VALUE_SLIDER_ICON
+		if has_theme_icon(&"arrow_normal", &"ValueSlider"):
+			_value_up_button.texture_normal = get_theme_icon(&"arrow_normal", &"ValueSlider")
+			_value_down_button.texture_normal = get_theme_icon(&"arrow_normal", &"ValueSlider")
+		else:
+			_value_up_button.texture_normal = VALUE_ARROW_ICON
+			_value_down_button.texture_normal = VALUE_ARROW_ICON
+		if has_theme_icon(&"arrow_pressed", &"ValueSlider"):
+			_value_up_button.texture_pressed = get_theme_icon(&"arrow_pressed", &"ValueSlider")
+			_value_down_button.texture_pressed = get_theme_icon(&"arrow_pressed", &"ValueSlider")
+		else:
+			_value_up_button.texture_pressed = VALUE_ARROW_PRESS_ICON
+			_value_down_button.texture_pressed = VALUE_ARROW_PRESS_ICON
+		if has_theme_icon(&"arrow_pressed", &"ValueSlider"):
+			_value_up_button.texture_hover = get_theme_icon(&"arrow_pressed", &"ValueSlider")
+			_value_down_button.texture_hover = get_theme_icon(&"arrow_pressed", &"ValueSlider")
+		else:
+			_value_up_button.texture_hover = VALUE_ARROW_HOVER_ICON
+			_value_down_button.texture_hover = VALUE_ARROW_HOVER_ICON
 
 		editable = editable  # Call the setter
-		tint_under = get_theme_color("under_color", "ValueSlider")
+		tint_under = get_theme_color(&"under_color", &"ValueSlider")
 		if show_progress:
-			tint_progress = get_theme_color("progress_color", "ValueSlider")
+			tint_progress = get_theme_color(&"progress_color", &"ValueSlider")
 		else:
 			tint_progress = Color.TRANSPARENT
 	_line_edit.text = _format_float_string()

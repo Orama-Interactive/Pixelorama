@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2025-10-14 14:10\n"
+"PO-Revision-Date: 2026-04-26 12:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -579,15 +579,6 @@ msgstr "Кисть проекта"
 msgid "Random brush"
 msgstr "Случайная кисть"
 
-msgid "Save Sprite as .pxo"
-msgstr "Сохранить спрайт как .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Экспортировать спрайт как .png"
-
-msgid "Export Sprite"
-msgstr "Экспортировать спрайт"
-
 msgid "File Exists, Overwrite?"
 msgstr "Файл уже существует, перезаписать?"
 
@@ -895,6 +886,10 @@ msgstr "Резервная копия"
 msgid "Performance"
 msgstr "Производительность"
 
+#. Found in the Preferences. Refers to the author of the current project.
+msgid "Author"
+msgstr ""
+
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
 msgstr "Драйверы"
@@ -963,6 +958,10 @@ msgstr "Шрифт:"
 msgid "Font size:"
 msgstr "Размер шрифта:"
 
+#. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
+msgid "Screen orientation:"
+msgstr ""
+
 msgid "Dim interface on dialog popup"
 msgstr "Затемнять интерфейс при появлении диалога"
 
@@ -981,6 +980,10 @@ msgstr "Когда эта настройка включена, вместо по
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
 msgstr "Однооконный режим"
+
+#. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
+msgid "Collapse main menu"
+msgstr ""
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
@@ -1029,9 +1032,17 @@ msgstr "Источник цвета фона:"
 msgid "Background color:"
 msgstr "Цвет фона:"
 
+#. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
+msgid "Single tool mode"
+msgstr ""
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
+msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
+msgstr ""
+
 #. Found in the preferences, under the Tools category.
-msgid "Share options between the left and the right tools"
-msgstr "Разделяет параметры между левыми и правыми инструментами"
+msgid "Share options between left and right tools"
+msgstr ""
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
@@ -1045,8 +1056,9 @@ msgstr "Цвет левого инструмента:"
 msgid "Right tool color:"
 msgstr "Цвет правого инструмента:"
 
-msgid "Tool button size:"
-msgstr "Размер кнопок инструментов:"
+#. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
+msgid "Make global palettes read-only"
+msgstr ""
 
 msgid "Small"
 msgstr "Маленький"
@@ -1497,6 +1509,9 @@ msgstr "Голландский"
 
 msgid "Belarusian"
 msgstr "Белорусский"
+
+msgid "Thai"
+msgstr ""
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -2039,6 +2054,26 @@ msgstr "Драйвер планшета:"
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "Укажите драйвер планшета, используемый в Windows. Если у вас включена функция Windows Ink, выберите winink."
+
+#. Found in the Preferences. Refers to the displayed name of the current project author.
+msgid "Display name:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the real name of the current project author.
+msgid "Real name:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the contact info of the current project author.
+msgid "Contact:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the company name of the current project author.
+msgid "Company/Studio:"
+msgstr ""
+
+#. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
+msgid "Last saved by"
+msgstr ""
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
@@ -2979,6 +3014,54 @@ msgstr "Отменить: Изменить длительность кадра"
 msgid "Redo: Change frame duration"
 msgstr "Повторить: Изменить длительность кадра"
 
+msgid "Undo: Rename Layer"
+msgstr ""
+
+msgid "Redo: Rename Layer"
+msgstr ""
+
+msgid "Undo: Change Layer Opacity"
+msgstr ""
+
+msgid "Redo: Change Layer Opacity"
+msgstr ""
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
+msgid "Undo: Change Layer Onion Skinning Ignore Status"
+msgstr ""
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
+msgid "Redo: Change Layer Onion Skinning Ignore Status"
+msgstr ""
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos.
+msgid "Undo: Change Layer User Data"
+msgstr ""
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
+msgid "Redo: Change Layer User Data"
+msgstr ""
+
+msgid "Undo: Change Layer Color"
+msgstr ""
+
+msgid "Redo: Change Layer Color"
+msgstr ""
+
+msgid "Undo: Change Layer Visibility"
+msgstr ""
+
+msgid "Redo: Change Layer Visibility"
+msgstr ""
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos.
+msgid "Undo: Change Layer Locked Status"
+msgstr ""
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
+msgid "Redo: Change Layer Locked Status"
+msgstr ""
+
 msgid "Move Guide"
 msgstr "Сдвинуть направляющие"
 
@@ -3007,9 +3090,6 @@ msgstr "Создать пустую палитру"
 
 msgid "Import Palette"
 msgstr "Импорт Палитры"
-
-msgid "Create Palette From Current Sprite"
-msgstr "Создать палитру из текущего спрайта"
 
 msgid "Palette Name:"
 msgstr "Название палитры:"
@@ -3098,6 +3178,10 @@ msgstr "Сбросить параметры всех инструментов"
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
 msgstr "Удалить все расширения"
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all backups"
+msgstr ""
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
@@ -3292,6 +3376,10 @@ msgstr "Выбор содержимого изображения"
 msgid "Only export content that is within the bounds of a selected area."
 msgstr "Экспортировать только содержимое, находящееся в пределах выбранной области."
 
+#. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
+msgid "Layers as separate files"
+msgstr ""
+
 msgid "Close"
 msgstr "Закрыть"
 
@@ -3329,6 +3417,10 @@ msgstr "Переместить выделенный кадр вправо."
 msgid "Frame duration:"
 msgstr "Длительность кадра:"
 
+#. Refers to the license of a project, which can be set from the project properties.
+msgid "License:"
+msgstr ""
+
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
 msgstr "Данные пользователя:"
@@ -3361,8 +3453,8 @@ msgstr "Пустой"
 msgid "From Current Palette"
 msgstr "Из текущей палитры"
 
-msgid "From Current Sprite"
-msgstr "Из текущего спрайта"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "Из выделенного"

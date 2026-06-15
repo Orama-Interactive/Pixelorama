@@ -1,11 +1,24 @@
-[gd_scene load_steps=10 format=3 uid="uid://c3vcvhh4d8hd7"]
+[gd_scene format=3 uid="uid://c3vcvhh4d8hd7"]
 
 [ext_resource type="Script" uid="uid://y2yilvjc63c" path="res://src/UI/ColorPickers/ColorPicker.gd" id="1_r8ot0"]
 [ext_resource type="Texture2D" uid="uid://d0v821l01w7go" path="res://assets/graphics/misc/color_switch.png" id="2_ojj3i"]
+[ext_resource type="Shader" uid="uid://c50kmfvf635kb" path="res://src/Shaders/TransparentChecker.gdshader" id="3_u6ehu"]
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="3_vjkb0"]
 [ext_resource type="Texture2D" uid="uid://cefhafnbc8upf" path="res://assets/graphics/misc/value_arrow_right.svg" id="5_hhe4d"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_02x7w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vm84b"]
+shader = ExtResource("3_u6ehu")
+shader_parameter/size = 10.0
+shader_parameter/alpha = 1.0
+shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
+shader_parameter/color2 = Color(1, 1, 1, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/scale = Vector2(0, 0)
+shader_parameter/rect_size = Vector2(38, 28)
+shader_parameter/follow_movement = false
+shader_parameter/follow_scale = false
 
 [sub_resource type="InputEventAction" id="InputEventAction_5llr2"]
 action = &"switch_colors"
@@ -13,29 +26,53 @@ action = &"switch_colors"
 [sub_resource type="Shortcut" id="19"]
 events = [SubResource("InputEventAction_5llr2")]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a4xx1"]
+shader = ExtResource("3_u6ehu")
+shader_parameter/size = 10.0
+shader_parameter/alpha = 1.0
+shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
+shader_parameter/color2 = Color(1, 1, 1, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/scale = Vector2(0, 0)
+shader_parameter/rect_size = Vector2(38, 28)
+shader_parameter/follow_movement = false
+shader_parameter/follow_scale = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_liu3n"]
+shader = ExtResource("3_u6ehu")
+shader_parameter/size = 10.0
+shader_parameter/alpha = 1.0
+shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
+shader_parameter/color2 = Color(1, 1, 1, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/scale = Vector2(0, 0)
+shader_parameter/rect_size = Vector2(11, 11)
+shader_parameter/follow_movement = false
+shader_parameter/follow_scale = false
+
 [sub_resource type="InputEventAction" id="InputEventAction_nptxe"]
 action = &"reset_colors_default"
 
 [sub_resource type="Shortcut" id="Shortcut_uay2n"]
 events = [SubResource("InputEventAction_nptxe")]
 
-[node name="ColorPicker" type="PanelContainer"]
+[node name="ColorPicker" type="PanelContainer" unique_id=1282553206]
 custom_minimum_size = Vector2(32, 80)
 offset_right = 312.0
 offset_bottom = 358.0
 script = ExtResource("1_r8ot0")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1272804798]
 layout_mode = 2
 
-[node name="VerticalContainer" type="VBoxContainer" parent="ScrollContainer"]
+[node name="VerticalContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=21774123]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = -6
 alignment = 1
 
-[node name="ColorPicker" type="ColorPicker" parent="ScrollContainer/VerticalContainer"]
+[node name="ColorPicker" type="ColorPicker" parent="ScrollContainer/VerticalContainer" unique_id=1179466016]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -48,13 +85,13 @@ sliders_visible = false
 hex_visible = false
 presets_visible = false
 
-[node name="ColorButtons" type="HBoxContainer" parent="ScrollContainer/VerticalContainer"]
+[node name="ColorButtons" type="HBoxContainer" parent="ScrollContainer/VerticalContainer" unique_id=1503366675]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 0
 alignment = 1
 
-[node name="LeftColorButton" type="Button" parent="ScrollContainer/VerticalContainer/ColorButtons"]
+[node name="LeftColorButton" type="Button" parent="ScrollContainer/VerticalContainer/ColorButtons" unique_id=1839496259]
 custom_minimum_size = Vector2(42, 32)
 layout_mode = 2
 size_flags_vertical = 4
@@ -64,7 +101,7 @@ toggle_mode = true
 button_pressed = true
 button_group = SubResource("ButtonGroup_02x7w")
 
-[node name="LeftColorRect" type="ColorRect" parent="ScrollContainer/VerticalContainer/ColorButtons/LeftColorButton"]
+[node name="LeftColorRect" type="ColorRect" parent="ScrollContainer/VerticalContainer/ColorButtons/LeftColorButton" unique_id=970441020]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 2.0
@@ -75,8 +112,9 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
-[node name="TransparentChecker" parent="ScrollContainer/VerticalContainer/ColorButtons/LeftColorButton/LeftColorRect" instance=ExtResource("3_vjkb0")]
+[node name="TransparentChecker" parent="ScrollContainer/VerticalContainer/ColorButtons/LeftColorButton/LeftColorRect" unique_id=507881423 instance=ExtResource("3_vjkb0")]
 show_behind_parent = true
+material = SubResource("ShaderMaterial_vm84b")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,7 +122,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorSwitch" type="TextureButton" parent="ScrollContainer/VerticalContainer/ColorButtons" groups=["UIButtons"]]
+[node name="ColorSwitch" type="TextureButton" parent="ScrollContainer/VerticalContainer/ColorButtons" unique_id=1856183564 groups=["UIButtons"]]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -93,7 +131,7 @@ mouse_default_cursor_shape = 2
 shortcut = SubResource("19")
 texture_normal = ExtResource("2_ojj3i")
 
-[node name="RightColorButton" type="Button" parent="ScrollContainer/VerticalContainer/ColorButtons"]
+[node name="RightColorButton" type="Button" parent="ScrollContainer/VerticalContainer/ColorButtons" unique_id=241127658]
 custom_minimum_size = Vector2(42, 32)
 layout_mode = 2
 size_flags_vertical = 4
@@ -102,7 +140,7 @@ mouse_default_cursor_shape = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_02x7w")
 
-[node name="RightColorRect" type="ColorRect" parent="ScrollContainer/VerticalContainer/ColorButtons/RightColorButton"]
+[node name="RightColorRect" type="ColorRect" parent="ScrollContainer/VerticalContainer/ColorButtons/RightColorButton" unique_id=1925615162]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 2.0
@@ -112,8 +150,9 @@ offset_bottom = 30.0
 mouse_filter = 2
 metadata/_edit_lock_ = true
 
-[node name="TransparentChecker" parent="ScrollContainer/VerticalContainer/ColorButtons/RightColorButton/RightColorRect" instance=ExtResource("3_vjkb0")]
+[node name="TransparentChecker" parent="ScrollContainer/VerticalContainer/ColorButtons/RightColorButton/RightColorRect" unique_id=1638339017 instance=ExtResource("3_vjkb0")]
 show_behind_parent = true
+material = SubResource("ShaderMaterial_a4xx1")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -121,19 +160,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorButtonsVertical" type="VBoxContainer" parent="ScrollContainer/VerticalContainer/ColorButtons"]
+[node name="ColorButtonsVertical" type="VBoxContainer" parent="ScrollContainer/VerticalContainer/ColorButtons" unique_id=814156762]
 layout_mode = 2
 theme_override_constants/separation = 2
 alignment = 1
 
-[node name="CopyAverage" type="Button" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical"]
+[node name="CopyAverage" type="Button" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical" unique_id=465564245]
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
 button_mask = 3
 
-[node name="AverageColor" type="ColorRect" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/CopyAverage"]
+[node name="AverageColor" type="ColorRect" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/CopyAverage" unique_id=1041707771]
 unique_name_in_owner = true
 layout_mode = 0
 anchor_left = 0.5
@@ -147,9 +186,10 @@ offset_bottom = 5.5
 mouse_filter = 2
 metadata/_edit_lock_ = true
 
-[node name="TransparentChecker" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/CopyAverage/AverageColor" instance=ExtResource("3_vjkb0")]
+[node name="TransparentChecker" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/CopyAverage/AverageColor" unique_id=1731616779 instance=ExtResource("3_vjkb0")]
 unique_name_in_owner = true
 show_behind_parent = true
+material = SubResource("ShaderMaterial_liu3n")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -158,7 +198,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="ColorDefaults" type="Button" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical"]
+[node name="ColorDefaults" type="Button" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical" unique_id=1611779176]
 custom_minimum_size = Vector2(15, 15)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -166,7 +206,7 @@ tooltip_text = "Reset the colors to their default state (black for left, white f
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_uay2n")
 
-[node name="ColorRectBlack" type="ColorRect" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/ColorDefaults"]
+[node name="ColorRectBlack" type="ColorRect" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/ColorDefaults" unique_id=1440781000]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 2.0
@@ -175,7 +215,7 @@ offset_bottom = 13.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[node name="ColorRectWhite" type="ColorRect" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/ColorDefaults"]
+[node name="ColorRectWhite" type="ColorRect" parent="ScrollContainer/VerticalContainer/ColorButtons/ColorButtonsVertical/ColorDefaults" unique_id=1570547092]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 2.0
@@ -183,7 +223,7 @@ offset_right = 13.0
 offset_bottom = 13.0
 mouse_filter = 2
 
-[node name="ExpandButton" type="Button" parent="ScrollContainer/VerticalContainer"]
+[node name="ExpandButton" type="Button" parent="ScrollContainer/VerticalContainer" unique_id=729249263]
 layout_mode = 2
 focus_mode = 0
 mouse_default_cursor_shape = 2

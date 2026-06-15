@@ -13,6 +13,12 @@ func _ready() -> void:
 	color_picker_button.get_picker().presets_visible = false
 
 
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_released("ui_text_submit"):
+		if gui_get_focus_owner() != user_data_text_edit:
+			get_ok_button().grab_focus()
+
+
 func show_dialog(
 	popup_rect: Rect2i, tag_id: int, is_editing: bool, selected_frames := PackedInt32Array()
 ) -> void:

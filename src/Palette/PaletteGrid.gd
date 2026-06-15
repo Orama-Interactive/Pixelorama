@@ -94,7 +94,7 @@ func find_and_select_color(color_info: Dictionary, mouse_button: int) -> void:
 	if not is_instance_valid(current_palette):
 		return
 	var selected_index := Palettes.current_palette_get_selected_color_index(mouse_button)
-	if palette_color_index != -1:  # If color has a defined index in palette then priortize index
+	if palette_color_index != -1:  # If color has a defined index in palette then prioritize index
 		if selected_index == palette_color_index:  # Index already selected
 			return
 		select_swatch(mouse_button, palette_color_index, selected_index)

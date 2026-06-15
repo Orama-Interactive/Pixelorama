@@ -126,6 +126,7 @@ func _init() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	super(event)
 	var options: OptionButton = $LightenDarken
 
 	if event.is_action_pressed("change_tool_mode"):
@@ -236,11 +237,6 @@ func update_strength() -> void:
 func draw_start(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_start(pos)
-	if Input.is_action_pressed(&"draw_color_picker", true):
-		_picking_color = true
-		_pick_color(pos)
-		return
-	_picking_color = false
 
 	Global.canvas.selection.transform_content_confirm()
 	update_mask(false)
@@ -269,10 +265,6 @@ func draw_move(pos_i: Vector2i) -> void:
 	var pos := _get_stabilized_position(pos_i)
 	pos = snap_position(pos)
 	super.draw_move(pos)
-	if _picking_color:  # Still return even if we released Alt
-		if Input.is_action_pressed(&"draw_color_picker", true):
-			_pick_color(pos)
-		return
 
 	if _draw_line:
 		if Global.mirror_view:
@@ -291,9 +283,6 @@ func draw_move(pos_i: Vector2i) -> void:
 
 func draw_end(pos: Vector2i) -> void:
 	pos = snap_position(pos)
-	if _picking_color:
-		super.draw_end(pos)
-		return
 
 	if _draw_line:
 		if Global.mirror_view:

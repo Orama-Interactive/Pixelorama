@@ -1,36 +1,49 @@
-[gd_scene load_steps=3 format=3 uid="uid://birggxam3fjnb"]
+[gd_scene format=3 uid="uid://birggxam3fjnb"]
 
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="1"]
 [ext_resource type="Script" uid="uid://dskbcqwcf40j2" path="res://src/UI/Dialogs/ImageEffects/ResizeCanvas.gd" id="2"]
+[ext_resource type="Shader" uid="uid://c50kmfvf635kb" path="res://src/Shaders/TransparentChecker.gdshader" id="3_5y14m"]
 
-[node name="ResizeCanvas" type="ConfirmationDialog"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_el557"]
+shader = ExtResource("3_5y14m")
+shader_parameter/size = 10.0
+shader_parameter/alpha = 1.0
+shader_parameter/color1 = Color(0.7, 0.7, 0.7, 1)
+shader_parameter/color2 = Color(1, 1, 1, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/scale = Vector2(0, 0)
+shader_parameter/rect_size = Vector2(0, 0)
+shader_parameter/follow_movement = false
+shader_parameter/follow_scale = false
+
+[node name="ResizeCanvas" type="ConfirmationDialog" unique_id=744546933]
 canvas_item_default_texture_filter = 0
 title = "Resize Canvas"
 size = Vector2i(216, 486)
 script = ExtResource("2")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1775589053]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 208.0
 offset_bottom = 437.0
 
-[node name="ImageSize" type="Label" parent="VBoxContainer"]
+[node name="ImageSize" type="Label" parent="VBoxContainer" unique_id=832656328]
 layout_mode = 2
 text = "Canvas Size"
 
-[node name="OptionsContainer" type="GridContainer" parent="VBoxContainer"]
+[node name="OptionsContainer" type="GridContainer" parent="VBoxContainer" unique_id=838596377]
 layout_mode = 2
 theme_override_constants/h_separation = 2
 theme_override_constants/v_separation = 4
 columns = 2
 
-[node name="WidthLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
+[node name="WidthLabel" type="Label" parent="VBoxContainer/OptionsContainer" unique_id=1731344640]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Width:"
 
-[node name="WidthValue" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
+[node name="WidthValue" type="SpinBox" parent="VBoxContainer/OptionsContainer" unique_id=1508872667]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -39,12 +52,12 @@ max_value = 16384.0
 value = 64.0
 suffix = "px"
 
-[node name="Height" type="Label" parent="VBoxContainer/OptionsContainer"]
+[node name="Height" type="Label" parent="VBoxContainer/OptionsContainer" unique_id=1801209190]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Height:"
 
-[node name="HeightValue" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
+[node name="HeightValue" type="SpinBox" parent="VBoxContainer/OptionsContainer" unique_id=2036015117]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -53,57 +66,58 @@ max_value = 16384.0
 value = 64.0
 suffix = "px"
 
-[node name="OffsetLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
+[node name="OffsetLabel" type="Label" parent="VBoxContainer/OptionsContainer" unique_id=1174524760]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Offset"
 
-[node name="EmptySpacer" type="Control" parent="VBoxContainer/OptionsContainer"]
+[node name="EmptySpacer" type="Control" parent="VBoxContainer/OptionsContainer" unique_id=217898141]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="XOffsetLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
+[node name="XOffsetLabel" type="Label" parent="VBoxContainer/OptionsContainer" unique_id=1518583650]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "X:"
 
-[node name="XOffsetSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
+[node name="XOffsetSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer" unique_id=1127752719]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 max_value = 0.0
 suffix = "px"
 
-[node name="YOffsetLabel" type="Label" parent="VBoxContainer/OptionsContainer"]
+[node name="YOffsetLabel" type="Label" parent="VBoxContainer/OptionsContainer" unique_id=137262253]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Y:"
 
-[node name="YOffsetSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer"]
+[node name="YOffsetSpinBox" type="SpinBox" parent="VBoxContainer/OptionsContainer" unique_id=1874578643]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 max_value = 0.0
 suffix = "px"
 
-[node name="CenterButton" type="Button" parent="VBoxContainer/OptionsContainer"]
+[node name="CenterButton" type="Button" parent="VBoxContainer/OptionsContainer" unique_id=756794357]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Center"
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer" unique_id=1089018391]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer"]
+[node name="Preview" type="TextureRect" parent="VBoxContainer/AspectRatioContainer" unique_id=1945203690]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer" instance=ExtResource("1")]
+[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer" unique_id=1834552944 instance=ExtResource("1")]
 show_behind_parent = true
+material = SubResource("ShaderMaterial_el557")
 layout_mode = 2
 
 [connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]

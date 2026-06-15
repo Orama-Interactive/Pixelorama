@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2025-10-14 14:10\n"
+"PO-Revision-Date: 2026-04-26 12:44\n"
 
 msgid "OK"
 msgstr "确定"
@@ -141,11 +141,11 @@ msgstr "重做"
 
 #. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
 msgid "Undo History"
-msgstr ""
+msgstr "撤消历史"
 
 #. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
 msgid "Initial state"
-msgstr ""
+msgstr "初始状态"
 
 msgid "Copy"
 msgstr "复制"
@@ -580,15 +580,6 @@ msgstr "项目笔画"
 msgid "Random brush"
 msgstr "随机笔画"
 
-msgid "Save Sprite as .pxo"
-msgstr "保存 Sprite 为 .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "导出 Sprite 为 .png"
-
-msgid "Export Sprite"
-msgstr "导出 Sprite"
-
 msgid "File Exists, Overwrite?"
 msgstr "文件已存在，覆盖吗?"
 
@@ -814,15 +805,15 @@ msgstr "Aseprite 项目"
 
 #. Found in "Open" and "Save" file dialogs. Searches Krita project files only (.kra). Note that Krita is a software and should remain untranslated.
 msgid "Krita Project"
-msgstr ""
+msgstr "Krita 项目"
 
 #. Found in "Open" and "Save" file dialogs. Searches Piskel project files only (.piskel). Note that Piskel is a software and should remain untranslated.
 msgid "Piskel Project"
-msgstr ""
+msgstr "Piskel 项目"
 
 #. Found in "Open" and "Save" file dialogs. Searches Photoshop project files only (.psd). Note that Photoshop is a software and should remain untranslated.
 msgid "Photoshop Project"
-msgstr ""
+msgstr "Photoshop 项目"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
@@ -896,6 +887,10 @@ msgstr "备份"
 msgid "Performance"
 msgstr "性能"
 
+#. Found in the Preferences. Refers to the author of the current project.
+msgid "Author"
+msgstr "作者"
+
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
 msgstr "驱动程序"
@@ -964,6 +959,10 @@ msgstr "字体："
 msgid "Font size:"
 msgstr "字体大小："
 
+#. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
+msgid "Screen orientation:"
+msgstr "屏幕方向："
+
 msgid "Dim interface on dialog popup"
 msgstr "对话框弹出时变暗界面"
 
@@ -982,6 +981,10 @@ msgstr "启用此设置后，将使用操作系统的本机文件对话框，而
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
 msgstr "单窗口模式"
+
+#. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
+msgid "Collapse main menu"
+msgstr "收起主菜单"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
@@ -1030,9 +1033,17 @@ msgstr "背景颜色从："
 msgid "Background color:"
 msgstr "背景颜色："
 
+#. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
+msgid "Single tool mode"
+msgstr "单工具模式"
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
+msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
+msgstr "如果启用此功能，则鼠标右键将始终激活与鼠标左键相同的工具。"
+
 #. Found in the preferences, under the Tools category.
-msgid "Share options between the left and the right tools"
-msgstr "在左侧和右侧工具之间共享选项"
+msgid "Share options between left and right tools"
+msgstr "左右工具之间的共享选项"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
@@ -1046,8 +1057,9 @@ msgstr "左侧工具颜色："
 msgid "Right tool color:"
 msgstr "左侧工具颜色："
 
-msgid "Tool button size:"
-msgstr "工具按钮大小："
+#. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
+msgid "Make global palettes read-only"
+msgstr "全局调色板设为只读"
 
 msgid "Small"
 msgstr "小"
@@ -1370,7 +1382,7 @@ msgid "Developed by Orama Interactive"
 msgstr "由 Orama Interactive 开发 - 简体中文翻译 By 大眼仔~旭（Anan）"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr "© 版权所有 2019~2025 - Orama Interactive 和贡献者"
+msgstr "© 版权所有 2019 Orama Interactive 和贡献者"
 
 msgid "Website"
 msgstr "网站"
@@ -1499,6 +1511,9 @@ msgstr "荷兰语"
 
 msgid "Belarusian"
 msgstr "白俄罗斯语"
+
+msgid "Thai"
+msgstr "泰语"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -2051,6 +2066,26 @@ msgstr "平板电脑驱动程序："
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "指定在 Windows 上使用的平板电脑驱动程序。如果你启用了 Windows Ink，选择 winink。"
 
+#. Found in the Preferences. Refers to the displayed name of the current project author.
+msgid "Display name:"
+msgstr "显示名称："
+
+#. Found in the Preferences. Refers to the real name of the current project author.
+msgid "Real name:"
+msgstr "真实名称："
+
+#. Found in the Preferences. Refers to the contact info of the current project author.
+msgid "Contact:"
+msgstr "联系："
+
+#. Found in the Preferences. Refers to the company name of the current project author.
+msgid "Company/Studio:"
+msgstr "公司/工作室："
+
+#. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
+msgid "Last saved by"
+msgstr "最后保存者"
+
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
 msgstr "添加扩展"
@@ -2498,11 +2533,11 @@ msgstr "启用垂直镜像绘图"
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↗) mirrored drawing"
-msgstr ""
+msgstr "启用对角线 (↗) 镜像绘图"
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↘) mirrored drawing"
-msgstr ""
+msgstr "启用对角线 (↘) 镜像绘图"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
@@ -2990,6 +3025,54 @@ msgstr "撤消：更改帧持续时间"
 msgid "Redo: Change frame duration"
 msgstr "重做：更改帧持续时间"
 
+msgid "Undo: Rename Layer"
+msgstr "撤销：重命名图层"
+
+msgid "Redo: Rename Layer"
+msgstr "重做：重命名图层"
+
+msgid "Undo: Change Layer Opacity"
+msgstr "撤销：更改图层不透明度"
+
+msgid "Redo: Change Layer Opacity"
+msgstr "重做：更改图层不透明度"
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
+msgid "Undo: Change Layer Onion Skinning Ignore Status"
+msgstr "撤销：更改图层洋葱皮忽略状态"
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
+msgid "Redo: Change Layer Onion Skinning Ignore Status"
+msgstr "重做：更改图层洋葱皮忽略状态"
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos.
+msgid "Undo: Change Layer User Data"
+msgstr "撤销：更改图层用户数据"
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
+msgid "Redo: Change Layer User Data"
+msgstr "重做：更改图层用户数据"
+
+msgid "Undo: Change Layer Color"
+msgstr "撤销：更改图层颜色"
+
+msgid "Redo: Change Layer Color"
+msgstr "重做：更改图层颜色"
+
+msgid "Undo: Change Layer Visibility"
+msgstr "撤销：更改图层可见性"
+
+msgid "Redo: Change Layer Visibility"
+msgstr "重做：更改图层可见性"
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos.
+msgid "Undo: Change Layer Locked Status"
+msgstr "撤销：更改图层锁定状态"
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
+msgid "Redo: Change Layer Locked Status"
+msgstr "重做：更改图层锁定状态"
+
 msgid "Move Guide"
 msgstr "移除辅助线"
 
@@ -3018,9 +3101,6 @@ msgstr "新建空的调色板"
 
 msgid "Import Palette"
 msgstr "导入调色板"
-
-msgid "Create Palette From Current Sprite"
-msgstr "从当前 Sprite 创建调色板"
 
 msgid "Palette Name:"
 msgstr "调色板名称："
@@ -3109,6 +3189,10 @@ msgstr "重置所有工具选项"
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
 msgstr "移除所有扩展"
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all backups"
+msgstr "删除所有备份"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
@@ -3303,6 +3387,10 @@ msgstr "剪辑图像内容到选择"
 msgid "Only export content that is within the bounds of a selected area."
 msgstr "仅导出在选定区域界限内的内容。"
 
+#. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
+msgid "Layers as separate files"
+msgstr "作为单独的图层文件"
+
 msgid "Close"
 msgstr "关闭"
 
@@ -3310,7 +3398,7 @@ msgid "Discard All"
 msgstr "放弃全部"
 
 msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
-msgstr ""
+msgstr "上次 Pixelorama 没有正常关闭。您想恢复之前的会话吗？"
 
 msgid "Backup reloaded"
 msgstr "重新加载备份"
@@ -3340,6 +3428,10 @@ msgstr "移动所选帧到右侧。"
 msgid "Frame duration:"
 msgstr "帧持续时间:"
 
+#. Refers to the license of a project, which can be set from the project properties.
+msgid "License:"
+msgstr "许可证："
+
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
 msgstr "用户数据:"
@@ -3361,7 +3453,7 @@ msgstr "创建一个新的调色板"
 
 #. Title of a window where the user can create a new project palette. Project palettes are palettes that are stored inside the project files, and are only being used by that project.
 msgid "Create a new project palette"
-msgstr ""
+msgstr "创建新的项目调色板"
 
 msgid "Comment:"
 msgstr "注释："
@@ -3372,8 +3464,8 @@ msgstr "空的"
 msgid "From Current Palette"
 msgstr "从当前调色板"
 
-msgid "From Current Sprite"
-msgstr "从当前 Sprite"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "从当前选择"

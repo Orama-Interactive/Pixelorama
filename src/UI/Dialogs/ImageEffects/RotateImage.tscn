@@ -1,45 +1,45 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvr6j8sohxob3"]
+[gd_scene format=3 uid="uid://bvr6j8sohxob3"]
 
 [ext_resource type="Script" uid="uid://bdgixc0fpy66f" path="res://src/UI/Dialogs/ImageEffects/RotateImage.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="4"]
 
-[node name="RotateImage" instance=ExtResource("2")]
+[node name="RotateImage" unique_id=1593018906 instance=ExtResource("2")]
 title = "Rotate Image"
 size = Vector2i(362, 535)
 script = ExtResource("1")
 
-[node name="VBoxContainer" parent="." index="3"]
+[node name="VBoxContainer" parent="." index="2" unique_id=1773123238]
 offset_bottom = 486.0
 
-[node name="Indicator" type="Control" parent="VBoxContainer/AspectRatioContainer" index="1"]
+[node name="Indicator" type="Control" parent="VBoxContainer/AspectRatioContainer" parent_id_path=PackedInt32Array(370669710) index="1" unique_id=643288853]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 
-[node name="LiveSettings" parent="VBoxContainer" index="2"]
+[node name="LiveSettings" parent="VBoxContainer" index="2" unique_id=2099258780]
 visible = true
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" index="3"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" index="3" unique_id=909437778]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2" index="0"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2" index="0" unique_id=838322794]
 layout_mode = 2
 text = "Type:"
 
-[node name="TypeOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer2" index="1"]
+[node name="TypeOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer2" index="1" unique_id=602054086]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_default_cursor_shape = 2
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer" index="4"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" index="4" unique_id=2011523910]
 layout_mode = 2
 
-[node name="PivotOptions" type="HBoxContainer" parent="VBoxContainer" index="5"]
+[node name="PivotOptions" type="HBoxContainer" parent="VBoxContainer" index="5" unique_id=1913954814]
 layout_mode = 2
 
-[node name="Pivot" parent="VBoxContainer/PivotOptions" index="0" instance=ExtResource("4")]
+[node name="Pivot" parent="VBoxContainer/PivotOptions" index="0" unique_id=100844535 instance=ExtResource("4")]
 layout_mode = 2
 size_flags_horizontal = 3
 step = 0.5
@@ -49,74 +49,74 @@ grid_columns = 2
 prefix_x = "Pivot x:"
 prefix_y = "Pivot y:"
 
-[node name="Centre" type="Button" parent="VBoxContainer/PivotOptions" index="1"]
+[node name="Centre" type="Button" parent="VBoxContainer/PivotOptions" index="1" unique_id=1413246239]
 layout_mode = 2
 tooltip_text = "Places the pivot at the center of the image, or at the center of the selection, if it is present."
 mouse_default_cursor_shape = 2
 text = "Center"
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer" index="6"]
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer" index="6" unique_id=1056076966]
 layout_mode = 2
 
-[node name="AngleSlider" parent="VBoxContainer" index="7" instance=ExtResource("3")]
+[node name="AngleSlider" parent="VBoxContainer" index="7" unique_id=1217211706 instance=ExtResource("3")]
 layout_mode = 2
 max_value = 359.0
 prefix = "Angle:"
 suffix = "°"
 snap_step = 45.0
 
-[node name="QuickRotations" type="HBoxContainer" parent="VBoxContainer" index="8"]
+[node name="QuickRotations" type="HBoxContainer" parent="VBoxContainer" index="8" unique_id=1813377076]
 layout_mode = 2
 alignment = 1
 
-[node name="Deduct90" type="Button" parent="VBoxContainer/QuickRotations" index="0"]
+[node name="Deduct90" type="Button" parent="VBoxContainer/QuickRotations" index="0" unique_id=1480244106]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "-90"
 
-[node name="Deduct45" type="Button" parent="VBoxContainer/QuickRotations" index="1"]
+[node name="Deduct45" type="Button" parent="VBoxContainer/QuickRotations" index="1" unique_id=196832450]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "-45"
 
-[node name="Zero" type="Button" parent="VBoxContainer/QuickRotations" index="2"]
+[node name="Zero" type="Button" parent="VBoxContainer/QuickRotations" index="2" unique_id=2018794978]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "0"
 
-[node name="Add45" type="Button" parent="VBoxContainer/QuickRotations" index="3"]
+[node name="Add45" type="Button" parent="VBoxContainer/QuickRotations" index="3" unique_id=2109237226]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "+45"
 
-[node name="Add90" type="Button" parent="VBoxContainer/QuickRotations" index="4"]
+[node name="Add90" type="Button" parent="VBoxContainer/QuickRotations" index="4" unique_id=383994964]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "+90"
 
-[node name="SmearOptions" type="VBoxContainer" parent="VBoxContainer" index="9"]
+[node name="SmearOptions" type="VBoxContainer" parent="VBoxContainer" index="9" unique_id=1635541587]
 visible = false
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/SmearOptions" index="0"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/SmearOptions" index="0" unique_id=104607265]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/SmearOptions" index="1"]
+[node name="Label" type="Label" parent="VBoxContainer/SmearOptions" index="1" unique_id=822159134]
 layout_mode = 2
 text = "Smear options:"
 
-[node name="ToleranceSlider" parent="VBoxContainer/SmearOptions" index="2" instance=ExtResource("3")]
+[node name="ToleranceSlider" parent="VBoxContainer/SmearOptions" index="2" unique_id=958208090 instance=ExtResource("3")]
 layout_mode = 2
 max_value = 255.0
 value = 100.0
 prefix = "Tolerance:"
 
-[node name="InitialAngleSlider" parent="VBoxContainer/SmearOptions" index="3" instance=ExtResource("3")]
+[node name="InitialAngleSlider" parent="VBoxContainer/SmearOptions" index="3" unique_id=1191393342 instance=ExtResource("3")]
 layout_mode = 2
 max_value = 359.0
 value = 359.0
@@ -124,7 +124,7 @@ prefix = "Initial angle:"
 suffix = "°"
 snap_step = 45.0
 
-[node name="HSeparator3" type="HSeparator" parent="VBoxContainer" index="10"]
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer" index="10" unique_id=1669692737]
 layout_mode = 2
 
 [connection signal="draw" from="VBoxContainer/AspectRatioContainer/Indicator" to="." method="_on_Indicator_draw"]

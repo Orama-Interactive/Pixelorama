@@ -1,35 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://duse1w3q7whmm"]
+[gd_scene format=3 uid="uid://duse1w3q7whmm"]
 
 [ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1"]
 [ext_resource type="Script" uid="uid://dhfp3uc7ikgw3" path="res://src/UI/Dialogs/ImageEffects/DropShadowDialog.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="3"]
 
-[node name="DropShadowDialog" instance=ExtResource("1")]
+[node name="DropShadowDialog" unique_id=250138760 instance=ExtResource("1")]
 title = "Drop Shadow"
 size = Vector2i(362, 413)
 script = ExtResource("2")
 
-[node name="VBoxContainer" parent="." index="3"]
+[node name="VBoxContainer" parent="." index="2" unique_id=1773123238]
 offset_bottom = 364.0
 
-[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" index="0"]
+[node name="TransparentChecker" parent="VBoxContainer/AspectRatioContainer/Preview" parent_id_path=PackedInt32Array(1653862649) index="0" unique_id=770515729]
 layout_mode = 1
 anchors_preset = 15
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ShadowOptions" type="GridContainer" parent="VBoxContainer" index="2"]
+[node name="ShadowOptions" type="GridContainer" parent="VBoxContainer" index="2" unique_id=1110206776]
 layout_mode = 2
 theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 4
 columns = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/ShadowOptions" index="0"]
+[node name="Label" type="Label" parent="VBoxContainer/ShadowOptions" index="0" unique_id=940057965]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Offset:"
 
-[node name="OffsetSliders" parent="VBoxContainer/ShadowOptions" index="1" instance=ExtResource("3")]
+[node name="OffsetSliders" parent="VBoxContainer/ShadowOptions" index="1" unique_id=1917938954 instance=ExtResource("3")]
 layout_mode = 2
 value = Vector2(5, 5)
 min_value = Vector2(-64, -64)
@@ -40,18 +40,18 @@ show_ratio = true
 suffix_x = "px"
 suffix_y = "px"
 
-[node name="ShadowColorLabel" type="Label" parent="VBoxContainer/ShadowOptions" index="2"]
+[node name="ShadowColorLabel" type="Label" parent="VBoxContainer/ShadowOptions" index="2" unique_id=321114749]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Shadow color:"
 
-[node name="ShadowColor" type="ColorPickerButton" parent="VBoxContainer/ShadowOptions" index="3"]
+[node name="ShadowColor" type="ColorPickerButton" parent="VBoxContainer/ShadowOptions" index="3" unique_id=1983034729]
 custom_minimum_size = Vector2(64, 20)
 layout_mode = 2
 size_flags_horizontal = 3
 color = Color(0.0823529, 0.0823529, 0.0823529, 0.627451)
 
-[node name="AnimatePanel" parent="AnimateDialog" index="0"]
+[node name="AnimatePanel" parent="AnimateDialog" parent_id_path=PackedInt32Array(44308645) index="0" unique_id=912775852]
 grow_horizontal = 2
 grow_vertical = 2
 

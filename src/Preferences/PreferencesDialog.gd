@@ -1,5 +1,30 @@
 extends AcceptDialog
 
+var pref_theme_base_color := Preference.new(
+	"theme_base_color",
+	"Interface/ThemeOptions/BaseColor",
+	"color",
+	Color.GRAY,
+	false,
+	_on_theme_color_changed
+)
+var pref_theme_accent_color := Preference.new(
+	"theme_accent_color",
+	"Interface/ThemeOptions/AccentColor",
+	"color",
+	Color.GRAY,
+	false,
+	_on_theme_color_changed
+)
+var pref_theme_color_contrast := Preference.new(
+	"theme_color_contrast",
+	"Interface/ThemeOptions/ContrastSlider",
+	"value",
+	0.3,
+	false,
+	_on_theme_color_changed
+)
+
 var preferences: Array[Preference] = [
 	Preference.new(
 		"open_last_project", "Startup/StartupContainer/OpenLastProject", "button_pressed", false
@@ -39,14 +64,30 @@ var preferences: Array[Preference] = [
 		true,
 		true
 	),
+	(
+		Preference
+		. new(
+			"collapse_main_menu",
+			"Interface/InterfaceOptions/CollapseMainMenu",
+			"button_pressed",
+			OS.has_feature("mobile"),
+		)
+	),
+	Preference.new("theme_preset_index", "%ThemePresetOptionButton", "selected", 0),
+	pref_theme_base_color,
+	pref_theme_accent_color,
+	pref_theme_color_contrast,
 	Preference.new(
-		"icon_color_from",
-		"Interface/ButtonOptions/IconColorOptionButton",
-		"selected",
-		Global.ColorFrom.THEME
+		"reset_swap_on_shortcut_release",
+		"Tools/ToolOptions/ResetSwapCheckBox",
+		"button_pressed",
+		false
 	),
 	Preference.new(
-		"custom_icon_color", "Interface/ButtonOptions/IconColorButton", "color", Color.GRAY
+		"swap_color_on_tool_swap",
+		"Tools/ToolOptions/SwapColorWithToolCheckBox",
+		"button_pressed",
+		false
 	),
 	Preference.new(
 		"single_tool_mode",
@@ -67,8 +108,14 @@ var preferences: Array[Preference] = [
 		"right_tool_color", "Tools/ToolOptions/RightToolColorButton", "color", Color("fd6d14")
 	),
 	Preference.new(
+		"global_palettes_readonly",
+		"Palettes/PaletteOptions/GlobalPalettesReadonly",
+		"button_pressed",
+		true
+	),
+	Preference.new(
 		"tool_button_size",
-		"Interface/ButtonOptions/ToolButtonSizeOptionButton",
+		"Interface/InterfaceOptions/ToolButtonSizeOptionButton",
 		"selected",
 		Global.ButtonSize.SMALL
 	),
@@ -146,15 +193,6 @@ var preferences: Array[Preference] = [
 	),
 	Preference.new("tilemode_opacity", "Canvas/CheckerOptions/TileModeOpacity", "value", 1.0),
 	Preference.new(
-		"clear_color_from",
-		"Canvas/BackgroundOptions/ColorOptionButton",
-		"selected",
-		Global.ColorFrom.THEME
-	),
-	Preference.new(
-		"modulate_clear_color", "Canvas/BackgroundOptions/BackgroundColor", "color", Color.GRAY
-	),
-	Preference.new(
 		"select_layer_on_button_click",
 		"Timeline/TimelineOptions/SelectLayerOnButton",
 		"button_pressed",
@@ -171,6 +209,18 @@ var preferences: Array[Preference] = [
 		"Timeline/TimelineOptions/OnionSkinningFutureColor",
 		"color",
 		Color.BLUE
+	),
+	Preference.new(
+		"layer_locking_undoable",
+		"Timeline/TimelineOptions/LayerLockingUndoableButton",
+		"button_pressed",
+		true
+	),
+	Preference.new(
+		"layer_visibility_undoable",
+		"Timeline/TimelineOptions/LayerVisibilityUndoableButton",
+		"button_pressed",
+		true
 	),
 	Preference.new(
 		"selection_animated_borders", "Selection/SelectionOptions/Animate", "button_pressed", true
@@ -215,23 +265,30 @@ var preferences: Array[Preference] = [
 		false,
 		true
 	),
-	Preference.new("tablet_driver", "Drivers/DriversContainer/TabletDriver", "selected", 0)
+	Preference.new("tablet_driver", "Drivers/DriversContainer/TabletDriver", "selected", 0),
+	Preference.new("author_display_name", "Author/AuthorContainer/DisplayName", "text", ""),
+	Preference.new("author_real_name", "Author/AuthorContainer/RealName", "text", ""),
+	Preference.new("author_contact", "Author/AuthorContainer/Contact", "text", ""),
+	Preference.new("author_company", "Author/AuthorContainer/CompanyStudio", "text", ""),
 ]
 
 var content_list := PackedStringArray([])
 var selected_item := 0
 
-@onready var list: ItemList = $HSplitContainer/List
+@onready var search_line_edit: LineEdit = %SearchLineEdit
+@onready var list: ItemList = $HSplitContainer/SearchandList/List
 @onready var right_side: VBoxContainer = $"%RightSide"
 @onready var language: VBoxContainer = %Language
 @onready var system_language := language.get_node(^"System Language") as CheckBox
+@onready var theme_preset_option_button: OptionButton = %ThemePresetOptionButton
+@onready var grid_options: GridContainer = %GridOptions
 @onready var autosave_container: Container = right_side.get_node("Backup/AutosaveContainer")
 @onready var autosave_interval: SpinBox = autosave_container.get_node("AutosaveInterval")
-@onready var themes: BoxContainer = right_side.get_node("Interface/Themes")
 @onready var shortcuts: Control = right_side.get_node("Shortcuts/ShortcutEdit")
 @onready var tablet_driver_label: Label = $"%TabletDriverLabel"
 @onready var tablet_driver: OptionButton = $"%TabletDriver"
 @onready var extensions: BoxContainer = right_side.get_node("Extensions")
+@onready var reset_category: VBoxContainer = %Reset
 @onready var must_restart: BoxContainer = $"%MustRestart"
 
 
@@ -241,13 +298,16 @@ class Preference:
 	var value_type: String
 	var default_value
 	var require_restart := false
+	var callable: Callable
+	var default_button: RestoreDefaultButton
 
 	func _init(
 		_prop_name: String,
 		_node_path: String,
 		_value_type: String,
 		_default_value = null,
-		_require_restart := false
+		_require_restart := false,
+		_callable := Callable(),
 	) -> void:
 		prop_name = _prop_name
 		node_path = _node_path
@@ -257,10 +317,14 @@ class Preference:
 			default_value = _default_value
 		else:
 			default_value = Global.get(prop_name)
+		callable = _callable
 
 
 func _ready() -> void:
 	Global.font_loaded.connect(_add_fonts)
+	Themes.theme_added.connect(_update_themes)
+	Themes.theme_removed.connect(_update_themes)
+	Themes.theme_switched.connect(_on_theme_switched)
 	# Replace OK since preference changes are being applied immediately, not after OK confirmation
 	get_ok_button().text = "Close"
 	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -297,7 +361,12 @@ func _ready() -> void:
 		get_tree().call_group(&"DesktopOnly", &"free")
 	if not OS.has_feature("mobile"):
 		get_tree().call_group(&"MobileOnly", &"free")
-	if not DisplayServer.has_feature(DisplayServer.FEATURE_NATIVE_DIALOG_FILE):
+	if (
+		not DisplayServer.has_feature(DisplayServer.FEATURE_NATIVE_DIALOG_FILE)
+		or OS.get_name() == "Android"
+	):
+		# We want to force all file dialogs to be native in Android to use SAF,
+		# to avoid requesting permission, which Google discourages.
 		get_tree().call_group(&"NativeFileDialog", &"free")
 
 	for child in right_side.get_children():
@@ -319,6 +388,7 @@ func _ready() -> void:
 		button.pressed.connect(_on_language_pressed.bind(button.get_index()))
 
 	_add_fonts()
+	_update_themes()
 
 	for pref in preferences:
 		if not right_side.has_node(pref.node_path):
@@ -330,6 +400,7 @@ func _ready() -> void:
 		restore_default_button.default_value = pref.default_value
 		restore_default_button.require_restart = pref.require_restart
 		restore_default_button.node = node
+		pref.default_button = restore_default_button
 		if pref.node_path in ["%ShrinkSlider", "%FontSizeSlider"]:
 			# Add the default button to the shrink slider's grandparent
 			var node_position := node.get_parent().get_index()
@@ -340,28 +411,22 @@ func _ready() -> void:
 			node.get_parent().add_child(restore_default_button)
 			node.get_parent().move_child(restore_default_button, node_position)
 
+		var callable := pref.callable
+		if not callable.is_valid():
+			callable = _on_Preference_value_changed
+		callable = callable.bind(pref, restore_default_button)
 		match pref.value_type:
 			"button_pressed":
-				node.toggled.connect(
-					_on_Preference_value_changed.bind(pref, restore_default_button)
-				)
+				node.toggled.connect(callable)
 			"value":
-				node.value_changed.connect(
-					_on_Preference_value_changed.bind(pref, restore_default_button)
-				)
+				node.value_changed.connect(callable)
 			"color":
 				node.get_picker().presets_visible = false
-				node.color_changed.connect(
-					_on_Preference_value_changed.bind(pref, restore_default_button)
-				)
+				node.color_changed.connect(callable)
 			"selected":
-				node.item_selected.connect(
-					_on_Preference_value_changed.bind(pref, restore_default_button)
-				)
+				node.item_selected.connect(callable)
 			"text":
-				node.text_changed.connect(
-					_on_Preference_value_changed.bind(pref, restore_default_button)
-				)
+				node.text_changed.connect(callable)
 
 		var value = Global.get(pref.prop_name)
 		if node is OptionButton:
@@ -373,7 +438,8 @@ func _ready() -> void:
 		# This is needed because color_changed doesn't fire if the color changes in code
 		if typeof(value) == TYPE_VECTOR2 or typeof(value) == TYPE_COLOR:
 			is_default = value.is_equal_approx(pref.default_value)
-		disable_restore_default_button(restore_default_button, is_default)
+		restore_default_button.set_disabled_status(is_default)
+	_on_theme_switched()
 	SteamManager.set_achievement("ACH_PREFERENCES")
 
 
@@ -390,7 +456,7 @@ func _on_Preference_value_changed(value, pref: Preference, button: RestoreDefaul
 	var disable: bool = Global.get(prop) == default_value
 	if typeof(value) == TYPE_COLOR:
 		disable = Global.get(prop).is_equal_approx(default_value)
-	disable_restore_default_button(button, disable)
+	button.set_disabled_status(disable)
 
 
 ## Add fonts to the font option button.
@@ -401,24 +467,43 @@ func _add_fonts() -> void:
 	%FontOptionButton.select(Global.theme_font_index)
 
 
+func _update_themes(_theme: Theme = null) -> void:
+	theme_preset_option_button.clear()
+	for theme_var in Themes.themes:
+		theme_preset_option_button.add_item(theme_var.get_name())
+	theme_preset_option_button.add_item("Custom", Themes.CUSTOM_THEME_INDEX)
+	var idx := theme_preset_option_button.get_item_index(Global.theme_preset_index)
+	theme_preset_option_button.select(idx)
+
+
+func _on_theme_switched() -> void:
+	if Global.theme_preset_index == Themes.CUSTOM_THEME_INDEX:
+		return
+	var theme_color_preferences: Array[Preference] = [
+		pref_theme_base_color, pref_theme_accent_color, pref_theme_color_contrast
+	]
+	for pref in theme_color_preferences:
+		var value = Global.get(pref.prop_name)
+		_on_Preference_value_changed(value, pref, pref.default_button)
+		var node := right_side.get_node(pref.node_path)
+		pref.default_value = value
+		pref.default_button.default_value = pref.default_value
+		pref.default_button.set_disabled_status(true)
+		if node is ValueSlider:
+			node.set_value_no_signal_update_display(value)
+		else:
+			node.set(pref.value_type, value)
+
+
 func preference_update(require_restart := false) -> void:
 	if require_restart:
 		must_restart.visible = true
 		return
 
 
-func disable_restore_default_button(button: RestoreDefaultButton, disable: bool) -> void:
-	button.disabled = disable
-	if disable:
-		button.mouse_default_cursor_shape = Control.CURSOR_ARROW
-		button.tooltip_text = ""
-	else:
-		button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		button.tooltip_text = "Restore default value"
-
-
 func _on_PreferencesDialog_about_to_show() -> void:
 	add_tabs(false)
+	list.grab_focus.call_deferred()
 
 
 func add_tabs(changed_language := false) -> void:
@@ -437,7 +522,70 @@ func _on_PreferencesDialog_visibility_changed() -> void:
 		Global.config_cache.save(Global.CONFIG_PATH)
 
 
+func _on_search_line_edit_text_changed(new_text: String) -> void:
+	if new_text.is_empty():
+		# If the text is empty/the search bar gets cleared.
+		get_tree().call_group(&"HeaderLabels", &"show")
+		for pref in preferences:
+			if not right_side.has_node(pref.node_path):
+				continue
+			var node := right_side.get_node(pref.node_path)
+			_show_node_when_searching(node, new_text)
+		for pref in grid_options.grid_preferences:
+			if not grid_options.has_node(pref.node_path):
+				continue
+			var node := grid_options.get_node(pref.node_path)
+			_show_node_when_searching(node, new_text)
+		_show_node_when_searching(grid_options.grids_count_slider, new_text)
+		_show_node_when_searching(grid_options.grids_select_container, new_text)
+		_on_List_item_selected(selected_item)
+		return
+
+	# When the search bar has text, show relevant nodes.
+	for child in right_side.get_children():
+		child.visible = true
+	language.visible = false
+	shortcuts.get_parent().visible = false
+	extensions.visible = false
+	reset_category.visible = false
+	get_tree().call_group(&"HeaderLabels", &"hide")
+	for pref in preferences:
+		if not right_side.has_node(pref.node_path):
+			continue
+		var node := right_side.get_node(pref.node_path)
+		_show_node_when_searching(node, new_text)
+	for pref in grid_options.grid_preferences:
+		if not grid_options.has_node(pref.node_path):
+			continue
+		var node := grid_options.get_node(pref.node_path)
+		_show_node_when_searching(node, new_text)
+	_show_node_when_searching(grid_options.grids_count_slider, new_text)
+	_show_node_when_searching(grid_options.grids_select_container, new_text)
+
+
+func _show_node_when_searching(node: Control, search_text: String) -> void:
+	var node_index := node.get_index()
+	var node_parent := node.get_parent()
+	var default_button := node_parent.get_child(node_index - 1)
+	var label := node_parent.get_child(node_index - 2)
+	if node_parent.get_child_count() < 3 and label is not Label:
+		var node_parent_index := node_parent.get_index()
+		node = node_parent
+		default_button = node_parent.get_parent().get_child(node_parent_index - 1)
+		label = node_parent.get_parent().get_child(node_parent_index - 2)
+	var show_node := true
+	if not search_text.is_empty():
+		show_node = search_text.is_subsequence_ofn(node.name)
+		if label is Label:
+			show_node = show_node or search_text.is_subsequence_ofn(label.text)
+	node.visible = show_node
+	default_button.visible = node.visible
+	label.visible = node.visible
+
+
 func _on_List_item_selected(index: int) -> void:
+	if not search_line_edit.text.is_empty():
+		search_line_edit.clear()
 	selected_item = index
 	for child in right_side.get_children():
 		child.visible = child.name == content_list[index]
@@ -445,6 +593,7 @@ func _on_List_item_selected(index: int) -> void:
 
 func _on_shrink_apply_button_pressed() -> void:
 	Global.control.set_display_scale()
+	Global.control.set_mobile_fullscreen_safe_area()
 	hide()
 	popup_centered_clamped(Vector2(600, 400))
 	Global.dialog_open(true)
@@ -480,8 +629,6 @@ func _on_reset_options_confirmation_confirmed() -> void:
 	if %ResetPreferences.button_pressed:
 		system_language.button_pressed = true
 		_on_language_pressed(0)
-		themes.buttons_container.get_child(0).button_pressed = true
-		Themes.change_theme(0)
 		for pref in preferences:
 			var property_name := pref.prop_name
 			var default_value = pref.default_value
@@ -526,3 +673,11 @@ func _on_reset_options_confirmation_confirmed() -> void:
 		Global.top_menu_container.recent_projects_submenu.clear()
 
 	Global.config_cache.save(Global.CONFIG_PATH)
+
+
+func _on_theme_color_changed(value, pref: Preference, button: RestoreDefaultButton) -> void:
+	Global.theme_preset_index = Themes.CUSTOM_THEME_INDEX
+	Global.config_cache.set_value("preferences", "theme_preset_index", Global.theme_preset_index)
+	var idx := theme_preset_option_button.get_item_index(Global.theme_preset_index)
+	theme_preset_option_button.select(idx)
+	_on_Preference_value_changed(value, pref, button)

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2025-10-19 16:20\n"
+"PO-Revision-Date: 2026-04-26 12:43\n"
 
 msgid "OK"
 msgstr "OK"
@@ -141,11 +141,11 @@ msgstr "Przywróć zmiany"
 
 #. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
 msgid "Undo History"
-msgstr ""
+msgstr "Cofnij historię"
 
 #. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
 msgid "Initial state"
-msgstr ""
+msgstr "Stan początkowy"
 
 msgid "Copy"
 msgstr "Kopiuj"
@@ -580,15 +580,6 @@ msgstr "Pędzel projektu"
 msgid "Random brush"
 msgstr "Losowy pędzel"
 
-msgid "Save Sprite as .pxo"
-msgstr "Zapisz obraz jako .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Eksportuj obraz jako .png"
-
-msgid "Export Sprite"
-msgstr "Eksportuj obraz"
-
 msgid "File Exists, Overwrite?"
 msgstr "Plik już istnieje, Nadpisać?"
 
@@ -895,6 +886,10 @@ msgstr "Utwórz kopię zapasową"
 msgid "Performance"
 msgstr "Wydajność"
 
+#. Found in the Preferences. Refers to the author of the current project.
+msgid "Author"
+msgstr ""
+
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
 msgstr "Sterowniki"
@@ -963,6 +958,10 @@ msgstr "Czcionka:"
 msgid "Font size:"
 msgstr "Rozmiar czcionki:"
 
+#. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
+msgid "Screen orientation:"
+msgstr "Orientacja ekranu:"
+
 msgid "Dim interface on dialog popup"
 msgstr "Przyciemnij interfejs, kiedy pojawia się okno dialogowe"
 
@@ -981,6 +980,10 @@ msgstr "Gdy to ustawienie jest włączone, używane są natywne okna dialogowe p
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
 msgstr "Tryb pojedynczego okna"
+
+#. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
+msgid "Collapse main menu"
+msgstr "Zwiń menu główne"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
@@ -1029,9 +1032,17 @@ msgstr "Kolor tła z:"
 msgid "Background color:"
 msgstr "Kolor tła:"
 
+#. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
+msgid "Single tool mode"
+msgstr "Tryb pojedynczego narzędzia"
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
+msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
+msgstr "Jeśli ta opcja jest włączona, prawy przycisk myszy będzie zawsze aktywować to samo narzędzie, co lewy przycisk myszy."
+
 #. Found in the preferences, under the Tools category.
-msgid "Share options between the left and the right tools"
-msgstr "Udostępnij opcje między narzędziami po lewej i prawej stronie"
+msgid "Share options between left and right tools"
+msgstr "Udostępniaj opcje między narzędziami lewymi i prawymi"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
@@ -1044,8 +1055,9 @@ msgstr "Kolor lewego narzędzia:"
 msgid "Right tool color:"
 msgstr "Kolor prawego narzędzia:"
 
-msgid "Tool button size:"
-msgstr "Rozmiar przycisku narzędzi:"
+#. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
+msgid "Make global palettes read-only"
+msgstr "Ustaw palety globalne jako tylko do odczytu"
 
 msgid "Small"
 msgstr "Mały"
@@ -1497,6 +1509,9 @@ msgstr "Niderlandzki"
 
 msgid "Belarusian"
 msgstr "Białoruski"
+
+msgid "Thai"
+msgstr ""
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -2046,6 +2061,26 @@ msgstr "Sterownik tabletu:"
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "Wybiera sterownik tabletu na Windowsie, jeżeli masz włączony \"Windows Ink\", wybierz \"winink\"."
 
+#. Found in the Preferences. Refers to the displayed name of the current project author.
+msgid "Display name:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the real name of the current project author.
+msgid "Real name:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the contact info of the current project author.
+msgid "Contact:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the company name of the current project author.
+msgid "Company/Studio:"
+msgstr ""
+
+#. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
+msgid "Last saved by"
+msgstr ""
+
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
 msgstr "Dodaj rozszerzenie"
@@ -2431,7 +2466,7 @@ msgstr "Styl:"
 
 #. Refers to the text. Regular means that the text is not bold or italic.
 msgid "Regular"
-msgstr "Normalny"
+msgstr "Standardowy"
 
 #. Refers to text that is bold.
 msgid "Bold"
@@ -2493,11 +2528,11 @@ msgstr "Włącza lustrzane odbicie w pionie podczas rysowania"
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↗) mirrored drawing"
-msgstr ""
+msgstr "Włącz lustrzane odbicie rysunku po przekątnej (↗)"
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↘) mirrored drawing"
-msgstr ""
+msgstr "Włącz lustrzane odbicie rysunku po przekątnej (↘)"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
@@ -2642,11 +2677,11 @@ msgstr "Wybierz piksele"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
-msgstr ""
+msgstr "Połącz komórki z"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get unlinked.
 msgid "Unlink cels"
-msgstr ""
+msgstr "Rozłącz komórki"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
@@ -2985,6 +3020,54 @@ msgstr "Cofnij: Zmień czas trwania klatki"
 msgid "Redo: Change frame duration"
 msgstr "Przywróć: Zmień czas trwania klatki"
 
+msgid "Undo: Rename Layer"
+msgstr ""
+
+msgid "Redo: Rename Layer"
+msgstr ""
+
+msgid "Undo: Change Layer Opacity"
+msgstr ""
+
+msgid "Redo: Change Layer Opacity"
+msgstr ""
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
+msgid "Undo: Change Layer Onion Skinning Ignore Status"
+msgstr ""
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
+msgid "Redo: Change Layer Onion Skinning Ignore Status"
+msgstr ""
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos.
+msgid "Undo: Change Layer User Data"
+msgstr ""
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
+msgid "Redo: Change Layer User Data"
+msgstr ""
+
+msgid "Undo: Change Layer Color"
+msgstr ""
+
+msgid "Redo: Change Layer Color"
+msgstr ""
+
+msgid "Undo: Change Layer Visibility"
+msgstr ""
+
+msgid "Redo: Change Layer Visibility"
+msgstr ""
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos.
+msgid "Undo: Change Layer Locked Status"
+msgstr ""
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
+msgid "Redo: Change Layer Locked Status"
+msgstr ""
+
 msgid "Move Guide"
 msgstr "Przesuń prowadnice"
 
@@ -3013,9 +3096,6 @@ msgstr "Nowa pusta paleta kolorów"
 
 msgid "Import Palette"
 msgstr "Importuj paletę kolorów"
-
-msgid "Create Palette From Current Sprite"
-msgstr "Utwórz paletę z aktualnego Sprite'a"
 
 msgid "Palette Name:"
 msgstr "Nazwa palety kolorów:"
@@ -3104,6 +3184,10 @@ msgstr "Zresetuj wszystkie opcje narzędzi"
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
 msgstr "Usuń wszystkie rozszerzenia"
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all backups"
+msgstr "Usuń wszystkie kopie zapasowe"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
@@ -3298,6 +3382,10 @@ msgstr "Przytnij zawartość obrazu do zaznaczenia"
 msgid "Only export content that is within the bounds of a selected area."
 msgstr "Eksportuj tylko treści znajdujące się w granicach wybranego obszaru."
 
+#. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
+msgid "Layers as separate files"
+msgstr ""
+
 msgid "Close"
 msgstr "Zamknij"
 
@@ -3305,7 +3393,7 @@ msgid "Discard All"
 msgstr "Odrzuć Wszystkie"
 
 msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
-msgstr ""
+msgstr "Pixelorama nie zamknęła się poprawnie ostatnim razem. Czy chcesz przywrócić poprzednią sesję?"
 
 msgid "Backup reloaded"
 msgstr "Wczytano ponownię kopię zapasową"
@@ -3334,6 +3422,10 @@ msgstr "Przenieś zaznaczoną klatkę w prawo."
 #. Refers to the duration of the frame. Found in the frame properties.
 msgid "Frame duration:"
 msgstr "Czas trwania klatki:"
+
+#. Refers to the license of a project, which can be set from the project properties.
+msgid "License:"
+msgstr ""
 
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
@@ -3367,8 +3459,8 @@ msgstr "Pusta"
 msgid "From Current Palette"
 msgstr "Z bieżącej palety"
 
-msgid "From Current Sprite"
-msgstr "Z bieżącego obrazu"
+msgid "From Current Cel"
+msgstr ""
 
 msgid "From Current Selection"
 msgstr "Z bieżącego zaznaczenia"

@@ -1,6 +1,7 @@
 # gdlint: ignore=max-public-methods
 extends Node
 
+signal tool_changed(tool_name: String, button: int)
 signal color_changed(color_info: Dictionary, button: int)
 @warning_ignore("unused_signal")
 signal selected_tile_index_changed(tile_index: int)
@@ -22,6 +23,10 @@ var diagonal_xy_mirror := false
 var diagonal_x_minus_y_mirror := false
 var pixel_perfect := false
 var alpha_locked := false
+var prev_tool_names: Dictionary[int, String] = {
+	MOUSE_BUTTON_LEFT: "",
+	MOUSE_BUTTON_RIGHT: "",
+}
 
 # Dynamics
 var stabilizer_enabled := false
@@ -33,14 +38,13 @@ var pen_pressure_min := 0.2
 var pen_pressure_max := 0.8
 var pressure_buf := [0, 0]  # past pressure value buffer
 var pen_inverted := false
-var mouse_velocity := 1.0
+var mouse_velocity := 0.0
 var mouse_velocity_min_thres := 0.2
 var mouse_velocity_max_thres := 0.8
 var mouse_velocity_max := 1000.0
 var alpha_min := 0.1
 var alpha_max := 1.0
-var brush_size_min := 1
-var brush_size_max := 4
+var brush_size_max_increment := 4
 
 var tools: Dictionary[String, Tool] = {
 	"RectSelect":
@@ -103,7 +107,7 @@ var tools: Dictionary[String, Tool] = {
 		"Move",
 		"move",
 		"res://src/Tools/UtilityTools/Move.tscn",
-		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP]
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.GROUP, Global.LayerTypes.TILEMAP]
 	),
 	"Zoom": Tool.new("Zoom", "Zoom", "zoom", "res://src/Tools/UtilityTools/Zoom.tscn"),
 	"Pan": Tool.new("Pan", "Pan", "pan", "res://src/Tools/UtilityTools/Pan.tscn"),
@@ -131,7 +135,7 @@ var tools: Dictionary[String, Tool] = {
 		"Pencil",
 		"pencil",
 		"res://src/Tools/DesignTools/Pencil.tscn",
-		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP, Global.LayerTypes.THREE_D],
 		"Hold %s to make a line",
 		["draw_create_line"]
 	),
@@ -167,7 +171,7 @@ var tools: Dictionary[String, Tool] = {
 		. new(
 			"LineTool",
 			"Line Tool",
-			"linetool",
+			"line",
 			"res://src/Tools/DesignTools/LineTool.tscn",
 			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Hold %s to snap the angle of the line
@@ -182,7 +186,7 @@ Hold %s to displace the shape's origin""",
 		. new(
 			"CurveTool",
 			"Curve Tool",
-			"curvetool",
+			"curve",
 			"res://src/Tools/DesignTools/CurveTool.tscn",
 			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Draws bezier curves
@@ -199,7 +203,7 @@ Press %s to remove the last added point""",
 		. new(
 			"RectangleTool",
 			"Rectangle Tool",
-			"rectangletool",
+			"rectangle",
 			"res://src/Tools/DesignTools/RectangleTool.tscn",
 			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Hold %s to create a 1:1 shape
@@ -214,7 +218,7 @@ Hold %s to displace the shape's origin""",
 		. new(
 			"EllipseTool",
 			"Ellipse Tool",
-			"ellipsetool",
+			"ellipse",
 			"res://src/Tools/DesignTools/EllipseTool.tscn",
 			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Hold %s to create a 1:1 shape
@@ -229,7 +233,7 @@ Hold %s to displace the shape's origin""",
 		. new(
 			"IsometricBoxTool",
 			"Isometric Box Tool",
-			"isometricboxtool",
+			"isometric_box",
 			"res://src/Tools/DesignTools/IsometricBoxTool.tscn",
 			[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP],
 			"""Draws an isometric box
@@ -254,6 +258,14 @@ Press %s to edit the last added basis""",
 		"res://src/Tools/3DTools/3DShapeEdit.tscn",
 		[Global.LayerTypes.THREE_D]
 	),
+	"TilesPropertyPainter":
+	Tool.new(
+		"TilesPropertyPainter",
+		"Tiles Property Painter",
+		"tilespropertypainter",
+		"res://src/Tools/UtilityTools/TilePropertyPainter.tscn",
+		[Global.LayerTypes.TILEMAP]
+	)
 }
 
 var _tool_button_scene := preload("res://src/UI/ToolsPanel/ToolButton.tscn")
@@ -373,9 +385,14 @@ func _ready() -> void:
 		add_tool_button(tools[t])
 		var tool_shortcut: String = tools[t].shortcut
 		var left_tool_shortcut := "left_%s_tool" % tool_shortcut
+		if InputMap.has_action(left_tool_shortcut):
+			Keychain.actions[left_tool_shortcut] = Keychain.InputAction.new("", "Left")
 		var right_tool_shortcut := "right_%s_tool" % tool_shortcut
-		Keychain.actions[left_tool_shortcut] = Keychain.InputAction.new("", "Left")
-		Keychain.actions[right_tool_shortcut] = Keychain.InputAction.new("", "Right")
+		if InputMap.has_action(right_tool_shortcut):
+			Keychain.actions[right_tool_shortcut] = Keychain.InputAction.new("", "Right")
+		var quick_tool_shortcut := "quick_%s_tool" % tool_shortcut
+		if InputMap.has_action(quick_tool_shortcut):
+			Keychain.actions[quick_tool_shortcut] = Keychain.InputAction.new("", "Quick tools")
 
 	_slots[MOUSE_BUTTON_LEFT] = Slot.new("Left tool")
 	_slots[MOUSE_BUTTON_RIGHT] = Slot.new("Right tool")
@@ -414,12 +431,20 @@ func _ready() -> void:
 	)
 	assign_color(color_value, MOUSE_BUTTON_RIGHT, false)
 	update_tool_cursors()
+
+	# Await is necessary to hide tools irrelevant to the current layer (That may have been
+	# added by extensions), And to make sure projects loaded at startup have correct visible tools
+	await get_tree().process_frame
 	var layer: BaseLayer = Global.current_project.layers[Global.current_project.current_layer]
 	var layer_type := layer.get_layer_type()
-
-	# Await is necessary to hide irrelevant tools added by extensions
-	await get_tree().process_frame
 	_show_relevant_tools(layer_type)
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("swap_tools"):
+		swap_tools()
+	if event.is_action_released("swap_tools") and Global.reset_swap_on_shortcut_release:
+		swap_tools()
 
 
 ## Syncs the other tool using the config of tool located at [param from_idx].[br]
@@ -508,6 +533,7 @@ func set_tool(tool_name: String, button: int) -> void:
 	if not config_changed.is_connected(attempt_config_share):
 		config_changed.connect(attempt_config_share)
 	attempt_config_share(config_slot)  # Sync it with the other tool
+	tool_changed.emit(tool_name, button)
 
 
 func get_tool(button: int) -> Slot:
@@ -530,6 +556,18 @@ func assign_tool(tool_name: String, button: int, allow_refresh := false) -> void
 	update_tool_buttons()
 	update_tool_cursors()
 	Global.config_cache.set_value(slot.kname, "tool", tool_name)
+
+
+func quick_assign_tool(tool_name: String, button: int, allow_refresh := false) -> void:
+	if prev_tool_names[button].is_empty():
+		prev_tool_names[button] = get_tool(button).tool_node.name
+	assign_tool(tool_name, button, allow_refresh)
+
+
+func quick_assign_tool_revert(button: int, allow_refresh := false) -> void:
+	if not prev_tool_names[button].is_empty():
+		assign_tool(prev_tool_names[button], button, allow_refresh)
+	prev_tool_names[button] = ""
 
 
 func default_color() -> void:
@@ -568,6 +606,8 @@ func swap_tools() -> void:
 				_slots[MOUSE_BUTTON_RIGHT].tool_node.set_config(left_config)
 				_slots[MOUSE_BUTTON_LEFT].tool_node.update_config()
 				_slots[MOUSE_BUTTON_RIGHT].tool_node.update_config()
+				if Global.swap_color_on_tool_swap:
+					Tools.swap_color()
 
 
 func assign_color(color: Color, button: int, change_alpha := true, index: int = -1) -> void:
@@ -838,7 +878,6 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 		pen_pressure = clampf(pen_pressure, 0.0, 1.0)
 
 		pen_inverted = event.pen_inverted
-
 		mouse_velocity = event.velocity.length() / mouse_velocity_max
 		mouse_velocity = remap(
 			mouse_velocity, mouse_velocity_min_thres, mouse_velocity_max_thres, 0.0, 1.0
@@ -848,6 +887,8 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 			pen_pressure = 1.0
 		if dynamics_alpha != Dynamics.VELOCITY and dynamics_size != Dynamics.VELOCITY:
 			mouse_velocity = 1.0
+		if active_button == -1:  # there is no meaning of velocity without an active tool
+			mouse_velocity = 0.0
 		if not position == _last_position:
 			_last_position = position
 			_slots[MOUSE_BUTTON_LEFT].tool_node.cursor_move(position)
@@ -882,29 +923,29 @@ func get_alpha_dynamic(strength := 1.0) -> float:
 func _cel_switched() -> void:
 	var layer: BaseLayer = Global.current_project.layers[Global.current_project.current_layer]
 	var layer_type := layer.get_layer_type()
-	# Do not make any changes when its the same type of layer, or a group layer
-	if (
-		layer_type == _curr_layer_type
-		or layer_type in [Global.LayerTypes.GROUP, Global.LayerTypes.AUDIO]
-	):
+	# Do not make any changes when its the same type of layer, or an audio layer
+	if layer_type == _curr_layer_type or layer_type in [Global.LayerTypes.AUDIO]:
 		return
 	_show_relevant_tools(layer_type)
 
 
 func _show_relevant_tools(layer_type: Global.LayerTypes) -> void:
 	# Hide tools that are not available in the current layer type
+	var fallback_available_tool: StringName
 	for button in _tool_buttons.get_children():
 		var tool_name: String = button.name
 		var t: Tool = tools[tool_name]
-		var hide_tool := _is_tool_available(layer_type, t)
-		button.visible = hide_tool
+		var can_show_tool := _is_tool_available(layer_type, t)
+		if can_show_tool:
+			fallback_available_tool = tool_name
+		button.visible = can_show_tool
 
 	# Assign new tools if the layer type has changed
 	_curr_layer_type = layer_type
-	var new_tool_name: String = _left_tools_per_layer_type[layer_type]
+	var new_tool_name: String = _left_tools_per_layer_type.get(layer_type, fallback_available_tool)
 	assign_tool(new_tool_name, MOUSE_BUTTON_LEFT)
 
-	new_tool_name = _right_tools_per_layer_type[layer_type]
+	new_tool_name = _right_tools_per_layer_type.get(layer_type, fallback_available_tool)
 	assign_tool(new_tool_name, MOUSE_BUTTON_RIGHT)
 
 

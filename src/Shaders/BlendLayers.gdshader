@@ -58,14 +58,20 @@ vec3 rgb_to_hsl(vec3 rgb)
 vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 	current_color.a *= opacity;  // Combine the layer opacity
 	if (current_color.a <= 0.001) {
-		return prev_color;
+		// NOTE: Unless the layer itself is transparent, we need transparent colors as well in
+		// Intersect and Match colors blending.
+		if ((blend_type != 21 && blend_type != 22) || opacity <= 0.001){
+			return prev_color;
+		}
 	}
+	
 	vec4 result;
 	bool should_blend_alpha = true;
 	switch(blend_type) {
 		case 1: // Erase
 			result = prev_color;
 			result.a -= current_color.a;  // clamping will be done at the end so not doing it here.
+			current_color.a = 0.0;
 			should_blend_alpha = false;
 			break;
 		case 2: // Darken
@@ -133,6 +139,34 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 			vec3 prev_hsl = rgb_to_hsl(prev_color.rgb);
 			result.rgb = hsl_to_rgb(vec3(prev_hsl.r, prev_hsl.g, current_hsl.b));
 			break;
+		case 21: // Intersection
+			result.rgb = current_color.rgb;
+			// Perform an Alpha focused relaxed intersection (In those pixels where current_color
+			// has alpha, but prev_color doesn't and vice versa, make them transparent)
+			if (current_color.a * prev_color.a <= 0.001){
+				// NOTE: Setting both prev_color.a and current_color.a to zero gives the net result
+				// of the pixel being transparent.
+				current_color.a = 0.0;
+				prev_color.a = 0.0;
+			}
+			break;
+		case 22: // Match colors
+			result = current_color;
+			bool similar_colors = (
+				abs(current_color.r - prev_color.r) <= 0.001
+				&& abs(current_color.g - prev_color.g) <= 0.001
+				&& abs(current_color.b - prev_color.b) <= 0.001
+				&& abs(current_color.a - prev_color.a) <= 0.001
+			);
+			// Wherever colors are different, use transparent color.
+			if (!similar_colors){
+				// NOTE: Setting both prev_color and current_color to zero gives the net result
+				// of the pixel being transparent.
+				prev_color.a = 0.0;
+				current_color = vec4(0.0);
+			}
+			should_blend_alpha = false;
+			break;
 		default: // Normal (case 0)
 			result.rgb = current_color.rgb;
 			break;
@@ -142,6 +176,7 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 		result.a = prev_color.a * (1.0 - current_color.a) + current_color.a;
 	}
 	result = clamp(result, 0.0, 1.0);
+	// Show blended result proportional to how much previous color had alpha there.
 	return mix(current_color, result, prev_color.a);
 }
 
@@ -187,6 +222,7 @@ void fragment() {
 		// Blend modes are being stored as integers divided by 255, so convert them back to
 		// their integer form
 		int current_blend_mode = int(floor(blend_mode_float * 255.0));
+		
 		vec2 current_origin = texture(metadata, vec2(layer_index, 2.0 / metadata_size_float.y)).rg;
 		if (!origin_x_positive) {
 			current_origin.x = -current_origin.x;
@@ -195,7 +231,8 @@ void fragment() {
 			current_origin.y = -current_origin.y;
 		}
 		// get origin of previous layer (used for clipping masks to work correctly)
-		float clipping_mask_index = float(find_previous_opaque_layer(i, metadata_size_float));
+		int clipping_i = find_previous_opaque_layer(i, metadata_size_float);
+		float clipping_mask_index = float(clipping_i) / metadata_size_float.x;
 		vec2 prev_origin = texture(metadata, vec2(clipping_mask_index, 2.0 / metadata_size_float.y)).rg;
 		if (!origin_x_positive) {
 			prev_origin.x = -prev_origin.x;
@@ -206,7 +243,7 @@ void fragment() {
 		float current_opacity = texture(metadata, vec2(layer_index, 1.0 / metadata_size_float.y)).r;
 		vec2 uv = UV - current_origin;
 		vec4 layer_color = texture(layers, vec3(uv, float(i)));
-		vec4 prev_layer_color = texture(layers, vec3(UV - prev_origin, clipping_mask_index));
+		vec4 prev_layer_color = texture(layers, vec3(UV - prev_origin, float(clipping_i)));
 		float clipping_mask = texture(metadata, vec2(layer_index, 3.0 / metadata_size_float.y)).r;
 		layer_color.a *= prev_layer_color.a * step(0.5, clipping_mask) + 1.0 * step(clipping_mask, 0.5);
 		layer_color.a = border_trim(layer_color, uv);

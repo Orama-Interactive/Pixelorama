@@ -13,7 +13,10 @@ signal animation_looped
 enum LoopType { NO, CYCLE, PINGPONG }
 
 const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
+const ANIMATION_TAG_TSCN := preload("res://src/UI/Timeline/AnimationTagUI.tscn")
 const LAYER_FX_SCENE_PATH := "res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.tscn"
+## Do not let [member min_cel_size] go below 22, as this is the size of the layer icons.
+const CEL_MIN_SIZE_HARD_LIMIT := 22
 const CEL_MIN_SIZE_OFFSET := 15
 
 var is_animation_running := false
@@ -28,7 +31,7 @@ var cel_size := 36:
 	set = _cel_size_changed
 var min_cel_size := 36:
 	set(value):
-		min_cel_size = value
+		min_cel_size = clampi(value, CEL_MIN_SIZE_HARD_LIMIT, max_cel_size)
 		if is_instance_valid(cel_size_slider):
 			cel_size_slider.min_value = min_cel_size
 var max_cel_size := 144
@@ -48,6 +51,10 @@ var global_layer_expand := true
 @onready var tag_spacer := %TagSpacer as Control
 @onready var layer_settings_container := %LayerSettingsContainer as VBoxContainer
 @onready var layer_container := %LayerContainer as VBoxContainer
+@onready var layer_vbox := %LayerVBox as VBoxContainer  ## Contains the layer buttons.
+@onready var frame_hbox := %FrameHBox as HBoxContainer  ## Contains the frame buttons.
+## Contains HBoxContainers, which contain cel buttons.
+@onready var cel_vbox := %CelVBox as VBoxContainer
 @onready var layer_header_container := %LayerHeaderContainer as HBoxContainer
 @onready var add_layer_list := %AddLayerList as MenuButton
 @onready var remove_layer := %RemoveLayer as Button
@@ -55,14 +62,17 @@ var global_layer_expand := true
 @onready var move_down_layer := %MoveDownLayer as Button
 @onready var merge_down_layer := %MergeDownLayer as Button
 @onready var layer_fx := %LayerFX as Button
+@onready var effects_timeline_button := %EffectsTimelineButton as Button
 @onready var blend_modes_button := %BlendModes as OptionButton
 @onready var opacity_slider := %OpacitySlider as ValueSlider
 @onready var frame_scroll_container := %FrameScrollContainer as Control
 @onready var timeline_scroll := %TimelineScroll as ScrollContainer
 @onready var frame_scroll_bar := %FrameScrollBar as HScrollBar
 @onready var tag_scroll_container := %TagScroll as ScrollContainer
+@onready var tag_container: Control = %TagContainer
 @onready var layer_frame_h_split := %LayerFrameHSplit as HSplitContainer
 @onready var layer_frame_header_h_split := %LayerFrameHeaderHSplit as HSplitContainer
+@onready var keyframe_timeline := %KeyframeTimeline as KeyframeTimeline
 @onready var delete_frame := %DeleteFrame as Button
 @onready var move_frame_left := %MoveFrameLeft as Button
 @onready var move_frame_right := %MoveFrameRight as Button
@@ -78,7 +88,8 @@ var global_layer_expand := true
 
 
 func _ready() -> void:
-	Global.control.find_child("LayerProperties").layer_property_changed.connect(_update_layer_ui)
+	var layer_properties_dialog := Global.control.find_child("LayerProperties")
+	layer_properties_dialog.layer_property_changed.connect(_update_layer_settings_ui)
 	layer_container.custom_minimum_size.x = layer_settings_container.size.x + 12
 	layer_header_container.custom_minimum_size.x = layer_container.custom_minimum_size.x
 	var loaded_cel_size: int = Global.config_cache.get_value("timeline", "cel_size", 40)
@@ -120,9 +131,12 @@ func _ready() -> void:
 	# Emit signals that were supposed to be emitted.
 	%PastPlacement.item_selected.emit(0 if past_above else 1)
 	%FuturePlacement.item_selected.emit(0 if future_above else 1)
+	Global.project_about_to_switch.connect(_on_project_about_to_switch)
+	Global.project_switched.connect(_on_project_switched)
 	Global.cel_switched.connect(_cel_switched)
 	# Makes sure that the frame and tag scroll bars are in the right place:
-	Global.layer_vbox.emit_signal.call_deferred("resized")
+	layer_vbox.emit_signal.call_deferred("resized")
+	drag_highlight.visibility_changed.connect(clear_highlight)
 
 
 func _notification(what: int) -> void:
@@ -134,6 +148,60 @@ func _notification(what: int) -> void:
 		if is_instance_valid(layer_settings_container):
 			layer_container.custom_minimum_size.x = layer_settings_container.size.x + 12
 			layer_header_container.custom_minimum_size.x = layer_container.custom_minimum_size.x
+
+
+func clear_highlight() -> void:
+	if not drag_highlight.visible:
+		for connection: Dictionary in drag_highlight.draw.get_connections():
+			var callable: Callable = connection.get("callable", null)
+			if callable:
+				drag_highlight.draw.disconnect(callable)
+		await get_tree().process_frame
+		drag_highlight.queue_redraw()
+
+
+## Manages frame highlighting during drag and drop.
+func set_frames_highlight(frame_indices: Array, offset: int) -> void:
+	if drag_highlight.draw.is_connected(_draw_highlight_frames):
+		drag_highlight.draw.disconnect(_draw_highlight_frames)
+	drag_highlight.draw.connect(_draw_highlight_frames.bind(frame_indices, offset))
+	drag_highlight.queue_redraw()
+
+
+## Draws frame highlighting during drag and drop.
+func _draw_highlight_frames(frame_indices: Array, offset: int) -> void:
+	for frame in frame_indices:
+		var frame_drop: int = frame + offset
+		if frame_drop < frame_hbox.get_child_count() and frame_drop >= 0:
+			var frame_button: BaseButton = frame_hbox.get_child(frame_drop)
+			var frame_rect: Rect2i = frame_button.get_global_rect()
+			frame_rect.position -= Vector2i(drag_highlight.global_position)
+			drag_highlight.draw_rect(frame_rect, drag_highlight.color)
+	frame_indices.clear()
+
+
+## Manages cel highlighting during drag and drop.
+func set_cels_highlight(cel_coords: Array, offset: Vector2i) -> void:
+	if drag_highlight.draw.is_connected(_draw_highlight_cels):
+		drag_highlight.draw.disconnect(_draw_highlight_cels)
+	drag_highlight.draw.connect(_draw_highlight_cels.bind(cel_coords, offset))
+	drag_highlight.queue_redraw()
+
+
+## Draws cel highlighting during drag and drop.
+func _draw_highlight_cels(cel_coords: Array, offset: Vector2i) -> void:
+	for cel in cel_coords:  # Press selected buttons
+		var frame: int = cel[0] + offset.x
+		var layer: int = cel[1] + offset.y
+		var cel_vbox_child_count: int = cel_vbox.get_child_count()
+		if layer < cel_vbox_child_count and layer >= 0:
+			var cel_hbox: Container = cel_vbox.get_child(cel_vbox_child_count - 1 - layer)
+			if frame < cel_hbox.get_child_count() and frame >= 0:
+				var cel_button: BaseButton = cel_hbox.get_child(frame)
+				var cel_rect: Rect2i = cel_button.get_global_rect()
+				cel_rect.position -= Vector2i(drag_highlight.global_position)
+				drag_highlight.draw_rect(cel_rect, drag_highlight.color)
+	cel_coords.clear()
 
 
 func _input(event: InputEvent) -> void:
@@ -207,9 +275,9 @@ func reset_settings() -> void:
 func _get_minimum_size() -> Vector2:
 	# X targets enough to see layers, 1 frame, vertical scrollbar, and padding
 	# Y targets enough to see 1 layer
-	if not is_instance_valid(Global.layer_vbox):
+	if not is_instance_valid(layer_vbox) or not cel_vbox.is_visible_in_tree():
 		return Vector2.ZERO
-	return Vector2(Global.layer_vbox.size.x + cel_size + 26, cel_size + 105)
+	return Vector2(layer_vbox.size.x + cel_size + 26, cel_size + 105)
 
 
 func _frame_scroll_changed(_value: float) -> void:
@@ -229,8 +297,8 @@ func adjust_scroll_container() -> void:
 	tag_spacer.custom_minimum_size.x = (
 		frame_scroll_container.global_position.x - tag_scroll_container.global_position.x
 	)
-	tag_scroll_container.get_child(0).custom_minimum_size.x = Global.frame_hbox.size.x
-	Global.tag_container.custom_minimum_size = Global.frame_hbox.size
+	tag_scroll_container.get_child(0).custom_minimum_size.x = frame_hbox.size.x
+	tag_container.custom_minimum_size = frame_hbox.size
 	tag_scroll_container.scroll_horizontal = frame_scroll_bar.value
 
 
@@ -251,21 +319,21 @@ func _cel_size_changed(value: int) -> void:
 	cel_size_slider.value = cel_size
 	update_minimum_size()
 	Global.config_cache.set_value("timeline", "cel_size", cel_size)
-	for layer_button: Control in Global.layer_vbox.get_children():
+	for layer_button: Control in layer_vbox.get_children():
 		layer_button.custom_minimum_size.y = cel_size
 		layer_button.size.y = cel_size
-	for cel_hbox: Control in Global.cel_vbox.get_children():
+	for cel_hbox: Control in cel_vbox.get_children():
 		for cel_button: Control in cel_hbox.get_children():
 			cel_button.custom_minimum_size.x = cel_size
 			cel_button.custom_minimum_size.y = cel_size
 			cel_button.size.x = cel_size
 			cel_button.size.y = cel_size
 
-	for frame_id: Control in Global.frame_hbox.get_children():
+	for frame_id: Control in frame_hbox.get_children():
 		frame_id.custom_minimum_size.x = cel_size
 		frame_id.size.x = cel_size
 
-	for tag_c: Control in Global.tag_container.get_children():
+	for tag_c: Control in tag_container.get_children():
 		tag_c.update_position_and_size()
 
 
@@ -310,24 +378,34 @@ func _fill_blend_modes_option_button() -> void:
 	blend_modes_button.add_item("Saturation", BaseLayer.BlendModes.SATURATION)
 	blend_modes_button.add_item("Color", BaseLayer.BlendModes.COLOR)
 	blend_modes_button.add_item("Luminosity", BaseLayer.BlendModes.LUMINOSITY)
+	blend_modes_button.add_separator("Masking")
+	blend_modes_button.add_item("Intersection", BaseLayer.BlendModes.INTERSECTION)
+	blend_modes_button.add_item("Match colors", BaseLayer.BlendModes.MATCH_COLORS)
 
 
 func _on_blend_modes_item_selected(index: int) -> void:
 	var project := Global.current_project
 	var current_mode := blend_modes_button.get_item_id(index)
-	project.undo_redo.create_action("Set Blend Mode")
-	for idx_pair in project.selected_cels:
-		var layer := project.layers[idx_pair[1]]
-		var previous_mode := layer.blend_mode
-		project.undo_redo.add_do_property(layer, "blend_mode", current_mode)
-		project.undo_redo.add_undo_property(layer, "blend_mode", previous_mode)
-	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	project.undo_redo.add_do_method(_update_layer_ui)
-	project.undo_redo.add_do_method(_update_layers)
-	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
-	project.undo_redo.add_undo_method(_update_layer_ui)
-	project.undo_redo.add_undo_method(_update_layers)
-	project.undo_redo.commit_action()
+	if Global.layer_blend_mode_undoable:
+		project.undo_redo.create_action("Set Blend Mode")
+		for idx_pair in project.selected_cels:
+			var layer := project.layers[idx_pair[1]]
+			var previous_mode := layer.blend_mode
+			project.undo_redo.add_do_property(layer, "blend_mode", current_mode)
+			project.undo_redo.add_undo_property(layer, "blend_mode", previous_mode)
+		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		project.undo_redo.add_do_method(_update_layer_settings_ui)
+		project.undo_redo.add_do_method(_update_layers)
+		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+		project.undo_redo.add_undo_method(_update_layer_settings_ui)
+		project.undo_redo.add_undo_method(_update_layers)
+		project.undo_redo.commit_action()
+	else:
+		for idx_pair in project.selected_cels:
+			var layer := project.layers[idx_pair[1]]
+			layer.blend_mode = current_mode as BaseLayer.BlendModes
+			_update_layer_settings_ui()
+			_update_layers()
 
 
 func _update_layers() -> void:
@@ -338,8 +416,25 @@ func _update_layers() -> void:
 func add_frame() -> void:
 	var project := Global.current_project
 	var frame_add_index := project.current_frame + 1
-	var frame := project.new_empty_frame()
 	project.undo_redo.create_action("Add Frame")
+	undo_redo_add_frame(frame_add_index)
+	project.undo_redo.add_do_method(project.change_cel.bind(project.current_frame + 1))
+	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.commit_action()
+	# It doesn't update properly without awaits
+	await get_tree().process_frame
+	await get_tree().process_frame
+	adjust_scroll_container()
+
+
+## This method adds a new frame assuming that an undo action is already created, hence it can be
+## reused in multiple undo actions like adding frame, cloning cel etc. Returns the new frame for
+## further adjustment outside of this method.
+func undo_redo_add_frame(frame_add_index: int) -> Frame:
+	var project := Global.current_project
+	var frame := project.new_empty_frame()
 	for l in range(project.layers.size()):
 		if project.layers[l].new_cels_linked:  # If the link button is pressed
 			var prev_cel := project.frames[project.current_frame].cels[l]
@@ -366,19 +461,11 @@ func add_frame() -> void:
 			tag.from += 1
 			tag.to += 1
 
-	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_do_method(project.add_frames.bind([frame], [frame_add_index]))
 	project.undo_redo.add_undo_method(project.remove_frames.bind([frame_add_index]))
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
-	project.undo_redo.add_do_method(project.change_cel.bind(project.current_frame + 1))
-	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
-	project.undo_redo.commit_action()
-	# It doesn't update properly without awaits
-	await get_tree().process_frame
-	await get_tree().process_frame
-	adjust_scroll_container()
+	return frame
 
 
 func _on_DeleteFrame_pressed() -> void:
@@ -939,11 +1026,11 @@ func add_layer(layer: BaseLayer, project: Project) -> void:
 		new_layer_idx = project.current_layer
 		if !current_layer.expanded:
 			current_layer.expanded = true
-			for layer_button: LayerButton in Global.layer_vbox.get_children():
+			for layer_button: LayerButton in layer_vbox.get_children():
 				layer_button.update_buttons()
 				var expanded := project.layers[layer_button.layer_index].is_expanded_in_hierarchy()
 				layer_button.visible = expanded
-				Global.cel_vbox.get_child(layer_button.get_index()).visible = expanded
+				cel_vbox.get_child(layer_button.get_index()).visible = expanded
 		# Make layer child of group.
 		layer.parent = project.layers[project.current_layer]
 	else:
@@ -1302,10 +1389,29 @@ func flatten_layers(indices: PackedInt32Array, only_visible := false) -> void:
 
 func _on_opacity_slider_value_changed(value: float) -> void:
 	var new_opacity := value / 100.0
-	for idx_pair in Global.current_project.selected_cels:
-		var layer := Global.current_project.layers[idx_pair[1]]
-		layer.opacity = new_opacity
-	Global.canvas.queue_redraw()
+
+	var project: Project = Global.current_project
+	if Global.layer_opacity_undoable:
+		project.undo_redo.create_action("Change Layer Opacity", UndoRedo.MergeMode.MERGE_ENDS)
+		for idx_pair in Global.current_project.selected_cels:
+			var layer := Global.current_project.layers[idx_pair[1]]
+
+			project.undo_redo.add_do_property(layer, "opacity", new_opacity)
+			project.undo_redo.add_undo_property(layer, "opacity", layer.opacity)
+			project.undo_redo.add_do_method(Global.canvas.queue_redraw)
+			project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
+			project.undo_redo.add_do_method(_update_layer_settings_ui)
+			project.undo_redo.add_undo_method(_update_layer_settings_ui)
+			project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+			project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+
+		project.undo_redo.commit_action()
+	else:
+		for idx_pair in Global.current_project.selected_cels:
+			var layer := Global.current_project.layers[idx_pair[1]]
+			layer.opacity = new_opacity
+			Global.canvas.queue_redraw()
+			_update_layer_settings_ui()
 
 
 func _on_timeline_settings_close_requested() -> void:
@@ -1316,32 +1422,135 @@ func _on_timeline_settings_visibility_changed() -> void:
 	Global.can_draw = not timeline_settings.visible
 
 
+func _on_project_about_to_switch() -> void:
+	var project := Global.current_project
+	project.layers_updated.disconnect(_update_layer_ui)
+	project.frames_updated.disconnect(_update_frame_ui)
+	project.tags_changed.disconnect(_on_animation_tags_changed)
+
+
+func _on_project_switched() -> void:
+	var project := Global.current_project
+	project_changed()
+	if not project.layers_updated.is_connected(_update_layer_ui):
+		project.layers_updated.connect(_update_layer_ui)
+	if not project.frames_updated.is_connected(_update_frame_ui):
+		project.frames_updated.connect(_update_frame_ui)
+	if not project.tags_changed.is_connected(_on_animation_tags_changed):
+		project.tags_changed.connect(_on_animation_tags_changed)
+
+
 # Methods to update the UI in response to changes in the current project
 
 
 func _cel_switched() -> void:
+	# Unpress all buttons
+	for i in Global.current_project.frames.size():
+		var frame_button: BaseButton = frame_hbox.get_child(i)
+		frame_button.button_pressed = false  # Unpress all frame buttons
+		for cel_hbox in cel_vbox.get_children():
+			if i < cel_hbox.get_child_count():
+				cel_hbox.get_child(i).button_pressed = false  # Unpress all cel buttons
+
+	for layer_button in layer_vbox.get_children():
+		layer_button.button_pressed = false  # Unpress all layer buttons
+
+	for cel in Global.current_project.selected_cels:  # Press selected buttons
+		var frame: int = cel[0]
+		var layer: int = cel[1]
+		if frame < frame_hbox.get_child_count():
+			var frame_button: BaseButton = frame_hbox.get_child(frame)
+			frame_button.button_pressed = true  # Press selected frame buttons
+
+		var layer_vbox_child_count: int = layer_vbox.get_child_count()
+		if layer < layer_vbox_child_count:
+			var layer_button = layer_vbox.get_child(layer_vbox_child_count - 1 - layer)
+			layer_button.button_pressed = true  # Press selected layer buttons
+
+		var cel_vbox_child_count: int = cel_vbox.get_child_count()
+		if layer < cel_vbox_child_count:
+			var cel_hbox: Container = cel_vbox.get_child(cel_vbox_child_count - 1 - layer)
+			if frame < cel_hbox.get_child_count():
+				var cel_button: BaseButton = cel_hbox.get_child(frame)
+				cel_button.button_pressed = true  # Press selected cel buttons
 	_toggle_frame_buttons()
 	_toggle_layer_buttons()
 	_fill_blend_modes_option_button()
-	# Temporarily disconnect it in order to prevent layer opacity changing
-	# in the rest of the selected layers, if there are any.
-	opacity_slider.value_changed.disconnect(_on_opacity_slider_value_changed)
-	_update_layer_ui()
-	opacity_slider.value_changed.connect(_on_opacity_slider_value_changed)
+	_update_layer_settings_ui()
 	var project := Global.current_project
-	frame_scroll_container.ensure_control_visible(
-		Global.frame_hbox.get_child(project.current_frame)
-	)
+	frame_scroll_container.ensure_control_visible(frame_hbox.get_child(project.current_frame))
 	var layer_index := project.layers.size() - project.current_layer - 1
-	timeline_scroll.ensure_control_visible(Global.layer_vbox.get_child(layer_index))
+	timeline_scroll.ensure_control_visible(layer_vbox.get_child(layer_index))
 
 
-func _update_layer_ui() -> void:
+func _update_layer_settings_ui() -> void:
 	var project := Global.current_project
 	var layer := project.layers[project.current_layer]
+	# Temporarily disconnect it in order to prevent layer opacity changing
+	# on different layers, or while undoing.
+	opacity_slider.value_changed.disconnect(_on_opacity_slider_value_changed)
 	opacity_slider.value = layer.opacity * 100
+	opacity_slider.value_changed.connect(_on_opacity_slider_value_changed)
 	var blend_mode_index := blend_modes_button.get_item_index(layer.blend_mode)
 	blend_modes_button.selected = blend_mode_index
+
+
+## Update the layer indices and layer/cel buttons
+func _update_layer_ui() -> void:
+	var layers := Global.current_project.layers
+	for l in layers.size():
+		layers[l].index = l
+		layer_vbox.get_child(layers.size() - 1 - l).layer_index = l
+		update_cel_button_ui(l)
+
+
+func _update_frame_ui() -> void:
+	var project := Global.current_project
+	for f in project.frames.size():  # Update the frames and frame buttons
+		frame_hbox.get_child(f).frame = f
+		frame_hbox.get_child(f).text = str(f + 1)
+
+	for l in project.layers.size():  # Update the cel buttons
+		update_cel_button_ui(l)
+	set_timeline_first_and_last_frames()
+
+
+func update_cel_button_ui(layer_index: int) -> void:
+	var project := Global.current_project
+	var cel_hbox: HBoxContainer = cel_vbox.get_child(project.layers.size() - 1 - layer_index)
+	for f in project.frames.size():
+		cel_hbox.get_child(f).layer = layer_index
+		cel_hbox.get_child(f).frame = f
+		cel_hbox.get_child(f).button_setup()
+
+
+func _on_animation_tags_changed() -> void:
+	var project := Global.current_project
+	for child in tag_container.get_children():
+		child.queue_free()
+
+	for tag in project.animation_tags:
+		var tag_c := ANIMATION_TAG_TSCN.instantiate()
+		tag_c.tag = tag
+		tag_container.add_child(tag_c)
+		var tag_position := tag_container.get_child_count() - 1
+		tag_container.move_child(tag_c, tag_position)
+
+	set_timeline_first_and_last_frames()
+
+
+## This is useful in case tags get modified DURING the animation is playing
+## otherwise, this code is useless in this context, since these values are being set
+## when the play buttons get pressed anyway
+func set_timeline_first_and_last_frames() -> void:
+	var project := Global.current_project
+	first_frame = 0
+	last_frame = project.frames.size() - 1
+	if Global.play_only_tags:
+		for tag in project.animation_tags:
+			if project.current_frame + 1 >= tag.from && project.current_frame + 1 <= tag.to:
+				first_frame = tag.from - 1
+				last_frame = mini(project.frames.size() - 1, tag.to - 1)
 
 
 func _toggle_frame_buttons() -> void:
@@ -1394,11 +1603,11 @@ func project_changed() -> void:
 	_toggle_layer_buttons()
 	# These must be removed from tree immediately to not mess up the indices of
 	# the new buttons, so use either free or queue_free + parent.remove_child
-	for layer_button in Global.layer_vbox.get_children():
+	for layer_button in layer_vbox.get_children():
 		layer_button.free()
-	for frame_button in Global.frame_hbox.get_children():
+	for frame_button in frame_hbox.get_children():
 		frame_button.free()
-	for cel_hbox in Global.cel_vbox.get_children():
+	for cel_hbox in cel_vbox.get_children():
 		cel_hbox.free()
 
 	for i in project.layers.size():
@@ -1406,35 +1615,45 @@ func project_changed() -> void:
 	for f in project.frames.size():
 		var button := FRAME_BUTTON_TSCN.instantiate() as Button
 		button.frame = f
-		Global.frame_hbox.add_child(button)
+		frame_hbox.add_child(button)
 
 	# Press selected cel/frame/layer buttons
 	for cel_index in project.selected_cels:
 		var frame: int = cel_index[0]
 		var layer: int = cel_index[1]
-		if frame < Global.frame_hbox.get_child_count():
-			var frame_button: BaseButton = Global.frame_hbox.get_child(frame)
+		if frame < frame_hbox.get_child_count():
+			var frame_button: BaseButton = frame_hbox.get_child(frame)
 			frame_button.button_pressed = true
 
-		var vbox_child_count: int = Global.cel_vbox.get_child_count()
+		var vbox_child_count: int = cel_vbox.get_child_count()
 		if layer < vbox_child_count:
-			var cel_hbox: HBoxContainer = Global.cel_vbox.get_child(vbox_child_count - 1 - layer)
+			var cel_hbox: HBoxContainer = cel_vbox.get_child(vbox_child_count - 1 - layer)
 			if frame < cel_hbox.get_child_count():
 				var cel_button := cel_hbox.get_child(frame)
 				cel_button.button_pressed = true
 
-			var layer_button := Global.layer_vbox.get_child(vbox_child_count - 1 - layer)
+			var layer_button := layer_vbox.get_child(vbox_child_count - 1 - layer)
 			layer_button.button_pressed = true
+	# Because we are re-creating the nodes, we need to wait one frame in order to call
+	# ensure_control_visible. If waiting wasn't needed, this piece of code wouldn't be needed
+	# anyway, since _cel_switched already calls ensure_control_visible.
+	await get_tree().process_frame
+	if project != Global.current_project:
+		# Needed in case we load multiple projects at once.
+		return
+	frame_scroll_container.ensure_control_visible(frame_hbox.get_child(project.current_frame))
+	var layer_index := project.layers.size() - project.current_layer - 1
+	timeline_scroll.ensure_control_visible.call_deferred(layer_vbox.get_child(layer_index))
 
 
 func project_frame_added(frame: int) -> void:
 	var project := Global.current_project
 	var button := FRAME_BUTTON_TSCN.instantiate() as Button
 	button.frame = frame
-	Global.frame_hbox.add_child(button)
-	Global.frame_hbox.move_child(button, frame)
-	var layer := Global.cel_vbox.get_child_count() - 1
-	for cel_hbox in Global.cel_vbox.get_children():
+	frame_hbox.add_child(button)
+	frame_hbox.move_child(button, frame)
+	var layer := cel_vbox.get_child_count() - 1
+	for cel_hbox in cel_vbox.get_children():
 		var cel_button := project.frames[frame].cels[layer].instantiate_cel_button()
 		cel_button.frame = frame
 		cel_button.layer = layer
@@ -1446,9 +1665,9 @@ func project_frame_added(frame: int) -> void:
 
 
 func project_frame_removed(frame: int) -> void:
-	Global.frame_hbox.get_child(frame).queue_free()
-	Global.frame_hbox.remove_child(Global.frame_hbox.get_child(frame))
-	for cel_hbox in Global.cel_vbox.get_children():
+	frame_hbox.get_child(frame).queue_free()
+	frame_hbox.remove_child(frame_hbox.get_child(frame))
+	for cel_hbox in cel_vbox.get_children():
 		cel_hbox.get_child(frame).free()
 
 
@@ -1471,27 +1690,29 @@ func project_layer_added(layer: int) -> void:
 	layer_button.visible = project.layers[layer].is_expanded_in_hierarchy()
 	cel_hbox.visible = layer_button.visible
 
-	Global.layer_vbox.add_child(layer_button)
-	var count := Global.layer_vbox.get_child_count()
-	Global.layer_vbox.move_child(layer_button, count - 1 - layer)
-	Global.cel_vbox.add_child(cel_hbox)
-	Global.cel_vbox.move_child(cel_hbox, count - 1 - layer)
+	layer_vbox.add_child(layer_button)
+	var count := layer_vbox.get_child_count()
+	layer_vbox.move_child(layer_button, count - 1 - layer)
+	cel_vbox.add_child(cel_hbox)
+	cel_vbox.move_child(cel_hbox, count - 1 - layer)
 	update_global_layer_buttons()
 	await get_tree().process_frame
+	if not is_instance_valid(layer_button):
+		return
 	timeline_scroll.ensure_control_visible(layer_button)
 
 
 func project_layer_removed(layer: int) -> void:
-	var count := Global.layer_vbox.get_child_count()
-	var layer_button := Global.layer_vbox.get_child(count - 1 - layer)
+	var count := layer_vbox.get_child_count()
+	var layer_button := layer_vbox.get_child(count - 1 - layer)
 	layer_button.free()
-	var cel_hbox := Global.cel_vbox.get_child(count - 1 - layer)
+	var cel_hbox := cel_vbox.get_child(count - 1 - layer)
 	cel_hbox.free()
 	update_global_layer_buttons()
 
 
 func project_cel_added(frame: int, layer: int) -> void:
-	var cel_hbox := Global.cel_vbox.get_child(Global.cel_vbox.get_child_count() - 1 - layer)
+	var cel_hbox := cel_vbox.get_child(cel_vbox.get_child_count() - 1 - layer)
 	var cel_button := Global.current_project.frames[frame].cels[layer].instantiate_cel_button()
 	cel_button.frame = frame
 	cel_button.layer = layer
@@ -1500,7 +1721,7 @@ func project_cel_added(frame: int, layer: int) -> void:
 
 
 func project_cel_removed(frame: int, layer: int) -> void:
-	var cel_hbox := Global.cel_vbox.get_child(Global.cel_vbox.get_child_count() - 1 - layer)
+	var cel_hbox := cel_vbox.get_child(cel_vbox.get_child_count() - 1 - layer)
 	cel_hbox.get_child(frame).queue_free()
 	cel_hbox.remove_child(cel_hbox.get_child(frame))
 
@@ -1523,24 +1744,76 @@ func _on_onion_skinning_opacity_value_changed(value: float) -> void:
 
 
 func _on_global_visibility_button_pressed() -> void:
+	var project = Global.current_project
+	if Global.layer_visibility_undoable:
+		project.undo_redo.create_action("Change Layer Visibility")
+
 	var layer_visible := !global_layer_visibility
-	for layer_button: LayerButton in Global.layer_vbox.get_children():
+	var mandatory_update := PackedInt32Array()
+	for layer_button: LayerButton in layer_vbox.get_children():
 		var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
 		if layer.parent == null and layer.visible != layer_visible:
-			layer_button.visibility_button.pressed.emit()
+			mandatory_update.append(layer.index)
+			if Global.layer_visibility_undoable:
+				project.undo_redo.add_do_property(layer, "visible", layer_visible)
+				project.undo_redo.add_undo_property(layer, "visible", layer.visible)
+			else:
+				layer.visible = layer_visible
+
+	# Multiple layers need to be redrawn
+	if Global.layer_visibility_undoable:
+		project.undo_redo.add_do_property(
+			Global.canvas, "mandatory_update_layers", mandatory_update
+		)
+		project.undo_redo.add_undo_property(
+			Global.canvas, "mandatory_update_layers", mandatory_update
+		)
+
+		project.undo_redo.add_do_method(update_global_layer_buttons)
+		project.undo_redo.add_undo_method(update_global_layer_buttons)
+		project.undo_redo.add_do_method(_toggle_layer_buttons)
+		project.undo_redo.add_undo_method(_toggle_layer_buttons)
+		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+
+		project.undo_redo.commit_action()
+	else:
+		Global.canvas.mandatory_update_layers = mandatory_update
+		update_global_layer_buttons()
+		_toggle_layer_buttons()
 
 
 func _on_global_lock_button_pressed() -> void:
+	var project = Global.current_project
 	var locked := !global_layer_lock
-	for layer_button: LayerButton in Global.layer_vbox.get_children():
-		var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
-		if layer.parent == null and layer.locked != locked:
-			layer_button.lock_button.pressed.emit()
+	if Global.layer_locking_undoable:
+		project.undo_redo.create_action("Change Layer Locked Status")
+
+		for layer_button: LayerButton in layer_vbox.get_children():
+			var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
+			if layer.parent == null and layer.locked != locked:
+				project.undo_redo.add_do_property(layer, "locked", locked)
+				project.undo_redo.add_undo_property(layer, "locked", layer.locked)
+
+		project.undo_redo.add_do_method(update_global_layer_buttons)
+		project.undo_redo.add_undo_method(update_global_layer_buttons)
+		project.undo_redo.add_do_method(_toggle_layer_buttons)
+		project.undo_redo.add_undo_method(_toggle_layer_buttons)
+		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+		project.undo_redo.commit_action()
+	else:
+		for layer_button: LayerButton in layer_vbox.get_children():
+			var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
+			if layer.parent == null and layer.locked != locked:
+				layer.locked = locked
+		update_global_layer_buttons()
+		_toggle_layer_buttons()
 
 
 func _on_global_expand_button_pressed() -> void:
 	var expand := !global_layer_expand
-	for layer_button: LayerButton in Global.layer_vbox.get_children():
+	for layer_button: LayerButton in layer_vbox.get_children():
 		var layer: BaseLayer = Global.current_project.layers[layer_button.layer_index]
 		if layer.parent == null and layer is GroupLayer and layer.expanded != expand:
 			layer_button.expand_button.pressed.emit()
@@ -1581,3 +1854,16 @@ func _on_layer_frame_h_split_dragged(offset: int) -> void:
 		layer_frame_header_h_split.split_offset = offset
 	if layer_frame_h_split.split_offset != offset:
 		layer_frame_h_split.split_offset = offset
+
+
+func _on_effects_timeline_button_pressed() -> void:
+	var keyframe_timeline_enabled := not keyframe_timeline.visible
+	keyframe_timeline.visible = keyframe_timeline_enabled
+	tag_scroll_container.visible = not keyframe_timeline_enabled
+	layer_frame_header_h_split.get_parent().visible = not keyframe_timeline_enabled
+	frame_scroll_container.get_parent().visible = not keyframe_timeline_enabled
+	var texture_button: TextureRect = effects_timeline_button.get_child(0)
+	if keyframe_timeline_enabled:
+		Global.change_button_texturerect(texture_button, "cel_based_timeline_button.png")
+	else:
+		Global.change_button_texturerect(texture_button, "keyframe_based_timeline_button.png")

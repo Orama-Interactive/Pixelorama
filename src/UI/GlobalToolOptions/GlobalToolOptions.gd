@@ -33,9 +33,7 @@ func reset_options() -> void:
 
 
 func _on_resized() -> void:
-	var tool_panel_size := size
-	var column_n := tool_panel_size.x / 36.5
-
+	var column_n := size.x / 36.5
 	if column_n < 1:
 		column_n = 1
 	grid_container.columns = column_n

@@ -212,21 +212,22 @@ class MenuAPI:
 			push_error("Menu of type: ", menu_type, " does not exist.")
 			return -1
 		popup_menu.add_item(item_name, item_id)
-		var idx := item_id
-		if item_id == -1:
-			idx = popup_menu.get_item_count() - 1
-		popup_menu.set_item_metadata(idx, item_metadata)
+		var true_id := item_id
+		if true_id == -1:
+			true_id = popup_menu.get_item_count() - 1
+		popup_menu.set_item_metadata(true_id, item_metadata)
 		ExtensionsApi.add_action("MenuAPI", "add_menu")
-		return idx
+		return true_id
 
 	## Removes a menu item at index [param item_idx] from the [param menu_type] defined by
 	## [enum @unnamed_enums].
-	func remove_menu_item(menu_type: int, item_idx: int) -> void:
+	func remove_menu_item(menu_type: int, item_id: int) -> void:
 		var popup_menu := _get_popup_menu(menu_type)
 		if not popup_menu:
 			push_error("Menu of type: ", menu_type, " does not exist.")
 			return
-		popup_menu.remove_item(item_idx)
+		# Ensure the index is correct by matching it with id
+		popup_menu.remove_item(popup_menu.get_item_index(item_id))
 		ExtensionsApi.remove_action("MenuAPI", "add_menu")
 
 
@@ -481,7 +482,13 @@ class ThemeAPI:
 
 	## Returns index of the [param theme] in preferences.
 	func find_theme_index(theme: Theme) -> int:
-		return Themes.themes.find(theme)
+		var index := -1
+		for i in Themes.themes.size():
+			var theme_var := Themes.themes[i]
+			if theme_var.theme == theme:
+				index = i
+				break
+		return index
 
 	## Returns the current theme resource.
 	func get_theme() -> Theme:
@@ -491,7 +498,7 @@ class ThemeAPI:
 	## return [code]true[/code], else [code]false[/code].
 	func set_theme(idx: int) -> bool:
 		if idx >= 0 and idx < Themes.themes.size():
-			Themes.change_theme(idx)
+			Global.theme_preset_index = idx
 			return true
 		else:
 			push_error("No theme found at index: ", idx)
@@ -787,10 +794,11 @@ class ProjectAPI:
 			project.current_layer = above_layer  # temporary assignment
 			if type >= 0 and type < Global.LayerTypes.size():
 				Global.animation_timeline.on_add_layer_list_id_pressed(type)
+				var layer_vbox := Global.animation_timeline.layer_vbox as VBoxContainer
 				if name != "":
 					project.layers[above_layer + 1].name = name
-					var l_idx := Global.layer_vbox.get_child_count() - (above_layer + 2)
-					Global.layer_vbox.get_child(l_idx).label.text = name
+					var l_idx := layer_vbox.get_child_count() - (above_layer + 2)
+					layer_vbox.get_child(l_idx).label.text = name
 				project.current_layer = old_current
 			else:
 				push_error("invalid (type): ", type)
@@ -892,6 +900,17 @@ class ImportAPI:
 		OpenSave.custom_import_names.erase(import_name)
 		OpenSave.custom_importer_scenes.erase(id)
 		ExtensionsApi.remove_action("ImportAPI", "add_import_option")
+
+	## Adds a callback function for opening files with custom extensions. Whenever a file with the
+	## given extension is opened, the given callback will be called with the file path as argument.
+	func add_open_callback(extension: String, callback: Callable) -> void:
+		OpenSave.register_custom_open_callback(extension, callback)
+		ExtensionsApi.add_action("ImportAPI", "add_open_callback")
+
+	## Removes the callback function for the given extension.
+	func remove_open_callback(extension: String) -> void:
+		OpenSave.unregister_custom_open_callback(extension)
+		ExtensionsApi.remove_action("ImportAPI", "add_open_callback")
 
 
 ## Gives access to palette related stuff.

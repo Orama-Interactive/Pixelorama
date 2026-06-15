@@ -112,6 +112,8 @@ func _refresh_properties(idx: int):
 	# Nodes setup
 	var property_node: Range = properties[idx]["range_node"]
 	if property_node is ValueSlider:
+		initial_value.suffix = property_node.suffix
+		final_value.suffix = property_node.suffix
 		final_value.snap_step = property_node.snap_step
 		initial_value.snap_step = property_node.snap_step
 	final_value.allow_greater = property_node.allow_greater
@@ -138,14 +140,14 @@ func _refresh_properties(idx: int):
 	final_value.value_changed.connect(_on_Final_value_changed)
 
 
-func _populate_ease_type():
+func _populate_ease_type() -> void:
 	$"%EaseType".add_item("Starts slowly and speeds up towards the end", Tween.EASE_IN)
 	$"%EaseType".add_item("Starts quickly and slows down towards the end", Tween.EASE_OUT)
 	$"%EaseType".add_item("Slowest at both ends, fast at middle", Tween.EASE_IN_OUT)
 	$"%EaseType".add_item("Fast at both ends, slow at middle", Tween.EASE_OUT_IN)
 
 
-func _populate_transition_type():
+func _populate_transition_type() -> void:
 	$"%TransitionType".add_item("Linear", Tween.TRANS_LINEAR)
 	$"%TransitionType".add_item("Quadratic (power of 2)", Tween.TRANS_QUAD)
 	$"%TransitionType".add_item("Cubic (power of 3)", Tween.TRANS_CUBIC)

@@ -23,6 +23,9 @@ var autosave_timer: Timer
 var custom_import_names := {}  ## Contains importer names as keys and ids as values
 var custom_importer_scenes := {}  ## Contains ids keys and import option preloads as values
 
+# custom open callbacks for extensions, with file extension as key and callback function as value
+var custom_open_callbacks: Dictionary = {}
+
 
 func _ready() -> void:
 	autosave_timer = Timer.new()
@@ -73,7 +76,7 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 	elif file_ext == "tres":  # Godot resource file
 		var resource := load(file)
 		if resource is VisualShader:
-			var new_path := SHADERS_DIRECTORY.path_join(file.get_file())
+			var new_path := SHADERS_DIRECTORY.path_join(file.uri_decode().get_file())
 			DirAccess.copy_absolute(file, new_path)
 			shader_copied.emit(new_path)
 	elif file_ext == "tscn":  # Godot scene file
@@ -89,9 +92,11 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 		var shader := load(file)
 		if not shader is Shader:
 			return
-		var new_path := SHADERS_DIRECTORY.path_join(file.get_file())
+		var new_path := SHADERS_DIRECTORY.path_join(file.uri_decode().get_file())
 		DirAccess.copy_absolute(file, new_path)
 		shader_copied.emit(new_path)
+	elif file_ext == "gltf" or file_ext == "glb":  # 3D scene
+		open_3d_scene_file(file)
 	elif file_ext == "mp3" or file_ext == "wav":  # Audio file
 		open_audio_file(file)
 	elif file_ext in FONT_FILE_EXTENSIONS:
@@ -100,7 +105,7 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 			return
 		if not DirAccess.dir_exists_absolute(Global.FONTS_DIR_PATH):
 			DirAccess.make_dir_absolute(Global.FONTS_DIR_PATH)
-		var new_path := Global.FONTS_DIR_PATH.path_join(file.get_file())
+		var new_path := Global.FONTS_DIR_PATH.path_join(file.uri_decode().get_file())
 		DirAccess.copy_absolute(file, new_path)
 		Global.loaded_fonts.append(font_file)
 	elif file_ext == "gif":
@@ -116,6 +121,8 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 		PhotoshopParser.open_photoshop_file(file)
 	elif file_ext == "piskel":
 		open_piskel_file(file)
+	elif has_custom_open_callbacks(file_ext):
+		execute_custom_open_callback(file_ext, file)
 	else:  # Image files
 		# Attempt to load as APNG.
 		# Note that the APNG importer will *only* succeed for *animated* PNGs.
@@ -133,7 +140,7 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 		if not is_instance_valid(image):  # Failed to import as image
 			if handle_loading_video(file):
 				return  # Succeeded in loading as video, so return early before the error appears
-			var file_name: String = file.get_file()
+			var file_name: String = file.uri_decode().get_file()
 			Global.popup_error(tr("Can't load file '%s'.") % [file_name])
 			return
 		handle_loading_image(file, image, force_import_dialog_on_images)
@@ -206,7 +213,7 @@ func handle_loading_image(file: String, image: Image, force_import_dialog := fal
 
 ## For loading the output of AImgIO as a project
 func handle_loading_aimg(path: String, frames: Array) -> void:
-	var project := Project.new([], path.get_file(), frames[0].content.get_size())
+	var project := Project.new([], path.uri_decode().get_file(), frames[0].content.get_size())
 	project.layers.append(PixelLayer.new(project))
 	Global.projects.append(project)
 
@@ -243,20 +250,20 @@ func handle_loading_aimg(path: String, frames: Array) -> void:
 ## TODO: Don't allow large files (how large?) to be imported, to avoid crashes due to lack of memory
 ## TODO: Find the video's fps and use that for the new project.
 func handle_loading_video(file: String) -> bool:
-	DirAccess.make_dir_absolute(Export.TEMP_PATH)
-	var temp_path_real := ProjectSettings.globalize_path(Export.TEMP_PATH)
+	DirAccess.make_dir_absolute(Export.temp_path)
+	var temp_path_real := Export.temp_path
 	var output_file_path := temp_path_real.path_join("%04d.png")
 	# ffmpeg -y -i input_file %04d.png
 	var ffmpeg_execute: PackedStringArray = ["-y", "-i", file, output_file_path]
 	var success := OS.execute(Global.ffmpeg_path, ffmpeg_execute, [], true)
 	if success < 0 or success > 1:  # FFMPEG is probably not installed correctly
-		DirAccess.remove_absolute(Export.TEMP_PATH)
+		DirAccess.remove_absolute(Export.temp_path)
 		return false
 	var images_to_import: Array[Image] = []
 	var project_size := Vector2i.ZERO
-	var temp_dir := DirAccess.open(Export.TEMP_PATH)
+	var temp_dir := DirAccess.open(Export.temp_path)
 	for temp_file in temp_dir.get_files():
-		var temp_image := Image.load_from_file(Export.TEMP_PATH.path_join(temp_file))
+		var temp_image := Image.load_from_file(Export.temp_path.path_join(temp_file))
 		temp_dir.remove(temp_file)
 		if not is_instance_valid(temp_image):
 			continue
@@ -266,10 +273,10 @@ func handle_loading_video(file: String) -> bool:
 		if temp_image.get_height() > project_size.y:
 			project_size.y = temp_image.get_height()
 	if images_to_import.size() == 0 or project_size == Vector2i.ZERO:
-		DirAccess.remove_absolute(Export.TEMP_PATH)
+		DirAccess.remove_absolute(Export.temp_path)
 		return false  # We didn't find any images, return
 	# If we found images, create a new project out of them
-	var new_project := Project.new([], file.get_basename().get_file(), project_size)
+	var new_project := Project.new([], file.uri_decode().get_basename().get_file(), project_size)
 	new_project.layers.append(PixelLayer.new(new_project))
 	for temp_image in images_to_import:
 		open_image_as_new_frame(temp_image, 0, new_project, false)
@@ -283,7 +290,7 @@ func handle_loading_video(file: String) -> bool:
 	if FileAccess.file_exists(output_audio_file):
 		open_audio_file(output_audio_file)
 		temp_dir.remove("audio.mp3")
-	DirAccess.remove_absolute(Export.TEMP_PATH)
+	DirAccess.remove_absolute(Export.temp_path)
 	return true
 
 
@@ -306,9 +313,9 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 			new_project.frames = []
 			new_project.layers = []
 			new_project.animation_tags.clear()
-			new_project.name = path.get_file().get_basename()
+			new_project.name = path.uri_decode().get_file().get_basename()
 		else:
-			new_project = Project.new([], path.get_file().get_basename())
+			new_project = Project.new([], path.uri_decode().get_file().get_basename())
 		var data_json := zip_reader.read_file("data.json").get_string_from_utf8()
 		var test_json_conv := JSON.new()
 		var error := test_json_conv.parse(data_json)
@@ -365,11 +372,12 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 				if cel is CelTileMap:
 					cel.find_times_used_of_tiles()
 		zip_reader.close()
-	new_project.export_directory_path = path.get_base_dir()
+	if new_project.export_directory_path.is_empty():
+		new_project.export_directory_path = path.get_base_dir()
 
 	if empty_project:
-		new_project.change_project()
 		Global.project_switched.emit()
+		new_project.change_project()
 		Global.cel_switched.emit()
 	else:
 		Global.projects.append(new_project)
@@ -386,10 +394,11 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 		Global.config_cache.set_value("data", "last_project_path", path)
 		Global.config_cache.save(Global.CONFIG_PATH)
-		new_project.file_name = path.get_file().trim_suffix(".pxo")
+		if new_project.file_name.is_empty():
+			new_project.file_name = path.uri_decode().get_file().trim_suffix(".pxo")
 		new_project.was_exported = false
 		Global.top_menu_container.file_menu.set_item_text(
-			Global.FileMenu.SAVE, tr("Save") + " %s" % path.get_file()
+			Global.FileMenu.SAVE, tr("Save") + " %s" % path.uri_decode().get_file()
 		)
 		Global.top_menu_container.file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Export"))
 
@@ -426,9 +435,9 @@ func open_v0_pxo_file(path: String, empty_project: bool) -> Project:
 		new_project.frames = []
 		new_project.layers = []
 		new_project.animation_tags.clear()
-		new_project.name = path.get_file().get_basename()
+		new_project.name = path.uri_decode().get_file().get_basename()
 	else:
-		new_project = Project.new([], path.get_file().get_basename())
+		new_project = Project.new([], path.uri_decode().get_file().get_basename())
 	new_project.deserialize(result, null, file)
 	if result.has("brushes"):
 		for brush in result.brushes:
@@ -459,8 +468,9 @@ func open_v0_pxo_file(path: String, empty_project: bool) -> Project:
 func save_pxo_file(
 	path: String, autosave: bool, include_blended := false, project := Global.current_project
 ) -> bool:
+	project.initialize_author_data()
 	if not autosave:
-		project.name = path.get_file().trim_suffix(".pxo")
+		project.name = path.uri_decode().get_file().trim_suffix(".pxo")
 	var serialized_data := project.serialize()
 	if not serialized_data:
 		Global.popup_error(tr("File failed to save. Converting project data to dictionary failed."))
@@ -472,10 +482,11 @@ func save_pxo_file(
 
 	# Check if a file with the same name exists. If it does, rename the new file temporarily.
 	# Needed in case of a crash, so that the old file won't be replaced with an empty one.
+	# NOTE: This cannot work in the case of Android, because SAF only allows a file
+	# to be saved if it has the exact same path as the one the user defined.
 	var temp_path := path
-	if FileAccess.file_exists(path):
+	if FileAccess.file_exists(path) and not OS.get_name() == "Android":
 		temp_path = path + "1"
-
 	var zip_packer := ZIPPacker.new()
 	var err := zip_packer.open(temp_path)
 	if err != OK:
@@ -490,7 +501,7 @@ func save_pxo_file(
 	zip_packer.close_file()
 
 	zip_packer.start_file("mimetype")
-	zip_packer.write_file("image/pxo".to_utf8_buffer())
+	zip_packer.write_file("application/x-pixelorama".to_utf8_buffer())
 	zip_packer.close_file()
 
 	var current_frame := project.frames[project.current_frame]
@@ -560,6 +571,25 @@ func save_pxo_file(
 			zip_packer.start_file(tileset_path.path_join(str(j)))
 			zip_packer.write_file(tile.image.get_data())
 			zip_packer.close_file()
+	var layers_3d := project.get_all_3d_layers()
+	for i in layers_3d.size():
+		var layer := layers_3d[i]
+		DirAccess.make_dir_absolute(Export.temp_path)
+		var scene_path_zip := "scene/%s" % i
+		var scene_path_file := Export.temp_path.path_join(str(i)) + ".tscn"
+		var node_to_pack := layer.viewport
+		var scene := PackedScene.new()
+		scene.pack(node_to_pack)
+		var scene_err := ResourceSaver.save(scene, scene_path_file)
+		if scene_err == OK:
+			var scene_file := FileAccess.open(scene_path_file, FileAccess.READ)
+			if is_instance_valid(scene_file):
+				zip_packer.start_file(scene_path_zip)
+				zip_packer.write_file(scene_file.get_buffer(scene_file.get_length()))
+				zip_packer.close_file()
+				scene_file.close()
+		DirAccess.remove_absolute(scene_path_file)
+		DirAccess.remove_absolute(Export.temp_path)
 	var audio_layers := project.get_all_audio_layers()
 	for i in audio_layers.size():
 		var layer := audio_layers[i]
@@ -602,11 +632,12 @@ func save_pxo_file(
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 		Global.config_cache.set_value("data", "last_project_path", path)
 		Global.config_cache.save(Global.CONFIG_PATH)
-		if !project.was_exported:
-			project.file_name = path.get_file().trim_suffix(".pxo")
+		if project.file_name.is_empty():
+			project.file_name = path.uri_decode().get_file().trim_suffix(".pxo")
+		if project.export_directory_path.is_empty():
 			project.export_directory_path = path.get_base_dir()
 		Global.top_menu_container.file_menu.set_item_text(
-			Global.FileMenu.SAVE, tr("Save") + " %s" % path.get_file()
+			Global.FileMenu.SAVE, tr("Save") + " %s" % path.uri_decode().get_file()
 		)
 		project_saved.emit()
 		SteamManager.set_achievement("ACH_SAVE")
@@ -615,7 +646,7 @@ func save_pxo_file(
 
 
 func open_image_as_new_tab(path: String, image: Image) -> void:
-	var project := Project.new([], path.get_file(), image.get_size())
+	var project := Project.new([], path.uri_decode().get_file(), image.get_size())
 	var layer := PixelLayer.new(project)
 	project.layers.append(layer)
 	Global.projects.append(project)
@@ -634,7 +665,7 @@ func open_image_as_spritesheet_tab_smart(
 	if sliced_rects.size() == 0:  # Image is empty sprite (manually set data to be consistent)
 		frame_size = image.get_size()
 		sliced_rects.append(Rect2i(Vector2i.ZERO, frame_size))
-	var project := Project.new([], path.get_file(), frame_size)
+	var project := Project.new([], path.uri_decode().get_file(), frame_size)
 	var layer := PixelLayer.new(project)
 	project.layers.append(layer)
 	Global.projects.append(project)
@@ -651,21 +682,26 @@ func open_image_as_spritesheet_tab_smart(
 	set_new_imported_tab(project, path)
 
 
-func open_image_as_spritesheet_tab(path: String, image: Image, horiz: int, vert: int) -> void:
+func open_image_as_spritesheet_tab(
+	path: String, image: Image, horiz: int, vert: int, detect_empty := true
+) -> void:
 	horiz = mini(horiz, image.get_size().x)
 	vert = mini(vert, image.get_size().y)
 	var frame_width := image.get_size().x / horiz
 	var frame_height := image.get_size().y / vert
-	var project := Project.new([], path.get_file(), Vector2(frame_width, frame_height))
+	var project := Project.new([], path.uri_decode().get_file(), Vector2(frame_width, frame_height))
 	var layer := PixelLayer.new(project)
 	project.layers.append(layer)
 	Global.projects.append(project)
 	for yy in range(vert):
 		for xx in range(horiz):
-			var frame := Frame.new()
 			var cropped_image := image.get_region(
 				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height)
 			)
+			if not detect_empty:
+				if cropped_image.get_used_rect().size == Vector2i.ZERO:
+					continue  # We don't need this Frame
+			var frame := Frame.new()
 			project.size = cropped_image.get_size()
 			cropped_image.convert(project.get_image_format())
 			frame.cels.append(layer.new_cel_from_image(cropped_image))
@@ -691,16 +727,26 @@ func open_image_as_spritesheet_layer_smart(
 	# Initialize undo mechanism
 	project.undo_redo.create_action("Add Spritesheet Layer")
 
-	# Create new frames (if needed)
-	var new_frames_size := maxi(project.frames.size(), start_frame + sliced_rects.size())
-	var frames := []
+	var max_frames_size := maxi(project.frames.size(), start_frame + sliced_rects.size())
+	var new_frames := []
 	var frame_indices := PackedInt32Array([])
-	if new_frames_size > project.frames.size():
-		var required_frames := new_frames_size - project.frames.size()
-		frame_indices = range(
-			project.current_frame + 1, project.current_frame + required_frames + 1
-		)
-		for i in required_frames:
+	# Create new layer for spritesheet
+	var layer := PixelLayer.new(project, file_name)
+	var cels: Array[PixelCel] = []
+	for f in max_frames_size:
+		if f >= start_frame and f < (start_frame + sliced_rects.size()):
+			# Slice spritesheet
+			var offset: Vector2 = (0.5 * (frame_size - sliced_rects[f - start_frame].size)).floor()
+			image.convert(project.get_image_format())
+			var cropped_image := Image.create(
+				project_width, project_height, false, project.get_image_format()
+			)
+			cropped_image.blit_rect(image, sliced_rects[f - start_frame], offset)
+			cels.append(layer.new_cel_from_image(cropped_image))
+		else:
+			cels.append(layer.new_empty_cel())
+		# If amount of cels exceede our project frames, then add new frame
+		if cels.size() > project.frames.size():
 			var new_frame := Frame.new()
 			for l in range(project.layers.size()):  # Create as many cels as there are layers
 				new_frame.cels.append(project.layers[l].new_empty_cel())
@@ -716,35 +762,19 @@ func open_image_as_spritesheet_layer_smart(
 						)
 					new_frame.cels[l].set_content(prev_cel.get_content(), prev_cel.image_texture)
 					new_frame.cels[l].link_set = prev_cel.link_set
-			frames.append(new_frame)
+			new_frames.append(new_frame)
 
-	# Create new layer for spritesheet
-	var layer := PixelLayer.new(project, file_name)
-	var cels: Array[PixelCel] = []
-	for f in new_frames_size:
-		if f >= start_frame and f < (start_frame + sliced_rects.size()):
-			# Slice spritesheet
-			var offset: Vector2 = (0.5 * (frame_size - sliced_rects[f - start_frame].size)).floor()
-			image.convert(project.get_image_format())
-			var cropped_image := Image.create(
-				project_width, project_height, false, project.get_image_format()
-			)
-			cropped_image.blit_rect(image, sliced_rects[f - start_frame], offset)
-			cels.append(layer.new_cel_from_image(cropped_image))
-		else:
-			cels.append(layer.new_empty_cel())
-
-	project.undo_redo.add_do_method(project.add_frames.bind(frames, frame_indices))
+	if not new_frames.is_empty():  # if new frames got added
+		frame_indices = range(project.frames.size(), project.frames.size() + new_frames.size())
+		project.undo_redo.add_do_method(project.add_frames.bind(new_frames, frame_indices))
+		project.undo_redo.add_undo_method(project.remove_frames.bind(frame_indices))
 	project.undo_redo.add_do_method(
 		project.add_layers.bind([layer], [project.layers.size()], [cels])
 	)
-	project.undo_redo.add_do_method(
-		project.change_cel.bind(new_frames_size - 1, project.layers.size())
-	)
+	project.undo_redo.add_do_method(project.change_cel.bind(cels.size() - 1, project.layers.size()))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 
 	project.undo_redo.add_undo_method(project.remove_layers.bind([project.layers.size()]))
-	project.undo_redo.add_undo_method(project.remove_frames.bind(frame_indices))
 	project.undo_redo.add_undo_method(
 		project.change_cel.bind(project.current_frame, project.current_layer)
 	)
@@ -753,7 +783,13 @@ func open_image_as_spritesheet_layer_smart(
 
 
 func open_image_as_spritesheet_layer(
-	_path: String, image: Image, file_name: String, horizontal: int, vertical: int, start_frame: int
+	_path: String,
+	image: Image,
+	file_name: String,
+	horizontal: int,
+	vertical: int,
+	start_frame: int,
+	detect_empty := true
 ) -> void:
 	# Data needed to slice images
 	horizontal = mini(horizontal, image.get_size().x)
@@ -770,17 +806,36 @@ func open_image_as_spritesheet_layer(
 
 	# Initialize undo mechanism
 	project.undo_redo.create_action("Add Spritesheet Layer")
-
-	# Create new frames (if needed)
-	var new_frames_size := maxi(project.frames.size(), start_frame + (vertical * horizontal))
-	var frames := []
+	var max_frames_size := maxi(project.frames.size(), start_frame + (vertical * horizontal))
+	var new_frames := []
 	var frame_indices := PackedInt32Array([])
-	if new_frames_size > project.frames.size():
-		var required_frames := new_frames_size - project.frames.size()
-		frame_indices = range(
-			project.current_frame + 1, project.current_frame + required_frames + 1
-		)
-		for i in required_frames:
+	# Create new layer for spritesheet
+	var layer := PixelLayer.new(project, file_name)
+	var cels := []
+	var tile_count := vertical * horizontal
+	for f in max_frames_size:
+		if f >= start_frame and f < start_frame + tile_count:  # Entered region of spritesheet
+			# Slice spritesheet
+			var tile_idx := f - start_frame
+			var xx := tile_idx % horizontal
+			var yy := tile_idx / horizontal
+			image.convert(project.get_image_format())
+			var cropped_image := Image.create(
+				project_width, project_height, false, project.get_image_format()
+			)
+			cropped_image.blit_rect(
+				image,
+				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height),
+				Vector2i.ZERO
+			)
+			if not detect_empty:
+				if cropped_image.get_used_rect().size == Vector2i.ZERO:
+					continue  # We don't need this cel
+			cels.append(layer.new_cel_from_image(cropped_image))
+		else:
+			cels.append(layer.new_empty_cel())
+		# If amount of cels exceede our project frames, then add new frame
+		if cels.size() > project.frames.size():
 			var new_frame := Frame.new()
 			for l in range(project.layers.size()):  # Create as many cels as there are layers
 				new_frame.cels.append(project.layers[l].new_empty_cel())
@@ -796,40 +851,19 @@ func open_image_as_spritesheet_layer(
 						)
 					new_frame.cels[l].set_content(prev_cel.get_content(), prev_cel.image_texture)
 					new_frame.cels[l].link_set = prev_cel.link_set
-			frames.append(new_frame)
+			new_frames.append(new_frame)
 
-	# Create new layer for spritesheet
-	var layer := PixelLayer.new(project, file_name)
-	var cels := []
-	for f in new_frames_size:
-		if f >= start_frame and f < (start_frame + (vertical * horizontal)):
-			# Slice spritesheet
-			var xx := (f - start_frame) % horizontal
-			var yy := (f - start_frame) / horizontal
-			image.convert(project.get_image_format())
-			var cropped_image := Image.create(
-				project_width, project_height, false, project.get_image_format()
-			)
-			cropped_image.blit_rect(
-				image,
-				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height),
-				Vector2i.ZERO
-			)
-			cels.append(layer.new_cel_from_image(cropped_image))
-		else:
-			cels.append(layer.new_empty_cel())
-
-	project.undo_redo.add_do_method(project.add_frames.bind(frames, frame_indices))
+	if not new_frames.is_empty():  # if new frames got added
+		frame_indices = range(project.frames.size(), project.frames.size() + new_frames.size())
+		project.undo_redo.add_do_method(project.add_frames.bind(new_frames, frame_indices))
+		project.undo_redo.add_undo_method(project.remove_frames.bind(frame_indices))
 	project.undo_redo.add_do_method(
 		project.add_layers.bind([layer], [project.layers.size()], [cels])
 	)
-	project.undo_redo.add_do_method(
-		project.change_cel.bind(new_frames_size - 1, project.layers.size())
-	)
+	project.undo_redo.add_do_method(project.change_cel.bind(cels.size() - 1, project.layers.size()))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 
 	project.undo_redo.add_undo_method(project.remove_layers.bind([project.layers.size()]))
-	project.undo_redo.add_undo_method(project.remove_frames.bind(frame_indices))
 	project.undo_redo.add_undo_method(
 		project.change_cel.bind(project.current_frame, project.current_layer)
 	)
@@ -854,6 +888,7 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 	if cel is CelTileMap:
 		undo_data[cel] = (cel as CelTileMap).serialize_undo_data()
 	cel_image.add_data_to_dictionary(undo_data)
+	cel_image.fill(0)
 	cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
 	cel_image.convert_rgb_to_indexed()
 	var redo_data := {}
@@ -870,6 +905,8 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 	project.undo_redo.add_undo_method(
 		project.change_cel.bind(project.current_frame, project.current_layer)
 	)
+	project.undo_redo.add_do_method(cel.update_texture)
+	project.undo_redo.add_undo_method(cel.update_texture)
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.commit_action()
 
@@ -972,7 +1009,8 @@ func open_image_as_tileset(
 	vert: int,
 	tile_shape: TileSet.TileShape,
 	tile_offset_axis: TileSet.TileOffsetAxis,
-	project := Global.current_project
+	project := Global.current_project,
+	detect_empty := true
 ) -> void:
 	image.convert(project.get_image_format())
 	horiz = mini(horiz, image.get_size().x)
@@ -980,13 +1018,18 @@ func open_image_as_tileset(
 	var frame_width := image.get_size().x / horiz
 	var frame_height := image.get_size().y / vert
 	var tile_size := Vector2i(frame_width, frame_height)
-	var tileset := TileSetCustom.new(tile_size, path.get_basename().get_file(), tile_shape)
+	var tileset := TileSetCustom.new(
+		tile_size, path.uri_decode().get_basename().get_file(), tile_shape
+	)
 	tileset.tile_offset_axis = tile_offset_axis
 	for yy in range(vert):
 		for xx in range(horiz):
 			var cropped_image := image.get_region(
 				Rect2i(frame_width * xx, frame_height * yy, frame_width, frame_height)
 			)
+			if not detect_empty:
+				if cropped_image.get_used_rect().size == Vector2i.ZERO:
+					continue  # We don't need this Frame
 			@warning_ignore("int_as_enum_without_cast")
 			tileset.add_tile(cropped_image, null, 0)
 	project.tilesets.append(tileset)
@@ -1005,7 +1048,9 @@ func open_image_as_tileset_smart(
 	if sliced_rects.size() == 0:  # Image is empty sprite (manually set data to be consistent)
 		tile_size = image.get_size()
 		sliced_rects.append(Rect2i(Vector2i.ZERO, tile_size))
-	var tileset := TileSetCustom.new(tile_size, path.get_basename().get_file(), tile_shape)
+	var tileset := TileSetCustom.new(
+		tile_size, path.uri_decode().get_basename().get_file(), tile_shape
+	)
 	tileset.tile_offset_axis = tile_offset_axis
 	for rect in sliced_rects:
 		var offset: Vector2 = (0.5 * (tile_size - rect.size)).floor()
@@ -1022,14 +1067,14 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 	var prev_project_empty := Global.current_project.is_empty()
 	var prev_project_pos := Global.current_project_index
 
+	var file_name := path.uri_decode().get_file()
 	get_window().title = (
-		path.get_file() + " (" + tr("imported") + ") - Pixelorama " + Global.current_version
+		file_name + " (" + tr("imported") + ") - Pixelorama " + Global.current_version
 	)
 	if project.has_changed:
 		get_window().title = get_window().title + "(*)"
-	var file_name := path.get_basename().get_file()
 	project.export_directory_path = path.get_base_dir()
-	project.file_name = file_name
+	project.file_name = file_name.get_basename()
 	project.was_exported = true
 	if path.get_extension().to_lower() == "png":
 		project.export_overwrite = true
@@ -1041,14 +1086,27 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 		Global.tabs.delete_tab(prev_project_pos)
 
 
+func open_3d_scene_file(path: String) -> void:
+	var gltf_document_load := GLTFDocument.new()
+	var gltf_state_load := GLTFState.new()
+	var error = gltf_document_load.append_from_file(path, gltf_state_load)
+	if error != OK:
+		return
+	var gltf_scene_root_node := gltf_document_load.generate_scene(gltf_state_load)
+	if not is_instance_valid(gltf_scene_root_node):
+		return
+	var project := Global.current_project
+	var new_layer := Layer3D.new(project, path.get_basename().get_file())
+	new_layer.add_new_node(gltf_scene_root_node)
+	Global.animation_timeline.add_layer(new_layer, project)
+
+
 func open_audio_file(path: String) -> void:
 	var audio_stream: AudioStream
-	var file := FileAccess.open(path, FileAccess.READ)
 	if path.get_extension().to_lower() == "mp3":
-		audio_stream = AudioStreamMP3.new()
-		audio_stream.data = file.get_buffer(file.get_length())
+		audio_stream = AudioStreamMP3.load_from_file(path)
 	elif path.get_extension().to_lower() == "wav":
-		audio_stream = AudioStreamWAV.load_from_buffer(file.get_buffer(file.get_length()))
+		audio_stream = AudioStreamWAV.load_from_file(path)
 	if not is_instance_valid(audio_stream):
 		return
 	var project := Global.current_project
@@ -1056,7 +1114,7 @@ func open_audio_file(path: String) -> void:
 		if layer is AudioLayer and not is_instance_valid(layer.audio):
 			layer.audio = audio_stream
 			return
-	var new_layer := AudioLayer.new(project, path.get_basename().get_file())
+	var new_layer := AudioLayer.new(project, path.uri_decode().get_basename().get_file())
 	new_layer.audio = audio_stream
 	Global.animation_timeline.add_layer(new_layer, project)
 
@@ -1082,7 +1140,7 @@ func open_gif_file(path: String) -> bool:
 	if imported_frames.size() == 0:
 		printerr("An error has occurred while importing the gif")
 		return false
-	var new_project := Project.new([], path.get_file().get_basename())
+	var new_project := Project.new([], path.uri_decode().get_file().get_basename())
 	var size := Vector2i(importer.get_logical_screen_width(), importer.get_logical_screen_height())
 	new_project.size = size
 	new_project.fps = 1.0
@@ -1119,7 +1177,8 @@ func open_ora_file(path: String) -> void:
 		print("Error parsing XML from ora file: ", error_string(err))
 		zip_reader.close()
 		return
-	var new_project := Project.new([Frame.new()], path.get_file().get_basename())
+	var new_project := Project.new([Frame.new()], path.uri_decode().get_file().get_basename())
+	new_project.clear_author_data()
 	var selected_layer: BaseLayer
 	var stacks_found := 0
 	var current_stack: Array[GroupLayer] = []
@@ -1224,8 +1283,9 @@ func open_piskel_file(path: String) -> void:
 	if typeof(file_json) != TYPE_DICTIONARY:
 		return
 	var piskel: Dictionary = file_json.piskel
-	var project_name: String = piskel.get("name", path.get_file().get_basename())
+	var project_name: String = piskel.get("name", path.uri_decode().get_file().get_basename())
 	var new_project := Project.new([], project_name)
+	new_project.clear_author_data()
 	new_project.size = Vector2i(piskel.width, piskel.height)
 	new_project.fps = piskel.fps
 	new_project.save_path = path.get_basename() + ".pxo"
@@ -1318,3 +1378,36 @@ func save_project_to_recent_list(path: String) -> void:
 
 	top_menu_container.recent_projects_submenu.clear()
 	top_menu_container.update_recent_projects_submenu()
+
+
+# Custom open callbacks are used to add support for opening files with extensions that are not
+# natively supported by Pixelorama.
+# This allows users to extend the functionality of Pixelorama without modifying the core code.
+func register_custom_open_callback(extension: String, callback: Callable) -> void:
+	custom_open_callbacks[extension] = callback
+
+
+# Unregister a custom open callback for a specific file extension.
+# This can be used when the support for that file type is no longer needed or if the user
+# wants to change the callback function for that extension.
+func unregister_custom_open_callback(extension: String) -> void:
+	if custom_open_callbacks.has(extension):
+		custom_open_callbacks.erase(extension)
+
+
+# Execute the custom open callback for a given file extension and path.
+# This function checks if there is a registered callback for the specified extension and, if so,
+# calls it with the provided path.
+# This allows the application to handle opening files with custom logic defined
+# in the callback function.
+func execute_custom_open_callback(extension: String, path: String) -> void:
+	if not custom_open_callbacks.has(extension):
+		return
+
+	var callback: Callable = custom_open_callbacks[extension]
+	callback.call(path)
+
+
+# Check if there is a custom open callback registered for a specific file extension.
+func has_custom_open_callbacks(extension: String) -> bool:
+	return custom_open_callbacks.has(extension)

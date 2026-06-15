@@ -42,7 +42,6 @@ Stable versions:
 - [GitHub Releases (Windows, Linux & Mac)](https://github.com/Orama-Interactive/Pixelorama/releases)
 - [GitHub Pages (Web)](https://orama-interactive.github.io/Pixelorama/)
 - [Flathub (Linux)](https://flathub.org/apps/details/com.orama_interactive.Pixelorama)
-- [Snap Store (Linux)](https://snapcraft.io/pixelorama)
 - WinGet (Windows) - `winget install pixelorama`
 
 You can also find early access builds in the [GitHub Actions page](https://github.com/Orama-Interactive/Pixelorama/actions). There's also a [Web version available](https://orama-interactive.github.io/Pixelorama/early_access/).
@@ -54,7 +53,7 @@ You can find online Documentation for Pixelorama here: https://orama-interactive
 It's still a work in progress so there are some pages missing. If you want to contribute, you can do so in [Pixelorama-Docs' GitHub Repository](https://github.com/Orama-Interactive/Pixelorama-Docs).
 
 ## Cloning Instructions
-Pixelorama uses Godot 4.5.1, so you will need to have it in order to run the project. Older versions will not work.
+Pixelorama uses Godot 4.6.3, so you will need to have it in order to run the project. Older versions will not work.
 As of right now, most of the code is written using GDScript, so the Mono version of Godot is not required, but Pixelorama should also work with it.
 
 ## Features:

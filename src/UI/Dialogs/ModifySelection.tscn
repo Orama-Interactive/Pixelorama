@@ -1,42 +1,43 @@
-[gd_scene load_steps=3 format=3 uid="uid://wcbpnsm7gptu"]
+[gd_scene format=3 uid="uid://wcbpnsm7gptu"]
 
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="1_3jelw"]
 [ext_resource type="Script" uid="uid://csbfkgg4y0vxc" path="res://src/UI/Dialogs/ModifySelection.gd" id="1_w6rs7"]
 
-[node name="ModifySelection" type="ConfirmationDialog"]
+[node name="ModifySelection" type="ConfirmationDialog" unique_id=983472115]
+oversampling_override = 1.0
 title = "Expand selection"
 position = Vector2i(0, 36)
 size = Vector2i(266, 152)
 visible = true
 script = ExtResource("1_w6rs7")
 
-[node name="Options" type="VBoxContainer" parent="."]
+[node name="Options" type="VBoxContainer" parent="." unique_id=2119590573]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 258.0
 offset_bottom = 103.0
 
-[node name="CenterContent" type="HBoxContainer" parent="Options"]
+[node name="CenterContent" type="HBoxContainer" parent="Options" unique_id=1429926721]
 visible = false
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="Options/CenterContent"]
+[node name="Label2" type="Label" parent="Options/CenterContent" unique_id=1767379214]
 layout_mode = 2
 text = "Center relative to content:"
 
-[node name="RelativeCheckbox" type="CheckBox" parent="Options/CenterContent"]
+[node name="RelativeCheckbox" type="CheckBox" parent="Options/CenterContent" unique_id=821537662]
 layout_mode = 2
 
-[node name="ExpandShrinkBorder" type="GridContainer" parent="Options"]
+[node name="ExpandShrinkBorder" type="GridContainer" parent="Options" unique_id=1928153237]
 layout_mode = 2
 columns = 2
 
-[node name="WidthLabel" type="Label" parent="Options/ExpandShrinkBorder"]
+[node name="WidthLabel" type="Label" parent="Options/ExpandShrinkBorder" unique_id=1305189528]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Width:"
 
-[node name="WidthSlider" type="TextureProgressBar" parent="Options/ExpandShrinkBorder"]
+[node name="WidthSlider" type="TextureProgressBar" parent="Options/ExpandShrinkBorder" unique_id=2860332]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -54,12 +55,12 @@ stretch_margin_right = 3
 stretch_margin_bottom = 3
 script = ExtResource("1_3jelw")
 
-[node name="BrushLabel" type="Label" parent="Options/ExpandShrinkBorder"]
+[node name="BrushLabel" type="Label" parent="Options/ExpandShrinkBorder" unique_id=1965631495]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Brush:"
 
-[node name="BrushOptionButton" type="OptionButton" parent="Options/ExpandShrinkBorder"]
+[node name="BrushOptionButton" type="OptionButton" parent="Options/ExpandShrinkBorder" unique_id=159978937]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -72,17 +73,17 @@ popup/item_1/id = 1
 popup/item_2/text = "Square"
 popup/item_2/id = 2
 
-[node name="HSeparator" type="HSeparator" parent="Options"]
+[node name="HSeparator" type="HSeparator" parent="Options" unique_id=43760856]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Options"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Options" unique_id=720656191]
 layout_mode = 2
 
-[node name="ContentLabel" type="Label" parent="Options/HBoxContainer"]
+[node name="ContentLabel" type="Label" parent="Options/HBoxContainer" unique_id=1931323741]
 layout_mode = 2
 text = "Transform content"
 
-[node name="WithContent" type="CheckBox" parent="Options/HBoxContainer"]
+[node name="WithContent" type="CheckBox" parent="Options/HBoxContainer" unique_id=337864889]
 layout_mode = 2
 
 [connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]

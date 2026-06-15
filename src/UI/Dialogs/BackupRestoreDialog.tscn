@@ -1,57 +1,58 @@
-[gd_scene load_steps=2 format=3 uid="uid://dx25yonx40ehr"]
+[gd_scene format=3 uid="uid://dx25yonx40ehr"]
 
 [ext_resource type="Script" uid="uid://clahbctkpotb2" path="res://src/UI/Dialogs/BackupRestoreDialog.gd" id="1_5v3pd"]
 
-[node name="BackupRestoreDialog" type="Window"]
+[node name="BackupRestoreDialog" type="Window" unique_id=956526482]
+oversampling_override = 1.0
 title = "Past sessions"
 position = Vector2i(0, 36)
-size = Vector2i(541, 300)
+size = Vector2i(541, 321)
 wrap_controls = true
 exclusive = true
 script = ExtResource("1_5v3pd")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1921965945]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=355337583]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=782182292]
 layout_mode = 2
 text = "Double click to load an entire session, or a specific project."
 autowrap_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer" unique_id=1840852437]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer" unique_id=1688439097]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SessionLabel" type="Label" parent="PanelContainer/VBoxContainer/GridContainer"]
+[node name="SessionLabel" type="Label" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=1604292133]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"HeaderSmall"
 text = "Sessions"
 
-[node name="ProjectsLabel" type="Label" parent="PanelContainer/VBoxContainer/GridContainer"]
+[node name="ProjectsLabel" type="Label" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=367407123]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"HeaderSmall"
 text = "Projects"
 
-[node name="sessions" type="ItemList" parent="PanelContainer/VBoxContainer/GridContainer"]
+[node name="sessions" type="ItemList" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=1582321448]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="projects" type="ItemList" parent="PanelContainer/VBoxContainer/GridContainer"]
+[node name="projects" type="ItemList" parent="PanelContainer/VBoxContainer/GridContainer" unique_id=1258462066]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(150, 0)

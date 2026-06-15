@@ -48,7 +48,7 @@ func set_confirm_buttons_visibility() -> void:
 	await get_tree().process_frame
 	set_spinbox_values()
 	get_tree().set_group(
-		&"ShowOnActiveTransformation", "visible", transformation_handles.is_transforming_content()
+		&"ShowOnActiveTransformation", "visible", transformation_handles.is_transforming()
 	)
 
 
@@ -85,7 +85,7 @@ func set_spinbox_values() -> void:
 		size_sliders.press_ratio_button(false)
 	position_sliders.editable = has_selection
 	size_sliders.editable = has_selection
-	if transformation_handles.is_transforming_content():
+	if transformation_handles.is_transforming():
 		select_rect = selection_node.preview_selection_map.get_selection_rect(project)
 		rotation_slider.value = rad_to_deg(transformation_handles.preview_transform.get_rotation())
 		shear_slider.value = rad_to_deg(transformation_handles.preview_transform.get_skew())
@@ -119,7 +119,7 @@ func draw_start(mouse_pos: Vector2i) -> void:
 		# Move current selection
 		_move = true
 		if quick_copy:  # Move selection without cutting it from the original position (quick copy)
-			if transformation_handles.is_transforming_content():
+			if transformation_handles.is_transforming():
 				selection_node.transform_content_confirm()
 			transformation_handles.begin_transform(null, project, true)
 			var select_rect := project.selection_map.get_selection_rect(project)
@@ -256,7 +256,7 @@ func _on_position_value_changed(value: Vector2) -> void:
 		return
 	if !Global.current_project.has_selection:
 		return
-	if not transformation_handles.is_transforming_content():
+	if not transformation_handles.is_transforming():
 		transformation_handles.begin_transform()
 	transformation_handles.move_transform(value - transformation_handles.preview_transform.origin)
 
@@ -266,7 +266,7 @@ func _on_size_value_changed(value: Vector2i) -> void:
 		return
 	if !Global.current_project.has_selection:
 		return
-	if not transformation_handles.is_transforming_content():
+	if not transformation_handles.is_transforming():
 		transformation_handles.begin_transform()
 	var image_size := selection_node.preview_selection_map.get_used_rect().size
 	var delta := value - image_size
@@ -278,7 +278,7 @@ func _on_rotation_value_changed(value: float) -> void:
 		return
 	if !Global.current_project.has_selection:
 		return
-	if not transformation_handles.is_transforming_content():
+	if not transformation_handles.is_transforming():
 		transformation_handles.begin_transform()
 	var angle := deg_to_rad(value)
 	transformation_handles.rotate_transform(angle)
@@ -289,7 +289,7 @@ func _on_shear_value_changed(value: float) -> void:
 		return
 	if !Global.current_project.has_selection:
 		return
-	if not transformation_handles.is_transforming_content():
+	if not transformation_handles.is_transforming():
 		transformation_handles.begin_transform()
 	var angle := deg_to_rad(value)
 	transformation_handles.shear_transform(angle)

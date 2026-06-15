@@ -49,10 +49,23 @@ func _commit_undo(action: String, undo_data: Dictionary, project: Project) -> vo
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
 		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
-	project.update_tilemaps(undo_data, tile_editing_mode)
+	var used_tilesets := project.update_tilemaps(undo_data, tile_editing_mode)
 	var redo_data := _get_undo_data(project)
 	project.undo_redo.create_action(action)
+	var layers_to_update := PackedInt32Array()
+	for l in Global.current_project.layers:
+		if l is LayerTileMap:
+			if l.tileset in used_tilesets:
+				layers_to_update.append(l.index)
 	project.deserialize_cel_undo_data(redo_data, undo_data)
+	# we may be on a different layer during undo/redo (Not sure if it's required here but it's good
+	# to add it just in case)
+	Global.current_project.undo_redo.add_do_property(
+		Global.canvas, "mandatory_update_layers", layers_to_update
+	)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.canvas, "mandatory_update_layers", layers_to_update
+	)
 	if redo_data.has("outline_offset"):
 		project.undo_redo.add_do_property(project, "selection_offset", redo_data["outline_offset"])
 		project.undo_redo.add_undo_property(

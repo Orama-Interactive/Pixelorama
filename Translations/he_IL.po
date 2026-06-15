@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hebrew\n"
 "Language: he_IL\n"
-"PO-Revision-Date: 2025-10-14 14:09\n"
+"PO-Revision-Date: 2026-04-26 12:43\n"
 
 msgid "OK"
 msgstr "אישור"
@@ -492,7 +492,7 @@ msgid "Recent projects"
 msgstr "פרוייקטים אחרונים"
 
 msgid "New project"
-msgstr ""
+msgstr "פרויקט חדש"
 
 #. Found in the preview image dialog, which appears when importing an image file.
 msgid "Spritesheet (new project)"
@@ -577,15 +577,6 @@ msgstr "מברשת פרויקט"
 
 msgid "Random brush"
 msgstr "מברשת אקראית"
-
-msgid "Save Sprite as .pxo"
-msgstr "שמירת ספרייט כקובץ .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "ייצוא ספרייט כקובץ .png"
-
-msgid "Export Sprite"
-msgstr "ייצוא ספרייט"
 
 msgid "File Exists, Overwrite?"
 msgstr "הקובץ קיים. להחליף?"
@@ -893,6 +884,10 @@ msgstr "גיבוי"
 msgid "Performance"
 msgstr "ביצועים"
 
+#. Found in the Preferences. Refers to the author of the current project.
+msgid "Author"
+msgstr ""
+
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
 msgstr ""
@@ -961,6 +956,10 @@ msgstr ""
 msgid "Font size:"
 msgstr ""
 
+#. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
+msgid "Screen orientation:"
+msgstr ""
+
 msgid "Dim interface on dialog popup"
 msgstr ""
 
@@ -980,6 +979,10 @@ msgstr ""
 msgid "Single window mode"
 msgstr ""
 
+#. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
+msgid "Collapse main menu"
+msgstr ""
+
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
 msgstr ""
@@ -991,7 +994,7 @@ msgid "Gray"
 msgstr ""
 
 msgid "Blue"
-msgstr ""
+msgstr "כחול"
 
 msgid "Caramel"
 msgstr ""
@@ -1000,7 +1003,7 @@ msgid "Light"
 msgstr ""
 
 msgid "Purple"
-msgstr ""
+msgstr "סגול"
 
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
@@ -1027,8 +1030,16 @@ msgstr "צבע רקע מ:"
 msgid "Background color:"
 msgstr "צבע רקע:"
 
+#. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
+msgid "Single tool mode"
+msgstr ""
+
+#. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
+msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
+msgstr ""
+
 #. Found in the preferences, under the Tools category.
-msgid "Share options between the left and the right tools"
+msgid "Share options between left and right tools"
 msgstr ""
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
@@ -1042,8 +1053,9 @@ msgstr "צבע כלי שמאלי:"
 msgid "Right tool color:"
 msgstr "צבע כלי ימני:"
 
-msgid "Tool button size:"
-msgstr "גודל כפתורי כלים:"
+#. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
+msgid "Make global palettes read-only"
+msgstr ""
 
 msgid "Small"
 msgstr "קטן"
@@ -1339,7 +1351,7 @@ msgstr ""
 
 #. Found in the Restore Backup dialog.
 msgid "Projects"
-msgstr ""
+msgstr "פרויקטים"
 
 #. Found in the Restore Backup dialog.
 msgid "(Current Session)"
@@ -1396,7 +1408,7 @@ msgstr "רשיונות"
 
 #. Refers to a software license. https://en.wikipedia.org/wiki/Software_license
 msgid "License"
-msgstr ""
+msgstr "רישיון"
 
 #. Refers to the licenses of the software that are used by the Godot Engine. https://en.wikipedia.org/wiki/Software_license
 msgid "Godot Licenses"
@@ -1494,6 +1506,9 @@ msgid "Dutch"
 msgstr "הולנדית"
 
 msgid "Belarusian"
+msgstr ""
+
+msgid "Thai"
 msgstr ""
 
 #. Found in the About dialog.
@@ -1981,6 +1996,26 @@ msgstr ""
 
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
+msgstr ""
+
+#. Found in the Preferences. Refers to the displayed name of the current project author.
+msgid "Display name:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the real name of the current project author.
+msgid "Real name:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the contact info of the current project author.
+msgid "Contact:"
+msgstr ""
+
+#. Found in the Preferences. Refers to the company name of the current project author.
+msgid "Company/Studio:"
+msgstr ""
+
+#. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
+msgid "Last saved by"
 msgstr ""
 
 #. Found in the Preferences, under Extensions.
@@ -2915,6 +2950,54 @@ msgstr ""
 msgid "Redo: Change frame duration"
 msgstr ""
 
+msgid "Undo: Rename Layer"
+msgstr ""
+
+msgid "Redo: Rename Layer"
+msgstr ""
+
+msgid "Undo: Change Layer Opacity"
+msgstr ""
+
+msgid "Redo: Change Layer Opacity"
+msgstr ""
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
+msgid "Undo: Change Layer Onion Skinning Ignore Status"
+msgstr ""
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
+msgid "Redo: Change Layer Onion Skinning Ignore Status"
+msgstr ""
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos.
+msgid "Undo: Change Layer User Data"
+msgstr ""
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
+msgid "Redo: Change Layer User Data"
+msgstr ""
+
+msgid "Undo: Change Layer Color"
+msgstr ""
+
+msgid "Redo: Change Layer Color"
+msgstr ""
+
+msgid "Undo: Change Layer Visibility"
+msgstr ""
+
+msgid "Redo: Change Layer Visibility"
+msgstr ""
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos.
+msgid "Undo: Change Layer Locked Status"
+msgstr ""
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
+msgid "Redo: Change Layer Locked Status"
+msgstr ""
+
 msgid "Move Guide"
 msgstr "הזזת קו מנחה"
 
@@ -2942,9 +3025,6 @@ msgid "New Empty Palette"
 msgstr ""
 
 msgid "Import Palette"
-msgstr ""
-
-msgid "Create Palette From Current Sprite"
 msgstr ""
 
 msgid "Palette Name:"
@@ -3034,6 +3114,10 @@ msgstr "איפוס כל אפשרויות הכלים"
 #. Found in the preferences, under the Reset category.
 msgid "Remove all extensions"
 msgstr "הסרת כל ההרחבות"
+
+#. Found in the preferences, under the Reset category.
+msgid "Remove all backups"
+msgstr ""
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
@@ -3228,6 +3312,10 @@ msgstr ""
 msgid "Only export content that is within the bounds of a selected area."
 msgstr ""
 
+#. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
+msgid "Layers as separate files"
+msgstr ""
+
 msgid "Close"
 msgstr ""
 
@@ -3265,6 +3353,10 @@ msgstr ""
 msgid "Frame duration:"
 msgstr ""
 
+#. Refers to the license of a project, which can be set from the project properties.
+msgid "License:"
+msgstr ""
+
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
 msgstr ""
@@ -3297,7 +3389,7 @@ msgstr ""
 msgid "From Current Palette"
 msgstr ""
 
-msgid "From Current Sprite"
+msgid "From Current Cel"
 msgstr ""
 
 msgid "From Current Selection"
@@ -3602,10 +3694,10 @@ msgid "Vertical alignment:"
 msgstr ""
 
 msgid "Left"
-msgstr ""
+msgstr "שמאל"
 
 msgid "Right"
-msgstr ""
+msgstr "ימין"
 
 #. Refers to the vertical space between lines in a text.
 msgid "Line spacing:"

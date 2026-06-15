@@ -1,18 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bbvvkrrjyxugo"]
+[gd_scene format=3 uid="uid://bbvvkrrjyxugo"]
 
 [ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="2"]
 [ext_resource type="Script" uid="uid://dvxi2qxovndmf" path="res://src/Tools/DesignTools/Bucket.gd" id="3"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="4_1pngp"]
-
-[sub_resource type="StyleBoxFlat" id="2"]
-bg_color = Color(1, 1, 1, 1)
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="1"]
 bg_color = Color(1, 1, 1, 1)
@@ -23,18 +14,27 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 anti_aliasing = false
 
-[node name="ToolOptions" instance=ExtResource("2")]
+[sub_resource type="StyleBoxFlat" id="2"]
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+anti_aliasing = false
+
+[node name="ToolOptions" unique_id=964459986 instance=ExtResource("2")]
 offset_right = 138.0
 offset_bottom = 105.0
 script = ExtResource("3")
 
-[node name="FillArea" type="Label" parent="." index="2"]
+[node name="FillArea" type="Label" parent="." index="2" unique_id=1502194525]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Fill area:"
 
-[node name="FillAreaOptions" type="OptionButton" parent="." index="3"]
+[node name="FillAreaOptions" type="OptionButton" parent="." index="3" unique_id=321873914]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -47,13 +47,13 @@ popup/item_1/id = 1
 popup/item_2/text = "Whole selection"
 popup/item_2/id = 2
 
-[node name="MergeAreaOptions" type="CheckBox" parent="." index="4"]
+[node name="MergeAreaOptions" type="CheckBox" parent="." index="4" unique_id=218009629]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Fill regions from the merging of all layers"
 autowrap_mode = 3
 
-[node name="ToleranceSlider" type="TextureProgressBar" parent="." index="5"]
+[node name="ToleranceSlider" type="TextureProgressBar" parent="." index="5" unique_id=1967537478]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
 focus_mode = 2
@@ -68,12 +68,12 @@ stretch_margin_bottom = 3
 script = ExtResource("4_1pngp")
 prefix = "Tolerance:"
 
-[node name="FillWith" type="Label" parent="." index="6"]
+[node name="FillWith" type="Label" parent="." index="6" unique_id=1434654370]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Fill with:"
 
-[node name="FillWithOptions" type="OptionButton" parent="." index="7"]
+[node name="FillWithOptions" type="OptionButton" parent="." index="7" unique_id=1494059608]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
@@ -84,35 +84,35 @@ popup/item_0/id = 0
 popup/item_1/text = "Pattern"
 popup/item_1/id = 1
 
-[node name="FillPattern" type="VBoxContainer" parent="." index="8"]
+[node name="FillPattern" type="VBoxContainer" parent="." index="8" unique_id=1597102964]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Type" type="Button" parent="FillPattern" index="0"]
+[node name="Type" type="Button" parent="FillPattern" index="0" unique_id=1941961889]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 0
 tooltip_text = "Select a brush"
 mouse_default_cursor_shape = 2
-theme_override_styles/focus = SubResource("2")
-theme_override_styles/disabled = SubResource("2")
-theme_override_styles/hover = SubResource("1")
-theme_override_styles/pressed = SubResource("1")
 theme_override_styles/normal = SubResource("1")
+theme_override_styles/pressed = SubResource("1")
+theme_override_styles/hover = SubResource("1")
+theme_override_styles/disabled = SubResource("2")
+theme_override_styles/focus = SubResource("2")
 
-[node name="Texture2D" type="TextureRect" parent="FillPattern/Type" index="0"]
+[node name="Texture2D" type="TextureRect" parent="FillPattern/Type" index="0" unique_id=1285940461]
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
 expand_mode = 1
 stretch_mode = 5
 
-[node name="OffsetX" parent="FillPattern" index="1" instance=ExtResource("1")]
+[node name="OffsetX" parent="FillPattern" index="1" unique_id=381068828 instance=ExtResource("1")]
 layout_mode = 2
 prefix = "Offset X:"
 
-[node name="OffsetY" parent="FillPattern" index="2" instance=ExtResource("1")]
+[node name="OffsetY" parent="FillPattern" index="2" unique_id=2113544548 instance=ExtResource("1")]
 layout_mode = 2
 prefix = "Offset Y:"
 

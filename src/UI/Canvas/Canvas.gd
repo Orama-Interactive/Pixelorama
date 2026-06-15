@@ -6,6 +6,9 @@ const CURSOR_SPEED_RATE := 6.0
 var current_pixel := Vector2.ZERO
 var sprite_changed_this_frame := false  ## For optimization purposes
 var update_all_layers := false
+## For optimization purposes. A kind of override to force include a layer during canvas update.
+## Used in Undo/Redo for FX and visibility changes
+var mandatory_update_layers := PackedInt32Array()
 var project_changed := false
 var move_preview_location := Vector2i.ZERO
 var layer_texture_array := Texture2DArray.new()
@@ -29,6 +32,7 @@ var layer_metadata_texture := ImageTexture.new()
 @onready var gizmos_3d := $Gizmos3D as Node2D
 @onready var measurements := $Measurements as Node2D
 @onready var reference_image_container := $ReferenceImages as Node2D
+@onready var tilemap_property_drawing := $TilemapPropertyDrawing as Node2D
 
 
 func _ready() -> void:
@@ -101,7 +105,16 @@ func _input(event: InputEvent) -> void:
 
 func queue_redraw_all_layers() -> void:
 	project_changed = true
-	queue_redraw()
+	var project := Global.current_project
+	var current_cel := project.get_current_cel()
+	if current_cel is Cel3D:
+		var layer_3d := project.layers[project.current_layer] as Layer3D
+		layer_3d.animation_player.speed_scale = project.fps
+		layer_3d.animation.length = project.frames.size()
+		layer_3d.animation_player.seek(project.current_frame, true)
+		current_cel.update_texture()
+	else:
+		queue_redraw()
 
 
 func camera_zoom() -> void:
@@ -193,12 +206,21 @@ func draw_layers(force_recreate := false) -> void:
 					var test_array := [project.current_frame, i]
 					if not test_array in project.selected_cels:
 						var include := false
-						var parents := layer.get_ancestors()
-						for parent in parents:
-							if parent.blend_mode == BaseLayer.BlendModes.PASS_THROUGH:
-								var test_array_parent := [project.current_frame, parent.index]
-								if test_array_parent in project.selected_cels:
-									include = true
+						# Some layers are required for mandatory update because they are part of
+						# an undo/redo action that is being performed right now. The may not be
+						# currently selected but still require an update
+						if i in mandatory_update_layers:
+							include = true
+						else:
+							var parents := layer.get_ancestors()
+							# Even if the layer itself is not changed, if it is part of a group layer
+							# with passthrough mode, it will still need an update if it's group cel is
+							# selected.
+							for parent in parents:
+								if parent.blend_mode == BaseLayer.BlendModes.PASS_THROUGH:
+									var test_array_parent := [project.current_frame, parent.index]
+									if test_array_parent in project.selected_cels:
+										include = true
 						if not include:
 							continue
 				var ordered_index := project.ordered_layers.find(layer.index)
@@ -217,6 +239,7 @@ func draw_layers(force_recreate := false) -> void:
 
 	material.set_shader_parameter("origin_x_positive", move_preview_location.x > 0)
 	material.set_shader_parameter("origin_y_positive", move_preview_location.y > 0)
+	mandatory_update_layers = []
 	update_all_layers = false
 
 

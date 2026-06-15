@@ -147,10 +147,11 @@ func deserialize_from_dictionary(data: Dictionary) -> void:
 	colors_max = width * height
 
 
-func save_to_file() -> Error:
-	if is_project_palette:  ## TODO: There might be a better way for this
+func save_to_file(custom_path: String = path) -> Error:
+	if is_project_palette:
+		# Project palettes are not a physical file so nothing needs to be saved
 		return OK
-	var file := FileAccess.open(path, FileAccess.WRITE)
+	var file := FileAccess.open(custom_path, FileAccess.WRITE)
 	if not is_instance_valid(file):
 		return FileAccess.get_open_error()
 	file.store_string(serialize())
@@ -185,6 +186,7 @@ func reindex_colors_on_width_increase(old_width: int) -> void:
 	sorted_colors_indices.sort()
 	var new_colors: Dictionary[int, PaletteColor]
 	for old_index: int in sorted_colors_indices:
+		@warning_ignore("integer_division")
 		var new_index := old_index + (width - old_width) * (old_index / old_width)
 		new_colors[new_index] = colors[old_index]
 		new_colors[new_index].index = new_index

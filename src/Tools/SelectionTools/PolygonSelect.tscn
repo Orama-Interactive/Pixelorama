@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dv8bn8gys3tax"]
+[gd_scene format=3 uid="uid://dv8bn8gys3tax"]
 
 [ext_resource type="PackedScene" uid="uid://bd62qfjn380wf" path="res://src/Tools/BaseSelectionTool.tscn" id="1"]
 [ext_resource type="Script" uid="uid://b21qeks86qx0r" path="res://src/Tools/SelectionTools/PolygonSelect.gd" id="2"]
 
-[node name="ToolOptions" instance=ExtResource("1")]
+[node name="ToolOptions" unique_id=422856033 instance=ExtResource("1")]
 script = ExtResource("2")
 
-[node name="DoubleClickTimer" type="Timer" parent="." index="8"]
+[node name="DoubleClickTimer" type="Timer" parent="." index="8" unique_id=204575428]
 wait_time = 0.1
 one_shot = true
