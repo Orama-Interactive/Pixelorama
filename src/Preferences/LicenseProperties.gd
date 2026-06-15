@@ -7,7 +7,8 @@ const licenses = {
 		"commercial_use_allowed": true,
 		"derivatives_allowed": true,
 		"share_alike_required": false,
-		"description": "Public domain dedication. No attribution required. Free use for any purpose."
+		"description":
+		"Public domain dedication. No attribution required. Free use for any purpose."
 	},
 	"CC-BY-4.0":
 	{
@@ -23,7 +24,8 @@ const licenses = {
 		"commercial_use_allowed": true,
 		"derivatives_allowed": true,
 		"share_alike_required": true,
-		"description": "Attribution required. Commercial use allowed. Derivatives must use same license."
+		"description":
+		"Attribution required. Commercial use allowed. Derivatives must use same license."
 	},
 	"CC-BY-ND-4.0":
 	{
@@ -47,7 +49,8 @@ const licenses = {
 		"commercial_use_allowed": false,
 		"derivatives_allowed": true,
 		"share_alike_required": true,
-		"description": "Attribution required. Non-commercial use only. Derivatives must use same license."
+		"description":
+		"Attribution required. Non-commercial use only. Derivatives must use same license."
 	},
 	"CC-BY-NC-ND-4.0":
 	{
@@ -87,7 +90,8 @@ const licenses = {
 		"commercial_use_allowed": true,
 		"derivatives_allowed": true,
 		"share_alike_required": true,
-		"description": "Free Art License. Copyleft license requiring derivatives to remain free under same license."
+		"description":
+		"Free Art License. Copyleft license requiring derivatives to remain free under same license."
 	},
 	"OFL-1.1":
 	{
@@ -95,7 +99,8 @@ const licenses = {
 		"commercial_use_allowed": true,
 		"derivatives_allowed": true,
 		"share_alike_required": false,
-		"description": "Open Font License. Allows modification and embedding of fonts with attribution."
+		"description":
+		"Open Font License. Allows modification and embedding of fonts with attribution."
 	},
 	"OGA-BY-3.0":
 	{
@@ -151,7 +156,8 @@ const licenses = {
 		"commercial_use_allowed": false,
 		"derivatives_allowed": false,
 		"share_alike_required": false,
-		"description": "Only allowed for news/editorial use, not advertising or commercial promotion."
+		"description":
+		"Only allowed for news/editorial use, not advertising or commercial promotion."
 	},
 	"Commercial-Use-Only":
 	{
