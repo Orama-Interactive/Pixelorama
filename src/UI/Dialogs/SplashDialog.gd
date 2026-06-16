@@ -22,14 +22,14 @@ var artworks: Array[Artwork] = [
 	Artwork.new(
 		preload("res://assets/graphics/splash_screen/artworks/kellay.png"),
 		"Kellay",
-		"",
+		"https://bsky.app/profile/awfukellay.bsky.social",
 		Color.WHITE,
 		""
 	),
 	Artwork.new(
 		preload("res://assets/graphics/splash_screen/artworks/momo.png"),
 		"Momo",
-		"",
+		"https://linktr.ee/mypeachtea",
 		Color.WHITE,
 		""
 	),
