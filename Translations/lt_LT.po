@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Lithuanian\n"
 "Language: lt_LT\n"
-"PO-Revision-Date: 2026-06-12 00:23\n"
+"PO-Revision-Date: 2026-06-16 23:47\n"
 
 msgid "OK"
 msgstr ""
@@ -883,8 +883,16 @@ msgstr ""
 msgid "Performance"
 msgstr ""
 
+#. Found in the Preferences. Refers to the attribution details of the current project, such as the project's creator and license.
+msgid "Attribution"
+msgstr ""
+
 #. Found in the Preferences. Refers to the author of the current project.
 msgid "Author"
+msgstr ""
+
+#. Found in the Preferences. Refers to the default license that is set to the created project.
+msgid "Default license"
 msgstr ""
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
