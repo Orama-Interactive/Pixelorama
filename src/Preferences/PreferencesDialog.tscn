@@ -1442,7 +1442,7 @@ theme_override_constants/separation = 0
 [node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/LicenseHeader" unique_id=1494019910]
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
-text = "Default License"
+text = "Default license"
 
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/LicenseHeader" unique_id=134067768]
 layout_mode = 2
