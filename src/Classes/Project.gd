@@ -167,7 +167,7 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 		export_directory_path = Global.config_cache.get_value(
 			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 		)
-	initialize_auttribution_data()
+	initialize_attribution_data()
 	Global.project_created.emit(self)
 
 
@@ -1071,7 +1071,7 @@ func update_tilemaps(
 	return used_tilesets
 
 
-func initialize_auttribution_data() -> void:
+func initialize_attribution_data() -> void:
 	author_display_name = Global.author_display_name
 	author_real_name = Global.author_real_name
 	author_contact = Global.author_contact
@@ -1079,7 +1079,7 @@ func initialize_auttribution_data() -> void:
 	license = Global.default_licence
 
 
-func clear_auttribution_data() -> void:
+func clear_attribution_data() -> void:
 	author_display_name = ""
 	author_real_name = ""
 	author_contact = ""
