@@ -520,6 +520,7 @@ func _notification(what: int) -> void:
 			get_tree().paused = false
 		NOTIFICATION_APPLICATION_FOCUS_IN:
 			get_tree().paused = false
+			Tools.quick_assign_tool_revert(MOUSE_BUTTON_RIGHT)
 			Tools.quick_assign_tool_revert(MOUSE_BUTTON_LEFT)
 
 
