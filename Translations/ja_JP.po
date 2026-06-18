@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2026-06-16 23:47\n"
+"PO-Revision-Date: 2026-06-18 03:34\n"
 
 msgid "OK"
 msgstr "OK"
@@ -890,7 +890,7 @@ msgstr "パフォーマンス"
 
 #. Found in the Preferences. Refers to the attribution details of the current project, such as the project's creator and license.
 msgid "Attribution"
-msgstr ""
+msgstr "属性"
 
 #. Found in the Preferences. Refers to the author of the current project.
 msgid "Author"
@@ -898,7 +898,7 @@ msgstr "著者"
 
 #. Found in the Preferences. Refers to the default license that is set to the created project.
 msgid "Default license"
-msgstr ""
+msgstr "標準ライセンス"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
