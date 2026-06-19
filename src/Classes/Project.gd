@@ -546,9 +546,13 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 		x_symmetry_point = dict.symmetry_points[0]
 		y_symmetry_point = dict.symmetry_points[1]
 		for point in x_symmetry_axis.points.size():
-			x_symmetry_axis.points[point].y = floorf(y_symmetry_point / 2 + 1)
+			var new_pos := x_symmetry_axis.points[point]
+			new_pos.y = floorf(y_symmetry_point / 2 + 1)
+			x_symmetry_axis.set_point_position(point, new_pos)
 		for point in y_symmetry_axis.points.size():
-			y_symmetry_axis.points[point].x = floorf(x_symmetry_point / 2 + 1)
+			var new_pos := y_symmetry_axis.points[point]
+			new_pos.x = floorf(x_symmetry_point / 2 + 1)
+			y_symmetry_axis.set_point_position(point, new_pos)
 	export_directory_path = dict.get("export_directory_path", export_directory_path)
 	if not DirAccess.dir_exists_absolute(export_directory_path):
 		export_directory_path = ""

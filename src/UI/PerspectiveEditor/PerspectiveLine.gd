@@ -44,18 +44,18 @@ func refresh() -> void:
 
 func draw_perspective_line() -> void:
 	var start := Vector2(_vanishing_point.pos_x.value, _vanishing_point.pos_y.value)
-	points[0] = start
+	set_point_position(0, start)
 	if is_hidden:
-		points[1] = start
+		set_point_position(1, start)
 	else:
-		points[1] = (
-			start + Vector2(length * cos(deg_to_rad(angle)), length * sin(deg_to_rad(angle)))
+		set_point_position(
+			1, start + Vector2(length * cos(deg_to_rad(angle)), length * sin(deg_to_rad(angle)))
 		)
 
 
 func hide_perspective_line() -> void:
 	var start := Vector2(_vanishing_point.pos_x.value, _vanishing_point.pos_y.value)
-	points[1] = start
+	set_point_position(1, start)
 	is_hidden = true
 
 
@@ -77,10 +77,8 @@ func _input(event: InputEvent) -> void:
 				if angle < 0:
 					angle += 360
 
-				points[1] = (
-					start
-					+ Vector2(length * cos(deg_to_rad(angle)), length * sin(deg_to_rad(angle)))
-				)
+				var end := Vector2(length * cos(deg_to_rad(angle)), length * sin(deg_to_rad(angle)))
+				set_point_position(1, start + end)
 			else:
 				hide_perspective_line()
 		else:
