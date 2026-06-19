@@ -18,7 +18,7 @@ jobs:
       image: docker://barichello/godot-ci:4.6.3
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           submodules: true
       - name: Setup 💻
@@ -71,7 +71,7 @@ jobs:
       image: docker://barichello/godot-ci:4.6.3
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           submodules: true
       - name: Setup 💻
@@ -127,7 +127,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           submodules: true
       - name: Setup environment 🔧
@@ -190,7 +190,7 @@ jobs:
       image: docker://barichello/godot-ci:4.6.3
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           submodules: true
       - name: Setup 💻
