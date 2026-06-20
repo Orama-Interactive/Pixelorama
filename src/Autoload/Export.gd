@@ -87,11 +87,13 @@ class ProcessedImage:
 	var image: Image
 	var frame_index: int
 	var duration: float
+	var layer_index: int
 
-	func _init(_image: Image, _frame_index: int, _duration := 1.0) -> void:
+	func _init(_image: Image, _frame_index: int, _duration := 1.0, _layer_index := -1) -> void:
 		image = _image
 		frame_index = _frame_index
 		duration = _duration
+		layer_index = _layer_index
 
 
 func _exit_tree() -> void:
@@ -218,8 +220,12 @@ func process_spritesheet(project := Global.current_project) -> void:
 			spritesheet_columns = temp
 	var width := project.size.x * spritesheet_columns
 	var height := project.size.y * spritesheet_rows
-	var splitter_array = project.layers if split_layers else []
+	var splitter_array: Array[BaseLayer] = []
+	if split_layers:
+		splitter_array = _calculate_layers_to_export(project)
+	var only_selected_cels := _export_only_selected_cels()
 	var sprite_sheets: Array[Image]  # Array of all apritesheets
+	var sprite_sheet_layer_indices: Array[int] = []
 	# This is an imitation of a do-while loop. The loop ends early if split_layers is empty
 	for split_l in splitter_array.size() + 1:
 		var origin := Vector2i.ZERO
@@ -292,14 +298,19 @@ func process_spritesheet(project := Global.current_project) -> void:
 				sheet_is_valid = true
 			elif split_l < splitter_array.size():
 				var layer: BaseLayer = splitter_array[split_l]
-				sheet_image.blend_rect(
-					layer.display_effects(frame.cels[layer.index]),
-					Rect2i(Vector2i.ZERO, project.size),
-					origin
-				)
-				sheet_is_valid = true
+				if not only_selected_cels or _is_cel_selected(project, frame, layer.index):
+					sheet_image.blend_rect(
+						layer.display_effects(frame.cels[layer.index]),
+						Rect2i(Vector2i.ZERO, project.size),
+						origin
+					)
+					sheet_is_valid = true
 		if sheet_is_valid:
 			sprite_sheets.append(sheet_image)
+			if split_layers and split_l < splitter_array.size():
+				sprite_sheet_layer_indices.append(splitter_array[split_l].index)
+			else:
+				sprite_sheet_layer_indices.append(-1)
 		if splitter_array.is_empty():
 			break
 	if not sheet_layers_as_separate_files and sprite_sheets.size() > 1:
@@ -314,23 +325,28 @@ func process_spritesheet(project := Global.current_project) -> void:
 			)
 		# Remove old sheets and add the stacked image
 		sprite_sheets = [big_image]
-	for sheet: Image in sprite_sheets:
-		processed_images.append(ProcessedImage.new(sheet, 0))
+		sprite_sheet_layer_indices = [-1]
+	for i in sprite_sheets.size():
+		processed_images.append(
+			ProcessedImage.new(sprite_sheets[i], 0, 1.0, sprite_sheet_layer_indices[i])
+		)
 
 
 func process_animation(project := Global.current_project) -> void:
 	processed_images.clear()
 	var frames := _calculate_frames(project)
+	var only_selected_cels := _export_only_selected_cels()
 	for frame in frames:
 		if split_layers:
-			for i in frame.cels.size():
-				var cel := frame.cels[i]
-				var layer := project.layers[i]
+			for layer in _calculate_layers_to_export(project):
+				if only_selected_cels and not _is_cel_selected(project, frame, layer.index):
+					continue
+				var cel := frame.cels[layer.index]
 				var image := Image.new()
 				image.copy_from(layer.display_effects(cel))
 				var duration := frame.get_duration_in_seconds(project.fps)
 				processed_images.append(
-					ProcessedImage.new(image, project.frames.find(frame), duration)
+					ProcessedImage.new(image, project.frames.find(frame), duration, layer.index)
 				)
 		else:
 			var image := project.new_empty_image()
@@ -367,7 +383,8 @@ func process_animation(project := Global.current_project) -> void:
 				ProcessedImage.new(
 					processed_images[i].image,
 					processed_images[i].frame_index,
-					processed_images[i].duration
+					processed_images[i].duration,
+					processed_images[i].layer_index
 				)
 			)
 
@@ -401,6 +418,42 @@ func _calculate_frames(project := Global.current_project) -> Array[Frame]:
 	return frames
 
 
+func _calculate_layers_to_export(project := Global.current_project) -> Array[BaseLayer]:
+	var layers_to_export: Array[BaseLayer] = []
+	for i in project.layers.size():
+		var layer := project.layers[i]
+		if layer is GroupLayer or layer is AudioLayer:
+			continue
+		var include := false
+		match export_layers:
+			VISIBLE_LAYERS:
+				include = layer.is_visible_in_hierarchy()
+			SELECTED_LAYERS:
+				include = layer.is_visible_in_hierarchy() and _is_layer_selected(project, i)
+			_:  # A specific layer was chosen from the dropdown
+				include = i == export_layers - 2
+		if include:
+			layers_to_export.append(layer)
+	return layers_to_export
+
+
+func _is_layer_selected(project: Project, layer_index: int) -> bool:
+	for selected_cel in project.selected_cels:
+		if selected_cel[1] == layer_index:
+			return true
+	return false
+
+
+## True when both "Selected frames" and "Selected layers" are chosen, in which case only the exact
+## cels the user selected are exported, instead of every selected layer at every selected frame.
+func _export_only_selected_cels() -> bool:
+	return frame_current_tag == ExportFrames.SELECTED_FRAMES and export_layers == SELECTED_LAYERS
+
+
+func _is_cel_selected(project: Project, frame: Frame, layer_index: int) -> bool:
+	return [project.frames.find(frame), layer_index] in project.selected_cels
+
+
 func export_processed_images(
 	ignore_overwrites: bool, export_dialog: ConfirmationDialog, project := Global.current_project
 ) -> bool:
@@ -426,15 +479,21 @@ func export_processed_images(
 	# Check export paths
 	var export_paths: PackedStringArray = []
 	var paths_of_existing_files := ""
+	# Frame counter for split-layer file names, bumped when the source frame changes.
+	var split_frame_counter := 0
+	var previous_split_frame := -1
 	for i in processed_images.size():
 		stop_export = false
 		var frame_index := i + 1
 		var layer_index := -1
 		var actual_frame_index := processed_images[i].frame_index
 		if split_layers:
-			@warning_ignore("integer_division")
-			frame_index = i / project.layers.size() + 1
-			layer_index = posmod(i, project.layers.size())
+			layer_index = processed_images[i].layer_index
+			if current_tab == ExportTab.IMAGE:
+				if actual_frame_index != previous_split_frame:
+					split_frame_counter += 1
+					previous_split_frame = actual_frame_index
+				frame_index = split_frame_counter
 		var export_path := _create_export_path(
 			multiple_files, project, frame_index, layer_index, actual_frame_index
 		)
