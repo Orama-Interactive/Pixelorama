@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dxjamv5np8av3" path="res://src/Preferences/ExtensionsPreferences.gd" id="7_8ume5"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="8"]
 [ext_resource type="PackedScene" uid="uid://chy5d42l72crk" path="res://src/UI/ExtensionExplorer/ExtensionExplorer.tscn" id="8_jmnx8"]
+[ext_resource type="Script" uid="uid://dc6yf25q3sacq" path="res://src/Preferences/LicenseProperties.gd" id="8_praud"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_8vsfb"]
 
@@ -178,7 +179,6 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = 0.5
@@ -210,7 +210,6 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = 4.0
@@ -393,7 +392,6 @@ text = "Contrast:"
 [node name="ContrastSlider" type="TextureProgressBar" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Interface/ThemeOptions" unique_id=1029001160]
 layout_mode = 2
 size_flags_horizontal = 3
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 max_value = 1.0
@@ -525,7 +523,6 @@ text = "Snapping distance:"
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "This is the distance in screen pixels where guide and grid snapping gets activated."
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = 1.0
@@ -573,6 +570,7 @@ layout_mode = 2
 
 [node name="GridsCount" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions" unique_id=1094094664 instance=ExtResource("5_rlmsh")]
 layout_mode = 2
+focus_mode = 0
 min_value = 1.0
 max_value = 10.0
 value = 1.0
@@ -731,7 +729,6 @@ text = "Show at zoom:"
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Sets the minimal zoom at which pixel grid will be shown"
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = 50.0
@@ -794,7 +791,6 @@ text = "Checker size:"
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Size of the transparent checker background"
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = 1.0
@@ -877,7 +873,6 @@ text = "Tile mode opacity:"
 [node name="TileModeOpacity" type="TextureProgressBar" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/CheckerOptions" unique_id=1537361059]
 layout_mode = 2
 size_flags_horizontal = 3
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 max_value = 1.0
@@ -1168,7 +1163,6 @@ text = "Transformation preview alpha:"
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 size_flags_horizontal = 3
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 max_value = 1.0
@@ -1375,71 +1369,111 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "On"
 
-[node name="Author" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide" unique_id=1483485289]
+[node name="Attribution" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide" unique_id=1483485289]
 visible = false
 layout_mode = 2
 
-[node name="AuthorHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author" unique_id=633189250 groups=["HeaderLabels"]]
+[node name="AuthorHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution" unique_id=633189250 groups=["HeaderLabels"]]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorHeader" unique_id=2101647471]
+[node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/AuthorHeader" unique_id=2101647471]
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
 text = "Author"
 
-[node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorHeader" unique_id=1443319414]
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/AuthorHeader" unique_id=1443319414]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="AuthorContainer" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author" unique_id=1415249693]
+[node name="AuthorContainer" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution" unique_id=1415249693]
 layout_mode = 2
 columns = 3
 
-[node name="DisplayNameLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorContainer" unique_id=778042227]
+[node name="DisplayNameLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/AuthorContainer" unique_id=778042227]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 mouse_filter = 1
 text = "Display name:"
 
-[node name="DisplayName" type="LineEdit" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorContainer" unique_id=1417754898]
+[node name="DisplayName" type="LineEdit" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/AuthorContainer" unique_id=1417754898]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RealNameLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorContainer" unique_id=959034553]
+[node name="RealNameLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/AuthorContainer" unique_id=959034553]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 mouse_filter = 1
 text = "Real name:"
 
-[node name="RealName" type="LineEdit" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorContainer" unique_id=849693492]
+[node name="RealName" type="LineEdit" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/AuthorContainer" unique_id=849693492]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ContactLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorContainer" unique_id=993045809]
+[node name="ContactLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/AuthorContainer" unique_id=993045809]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 mouse_filter = 1
 text = "Contact:"
 
-[node name="Contact" type="LineEdit" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorContainer" unique_id=1879197820]
+[node name="Contact" type="LineEdit" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/AuthorContainer" unique_id=1879197820]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CompanyStudioLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorContainer" unique_id=326685751]
+[node name="CompanyStudioLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/AuthorContainer" unique_id=326685751]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 mouse_filter = 1
 text = "Company/Studio:"
 
-[node name="CompanyStudio" type="LineEdit" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Author/AuthorContainer" unique_id=1643027864]
+[node name="CompanyStudio" type="LineEdit" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/AuthorContainer" unique_id=1643027864]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="LicenseHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution" unique_id=824309673 groups=["HeaderLabels"]]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/LicenseHeader" unique_id=1494019910]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Default license"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/LicenseHeader" unique_id=134067768]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="LicenseProperties" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution" unique_id=1970728459]
+layout_mode = 2
+columns = 3
+script = ExtResource("8_praud")
+
+[node name="LicenseLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/LicenseProperties" unique_id=607807999]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Type:"
+
+[node name="LicenceName" type="LineEdit" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/LicenseProperties" unique_id=1932956567]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spacer" type="Control" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/LicenseProperties" unique_id=1425950916]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spacer2" type="Control" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/LicenseProperties" unique_id=620550166]
+layout_mode = 2
+
+[node name="PresetOptions" type="MenuButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/LicenseProperties" unique_id=672159092]
+layout_mode = 2
+text = "Choose from presets"
+flat = false
 
 [node name="Drivers" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide" unique_id=1209566191]
 visible = false

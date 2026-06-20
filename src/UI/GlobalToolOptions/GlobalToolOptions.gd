@@ -138,15 +138,20 @@ func _on_mirror_options_id_pressed(id: int) -> void:
 		project.y_symmetry_point = Global.camera.camera_screen_center.y * 2
 		project.xy_symmetry_point = Global.camera.camera_screen_center
 	project.x_minus_y_symmetry_point = project.xy_symmetry_point
-	project.y_symmetry_axis.points[0].x = project.x_symmetry_point / 2 + 0.5
-	project.y_symmetry_axis.points[1].x = project.x_symmetry_point / 2 + 0.5
-	project.x_symmetry_axis.points[0].y = project.y_symmetry_point / 2 + 0.5
-	project.x_symmetry_axis.points[1].y = project.y_symmetry_point / 2 + 0.5
-	project.diagonal_xy_symmetry_axis.points[0] = Vector2(19999, -19999)
-	project.diagonal_xy_symmetry_axis.points[1] = (
-		Vector2(-19999, 19999) + project.xy_symmetry_point * 2.0
+	for i in project.y_symmetry_axis.points.size():
+		var new_pos := project.y_symmetry_axis.points[i]
+		new_pos.x = project.x_symmetry_point / 2 + 0.5
+		project.y_symmetry_axis.set_point_position(i, new_pos)
+	for i in project.x_symmetry_axis.points.size():
+		var new_pos := project.x_symmetry_axis.points[i]
+		new_pos.y = project.y_symmetry_point / 2 + 0.5
+		project.x_symmetry_axis.set_point_position(i, new_pos)
+
+	project.diagonal_xy_symmetry_axis.set_point_position(0, Vector2(19999, -19999))
+	project.diagonal_xy_symmetry_axis.set_point_position(
+		1, Vector2(-19999, 19999) + project.xy_symmetry_point * 2.0
 	)
-	project.diagonal_x_minus_y_symmetry_axis.points[0] = Vector2(-19999, -19999)
-	project.diagonal_x_minus_y_symmetry_axis.points[1] = (
-		Vector2(19999, 19999) + project.x_minus_y_symmetry_point * 2.0
+	project.diagonal_x_minus_y_symmetry_axis.set_point_position(0, Vector2(-19999, -19999))
+	project.diagonal_x_minus_y_symmetry_axis.set_point_position(
+		1, Vector2(19999, 19999) + project.x_minus_y_symmetry_point * 2.0
 	)
