@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v1.2] - Unreleased
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), SOS1, [@SjamesE](https://github.com/SjamesE)
 
 Built using Godot 4.6.3
 
@@ -22,18 +22,26 @@ Built using Godot 4.6.3
 - Added a new "Reselect" option in the Selection menu, which re-creates a previously cleared selection. By default, its shortcut is set to <kbd>Control + Shift + D</kbd>.
 - Added new blend modes: Intersect and Match colors! [#1474](https://github.com/Orama-Interactive/Pixelorama/pull/1474)
 - Added an option in the export dialog to repeat the animation as many times as you want. [#1508](https://github.com/Orama-Interactive/Pixelorama/pull/1508)
+- Added a "crop to selection" mode in the advanced options of the export window. [#1521](https://github.com/Orama-Interactive/Pixelorama/pull/1521)
 - Exporting tilesets is now also possible from the layer properties of a tilemap layer.
 - Added a preview and a transpose option when exporting tilesets.
 - New projects can now have the clipboard image (either app or system clipboard) as their content. Clipboard sizes have also been added in the Template list, if you just want to get the clipboard size but not the image itself.
+- A default license option for projects has been added in the preferences. [#1526](https://github.com/Orama-Interactive/Pixelorama/pull/1526)
 - Exporting a tileset as a Godot TileSet resource now saves the probability of each tile.
 
 ### Changed
 - Made some UI elements, such as tool, cel, layer & frame buttons be focusable with the keyboard and activatable by pressing <kbd>Space</kbd> and/or <kbd>Enter</kbd>.
+- The bezier points of the curve tool now lie at the center of the pixels instead of their corner. [#1495](https://github.com/Orama-Interactive/Pixelorama/pull/1495)
 
 ### Fixed
 - Fixed resizing selection not being snapped to the pixel grid.
 - Fixed crash when switching to a different project while a transformation is active on a tilemap layer.
 - Fixed manual mode in tilemap layers not updating all cells when there is more than one tilemap layer sharing the same tileset.
+- The keyboard no longer gets stuck on activating elements in the user interface after renaming a layer. [#1524](https://github.com/Orama-Interactive/Pixelorama/pull/1524)
+- The Gaussian blur effect no longer generates darkened edges. [#1523](https://github.com/Orama-Interactive/Pixelorama/pull/1523)
+- Exporting split layers now works properly with a selected amount of layers. [#1532](https://github.com/Orama-Interactive/Pixelorama/pull/1532)
+- Fixed issue where the tags were not being visible if Pixelorama is opened with a file.
+- Fixed the unfocused border color of embedded windows in non-dark themes.
 - Fixed extension exporters not working. [#1497](https://github.com/Orama-Interactive/Pixelorama/pull/1497)
 
 ### Removed
