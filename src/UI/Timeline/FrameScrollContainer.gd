@@ -6,6 +6,7 @@ const PAGE_DIVISOR := 8
 # https://github.com/godotengine/godot/pull/111305
 const PAN_MULTIPLIER := 5
 
+@export var keyframe_timeline: KeyframeTimeline
 @export var h_scroll_bar: HScrollBar
 
 var drag_speed := 0.0
@@ -213,7 +214,10 @@ func _update_scroll() -> void:
 	if get_child_count() > 0 and is_instance_valid(h_scroll_bar):
 		var cel_margin_container := get_child(0) as Control
 		var child_min_size := cel_margin_container.get_combined_minimum_size()
-		h_scroll_bar.visible = child_min_size.x > size.x
+		if is_instance_valid(keyframe_timeline) and keyframe_timeline.visible:
+			h_scroll_bar.visible = false
+		else:
+			h_scroll_bar.visible = child_min_size.x > size.x
 		h_scroll_bar.max_value = child_min_size.x
 		if h_scroll_bar.visible:
 			h_scroll_bar.page = size.x - h_scroll_bar.get_combined_minimum_size().x

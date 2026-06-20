@@ -1,5 +1,6 @@
 extends Node
 
+enum CropMode { NONE, CONTENT, SELECTION }
 enum ExportTab { IMAGE, SPRITESHEET }
 enum Orientation { COLUMNS, ROWS, TAGS_BY_ROW, TAGS_BY_COLUMN }
 enum AnimationDirection { FORWARD, BACKWARDS, PING_PONG }
@@ -53,7 +54,7 @@ var blended_frames: Dictionary[Frame, Image] = {}
 var export_json := false
 var split_layers := false
 var sheet_layers_as_separate_files := false
-var trim_images := false
+var crop_mode := CropMode.NONE
 var erase_unselected_area := false
 # Spritesheet options
 var orientation := Orientation.COLUMNS
@@ -343,8 +344,18 @@ func process_animation(project := Global.current_project) -> void:
 					image, selection_image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO
 				)
 				image.copy_from(crop)
-			if trim_images:
-				image = image.get_region(image.get_used_rect())
+			match crop_mode:
+				CropMode.CONTENT:
+					if image.get_used_rect().has_area():
+						image = image.get_region(image.get_used_rect())
+				CropMode.SELECTION:
+					if (
+						Global.current_project.has_selection
+						and Global.current_project.selection_map.get_used_rect().has_area()
+					):
+						image = image.get_region(
+							Global.current_project.selection_map.get_used_rect()
+						)
 			var duration := frame.get_duration_in_seconds(project.fps)
 			processed_images.append(ProcessedImage.new(image, project.frames.find(frame), duration))
 	# Add additional repeated animation (Doing it here instead of _calculate_frames() to save

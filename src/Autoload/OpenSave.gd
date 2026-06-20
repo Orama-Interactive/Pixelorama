@@ -468,7 +468,7 @@ func open_v0_pxo_file(path: String, empty_project: bool) -> Project:
 func save_pxo_file(
 	path: String, autosave: bool, include_blended := false, project := Global.current_project
 ) -> bool:
-	project.initialize_author_data()
+	project.initialize_attribution_data()
 	if not autosave:
 		project.name = path.uri_decode().get_file().trim_suffix(".pxo")
 	var serialized_data := project.serialize()
@@ -1178,7 +1178,7 @@ func open_ora_file(path: String) -> void:
 		zip_reader.close()
 		return
 	var new_project := Project.new([Frame.new()], path.uri_decode().get_file().get_basename())
-	new_project.clear_author_data()
+	new_project.clear_attribution_data()
 	var selected_layer: BaseLayer
 	var stacks_found := 0
 	var current_stack: Array[GroupLayer] = []
@@ -1285,7 +1285,7 @@ func open_piskel_file(path: String) -> void:
 	var piskel: Dictionary = file_json.piskel
 	var project_name: String = piskel.get("name", path.uri_decode().get_file().get_basename())
 	var new_project := Project.new([], project_name)
-	new_project.clear_author_data()
+	new_project.clear_attribution_data()
 	new_project.size = Vector2i(piskel.width, piskel.height)
 	new_project.fps = piskel.fps
 	new_project.save_path = path.get_basename() + ".pxo"

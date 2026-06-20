@@ -79,12 +79,12 @@ class GradientCursor:
 func _ready() -> void:
 	gradient = gradient.duplicate(true)
 	texture.gradient = gradient
-	gradient.offsets[1] = start
-	gradient.offsets[2] = end
+	gradient.set_offset(1, start)
+	gradient.set_offset(2, end)
 	gradient.interpolation_mode = Gradient.GRADIENT_INTERPOLATE_CONSTANT
-	gradient.colors[0] = background_col
-	gradient.colors[2] = background_col
-	gradient.colors[1] = zone_col
+	gradient.set_color(0, background_col)
+	gradient.set_color(2, background_col)
+	gradient.set_color(1, zone_col)
 	_create_cursors()
 
 

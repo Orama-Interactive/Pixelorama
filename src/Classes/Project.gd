@@ -167,7 +167,7 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 		export_directory_path = Global.config_cache.get_value(
 			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 		)
-	initialize_author_data()
+	initialize_attribution_data()
 	Global.project_created.emit(self)
 
 
@@ -546,9 +546,13 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 		x_symmetry_point = dict.symmetry_points[0]
 		y_symmetry_point = dict.symmetry_points[1]
 		for point in x_symmetry_axis.points.size():
-			x_symmetry_axis.points[point].y = floorf(y_symmetry_point / 2 + 1)
+			var new_pos := x_symmetry_axis.points[point]
+			new_pos.y = floorf(y_symmetry_point / 2 + 1)
+			x_symmetry_axis.set_point_position(point, new_pos)
 		for point in y_symmetry_axis.points.size():
-			y_symmetry_axis.points[point].x = floorf(x_symmetry_point / 2 + 1)
+			var new_pos := y_symmetry_axis.points[point]
+			new_pos.x = floorf(x_symmetry_point / 2 + 1)
+			y_symmetry_axis.set_point_position(point, new_pos)
 	export_directory_path = dict.get("export_directory_path", export_directory_path)
 	if not DirAccess.dir_exists_absolute(export_directory_path):
 		export_directory_path = ""
@@ -1071,15 +1075,17 @@ func update_tilemaps(
 	return used_tilesets
 
 
-func initialize_author_data() -> void:
+func initialize_attribution_data() -> void:
 	author_display_name = Global.author_display_name
 	author_real_name = Global.author_real_name
 	author_contact = Global.author_contact
 	author_company = Global.author_company
+	license = Global.default_licence
 
 
-func clear_author_data() -> void:
+func clear_attribution_data() -> void:
 	author_display_name = ""
 	author_real_name = ""
 	author_contact = ""
 	author_company = ""
+	license = ""

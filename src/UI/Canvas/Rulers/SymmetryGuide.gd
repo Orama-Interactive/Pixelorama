@@ -21,11 +21,11 @@ func _input(_event: InputEvent) -> void:
 	super._input(_event)
 	if type == Types.HORIZONTAL:
 		project.y_symmetry_point = points[0].y * 2 - 1
-		points[0].y = clampf(points[0].y, 0, project.size.y)
-		points[1].y = clampf(points[1].y, 0, project.size.y)
+		set_point_position(0, Vector2(points[0].x, clampf(points[0].y, 0, project.size.y)))
+		set_point_position(1, Vector2(points[1].x, clampf(points[1].y, 0, project.size.y)))
 	elif type == Types.VERTICAL:
-		points[0].x = clampf(points[0].x, 0, project.size.x)
-		points[1].x = clampf(points[1].x, 0, project.size.x)
+		set_point_position(0, Vector2(clampf(points[0].x, 0, project.size.x), points[0].y))
+		set_point_position(1, Vector2(clampf(points[1].x, 0, project.size.x), points[1].y))
 		project.x_symmetry_point = points[0].x * 2 - 1
 	elif type == Types.XY:
 		var mid := (points[0] + points[1]) * 0.5
