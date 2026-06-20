@@ -1,6 +1,12 @@
 extends BaseSelectionTool
 
-var _brush_size := 2
+enum DrawMode { PIXELS, GRID_BOXES }
+
+var _draw_mode := DrawMode.PIXELS:
+	set(value):
+		_draw_mode = value
+		$Brush.visible = value == DrawMode.PIXELS
+var _brush_size := 1
 var _brush := Brushes.get_default_brush()
 var _indicator := BitMap.new()
 var _polylines := []
@@ -10,10 +16,12 @@ var _circle_tool_shortcut: Array[Vector2i]
 
 var _last_position := Vector2.INF
 var _draw_points: Array[Vector2i] = []
+var _cache_grid_points: Array[Vector2i] = []
 
 
 func get_config() -> Dictionary:
 	var config := super.get_config()
+	config["draw_mode"] = _draw_mode
 	config["brush_type"] = _brush.type
 	config["brush_index"] = _brush.index
 	config["brush_size"] = _brush_size
@@ -23,16 +31,19 @@ func get_config() -> Dictionary:
 func set_config(config: Dictionary) -> void:
 	var type: int = config.get("brush_type", _brush.type)
 	var index: int = config.get("brush_index", _brush.index)
+	_draw_mode = config.get("draw_mode", _draw_mode)
 	_brush = Global.brushes_popup.get_brush(type, index)
 	_brush_size = config.get("brush_size", _brush_size)
 
 
 func update_config() -> void:
+	$DrawMode.select(_draw_mode)
 	$Brush/BrushSize.value = _brush_size
 	update_brush()
 
 
 func draw_start(pos: Vector2i) -> void:
+	_cache_grid_points.clear()
 	pos = snap_position(pos)
 	super.draw_start(pos)
 	if !_move:
@@ -73,7 +84,7 @@ func _reset_tool() -> void:
 
 
 func draw_preview() -> void:
-	var canvas := Global.canvas.previews_sprite
+	var previews := Global.canvas.previews_sprite
 	if _last_position != Vector2.INF and !_move:
 		var image := Image.create(
 			Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_LA8
@@ -93,7 +104,7 @@ func draw_preview() -> void:
 			if Rect2i(Vector2i.ZERO, image.get_size()).has_point(draw_point):
 				image.set_pixelv(draw_point, Color.WHITE)
 		var texture := ImageTexture.create_from_image(image)
-		canvas.texture = texture
+		previews.texture = texture
 
 
 func apply_selection(pos: Vector2i) -> void:
@@ -150,6 +161,8 @@ func draw_tool(pos: Vector2i) -> Array[Vector2i]:
 
 
 func _prepare_tool() -> void:
+	if _draw_mode != DrawMode.PIXELS:
+		return
 	match _brush.type:
 		Brushes.CIRCLE:
 			_prepare_circle_tool(false)
@@ -171,15 +184,40 @@ func _prepare_circle_tool(fill: bool) -> void:
 ## Make sure to always have invoked _prepare_tool() before this. This computes the coordinates to be
 ## drawn if it can (except for the generic brush, when it's actually drawing them)
 func _draw_tool(pos: Vector2i) -> Array[Vector2i]:
-	match _brush.type:
-		Brushes.PIXEL:
-			return _compute_draw_tool_pixel(pos)
-		Brushes.CIRCLE:
-			return _compute_draw_tool_circle(pos, false)
-		Brushes.FILLED_CIRCLE:
-			return _compute_draw_tool_circle(pos, true)
-		_:
-			return _compute_draw_tool_brush(pos)
+	if _draw_mode == DrawMode.GRID_BOXES:
+		return _compute_draw_tool_grid(pos)
+	else:
+		match _brush.type:
+			Brushes.PIXEL:
+				return _compute_draw_tool_pixel(pos)
+			Brushes.CIRCLE:
+				return _compute_draw_tool_circle(pos, false)
+			Brushes.FILLED_CIRCLE:
+				return _compute_draw_tool_circle(pos, true)
+			_:
+				return _compute_draw_tool_brush(pos)
+
+
+func _compute_draw_tool_grid(pos: Vector2i) -> Array[Vector2i]:
+	var result: Array[Vector2i] = []
+	# We only consider the first grid
+	var grid_size := Global.grids[0].grid_size
+	var grid_offset := Global.grids[0].grid_offset
+	if Tools.is_placing_tiles():
+		var cel := Global.current_project.get_current_cel() as CelTileMap
+		grid_size = cel.get_tile_size()
+		grid_offset = cel.offset % grid_size
+	var grid_center := Tools.snap_to_rectangular_grid_center(pos, grid_size, grid_offset)
+	print(grid_center)
+	if grid_center in _cache_grid_points:
+		return result
+	var grid_start := Vector2i(grid_center) - (grid_size / 2)
+	var end := Vector2i(grid_start) + grid_size
+	for y in range(grid_start.y, end.y):
+		for x in range(grid_start.x, end.x):
+			if !_draw_points.has(Vector2i(x, y)):
+				result.append(Vector2i(x, y))
+	return result
 
 
 func _compute_draw_tool_pixel(pos: Vector2i) -> Array[Vector2i]:
@@ -225,8 +263,13 @@ func _compute_draw_tool_brush(pos: Vector2i) -> Array[Vector2i]:
 			if !_draw_points.has(Vector2i(x, y)):
 				if brush_mask.get_bitv(Vector2i(x, y)):
 					result.append(pos + Vector2i(x, y))
-
 	return result
+
+
+func _on_draw_mode_item_selected(index: int) -> void:
+	_draw_mode = index as DrawMode
+	update_brush()
+	save_config()
 
 
 func _on_BrushType_pressed() -> void:
@@ -298,6 +341,8 @@ func _create_blended_brush_image(image: Image) -> Image:
 
 
 func _create_brush_indicator() -> BitMap:
+	if _draw_mode == DrawMode.GRID_BOXES:
+		return _create_pixel_indicator(1)
 	match _brush.type:
 		Brushes.PIXEL:
 			return _create_pixel_indicator(_brush_size)
