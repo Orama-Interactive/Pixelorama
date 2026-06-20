@@ -208,7 +208,6 @@ func _compute_draw_tool_grid(pos: Vector2i) -> Array[Vector2i]:
 		grid_size = cel.get_tile_size()
 		grid_offset = cel.offset % grid_size
 	var grid_center := Tools.snap_to_rectangular_grid_center(pos, grid_size, grid_offset)
-	print(grid_center)
 	if grid_center in _cache_grid_points:
 		return result
 	var grid_start := Vector2i(grid_center) - (grid_size / 2)
