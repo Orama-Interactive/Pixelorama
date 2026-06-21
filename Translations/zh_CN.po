@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2026-04-26 12:44\n"
+"PO-Revision-Date: 2026-06-16 23:47\n"
 
 msgid "OK"
 msgstr "确定"
@@ -30,11 +30,8 @@ msgstr "请确认..."
 msgid "File Name:"
 msgstr "文件名称："
 
-msgid "Project Name:"
-msgstr "项目名称:"
-
-msgid "Image Size"
-msgstr "图像大小"
+msgid "Project name:"
+msgstr "项目名称："
 
 msgid "Canvas Size"
 msgstr "画布尺寸"
@@ -208,8 +205,12 @@ msgstr "裁剪到内容"
 msgid "Resize Canvas"
 msgstr "调整画布尺寸"
 
-msgid "Offset Image"
-msgstr "偏移图像"
+msgid "Offset & Scale Image"
+msgstr "偏移和缩放图像"
+
+#. Refers to the "Offset & Scale" layer effect.
+msgid "Offset & Scale"
+msgstr "偏移和缩放"
 
 msgid "Offset:"
 msgstr "偏移："
@@ -887,9 +888,17 @@ msgstr "备份"
 msgid "Performance"
 msgstr "性能"
 
+#. Found in the Preferences. Refers to the attribution details of the current project, such as the project's creator and license.
+msgid "Attribution"
+msgstr ""
+
 #. Found in the Preferences. Refers to the author of the current project.
 msgid "Author"
 msgstr "作者"
+
+#. Found in the Preferences. Refers to the default license that is set to the created project.
+msgid "Default license"
+msgstr ""
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
@@ -1011,6 +1020,22 @@ msgstr "紫色"
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
 msgstr "玫瑰"
+
+#. A theme. Black (#000000) is set as the main color so these pixels can be turned off on OLED screens.
+msgid "Black (OLED)"
+msgstr "黑色 (OLED)"
+
+#. A theme. "System" refers to the Operating System.
+msgid "System"
+msgstr "系统"
+
+#. Refers to the base color of a theme.
+msgid "Base color:"
+msgstr "基本颜色："
+
+#. Refers to the accent color of a theme.
+msgid "Accent color:"
+msgstr "强调颜色："
 
 msgid "Theme"
 msgstr "主题"
@@ -2514,6 +2539,10 @@ msgstr "左面"
 msgid "Right Face"
 msgstr "右面"
 
+#. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
+msgid "Eraser mode"
+msgstr "擦除模式"
+
 msgid "Mirroring"
 msgstr "镜像"
 
@@ -2892,6 +2921,18 @@ msgstr "颜色"
 msgid "Luminosity"
 msgstr "明度"
 
+#. Found in the layer's section of the timeline, as a category of blend modes. Contains blend modes that do masking operations between layers, such as the "Intersection" and "Match colors" blend modes.
+msgid "Masking"
+msgstr "蒙版"
+
+#. Found in the layer's section of the timeline, as a blend mode option. This blend mode belongs to the "Masking" category, and it erases the un-common areas between the blend and the base layers.
+msgid "Intersection"
+msgstr "交叉"
+
+#. Found in the layer's section of the timeline, as a blend mode option.  This blend mode belongs to the "Masking" category, and it only shows the same colors between the blend and the base layers.
+msgid "Match colors"
+msgstr "匹配颜色"
+
 msgid "Opacity:"
 msgstr "不透明度："
 
@@ -3207,8 +3248,28 @@ msgstr "纵向"
 msgid "Landscape"
 msgstr "横向"
 
+# Found in the "New project" window. Refers to the content of the new project, whether it will just be a blank canvas, or if it will be created with data from the clipboard.
+msgid "Content:"
+msgstr "内容："
+
+# Found in the "New project" window. Refers to the content of the new project, set to be just a blank canvas.
+msgid "Blank canvas"
+msgstr "空白画布"
+
+# Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
+msgid "App clipboard"
+msgstr "应用程序剪贴板"
+
+# Found in the "New project" window. Refers to the content of the clipboard of the (operating) system.
+msgid "System clipboard"
+msgstr "系统剪贴板"
+
 msgid "Templates:"
 msgstr "模板："
+
+# Found in the "New project" window. Refers to recent project sizes.
+msgid "Recent:"
+msgstr "最近："
 
 msgid "Preset"
 msgstr "预设"
@@ -3281,6 +3342,10 @@ msgstr "椭圆工具"
 
 msgid "Isometric Box Tool"
 msgstr "等距框工具"
+
+#. A tool that exists only for tilemap layers, and is responsible for setting some properties for the tiles. Currently, it is only used for setting the autotiling bits for a tile.
+msgid "Tiles Property Painter"
+msgstr "图块属性画笔"
 
 msgid "Switch Colors"
 msgstr "切换颜色"
@@ -3371,21 +3436,17 @@ msgstr "分隔符:"
 msgid "The character(s) that separate the file name and the frame number"
 msgstr "分隔文件名称和帧编号的字符(秒)"
 
-#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
-msgid "Trim images"
-msgstr "裁剪图像"
+#. Found in the export dialog. It is an option button that allows users to removes the transparent area around non-transparent pixels of the exported images, or to remove every pixel outside of the selection.
+msgid "Crop mode:"
+msgstr ""
+
+#. Refers to the content of an image.
+msgid "Content"
+msgstr ""
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
 msgstr "将导出的图像变为可见部分，考虑到非零透明通道的每个像素。"
-
-#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
-msgid "Clip image content to selection"
-msgstr "剪辑图像内容到选择"
-
-#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
-msgid "Only export content that is within the bounds of a selected area."
-msgstr "仅导出在选定区域界限内的内容。"
 
 #. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
 msgid "Layers as separate files"
@@ -3465,7 +3526,7 @@ msgid "From Current Palette"
 msgstr "从当前调色板"
 
 msgid "From Current Cel"
-msgstr ""
+msgstr "从当前调色板"
 
 msgid "From Current Selection"
 msgstr "从当前选择"
@@ -3813,26 +3874,6 @@ msgstr "初始值："
 msgid "Final value:"
 msgstr "最终值："
 
-#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
-msgid "Ease type:"
-msgstr "简易类型："
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Starts slowly and speeds up towards the end"
-msgstr "缓慢开始并加速接近结束"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Starts quickly and slows down towards the end"
-msgstr "快速开始并减慢到终点"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Slowest at both ends, fast at middle"
-msgstr "两端最慢，中间很快"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Fast at both ends, slow at middle"
-msgstr "两端快速，中间缓慢"
-
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
 msgstr "二次曲线(2次)"
@@ -3876,6 +3917,58 @@ msgstr "在线束时倒退"
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Spring towards the end"
 msgstr "跳转到结束"
+
+#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
+msgid "Ease type:"
+msgstr "简易类型："
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts slowly and speeds up towards the end"
+msgstr "缓慢开始并加速接近结束"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts quickly and slows down towards the end"
+msgstr "快速开始并减慢到终点"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Slowest at both ends, fast at middle"
+msgstr "两端最慢，中间很快"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Fast at both ends, slow at middle"
+msgstr "两端快速，中间缓慢"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts slowly and speeds up towards the end", but with a shortened name.
+msgid "Ease in"
+msgstr "缓入"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts quickly and slows down towards the end", but with a shortened name.
+msgid "Ease out"
+msgstr "缓出"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Slowest at both ends, fast at middle", but with a shortened name.
+msgid "Ease in out"
+msgstr "缓入缓出"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Fast at both ends, slow at middle", but with a shortened name.
+msgid "Ease out in"
+msgstr "缓出缓入"
+
+#. Found in the keyframe timeline on the right panel when there is no keyframe selected.
+msgid "No key selected"
+msgstr "未选择键"
+
+#. Found in the keyframe timeline when right clicking on a track. When selected, a new keyframe is being inserted at the selected frame.
+msgid "Insert keyframe"
+msgstr "插入关键帧"
+
+#. A button found in the keyframe timeline on the right panel when there is a keyframe selected. When clicked, it deletes the currently selected keyframe.
+msgid "Delete keyframe"
+msgstr "删除关键帧"
+
+#. A button found in the keyframe timeline on the right panel when two or more keyframes are selected. When clicked, it deletes the currently selected keyframes.
+msgid "Delete keyframes"
+msgstr "删除关键帧"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
@@ -4110,6 +4203,11 @@ msgstr "自动"
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
 msgstr "堆叠"
+
+#. A checkbox that toggles autotiling on or off for tilemap layers.
+#: src/UI/TilesPanel.tscn
+msgid "Autotiling:"
+msgstr "自动平铺："
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
