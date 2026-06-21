@@ -114,7 +114,7 @@ func set_tile_bit(pos: Vector2i) -> void:
 
 func get_appropriate_bit(pos: Vector2i, cel: CelTileMap, tile: TileSetCustom.Tile) -> Array:
 	@warning_ignore("integer_division")
-	var half_size := cel.tile_size / 2
+	var half_size := cel.get_tile_size() / 2
 	var tileset := cel.tileset
 	var cell_position := get_cell_position(pos)
 	var cell_position_pixel_coords := cel.get_pixel_coords(cell_position)
