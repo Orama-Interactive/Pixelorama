@@ -381,9 +381,7 @@ func _flood_fill(pos: Vector2i) -> void:
 				continue
 			var tilemap_cel := cel as CelTileMap
 			var cell_pos := tilemap_cel.get_cell_position(pos)
-			tilemap_cel.bucket_fill(
-				cell_pos, TileSetPanel.selected_tile_index, draw_tile.bind(tilemap_cel)
-			)
+			tilemap_cel.bucket_fill(cell_pos, draw_tile.bind(tilemap_cel))
 		if project.has_selection:
 			project.selection_map.lock_selection_rect(project, false)
 		return

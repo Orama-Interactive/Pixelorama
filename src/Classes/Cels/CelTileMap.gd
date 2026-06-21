@@ -296,7 +296,7 @@ func get_tile_offset_axis() -> TileSet.TileOffsetAxis:
 	return tileset.tile_offset_axis
 
 
-func bucket_fill(cell_coords: Vector2i, index: int, callable: Callable) -> void:
+func bucket_fill(cell_coords: Vector2i, callable: Callable) -> void:
 	var godot_tilemap := create_tilemap_layer_node()
 	var source_cell := get_cell_at(cell_coords)
 	var source_index := source_cell.index
@@ -311,6 +311,7 @@ func bucket_fill(cell_coords: Vector2i, index: int, callable: Callable) -> void:
 				continue
 			var current_cell := cells[coords]
 			if source_index == current_cell.index:
+				var index := TileSetPanel.selected_tile_index
 				callable.call(coords, index)
 				# Get surrounding tiles (handles different tile shapes).
 				var around := godot_tilemap.get_surrounding_cells(coords)
