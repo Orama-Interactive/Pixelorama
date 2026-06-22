@@ -25,7 +25,17 @@ anti_aliasing = false
 [node name="ToolOptions" unique_id=830652910 instance=ExtResource("1")]
 script = ExtResource("2")
 
-[node name="Brush" type="HBoxContainer" parent="." index="2" unique_id=321773034]
+[node name="DrawMode" type="OptionButton" parent="." index="2" unique_id=590358914]
+layout_mode = 2
+selected = 0
+fit_to_longest_item = false
+item_count = 2
+popup/item_0/text = "Select pixels"
+popup/item_0/id = 0
+popup/item_1/text = "Select grid boxes"
+popup/item_1/id = 1
+
+[node name="Brush" type="HBoxContainer" parent="." index="3" unique_id=321773034]
 layout_mode = 2
 alignment = 1
 
@@ -50,6 +60,7 @@ stretch_mode = 5
 
 [node name="BrushSize" parent="Brush" index="1" unique_id=1428740001 instance=ExtResource("3")]
 layout_mode = 2
+focus_mode = 0
 min_value = 1.0
 max_value = 25.0
 value = 1.0
@@ -57,5 +68,12 @@ allow_greater = true
 prefix = "Size:"
 suffix = "px"
 
+[node name="Rotation" parent="." index="13" unique_id=260307741]
+focus_mode = 0
+
+[node name="Shear" parent="." index="14" unique_id=1423914130]
+focus_mode = 0
+
+[connection signal="item_selected" from="DrawMode" to="." method="_on_draw_mode_item_selected"]
 [connection signal="pressed" from="Brush/Type" to="." method="_on_BrushType_pressed"]
 [connection signal="value_changed" from="Brush/BrushSize" to="." method="_on_BrushSize_value_changed"]
