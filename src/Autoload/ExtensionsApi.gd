@@ -970,14 +970,18 @@ class SignalsAPI:
 	var _cel_updaters: Dictionary[Callable, Signal] = {}
 
 	func _init() -> void:
-		Global.project_switched.connect(func(): _update_signals(true); _update_signals(false))
+		Global.project_switched.connect(
+			func():
+				_update_signals(true)
+				_update_signals(false)
+		)
 		Global.cel_switched.connect(_update_signals.bind(true))
 
 	func _update_signals(is_cel: bool) -> void:
 		if not Global.current_project:
 			return
 		var invalid_callables: Array[Callable] = []
-		var updater_array := (_cel_updaters if is_cel else _project_updaters)
+		var updater_array := _cel_updaters if is_cel else _project_updaters
 		for callable: Callable in updater_array:
 			if not callable.is_valid():
 				invalid_callables.append(callable)
@@ -1010,6 +1014,7 @@ class SignalsAPI:
 			if signal_class.is_connected(callable):
 				signal_class.disconnect(callable)
 				ExtensionsApi.remove_action("SignalsAPI", signal_class.get_name())
+
 	#endregion
 
 	#region APP RELATED SIGNALS
@@ -1022,6 +1027,7 @@ class SignalsAPI:
 	## when pixelorama is about to close.
 	func signal_pixelorama_about_to_close(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(Global.pixelorama_about_to_close, callable, is_disconnecting)
+
 	#endregion
 
 	#region PROJECT RELATED SIGNALS
@@ -1056,6 +1062,7 @@ class SignalsAPI:
 	## whenever the project data are being modified.
 	func signal_project_data_changed(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(Global.project_data_changed, callable, is_disconnecting)
+
 	#endregion
 
 	#region TOOL RELATED SIGNALS
@@ -1065,6 +1072,7 @@ class SignalsAPI:
 	## and [int] (Indicating button that tool is assigned to, see [enum @GlobalScope.MouseButton])
 	func signal_tool_color_changed(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(Tools.color_changed, callable, is_disconnecting)
+
 	#endregion
 
 	#region TIMELINE RELATED SIGNALS
@@ -1081,6 +1089,7 @@ class SignalsAPI:
 		_connect_disconnect(
 			Global.animation_timeline.animation_finished, callable, is_disconnecting
 		)
+
 	#endregion
 
 	#region UPDATER SIGNALS
@@ -1114,9 +1123,7 @@ class SignalsAPI:
 			return
 		var current_cel := Global.current_project.get_current_cel()
 		if not current_cel:
-			printerr(
-				"There are no cels detected, try calling current_cel_signal after an await."
-			)
+			printerr("There are no cels detected, try calling current_cel_signal after an await.")
 			return
 		if current_cel.has_signal(updater):
 			if is_disconnecting:
@@ -1129,7 +1136,9 @@ class SignalsAPI:
 	## Connects/disconnects a signal to [param callable], that emits
 	## whenever texture of the currently focused cel changes.
 	func signal_current_cel_texture_changed(callable: Callable, is_disconnecting := false) -> void:
-		push_warning("signal_current_cel_texture_changed() is deprecated and will be removed in later versions, please use current_cel_signal() instead.")
+		push_warning(
+			"signal_current_cel_texture_changed() is deprecated and will be removed in later versions, please use current_cel_signal() instead."
+		)
 		current_cel_signal(callable, "texture_changed", is_disconnecting)
 
 	## Connects/disconnects a signal to [param callable], that emits
