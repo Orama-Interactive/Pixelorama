@@ -15,7 +15,7 @@ var extension_selected := -1
 var damaged_extensions := PackedStringArray()
 var prev_damaged_extensions := PackedStringArray()
 ## Extensions built using the versions in this array are considered compatible with the current Api
-var legacy_api_versions := []
+var legacy_api_versions := [8]
 
 
 class Extension:
