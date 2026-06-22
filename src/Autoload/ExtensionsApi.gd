@@ -1136,8 +1136,8 @@ class SignalsAPI:
 	## Connects/disconnects a signal to [param callable], that emits
 	## whenever texture of the currently focused cel changes.
 	func signal_current_cel_texture_changed(callable: Callable, is_disconnecting := false) -> void:
-		# gdlint-ignore-next-line max-line-length
 		push_warning(
+			# gdlint-ignore-next-line max-line-length
 			"signal_current_cel_texture_changed() is deprecated and will be removed in later versions, please use current_cel_signal() instead."
 		)
 		current_cel_signal(callable, "texture_changed", is_disconnecting)
