@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-06-16 23:48\n"
+"PO-Revision-Date: 2026-06-23 11:40\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -4155,8 +4155,8 @@ msgstr "Nurmeta reĝimo:"
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
-msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr "Ŝaltado de nurmeta reĝimo estas porĉiama ago. Ekde ŝaltita, nur metado de kalehoj estos ebla, kaj vi ne povos modifi ekzistantajn kahelojn sur tiu ĉi tavolo."
+msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place, duplicate and edit existing tiles, and you won't be able to use Manual, Auto and Stack modes."
+msgstr ""
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
