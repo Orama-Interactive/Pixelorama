@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2026-06-18 03:34\n"
+"PO-Revision-Date: 2026-06-23 11:39\n"
 
 msgid "OK"
 msgstr "OK"
@@ -4159,8 +4159,8 @@ msgstr "配置専用モード："
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
-msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr "配置専用モードを有効にすることは、永続的なアクションです。 一度有効にすると、タイルのみを配置でき、このレイヤー上の既存のタイルを変更することはできなくなります。"
+msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place, duplicate and edit existing tiles, and you won't be able to use Manual, Auto and Stack modes."
+msgstr ""
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
