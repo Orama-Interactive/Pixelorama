@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2026-06-20 08:34\n"
+"PO-Revision-Date: 2026-06-23 09:45\n"
 
 msgid "OK"
 msgstr "OK"
@@ -154,7 +154,7 @@ msgid "Paste"
 msgstr "Einfügen"
 
 msgid "Paste in Place"
-msgstr "An Ort einfügen"
+msgstr "An gleicher Stelle einfügen"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
@@ -359,7 +359,7 @@ msgid "Window Opacity"
 msgstr "Fensterdeckkraft"
 
 msgid "Window opacity does not work on fullscreen mode."
-msgstr "Fenstertransparenz funktioniert nicht im Vollbildmodus."
+msgstr "Fensterdeckkraft funktioniert nicht im Vollbildmodus."
 
 msgid "Panel Layout"
 msgstr "Panel-Layout"
@@ -582,7 +582,7 @@ msgid "Random brush"
 msgstr "Zufälliger Pinsel"
 
 msgid "File Exists, Overwrite?"
-msgstr "Datei existiert schon, überschreiben?"
+msgstr "Datei existiert bereits, überschreiben?"
 
 msgid "The following files already exist. Do you wish to overwrite them?\n"
 "%s"
@@ -602,11 +602,12 @@ msgid "Exporting in progress..."
 msgstr "Export läuft..."
 
 msgid "Can't load file '%s'."
-msgstr "Kann Datei '%s ' nicht laden."
+msgstr "Kann Datei '%s' nicht laden."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
-msgstr "Kann Datei nicht laden '%s'. Fehlercode: %s"
+msgstr "Kann Datei '%s' nicht laden.\n"
+"Fehlercode: %s"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
@@ -761,7 +762,7 @@ msgstr "Alle Dateien"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
-msgstr "Alle erkannt"
+msgstr "Alle erkannten"
 
 #. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
 msgid "Pixelorama Project"
@@ -889,7 +890,7 @@ msgstr "Leistung"
 
 #. Found in the Preferences. Refers to the attribution details of the current project, such as the project's creator and license.
 msgid "Attribution"
-msgstr "Zuschreibung"
+msgstr "Namensnennung"
 
 #. Found in the Preferences. Refers to the author of the current project.
 msgid "Author"
@@ -936,7 +937,7 @@ msgstr "Ganzzahliger Zoom"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
-msgstr "Beschränkt den Wert auf eine ganzzahliges Vielfaches von 100%"
+msgstr "Beschränkt den Wert auf ein ganzzahliges Vielfaches von 100%"
 
 msgid "Tablet pressure sensitivity:"
 msgstr "Tablett-Druckempfindlichkeit:"
@@ -1363,7 +1364,7 @@ msgstr "Fehlermeldungen"
 
 #. Found under the Help menu. When selected, it opens a window with a list of backups of projects opened in previous sessions.
 msgid "Restore Backup"
-msgstr "Backup wiederherstellen"
+msgstr "Sicherung wiederherstellen"
 
 #. Found in the Restore Backup dialog.
 msgid "Past sessions"
@@ -1371,7 +1372,7 @@ msgstr "Vergangene Sitzungen"
 
 #. Found in the Restore Backup dialog.
 msgid "Double click to load an entire session, or a specific project."
-msgstr "Doppelklicken um eine ganze Sitzung oder ein bestimmtes Projekt zu laden."
+msgstr "Doppelklicken, um eine ganze Sitzung oder ein bestimmtes Projekt zu laden."
 
 #. Found in the Restore Backup dialog.
 msgid "Sessions"
@@ -1400,7 +1401,7 @@ msgid "Support Pixelorama's Development"
 msgstr "Unterstütze Pixeloramas Entwicklung"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr "Pixelorama - Verpixele deine Träume!"
+msgstr "Pixelorama - Träume in Pixeln"
 
 msgid "Developed by Orama Interactive"
 msgstr "Entwickelt von Orama Interactive"
@@ -1428,7 +1429,7 @@ msgid "Donors"
 msgstr "Spender"
 
 msgid "Translators"
-msgstr "Übersetzungen"
+msgstr "Übersetzer"
 
 #. Refers to software licenses. https://en.wikipedia.org/wiki/Software_license
 msgid "Licenses"
@@ -1474,7 +1475,7 @@ msgid "Chinese Simplified"
 msgstr "Chinesisch (Vereinfacht)"
 
 msgid "Chinese Traditional"
-msgstr "Traditionelles Chinesisch"
+msgstr "Chinesisch (Traditionell)"
 
 msgid "Italian"
 msgstr "Italienisch"
@@ -1504,7 +1505,7 @@ msgid "Turkish"
 msgstr "Türkisch"
 
 msgid "Norwegian Bokmål"
-msgstr "Norwegisch Bokmål"
+msgstr "Norwegisch (Bokmål)"
 
 msgid "Korean"
 msgstr "Koreanisch"
@@ -1545,7 +1546,7 @@ msgstr "Leitender Entwickler"
 
 #. Found in the About dialog.
 msgid "UI Designer"
-msgstr "UI Designer"
+msgstr "UI-Designer"
 
 #. Found in the About dialog. Refers to the people who have contributed code to the project.
 msgid "Authors"
@@ -1610,7 +1611,7 @@ msgstr "Polygonale Auswahl\n\n"
 msgid "Select By Color\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Nach Farbe wählen\n\n"
+msgstr "Nach Farbe auswählen\n\n"
 "%s für die linke Maustaste\n"
 "%s für die rechte Maustaste"
 
@@ -1631,7 +1632,7 @@ msgstr "Lasso- / Freies Auswahl-Werkzeug\n\n"
 msgid "Select by Drawing\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Auswahl durch Zeichnen\n\n"
+msgstr "Nach Zeichnung auswählen\n\n"
 "%s für die linke Maustaste\n"
 "%s für die rechte Maustaste"
 
@@ -1652,7 +1653,7 @@ msgstr "Zoom\n\n"
 msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Ansicht verschieben\n\n"
+msgstr "Schwenken\n\n"
 "%s für die linke Maustaste\n"
 "%s für die rechte Maustaste"
 
@@ -1671,7 +1672,8 @@ msgid "Crop\n\n"
 "Resize the canvas"
 msgstr "Zuschneiden\n\n"
 "%s für die linke Maustaste\n"
-"%s für die rechte Maustaste"
+"%s für die rechte Maustaste\n\n"
+"Leinwandgröße ändern"
 
 msgid "Pencil\n\n"
 "%s for left mouse button\n"
@@ -1711,7 +1713,7 @@ msgid "Line Tool\n\n"
 "Hold %s to snap the angle of the line\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr "Linienwerkzeug\n\n"
+msgstr "Linien-Werkzeug\n\n"
 "%s für die linke Maustaste\n"
 "%s für die rechte Maustaste\n\n"
 "%s halten, um den Linienwinkel einzurasten\n"
@@ -1726,7 +1728,7 @@ msgid "Curve Tool\n\n"
 "Double-click to finish drawing the curve\n"
 "Press and drag to control the curvature\n"
 "Press %s to remove the last added point"
-msgstr "Kurvenwerkzeug\n\n"
+msgstr "Kurven-Werkzeug\n\n"
 "%s für die linke Maustaste\n"
 "%s für die rechte Maustaste\n\n"
 "Zeichnet Bézierkurven\n"
@@ -1741,7 +1743,7 @@ msgid "Rectangle Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr "Rechteckwerkzeug\n\n"
+msgstr "Rechteck-Werkzeug\n\n"
 "%s für die linke Maustaste\n"
 "%s für die rechte Maustaste\n\n"
 "%s halten, um eine 1:1 Form zu erstellen\n"
@@ -1754,7 +1756,7 @@ msgid "Ellipse Tool\n\n"
 "Hold %s to create a 1:1 shape\n"
 "Hold %s to center the shape on the click origin\n"
 "Hold %s to displace the shape's origin"
-msgstr "Ellipsenwerkzeug\n\n"
+msgstr "Ellipsen-Werkzeug\n\n"
 "%s für die linke Maustaste\n"
 "%s für die rechte Maustaste\n\n"
 "%s halten, um eine 1:1 Form zu erstellen\n"
@@ -1769,7 +1771,7 @@ msgid "Isometric Box Tool\n\n"
 "Hold %s to snap the angle of the basis point\n"
 "Hold %s to displace the shape's origin\n"
 "Press %s to edit the last added basis"
-msgstr "Isometrische Box Werkzeug\n\n"
+msgstr "Isometrisches Box-Werkzeug\n\n"
 "%s für die linke Maustaste\n"
 "%s für die rechte Maustaste\n\n"
 "Zeichnet eine isometrische Box\n"
@@ -1814,7 +1816,7 @@ msgstr "Wähle eine Farbe aus dem Anwendungsfenster."
 
 #. Tooltip of the color text field found in the color picker panel that lets users change the color by hex code or english name ("red" cannot be translated).
 msgid "Enter a hex code (\"#ff0000\") or named color (\"red\")."
-msgstr "Gib einen Hex-Code (z.\\u00a0B. \"#ff0000\") oder einen Farbnamen (z.\\u00a0B. \"red\") ein."
+msgstr "Gib einen Hex-Code (\"#ff0000\") oder einen Farbnamen (\"red\") ein."
 
 #. Tooltip of the button found in the color picker panel that lets users change the shape of the color picker.
 msgid "Select a picker shape."
@@ -2051,7 +2053,7 @@ msgstr "Anwendung pausieren, wenn sie den Fokus verliert"
 
 #. Found in the preferences, hint of the "Pause application when it loses focus" option.
 msgid "If this is toggled on, when the application's window loses focus, it gets paused. This helps lower CPU usage when idle. The application gets unpaused when the mouse enters the application's window."
-msgstr "Wenn dies aktiviert ist, zeichnet die Anwendung den Bildschirm kontinuierlich neu, auch wenn sie nicht verwendet wird. Das Ausschalten senkt die CPU- und GPU-Nutzung im Leerlauf."
+msgstr "Wenn dies aktiviert ist, wird die Anwendung pausiert, wenn ihr Fenster den Fokus verliert. Das senkt die CPU-Nutzung im Leerlauf. Die Anwendung wird fortgesetzt, wenn die Maus das Fenster betritt."
 
 #. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
 msgid "Update continuously"
@@ -2356,7 +2358,7 @@ msgstr "0: Farbe von dem Pinsel selbst, 100: die aktuell ausgewählte Farbe"
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr "Fülle Bereich:"
+msgstr "Füllbereich:"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
@@ -2603,7 +2605,7 @@ msgid "Jump to the last frame"
 msgstr "Zum letzten Frame springen"
 
 msgid "Timeline settings"
-msgstr "Timeline-Einstellungen"
+msgstr "Zeitleisten-Einstellungen"
 
 msgid "Enable/disable Onion Skinning"
 msgstr "Onion Skinning aktivieren/deaktivieren"
@@ -2614,7 +2616,7 @@ msgstr "Wie viele Bilder pro Sekunde (FPS) soll die Vorschau haben?\n"
 "Je höher der Wert, desto schneller läuft die Animation."
 
 msgid "No loop"
-msgstr "Keine Wiederholung"
+msgstr "Keine Schleife"
 
 msgid "Cycle loop"
 msgstr "Schleife"
@@ -2684,7 +2686,7 @@ msgid "Below canvas"
 msgstr "Unter der Leinwand"
 
 msgid "If you want a layer to ignore onion skinning simply add the \"_io\" suffix in its name."
-msgstr "Damit eine Ebene Onion Skinning ignoriert, einfach das Suffix \\\"_io\\\" an den Namen anhängen."
+msgstr "Damit eine Ebene Onion Skinning ignoriert, einfach das Suffix \"_io\" an den Namen anhängen."
 
 msgid "Add a new frame"
 msgstr "Neuen Frame hinzufügen"
@@ -2724,7 +2726,7 @@ msgid "Properties"
 msgstr "Eigenschaften"
 
 msgid "Project Properties"
-msgstr "Projekteinstellungen"
+msgstr "Projekteigenschaften"
 
 msgid "Frame properties"
 msgstr "Frame-Eigenschaften"
@@ -2768,15 +2770,15 @@ msgstr "Ebenen"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When enabled, the layer becomes a clipping mask.
 msgid "Clipping mask"
-msgstr "Clipping-Maske"
+msgstr "Schnittmaske"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected layers are being flattened into a single layer.
 msgid "Flatten"
-msgstr "Abflachen"
+msgstr "Auf eine Ebene reduzieren"
 
 #. Found in the layer menu which appears when right clicking on a layer button in the timeline. When clicked, the selected visible layers are being flattened into a single layer.
 msgid "Flatten visible"
-msgstr "Sichtbare abflachen"
+msgstr "Sichtbare auf eine Ebene reduzieren"
 
 #. Hint tooltip of the create new layer button, found on the left side of the timeline.
 #: src/UI/Timeline/AnimationTimeline.tscn
@@ -2918,7 +2920,7 @@ msgstr "Farbe"
 
 #. Found in the layer's section of the timeline, as a blend mode option. For more info refer to: https://en.wikipedia.org/wiki/Blend_modes
 msgid "Luminosity"
-msgstr "Helligkeit"
+msgstr "Luminanz"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. Contains blend modes that do masking operations between layers, such as the "Intersection" and "Match colors" blend modes.
 msgid "Masking"
@@ -3042,7 +3044,7 @@ msgid "Redo: Change Frame Order"
 msgstr "Wiederholen: Framereihenfolge ändern"
 
 msgid "Undo: Delete Custom Brush"
-msgstr "Rückgängig: benutzerdefinierten Pinsel löschen"
+msgstr "Rückgängig: Benutzerdefinierten Pinsel löschen"
 
 msgid "Redo: Delete Custom Brush"
 msgstr "Wiederholen: benutzerdefinierten Pinsel löschen"
@@ -3054,10 +3056,10 @@ msgid "Redo: Modify Frame Tag"
 msgstr "Wiederholen: Frame-Tag ändern"
 
 msgid "Undo: Delete Frame Tag"
-msgstr "Rückgängig: Lösche Frame-Tag"
+msgstr "Rückgängig: Frame-Tag löschen"
 
 msgid "Redo: Delete Frame Tag"
-msgstr "Wiederholen: Lösche Frame-Tag"
+msgstr "Wiederholen: Frame-Tag löschen"
 
 msgid "Undo: Change frame duration"
 msgstr "Rückgängig: Frame-Dauer ändern"
@@ -3069,13 +3071,13 @@ msgid "Undo: Rename Layer"
 msgstr "Rückgängig: Ebene umbenennen"
 
 msgid "Redo: Rename Layer"
-msgstr "Wiederherstellen: Ebene umbenennen"
+msgstr "Wiederholen: Ebene umbenennen"
 
 msgid "Undo: Change Layer Opacity"
 msgstr "Rückgängig: Ebenendeckkraft ändern"
 
 msgid "Redo: Change Layer Opacity"
-msgstr "Wiederherstellen: Ebenendeckkraft ändern"
+msgstr "Wiederholen: Ebenendeckkraft ändern"
 
 #. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
 msgid "Undo: Change Layer Onion Skinning Ignore Status"
@@ -3083,7 +3085,7 @@ msgstr "Rückgängig: Onion-Skinning-Ignorierung der Ebene ändern"
 
 #. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
 msgid "Redo: Change Layer Onion Skinning Ignore Status"
-msgstr "Wiederherstellen: Onion-Skinning-Ignorierung der Ebene ändern"
+msgstr "Wiederholen: Onion-Skinning-Ignorierung der Ebene ändern"
 
 #. Appears as a notification when the user data field of a layer is changed, and the user undos.
 msgid "Undo: Change Layer User Data"
@@ -3091,19 +3093,19 @@ msgstr "Rückgängig: Ebenen-Benutzerdaten ändern"
 
 #. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
 msgid "Redo: Change Layer User Data"
-msgstr "Wiederherstellen: Ebenen-Benutzerdaten ändern"
+msgstr "Wiederholen: Ebenen-Benutzerdaten ändern"
 
 msgid "Undo: Change Layer Color"
 msgstr "Rückgängig: Ebenenfarbe ändern"
 
 msgid "Redo: Change Layer Color"
-msgstr "Wiederherstellen: Ebenenfarbe ändern"
+msgstr "Wiederholen: Ebenenfarbe ändern"
 
 msgid "Undo: Change Layer Visibility"
 msgstr "Rückgängig: Ebenensichtbarkeit ändern"
 
 msgid "Redo: Change Layer Visibility"
-msgstr "Wiederherstellen: Ebenensichtbarkeit ändern"
+msgstr "Wiederholen: Ebenensichtbarkeit ändern"
 
 #. Appears as a notification when a layer gets locked or unlocked, and the user undos.
 msgid "Undo: Change Layer Locked Status"
@@ -3111,7 +3113,7 @@ msgstr "Rückgängig: Sperrstatus der Ebene ändern"
 
 #. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
 msgid "Redo: Change Layer Locked Status"
-msgstr "Wiederherstellen: Sperrstatus der Ebene ändern"
+msgstr "Wiederholen: Sperrstatus der Ebene ändern"
 
 msgid "Move Guide"
 msgstr "Hilfslinie verschieben"
@@ -3121,7 +3123,7 @@ msgstr "Datei gespeichert"
 
 #. A notification label that appears when the backup of the currently opened project gets saved.
 msgid "Backup saved"
-msgstr "Backup gespeichert"
+msgstr "Sicherung gespeichert"
 
 msgid "File failed to open. Error code %s"
 msgstr "Datei konnte nicht geöffnet werden. Fehlercode %s"
@@ -3131,7 +3133,7 @@ msgstr "Datei konnte nicht gespeichert werden. Fehlercode %s"
 
 #. Appears when the user attempts to export a project as a video, but the process fails. FFMPEG is the external software used to export videos.
 msgid "Video failed to export. Ensure that FFMPEG is installed correctly."
-msgstr "Video-Export fehlgeschlagen. Bitte sicherstellen, dass FFMPEG korrekt installiert ist."
+msgstr "Video-Export fehlgeschlagen. Stelle sicher, dass FFMPEG korrekt installiert ist."
 
 msgid "File(s) exported"
 msgstr "Datei(en) exportiert"
@@ -3161,7 +3163,7 @@ msgid "Error: Palette must have a valid name."
 msgstr "Fehler: Palette muss einen gültigen Namen haben."
 
 msgid "Invalid Palette file!"
-msgstr "Nicht gültige Palettendatei!"
+msgstr "Ungültige Palettendatei!"
 
 msgid "Edit Palette"
 msgstr "Bearbeite Palette"
@@ -3191,7 +3193,7 @@ msgid "Become a Patron"
 msgstr "Werde ein Patron"
 
 msgid "Don't show again"
-msgstr "Beim nächsten Start nicht mehr anzeigen"
+msgstr "Nicht wieder anzeigen"
 
 msgid "Image Options"
 msgstr "Bild Optionen"
@@ -3313,7 +3315,7 @@ msgid "Pan"
 msgstr "Schwenk"
 
 msgid "Color Picker"
-msgstr "Farbauswahl"
+msgstr "Farbwähler"
 
 msgid "Pencil"
 msgstr "Stift"
@@ -3461,7 +3463,7 @@ msgid "Pixelorama did not close properly last time. Would you like to restore a 
 msgstr "Pixelorama wurde beim letzten Mal nicht ordnungsgemäß geschlossen. Möchtest du eine vorherige Sitzung wiederherstellen?"
 
 msgid "Backup reloaded"
-msgstr "Backup neu geladen"
+msgstr "Sicherung neu geladen"
 
 msgid "Remove currently selected palette"
 msgstr "Aktuell ausgewählte Palette entfernen"
@@ -3606,7 +3608,7 @@ msgid "Canvas Preview"
 msgstr "Leinwand-Vorschau"
 
 msgid "Color Pickers"
-msgstr "Farbauswähler"
+msgstr "Farbwähler"
 
 msgid "Global Tool Options"
 msgstr "Globale Werkzeugoptionen"
@@ -3884,7 +3886,7 @@ msgstr "Kubisch (hoch 3)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quartic (power of 4)"
-msgstr "Quartik (hoch  4)"
+msgstr "Quartisch (hoch 4)"
 
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quintic (power of 5)"
