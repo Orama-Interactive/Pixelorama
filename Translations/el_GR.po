@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2026-06-23 11:39\n"
+"PO-Revision-Date: 2026-06-25 12:59\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -4158,7 +4158,7 @@ msgstr "Λειτουργία μόνο για τοποθέτηση:"
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place, duplicate and edit existing tiles, and you won't be able to use Manual, Auto and Stack modes."
-msgstr ""
+msgstr "Η ενεργοποίηση της λειτουργίας μόνο για τοποθέτηση είναι μια μόνιμη ενέργεια. Μόλις ενεργοποιηθεί, θα μπορείτε μόνο να τοποθετήσετε, να αντιγράψετε και να επεξεργαστείτε τα ήδη υπάρχοντα πλακίδια και δε θα μπορείτε να χρησιμοποιείτε τις λειτουργίες \"Χειροκίνητο\", \"Αυτόματο\" και \"Στοίβα\"."
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
