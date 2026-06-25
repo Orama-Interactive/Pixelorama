@@ -43,7 +43,6 @@ func _on_confirmed() -> void:
 	if with_content_node.button_pressed:
 		if !selection_node.transformation_handles.currently_transforming:
 			selection_node.transformation_handles.begin_transform()
-		var image_size := selection_node.preview_selection_map.get_used_rect().size
 		var delta := Vector2i(width, width)
 		match type:
 			Types.EXPAND:

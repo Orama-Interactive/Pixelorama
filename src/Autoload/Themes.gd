@@ -169,11 +169,11 @@ func change_clear_color() -> void:
 
 func change_icon_colors() -> void:
 	for node in get_tree().get_nodes_in_group("UIButtons"):
-		if node is TextureRect or node is Sprite2D:
+		if node is TextureRect or node is Sprite2D or node is NinePatchRect:
 			node.modulate = Global.modulate_icon_color
 		elif node is TextureButton:
 			node.modulate = Global.modulate_icon_color
-			if node.disabled and not ("RestoreDefaultButton" in node.name):
+			if node.disabled and not node is RestoreDefaultButton:
 				node.modulate.a = 0.5
 		elif node is Button:
 			var texture: TextureRect

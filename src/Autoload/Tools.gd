@@ -543,8 +543,8 @@ func get_tool(button: int) -> Slot:
 func assign_tool(tool_name: String, button: int, allow_refresh := false) -> void:
 	if Global.single_tool_mode and button == MOUSE_BUTTON_LEFT:
 		assign_tool(tool_name, MOUSE_BUTTON_RIGHT, allow_refresh)
-	var slot: Slot = _slots[button]
-	var panel: Node = _panels[button]
+	var slot := _slots[button]
+	var panel := _panels[button]
 
 	if slot.tool_node != null:
 		if slot.tool_node.name == tool_name and not allow_refresh:
@@ -576,8 +576,8 @@ func default_color() -> void:
 
 
 func swap_color() -> void:
-	var left = _slots[MOUSE_BUTTON_LEFT].color
-	var right = _slots[MOUSE_BUTTON_RIGHT].color
+	var left := _slots[MOUSE_BUTTON_LEFT].color
+	var right := _slots[MOUSE_BUTTON_RIGHT].color
 	assign_color(right, MOUSE_BUTTON_LEFT, false)
 	assign_color(left, MOUSE_BUTTON_RIGHT, false)
 
