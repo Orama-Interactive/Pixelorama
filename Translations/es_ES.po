@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2026-06-23 11:39\n"
+"PO-Revision-Date: 2026-06-25 16:35\n"
 
 msgid "OK"
 msgstr "Aceptar"
@@ -887,7 +887,7 @@ msgstr "Rendimiento"
 
 #. Found in the Preferences. Refers to the attribution details of the current project, such as the project's creator and license.
 msgid "Attribution"
-msgstr ""
+msgstr "Atribuciones"
 
 #. Found in the Preferences. Refers to the author of the current project.
 msgid "Author"
@@ -895,7 +895,7 @@ msgstr "Autor"
 
 #. Found in the Preferences. Refers to the default license that is set to the created project.
 msgid "Default license"
-msgstr ""
+msgstr "Licencia predeterminada"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
@@ -4156,7 +4156,7 @@ msgstr "Modo de solo colocar:"
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place, duplicate and edit existing tiles, and you won't be able to use Manual, Auto and Stack modes."
-msgstr ""
+msgstr "Activar el modo de solo colocación es una acción permanente. Una vez activado, solo podrás colocar, duplicar y editar los mosaicos existentes, y no podrás usar los modos manual, automático o apilado."
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
@@ -4199,7 +4199,7 @@ msgstr "Automático"
 #. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
-msgstr "Pila"
+msgstr "Apilado"
 
 #. A checkbox that toggles autotiling on or off for tilemap layers.
 #: src/UI/TilesPanel.tscn
