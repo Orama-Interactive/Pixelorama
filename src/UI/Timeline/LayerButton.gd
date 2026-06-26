@@ -3,7 +3,7 @@ extends HBoxContainer
 
 enum MenuOptions { PROPERTIES, CLIPPING_MASK, FLATTEN, FLATTEN_VISIBLE }
 
-const HIERARCHY_DEPTH_PIXEL_SHIFT := 16
+const HIERARCHY_DEPTH_PIXEL_SHIFT := 24
 const ARRAY_TEXTURE_TYPES: Array[Texture2D] = [
 	preload("res://assets/graphics/layers/type_icons/layer_pixel.png"),
 	preload("res://assets/graphics/layers/type_icons/layer_group.png"),
@@ -17,6 +17,8 @@ var layer_index := 0:
 		layer_index = value
 		if is_instance_valid(main_button):
 			main_button.layer_index = value
+		if is_instance_valid(hierarchy_spacer):
+			hierarchy_spacer.layer_index = value
 var button_pressed := false:
 	set(value):
 		button_pressed = value
@@ -37,7 +39,7 @@ var _old_is_writing_text: bool
 @onready var lock_button := %LockButton as BaseButton
 @onready var label := %LayerNameLabel as Label
 @onready var line_edit := %LayerNameLineEdit as LineEdit
-@onready var hierarchy_spacer := %HierarchySpacer as Control
+@onready var hierarchy_spacer := %LayerHierarchyIndicator as Control
 @onready var layer_fx_texture_rect := %LayerFXTextureRect as TextureRect
 @onready var layer_type_texture_rect := %LayerTypeTextureRect as TextureRect
 @onready var layer_ui_color := $LayerMainButton/LayerUIColor as ColorRect
@@ -51,6 +53,7 @@ func _ready() -> void:
 		mouse_filter = Control.MOUSE_FILTER_PASS
 	main_button.layer_index = layer_index
 	main_button.hierarchy_depth_pixel_shift = HIERARCHY_DEPTH_PIXEL_SHIFT
+	hierarchy_spacer.hierarchy_depth_pixel_shift = HIERARCHY_DEPTH_PIXEL_SHIFT
 	Global.cel_switched.connect(_on_cel_switched)
 	var layer := Global.current_project.layers[layer_index]
 	layer.name_changed.connect(
@@ -91,10 +94,8 @@ func _ready() -> void:
 		if not texture is TextureRect:
 			continue
 		texture.modulate = Global.modulate_icon_color
-
 	# Visualize how deep into the hierarchy the layer is
-	var hierarchy_depth := layer.get_hierarchy_depth()
-	hierarchy_spacer.custom_minimum_size.x = hierarchy_depth * HIERARCHY_DEPTH_PIXEL_SHIFT
+	hierarchy_spacer.layer_index = layer_index
 	update_buttons()
 
 

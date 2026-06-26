@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cofw1x6chh4i" path="res://assets/graphics/layers/unlinked_layer.png" id="4_058qm"]
 [ext_resource type="Texture2D" uid="uid://ieo8fsapcgsy" path="res://assets/graphics/layers/clipping_mask.png" id="6_73j5q"]
 [ext_resource type="Script" uid="uid://bgvjodkehy0qn" path="res://src/UI/Timeline/LayerMainButton.gd" id="6_n8q6b"]
+[ext_resource type="Script" uid="uid://yrppk5eyflcy" path="res://src/UI/Timeline/layer_hierarchy_indicator.gd" id="7_7gdso"]
 [ext_resource type="Texture2D" uid="uid://dv5y24sb8lxg2" path="res://assets/graphics/layers/layer_active_effect.png" id="8_7wf6f"]
 [ext_resource type="Texture2D" uid="uid://cjvk47bd56156" path="res://assets/graphics/layers/type_icons/layer_pixel.png" id="8_ce16y"]
 
@@ -142,10 +143,11 @@ grow_vertical = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 
-[node name="HierarchySpacer" type="Control" parent="LayerMainButton/LayerName" unique_id=784955876]
+[node name="LayerHierarchyIndicator" type="Control" parent="LayerMainButton/LayerName" unique_id=784955876]
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
+script = ExtResource("7_7gdso")
 
 [node name="ClippingMask" type="TextureRect" parent="LayerMainButton/LayerName" unique_id=532219846]
 unique_name_in_owner = true
