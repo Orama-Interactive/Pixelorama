@@ -1023,9 +1023,17 @@ func add_layer(layer: BaseLayer, project: Project) -> void:
 
 	var new_layer_idx := project.current_layer + 1
 	if current_layer is GroupLayer:
-		new_layer_idx = project.current_layer
-		# Make layer child of group.
-		layer.parent = project.layers[project.current_layer]
+		if current_layer.expanded:
+			new_layer_idx = project.current_layer
+			# Make layer child of group.
+			layer.parent = project.layers[project.current_layer]
+		else:
+			if project.layers.size() > new_layer_idx:
+				var above_layer := project.layers[new_layer_idx]
+				if above_layer is GroupLayer:
+					layer.parent = above_layer
+				else:
+					layer.parent = above_layer.parent
 	else:
 		# Set the parent of layer to be the same as the layer below it.
 		layer.parent = project.layers[project.current_layer].parent
