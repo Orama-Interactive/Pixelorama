@@ -1024,13 +1024,6 @@ func add_layer(layer: BaseLayer, project: Project) -> void:
 	var new_layer_idx := project.current_layer + 1
 	if current_layer is GroupLayer:
 		new_layer_idx = project.current_layer
-		if !current_layer.expanded:
-			current_layer.expanded = true
-			for layer_button: LayerButton in layer_vbox.get_children():
-				layer_button.update_buttons()
-				var expanded := project.layers[layer_button.layer_index].is_expanded_in_hierarchy()
-				layer_button.visible = expanded
-				cel_vbox.get_child(layer_button.get_index()).visible = expanded
 		# Make layer child of group.
 		layer.parent = project.layers[project.current_layer]
 	else:
@@ -1387,10 +1380,18 @@ func flatten_layers(indices: PackedInt32Array, only_visible := false) -> void:
 	project.undo_redo.commit_action()
 
 
+func update_layer_expanded_status() -> void:
+	var project := Global.current_project
+	for layer_button: LayerButton in layer_vbox.get_children():
+		layer_button.update_buttons()
+		var expanded := project.layers[layer_button.layer_index].is_expanded_in_hierarchy()
+		layer_button.visible = expanded
+		cel_vbox.get_child(layer_button.get_index()).visible = expanded
+
+
 func _on_opacity_slider_value_changed(value: float) -> void:
 	var new_opacity := value / 100.0
-
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	if Global.layer_opacity_undoable:
 		project.undo_redo.create_action("Change Layer Opacity", UndoRedo.MergeMode.MERGE_ENDS)
 		for idx_pair in Global.current_project.selected_cels:
@@ -1671,30 +1672,30 @@ func project_frame_removed(frame: int) -> void:
 		cel_hbox.get_child(frame).free()
 
 
-func project_layer_added(layer: int) -> void:
+func project_layer_added(layer_index: int) -> void:
 	var project := Global.current_project
-
-	var layer_button := project.layers[layer].instantiate_layer_button() as LayerButton
-	layer_button.layer_index = layer
-	if project.layers[layer].name == "":
-		project.layers[layer].set_name_to_default(project.layers.size())
+	var layer := project.layers[layer_index]
+	var layer_button := layer.instantiate_layer_button() as LayerButton
+	layer_button.layer_index = layer_index
+	if layer.name == "":
+		layer.set_name_to_default(project.layers.size())
 
 	var cel_hbox := HBoxContainer.new()
 	cel_hbox.add_theme_constant_override("separation", 0)
 	for f in project.frames.size():
-		var cel_button := project.frames[f].cels[layer].instantiate_cel_button()
+		var cel_button := project.frames[f].cels[layer_index].instantiate_cel_button()
 		cel_button.frame = f
-		cel_button.layer = layer
+		cel_button.layer = layer_index
 		cel_hbox.add_child(cel_button)
-
-	layer_button.visible = project.layers[layer].is_expanded_in_hierarchy()
-	cel_hbox.visible = layer_button.visible
 
 	layer_vbox.add_child(layer_button)
 	var count := layer_vbox.get_child_count()
-	layer_vbox.move_child(layer_button, count - 1 - layer)
+	layer_vbox.move_child(layer_button, count - 1 - layer_index)
 	cel_vbox.add_child(cel_hbox)
-	cel_vbox.move_child(cel_hbox, count - 1 - layer)
+	cel_vbox.move_child(cel_hbox, count - 1 - layer_index)
+	for ancestor in layer.get_ancestors():
+		ancestor.expanded = true
+	update_layer_expanded_status.call_deferred()
 	update_global_layer_buttons()
 	await get_tree().process_frame
 	if not is_instance_valid(layer_button):
@@ -1702,11 +1703,11 @@ func project_layer_added(layer: int) -> void:
 	timeline_scroll.ensure_control_visible(layer_button)
 
 
-func project_layer_removed(layer: int) -> void:
+func project_layer_removed(layer_index: int) -> void:
 	var count := layer_vbox.get_child_count()
-	var layer_button := layer_vbox.get_child(count - 1 - layer)
+	var layer_button := layer_vbox.get_child(count - 1 - layer_index)
 	layer_button.free()
-	var cel_hbox := cel_vbox.get_child(count - 1 - layer)
+	var cel_hbox := cel_vbox.get_child(count - 1 - layer_index)
 	cel_hbox.free()
 	update_global_layer_buttons()
 
