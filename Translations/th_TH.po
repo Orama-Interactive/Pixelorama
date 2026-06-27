@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Thai\n"
 "Language: th_TH\n"
-"PO-Revision-Date: 2026-06-23 11:40\n"
+"PO-Revision-Date: 2026-06-27 13:34\n"
 
 msgid "OK"
 msgstr "ตกลง"
@@ -3994,8 +3994,8 @@ msgid "Hold Shift while pressing to instantly remove."
 msgstr "กด Shift ค้างไว้ขณะกดเพื่อลบทันที"
 
 #. Shown in the confirmation dialog for removing a reference image.
-msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr "คุณแน่ใจหรือไม่ว่าต้องการลบรูปภาพอ้างอิงนี้? ไฟล์จะไม่ถูกลบออกจากระบบของคุณ"
+msgid "Are you sure you want to remove this reference image?"
+msgstr ""
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -4020,10 +4020,6 @@ msgstr "หมุนรูปภาพอ้างอิงที่เลือ
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
 msgstr "ปรับสเกลรูปภาพอ้างอิงที่เลือก"
-
-#. Button to select no reference images in the Reference Images panel.
-msgid "none"
-msgstr "ไม่มี"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
