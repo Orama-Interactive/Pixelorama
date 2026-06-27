@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2026-06-23 13:49\n"
+"PO-Revision-Date: 2026-06-27 13:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3994,8 +3994,8 @@ msgid "Hold Shift while pressing to instantly remove."
 msgstr "Shiftキーを押したまま押すと即座に削除されます。"
 
 #. Shown in the confirmation dialog for removing a reference image.
-msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr "この参照画像を削除してもよろしいですか？ファイルシステムからは削除されません。"
+msgid "Are you sure you want to remove this reference image?"
+msgstr ""
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -4020,10 +4020,6 @@ msgstr "選択した参照画像を回転"
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
 msgstr "選択した参照画像を拡大縮小"
-
-#. Button to select no reference images in the Reference Images panel.
-msgid "none"
-msgstr "なし"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
