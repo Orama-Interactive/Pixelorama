@@ -34,14 +34,16 @@ func _draw() -> void:
 	self_and_ancestors.append(current_layer)
 	for i in self_and_ancestors.size():
 		var layer := self_and_ancestors[i]
+		var line_reaching_bottom := false
+		if is_instance_valid(layer.parent) and layer.parent.get_child_count(false) > 0:
+			var first_child := layer.parent.get_children(false)[0]
+			if i < self_and_ancestors.size() - 1 and layer == first_child:
+				continue
+			line_reaching_bottom = layer != first_child
 		xx = i * hierarchy_depth_pixel_shift + X_OFFSET
 		var center_top := Vector2(xx, 0)
 		var center_bottom := Vector2(xx, size.y)
 		center = Vector2(xx, half_size.y)
-		var line_reaching_bottom := false
-		if is_instance_valid(layer.parent) and layer.parent.get_child_count(false) > 0:
-			var first_child := layer.parent.get_children(false)[0]
-			line_reaching_bottom = layer != first_child
 		var horizontal_line_end := center_bottom if line_reaching_bottom else center
 		draw_line(center_top, horizontal_line_end, color, LINE_WIDTH)
 
