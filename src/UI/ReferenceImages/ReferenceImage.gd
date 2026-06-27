@@ -6,7 +6,6 @@ signal properties_changed
 
 var project := Global.current_project
 var shader := preload("res://src/Shaders/ReferenceImageShader.gdshader")
-var image_path := ""
 var filter := false:
 	set(value):
 		filter = value
@@ -39,6 +38,11 @@ func _ready() -> void:
 	project.reference_images.append(self)
 	# Make this show behind parent because we want to use _draw() to draw over it
 	show_behind_parent = true
+	overlay_color = Color(1, 1, 1, 0.5)
+	# Apply the silhouette shader
+	var mat := ShaderMaterial.new()
+	mat.shader = shader
+	set_material(mat)
 
 
 func change_properties() -> void:
@@ -63,9 +67,12 @@ func position_reset() -> void:
 
 ## Serialize details of the reference image.
 func serialize() -> Dictionary:
+	var image_size := texture.get_size()
 	return {
 		"x": position.x,
 		"y": position.y,
+		"width": image_size.x,
+		"height": image_size.y,
 		"scale_x": scale.x,
 		"scale_y": scale.y,
 		"rotation_degrees": rotation_degrees,
@@ -76,30 +83,11 @@ func serialize() -> Dictionary:
 		"filter": filter,
 		"monochrome": monochrome,
 		"color_clamping": color_clamping,
-		"image_path": image_path
 	}
 
 
 ## Load details of the reference image from a dictionary.
-## Be aware that new ReferenceImages are created via deserialization.
-## This is because deserialization sets up some nice defaults.
 func deserialize(d: Dictionary) -> void:
-	overlay_color = Color(1, 1, 1, 0.5)
-	if d.has("image_path"):
-		# Note that reference images are referred to by path.
-		# These images may be rather big.
-		image_path = d["image_path"]
-		var img := Image.new()
-		if img.load(image_path) == OK:
-			var itex := ImageTexture.create_from_image(img)
-			texture = itex
-		# Apply the silhouette shader
-		var mat := ShaderMaterial.new()
-		mat.shader = shader
-		set_material(mat)
-
-	# Now that the image may have been established...
-	position_reset()
 	if d.has("x"):
 		position.x = d["x"]
 	if d.has("y"):
@@ -127,11 +115,11 @@ func deserialize(d: Dictionary) -> void:
 	change_properties()
 
 
-## Useful for Web
-func create_from_image(image: Image) -> void:
+func create_from_image(image: Image, reset_position := true) -> void:
 	var itex := ImageTexture.create_from_image(image)
 	texture = itex
-	position_reset()
+	if reset_position:
+		position_reset()
 
 
 func _project_switched() -> void:
