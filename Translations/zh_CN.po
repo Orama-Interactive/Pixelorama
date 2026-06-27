@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2026-06-23 15:06\n"
+"PO-Revision-Date: 2026-06-27 13:33\n"
 
 msgid "OK"
 msgstr "确定"
@@ -3993,8 +3993,8 @@ msgid "Hold Shift while pressing to instantly remove."
 msgstr "按住 Shift 键并按下即可立即删除。"
 
 #. Shown in the confirmation dialog for removing a reference image.
-msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr "您确定要删除此参考图像吗？它不会从您的文件系统中删除。"
+msgid "Are you sure you want to remove this reference image?"
+msgstr ""
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -4019,10 +4019,6 @@ msgstr "移动选中的参考图像"
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
 msgstr "缩放选中的参考图像"
-
-#. Button to select no reference images in the Reference Images panel.
-msgid "none"
-msgstr "无"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
