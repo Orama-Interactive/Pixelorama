@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2026-06-25 12:59\n"
+"PO-Revision-Date: 2026-06-27 13:33\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -3992,8 +3992,8 @@ msgid "Hold Shift while pressing to instantly remove."
 msgstr "Κρατήστε πατημένο το Shift για άμεση αφαίρεση."
 
 #. Shown in the confirmation dialog for removing a reference image.
-msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr "Είστε βέβαιοι ότι θέλετε να καταργήσετε αυτή την εικόνα αναφοράς? Δεν θα διαγραφεί από το σύστημα αρχείων σας."
+msgid "Are you sure you want to remove this reference image?"
+msgstr ""
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -4018,10 +4018,6 @@ msgstr "Περιστροφή της επιλεγμένης εικόνας ανα
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
 msgstr "Κλιμάκωση της επιλεγμένης εικόνας αναφοράς"
-
-#. Button to select no reference images in the Reference Images panel.
-msgid "none"
-msgstr "κανένα"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
