@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2026-06-27 13:33\n"
+"PO-Revision-Date: 2026-06-27 16:01\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3995,7 +3995,7 @@ msgstr "Shiftキーを押したまま押すと即座に削除されます。"
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image?"
-msgstr ""
+msgstr "この参照画像を削除してもよろしいですか?"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
