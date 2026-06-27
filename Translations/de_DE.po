@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2026-06-27 11:12\n"
+"PO-Revision-Date: 2026-06-27 13:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3995,8 +3995,8 @@ msgid "Hold Shift while pressing to instantly remove."
 msgstr "Halte die Umschalttaste gedrückt, während du drückst, um sofort zu entfernen."
 
 #. Shown in the confirmation dialog for removing a reference image.
-msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr "Bist du sicher, dass du dieses Referenzbild entfernen möchtest? Es wird nicht aus deinem Dateisystem gelöscht."
+msgid "Are you sure you want to remove this reference image?"
+msgstr ""
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -4021,10 +4021,6 @@ msgstr "Ausgewähltes Referenzbild drehen"
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
 msgstr "Ausgewähltes Referenzbild skalieren"
-
-#. Button to select no reference images in the Reference Images panel.
-msgid "none"
-msgstr "keine"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
