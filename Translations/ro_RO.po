@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2026-06-27 13:33\n"
+"PO-Revision-Date: 2026-06-27 14:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3992,7 +3992,7 @@ msgstr "Ține apăsat Shift în timp ce apeși pentru a elimina instant."
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image?"
-msgstr ""
+msgstr "Sigur vrei să elimini această imagine de referință?"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
