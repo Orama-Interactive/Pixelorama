@@ -240,6 +240,7 @@ func _ready() -> void:
 	_show_splash_screen()
 	Global.pixelorama_has_loaded = true
 	Global.pixelorama_opened.emit()
+	print("Time Pixelorama took to open: %sms" % Time.get_ticks_msec())
 
 
 func _input(event: InputEvent) -> void:
@@ -519,6 +520,8 @@ func _notification(what: int) -> void:
 			get_tree().paused = false
 		NOTIFICATION_APPLICATION_FOCUS_IN:
 			get_tree().paused = false
+			Tools.quick_assign_tool_revert(MOUSE_BUTTON_RIGHT)
+			Tools.quick_assign_tool_revert(MOUSE_BUTTON_LEFT)
 
 
 func _on_files_dropped(files: PackedStringArray) -> void:

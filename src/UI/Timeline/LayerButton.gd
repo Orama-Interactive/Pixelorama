@@ -3,7 +3,7 @@ extends HBoxContainer
 
 enum MenuOptions { PROPERTIES, CLIPPING_MASK, FLATTEN, FLATTEN_VISIBLE }
 
-const HIERARCHY_DEPTH_PIXEL_SHIFT := 16
+const HIERARCHY_DEPTH_PIXEL_SHIFT := 24
 const ARRAY_TEXTURE_TYPES: Array[Texture2D] = [
 	preload("res://assets/graphics/layers/type_icons/layer_pixel.png"),
 	preload("res://assets/graphics/layers/type_icons/layer_group.png"),
@@ -17,6 +17,8 @@ var layer_index := 0:
 		layer_index = value
 		if is_instance_valid(main_button):
 			main_button.layer_index = value
+		if is_instance_valid(hierarchy_spacer):
+			hierarchy_spacer.layer_index = value
 var button_pressed := false:
 	set(value):
 		button_pressed = value
@@ -37,7 +39,7 @@ var _old_is_writing_text: bool
 @onready var lock_button := %LockButton as BaseButton
 @onready var label := %LayerNameLabel as Label
 @onready var line_edit := %LayerNameLineEdit as LineEdit
-@onready var hierarchy_spacer := %HierarchySpacer as Control
+@onready var hierarchy_spacer := %LayerHierarchyIndicator as Control
 @onready var layer_fx_texture_rect := %LayerFXTextureRect as TextureRect
 @onready var layer_type_texture_rect := %LayerTypeTextureRect as TextureRect
 @onready var layer_ui_color := $LayerMainButton/LayerUIColor as ColorRect
@@ -51,6 +53,7 @@ func _ready() -> void:
 		mouse_filter = Control.MOUSE_FILTER_PASS
 	main_button.layer_index = layer_index
 	main_button.hierarchy_depth_pixel_shift = HIERARCHY_DEPTH_PIXEL_SHIFT
+	hierarchy_spacer.hierarchy_depth_pixel_shift = HIERARCHY_DEPTH_PIXEL_SHIFT
 	Global.cel_switched.connect(_on_cel_switched)
 	var layer := Global.current_project.layers[layer_index]
 	layer.name_changed.connect(
@@ -91,10 +94,8 @@ func _ready() -> void:
 		if not texture is TextureRect:
 			continue
 		texture.modulate = Global.modulate_icon_color
-
 	# Visualize how deep into the hierarchy the layer is
-	var hierarchy_depth := layer.get_hierarchy_depth()
-	hierarchy_spacer.custom_minimum_size.x = hierarchy_depth * HIERARCHY_DEPTH_PIXEL_SHIFT
+	hierarchy_spacer.layer_index = layer_index
 	update_buttons()
 
 
@@ -205,12 +206,7 @@ func update_buttons() -> void:
 
 ## When pressing a button, change the appearance of other layers (ie: expand or visible)
 func _update_buttons_all_layers() -> void:
-	for layer_button: LayerButton in get_parent().get_children():
-		layer_button.update_buttons()
-		var layer := Global.current_project.layers[layer_button.layer_index]
-		var expanded := layer.is_expanded_in_hierarchy()
-		layer_button.visible = expanded
-		Global.animation_timeline.cel_vbox.get_child(layer_button.get_index()).visible = expanded
+	Global.animation_timeline.update_layer_expanded_status()
 	Global.animation_timeline.update_global_layer_buttons()
 
 
@@ -220,16 +216,7 @@ func _input(event: InputEvent) -> void:
 		and layer_index == Global.current_project.current_layer
 		and line_edit.visible == false
 	):
-		_old_camera_auto_release_gui_focus = Global.camera.auto_release_gui_focus
-		Global.camera.auto_release_gui_focus = false
-		_old_is_writing_text = get_tree().current_scene.is_writing_text
-		get_tree().current_scene.is_writing_text = true
-		label.visible = false
-		line_edit.visible = true
-		line_edit.editable = true
-		line_edit.grab_focus()
-		line_edit.select_all()
-		line_edit.caret_column = line_edit.text.length()
+		_show_rename_edit()
 	elif (
 		(event.is_action_released(&"ui_accept") or event.is_action_released(&"ui_cancel"))
 		and line_edit.visible
@@ -267,12 +254,7 @@ func _on_main_button_gui_input(event: InputEvent) -> void:
 		return
 	if event.button_index == MOUSE_BUTTON_LEFT:
 		if event.double_click:
-			label.visible = false
-			line_edit.visible = true
-			line_edit.editable = true
-			line_edit.grab_focus()
-			line_edit.select_all()
-			line_edit.caret_column = line_edit.text.length()
+			_show_rename_edit()
 
 	elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 		popup_menu.popup_on_parent(Rect2(get_global_mouse_position(), Vector2.ONE))
@@ -280,6 +262,20 @@ func _on_main_button_gui_input(event: InputEvent) -> void:
 
 func _on_layer_name_line_edit_focus_exited() -> void:
 	_save_layer_name(line_edit.text)
+
+
+func _show_rename_edit():
+	# temporarily disable gui focus release mechanism when renaming layer
+	_old_camera_auto_release_gui_focus = Global.camera.auto_release_gui_focus
+	Global.camera.auto_release_gui_focus = false
+	_old_is_writing_text = get_tree().current_scene.is_writing_text
+	get_tree().current_scene.is_writing_text = true
+	label.visible = false
+	line_edit.visible = true
+	line_edit.editable = true
+	line_edit.grab_focus()
+	line_edit.select_all()
+	line_edit.caret_column = line_edit.text.length()
 
 
 func _save_layer_name(new_name: String) -> void:

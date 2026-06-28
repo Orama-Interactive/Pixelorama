@@ -20,7 +20,7 @@ static func open_kra_file(path: String) -> void:
 	var xml_as_string := data_xml.get_string_from_utf8()
 	var has_animation := xml_as_string.contains("keyframes")
 	var new_project := Project.new([Frame.new()], path.get_file().get_basename())
-	new_project.clear_author_data()
+	new_project.clear_attribution_data()
 	var selected_layer: BaseLayer
 	var group_layer_found := false
 	var current_stack: Array[GroupLayer] = []

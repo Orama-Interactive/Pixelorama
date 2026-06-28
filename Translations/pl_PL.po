@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Polish\n"
 "Language: pl_PL\n"
-"PO-Revision-Date: 2026-04-26 12:43\n"
+"PO-Revision-Date: 2026-06-16 23:47\n"
 
 msgid "OK"
 msgstr "OK"
@@ -30,11 +30,8 @@ msgstr "Proszę potwierdzić..."
 msgid "File Name:"
 msgstr "Nazwa pliku:"
 
-msgid "Project Name:"
-msgstr "Nazwa projektu:"
-
-msgid "Image Size"
-msgstr "Rozmiar obrazu"
+msgid "Project name:"
+msgstr ""
 
 msgid "Canvas Size"
 msgstr "Rozmiar płótna"
@@ -208,8 +205,12 @@ msgstr "Przytnij do zawartości"
 msgid "Resize Canvas"
 msgstr "Zmień rozmiar płótna"
 
-msgid "Offset Image"
-msgstr "Przesuń Obraz"
+msgid "Offset & Scale Image"
+msgstr ""
+
+#. Refers to the "Offset & Scale" layer effect.
+msgid "Offset & Scale"
+msgstr ""
 
 msgid "Offset:"
 msgstr "Przesunięcie:"
@@ -886,8 +887,16 @@ msgstr "Utwórz kopię zapasową"
 msgid "Performance"
 msgstr "Wydajność"
 
+#. Found in the Preferences. Refers to the attribution details of the current project, such as the project's creator and license.
+msgid "Attribution"
+msgstr ""
+
 #. Found in the Preferences. Refers to the author of the current project.
 msgid "Author"
+msgstr ""
+
+#. Found in the Preferences. Refers to the default license that is set to the created project.
+msgid "Default license"
 msgstr ""
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
@@ -1010,6 +1019,22 @@ msgstr "Fioletowy"
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
 msgstr "Różowy"
+
+#. A theme. Black (#000000) is set as the main color so these pixels can be turned off on OLED screens.
+msgid "Black (OLED)"
+msgstr ""
+
+#. A theme. "System" refers to the Operating System.
+msgid "System"
+msgstr ""
+
+#. Refers to the base color of a theme.
+msgid "Base color:"
+msgstr ""
+
+#. Refers to the accent color of a theme.
+msgid "Accent color:"
+msgstr ""
 
 msgid "Theme"
 msgstr "Motyw"
@@ -2063,23 +2088,23 @@ msgstr "Wybiera sterownik tabletu na Windowsie, jeżeli masz włączony \"Window
 
 #. Found in the Preferences. Refers to the displayed name of the current project author.
 msgid "Display name:"
-msgstr ""
+msgstr "Wyświetlana nazwa:"
 
 #. Found in the Preferences. Refers to the real name of the current project author.
 msgid "Real name:"
-msgstr ""
+msgstr "Imię i nazwisko:"
 
 #. Found in the Preferences. Refers to the contact info of the current project author.
 msgid "Contact:"
-msgstr ""
+msgstr "Kontakt:"
 
 #. Found in the Preferences. Refers to the company name of the current project author.
 msgid "Company/Studio:"
-msgstr ""
+msgstr "Firma/Studio:"
 
 #. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
 msgid "Last saved by"
-msgstr ""
+msgstr "Ostatnio zapisany przez"
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
@@ -2509,6 +2534,10 @@ msgstr "Lewa ściana"
 msgid "Right Face"
 msgstr "Prawa ściana"
 
+#. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
+msgid "Eraser mode"
+msgstr ""
+
 msgid "Mirroring"
 msgstr "Lustrzane odbicie"
 
@@ -2887,6 +2916,18 @@ msgstr "Kolor"
 msgid "Luminosity"
 msgstr "Jaskrawość"
 
+#. Found in the layer's section of the timeline, as a category of blend modes. Contains blend modes that do masking operations between layers, such as the "Intersection" and "Match colors" blend modes.
+msgid "Masking"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. This blend mode belongs to the "Masking" category, and it erases the un-common areas between the blend and the base layers.
+msgid "Intersection"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option.  This blend mode belongs to the "Masking" category, and it only shows the same colors between the blend and the base layers.
+msgid "Match colors"
+msgstr ""
+
 msgid "Opacity:"
 msgstr "Przezroczystość:"
 
@@ -2919,7 +2960,7 @@ msgstr "Wczytaj plik"
 
 #. An option in the audio layer properties, allows users to play the audio starting from a specific frame.
 msgid "Play at frame:"
-msgstr ""
+msgstr "Odtwórz klatkę:"
 
 msgid "Palette"
 msgstr "Paleta kolorów"
@@ -3021,16 +3062,16 @@ msgid "Redo: Change frame duration"
 msgstr "Przywróć: Zmień czas trwania klatki"
 
 msgid "Undo: Rename Layer"
-msgstr ""
+msgstr "Cofnij: Zmień nazwę warstwy"
 
 msgid "Redo: Rename Layer"
-msgstr ""
+msgstr "Powtórz: Zmień nazwę warstwy"
 
 msgid "Undo: Change Layer Opacity"
-msgstr ""
+msgstr "Cofnij: Zmień krycie warstwy"
 
 msgid "Redo: Change Layer Opacity"
-msgstr ""
+msgstr "Powtórz: Zmień krycie warstwy"
 
 #. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
 msgid "Undo: Change Layer Onion Skinning Ignore Status"
@@ -3202,8 +3243,28 @@ msgstr "Orientacja pionowa"
 msgid "Landscape"
 msgstr "Orientacja pozioma"
 
+# Found in the "New project" window. Refers to the content of the new project, whether it will just be a blank canvas, or if it will be created with data from the clipboard.
+msgid "Content:"
+msgstr ""
+
+# Found in the "New project" window. Refers to the content of the new project, set to be just a blank canvas.
+msgid "Blank canvas"
+msgstr ""
+
+# Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
+msgid "App clipboard"
+msgstr ""
+
+# Found in the "New project" window. Refers to the content of the clipboard of the (operating) system.
+msgid "System clipboard"
+msgstr ""
+
 msgid "Templates:"
 msgstr "Szablony:"
+
+# Found in the "New project" window. Refers to recent project sizes.
+msgid "Recent:"
+msgstr ""
 
 msgid "Preset"
 msgstr "Domyślnie"
@@ -3276,6 +3337,10 @@ msgstr "Elipsa"
 
 msgid "Isometric Box Tool"
 msgstr "Narzędzie \"Prostopadłościan izometryczny\""
+
+#. A tool that exists only for tilemap layers, and is responsible for setting some properties for the tiles. Currently, it is only used for setting the autotiling bits for a tile.
+msgid "Tiles Property Painter"
+msgstr ""
 
 msgid "Switch Colors"
 msgstr "Zmień kolory"
@@ -3366,21 +3431,17 @@ msgstr "Znak(i) rozdzielające:"
 msgid "The character(s) that separate the file name and the frame number"
 msgstr "Znak(i) oddzielające nazwę pliku od numeru klatki"
 
-#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
-msgid "Trim images"
-msgstr "Przytnij obrazy"
+#. Found in the export dialog. It is an option button that allows users to removes the transparent area around non-transparent pixels of the exported images, or to remove every pixel outside of the selection.
+msgid "Crop mode:"
+msgstr ""
+
+#. Refers to the content of an image.
+msgid "Content"
+msgstr ""
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
 msgstr "Przycina eksportowane obrazy do ich widocznej części, uznając każdy piksel z kanałem alfa różnym od zera za widoczny."
-
-#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
-msgid "Clip image content to selection"
-msgstr "Przytnij zawartość obrazu do zaznaczenia"
-
-#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
-msgid "Only export content that is within the bounds of a selected area."
-msgstr "Eksportuj tylko treści znajdujące się w granicach wybranego obszaru."
 
 #. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
 msgid "Layers as separate files"
@@ -3809,26 +3870,6 @@ msgstr "Wartość początkowa:"
 msgid "Final value:"
 msgstr "Wartość końcowa:"
 
-#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
-msgid "Ease type:"
-msgstr "Typ przejść:"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Starts slowly and speeds up towards the end"
-msgstr "Zaczyna powoli i przyśpiesza do końca"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Starts quickly and slows down towards the end"
-msgstr "Zaczyna szybko i spowalnia do końca"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Slowest at both ends, fast at middle"
-msgstr "Najwolniej na obu końcach, najszybsza w połowie"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Fast at both ends, slow at middle"
-msgstr "Najszybsza na obu końcach, najwolniejsza w połowie"
-
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
 msgstr "Kwadratowy (do potęgi 2.)"
@@ -3872,6 +3913,58 @@ msgstr "Wycofująca się na końcach"
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Spring towards the end"
 msgstr "Przejdź do końca"
+
+#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
+msgid "Ease type:"
+msgstr "Typ przejść:"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts slowly and speeds up towards the end"
+msgstr "Zaczyna powoli i przyśpiesza do końca"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts quickly and slows down towards the end"
+msgstr "Zaczyna szybko i spowalnia do końca"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Slowest at both ends, fast at middle"
+msgstr "Najwolniej na obu końcach, najszybsza w połowie"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Fast at both ends, slow at middle"
+msgstr "Najszybsza na obu końcach, najwolniejsza w połowie"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts slowly and speeds up towards the end", but with a shortened name.
+msgid "Ease in"
+msgstr ""
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts quickly and slows down towards the end", but with a shortened name.
+msgid "Ease out"
+msgstr ""
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Slowest at both ends, fast at middle", but with a shortened name.
+msgid "Ease in out"
+msgstr ""
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Fast at both ends, slow at middle", but with a shortened name.
+msgid "Ease out in"
+msgstr ""
+
+#. Found in the keyframe timeline on the right panel when there is no keyframe selected.
+msgid "No key selected"
+msgstr ""
+
+#. Found in the keyframe timeline when right clicking on a track. When selected, a new keyframe is being inserted at the selected frame.
+msgid "Insert keyframe"
+msgstr ""
+
+#. A button found in the keyframe timeline on the right panel when there is a keyframe selected. When clicked, it deletes the currently selected keyframe.
+msgid "Delete keyframe"
+msgstr ""
+
+#. A button found in the keyframe timeline on the right panel when two or more keyframes are selected. When clicked, it deletes the currently selected keyframes.
+msgid "Delete keyframes"
+msgstr ""
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
@@ -4105,6 +4198,11 @@ msgstr "Automatyczny"
 #. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
+msgstr ""
+
+#. A checkbox that toggles autotiling on or off for tilemap layers.
+#: src/UI/TilesPanel.tscn
+msgid "Autotiling:"
 msgstr ""
 
 #: src/UI/TilesPanel.tscn

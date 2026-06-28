@@ -342,6 +342,20 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 				new_project.brushes.append(image)
 				Brushes.add_project_brush(image)
 				brush_index += 1
+		if result.has("reference_images"):
+			var ref_index := 0
+			for ref_image_data: Dictionary in result.reference_images:
+				var width: int = ref_image_data.get("width", 64)
+				var height: int = ref_image_data.get("height", 64)
+				var reference_image := new_project.reference_images[ref_index]
+				var image_data := zip_reader.read_file(
+					"image_data/reference_images/reference_%s" % ref_index
+				)
+				var image := Image.create_from_data(
+					width, height, false, Image.FORMAT_RGBA8, image_data
+				)
+				reference_image.create_from_image(image, false)
+				ref_index += 1
 		if result.has("tile_mask") and result.has("has_mask"):
 			if result.has_mask:
 				var t_width = result.tile_mask.size_x
@@ -468,7 +482,7 @@ func open_v0_pxo_file(path: String, empty_project: bool) -> Project:
 func save_pxo_file(
 	path: String, autosave: bool, include_blended := false, project := Global.current_project
 ) -> bool:
-	project.initialize_author_data()
+	project.initialize_attribution_data()
 	if not autosave:
 		project.name = path.uri_decode().get_file().trim_suffix(".pxo")
 	var serialized_data := project.serialize()
@@ -559,6 +573,11 @@ func save_pxo_file(
 		zip_packer.write_file(brush.get_data())
 		zip_packer.close_file()
 		brush_index += 1
+	for i in project.reference_images.size():
+		var reference_image := project.reference_images[i]
+		zip_packer.start_file("image_data/reference_images/reference_%s" % i)
+		zip_packer.write_file(reference_image.texture.get_image().get_data())
+		zip_packer.close_file()
 	if project.tiles.has_mask:
 		zip_packer.start_file("image_data/tile_map")
 		zip_packer.write_file(project.tiles.tile_mask.get_data())
@@ -983,16 +1002,6 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 	project.undo_redo.commit_action()
 
 
-func import_reference_image_from_path(path: String) -> void:
-	var project := Global.current_project
-	var ri := ReferenceImage.new()
-	ri.project = project
-	ri.deserialize({"image_path": path})
-	Global.canvas.reference_image_container.add_child(ri)
-	reference_image_imported.emit()
-
-
-## Useful for Web
 func import_reference_image_from_image(image: Image) -> void:
 	var project := Global.current_project
 	var ri := ReferenceImage.new()
@@ -1178,7 +1187,7 @@ func open_ora_file(path: String) -> void:
 		zip_reader.close()
 		return
 	var new_project := Project.new([Frame.new()], path.uri_decode().get_file().get_basename())
-	new_project.clear_author_data()
+	new_project.clear_attribution_data()
 	var selected_layer: BaseLayer
 	var stacks_found := 0
 	var current_stack: Array[GroupLayer] = []
@@ -1285,7 +1294,7 @@ func open_piskel_file(path: String) -> void:
 	var piskel: Dictionary = file_json.piskel
 	var project_name: String = piskel.get("name", path.uri_decode().get_file().get_basename())
 	var new_project := Project.new([], project_name)
-	new_project.clear_author_data()
+	new_project.clear_attribution_data()
 	new_project.size = Vector2i(piskel.width, piskel.height)
 	new_project.fps = piskel.fps
 	new_project.save_path = path.get_basename() + ".pxo"

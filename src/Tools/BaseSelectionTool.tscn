@@ -86,7 +86,6 @@ text = "Rotation:"
 [node name="Rotation" type="TextureProgressBar" parent="." index="11" unique_id=260307741 groups=["ShowOnActiveTransformation"]]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = -180.0
@@ -104,7 +103,6 @@ metadata/_custom_type_script = "uid://tfdhqto6j5j0"
 [node name="Shear" type="TextureProgressBar" parent="." index="12" unique_id=1423914130 groups=["ShowOnActiveTransformation"]]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = -80.0

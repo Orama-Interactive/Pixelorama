@@ -219,7 +219,7 @@ func draw_preview() -> void:
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_LA8
 	)
 
-	var box_points = _control_pts.duplicate()
+	var box_points := _control_pts.duplicate()
 	box_points.push_front(_origin)
 	var canvas := Global.canvas.previews
 
@@ -263,15 +263,15 @@ func draw_preview() -> void:
 
 
 func _preview_updater(point_a: Vector2, point_b: Vector2, str_value: String) -> void:
-	var measurements = Global.canvas.measurements
+	var measurements := Global.canvas.measurements
 	var font = measurements.font
-	var line_color = Color.WHITE
-	var offset = (point_a - point_b).rotated(PI / 2).normalized()
+	var line_color := Color.WHITE
+	var offset := (point_a - point_b).rotated(PI / 2).normalized()
 	measurements.draw_set_transform(Vector2(0.5, 0.5) + offset)
 	measurements.draw_line(point_a + offset, point_b + offset, line_color)
 	measurements.draw_line(point_a, point_a + offset, line_color)
 	measurements.draw_line(point_b, point_b + offset, line_color)
-	var pos = point_a + (point_b - point_a) / 2
+	var pos := point_a + (point_b - point_a) / 2
 	measurements.draw_set_transform(
 		pos + offset * 5, Global.camera.rotation, Vector2.ONE / Global.camera.zoom
 	)
@@ -285,25 +285,25 @@ func _draw_shape() -> void:
 	var images := _get_selected_draw_images()
 	if _fill_inside and !Tools.is_placing_tiles():
 		# converting control points to local basis vectors
-		var a = _control_pts[0] - _origin
-		var gap = _control_pts[1] - _control_pts[0]
-		var b = _control_pts[2] - _control_pts[1]
-		var h = _control_pts[3] - _control_pts[2]
-		h.y = abs(h.y)
-		var color = tool_slot.color
+		var a := _control_pts[0] - _origin
+		var gap := _control_pts[1] - _control_pts[0]
+		var b := _control_pts[2] - _control_pts[1]
+		var h := _control_pts[3] - _control_pts[2]
+		h.y = absi(h.y)
+		var color := tool_slot.color
 		if color.a == 0:
 			_clear()
-		var left_color = (
+		var left_color := (
 			color.lightened(_left_shade_value)
 			if %LeftShadeOption.selected == 0
 			else color.darkened(_left_shade_value)
 		)
-		var right_color = (
+		var right_color := (
 			color.lightened(_right_shade_value)
 			if %RightShadeOption.selected == 0
 			else color.darkened(_right_shade_value)
 		)
-		var box_img = generate_isometric_box(
+		var box_img := generate_isometric_box(
 			a, gap, b, h.y, color, left_color, right_color, _blend_edge_mode
 		)
 		if !box_img:  # Invalid shape
@@ -316,7 +316,7 @@ func _draw_shape() -> void:
 		var draw_rectangle := _get_draw_rect()
 		if Global.current_project.has_selection and project.tiles.mode == Tiles.MODE.NONE:
 			positions = Global.current_project.selection_map.get_point_in_tile_mode(central_point)
-		var box_size = box_img.get_size()
+		var box_size := box_img.get_size()
 		for i in positions.size():
 			var pos := positions[i]
 			var dst := (
@@ -338,13 +338,13 @@ func _draw_shape() -> void:
 			var mirror_y := (project.y_symmetry_point + 1) - dst.y - src_rect.size.y
 
 			if Tools.horizontal_mirror or Tools.vertical_mirror:
-				var brush_copy_x = brush_image.duplicate()
+				var brush_copy_x := brush_image.duplicate()
 				brush_copy_x.flip_x()
-				var brush_copy_y = brush_image.duplicate()
+				var brush_copy_y := brush_image.duplicate()
 				brush_copy_y.flip_y()
 				if Tools.horizontal_mirror:
 					var x_dst := Vector2i(mirror_x, dst.y)
-					var mirr_b_x = remove_unselected_parts_of_brush(brush_copy_x, x_dst)
+					var mirr_b_x := remove_unselected_parts_of_brush(brush_copy_x, x_dst)
 					_draw_brush_image(mirr_b_x, _flip_rect(src_rect, box_size, true, false), x_dst)
 					if Tools.vertical_mirror:
 						brush_copy_x.flip_y()
@@ -358,7 +358,7 @@ func _draw_shape() -> void:
 					var mirr_b_y := remove_unselected_parts_of_brush(brush_copy_y, y_dst)
 					_draw_brush_image(mirr_b_y, _flip_rect(src_rect, box_size, false, true), y_dst)
 	else:
-		var box_points = _control_pts.duplicate()
+		var box_points := _control_pts.duplicate()
 		box_points.push_front(_origin)
 		for points: Array[Vector2i] in _iso_box_outline(box_points).values():
 			for point in points:
@@ -410,9 +410,9 @@ func _iso_box_outline(box_points: Array[Vector2i]) -> Dictionary:
 		edge_0_1.append_array(bresenham_line_thickness(origin, box_points[0], _thickness))
 		if box_points.size() >= 2:  # Isometric box
 			# (point A --> point A + gap)
-			var gap = box_points[1] - box_points[0]
-			var point_b = box_points[1]  # Assume it's the same as gap point for now
-			var gap_points = bresenham_line_thickness(
+			var gap := box_points[1] - box_points[0]
+			var point_b := box_points[1]  # Assume it's the same as gap point for now
+			var gap_points := bresenham_line_thickness(
 				box_points[0], box_points[0] + gap, _thickness
 			)
 			if box_points.size() < 4:  # Optimization
@@ -424,7 +424,7 @@ func _iso_box_outline(box_points: Array[Vector2i]) -> Dictionary:
 					bresenham_line_thickness(box_points[0] + gap, point_b, _thickness)
 				)
 			# draw the other sides of isometric polygon (we also add a 1px vertical offset)
-			var upper_a = point_b - box_points[1] + origin + Vector2i.UP  # origin + point A basis
+			var upper_a := point_b - box_points[1] + origin + Vector2i.UP  # origin + point A basis
 			# (point B --> upper_a + gap)
 			edge_up.append_array(
 				bresenham_line_thickness(point_b + Vector2i.UP, upper_a + gap, _thickness)
@@ -437,7 +437,7 @@ func _iso_box_outline(box_points: Array[Vector2i]) -> Dictionary:
 			)
 			if box_points.size() == 4:
 				# move the polygon up a height
-				var height = Vector2i(0, -abs(box_points[3].y - box_points[2].y))
+				var height := Vector2i(0, -abs(box_points[3].y - box_points[2].y))
 				for i in edge_up.size():
 					if i < edge_0_1.size():
 						edge_0_1[i] += height
@@ -461,8 +461,8 @@ func _iso_box_outline(box_points: Array[Vector2i]) -> Dictionary:
 				edge_1_2.clear()
 				for point in gap_points:
 					# NOTE: Height vector is negative so that it points upwards
-					var end = point + height
-					end.y = min(point.y, end.y)
+					var end := point + height
+					end.y = mini(point.y, end.y)
 					edge_1_2.append_array(Geometry2D.bresenham_line(point, end))
 	if _current_state < BoxState.READY:
 		box_points.resize(box_points.size() - 1)
@@ -494,20 +494,20 @@ func generate_isometric_box(
 	var height: int = (
 		max(0, a.y, (a + gap).y, b.y, (b + gap).y, (a + b + gap).y)
 		- min(0, a.y, (a + gap).y, b.y, (b + gap).y, (a + b + gap).y)
-		+ abs(box_height + _thickness + 1)
+		+ absi(box_height + _thickness + 1)
 	)
 	# starting point of upper plate
-	var u_st = Vector2i(
+	var u_st := Vector2i(
 		floori(_thickness / 2.0),
 		(
-			abs(min(0, a.y, b.y, (b + gap).y, (a + gap).y, (a + gap + b).y))
+			absi(min(0, a.y, b.y, (b + gap).y, (a + gap).y, (a + gap + b).y))
 			+ 1
 			+ floori(_thickness / 2.0)
 		)
 	)
 	# starting point of lower plate
-	var b_st = u_st + h
-	# a convenient lambdha function
+	var b_st := u_st + h
+	# a convenient lambda function
 	var basis_to_polygon := func(basis_steps: Array) -> Array[Vector2i]:
 		var poly: Array[Vector2i] = [basis_steps.pop_front()]
 		for i in basis_steps.size():
@@ -520,7 +520,7 @@ func generate_isometric_box(
 	var b_l_poly: PackedVector2Array = basis_to_polygon.call([b_st, a, -h, -a])
 	var b_r_poly: PackedVector2Array = basis_to_polygon.call([b_st + a + gap, b, -h, -b])
 	var b_poly: Array[Vector2i] = basis_to_polygon.call([b_st, a, gap, b, -h])
-	var edge_points = _iso_box_outline(b_poly)
+	var edge_points := _iso_box_outline(b_poly)
 	var edge_up: Array[Vector2i] = edge_points.get("edge_up", [])
 	var edge_down_left: Array[Vector2i] = edge_points.get("edge_down_left", [])
 	var edge_down_right: Array[Vector2i] = edge_points.get("edge_down_right", [])
@@ -532,12 +532,12 @@ func generate_isometric_box(
 
 	if width <= 0 or height <= 0:
 		return
-	var image = Image.create(width, height, false, Image.FORMAT_RGBA8)
+	var image := Image.create(width, height, false, Image.FORMAT_RGBA8)
 	for x: int in width:
 		var top_started: bool = false
 		var middle_edge_offset := INF  # Allows top polygon to be drawn before starting middle edge.
 		for y: int in height:
-			var point = Vector2i(x, y)
+			var point := Vector2i(x, y)
 			## Edge coloring
 			var edge_color: Color
 			var should_color := false
@@ -556,8 +556,8 @@ func generate_isometric_box(
 					if point.y < middle_edge_offset and blend_mode == EdgeBlend.NONE:
 						image.set_pixelv(point, c_t)
 						continue
-				var least_x = edge_1_2[0].x
-				var max_x = edge_1_2[edge_1_2.size() - 1].x
+				var least_x := edge_1_2[0].x
+				var max_x := edge_1_2[edge_1_2.size() - 1].x
 				if point.x <= least_x + floori((max_x - least_x) / 2.0):
 					edge_color = get_blend_color(c_l, c_r, blend_mode)
 				else:
@@ -596,12 +596,12 @@ func generate_isometric_box(
 	return image
 
 
-func get_blend_color(face_color: Color, interface_color: Color, blend_mode):
-	var tool_color = tool_slot.color
+func get_blend_color(face_color: Color, interface_color: Color, blend_mode: EdgeBlend) -> Color:
+	var tool_color := tool_slot.color
 	match blend_mode:
 		EdgeBlend.TOOL_COLOR:
 			if _color_from_other_tool:
-				var button = MOUSE_BUTTON_LEFT
+				var button := MOUSE_BUTTON_LEFT
 				if tool_slot.button == MOUSE_BUTTON_LEFT:
 					button = MOUSE_BUTTON_RIGHT
 				return Tools.get_assigned_color(button)
@@ -635,14 +635,14 @@ func angle_constraint(point: Vector2) -> Vector2i:
 
 func box_constraint(old_point: Vector2i, point: Vector2i, state: int) -> Vector2i:
 	if state == BoxState.SIDE_A:
-		point.x = max(_origin.x, point.x)
+		point.x = maxi(_origin.x, point.x)
 		if state != _current_state:
 			if Vector2(_last_pixel - _origin).angle() >= Vector2(point - _origin).angle():
 				point = old_point
 	elif state == BoxState.SIDE_GAP:
 		# restriction on Gap joining two sides:
 		# It should always be the same height as SIDE_A with x-value greater or equal than SIDE_A)
-		point.x = max(_control_pts[0].x, point.x)
+		point.x = maxi(_control_pts[0].x, point.x)
 		if Vector2(point - _origin).angle() > Vector2(_control_pts[0] - _origin).angle():
 			point = old_point
 	elif state == BoxState.SIDE_B:
@@ -650,7 +650,7 @@ func box_constraint(old_point: Vector2i, point: Vector2i, state: int) -> Vector2
 		# It should always have x-value greater or equal than SIDE_GAP
 		# And is placed such that it's angle with respect to origin is always greater than
 		# angle of SIDE_A point with respect to origin
-		point.x = max(_control_pts[1].x, point.x)
+		point.x = maxi(_control_pts[1].x, point.x)
 		if (
 			Vector2(point - _control_pts[0]).angle()
 			> Vector2(_control_pts[1] - _control_pts[0]).angle()
@@ -660,7 +660,7 @@ func box_constraint(old_point: Vector2i, point: Vector2i, state: int) -> Vector2
 		# restriction on H:
 		# It's x-value is always constant. and y-value is always in upward direction
 		point.x = _control_pts[2].x
-		point.y = _control_pts[2].y - abs(floori(point.distance_to(_control_pts[2])))
+		point.y = _control_pts[2].y - absi(floori(point.distance_to(_control_pts[2])))
 	return point
 
 

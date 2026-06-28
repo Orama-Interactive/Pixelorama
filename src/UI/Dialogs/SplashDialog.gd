@@ -1,8 +1,12 @@
 extends AcceptDialog
 
+const ROROTO_BREAKFAST := preload("uid://di1mne21susb2")
+const ROROTO_EVENING := preload("uid://coiphd8y07hid")
+const ROROTO_LUNCH := preload("uid://bt4gfcc0mycdl")
+
 var artworks: Array[Artwork] = [
 	Artwork.new(
-		preload("res://assets/graphics/splash_screen/artworks/roroto.png"),
+		ROROTO_BREAKFAST,
 		"Roroto Sic",
 		"https://linktr.ee/Roroto_Sic",
 		Color.WHITE,
@@ -14,6 +18,20 @@ var artworks: Array[Artwork] = [
 		"https://bearsaidno.neocities.org/",
 		Color.WHITE,
 		"Licensed under MIT"
+	),
+	Artwork.new(
+		preload("res://assets/graphics/splash_screen/artworks/kellay.png"),
+		"Kellay",
+		"https://bsky.app/profile/awfukellay.bsky.social",
+		Color.WHITE,
+		""
+	),
+	Artwork.new(
+		preload("res://assets/graphics/splash_screen/artworks/momo.png"),
+		"Momo",
+		"https://linktr.ee/mypeachtea",
+		Color.WHITE,
+		""
 	),
 ]
 
@@ -47,42 +65,56 @@ class Artwork:
 
 
 func _ready() -> void:
+	set_process(false)
 	get_ok_button().visible = false
 	if OS.get_name() == "Web":
 		open_last_btn.visible = false
 
 
+## Only gets called if there are animated artworks.
 func _process(_delta: float) -> void:
 	splash_art_texturerect.queue_redraw()
 
 
-func _on_SplashDialog_about_to_show() -> void:
+func _on_about_to_popup() -> void:
 	if Global.config_cache.has_section_key("preferences", "startup"):
 		show_on_startup.button_pressed = not Global.config_cache.get_value("preferences", "startup")
 	title = "Pixelorama" + " " + Global.current_version
-
-	if not artworks.is_empty():
-		chosen_artwork = randi() % artworks.size()
-		change_artwork(0)
-	else:
+	if artworks.is_empty():
 		$Contents/SplashArt/ChangeArtBtnLeft.visible = false
 		$Contents/SplashArt/ChangeArtBtnRight.visible = false
+		return
+
+	chosen_artwork = randi() % artworks.size()
+	change_artwork(0)
 
 
 func change_artwork(direction: int) -> void:
 	chosen_artwork = wrapi(chosen_artwork + direction, 0, artworks.size())
+
+	# Roroto v1.2 specific code, used to determine which artwork to show
+	# depending on the current time of day.
+	if chosen_artwork == 0:
+		var roroto_time := Time.get_time_dict_from_system()
+		if roroto_time.hour >= 4 and roroto_time.hour < 12:
+			artworks[chosen_artwork].artwork = ROROTO_BREAKFAST
+		if roroto_time.hour >= 12 and roroto_time.hour < 19:
+			artworks[chosen_artwork].artwork = ROROTO_LUNCH
+		if roroto_time.hour < 4 or roroto_time.hour >= 19:
+			artworks[chosen_artwork].artwork = ROROTO_EVENING
+
 	splash_art_texturerect.texture = artworks[chosen_artwork].artwork
 	set_process(artworks[chosen_artwork].artwork is AnimatedTexture)
 	art_by_label.text = tr("Art by: %s") % artworks[chosen_artwork].artist_name
 	art_by_label.tooltip_text = artworks[chosen_artwork].artist_link
 	version_text.modulate = artworks[chosen_artwork].text_modulation
 	# Set an ambient
-	var ambient = GradientTexture2D.new()
+	var ambient := GradientTexture2D.new()
 	ambient.gradient = Gradient.new()
 	ambient.width = 100
 	ambient.height = 100
-	var col_a = splash_art_texturerect.texture.get_image().get_pixel(0, 0)
-	var col_b = Color(col_a.r, col_a.g, col_a.b, 0.5)
+	var col_a := splash_art_texturerect.texture.get_image().get_pixel(0, 0)
+	var col_b := Color(col_a.r, col_a.g, col_a.b, 0.5)
 	ambient.gradient.set_color(0, col_a)
 	ambient.gradient.set_color(1, col_b)
 	ambient.fill_from = Vector2(0.5, 0.5)

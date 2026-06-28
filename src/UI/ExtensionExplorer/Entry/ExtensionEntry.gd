@@ -71,12 +71,13 @@ func _on_ImageRequest_request_completed(
 ) -> void:
 	# Update the received image
 	thumbnail_request.queue_free()
-	var image := OpenSave.load_image_from_buffer(body)
-	if image.is_empty():
-		return
-	var texture := ImageTexture.create_from_image(image)
-	small_picture.texture_normal = texture
-	small_picture.pressed.connect(enlarge_thumbnail.bind(texture))
+	if body.size() > 0:
+		var image := OpenSave.load_image_from_buffer(body)
+		if image.is_empty():
+			return
+		var texture := ImageTexture.create_from_image(image)
+		small_picture.texture_normal = texture
+		small_picture.pressed.connect(enlarge_thumbnail.bind(texture))
 
 
 func _on_readme_button_pressed() -> void:
@@ -86,8 +87,14 @@ func _on_readme_button_pressed() -> void:
 func _on_Download_pressed() -> void:
 	down_button.disabled = true
 	extension_downloader.download_file = download_path
-	extension_downloader.request(download_link)
-	prepare_progress()
+	var error := extension_downloader.request(download_link)
+	if error == OK:
+		prepare_progress()
+	else:
+		printerr(str("Unable to send request, Code: ", error, " (", error_string(error), ")"))
+		_show_error_message(
+			str("Unable to send request,\nCode: ", error, " (", error_string(error), ")")
+		)
 
 
 ## Called after the extension downloader has finished its job
@@ -104,15 +111,7 @@ func _on_DownloadRequest_request_completed(
 		else:
 			_show_error_message("Unable to download extension.\nSHA256 mismatch")
 	else:
-		_show_error_message(
-			str(
-				"Unable to download extension.\nHttp Code: ",
-				result,
-				" (",
-				error_string(result),
-				")"
-			)
-		)
+		_show_error_message(str("Unable to download extension.\nHttp Code: ", result))
 	DirAccess.remove_absolute(download_path)
 
 

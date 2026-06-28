@@ -89,9 +89,11 @@ autostart = true
 
 [node name="ImageRequest" type="HTTPRequest" parent="." unique_id=2139344464]
 unique_name_in_owner = true
+timeout = 10.0
 
 [node name="DownloadRequest" type="HTTPRequest" parent="." unique_id=775601248]
 unique_name_in_owner = true
+timeout = 10.0
 
 [node name="Alert" type="AcceptDialog" parent="." unique_id=458474820]
 unique_name_in_owner = true

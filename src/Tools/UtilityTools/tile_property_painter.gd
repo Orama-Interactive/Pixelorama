@@ -95,7 +95,10 @@ func set_tile_bit(pos: Vector2i) -> void:
 	if tile_index == 0:
 		return
 	var terrain_id := TileSetPanel.current_terrain_index
-	if _erase:
+	var should_erase := _erase
+	if Global.single_tool_mode and tool_slot.button == MOUSE_BUTTON_RIGHT:
+		should_erase = not should_erase
+	if should_erase:
 		terrain_id = -1
 	var tile := cel.tileset.tiles[tile_index]
 	var bit_info := get_appropriate_bit(pos, cel, tile)
@@ -111,7 +114,7 @@ func set_tile_bit(pos: Vector2i) -> void:
 
 func get_appropriate_bit(pos: Vector2i, cel: CelTileMap, tile: TileSetCustom.Tile) -> Array:
 	@warning_ignore("integer_division")
-	var half_size := cel.tile_size / 2
+	var half_size := cel.get_tile_size() / 2
 	var tileset := cel.tileset
 	var cell_position := get_cell_position(pos)
 	var cell_position_pixel_coords := cel.get_pixel_coords(cell_position)

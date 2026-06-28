@@ -42,6 +42,7 @@ shader_parameter/first_color = Color(1, 1, 1, 1)
 shader_parameter/second_color = Color(0, 0, 0, 1)
 shader_parameter/animated = true
 shader_parameter/frequency = 200.0
+shader_parameter/time = 0.0
 shader_parameter/stripe_direction = 0.5
 
 [sub_resource type="ShaderMaterial" id="3"]
