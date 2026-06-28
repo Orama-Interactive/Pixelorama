@@ -21,25 +21,28 @@ func _ready() -> void:
 
 
 func _draw() -> void:
-	var current_layer := Global.current_project.layers[layer_index]
-	var self_and_ancestors := current_layer.get_ancestors()
+	var project := Global.current_project
+	var layer := project.layers[layer_index]
+	var self_and_ancestors := layer.get_ancestors()
 	if self_and_ancestors.is_empty():  # Layer has no parents.
 		return
 	var color := Global.control.theme.get_color(&"font_color", &"Label")
 	var half_size := size / 2
 	var xx: int
 	var center: Vector2
-	self_and_ancestors.pop_back()
+	self_and_ancestors.pop_back()  # Remove the oldest ancestor.
 	self_and_ancestors.reverse()
-	self_and_ancestors.append(current_layer)
+	self_and_ancestors.append(layer)
 	for i in self_and_ancestors.size():
-		var layer := self_and_ancestors[i]
+		var ancestor := self_and_ancestors[i]
 		var line_reaching_bottom := false
-		if is_instance_valid(layer.parent) and layer.parent.get_child_count(false) > 0:
-			var first_child := layer.parent.get_children(false)[0]
-			if i < self_and_ancestors.size() - 1 and layer == first_child:
+		if is_instance_valid(ancestor.parent) and ancestor.parent.get_child_count(false) > 0:
+			var bottom_child := ancestor.parent.get_children(false)[0]
+			# If the parent is the bottom-most child of a group layer,
+			# do not draw an in-between line.
+			if i < self_and_ancestors.size() - 1 and ancestor == bottom_child:
 				continue
-			line_reaching_bottom = layer != first_child
+			line_reaching_bottom = ancestor != bottom_child
 		xx = i * hierarchy_depth_pixel_shift + X_OFFSET
 		var center_top := Vector2(xx, 0)
 		var center_bottom := Vector2(xx, size.y)
