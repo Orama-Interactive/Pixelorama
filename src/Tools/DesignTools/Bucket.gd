@@ -617,6 +617,7 @@ func commit_undo() -> void:
 		layer = project.current_layer
 
 	project.undo_redo.create_action("Draw")
+	manage_undo_redo_palettes()
 	var layers_to_update := PackedInt32Array()
 	for l in Global.current_project.layers:
 		if l is LayerTileMap:
