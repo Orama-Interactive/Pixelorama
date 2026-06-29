@@ -107,9 +107,7 @@ func get_animated_property(frame_index: int, param: String) -> Variant:
 		if trans_type == TRANS_CONSTANT:
 			return min_value
 		var ease_type: Tween.EaseType = min_params.get("ease", Tween.EASE_IN)
-		return Tween.interpolate_value(
-			min_value, delta, elapsed, duration, trans_type, ease_type
-		)
+		return Tween.interpolate_value(min_value, delta, elapsed, duration, trans_type, ease_type)
 
 
 func set_keyframe(
@@ -129,10 +127,7 @@ func set_keyframe(
 	keyframe_set.emit()
 
 
-func unset_keyframe(
-	param_name: String,
-	frame_index: int
-) -> void:
+func unset_keyframe(param_name: String, frame_index: int) -> void:
 	if animated_params.has(param_name):
 		animated_params[param_name].erase(frame_index)
 
