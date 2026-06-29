@@ -337,10 +337,10 @@ func _on_tile_size_slider_value_changed(value: Vector2) -> void:
 
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_do_method(func(): Global.canvas.queue_redraw())
-	project.undo_redo.add_do_method(func(): Global.canvas.grid.queue_redraw())
+	project.undo_redo.add_do_method(func(): Global.grid_updated.emit())
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_undo_method(func(): Global.canvas.queue_redraw())
-	project.undo_redo.add_undo_method(func(): Global.canvas.grid.queue_redraw())
+	project.undo_redo.add_undo_method(func(): Global.grid_updated.emit())
 	project.undo_redo.commit_action()
 
 
@@ -362,10 +362,10 @@ func _on_tile_shape_option_button_item_selected(index: TileSet.TileShape) -> voi
 					project.undo_redo.add_undo_property(cel, "tile_shape", cel.tile_shape)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_do_method(func(): Global.canvas.queue_redraw())
-	project.undo_redo.add_do_method(func(): Global.canvas.grid.queue_redraw())
+	project.undo_redo.add_do_method(func(): Global.grid_updated.emit())
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_undo_method(func(): Global.canvas.queue_redraw())
-	project.undo_redo.add_undo_method(func(): Global.canvas.grid.queue_redraw())
+	project.undo_redo.add_undo_method(func(): Global.grid_updated.emit())
 	project.undo_redo.commit_action()
 
 
@@ -386,10 +386,10 @@ func _on_tile_layout_option_button_item_selected(index: TileSet.TileLayout) -> v
 					project.undo_redo.add_undo_property(cel, "tile_layout", cel.tile_layout)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_do_method(func(): Global.canvas.queue_redraw())
-	project.undo_redo.add_do_method(func(): Global.canvas.grid.queue_redraw())
+	project.undo_redo.add_do_method(func(): Global.grid_updated.emit())
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_undo_method(func(): Global.canvas.queue_redraw())
-	project.undo_redo.add_undo_method(func(): Global.canvas.grid.queue_redraw())
+	project.undo_redo.add_undo_method(func(): Global.grid_updated.emit())
 	project.undo_redo.commit_action()
 
 
@@ -413,10 +413,10 @@ func _on_tile_offset_axis_button_item_selected(index: TileSet.TileOffsetAxis) ->
 					)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_do_method(func(): Global.canvas.queue_redraw())
-	project.undo_redo.add_do_method(func(): Global.canvas.grid.queue_redraw())
+	project.undo_redo.add_do_method(func(): Global.grid_updated.emit())
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_undo_method(func(): Global.canvas.queue_redraw())
-	project.undo_redo.add_undo_method(func(): Global.canvas.grid.queue_redraw())
+	project.undo_redo.add_undo_method(func(): Global.grid_updated.emit())
 	project.undo_redo.commit_action()
 
 

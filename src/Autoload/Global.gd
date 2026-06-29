@@ -23,6 +23,8 @@ signal collapse_main_menu_changed  ## Emitted when [member collapse_main_menu] c
 signal single_tool_mode_changed(mode: bool)  ## Emitted when [member single_tool_mode] changes.
 ## Emitted when [member share_options_between_tools] changes.
 signal share_options_between_tools_changed(mode: bool)
+signal grid_updated  ## Emitted when the grid needs to be redrawn.
+signal pixel_grid_updated  ## Emitted when the pixel grid needs to be redrawn.
 @warning_ignore("unused_signal")
 signal on_cursor_position_text_changed(text: String)
 @warning_ignore("unused_signal")
@@ -391,16 +393,14 @@ var pixel_grid_show_at_zoom := 1500.0:  # percentage
 		if value == pixel_grid_show_at_zoom:
 			return
 		pixel_grid_show_at_zoom = value
-		if is_instance_valid(canvas.pixel_grid):
-			canvas.pixel_grid.queue_redraw()
+		pixel_grid_updated.emit()
 ## Found in Preferences. The color of pixel grid.
 var pixel_grid_color := Color("21212191"):
 	set(value):
 		if value == pixel_grid_color:
 			return
 		pixel_grid_color = value
-		if is_instance_valid(canvas.pixel_grid):
-			canvas.pixel_grid.queue_redraw()
+		pixel_grid_updated.emit()
 ## Found in Preferences. The color of guides.
 var guide_color := Color.PURPLE:
 	set(value):
@@ -726,24 +726,21 @@ class Grid:
 			if value == grid_type:
 				return
 			grid_type = value
-			if is_instance_valid(Global.canvas.grid):
-				Global.canvas.grid.queue_redraw()
+			Global.grid_updated.emit()
 	## Found in Preferences. The size of the grid.
 	var grid_size := Vector2i(2, 2):
 		set(value):
 			if value == grid_size:
 				return
 			grid_size = value
-			if is_instance_valid(Global.canvas.grid):
-				Global.canvas.grid.queue_redraw()
+			Global.grid_updated.emit()
 	## Found in Preferences. The grid offset from top-left corner of the canvas.
 	var grid_offset := Vector2i.ZERO:
 		set(value):
 			if value == grid_offset:
 				return
 			grid_offset = value
-			if is_instance_valid(Global.canvas.grid):
-				Global.canvas.grid.queue_redraw()
+			Global.grid_updated.emit()
 	## Found in Preferences. If [code]true[/code], The grid draws over the area extended by
 	## tile-mode as well.
 	var grid_draw_over_tile_mode := false:
@@ -751,32 +748,28 @@ class Grid:
 			if value == grid_draw_over_tile_mode:
 				return
 			grid_draw_over_tile_mode = value
-			if is_instance_valid(Global.canvas.grid):
-				Global.canvas.grid.queue_redraw()
+			Global.grid_updated.emit()
 	## Found in Preferences. The color of grid.
 	var grid_color := Color.BLACK:
 		set(value):
 			if value == grid_color:
 				return
 			grid_color = value
-			if is_instance_valid(Global.canvas.grid):
-				Global.canvas.grid.queue_redraw()
+			Global.grid_updated.emit()
 	## Found in Preferences. The enables/disables pixelation mode of grid.
 	var is_pixelated := false:
 		set(value):
 			if value == is_pixelated:
 				return
 			is_pixelated = value
-			if is_instance_valid(Global.canvas.grid):
-				Global.canvas.grid.queue_redraw()
+			Global.grid_updated.emit()
 	## Found in Preferences. contains special keywords that may not be common among grids.
 	var special_flags := PackedStringArray():
 		set(value):
 			if value == special_flags:
 				return
 			special_flags = value
-			if is_instance_valid(Global.canvas.grid):
-				Global.canvas.grid.queue_redraw()
+			Global.grid_updated.emit()
 
 	func _init(properties := {}) -> void:
 		Global.grids.append(self)
@@ -939,8 +932,7 @@ func get_system_info() -> String:
 func update_grids(grids_data: Dictionary) -> void:
 	# Remove old grids
 	grids.clear()
-	if is_instance_valid(Global.canvas.grid):
-		Global.canvas.grid.queue_redraw()
+	grid_updated.emit()
 	# ADD new ones
 	for grid_idx in grids_data.size():
 		Grid.new(grids_data[grid_idx])  # gets auto added to grids array

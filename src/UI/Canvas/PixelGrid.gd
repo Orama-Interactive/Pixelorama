@@ -2,6 +2,7 @@ extends Node2D
 
 
 func _ready() -> void:
+	Global.pixel_grid_updated.connect(queue_redraw)
 	Global.project_about_to_switch.connect(_on_project_about_to_switch)
 	Global.project_switched.connect(_on_project_switched)
 	Global.camera.zoom_changed.connect(queue_redraw)

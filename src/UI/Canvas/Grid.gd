@@ -5,6 +5,7 @@ var unique_iso_lines := PackedVector2Array()
 
 
 func _ready() -> void:
+	Global.grid_updated.connect(queue_redraw)
 	Global.project_about_to_switch.connect(_on_project_about_to_switch)
 	Global.project_switched.connect(_on_project_switched)
 	Global.cel_switched.connect(queue_redraw)
