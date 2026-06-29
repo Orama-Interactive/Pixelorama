@@ -2,6 +2,8 @@ extends Node2D
 
 
 func _ready() -> void:
+	Global.project_about_to_switch.connect(_on_project_about_to_switch)
+	Global.project_switched.connect(_on_project_switched)
 	Global.camera.zoom_changed.connect(queue_redraw)
 
 
@@ -28,3 +30,14 @@ func _draw() -> void:
 
 	if not grid_multiline_points.is_empty():
 		draw_multiline(grid_multiline_points, Global.pixel_grid_color)
+
+
+func _on_project_about_to_switch() -> void:
+	var project := Global.current_project
+	project.resized.disconnect(queue_redraw)
+
+
+func _on_project_switched() -> void:
+	var project := Global.current_project
+	if not project.resized.is_connected(queue_redraw):
+		project.resized.connect(queue_redraw)

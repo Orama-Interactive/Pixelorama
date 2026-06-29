@@ -5,7 +5,8 @@ var unique_iso_lines := PackedVector2Array()
 
 
 func _ready() -> void:
-	Global.project_switched.connect(queue_redraw)
+	Global.project_about_to_switch.connect(_on_project_about_to_switch)
+	Global.project_switched.connect(_on_project_switched)
 	Global.cel_switched.connect(queue_redraw)
 
 
@@ -485,3 +486,14 @@ func get_isometric_polyline(
 		lines.append(tile_size_x + Vector2i(point) + Vector2i(0, centre.y))
 		lines.append(Vector2i(tile_size) + Vector2i(point) - Vector2i(0, centre.y))
 	return lines
+
+
+func _on_project_about_to_switch() -> void:
+	var project := Global.current_project
+	project.resized.disconnect(queue_redraw)
+
+
+func _on_project_switched() -> void:
+	var project := Global.current_project
+	if not project.resized.is_connected(queue_redraw):
+		project.resized.connect(queue_redraw)
