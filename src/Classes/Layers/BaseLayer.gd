@@ -252,9 +252,7 @@ func link_cel(cel: BaseCel, link_set = null) -> void:
 func get_opacity(frame_index := -1) -> float:
 	if frame_index == -1:
 		return opacity
-	var dict := {"opacity": opacity}
-	dict = get_animated_property(frame_index, "opacity", animated_params["opacity"], dict)
-	return dict["opacity"]
+	return get_animated_property(frame_index, "opacity")
 
 
 ## Returns a copy of the [param cel]'s [Image] with all of the effects applied to it.
@@ -279,12 +277,12 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 	for effect in effects:
 		if not effect.enabled or not is_instance_valid(effect.shader):
 			continue
-		var params := effect.get_params(frame_index)
-		params["PXO_time"] = frame.position_in_seconds(project)
-		params["PXO_frame_index"] = frame_index
-		params["PXO_layer_index"] = index
+		var interpol_params := effect.get_params(frame_index)
+		interpol_params["PXO_time"] = frame.position_in_seconds(project)
+		interpol_params["PXO_frame_index"] = frame_index
+		interpol_params["PXO_layer_index"] = index
 		var shader_image_effect := ShaderImageEffect.new()
-		shader_image_effect.generate_image(image, effect.shader, params, image_size)
+		shader_image_effect.generate_image(image, effect.shader, interpol_params, image_size)
 	# Inherit effects from the parents, if their blend mode is set to pass through
 	for ancestor in get_ancestors():
 		if ancestor.blend_mode != BlendModes.PASS_THROUGH:
@@ -294,12 +292,12 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 		for effect in ancestor.effects:
 			if not effect.enabled:
 				continue
-			var params := effect.get_params(frame_index)
-			params["PXO_time"] = frame.position_in_seconds(project)
-			params["PXO_frame_index"] = frame_index
-			params["PXO_layer_index"] = index
+			var interpol_params := effect.get_params(frame_index)
+			interpol_params["PXO_time"] = frame.position_in_seconds(project)
+			interpol_params["PXO_frame_index"] = frame_index
+			interpol_params["PXO_layer_index"] = index
 			var shader_image_effect := ShaderImageEffect.new()
-			shader_image_effect.generate_image(image, effect.shader, params, image_size)
+			shader_image_effect.generate_image(image, effect.shader, interpol_params, image_size)
 	return image
 
 

@@ -435,7 +435,7 @@ func add_effect_keyframe(effect: AnimatableObject, frame_index: int, param_name:
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Add keyframe")
 	undo_redo.add_do_method(effect.set_keyframe.bind(param_name, frame_index))
-	undo_redo.add_undo_method(func(): effect.animated_params[param_name].erase(frame_index))
+	undo_redo.add_undo_method(effect.unset_keyframe.bind(param_name, frame_index))
 	undo_redo.add_undo_method(unselect_keyframe.bind(next_keyframe_id))
 	undo_redo.add_do_method(recreate_timeline)
 	undo_redo.add_undo_method(recreate_timeline)
