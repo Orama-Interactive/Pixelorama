@@ -1,6 +1,6 @@
 # gdlint: ignore=max-public-methods
-class_name BaseLayer
-extends RefCounted
+@abstract class_name BaseLayer
+extends AnimatableObject
 ## Base class for layer properties. Different layer types extend from this class.
 
 signal name_changed  ## Emits when [member name] is changed.
@@ -71,7 +71,16 @@ var ui_color := Color(0, 0, 0, 0):
 	set(value):
 		ui_color = value
 		ui_color_changed.emit()
+
 var text_server := TextServerManager.get_primary_interface()
+
+
+func _init(_project: Project, _name := "") -> void:
+	project = _project
+	name = _name
+	params["opacity"] = opacity
+	animated_params["opacity"] = {}
+	param_properties["opacity"] = {"hint_string": "0.0,1.0,0.01"}
 
 
 ## Returns true if this is a direct or indirect parent of layer
@@ -240,6 +249,14 @@ func link_cel(cel: BaseCel, link_set = null) -> void:
 			cel_link_sets.append(link_set)
 
 
+func get_opacity(frame_index := -1) -> float:
+	if frame_index == -1:
+		return opacity
+	var dict := {"opacity": opacity}
+	dict = get_animated_property(frame_index, "opacity", animated_params["opacity"], dict)
+	return dict["opacity"]
+
+
 ## Returns a copy of the [param cel]'s [Image] with all of the effects applied to it.
 ## This method is not destructive as it does NOT change the data of the image,
 ## it just returns a copy.
@@ -320,6 +337,7 @@ func serialize() -> Dictionary:
 		"ui_color": ui_color,
 		"parent": parent.index if is_instance_valid(parent) else -1,
 		"effects": effect_data,
+		"animated_params": var_to_str(animated_params),
 	}
 	if not user_data.is_empty():
 		dict["user_data"] = user_data
@@ -373,6 +391,8 @@ func deserialize(dict: Dictionary) -> void:
 			effect.layer = self
 			effect.deserialize(effect_dict)
 			effects.append(effect)
+	if dict.has("animated_params"):
+		animated_params = str_to_var(dict["animated_params"])
 
 
 ## Returns a layer type that is one of the [param LayerTypes]

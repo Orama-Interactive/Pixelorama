@@ -9,8 +9,7 @@ var _blend_generator := ShaderImageEffect.new()
 
 
 func _init(_project: Project, _name := "") -> void:
-	project = _project
-	name = _name
+	super(_project, _name)
 	blend_mode = BlendModes.PASS_THROUGH
 
 

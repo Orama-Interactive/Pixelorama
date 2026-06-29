@@ -7,7 +7,7 @@ enum TrackTypes { LAYER_EFFECT }
 
 var timeline: KeyframeTimeline
 var type := TrackTypes.LAYER_EFFECT
-var effect: LayerEffect
+var effect: AnimatableObject
 var param_name: String
 var is_property := false
 var popup_menu := PopupMenu.new()

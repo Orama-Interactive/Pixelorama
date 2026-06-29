@@ -27,7 +27,7 @@ var tile_offset_axis := TileSet.TILE_OFFSET_AXIS_HORIZONTAL
 
 
 func _init(_project: Project, _tileset: TileSetCustom, _name := "") -> void:
-	super._init(_project, _name)
+	super(_project, _name)
 	set_tileset(_tileset)
 	if not project.tilesets.has(tileset) and is_instance_valid(tileset):
 		project.add_tileset(tileset)

@@ -31,7 +31,10 @@ var ui_color := Color(0, 0, 0, 0):
 
 
 func get_final_opacity(layer: BaseLayer) -> float:
-	return layer.opacity * opacity
+	var project := layer.project
+	var frame := get_frame(project)
+	var frame_index := project.frames.find(frame)
+	return layer.get_opacity(frame_index) * opacity
 
 
 func get_frame(project: Project) -> Frame:

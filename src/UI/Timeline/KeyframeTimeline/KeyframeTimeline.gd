@@ -117,17 +117,28 @@ func recreate_timeline() -> void:
 	var h_scroll := track_scroll_container.scroll_horizontal
 	var v_scroll := track_scroll_container.scroll_vertical
 	layer_element_tree.clear()
-	layer_element_tree.create_item()
 	for child in track_container.get_children():
 		child.queue_free()
+	var root := layer_element_tree.create_item()
+	var layer_item := add_section(
+		current_layer.name, KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT, root
+	)
+	#region Add tracks for layer's animatable properties.
+	for param_name in current_layer.animated_params:
+		add_property(
+			param_name, KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT, layer_item, current_layer
+		)
+	#endregion
 	#region Add tracks for animatable objects.
 	for effect in current_layer.effects:
-		var effect_item := add_section(effect.name, KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT)
+		var effect_item := add_section(
+			effect.name, KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT, layer_item
+		)
 		for param_name in effect.params:
 			if param_name in ["PXO_time", "PXO_frame_index", "PXO_layer_index"]:
 				continue
 			var value = effect.params[param_name]
-			if not LayerEffect.is_animatable_type(value):
+			if not AnimatableObject.is_animatable_type(value):
 				continue
 			add_property(
 				param_name, KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT, effect_item, effect
@@ -141,9 +152,9 @@ func recreate_timeline() -> void:
 
 
 func add_section(
-	section_name: StringName, track_type: KeyframeAnimationTrack.TrackTypes
+	section_name: StringName, track_type: KeyframeAnimationTrack.TrackTypes, parent_item: TreeItem
 ) -> TreeItem:
-	var tree_item := layer_element_tree.create_item()
+	var tree_item := parent_item.create_child()
 	tree_item.set_text(0, section_name)
 	var track := KeyframeAnimationTrack.new()
 	track.type = track_type
@@ -158,7 +169,7 @@ func add_property(
 	property: StringName,
 	param_type: KeyframeAnimationTrack.TrackTypes,
 	parent_item: TreeItem,
-	animatable_object: RefCounted,
+	animatable_object: AnimatableObject,
 	animation_dictionary_name := &"animated_params"
 ):
 	var param_tree_item := parent_item.create_child()
@@ -262,7 +273,10 @@ func select_keyframes() -> void:
 	var property_properties := {}  # I apologize for the horrible variable name.
 	if track.type == KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT:
 		property_properties = track.effect.param_properties[param_name].duplicate()
-	property_properties["hint_string"] = "or_less,or_greater"
+	if property_properties.has("hint_string"):
+		property_properties["hint_string"] += ",or_less,or_greater"
+	else:
+		property_properties["hint_string"] = "or_less,or_greater"
 	var node := Global.create_node_from_variable(
 		property, _on_keyframe_property_changed.bind("value"), property_properties
 	)
@@ -271,7 +285,7 @@ func select_keyframes() -> void:
 	var trans_type = dict[param_name][frame_index]["trans"]
 	var ease_type = dict[param_name][frame_index]["ease"]
 
-	if LayerEffect.is_interpolatable_type(property):
+	if AnimatableObject.is_interpolatable_type(property):
 		var trans_label := Label.new()
 		trans_label.text = "Interpolation:"
 		trans_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -292,7 +306,7 @@ func select_keyframes() -> void:
 		trans_type_options.add_item("Bouncing at the end", Tween.TRANS_BOUNCE)
 		trans_type_options.add_item("Backing out at ends", Tween.TRANS_BACK)
 		trans_type_options.add_item("Spring towards the end", Tween.TRANS_SPRING)
-		trans_type_options.add_item("Constant", Tween.TRANS_SPRING + 1)
+		trans_type_options.add_item("Constant", AnimatableObject.TRANS_CONSTANT)
 		trans_type_options.select(trans_type)
 		trans_type_options.item_selected.connect(_on_keyframe_property_changed.bind("trans"))
 		trans_type_options.fit_to_longest_item = false
@@ -416,7 +430,7 @@ func _update_keyframe_property_ui(dict: Dictionary, keyframe_id: int) -> void:
 		ease_type_options.select(ease_type)
 
 
-func add_effect_keyframe(effect: LayerEffect, frame_index: int, param_name: String) -> void:
+func add_effect_keyframe(effect: AnimatableObject, frame_index: int, param_name: String) -> void:
 	selected_keyframes = [next_keyframe_id]
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Add keyframe")

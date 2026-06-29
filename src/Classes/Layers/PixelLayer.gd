@@ -2,12 +2,6 @@ class_name PixelLayer
 extends BaseLayer
 ## A class for standard pixel layer properties.
 
-
-func _init(_project: Project, _name := "") -> void:
-	project = _project
-	name = _name
-
-
 # Overridden Methods:
 
 

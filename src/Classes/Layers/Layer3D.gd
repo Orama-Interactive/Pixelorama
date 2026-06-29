@@ -148,8 +148,7 @@ class Property:
 
 
 func _init(_project: Project, _name := "", from_pxo := false) -> void:
-	project = _project
-	name = _name
+	super(_project, _name)
 	if not from_pxo:
 		generate_nodes(project.size)
 	node_property_changed.connect(_on_node_property_changed)
