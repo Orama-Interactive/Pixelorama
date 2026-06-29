@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2026-06-27 13:33\n"
+"PO-Revision-Date: 2026-06-29 21:02\n"
 
 msgid "OK"
 msgstr "Aceptar"
@@ -3991,7 +3991,7 @@ msgstr "Mantén pulsado Shift mientras presionas para eliminar al instante."
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image?"
-msgstr ""
+msgstr "¿Estás seguro de que deseas eliminar esta imagen de referencia?"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
