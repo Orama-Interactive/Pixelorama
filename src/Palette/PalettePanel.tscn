@@ -29,7 +29,7 @@ script = ExtResource("8")
 [node name="PaletteVBoxContainer" type="VBoxContainer" parent="." unique_id=1686199193]
 layout_mode = 2
 
-[node name="PaletteButtons" type="HBoxContainer" parent="PaletteVBoxContainer" unique_id=290481916]
+[node name="PaletteButtons" type="HFlowContainer" parent="PaletteVBoxContainer" unique_id=2138896527]
 layout_mode = 2
 
 [node name="AddColor" type="Button" parent="PaletteVBoxContainer/PaletteButtons" unique_id=1738955467 groups=["UIButtons"]]
@@ -58,7 +58,7 @@ texture = ExtResource("2_j1lig")
 
 [node name="DeleteColor" type="Button" parent="PaletteVBoxContainer/PaletteButtons" unique_id=1984983129 groups=["UIButtons"]]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(24, 0)
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 tooltip_text = "Remove a selected color"
 mouse_default_cursor_shape = 2
@@ -82,7 +82,7 @@ texture = ExtResource("3_0e27e")
 
 [node name="Sort" type="MenuButton" parent="PaletteVBoxContainer/PaletteButtons" unique_id=1626175714 groups=["UIButtons"]]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(24, 0)
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 tooltip_text = "Sort palette"
 mouse_default_cursor_shape = 2
@@ -107,7 +107,7 @@ texture = ExtResource("4_hcsuy")
 
 [node name="LockGrid" type="Button" parent="PaletteVBoxContainer/PaletteButtons" unique_id=396920274 groups=["UIButtons"]]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(24, 0)
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 tooltip_text = "Lock palette grid"
 mouse_default_cursor_shape = 2
@@ -133,7 +133,7 @@ texture = ExtResource("5_unk2t")
 
 [node name="PaletteSelect" type="OptionButton" parent="PaletteVBoxContainer/PaletteButtons" unique_id=837684490]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Choose a palette"
@@ -142,7 +142,7 @@ alignment = 1
 clip_text = true
 
 [node name="EditPalette" type="Button" parent="PaletteVBoxContainer/PaletteButtons" unique_id=2044011141 groups=["UIButtons"]]
-custom_minimum_size = Vector2(22, 22)
+custom_minimum_size = Vector2(22, 24)
 layout_mode = 2
 tooltip_text = "Edit currently selected palette"
 mouse_default_cursor_shape = 2
@@ -161,7 +161,7 @@ texture = ExtResource("2")
 stretch_mode = 3
 
 [node name="AddPalette" type="Button" parent="PaletteVBoxContainer/PaletteButtons" unique_id=10393364 groups=["UIButtons"]]
-custom_minimum_size = Vector2(22, 22)
+custom_minimum_size = Vector2(22, 24)
 layout_mode = 2
 tooltip_text = "Create a new palette"
 mouse_default_cursor_shape = 2
