@@ -38,13 +38,14 @@ var layer_metadata_texture := ImageTexture.new()
 func _ready() -> void:
 	material.set_shader_parameter("layers", layer_texture_array)
 	material.set_shader_parameter("metadata", layer_metadata_texture)
-	Global.project_switched.connect(queue_redraw_all_layers)
+	Global.project_created.connect(camera_zoom)
+	Global.project_about_to_switch.connect(_on_project_about_to_switch)
+	Global.project_switched.connect(_on_project_switched)
 	Global.cel_switched.connect(queue_redraw_all_layers)
 	onion_past.type = onion_past.PAST
 	onion_past.blue_red_color = Global.onion_skinning_past_color
 	onion_future.type = onion_future.FUTURE
 	onion_future.blue_red_color = Global.onion_skinning_future_color
-	await get_tree().process_frame
 	await get_tree().process_frame
 	camera_zoom()
 
@@ -117,10 +118,10 @@ func queue_redraw_all_layers() -> void:
 		queue_redraw()
 
 
-func camera_zoom() -> void:
+func camera_zoom(project := Global.current_project) -> void:
+	await get_tree().process_frame
 	for camera: CanvasCamera in get_tree().get_nodes_in_group("CanvasCameras"):
-		camera.fit_to_frame(Global.current_project.size)
-
+		camera.fit_to_frame(project.size)
 	Global.transparent_checker.update_rect()
 
 
@@ -272,3 +273,14 @@ func _update_texture_array_layer(
 func refresh_onion() -> void:
 	onion_past.queue_redraw()
 	onion_future.queue_redraw()
+
+
+func _on_project_about_to_switch() -> void:
+	var project := Global.current_project
+	project.resized.disconnect(camera_zoom)
+
+
+func _on_project_switched() -> void:
+	var project := Global.current_project
+	if not project.resized.is_connected(camera_zoom):
+		project.resized.connect(camera_zoom.bind(project))

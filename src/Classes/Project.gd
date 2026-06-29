@@ -358,9 +358,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 		"pxo_version", ProjectSettings.get_setting("application/config/Pxo_Version")
 	)
 	if dict.has("size_x") and dict.has("size_y"):
-		size.x = dict.size_x
-		size.y = dict.size_y
-		tiles.tile_size = size
+		size = Vector2i(dict.size_x, dict.size_y)
 		selection_map.crop(size.x, size.y)
 	color_mode = dict.get("color_mode", color_mode)
 	if pxo_version <= 5:

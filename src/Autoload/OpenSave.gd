@@ -282,7 +282,6 @@ func handle_loading_video(file: String) -> bool:
 		open_image_as_new_frame(temp_image, 0, new_project, false)
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	Global.canvas.camera_zoom()
 	var output_audio_file := temp_path_real.path_join("audio.mp3")
 	# ffmpeg -y -i input_file -vn audio.mp3
 	var ffmpeg_execute_audio: PackedStringArray = ["-y", "-i", file, "-vn", output_audio_file]
@@ -396,7 +395,6 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 	else:
 		Global.projects.append(new_project)
 		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	Global.canvas.camera_zoom()
 
 	if is_backup:
 		new_project.backup_path = path
@@ -1089,7 +1087,6 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 		project.export_overwrite = true
 
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	Global.canvas.camera_zoom()
 
 	if prev_project_empty:
 		Global.tabs.delete_tab(prev_project_pos)
@@ -1168,7 +1165,6 @@ func open_gif_file(path: String) -> bool:
 	new_project.file_name = new_project.name
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	Global.canvas.camera_zoom()
 	return true
 
 
@@ -1284,7 +1280,6 @@ func open_ora_file(path: String) -> void:
 	new_project.file_name = new_project.name
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	Global.canvas.camera_zoom()
 
 
 func open_piskel_file(path: String) -> void:
@@ -1330,7 +1325,6 @@ func open_piskel_file(path: String) -> void:
 	new_project.order_layers()
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	Global.canvas.camera_zoom()
 
 
 func enforce_backed_sessions_limit() -> void:

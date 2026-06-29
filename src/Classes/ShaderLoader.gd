@@ -620,4 +620,3 @@ static func modify_texture_resource(
 	resource_proj.resource_updated.connect(update_callable)
 	Global.projects.append(resource_proj)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	Global.canvas.camera_zoom()

@@ -169,7 +169,6 @@ func _on_confirmed() -> void:
 		cel_image.blit_rect(clipboard_img, clipboad_rect, Vector2i.ZERO)
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	Global.canvas.camera_zoom()
 
 
 func _on_AspectRatioButton_toggled(_button_pressed: bool) -> void:

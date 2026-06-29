@@ -1279,7 +1279,6 @@ func undo_or_redo(
 					var current_cel := project.frames[i].cels[j]
 					if current_cel is not Cel3D:
 						current_cel.image_texture.set_image(current_cel.get_image())
-			canvas.camera_zoom()
 			canvas.grid.queue_redraw()
 			canvas.pixel_grid.queue_redraw()
 			project.selection_map_changed()

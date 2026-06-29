@@ -247,7 +247,6 @@ static func open_kra_file(path: String) -> void:
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	new_project.change_cel(0, new_project.layers.find(selected_layer))
-	Global.canvas.camera_zoom()
 
 
 # gdlint: ignore=max-line-length
