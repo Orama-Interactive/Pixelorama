@@ -1,6 +1,6 @@
 extends ImageEffect
 
-var shader := preload("res://src/Shaders/Effects/GradientMap.gdshader")
+var shader := load("res://src/Shaders/Effects/GradientMap.gdshader")
 
 
 func _ready() -> void:

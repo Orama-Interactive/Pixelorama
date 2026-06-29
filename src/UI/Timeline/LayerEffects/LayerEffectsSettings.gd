@@ -4,46 +4,40 @@ const LAYER_EFFECT_BUTTON = preload("res://src/UI/Timeline/LayerEffects/LayerEff
 const DELETE_TEXTURE := preload("res://assets/graphics/misc/close.svg")
 
 var effects: Array[LayerEffect] = [
-	LayerEffect.new("Offset & Scale", preload("res://src/Shaders/Effects/OffsetPixels.gdshader")),
+	LayerEffect.new("Offset & Scale", load("res://src/Shaders/Effects/OffsetPixels.gdshader")),
 	LayerEffect.new(
-		"Convolution Matrix",
-		preload("res://src/Shaders/Effects/ConvolutionMatrix.gdshader"),
-		"Color"
+		"Convolution Matrix", load("res://src/Shaders/Effects/ConvolutionMatrix.gdshader"), "Color"
 	),
 	LayerEffect.new(
-		"Gaussian Blur", preload("res://src/Shaders/Effects/GaussianBlur.gdshader"), "Blur"
+		"Gaussian Blur", load("res://src/Shaders/Effects/GaussianBlur.gdshader"), "Blur"
+	),
+	LayerEffect.new("Gradient", load("res://src/Shaders/Effects/Gradient.gdshader"), "Procedural"),
+	LayerEffect.new(
+		"Outline", load("res://src/Shaders/Effects/OutlineInline.gdshader"), "Procedural"
 	),
 	LayerEffect.new(
-		"Gradient", preload("res://src/Shaders/Effects/Gradient.gdshader"), "Procedural"
+		"Drop Shadow", load("res://src/Shaders/Effects/DropShadow.gdshader"), "Procedural"
 	),
+	LayerEffect.new("Invert Colors", load("res://src/Shaders/Effects/Invert.gdshader"), "Color"),
+	LayerEffect.new("Desaturation", load("res://src/Shaders/Effects/Desaturate.gdshader"), "Color"),
 	LayerEffect.new(
-		"Outline", preload("res://src/Shaders/Effects/OutlineInline.gdshader"), "Procedural"
-	),
-	LayerEffect.new(
-		"Drop Shadow", preload("res://src/Shaders/Effects/DropShadow.gdshader"), "Procedural"
-	),
-	LayerEffect.new("Invert Colors", preload("res://src/Shaders/Effects/Invert.gdshader"), "Color"),
-	LayerEffect.new(
-		"Desaturation", preload("res://src/Shaders/Effects/Desaturate.gdshader"), "Color"
-	),
-	LayerEffect.new(
-		"Adjust Hue/Saturation/Value", preload("res://src/Shaders/Effects/HSV.gdshader"), "Color"
+		"Adjust Hue/Saturation/Value", load("res://src/Shaders/Effects/HSV.gdshader"), "Color"
 	),
 	LayerEffect.new(
 		"Adjust Brightness/Contrast",
-		preload("res://src/Shaders/Effects/BrightnessContrast.gdshader"),
+		load("res://src/Shaders/Effects/BrightnessContrast.gdshader"),
 		"Color"
 	),
 	LayerEffect.new(
-		"Color Curves", preload("res://src/Shaders/Effects/ColorCurves.gdshader"), "Color"
+		"Color Curves", load("res://src/Shaders/Effects/ColorCurves.gdshader"), "Color"
 	),
-	LayerEffect.new("Palettize", preload("res://src/Shaders/Effects/Palettize.gdshader"), "Color"),
-	LayerEffect.new("Pixelize", preload("res://src/Shaders/Effects/Pixelize.gdshader"), "Blur"),
-	LayerEffect.new("Posterize", preload("res://src/Shaders/Effects/Posterize.gdshader"), "Color"),
+	LayerEffect.new("Palettize", load("res://src/Shaders/Effects/Palettize.gdshader"), "Color"),
+	LayerEffect.new("Pixelize", load("res://src/Shaders/Effects/Pixelize.gdshader"), "Blur"),
+	LayerEffect.new("Posterize", load("res://src/Shaders/Effects/Posterize.gdshader"), "Color"),
 	LayerEffect.new(
-		"Gradient Map", preload("res://src/Shaders/Effects/GradientMap.gdshader"), "Color"
+		"Gradient Map", load("res://src/Shaders/Effects/GradientMap.gdshader"), "Color"
 	),
-	LayerEffect.new("Index Map", preload("res://src/Shaders/Effects/IndexMap.gdshader"), "Color"),
+	LayerEffect.new("Index Map", load("res://src/Shaders/Effects/IndexMap.gdshader"), "Color"),
 ]
 ## A dictionary that maps each category to a [PopupMenu].
 var category_submenus: Dictionary[String, PopupMenu] = {}

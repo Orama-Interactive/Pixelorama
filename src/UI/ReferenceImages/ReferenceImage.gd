@@ -5,7 +5,7 @@ extends Sprite2D
 signal properties_changed
 
 var project := Global.current_project
-var shader := preload("res://src/Shaders/ReferenceImageShader.gdshader")
+var shader := load("res://src/Shaders/ReferenceImageShader.gdshader")
 var filter := false:
 	set(value):
 		filter = value
