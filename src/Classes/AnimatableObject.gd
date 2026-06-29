@@ -86,7 +86,7 @@ func get_animated_property(frame_index: int, param: String) -> Variant:
 		return params[param]  # No Keyframes present, return default value
 
 	if properties.has(frame_index):
-		# If the currect frame is a keyframe then there is no reason to
+		# If the current frame is a keyframe then there is no reason to
 		# interpolate. Get value directly from properties
 		return properties[frame_index].get("value", params[param])
 	else:
