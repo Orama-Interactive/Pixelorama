@@ -118,18 +118,24 @@ var preferences: Array[Preference] = [
 		"selected",
 		Global.ButtonSize.SMALL
 	),
-	Preference.new(
-		"pxo_dir_as_default_export_dir",
-		"Export/ExportContainer/PxoDirAsExportDir",
-		"button_pressed",
-		false,
+	(
+		Preference
+		. new(
+			"pxo_dir_as_default_export_dir",
+			"Export/ExportContainer/PxoDirAsExportDir",
+			"button_pressed",
+			false,
+		)
 	),
-	Preference.new(
-		"pxo_name_as_default_export_file",
-		"Export/ExportContainer/PxoNameAsExportName",
-		"button_pressed",
-		false,
-	),
+	(
+		Preference
+		. new(
+			"pxo_name_as_default_export_file",
+			"Export/ExportContainer/PxoNameAsExportName",
+			"button_pressed",
+			false,
+		)
+ 	),
 	Preference.new("ffmpeg_path", "Export/ExportContainer/FFMPEGPath", "text", ""),
 	Preference.new(
 		"show_left_tool_icon",
