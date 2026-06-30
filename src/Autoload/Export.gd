@@ -638,8 +638,8 @@ func export_processed_images(
 		Global.top_menu_container.file_menu.set_item_text(
 			Global.FileMenu.EXPORT, tr("Export") + " %s" % file_name_with_ext
 		)
-	if OS.get_name() != "Android":
-		project.export_directory_path = export_paths[0].get_base_dir()
+	# NOTE: project.export_directory_path is already updated through ExportDialog.gd
+	# we only need to update the current_dir here after the export
 	Global.config_cache.set_value("data", "current_dir", project.export_directory_path)
 	return true
 
