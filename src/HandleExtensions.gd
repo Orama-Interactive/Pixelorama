@@ -98,7 +98,9 @@ func install_extension(path: String) -> void:
 	var file_name := path.uri_decode().get_file()
 	var err := DirAccess.copy_absolute(path, EXTENSIONS_PATH.path_join(file_name))
 	if err != OK:
-		var msg := tr("Extension failed to install. Error code %s (%s)") % [err, error_string(err)]
+		var msg := tr(
+			"Extension failed to install. Error code %s (%s)\nSource:%s"
+		) % [err, error_string(err), file_name]
 		Global.popup_error(msg)
 		return
 	_add_extension(file_name)
@@ -132,7 +134,9 @@ func _load_extension(extension_file_or_folder_name: StringName, internal := fals
 	var err := FileAccess.get_open_error()
 	if err != OK:
 		var msg := (
-			tr("Error loading extension config file. Error code %s (%s)") % [err, error_string(err)]
+			tr(
+				"Error loading extension config file. Error code %s (%s)\nSource:%s"
+			) % [err, error_string(err), extension_file_or_folder_name]
 		)
 		Global.popup_error(msg)
 		if extension_config_file:
@@ -145,7 +149,9 @@ func _load_extension(extension_file_or_folder_name: StringName, internal := fals
 	extension_config_file.close()
 
 	if not extension_json:
-		Global.popup_error(tr("No JSON data found in the extension."))
+		Global.popup_error(
+			tr("No JSON data found in the extension.\nSource:%s" % extension_file_or_folder_name)
+		)
 		return
 
 	if extension_json.has("supported_api_versions"):
