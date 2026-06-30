@@ -386,7 +386,7 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 				if cel is CelTileMap:
 					cel.find_times_used_of_tiles()
 		zip_reader.close()
-	if new_project.export_directory_path.is_empty():
+	if new_project.export_directory_path.is_empty() or Global.pxo_dir_as_default_export_dir:
 		new_project.export_directory_path = path.get_base_dir()
 
 	if empty_project:
@@ -408,7 +408,7 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 		Global.config_cache.set_value("data", "last_project_path", path)
 		Global.config_cache.save(Global.CONFIG_PATH)
-		if new_project.file_name.is_empty():
+		if new_project.file_name.is_empty() or Global.pxo_name_as_default_export_file:
 			new_project.file_name = path.uri_decode().get_file().trim_suffix(".pxo")
 		new_project.was_exported = false
 		Global.top_menu_container.file_menu.set_item_text(

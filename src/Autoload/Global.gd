@@ -209,8 +209,6 @@ var show_x_minus_y_symmetry_axis := false
 var open_last_project := false
 ## Found in Preferences. If [code]true[/code], asks for permission to quit on exit.
 var quit_confirmation := false
-## Found in Preferences. Refers to the ffmpeg location path.
-var ffmpeg_path := ""
 ## Found in Preferences. If [code]true[/code], the zoom is smooth.
 var smooth_zoom := true
 ## Found in Preferences. If [code]true[/code], the zoom is restricted to integral multiples of 100%.
@@ -602,6 +600,30 @@ var author_contact := ""
 var author_company := ""
 ## Found in Preferences. The default licence to be used for the current project.
 var default_licence := ""
+
+# Export prefferences
+## Found in Preferences. Refers to the ffmpeg location path.
+var ffmpeg_path := ""
+## Found in Preferences. If enabled, uses project directory (if available) as initial export dir.
+var pxo_dir_as_default_export_dir := false:
+	set(value):
+		pxo_dir_as_default_export_dir = value
+		for project in Global.projects:
+			if project.save_path.is_empty():
+				continue
+			# Only set defaults for projects that were not exported yet
+			if not project.was_exported:
+				project.export_directory_path = project.save_path.get_base_dir()
+## Found in Preferences. If enabled, uses project name as default export file name.
+var pxo_name_as_default_export_file := false:
+	set(value):
+		pxo_name_as_default_export_file = value
+		for project in Global.projects:
+			if project.save_path.is_empty():
+				continue
+			# Only set defaults for projects that were not exported yet
+			if not project.was_exported:
+				project.file_name = project.save_path.uri_decode().get_file().trim_suffix(".pxo")
 
 # Tools & options
 ## Found in Preferences. If [code]true[/code], the cursor's left tool icon is visible.

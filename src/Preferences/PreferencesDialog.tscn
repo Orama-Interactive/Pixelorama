@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://dxjamv5np8av3" path="res://src/Preferences/ExtensionsPreferences.gd" id="7_8ume5"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="8"]
 [ext_resource type="PackedScene" uid="uid://chy5d42l72crk" path="res://src/UI/ExtensionExplorer/ExtensionExplorer.tscn" id="8_jmnx8"]
-[ext_resource type="Script" uid="uid://dc6yf25q3sacq" path="res://src/Preferences/LicenseProperties.gd" id="8_praud"]
+[ext_resource type="Script" path="res://src/Preferences/LicenseProperties.gd" id="8_praud"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_8vsfb"]
 
@@ -106,15 +106,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "On"
-
-[node name="FFMPEGPathLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Startup/StartupContainer" unique_id=34180567 groups=["DesktopOnly"]]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "FFMPEG path"
-
-[node name="FFMPEGPath" type="LineEdit" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Startup/StartupContainer" unique_id=465096376 groups=["DesktopOnly"]]
-layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="Language" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide" unique_id=771798959]
 unique_name_in_owner = true
@@ -1511,6 +1502,60 @@ layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 mouse_default_cursor_shape = 2
+
+[node name="Export" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide" unique_id=586797434]
+visible = false
+layout_mode = 2
+
+[node name="ExportHeader" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Export" unique_id=1667460930 groups=["HeaderLabels"]]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Export/ExportHeader" unique_id=1513439332]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Export"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Export/ExportHeader" unique_id=884505626]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="ExportContainer" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Export" unique_id=1567207403]
+layout_mode = 2
+columns = 3
+
+[node name="UsePxoNameLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Export/ExportContainer" unique_id=923894525]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Use project name as default file name on export"
+
+[node name="PxoNameAsExportName" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Export/ExportContainer" unique_id=1883841778]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "On"
+
+[node name="UsePxoDirLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Export/ExportContainer" unique_id=1229533042]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Use project directory as default directory for export"
+
+[node name="PxoDirAsExportDir" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Export/ExportContainer" unique_id=1181043941]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Opens last opened project on startup"
+mouse_default_cursor_shape = 2
+text = "On"
+
+[node name="FFMPEGPathLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Export/ExportContainer" unique_id=543999620 groups=["DesktopOnly"]]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FFMPEG path"
+
+[node name="FFMPEGPath" type="LineEdit" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Export/ExportContainer" unique_id=432326838 groups=["DesktopOnly"]]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Extensions" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide" unique_id=326880860 node_paths=PackedStringArray("preferences_dialog", "add_extension_file_dialog")]
 unique_name_in_owner = true

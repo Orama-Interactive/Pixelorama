@@ -32,7 +32,6 @@ var preferences: Array[Preference] = [
 	Preference.new(
 		"quit_confirmation", "Startup/StartupContainer/QuitConfirmation", "button_pressed", false
 	),
-	Preference.new("ffmpeg_path", "Startup/StartupContainer/FFMPEGPath", "text", ""),
 	Preference.new("shrink", "%ShrinkSlider", "value", Global.auto_content_scale_factor),
 	Preference.new("theme_font_index", "%FontOptionButton", "selected", 1),
 	Preference.new("font_size", "%FontSizeSlider", "value", 16),
@@ -119,6 +118,19 @@ var preferences: Array[Preference] = [
 		"selected",
 		Global.ButtonSize.SMALL
 	),
+	Preference.new(
+		"pxo_dir_as_default_export_dir",
+		"Export/ExportContainer/PxoDirAsExportDir",
+		"button_pressed",
+		false,
+	),
+	Preference.new(
+		"pxo_name_as_default_export_file",
+		"Export/ExportContainer/PxoNameAsExportName",
+		"button_pressed",
+		false,
+	),
+	Preference.new("ffmpeg_path", "Export/ExportContainer/FFMPEGPath", "text", ""),
 	Preference.new(
 		"show_left_tool_icon",
 		"Cursors/CursorsContainer/LeftToolIconCheckbox",
