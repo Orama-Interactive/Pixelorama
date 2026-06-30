@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2026-06-27 13:34\n"
+"PO-Revision-Date: 2026-06-30 04:36\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Nome do arquivo:"
 
 msgid "Project name:"
-msgstr ""
+msgstr "Nome do projeto:"
 
 msgid "Canvas Size"
 msgstr "Tamanho da Tela"
@@ -894,11 +894,11 @@ msgstr ""
 
 #. Found in the Preferences. Refers to the author of the current project.
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #. Found in the Preferences. Refers to the default license that is set to the created project.
 msgid "Default license"
-msgstr ""
+msgstr "Licença padrão"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
@@ -1027,7 +1027,7 @@ msgstr ""
 
 #. A theme. "System" refers to the Operating System.
 msgid "System"
-msgstr ""
+msgstr "Sistema"
 
 #. Refers to the base color of a theme.
 msgid "Base color:"
@@ -1538,7 +1538,7 @@ msgid "Belarusian"
 msgstr "Bielorrusso"
 
 msgid "Thai"
-msgstr ""
+msgstr "Tailandês"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -2093,7 +2093,7 @@ msgstr "Especifica o driver do tablet q está sendo usado no Windows. Se você t
 
 #. Found in the Preferences. Refers to the displayed name of the current project author.
 msgid "Display name:"
-msgstr ""
+msgstr "Nome de exibição"
 
 #. Found in the Preferences. Refers to the real name of the current project author.
 msgid "Real name:"
@@ -2101,11 +2101,11 @@ msgstr ""
 
 #. Found in the Preferences. Refers to the contact info of the current project author.
 msgid "Contact:"
-msgstr ""
+msgstr "Contato:"
 
 #. Found in the Preferences. Refers to the company name of the current project author.
 msgid "Company/Studio:"
-msgstr ""
+msgstr "Empresa/Studio:"
 
 #. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
 msgid "Last saved by"
@@ -2927,7 +2927,7 @@ msgstr ""
 
 #. Found in the layer's section of the timeline, as a blend mode option. This blend mode belongs to the "Masking" category, and it erases the un-common areas between the blend and the base layers.
 msgid "Intersection"
-msgstr ""
+msgstr "Interseção"
 
 #. Found in the layer's section of the timeline, as a blend mode option.  This blend mode belongs to the "Masking" category, and it only shows the same colors between the blend and the base layers.
 msgid "Match colors"
@@ -3994,7 +3994,7 @@ msgstr "Segure Shift enquanto pressiona para remover instantaneamente."
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image?"
-msgstr ""
+msgstr "Você tem certeza de que deseja remover esta imagem de referência?"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
