@@ -45,7 +45,7 @@ func _button_pressed() -> void:
 					var frame_layer := [i, j]
 					if !Global.current_project.selected_cels.has(frame_layer):
 						Global.current_project.selected_cels.append(frame_layer)
-		elif Input.is_action_pressed("ctrl"):
+		elif Global.is_ctrl_or_cmd_pressed():
 			for j in range(0, Global.current_project.layers.size()):
 				var frame_layer := [frame, j]
 				if !Global.current_project.selected_cels.has(frame_layer):
@@ -140,7 +140,7 @@ func _can_drop_data(pos: Vector2, data) -> bool:
 			frame_container.get_child(get_index() - 1)
 		)
 
-	var is_swapping := Input.is_action_pressed("ctrl")
+	var is_swapping := Global.is_ctrl_or_cmd_pressed()
 	var drop_frames: PackedInt32Array = data[1]
 	# Get offset
 	var offset: int = 0
@@ -173,7 +173,7 @@ func _drop_data(_pos: Vector2, data) -> void:
 	var drop_frames: PackedInt32Array = data[1]
 	var project := Global.current_project
 	project.undo_redo.create_action("Change Frame Order")
-	if Input.is_action_pressed("ctrl"):  # Swap frames
+	if Global.is_ctrl_or_cmd_pressed():  # Swap frames
 		var swap_frame_positions := []
 		# Get offset
 		var offset: int = 0

@@ -133,7 +133,7 @@ func _on_CelButton_pressed() -> void:
 					var frame_layer := [i, j]
 					if !project.selected_cels.has(frame_layer):
 						project.selected_cels.append(frame_layer)
-		elif Input.is_action_pressed("ctrl"):
+		elif Global.is_ctrl_or_cmd_pressed():
 			var frame_layer := [frame, layer]
 			if project.selected_cels.has(frame_layer):
 				if project.selected_cels.size() > 1:
@@ -409,7 +409,7 @@ func _can_drop_data(pos: Vector2, data) -> bool:
 	for l in drop_layers:
 		if l != layer:
 			different_layers = true
-	var is_swapping := Input.is_action_pressed("ctrl") or different_layers
+	var is_swapping := Global.is_ctrl_or_cmd_pressed() or different_layers
 
 	if is_swapping:
 		for cel_idx in drop_cels:
@@ -486,7 +486,7 @@ func _drop_data(_pos: Vector2, data) -> void:
 		offset.y = layer - Array(drop_layers).max()
 	var project := Global.current_project
 	project.undo_redo.create_action("Move Cels")
-	if Input.is_action_pressed("ctrl") or different_layers:  # Swap cels
+	if Global.is_ctrl_or_cmd_pressed() or different_layers:  # Swap cels
 		var swap_cel_positions := []
 		for cel_idx in drop_cels:
 			var drop_point_frame: int = cel_idx[0] + offset.x
