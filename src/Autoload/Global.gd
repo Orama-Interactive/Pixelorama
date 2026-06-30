@@ -601,7 +601,7 @@ var author_company := ""
 ## Found in Preferences. The default licence to be used for the current project.
 var default_licence := ""
 
-# Export prefferences
+# Export preferences
 ## Found in Preferences. Refers to the ffmpeg location path.
 var ffmpeg_path := ""
 ## Found in Preferences. If enabled, uses project directory (if available) as initial export dir.
