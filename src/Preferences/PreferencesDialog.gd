@@ -135,7 +135,7 @@ var preferences: Array[Preference] = [
 			"button_pressed",
 			false,
 		)
- 	),
+	),
 	Preference.new("ffmpeg_path", "Export/ExportContainer/FFMPEGPath", "text", ""),
 	Preference.new(
 		"show_left_tool_icon",
