@@ -558,8 +558,8 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 	file_name = dict.get("export_file_name", file_name)
 	if file_name.is_empty() or file_name == "untitled":
 		file_name = name
-	file_format = dict.get("export_file_format", file_name)
-	fps = dict.get("fps", file_name)
+	file_format = dict.get("export_file_format", file_format)
+	fps = dict.get("fps", fps)
 	license = dict.get("license", license)
 	author_display_name = dict.get("author_display_name", "")
 	author_real_name = dict.get("author_real_name", "")
