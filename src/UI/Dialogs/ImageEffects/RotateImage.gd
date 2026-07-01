@@ -3,8 +3,8 @@ extends ImageEffect
 enum { ROTXEL_SMEAR, CLEANEDGE, OMNISCALE, NNS, NN, ROTXEL, URD }
 enum Animate { ANGLE, INIT_ANGLE }
 
-var rotxel_shader := preload("res://src/Shaders/Effects/Rotation/SmearRotxel.gdshader")
-var nn_shader := preload("res://src/Shaders/Effects/Rotation/NearestNeighbour.gdshader")
+var rotxel_shader := load("res://src/Shaders/Effects/Rotation/SmearRotxel.gdshader")
+var nn_shader := load("res://src/Shaders/Effects/Rotation/NearestNeighbour.gdshader")
 var pivot := Vector2.INF
 var drag_pivot := false
 

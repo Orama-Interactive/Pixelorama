@@ -193,7 +193,7 @@ func set_index(
 func change_offset(new_offset: Vector2i) -> void:
 	offset = new_offset
 	_resize_cells(get_image().get_size(), false)
-	Global.canvas.grid.queue_redraw()
+	Global.grid_updated.emit()
 
 
 ## Returns the [CelTileMap.Cell] at position [param cell_coords] in tilemap space.

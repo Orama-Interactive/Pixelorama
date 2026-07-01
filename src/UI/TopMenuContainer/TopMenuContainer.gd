@@ -866,9 +866,9 @@ func _tile_mode_submenu_id_pressed(id: Tiles.MODE) -> void:
 	Global.transparent_checker.fit_rect(Global.current_project.tiles.get_bounding_rect())
 	for i in Tiles.MODE.values():
 		tile_mode_submenu.set_item_checked(i, i == id)
+	Global.pixel_grid_updated.emit()
+	Global.grid_updated.emit()
 	Global.canvas.tile_mode.queue_redraw()
-	Global.canvas.pixel_grid.queue_redraw()
-	Global.canvas.grid.queue_redraw()
 	get_tree().current_scene.tile_mode_offsets_dialog.change_mask()
 
 
@@ -1081,15 +1081,13 @@ func _toggle_mirror_view() -> void:
 func _toggle_show_grid() -> void:
 	Global.draw_grid = !Global.draw_grid
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_GRID, Global.draw_grid)
-	if Global.canvas.grid:
-		Global.canvas.grid.queue_redraw()
+	Global.grid_updated.emit()
 
 
 func _toggle_show_pixel_grid() -> void:
 	Global.draw_pixel_grid = !Global.draw_pixel_grid
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_PIXEL_GRID, Global.draw_pixel_grid)
-	if Global.canvas.pixel_grid:
-		Global.canvas.pixel_grid.queue_redraw()
+	Global.pixel_grid_updated.emit()
 
 
 func _toggle_show_pixel_indices() -> void:

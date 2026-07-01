@@ -466,7 +466,6 @@ static func psd_to_pxo_project(psd_project: PhotoshopProject, add_frames := true
 	new_project.file_name = new_project.name
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	Global.canvas.camera_zoom()
 
 
 static func offset_cel_image(

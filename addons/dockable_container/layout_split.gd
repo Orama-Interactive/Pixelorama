@@ -13,12 +13,12 @@ enum Direction { HORIZONTAL, VERTICAL }
 @export_range(0, 1) var percent := 0.5:
 	get = get_percent,
 	set = set_percent
-@export var first: DockableLayoutNode = DockableLayoutPanel.new():
+@export var first: DockableLayoutNode:
 	get:
 		return get_first()
 	set(value):
 		set_first(value)
-@export var second: DockableLayoutNode = DockableLayoutPanel.new():
+@export var second: DockableLayoutNode:
 	get:
 		return get_second()
 	set(value):

@@ -165,7 +165,6 @@ static func _modify_texture_resource(
 		resource_proj.resource_updated.connect(_update_tile.bind(project, tileset, tile_idx))
 		Global.projects.append(resource_proj)
 		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-		Global.canvas.camera_zoom()
 
 
 static func _update_tile(

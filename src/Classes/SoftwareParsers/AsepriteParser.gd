@@ -457,7 +457,6 @@ static func open_aseprite_file(path: String) -> void:
 	new_project.project_current_palette_name = project_current_palette_name
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	Global.canvas.camera_zoom()
 
 
 static func parse_aseprite_string(ase_file: FileAccess) -> String:

@@ -13,7 +13,7 @@ enum Animate {
 	TINT_EFFECT_FACTOR
 }
 
-var shader := preload("res://src/Shaders/Effects/BrightnessContrast.gdshader")
+var shader := load("res://src/Shaders/Effects/BrightnessContrast.gdshader")
 
 @onready var overflow_check_box := $VBoxContainer/OverflowCheckBox as CheckBox
 

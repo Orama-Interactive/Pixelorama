@@ -152,6 +152,11 @@ static func open_kra_file(path: String) -> void:
 					var blend_mode := parser.get_named_attribute_value_safe("compositeop")
 					layer.blend_mode = match_blend_modes(blend_mode)
 				var keyframes := parser.get_named_attribute_value_safe("keyframes")
+				var keyframes_xml_buffer: PackedByteArray
+				# Add animation frames, if they exist.
+				var keyframes_path := new_project.name.path_join("layers").path_join(keyframes)
+				if zip_reader.file_exists(keyframes_path):
+					keyframes_xml_buffer = zip_reader.read_file(keyframes_path)
 
 				# Create cel
 				var image_x := int(parser.get_named_attribute_value("x"))
@@ -174,19 +179,16 @@ static func open_kra_file(path: String) -> void:
 						# If there are no keyframes, fill all cels with the same layer image.
 						fill_frames(new_project, layer, image, 0, n_of_frames, offset)
 					else:
-						# Add animation frames, if they exist.
-						var keyframes_path := new_project.name.path_join("layers").path_join(
-							keyframes
+						var keyframe_content_data := get_keyframe_data(
+							keyframes_xml_buffer, "content"
 						)
-						var keyframes_xml_buffer := zip_reader.read_file(keyframes_path)
-						var keyframe_data := get_keyframe_data(keyframes_xml_buffer)
-						if keyframe_data.is_empty():
+						if keyframe_content_data.is_empty():
 							fill_frames(new_project, layer, image, 0, n_of_frames, offset)
 						else:
 							var prev_time := 0
 							var prev_image := image
-							for keyframe in keyframe_data:
-								var time: int = int(keyframe["time"]) - starting_frame
+							for keyframe in keyframe_content_data:
+								var time := int(keyframe["time"]) - starting_frame
 								if time < 0:
 									time = 0
 								# Fill potentially empty frames with the image of the previous keyframe.
@@ -195,6 +197,8 @@ static func open_kra_file(path: String) -> void:
 								var frame_path := new_project.name.path_join("layers").path_join(
 									frame_file
 								)
+								if not zip_reader.file_exists(frame_path):
+									continue
 								var image_data := zip_reader.read_file(frame_path)
 								var frame_image := read_krita_image(image_data)
 								if not frame_image.is_empty():
@@ -217,6 +221,16 @@ static func open_kra_file(path: String) -> void:
 						var frame := new_project.frames[i]
 						var empty_cel := layer.new_empty_cel()
 						frame.cels.insert(0, empty_cel)
+
+				# Read the opacity keyframe data.
+				if not keyframes_xml_buffer.is_empty():
+					var keyframe_opacity_data := get_keyframe_data(keyframes_xml_buffer, "opacity")
+					for opacity_keyframe in keyframe_opacity_data:
+						var time := int(opacity_keyframe["time"])
+						if time < 0:
+							time = 0
+						var opacity_value := float(opacity_keyframe["value"]) / 100.0
+						layer.set_keyframe("opacity", time, opacity_value)
 			elif node_name == "layers" and group_layer_found:
 				group_layer_found = false
 		elif parser.get_node_type() == XMLParser.NODE_ELEMENT_END:
@@ -233,7 +247,6 @@ static func open_kra_file(path: String) -> void:
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	new_project.change_cel(0, new_project.layers.find(selected_layer))
-	Global.canvas.camera_zoom()
 
 
 # gdlint: ignore=max-line-length
@@ -446,19 +459,32 @@ static func fill_frames(
 		frame.cels.insert(0, current_cel)
 
 
-static func get_keyframe_data(keyframe_buffer: PackedByteArray) -> Array[Dictionary]:
+static func get_keyframe_data(
+	keyframe_buffer: PackedByteArray, channel_name := "content"
+) -> Array[Dictionary]:
 	var keyframe_data: Array[Dictionary] = []
 	var parser := XMLParser.new()
 	var err := parser.open_buffer(keyframe_buffer)
 	if err != OK:
 		return keyframe_data
+	var current_channel := ""
 	while parser.read() != ERR_FILE_EOF:
 		if parser.get_node_type() == XMLParser.NODE_ELEMENT:
 			var node_name := parser.get_node_name()
-			if node_name == "keyframe":
+			if node_name == "channel":
+				current_channel = parser.get_named_attribute_value_safe("name")
+			elif node_name == "keyframe" and current_channel == channel_name:
 				var time := parser.get_named_attribute_value_safe("time")
-				var frame := parser.get_named_attribute_value_safe("frame")
-				keyframe_data.append({"time": time, "frame": frame})
+				if channel_name == "content":
+					var frame := parser.get_named_attribute_value_safe("frame")
+					keyframe_data.append({"time": time, "frame": frame})
+				elif channel_name == "opacity":
+					var value := parser.get_named_attribute_value_safe("value")
+					keyframe_data.append({"time": time, "value": value})
+		elif parser.get_node_type() == XMLParser.NODE_ELEMENT_END:
+			var node_name := parser.get_node_name()
+			if node_name == "channel" and current_channel == channel_name:
+				break
 	return keyframe_data
 
 
