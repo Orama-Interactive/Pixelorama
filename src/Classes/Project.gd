@@ -25,6 +25,7 @@ var name := "":
 		var project_index := Global.projects.find(self)
 		if project_index < Global.tabs.tab_count and project_index > -1:
 			Global.tabs.set_tab_title(project_index, name)
+		file_name = name
 var size: Vector2i:
 	set = _size_changed
 var undo_redo := UndoRedo.new()
@@ -555,6 +556,8 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 	if not DirAccess.dir_exists_absolute(export_directory_path):
 		export_directory_path = ""
 	file_name = dict.get("export_file_name", file_name)
+	if file_name.is_empty() or file_name == "untitled":
+		file_name = name
 	file_format = dict.get("export_file_format", file_name)
 	fps = dict.get("fps", file_name)
 	license = dict.get("license", license)
