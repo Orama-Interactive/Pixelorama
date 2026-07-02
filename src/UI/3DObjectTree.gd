@@ -70,7 +70,7 @@ func _new_object_popup_id_pressed(id: Layer3D.ObjectType) -> void:
 
 
 func _add_object(type: Layer3D.ObjectType, custom_mesh: Mesh = null) -> void:
-	var node3d := Layer3D.create_node(type, custom_mesh)
+	var node3d := layer_3d.create_node(type, custom_mesh)
 	var undo_redo := layer_3d.project.undo_redo
 	undo_redo.create_action("Add 3D object")
 	undo_redo.add_do_method(layer_3d.parent_node.add_child.bind(node3d, true))

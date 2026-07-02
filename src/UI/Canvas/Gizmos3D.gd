@@ -27,7 +27,6 @@ const EDGES: Array[Array] = [
 
 var layer_3d: Layer3D
 var applying_gizmos := Layer3D.Gizmos.NONE
-var always_visible: Dictionary[Node3D, Texture2D] = {}
 var points_per_object: Dictionary[Node3D, PackedVector2Array] = {}
 var selected_color := Color.WHITE
 var hovered_color := Color.GRAY
@@ -91,8 +90,8 @@ func get_hovering_gizmo(pos: Vector2) -> Layer3D.Gizmos:
 
 func get_hovering_light(pos: Vector2) -> Node3D:
 	var draw_scale := Vector2(20.0, 20.0) / Global.camera.zoom
-	for object in always_visible:
-		if not always_visible[object]:
+	for object in layer_3d.always_visible:
+		if not layer_3d.always_visible[object]:
 			continue
 		var camera := object.get_viewport().get_camera_3d()
 		var object_pos := camera.unproject_position(object.position)
@@ -108,6 +107,8 @@ func _cel_switched() -> void:
 			layer_3d.selected_object_changed.disconnect(_on_selected_object)
 			layer_3d.object_hovered.disconnect(_on_hovered_object)
 			layer_3d.node_property_changed.disconnect(_on_node_property_changed)
+			layer_3d.parent_node.child_entered_tree.disconnect(_on_layer_child_entered_exited_tree)
+			layer_3d.parent_node.child_exiting_tree.disconnect(_on_layer_child_entered_exited_tree)
 	for object in points_per_object:
 		clear_points(object)
 	if not Global.current_project.get_current_cel() is Cel3D:
@@ -117,6 +118,8 @@ func _cel_switched() -> void:
 	layer_3d.selected_object_changed.connect(_on_selected_object)
 	layer_3d.object_hovered.connect(_on_hovered_object)
 	layer_3d.node_property_changed.connect(_on_node_property_changed)
+	layer_3d.parent_node.child_entered_tree.connect(_on_layer_child_entered_exited_tree)
+	layer_3d.parent_node.child_exiting_tree.connect(_on_layer_child_entered_exited_tree)
 	var selected := layer_3d.selected
 	if is_instance_valid(selected):
 		get_points(selected, true)
@@ -145,16 +148,7 @@ func _on_node_property_changed(node: Node, _property: StringName, frame_index: i
 	queue_redraw()
 
 
-func add_always_visible(object3d: VisualInstance3D, texture: Texture2D) -> void:
-	always_visible[object3d] = texture
-	if not object3d.tree_exiting.is_connected(remove_always_visible):
-		object3d.tree_exiting.connect(remove_always_visible.bind(object3d))
-		object3d.tree_entered.connect(add_always_visible.bind(object3d, texture))
-	queue_redraw()
-
-
-func remove_always_visible(object3d: VisualInstance3D) -> void:
-	always_visible.erase(object3d)
+func _on_layer_child_entered_exited_tree(_node: Node) -> void:
 	queue_redraw()
 
 
@@ -239,14 +233,13 @@ func clear_points(object3d: Node3D) -> void:
 
 
 func _draw() -> void:
-	var layer := Global.current_project.layers[Global.current_project.current_layer]
-	if not layer is Layer3D:
+	if not Global.current_project.get_current_cel() is Cel3D:
 		return
 	var draw_scale := Vector2(10.0, 10.0) / Global.camera.zoom
-	for object in always_visible:
-		if not always_visible[object]:
+	for object in layer_3d.always_visible:
+		if not layer_3d.always_visible[object]:
 			continue
-		var texture: Texture2D = always_visible[object]
+		var texture: Texture2D = layer_3d.always_visible[object]
 		var center := Vector2(8, 8)
 		var camera := object.get_viewport().get_camera_3d()
 		var pos: Vector2 = camera.unproject_position(object.position)
@@ -269,7 +262,7 @@ func _draw() -> void:
 		var points: PackedVector2Array = points_per_object[object]
 		if points.is_empty():
 			continue
-		if (layer as Layer3D).selected == object:
+		if layer_3d.selected == object:
 			var is_applying_gizmos = false
 			# Draw bounding box outline
 			draw_multiline(points, selected_color, 0.5)

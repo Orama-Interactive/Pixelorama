@@ -120,6 +120,7 @@ var world_environment: WorldEnvironment
 var camera: Camera3D  ## Camera that is used to render the Image.
 var animation_player: AnimationPlayer
 var animation: Animation
+var always_visible: Dictionary[Node3D, Texture2D] = {}
 ## The currently selected [Node3D].
 var selected: Node3D = null:
 	set(value):
@@ -214,11 +215,11 @@ func load_scene(scene: PackedScene) -> void:
 			parent_node = child
 	for child in parent_node.get_children():
 		if child is DirectionalLight3D:
-			Global.canvas.gizmos_3d.add_always_visible(child, DIR_LIGHT_TEXTURE)
+			add_always_visible(child, DIR_LIGHT_TEXTURE)
 		elif child is SpotLight3D:
-			Global.canvas.gizmos_3d.add_always_visible(child, SPOT_LIGHT_TEXTURE)
+			add_always_visible(child, SPOT_LIGHT_TEXTURE)
 		elif child is OmniLight3D:
-			Global.canvas.gizmos_3d.add_always_visible(child, OMNI_LIGHT_TEXTURE)
+			add_always_visible(child, OMNI_LIGHT_TEXTURE)
 	Global.canvas.add_child(viewport)
 
 
@@ -241,7 +242,7 @@ func unselect() -> void:
 	selected = null
 
 
-static func create_node(type: ObjectType, custom_mesh: Mesh = null) -> Node3D:
+func create_node(type: ObjectType, custom_mesh: Mesh = null) -> Node3D:
 	var node3d: Node3D
 	match type:
 		ObjectType.BOX:
@@ -287,16 +288,16 @@ static func create_node(type: ObjectType, custom_mesh: Mesh = null) -> Node3D:
 		ObjectType.DIR_LIGHT:
 			node3d = DirectionalLight3D.new()
 			node3d.name = "DirectionalLight"
-			Global.canvas.gizmos_3d.add_always_visible(node3d, DIR_LIGHT_TEXTURE)
+			add_always_visible(node3d, DIR_LIGHT_TEXTURE)
 		ObjectType.SPOT_LIGHT:
 			node3d = SpotLight3D.new()
 			node3d.name = "SpotLight"
-			Global.canvas.gizmos_3d.add_always_visible(node3d, SPOT_LIGHT_TEXTURE)
+			add_always_visible(node3d, SPOT_LIGHT_TEXTURE)
 		ObjectType.OMNI_LIGHT:
 			node3d = OmniLight3D.new()
 			node3d.name = "OmniLight"
 			node3d.omni_range = 1.0
-			Global.canvas.gizmos_3d.add_always_visible(node3d, OMNI_LIGHT_TEXTURE)
+			add_always_visible(node3d, OMNI_LIGHT_TEXTURE)
 	if node3d is MeshInstance3D and not is_instance_valid(node3d.mesh.surface_get_material(0)):
 		var material := StandardMaterial3D.new()
 		material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
@@ -305,6 +306,17 @@ static func create_node(type: ObjectType, custom_mesh: Mesh = null) -> Node3D:
 		material.albedo_texture = ImageTexture.create_from_image(albedo_image)
 		node3d.mesh.surface_set_material(0, material)
 	return node3d
+
+
+func add_always_visible(object3d: VisualInstance3D, texture: Texture2D) -> void:
+	always_visible[object3d] = texture
+	if not object3d.tree_exiting.is_connected(remove_always_visible):
+		object3d.tree_exiting.connect(remove_always_visible.bind(object3d))
+		object3d.tree_entered.connect(add_always_visible.bind(object3d, texture))
+
+
+func remove_always_visible(object3d: VisualInstance3D) -> void:
+	always_visible.erase(object3d)
 
 
 static func get_object_property_list(object: Object) -> Array[Dictionary]:
