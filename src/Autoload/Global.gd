@@ -28,6 +28,8 @@ signal collapse_main_menu_changed  ## Emitted when [member collapse_main_menu] c
 signal single_tool_mode_changed(mode: bool)  ## Emitted when [member single_tool_mode] changes.
 ## Emitted when [member share_options_between_tools] changes.
 signal share_options_between_tools_changed(mode: bool)
+@warning_ignore("unused_signal")
+signal palette_panel_updated  ## Emitted when the palette needs to be redrawn in the palette panel.
 signal grid_updated  ## Emitted when the grid needs to be redrawn.
 signal pixel_grid_updated  ## Emitted when the pixel grid needs to be redrawn.
 @warning_ignore("unused_signal")
@@ -713,8 +715,6 @@ var cel_button_scene: PackedScene = load("res://src/UI/Timeline/CelButton.tscn")
 @onready var top_menu_container: Panel = control.find_child("TopMenuContainer")
 ## The animation timeline. It has the [param AnimationTimeline.gd] script attached.
 @onready var animation_timeline: Panel = control.find_child("Animation Timeline")
-## The palette panel. It has the [param PalettePanel.gd] script attached.
-@onready var palette_panel: PalettePanel = control.find_child("Palettes")
 ## Popup dialog that displays brushes. It has the [param BrushesPopup.gd] script attached.
 @onready var brushes_popup: Popup = control.find_child("BrushesPopup")
 ## Popup dialog that displays patterns. It has the [param PatternsPopup.gd] script attached.

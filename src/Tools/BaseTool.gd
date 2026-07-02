@@ -83,7 +83,7 @@ func draw_end(_pos: Vector2i) -> void:
 	project.can_undo = true
 
 
-## Manages conversion of global palettes into local if a drawable tool is used
+## Manages conversion of global palettes into local if a drawable tool is used.
 func manage_undo_redo_palettes() -> void:
 	var palette_in_focus := Palettes.current_palette
 	if not is_instance_valid(palette_in_focus):
@@ -96,15 +96,14 @@ func manage_undo_redo_palettes() -> void:
 			palette_in_focus = palette_in_focus.duplicate()
 			Palettes.undo_redo_add_palette(palette_in_focus, false)
 	if Palettes.auto_add_colors and not palette_has_color:
-		# Get an estimate of where the color will end up (used for undo)
-		if not palette_in_focus.is_project_palette:  ## readonly mode disabled
+		# Get an estimate of where the color will end up (used for undo).
+		if not palette_in_focus.is_project_palette:  # Read-only mode disabled.
 			palette_in_focus.add_color(tool_slot.color, 0)
-			Global.palette_panel.redraw_current_palette()
-			Global.palette_panel.toggle_add_delete_buttons()
+			Global.palette_panel_updated.emit()
 		else:
 			var index := 0
 			var color_max: int = palette_in_focus.colors_max
-			# If palette is full automatically increase the palette height
+			# If palette is full, automatically increase the palette height.
 			if palette_in_focus.is_full():
 				color_max = palette_in_focus.width * (palette_in_focus.height + 1)
 			for i in range(0, color_max):
@@ -114,13 +113,8 @@ func manage_undo_redo_palettes() -> void:
 			var undo_redo := Global.current_project.undo_redo
 			undo_redo.add_do_method(palette_in_focus.add_color.bind(tool_slot.color, 0))
 			undo_redo.add_undo_method(palette_in_focus.remove_color.bind(index))
-			if not Global.palette_panel:  # Failsafe
-				printerr("Missing global reference to PalettePanel")
-				return
-			undo_redo.add_do_method(Global.palette_panel.redraw_current_palette)
-			undo_redo.add_undo_method(Global.palette_panel.redraw_current_palette)
-			undo_redo.add_do_method(Global.palette_panel.toggle_add_delete_buttons)
-			undo_redo.add_undo_method(Global.palette_panel.toggle_add_delete_buttons)
+			undo_redo.add_do_method(func(): Global.palette_panel_updated.emit())
+			undo_redo.add_undo_method(func(): Global.palette_panel_updated.emit())
 
 
 func cancel_tool() -> void:

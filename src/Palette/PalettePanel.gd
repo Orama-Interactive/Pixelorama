@@ -68,6 +68,8 @@ func _ready() -> void:
 	Palettes.palette_removed.connect(setup_palettes_selector)
 	Palettes.new_palette_imported.connect(setup_palettes_selector)
 	Global.project_switched.connect(_project_switched)
+	Global.palette_panel_updated.connect(redraw_current_palette)
+	Global.palette_panel_updated.connect(toggle_add_delete_buttons)
 	sort_submenu.id_pressed.connect(sort_pressed)
 	sort_button_popup.id_pressed.connect(
 		func(id: int):
