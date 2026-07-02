@@ -682,6 +682,16 @@ func is_placing_tiles() -> bool:
 	return Global.current_project.get_current_cel() is CelTileMap and TileSetPanel.placing_tiles
 
 
+func has_selection_tool() -> bool:
+	if not Global.current_project.has_selection:
+		return false
+	for mouse_button in _slots:
+		var slot := _slots[mouse_button]
+		if slot.tool_node is BaseSelectionTool:
+			return true
+	return false
+
+
 func _get_closest_point_to_grid(pos: Vector2, distance: float, grid_pos: Vector2) -> Vector2:
 	# If the cursor is close to the start/origin of a grid cell, snap to that
 	var snap_distance := distance * Vector2.ONE

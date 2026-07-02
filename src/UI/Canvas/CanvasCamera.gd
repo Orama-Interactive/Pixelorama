@@ -96,7 +96,7 @@ func _input(event: InputEvent) -> void:
 			update_transparent_checker_offset()
 	else:
 		var dir := Input.get_vector(&"camera_left", &"camera_right", &"camera_up", &"camera_down")
-		if dir != Vector2.ZERO and !_has_selection_tool():
+		if dir != Vector2.ZERO and not Tools.has_selection_tool():
 			offset = offset + (dir.rotated(camera_angle) / zoom) * CAMERA_SPEED_RATE
 
 
@@ -236,15 +236,6 @@ func _rotation_slider_value_changed(value: float) -> void:
 	var canvas_center: Vector2 = Global.current_project.size / 2
 	offset = (offset - canvas_center).rotated(difference) + canvas_center
 	camera_angle = angle
-
-
-func _has_selection_tool() -> bool:
-	if not Global.current_project.has_selection:
-		return false
-	for slot in Tools._slots.values():
-		if slot.tool_node is BaseSelectionTool:
-			return true
-	return false
 
 
 func _project_switched() -> void:

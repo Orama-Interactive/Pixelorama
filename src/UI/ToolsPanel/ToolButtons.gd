@@ -47,7 +47,7 @@ func _input(event: InputEvent) -> void:
 				return
 
 		var quick_tool_shortcut := "quick_" + t.shortcut + "_tool"
-		if InputMap.has_action(quick_tool_shortcut):
+		if InputMap.has_action(quick_tool_shortcut) and not Tools.has_selection_tool():
 			if (
 				event.is_action_pressed(quick_tool_shortcut, false, true)
 				and not tool_activated
