@@ -483,6 +483,7 @@ func paste(in_place := false) -> void:
 	project.selection_map_changed()
 	transformation_handles.begin_transform(clipboard.image)
 	transformation_handles.preview_transform.origin = transform_origin
+	queue_redraw()
 
 
 func paste_from_clipboard() -> void:
@@ -517,6 +518,7 @@ func paste_from_clipboard() -> void:
 	project.selection_map_changed()
 	transformation_handles.begin_transform(clipboard_image)
 	is_pasting = true
+	queue_redraw()
 
 
 ## Deletes the drawing enclosed within the selection's area.
