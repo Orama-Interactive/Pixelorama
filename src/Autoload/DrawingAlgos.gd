@@ -34,8 +34,16 @@ var omniscale_shader_premul_alpha: Shader:
 				"unshaded", "unshaded, blend_premul_alpha"
 			)
 		return omniscale_shader_premul_alpha
-var rotxel_shader := preload("res://src/Shaders/Effects/Rotation/SmearRotxel.gdshader")
-var nn_shader := preload("res://src/Shaders/Effects/Rotation/NearestNeighbour.gdshader")
+var rotxel_shader: Shader:
+	get:
+		if rotxel_shader == null:
+			rotxel_shader = load("res://src/Shaders/Effects/Rotation/SmearRotxel.gdshader")
+		return rotxel_shader
+var nn_shader: Shader:
+	get:
+		if nn_shader == null:
+			nn_shader = load("res://src/Shaders/Effects/Rotation/NearestNeighbour.gdshader")
+		return nn_shader
 var isometric_tile_cache := {}
 
 

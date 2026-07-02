@@ -3,8 +3,6 @@ extends ImageEffect
 enum { ROTXEL_SMEAR, CLEANEDGE, OMNISCALE, NNS, NN, ROTXEL, URD }
 enum Animate { ANGLE, INIT_ANGLE }
 
-var rotxel_shader := load("res://src/Shaders/Effects/Rotation/SmearRotxel.gdshader")
-var nn_shader := load("res://src/Shaders/Effects/Rotation/NearestNeighbour.gdshader")
 var pivot := Vector2.INF
 var drag_pivot := false
 
@@ -129,7 +127,7 @@ func _on_TypeOptionButton_item_selected(_id: int) -> void:
 	match type_option_button.get_selected_id():
 		ROTXEL_SMEAR:
 			var sm := ShaderMaterial.new()
-			sm.shader = rotxel_shader
+			sm.shader = DrawingAlgos.rotxel_shader
 			preview.set_material(sm)
 			smear_options.visible = true
 		CLEANEDGE:
@@ -144,7 +142,7 @@ func _on_TypeOptionButton_item_selected(_id: int) -> void:
 			smear_options.visible = false
 		NNS:
 			var sm := ShaderMaterial.new()
-			sm.shader = nn_shader
+			sm.shader = DrawingAlgos.nn_shader
 			preview.set_material(sm)
 			smear_options.visible = false
 		_:
