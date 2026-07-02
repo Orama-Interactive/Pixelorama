@@ -1237,7 +1237,7 @@ func select_menu_id_pressed(id: int) -> void:
 			Global.canvas.selection.select_cel_rect()
 		Global.SelectMenu.WRAP_STROKES:
 			var state = select_menu.is_item_checked(id)
-			Global.canvas.selection.flag_tilemode = !state
+			SelectionNode.flag_tilemode = !state
 			select_menu.set_item_checked(id, !state)
 		_:
 			_handle_metadata(id, select_menu)

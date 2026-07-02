@@ -8,7 +8,7 @@ enum SelectionOperation { ADD, SUBTRACT, INTERSECT }
 const CLIPBOARD_FILE_PATH := "user://clipboard.txt"
 
 # flags (additional properties of selection that can be toggled)
-var flag_tilemode := false
+static var flag_tilemode := false
 
 var undo_data: Dictionary
 var is_pasting := false
