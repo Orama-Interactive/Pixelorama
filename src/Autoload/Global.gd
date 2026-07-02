@@ -877,6 +877,15 @@ func is_linux_or_bsd() -> bool:
 	return OS.get_name() in ["Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD"]
 
 
+## Returns [code]true[/code] if the platform's selection modifier is held down.
+## On macOS this is the Command key, because Control+left-click is interpreted by the
+## operating system as a right-click; on every other platform it is the Control key.
+func is_ctrl_or_cmd_pressed() -> bool:
+	if OS.get_name() == "macOS":
+		return Input.is_key_pressed(KEY_META)
+	return Input.is_action_pressed(&"ctrl")
+
+
 ## Print this when Pixelorama launches so it can be stored in the log files.
 ## This info may help us better debug issues certain users may have.
 func get_system_info() -> String:

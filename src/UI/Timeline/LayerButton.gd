@@ -239,7 +239,7 @@ func _on_layer_main_button_pressed() -> void:
 				if !project.selected_cels.has(frame_layer):
 					project.selected_cels.append(frame_layer)
 		project.change_cel(-1, layer_index)
-	elif Input.is_action_pressed(&"ctrl"):
+	elif Global.is_ctrl_or_cmd_pressed():
 		for i in range(0, project.frames.size()):
 			var frame_layer := [i, layer_index]
 			if !project.selected_cels.has(frame_layer):
