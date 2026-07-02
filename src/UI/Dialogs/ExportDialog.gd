@@ -307,7 +307,7 @@ func set_export_progress_bar(value: float) -> void:
 
 func _on_about_to_popup() -> void:
 	get_ok_button().text = "Export"
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	var project := Global.current_project
 	# If we're on Web, don't let the user change the directory path
 	if OS.get_name() == "Web":

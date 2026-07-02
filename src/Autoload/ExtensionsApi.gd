@@ -594,7 +594,7 @@ class SelectionAPI:
 	## [param operation] influences it's behaviour with previous selection rects
 	## (0 for adding, 1 for subtracting, 2 for intersection).
 	func select_rect(rect: Rect2i, operation := 0) -> void:
-		Global.canvas.selection.transform_content_confirm()
+		Global.transform_content_confirmed.emit()
 		var undo_data_tmp := Global.canvas.selection.get_undo_data(false)
 		Global.canvas.selection.select_rect(rect, operation)
 		Global.canvas.selection.commit_undo("Select", undo_data_tmp)
@@ -607,7 +607,7 @@ class SelectionAPI:
 		destination: Vector2i, with_content := true, transform_standby := false
 	) -> void:
 		var selection_node := Global.canvas.selection
-		selection_node.transform_content_confirm()
+		Global.transform_content_confirmed.emit()
 		selection_node.transformation_handles.begin_transform(
 			null, Global.current_project, false, not with_content
 		)
@@ -618,7 +618,7 @@ class SelectionAPI:
 		var rel_direction := destination - (selection_rectangle.position as Vector2i)
 		selection_node.transformation_handles.move_transform(rel_direction)
 		if not transform_standby:
-			selection_node.transform_content_confirm()
+			Global.transform_content_confirmed.emit()
 
 	## Resizes the selection to [param new_size],
 	## with content if [param with_content] is [code]true[/code].
@@ -628,7 +628,7 @@ class SelectionAPI:
 		new_size: Vector2i, with_content := true, transform_standby := false
 	) -> void:
 		var selection_node := Global.canvas.selection
-		selection_node.transform_content_confirm()
+		Global.transform_content_confirmed.emit()
 		selection_node.transformation_handles.begin_transform(
 			null, Global.current_project, false, not with_content
 		)
@@ -636,7 +636,7 @@ class SelectionAPI:
 		var delta := new_size - image_size
 		selection_node.transformation_handles.resize_transform(delta)
 		if not transform_standby:
-			Global.canvas.selection.transform_content_confirm()
+			Global.transform_content_confirmed.emit()
 
 	## Inverts the selection.
 	func invert() -> void:

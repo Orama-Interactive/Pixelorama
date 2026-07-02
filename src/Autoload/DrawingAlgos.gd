@@ -890,7 +890,7 @@ func generate_hexagonal_flat_top(image: Image) -> void:
 # Image effects
 func center(indices: Array) -> void:
 	var project := Global.current_project
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit(project)
 	var redo_data := {}
 	var undo_data := {}
 	project.undo_redo.create_action("Center Frames")
@@ -989,7 +989,7 @@ func resize_image(
 func crop_to_selection() -> void:
 	if not Global.current_project.has_selection:
 		return
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit(Global.current_project)
 	var redo_data := {}
 	var undo_data := {}
 	var rect := Global.current_project.selection_map.get_selection_rect(Global.current_project)
@@ -1012,7 +1012,7 @@ func crop_to_selection() -> void:
 ## Automatically makes the project smaller by looping through all of the cels and
 ## trimming out the pixels that are transparent in all cels.
 func crop_to_content() -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit(Global.current_project)
 	var used_rect := Rect2i()
 	for cel in Global.current_project.get_all_pixel_cels():
 		if not cel is PixelCel:

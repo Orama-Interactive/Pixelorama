@@ -33,6 +33,8 @@ func _ready() -> void:
 	)
 	transformation_handles.preview_transform_changed.connect(_update_marching_ants)
 	Global.project_switched.connect(_project_switched)
+	Global.transform_content_confirmed.connect(transform_content_confirm)
+	Global.transform_content_canceled.connect(transform_content_cancel)
 	Global.camera.zoom_changed.connect(_update_on_zoom)
 
 
@@ -104,10 +106,11 @@ func select_rect(rect: Rect2i, operation := SelectionOperation.ADD) -> void:
 		project.selection_map.move_bitmap_values(project)
 
 
-func transform_content_confirm(should_emit_signal := true) -> void:
+func transform_content_confirm(
+	project := Global.current_project, should_emit_signal := true
+) -> void:
 	if not transformation_handles.is_transforming():
 		return
-	var project := Global.current_project
 	var preview_image := transformation_handles.pre_transformed_image
 	var original_selection_rect = project.selection_map.get_selection_rect(project)
 	transformation_handles.bake_transform_to_selection(project.selection_map, true)
@@ -158,10 +161,9 @@ func transform_content_confirm(should_emit_signal := true) -> void:
 		transformation_confirmed.emit()
 
 
-func transform_content_cancel() -> void:
+func transform_content_cancel(project := Global.current_project) -> void:
 	if not transformation_handles.is_transforming():
 		return
-	var project := Global.current_project
 	project.selection_offset = transformation_handles.pre_transform_selection_offset
 	project.selection_map_changed()
 	for cel in get_selected_draw_cels():

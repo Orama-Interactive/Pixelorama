@@ -17,6 +17,11 @@ signal project_switched  ## Emitted whenever you switch to some other project ta
 signal cel_switched  ## Emitted whenever you select a different cel.
 @warning_ignore("unused_signal")
 signal project_data_changed(project: Project)  ## Emitted when project data is modified.
+## Emitted when we are about to confirm a transformation.
+signal transform_content_confirmed(project: Project, should_emit_signal: bool)
+## Emitted when we are about to cancel a transformation.
+@warning_ignore("unused_signal")
+signal transform_content_canceled(project: Project)
 @warning_ignore("unused_signal")
 signal font_loaded  ## Emitted when a new font has been loaded, or an old one gets unloaded.
 signal collapse_main_menu_changed  ## Emitted when [member collapse_main_menu] changes.
@@ -171,7 +176,7 @@ var current_project_index := 0:
 	set(value):
 		if value >= projects.size():
 			return
-		canvas.selection.transform_content_confirm()
+		transform_content_confirmed.emit()
 		project_about_to_switch.emit()
 		current_project_index = value
 		current_project = projects[value]

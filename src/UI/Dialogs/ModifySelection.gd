@@ -64,7 +64,7 @@ func _on_confirmed() -> void:
 				var offset: Vector2i = (0.5 * (project.size - used_rect.size)).floor()
 				selection_node.transformation_handles.move_transform(offset - used_rect.position)
 		return
-	selection_node.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	var undo_data_tmp := selection_node.get_undo_data(false)
 	var brush := brush_option_button.selected
 	project.selection_map.crop(project.size.x, project.size.y)

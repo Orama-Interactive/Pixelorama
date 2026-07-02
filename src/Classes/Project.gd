@@ -192,7 +192,7 @@ func commit_undo() -> void:
 	if not can_undo:
 		return
 	if Global.canvas.selection.transformation_handles.is_transforming():
-		Global.canvas.selection.transform_content_cancel()
+		Global.transform_content_canceled.emit(self)
 	else:
 		undo_redo.undo()
 
@@ -643,7 +643,7 @@ func change_cel(new_frame: int, new_layer := -1) -> void:
 		new_frame = current_frame
 	if new_layer < 0:
 		new_layer = current_layer
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit(self)
 
 	if selected_cels.is_empty():
 		selected_cels.append([new_frame, new_layer])
@@ -812,7 +812,7 @@ func _z_index_sort(a: int, b: int, frame_index: int) -> bool:
 
 # indices should be in ascending order
 func add_frames(new_frames: Array, indices: PackedInt32Array) -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit(self)
 	selected_cels.clear()
 	for i in new_frames.size():
 		# For each linked cel in the frame, update its layer's cel_link_sets
@@ -829,7 +829,7 @@ func add_frames(new_frames: Array, indices: PackedInt32Array) -> void:
 
 
 func remove_frames(indices: PackedInt32Array) -> void:  # indices should be in ascending order
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit(self)
 	selected_cels.clear()
 	for i in indices.size():
 		# With each removed index, future indices need to be lowered, so subtract by i
@@ -849,7 +849,7 @@ func remove_frames(indices: PackedInt32Array) -> void:  # indices should be in a
 
 # from_indices and to_indicies should be in ascending order
 func move_frames(from_indices: PackedInt32Array, to_indices: PackedInt32Array) -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit(self)
 	selected_cels.clear()
 	var removed_frames := []
 	for i in from_indices.size():
@@ -863,7 +863,7 @@ func move_frames(from_indices: PackedInt32Array, to_indices: PackedInt32Array) -
 
 
 func swap_frame(a_index: int, b_index: int) -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit(self)
 	selected_cels.clear()
 	var temp := frames[a_index]
 	frames[a_index] = frames[b_index]
@@ -876,7 +876,7 @@ func swap_frame(a_index: int, b_index: int) -> void:
 
 
 func reverse_frames(frame_indices: PackedInt32Array) -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit(self)
 	@warning_ignore("integer_division")
 	for i in frame_indices.size() / 2:
 		var index := frame_indices[i]
@@ -894,7 +894,7 @@ func reverse_frames(frame_indices: PackedInt32Array) -> void:
 
 ## [param cels] is 2d Array of [BaseCel]s
 func add_layers(new_layers: Array, indices: PackedInt32Array, cels: Array) -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit(self)
 	selected_cels.clear()
 	for i in indices.size():
 		layers.insert(indices[i], new_layers[i])
@@ -906,7 +906,7 @@ func add_layers(new_layers: Array, indices: PackedInt32Array, cels: Array) -> vo
 
 
 func remove_layers(indices: PackedInt32Array) -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit(self)
 	selected_cels.clear()
 	for i in indices.size():
 		# With each removed index, future indices need to be lowered, so subtract by i
@@ -923,7 +923,7 @@ func remove_layers(indices: PackedInt32Array) -> void:
 func move_layers(
 	from_indices: PackedInt32Array, to_indices: PackedInt32Array, to_parents: Array
 ) -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit(self)
 	selected_cels.clear()
 	var removed_layers := []
 	var removed_cels := []  # 2D array of cels (an array for each layer removed)
@@ -950,7 +950,7 @@ func move_layers(
 # "a" and "b" should both contain "from", "to", and "to_parents" arrays.
 # (Using dictionaries because there seems to be a limit of 5 arguments for do/undo method calls)
 func swap_layers(a: Dictionary, b: Dictionary) -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit(self)
 	selected_cels.clear()
 	var a_layers := []
 	var b_layers := []
@@ -994,7 +994,7 @@ func swap_layers(a: Dictionary, b: Dictionary) -> void:
 func move_cels_same_layer(
 	from_indices: PackedInt32Array, to_indices: PackedInt32Array, layer: int
 ) -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit(self)
 	selected_cels.clear()
 	var cels: Array[BaseCel] = []
 	for frame in frames:
@@ -1020,7 +1020,7 @@ func move_cels_same_layer(
 
 
 func swap_cel(a_frame: int, a_layer: int, b_frame: int, b_layer: int) -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit(self)
 	selected_cels.clear()
 	var temp := frames[a_frame].cels[a_layer]
 	frames[a_frame].cels[a_layer] = frames[b_frame].cels[b_layer]

@@ -227,7 +227,7 @@ func _input(event: InputEvent) -> void:
 
 func _on_layer_main_button_pressed() -> void:
 	var project := Global.current_project
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	var prev_curr_layer := project.current_layer
 	if Input.is_action_pressed(&"shift"):
 		var layer_diff_sign := signi(layer_index - prev_curr_layer)
@@ -307,7 +307,7 @@ func _on_visibility_button_pressed() -> void:
 	if Global.layer_visibility_undoable:
 		project.undo_redo.create_action("Change Layer Visibility")
 
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	var layer := Global.current_project.layers[layer_index]
 	if Input.is_key_pressed(KEY_ALT):
 		var one_hidden_by_other_layer := false
@@ -368,7 +368,7 @@ func _on_visibility_button_pressed() -> void:
 
 func _on_lock_button_pressed() -> void:
 	var project = Global.current_project
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	var layer := Global.current_project.layers[layer_index]
 
 	if Global.layer_locking_undoable:
@@ -405,7 +405,7 @@ func _update_delete_layer_button() -> void:
 
 
 func _on_link_button_pressed() -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	var layer := Global.current_project.layers[layer_index]
 	if not layer is PixelLayer:
 		return

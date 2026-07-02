@@ -221,6 +221,7 @@ func _delete_effect(effect: LayerEffect) -> void:
 
 
 func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
+	Global.transform_content_confirmed.emit()
 	var project := Global.current_project
 	var index := layer.effects.find(effect)
 	var redo_data := {}

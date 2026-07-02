@@ -180,7 +180,7 @@ func draw_start(pos: Vector2i) -> void:
 	super.draw_start(pos)
 	cursor_move(pos)
 	pos = angle_constraint(Vector2(pos))
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	update_mask()
 	if !_drawing:
 		_drawing = true

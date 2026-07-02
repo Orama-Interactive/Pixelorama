@@ -172,7 +172,7 @@ func update_pattern() -> void:
 
 func draw_start(pos: Vector2i) -> void:
 	super.draw_start(pos)
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	_undo_data = _get_undo_data()
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
 		return

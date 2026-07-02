@@ -122,7 +122,7 @@ func draw_start(pos: Vector2i) -> void:
 		return
 	pos = snap_position(pos)
 	super.draw_start(pos)
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	update_mask()
 	if !_drawing:
 		bezier_option_button.disabled = true

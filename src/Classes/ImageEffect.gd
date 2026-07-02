@@ -40,7 +40,7 @@ func _ready() -> void:
 
 func _about_to_popup() -> void:
 	has_been_confirmed = false
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	prepare_animator(Global.current_project)
 	set_and_update_preview_image(Global.current_project.current_frame)
 	aspect_ratio_container.ratio = float(preview_image.get_width()) / preview_image.get_height()

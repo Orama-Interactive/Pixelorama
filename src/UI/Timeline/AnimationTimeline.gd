@@ -207,21 +207,21 @@ func _draw_highlight_cels(cel_coords: Array, offset: Vector2i) -> void:
 func _input(event: InputEvent) -> void:
 	var project := Global.current_project
 	if event.is_action_pressed(&"go_to_previous_layer"):
-		Global.canvas.selection.transform_content_confirm()
+		Global.transform_content_confirmed.emit()
 		project.selected_cels.clear()
 		if project.current_layer > 0:
 			project.change_cel(-1, project.current_layer - 1)
 		else:
 			project.change_cel(-1, project.layers.size() - 1)
 	elif event.is_action_pressed(&"go_to_next_layer"):
-		Global.canvas.selection.transform_content_confirm()
+		Global.transform_content_confirmed.emit()
 		project.selected_cels.clear()
 		if project.current_layer < project.layers.size() - 1:
 			project.change_cel(-1, project.current_layer + 1)
 		else:
 			project.change_cel(-1, 0)
 	elif event.is_action_pressed(&"go_to_next_frame_with_same_tag"):
-		Global.canvas.selection.transform_content_confirm()
+		Global.transform_content_confirmed.emit()
 		project.selected_cels.clear()
 		var from := 0
 		var to := project.frames.size() - 1
@@ -234,7 +234,7 @@ func _input(event: InputEvent) -> void:
 		else:
 			project.change_cel(from, -1)
 	elif event.is_action_pressed(&"go_to_previous_frame_with_same_tag"):
-		Global.canvas.selection.transform_content_confirm()
+		Global.transform_content_confirmed.emit()
 		project.selected_cels.clear()
 		var from := 0
 		var to := project.frames.size() - 1
@@ -546,7 +546,7 @@ func _on_CopyFrame_pressed() -> void:
 func copy_frames(
 	indices := [], destination := -1, select_all_cels := true, tag_name_from: AnimationTag = null
 ) -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	var project := Global.current_project
 
 	if indices.size() == 0:
@@ -805,7 +805,7 @@ func _on_AnimationTimer_timeout() -> void:
 		animation_timer.stop()
 		return
 
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	var project := Global.current_project
 	var fps := project.fps
 	# Recalculate start and end points if user deliberately changed the frame.
@@ -919,7 +919,7 @@ func play_animation(play: bool, forward_dir: bool) -> void:
 
 
 func _on_NextFrame_pressed() -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	var project := Global.current_project
 	project.selected_cels.clear()
 	if project.current_frame < project.frames.size() - 1:
@@ -929,7 +929,7 @@ func _on_NextFrame_pressed() -> void:
 
 
 func _on_PreviousFrame_pressed() -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	var project := Global.current_project
 	project.selected_cels.clear()
 	if project.current_frame > 0:
@@ -939,13 +939,13 @@ func _on_PreviousFrame_pressed() -> void:
 
 
 func _on_LastFrame_pressed() -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	Global.current_project.selected_cels.clear()
 	Global.current_project.change_cel(Global.current_project.frames.size() - 1, -1)
 
 
 func _on_FirstFrame_pressed() -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	Global.current_project.selected_cels.clear()
 	Global.current_project.change_cel(0, -1)
 
@@ -1049,7 +1049,7 @@ func add_layer(layer: BaseLayer, project: Project) -> void:
 
 
 func _on_CloneLayer_pressed() -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	var project := Global.current_project
 	var source_layers := project.layers[project.current_layer].get_children(true)
 	source_layers.append(project.layers[project.current_layer])

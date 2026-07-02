@@ -38,7 +38,7 @@ func set_config(config: Dictionary) -> void:
 func draw_start(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_start(pos)
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	prepare_undo()
 	update_mask(_strength == 1)
 	_changed = false

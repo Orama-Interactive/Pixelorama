@@ -608,7 +608,7 @@ func begin_transform(
 			if currently_transforming:
 				# If we are transforming the content and we want to only transform the selection,
 				# confirm the transformation and begin a new one, that does not include the content.
-				selection_node.transform_content_confirm(false)
+				Global.transform_content_confirmed.emit(project, false)
 			selection_node.undo_data = selection_node.get_undo_data(false)
 			only_transforms_selection = true
 		currently_transforming = true
@@ -617,7 +617,7 @@ func begin_transform(
 		if only_transforms_selection:
 			# If we are only transforming selection and we want to transform the content as well,
 			# confirm the transformation and begin a new one, that includes the content.
-			selection_node.transform_content_confirm(false)
+			Global.transform_content_confirmed.emit(project, false)
 	currently_transforming = true
 	if not pre_transformed_image.is_empty():
 		return

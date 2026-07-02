@@ -7,7 +7,7 @@ var params := {}
 
 
 func _about_to_popup() -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	var frame := Global.current_project.frames[Global.current_project.current_frame]
 	DrawingAlgos.blend_layers(selected_cels, frame, Vector2i.ZERO, Global.current_project, true)
 

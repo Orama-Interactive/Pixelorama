@@ -22,7 +22,7 @@ func _ready() -> void:
 
 
 func _on_ScaleImage_about_to_show() -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	aspect_ratio = float(Global.current_project.size.x) / float(Global.current_project.size.y)
 	width_value.value = Global.current_project.size.x
 	height_value.value = Global.current_project.size.y
