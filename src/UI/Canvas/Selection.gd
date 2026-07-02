@@ -218,11 +218,11 @@ func get_undo_data(undo_image: bool) -> Dictionary:
 	var data := {}
 	var project := Global.current_project
 	data[project.selection_map] = project.selection_map.data
-	data["outline_offset"] = Global.current_project.selection_offset
+	data["outline_offset"] = project.selection_offset
 	data["undo_image"] = undo_image
 
 	if undo_image:
-		Global.current_project.serialize_cel_undo_data(get_selected_draw_cels(), data)
+		project.serialize_cel_undo_data(get_selected_draw_cels(), data)
 	return data
 
 
