@@ -440,9 +440,12 @@ func paste(in_place := false) -> void:
 			var grid_size := Global.grids[0].grid_size
 			var grid_offset := Global.grids[0].grid_offset
 			# Offset the selection so that the center of selection falls above the center of grid.
-			transform_origin = Vector2i(
-				Tools.snap_to_rectangular_grid_center(transform_origin, grid_size, grid_offset)
-			) - Vector2i((clipboard.image.get_size() / 2.0).floor())
+			transform_origin = (
+				Vector2i(
+					Tools.snap_to_rectangular_grid_center(transform_origin, grid_size, grid_offset)
+				)
+				- Vector2i((clipboard.image.get_size() / 2.0).floor())
+			)
 		elif Global.snap_to_rectangular_grid_boundary:
 			var grid_size := Global.grids[0].grid_size
 			var grid_offset := Global.grids[0].grid_offset
@@ -465,12 +468,18 @@ func paste(in_place := false) -> void:
 			var grid_size := Global.grids[0].grid_size
 			var grid_offset := Global.grids[0].grid_offset
 			# Offset the selection so that the center of selection falls above the center of grid.
-			project.selection_offset = Tools.snap_to_rectangular_grid_center(
-				project.selection_offset, grid_size, grid_offset
-			) - (clipboard.image.get_size() / 2.0).floor()
-			transform_origin = Vector2i(
-				Tools.snap_to_rectangular_grid_center(transform_origin, grid_size, grid_offset)
-			) - Vector2i((clipboard.image.get_size() / 2.0).floor())
+			project.selection_offset = (
+				Tools.snap_to_rectangular_grid_center(
+					project.selection_offset, grid_size, grid_offset
+				)
+				- (clipboard.image.get_size() / 2.0).floor()
+			)
+			transform_origin = (
+				Vector2i(
+					Tools.snap_to_rectangular_grid_center(transform_origin, grid_size, grid_offset)
+				)
+				- Vector2i((clipboard.image.get_size() / 2.0).floor())
+			)
 		elif Global.snap_to_rectangular_grid_boundary:
 			var grid_size := Global.grids[0].grid_size
 			var grid_offset := Global.grids[0].grid_offset
