@@ -45,6 +45,8 @@ func _ready() -> void:
 
 
 func set_confirm_buttons_visibility() -> void:
+	if not is_inside_tree():
+		return
 	await get_tree().process_frame
 	set_spinbox_values()
 	get_tree().set_group(
