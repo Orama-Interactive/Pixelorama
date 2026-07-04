@@ -250,7 +250,7 @@ func link_cel(cel: BaseCel, link_set = null) -> void:
 
 
 func get_opacity(frame_index := -1) -> float:
-	if frame_index == -1:
+	if frame_index == -1 or animated_params["opacity"].is_empty():
 		return opacity
 	return get_animated_property(frame_index, "opacity")
 
