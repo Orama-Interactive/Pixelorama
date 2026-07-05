@@ -212,6 +212,7 @@ func new_empty_frame() -> Frame:
 		var cel := l.new_empty_cel()
 		if cel is PixelCel and bottom_layer and fill_color.a > 0:
 			cel.image.fill(fill_color)
+			cel.update_texture()
 		frame.cels.append(cel)
 		bottom_layer = false
 	return frame
