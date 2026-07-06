@@ -732,6 +732,8 @@ func _set_pixel(pos: Vector2i, ignore_mirroring := false) -> void:
 
 
 func _set_pixel_no_cache(pos: Vector2i, ignore_mirroring := false) -> void:
+	if _stroke_project == null:
+		return
 	if randi() % 100 >= _brush_density:
 		return
 	pos = _stroke_project.tiles.get_canon_position(pos)
