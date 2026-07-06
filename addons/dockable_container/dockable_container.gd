@@ -151,8 +151,10 @@ func _can_drop_data(_position: Vector2, data) -> bool:
 
 func _drop_data(_position: Vector2, data) -> void:
 	var from_node := get_node(data.from_path)
-	if from_node is TabBar:
+	while from_node is not TabContainer and is_instance_valid(from_node):
 		from_node = from_node.get_parent()
+	if not is_instance_valid(from_node):
+		return
 	if from_node == _drag_panel and _drag_panel.get_child_count() == 1:
 		return
 	var tab_index = data.tabc_element if data.has("tabc_element") else data.tab_index
