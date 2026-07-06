@@ -6,12 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v1.2] - Unreleased
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), SOS1, [@SjamesE](https://github.com/SjamesE)
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), SOS1, [@SjamesE](https://github.com/SjamesE), [@Arthurmtro](https://github.com/Arthurmtro)
 
 Built using Godot 4.6.3
 
 ### Added
-- Added a keyframe-based view on the timeline, allowing users to animate layer effects with interpolation support. [#1417](https://github.com/Orama-Interactive/Pixelorama/pull/1417)
+- Added a keyframe-based view on the timeline, allowing users to animate layer opacity and layer effects with interpolation support. [#1417](https://github.com/Orama-Interactive/Pixelorama/pull/1417)
 - Implemented autotiling support for tilemap layers, with a new tool for tilemap layers that allows users to set the autotiling bits on each tile. [#1482](https://github.com/Orama-Interactive/Pixelorama/pull/1482)
 - The 3D layer system has been completely re-written! 3D objects are now shared across all cels of a layer, instead of each cel having its own objects, making it possible to animate an object's properties. This re-write also allows for some other new features, such as material property editing (and animating!), importing GLTF scenes, and even drawing directly on 3D objects using the pencil tool! **IMPORTANT NOTE:** Due to this, the 3D layer data of pxo files is NO LONGER COMPATIBLE between v1.2 and older versions. The pxo files themselves should load just fine, but the 3D layers will be EMPTY. [#1429](https://github.com/Orama-Interactive/Pixelorama/pull/1429)
 - The shape tools now support drawing with brushes.
@@ -26,10 +26,16 @@ Built using Godot 4.6.3
 - Exporting tilesets is now also possible from the layer properties of a tilemap layer.
 - Added a preview and a transpose option when exporting tilesets.
 - New projects can now have the clipboard image (either app or system clipboard) as their content. Clipboard sizes have also been added in the Template list, if you just want to get the clipboard size but not the image itself.
+- The paint select tool can now select entire grid cells. [#1533](https://github.com/Orama-Interactive/Pixelorama/pull/1533)
 - A default license option for projects has been added in the preferences. [#1526](https://github.com/Orama-Interactive/Pixelorama/pull/1526)
 - Exporting a tileset as a Godot TileSet resource now saves the probability of each tile.
+- Importing Krita projects now also loads their layer opacity keyframe data, if they have any.
 
 ### Changed
+- Reference images are now stored inside pxo files. **NOTE:** This is a breaking change as reference images will fail to load from pxo files saved in v1.1.10 and older.
+- Made layer hierarchy status more readable by adding lines to layer buttons in the timeline, for layers that belong to groups.
+- The Command key is now used for selecting timeline properties on macOS. [#1544](https://github.com/Orama-Interactive/Pixelorama/pull/1544)
+- Adding a new layer while a collapsed group layer is selected now places it outside of that group.
 - Made some UI elements, such as tool, cel, layer & frame buttons be focusable with the keyboard and activatable by pressing <kbd>Space</kbd> and/or <kbd>Enter</kbd>.
 - The bezier points of the curve tool now lie at the center of the pixels instead of their corner. [#1495](https://github.com/Orama-Interactive/Pixelorama/pull/1495)
 
@@ -37,10 +43,19 @@ Built using Godot 4.6.3
 - Fixed resizing selection not being snapped to the pixel grid.
 - Fixed crash when switching to a different project while a transformation is active on a tilemap layer.
 - Fixed manual mode in tilemap layers not updating all cells when there is more than one tilemap layer sharing the same tileset.
+- Tilemap layer bucket fill now works properly with random tiles.
+- If a layer is added in a collapsed group layer (such as when undoing a layer deletion) now expands that group.
+- Various fixes and improvements in grid center snapping. [#1533](https://github.com/Orama-Interactive/Pixelorama/pull/1533) & [#1545](https://github.com/Orama-Interactive/Pixelorama/pull/1545)
+- Fixed the bucket tool not auto-converting global palettes to project palettes. [#1538](https://github.com/Orama-Interactive/Pixelorama/pull/1538)
 - The keyboard no longer gets stuck on activating elements in the user interface after renaming a layer. [#1524](https://github.com/Orama-Interactive/Pixelorama/pull/1524)
 - The Gaussian blur effect no longer generates darkened edges. [#1523](https://github.com/Orama-Interactive/Pixelorama/pull/1523)
 - Exporting split layers now works properly with a selected amount of layers. [#1532](https://github.com/Orama-Interactive/Pixelorama/pull/1532)
+- Fixed exported file name being set to "untitled" even if the project has a name.
+- Fixed issue where when you batch exported and the "Create new folder for each frame tag" option is enabled, the export folder became the folder of the first "tag", instead of the folder where the .pxo file is located. [#1540](https://github.com/Orama-Interactive/Pixelorama/pull/1540)
 - Fixed issue where the tags were not being visible if Pixelorama is opened with a file.
+- Fixed a crash when loading a Krita project that had keyframes for stuff like opacity, but no image data for frames.
+- Fixed selection marching ants outline not appearing when pasting.
+- Cel button previews are now properly updated when creating new frames for a project that has a fill color.
 - Fixed the unfocused border color of embedded windows in non-dark themes.
 - Fixed extension exporters not working. [#1497](https://github.com/Orama-Interactive/Pixelorama/pull/1497)
 
