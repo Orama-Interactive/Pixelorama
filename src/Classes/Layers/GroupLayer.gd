@@ -23,7 +23,7 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 		return image
 	var textures: Array[Image] = []
 	_cache_texture_data.clear()
-	var metadata_image := Image.create(children.size(), 4, false, Image.FORMAT_RGF)
+	var metadata_image := Image.create(children.size(), 4, false, Image.FORMAT_RGH)
 	# Corresponding to the index of texture in textures. This is not the layer index
 	var current_metadata_index := 0
 	for i in children.size():

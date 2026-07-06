@@ -178,7 +178,10 @@ func draw_layers(force_recreate := false) -> void:
 		# Nx4 texture, where N is the number of layers and the first row are the blend modes,
 		# the second are the opacities, the third are the origins and the fourth are the
 		# clipping mask booleans.
-		layer_metadata_image = Image.create(project.layers.size(), 4, false, Image.FORMAT_RGF)
+		# We are using RGH because RG8 causes the move tool preview to be imprecise and
+		# not follow the pixel grid, and because RGF is not supported by all hardware
+		# see https://github.com/Orama-Interactive/Pixelorama/issues/1546.
+		layer_metadata_image = Image.create(project.layers.size(), 4, false, Image.FORMAT_RGH)
 		# Draw current frame layers
 		for i in project.layers.size():
 			var layer := project.layers[i]
