@@ -35,7 +35,7 @@ func _input(_event: InputEvent) -> void:
 			tab_idx = tab_count - 1
 	if tab_idx != current_tab:
 		current_tab = tab_idx
-	if Input.is_action_just_released(&"close_project"):
+	if Input.is_action_just_released(&"close_project", true):
 		tab_close_pressed.emit(current_tab)
 
 
