@@ -1329,7 +1329,7 @@ func disable_button(button: BaseButton, disable: bool) -> void:
 	if button is Button:
 		for c in button.get_children():
 			if c is TextureRect:
-				c.modulate.a = 0.5 if disable else 1.0
+				c.modulate.a = 0.5 if disable else modulate_icon_color.a
 				break
 
 
