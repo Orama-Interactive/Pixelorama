@@ -21,6 +21,7 @@ Built using Godot 4.6.3
 - Added quick tool activation shortcuts. When a quick tool shortcut is being held, that tool gets activated until the shortcut is released. By default, only the color picker tool has a shortcut, which ic set to <kbd>Alt</kbd>, but you can set shortcuts for every other tool in the Preferences.
 - Added a new "Reselect" option in the Selection menu, which re-creates a previously cleared selection. By default, its shortcut is set to <kbd>Control + Shift + D</kbd>.
 - Added new blend modes: Intersect and Match colors! [#1474](https://github.com/Orama-Interactive/Pixelorama/pull/1474)
+- Added a hotkey to close the current project. Set to <kbd>Control + W</kbd> by default. [#1548](https://github.com/Orama-Interactive/Pixelorama/pull/1548)
 - Added an option in the export dialog to repeat the animation as many times as you want. [#1508](https://github.com/Orama-Interactive/Pixelorama/pull/1508)
 - Added a "crop to selection" mode in the advanced options of the export window. [#1521](https://github.com/Orama-Interactive/Pixelorama/pull/1521)
 - Exporting tilesets is now also possible from the layer properties of a tilemap layer.
@@ -57,6 +58,7 @@ Built using Godot 4.6.3
 - Fixed selection marching ants outline not appearing when pasting.
 - Cel button previews are now properly updated when creating new frames for a project that has a fill color.
 - Fixed the unfocused border color of embedded windows in non-dark themes.
+- Fixed hardware related issue where layer opacity & blend mode did not update in certain mobile GPUs. [#1546](https://github.com/Orama-Interactive/Pixelorama/issues/1546)
 - Fixed extension exporters not working. [#1497](https://github.com/Orama-Interactive/Pixelorama/pull/1497)
 
 ### Removed
