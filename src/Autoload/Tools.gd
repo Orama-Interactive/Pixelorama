@@ -953,6 +953,8 @@ func _cel_switched() -> void:
 	# Do not make any changes when its the same type of layer, or an audio layer
 	if layer_type == _curr_layer_type or layer_type in [Global.LayerTypes.AUDIO]:
 		return
+	quick_assign_tool_revert(MOUSE_BUTTON_RIGHT)
+	quick_assign_tool_revert(MOUSE_BUTTON_LEFT)
 	_show_relevant_tools(layer_type)
 
 
