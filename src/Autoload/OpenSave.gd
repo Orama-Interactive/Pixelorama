@@ -346,13 +346,12 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 			for ref_image_data: Dictionary in result.reference_images:
 				var width: int = ref_image_data.get("width", 64)
 				var height: int = ref_image_data.get("height", 64)
+				var format: int = ref_image_data.get("image_format", Image.FORMAT_RGBA8)
 				var reference_image := new_project.reference_images[ref_index]
 				var image_data := zip_reader.read_file(
 					"image_data/reference_images/reference_%s" % ref_index
 				)
-				var image := Image.create_from_data(
-					width, height, false, Image.FORMAT_RGBA8, image_data
-				)
+				var image := Image.create_from_data(width, height, false, format, image_data)
 				reference_image.create_from_image(image, false)
 				ref_index += 1
 		if result.has("tile_mask") and result.has("has_mask"):

@@ -73,6 +73,7 @@ func serialize() -> Dictionary:
 		"y": position.y,
 		"width": image_size.x,
 		"height": image_size.y,
+		"image_format": texture.get_image().get_format(),
 		"scale_x": scale.x,
 		"scale_y": scale.y,
 		"rotation_degrees": rotation_degrees,
