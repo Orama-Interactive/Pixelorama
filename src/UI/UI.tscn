@@ -244,6 +244,7 @@ layout_mode = 2
 auto_translate_mode = 2
 layout_mode = 2
 tab_close_display_policy = 2
+max_tab_width = 256
 drag_to_rearrange_enabled = true
 script = ExtResource("3")
 
