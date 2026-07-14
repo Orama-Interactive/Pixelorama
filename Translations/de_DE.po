@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
-"PO-Revision-Date: 2026-06-27 13:33\n"
+"PO-Revision-Date: 2026-07-14 05:44\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3996,7 +3996,7 @@ msgstr "Halte die Umschalttaste gedrückt, während du drückst, um sofort zu en
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image?"
-msgstr ""
+msgstr "Möchtest du dieses Referenzbild wirklich entfernen?"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
