@@ -144,6 +144,7 @@ func handle_loading_file(file: String, force_import_dialog_on_images := false) -
 			Global.popup_error(tr("Can't load file '%s'.") % [file_name])
 			return
 		handle_loading_image(file, image, force_import_dialog_on_images)
+	persist_file_read_write_permissions(file)
 
 
 func add_import_option(import_name: StringName, import_scene: PackedScene) -> int:
@@ -654,6 +655,7 @@ func save_pxo_file(
 		project_saved.emit()
 		SteamManager.set_achievement("ACH_SAVE")
 		save_project_to_recent_list(path)
+	persist_file_read_write_permissions(path)
 	return true
 
 
@@ -1409,3 +1411,9 @@ func execute_custom_open_callback(extension: String, path: String) -> void:
 # Check if there is a custom open callback registered for a specific file extension.
 func has_custom_open_callbacks(extension: String) -> bool:
 	return custom_open_callbacks.has(extension)
+
+
+func persist_file_read_write_permissions(path: String) -> void:
+	var android_runtime: Object = Engine.get_singleton("AndroidRuntime")
+	if is_instance_valid(android_runtime):
+		android_runtime.updatePersistableUriPermission(path, true)
