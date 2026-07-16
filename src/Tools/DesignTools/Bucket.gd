@@ -376,7 +376,7 @@ func _flood_fill(pos: Vector2i) -> void:
 	if project.has_selection:
 		project.selection_map.lock_selection_rect(project, true)
 	if Tools.is_placing_tiles():
-		for cel in _get_selected_draw_cels():
+		for cel in _get_selected_draw_cels(false):
 			if cel is not CelTileMap:
 				continue
 			var tilemap_cel := cel as CelTileMap
@@ -386,7 +386,7 @@ func _flood_fill(pos: Vector2i) -> void:
 			project.selection_map.lock_selection_rect(project, false)
 		return
 
-	var cels = _get_selected_draw_cels()
+	var cels := _get_selected_draw_cels(false)
 	for cel: PixelCel in cels:
 		var image: ImageExtended = cel.image
 		if Tools.check_alpha_lock(image, pos):

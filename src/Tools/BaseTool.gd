@@ -413,10 +413,14 @@ func _get_draw_image() -> ImageExtended:
 	return Global.current_project.get_current_cel().get_image()
 
 
-func _get_selected_draw_cels() -> Array[BaseCel]:
+func _get_selected_draw_cels(include_all_layers := true) -> Array[BaseCel]:
 	var cels: Array[BaseCel]
 	var project := Global.current_project
 	for cel_index in project.selected_cels:
+		if not include_all_layers:
+			var layer := project.layers[cel_index[1]]
+			if not layer.can_layer_get_drawn():
+				continue
 		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
 		if not cel is PixelCel:
 			continue
