@@ -116,8 +116,9 @@ func blend_layers(
 func set_layer_metadata_image(
 	layer: BaseLayer, cel: BaseCel, image: Image, index: int, include := true
 ) -> void:
-	# Store the blend mode
-	image.set_pixel(index, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
+	# Store the blend mode. We are adding 0.5 to it because if we don't, it breaks for
+	# RGH textures due to rounding errors.
+	image.set_pixel(index, 0, Color((layer.blend_mode + 0.5) / 255.0, 0.0, 0.0, 0.0))
 	# Store the opacity
 	if layer.is_visible_in_hierarchy() and include:
 		var opacity := cel.get_final_opacity(layer)
