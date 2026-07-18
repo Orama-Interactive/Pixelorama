@@ -42,12 +42,13 @@ var fill_color := Color(0)
 var has_changed := false:
 	set(value):
 		has_changed = value
+		var tab_index := Global.projects.find(self)
 		if value:
 			Global.project_data_changed.emit(self)
-			Global.tabs.set_tab_title(Global.tabs.current_tab, name + "(*)")
+			Global.tabs.set_tab_title(tab_index, name + "(*)")
 			JavaScriptBridge.eval("setUnsavedChanges(true);")
 		else:
-			Global.tabs.set_tab_title(Global.tabs.current_tab, name)
+			Global.tabs.set_tab_title(tab_index, name)
 			JavaScriptBridge.eval("setUnsavedChanges(false);")
 # frames and layers Arrays should generally only be modified directly when
 # opening/creating a project. When modifying the current project, use
