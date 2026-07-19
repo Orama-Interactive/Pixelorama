@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2026-06-27 13:33\n"
+"PO-Revision-Date: 2026-07-19 10:48\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Nome file:"
 
 msgid "Project name:"
-msgstr ""
+msgstr "Nome del progetto:"
 
 msgid "Canvas Size"
 msgstr "Dimensioni della tela"
@@ -206,11 +206,11 @@ msgid "Resize Canvas"
 msgstr "Ridimensiona Canvas"
 
 msgid "Offset & Scale Image"
-msgstr ""
+msgstr "Offset & Scala Immagine"
 
 #. Refers to the "Offset & Scale" layer effect.
 msgid "Offset & Scale"
-msgstr ""
+msgstr "Offset & Scala"
 
 msgid "Offset:"
 msgstr "Scostamento:"
@@ -890,7 +890,7 @@ msgstr "Prestazioni"
 
 #. Found in the Preferences. Refers to the attribution details of the current project, such as the project's creator and license.
 msgid "Attribution"
-msgstr ""
+msgstr "Attribuzione"
 
 #. Found in the Preferences. Refers to the author of the current project.
 msgid "Author"
@@ -898,7 +898,7 @@ msgstr "Autore"
 
 #. Found in the Preferences. Refers to the default license that is set to the created project.
 msgid "Default license"
-msgstr ""
+msgstr "Licenza predefinita"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
@@ -1023,19 +1023,19 @@ msgstr "Rosa"
 
 #. A theme. Black (#000000) is set as the main color so these pixels can be turned off on OLED screens.
 msgid "Black (OLED)"
-msgstr ""
+msgstr "Nero (OLED)"
 
 #. A theme. "System" refers to the Operating System.
 msgid "System"
-msgstr ""
+msgstr "Sistema"
 
 #. Refers to the base color of a theme.
 msgid "Base color:"
-msgstr ""
+msgstr "Colore di base:"
 
 #. Refers to the accent color of a theme.
 msgid "Accent color:"
-msgstr ""
+msgstr "Colore accento:"
 
 msgid "Theme"
 msgstr "Tema"
@@ -2540,7 +2540,7 @@ msgstr "Volto Destro"
 
 #. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
 msgid "Eraser mode"
-msgstr ""
+msgstr "Modalità gomma"
 
 msgid "Mirroring"
 msgstr "Specchiatura"
@@ -2922,15 +2922,15 @@ msgstr "Luminosità"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. Contains blend modes that do masking operations between layers, such as the "Intersection" and "Match colors" blend modes.
 msgid "Masking"
-msgstr ""
+msgstr "Mascheramento"
 
 #. Found in the layer's section of the timeline, as a blend mode option. This blend mode belongs to the "Masking" category, and it erases the un-common areas between the blend and the base layers.
 msgid "Intersection"
-msgstr ""
+msgstr "Intersezione"
 
 #. Found in the layer's section of the timeline, as a blend mode option.  This blend mode belongs to the "Masking" category, and it only shows the same colors between the blend and the base layers.
 msgid "Match colors"
-msgstr ""
+msgstr "Abbina colori"
 
 msgid "Opacity:"
 msgstr "Opacità:"
@@ -3249,26 +3249,26 @@ msgstr "Paesaggio"
 
 # Found in the "New project" window. Refers to the content of the new project, whether it will just be a blank canvas, or if it will be created with data from the clipboard.
 msgid "Content:"
-msgstr ""
+msgstr "Contenuto:"
 
 # Found in the "New project" window. Refers to the content of the new project, set to be just a blank canvas.
 msgid "Blank canvas"
-msgstr ""
+msgstr "Tela vuota"
 
 # Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
 msgid "App clipboard"
-msgstr ""
+msgstr "Appunti app"
 
 # Found in the "New project" window. Refers to the content of the clipboard of the (operating) system.
 msgid "System clipboard"
-msgstr ""
+msgstr "Appunti di sistema"
 
 msgid "Templates:"
 msgstr "Modelli:"
 
 # Found in the "New project" window. Refers to recent project sizes.
 msgid "Recent:"
-msgstr ""
+msgstr "Recente:"
 
 msgid "Preset"
 msgstr "Preset"
@@ -3437,11 +3437,11 @@ msgstr "I caratteri che separano il nome del file e il numero di fotogramma"
 
 #. Found in the export dialog. It is an option button that allows users to removes the transparent area around non-transparent pixels of the exported images, or to remove every pixel outside of the selection.
 msgid "Crop mode:"
-msgstr ""
+msgstr "Modalità ritaglio:"
 
 #. Refers to the content of an image.
 msgid "Content"
-msgstr ""
+msgstr "Contenuto"
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
@@ -3955,7 +3955,7 @@ msgstr ""
 
 #. Found in the keyframe timeline on the right panel when there is no keyframe selected.
 msgid "No key selected"
-msgstr ""
+msgstr "Nessuna chiave selezionata"
 
 #. Found in the keyframe timeline when right clicking on a track. When selected, a new keyframe is being inserted at the selected frame.
 msgid "Insert keyframe"
@@ -3993,7 +3993,7 @@ msgstr "Tieni premuto Shift mentre per rimuovere istantaneamente."
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image?"
-msgstr ""
+msgstr "Sei sicuro di voler eliminare questa immagine di riferimento?"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -4154,7 +4154,7 @@ msgstr "Modalità di posizionamento:"
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place, duplicate and edit existing tiles, and you won't be able to use Manual, Auto and Stack modes."
-msgstr ""
+msgstr "Abilitare la modalità di posizionamento è un'azione permanente. Una volta attivato, potrai posizionare e modificare solo i tile esistenti, e non si sarà in grado di utilizzare le modalità Manuale, Auto e Stack."
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
