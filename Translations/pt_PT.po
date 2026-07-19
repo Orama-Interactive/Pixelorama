@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2026-06-27 13:33\n"
+"PO-Revision-Date: 2026-07-19 20:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1106,6 +1106,10 @@ msgstr "Todas os fotogramas"
 
 msgid "All projects"
 msgstr "Todos os projetos"
+
+#. An image effect that helps convert a flat image to isometric.
+msgid "Flat to Isometric"
+msgstr ""
 
 msgid "Invert Colors"
 msgstr "Inverter Cores"
