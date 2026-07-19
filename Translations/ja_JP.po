@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2026-06-27 16:01\n"
+"PO-Revision-Date: 2026-07-19 20:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1109,6 +1109,10 @@ msgstr "すべてのフレーム"
 
 msgid "All projects"
 msgstr "すべてのプロジェクト"
+
+#. An image effect that helps convert a flat image to isometric.
+msgid "Flat to Isometric"
+msgstr ""
 
 msgid "Invert Colors"
 msgstr "色を反転"
