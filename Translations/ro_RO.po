@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2026-06-27 14:32\n"
+"PO-Revision-Date: 2026-07-19 20:32\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1107,6 +1107,10 @@ msgstr "Toate cadrele"
 
 msgid "All projects"
 msgstr "Toate proiectele"
+
+#. An image effect that helps convert a flat image to isometric.
+msgid "Flat to Isometric"
+msgstr ""
 
 msgid "Invert Colors"
 msgstr "Inversare culori"
