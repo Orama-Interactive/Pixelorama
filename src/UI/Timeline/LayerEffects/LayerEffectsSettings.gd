@@ -6,6 +6,9 @@ const DELETE_TEXTURE := preload("res://assets/graphics/misc/close.svg")
 var effects: Array[LayerEffect] = [
 	LayerEffect.new("Offset & Scale", load("res://src/Shaders/Effects/OffsetPixels.gdshader")),
 	LayerEffect.new(
+		"Flat to Isometric", load("res://src/Shaders/Effects/FlatToIsometric.gdshader")
+	),
+	LayerEffect.new(
 		"Convolution Matrix", load("res://src/Shaders/Effects/ConvolutionMatrix.gdshader"), "Color"
 	),
 	LayerEffect.new(

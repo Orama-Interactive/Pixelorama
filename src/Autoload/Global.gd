@@ -983,6 +983,7 @@ func _initialize_keychain() -> void:
 		&"offset_image": Keychain.InputAction.new("", "Effects menu", true),
 		&"mirror_image": Keychain.InputAction.new("", "Effects menu", true),
 		&"rotate_image": Keychain.InputAction.new("", "Effects menu", true),
+		&"flat_to_isometric": Keychain.InputAction.new("", "Effects menu", true),
 		&"invert_colors": Keychain.InputAction.new("", "Effects menu", true),
 		&"desaturation": Keychain.InputAction.new("", "Effects menu", true),
 		&"outline": Keychain.InputAction.new("", "Effects menu", true),

@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://ckre1e6t3esvo"]
+
+[ext_resource type="PackedScene" uid="uid://bybqhhayl5ay5" path="res://src/UI/Dialogs/ImageEffects/ImageEffectParent.tscn" id="1_hcjfg"]
+[ext_resource type="Script" uid="uid://cpv1h6b3rk0kd" path="res://src/UI/Dialogs/ImageEffects/flat_to_isometric.gd" id="2_w8h5d"]
+[ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="3_xnhln"]
+
+[node name="FlatToIsometric" unique_id=829570751 instance=ExtResource("1_hcjfg")]
+oversampling_override = 1.0
+size = Vector2i(362, 400)
+visible = true
+script = ExtResource("2_w8h5d")
+
+[node name="VBoxContainer" parent="." index="2" unique_id=1773123238]
+offset_bottom = 351.0
+
+[node name="Origin" type="TextureProgressBar" parent="VBoxContainer" index="3" unique_id=1485075028]
+custom_minimum_size = Vector2(32, 24)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+max_value = 64.0
+value = 32.0
+allow_greater = true
+allow_lesser = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("3_xnhln")
+prefix = "Origin:"
+
+[node name="IsoStep" type="TextureProgressBar" parent="VBoxContainer" index="4" unique_id=751131232]
+custom_minimum_size = Vector2(32, 24)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+max_value = 16.0
+allow_greater = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("3_xnhln")
+prefix = "Isometric step:"
+
+[node name="Deadzone" type="TextureProgressBar" parent="VBoxContainer" index="5" unique_id=2054244353]
+custom_minimum_size = Vector2(32, 24)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_type_variation = &"ValueSlider"
+max_value = 16.0
+allow_greater = true
+allow_lesser = true
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 3
+stretch_margin_right = 3
+stretch_margin_bottom = 3
+script = ExtResource("3_xnhln")
+prefix = "Deadzone:"
+
+[connection signal="about_to_popup" from="." to="." method="_on_about_to_popup"]
+[connection signal="value_changed" from="VBoxContainer/Origin" to="." method="_on_origin_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/IsoStep" to="." method="_on_iso_step_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/Deadzone" to="." method="_on_deadzone_value_changed"]

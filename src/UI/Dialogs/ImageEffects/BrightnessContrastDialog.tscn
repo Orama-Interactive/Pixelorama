@@ -7,16 +7,15 @@
 [node name="BrightnessContrastDialog" unique_id=954387416 instance=ExtResource("1_5wfra")]
 oversampling_override = 1.0
 title = "Adjust Brightness/Contrast"
-size = Vector2i(362, 540)
+size = Vector2i(362, 659)
 script = ExtResource("2_msv0o")
 
 [node name="VBoxContainer" parent="." index="2" unique_id=1773123238]
-offset_bottom = 491.0
+offset_bottom = 610.0
 
 [node name="RedShift" type="TextureProgressBar" parent="VBoxContainer" index="2" unique_id=2116233543]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = -255.0
@@ -33,7 +32,6 @@ prefix = "Red shift:"
 [node name="GreenShift" type="TextureProgressBar" parent="VBoxContainer" index="3" unique_id=1436100762]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = -255.0
@@ -50,7 +48,6 @@ prefix = "Green shift:"
 [node name="BlueShift" type="TextureProgressBar" parent="VBoxContainer" index="4" unique_id=2079536811]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = -255.0
@@ -67,7 +64,6 @@ prefix = "Blue shift:"
 [node name="BrightnessSlider" type="TextureProgressBar" parent="VBoxContainer" index="5" unique_id=738643021]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = -100.0
@@ -82,7 +78,6 @@ prefix = "Brightness:"
 [node name="ContrastSlider" type="TextureProgressBar" parent="VBoxContainer" index="6" unique_id=719668350]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 max_value = 300.0
@@ -98,7 +93,6 @@ prefix = "Contrast:"
 [node name="SaturationSlider" type="TextureProgressBar" parent="VBoxContainer" index="7" unique_id=450016837]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 max_value = 300.0
@@ -114,7 +108,6 @@ prefix = "Saturation:"
 [node name="RedSlider" type="TextureProgressBar" parent="VBoxContainer" index="8" unique_id=1115794383]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 value = 100.0
@@ -131,7 +124,6 @@ suffix = "%"
 [node name="GreenSlider" type="TextureProgressBar" parent="VBoxContainer" index="9" unique_id=1456343987]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 value = 100.0
@@ -148,7 +140,6 @@ suffix = "%"
 [node name="BlueSlider" type="TextureProgressBar" parent="VBoxContainer" index="10" unique_id=2082911472]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 value = 100.0
@@ -179,7 +170,6 @@ color = Color(1, 1, 1, 1)
 [node name="TintSlider" type="TextureProgressBar" parent="VBoxContainer" index="12" unique_id=1493212009]
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 nine_patch_stretch = true

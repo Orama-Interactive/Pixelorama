@@ -39,6 +39,7 @@ var scale_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ScaleIma
 var resize_canvas_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/ResizeCanvas.tscn")
 var mirror_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/FlipImageDialog.tscn")
 var rotate_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/RotateImage.tscn")
+var isometric_image_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/flat_to_isometric.tscn")
 var invert_colors_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/InvertColorsDialog.tscn")
 var desaturate_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/DesaturateDialog.tscn")
 var outline_dialog := Dialog.new("res://src/UI/Dialogs/ImageEffects/OutlineDialog.tscn")
@@ -543,6 +544,7 @@ func _setup_effects_menu() -> void:
 	_set_menu_shortcut(&"offset_image", effects_transform_submenu, 0, "Offset & Scale Image")
 	_set_menu_shortcut(&"mirror_image", effects_transform_submenu, 1, "Mirror Image")
 	_set_menu_shortcut(&"rotate_image", effects_transform_submenu, 2, "Rotate Image")
+	_set_menu_shortcut(&"flat_to_isometric", effects_transform_submenu, 3, "Flat to Isometric")
 	effects_transform_submenu.id_pressed.connect(_on_effects_transform_submenu_id_pressed)
 	effects_menu.add_child(effects_transform_submenu)
 	effects_menu.add_submenu_node_item("Transform", effects_transform_submenu)
@@ -1183,6 +1185,8 @@ func _on_effects_transform_submenu_id_pressed(id: int) -> void:
 			mirror_image_dialog.popup()
 		2:
 			rotate_image_dialog.popup()
+		3:
+			isometric_image_dialog.popup()
 
 
 func _on_effects_color_submenu_id_pressed(id: int) -> void:

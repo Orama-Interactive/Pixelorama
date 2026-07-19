@@ -1093,6 +1093,10 @@ msgstr ""
 msgid "All projects"
 msgstr ""
 
+#. An image effect that helps convert a flat image to isometric.
+msgid "Flat to Isometric"
+msgstr ""
+
 msgid "Invert Colors"
 msgstr ""
 

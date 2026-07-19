@@ -81,6 +81,7 @@ text = "Live Preview"
 [node name="WaitTime" parent="VBoxContainer/LiveSettings" unique_id=2022496090 instance=ExtResource("4_whox6")]
 visible = false
 layout_mode = 2
+focus_mode = 0
 min_value = 1.0
 max_value = 1000.0
 value = 200.0
