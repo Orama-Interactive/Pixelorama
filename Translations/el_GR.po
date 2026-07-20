@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2026-07-19 20:32\n"
+"PO-Revision-Date: 2026-07-20 13:59\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1112,7 +1112,7 @@ msgstr "Όλα τα έργα"
 
 #. An image effect that helps convert a flat image to isometric.
 msgid "Flat to Isometric"
-msgstr ""
+msgstr "Επίπεδο σε ισομετρικό"
 
 msgid "Invert Colors"
 msgstr "Αντιστροφή χρωμάτων"
