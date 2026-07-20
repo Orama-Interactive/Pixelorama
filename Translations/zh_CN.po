@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2026-07-19 20:32\n"
+"PO-Revision-Date: 2026-07-20 01:24\n"
 
 msgid "OK"
 msgstr "确定"
@@ -1112,7 +1112,7 @@ msgstr "所有项目"
 
 #. An image effect that helps convert a flat image to isometric.
 msgid "Flat to Isometric"
-msgstr ""
+msgstr "从平面到等距"
 
 msgid "Invert Colors"
 msgstr "反相颜色"
