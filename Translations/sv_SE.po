@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
-"PO-Revision-Date: 2026-07-21 07:44\n"
+"PO-Revision-Date: 2026-07-21 08:49\n"
 
 msgid "OK"
 msgstr "Okej"
@@ -186,7 +186,7 @@ msgstr "Färgläge:"
 
 #. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
 msgid "Color Mode"
-msgstr ""
+msgstr "Färgläge"
 
 #. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
 msgid "Indexed"
@@ -409,10 +409,10 @@ msgid "Are you sure you want to delete this layout?"
 msgstr ""
 
 msgid "Widescreen"
-msgstr ""
+msgstr "Bredskärm"
 
 msgid "Tallscreen"
-msgstr ""
+msgstr "Högskärm"
 
 msgid "Mirror View"
 msgstr ""
@@ -471,7 +471,7 @@ msgid "Fullscreen Mode"
 msgstr "Fullskärmsläge"
 
 msgid "Fill with color:"
-msgstr ""
+msgstr "Fyll med färg:"
 
 msgid "Open a File"
 msgstr "Öppna en fil"
@@ -537,7 +537,7 @@ msgstr ""
 
 #. A value that is a threshold
 msgid "Threshold:"
-msgstr ""
+msgstr "Tröskelvärde:"
 
 #. Found in the preview image dialog, which appears when importing an image file. This option appears when the image is being imported as a spritesheet, if "smart slice" is enabled. Hint tooltip of the "Threshold" value slider.
 msgid "Images that have any one side smaller than this value will cross the threshold"
@@ -686,7 +686,7 @@ msgid "3D layer:"
 msgstr "3D-lager:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Riktning:"
 
 msgid "Forward"
 msgstr "Framåt"
@@ -711,7 +711,7 @@ msgstr "Rader:"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new column.
 msgid "Tags by column"
-msgstr ""
+msgstr "Taggar efter kolumn"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new row.
 msgid "Tags by row"
@@ -777,7 +777,7 @@ msgstr ""
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
-msgstr ""
+msgstr "JPEG-bild"
 
 #. Found in the "Open" file dialog. Searches SVG files only. (Note that SVG is a file type and should remain untranslated)
 msgid "SVG Image"
@@ -789,7 +789,7 @@ msgstr "TGA-bild"
 
 #. Found in the "Open" file dialog. Searches WebP files only. (Note that WebP is a file type and should remain untranslated)
 msgid "WebP Image"
-msgstr ""
+msgstr "WebP-bild"
 
 #. Found in "Open" and "Save" file dialogs. Searches OpenRaster project files only (.ora). OpenRaster should remain untranslated. https://www.openraster.org/
 msgid "OpenRaster Project"
@@ -797,7 +797,7 @@ msgstr "OpenRaster-projekt"
 
 #. Found in "Open" and "Save" file dialogs. Searches Aseprite project files only (.ase and .aseprite). Note that Aseprite is a software and should remain untranslated.
 msgid "Aseprite Project"
-msgstr ""
+msgstr "Aseprite-projekt"
 
 #. Found in "Open" and "Save" file dialogs. Searches Krita project files only (.kra). Note that Krita is a software and should remain untranslated.
 msgid "Krita Project"
@@ -805,7 +805,7 @@ msgstr "Krita-projekt"
 
 #. Found in "Open" and "Save" file dialogs. Searches Piskel project files only (.piskel). Note that Piskel is a software and should remain untranslated.
 msgid "Piskel Project"
-msgstr ""
+msgstr "Piskel-projekt"
 
 #. Found in "Open" and "Save" file dialogs. Searches Photoshop project files only (.psd). Note that Photoshop is a software and should remain untranslated.
 msgid "Photoshop Project"
@@ -821,7 +821,7 @@ msgstr "GIMP-palett"
 
 #. Found in the export dialog. It is a button that when pressed, shows more options.
 msgid "Advanced options"
-msgstr ""
+msgstr "Avancerade alternativ"
 
 msgid "Interpolation:"
 msgstr "Interpolering:"
@@ -830,7 +830,7 @@ msgid "Nearest"
 msgstr "Närmaste"
 
 msgid "Bilinear"
-msgstr ""
+msgstr "Bilinjär"
 
 msgid "Cubic"
 msgstr ""
@@ -843,7 +843,7 @@ msgstr "Konstant"
 
 #. Refers to https://en.wikipedia.org/wiki/Color_space
 msgid "Color space"
-msgstr ""
+msgstr "Färgrymd"
 
 #. A type of color space.
 msgid "Linear sRGB"
@@ -900,13 +900,13 @@ msgid "Drivers"
 msgstr ""
 
 msgid "Extensions"
-msgstr ""
+msgstr "Tillägg"
 
 msgid "Cursors"
 msgstr ""
 
 msgid "Indicators"
-msgstr ""
+msgstr "Indikatorer"
 
 #. Found in the preferences. Used for options that require restart when they are changed.
 msgid "Pixelorama must be restarted for changes to take effect."
@@ -928,7 +928,7 @@ msgstr ""
 
 #. Found in the preferences, under Canvas.
 msgid "Integer Zoom"
-msgstr ""
+msgstr "Heltalszoom"
 
 #. Found in the preferences, under Canvas. Hint tooltip of "Integer Zoom".
 msgid "Restricts the value to be an integer multiple of 100%"
@@ -947,7 +947,7 @@ msgid "Color:"
 msgstr "Färg:"
 
 msgid "Guide color:"
-msgstr ""
+msgstr "Guidefärg:"
 
 msgid "System Language"
 msgstr "Systemspråk"
@@ -961,7 +961,7 @@ msgstr "Font:"
 
 #. Found in the preferences, under the interface section. Allows users to set the size of the font, ie the text.
 msgid "Font size:"
-msgstr ""
+msgstr "Teckenstorlek:"
 
 #. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
 msgid "Screen orientation:"
@@ -1018,7 +1018,7 @@ msgstr "Ros"
 
 #. A theme. Black (#000000) is set as the main color so these pixels can be turned off on OLED screens.
 msgid "Black (OLED)"
-msgstr ""
+msgstr "Svart (OLED)"
 
 #. A theme. "System" refers to the Operating System.
 msgid "System"
@@ -1039,7 +1039,7 @@ msgid "Buttons"
 msgstr "Knappar"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Ikonfärg från:"
 
 msgid "Icon color:"
 msgstr "Ikonfärg:"
@@ -1090,7 +1090,7 @@ msgid "Only affect selection"
 msgstr ""
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Valda celler"
 
 msgid "Current cel"
 msgstr ""
@@ -1222,7 +1222,7 @@ msgstr "Spegel"
 
 #. Found in the Gradient dialog, under the image menu. It is one of the repeat options. If Truncate is selected, the gradient gets cut at the edges.
 msgid "Truncate"
-msgstr ""
+msgstr "Trunkera"
 
 msgid "Transition size:"
 msgstr ""
@@ -1253,7 +1253,7 @@ msgstr ""
 
 #. Refers to the saturation of the colors of an image.
 msgid "Saturation:"
-msgstr ""
+msgstr "Mättnad:"
 
 #. Refers to the value (as in HSV) of the colors of an image.
 msgid "Value:"
@@ -1265,7 +1265,7 @@ msgstr ""
 
 #. Refers to the brightness of the colors of an image.
 msgid "Brightness:"
-msgstr ""
+msgstr "Ljusstyrka:"
 
 #. Refers to the contrast of the colors of an image.
 msgid "Contrast:"
@@ -1281,7 +1281,7 @@ msgstr ""
 
 #. Refers to the blue value of the colors of an image.
 msgid "Blue value:"
-msgstr ""
+msgstr "Blått värde:"
 
 #. Refers to a color that tints an image.
 msgid "Tint color:"
@@ -1332,7 +1332,7 @@ msgstr "Steg:"
 
 #. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Palettize"
-msgstr ""
+msgstr "Palettisera"
 
 #. An image effect. It makes the input image pixelated. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Pixelize"
@@ -1354,7 +1354,7 @@ msgid "View Splash Screen"
 msgstr ""
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Onlinedokument"
 
 msgid "Issue Tracker"
 msgstr ""
@@ -1811,7 +1811,7 @@ msgid "Guides"
 msgstr "Guider"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "Guidefärg:"
 
 msgid "A color of ruler guides displayed on the canvas"
 msgstr ""
@@ -1864,7 +1864,7 @@ msgstr ""
 
 #. Found in the Preferences, in the Canvas category. Refers to the grid that is being edited.
 msgid "Editing grid:"
-msgstr ""
+msgstr "Redigerar rutnät:"
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid size:"
@@ -1885,7 +1885,7 @@ msgid "If disabled, the grid will be drawn only over the original image"
 msgstr ""
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Rutnätsfärg:"
 
 msgid "A color of the grid"
 msgstr ""
@@ -1894,7 +1894,7 @@ msgid "Pixel Grid"
 msgstr ""
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "Visa vid zoomning:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
 msgstr ""
@@ -1986,7 +1986,7 @@ msgstr ""
 
 #. An option found in the preferences, under the Performance section. Refers to the screen being updated (redrawn) continuously.
 msgid "Update continuously"
-msgstr ""
+msgstr "Uppdatera kontinuerligt"
 
 #. Found in the preferences, hint of the "Update continuously" option.
 msgid "If this is toggled on, the application will redraw the screen continuously, even while it's not used. Turning this off helps lower CPU and GPU usage when idle."
@@ -2030,7 +2030,7 @@ msgstr "Riktigt namn:"
 
 #. Found in the Preferences. Refers to the contact info of the current project author.
 msgid "Contact:"
-msgstr ""
+msgstr "Kontakt:"
 
 #. Found in the Preferences. Refers to the company name of the current project author.
 msgid "Company/Studio:"
@@ -2085,7 +2085,7 @@ msgstr ""
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup. Button to download an extension.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
 msgid "Download"
-msgstr ""
+msgstr "Ladda ner"
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. It's the section where you can add links to more extension repositories.
 #: src/UI/ExtensionExplorer/ExtensionExplorer.tscn
@@ -2129,7 +2129,7 @@ msgstr ""
 
 #. Hint tooltip of a button in the Global Tool Settings. "Dynamics" let users affect certain brush parameters, such as their size and alpha, based on the pressure of the tablet pen, the velocity of the mouse or the pen, and more in the future.
 msgid "Dynamics"
-msgstr ""
+msgstr "Dynamik"
 
 #. Found in the Dynamics options menu. A stabilizer is a feature that, when enabled, helps artists create smooth lines as they draw.
 msgid "Stabilizer"
@@ -2187,7 +2187,7 @@ msgstr "Cirkelpensel"
 
 #. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Filled circle brush"
-msgstr ""
+msgstr "Fylld cirkelpensel"
 
 #. Found when selecting a brush. It's a section that shows brushes the user has imported for the current project specifically.
 msgid "Project Brushes"
@@ -2344,7 +2344,7 @@ msgid "Colors right:"
 msgstr ""
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Välj för:"
 
 msgid "Left Color"
 msgstr ""
@@ -2468,7 +2468,7 @@ msgid "Eraser mode"
 msgstr ""
 
 msgid "Mirroring"
-msgstr ""
+msgstr "Spegling"
 
 msgid "Horizontal"
 msgstr "Horisontell"
@@ -2504,7 +2504,7 @@ msgid "Current frame:"
 msgstr ""
 
 msgid "Animation mode:"
-msgstr ""
+msgstr "Animeringsläge:"
 
 msgid "Current frame as spritesheet"
 msgstr ""
@@ -2633,11 +2633,11 @@ msgstr "Välj pixlar"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
-msgstr ""
+msgstr "Länka celler till"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get unlinked.
 msgid "Unlink cels"
-msgstr ""
+msgstr "Avlänka celler"
 
 #. An option found in the right click menu of an audio cel. If selected, the audio of the audio layer will start playing from this frame.
 msgid "Play audio here"
@@ -2934,7 +2934,7 @@ msgid "Redo: Remove Layer"
 msgstr ""
 
 msgid "Undo: Merge Layer"
-msgstr ""
+msgstr "Ångra: Slå ihop lager"
 
 msgid "Redo: Merge Layer"
 msgstr ""
@@ -3131,7 +3131,7 @@ msgid "A default height of a new image"
 msgstr ""
 
 msgid "Default fill color:"
-msgstr ""
+msgstr "Förvald fyllnadsfärg:"
 
 msgid "A default background color of a new image"
 msgstr ""
@@ -3190,7 +3190,7 @@ msgstr "Mallar:"
 
 # Found in the "New project" window. Refers to recent project sizes.
 msgid "Recent:"
-msgstr ""
+msgstr "Nyligen:"
 
 msgid "Preset"
 msgstr "Förval"
@@ -3247,7 +3247,7 @@ msgid "Bucket"
 msgstr "Hink"
 
 msgid "Shading Tool"
-msgstr ""
+msgstr "Skuggningsverktyg"
 
 msgid "Line Tool"
 msgstr "Linjeverktyg"
@@ -3335,7 +3335,7 @@ msgstr "Exportera JSON-data"
 
 #. A setting found in the export dialog. When enabled, each layer is being exported as a different file, or as different frames if the target format is gif/apng/video.
 msgid "Split layers"
-msgstr ""
+msgstr "Dela lager"
 
 #. Found in the export dialog.
 msgid "Include frame tags in the file name"
@@ -3419,7 +3419,7 @@ msgid "User data:"
 msgstr "Användardata:"
 
 msgid "Duration"
-msgstr ""
+msgstr "Varaktighet"
 
 msgid "Tiled In Both Axis"
 msgstr ""
@@ -3484,19 +3484,19 @@ msgstr ""
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their red channel value.
 msgid "Sort by red"
-msgstr ""
+msgstr "Sortera efter röd"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their green channel value.
 msgid "Sort by green"
-msgstr ""
+msgstr "Sortera efter grön"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their blue channel value.
 msgid "Sort by blue"
-msgstr ""
+msgstr "Sortera efter blå"
 
 #. An option of the Sort palette button found in the palette panel. When selected, the colors of the palette are being sorted based on their alpha channel value.
 msgid "Sort by alpha"
-msgstr ""
+msgstr "Sortera efter alfa"
 
 msgid "Palette with the same name and path already exists!"
 msgstr ""
@@ -3546,7 +3546,7 @@ msgstr "Perspektivredigerare"
 
 #. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
 msgid "Recorder"
-msgstr ""
+msgstr "Inspelare"
 
 #. Tiles are images of a specific shape, usually rectangular, that are laid out in a grid. They are used in tile-based video games. https://en.wikipedia.org/wiki/Tile-based_video_game
 msgid "Tiles"
@@ -3670,7 +3670,7 @@ msgid "Frustum"
 msgstr ""
 
 msgid "Rotation:"
-msgstr ""
+msgstr "Rotation:"
 
 msgid "Scale:"
 msgstr ""
@@ -3689,7 +3689,7 @@ msgstr ""
 
 #. An option that toggles the visibility of something on or off. Found in the format of "Visible: on/off"
 msgid "Visible:"
-msgstr ""
+msgstr "Synliga:"
 
 #. Refers to the transformation options of an object, such as its position, rotation and scale. For technical details, see https://docs.godotengine.org/en/stable/tutorials/math/matrices_and_transforms.html
 msgid "Transform"
@@ -3952,7 +3952,7 @@ msgstr ""
 
 #. Rotation of the selected reference image on the canvas.
 msgid "Rotation"
-msgstr ""
+msgstr "Rotation"
 
 #. Toggle filter of the selected reference image on the canvas.
 msgid "Filter"
