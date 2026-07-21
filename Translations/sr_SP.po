@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Serbian (Cyrillic)\n"
 "Language: sr_SP\n"
-"PO-Revision-Date: 2026-06-16 23:47\n"
+"PO-Revision-Date: 2026-07-19 20:33\n"
 
 msgid "OK"
 msgstr "ОК"
@@ -1103,6 +1103,10 @@ msgstr "Сви фрејмови"
 
 msgid "All projects"
 msgstr "Сви пројекти"
+
+#. An image effect that helps convert a flat image to isometric.
+msgid "Flat to Isometric"
+msgstr ""
 
 msgid "Invert Colors"
 msgstr ""
@@ -3907,7 +3911,7 @@ msgid "Hold Shift while pressing to instantly remove."
 msgstr ""
 
 #. Shown in the confirmation dialog for removing a reference image.
-msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
+msgid "Are you sure you want to remove this reference image?"
 msgstr ""
 
 #. Moves the reference image up in the list
@@ -3932,10 +3936,6 @@ msgstr ""
 
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
-msgstr ""
-
-#. Button to select no reference images in the Reference Images panel.
-msgid "none"
 msgstr ""
 
 #. Resets the Transform of the selected reference image on the canvas.
@@ -4072,7 +4072,7 @@ msgstr ""
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
-msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
+msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place, duplicate and edit existing tiles, and you won't be able to use Manual, Auto and Stack modes."
 msgstr ""
 
 #: src/UI/TilesPanel.gd

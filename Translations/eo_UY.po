@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-06-16 23:48\n"
+"PO-Revision-Date: 2026-07-19 20:33\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -1107,6 +1107,10 @@ msgstr "Ĉiuj kadroj"
 
 msgid "All projects"
 msgstr "Ĉiuj projektoj"
+
+#. An image effect that helps convert a flat image to isometric.
+msgid "Flat to Isometric"
+msgstr ""
 
 msgid "Invert Colors"
 msgstr "Inversigi kolorojn"
@@ -3990,8 +3994,8 @@ msgid "Hold Shift while pressing to instantly remove."
 msgstr "Premu la majuskligan klavon dum alklako por senkonfirma forigado."
 
 #. Shown in the confirmation dialog for removing a reference image.
-msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr "Ĉu vi certas, ke vi volas forigi ĉi tiun referencan bildon? Ĝi ne estos forigita de via dosiersistemo."
+msgid "Are you sure you want to remove this reference image?"
+msgstr ""
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -4016,10 +4020,6 @@ msgstr "Rotacii la elektitan referencan bildon"
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
 msgstr "Skali la elektitan referencan bildon"
-
-#. Button to select no reference images in the Reference Images panel.
-msgid "none"
-msgstr "neniu"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
@@ -4155,8 +4155,8 @@ msgstr "Nurmeta reĝimo:"
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
-msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr "Ŝaltado de nurmeta reĝimo estas porĉiama ago. Ekde ŝaltita, nur metado de kalehoj estos ebla, kaj vi ne povos modifi ekzistantajn kahelojn sur tiu ĉi tavolo."
+msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place, duplicate and edit existing tiles, and you won't be able to use Manual, Auto and Stack modes."
+msgstr ""
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."

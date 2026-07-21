@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2026-06-20 22:09\n"
+"PO-Revision-Date: 2026-07-20 13:59\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -1109,6 +1109,10 @@ msgstr "Όλα τα καρέ"
 
 msgid "All projects"
 msgstr "Όλα τα έργα"
+
+#. An image effect that helps convert a flat image to isometric.
+msgid "Flat to Isometric"
+msgstr "Επίπεδο σε ισομετρικό"
 
 msgid "Invert Colors"
 msgstr "Αντιστροφή χρωμάτων"
@@ -3992,8 +3996,8 @@ msgid "Hold Shift while pressing to instantly remove."
 msgstr "Κρατήστε πατημένο το Shift για άμεση αφαίρεση."
 
 #. Shown in the confirmation dialog for removing a reference image.
-msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr "Είστε βέβαιοι ότι θέλετε να καταργήσετε αυτή την εικόνα αναφοράς? Δεν θα διαγραφεί από το σύστημα αρχείων σας."
+msgid "Are you sure you want to remove this reference image?"
+msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε αυτή την εικόνα αναφοράς;"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -4018,10 +4022,6 @@ msgstr "Περιστροφή της επιλεγμένης εικόνας ανα
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
 msgstr "Κλιμάκωση της επιλεγμένης εικόνας αναφοράς"
-
-#. Button to select no reference images in the Reference Images panel.
-msgid "none"
-msgstr "κανένα"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
@@ -4157,8 +4157,8 @@ msgstr "Λειτουργία μόνο για τοποθέτηση:"
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
-msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr "Η ενεργοποίηση της λειτουργίας μόνο για τοποθέτηση είναι μια μόνιμη ενέργεια. Μόλις ενεργοποιηθεί, θα είστε σε θέση να τοποθετήσετε πλακίδια και δε θα μπορείτε να τροποποιήσετε τα υπάρχοντα πλακίδια πια σε αυτή τη στρώση."
+msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place, duplicate and edit existing tiles, and you won't be able to use Manual, Auto and Stack modes."
+msgstr "Η ενεργοποίηση της λειτουργίας μόνο για τοποθέτηση είναι μια μόνιμη ενέργεια. Μόλις ενεργοποιηθεί, θα μπορείτε μόνο να τοποθετήσετε, να αντιγράψετε και να επεξεργαστείτε τα ήδη υπάρχοντα πλακίδια και δε θα μπορείτε να χρησιμοποιείτε τις λειτουργίες \"Χειροκίνητο\", \"Αυτόματο\" και \"Στοίβα\"."
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."

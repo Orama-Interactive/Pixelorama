@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2026-06-16 23:47\n"
+"PO-Revision-Date: 2026-07-20 01:24\n"
 
 msgid "OK"
 msgstr "确定"
@@ -890,7 +890,7 @@ msgstr "性能"
 
 #. Found in the Preferences. Refers to the attribution details of the current project, such as the project's creator and license.
 msgid "Attribution"
-msgstr ""
+msgstr "署名"
 
 #. Found in the Preferences. Refers to the author of the current project.
 msgid "Author"
@@ -898,7 +898,7 @@ msgstr "作者"
 
 #. Found in the Preferences. Refers to the default license that is set to the created project.
 msgid "Default license"
-msgstr ""
+msgstr "默认许可证"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
@@ -1109,6 +1109,10 @@ msgstr "所有帧"
 
 msgid "All projects"
 msgstr "所有项目"
+
+#. An image effect that helps convert a flat image to isometric.
+msgid "Flat to Isometric"
+msgstr "从平面到等距"
 
 msgid "Invert Colors"
 msgstr "反相颜色"
@@ -3438,11 +3442,11 @@ msgstr "分隔文件名称和帧编号的字符(秒)"
 
 #. Found in the export dialog. It is an option button that allows users to removes the transparent area around non-transparent pixels of the exported images, or to remove every pixel outside of the selection.
 msgid "Crop mode:"
-msgstr ""
+msgstr "裁剪模式："
 
 #. Refers to the content of an image.
 msgid "Content"
-msgstr ""
+msgstr "内容"
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
@@ -3993,8 +3997,8 @@ msgid "Hold Shift while pressing to instantly remove."
 msgstr "按住 Shift 键并按下即可立即删除。"
 
 #. Shown in the confirmation dialog for removing a reference image.
-msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr "您确定要删除此参考图像吗？它不会从您的文件系统中删除。"
+msgid "Are you sure you want to remove this reference image?"
+msgstr "您确定要删除此参考图像吗？"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -4019,10 +4023,6 @@ msgstr "移动选中的参考图像"
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
 msgstr "缩放选中的参考图像"
-
-#. Button to select no reference images in the Reference Images panel.
-msgid "none"
-msgstr "无"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
@@ -4158,8 +4158,8 @@ msgstr "仅放置模式："
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
-msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr "启用“仅放置”模式是永久性操作。一旦激活，您将只能放置图块，并且无法再修改此图层上的现有图块。"
+msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place, duplicate and edit existing tiles, and you won't be able to use Manual, Auto and Stack modes."
+msgstr "启用仅放置模式是一个永久性操作。激活后，你将只能放置、复制和编辑现有的图块，并且你将无法使用手动、自动和堆叠模式。"
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."

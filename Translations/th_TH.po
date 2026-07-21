@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Thai\n"
 "Language: th_TH\n"
-"PO-Revision-Date: 2026-06-16 23:48\n"
+"PO-Revision-Date: 2026-07-19 20:33\n"
 
 msgid "OK"
 msgstr "ตกลง"
@@ -1109,6 +1109,10 @@ msgstr "ทุกเฟรม"
 
 msgid "All projects"
 msgstr "ทุกโปรเจกต์"
+
+#. An image effect that helps convert a flat image to isometric.
+msgid "Flat to Isometric"
+msgstr ""
 
 msgid "Invert Colors"
 msgstr "กลับค่าสี"
@@ -3994,8 +3998,8 @@ msgid "Hold Shift while pressing to instantly remove."
 msgstr "กด Shift ค้างไว้ขณะกดเพื่อลบทันที"
 
 #. Shown in the confirmation dialog for removing a reference image.
-msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr "คุณแน่ใจหรือไม่ว่าต้องการลบรูปภาพอ้างอิงนี้? ไฟล์จะไม่ถูกลบออกจากระบบของคุณ"
+msgid "Are you sure you want to remove this reference image?"
+msgstr ""
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -4020,10 +4024,6 @@ msgstr "หมุนรูปภาพอ้างอิงที่เลือ
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
 msgstr "ปรับสเกลรูปภาพอ้างอิงที่เลือก"
-
-#. Button to select no reference images in the Reference Images panel.
-msgid "none"
-msgstr "ไม่มี"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
@@ -4159,8 +4159,8 @@ msgstr "โหมดวางอย่างเดียว:"
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
-msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr "การเปิดใช้งานโหมดวางอย่างเดียวเป็นการกระทำถาวร เมื่อเปิดใช้งานแล้ว คุณจะสามารถวางกระเบื้องได้เท่านั้น และคุณจะไม่สามารถแก้ไขกระเบื้องที่มีอยู่เดิมในเลเยอร์นี้ได้อีก"
+msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place, duplicate and edit existing tiles, and you won't be able to use Manual, Auto and Stack modes."
+msgstr ""
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."

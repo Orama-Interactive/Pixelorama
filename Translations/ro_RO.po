@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2026-06-17 05:54\n"
+"PO-Revision-Date: 2026-07-20 08:04\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1107,6 +1107,10 @@ msgstr "Toate cadrele"
 
 msgid "All projects"
 msgstr "Toate proiectele"
+
+#. An image effect that helps convert a flat image to isometric.
+msgid "Flat to Isometric"
+msgstr "Plat în izometric"
 
 msgid "Invert Colors"
 msgstr "Inversare culori"
@@ -3991,8 +3995,8 @@ msgid "Hold Shift while pressing to instantly remove."
 msgstr "Ține apăsat Shift în timp ce apeși pentru a elimina instant."
 
 #. Shown in the confirmation dialog for removing a reference image.
-msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr "Sigur vrei să ștergi această imagine de referință? Nu va fi ștearsă din sistemul de fișiere."
+msgid "Are you sure you want to remove this reference image?"
+msgstr "Sigur vrei să elimini această imagine de referință?"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -4017,10 +4021,6 @@ msgstr "Rotește imaginea de referință selectată"
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
 msgstr "Scalează imaginea de referință selectată"
-
-#. Button to select no reference images in the Reference Images panel.
-msgid "none"
-msgstr "niciuna"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
@@ -4156,8 +4156,8 @@ msgstr "Mod doar plasare:"
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
-msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr "Activarea modului doar plasare este o acțiune permanentă. Odată activat, vei putea plasa doar dale și nu vei mai putea modifica dalele existente pe acest strat."
+msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place, duplicate and edit existing tiles, and you won't be able to use Manual, Auto and Stack modes."
+msgstr "Activarea modului doar plasare este o acțiune definitivă. Odată activat, vei putea doar să plasezi, să duplici și să editezi dalele existente, iar modurile Manual, Auto și Stivă nu vor mai fi disponibile."
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2026-06-16 23:47\n"
+"PO-Revision-Date: 2026-07-19 20:32\n"
 
 msgid "OK"
 msgstr "Aceptar"
@@ -887,7 +887,7 @@ msgstr "Rendimiento"
 
 #. Found in the Preferences. Refers to the attribution details of the current project, such as the project's creator and license.
 msgid "Attribution"
-msgstr ""
+msgstr "Atribuciones"
 
 #. Found in the Preferences. Refers to the author of the current project.
 msgid "Author"
@@ -895,7 +895,7 @@ msgstr "Autor"
 
 #. Found in the Preferences. Refers to the default license that is set to the created project.
 msgid "Default license"
-msgstr ""
+msgstr "Licencia predeterminada"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
@@ -1106,6 +1106,10 @@ msgstr "Todos los fotogramas"
 
 msgid "All projects"
 msgstr "Todos los proyectos"
+
+#. An image effect that helps convert a flat image to isometric.
+msgid "Flat to Isometric"
+msgstr ""
 
 msgid "Invert Colors"
 msgstr "Invertir colores"
@@ -3990,8 +3994,8 @@ msgid "Hold Shift while pressing to instantly remove."
 msgstr "Mantén pulsado Shift mientras presionas para eliminar al instante."
 
 #. Shown in the confirmation dialog for removing a reference image.
-msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr "¿Estás seguro de que deseas eliminar esta imagen de referencia? No será eliminada de tu sistema de archivos."
+msgid "Are you sure you want to remove this reference image?"
+msgstr "¿Estás seguro de que deseas eliminar esta imagen de referencia?"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -4016,10 +4020,6 @@ msgstr "Rotar la imagen de referencia seleccionada"
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
 msgstr "Escalar la imagen de referencia seleccionada"
-
-#. Button to select no reference images in the Reference Images panel.
-msgid "none"
-msgstr "ninguna"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
@@ -4155,8 +4155,8 @@ msgstr "Modo de solo colocar:"
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
-msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr "Activar el modo de sólo colocar es una acción permanente. Una vez activado, sólo podrás colocar los mosaicos, y ya no podrás modificar los mosaicos existentes en esta capa."
+msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place, duplicate and edit existing tiles, and you won't be able to use Manual, Auto and Stack modes."
+msgstr "Activar el modo de solo colocación es una acción permanente. Una vez activado, solo podrás colocar, duplicar y editar los mosaicos existentes, y no podrás usar los modos manual, automático o apilado."
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
@@ -4199,7 +4199,7 @@ msgstr "Automático"
 #. Refers to stack mode, one of the three modes of tilemap layer pixel drawing.
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
-msgstr "Pila"
+msgstr "Apilado"
 
 #. A checkbox that toggles autotiling on or off for tilemap layers.
 #: src/UI/TilesPanel.tscn

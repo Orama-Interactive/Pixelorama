@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2026-06-18 03:34\n"
+"PO-Revision-Date: 2026-07-19 20:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1109,6 +1109,10 @@ msgstr "すべてのフレーム"
 
 msgid "All projects"
 msgstr "すべてのプロジェクト"
+
+#. An image effect that helps convert a flat image to isometric.
+msgid "Flat to Isometric"
+msgstr ""
 
 msgid "Invert Colors"
 msgstr "色を反転"
@@ -3994,8 +3998,8 @@ msgid "Hold Shift while pressing to instantly remove."
 msgstr "Shiftキーを押したまま押すと即座に削除されます。"
 
 #. Shown in the confirmation dialog for removing a reference image.
-msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr "この参照画像を削除してもよろしいですか？ファイルシステムからは削除されません。"
+msgid "Are you sure you want to remove this reference image?"
+msgstr "この参照画像を削除してもよろしいですか?"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -4020,10 +4024,6 @@ msgstr "選択した参照画像を回転"
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
 msgstr "選択した参照画像を拡大縮小"
-
-#. Button to select no reference images in the Reference Images panel.
-msgid "none"
-msgstr "なし"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
@@ -4159,8 +4159,8 @@ msgstr "配置専用モード："
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
-msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr "配置専用モードを有効にすることは、永続的なアクションです。 一度有効にすると、タイルのみを配置でき、このレイヤー上の既存のタイルを変更することはできなくなります。"
+msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place, duplicate and edit existing tiles, and you won't be able to use Manual, Auto and Stack modes."
+msgstr "プレイスオンリーモードの有効化は永続的なアクションです。 有効化されると、既存のタイルの配置、複製、編集のみが可能になります。 手動モード、自動モード、スタックモードを使用することはできません。"
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
