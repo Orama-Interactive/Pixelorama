@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 uniform int origin : hint_range(0, 64, 1) = 32;
-uniform int iso_step : hint_range(0, 16, 1);
+uniform int iso_step : hint_range(0, 16, 1) = 2;
 uniform int deadzone : hint_range(0, 16, 1);
 uniform sampler2D selection : filter_nearest;
 

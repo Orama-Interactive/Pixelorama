@@ -36,6 +36,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 max_value = 16.0
+value = 2.0
 allow_greater = true
 nine_patch_stretch = true
 stretch_margin_left = 3
