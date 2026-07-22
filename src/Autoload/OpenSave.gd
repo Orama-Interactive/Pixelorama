@@ -1414,6 +1414,7 @@ func has_custom_open_callbacks(extension: String) -> bool:
 
 
 func persist_file_read_write_permissions(path: String) -> void:
-	var android_runtime: Object = Engine.get_singleton("AndroidRuntime")
-	if is_instance_valid(android_runtime):
-		android_runtime.updatePersistableUriPermission(path, true)
+	if Engine.has_singleton(&"AndroidRuntime"):
+		var android_runtime: Object = Engine.get_singleton(&"AndroidRuntime")
+		if is_instance_valid(android_runtime):
+			android_runtime.updatePersistableUriPermission(path, true)
