@@ -16,6 +16,7 @@ Built using Godot 4.6.3
 - The 3D layer system has been completely re-written! 3D objects are now shared across all cels of a layer, instead of each cel having its own objects, making it possible to animate an object's properties. This re-write also allows for some other new features, such as material property editing (and animating!), importing GLTF scenes, and even drawing directly on 3D objects using the pencil tool! **IMPORTANT NOTE:** Due to this, the 3D layer data of pxo files is NO LONGER COMPATIBLE between v1.2 and older versions. The pxo files themselves should load just fine, but the 3D layers will be EMPTY. [#1429](https://github.com/Orama-Interactive/Pixelorama/pull/1429)
 - The shape tools now support drawing with brushes.
 - Implement rounded rectangle drawing in the rectangle tool.
+- Added a "Flat to Isometric" image & layer effect.
 - Users can now change the colors of the UI by changing the theme's base color, accent color & contrast directly from the Preferences, making Pixelorama even more configurable & accessible, without having to rely on extensions. [#1515](https://github.com/Orama-Interactive/Pixelorama/pull/1515)
 - Added two new themes: `Black (OLED)` and `System`. `System` is a special theme that follows the Operating System's base & accent colors, and it even automatically updates if the OS' theme changes while Pixelorama is running! This should work for Windows, macOS and Android, while Linux only supports accent color at the moment. [#1515](https://github.com/Orama-Interactive/Pixelorama/pull/1515)
 - Added quick tool activation shortcuts. When a quick tool shortcut is being held, that tool gets activated until the shortcut is released. By default, only the color picker tool has a shortcut, which ic set to <kbd>Alt</kbd>, but you can set shortcuts for every other tool in the Preferences.
@@ -39,12 +40,15 @@ Built using Godot 4.6.3
 - Adding a new layer while a collapsed group layer is selected now places it outside of that group.
 - Made some UI elements, such as tool, cel, layer & frame buttons be focusable with the keyboard and activatable by pressing <kbd>Space</kbd> and/or <kbd>Enter</kbd>.
 - The bezier points of the curve tool now lie at the center of the pixels instead of their corner. [#1495](https://github.com/Orama-Interactive/Pixelorama/pull/1495)
+- The mad width of project tabs has been limited to 256 pixels, to prevent issues where, if the project name was too long, it would hide parts of the UI.
 
 ### Fixed
 - Fixed resizing selection not being snapped to the pixel grid.
 - Fixed crash when switching to a different project while a transformation is active on a tilemap layer.
 - Fixed manual mode in tilemap layers not updating all cells when there is more than one tilemap layer sharing the same tileset.
 - Tilemap layer bucket fill now works properly with random tiles.
+- The bucket tool no longer affects locked & invisible layers.
+- Fixed project tabs sometimes displaying the wrong project name. [#1489](https://github.com/Orama-Interactive/Pixelorama/issues/1489)
 - If a layer is added in a collapsed group layer (such as when undoing a layer deletion) now expands that group.
 - Various fixes and improvements in grid center snapping. [#1533](https://github.com/Orama-Interactive/Pixelorama/pull/1533) & [#1545](https://github.com/Orama-Interactive/Pixelorama/pull/1545)
 - Fixed the bucket tool not auto-converting global palettes to project palettes. [#1538](https://github.com/Orama-Interactive/Pixelorama/pull/1538)
