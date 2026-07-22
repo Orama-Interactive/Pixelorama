@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [v1.2] - Unreleased
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), SOS1, [@SjamesE](https://github.com/SjamesE), [@Arthurmtro](https://github.com/Arthurmtro)
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), SOS1, [@SjamesE](https://github.com/SjamesE), [@Arthurmtro](https://github.com/Arthurmtro),  Luciano Leão ([@LeaoLuciano](https://github.com/LeaoLuciano))
 
 Built using Godot 4.6.3
 
@@ -41,6 +41,7 @@ Built using Godot 4.6.3
 - Made some UI elements, such as tool, cel, layer & frame buttons be focusable with the keyboard and activatable by pressing <kbd>Space</kbd> and/or <kbd>Enter</kbd>.
 - The bezier points of the curve tool now lie at the center of the pixels instead of their corner. [#1495](https://github.com/Orama-Interactive/Pixelorama/pull/1495)
 - The mad width of project tabs has been limited to 256 pixels, to prevent issues where, if the project name was too long, it would hide parts of the UI.
+- [Android] Project's read and write permissions now persist after the app is closed.
 
 ### Fixed
 - Fixed resizing selection not being snapped to the pixel grid.
