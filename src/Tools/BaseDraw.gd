@@ -38,6 +38,7 @@ var _is_mask_size_zero := true
 var _drawn_tiles: Dictionary[Vector2i, bool]
 var _circle_tool_shortcut: Array[Vector2i]
 var _mm_action: Keychain.MouseMovementInputAction
+var _is_using_mm_action := false
 
 
 func _ready() -> void:
@@ -59,6 +60,8 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if Input.is_action_just_released(&"mm_change_brush_size", true):
+		_is_using_mm_action = false
 	for action in [&"undo", &"redo"]:
 		if Input.is_action_pressed(action):
 			return
@@ -66,8 +69,21 @@ func _input(event: InputEvent) -> void:
 	# otherwise it will be changed twice on both left and right tools.
 	if tool_slot.button == MOUSE_BUTTON_RIGHT and Global.share_options_between_tools:
 		return
-	var brush_size_value := _mm_action.get_action_distance_int(event, true)
-	$Brush/BrushSize.value += brush_size_value
+
+	# Do not allow brush resizing at the same time as drawing.
+	# Otherwise, we have cases such as drawing snapped lines using Control + Shift
+	# and resizing brush at the same time, which is very annoying.
+	if (
+		Input.is_action_pressed(&"activate_left_tool")
+		or Input.is_action_pressed(&"activate_right_tool")
+	):
+		_is_using_mm_action = false
+		return
+	if Input.is_action_just_pressed(&"mm_change_brush_size", true):
+		_is_using_mm_action = true
+	if _is_using_mm_action:
+		var brush_size_value := _mm_action.get_action_distance_int(event, true)
+		$Brush/BrushSize.value += brush_size_value
 
 
 func _on_BrushType_pressed() -> void:
