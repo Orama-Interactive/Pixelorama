@@ -108,10 +108,13 @@ func _ready() -> void:
 	selection_node.transformation_canceled.connect(func(): active_handle = null)
 	preview_transform_changed.connect(_on_preview_transform_changed)
 	Global.camera.zoom_changed.connect(queue_redraw)
+	Tools.tool_changed.connect(func(_tool_name: String, _button: int) -> void: queue_redraw())
 	set_process_input(false)
 
 
 func _input(event: InputEvent) -> void:
+	if not Tools.has_selection_tool():
+		return
 	var project := Global.current_project
 	if not project.layers[project.current_layer].can_layer_get_drawn():
 		return
@@ -163,6 +166,8 @@ func _draw() -> void:
 		var preview_color := Color(1, 1, 1, Global.transformation_preview_alpha)
 		draw_texture(image_texture, Vector2.ZERO, preview_color)
 	draw_set_transform(position_tmp, rotation, scale_tmp)
+	if not Tools.has_selection_tool():
+		return
 	# Draw handles
 	for handle in handles:
 		var pos := get_handle_position(handle)
