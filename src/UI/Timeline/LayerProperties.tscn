@@ -36,7 +36,6 @@ text = "Opacity:"
 [node name="OpacitySlider" type="TextureProgressBar" parent="GridContainer" unique_id=1204267921 groups=["VisualLayers"]]
 layout_mode = 2
 size_flags_horizontal = 3
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 nine_patch_stretch = true
@@ -56,7 +55,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 
-[node name="OnionIgnoreLabel" type="Label" parent="GridContainer" unique_id=1250619841]
+[node name="OnionIgnoreLabel" type="Label" parent="GridContainer" unique_id=1250619841 groups=["VisualLayers"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Ignore in onion skinning:"
@@ -80,7 +79,6 @@ text = "Play at frame:"
 
 [node name="PlayAtFrameSlider" type="TextureProgressBar" parent="GridContainer" unique_id=1150512316 groups=["AudioLayers"]]
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = 1.0
