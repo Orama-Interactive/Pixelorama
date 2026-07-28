@@ -17,7 +17,10 @@ void fragment() {
 		vec2 tex_size = 1.0 / TEXTURE_PIXEL_SIZE;
 		float ratio = tex_size.x / tex_size.y;
 		uv.y += shifted_dist / float(iso_step) * ratio;
-		vec4 final_color = texture(TEXTURE, uv);
-		COLOR = mix(original_color.rgba, final_color, selection_color.a);
+		
+		vec4 output = texture(TEXTURE, uv);
+		output.a = min(step(uv.x, 1.0) * step(0.0, uv.x), output.a); // Remove left and right edges
+		output.a = min(step(uv.y, 1.0) * step(0.0, uv.y), output.a); // Remove up and bottom edges
+		COLOR = mix(original_color.rgba, output, selection_color.a);
 	}
 }
