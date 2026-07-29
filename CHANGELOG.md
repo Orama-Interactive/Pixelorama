@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v1.2] - Unreleased
+## [v1.2] - 2026-07-29
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), SOS1, [@SjamesE](https://github.com/SjamesE), [@Arthurmtro](https://github.com/Arthurmtro),  Luciano Leão ([@LeaoLuciano](https://github.com/LeaoLuciano))
 

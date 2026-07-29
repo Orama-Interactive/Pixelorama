@@ -254,6 +254,7 @@ const TRANSLATORS_DICTIONARY := {
 const DONORS: PackedStringArray = [
 	"Astropulse",
 	"Benedikt",
+	"En Pax",
 	"Hugo Locurcio",
 	"Jérôme P.",
 	"Jonas Rudlang",
