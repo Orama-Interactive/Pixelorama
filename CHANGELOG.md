@@ -68,6 +68,7 @@ Built using Godot 4.6.3
 - Fixed hardware related issue where layer opacity & blend mode did not update in certain mobile GPUs. [#1546](https://github.com/Orama-Interactive/Pixelorama/issues/1546)
 - Make UI elements in the audio layer properties stack properly.
 - Fixed extension exporters not working. [#1497](https://github.com/Orama-Interactive/Pixelorama/pull/1497)
+- Export dialog settings (spritesheet layout, frame range, resize, crop mode, etc.) are now saved per-project and restored when the project is reopened. [#1503](https://github.com/Orama-Interactive/Pixelorama/issues/1503)
 
 ### Removed
 - Removed tool & background color options from the Preferences in favor of the new theming system. If there is enough demand for them, we could add them again. [#1515](https://github.com/Orama-Interactive/Pixelorama/pull/1515)

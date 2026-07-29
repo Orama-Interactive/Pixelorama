@@ -123,6 +123,29 @@ var was_exported := false
 var export_overwrite := false
 var backup_path := ""
 
+# Export dialog settings, kept per-project so that they are saved/loaded along with the file.
+var export_tab := Export.ExportTab.IMAGE
+var export_json := false
+var export_split_layers := false
+var export_sheet_layers_as_separate_files := false
+var export_crop_mode := Export.CropMode.NONE
+var export_erase_unselected_area := false
+# Spritesheet options
+var export_orientation := Export.Orientation.COLUMNS
+var export_lines_count := 1  ## How many rows/columns before new line is added
+# General options
+var export_frame_current_tag := 0  ## Export only current frame tag
+var export_layers := 0
+var export_direction := Export.AnimationDirection.FORWARD
+var export_repeat_count := 0
+var export_resize := 100
+var export_save_quality := 0.75  ## Used when saving jpg and webp images. Goes from 0 to 1.
+var export_interpolation := Image.INTERPOLATE_NEAREST
+var export_include_tag_in_filename := false
+var export_new_dir_for_each_frame_tag := false
+var export_number_of_digits := 4
+var export_separator_character := "_"
+
 
 func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2i(64, 64)) -> void:
 	frames = _frames
@@ -341,6 +364,25 @@ func serialize() -> Dictionary:
 		"export_directory_path": export_directory_path,
 		"export_file_name": file_name,
 		"export_file_format": file_format,
+		"export_tab": export_tab,
+		"export_json": export_json,
+		"export_split_layers": export_split_layers,
+		"export_sheet_layers_as_separate_files": export_sheet_layers_as_separate_files,
+		"export_crop_mode": export_crop_mode,
+		"export_erase_unselected_area": export_erase_unselected_area,
+		"export_orientation": export_orientation,
+		"export_lines_count": export_lines_count,
+		"export_frame_current_tag": export_frame_current_tag,
+		"export_layers_option": export_layers,
+		"export_direction": export_direction,
+		"export_repeat_count": export_repeat_count,
+		"export_resize": export_resize,
+		"export_save_quality": export_save_quality,
+		"export_interpolation": export_interpolation,
+		"export_include_tag_in_filename": export_include_tag_in_filename,
+		"export_new_dir_for_each_frame_tag": export_new_dir_for_each_frame_tag,
+		"export_number_of_digits": export_number_of_digits,
+		"export_separator_character": export_separator_character,
 		"fps": fps,
 		"license": license,
 		"user_data": user_data,
@@ -561,6 +603,33 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 	if file_name.is_empty() or file_name == "untitled":
 		file_name = name
 	file_format = dict.get("export_file_format", file_format)
+	export_tab = dict.get("export_tab", export_tab)
+	export_json = dict.get("export_json", export_json)
+	export_split_layers = dict.get("export_split_layers", export_split_layers)
+	export_sheet_layers_as_separate_files = dict.get(
+		"export_sheet_layers_as_separate_files", export_sheet_layers_as_separate_files
+	)
+	export_crop_mode = dict.get("export_crop_mode", export_crop_mode)
+	export_erase_unselected_area = dict.get(
+		"export_erase_unselected_area", export_erase_unselected_area
+	)
+	export_orientation = dict.get("export_orientation", export_orientation)
+	export_lines_count = dict.get("export_lines_count", export_lines_count)
+	export_frame_current_tag = dict.get("export_frame_current_tag", export_frame_current_tag)
+	export_layers = dict.get("export_layers_option", export_layers)
+	export_direction = dict.get("export_direction", export_direction)
+	export_repeat_count = dict.get("export_repeat_count", export_repeat_count)
+	export_resize = dict.get("export_resize", export_resize)
+	export_save_quality = dict.get("export_save_quality", export_save_quality)
+	export_interpolation = dict.get("export_interpolation", export_interpolation)
+	export_include_tag_in_filename = dict.get(
+		"export_include_tag_in_filename", export_include_tag_in_filename
+	)
+	export_new_dir_for_each_frame_tag = dict.get(
+		"export_new_dir_for_each_frame_tag", export_new_dir_for_each_frame_tag
+	)
+	export_number_of_digits = dict.get("export_number_of_digits", export_number_of_digits)
+	export_separator_character = dict.get("export_separator_character", export_separator_character)
 	fps = dict.get("fps", fps)
 	license = dict.get("license", license)
 	author_display_name = dict.get("author_display_name", "")
