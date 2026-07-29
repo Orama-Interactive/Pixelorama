@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2026-07-29 21:33\n"
+"PO-Revision-Date: 2026-07-29 22:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -1368,7 +1368,7 @@ msgstr "Rastreador de problemas"
 
 #. Found under the Help menu. When selected, it opens a window with a list of backups of projects opened in previous sessions.
 msgid "Restore Backup"
-msgstr "Restaurar ''backup''"
+msgstr "Restaurar \"backup\""
 
 #. Found in the Restore Backup dialog.
 msgid "Past sessions"
@@ -1775,13 +1775,13 @@ msgid "Isometric Box Tool\n\n"
 "Hold %s to snap the angle of the basis point\n"
 "Hold %s to displace the shape's origin\n"
 "Press %s to edit the last added basis"
-msgstr "Caixa de ferramentas isométricas\n\n"
+msgstr "Ferramenta de Caixa Isométrica\n\n"
 "%s para o botão esquerdo do mouse\n"
 "%s para o botão direito do mouse\n\n"
-"Desenhe uma caixa isométrica\n"
+"Desenha uma caixa isométrica\n"
 "Pressione %s/%s para adicionar um ponto base\n"
 "Segure %s para ajustar o ângulo do ponto base\n"
-"Segure %s para desposicionar a origem da forma\n"
+"Segure %s para deslocar a origem da forma\n"
 "Pressione %s para editar a última base adicionada"
 
 msgid "Text\n\n"
@@ -2533,7 +2533,7 @@ msgid "Adjusted average"
 msgstr "Média ajustada"
 
 msgid "Blend at interface"
-msgstr "Mesclar na ''interface''"
+msgstr "Mesclar na interface"
 
 #. Refers to the left face of a box shape.
 msgid "Left Face"
@@ -3345,7 +3345,7 @@ msgid "Ellipse Tool"
 msgstr "Ferramenta Elipse"
 
 msgid "Isometric Box Tool"
-msgstr "Caixa de ferramenta isométrica"
+msgstr "Ferramenta de Caixa Isométrica"
 
 #. A tool that exists only for tilemap layers, and is responsible for setting some properties for the tiles. Currently, it is only used for setting the autotiling bits for a tile.
 msgid "Tiles Property Painter"
