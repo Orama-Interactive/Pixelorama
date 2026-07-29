@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (c) 2019-present Orama Interactive and contributors -->
 <component type="desktop">
-  <id>com.orama_interactive.Pixelorama.desktop</id>
+  <id>com.orama_interactive.Pixelorama</id>
 
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
+  <launchable type="desktop-id">com.orama_interactive.Pixelorama.desktop</launchable>
 
   <name>Pixelorama</name>
   <summary>Pixel Art &amp; Animation</summary>
