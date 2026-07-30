@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese, Brazilian\n"
 "Language: pt_BR\n"
-"PO-Revision-Date: 2026-07-29 23:37\n"
+"PO-Revision-Date: 2026-07-30 02:37\n"
 
 msgid "OK"
 msgstr "OK"
@@ -2643,7 +2643,7 @@ msgid "Frame Tag Properties"
 msgstr "Propriedades do quadro"
 
 msgid "Add a new frame tag"
-msgstr "Adicionar um novo quadro"
+msgstr "Adicionar uma nova tag de quadro"
 
 msgid "Name:"
 msgstr "Nome:"
@@ -2749,7 +2749,7 @@ msgstr "Nova Tag"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, it allows users to paste/import tags from other opened projects.
 msgid "Import Tag"
-msgstr "Importar Marcação"
+msgstr "Importar Tag"
 
 #. Found on the popup menu that appears when a user right-clicks on a frame button. When clicked, the order of the selected frames is being reversed.
 msgid "Reverse Frames"
