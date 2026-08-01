@@ -600,7 +600,9 @@ func export_processed_images(
 				elif project.file_format == FileFormat.WEBP:
 					err = processed_images[i].image.save_webp(export_paths[i])
 				elif project.file_format == FileFormat.JPEG:
-					err = processed_images[i].image.save_jpg(export_paths[i], project.export_save_quality)
+					err = processed_images[i].image.save_jpg(
+						export_paths[i], project.export_save_quality
+					)
 				elif project.file_format == FileFormat.EXR:
 					err = processed_images[i].image.save_exr(export_paths[i])
 				if err != OK:
@@ -672,7 +674,9 @@ func export_video(export_paths: PackedStringArray, project: Project) -> bool:
 	var adelay_string := ""
 	for layer in project.get_all_audio_layers():
 		if layer.audio is AudioStreamMP3 or layer.audio is AudioStreamWAV:
-			var temp_file_name := str(audio_layer_count + 1).pad_zeros(project.export_number_of_digits)
+			var temp_file_name := str(audio_layer_count + 1).pad_zeros(
+				project.export_number_of_digits
+			)
 			if layer.audio is AudioStreamMP3:
 				temp_file_name += ".mp3"
 			elif layer.audio is AudioStreamWAV:
@@ -790,7 +794,9 @@ func _scale_processed_images(project := Global.current_project) -> void:
 			continue
 		var image := processed_image.image
 		image.resize(
-			image.get_size().x * resize_f, image.get_size().y * resize_f, project.export_interpolation
+			image.get_size().x * resize_f,
+			image.get_size().y * resize_f,
+			project.export_interpolation
 		)
 
 
