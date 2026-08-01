@@ -26,6 +26,7 @@ var spritesheet_exports: Array[Export.FileFormat] = [
 ]
 
 var _preview_images: Array[Export.ProcessedImage]
+var _is_initializing_export_settings := false
 
 @onready var tabs: TabBar = $VBoxContainer/TabBar
 @onready var checker: ColorRect = $"%TransparentChecker"
@@ -113,6 +114,22 @@ func show_tab() -> void:
 		get_tree().call_group("NotHTML5", "hide")
 	elif OS.get_name() == "Android":
 		get_tree().call_group("NotAndroid", "hide")
+
+
+func _set_project_export_settings(
+	directory_path: String, file_name: String, file_format: Export.FileFormat
+) -> void:
+	var project := Global.current_project
+	var settings_changed := (
+		project.export_directory_path != directory_path
+		or project.file_name != file_name
+		or project.file_format != file_format
+	)
+	project.export_directory_path = directory_path
+	project.file_name = file_name
+	project.file_format = file_format
+	if settings_changed and not _is_initializing_export_settings:
+		project.has_changed = true
 
 
 func set_preview() -> void:
@@ -229,7 +246,7 @@ func _set_file_format_selector_suitable_file_formats(formats: Array[Export.FileF
 				"*" + Export.file_format_string(i), Export.file_format_description(i)
 			)
 	if needs_update:
-		project.file_format = formats[0]
+		_set_project_export_settings(project.export_directory_path, project.file_name, formats[0])
 	file_format_options.selected = file_format_options.get_item_index(project.file_format)
 	if OS.get_name() == "Android":
 		var file_ext_str := "*" + Export.file_format_string(project.file_format)
@@ -306,17 +323,19 @@ func set_export_progress_bar(value: float) -> void:
 
 
 func _on_about_to_popup() -> void:
+	_is_initializing_export_settings = true
 	get_ok_button().text = "Export"
 	Global.transform_content_confirmed.emit()
 	var project := Global.current_project
 	# If we're on Web, don't let the user change the directory path
 	if OS.get_name() == "Web":
-		project.export_directory_path = "user://"
+		_set_project_export_settings("user://", project.file_name, project.file_format)
 
 	if project.export_directory_path.is_empty():
-		project.export_directory_path = Global.config_cache.get_value(
+		var default_directory_path: String = Global.config_cache.get_value(
 			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 		)
+		_set_project_export_settings(default_directory_path, project.file_name, project.file_format)
 
 	# If export already occurred - sets GUI to show previous settings
 	options_resize.value = Export.resize
@@ -333,6 +352,7 @@ func _on_about_to_popup() -> void:
 
 	# Set the size of the preview checker
 	checker.size = checker.get_parent().size
+	_is_initializing_export_settings = false
 
 
 func _on_tab_bar_tab_changed(tab: Export.ExportTab) -> void:
@@ -417,11 +437,13 @@ func _on_path_button_pressed() -> void:
 
 
 func _on_path_line_edit_text_changed(new_text: String) -> void:
+	var project := Global.current_project
+	var directory_path := project.export_directory_path
 	if OS.get_name() != "Android":
-		Global.current_project.export_directory_path = new_text.get_base_dir()
-	Global.current_project.file_name = new_text.get_file().get_basename()
+		directory_path = new_text.get_base_dir()
+	var file_name := new_text.get_file().get_basename()
 	var file_format := Export.get_file_format_from_extension(new_text.get_extension())
-	Global.current_project.file_format = file_format
+	_set_project_export_settings(directory_path, file_name, file_format)
 	if not Export.is_single_file_format():
 		get_tree().set_group("ExportMultipleFilesOptions", "disabled", false)
 		get_tree().set_group("ExportMultipleFilesEditableOptions", "editable", true)
@@ -447,7 +469,8 @@ func _on_path_dialog_file_selected(path: String) -> void:
 
 func _on_path_dialog_dir_selected(dir: String) -> void:
 	directory_path_label.text = dir
-	Global.current_project.export_directory_path = dir
+	var project := Global.current_project
+	_set_project_export_settings(dir, project.file_name, project.file_format)
 
 
 func _on_path_dialog_canceled() -> void:
