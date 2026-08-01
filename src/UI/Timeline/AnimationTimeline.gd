@@ -1576,6 +1576,7 @@ func _toggle_layer_buttons() -> void:
 	var layer := project.layers[project.current_layer]
 	var child_count := layer.get_child_count(true)
 
+	opacity_slider.editable = not layer.has_keyframes("opacity")
 	Global.disable_button(
 		remove_layer, layer.is_locked_in_hierarchy() or project.layers.size() == child_count + 1
 	)

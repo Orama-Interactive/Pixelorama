@@ -81,6 +81,17 @@ func _init(_project: Project, _name := "") -> void:
 	params["opacity"] = opacity
 	animated_params["opacity"] = {}
 	param_properties["opacity"] = {"hint_string": "0.0,1.0,0.01"}
+	super()
+
+
+func _on_keyframe_set(param_name) -> void:
+	if param_name == "opacity" and project.layers[project.current_layer] == self:
+		Global.animation_timeline.opacity_slider.editable = false
+
+
+func _on_keyframe_unset(param_name) -> void:
+	if param_name == "opacity" and project.layers[project.current_layer] == self:
+		Global.animation_timeline.opacity_slider.editable = true
 
 
 ## Returns true if this is a direct or indirect parent of layer
