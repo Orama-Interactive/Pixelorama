@@ -84,16 +84,6 @@ func _init(_project: Project, _name := "") -> void:
 	super()
 
 
-func _on_keyframe_set(param_name) -> void:
-	if param_name == "opacity" and project.layers[project.current_layer] == self:
-		Global.animation_timeline.opacity_slider.editable = false
-
-
-func _on_keyframe_unset(param_name) -> void:
-	if param_name == "opacity" and project.layers[project.current_layer] == self:
-		Global.animation_timeline.opacity_slider.editable = true
-
-
 ## Returns true if this is a direct or indirect parent of layer
 func is_ancestor_of(layer: BaseLayer) -> bool:
 	if layer.parent == self:
@@ -441,3 +431,13 @@ func instantiate_layer_button() -> Node:
 ## blend mode is set to something else rather than [enum BlendModes.PASS_THROUGH].
 func is_blender() -> bool:
 	return false
+
+
+func _on_keyframe_set(param_name: String) -> void:
+	if param_name == "opacity" and project.layers[project.current_layer] == self:
+		Global.animation_timeline.opacity_slider.editable = false
+
+
+func _on_keyframe_unset(param_name: String) -> void:
+	if param_name == "opacity" and project.layers[project.current_layer] == self:
+		Global.animation_timeline.opacity_slider.editable = true

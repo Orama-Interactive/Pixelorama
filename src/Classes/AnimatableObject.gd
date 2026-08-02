@@ -122,7 +122,7 @@ func has_keyframes(property_name: String) -> bool:
 	return false
 
 
-func set_keyframe(
+func add_keyframe(
 	param_name: String,
 	frame_index: int,
 	value: Variant = get_params(frame_index)[param_name],
@@ -139,20 +139,17 @@ func set_keyframe(
 	keyframe_set.emit(param_name)
 
 
-func unset_keyframe(param_name: String, frame_index: int) -> void:
+func set_keyframe_data(param_name: String, frame_index: int, data: Dictionary) -> void:
+	if not animated_params.has(param_name):
+		animated_params[param_name] = {}
+	animated_params[param_name][frame_index] = data
+	keyframe_set.emit(param_name)
+
+
+func delete_keyframe(param_name: String, frame_index: int) -> void:
 	if animated_params.has(param_name):
 		animated_params[param_name].erase(frame_index)
 		keyframe_unset.emit(param_name)
-
-
-## Meant to be overridden by inherited classes, automatically calls it if keyframe is set
-func _on_keyframe_set(_param_name) -> void:
-	pass
-
-
-## Meant to be overridden by inherited classes, automatically calls it if keyframe is unset
-func _on_keyframe_unset(_param_name) -> void:
-	pass
 
 
 static func is_interpolatable_type(value: Variant) -> bool:
@@ -207,3 +204,13 @@ func deserialize(dict: Dictionary) -> void:
 			params = str_to_var(dict["params"])
 	if dict.has("animated_params"):
 		animated_params = str_to_var(dict["animated_params"])
+
+
+## Meant to be overridden by inherited classes, automatically calls it if keyframe is set
+func _on_keyframe_set(_param_name: String) -> void:
+	pass
+
+
+## Meant to be overridden by inherited classes, automatically calls it if keyframe is unset
+func _on_keyframe_unset(_param_name: String) -> void:
+	pass

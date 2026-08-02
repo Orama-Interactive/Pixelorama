@@ -230,7 +230,7 @@ static func open_kra_file(path: String) -> void:
 						if time < 0:
 							time = 0
 						var opacity_value := float(opacity_keyframe["value"]) / 100.0
-						layer.set_keyframe("opacity", time, opacity_value)
+						layer.add_keyframe("opacity", time, opacity_value)
 			elif node_name == "layers" and group_layer_found:
 				group_layer_found = false
 		elif parser.get_node_type() == XMLParser.NODE_ELEMENT_END:

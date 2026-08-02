@@ -434,8 +434,8 @@ func add_effect_keyframe(anim_obj: AnimatableObject, frame_index: int, param_nam
 	selected_keyframes = [next_keyframe_id]
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Add keyframe")
-	undo_redo.add_do_method(anim_obj.set_keyframe.bind(param_name, frame_index))
-	undo_redo.add_undo_method(anim_obj.unset_keyframe.bind(param_name, frame_index))
+	undo_redo.add_do_method(anim_obj.add_keyframe.bind(param_name, frame_index))
+	undo_redo.add_undo_method(anim_obj.delete_keyframe.bind(param_name, frame_index))
 	undo_redo.add_undo_method(unselect_keyframe.bind(next_keyframe_id))
 	undo_redo.add_do_method(recreate_timeline)
 	undo_redo.add_undo_method(recreate_timeline)
@@ -448,12 +448,16 @@ func _on_keyframe_deleted() -> void:
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Delete keyframe")
 	for key_button in get_selected_keyframe_buttons():
+		var track := key_button.get_parent() as KeyframeAnimationTrack
 		var dict := key_button.dict
 		var param_name := key_button.param_name
 		var frame_index := key_button.frame_index
 		var old_dict = dict[param_name][frame_index].duplicate()
-		undo_redo.add_do_method(func(): dict[param_name].erase(frame_index))
-		undo_redo.add_undo_method(func(): dict[param_name][frame_index] = old_dict)
+		var anim_obj := track.animatable_object
+		undo_redo.add_do_method(anim_obj.delete_keyframe.bind(param_name, frame_index))
+		undo_redo.add_undo_method(
+			anim_obj.set_keyframe_data.bind(param_name, frame_index, old_dict)
+		)
 		undo_redo.add_do_method(unselect_keyframe.bind(key_button.keyframe_id))
 	undo_redo.add_do_method(recreate_timeline)
 	undo_redo.add_undo_method(recreate_timeline)
