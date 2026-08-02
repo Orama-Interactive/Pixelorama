@@ -5,7 +5,7 @@ enum ExportTab { IMAGE, SPRITESHEET }
 enum Orientation { COLUMNS, ROWS, TAGS_BY_ROW, TAGS_BY_COLUMN }
 enum AnimationDirection { FORWARD, BACKWARDS, PING_PONG }
 ## See file_format_string, file_format_description, and ExportDialog.gd
-enum FileFormat { PNG, WEBP, JPEG, EXR, GIF, APNG, MP4, AVI, OGV, MKV, WEBM }
+enum FileFormat { PNG, WEBP, JPEG, SVG, EXR, GIF, APNG, MP4, AVI, OGV, MKV, WEBM }
 enum { VISIBLE_LAYERS, SELECTED_LAYERS }
 enum ExportFrames { ALL_FRAMES, SELECTED_FRAMES }
 
@@ -31,6 +31,7 @@ var file_format_dictionary: Dictionary[FileFormat, Array] = {
 	FileFormat.PNG: [".png", "PNG Image"],
 	FileFormat.WEBP: [".webp", "WebP Image"],
 	FileFormat.JPEG: [".jpg", "JPG Image"],
+	FileFormat.SVG: [".svg", "SVG Image"],
 	FileFormat.EXR: [".exr", "EXR Image"],
 	FileFormat.GIF: [".gif", "GIF Image"],
 	FileFormat.APNG: [".apng", "APNG Image"],
@@ -591,24 +592,24 @@ func export_processed_images(
 	else:
 		for i in range(processed_images.size()):
 			if OS.has_feature("web"):
+				var buffer: PackedByteArray
+				var file_name := export_paths[i].get_file()
+				var mimetype := ""
 				if project.file_format == FileFormat.WEBP:
-					JavaScriptBridge.download_buffer(
-						processed_images[i].image.save_webp_to_buffer(),
-						export_paths[i].get_file(),
-						"image/webp"
-					)
+					buffer = processed_images[i].image.save_webp_to_buffer()
+					mimetype = "image/webp"
 				elif project.file_format == FileFormat.JPEG:
-					JavaScriptBridge.download_buffer(
-						processed_images[i].image.save_jpg_to_buffer(save_quality),
-						export_paths[i].get_file(),
-						"image/jpeg"
-					)
+					buffer = processed_images[i].image.save_jpg_to_buffer()
+					mimetype = "image/jpeg"
+				elif project.file_format == FileFormat.SVG:
+					var svg_str := image_to_svg(processed_images[i].image)
+					buffer = svg_str.to_utf8_buffer()
+					mimetype = "image/svg"
 				else:
-					JavaScriptBridge.download_buffer(
-						processed_images[i].image.save_png_to_buffer(),
-						export_paths[i].get_file(),
-						"image/png"
-					)
+					buffer = processed_images[i].image.save_png_to_buffer()
+					mimetype = "image/png"
+
+				JavaScriptBridge.download_buffer(buffer, file_name, mimetype)
 
 			else:
 				var err: Error
@@ -618,6 +619,11 @@ func export_processed_images(
 					err = processed_images[i].image.save_webp(export_paths[i])
 				elif project.file_format == FileFormat.JPEG:
 					err = processed_images[i].image.save_jpg(export_paths[i], save_quality)
+				elif project.file_format == FileFormat.SVG:
+					var svg_str := image_to_svg(processed_images[i].image)
+					var svg_file := FileAccess.open(export_paths[i], FileAccess.WRITE)
+					err = FileAccess.get_open_error()
+					svg_file.store_string(svg_str)
 				elif project.file_format == FileFormat.EXR:
 					err = processed_images[i].image.save_exr(export_paths[i])
 				if err != OK:
@@ -793,6 +799,36 @@ func export_animated(args: Dictionary) -> void:
 			file.close()
 	export_dialog.toggle_export_progress_popup(false)
 	Global.notification_label("File(s) exported")
+
+
+func image_to_svg(source_image: Image) -> String:
+	var svg_version := "1.1"
+	var width := source_image.get_width()
+	var height := source_image.get_height()
+	var xmlns := "http://www.w3.org/2000/svg"
+
+	var xml := (
+		"""<!--Exported from Pixelorama, developed by Orama Interactive.-->
+<svg version= '%s'
+	width='%s' height='%s'
+	xmlns='%s'>
+"""
+		% [svg_version, width, height, xmlns]
+	)
+
+	for x in source_image.get_width():
+		for y in source_image.get_height():
+			var color := source_image.get_pixel(x, y)
+			if is_zero_approx(color.a):
+				continue
+			var rect := Rect2(x, y, 1, 1)
+			xml += (
+				"<rect x='%s' y='%s' width='%s' height='%s' fill='#%s' />\n"
+				% [rect.position.x, rect.position.y, rect.size.x, rect.size.y, color.to_html(false)]
+			)
+
+	xml += "</svg>"
+	return xml
 
 
 func _increase_export_progress(export_dialog: Node) -> void:
