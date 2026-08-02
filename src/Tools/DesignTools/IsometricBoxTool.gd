@@ -386,7 +386,6 @@ func _draw_pixel(point: Vector2i, images: Array[ImageExtended]) -> void:
 
 
 func _clear() -> void:
-	Tools.active_multi_state_tools -= 1
 	_control_pts.clear()
 	_fill_inside_rect = Rect2i()
 	if _drawing:

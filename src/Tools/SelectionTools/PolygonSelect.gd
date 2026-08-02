@@ -10,6 +10,10 @@ func _init() -> void:
 	Global.project_about_to_switch.connect(_clear)
 
 
+func _exit_tree() -> void:
+	cancel_tool()
+
+
 func _input(event: InputEvent) -> void:
 	if _move:
 		return
@@ -34,6 +38,7 @@ func draw_start(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_start(pos)
 	if !_move and !_draw_points:
+		Tools.active_multi_state_tools += 1
 		_ongoing_selection = true
 		_draw_points.append(pos)
 		_last_position = pos
@@ -126,7 +131,9 @@ func apply_selection(pos: Vector2i) -> void:
 
 
 func _clear() -> void:
-	_ongoing_selection = false
+	if _ongoing_selection:
+		_ongoing_selection = false
+		Tools.active_multi_state_tools -=1
 	Global.canvas.previews_sprite.texture = null
 	_draw_points.clear()
 	_ready_to_apply = false
