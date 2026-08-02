@@ -1,7 +1,8 @@
 class_name AnimatableObject
 extends RefCounted
 
-signal keyframe_set
+signal keyframe_set(property_name)
+signal keyframe_unset(property_name)
 
 const TRANS_CONSTANT := -1
 
@@ -52,6 +53,11 @@ var animated_params: Dictionary[String, Dictionary] = {}
 ##}
 ## [/codeblock]
 var param_properties: Dictionary[String, Dictionary]
+
+
+func _init() -> void:
+	keyframe_set.connect(_on_keyframe_set)
+	keyframe_unset.connect(_on_keyframe_unset)
 
 
 ## Returns the interpolated valued of all the properties present in [member animated_params] for the
@@ -110,6 +116,12 @@ func get_animated_property(frame_index: int, param: String) -> Variant:
 		return Tween.interpolate_value(min_value, delta, elapsed, duration, trans_type, ease_type)
 
 
+func has_keyframes(property_name: String) -> bool:
+	if animated_params.has(property_name):
+		return animated_params[property_name].keys().size() != 0
+	return false
+
+
 func set_keyframe(
 	param_name: String,
 	frame_index: int,
@@ -124,12 +136,23 @@ func set_keyframe(
 		"id": id, "value": value, "trans": trans, "ease": ease_type
 	}
 	KeyframeTimeline.next_keyframe_id += 1
-	keyframe_set.emit()
+	keyframe_set.emit(param_name)
 
 
 func unset_keyframe(param_name: String, frame_index: int) -> void:
 	if animated_params.has(param_name):
 		animated_params[param_name].erase(frame_index)
+		keyframe_unset.emit(param_name)
+
+
+## Meant to be overridden by inherited classes, automatically calls it if keyframe is set
+func _on_keyframe_set(_param_name) -> void:
+	pass
+
+
+## Meant to be overridden by inherited classes, automatically calls it if keyframe is unset
+func _on_keyframe_unset(_param_name) -> void:
+	pass
 
 
 static func is_interpolatable_type(value: Variant) -> bool:
