@@ -440,4 +440,5 @@ func _on_keyframe_set(param_name: String) -> void:
 
 func _on_keyframe_unset(param_name: String) -> void:
 	if param_name == "opacity" and project.layers[project.current_layer] == self:
-		Global.animation_timeline.opacity_slider.editable = true
+		if not has_keyframes("opacity"):
+			Global.animation_timeline.opacity_slider.editable = true
