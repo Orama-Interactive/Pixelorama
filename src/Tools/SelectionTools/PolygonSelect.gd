@@ -133,7 +133,7 @@ func apply_selection(pos: Vector2i) -> void:
 func _clear() -> void:
 	if _ongoing_selection:
 		_ongoing_selection = false
-		Tools.active_multi_state_tools -=1
+		Tools.active_multi_state_tools -= 1
 	Global.canvas.previews_sprite.texture = null
 	_draw_points.clear()
 	_ready_to_apply = false
