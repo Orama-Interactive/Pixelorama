@@ -149,7 +149,7 @@ func remove_custom_file_format(id: int) -> void:
 func external_export(project := Global.current_project) -> void:
 	cache_blended_frames(project)
 	process_data(project)
-	export_processed_images(true, Global.export_dialog, project)
+	await export_processed_images(true, Global.export_dialog, project)
 
 
 func process_data(project := Global.current_project) -> void:
