@@ -129,6 +129,28 @@ func recreate_timeline() -> void:
 			param_name, KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT, layer_item, current_layer
 		)
 	#endregion
+	#region Add tracks for bone properties.
+	if current_layer is BoneLayer:
+		var bone_params := BoneLayer.default_bone_params().keys()
+		var child_bones: Array[BoneLayer] = current_layer.get_child_bones(true)
+		child_bones.reverse()
+		for child_bone in child_bones:
+			var child_bone_section := add_section(
+				"Bone:%s" % child_bone.name, KeyframeAnimationTrack.TrackTypes.BONE, root
+			)
+			for param_name in child_bone.params.keys():
+				if not param_name in bone_params:
+					continue
+				var value = child_bone.params[param_name]
+				if not AnimatableObject.is_animatable_type(value):
+					continue
+				add_property(
+					param_name,
+					KeyframeAnimationTrack.TrackTypes.BONE,
+					child_bone_section,
+					child_bone
+				)
+	#endregion
 	#region Add tracks for animatable objects.
 	for effect in current_layer.effects:
 		var effect_item := add_section(
@@ -184,7 +206,10 @@ func add_property(
 	param_track.custom_minimum_size.y = tree_item_area_rect.size.y
 	track_container.add_child(param_track)
 	match param_track.type:
+		# TODO: Check duplications later.
 		KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT:
+			param_track.animatable_object = animatable_object
+		KeyframeAnimationTrack.TrackTypes.BONE:
 			param_track.animatable_object = animatable_object
 
 	var animation_dictionary: Dictionary[String, Dictionary] = animatable_object.get(
@@ -384,6 +409,9 @@ func _on_keyframe_property_changed(new_value, property_name: String) -> void:
 		undo_redo.add_do_method(func(): dict[param_name][frame_index][property_name] = new_value)
 		undo_redo.add_undo_method(func(): dict[param_name][frame_index][property_name] = old_value)
 		last_key_button = key_button
+		if param_name in ["start_point", "bone_rotation"]:
+			# TODO verify this works later
+			Global.canvas.skeleton.queue_redraw()
 	var last_dict := last_key_button.dict
 	var last_param_name := last_key_button.param_name
 	var last_frame_index := last_key_button.frame_index
@@ -430,7 +458,7 @@ func _update_keyframe_property_ui(dict: Dictionary, keyframe_id: int) -> void:
 		ease_type_options.select(ease_type)
 
 
-func add_effect_keyframe(anim_obj: AnimatableObject, frame_index: int, param_name: String) -> void:
+func add_keyframe(anim_obj: AnimatableObject, frame_index: int, param_name: String) -> void:
 	selected_keyframes = [next_keyframe_id]
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Add keyframe")

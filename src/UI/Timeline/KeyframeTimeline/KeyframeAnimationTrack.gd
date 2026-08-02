@@ -3,7 +3,7 @@ extends Control
 
 ## An enum that contains the possible types of the track.
 ## Such as layer effect, and in the future, 3D and bones.
-enum TrackTypes { LAYER_EFFECT }
+enum TrackTypes { LAYER_EFFECT, BONE }
 
 var timeline: KeyframeTimeline
 var type := TrackTypes.LAYER_EFFECT
@@ -55,5 +55,9 @@ func _on_popup_menu_id_pressed(id: int) -> void:
 			and animatable_object.animated_params[param_name].has(keyframe_at)
 		):
 			return
-		if type == TrackTypes.LAYER_EFFECT:
-			timeline.add_effect_keyframe(animatable_object, keyframe_at, param_name)
+		match type:
+			# TODO: Check duplications later.
+			TrackTypes.LAYER_EFFECT:
+				timeline.add_keyframe(animatable_object, keyframe_at, param_name)
+			TrackTypes.BONE:
+				timeline.add_keyframe(animatable_object, keyframe_at, param_name)
