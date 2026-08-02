@@ -7,6 +7,11 @@ var _color_slot := 0
 var _mode := 0
 
 
+func _ready() -> void:
+	_color_slot = 0 if tool_slot.button == MOUSE_BUTTON_LEFT else 1
+	super._ready()
+
+
 func _input(event: InputEvent) -> void:
 	var options: OptionButton = $ColorPicker/Options
 
