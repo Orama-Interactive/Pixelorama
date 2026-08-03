@@ -122,6 +122,7 @@ var file_format := Export.FileFormat.PNG
 var was_exported := false
 var export_overwrite := false
 var backup_path := ""
+var export_settings := Export.ExportStruct.new()
 
 
 func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2i(64, 64)) -> void:
@@ -348,7 +349,8 @@ func serialize() -> Dictionary:
 		"author_real_name": author_real_name,
 		"author_contact": author_contact,
 		"author_company": author_company,
-		"metadata": metadata
+		"metadata": metadata,
+		"export_settings": export_settings.serialize()
 	}
 
 	serialized.emit(project_data)
@@ -554,6 +556,9 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			var new_pos := y_symmetry_axis.points[point]
 			new_pos.x = floorf(x_symmetry_point / 2 + 1)
 			y_symmetry_axis.set_point_position(point, new_pos)
+	var exp_settings = dict.get("export_settings", {})
+	if typeof(exp_settings) == TYPE_DICTIONARY:
+		export_settings.deserialize(exp_settings)
 	export_directory_path = dict.get("export_directory_path", export_directory_path)
 	if not DirAccess.dir_exists_absolute(export_directory_path):
 		export_directory_path = ""
