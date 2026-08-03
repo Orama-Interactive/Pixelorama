@@ -19,5 +19,6 @@ func export_animation(
 	_progress_report_args,
 	_export_file: FileAccess = null
 ) -> PackedByteArray:
-	await RenderingServer.frame_post_draw
+	if DisplayServer.get_name() != "headless":
+		await RenderingServer.frame_post_draw
 	return PackedByteArray()
