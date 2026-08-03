@@ -121,8 +121,8 @@ some useful [b][SYSTEM OPTIONS][/b] are:
 	static func enable_export(_project: Project, _next_arg: String):
 		return true
 
-	static func enable_spritesheet(_project: Project, _next_arg: String):
-		Export.current_tab = Export.ExportTab.SPRITESHEET
+	static func enable_spritesheet(project: Project, _next_arg: String):
+		project.export_settings.current_tab = Export.ExportTab.SPRITESHEET
 		return true
 
 	static func set_output(project: Project, next_arg: String) -> void:
@@ -134,13 +134,14 @@ some useful [b][SYSTEM OPTIONS][/b] are:
 			var extension := next_arg.get_extension()
 			project.file_format = Export.get_file_format_from_extension(extension)
 
-	static func set_export_scale(_project: Project, next_arg: String) -> void:
+	static func set_export_scale(project: Project, next_arg: String) -> void:
 		if not next_arg.is_empty():
 			if next_arg.is_valid_float():
-				Export.resize = next_arg.to_float() * 100
+				project.export_settings.resize = next_arg.to_float() * 100
 
 	static func set_frames(project: Project, next_arg: String) -> void:
 		if not next_arg.is_empty():
+			var export_setting := project.export_settings
 			if next_arg.contains("-"):
 				var frame_numbers := next_arg.split("-")
 				if frame_numbers.size() > 1:
@@ -156,36 +157,37 @@ some useful [b][SYSTEM OPTIONS][/b] are:
 					for frame in range(frame_number_1, frame_number_2 + 1):
 						project.selected_cels.append([frame, project.current_layer])
 						project.change_cel(frame)
-						Export.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
+						export_setting.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
 			elif next_arg.is_valid_int():
 				var frame_number := next_arg.to_int() - 1
 				frame_number = clampi(frame_number, 0, project.frames.size() - 1)
 				project.selected_cels = [[frame_number, project.current_layer]]
 				project.change_cel(frame_number)
-				Export.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
+				export_setting.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
 
-	static func set_direction(_project: Project, next_arg: String) -> void:
+	static func set_direction(project: Project, next_arg: String) -> void:
+		var export_setting := project.export_settings
 		if not next_arg.is_empty():
 			next_arg = next_arg.to_lower()
 			if next_arg == "0" or next_arg.contains("forward"):
-				Export.direction = Export.AnimationDirection.FORWARD
+				export_setting.direction = Export.AnimationDirection.FORWARD
 			elif next_arg == "1" or next_arg.contains("backward"):
-				Export.direction = Export.AnimationDirection.BACKWARDS
+				export_setting.direction = Export.AnimationDirection.BACKWARDS
 			elif next_arg == "2" or next_arg.contains("ping"):
-				Export.direction = Export.AnimationDirection.PING_PONG
+				export_setting.direction = Export.AnimationDirection.PING_PONG
 			else:
-				print(Export.AnimationDirection.keys()[Export.direction])
+				print(Export.AnimationDirection.keys()[export_setting.direction])
 		else:
-			print(Export.AnimationDirection.keys()[Export.direction])
+			print(Export.AnimationDirection.keys()[export_setting.direction])
 
-	static func set_json(_project: Project, _next_arg: String) -> void:
-		Export.export_json = true
+	static func set_json(project: Project, _next_arg: String) -> void:
+		project.export_settings.export_json = true
 
-	static func set_split_layers(_project: Project, _next_arg: String) -> void:
-		Export.split_layers = true
+	static func set_split_layers(project: Project, _next_arg: String) -> void:
+		project.export_settings.split_layers = true
 
-	static func set_sheet_layers_as_separate_files(_project: Project, _next_arg: String) -> void:
-		Export.sheet_layers_as_separate_files = true
+	static func set_sheet_layers_as_separate_files(project: Project, _next_arg: String) -> void:
+		project.export_settings.sheet_layers_as_separate_files = true
 
 	static func dummy(_project: Project, _next_arg: String) -> void:
 		pass
