@@ -41,9 +41,6 @@ var _last_session_last_project := ""
 
 
 class CLI:
-	## Set when [code]--quit[/code] is passed, so Pixelorama closes once the CLI
-	## command (e.g. an export) has actually finished, instead of quitting immediately.
-	static var quit_when_done := false
 	static var args_list := {
 		["rel-dir="]:
 		[dummy, "(Default='PWD') The directory using which relative paths are resolved."],
@@ -52,7 +49,6 @@ class CLI:
 		["--size"]: [CLI.print_project_size, "Prints size of the given project"],
 		["--framecount"]: [CLI.print_frame_count, "Prints total frames in the current project"],
 		["--export", "-e"]: [CLI.enable_export, "Indicates given project should be exported"],
-		["--quit"]: [CLI.enable_quit, "Close pixelorama after the current command finishes"],
 		["--spritesheet", "-s"]:
 		[CLI.enable_spritesheet, "Indicates given project should be exported as spritesheet"],
 		["--output", "-o"]: [CLI.set_output, "[path] Name of output file (with extension)"],
@@ -124,9 +120,6 @@ some useful [b][SYSTEM OPTIONS][/b] are:
 
 	static func enable_export(_project: Project, _next_arg: String):
 		return true
-
-	static func enable_quit(_project: Project, _next_arg: String) -> void:
-		quit_when_done = true
 
 	static func enable_spritesheet(_project: Project, _next_arg: String):
 		Export.current_tab = Export.ExportTab.SPRITESHEET
@@ -482,8 +475,6 @@ func _handle_cmdline_arguments() -> void:
 				break
 	if should_export:
 		await Export.external_export(project)
-	if CLI.quit_when_done:
-		get_tree().quit()
 
 
 func _on_applinks_data_received(uri: String) -> void:
