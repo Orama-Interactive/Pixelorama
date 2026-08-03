@@ -350,13 +350,14 @@ func is_blender() -> bool:
 func draw_bone(
 	camera_zoom: Vector2, mouse_point: Vector2, with_transform := true
 ) -> void:
+	# Basic variables
 	var preview := Global.canvas.skeleton
 	var highlight = (self == preview.hover_bone or self == preview.selected_bone)
 	var primary_color := Color.WHITE
 	var secondary_color := Color(1, 1, 1, 0.8)
 	var highlight_color := primary_color if (highlight) else secondary_color
 
-	# Get the appropriate hover mode
+	#region Determine the hover mode and set cursor
 	var true_hover_mode = BoneLayer.NONE
 	if highlight:
 		var hover := hover_mode(mouse_point, camera_zoom)
@@ -374,15 +375,9 @@ func draw_bone(
 			BoneLayer.ROTATE:
 				if DisplayServer.cursor_get_shape() != Input.CURSOR_POINTING_HAND:
 					Input.set_default_cursor_shape(Input.CURSOR_POINTING_HAND)
+	#endregion
 
-	var bone_displacement := get_net_displacement()
-	var net_rotation := get_net_rotation()
-	var bone_end := get_end()
-	if not with_transform:  # Exclude effects of rotation
-		bone_displacement = Vector2.ZERO
-		bone_end = bone_end.rotated(-net_rotation)
-
-	# Lambdha func to get width
+	#region Lambdha func to get width
 	var get_width := func(for_hover_mode):
 		var initial_width: float = (WIDTH if (highlight) else DESELECT_WIDTH) / camera_zoom.x
 		var hover_width_diff: float = (
@@ -394,8 +389,18 @@ func draw_bone(
 			else BoneLayer.DESELECT_WIDTH / camera_zoom.x
 		)
 		return net_width
+	#endregion
 
-	# Draw the position circle
+	#region Determine the displacement/end/rotation to be previewed
+	var bone_displacement := get_net_displacement()
+	var net_rotation := get_net_rotation()
+	var bone_end := get_end()
+	if not with_transform:  # Exclude effects of rotation
+		bone_displacement = Vector2.ZERO
+		bone_end = bone_end.rotated(-net_rotation)
+	#endregion
+
+	#region Draw the position circle
 	preview.draw_set_transform(gizmo_offset.rotated(net_rotation))
 	# Joint circle at start
 	preview.draw_circle(
@@ -405,8 +410,10 @@ func draw_bone(
 		false,
 		get_width.call(BoneLayer.DISPLACE)
 	)
-
 	preview.draw_set_transform(Vector2.ZERO)
+	#endregion
+
+	#region Draw the bone shape and rotation circle
 	ignore_rotation_hover = preview.chaining_mode
 	var skip_rotation_bone := false
 	if preview.chaining_mode and not get_child_bones(false).is_empty():
@@ -414,6 +421,7 @@ func draw_bone(
 	ignore_rotation_hover = skip_rotation_bone
 	if !skip_rotation_bone:
 		preview.draw_set_transform(gizmo_offset.rotated(net_rotation))
+		#region Bone shape
 		if with_transform:
 			# Increase width slightly in order to indicate highlight
 			# Draw the line joining the start and end points
@@ -440,7 +448,8 @@ func draw_bone(
 				highlight_color,
 				get_width.call(BoneLayer.ROTATE)
 			)
-		# Draw rotation circle (pose mode)
+		#endregion
+		#region Draw rotation circle
 		preview.draw_circle(
 			bone_displacement + bone_end,
 			BoneLayer.END_RADIUS / camera_zoom.x,
@@ -448,9 +457,11 @@ func draw_bone(
 			false,
 			get_width.call(BoneLayer.ROTATE)
 		)
+		#endregion
+	#endregion
 	preview.draw_set_transform(Vector2.ZERO)
 	if with_transform:
-		## Show connection to parent and write bone name
+		#region Show connection to parent
 		var parent_bone: BoneLayer = BoneLayer.get_parent_bone(self)
 		if parent_bone:
 			var p_start := parent_bone.get_start()
@@ -463,7 +474,9 @@ func draw_bone(
 				highlight_color,
 				BoneLayer.DESELECT_WIDTH / camera_zoom.x
 			)
+		#endregion
 
+		#region  Write bone name
 		var font = Themes.get_font()
 		var line_size = gizmo_length
 		var fade_ratio = (line_size * camera_zoom.x) / (font.get_string_size(name).x)
@@ -476,3 +489,4 @@ func draw_bone(
 			preview.draw_string(
 				font, Vector2(3, -3), name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, highlight_color
 			)
+		#endregion

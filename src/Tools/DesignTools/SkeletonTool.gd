@@ -328,6 +328,7 @@ func draw_move(_pos: Vector2i) -> void:
 	)
 	if !current_selected_bone or !current_selected_bone is BoneLayer:
 		return
+	#region Chaining logic
 	if (
 		_allow_chaining
 		and BoneLayer.get_parent_bone(current_selected_bone)
@@ -369,7 +370,8 @@ func draw_move(_pos: Vector2i) -> void:
 					current_selected_bone.modify_mode = BoneLayer.ROTATE
 					Global.canvas.skeleton.selected_bone = current_selected_bone
 					_hover_layer_in_chain.modify_mode = BoneLayer.NONE
-	# Simple dragging
+	#endregion
+	#region Drag logic (includes non-transform movement)
 	if current_selected_bone.modify_mode == BoneLayer.DISPLACE:
 		if Input.is_action_pressed(&"transform_move_selection_only", true):
 			current_selected_bone.gizmo_offset += offset.rotated(
@@ -379,7 +381,8 @@ func draw_move(_pos: Vector2i) -> void:
 			current_selected_bone.set_local_displacement(
 				current_selected_bone.get_local_displacement() + offset
 			)
-	# Rotations and simple chaining
+	#endregion
+	#region  Rotations and simple chaining (includes non-transform movement)
 	elif (
 		current_selected_bone.modify_mode == BoneLayer.ROTATE
 		or current_selected_bone.modify_mode == BoneLayer.EXTEND
@@ -391,22 +394,24 @@ func draw_move(_pos: Vector2i) -> void:
 			current_selected_bone.rel_to_start_point(_prev_mouse_position).normalized()
 		)
 		var diff := localized_mouse_norm.angle_to(localized_prev_mouse_norm)
-		# Rotation
+		# Rotation without transform
 		if Input.is_action_pressed(&"transform_move_selection_only", true):
 			current_selected_bone.gizmo_rotate_origin -= diff
 			if current_selected_bone.modify_mode == BoneLayer.EXTEND:
 				current_selected_bone.gizmo_length = (
 					current_selected_bone.rel_to_start_point(mouse_point).length()
 				)
-		# Simple chaining
+		# Rotation with transform
 		else:
 			current_selected_bone.set_local_rotation(
 				current_selected_bone.get_local_rotation() - diff
 			)
+			# NOTE: if vanilla chaining is used, then a pivot-like rotation is also performed
 			if _allow_chaining and _hover_layer_in_chain:
 				_hover_layer_in_chain.set_local_rotation(
 					_hover_layer_in_chain.get_local_rotation() + diff
 				)
+	#endregion
 	if _live_update:
 		Global.canvas.queue_redraw()
 	else:
