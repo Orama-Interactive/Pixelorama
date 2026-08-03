@@ -387,19 +387,19 @@ func draw_move(_pos: Vector2i) -> void:
 		current_selected_bone.modify_mode == BoneLayer.ROTATE
 		or current_selected_bone.modify_mode == BoneLayer.EXTEND
 	):
-		var localized_mouse_norm: Vector2 = (
-			current_selected_bone.rel_to_start_point(mouse_point).normalized()
+		var normalized_local_mouse: Vector2 = (
+			(mouse_point - current_selected_bone.get_pivot()).normalized()
 		)
-		var localized_prev_mouse_norm: Vector2 = (
-			current_selected_bone.rel_to_start_point(_prev_mouse_position).normalized()
+		var normalized_local_prev_mouse: Vector2 = (
+			(_prev_mouse_position - current_selected_bone.get_pivot()).normalized()
 		)
-		var diff := localized_mouse_norm.angle_to(localized_prev_mouse_norm)
+		var diff := normalized_local_mouse.angle_to(normalized_local_prev_mouse)
 		# Rotation without transform
 		if Input.is_action_pressed(&"transform_move_selection_only", true):
 			current_selected_bone.gizmo_rotate_origin -= diff
 			if current_selected_bone.modify_mode == BoneLayer.EXTEND:
 				current_selected_bone.gizmo_length = (
-					current_selected_bone.rel_to_start_point(mouse_point).length()
+					(mouse_point - current_selected_bone.get_pivot()).length()
 				)
 		# Rotation with transform
 		else:

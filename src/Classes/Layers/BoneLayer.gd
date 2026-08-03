@@ -69,8 +69,16 @@ func get_start() -> Vector2:
 	return get_net_displacement() + gizmo_offset.rotated(get_net_rotation())
 
 
-func get_end(frame: int = project.current_frame) -> Vector2:
-	return Vector2(gizmo_length, 0).rotated(gizmo_rotate_origin + get_net_rotation(frame))
+func get_end(is_pose_mode := true, frame: int = project.current_frame) -> Vector2:
+	if is_pose_mode:
+		return Vector2(gizmo_length, 0).rotated(gizmo_rotate_origin + get_net_rotation(frame))
+	return Vector2(gizmo_length, 0).rotated(gizmo_rotate_origin)
+
+
+func get_pivot(is_pose_mode := true, frame: int = project.current_frame) -> Vector2:
+	if is_pose_mode:
+		return get_net_displacement(frame) + gizmo_offset
+	return gizmo_offset
 
 
 func get_parent_contributions(frame: int = project.current_frame):
@@ -181,15 +189,15 @@ func get_interaction_distance(zoom_level: float) -> float:
 
 ## Calculates hover mode of current BoneLayer
 func hover_mode(mouse_position: Vector2, camera_zoom) -> int:
-	var gizmo_pos_circle := get_net_displacement() + gizmo_offset.rotated(get_net_rotation())
+	var pivot_circle := get_pivot()
 	var end_point := get_end()
 	var hover_type := NONE
 	var interaction_distance := get_interaction_distance(camera_zoom.x)
 	# Mouse close to position circle
-	if gizmo_pos_circle.distance_to(mouse_position) <= interaction_distance:
+	if pivot_circle.distance_to(mouse_position) <= interaction_distance:
 		hover_type = DISPLACE
 	elif (
-		(gizmo_pos_circle + end_point).distance_to(mouse_position)
+		(pivot_circle + end_point).distance_to(mouse_position)
 		<= interaction_distance
 	):
 		# Mouse close to end circle
@@ -198,7 +206,7 @@ func hover_mode(mouse_position: Vector2, camera_zoom) -> int:
 	elif BoneLayer.is_close_to_segment(
 		mouse_position,
 		interaction_distance,
-		gizmo_pos_circle, gizmo_pos_circle + end_point
+		pivot_circle, pivot_circle + end_point
 	):
 		# Mouse close joining line
 		if !ignore_rotation_hover:
@@ -250,14 +258,14 @@ func apply_bone(cel_image: Image, at_frame: int) -> Image:
 	if is_edit_mode() or DrawingAlgos.force_bone_mode == DrawingAlgos.BoneRenderMode.EDIT:
 		if DrawingAlgos.force_bone_mode != DrawingAlgos.BoneRenderMode.POSE:
 			return cel_image
-	var frame_angle: float = get_net_rotation(at_frame)
-	var frame_start_point: Vector2i = get_net_displacement(at_frame)
-	if frame_angle == 0 and frame_start_point == Vector2i.ZERO:
+	var net_rotation: float = get_net_rotation(at_frame)
+	var net_displacement: Vector2i = get_net_displacement(at_frame)
+	if net_rotation == 0 and net_displacement == Vector2i.ZERO:
 		return cel_image
 	var used_region := cel_image.get_used_rect()
 	if used_region.size == Vector2i.ZERO:
 		return cel_image
-	# Imprint on a square for rotation
+	#region Use a smaller (square) image for rotation of content
 	# (We are doing this so that the image doesn't get clipped as a result of rotation.)
 	var diagonal_length := floori(used_region.size.length())
 	if diagonal_length % 2 == 0:
@@ -272,12 +280,12 @@ func apply_bone(cel_image: Image, at_frame: int) -> Image:
 		Rect2i(square_image_start, Vector2i(diagonal_length, diagonal_length))
 	)
 	# Apply Rotation To this Image
-	if frame_angle != 0:
-		var transformation_matrix := Transform2D(frame_angle, Vector2.ZERO)
+	if net_rotation != 0:
+		var transformation_matrix := Transform2D(net_rotation, Vector2.ZERO)
 		var rotate_params := {
 			"transformation_matrix": transformation_matrix.affine_inverse(),
 			"pivot": Vector2(0.5, 0.5),
-			"ending_angle": frame_angle,
+			"ending_angle": net_rotation,
 			"tolerance": 0,
 			"preview": false
 		}
@@ -286,7 +294,7 @@ func apply_bone(cel_image: Image, at_frame: int) -> Image:
 		# NOTE: I tried caching entire poses (that remain same) as well. It was faster than this
 		# approach but only by a few milliseconds. I don't think straining the memory for only
 		# a boost of a few millisec was worth it so i declare this the most optimal approach.
-		var cache_key := {"angle": frame_angle, "un_transformed": square_image.get_data()}
+		var cache_key := {"angle": net_rotation, "un_transformed": square_image.get_data()}
 		var bone_cel: BoneCel = project.frames[at_frame].cels[index]
 		var bone_cache: Dictionary = generation_cache.get_or_add(bone_cel, {})
 		if cache_key in bone_cache.keys():
@@ -297,19 +305,25 @@ func apply_bone(cel_image: Image, at_frame: int) -> Image:
 			)
 			bone_cache.clear()
 			bone_cache[cache_key] = square_image
-	var gizmo_offset_rotated_floored: Vector2i = gizmo_offset.rotated(frame_angle).floor()
-	var pivot: Vector2i = gizmo_offset_rotated_floored
-	var bone_start_global: Vector2i = gizmo_offset_rotated_floored + frame_start_point
+	#endregion
+	#region Determine new coordinates to place the rotated image
+	# We have our old content center
 	var global_square_centre: Vector2 = square_image_start + (square_image.get_size() / 2)
-	var global_rotated_new_centre = (
-		(global_square_centre).rotated(frame_angle) - Vector2(pivot) + Vector2(bone_start_global)
+	# We apply rotation operation to get rotated center
+	var global_square_centre_rotated: Vector2 = global_square_centre.rotated(net_rotation)
+	# we work our way to get the top left corner of the rotated version
+	var top_left_corner: Vector2i = (
+		square_image_start
+		+ Vector2i((global_square_centre_rotated - global_square_centre).floor())
+		+ Vector2i(gizmo_offset - gizmo_offset.rotated(net_rotation).floor())
 	)
-	var new_start: Vector2i = (
-		square_image_start + Vector2i((global_rotated_new_centre - global_square_centre).floor())
-	)
+	# We now apply the displacement operation
+	top_left_corner += net_displacement
+	#endregion
+	# Paste the image back on the canvas
 	cel_image.fill(Color(0, 0, 0, 0))
 	cel_image.blit_rect(
-		square_image, Rect2i(Vector2.ZERO, square_image.get_size()), Vector2i(new_start)
+		square_image, Rect2i(Vector2.ZERO, square_image.get_size()), Vector2i(top_left_corner)
 	)
 	return cel_image
 
@@ -392,25 +406,19 @@ func draw_bone(
 	#endregion
 
 	#region Determine the displacement/end/rotation to be previewed
-	var bone_displacement := get_net_displacement()
-	var net_rotation := get_net_rotation()
-	var bone_end := get_end()
-	if not with_transform:  # Exclude effects of rotation
-		bone_displacement = Vector2.ZERO
-		bone_end = bone_end.rotated(-net_rotation)
+	var bone_pivot := get_pivot(with_transform)
+	var bone_end := get_end(with_transform)
 	#endregion
 
 	#region Draw the position circle
-	preview.draw_set_transform(gizmo_offset.rotated(net_rotation))
 	# Joint circle at start
 	preview.draw_circle(
-		bone_displacement,
+		bone_pivot,
 		START_RADIUS / camera_zoom.x,
 		highlight_color,
 		false,
 		get_width.call(BoneLayer.DISPLACE)
 	)
-	preview.draw_set_transform(Vector2.ZERO)
 	#endregion
 
 	#region Draw the bone shape and rotation circle
@@ -420,7 +428,6 @@ func draw_bone(
 		skip_rotation_bone = true
 	ignore_rotation_hover = skip_rotation_bone
 	if !skip_rotation_bone:
-		preview.draw_set_transform(gizmo_offset.rotated(net_rotation))
 		#region Bone shape
 		if with_transform:
 			# Increase width slightly in order to indicate highlight
@@ -429,8 +436,8 @@ func draw_bone(
 			var perp := bone_end.normalized().rotated(-(PI / 2))
 			var w1 := START_RADIUS / camera_zoom.x   # start thickness
 			var w2 := END_RADIUS / camera_zoom.x   # end thickness
-			var start := bone_displacement + (bone_end.normalized() * w1)
-			var end := bone_displacement + bone_end - (bone_end.normalized() * w2)
+			var start := bone_pivot + (bone_end.normalized() * w1)
+			var end := bone_pivot + bone_end - (bone_end.normalized() * w2)
 			var p1 := start + split + perp * get_interaction_distance(camera_zoom.x)
 			var p2 := end + (perp / 2) * w2
 			var p3 := end - (perp / 2) * w2
@@ -443,15 +450,15 @@ func draw_bone(
 		else:
 			# Draw the line joining the position and rotation circles
 			preview.draw_line(
-				bone_displacement,
-				bone_displacement + bone_end,
+				bone_pivot,
+				bone_pivot + bone_end,
 				highlight_color,
 				get_width.call(BoneLayer.ROTATE)
 			)
 		#endregion
 		#region Draw rotation circle
 		preview.draw_circle(
-			bone_displacement + bone_end,
+			bone_pivot + bone_end,
 			BoneLayer.END_RADIUS / camera_zoom.x,
 			highlight_color,
 			false,
@@ -459,21 +466,20 @@ func draw_bone(
 		)
 		#endregion
 	#endregion
-	preview.draw_set_transform(Vector2.ZERO)
 	if with_transform:
 		#region Show connection to parent
-		var parent_bone: BoneLayer = BoneLayer.get_parent_bone(self)
-		if parent_bone:
-			var p_start := parent_bone.get_start()
-			var p_end := Vector2.ZERO if preview.chaining_mode else parent_bone.get_end()
-			if not parent_bone in preview.canon_layers:
-				preview.draw_circle(p_start + p_end, START_RADIUS / camera_zoom.x, Color.GRAY, true)
-			preview.draw_dashed_line(
-				bone_displacement + gizmo_offset.rotated(net_rotation),
-				p_start + p_end,
-				highlight_color,
-				BoneLayer.DESELECT_WIDTH / camera_zoom.x
-			)
+		#var parent_bone: BoneLayer = BoneLayer.get_parent_bone(self)
+		#if parent_bone:
+			#var p_start := parent_bone.get_start()
+			#var p_end := Vector2.ZERO if preview.chaining_mode else parent_bone.get_end()
+			#if not parent_bone in preview.canon_layers:
+				#preview.draw_circle(p_start + p_end, START_RADIUS / camera_zoom.x, Color.GRAY, true)
+			#preview.draw_dashed_line(
+				#bone_pivot + gizmo_offset.rotated(get_net_rotation()),
+				#p_start + p_end,
+				#highlight_color,
+				#BoneLayer.DESELECT_WIDTH / camera_zoom.x
+			#)
 		#endregion
 
 		#region  Write bone name
@@ -484,7 +490,7 @@ func draw_bone(
 			fade_ratio = max(0.3, fade_ratio)
 		if fade_ratio >= 0.4 and !preview.active_tool:  # Hide names if we have zoomed far
 			preview.draw_set_transform(
-				gizmo_offset + bone_displacement, preview.rotation, Vector2.ONE / camera_zoom.x
+				bone_pivot, preview.rotation, Vector2.ONE / camera_zoom.x
 			)
 			preview.draw_string(
 				font, Vector2(3, -3), name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, highlight_color
