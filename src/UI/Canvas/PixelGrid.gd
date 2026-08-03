@@ -35,7 +35,8 @@ func _draw() -> void:
 
 func _on_project_about_to_switch() -> void:
 	var project := Global.current_project
-	project.resized.disconnect(queue_redraw)
+	if project.resized.is_connected(queue_redraw):
+		project.resized.disconnect(queue_redraw)
 
 
 func _on_project_switched() -> void:

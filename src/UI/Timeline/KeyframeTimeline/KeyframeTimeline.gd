@@ -95,7 +95,8 @@ func _on_effects_added_removed() -> void:
 
 func _on_project_about_to_switch() -> void:
 	var project := Global.current_project
-	project.frames_updated.disconnect(_add_ui_frames)
+	if project.frames_updated.is_connected(_add_ui_frames):
+		project.frames_updated.disconnect(_add_ui_frames)
 
 
 func _on_project_switched() -> void:

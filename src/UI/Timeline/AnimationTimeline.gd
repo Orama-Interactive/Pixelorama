@@ -1433,9 +1433,12 @@ func _on_timeline_settings_visibility_changed() -> void:
 
 func _on_project_about_to_switch() -> void:
 	var project := Global.current_project
-	project.layers_updated.disconnect(_update_layer_ui)
-	project.frames_updated.disconnect(_update_frame_ui)
-	project.tags_changed.disconnect(_on_animation_tags_changed)
+	if project.layers_updated.is_connected(_update_layer_ui):
+		project.layers_updated.disconnect(_update_layer_ui)
+	if project.frames_updated.is_connected(_update_frame_ui):
+		project.frames_updated.disconnect(_update_frame_ui)
+	if project.tags_changed.is_connected(_on_animation_tags_changed):
+		project.tags_changed.disconnect(_on_animation_tags_changed)
 
 
 func _on_project_switched() -> void:

@@ -181,8 +181,10 @@ func handle_main_menu_collapse() -> void:
 
 func _on_project_about_to_switch() -> void:
 	var project := Global.current_project
-	project.resized.disconnect(_on_project_resized)
-	project.selection_changed.disconnect(_on_project_selection_changed)
+	if project.resized.is_connected(_on_project_resized):
+		project.resized.disconnect(_on_project_resized)
+	if project.resized.is_connected(_on_project_selection_changed):
+		project.selection_changed.disconnect(_on_project_selection_changed)
 
 
 func _on_project_switched() -> void:

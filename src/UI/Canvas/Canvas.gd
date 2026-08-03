@@ -278,7 +278,8 @@ func refresh_onion() -> void:
 
 func _on_project_about_to_switch() -> void:
 	var project := Global.current_project
-	project.resized.disconnect(camera_zoom)
+	if project.resized.is_connected(camera_zoom):
+		project.resized.disconnect(camera_zoom)
 
 
 func _on_project_switched() -> void:
