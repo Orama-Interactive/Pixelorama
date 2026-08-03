@@ -155,7 +155,7 @@ func deserialize(dict: Dictionary) -> void:
 	gizmo_rotate_origin = str_to_var(
 		dict.get("gizmo_rotate_origin", var_to_str(gizmo_rotate_origin))
 	)
-	gizmo_length = str_to_var(dict.get("gizmo_length", var_to_str(gizmo_length)))
+	gizmo_length = dict.get("gizmo_length", gizmo_length)
 	super(dict)  # Update animatable properties (and other parent class properties)
 
 
