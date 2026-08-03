@@ -495,4 +495,5 @@ func draw_bone(
 			preview.draw_string(
 				font, Vector2(3, -3), name, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, highlight_color
 			)
+			preview.draw_set_transform(Vector2.ZERO)
 		#endregion

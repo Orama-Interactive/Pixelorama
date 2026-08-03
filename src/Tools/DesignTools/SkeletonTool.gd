@@ -374,8 +374,13 @@ func draw_move(_pos: Vector2i) -> void:
 	#region Drag logic (includes non-transform movement)
 	if current_selected_bone.modify_mode == BoneLayer.DISPLACE:
 		if Input.is_action_pressed(&"transform_move_selection_only", true):
-			current_selected_bone.gizmo_offset += offset.rotated(
+			## iter 1
+			var local_rotated_offset := offset.rotated(
 				-current_selected_bone.get_local_rotation()
+			)
+			current_selected_bone.gizmo_offset += local_rotated_offset
+			current_selected_bone.set_local_displacement(
+				current_selected_bone.get_local_displacement() - local_rotated_offset + offset
 			)
 		else:
 			current_selected_bone.set_local_displacement(
@@ -499,7 +504,7 @@ func display_props():
 		%BoneProps.visible = true
 		%BoneLabel.text = tr("Name:") + " " + current_selected_bone.name
 		rot_slider.set_value_no_signal_update_display(
-			rad_to_deg(current_selected_bone.get_local_rotation())
+			wrapf(rad_to_deg(current_selected_bone.get_local_rotation()), 0, 360)
 		)
 		pos_slider.set_value_no_signal(
 			current_selected_bone.get_local_displacement()
