@@ -44,15 +44,25 @@ var _is_initializing_export_settings := false
 
 @onready var frames_option_button: OptionButton = $"%Frames"
 @onready var layers_option_button: OptionButton = $"%Layers"
-@onready var options_resize: ValueSlider = $"%Resize"
+@onready var split_layers_checkbox: CheckBox = %SplitLayers
+@onready var direction_option_button: OptionButton = %Direction
+@onready var repeat_count_spinbox: SpinBox = %RepeatCount
 @onready var dimension_label: Label = $"%DimensionLabel"
-@onready var crop_image_option: OptionButton = %CropImages
+@onready var options_resize: ValueSlider = $"%Resize"
+@onready var options_quality: ValueSlider = %Quality
+
+@onready var options_interpolation: OptionButton = $"%Interpolation"
+@onready var separator_character_edit: LineEdit = %SeparatorCharacter
+@onready var export_json_checkbox: CheckBox = %ExportJSON
+@onready var include_tags_in_filename_checkbox: CheckBox = %IncludeTagsInFilename
+@onready var multiple_animations_directories_checkbox: CheckBox = %MultipleAnimationsDirectories
 @onready var erase_outside_selection: CheckBox = %EraseOutsideSelection
+@onready var crop_image_option: OptionButton = %CropImages
+
 
 @onready var directory_path_label: Label = %DirectoryPathLabel
 @onready var path_line_edit: LineEdit = $"%PathLineEdit"
 @onready var file_format_options: OptionButton = $"%FileFormat"
-@onready var options_interpolation: OptionButton = $"%Interpolation"
 
 @onready var file_exists_alert_popup: AcceptDialog = $FileExistsAlert
 @onready var path_validation_alert_popup: AcceptDialog = $PathValidationAlert
@@ -90,11 +100,11 @@ func show_tab() -> void:
 	get_tree().call_group("ExportSpritesheetOptions", "hide")
 	set_file_format_selector()
 	create_frame_tag_list()
-	var export_setting := Global.current_project.export_settings
-	frames_option_button.select(export_setting.frame_current_tag)
+	var export_settings := Global.current_project.export_settings
+	frames_option_button.select(export_settings.frame_current_tag)
 	create_layer_list()
-	layers_option_button.select(export_setting.export_layers)
-	match export_setting.current_tab:
+	layers_option_button.select(export_settings.export_layers)
+	match export_settings.current_tab:
 		Export.ExportTab.IMAGE:
 			Export.process_animation()
 			get_tree().call_group("ExportImageOptions", "show")
@@ -107,15 +117,15 @@ func show_tab() -> void:
 		Export.ExportTab.SPRITESHEET:
 			frame_timer.stop()
 			Export.process_spritesheet()
-			spritesheet_orientation.selected = export_setting.orientation
-			spritesheet_lines_count.max_value = export_setting.number_of_frames
-			spritesheet_lines_count.value = export_setting.lines_count
-			spritesheet_layers_as_separate_files.disabled = !export_setting.split_layers
+			spritesheet_orientation.selected = export_settings.orientation
+			spritesheet_lines_count.max_value = export_settings.number_of_frames
+			spritesheet_lines_count.value = export_settings.lines_count
+			spritesheet_layers_as_separate_files.disabled = !export_settings.split_layers
 			get_tree().call_group("ExportSpritesheetOptions", "show")
 			_handle_orientation_ui()
 	set_preview()
 	update_dimensions_label()
-	tabs.current_tab = export_setting.current_tab
+	tabs.current_tab = export_settings.current_tab
 	if OS.get_name() == "Web":
 		get_tree().call_group("NotHTML5", "hide")
 	elif OS.get_name() == "Android":
@@ -127,25 +137,25 @@ func _set_project_export_settings(
 ) -> void:
 	var project := Global.current_project
 	var settings_changed := (
-		project.export_directory_path != directory_path
-		or project.file_name != file_name
-		or project.file_format != file_format
+		project.export_settings.directory_path != directory_path
+		or project.export_settings.file_name != file_name
+		or project.export_settings.file_format != file_format
 	)
-	project.export_directory_path = directory_path
-	project.file_name = file_name
-	project.file_format = file_format
+	project.export_settings.directory_path = directory_path
+	project.export_settings.file_name = file_name
+	project.export_settings.file_format = file_format
 	if settings_changed and not _is_initializing_export_settings:
 		project.has_changed = true
 
 
 func set_preview() -> void:
-	var export_setting := Global.current_project.export_settings
+	var export_settings := Global.current_project.export_settings
 	_preview_images = Export.processed_images
 	if _preview_images.is_empty():
 		return
 	var preview_data := {
-		"exporter_id": Global.current_project.file_format,
-		"export_tab": export_setting.current_tab,
+		"exporter_id": export_settings.file_format,
+		"export_tab": export_settings.current_tab,
 		"preview_images": _preview_images,
 	}
 	about_to_preview.emit(preview_data)
@@ -233,6 +243,7 @@ func set_file_format_selector() -> void:
 ## Note that if the current format is in the list, it stays for consistency.
 func _set_file_format_selector_suitable_file_formats(formats: Array[Export.FileFormat]) -> void:
 	var project := Global.current_project
+	var export_settings := project.export_settings
 	file_format_options.clear()
 	path_dialog_popup.clear_filters()
 	var ffmpeg_installed := Export.is_ffmpeg_installed()
@@ -241,7 +252,7 @@ func _set_file_format_selector_suitable_file_formats(formats: Array[Export.FileF
 		if i == Export.FileFormat.EXR:
 			if OS.get_name() == "Android" or OS.get_name() == "Web":
 				continue
-		if project.file_format == i:
+		if export_settings.file_format == i:
 			needs_update = false
 		if not ffmpeg_installed:
 			if i in Export.ffmpeg_formats:
@@ -253,11 +264,11 @@ func _set_file_format_selector_suitable_file_formats(formats: Array[Export.FileF
 				"*" + Export.file_format_string(i), Export.file_format_description(i)
 			)
 	if needs_update:
-		_set_project_export_settings(project.export_directory_path, project.file_name, formats[0])
-	file_format_options.selected = file_format_options.get_item_index(project.file_format)
+		_set_project_export_settings(export_settings.directory_path, export_settings.file_name, formats[0])
+	file_format_options.selected = file_format_options.get_item_index(export_settings.file_format)
 	if OS.get_name() == "Android":
-		var file_ext_str := "*" + Export.file_format_string(project.file_format)
-		var file_format_description := Export.file_format_description(project.file_format)
+		var file_ext_str := "*" + Export.file_format_string(export_settings.file_format)
+		var file_format_description := Export.file_format_description(export_settings.file_format)
 		path_dialog_popup.add_filter(file_ext_str, file_format_description)
 
 
@@ -295,8 +306,8 @@ func create_layer_list() -> void:
 
 func update_dimensions_label() -> void:
 	if _preview_images.size() > 0:
-		var export_setting := Global.current_project.export_settings
-		var new_size: Vector2i = _preview_images[0].image.get_size() * (export_setting.resize / 100.0)
+		var export_settings := Global.current_project.export_settings
+		var new_size: Vector2i = _preview_images[0].image.get_size() * (export_settings.resize / 100.0)
 		dimension_label.text = str(new_size.x, "×", new_size.y)
 
 
@@ -335,27 +346,42 @@ func _on_about_to_popup() -> void:
 	get_ok_button().text = "Export"
 	Global.transform_content_confirmed.emit()
 	var project := Global.current_project
+	var export_settings := project.export_settings
 	# If we're on Web, don't let the user change the directory path
 	if OS.get_name() == "Web":
-		_set_project_export_settings("user://", project.file_name, project.file_format)
+		_set_project_export_settings("user://", export_settings.file_name, export_settings.file_format)
 
-	if project.export_directory_path.is_empty():
+	if export_settings.directory_path.is_empty():
 		var default_directory_path: String = Global.config_cache.get_value(
 			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 		)
-		_set_project_export_settings(default_directory_path, project.file_name, project.file_format)
+		_set_project_export_settings(default_directory_path, export_settings.file_name, export_settings.file_format)
 
 	# If export already occurred - sets GUI to show previous settings
-	var export_setting := project.export_settings
-	options_resize.value = export_setting.resize
-	options_interpolation.selected = export_setting.interpolation
-	directory_path_label.text = project.export_directory_path
-	var file_ext := Export.file_format_string(project.file_format)
+	# we don't emit signals because there settings are already set, so nothing new is changed.
+	options_resize.set_value_no_signal(export_settings.resize)
+	options_interpolation.selected = export_settings.interpolation
+	options_quality.set_value_no_signal(export_settings.save_quality * 100.0)
+	direction_option_button.selected = export_settings.direction
+	repeat_count_spinbox.set_value_no_signal(export_settings.repeat_count)
+	split_layers_checkbox.set_pressed_no_signal(export_settings.split_layers)
+	crop_image_option.selected = export_settings.crop_mode
+	erase_outside_selection.disabled = (export_settings.crop_mode == Export.CropMode.SELECTION)
+	erase_outside_selection.set_pressed_no_signal(export_settings.erase_unselected_area)
+	separator_character_edit.text = export_settings.separator_character
+	export_json_checkbox.set_pressed_no_signal(export_settings.export_json)
+	include_tags_in_filename_checkbox.set_pressed_no_signal(export_settings.include_tag_in_filename)
+	multiple_animations_directories_checkbox.set_pressed_no_signal(
+		export_settings.new_dir_for_each_frame_tag
+	)
+
+	directory_path_label.text = export_settings.directory_path
+	var file_ext := Export.file_format_string(export_settings.file_format)
 	if OS.get_name() == "Web" or OS.get_name() == "Android":
-		path_line_edit.text = project.file_name + file_ext
+		path_line_edit.text = export_settings.file_name + file_ext
 	else:
-		path_line_edit.text = project.export_directory_path.path_join(project.file_name) + file_ext
-	path_dialog_popup.current_dir = project.export_directory_path
+		path_line_edit.text = export_settings.directory_path.path_join(export_settings.file_name) + file_ext
+	path_dialog_popup.current_dir = export_settings.directory_path
 	Export.cache_blended_frames()
 	show_tab()
 
@@ -447,7 +473,8 @@ func _on_path_button_pressed() -> void:
 
 func _on_path_line_edit_text_changed(new_text: String) -> void:
 	var project := Global.current_project
-	var directory_path := project.export_directory_path
+	var export_settings := project.export_settings
+	var directory_path := export_settings.directory_path
 	if OS.get_name() != "Android":
 		directory_path = new_text.get_base_dir()
 	var file_name := new_text.get_file().get_basename()
@@ -479,7 +506,9 @@ func _on_path_dialog_file_selected(path: String) -> void:
 func _on_path_dialog_dir_selected(dir: String) -> void:
 	directory_path_label.text = dir
 	var project := Global.current_project
-	_set_project_export_settings(dir, project.file_name, project.file_format)
+	_set_project_export_settings(
+		dir, project.export_settings.file_name, project.export_settings.file_format
+	)
 
 
 func _on_path_dialog_canceled() -> void:
@@ -547,9 +576,9 @@ func _on_export_json_toggled(toggled_on: bool) -> void:
 
 
 func _on_split_layers_toggled(toggled_on: bool) -> void:
-	var export_setting := Global.current_project.export_settings
-	export_setting.split_layers = toggled_on
-	spritesheet_layers_as_separate_files.disabled = !export_setting.split_layers
+	var export_settings := Global.current_project.export_settings
+	export_settings.split_layers = toggled_on
+	spritesheet_layers_as_separate_files.disabled = !export_settings.split_layers
 	Export.process_data()
 	set_preview()
 
@@ -582,12 +611,12 @@ func _on_clip_images_selection_toggled(toggled_on: bool) -> void:
 
 
 func _on_frames_item_selected(id: int) -> void:
-	var export_setting := Global.current_project.export_settings
-	export_setting.frame_current_tag = id
+	var export_settings := Global.current_project.export_settings
+	export_settings.frame_current_tag = id
 	Export.process_data()
 	set_preview()
-	spritesheet_lines_count.max_value = export_setting.number_of_frames
-	spritesheet_lines_count.value = export_setting.lines_count
+	spritesheet_lines_count.max_value = export_settings.number_of_frames
+	spritesheet_lines_count.value = export_settings.lines_count
 
 
 func _on_layers_item_selected(id: int) -> void:

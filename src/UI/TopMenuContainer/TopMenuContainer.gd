@@ -227,12 +227,13 @@ func _on_cursor_position_text_changed(text: String) -> void:
 func _update_file_menu_buttons(project: Project) -> void:
 	if not is_instance_valid(file_menu):
 		return
-	if project.export_directory_path.is_empty():
+	var export_settings = project.export_settings
+	if export_settings.directory_path.is_empty():
 		file_menu.set_item_text(Global.FileMenu.SAVE, tr("Save"))
 	else:
-		file_menu.set_item_text(Global.FileMenu.SAVE, tr("Save") + " %s" % project.file_name)
+		file_menu.set_item_text(Global.FileMenu.SAVE, tr("Save") + " %s" % export_settings.file_name)
 	if project.was_exported:
-		var f_name := " %s" % (project.file_name + Export.file_format_string(project.file_format))
+		var f_name := " %s" % (project.file_name + Export.file_format_string(export_settings.file_format))
 		if project.export_overwrite:
 			file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Overwrite") + f_name)
 		else:

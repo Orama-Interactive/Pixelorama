@@ -130,9 +130,9 @@ some useful [b][SYSTEM OPTIONS][/b] are:
 			project.file_name = next_arg.get_file().get_basename()
 			var directory_path = next_arg.get_base_dir()
 			if directory_path != ".":
-				project.export_directory_path = directory_path
+				project.export_settings.directory_path = directory_path
 			var extension := next_arg.get_extension()
-			project.file_format = Export.get_file_format_from_extension(extension)
+			project.export_settings.file_format = Export.get_file_format_from_extension(extension)
 
 	static func set_export_scale(project: Project, next_arg: String) -> void:
 		if not next_arg.is_empty():
@@ -141,7 +141,7 @@ some useful [b][SYSTEM OPTIONS][/b] are:
 
 	static func set_frames(project: Project, next_arg: String) -> void:
 		if not next_arg.is_empty():
-			var export_setting := project.export_settings
+			var export_settings := project.export_settings
 			if next_arg.contains("-"):
 				var frame_numbers := next_arg.split("-")
 				if frame_numbers.size() > 1:
@@ -157,28 +157,28 @@ some useful [b][SYSTEM OPTIONS][/b] are:
 					for frame in range(frame_number_1, frame_number_2 + 1):
 						project.selected_cels.append([frame, project.current_layer])
 						project.change_cel(frame)
-						export_setting.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
+						export_settings.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
 			elif next_arg.is_valid_int():
 				var frame_number := next_arg.to_int() - 1
 				frame_number = clampi(frame_number, 0, project.frames.size() - 1)
 				project.selected_cels = [[frame_number, project.current_layer]]
 				project.change_cel(frame_number)
-				export_setting.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
+				export_settings.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
 
 	static func set_direction(project: Project, next_arg: String) -> void:
-		var export_setting := project.export_settings
+		var export_settings := project.export_settings
 		if not next_arg.is_empty():
 			next_arg = next_arg.to_lower()
 			if next_arg == "0" or next_arg.contains("forward"):
-				export_setting.direction = Export.AnimationDirection.FORWARD
+				export_settings.direction = Export.AnimationDirection.FORWARD
 			elif next_arg == "1" or next_arg.contains("backward"):
-				export_setting.direction = Export.AnimationDirection.BACKWARDS
+				export_settings.direction = Export.AnimationDirection.BACKWARDS
 			elif next_arg == "2" or next_arg.contains("ping"):
-				export_setting.direction = Export.AnimationDirection.PING_PONG
+				export_settings.direction = Export.AnimationDirection.PING_PONG
 			else:
-				print(Export.AnimationDirection.keys()[export_setting.direction])
+				print(Export.AnimationDirection.keys()[export_settings.direction])
 		else:
-			print(Export.AnimationDirection.keys()[export_setting.direction])
+			print(Export.AnimationDirection.keys()[export_settings.direction])
 
 	static func set_json(project: Project, _next_arg: String) -> void:
 		project.export_settings.export_json = true
@@ -264,9 +264,9 @@ func _input(event: InputEvent) -> void:
 
 
 func _project_switched() -> void:
-	if Global.current_project.export_directory_path != "":
-		open_sprite_dialog.current_dir = Global.current_project.export_directory_path
-		save_sprite_dialog.current_dir = Global.current_project.export_directory_path
+	if Global.current_project.export_settings.directory_path != "":
+		open_sprite_dialog.current_dir = Global.current_project.export_settings.directory_path
+		save_sprite_dialog.current_dir = Global.current_project.export_settings.directory_path
 
 
 # Taken from

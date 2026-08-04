@@ -25,7 +25,7 @@ var name := "":
 		var project_index := Global.projects.find(self)
 		if project_index < Global.tabs.tab_count and project_index > -1:
 			Global.tabs.set_tab_title(project_index, name)
-		file_name = name
+		export_settings.file_name = name
 var size: Vector2i:
 	set = _size_changed
 var undo_redo := UndoRedo.new()
@@ -114,11 +114,7 @@ var cameras_zoom: PackedVector2Array = [
 ]
 var cameras_offset: PackedVector2Array = [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]
 
-# Export directory path and export file name
-var save_path := ""
-var export_directory_path := ""
-var file_name := "untitled"
-var file_format := Export.FileFormat.PNG
+var save_path := "" ## Path the pxo gets saved to (or is loaded from)
 var was_exported := false
 var export_overwrite := false
 var backup_path := ""
@@ -165,9 +161,9 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 	Global.canvas.add_child(diagonal_x_minus_y_symmetry_axis)
 
 	if OS.get_name() == "Web":
-		export_directory_path = "user://"
+		export_settings.directory_path = "user://"
 	else:
-		export_directory_path = Global.config_cache.get_value(
+		export_settings.directory_path = Global.config_cache.get_value(
 			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 		)
 	initialize_attribution_data()
@@ -339,9 +335,6 @@ func serialize() -> Dictionary:
 		"reference_images": reference_image_data,
 		"tilesets": tileset_data,
 		"vanishing_points": vanishing_points,
-		"export_directory_path": export_directory_path,
-		"export_file_name": file_name,
-		"export_file_format": file_format,
 		"fps": fps,
 		"license": license,
 		"user_data": user_data,
@@ -559,13 +552,10 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 	var exp_settings = dict.get("export_settings", {})
 	if typeof(exp_settings) == TYPE_DICTIONARY:
 		export_settings.deserialize(exp_settings)
-	export_directory_path = dict.get("export_directory_path", export_directory_path)
-	if not DirAccess.dir_exists_absolute(export_directory_path):
-		export_directory_path = ""
-	file_name = dict.get("export_file_name", file_name)
-	if file_name.is_empty() or file_name == "untitled":
-		file_name = name
-	file_format = dict.get("export_file_format", file_format)
+	if not DirAccess.dir_exists_absolute(export_settings.directory_path):
+			export_settings.directory_path = ""
+	if export_settings.file_name.is_empty() or export_settings.file_name == "untitled":
+		export_settings.file_name = name
 	fps = dict.get("fps", fps)
 	license = dict.get("license", license)
 	author_display_name = dict.get("author_display_name", "")

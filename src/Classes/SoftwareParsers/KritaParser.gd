@@ -243,7 +243,7 @@ static func open_kra_file(path: String) -> void:
 	new_project.order_layers()
 	new_project.selected_cels.clear()
 	new_project.save_path = path.get_basename() + ".pxo"
-	new_project.file_name = new_project.name
+	new_project.export_settings.file_name = new_project.name
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	new_project.change_cel(0, new_project.layers.find(selected_layer))

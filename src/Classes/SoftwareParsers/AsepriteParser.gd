@@ -452,7 +452,7 @@ static func open_aseprite_file(path: String) -> void:
 	organize_layer_child_levels(new_project)
 	new_project.order_layers()
 	new_project.save_path = path.get_basename() + ".pxo"
-	new_project.file_name = new_project.name
+	new_project.export_settings.file_name = new_project.name
 	new_project.palettes = palettes
 	new_project.project_current_palette_name = project_current_palette_name
 	Global.projects.append(new_project)

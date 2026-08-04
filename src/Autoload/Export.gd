@@ -63,6 +63,10 @@ var export_progress := 0.0
 
 
 class ExportStruct:
+	var directory_path := ""
+	var file_name := "untitled"
+	var file_format := Export.FileFormat.PNG
+
 	var current_tab := Export.ExportTab.IMAGE
 	var export_json := false
 	var split_layers := false
@@ -91,10 +95,14 @@ class ExportStruct:
 			var default = get(key)
 			var value = str_to_var(data[key])
 			if default != null and typeof(default) == typeof(value): # property exists
+				prints(key, value)
 				set(key, value)
 
 	func serialize():
 		return {
+			"directory_path": var_to_str(directory_path),
+			"file_name": var_to_str(file_name),
+			"file_format": var_to_str(file_format),
 			"current_tab" : var_to_str(current_tab),
 			"export_json" : var_to_str(export_json),
 			"split_layers" : var_to_str(split_layers),
@@ -189,10 +197,10 @@ func external_export(project := Global.current_project) -> void:
 
 func process_data(project := Global.current_project) -> void:
 	var frames := _calculate_frames(project)
-	var export_setting := project.export_settings
-	if frames.size() * (export_setting.repeat_count + 1) > blended_frames.size():
+	var export_settings := project.export_settings
+	if frames.size() * (export_settings.repeat_count + 1) > blended_frames.size():
 		cache_blended_frames(project)
-	match export_setting.current_tab:
+	match export_settings.current_tab:
 		ExportTab.IMAGE:
 			process_animation(project)
 		ExportTab.SPRITESHEET:
@@ -214,29 +222,29 @@ func process_spritesheet(project := Global.current_project) -> void:
 	var frames := _calculate_frames(project)
 	# Add additional repeated animation (Doing it here instead of _calculate_frames() to save
 	# compute power
-	var export_setting := project.export_settings
-	if export_setting.repeat_count > 0:
+	var export_settings := project.export_settings
+	if export_settings.repeat_count > 0:
 		var frames_copy := frames.duplicate()
-		for _r in export_setting.repeat_count:
+		for _r in export_settings.repeat_count:
 			frames.append_array(frames_copy)
 	# Then store the size of frames for other functions
-	export_setting.number_of_frames = frames.size()
+	export_settings.number_of_frames = frames.size()
 	# Used when the orientation is based off the animation tags
 	var tag_origins := {0: 0}
-	var frames_without_tag := export_setting.number_of_frames
+	var frames_without_tag := export_settings.number_of_frames
 	var spritesheet_columns := 1
 	var spritesheet_rows := 1
 	# If rows mode selected calculate columns count and vice versa
-	if export_setting.orientation == Orientation.COLUMNS:
+	if export_settings.orientation == Orientation.COLUMNS:
 		spritesheet_columns = frames_divided_by_spritesheet_lines()
-		spritesheet_rows = export_setting.lines_count
-	elif export_setting.orientation == Orientation.ROWS:
-		spritesheet_columns = export_setting.lines_count
+		spritesheet_rows = export_settings.lines_count
+	elif export_settings.orientation == Orientation.ROWS:
+		spritesheet_columns = export_settings.lines_count
 		spritesheet_rows = frames_divided_by_spritesheet_lines()
 	else:
 		spritesheet_rows = project.animation_tags.size() + 1
 		if spritesheet_rows == 1:
-			spritesheet_columns = export_setting.number_of_frames
+			spritesheet_columns = export_settings.number_of_frames
 		else:
 			var max_tag_size := 1
 			for tag in project.animation_tags:
@@ -250,7 +258,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 		if frames_without_tag == 0:
 			# If all frames have a tag, remove the first row
 			spritesheet_rows -= 1
-		if export_setting.orientation == Orientation.TAGS_BY_COLUMN:
+		if export_settings.orientation == Orientation.TAGS_BY_COLUMN:
 			# Switch rows and columns
 			var temp := spritesheet_rows
 			spritesheet_rows = spritesheet_columns
@@ -258,7 +266,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 	var width := project.size.x * spritesheet_columns
 	var height := project.size.y * spritesheet_rows
 	var splitter_array: Array[BaseLayer] = []
-	if export_setting.split_layers:
+	if export_settings.split_layers:
 		splitter_array = _calculate_layers_to_export(project)
 	var only_selected_cels := _export_only_selected_cels(project)
 	var sprite_sheets: Array[Image]  # Array of all apritesheets
@@ -272,7 +280,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 		var sheet_image := Image.create_empty(width, height, false, project.get_image_format())
 		var sheet_is_valid := false
 		for frame in frames:
-			if export_setting.orientation == Orientation.ROWS:
+			if export_settings.orientation == Orientation.ROWS:
 				if vv < spritesheet_columns:
 					origin.x = project.size.x * vv
 					vv += 1
@@ -281,7 +289,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 					origin.x = 0
 					vv = 1
 					origin.y = project.size.y * hh
-			elif export_setting.orientation == Orientation.COLUMNS:
+			elif export_settings.orientation == Orientation.COLUMNS:
 				if hh < spritesheet_rows:
 					origin.y = project.size.y * hh
 					hh += 1
@@ -290,7 +298,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 					origin.y = 0
 					hh = 1
 					origin.x = project.size.x * vv
-			elif export_setting.orientation == Orientation.TAGS_BY_ROW:
+			elif export_settings.orientation == Orientation.TAGS_BY_ROW:
 				var frame_index := project.frames.find(frame)
 				var frame_has_tag := false
 				for i in project.animation_tags.size():
@@ -309,7 +317,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 					origin.x = project.size.x * layer_tag_origins[0]
 					origin.y = 0
 					layer_tag_origins[0] += 1
-			elif export_setting.orientation == Orientation.TAGS_BY_COLUMN:
+			elif export_settings.orientation == Orientation.TAGS_BY_COLUMN:
 				var frame_index := project.frames.find(frame)
 				var frame_has_tag := false
 				for i in project.animation_tags.size():
@@ -328,7 +336,7 @@ func process_spritesheet(project := Global.current_project) -> void:
 					origin.y = project.size.y * layer_tag_origins[0]
 					origin.x = 0
 					layer_tag_origins[0] += 1
-			if not export_setting.split_layers:
+			if not export_settings.split_layers:
 				sheet_image.blend_rect(
 					blended_frames[frame], Rect2i(Vector2i.ZERO, project.size), origin
 				)
@@ -344,13 +352,13 @@ func process_spritesheet(project := Global.current_project) -> void:
 					sheet_is_valid = true
 		if sheet_is_valid:
 			sprite_sheets.append(sheet_image)
-			if export_setting.split_layers and split_l < splitter_array.size():
+			if export_settings.split_layers and split_l < splitter_array.size():
 				sprite_sheet_layer_indices.append(splitter_array[split_l].index)
 			else:
 				sprite_sheet_layer_indices.append(-1)
 		if splitter_array.is_empty():
 			break
-	if not export_setting.sheet_layers_as_separate_files and sprite_sheets.size() > 1:
+	if not export_settings.sheet_layers_as_separate_files and sprite_sheets.size() > 1:
 		var big_image := Image.create(
 			width, height * sprite_sheets.size(), false, project.get_image_format()
 		)
@@ -373,9 +381,9 @@ func process_animation(project := Global.current_project) -> void:
 	processed_images.clear()
 	var frames := _calculate_frames(project)
 	var only_selected_cels := _export_only_selected_cels(project)
-	var export_setting := project.export_settings
+	var export_settings := project.export_settings
 	for frame in frames:
-		if export_setting.split_layers:
+		if export_settings.split_layers:
 			for layer in _calculate_layers_to_export(project):
 				if only_selected_cels and not _is_cel_selected(project, frame, layer.index):
 					continue
@@ -389,7 +397,7 @@ func process_animation(project := Global.current_project) -> void:
 		else:
 			var image := project.new_empty_image()
 			image.copy_from(blended_frames[frame])
-			if export_setting.erase_unselected_area and project.has_selection:
+			if export_settings.erase_unselected_area and project.has_selection:
 				var crop := project.new_empty_image()
 				var selection_image := project.selection_map.return_cropped_copy(
 					project, project.size
@@ -398,7 +406,7 @@ func process_animation(project := Global.current_project) -> void:
 					image, selection_image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO
 				)
 				image.copy_from(crop)
-			match export_setting.crop_mode:
+			match export_settings.crop_mode:
 				CropMode.CONTENT:
 					if image.get_used_rect().has_area():
 						image = image.get_region(image.get_used_rect())
@@ -415,7 +423,7 @@ func process_animation(project := Global.current_project) -> void:
 	# Add additional repeated animation (Doing it here instead of _calculate_frames() to save
 	# compute power
 	var un_repeated_size: int = processed_images.size()
-	for _r in export_setting.repeat_count:
+	for _r in export_settings.repeat_count:
 		for i in un_repeated_size:
 			processed_images.append(
 				ProcessedImage.new(
@@ -428,16 +436,16 @@ func process_animation(project := Global.current_project) -> void:
 
 
 func _calculate_frames(project := Global.current_project) -> Array[Frame]:
-	var export_setting = project.export_settings
-	var tag_index = export_setting.frame_current_tag - ExportFrames.size()
+	var export_settings := project.export_settings
+	var tag_index = export_settings.frame_current_tag - ExportFrames.size()
 	if tag_index >= project.animation_tags.size():
-		export_setting.frame_current_tag = ExportFrames.ALL_FRAMES
+		export_settings.frame_current_tag = ExportFrames.ALL_FRAMES
 	var frames: Array[Frame] = []
-	if export_setting.frame_current_tag >= ExportFrames.size():  # Export a specific tag
+	if export_settings.frame_current_tag >= ExportFrames.size():  # Export a specific tag
 		var frame_start: int = project.animation_tags[tag_index].from
 		var frame_end: int = project.animation_tags[tag_index].to
 		frames = project.frames.slice(frame_start - 1, frame_end, 1, true)
-	elif export_setting.frame_current_tag == ExportFrames.SELECTED_FRAMES:
+	elif export_settings.frame_current_tag == ExportFrames.SELECTED_FRAMES:
 		for cel in project.selected_cels:
 			var frame := project.frames[cel[0]]
 			if not frames.has(frame):
@@ -445,9 +453,9 @@ func _calculate_frames(project := Global.current_project) -> Array[Frame]:
 	else:  # All frames
 		frames = project.frames.duplicate()
 
-	if export_setting.direction == AnimationDirection.BACKWARDS:
+	if export_settings.direction == AnimationDirection.BACKWARDS:
 		frames.reverse()
-	elif export_setting.direction == AnimationDirection.PING_PONG:
+	elif export_settings.direction == AnimationDirection.PING_PONG:
 		var inverted_frames := frames.duplicate()
 		inverted_frames.reverse()
 		inverted_frames.remove_at(0)
@@ -459,19 +467,19 @@ func _calculate_frames(project := Global.current_project) -> Array[Frame]:
 
 func _calculate_layers_to_export(project := Global.current_project) -> Array[BaseLayer]:
 	var layers_to_export: Array[BaseLayer] = []
-	var export_setting = project.export_settings
+	var export_settings := project.export_settings
 	for i in project.layers.size():
 		var layer := project.layers[i]
 		if layer is GroupLayer or layer is AudioLayer:
 			continue
 		var include := false
-		match export_setting.export_layers:
+		match export_settings.export_layers:
 			VISIBLE_LAYERS:
 				include = layer.is_visible_in_hierarchy()
 			SELECTED_LAYERS:
 				include = layer.is_visible_in_hierarchy() and _is_layer_selected(project, i)
 			_:  # A specific layer was chosen from the dropdown
-				include = i == export_setting.export_layers - 2
+				include = i == export_settings.export_layers - 2
 		if include:
 			layers_to_export.append(layer)
 	return layers_to_export
@@ -501,9 +509,10 @@ func export_processed_images(
 	ignore_overwrites: bool, export_dialog: ConfirmationDialog, project := Global.current_project
 ) -> bool:
 	# Stop export if directory path or file name are not valid
-	var dir_exists := DirAccess.dir_exists_absolute(project.export_directory_path)
-	var is_valid_filename := project.file_name.is_valid_filename()
-	if project.export_directory_path.begins_with("content://"):
+	var export_settings := project.export_settings
+	var dir_exists := DirAccess.dir_exists_absolute(export_settings.directory_path)
+	var is_valid_filename := export_settings.file_name.is_valid_filename()
+	if export_settings.directory_path.begins_with("content://"):
 		dir_exists = true
 		is_valid_filename = true
 	if not dir_exists:
@@ -516,7 +525,6 @@ func export_processed_images(
 		export_dialog.open_path_validation_alert_popup(1)
 		return false
 
-	var export_setting = project.export_settings
 	var multiple_files := false
 	if not is_single_file_format(project):
 		multiple_files = true if processed_images.size() > 1 else false
@@ -531,9 +539,9 @@ func export_processed_images(
 		var frame_index := i + 1
 		var layer_index := -1
 		var actual_frame_index := processed_images[i].frame_index
-		if export_setting.split_layers:
+		if export_settings.split_layers:
 			layer_index = processed_images[i].layer_index
-			if export_setting.current_tab == ExportTab.IMAGE:
+			if export_settings.current_tab == ExportTab.IMAGE:
 				if actual_frame_index != previous_split_frame:
 					split_frame_counter += 1
 					previous_split_frame = actual_frame_index
@@ -545,12 +553,12 @@ func export_processed_images(
 		# if directories exist, and create them if not
 		if (
 			multiple_files
-			and export_setting.new_dir_for_each_frame_tag
-			and not export_setting.current_tab == ExportTab.SPRITESHEET
+			and export_settings.new_dir_for_each_frame_tag
+			and not export_settings.current_tab == ExportTab.SPRITESHEET
 		):
 			var frame_tag_directory := DirAccess.open(export_path.get_base_dir())
 			if not DirAccess.dir_exists_absolute(export_path.get_base_dir()):
-				frame_tag_directory = DirAccess.open(project.export_directory_path)
+				frame_tag_directory = DirAccess.open(export_settings.directory_path)
 				frame_tag_directory.make_dir(export_path.get_base_dir().get_file())
 
 		if not ignore_overwrites:  # Check if the files already exist
@@ -571,21 +579,21 @@ func export_processed_images(
 		if stop_export:  # User decided to stop export
 			return false
 
-	_scale_processed_images(export_setting.resize, export_setting.interpolation)
-	if export_setting.export_json:
+	_scale_processed_images(export_settings.resize, export_settings.interpolation)
+	if export_settings.export_json:
 		var json := JSON.stringify(project.serialize())
 		var json_file_name := project.name + ".json"
 		if OS.has_feature("web"):
 			var json_buffer := json.to_utf8_buffer()
 			JavaScriptBridge.download_buffer(json_buffer, json_file_name, "application/json")
 		else:
-			var json_path := project.export_directory_path.path_join(json_file_name)
+			var json_path := export_settings.directory_path.path_join(json_file_name)
 			var json_file := FileAccess.open(json_path, FileAccess.WRITE)
 			json_file.store_string(json)
 	# override if a custom export is chosen
-	if project.file_format in custom_exporter_generators.keys():
+	if export_settings.file_format in custom_exporter_generators.keys():
 		# Divert the path to the custom exporter instead
-		var custom_exporter: Object = custom_exporter_generators[project.file_format][0]
+		var custom_exporter: Object = custom_exporter_generators[export_settings.file_format][0]
 		if custom_exporter.has_method("override_export"):
 			var result := true
 			var details := {
@@ -607,7 +615,7 @@ func export_processed_images(
 			return result
 
 	if is_single_file_format(project):
-		if is_using_ffmpeg(project.file_format):
+		if is_using_ffmpeg(export_settings.file_format):
 			var video_exported := export_video(export_paths, project)
 			if not video_exported:
 				Global.popup_error(
@@ -616,7 +624,7 @@ func export_processed_images(
 				return false
 		else:
 			var exporter: AImgIOBaseExporter
-			if project.file_format == FileFormat.APNG:
+			if export_settings.file_format == FileFormat.APNG:
 				exporter = AImgIOAPNGExporter.new()
 			else:
 				exporter = GIFAnimationExporter.new()
@@ -638,13 +646,13 @@ func export_processed_images(
 				var buffer: PackedByteArray
 				var file_name := export_paths[i].get_file()
 				var mimetype := ""
-				if project.file_format == FileFormat.WEBP:
+				if export_settings.file_format == FileFormat.WEBP:
 					buffer = processed_images[i].image.save_webp_to_buffer()
 					mimetype = "image/webp"
-				elif project.file_format == FileFormat.JPEG:
+				elif export_settings.file_format == FileFormat.JPEG:
 					buffer = processed_images[i].image.save_jpg_to_buffer()
 					mimetype = "image/jpeg"
-				elif project.file_format == FileFormat.SVG:
+				elif export_settings.file_format == FileFormat.SVG:
 					var svg_str := image_to_svg(processed_images[i].image)
 					buffer = svg_str.to_utf8_buffer()
 					mimetype = "image/svg"
@@ -656,20 +664,20 @@ func export_processed_images(
 
 			else:
 				var err: Error
-				if project.file_format == FileFormat.PNG:
+				if export_settings.file_format == FileFormat.PNG:
 					err = processed_images[i].image.save_png(export_paths[i])
-				elif project.file_format == FileFormat.WEBP:
+				elif export_settings.file_format == FileFormat.WEBP:
 					err = processed_images[i].image.save_webp(export_paths[i])
-				elif project.file_format == FileFormat.JPEG:
+				elif export_settings.file_format == FileFormat.JPEG:
 					err = processed_images[i].image.save_jpg(
-						export_paths[i], export_setting.save_quality
+						export_paths[i], export_settings.save_quality
 					)
-				elif project.file_format == FileFormat.SVG:
+				elif export_settings.file_format == FileFormat.SVG:
 					var svg_str := image_to_svg(processed_images[i].image)
 					var svg_file := FileAccess.open(export_paths[i], FileAccess.WRITE)
 					err = FileAccess.get_open_error()
 					svg_file.store_string(svg_str)
-				elif project.file_format == FileFormat.EXR:
+				elif export_settings.file_format == FileFormat.EXR:
 					err = processed_images[i].image.save_exr(export_paths[i])
 				if err != OK:
 					Global.popup_error(
@@ -679,7 +687,10 @@ func export_processed_images(
 
 	Global.notification_label("File(s) exported")
 	# Store settings for quick export and when the dialog is opened again
-	var file_name_with_ext := project.file_name + file_format_string(project.file_format)
+	var file_name_with_ext := (
+		project.export_settings.file_name
+		+ file_format_string(project.export_settings.file_format)
+	)
 	project.was_exported = true
 	if project.export_overwrite:
 		Global.top_menu_container.file_menu.set_item_text(
@@ -689,9 +700,9 @@ func export_processed_images(
 		Global.top_menu_container.file_menu.set_item_text(
 			Global.FileMenu.EXPORT, tr("Export") + " %s" % file_name_with_ext
 		)
-	# NOTE: project.export_directory_path is already updated through ExportDialog.gd
+	# NOTE: export_settings.directory_path is already updated through ExportDialog.gd
 	# we only need to update the current_dir here after the export
-	Global.config_cache.set_value("data", "current_dir", project.export_directory_path)
+	Global.config_cache.set_value("data", "current_dir", export_settings.directory_path)
 	return true
 
 
@@ -701,9 +712,9 @@ func export_video(export_paths: PackedStringArray, project: Project) -> bool:
 	var video_duration := 0
 	var input_file_path := temp_path.path_join("input.txt")
 	var input_file := FileAccess.open(input_file_path, FileAccess.WRITE)
-	var export_setting = project.export_settings
+	var export_settings := project.export_settings
 	for i in range(processed_images.size()):
-		var temp_file_name := str(i + 1).pad_zeros(export_setting.number_of_digits) + ".png"
+		var temp_file_name := str(i + 1).pad_zeros(export_settings.number_of_digits) + ".png"
 		var temp_file_path := temp_path.path_join(temp_file_name)
 		processed_images[i].image.save_png(temp_file_path)
 		input_file.store_line("file '" + temp_file_name + "'")
@@ -741,7 +752,7 @@ func export_video(export_paths: PackedStringArray, project: Project) -> bool:
 	var adelay_string := ""
 	for layer in project.get_all_audio_layers():
 		if layer.audio is AudioStreamMP3 or layer.audio is AudioStreamWAV:
-			var temp_file_name := str(audio_layer_count + 1).pad_zeros(export_setting.number_of_digits)
+			var temp_file_name := str(audio_layer_count + 1).pad_zeros(export_settings.number_of_digits)
 			if layer.audio is AudioStreamMP3:
 				temp_file_name += ".mp3"
 			elif layer.audio is AudioStreamWAV:
@@ -935,7 +946,7 @@ func get_file_format_from_extension(file_extension: String) -> FileFormat:
 ## True when exporting to .gif, .apng and video
 ## False when exporting to .png, .jpg and static .webp
 func is_single_file_format(project := Global.current_project) -> bool:
-	return animated_formats.has(project.file_format)
+	return animated_formats.has(project.export_settings.file_format)
 
 
 func is_using_ffmpeg(format: FileFormat) -> bool:
@@ -954,21 +965,21 @@ func is_ffmpeg_installed() -> bool:
 func _create_export_path(
 	multifile: bool, project: Project, frame := 0, layer := -1, actual_frame_index := 0
 ) -> String:
-	var path := project.file_name
-	var export_setting := project.export_settings
+	var export_settings := project.export_settings
+	var path := export_settings.file_name
 	if path.contains("{name}"):
 		path = path.replace("{name}", project.name)
 	var path_extras := ""
-	var separator_character := export_setting.separator_character
+	var separator_character := export_settings.separator_character
 	# Only append frame number when there are multiple files exported
 	if multifile:
 		if layer > -1:
 			var layer_name := project.layers[layer].name
 			path_extras += "(%s) " % layer_name
 		var counter: String = (
-			str(layer).pad_zeros(export_setting.number_of_digits)
-			if export_setting.current_tab == ExportTab.SPRITESHEET
-			else str(str(frame).pad_zeros(export_setting.number_of_digits))
+			str(layer).pad_zeros(export_settings.number_of_digits)
+			if export_settings.current_tab == ExportTab.SPRITESHEET
+			else str(str(frame).pad_zeros(export_settings.number_of_digits))
 		)
 		path_extras += separator_character + counter
 	var frame_tag_and_start_id := _get_processed_image_tag_name_and_start_id(
@@ -982,31 +993,31 @@ func _create_export_path(
 		var regex := RegEx.new()
 		regex.compile("[^a-zA-Z0-9_]+")
 		var frame_tag_dir := regex.sub(frame_tag, "", true)
-		if export_setting.include_tag_in_filename:
+		if export_settings.include_tag_in_filename:
 			# (actual_frame_index - start_id + 2) makes frames id to start from 1
 			var tag_frame_number := str(actual_frame_index - start_id + 2).pad_zeros(
-				export_setting.number_of_digits
+				export_settings.number_of_digits
 			)
 			path_extras = (
 				separator_character + frame_tag_dir + separator_character + tag_frame_number
 			)
-		if export_setting.new_dir_for_each_frame_tag:
+		if export_settings.new_dir_for_each_frame_tag:
 			path += path_extras
-			return project.export_directory_path.path_join(frame_tag_dir).path_join(
-				path + file_format_string(project.file_format, true)
+			return export_settings.directory_path.path_join(frame_tag_dir).path_join(
+				path + file_format_string(export_settings.file_format, true)
 			)
 	path += path_extras
 
 	if OS.get_name() == "Android":
 		return (
-			project.export_directory_path
+			export_settings.directory_path
 			+ "#"
 			+ path
-			+ file_format_string(project.file_format, true)
+			+ file_format_string(export_settings.file_format, true)
 		)
 
-	return project.export_directory_path.path_join(
-		path + file_format_string(project.file_format, true)
+	return export_settings.directory_path.path_join(
+		path + file_format_string(export_settings.file_format, true)
 	)
 
 
@@ -1024,10 +1035,10 @@ func _get_processed_image_tag_name_and_start_id(project: Project, processed_imag
 func _blend_layers(
 	image: Image, frame: Frame, origin := Vector2i.ZERO, project := Global.current_project
 ) -> void:
-	var export_setting := project.export_settings
-	if export_setting.export_layers - 2 >= project.layers.size():
-		export_setting.export_layers = VISIBLE_LAYERS
-	if export_setting.export_layers == VISIBLE_LAYERS:
+	var export_settings := project.export_settings
+	if export_settings.export_layers - 2 >= project.layers.size():
+		export_settings.export_layers = VISIBLE_LAYERS
+	if export_settings.export_layers == VISIBLE_LAYERS:
 		var load_result_from_pxo := not project.save_path.is_empty() and not project.has_changed
 		if load_result_from_pxo:
 			# Attempt to read the image data directly from the pxo file, without having to blend
@@ -1057,20 +1068,20 @@ func _blend_layers(
 				load_result_from_pxo = false
 		if not load_result_from_pxo:
 			DrawingAlgos.blend_layers(image, frame, origin, project)
-	elif export_setting.export_layers == SELECTED_LAYERS:
+	elif export_settings.export_layers == SELECTED_LAYERS:
 		DrawingAlgos.blend_layers(image, frame, origin, project, false, true)
 	else:
-		var layer := project.layers[export_setting.export_layers - 2]
+		var layer := project.layers[export_settings.export_layers - 2]
 		var layer_image := Image.new()
 		if layer is GroupLayer:
 			layer_image.copy_from(layer.blend_children(frame, Vector2i.ZERO))
 		else:
 			layer_image.copy_from(
-				layer.display_effects(frame.cels[export_setting.export_layers - 2])
+				layer.display_effects(frame.cels[export_settings.export_layers - 2])
 			)
 		image.blend_rect(layer_image, Rect2i(Vector2i.ZERO, project.size), origin)
 
 
 func frames_divided_by_spritesheet_lines(project := Global.current_project) -> int:
-	var export_setting := project.export_settings
-	return ceili(export_setting.number_of_frames / float(export_setting.lines_count))
+	var export_settings := project.export_settings
+	return ceili(export_settings.number_of_frames / float(export_settings.lines_count))
