@@ -122,7 +122,7 @@ some useful [b][SYSTEM OPTIONS][/b] are:
 		return true
 
 	static func enable_spritesheet(project: Project, _next_arg: String):
-		project.export_settings.current_tab = Export.ExportTab.SPRITESHEET
+		project.export_profile.current_tab = Export.ExportTab.SPRITESHEET
 		return true
 
 	static func set_output(project: Project, next_arg: String) -> void:
@@ -130,18 +130,18 @@ some useful [b][SYSTEM OPTIONS][/b] are:
 			project.file_name = next_arg.get_file().get_basename()
 			var directory_path = next_arg.get_base_dir()
 			if directory_path != ".":
-				project.export_settings.directory_path = directory_path
+				project.export_profile.directory_path = directory_path
 			var extension := next_arg.get_extension()
-			project.export_settings.file_format = Export.get_file_format_from_extension(extension)
+			project.export_profile.file_format = Export.get_file_format_from_extension(extension)
 
 	static func set_export_scale(project: Project, next_arg: String) -> void:
 		if not next_arg.is_empty():
 			if next_arg.is_valid_float():
-				project.export_settings.resize = next_arg.to_float() * 100
+				project.export_profile.resize = next_arg.to_float() * 100
 
 	static func set_frames(project: Project, next_arg: String) -> void:
 		if not next_arg.is_empty():
-			var export_settings := project.export_settings
+			var export_profile := project.export_profile
 			if next_arg.contains("-"):
 				var frame_numbers := next_arg.split("-")
 				if frame_numbers.size() > 1:
@@ -157,37 +157,37 @@ some useful [b][SYSTEM OPTIONS][/b] are:
 					for frame in range(frame_number_1, frame_number_2 + 1):
 						project.selected_cels.append([frame, project.current_layer])
 						project.change_cel(frame)
-						export_settings.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
+						export_profile.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
 			elif next_arg.is_valid_int():
 				var frame_number := next_arg.to_int() - 1
 				frame_number = clampi(frame_number, 0, project.frames.size() - 1)
 				project.selected_cels = [[frame_number, project.current_layer]]
 				project.change_cel(frame_number)
-				export_settings.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
+				export_profile.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
 
 	static func set_direction(project: Project, next_arg: String) -> void:
-		var export_settings := project.export_settings
+		var export_profile := project.export_profile
 		if not next_arg.is_empty():
 			next_arg = next_arg.to_lower()
 			if next_arg == "0" or next_arg.contains("forward"):
-				export_settings.direction = Export.AnimationDirection.FORWARD
+				export_profile.direction = Export.AnimationDirection.FORWARD
 			elif next_arg == "1" or next_arg.contains("backward"):
-				export_settings.direction = Export.AnimationDirection.BACKWARDS
+				export_profile.direction = Export.AnimationDirection.BACKWARDS
 			elif next_arg == "2" or next_arg.contains("ping"):
-				export_settings.direction = Export.AnimationDirection.PING_PONG
+				export_profile.direction = Export.AnimationDirection.PING_PONG
 			else:
-				print(Export.AnimationDirection.keys()[export_settings.direction])
+				print(Export.AnimationDirection.keys()[export_profile.direction])
 		else:
-			print(Export.AnimationDirection.keys()[export_settings.direction])
+			print(Export.AnimationDirection.keys()[export_profile.direction])
 
 	static func set_json(project: Project, _next_arg: String) -> void:
-		project.export_settings.export_json = true
+		project.export_profile.export_json = true
 
 	static func set_split_layers(project: Project, _next_arg: String) -> void:
-		project.export_settings.split_layers = true
+		project.export_profile.split_layers = true
 
 	static func set_sheet_layers_as_separate_files(project: Project, _next_arg: String) -> void:
-		project.export_settings.sheet_layers_as_separate_files = true
+		project.export_profile.sheet_layers_as_separate_files = true
 
 	static func dummy(_project: Project, _next_arg: String) -> void:
 		pass
@@ -264,9 +264,9 @@ func _input(event: InputEvent) -> void:
 
 
 func _project_switched() -> void:
-	if Global.current_project.export_settings.directory_path != "":
-		open_sprite_dialog.current_dir = Global.current_project.export_settings.directory_path
-		save_sprite_dialog.current_dir = Global.current_project.export_settings.directory_path
+	if Global.current_project.export_profile.directory_path != "":
+		open_sprite_dialog.current_dir = Global.current_project.export_profile.directory_path
+		save_sprite_dialog.current_dir = Global.current_project.export_profile.directory_path
 
 
 # Taken from

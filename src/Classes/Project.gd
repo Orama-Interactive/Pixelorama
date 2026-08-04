@@ -25,7 +25,7 @@ var name := "":
 		var project_index := Global.projects.find(self)
 		if project_index < Global.tabs.tab_count and project_index > -1:
 			Global.tabs.set_tab_title(project_index, name)
-		export_settings.file_name = name
+		export_profile.file_name = name
 var size: Vector2i:
 	set = _size_changed
 var undo_redo := UndoRedo.new()
@@ -118,7 +118,7 @@ var save_path := "" ## Path the pxo gets saved to (or is loaded from)
 var was_exported := false
 var export_overwrite := false
 var backup_path := ""
-var export_settings := Export.ExportStruct.new()
+var export_profile := Export.ExportProfile.new()
 
 
 func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2i(64, 64)) -> void:
@@ -161,9 +161,9 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 	Global.canvas.add_child(diagonal_x_minus_y_symmetry_axis)
 
 	if OS.get_name() == "Web":
-		export_settings.directory_path = "user://"
+		export_profile.directory_path = "user://"
 	else:
-		export_settings.directory_path = Global.config_cache.get_value(
+		export_profile.directory_path = Global.config_cache.get_value(
 			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 		)
 	initialize_attribution_data()
@@ -343,7 +343,7 @@ func serialize() -> Dictionary:
 		"author_contact": author_contact,
 		"author_company": author_company,
 		"metadata": metadata,
-		"export_settings": export_settings.serialize()
+		"export_profile": export_profile.serialize()
 	}
 
 	serialized.emit(project_data)
@@ -549,13 +549,13 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			var new_pos := y_symmetry_axis.points[point]
 			new_pos.x = floorf(x_symmetry_point / 2 + 1)
 			y_symmetry_axis.set_point_position(point, new_pos)
-	var exp_settings = dict.get("export_settings", {})
+	var exp_settings = dict.get("export_profile", {})
 	if typeof(exp_settings) == TYPE_DICTIONARY:
-		export_settings.deserialize(exp_settings)
-	if not DirAccess.dir_exists_absolute(export_settings.directory_path):
-			export_settings.directory_path = ""
-	if export_settings.file_name.is_empty() or export_settings.file_name == "untitled":
-		export_settings.file_name = name
+		export_profile.deserialize(exp_settings)
+	if not DirAccess.dir_exists_absolute(export_profile.directory_path):
+			export_profile.directory_path = ""
+	if export_profile.file_name.is_empty() or export_profile.file_name == "untitled":
+		export_profile.file_name = name
 	fps = dict.get("fps", fps)
 	license = dict.get("license", license)
 	author_display_name = dict.get("author_display_name", "")

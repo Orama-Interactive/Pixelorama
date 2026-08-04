@@ -463,7 +463,7 @@ static func psd_to_pxo_project(psd_project: PhotoshopProject, add_frames := true
 		Global.canvas.add_child(guide)
 
 	new_project.save_path = psd_project.path.get_basename() + ".pxo"
-	new_project.export_settings.file_name = new_project.name
+	new_project.export_profile.file_name = new_project.name
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 
