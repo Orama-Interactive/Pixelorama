@@ -11,7 +11,7 @@ func _init() -> void:
 
 
 func _exit_tree() -> void:
-	cancel_tool()
+	_clear()
 
 
 func _input(event: InputEvent) -> void:
@@ -38,6 +38,7 @@ func draw_start(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_start(pos)
 	if !_move and !_draw_points:
+		# NOTE: We need the quick tools to be disabled, while we are adding control points
 		Tools.active_multi_state_tools += 1
 		_ongoing_selection = true
 		_draw_points.append(pos)

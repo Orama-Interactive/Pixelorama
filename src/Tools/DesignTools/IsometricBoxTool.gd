@@ -285,7 +285,6 @@ func _preview_updater(point_a: Vector2, point_b: Vector2, str_value: String) -> 
 
 
 func _draw_shape() -> void:
-	_drawing = false
 	prepare_undo()
 	var images := _get_selected_draw_images()
 	if _fill_inside and !Tools.is_placing_tiles():
