@@ -553,7 +553,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 	if typeof(exp_settings) == TYPE_DICTIONARY:
 		export_profile.deserialize(exp_settings)
 	if not DirAccess.dir_exists_absolute(export_profile.directory_path):
-			export_profile.directory_path = ""
+		export_profile.directory_path = ""
 	if export_profile.file_name.is_empty() or export_profile.file_name == "untitled":
 		export_profile.file_name = name
 	fps = dict.get("fps", fps)

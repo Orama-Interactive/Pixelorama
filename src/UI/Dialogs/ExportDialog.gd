@@ -59,7 +59,6 @@ var _is_initializing_export_settings := false
 @onready var erase_outside_selection: CheckBox = %EraseOutsideSelection
 @onready var crop_image_option: OptionButton = %CropImages
 
-
 @onready var directory_path_label: Label = %DirectoryPathLabel
 @onready var path_line_edit: LineEdit = $"%PathLineEdit"
 @onready var file_format_options: OptionButton = $"%FileFormat"
@@ -264,7 +263,9 @@ func _set_file_format_selector_suitable_file_formats(formats: Array[Export.FileF
 				"*" + Export.file_format_string(i), Export.file_format_description(i)
 			)
 	if needs_update:
-		_set_project_export_settings(export_profile.directory_path, export_profile.file_name, formats[0])
+		_set_project_export_settings(
+			export_profile.directory_path, export_profile.file_name, formats[0]
+		)
 	file_format_options.selected = file_format_options.get_item_index(export_profile.file_format)
 	if OS.get_name() == "Android":
 		var file_ext_str := "*" + Export.file_format_string(export_profile.file_format)
@@ -307,7 +308,9 @@ func create_layer_list() -> void:
 func update_dimensions_label() -> void:
 	if _preview_images.size() > 0:
 		var export_profile := Global.current_project.export_profile
-		var new_size: Vector2i = _preview_images[0].image.get_size() * (export_profile.resize / 100.0)
+		var new_size: Vector2i = (
+			_preview_images[0].image.get_size() * (export_profile.resize / 100.0)
+		)
 		dimension_label.text = str(new_size.x, "×", new_size.y)
 
 
@@ -349,13 +352,17 @@ func _on_about_to_popup() -> void:
 	var export_profile := project.export_profile
 	# If we're on Web, don't let the user change the directory path
 	if OS.get_name() == "Web":
-		_set_project_export_settings("user://", export_profile.file_name, export_profile.file_format)
+		_set_project_export_settings(
+			"user://", export_profile.file_name, export_profile.file_format
+		)
 
 	if export_profile.directory_path.is_empty():
 		var default_directory_path: String = Global.config_cache.get_value(
 			"data", "current_dir", OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP)
 		)
-		_set_project_export_settings(default_directory_path, export_profile.file_name, export_profile.file_format)
+		_set_project_export_settings(
+			default_directory_path, export_profile.file_name, export_profile.file_format
+		)
 
 	# If export already occurred - sets GUI to show previous settings
 	# we don't emit signals because there settings are already set, so nothing new is changed.
@@ -380,7 +387,9 @@ func _on_about_to_popup() -> void:
 	if OS.get_name() == "Web" or OS.get_name() == "Android":
 		path_line_edit.text = export_profile.file_name + file_ext
 	else:
-		path_line_edit.text = export_profile.directory_path.path_join(export_profile.file_name) + file_ext
+		path_line_edit.text = (
+			export_profile.directory_path.path_join(export_profile.file_name) + file_ext
+		)
 	path_dialog_popup.current_dir = export_profile.directory_path
 	Export.cache_blended_frames()
 	show_tab()

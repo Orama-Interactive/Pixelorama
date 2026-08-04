@@ -46,7 +46,6 @@ var file_format_dictionary: Dictionary[FileFormat, Array] = {
 var custom_file_formats := {}
 var custom_exporter_generators := {}
 
-
 ## All frames and their layers processed/blended into images
 var processed_images: Array[ProcessedImage] = []
 ## A dictionary that contains all of the blended frames.
@@ -94,7 +93,7 @@ class ExportProfile:
 		for key in data.keys():
 			var default = get(key)
 			var value = str_to_var(data[key])
-			if default != null and typeof(default) == typeof(value): # property exists
+			if default != null and typeof(default) == typeof(value):  # property exists
 				set(key, value)
 
 	func serialize():
@@ -102,26 +101,27 @@ class ExportProfile:
 			"directory_path": var_to_str(directory_path),
 			"file_name": var_to_str(file_name),
 			"file_format": var_to_str(file_format),
-			"current_tab" : var_to_str(current_tab),
-			"export_json" : var_to_str(export_json),
-			"split_layers" : var_to_str(split_layers),
-			"sheet_layers_as_separate_files" : var_to_str(sheet_layers_as_separate_files),
-			"crop_mode" : var_to_str(crop_mode),
-			"erase_unselected_area" : var_to_str(erase_unselected_area),
-			"orientation" : var_to_str(orientation),
-			"lines_count" : var_to_str(lines_count),
-			"frame_current_tag" : var_to_str(frame_current_tag),
-			"export_layers" : var_to_str(export_layers),
-			"number_of_frames" : var_to_str(number_of_frames),
-			"direction" : var_to_str(direction),
-			"repeat_count" : var_to_str(repeat_count),
-			"resize" : var_to_str(resize),
-			"save_quality" : var_to_str(save_quality),
-			"interpolation" : var_to_str(interpolation),
-			"include_tag_in_filename" : var_to_str(include_tag_in_filename),
-			"new_dir_for_each_frame_tag" : var_to_str(new_dir_for_each_frame_tag),
-			"number_of_digits" : var_to_str(number_of_digits),
-			"separator_character" : var_to_str(separator_character)
+			"current_tab": var_to_str(current_tab),
+			"export_json": var_to_str(export_json),
+			"split_layers": var_to_str(split_layers),
+			"sheet_layers_as_separate_files": var_to_str(sheet_layers_as_separate_files),
+			"crop_mode": var_to_str(crop_mode),
+			"erase_unselected_area": var_to_str(erase_unselected_area),
+			"orientation": var_to_str(orientation),
+			"lines_count": var_to_str(lines_count),
+			"frame_current_tag": var_to_str(frame_current_tag),
+			"export_layers": var_to_str(export_layers),
+			"number_of_frames": var_to_str(number_of_frames),
+			"direction": var_to_str(direction),
+			"repeat_count": var_to_str(repeat_count),
+			"resize": var_to_str(resize),
+			"save_quality": var_to_str(save_quality),
+			"interpolation": var_to_str(interpolation),
+			"include_tag_in_filename": var_to_str(include_tag_in_filename),
+			"new_dir_for_each_frame_tag": var_to_str(new_dir_for_each_frame_tag),
+			"number_of_digits": var_to_str(number_of_digits),
+			"separator_character": var_to_str(separator_character)
+
 		}
 
 
@@ -687,8 +687,7 @@ func export_processed_images(
 	Global.notification_label("File(s) exported")
 	# Store settings for quick export and when the dialog is opened again
 	var file_name_with_ext := (
-		project.export_profile.file_name
-		+ file_format_string(project.export_profile.file_format)
+		project.export_profile.file_name + file_format_string(project.export_profile.file_format)
 	)
 	project.was_exported = true
 	if project.export_overwrite:
@@ -751,7 +750,9 @@ func export_video(export_paths: PackedStringArray, project: Project) -> bool:
 	var adelay_string := ""
 	for layer in project.get_all_audio_layers():
 		if layer.audio is AudioStreamMP3 or layer.audio is AudioStreamWAV:
-			var temp_file_name := str(audio_layer_count + 1).pad_zeros(export_profile.number_of_digits)
+			var temp_file_name := str(audio_layer_count + 1).pad_zeros(
+				export_profile.number_of_digits
+			)
 			if layer.audio is AudioStreamMP3:
 				temp_file_name += ".mp3"
 			elif layer.audio is AudioStreamWAV:
@@ -892,7 +893,9 @@ func _increase_export_progress(export_dialog: Node) -> void:
 	export_dialog.set_export_progress_bar(export_progress)
 
 
-func _scale_processed_images(resize_amount: int, interpolation := Image.INTERPOLATE_NEAREST) -> void:
+func _scale_processed_images(
+	resize_amount: int, interpolation := Image.INTERPOLATE_NEAREST
+) -> void:
 	var resize_f := resize_amount / 100.0
 	for processed_image in processed_images:
 		if is_equal_approx(resize_amount, 1.0):
