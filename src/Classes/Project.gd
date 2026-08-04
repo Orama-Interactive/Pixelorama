@@ -114,7 +114,7 @@ var cameras_zoom: PackedVector2Array = [
 ]
 var cameras_offset: PackedVector2Array = [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]
 
-var save_path := "" ## Path the pxo gets saved to (or is loaded from)
+var save_path := ""  ## Path the pxo gets saved to (or is loaded from)
 var was_exported := false
 var export_overwrite := false
 var backup_path := ""
