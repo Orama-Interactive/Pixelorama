@@ -95,7 +95,6 @@ class ExportProfile:
 			var default = get(key)
 			var value = str_to_var(data[key])
 			if default != null and typeof(default) == typeof(value): # property exists
-				prints(key, value)
 				set(key, value)
 
 	func serialize():

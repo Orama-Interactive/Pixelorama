@@ -233,7 +233,7 @@ func _update_file_menu_buttons(project: Project) -> void:
 	else:
 		file_menu.set_item_text(Global.FileMenu.SAVE, tr("Save") + " %s" % export_profile.file_name)
 	if project.was_exported:
-		var f_name := " %s" % (project.file_name + Export.file_format_string(export_profile.file_format))
+		var f_name := " %s" % (export_profile.file_name + Export.file_format_string(export_profile.file_format))
 		if project.export_overwrite:
 			file_menu.set_item_text(Global.FileMenu.EXPORT, tr("Overwrite") + f_name)
 		else:
