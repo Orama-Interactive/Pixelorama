@@ -121,7 +121,6 @@ class ExportProfile:
 			"new_dir_for_each_frame_tag": var_to_str(new_dir_for_each_frame_tag),
 			"number_of_digits": var_to_str(number_of_digits),
 			"separator_character": var_to_str(separator_character)
-
 		}
 
 
