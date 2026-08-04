@@ -96,7 +96,8 @@ func _input(event: InputEvent) -> void:
 			update_transparent_checker_offset()
 	else:
 		var dir := Input.get_vector(&"camera_left", &"camera_right", &"camera_up", &"camera_down")
-		if dir != Vector2.ZERO and not Tools.has_selection_tool():
+		var root := get_tree().current_scene
+		if dir != Vector2.ZERO and not Tools.has_selection_tool() and not root.is_writing_text:
 			offset = offset + (dir.rotated(camera_angle) / zoom) * CAMERA_SPEED_RATE
 
 
