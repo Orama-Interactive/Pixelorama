@@ -25,6 +25,10 @@ func _init() -> void:
 	update_indicator()
 
 
+func _exit_tree() -> void:
+	cancel_tool()
+
+
 func _ready() -> void:
 	super()
 	if tool_slot.button == MOUSE_BUTTON_RIGHT:
@@ -185,6 +189,7 @@ func draw_start(pos: Vector2i) -> void:
 	if !_drawing:
 		_drawing = true
 		_origin = pos
+		Tools.active_multi_state_tools += 1
 	else:
 		pos = box_constraint(_last_pixel, pos, _current_state)
 		if _current_state < BoxState.READY:
@@ -280,7 +285,6 @@ func _preview_updater(point_a: Vector2, point_b: Vector2, str_value: String) -> 
 
 
 func _draw_shape() -> void:
-	_drawing = false
 	prepare_undo()
 	var images := _get_selected_draw_images()
 	if _fill_inside and !Tools.is_placing_tiles():
@@ -383,6 +387,9 @@ func _draw_pixel(point: Vector2i, images: Array[ImageExtended]) -> void:
 func _clear() -> void:
 	_control_pts.clear()
 	_fill_inside_rect = Rect2i()
+	if _drawing:
+		Tools.active_multi_state_tools -= 1
+		_drawing = false
 	_current_state = BoxState.SIDE_A
 	Global.canvas.previews_sprite.texture = null
 	Global.canvas.previews.queue_redraw()

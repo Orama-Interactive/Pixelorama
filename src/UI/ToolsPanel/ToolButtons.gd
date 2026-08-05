@@ -16,6 +16,7 @@ func _input(event: InputEvent) -> void:
 	var tool_activated := (
 		Input.is_action_pressed(&"activate_left_tool")
 		or Input.is_action_pressed(&"activate_right_tool")
+		or Tools.active_multi_state_tools > 0
 	)
 
 	for tool_name in Tools.tools:  # Handle tool shortcuts
