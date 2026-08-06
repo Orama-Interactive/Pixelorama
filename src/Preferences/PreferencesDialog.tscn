@@ -1824,8 +1824,6 @@ filters = PackedStringArray("*.pck ; Godot Resource Pack File", "*.zip")
 show_hidden_files = true
 
 [node name="ExtensionExplorer" parent="." unique_id=523014809 instance=ExtResource("8_jmnx8")]
-transient = true
-always_on_top = false
 
 [node name="EnableExtensionConfirmation" type="ConfirmationDialog" parent="." unique_id=1187640624]
 unique_name_in_owner = true

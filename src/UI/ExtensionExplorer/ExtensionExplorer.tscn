@@ -12,8 +12,8 @@ position = Vector2i(0, 36)
 size = Vector2i(760, 470)
 visible = false
 wrap_controls = true
+transient = true
 exclusive = true
-always_on_top = true
 script = ExtResource("1_pwcwi")
 
 [node name="TabContainer" type="TabContainer" parent="." unique_id=1552507201]
