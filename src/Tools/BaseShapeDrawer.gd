@@ -49,11 +49,6 @@ func update_config() -> void:
 	$FillCheckbox.button_pressed = _fill_inside
 
 
-## This tool has no brush, so just return the indicator as it is.
-func _create_brush_indicator() -> BitMap:
-	return _indicator
-
-
 func _get_shape_points(_pos: Vector2i, _size: Vector2i) -> Array[Vector2i]:
 	return []
 
