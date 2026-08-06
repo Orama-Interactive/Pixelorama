@@ -25,10 +25,6 @@ func _init() -> void:
 	update_indicator()
 
 
-func _exit_tree() -> void:
-	cancel_tool()
-
-
 func _ready() -> void:
 	super()
 	if tool_slot.button == MOUSE_BUTTON_RIGHT:
@@ -680,3 +676,8 @@ func _draw_brush_image(brush_image: Image, src_rect: Rect2i, dst: Vector2i) -> v
 		else:
 			draw_image.blend_rect(brush_image, src_rect, dst)
 		draw_image.convert_rgb_to_indexed()
+
+
+func _exit_tree() -> void:
+	cancel_tool()
+	super()

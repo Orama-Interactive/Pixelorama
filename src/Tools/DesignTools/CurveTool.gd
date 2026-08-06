@@ -24,10 +24,6 @@ func _init() -> void:
 	update_indicator()
 
 
-func _exit_tree() -> void:
-	cancel_tool()
-
-
 func _on_bezier_mode_item_selected(index: int) -> void:
 	_bezier_mode = index
 	update_config()
@@ -319,3 +315,8 @@ func draw_empty_circle(
 
 	line_end = circle_radius.rotated(TAU) + circle_center
 	canvas.draw_line(line_origin, line_end, color)
+
+
+func _exit_tree() -> void:
+	cancel_tool()
+	super()

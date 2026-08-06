@@ -10,10 +10,6 @@ func _init() -> void:
 	Global.project_about_to_switch.connect(_clear)
 
 
-func _exit_tree() -> void:
-	_clear()
-
-
 func _input(event: InputEvent) -> void:
 	if _move:
 		return
@@ -198,3 +194,8 @@ func draw_empty_circle(
 
 	line_end = circle_radius.rotated(TAU) + circle_center
 	canvas.draw_line(line_origin, line_end, color)
+
+
+func _exit_tree() -> void:
+	_clear()
+	super()
