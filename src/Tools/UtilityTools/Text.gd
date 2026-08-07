@@ -119,7 +119,9 @@ func text_to_pixels() -> void:
 
 	var undo_data := _get_undo_data()
 	var project := Global.current_project
-	var image := project.frames[project.current_frame].cels[project.current_layer].get_image()
+	var cel_image := project.frames[project.current_frame].cels[project.current_layer].get_image()
+	if cel_image == null:
+		return
 
 	var vp := RenderingServer.viewport_create()
 	var canvas := RenderingServer.canvas_create()
@@ -135,8 +137,6 @@ func text_to_pixels() -> void:
 	var ci_rid := RenderingServer.canvas_item_create()
 	RenderingServer.viewport_set_canvas_transform(vp, canvas, Transform2D())
 	RenderingServer.canvas_item_set_parent(ci_rid, canvas)
-	var texture := RenderingServer.texture_2d_create(image)
-	RenderingServer.canvas_item_add_texture_rect(ci_rid, Rect2(Vector2.ZERO, project.size), texture)
 	RenderingServer.canvas_item_set_material(ci_rid, NEW_CANVAS_ITEM_MATERIAL.get_rid())
 	var text := text_edit.text
 	var color := tool_slot.color
@@ -149,19 +149,20 @@ func text_to_pixels() -> void:
 
 	RenderingServer.viewport_set_update_mode(vp, RenderingServer.VIEWPORT_UPDATE_ONCE)
 	RenderingServer.force_draw(false)
-	var viewport_texture := RenderingServer.texture_2d_get(RenderingServer.viewport_get_texture(vp))
+	var viewport_image := RenderingServer.texture_2d_get(RenderingServer.viewport_get_texture(vp))
 	RenderingServer.free_rid(vp)
 	RenderingServer.free_rid(canvas)
 	RenderingServer.free_rid(ci_rid)
-	RenderingServer.free_rid(texture)
-	viewport_texture.convert(image.get_format())
+	viewport_image.convert(cel_image.get_format())
 
 	text_edit.queue_free()
 	text_edit = null
-	if not viewport_texture.is_empty():
-		image.copy_from(viewport_texture)
-		if image is ImageExtended:
-			image.convert_rgb_to_indexed()
+	if not viewport_image.is_empty():
+		cel_image.blend_rect(
+			viewport_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), Vector2i.ZERO
+		)
+		if cel_image is ImageExtended:
+			cel_image.convert_rgb_to_indexed()
 		commit_undo("Draw", undo_data)
 
 
