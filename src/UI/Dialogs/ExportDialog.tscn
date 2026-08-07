@@ -149,6 +149,7 @@ popup/item_1/text = "Selected layers"
 popup/item_1/id = 1
 
 [node name="SplitLayers" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer/LayersContainer" unique_id=287230239 groups=["ExportImageOptions", "ExportSpritesheetOptions", "NotAndroid"]]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Split layers"
@@ -158,6 +159,7 @@ layout_mode = 2
 text = "Direction:"
 
 [node name="Direction" type="OptionButton" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=72482042]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -176,6 +178,7 @@ layout_mode = 2
 text = "Repeat times:"
 
 [node name="RepeatCount" type="SpinBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/GridContainer" unique_id=1383852018]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "The number of times the animation is repeated in addition to the original animation."
@@ -320,11 +323,13 @@ size_flags_horizontal = 3
 text = "Separator character(s):"
 
 [node name="SeparatorCharacter" type="LineEdit" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=863531641 groups=["ExportImageOptions", "ExportMultipleFilesEditableOptions", "ExportSpritesheetOptions"]]
+unique_name_in_owner = true
 layout_mode = 2
 tooltip_text = "The character(s) that separate the file name and the frame number"
 text = "_"
 
 [node name="ExportJSON" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=459971663 groups=["NotAndroid"]]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Export JSON data"
@@ -336,11 +341,13 @@ mouse_default_cursor_shape = 2
 text = "Layers as separate files"
 
 [node name="IncludeTagsInFilename" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=64815569 groups=["ExportImageOptions", "ExportMultipleFilesOptions", "NotAndroid"]]
+unique_name_in_owner = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Include frame tags in the file name"
 
 [node name="MultipleAnimationsDirectories" type="CheckBox" parent="VBoxContainer/VSplitContainer/VBoxContainer/AdvancedOptions/GridContainer" unique_id=2068197934 groups=["ExportImageOptions", "ExportMultipleFilesOptions", "NotAndroid", "NotHTML5"]]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 tooltip_text = "Creates multiple files but every file is stored in different folder that corresponds to its frame tag"
