@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  GODOT_VERSION: 4.6.3
+  GODOT_VERSION: 4.7.1
   EXPORT_NAME: Pixelorama
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
     name: Windows Export 🗔
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.6.3
+      image: docker://barichello/godot-ci:4.7.1
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v7
@@ -53,7 +53,7 @@ jobs:
     name: Linux Export 🐧
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.6.3
+      image: docker://barichello/godot-ci:4.7.1
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v7

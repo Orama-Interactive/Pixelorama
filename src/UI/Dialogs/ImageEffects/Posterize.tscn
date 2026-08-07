@@ -18,7 +18,6 @@ visible = false
 [node name="LevelsSlider" type="TextureProgressBar" parent="VBoxContainer" index="2" unique_id=774982548]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = 2.0
@@ -37,7 +36,6 @@ snap_by_default = true
 [node name="DitherSlider" type="TextureProgressBar" parent="VBoxContainer" index="3" unique_id=734547818]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 max_value = 0.5

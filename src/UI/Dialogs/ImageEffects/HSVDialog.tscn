@@ -15,17 +15,20 @@ offset_bottom = 386.0
 
 [node name="HueSlider" parent="VBoxContainer" index="2" unique_id=161711944 instance=ExtResource("3")]
 layout_mode = 2
+focus_mode = 0
 min_value = -180.0
 max_value = 180.0
 prefix = "Hue:"
 
 [node name="SaturationSlider" parent="VBoxContainer" index="3" unique_id=312017953 instance=ExtResource("3")]
 layout_mode = 2
+focus_mode = 0
 min_value = -100.0
 prefix = "Saturation:"
 
 [node name="ValueSlider" parent="VBoxContainer" index="4" unique_id=1533100203 instance=ExtResource("3")]
 layout_mode = 2
+focus_mode = 0
 min_value = -100.0
 prefix = "Value:"
 

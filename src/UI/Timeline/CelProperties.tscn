@@ -41,7 +41,6 @@ text = "Opacity:"
 [node name="OpacitySlider" type="TextureProgressBar" parent="GridContainer" unique_id=923000872 groups=["VisualCels"]]
 layout_mode = 2
 size_flags_horizontal = 3
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 value = 100.0
@@ -60,7 +59,6 @@ text = "Z-Index:"
 [node name="ZIndexSlider" type="TextureProgressBar" parent="GridContainer" unique_id=1620974568 groups=["VisualCels"]]
 layout_mode = 2
 size_flags_horizontal = 3
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = -64.0

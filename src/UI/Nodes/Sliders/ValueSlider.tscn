@@ -8,7 +8,6 @@ custom_minimum_size = Vector2(32, 24)
 offset_right = 24.0
 offset_bottom = 24.0
 size_flags_horizontal = 3
-focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"

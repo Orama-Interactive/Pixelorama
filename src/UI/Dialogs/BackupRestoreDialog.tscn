@@ -6,7 +6,7 @@
 oversampling_override = 1.0
 title = "Past sessions"
 position = Vector2i(0, 36)
-size = Vector2i(541, 321)
+size = Vector2i(541, 326)
 wrap_controls = true
 exclusive = true
 script = ExtResource("1_5v3pd")

@@ -19,7 +19,6 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
@@ -109,9 +108,9 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=943831304]
 custom_minimum_size = Vector2(0, 30)
-layout_direction = 2
 layout_mode = 2
 size_flags_vertical = 3
+layout_direction = 2
 expand_mode = 1
 
 [node name="Popup" type="PopupPanel" parent="." unique_id=2114072867]

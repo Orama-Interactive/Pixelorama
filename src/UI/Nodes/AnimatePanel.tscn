@@ -22,6 +22,7 @@ text = "Animatable Properties"
 [node name="PreviewSlider" parent="VBoxContainer/TopOptions" unique_id=1770337358 instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 min_value = 1.0
 max_value = 1.0
 value = 1.0
@@ -72,6 +73,7 @@ text = "Initial value:"
 [node name="Initial" parent="VBoxContainer/HBoxContainer/Options/Values" unique_id=1915558208 instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 editable = false
 
 [node name="FinalValueLabel" type="Label" parent="VBoxContainer/HBoxContainer/Options/Values" unique_id=627776325]
@@ -81,6 +83,7 @@ text = "Final value:"
 [node name="Final" parent="VBoxContainer/HBoxContainer/Options/Values" unique_id=194689446 instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 editable = false
 
 [node name="InterpolatioNLabel" type="Label" parent="VBoxContainer/HBoxContainer/Options/Values" unique_id=687245253]

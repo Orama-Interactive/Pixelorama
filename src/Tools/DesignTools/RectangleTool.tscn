@@ -10,7 +10,6 @@ script = ExtResource("2")
 [node name="RadiusValueSlider" type="TextureProgressBar" parent="." index="6" unique_id=2003319434]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 max_value = 20.0

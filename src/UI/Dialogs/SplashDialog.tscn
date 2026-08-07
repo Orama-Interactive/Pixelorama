@@ -67,7 +67,6 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="ChangeArtBtnLeft" type="Button" parent="Contents/SplashArt" unique_id=1616739246 groups=["UIButtons"]]
-layout_direction = 2
 layout_mode = 0
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -75,6 +74,7 @@ offset_left = 5.0
 offset_top = -10.0
 offset_right = 30.0
 offset_bottom = 10.0
+layout_direction = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("2")
 theme_override_styles/pressed = SubResource("5")
@@ -96,7 +96,6 @@ expand_mode = 1
 flip_h = true
 
 [node name="ChangeArtBtnRight" type="Button" parent="Contents/SplashArt" unique_id=1637809233 groups=["UIButtons"]]
-layout_direction = 2
 layout_mode = 0
 anchor_left = 1.0
 anchor_top = 0.5
@@ -106,6 +105,7 @@ offset_left = -30.0
 offset_top = -10.0
 offset_right = -5.0
 offset_bottom = 10.0
+layout_direction = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("3")
 theme_override_styles/pressed = SubResource("5")

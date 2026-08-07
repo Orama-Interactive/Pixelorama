@@ -53,6 +53,7 @@ text = "Margins:"
 [node name="Top" parent="MarginsContainer" index="1" unique_id=688061349 instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 allow_greater = true
 allow_lesser = true
 prefix = "Top:"
@@ -60,6 +61,7 @@ prefix = "Top:"
 [node name="Bottom" parent="MarginsContainer" index="2" unique_id=739734631 instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 allow_greater = true
 allow_lesser = true
 prefix = "Bottom:"
@@ -67,6 +69,7 @@ prefix = "Bottom:"
 [node name="Left" parent="MarginsContainer" index="3" unique_id=1074616429 instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 allow_greater = true
 allow_lesser = true
 prefix = "Left:"
@@ -74,6 +77,7 @@ prefix = "Left:"
 [node name="Right" parent="MarginsContainer" index="4" unique_id=1345948867 instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 allow_greater = true
 allow_lesser = true
 prefix = "Right:"
@@ -93,6 +97,7 @@ layout_mode = 2
 [node name="RatioX" parent="RatioContainer/HBoxContainer" index="0" unique_id=1522669245 instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 min_value = 1.0
 value = 1.0
 allow_greater = true
@@ -104,6 +109,7 @@ text = ":"
 [node name="RatioY" parent="RatioContainer/HBoxContainer" index="2" unique_id=1813607048 instance=ExtResource("2")]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 min_value = 1.0
 value = 1.0
 allow_greater = true

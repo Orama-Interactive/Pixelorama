@@ -182,13 +182,13 @@ offset_bottom = 160.0
 script = ExtResource("1")
 
 [node name="TimelineContainer" type="VBoxContainer" parent="." unique_id=1088664417]
-layout_direction = 2
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+layout_direction = 2
 
 [node name="TimelineButtons" type="HBoxContainer" parent="TimelineContainer" unique_id=2029892245]
 layout_mode = 2
@@ -201,8 +201,8 @@ layout_mode = 2
 
 [node name="LayerSettingsContainer" type="VBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/MarginContainer" unique_id=240466804]
 unique_name_in_owner = true
-layout_direction = 1
 layout_mode = 2
+layout_direction = 1
 
 [node name="LayerButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/LayerTools/MarginContainer/LayerSettingsContainer" unique_id=11005783]
 layout_mode = 2
@@ -449,9 +449,9 @@ layout_mode = 2
 
 [node name="AnimationButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/MarginContainer" unique_id=518116112]
 custom_minimum_size = Vector2(0, 24)
-layout_direction = 1
 layout_mode = 2
 size_flags_horizontal = 3
+layout_direction = 1
 theme_override_constants/separation = 24
 alignment = 2
 
@@ -565,8 +565,8 @@ offset_bottom = 5.5
 texture = ExtResource("8")
 
 [node name="PlaybackButtons" type="HBoxContainer" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/MarginContainer/AnimationButtons" unique_id=610982039]
-layout_direction = 2
 layout_mode = 2
+layout_direction = 2
 
 [node name="FirstFrame" type="Button" parent="TimelineContainer/TimelineButtons/VBoxContainer/AnimationToolsScrollContainer/AnimationTools/MarginContainer/AnimationButtons/PlaybackButtons" unique_id=1832998911 groups=["UIButtons"]]
 custom_minimum_size = Vector2(24, 24)
@@ -761,7 +761,6 @@ layout_mode = 2
 size_flags_horizontal = 1
 tooltip_text = "How many frames per second should the animation preview be?
 The more FPS, the faster the animation plays."
-focus_mode = 0
 min_value = 0.1
 max_value = 50.0
 step = 0.1
@@ -805,8 +804,8 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="TimelineContainer/MainBodyPanel/MainBodyVBoxContainer" unique_id=444685561]
-clip_contents = true
 custom_minimum_size = Vector2(0, 38)
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_bottom = 0
@@ -906,7 +905,6 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 29)
 layout_mode = 2
 size_flags_vertical = 0
-focus_mode = 0
 value = 100.0
 prefix = "Opacity:"
 
@@ -1080,7 +1078,6 @@ text = "Past Frames"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 1
-focus_mode = 0
 max_value = 10.0
 value = 1.0
 allow_greater = true
@@ -1094,7 +1091,6 @@ text = "Future Frames"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 1
-focus_mode = 0
 max_value = 10.0
 value = 1.0
 allow_greater = true
@@ -1136,7 +1132,6 @@ text = "Opacity"
 [node name="OnionSkinningOpacity" parent="TimelineSettings/MarginContainer/VBoxContainer/OnionSkinningOptionsContainer" unique_id=543504837 instance=ExtResource("9")]
 unique_name_in_owner = true
 layout_mode = 2
-focus_mode = 0
 suffix = "%"
 
 [node name="BlueRedMode" type="CheckBox" parent="TimelineSettings/MarginContainer/VBoxContainer" unique_id=763053732]

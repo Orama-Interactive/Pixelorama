@@ -9,6 +9,7 @@ script = ExtResource("2_g8u0x")
 
 [node name="ThicknessSlider" parent="." index="2" unique_id=993746238 instance=ExtResource("3_xw18e")]
 layout_mode = 2
+focus_mode = 0
 min_value = 1.0
 value = 1.0
 prefix = "Size:"
@@ -73,6 +74,7 @@ popup/item_1/id = 1
 [node name="LeftShadeSlider" parent="FillOptions" index="5" unique_id=839435554 instance=ExtResource("3_xw18e")]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 max_value = 1.0
 step = 0.01
 value = 0.5
@@ -96,6 +98,7 @@ popup/item_1/id = 1
 [node name="RightShadeSlider" parent="FillOptions" index="8" unique_id=593589170 instance=ExtResource("3_xw18e")]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 max_value = 1.0
 step = 0.01
 value = 0.5

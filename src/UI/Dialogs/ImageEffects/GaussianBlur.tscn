@@ -47,7 +47,6 @@ text = "Blur amount:"
 
 [node name="BlurAmount" type="TextureProgressBar" parent="VBoxContainer/BlurOptions" index="3" unique_id=2099666068]
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 value = 16.0
@@ -65,7 +64,6 @@ text = "Blur radius:"
 
 [node name="BlurRadius" type="TextureProgressBar" parent="VBoxContainer/BlurOptions" index="5" unique_id=1950433215]
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 value = 1.0

@@ -18,6 +18,7 @@ offset_bottom = -36.0
 
 [node name="ValueSlider" parent="VBoxContainer" unique_id=861080601 instance=ExtResource("2")]
 layout_mode = 2
+focus_mode = 0
 value = 100.0
 
 [node name="FullscreenWarning" type="Label" parent="VBoxContainer" unique_id=1907242302]

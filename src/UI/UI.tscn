@@ -249,8 +249,8 @@ drag_to_rearrange_enabled = true
 script = ExtResource("3")
 
 [node name="HorizontalRuler" type="Button" parent="DockableContainer/Main Canvas" unique_id=278517062 node_paths=PackedStringArray("viewport_container", "camera") groups=["CanvasRulers"]]
-clip_contents = true
 custom_minimum_size = Vector2(0, 16)
+clip_contents = true
 layout_mode = 2
 focus_mode = 0
 mouse_default_cursor_shape = 14
@@ -267,8 +267,8 @@ size_flags_vertical = 3
 theme_override_constants/separation = 0
 
 [node name="VerticalRuler" type="Button" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler" unique_id=1614697544 node_paths=PackedStringArray("viewport_container", "camera") groups=["CanvasRulers"]]
-clip_contents = true
 custom_minimum_size = Vector2(16, 0)
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
@@ -292,7 +292,7 @@ camera_path = NodePath("SubViewport/Camera2D")
 disable_3d = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(755, 515)
+size = Vector2i(749, 515)
 render_target_update_mode = 4
 
 [node name="TransparentChecker" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" unique_id=977983793 instance=ExtResource("5")]

@@ -68,12 +68,6 @@ allow_greater = true
 prefix = "Size:"
 suffix = "px"
 
-[node name="Rotation" parent="." index="13" unique_id=260307741]
-focus_mode = 0
-
-[node name="Shear" parent="." index="14" unique_id=1423914130]
-focus_mode = 0
-
 [connection signal="item_selected" from="DrawMode" to="." method="_on_draw_mode_item_selected"]
 [connection signal="pressed" from="Brush/Type" to="." method="_on_BrushType_pressed"]
 [connection signal="value_changed" from="Brush/BrushSize" to="." method="_on_BrushSize_value_changed"]

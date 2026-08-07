@@ -30,8 +30,8 @@ size_flags_horizontal = 3
 
 [node name="KeyframeTimelineFrameDisplay" type="Control" parent="VBoxContainer/MarginContainer" unique_id=1946935234]
 unique_name_in_owner = true
-clip_contents = true
 custom_minimum_size = Vector2(0, 24)
+clip_contents = true
 layout_mode = 2
 script = ExtResource("2_f3yqq")
 
@@ -77,8 +77,8 @@ timeline = NodePath("../../../../../..")
 
 [node name="KeyframeTimelineCursor" type="Control" parent="VBoxContainer/HSplitContainer/HSplitContainer/TrackScrollContainer/PanelContainer" unique_id=1974340089 node_paths=PackedStringArray("keyframe_timeline_frame_display")]
 unique_name_in_owner = true
-clip_contents = true
 custom_minimum_size = Vector2(8, 0)
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3

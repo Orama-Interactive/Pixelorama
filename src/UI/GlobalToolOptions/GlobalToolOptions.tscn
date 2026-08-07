@@ -279,7 +279,6 @@ text = "Stabilizer"
 [node name="StabilizerValue" type="TextureProgressBar" parent="DynamicsPanel/VBoxContainer/StabilizerContainer" unique_id=217099507]
 layout_mode = 2
 size_flags_horizontal = 3
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = 1.0
@@ -407,7 +406,6 @@ text = "Alpha"
 [node name="AlphaMin" type="TextureProgressBar" parent="DynamicsPanel/VBoxContainer/LimitContainer/AlphaLimits" unique_id=1556235059]
 layout_mode = 2
 size_flags_horizontal = 3
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 max_value = 1.0
@@ -425,7 +423,6 @@ snap_step = 0.1
 [node name="AlphaMax" type="TextureProgressBar" parent="DynamicsPanel/VBoxContainer/LimitContainer/AlphaLimits" unique_id=1226675110]
 layout_mode = 2
 size_flags_horizontal = 3
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 max_value = 1.0
@@ -453,7 +450,6 @@ text = "Size max:"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = -25.0
@@ -551,6 +547,7 @@ offset_bottom = 23.0
 [node name="MaxVelocitySlider" parent="DynamicsPanel/VBoxContainer/ThresholdContainer/ThresholdVelocity" unique_id=1339175976 instance=ExtResource("14_d1yms")]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
 min_value = 1.0
 max_value = 1000.0
 value = 1000.0

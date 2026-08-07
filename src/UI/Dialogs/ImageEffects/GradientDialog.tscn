@@ -85,7 +85,6 @@ text = "Position:"
 [node name="PositionSlider" type="TextureProgressBar" parent="VBoxContainer/ScrollContainer/GradientOptions" index="7" unique_id=878784383 groups=["gradient_linear"]]
 unique_name_in_owner = true
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 value = 50.0
@@ -107,7 +106,6 @@ text = "Size:"
 [node name="SizeSlider" type="TextureProgressBar" parent="VBoxContainer/ScrollContainer/GradientOptions" index="9" unique_id=346526022 groups=["gradient_linear"]]
 unique_name_in_owner = true
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = 1.0
@@ -130,7 +128,6 @@ text = "Angle:"
 [node name="AngleSlider" type="TextureProgressBar" parent="VBoxContainer/ScrollContainer/GradientOptions" index="11" unique_id=1754665369 groups=["gradient_linear"]]
 unique_name_in_owner = true
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 max_value = 360.0

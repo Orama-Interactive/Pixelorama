@@ -140,6 +140,8 @@ tooltip_text = "Choose a palette"
 mouse_default_cursor_shape = 2
 alignment = 1
 clip_text = true
+fit_to_longest_item = false
+search_bar_enabled = true
 
 [node name="EditPalette" type="Button" parent="PaletteVBoxContainer/PaletteButtons" unique_id=2044011141 groups=["UIButtons"]]
 custom_minimum_size = Vector2(22, 24)

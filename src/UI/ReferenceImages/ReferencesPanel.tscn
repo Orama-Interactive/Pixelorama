@@ -213,8 +213,8 @@ grow_vertical = 2
 texture = ExtResource("6_7v0q5")
 
 [node name="Images" type="Panel" parent="ScrollContainer/Container" unique_id=819465132]
-clip_contents = true
 custom_minimum_size = Vector2(0, 200)
+clip_contents = true
 layout_mode = 2
 mouse_filter = 1
 
@@ -281,7 +281,6 @@ size_flags_horizontal = 3
 
 [node name="X" parent="ScrollContainer/Container/ReferenceEdit/Options/Position" unique_id=1154386615 instance=ExtResource("3_1w6gu")]
 layout_mode = 2
-focus_mode = 0
 step = 0.01
 allow_greater = true
 allow_lesser = true
@@ -289,7 +288,6 @@ snap_by_default = true
 
 [node name="Y" parent="ScrollContainer/Container/ReferenceEdit/Options/Position" unique_id=1257980441 instance=ExtResource("3_1w6gu")]
 layout_mode = 2
-focus_mode = 0
 step = 0.01
 allow_greater = true
 allow_lesser = true
@@ -302,7 +300,6 @@ text = "Scale"
 
 [node name="Scale" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=1228250765 instance=ExtResource("3_1w6gu")]
 layout_mode = 2
-focus_mode = 0
 step = 0.01
 allow_greater = true
 allow_lesser = true
@@ -315,7 +312,6 @@ text = "Rotation"
 
 [node name="Rotation" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=1970090158 instance=ExtResource("3_1w6gu")]
 layout_mode = 2
-focus_mode = 0
 min_value = -180.0
 max_value = 180.0
 step = 0.01
@@ -366,7 +362,6 @@ text = "Opacity"
 
 [node name="Opacity" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=60287637 instance=ExtResource("3_1w6gu")]
 layout_mode = 2
-focus_mode = 0
 
 [node name="ColorClampingLabel" type="Label" parent="ScrollContainer/Container/ReferenceEdit/Options" unique_id=1968415575]
 custom_minimum_size = Vector2(115, 0)

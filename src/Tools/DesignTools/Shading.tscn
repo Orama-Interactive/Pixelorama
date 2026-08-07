@@ -33,6 +33,7 @@ popup/item_2/id = 2
 [node name="AmountSlider" parent="." index="7" unique_id=202412531 instance=ExtResource("3")]
 layout_mode = 2
 tooltip_text = "Lighten/Darken amount"
+focus_mode = 0
 min_value = -100.0
 value = 10.0
 prefix = "Amount:"
@@ -43,6 +44,7 @@ layout_mode = 2
 
 [node name="HueSlider" parent="HueShiftingOptions" index="0" unique_id=2104903709 instance=ExtResource("3")]
 layout_mode = 2
+focus_mode = 0
 min_value = -180.0
 max_value = 180.0
 value = 10.0
@@ -50,12 +52,14 @@ prefix = "Hue:"
 
 [node name="SatSlider" parent="HueShiftingOptions" index="1" unique_id=637129795 instance=ExtResource("3")]
 layout_mode = 2
+focus_mode = 0
 min_value = -100.0
 value = 10.0
 prefix = "Saturation:"
 
 [node name="ValueSlider" parent="HueShiftingOptions" index="2" unique_id=1878734116 instance=ExtResource("3")]
 layout_mode = 2
+focus_mode = 0
 min_value = -100.0
 value = 10.0
 prefix = "Value:"
@@ -70,6 +74,7 @@ layout_mode = 2
 
 [node name="ColorsRight" parent="ColorReplaceOptions/Settings" index="0" unique_id=1209338373 instance=ExtResource("3")]
 layout_mode = 2
+focus_mode = 0
 max_value = 10.0
 allow_greater = true
 prefix = "Colors right:"

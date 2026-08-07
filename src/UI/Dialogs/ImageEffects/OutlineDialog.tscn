@@ -24,7 +24,6 @@ text = "Thickness:"
 
 [node name="ThickValue" type="TextureProgressBar" parent="VBoxContainer/OutlineOptions" index="1" unique_id=1898165399]
 layout_mode = 2
-focus_mode = 2
 mouse_default_cursor_shape = 2
 theme_type_variation = &"ValueSlider"
 min_value = 1.0

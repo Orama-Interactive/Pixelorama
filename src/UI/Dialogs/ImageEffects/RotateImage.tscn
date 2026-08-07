@@ -60,6 +60,7 @@ layout_mode = 2
 
 [node name="AngleSlider" parent="VBoxContainer" index="7" unique_id=1217211706 instance=ExtResource("3")]
 layout_mode = 2
+focus_mode = 0
 max_value = 359.0
 prefix = "Angle:"
 suffix = "°"
@@ -112,12 +113,14 @@ text = "Smear options:"
 
 [node name="ToleranceSlider" parent="VBoxContainer/SmearOptions" index="2" unique_id=958208090 instance=ExtResource("3")]
 layout_mode = 2
+focus_mode = 0
 max_value = 255.0
 value = 100.0
 prefix = "Tolerance:"
 
 [node name="InitialAngleSlider" parent="VBoxContainer/SmearOptions" index="3" unique_id=1191393342 instance=ExtResource("3")]
 layout_mode = 2
+focus_mode = 0
 max_value = 359.0
 value = 359.0
 prefix = "Initial angle:"
