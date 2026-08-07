@@ -38,7 +38,7 @@ signal on_cursor_position_text_changed(text: String)
 signal dynamics_changed
 #endregion
 
-enum LayerTypes { PIXEL, GROUP, THREE_D, TILEMAP, AUDIO }
+enum LayerTypes { PIXEL, GROUP, THREE_D, TILEMAP, AUDIO, BONE }
 enum GridTypes { CARTESIAN, ISOMETRIC, HEXAGONAL_POINTY_TOP, HEXAGONAL_FLAT_TOP }
 enum ButtonSize { SMALL, BIG }
 enum MeasurementMode { NONE, DISPLAY_RECT, MOVE }

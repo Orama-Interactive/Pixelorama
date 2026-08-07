@@ -106,6 +106,9 @@ func _include_child_in_blending(
 			cel_image = layer.display_effects(cel)
 		else:
 			cel_image = cel.get_image()
+		var bone_layer := BoneLayer.get_parent_bone(layer)
+		if bone_layer:
+			cel_image = bone_layer.apply_bone(cel_image, project.frames.find(frame))
 		textures.append(cel_image)
 		_cache_texture_data.append(cel_image.get_data())
 		DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, i)
