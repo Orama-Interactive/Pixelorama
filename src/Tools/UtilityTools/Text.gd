@@ -28,14 +28,20 @@ var text_style := 0:
 		save_config()
 		_textedit_text_changed()
 
-var horizontal_alignment := HORIZONTAL_ALIGNMENT_LEFT
+var horizontal_alignment := HORIZONTAL_ALIGNMENT_LEFT:
+	set(value):
+		horizontal_alignment = value
+		save_config()
 var antialiasing := TextServer.FONT_ANTIALIASING_NONE:
 	set(value):
 		antialiasing = value
 		font.base_font.antialiasing = antialiasing
+		save_config()
 
 var _offset := Vector2i.ZERO
 
+@onready var bold_button: Button = %BoldButton
+@onready var italic_button: Button = %ItalicButton
 @onready var confirm_buttons: HBoxContainer = $ConfirmButtons
 @onready var font_option_button: OptionButton = $GridContainer/FontOptionButton
 @onready var horizontal_alignment_group: ButtonGroup = %HorizontalAlignmentLeftButton.button_group
@@ -83,6 +89,19 @@ func update_config() -> void:
 		if font_name == item_name:
 			font_option_button.selected = i
 	$TextSizeSlider.value = text_size
+	# Update group buttons
+	bold_button.set_pressed_no_signal(text_style & BOLD_FLAG)
+	italic_button.set_pressed_no_signal(text_style & ITALIC_FLAG)
+	var aa_button: Button = anti_aliasing_group.get_buttons().get(
+		antialiasing
+	)
+	if aa_button:
+		aa_button.button_pressed = true
+	var h_align_button: Button = horizontal_alignment_group.get_buttons().get(
+		horizontal_alignment
+	)
+	if h_align_button:
+		h_align_button.button_pressed = true
 
 
 func draw_start(pos: Vector2i) -> void:
@@ -252,13 +271,11 @@ func _on_italic_button_toggled(toggled_on: bool) -> void:
 
 
 func _on_horizontal_alignment_button_pressed(button: BaseButton) -> void:
-	@warning_ignore("int_as_enum_without_cast")
-	horizontal_alignment = button.get_index()
+	horizontal_alignment = button.get_index() as HorizontalAlignment
 
 
 func _on_antialiasing_button_pressed(button: BaseButton) -> void:
-	@warning_ignore("int_as_enum_without_cast")
-	antialiasing = button.get_index()
+	antialiasing = button.get_index() as TextServer.FontAntialiasing
 
 
 func _exit_tree() -> void:
