@@ -92,7 +92,6 @@ func update_config() -> void:
 	# Update group buttons
 	bold_button.set_pressed_no_signal(text_style & BOLD_FLAG)
 	italic_button.set_pressed_no_signal(text_style & ITALIC_FLAG)
-	print(antialiasing)
 	var aa_button: Button = anti_aliasing_group.get_buttons().get(
 		antialiasing
 	)
