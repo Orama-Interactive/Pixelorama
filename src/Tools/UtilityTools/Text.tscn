@@ -99,6 +99,7 @@ fit_to_longest_item = false
 layout_mode = 2
 
 [node name="BoldButton" type="Button" parent="StyleButtonContainer" index="0" unique_id=650071589 groups=["UIButtons"]]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_default_cursor_shape = 2
@@ -115,6 +116,7 @@ texture = ExtResource("6_44cpf")
 stretch_mode = 3
 
 [node name="ItalicButton" type="Button" parent="StyleButtonContainer" index="1" unique_id=1205920878 groups=["UIButtons"]]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_default_cursor_shape = 2
