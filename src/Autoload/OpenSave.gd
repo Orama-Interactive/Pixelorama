@@ -385,8 +385,8 @@ func open_pxo_file(path: String, is_backup := false, replace_empty := true) -> v
 				if cel is CelTileMap:
 					cel.find_times_used_of_tiles()
 		zip_reader.close()
-	if new_project.export_directory_path.is_empty():
-		new_project.export_directory_path = path.get_base_dir()
+	if new_project.export_profile.directory_path.is_empty():
+		new_project.export_profile.directory_path = path.get_base_dir()
 
 	if empty_project:
 		Global.project_switched.emit()
@@ -647,8 +647,8 @@ func save_pxo_file(
 		Global.config_cache.set_value("data", "current_dir", path.get_base_dir())
 		Global.config_cache.set_value("data", "last_project_path", path)
 		Global.config_cache.save(Global.CONFIG_PATH)
-		if project.export_directory_path.is_empty():
-			project.export_directory_path = path.get_base_dir()
+		if project.export_profile.directory_path.is_empty():
+			project.export_profile.directory_path = path.get_base_dir()
 		Global.top_menu_container.file_menu.set_item_text(
 			Global.FileMenu.SAVE, tr("Save") + " %s" % path.uri_decode().get_file()
 		)
@@ -1077,8 +1077,8 @@ func set_new_imported_tab(project: Project, path: String) -> void:
 	)
 	if project.has_changed:
 		get_window().title = get_window().title + "(*)"
-	project.export_directory_path = path.get_base_dir()
-	project.file_name = file_name.get_basename()
+	project.export_profile.directory_path = path.get_base_dir()
+	project.export_profile.file_name = file_name.get_basename()
 	project.was_exported = true
 	if path.get_extension().to_lower() == "png":
 		project.export_overwrite = true
@@ -1159,7 +1159,7 @@ func open_gif_file(path: String) -> bool:
 		var frame := Frame.new([cel], delay)
 		new_project.frames.append(frame)
 	new_project.save_path = path.get_basename() + ".pxo"
-	new_project.file_name = new_project.name
+	new_project.export_profile.file_name = new_project.name
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 	return true
@@ -1274,7 +1274,7 @@ func open_ora_file(path: String) -> void:
 	new_project.selected_cels.clear()
 	new_project.change_cel(0, new_project.layers.find(selected_layer))
 	new_project.save_path = path.get_basename() + ".pxo"
-	new_project.file_name = new_project.name
+	new_project.export_profile.file_name = new_project.name
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 
@@ -1290,7 +1290,7 @@ func open_piskel_file(path: String) -> void:
 	new_project.size = Vector2i(piskel.width, piskel.height)
 	new_project.fps = piskel.fps
 	new_project.save_path = path.get_basename() + ".pxo"
-	new_project.file_name = new_project.name
+	new_project.export_profile.file_name = new_project.name
 	var n_of_frames := 0
 	for i in piskel.layers.size():
 		var piskel_layer_str = piskel.layers[i]
@@ -1352,7 +1352,7 @@ func update_autosave() -> void:
 func _on_Autosave_timeout() -> void:
 	for i in Global.projects.size():
 		var project := Global.projects[i]
-		var p_name: String = project.file_name
+		var p_name: String = project.export_profile.file_name
 		if project.backup_path.is_empty():
 			project.backup_path = (current_session_backup.path_join(
 				"(" + p_name + " backup)-" + str(Time.get_unix_time_from_system()) + "-%s" % i
