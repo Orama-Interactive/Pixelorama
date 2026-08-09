@@ -92,14 +92,10 @@ func update_config() -> void:
 	# Update group buttons
 	bold_button.set_pressed_no_signal(text_style & BOLD_FLAG)
 	italic_button.set_pressed_no_signal(text_style & ITALIC_FLAG)
-	var aa_button: Button = anti_aliasing_group.get_buttons().get(
-		antialiasing
-	)
+	var aa_button: Button = anti_aliasing_group.get_buttons().get(antialiasing)
 	if aa_button:
 		aa_button.button_pressed = true
-	var h_align_button: Button = horizontal_alignment_group.get_buttons().get(
-		horizontal_alignment
-	)
+	var h_align_button: Button = horizontal_alignment_group.get_buttons().get(horizontal_alignment)
 	if h_align_button:
 		h_align_button.button_pressed = true
 
