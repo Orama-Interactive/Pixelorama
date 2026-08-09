@@ -6,6 +6,8 @@ var tag: AnimationTag
 var dragging_tag: AnimationTag
 var dragged_initial := 0
 var is_dragging := Drag.NONE
+
+@onready var line_2d := $Line2D as Line2D
 @onready var tag_properties := Global.control.find_child("TagProperties") as ConfirmationDialog
 
 
@@ -14,16 +16,22 @@ func _ready() -> void:
 		return
 	$Button.text = tag.name
 	$Button.modulate = tag.color
-	$Line2D.default_color = tag.color
+	line_2d.default_color = tag.color
 	update_position_and_size()
 
 
 func update_position_and_size(from_tag := tag) -> void:
+	if not is_instance_valid(line_2d):
+		return
 	position = from_tag.get_position()
 	custom_minimum_size.x = from_tag.get_minimum_size()
 	size.x = custom_minimum_size.x
-	$Line2D.points[2].x = custom_minimum_size.x
-	$Line2D.points[3].x = custom_minimum_size.x
+	var point_2 := line_2d.get_point_position(2)
+	var point_3 := line_2d.get_point_position(3)
+	point_2.x = custom_minimum_size.x
+	point_3.x = custom_minimum_size.x
+	line_2d.set_point_position(2, point_2)
+	line_2d.set_point_position(3, point_3)
 
 
 func _on_button_pressed() -> void:
