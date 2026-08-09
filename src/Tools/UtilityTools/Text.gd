@@ -6,6 +6,7 @@ const EMBOLDEN_AMOUNT := 0.6
 const ITALIC_AMOUNT := 0.2
 const ITALIC_TRANSFORM := Transform2D(Vector2(1.0, ITALIC_AMOUNT), Vector2(0.0, 1.0), Vector2.ZERO)
 const NEW_CANVAS_ITEM_MATERIAL := preload("res://assets/premult_alpha_canvas_item_mat.tres")
+const SELECTION_CROP := preload("res://src/Shaders/SelectionCrop.gdshader")
 
 var text_edit: TextToolEdit:
 	set(value):
@@ -143,6 +144,13 @@ func text_to_pixels() -> void:
 	var font_ascent := font.get_ascent(text_size)
 	var pos := Vector2(0, font_ascent + text_edit.get_theme_constant(&"line_spacing"))
 	pos += text_edit.position
+	var background_rid: RID
+	if antialiasing == TextServer.FONT_ANTIALIASING_LCD:
+		# NOTE: We need background information for FONT_ANTIALIASING_LCD to work.
+		background_rid = RenderingServer.texture_2d_create(cel_image)
+		RenderingServer.canvas_item_add_texture_rect(
+			ci_rid, Rect2(Vector2.ZERO, project.size), background_rid
+		)
 	font.draw_multiline_string(
 		ci_rid, pos, text, horizontal_alignment, text_edit.size.x, text_size, -1, color
 	)
@@ -153,14 +161,31 @@ func text_to_pixels() -> void:
 	RenderingServer.free_rid(vp)
 	RenderingServer.free_rid(canvas)
 	RenderingServer.free_rid(ci_rid)
+	if background_rid:
+		RenderingServer.free_rid(background_rid)
 	viewport_image.convert(cel_image.get_format())
 
 	text_edit.queue_free()
 	text_edit = null
 	if not viewport_image.is_empty():
-		cel_image.blend_rect(
-			viewport_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), Vector2i.ZERO
+		# Crop to selection area
+		var selection_tex: ImageTexture
+		if project.has_selection:
+			var selection := project.selection_map.return_cropped_copy(project, project.size)
+			selection_tex = ImageTexture.create_from_image(selection)
+		var shader_image_effect := ShaderImageEffect.new()
+		shader_image_effect.generate_image(
+			viewport_image, SELECTION_CROP, {"selection": selection_tex}, project.size
 		)
+		# Add this text to our cel's image
+		if background_rid:
+			cel_image.blit_rect(
+				viewport_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), Vector2i.ZERO
+			)
+		else:
+			cel_image.blend_rect(
+				viewport_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), Vector2i.ZERO
+			)
 		if cel_image is ImageExtended:
 			cel_image.convert_rgb_to_indexed()
 		commit_undo("Draw", undo_data)
