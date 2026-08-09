@@ -157,34 +157,34 @@ func text_to_pixels() -> void:
 
 	RenderingServer.viewport_set_update_mode(vp, RenderingServer.VIEWPORT_UPDATE_ONCE)
 	RenderingServer.force_draw(false)
-	var viewport_image := RenderingServer.texture_2d_get(RenderingServer.viewport_get_texture(vp))
+	var text_image := RenderingServer.texture_2d_get(RenderingServer.viewport_get_texture(vp))
 	RenderingServer.free_rid(vp)
 	RenderingServer.free_rid(canvas)
 	RenderingServer.free_rid(ci_rid)
 	if background_rid:
 		RenderingServer.free_rid(background_rid)
-	viewport_image.convert(cel_image.get_format())
+	text_image.convert(cel_image.get_format())
 
 	text_edit.queue_free()
 	text_edit = null
-	if not viewport_image.is_empty():
+	if not text_image.is_empty():
 		# Crop to selection area
-		var selection_tex: ImageTexture
 		if project.has_selection:
-			var selection := project.selection_map.return_cropped_copy(project, project.size)
-			selection_tex = ImageTexture.create_from_image(selection)
-		var shader_image_effect := ShaderImageEffect.new()
-		shader_image_effect.generate_image(
-			viewport_image, SELECTION_CROP, {"selection": selection_tex}, project.size
-		)
+			var selected_content := project.new_empty_image()
+			var selection_map_copy := project.selection_map.return_cropped_copy(project, project.size)
+			var selection_rect := selection_map_copy.get_used_rect()
+			selected_content.blit_rect_mask(
+				text_image, selection_map_copy, selection_rect, selection_rect.position
+			)
+			text_image = selected_content
 		# Add this text to our cel's image
 		if background_rid:
 			cel_image.blit_rect(
-				viewport_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), Vector2i.ZERO
+				text_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), Vector2i.ZERO
 			)
 		else:
 			cel_image.blend_rect(
-				viewport_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), Vector2i.ZERO
+				text_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), Vector2i.ZERO
 			)
 		if cel_image is ImageExtended:
 			cel_image.convert_rgb_to_indexed()
