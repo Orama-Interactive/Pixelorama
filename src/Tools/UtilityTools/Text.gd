@@ -158,24 +158,50 @@ func text_to_pixels() -> void:
 	var font_ascent := font.get_ascent(text_size)
 	var pos := Vector2(0, font_ascent + text_edit.get_theme_constant(&"line_spacing"))
 	pos += text_edit.position
+	var background_rid: RID
+	if antialiasing == TextServer.FONT_ANTIALIASING_LCD:
+		# NOTE: We need background information for FONT_ANTIALIASING_LCD to work.
+		background_rid = RenderingServer.texture_2d_create(cel_image)
+		RenderingServer.canvas_item_add_texture_rect(
+			ci_rid, Rect2(Vector2.ZERO, project.size), background_rid
+		)
 	font.draw_multiline_string(
 		ci_rid, pos, text, horizontal_alignment, text_edit.size.x, text_size, -1, color
 	)
 
 	RenderingServer.viewport_set_update_mode(vp, RenderingServer.VIEWPORT_UPDATE_ONCE)
 	RenderingServer.force_draw(false)
-	var viewport_image := RenderingServer.texture_2d_get(RenderingServer.viewport_get_texture(vp))
+	var text_image := RenderingServer.texture_2d_get(RenderingServer.viewport_get_texture(vp))
 	RenderingServer.free_rid(vp)
 	RenderingServer.free_rid(canvas)
 	RenderingServer.free_rid(ci_rid)
-	viewport_image.convert(cel_image.get_format())
+	if background_rid:
+		RenderingServer.free_rid(background_rid)
+	text_image.convert(cel_image.get_format())
 
 	text_edit.queue_free()
 	text_edit = null
-	if not viewport_image.is_empty():
-		cel_image.blend_rect(
-			viewport_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), Vector2i.ZERO
-		)
+	if not text_image.is_empty():
+		# Crop to selection area
+		if project.has_selection:
+			var selected_content := project.new_empty_image()
+			var selection_map_copy := project.selection_map.return_cropped_copy(
+				project, project.size
+			)
+			var selection_rect := selection_map_copy.get_used_rect()
+			selected_content.blit_rect_mask(
+				text_image, selection_map_copy, selection_rect, selection_rect.position
+			)
+			text_image = selected_content
+		# Add this text to our cel's image
+		if background_rid:
+			cel_image.blit_rect(
+				text_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), Vector2i.ZERO
+			)
+		else:
+			cel_image.blend_rect(
+				text_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), Vector2i.ZERO
+			)
 		if cel_image is ImageExtended:
 			cel_image.convert_rgb_to_indexed()
 		commit_undo("Draw", undo_data)
