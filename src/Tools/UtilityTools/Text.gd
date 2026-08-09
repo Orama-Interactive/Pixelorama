@@ -6,7 +6,6 @@ const EMBOLDEN_AMOUNT := 0.6
 const ITALIC_AMOUNT := 0.2
 const ITALIC_TRANSFORM := Transform2D(Vector2(1.0, ITALIC_AMOUNT), Vector2(0.0, 1.0), Vector2.ZERO)
 const NEW_CANVAS_ITEM_MATERIAL := preload("res://assets/premult_alpha_canvas_item_mat.tres")
-const SELECTION_CROP := preload("res://src/Shaders/SelectionCrop.gdshader")
 
 var text_edit: TextToolEdit:
 	set(value):
@@ -171,7 +170,9 @@ func text_to_pixels() -> void:
 		# Crop to selection area
 		if project.has_selection:
 			var selected_content := project.new_empty_image()
-			var selection_map_copy := project.selection_map.return_cropped_copy(project, project.size)
+			var selection_map_copy := project.selection_map.return_cropped_copy(
+				project, project.size
+			)
 			var selection_rect := selection_map_copy.get_used_rect()
 			selected_content.blit_rect_mask(
 				text_image, selection_map_copy, selection_rect, selection_rect.position
