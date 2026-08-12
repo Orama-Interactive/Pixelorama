@@ -48,6 +48,14 @@ func deserialize(dict: Dictionary) -> void:
 	super(dict)
 
 
+func is_param_valid(param_name: StringName) -> bool:
+	var uniforms := shader.get_shader_uniform_list()
+	for uniform in uniforms:
+		if param_name == (uniform["name"] as String):
+			return true
+	return false
+
+
 func _set_params_from_shader() -> void:
 	if not is_instance_valid(shader):
 		return
