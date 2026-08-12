@@ -5,9 +5,9 @@ render_mode unshaded;
 uniform sampler2D map_texture : filter_nearest;  // The map texture
 uniform ivec2 offset = ivec2(0); // Offset value for the lookup coordinates in pixels
 uniform bool wrap_around = false; // Wraps the coordinates if offset causes them out of area.
-// If true, the aplha from the map colors are used as well.
+// If true, the alpha from the map colors are used as well.
 uniform bool use_pixel_position_for_transparent_colors = false;
-// If true, the aplha from the map colors are used as well.
+// If true, the alpha from the map colors are used as well.
 uniform bool include_alpha = false;
 
 // (begin DESCRIPTION)
@@ -18,7 +18,7 @@ uniform bool include_alpha = false;
 // If "Use pixel position for transparent colors" is enabled, then for transparent colors,
 // their "Canvas position" will be looked up in the "Map Texture" instead of the color.
 // Optionally you can also set some offset to the returned color i-e (X, Y) + Offset
-// If "Include alpha" is enabled, the aplha from the "Map Texture's" color is used as well.
+// If "Include alpha" is enabled, the alpha from the "Map Texture's" color is used as well.
 // (end DESCRIPTION)
 void fragment() {
 	vec4 coordinate = texture(TEXTURE, UV);
