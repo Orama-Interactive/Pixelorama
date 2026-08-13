@@ -210,7 +210,7 @@ func get_cell_position(pixel_coords: Vector2i) -> Vector2i:
 	var cell_coords := Vector2i()
 	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 		offset_coords -= get_tile_size() / 2
-		var godot_tilemap := create_tilemap_layer_node()
+		var godot_tilemap := create_tilemap_layer_dull_node()
 		cell_coords = godot_tilemap.local_to_map(offset_coords)
 		godot_tilemap.queue_free()
 	else:
@@ -228,7 +228,7 @@ func get_cell_index_at_coords(coords: Vector2i) -> int:
 
 func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
 	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
-		var godot_tilemap := create_tilemap_layer_node()
+		var godot_tilemap := create_tilemap_layer_dull_node()
 		var pixel_coords := godot_tilemap.map_to_local(cell_coords).floor() as Vector2i
 		if get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
 			var quarter_tile_size := get_tile_size() / 4
@@ -297,7 +297,7 @@ func get_tile_offset_axis() -> TileSet.TileOffsetAxis:
 
 
 func bucket_fill(cell_coords: Vector2i, callable: Callable) -> void:
-	var godot_tilemap := create_tilemap_layer_node()
+	var godot_tilemap := create_tilemap_layer_dull_node()
 	var source_cell := get_cell_at(cell_coords)
 	var source_index := source_cell.index
 	var already_checked: Array[Vector2i]
@@ -323,7 +323,7 @@ func bucket_fill(cell_coords: Vector2i, callable: Callable) -> void:
 
 #region Autotiling
 func autotile(cell_coords: Array[Vector2i], only_neighbors := false) -> void:
-	var godot_tilemap := create_tilemap_layer_node()
+	var godot_tilemap := create_tilemap_layer_dull_node()
 	autotile_with_neighbors(cell_coords, godot_tilemap, only_neighbors)
 	godot_tilemap.queue_free()
 
@@ -468,7 +468,7 @@ func re_order_tilemap() -> void:
 	update_cel_portions(true)
 
 
-func create_tilemap_layer_node() -> TileMapLayer:
+func create_tilemap_layer_dull_node() -> TileMapLayer:
 	var godot_tileset := TileSet.new()
 	godot_tileset.tile_size = get_tile_size()
 	godot_tileset.tile_shape = get_tile_shape()
@@ -476,6 +476,31 @@ func create_tilemap_layer_node() -> TileMapLayer:
 	godot_tileset.tile_offset_axis = get_tile_offset_axis()
 	var godot_tilemap := TileMapLayer.new()
 	godot_tilemap.tile_set = godot_tileset
+	return godot_tilemap
+
+
+## Used to export a tilemap as a Godot TileMapLayer node.
+func create_tilemap_layer_filled_node(rows := 1, transpose := false) -> TileMapLayer:
+	var godot_tileset := tileset.create_godot_tileset(rows, transpose)
+	var godot_tilemap := TileMapLayer.new()
+	godot_tilemap.tile_set = godot_tileset
+	var tileset_source_id := godot_tileset.get_source_id(0)
+	var tileset_atlas_source := godot_tileset.get_source(tileset_source_id) as TileSetAtlasSource
+	var grid_size := tileset_atlas_source.get_atlas_grid_size()
+	for cell_coords in cells:
+		var cell := cells[cell_coords]
+		var tile_index := cell.index
+		var atlas_coords := Vector2(-1, -1)
+		if tile_index != 0:
+			tile_index -= 1
+			if transpose:
+				@warning_ignore("integer_division")
+				atlas_coords = Vector2(tile_index / grid_size.y, tile_index % grid_size.y)
+			else:
+				@warning_ignore("integer_division")
+				atlas_coords = Vector2(tile_index % grid_size.x, tile_index / grid_size.x)
+		godot_tilemap.set_cell(cell_coords, tileset_source_id, atlas_coords)
+	godot_tilemap.position = offset
 	return godot_tilemap
 
 

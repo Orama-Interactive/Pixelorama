@@ -295,7 +295,6 @@ func create_godot_tileset(
 	rows := 1, transpose := false, shape := tile_shape, size := tile_size
 ) -> TileSet:
 	var godot_tileset := TileSet.new()
-	godot_tileset.tile_size = tile_size
 	godot_tileset.tile_shape = tile_shape
 	godot_tileset.tile_size = size
 	godot_tileset.tile_shape = shape
