@@ -41,8 +41,10 @@ void fragment() {
 	}
 
 	vec2 map_size = vec2(textureSize(map_texture, 0));
-	vec2 offset_lookup_uv = ((coordinate.rg * anti_normalize_vector) + vec2(offset)) / map_size;
-	vec2 zoomed_lookup_uv = ((offset_lookup_uv - vec2(0.5)) / scale) + vec2(0.5);
+	vec2 offset_lookup_uv = ((coordinate.rg * anti_normalize_vector) - vec2(offset)) / map_size;
+
+	vec2 zoom_center = (vec2(0.5) * (image_size / map_size)) - (vec2(offset) / map_size);
+	vec2 zoomed_lookup_uv = ((offset_lookup_uv - zoom_center) / scale) + zoom_center;
 	if (wrap_around) {
 		zoomed_lookup_uv = fract(zoomed_lookup_uv);
 	}
