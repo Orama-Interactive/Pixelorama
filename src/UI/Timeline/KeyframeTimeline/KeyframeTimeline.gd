@@ -136,6 +136,8 @@ func recreate_timeline() -> void:
 			effect.name, KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT, layer_item
 		)
 		for param_name in effect.params:
+			if not effect.is_param_valid(param_name):
+				continue
 			if param_name in ShaderLoader.UNIFORMS_TO_IGNORE:
 				continue
 			var value = effect.params[param_name]

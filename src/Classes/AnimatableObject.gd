@@ -206,6 +206,11 @@ func deserialize(dict: Dictionary) -> void:
 		animated_params = str_to_var(dict["animated_params"])
 
 
+## preserves compatibility for name changes across different version.
+func is_param_valid(_param_name: StringName) -> bool:
+	return true
+
+
 ## Meant to be overridden by inherited classes, automatically calls it if keyframe is set
 func _on_keyframe_set(_param_name: String) -> void:
 	pass
