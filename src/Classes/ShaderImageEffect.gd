@@ -26,6 +26,42 @@ func generate_image(
 		size.y = 2
 		img.crop(img.get_width(), 2)
 		resized_height = true
+	if shader.get_mode() == Shader.MODE_TEXTURE_BLIT:
+		handle_texture_blit_shader(img, shader, params, size)
+	elif shader.get_mode() == Shader.MODE_CANVAS_ITEM:
+		handle_canvas_item_shader(img, shader, params, size, dest_mat_after_gen)
+	if resized_width:
+		img.crop(img.get_width() - 1, img.get_height())
+	if resized_height:
+		img.crop(img.get_width(), img.get_height() - 1)
+	if img is ImageExtended and respect_indexed:
+		img.convert_rgb_to_indexed()
+	done.emit()
+
+
+func handle_texture_blit_shader(
+	img: Image,
+	shader: Shader,
+	params: Dictionary,
+	size: Vector2i,
+) -> void:
+	var drawable_texture := DrawableTexture2D.new()
+	drawable_texture.setup(size.x, size.y, DrawableTexture2D.DRAWABLE_FORMAT_RGBA8)
+	var material := ShaderMaterial.new()
+	material.shader = shader
+
+	for key in params:
+		material.set_shader_parameter(key, params[key])
+
+	drawable_texture.blit_rect(
+		Rect2i(0, 0, size.x, size.y), ImageTexture.create_from_image(img), Color.WHITE, 0, material
+	)
+	img.copy_from(drawable_texture.get_image())
+
+
+func handle_canvas_item_shader(
+	img: Image, shader: Shader, params: Dictionary, size: Vector2i, dest_mat_after_gen := true
+) -> void:
 	shader = shader.duplicate()
 	shader.code = shader.code.replace("unshaded", "unshaded, blend_premul_alpha")
 	var vp := RenderingServer.viewport_create()
@@ -72,17 +108,9 @@ func generate_image(
 		cache_shader = null
 	RenderingServer.free_rid(texture)
 	if not is_instance_valid(viewport_texture):  # Very rare bug
-		done.emit()
 		return
 	viewport_texture.convert(img.get_format())
 	img.copy_from(viewport_texture)
-	if resized_width:
-		img.crop(img.get_width() - 1, img.get_height())
-	if resized_height:
-		img.crop(img.get_width(), img.get_height() - 1)
-	if img is ImageExtended and respect_indexed:
-		img.convert_rgb_to_indexed()
-	done.emit()
 
 
 func _notification(what: int) -> void:

@@ -136,7 +136,7 @@ func recreate_timeline() -> void:
 			effect.name, KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT, layer_item
 		)
 		for param_name in effect.params:
-			if param_name in ["PXO_time", "PXO_frame_index", "PXO_layer_index"]:
+			if param_name in ShaderLoader.UNIFORMS_TO_IGNORE:
 				continue
 			var value = effect.params[param_name]
 			if not AnimatableObject.is_animatable_type(value):
