@@ -6,6 +6,9 @@ const VALUE_SLIDER_V3_TSCN := preload("res://src/UI/Nodes/Sliders/ValueSliderV3.
 const BASIS_SLIDERS_TSCN := preload("res://src/UI/Nodes/Sliders/BasisSliders.tscn")
 const GRADIENT_EDIT_TSCN := preload("res://src/UI/Nodes/GradientEdit.tscn")
 const NOISE_GENERATOR := preload("res://src/UI/Nodes/NoiseGeneratorDialog.tscn")
+const UNIFORMS_TO_IGNORE: Array[String] = [
+	"PXO_time", "PXO_frame_index", "PXO_layer_index, source_texture0"
+]
 
 static var dither_matrices: Array[DitherMatrix] = [
 	DitherMatrix.new(preload("res://assets/dither-matrices/bayer2.png"), "Bayer 2x2"),
@@ -98,7 +101,7 @@ static func create_ui_for_shader_uniforms(
 			continue
 		var u_type := u_init[1]
 		var u_name := u_init[2]
-		if u_name in ["PXO_time", "PXO_frame_index", "PXO_layer_index"]:
+		if u_name in UNIFORMS_TO_IGNORE:
 			continue
 		var humanized_u_name := Keychain.humanize_snake_case(u_name) + ":"
 

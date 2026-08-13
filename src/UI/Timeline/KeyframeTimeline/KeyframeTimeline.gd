@@ -138,7 +138,7 @@ func recreate_timeline() -> void:
 		for param_name in effect.params:
 			if not effect.is_param_valid(param_name):
 				continue
-			if param_name in ["PXO_time", "PXO_frame_index", "PXO_layer_index"]:
+			if param_name in ShaderLoader.UNIFORMS_TO_IGNORE:
 				continue
 			var value = effect.params[param_name]
 			if not AnimatableObject.is_animatable_type(value):
