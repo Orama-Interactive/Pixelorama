@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2026-08-02 16:56\n"
+"PO-Revision-Date: 2026-08-14 12:06\n"
 
 msgid "OK"
 msgstr "Aceptar"
@@ -50,6 +50,9 @@ msgstr "Alto:"
 
 msgid "Center"
 msgstr "Centro"
+
+msgid "Main Menu"
+msgstr ""
 
 msgid "File"
 msgstr "Archivo"
