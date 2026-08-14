@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2026-07-19 20:33\n"
+"PO-Revision-Date: 2026-08-14 12:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -50,6 +50,9 @@ msgstr "Высота:"
 
 msgid "Center"
 msgstr "По центру"
+
+msgid "Main Menu"
+msgstr ""
 
 msgid "File"
 msgstr "Файл"
@@ -893,7 +896,7 @@ msgstr ""
 
 #. Found in the Preferences. Refers to the author of the current project.
 msgid "Author"
-msgstr ""
+msgstr "Автор"
 
 #. Found in the Preferences. Refers to the default license that is set to the created project.
 msgid "Default license"
@@ -992,7 +995,7 @@ msgstr "Однооконный режим"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
 msgid "Collapse main menu"
-msgstr ""
+msgstr "Свернуть главное меню"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
@@ -1022,7 +1025,7 @@ msgstr "Розовый"
 
 #. A theme. Black (#000000) is set as the main color so these pixels can be turned off on OLED screens.
 msgid "Black (OLED)"
-msgstr ""
+msgstr "Чёрный (OLED)"
 
 #. A theme. "System" refers to the Operating System.
 msgid "System"
@@ -3247,7 +3250,7 @@ msgstr ""
 
 # Found in the "New project" window. Refers to the content of the new project, set to be just a blank canvas.
 msgid "Blank canvas"
-msgstr ""
+msgstr "Пустой холст"
 
 # Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
 msgid "App clipboard"
@@ -3484,7 +3487,7 @@ msgstr "Длительность кадра:"
 
 #. Refers to the license of a project, which can be set from the project properties.
 msgid "License:"
-msgstr ""
+msgstr "Лицензия:"
 
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
@@ -3933,19 +3936,19 @@ msgstr "Быстро в конце и в начале, медленно в се�
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts slowly and speeds up towards the end", but with a shortened name.
 msgid "Ease in"
-msgstr ""
+msgstr "Переход В"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts quickly and slows down towards the end", but with a shortened name.
 msgid "Ease out"
-msgstr ""
+msgstr "Переход Из"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Slowest at both ends, fast at middle", but with a shortened name.
 msgid "Ease in out"
-msgstr ""
+msgstr "Переход В-Из"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Fast at both ends, slow at middle", but with a shortened name.
 msgid "Ease out in"
-msgstr ""
+msgstr "Переход Из-В"
 
 #. Found in the keyframe timeline on the right panel when there is no keyframe selected.
 msgid "No key selected"
