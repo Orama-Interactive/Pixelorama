@@ -38,7 +38,7 @@ func serialize() -> Dictionary:
 	return (
 		{
 			"name": name,
-			"shader_path": shader.resource_path,
+			"shader_path": shader_or_include.resource_path,
 			"enabled": enabled,
 		}
 		. merged(super())
@@ -50,9 +50,13 @@ func deserialize(dict: Dictionary) -> void:
 		name = dict["name"]
 	if dict.has("shader_path"):
 		var path: String = dict["shader_path"]
+		if not ResourceLoader.exists(path):
+			# To ensure compatibility with older pxo files.
+			if path.get_extension() == "gdshader":
+				path += "inc"
 		var shader_to_load := load(path)
-		if is_instance_valid(shader_to_load) and shader_to_load is Shader:
-			shader = shader_to_load
+		if is_instance_valid(shader_to_load):
+			shader_or_include = shader_to_load
 	if dict.has("enabled"):
 		enabled = dict["enabled"]
 	super(dict)

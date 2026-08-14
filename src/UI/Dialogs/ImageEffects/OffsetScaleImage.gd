@@ -2,7 +2,7 @@ extends ImageEffect
 
 enum Animate { OFFSET_X, OFFSET_Y, ZOOM }
 
-var shader := load("res://src/Shaders/Effects/OffsetPixels.gdshader")
+var shader: Shader
 var wrap_around := false
 
 @onready var offset_sliders := $VBoxContainer/OffsetOptions/OffsetSliders as ValueSliderV2
@@ -10,6 +10,7 @@ var wrap_around := false
 
 
 func _ready() -> void:
+	shader = ShaderLoader.generate_canvas_item_shader(load("uid://ugcfg5hro2ec"))
 	super._ready()
 	# Set in the order of the Animate enum
 	animate_panel.add_float_property("Offset X", offset_sliders.get_sliders()[0])

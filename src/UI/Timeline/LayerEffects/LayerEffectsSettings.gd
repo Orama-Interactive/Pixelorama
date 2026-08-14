@@ -5,7 +5,7 @@ const DELETE_TEXTURE := preload("res://assets/graphics/misc/close.svg")
 
 var effects: Array[LayerEffect] = [
 	LayerEffect.new(
-		"Offset & Scale", load("res://src/Shaders/Effects/OffsetPixels.gdshader"), "Transform"
+		"Offset & Scale", load("res://src/Shaders/Effects/OffsetPixels.gdshaderinc"), "Transform"
 	),
 	LayerEffect.new(
 		"Corner Pin", load("res://src/Shaders/Effects/CornerPin.gdshader"), "Transform"
