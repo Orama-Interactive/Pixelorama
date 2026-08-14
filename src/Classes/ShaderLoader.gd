@@ -7,7 +7,7 @@ const BASIS_SLIDERS_TSCN := preload("res://src/UI/Nodes/Sliders/BasisSliders.tsc
 const GRADIENT_EDIT_TSCN := preload("res://src/UI/Nodes/GradientEdit.tscn")
 const NOISE_GENERATOR := preload("res://src/UI/Nodes/NoiseGeneratorDialog.tscn")
 const UNIFORMS_TO_IGNORE: Array[String] = [
-	"PXO_time", "PXO_frame_index", "PXO_layer_index, source_texture0"
+	"PXO_time", "PXO_frame_index", "PXO_layer_index", "source_texture0"
 ]
 
 static var dither_matrices: Array[DitherMatrix] = [
