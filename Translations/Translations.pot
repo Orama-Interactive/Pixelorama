@@ -40,6 +40,9 @@ msgstr ""
 msgid "Center"
 msgstr ""
 
+msgid "Main Menu"
+msgstr ""
+
 msgid "File"
 msgstr ""
 
