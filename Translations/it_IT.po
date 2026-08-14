@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Italian\n"
 "Language: it_IT\n"
-"PO-Revision-Date: 2026-07-19 20:32\n"
+"PO-Revision-Date: 2026-08-14 12:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -50,6 +50,9 @@ msgstr "Altezza:"
 
 msgid "Center"
 msgstr "Centro"
+
+msgid "Main Menu"
+msgstr ""
 
 msgid "File"
 msgstr "File"
@@ -1112,7 +1115,7 @@ msgstr "Tutti i progetti"
 
 #. An image effect that helps convert a flat image to isometric.
 msgid "Flat to Isometric"
-msgstr ""
+msgstr "Piatto a Isometrico"
 
 msgid "Invert Colors"
 msgstr "Inverti Colori"
@@ -3963,15 +3966,15 @@ msgstr "Nessuna chiave selezionata"
 
 #. Found in the keyframe timeline when right clicking on a track. When selected, a new keyframe is being inserted at the selected frame.
 msgid "Insert keyframe"
-msgstr ""
+msgstr "Inserisci keyframe"
 
 #. A button found in the keyframe timeline on the right panel when there is a keyframe selected. When clicked, it deletes the currently selected keyframe.
 msgid "Delete keyframe"
-msgstr ""
+msgstr "Elimina keyframe"
 
 #. A button found in the keyframe timeline on the right panel when two or more keyframes are selected. When clicked, it deletes the currently selected keyframes.
 msgid "Delete keyframes"
-msgstr ""
+msgstr "Elimina i keyframe"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
@@ -4206,7 +4209,7 @@ msgstr "Pila"
 #. A checkbox that toggles autotiling on or off for tilemap layers.
 #: src/UI/TilesPanel.tscn
 msgid "Autotiling:"
-msgstr ""
+msgstr "Autotiling:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"
