@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2026-07-31 09:40\n"
+"PO-Revision-Date: 2026-08-14 12:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -50,6 +50,9 @@ msgstr "Altura:"
 
 msgid "Center"
 msgstr "Centrar"
+
+msgid "Main Menu"
+msgstr ""
 
 msgid "File"
 msgstr "Ficheiro"
