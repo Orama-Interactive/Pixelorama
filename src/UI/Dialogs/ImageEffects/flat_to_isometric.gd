@@ -1,6 +1,6 @@
 extends ImageEffect
 
-var shader := load("res://src/Shaders/Effects/FlatToIsometric.gdshader")
+var shader: Shader
 
 @onready var origin: ValueSlider = $VBoxContainer/Origin
 @onready var iso_step: ValueSlider = $VBoxContainer/IsoStep
@@ -8,6 +8,7 @@ var shader := load("res://src/Shaders/Effects/FlatToIsometric.gdshader")
 
 
 func _ready() -> void:
+	shader = ShaderLoader.generate_canvas_item_shader(load("uid://uo6litvr3dex"))
 	super._ready()
 	var sm := ShaderMaterial.new()
 	sm.shader = shader

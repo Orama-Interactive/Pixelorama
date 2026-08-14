@@ -13,12 +13,13 @@ enum Animate {
 	TINT_EFFECT_FACTOR
 }
 
-var shader := load("res://src/Shaders/Effects/BrightnessContrast.gdshader")
+var shader: Shader
 
 @onready var overflow_check_box := $VBoxContainer/OverflowCheckBox as CheckBox
 
 
 func _ready() -> void:
+	shader = ShaderLoader.generate_canvas_item_shader(load("uid://dniwy151saxkt"))
 	super._ready()
 	var sm := ShaderMaterial.new()
 	sm.shader = shader

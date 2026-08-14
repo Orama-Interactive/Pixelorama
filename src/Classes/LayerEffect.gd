@@ -2,6 +2,13 @@ class_name LayerEffect
 extends AnimatableObject
 
 var name := ""
+var shader_or_include: Resource:
+	set(value):
+		shader_or_include = value
+		if shader_or_include is Shader:
+			shader = shader_or_include
+		elif shader_or_include is ShaderInclude:
+			shader = ShaderLoader.generate_texture_blit_shader(shader_or_include)
 var shader: Shader:
 	set(value):
 		shader = value
@@ -12,10 +19,13 @@ var enabled := true
 
 
 func _init(
-	_name := "", _shader: Shader = null, _category := "", _params: Dictionary[String, Variant] = {}
+	_name := "",
+	_shader_or_include: Resource = null,
+	_category := "",
+	_params: Dictionary[String, Variant] = {}
 ) -> void:
 	name = _name
-	shader = _shader
+	shader_or_include = _shader_or_include
 	category = _category
 	params = _params
 

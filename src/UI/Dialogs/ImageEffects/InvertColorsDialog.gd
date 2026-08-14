@@ -5,10 +5,11 @@ var green := true
 var blue := true
 var alpha := false
 
-var shader := load("res://src/Shaders/Effects/Invert.gdshader")
+var shader: Shader
 
 
 func _ready() -> void:
+	shader = ShaderLoader.generate_canvas_item_shader(load("uid://fy5daqnx8jwr"))
 	super._ready()
 	var sm := ShaderMaterial.new()
 	sm.shader = shader
