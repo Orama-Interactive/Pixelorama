@@ -26,6 +26,7 @@ class DitherMatrix:
 		texture = _texture
 		name = _name
 
+
 class ShaderMetadata:
 	var uniforms: PackedStringArray = []
 	var description: String = ""
@@ -382,7 +383,6 @@ static func create_ui_for_shader_uniforms(
 			button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
 
-
 static func get_shader_metadata(shader_code: PackedStringArray) -> ShaderMetadata:
 	var shader_metadata := ShaderMetadata.new()
 	var description_began := false
@@ -418,22 +418,25 @@ static func generate_texture_blit_shader(shader_inc: ShaderInclude) -> Shader:
 		var uniform_string := u_init[0]
 		if uniform_string == "group_uniforms":
 			continue
-		var u_name := u_init[2]
+		var u_name := u_init[2].replace(";", "")
 		uniform_names += ", " + u_name
-	var shader_code := """
+	var shader_code := (
+		"""
 shader_type texture_blit;
 render_mode blend_disabled;
 
 #include "%s"
 
-uniform sampler2D source_texture0 : hint_blit_source0;
+uniform sampler2D source_texture0 : hint_blit_source0, filter_nearest;
 uniform sampler2D selection : filter_nearest;
 %s
 
 void blit() {
     COLOR0 = apply_effect(source_texture0, UV, selection%s);
 }
-	""" % [shader_inc.resource_path, uniform_declarations, uniform_names]
+	"""
+		% [shader_inc.resource_path, uniform_declarations, uniform_names]
+	)
 	var shader := Shader.new()
 	shader.code = shader_code
 	return shader
@@ -452,9 +455,10 @@ static func generate_canvas_item_shader(shader_inc: ShaderInclude) -> Shader:
 		var uniform_string := u_init[0]
 		if uniform_string == "group_uniforms":
 			continue
-		var u_name := u_init[2]
+		var u_name := u_init[2].replace(";", "")
 		uniform_names += ", " + u_name
-	var shader_code := """
+	var shader_code := (
+		"""
 shader_type canvas_item;
 render_mode unshaded;
 
@@ -466,7 +470,9 @@ uniform sampler2D selection : filter_nearest;
 void fragment() {
     COLOR = apply_effect(TEXTURE, UV, selection%s);
 }
-	""" % [shader_inc.resource_path, uniform_declarations, uniform_names]
+	"""
+		% [shader_inc.resource_path, uniform_declarations, uniform_names]
+	)
 	var shader := Shader.new()
 	shader.code = shader_code
 	return shader

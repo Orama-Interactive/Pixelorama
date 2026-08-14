@@ -5,12 +5,13 @@ var color := Color.BLACK
 var thickness := 1
 var pattern := 0
 var inside_image := false
-var shader := load("res://src/Shaders/Effects/OutlineInline.gdshader")
+var shader: Shader
 
 @onready var outline_color := $VBoxContainer/OutlineOptions/OutlineColor as ColorPickerButton
 
 
 func _ready() -> void:
+	shader = ShaderLoader.generate_canvas_item_shader(load("uid://dnc7oours8vc0"))
 	super._ready()
 	var sm := ShaderMaterial.new()
 	sm.shader = shader

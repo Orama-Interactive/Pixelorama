@@ -21,7 +21,7 @@ var effects: Array[LayerEffect] = [
 	),
 	LayerEffect.new("Gradient", load("res://src/Shaders/Effects/Gradient.gdshader"), "Procedural"),
 	LayerEffect.new(
-		"Outline", load("res://src/Shaders/Effects/OutlineInline.gdshader"), "Procedural"
+		"Outline", load("res://src/Shaders/Effects/OutlineInline.gdshaderinc"), "Procedural"
 	),
 	LayerEffect.new(
 		"Drop Shadow", load("res://src/Shaders/Effects/DropShadow.gdshader"), "Procedural"

@@ -1,9 +1,8 @@
 class_name SelectionMap
 extends Image
 
-const OUTLINE_INLINE_SHADER := preload("res://src/Shaders/Effects/OutlineInline.gdshader")
-
 static var invert_shader: Shader
+static var outline_inline_shader: Shader
 
 ## An optimization technique
 var _selection_rect_cache := Rect2i()
@@ -11,7 +10,11 @@ var _selection_rect_cache := Rect2i()
 
 func _init() -> void:
 	if invert_shader == null:
-		invert_shader = ShaderLoader.generate_canvas_item_shader(load("uid://fy5daqnx8jwr"))
+		invert_shader = ShaderLoader.generate_texture_blit_shader(load("uid://fy5daqnx8jwr"))
+	if outline_inline_shader == null:
+		outline_inline_shader = ShaderLoader.generate_texture_blit_shader(
+			load("uid://dnc7oours8vc0")
+		)
 
 
 func is_pixel_selected(
@@ -209,7 +212,7 @@ func expand(width: int, brush: int) -> void:
 		"brush": brush,
 	}
 	var gen := ShaderImageEffect.new()
-	gen.generate_image(self, OUTLINE_INLINE_SHADER, params, get_size())
+	gen.generate_image(self, outline_inline_shader, params, get_size())
 
 
 func shrink(width: int, brush: int) -> void:
@@ -220,7 +223,7 @@ func shrink(width: int, brush: int) -> void:
 		"inside": true,
 	}
 	var gen := ShaderImageEffect.new()
-	gen.generate_image(self, OUTLINE_INLINE_SHADER, params, get_size())
+	gen.generate_image(self, outline_inline_shader, params, get_size())
 
 
 func center() -> void:
@@ -242,4 +245,4 @@ func border(width: int, brush: int) -> void:
 		"keep_border_only": true,
 	}
 	var gen := ShaderImageEffect.new()
-	gen.generate_image(self, OUTLINE_INLINE_SHADER, params, get_size())
+	gen.generate_image(self, outline_inline_shader, params, get_size())
