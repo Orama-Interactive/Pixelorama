@@ -59,8 +59,8 @@ func _change_cel(new_pos: Vector2) -> void:
 	var container_pos := keyframe_timeline_frame_display.get_global_rect().position.x
 	var container_end := keyframe_timeline_frame_display.get_global_rect().end.x
 	var x_offset := keyframe_timeline_frame_display.x_offset
-	var g_pos := clampf(new_pos.x - (size.x / 2.0), container_pos, container_end)
-	var frame_position_float := (g_pos - container_pos + x_offset) / KeyframeTimeline.frame_ui_size
+	pos = clampf(new_pos.x - (size.x / 2.0), container_pos, container_end)
+	var frame_position_float := (pos - container_pos + x_offset) / KeyframeTimeline.frame_ui_size
 	var frame := roundi(frame_position_float)
 	frame = clampi(frame, 0, Global.current_project.frames.size() - 1)
 	# Change frame
@@ -72,8 +72,6 @@ func _change_cel(new_pos: Vector2) -> void:
 	# Snap to the frame position if it is close enough, otherwise move freely
 	if abs(frame_position_float - frame) < 0.3:
 		pos = frame * KeyframeTimeline.frame_ui_size + container_pos - x_offset
-	else:
-		pos = g_pos
 
 
 func update_position() -> void:
