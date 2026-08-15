@@ -1,13 +1,10 @@
 // https://godotshaders.com/shader/gaussian-blur-functions-for-gles2/
 // Licensed under MIT.
-shader_type canvas_item;
-render_mode unshaded;
 
-uniform int blur_type : hint_enum("Xor's Gaussian Blur", "Monk's Multi-Pass Gaussian Blur", "NoDev's Single-Pass Gaussian Blur", "NoDev's Multi-Pass Gaussian Blur") = 0;
-uniform int blur_amount : hint_range(0, 100, 1) = 16;
-uniform float blur_radius : hint_range(0.0, 100.0, 1.0) = 1.0;
-uniform vec2 blur_direction = vec2(1, 1);
-uniform sampler2D selection : filter_nearest;
+// @uniform int blur_type : hint_enum("Xor's Gaussian Blur", "Monk's Multi-Pass Gaussian Blur", "NoDev's Single-Pass Gaussian Blur", "NoDev's Multi-Pass Gaussian Blur") = 0;
+// @uniform int blur_amount : hint_range(0, 100, 1) = 16;
+// @uniform float blur_radius : hint_range(0.0, 100.0, 1.0) = 1.0;
+// @uniform vec2 blur_direction = vec2(1, 1);
 
 // Xor's gaussian blur function from https://xorshaders.weebly.com/tutorials/blur-shaders-5-part-2
 // Defaults from: https://www.shadertoy.com/view/Xltfzj
@@ -154,29 +151,38 @@ vec4 texture_nodevgaussian_multipass(sampler2D tex, vec2 uv, vec2 pixel_size, fl
 	return blurred_tex;
 }
 
-void fragment() {
-	vec4 original_color = texture(TEXTURE, UV);
-	vec4 selection_color = texture(selection, UV);
+vec4 apply_effect(
+	sampler2D source_texture,
+	vec2 uv,
+	sampler2D selection,
+	int blur_type,
+	int blur_amount,
+	float blur_radius,
+	vec2 blur_direction,
+) {
+	vec4 original_color = texture(source_texture, uv);
+	vec4 selection_color = texture(selection, uv);
+	vec2 pixel_size = 1.0 / vec2(textureSize(source_texture, 0));
 	vec4 col = original_color;
 	if (blur_type == 0) {
-		vec4 xorgaussian = texture_xorgaussian(TEXTURE, UV, TEXTURE_PIXEL_SIZE, float(blur_amount), 32, 8);
+		vec4 xorgaussian = texture_xorgaussian(source_texture, uv, pixel_size, float(blur_amount), 32, 8);
 		col = xorgaussian;
 	}
 	else if (blur_type == 1) {
-		vec4 monksgaussian_multipass = texture_monksgaussian_multipass(TEXTURE, UV, TEXTURE_PIXEL_SIZE, blur_amount, blur_direction);
+		vec4 monksgaussian_multipass = texture_monksgaussian_multipass(source_texture, uv, pixel_size, blur_amount, blur_direction);
 		col = monksgaussian_multipass;
 	}
 	else if (blur_type == 2) {
-		vec4 nodevgaussian_singlepass = texture_nodevgaussian_singlepass(TEXTURE, UV, TEXTURE_PIXEL_SIZE, float(blur_amount), blur_radius);
+		vec4 nodevgaussian_singlepass = texture_nodevgaussian_singlepass(source_texture, uv, pixel_size, float(blur_amount), blur_radius);
 		col = nodevgaussian_singlepass;
 	}
 	else if (blur_type == 3) {
-		vec4 nodevgaussian_multipass = texture_nodevgaussian_multipass(TEXTURE, UV, TEXTURE_PIXEL_SIZE, float(blur_amount), blur_direction);
+		vec4 nodevgaussian_multipass = texture_nodevgaussian_multipass(source_texture, uv, pixel_size, float(blur_amount), blur_direction);
 		col = nodevgaussian_multipass;
 	}
 	else {
-		col = texture(TEXTURE, UV);
+		col = original_color;
 	}
 	vec4 output = mix(original_color.rgba, col, selection_color.a);
-	COLOR = output;
+	return output;
 }

@@ -19,7 +19,7 @@ var effects: Array[LayerEffect] = [
 		"Color"
 	),
 	LayerEffect.new(
-		"Gaussian Blur", load("res://src/Shaders/Effects/GaussianBlur.gdshader"), "Blur"
+		"Gaussian Blur", load("res://src/Shaders/Effects/GaussianBlur.gdshaderinc"), "Blur"
 	),
 	LayerEffect.new("Gradient", load("res://src/Shaders/Effects/Gradient.gdshader"), "Procedural"),
 	LayerEffect.new(
@@ -41,13 +41,13 @@ var effects: Array[LayerEffect] = [
 		"Color"
 	),
 	LayerEffect.new(
-		"Color Curves", load("res://src/Shaders/Effects/ColorCurves.gdshader"), "Color"
+		"Color Curves", load("res://src/Shaders/Effects/ColorCurves.gdshaderinc"), "Color"
 	),
 	LayerEffect.new("Palettize", load("res://src/Shaders/Effects/Palettize.gdshader"), "Color"),
 	LayerEffect.new("Pixelize", load("res://src/Shaders/Effects/Pixelize.gdshader"), "Blur"),
 	LayerEffect.new("Posterize", load("res://src/Shaders/Effects/Posterize.gdshader"), "Color"),
 	LayerEffect.new(
-		"Gradient Map", load("res://src/Shaders/Effects/GradientMap.gdshader"), "Color"
+		"Gradient Map", load("res://src/Shaders/Effects/GradientMap.gdshaderinc"), "Color"
 	),
 	LayerEffect.new("Index Map", load("res://src/Shaders/Effects/IndexMap.gdshader"), "Color"),
 ]

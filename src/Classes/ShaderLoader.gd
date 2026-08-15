@@ -428,7 +428,7 @@ render_mode blend_disabled;
 #include "%s"
 
 uniform sampler2D source_texture0 : hint_blit_source0, filter_nearest;
-uniform sampler2D selection : filter_nearest;
+uniform sampler2D selection : filter_nearest, repeat_disable;
 %s
 
 void blit() {

@@ -1,17 +1,13 @@
-shader_type canvas_item;
-render_mode unshaded;
-
-uniform sampler2D selection : filter_nearest;
 // CurveTexture(s)
-group_uniforms channel;
-uniform sampler2D curve_rgb;
-uniform sampler2D curve_red;
-uniform sampler2D curve_green;
-uniform sampler2D curve_blue;
-uniform sampler2D curve_alpha;
-uniform sampler2D curve_hue;
-uniform sampler2D curve_sat;
-uniform sampler2D curve_value;
+// @group_uniforms channel;
+// @uniform sampler2D curve_rgb : repeat_disable;
+// @uniform sampler2D curve_red: repeat_disable;
+// @uniform sampler2D curve_green: repeat_disable;
+// @uniform sampler2D curve_blue: repeat_disable;
+// @uniform sampler2D curve_alpha: repeat_disable;
+// @uniform sampler2D curve_hue: repeat_disable;
+// @uniform sampler2D curve_sat: repeat_disable;
+// @uniform sampler2D curve_value: repeat_disable;
 
 
 vec3 rgb2hsb(vec3 c) {
@@ -37,14 +33,26 @@ vec3 hsb2rgb(vec3 c)
 }
 
 
-void fragment() {
-	vec4 original_color = texture(TEXTURE, UV);
-	vec4 selection_color = texture(selection, UV);
+vec4 apply_effect(
+	sampler2D source_texture,
+	vec2 uv,
+	sampler2D selection,
+	sampler2D curve_rgb,
+	sampler2D curve_red,
+	sampler2D curve_green,
+	sampler2D curve_blue,
+	sampler2D curve_alpha,
+	sampler2D curve_hue,
+	sampler2D curve_sat,
+	sampler2D curve_value,
+) {
+	vec4 original_color = texture(source_texture, uv);
+	vec4 selection_color = texture(selection, uv);
 	vec4 col;
-	float red_curve_color = texture(curve_red, vec2(COLOR.r, 0.0)).r;
-	float green_curve_color = texture(curve_green, vec2(COLOR.g, 0.0)).r;
-	float blue_curve_color = texture(curve_blue, vec2(COLOR.b, 0.0)).r;
-	float alpha_curve_color = texture(curve_alpha, vec2(COLOR.a, 0.0)).r;
+	float red_curve_color = texture(curve_red, vec2(original_color.r, 0.0)).r;
+	float green_curve_color = texture(curve_green, vec2(original_color.g, 0.0)).r;
+	float blue_curve_color = texture(curve_blue, vec2(original_color.b, 0.0)).r;
+	float alpha_curve_color = texture(curve_alpha, vec2(original_color.a, 0.0)).r;
 	col.r = red_curve_color;
 	col.g = green_curve_color;
 	col.b = blue_curve_color;
@@ -65,5 +73,5 @@ void fragment() {
 	float rgb_curve_color_b = texture(curve_rgb, vec2(col.b, 0.0)).r;
 	col.rgb = vec3(rgb_curve_color_r, rgb_curve_color_g, rgb_curve_color_b);
 	vec4 output = mix(original_color.rgba, col, selection_color.a);
-	COLOR = output;
+	return output;
 }

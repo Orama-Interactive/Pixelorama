@@ -2,16 +2,19 @@ extends ImageEffect
 
 enum Channel { RGB, RED, GREEN, BLUE, ALPHA, HUE, SATURATION, VALUE }
 
-var shader := load("res://src/Shaders/Effects/ColorCurves.gdshader")
+var shader_inc := load("uid://cngtsyw8tyy0")
+var shader: Shader
+
 var curves: Array[Curve]
 @onready var channel_option_button := %ChannelOptionButton as OptionButton
 @onready var curve_edit := $VBoxContainer/CurveEdit as CurveEdit
 
 
 func _ready() -> void:
-	super._ready()
+	shader = ShaderLoader.generate_texture_blit_shader(shader_inc)
+	super()
 	var sm := ShaderMaterial.new()
-	sm.shader = shader
+	sm.shader = ShaderLoader.generate_canvas_item_shader(shader_inc)
 	preview.set_material(sm)
 	for i in channel_option_button.item_count:
 		var curve := Curve.new()

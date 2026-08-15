@@ -1,12 +1,14 @@
 extends ImageEffect
 
-var shader := load("res://src/Shaders/Effects/GradientMap.gdshader")
+var shader_inc := load("uid://dbse7sufxr24y")
+var shader: Shader
 
 
 func _ready() -> void:
-	super._ready()
+	shader = ShaderLoader.generate_texture_blit_shader(shader_inc)
+	super()
 	var sm := ShaderMaterial.new()
-	sm.shader = shader
+	sm.shader = ShaderLoader.generate_canvas_item_shader(shader_inc)
 	preview.set_material(sm)
 
 
