@@ -529,6 +529,7 @@ func _on_track_scroll_container_resized() -> void:
 	var r_marg := properties_container.size.x if properties_container.is_visible_in_tree() else 0.0
 	margin_container.add_theme_constant_override(&"margin_left", l_marg + split_separation)
 	margin_container.add_theme_constant_override(&"margin_right", r_marg + split_separation)
+	await get_tree().process_frame
 	keyframe_timeline_cursor.update_position()
 
 
