@@ -3,7 +3,8 @@ extends ImageEffect
 enum { LINEAR, RADIAL, LINEAR_DITHERING, RADIAL_DITHERING }
 enum Animate { POSITION, SIZE, ANGLE, CENTER_X, CENTER_Y, RADIUS_X, RADIUS_Y }
 
-var shader := load("res://src/Shaders/Effects/Gradient.gdshader")
+var shader_inc := load("uid://dj3bi0pycege2")
+var shader: Shader
 var selected_dither_matrix := ShaderLoader.dither_matrices[0]
 
 @onready var options_cont: Container = $VBoxContainer/ScrollContainer/GradientOptions
@@ -19,9 +20,10 @@ var selected_dither_matrix := ShaderLoader.dither_matrices[0]
 
 
 func _ready() -> void:
-	super._ready()
+	shader = ShaderLoader.generate_texture_blit_shader(shader_inc)
+	super()
 	var sm := ShaderMaterial.new()
-	sm.shader = shader
+	sm.shader = ShaderLoader.generate_canvas_item_shader(shader_inc)
 	preview.set_material(sm)
 
 	for matrix in ShaderLoader.dither_matrices:
@@ -68,7 +70,6 @@ func commit_action(cel: Image, project := Global.current_project) -> void:
 	}
 
 	if !has_been_confirmed:
-		preview.material.shader = shader
 		for param in params:
 			preview.material.set_shader_parameter(param, params[param])
 	else:

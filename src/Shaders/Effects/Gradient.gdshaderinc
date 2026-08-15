@@ -1,30 +1,34 @@
-shader_type canvas_item;
-render_mode unshaded;
-
-uniform sampler2D selection : filter_nearest;
-group_uniforms gradient_textures;
+// @group_uniforms gradient_textures;
 // The gradient texture itself, with interpolation.
-uniform sampler2D gradient_texture : filter_nearest;
+// @uniform sampler2D gradient_texture : filter_nearest, repeat_disable;
 // A Nx1 image, where N is the amount of the different colors of gradient_texture,
 // without interpolating between them. Used in dithering.
-uniform sampler2D gradient_texture_no_interpolation : filter_nearest;
+// @uniform sampler2D gradient_texture_no_interpolation : filter_nearest, repeat_disable;
 // A Nx1 grayscale image, where N is the amount of the different colors of gradient_texture,
 // where each pixel contains the offset, ranging from 0-1 of each color. Used in dithering.
-uniform sampler2D gradient_offset_texture : filter_nearest;
+// @uniform sampler2D gradient_offset_texture : filter_nearest, repeat_disable;
 
-group_uniforms gradient_options;
-uniform int shape : hint_enum("Linear", "Radial") = 0;
-uniform int repeat : hint_enum("None", "Repeat", "Mirrored", "Truncate") = 0;
-uniform bool use_dithering = false;
-uniform sampler2D dither_texture : filter_nearest, repeat_enable;
-uniform float position : hint_range(-0.5, 0.5, 0.01) = 0.0;
-uniform float size : hint_range(0.01, 2.0, 0.01) = 1.0;
-uniform float angle : hint_range(0.0, 360.0, 0.01) = 0.0;
-uniform vec2 center = vec2(0.5);
-uniform vec2 radius = vec2(1.0);
+// @group_uniforms gradient_options;
+// @uniform int shape : hint_enum("Linear", "Radial") = 0;
+// @uniform int repeat : hint_enum("None", "Repeat", "Mirrored", "Truncate") = 0;
+// @uniform bool use_dithering = false;
+// @uniform sampler2D dither_texture : filter_nearest, repeat_enable;
+// @uniform float position : hint_range(-0.5, 0.5, 0.01) = 0.0;
+// @uniform float size : hint_range(0.01, 2.0, 0.01) = 1.0;
+// @uniform float angle : hint_range(0.0, 360.0, 0.01) = 0.0;
+// @uniform vec2 center = vec2(0.5);
+// @uniform vec2 radius = vec2(1.0);
 
 
-float modify_uv(vec2 uv) {
+float modify_uv(
+	vec2 uv,
+	int shape,
+	float position,
+	float size,
+	float angle,
+	vec2 center,
+	vec2 radius,
+) {
 	float modified_uv;
 	if (shape == 0) { // Linear
 		vec2 uv_offsetted = uv - 0.5;
@@ -57,7 +61,7 @@ float mirror_fract(float uv) {
 }
 
 // Logic taken from https://godotshaders.com/shader/dither-gradient-shader/
-float dither(vec2 uv, float modified_uv, ivec2 image_size) {
+float dither(vec2 uv, float modified_uv, ivec2 image_size, sampler2D dither_texture) {
 	float uv_lower = floor(modified_uv);
 	float uv_upper = floor(modified_uv) + 1.0;
 	ivec2 pixel_size = textureSize(dither_texture, 0);
@@ -69,12 +73,28 @@ float dither(vec2 uv, float modified_uv, ivec2 image_size) {
 }
 
 
-void fragment() {
-	vec4 original_color = texture(TEXTURE, UV);
-	vec4 selection_color = texture(selection, UV);
-	vec2 tex_size = 1.0 / TEXTURE_PIXEL_SIZE;
-	vec2 uv = floor(UV * tex_size) / (tex_size - 1.0);
-	float modified_uv = modify_uv(uv);
+vec4 apply_effect(
+	sampler2D source_texture,
+	vec2 uv,
+	sampler2D selection,
+	sampler2D gradient_texture,
+	sampler2D gradient_texture_no_interpolation,
+	sampler2D gradient_offset_texture,
+	int shape,
+	int repeat,
+	bool use_dithering,
+	sampler2D dither_texture,
+	float position,
+	float size,
+	float angle,
+	vec2 center,
+	vec2 radius,
+) {
+	vec2 pixel_size = 1.0 / vec2(textureSize(source_texture, 0));
+	vec4 original_color = texture(source_texture, uv);
+	vec4 selection_color = texture(selection, uv);
+	vec2 tex_size = 1.0 / pixel_size;
+	float modified_uv = modify_uv(uv, shape, position, size, angle, center, radius);
 	if (repeat == 1)
 		modified_uv = fract(modified_uv);
 	else if (repeat == 2)
@@ -102,7 +122,7 @@ void fragment() {
 				continue;
 			}
 			float uvt = (modified_uv - off_prev) / (off - off_prev);
-			float col_sample = dither(UV, uvt, textureSize(TEXTURE, 0));
+			float col_sample = dither(uv, uvt, textureSize(source_texture, 0), dither_texture);
 			output = mix(first, second, col_sample);
 		}
 	}
@@ -111,5 +131,5 @@ void fragment() {
 	if (repeat == 3)
 		output.a = min(step(modified_uv, 1.0) * step(0.0, modified_uv), output.a);
 	output = mix(original_color, output, output.a);
-	COLOR = mix(original_color, output, selection_color.a);
+	return mix(original_color, output, selection_color.a);
 }

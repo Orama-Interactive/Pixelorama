@@ -21,7 +21,9 @@ var effects: Array[LayerEffect] = [
 	LayerEffect.new(
 		"Gaussian Blur", load("res://src/Shaders/Effects/GaussianBlur.gdshaderinc"), "Blur"
 	),
-	LayerEffect.new("Gradient", load("res://src/Shaders/Effects/Gradient.gdshader"), "Procedural"),
+	LayerEffect.new(
+		"Gradient", load("res://src/Shaders/Effects/Gradient.gdshaderinc"), "Procedural"
+	),
 	LayerEffect.new(
 		"Outline", load("res://src/Shaders/Effects/OutlineInline.gdshaderinc"), "Procedural"
 	),
