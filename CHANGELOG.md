@@ -4,6 +4,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.2.1] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)),  [Joseph Demarest](https://github.com/JosephDemarest), [Qmaker-programmer](https://github.com/Qmaker-programmer)
+
+Built using Godot 4.7.1
+
+### Added
+- Exporting images as SVG files is now possible. Right now it's very basic, it just takes each non-transparent pixel and makes it a `<rect>` element. In the future we could add an option to merge pixels that have the same color into singular `<rect>` elements, resulting in a smaller file size, but taking a longer time to export.
+- Support for texture blit Godot shaders have been added and users can now load their own texture blit shaders.
+
+### Changed
+- The Index Map effect has been made a lot more powerful. [#1580](https://github.com/Orama-Interactive/Pixelorama/pull/#1580)
+- Tool shortcuts can now be activated when the cursor is outside the canvas.
+- Projects are now marked as unsaved when you change their export directory path, file name or file format. [#1561](https://github.com/Orama-Interactive/Pixelorama/pull/#1561)
+- Export settings are now being stored inside pxo files. [#1574](https://github.com/Orama-Interactive/Pixelorama/pull/#1574)
+- The layer opacity slider is now disabled if the selected layer has opacity keyframes. [#1568](https://github.com/Orama-Interactive/Pixelorama/pull/#1568)
+
+### Fixed
+- Fixed gif & apng files not being exported from the CLI. [#1563](https://github.com/Orama-Interactive/Pixelorama/issues/1563)
+- The quick tool shortcuts no longer get called when a multi-state tool is being used, such as the curve tool, polygon select and isometric box tool. [#1569](https://github.com/Orama-Interactive/Pixelorama/pull/#1569)
+- Fixed dynamics not changing the brush size, if it is set to 1px.
+- The canvas can no longer move with arrow keys if the text tool is currently being used.
+- Fixed text applied by the text tool not having correct transparent colors. [#1577](https://github.com/Orama-Interactive/Pixelorama/pull/#1577)
+- Fixed text tool options not reflecting correct settings on loading. [#1578](https://github.com/Orama-Interactive/Pixelorama/pull/#1578)
+- Fixed LCD antialiasing for the text tool. [#1579](https://github.com/Orama-Interactive/Pixelorama/pull/#1579)
+- Fixed the shape tool colored indicators not being updated to the correct size. [#1575](https://github.com/Orama-Interactive/Pixelorama/pull/#1575)
+- Fixed the color picker tool not defaulting to the assigned mouse button. [#1567](https://github.com/Orama-Interactive/Pixelorama/pull/#1567)
+- Fixed rounding errors in the Index Map effect.
+- Fixed a crash when using tools coming from extensions.
+
 ## [v1.2] - 2026-07-29
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), SOS1, [@SjamesE](https://github.com/SjamesE), [@Arthurmtro](https://github.com/Arthurmtro),  Luciano Leão ([@LeaoLuciano](https://github.com/LeaoLuciano))
