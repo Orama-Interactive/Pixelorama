@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2026-08-14 12:06\n"
+"PO-Revision-Date: 2026-08-15 10:28\n"
 
 msgid "OK"
 msgstr "确定"
@@ -52,7 +52,7 @@ msgid "Center"
 msgstr "中心"
 
 msgid "Main Menu"
-msgstr ""
+msgstr "主菜单"
 
 msgid "File"
 msgstr "文件"
