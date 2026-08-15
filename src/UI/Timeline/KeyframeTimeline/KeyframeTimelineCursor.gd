@@ -59,7 +59,10 @@ func _change_cel(new_pos: Vector2) -> void:
 	var container_pos := keyframe_timeline_frame_display.get_global_rect().position.x
 	var container_end := keyframe_timeline_frame_display.get_global_rect().end.x
 	var x_offset := keyframe_timeline_frame_display.x_offset
-	pos = clampf(new_pos.x - (size.x / 2.0), container_pos, container_end)
+	# NOTE: container_pos - KeyframeTimeline.frame_ui_size is for allowing reverse auto scroll
+	pos = clampf(
+		new_pos.x - (size.x / 2.0), container_pos - KeyframeTimeline.frame_ui_size, container_end
+	)
 	var frame_position_float := (pos - container_pos + x_offset) / KeyframeTimeline.frame_ui_size
 	var frame := roundi(frame_position_float)
 	frame = clampi(frame, 0, Global.current_project.frames.size() - 1)
