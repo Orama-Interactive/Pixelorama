@@ -13,16 +13,17 @@ enum Animate {
 	TINT_EFFECT_FACTOR
 }
 
+var shader_inc := load("uid://dniwy151saxkt")
 var shader: Shader
 
 @onready var overflow_check_box := $VBoxContainer/OverflowCheckBox as CheckBox
 
 
 func _ready() -> void:
-	shader = ShaderLoader.generate_canvas_item_shader(load("uid://dniwy151saxkt"))
-	super._ready()
+	shader = ShaderLoader.generate_texture_blit_shader(shader_inc)
+	super()
 	var sm := ShaderMaterial.new()
-	sm.shader = shader
+	sm.shader = ShaderLoader.generate_canvas_item_shader(shader_inc)
 	preview.set_material(sm)
 	animate_panel.add_float_property("Red shift", $VBoxContainer/RedShift)
 	animate_panel.add_float_property("Green shift", $VBoxContainer/GreenShift)

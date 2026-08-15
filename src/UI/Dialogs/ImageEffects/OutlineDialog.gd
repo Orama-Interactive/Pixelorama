@@ -5,16 +5,18 @@ var color := Color.BLACK
 var thickness := 1
 var pattern := 0
 var inside_image := false
+
+var shader_inc := load("uid://dnc7oours8vc0")
 var shader: Shader
 
 @onready var outline_color := $VBoxContainer/OutlineOptions/OutlineColor as ColorPickerButton
 
 
 func _ready() -> void:
-	shader = ShaderLoader.generate_canvas_item_shader(load("uid://dnc7oours8vc0"))
-	super._ready()
+	shader = ShaderLoader.generate_texture_blit_shader(shader_inc)
+	super()
 	var sm := ShaderMaterial.new()
-	sm.shader = shader
+	sm.shader = ShaderLoader.generate_canvas_item_shader(shader_inc)
 	preview.set_material(sm)
 	outline_color.get_picker().presets_visible = false
 	color = outline_color.color

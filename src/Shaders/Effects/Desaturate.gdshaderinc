@@ -1,11 +1,7 @@
-shader_type canvas_item;
-render_mode unshaded;
-
-uniform bool red = true;
-uniform bool green = true;
-uniform bool blue = true;
-uniform bool alpha = false;
-uniform sampler2D selection : filter_nearest;
+// @uniform bool red = true;
+// @uniform bool green = true;
+// @uniform bool blue = true;
+// @uniform bool alpha = false;
 
 float stolChannel(float x) {
 	return (x < 0.04045) ? (x / 12.92) : pow((x + 0.055) / 1.055, 2.4);
@@ -35,10 +31,18 @@ float luminance(vec3 lin) {
 		 + 0.07218152 * lin.b;
 }
 
-void fragment() {
+vec4 apply_effect(
+	sampler2D source_texture,
+	vec2 uv,
+	sampler2D selection,
+	bool red,
+	bool green,
+	bool blue,
+	bool alpha
+) {
 	// Get color from the sprite texture at the current pixel we are rendering
-	vec4 original_color = texture(TEXTURE, UV);
-	vec4 selection_color = texture(selection, UV);
+	vec4 original_color = texture(source_texture, uv);
+	vec4 selection_color = texture(selection, uv);
 
 	// Transform from standard RGB to linear RGB.
 	vec3 std = original_color.rgb;
@@ -55,8 +59,8 @@ void fragment() {
 	vec3 output = mix(original_color.rgb, stdPrime, selection_color.a);
 
     if (alpha) {
-	    COLOR = vec4(output.rgb, ltosChannel(lum));
+	    return vec4(output.rgb, ltosChannel(lum));
 	} else {
-        COLOR = vec4(output.rgb, original_color.a);
+        return vec4(output.rgb, original_color.a);
 	}
 }

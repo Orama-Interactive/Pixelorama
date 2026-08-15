@@ -5,14 +5,15 @@ var green := true
 var blue := true
 var alpha := false
 
+var shader_inc := load("uid://fy5daqnx8jwr")
 var shader: Shader
 
 
 func _ready() -> void:
-	shader = ShaderLoader.generate_canvas_item_shader(load("uid://fy5daqnx8jwr"))
-	super._ready()
+	shader = ShaderLoader.generate_texture_blit_shader(shader_inc)
+	super()
 	var sm := ShaderMaterial.new()
-	sm.shader = shader
+	sm.shader = ShaderLoader.generate_canvas_item_shader(shader_inc)
 	preview.set_material(sm)
 
 

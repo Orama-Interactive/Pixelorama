@@ -1,11 +1,9 @@
-shader_type canvas_item;
-
 // author : csblo
 // Work made just by consulting :
 // https://en.wikipedia.org/wiki/Kernel_(image_processing)
 
-uniform mat3 kernel = mat3(vec3(0, 0, 0), vec3(0, 1, 0), vec3(0, 0, 0));
-uniform float kernel_normalization = 1.0;
+// @uniform mat3 kernel = mat3(vec3(0, 0, 0), vec3(0, 1, 0), vec3(0, 0, 0));
+// @uniform float kernel_normalization = 1.0;
 
 // Find coordinate of matrix element from index
 vec2 kpos(int index, vec2 iResolution)
@@ -47,8 +45,9 @@ mat3[3] region3x3(sampler2D sampler, vec2 uv, vec2 iResolution)
 // kernel : kernel used for convolution
 // sampler : texture sampler
 // uv : current coordinates on sampler
-vec3 convolution(sampler2D sampler, vec2 uv, vec2 iResolution)
-{
+vec3 convolution(
+	sampler2D sampler, vec2 uv, vec2 iResolution, mat3 kernel, float kernel_normalization
+) {
 	vec3 fragment;
 
 	// Extract a 3x3 region centered in uv
@@ -74,11 +73,17 @@ vec3 convolution(sampler2D sampler, vec2 uv, vec2 iResolution)
 	return fragment;
 }
 
-void fragment()
-{
+vec4 apply_effect(
+	sampler2D source_texture,
+	vec2 uv,
+	sampler2D selection,
+	mat3 kernel,
+	float kernel_normalization
+) {
+	vec4 original = texture(source_texture, uv); // Original texture
 	// Convolve kernel with texture
-	vec3 col = convolution(TEXTURE, UV, 1.0 / TEXTURE_PIXEL_SIZE);
+	vec2 pixel_size = 1.0 / vec2(textureSize(source_texture, 0));
+	vec3 col = convolution(source_texture, uv, 1.0 / pixel_size, kernel, kernel_normalization);
 
-	// Output to screen
-	COLOR.rgb = col;
+	return vec4(col, original.a);
 }

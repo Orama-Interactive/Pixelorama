@@ -2,17 +2,19 @@ extends ImageEffect
 
 enum Animate { OFFSET_X, OFFSET_Y }
 var color := Color.BLACK
-var shader := load("res://src/Shaders/Effects/DropShadow.gdshader")
+var shader_inc := load("uid://b5eae1cl8cpx0")
+var shader: Shader
 
 @onready var shadow_color := $VBoxContainer/ShadowOptions/ShadowColor as ColorPickerButton
 
 
 func _ready() -> void:
-	super._ready()
+	shader = ShaderLoader.generate_texture_blit_shader(shader_inc)
+	super()
 	shadow_color.get_picker().presets_visible = false
 	color = shadow_color.color
 	var sm := ShaderMaterial.new()
-	sm.shader = shader
+	sm.shader = ShaderLoader.generate_canvas_item_shader(shader_inc)
 	preview.set_material(sm)
 
 	# set as in enum

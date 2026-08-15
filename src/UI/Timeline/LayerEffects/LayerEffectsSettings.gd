@@ -14,7 +14,9 @@ var effects: Array[LayerEffect] = [
 		"Flat to Isometric", load("res://src/Shaders/Effects/FlatToIsometric.gdshaderinc"), "Transform"
 	),
 	LayerEffect.new(
-		"Convolution Matrix", load("res://src/Shaders/Effects/ConvolutionMatrix.gdshader"), "Color"
+		"Convolution Matrix",
+		load("res://src/Shaders/Effects/ConvolutionMatrix.gdshaderinc"),
+		"Color"
 	),
 	LayerEffect.new(
 		"Gaussian Blur", load("res://src/Shaders/Effects/GaussianBlur.gdshader"), "Blur"
@@ -24,10 +26,12 @@ var effects: Array[LayerEffect] = [
 		"Outline", load("res://src/Shaders/Effects/OutlineInline.gdshaderinc"), "Procedural"
 	),
 	LayerEffect.new(
-		"Drop Shadow", load("res://src/Shaders/Effects/DropShadow.gdshader"), "Procedural"
+		"Drop Shadow", load("res://src/Shaders/Effects/DropShadow.gdshaderinc"), "Procedural"
 	),
 	LayerEffect.new("Invert Colors", load("res://src/Shaders/Effects/Invert.gdshaderinc"), "Color"),
-	LayerEffect.new("Desaturation", load("res://src/Shaders/Effects/Desaturate.gdshader"), "Color"),
+	LayerEffect.new(
+		"Desaturation", load("res://src/Shaders/Effects/Desaturate.gdshaderinc"), "Color"
+	),
 	LayerEffect.new(
 		"Adjust Hue/Saturation/Value", load("res://src/Shaders/Effects/HSV.gdshader"), "Color"
 	),

@@ -5,13 +5,15 @@ var green := true
 var blue := true
 var alpha := false
 
-var shader := load("res://src/Shaders/Effects/Desaturate.gdshader")
+var shader_inc := load("uid://l1rt2q7jthsm")
+var shader: Shader
 
 
 func _ready() -> void:
-	super._ready()
+	shader = ShaderLoader.generate_texture_blit_shader(shader_inc)
+	super()
 	var sm := ShaderMaterial.new()
-	sm.shader = shader
+	sm.shader = ShaderLoader.generate_canvas_item_shader(shader_inc)
 	preview.set_material(sm)
 
 
