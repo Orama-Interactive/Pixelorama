@@ -1,7 +1,8 @@
-shader_type canvas_item;
-render_mode unshaded;
+shader_type texture_blit;
+render_mode blend_disabled;
 
-uniform sampler2D selection : filter_nearest, hint_default_black;
+uniform sampler2D source_texture0 : hint_blit_source0, filter_nearest;
+uniform sampler2D selection : filter_nearest, hint_default_black, repeat_disable;
 uniform vec4 color;
 uniform float tolerance : hint_range(0.0, 1.0);
 uniform int operation = 0; // 0 = add, 1 = subtract, 2 = intersect
@@ -15,8 +16,8 @@ bool similar_colors(vec4 c1, vec4 c2, float tol) {
 	);
 }
 
-void fragment() {
-	vec4 original_color = texture(TEXTURE, UV);
+void blit() {
+	vec4 original_color = texture(source_texture0, UV);
 
 	vec4 col = texture(selection, UV);
 	if (col.rgb == vec3(0.0))
@@ -33,5 +34,5 @@ void fragment() {
 		if (operation == 2)
 			col = vec4(0.0);
 
-	COLOR = col;
+	COLOR0 = col;
 }
