@@ -22,6 +22,8 @@ var current_layer: BaseLayer:
 		track_scroll_container.ensure_control_visible(keyframe_timeline_cursor)
 		track_scroll_container.scroll_vertical = v_scroll
 var layer_element_tree_vscrollbar: VScrollBar
+## Keeps track of all categories if they are collapsed. It doesn't matter if they exist or not
+var collapsed_track_names: PackedStringArray
 
 @onready
 var keyframe_timeline_frame_display: KeyframeTimelineFrameDisplay = %KeyframeTimelineFrameDisplay
@@ -159,6 +161,8 @@ func add_section(
 ) -> TreeItem:
 	var tree_item := parent_item.create_child()
 	tree_item.set_text(0, section_name)
+	if section_name in collapsed_track_names:
+		tree_item.collapsed = true
 	var track := KeyframeAnimationTrack.new()
 	track.type = track_type
 	track.custom_minimum_size.x = frame_ui_size * Global.current_project.frames.size()
@@ -177,30 +181,31 @@ func add_property(
 ):
 	var param_tree_item := parent_item.create_child()
 	param_tree_item.set_text(0, Keychain.humanize_snake_case(property))
-	var param_track := KeyframeAnimationTrack.new()
-	param_track.type = param_type
-	param_track.timeline = self
-	param_track.param_name = property
-	param_track.is_property = true
 	var tree_item_area_rect := layer_element_tree.get_item_area_rect(param_tree_item)
-	param_track.custom_minimum_size.x = frame_ui_size * Global.current_project.frames.size()
-	param_track.custom_minimum_size.y = tree_item_area_rect.size.y
-	track_container.add_child(param_track)
-	match param_track.type:
-		KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT:
-			param_track.animatable_object = animatable_object
+	if not parent_item.collapsed:
+		var param_track := KeyframeAnimationTrack.new()
+		param_track.type = param_type
+		param_track.timeline = self
+		param_track.param_name = property
+		param_track.is_property = true
+		param_track.custom_minimum_size.x = frame_ui_size * Global.current_project.frames.size()
+		param_track.custom_minimum_size.y = tree_item_area_rect.size.y
+		track_container.add_child(param_track)
+		match param_track.type:
+			KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT:
+				param_track.animatable_object = animatable_object
 
-	var animation_dictionary: Dictionary[String, Dictionary] = animatable_object.get(
-		animation_dictionary_name
-	)
-	if not animation_dictionary:
-		return
-	if animation_dictionary.has(property):
-		for frame_index: int in animation_dictionary[property]:
-			var key_button := _create_keyframe_button(
-				frame_index, param_track, animation_dictionary, property
-			)
-			param_track.add_child(key_button)
+		var animation_dictionary: Dictionary[String, Dictionary] = animatable_object.get(
+			animation_dictionary_name
+		)
+		if not animation_dictionary:
+			return
+		if animation_dictionary.has(property):
+			for frame_index: int in animation_dictionary[property]:
+				var key_button := _create_keyframe_button(
+					frame_index, param_track, animation_dictionary, property
+				)
+				param_track.add_child(key_button)
 
 
 func _hide_extra_ui() -> void:
@@ -541,3 +546,18 @@ func _on_layer_element_tree_vertical_scrolling() -> void:
 
 func _on_layer_element_tree_gui_input(_event: InputEvent) -> void:
 	track_scroll_container.scroll_vertical = layer_element_tree.get_scroll().y
+
+
+func _on_layer_element_tree_item_collapsed(item: TreeItem) -> void:
+	var section_name := item.get_text(0)
+	var collapse_state_changed := false
+	if item.collapsed and not section_name in collapsed_track_names:
+		collapsed_track_names.append(item.get_text(0))
+		collapse_state_changed = true
+	elif not item.collapsed and section_name in collapsed_track_names:
+		collapsed_track_names.erase(item.get_text(0))
+		collapse_state_changed = true
+	if collapse_state_changed:
+		unselect_keyframe()
+		await get_tree().process_frame
+		recreate_timeline()
