@@ -1,7 +1,9 @@
 extends ImageEffect
 
 enum Animate { HUE, SATURATION, VALUE }
-var shader := load("res://src/Shaders/Effects/HSV.gdshader")
+
+var shader_inc := load("uid://bph4225jfs3hc")
+var shader: Shader
 
 @onready var hue_slider := $VBoxContainer/HueSlider as ValueSlider
 @onready var sat_slider := $VBoxContainer/SaturationSlider as ValueSlider
@@ -10,9 +12,10 @@ var shader := load("res://src/Shaders/Effects/HSV.gdshader")
 
 
 func _ready() -> void:
-	super._ready()
+	shader = ShaderLoader.generate_texture_blit_shader(shader_inc)
+	super()
 	var sm := ShaderMaterial.new()
-	sm.shader = shader
+	sm.shader = ShaderLoader.generate_canvas_item_shader(shader_inc)
 	preview.set_material(sm)
 	# set as in enum
 	animate_panel.add_float_property("Hue", hue_slider)

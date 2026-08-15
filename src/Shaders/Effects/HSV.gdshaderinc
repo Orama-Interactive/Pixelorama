@@ -1,11 +1,7 @@
-shader_type canvas_item;
-render_mode unshaded;
-
-uniform int hue : hint_range(-180, 180);
-uniform int saturation : hint_range(-100, 100);
-uniform int value : hint_range(-100, 100);
-uniform bool wrap_overflowing = false;
-uniform sampler2D selection : filter_nearest;
+// @uniform int hue : hint_range(-180, 180);
+// @uniform int saturation : hint_range(-100, 100);
+// @uniform int value : hint_range(-100, 100);
+// @uniform bool wrap_overflowing = false;
 
 bool is_equal_approx(float a, float b) {
 	return abs(a - b) <= 0.0001;
@@ -83,10 +79,17 @@ vec3 hsv2rgb(vec3 hsv) {
 	}
 }
 
-void fragment() {
-	// Get color from the sprite texture at the current pixel we are rendering
-	vec4 original_color = texture(TEXTURE, UV);
-	vec4 selection_color = texture(selection, UV);
+vec4 apply_effect(
+	sampler2D source_texture,
+	vec2 uv,
+	sampler2D selection,
+	int hue,
+	int saturation,
+	int value,
+	bool wrap_overflowing
+) {
+	vec4 original_color = texture(source_texture, uv);
+	vec4 selection_color = texture(selection, uv);
 
 	vec3 col = original_color.rgb;
 	ivec3 hsv_8 = ivec3(round(rgb2hsv(col) * vec3(360.0, 100.0, 100.0)));
@@ -114,5 +117,5 @@ void fragment() {
 	}
 	col = hsv2rgb(vec3(hsv_8) / vec3(360, 100, 100));
 	vec3 output = mix(original_color.rgb, col, selection_color.a);
-	COLOR = vec4(output.rgb, original_color.a);
+	return vec4(output.rgb, original_color.a);
 }

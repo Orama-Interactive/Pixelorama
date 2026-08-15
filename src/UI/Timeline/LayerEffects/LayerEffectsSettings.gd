@@ -35,7 +35,7 @@ var effects: Array[LayerEffect] = [
 		"Desaturation", load("res://src/Shaders/Effects/Desaturate.gdshaderinc"), "Color"
 	),
 	LayerEffect.new(
-		"Adjust Hue/Saturation/Value", load("res://src/Shaders/Effects/HSV.gdshader"), "Color"
+		"Adjust Hue/Saturation/Value", load("res://src/Shaders/Effects/HSV.gdshaderinc"), "Color"
 	),
 	LayerEffect.new(
 		"Adjust Brightness/Contrast",
@@ -45,9 +45,9 @@ var effects: Array[LayerEffect] = [
 	LayerEffect.new(
 		"Color Curves", load("res://src/Shaders/Effects/ColorCurves.gdshaderinc"), "Color"
 	),
-	LayerEffect.new("Palettize", load("res://src/Shaders/Effects/Palettize.gdshader"), "Color"),
-	LayerEffect.new("Pixelize", load("res://src/Shaders/Effects/Pixelize.gdshader"), "Blur"),
-	LayerEffect.new("Posterize", load("res://src/Shaders/Effects/Posterize.gdshader"), "Color"),
+	LayerEffect.new("Palettize", load("res://src/Shaders/Effects/Palettize.gdshaderinc"), "Color"),
+	LayerEffect.new("Pixelize", load("res://src/Shaders/Effects/Pixelize.gdshaderinc"), "Blur"),
+	LayerEffect.new("Posterize", load("res://src/Shaders/Effects/Posterize.gdshaderinc"), "Color"),
 	LayerEffect.new(
 		"Gradient Map", load("res://src/Shaders/Effects/GradientMap.gdshaderinc"), "Color"
 	),
