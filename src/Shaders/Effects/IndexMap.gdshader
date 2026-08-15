@@ -31,6 +31,8 @@ uniform vec2 scale = vec2(1.0);
 // (end DESCRIPTION)
 void fragment() {
 	vec4 coordinate = texture(TEXTURE, UV);
+	// We are adding 0.5 to it because if we don't, sometimes it breaks due to rounding errors.
+	coordinate.rg += vec2(0.5 / 255.0);
 	vec2 image_size = vec2(textureSize(TEXTURE, 0));
 	bool should_import_alpha = include_alpha;
 	vec2 anti_normalize_vector = vec2(255.0, 255.0);
