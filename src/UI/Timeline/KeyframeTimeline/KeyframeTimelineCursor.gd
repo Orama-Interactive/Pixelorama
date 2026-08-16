@@ -59,8 +59,12 @@ func _change_cel(new_pos: Vector2) -> void:
 	var container_pos := keyframe_timeline_frame_display.get_global_rect().position.x
 	var container_end := keyframe_timeline_frame_display.get_global_rect().end.x
 	var x_offset := keyframe_timeline_frame_display.x_offset
-	pos = clampf(new_pos.x - (size.x / 2.0), container_pos, container_end)
-	var frame := floori((pos - container_pos + x_offset) / KeyframeTimeline.frame_ui_size)
+	# NOTE: container_pos - KeyframeTimeline.frame_ui_size is for allowing reverse auto scroll
+	pos = clampf(
+		new_pos.x - (size.x / 2.0), container_pos - KeyframeTimeline.frame_ui_size, container_end
+	)
+	var frame_position_float := (pos - container_pos + x_offset) / KeyframeTimeline.frame_ui_size
+	var frame := roundi(frame_position_float)
 	frame = clampi(frame, 0, Global.current_project.frames.size() - 1)
 	# Change frame
 	Global.current_project.selected_cels.clear()
@@ -68,6 +72,9 @@ func _change_cel(new_pos: Vector2) -> void:
 	if !Global.current_project.selected_cels.has(frame_layer):
 		Global.current_project.selected_cels.append(frame_layer)
 	Global.current_project.change_cel(frame, -1)
+	# Snap to the frame position if it is close enough, otherwise move freely
+	if abs(frame_position_float - frame) < 0.3:
+		pos = frame * KeyframeTimeline.frame_ui_size + container_pos - x_offset
 
 
 func update_position() -> void:

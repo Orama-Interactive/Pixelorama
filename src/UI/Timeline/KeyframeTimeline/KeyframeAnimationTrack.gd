@@ -45,6 +45,9 @@ func _gui_input(event: InputEvent) -> void:
 
 
 func _draw() -> void:
+	if animatable_object != null:
+		var dash_color := Color(line_color.r, line_color.g, line_color.b, line_color.a * 0.5)
+		draw_dashed_line(Vector2(0, size.y / 2.0), Vector2(size.x, size.y / 2.0), dash_color)
 	draw_line(Vector2(0, size.y), Vector2(size.x, size.y), line_color)
 
 
