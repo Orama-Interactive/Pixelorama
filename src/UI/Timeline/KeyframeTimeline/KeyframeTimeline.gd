@@ -152,7 +152,7 @@ func recreate_timeline() -> void:
 	select_keyframes()
 	track_scroll_container.scroll_horizontal = h_scroll
 	track_scroll_container.scroll_vertical = v_scroll
-	# Hide UI which is un-usable
+	# Hide UI which is un-usable.
 	_hide_extra_ui()
 
 
@@ -163,6 +163,8 @@ func add_section(
 	tree_item.set_text(0, section_name)
 	if section_name in collapsed_track_names:
 		tree_item.collapsed = true
+	if parent_item.collapsed:
+		return
 	var track := KeyframeAnimationTrack.new()
 	track.type = track_type
 	track.custom_minimum_size.x = frame_ui_size * Global.current_project.frames.size()
@@ -171,7 +173,7 @@ func add_section(
 	return tree_item
 
 
-# NOTE: the property to be animated must have a animated_params variable
+# NOTE: The property to be animated must have a animated_params variable.
 func add_property(
 	property: StringName,
 	param_type: KeyframeAnimationTrack.TrackTypes,
@@ -179,33 +181,37 @@ func add_property(
 	animatable_object: AnimatableObject,
 	animation_dictionary_name := &"animated_params"
 ):
+	if not is_instance_valid(parent_item):
+		return
 	var param_tree_item := parent_item.create_child()
 	param_tree_item.set_text(0, Keychain.humanize_snake_case(property))
-	var tree_item_area_rect := layer_element_tree.get_item_area_rect(param_tree_item)
-	if not parent_item.collapsed:
-		var param_track := KeyframeAnimationTrack.new()
-		param_track.type = param_type
-		param_track.timeline = self
-		param_track.param_name = property
-		param_track.is_property = true
-		param_track.custom_minimum_size.x = frame_ui_size * Global.current_project.frames.size()
-		param_track.custom_minimum_size.y = tree_item_area_rect.size.y
-		track_container.add_child(param_track)
-		match param_track.type:
-			KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT:
-				param_track.animatable_object = animatable_object
+	if parent_item.collapsed:
+		return
 
-		var animation_dictionary: Dictionary[String, Dictionary] = animatable_object.get(
-			animation_dictionary_name
-		)
-		if not animation_dictionary:
-			return
-		if animation_dictionary.has(property):
-			for frame_index: int in animation_dictionary[property]:
-				var key_button := _create_keyframe_button(
-					frame_index, param_track, animation_dictionary, property
-				)
-				param_track.add_child(key_button)
+	var tree_item_area_rect := layer_element_tree.get_item_area_rect(param_tree_item)
+	var param_track := KeyframeAnimationTrack.new()
+	param_track.type = param_type
+	param_track.timeline = self
+	param_track.param_name = property
+	param_track.is_property = true
+	param_track.custom_minimum_size.x = frame_ui_size * Global.current_project.frames.size()
+	param_track.custom_minimum_size.y = tree_item_area_rect.size.y
+	track_container.add_child(param_track)
+	match param_track.type:
+		KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT:
+			param_track.animatable_object = animatable_object
+
+	var animation_dictionary: Dictionary[String, Dictionary] = animatable_object.get(
+		animation_dictionary_name
+	)
+	if not animation_dictionary:
+		return
+	if animation_dictionary.has(property):
+		for frame_index: int in animation_dictionary[property]:
+			var key_button := _create_keyframe_button(
+				frame_index, param_track, animation_dictionary, property
+			)
+			param_track.add_child(key_button)
 
 
 func _hide_extra_ui() -> void:
