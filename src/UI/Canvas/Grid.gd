@@ -381,11 +381,11 @@ func _hexagonal_cell_points_append(
 
 ## Helper functions for _draw_pixelated_isometric_grid()
 func _create_polylines(points: Array[Vector2i], bound: Rect2i) -> Array:
-	var lines = []
+	var lines := []
 	for i in points.size():
-		var point = points[i]
+		var point := points[i]
 		if i < points.size() - 1:
-			var next_point = points[i + 1]
+			var next_point := points[i + 1]
 			if (
 				point.x < bound.position.x
 				or point.x > bound.end.x
