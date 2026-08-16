@@ -24,17 +24,16 @@ var _marching_ants_time_elapsed := 0.0
 
 func _ready() -> void:
 	set_process(false)
+	_on_selection_properties_updated()
 	# Ensure to only call _input() if the cursor is inside the main canvas viewport
 	Global.main_viewport.mouse_entered.connect(set_process_input.bind(true))
 	Global.main_viewport.mouse_exited.connect(set_process_input.bind(false))
 	marching_ants_outline.texture = preview_selection_texture
-	marching_ants_outline.material.set_shader_parameter(
-		"animated", Global.selection_animated_borders
-	)
 	transformation_handles.preview_transform_changed.connect(_update_marching_ants)
 	Global.project_switched.connect(_project_switched)
 	Global.transform_content_confirmed.connect(transform_content_confirm)
 	Global.transform_content_canceled.connect(transform_content_cancel)
+	Global.selection_properties_updated.connect(_on_selection_properties_updated)
 	Global.camera.zoom_changed.connect(_update_on_zoom)
 
 
@@ -58,6 +57,14 @@ func _draw() -> void:
 	else:
 		set_process(false)
 	transformation_handles.queue_redraw()
+
+
+func _on_selection_properties_updated() -> void:
+	var mat := marching_ants_outline.material as ShaderMaterial
+	mat.set_shader_parameter(&"animated", Global.selection_animated_borders)
+	mat.set_shader_parameter(&"first_color", Global.selection_border_color_1)
+	mat.set_shader_parameter(&"second_color", Global.selection_border_color_2)
+	queue_redraw()
 
 
 func _update_on_zoom() -> void:
