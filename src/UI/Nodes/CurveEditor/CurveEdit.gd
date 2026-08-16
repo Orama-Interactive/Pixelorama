@@ -257,7 +257,7 @@ func _on_gui_input(event: InputEvent) -> void:
 
 func _on_resize() -> void:
 	queue_redraw()
-	update_controls()
+	update_controls.call_deferred()
 
 
 func _on_presets_item_selected(index: int) -> void:

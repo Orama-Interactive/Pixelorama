@@ -15,8 +15,7 @@ func _ready() -> void:
 	preview.set_material(sm)
 	for i in channel_option_button.item_count:
 		var curve := Curve.new()
-		curve.add_point(Vector2.ZERO, 0, 1, Curve.TANGENT_LINEAR)
-		curve.add_point(Vector2.ONE, 1, 0, Curve.TANGENT_LINEAR)
+		CurveEdit.set_curve_preset(curve, 0)
 		curves.append(curve)
 	curve_edit.curve = curves[Channel.RGB]
 
