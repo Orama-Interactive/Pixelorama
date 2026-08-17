@@ -570,7 +570,6 @@ layout_mode = 2
 
 [node name="GridsCount" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Canvas/GridOptions" unique_id=1094094664 instance=ExtResource("5_rlmsh")]
 layout_mode = 2
-focus_mode = 0
 min_value = 1.0
 max_value = 10.0
 value = 1.0

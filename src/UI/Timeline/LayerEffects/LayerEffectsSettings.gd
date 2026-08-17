@@ -4,9 +4,14 @@ const LAYER_EFFECT_BUTTON = preload("res://src/UI/Timeline/LayerEffects/LayerEff
 const DELETE_TEXTURE := preload("res://assets/graphics/misc/close.svg")
 
 var effects: Array[LayerEffect] = [
-	LayerEffect.new("Offset & Scale", load("res://src/Shaders/Effects/OffsetPixels.gdshader")),
 	LayerEffect.new(
-		"Flat to Isometric", load("res://src/Shaders/Effects/FlatToIsometric.gdshader")
+		"Offset & Scale", load("res://src/Shaders/Effects/OffsetPixels.gdshader"), "Transform"
+	),
+	LayerEffect.new(
+		"Corner Pin", load("res://src/Shaders/Effects/CornerPin.gdshader"), "Transform"
+	),
+	LayerEffect.new(
+		"Flat to Isometric", load("res://src/Shaders/Effects/FlatToIsometric.gdshader"), "Transform"
 	),
 	LayerEffect.new(
 		"Convolution Matrix", load("res://src/Shaders/Effects/ConvolutionMatrix.gdshader"), "Color"
