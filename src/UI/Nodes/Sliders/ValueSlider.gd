@@ -187,7 +187,12 @@ func _gui_input(event: InputEvent) -> void:
 			if event.shift_pressed:
 				x_delta *= 0.1
 			if show_progress:
-				ratio = get_meta("start_ratio") + x_delta / size.x
+				# NOTE: changing ratio can only happen between [0,1]. We need to increment value
+				# even when the bounds have reached
+				var new_ratio: float = get_meta("start_ratio") + x_delta / size.x
+				value = (
+					_start_value + (max_value - min_value) * (new_ratio - get_meta("start_ratio"))
+				)
 			else:
 				value = _start_value + x_delta * step
 			# Snap when snap_by_default is true, do the opposite when Control is pressed
