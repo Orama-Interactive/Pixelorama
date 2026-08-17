@@ -24,17 +24,16 @@ var _marching_ants_time_elapsed := 0.0
 
 func _ready() -> void:
 	set_process(false)
+	_on_selection_properties_updated()
 	# Ensure to only call _input() if the cursor is inside the main canvas viewport
 	Global.main_viewport.mouse_entered.connect(set_process_input.bind(true))
 	Global.main_viewport.mouse_exited.connect(set_process_input.bind(false))
 	marching_ants_outline.texture = preview_selection_texture
-	marching_ants_outline.material.set_shader_parameter(
-		"animated", Global.selection_animated_borders
-	)
 	transformation_handles.preview_transform_changed.connect(_update_marching_ants)
 	Global.project_switched.connect(_project_switched)
 	Global.transform_content_confirmed.connect(transform_content_confirm)
 	Global.transform_content_canceled.connect(transform_content_cancel)
+	Global.selection_properties_updated.connect(_on_selection_properties_updated)
 	Global.camera.zoom_changed.connect(_update_on_zoom)
 
 
@@ -58,6 +57,14 @@ func _draw() -> void:
 	else:
 		set_process(false)
 	transformation_handles.queue_redraw()
+
+
+func _on_selection_properties_updated() -> void:
+	var mat := marching_ants_outline.material as ShaderMaterial
+	mat.set_shader_parameter(&"animated", Global.selection_animated_borders)
+	mat.set_shader_parameter(&"first_color", Global.selection_border_color_1)
+	mat.set_shader_parameter(&"second_color", Global.selection_border_color_2)
+	queue_redraw()
 
 
 func _update_on_zoom() -> void:
@@ -418,6 +425,8 @@ func paste(in_place := false) -> void:
 	var selection_rect := project.selection_map.get_selection_rect(project)
 	project.selection_offset = clipboard.selection_offset
 	var transform_origin: Vector2 = clipboard.big_bounding_rectangle.position
+	var grid_size := Global.grids[0].grid_size
+	var grid_offset := Global.grids[0].grid_offset
 	if not in_place:  # If "Paste" is selected, and not "Paste in Place"
 		var camera_center := Global.camera.camera_screen_center
 		camera_center -= Vector2(selection_rect.size) / 2.0
@@ -433,14 +442,12 @@ func paste(in_place := false) -> void:
 		transform_origin = Vector2i(camera_center.floor())
 		if Tools.is_placing_tiles():
 			var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
-			var grid_size := tilemap_cel.get_tile_size()
-			var offset := tilemap_cel.offset % grid_size
+			var tile_size := tilemap_cel.get_tile_size()
+			var offset := tilemap_cel.offset % tile_size
 			transform_origin = Vector2i(
-				Tools.snap_to_rectangular_grid_boundary(transform_origin, grid_size, offset)
+				Tools.snap_to_rectangular_grid_boundary(transform_origin, tile_size, offset)
 			)
 		elif Global.snap_to_rectangular_grid_center:
-			var grid_size := Global.grids[0].grid_size
-			var grid_offset := Global.grids[0].grid_offset
 			# Offset the selection so that the center of selection falls above the center of grid.
 			transform_origin = (
 				Vector2i(
@@ -449,8 +456,6 @@ func paste(in_place := false) -> void:
 				- Vector2i((clipboard.image.get_size() / 2.0).floor())
 			)
 		elif Global.snap_to_rectangular_grid_boundary:
-			var grid_size := Global.grids[0].grid_size
-			var grid_offset := Global.grids[0].grid_offset
 			transform_origin = Vector2i(
 				Tools.snap_to_rectangular_grid_boundary(transform_origin, grid_size, grid_offset)
 			)
@@ -458,17 +463,15 @@ func paste(in_place := false) -> void:
 	else:
 		if Tools.is_placing_tiles():
 			var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
-			var grid_size := tilemap_cel.get_tile_size()
-			var offset := tilemap_cel.offset % grid_size
+			var tile_size := tilemap_cel.get_tile_size()
+			var offset := tilemap_cel.offset % tile_size
 			project.selection_offset = Tools.snap_to_rectangular_grid_boundary(
-				project.selection_offset, grid_size, offset
+				project.selection_offset, tile_size, offset
 			)
 			transform_origin = Vector2i(
-				Tools.snap_to_rectangular_grid_boundary(transform_origin, grid_size, offset)
+				Tools.snap_to_rectangular_grid_boundary(transform_origin, tile_size, offset)
 			)
 		elif Global.snap_to_rectangular_grid_center:
-			var grid_size := Global.grids[0].grid_size
-			var grid_offset := Global.grids[0].grid_offset
 			# Offset the selection so that the center of selection falls above the center of grid.
 			project.selection_offset = (
 				Tools.snap_to_rectangular_grid_center(
@@ -483,8 +486,6 @@ func paste(in_place := false) -> void:
 				- Vector2i((clipboard.image.get_size() / 2.0).floor())
 			)
 		elif Global.snap_to_rectangular_grid_boundary:
-			var grid_size := Global.grids[0].grid_size
-			var grid_offset := Global.grids[0].grid_offset
 			project.selection_offset = Tools.snap_to_rectangular_grid_boundary(
 				project.selection_offset, grid_size, grid_offset
 			)
@@ -700,7 +701,7 @@ func _project_switched() -> void:
 	queue_redraw()
 
 
-func get_selected_image(cel_image: Image) -> Image:
+static func get_selected_image(cel_image: Image) -> Image:
 	var project := Global.current_project
 	var selection_map_copy := project.selection_map.return_cropped_copy(project, project.size)
 	var selection_rect := selection_map_copy.get_used_rect()

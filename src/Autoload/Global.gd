@@ -32,6 +32,7 @@ signal share_options_between_tools_changed(mode: bool)
 signal palette_panel_updated  ## Emitted when the palette needs to be redrawn in the palette panel.
 signal grid_updated  ## Emitted when the grid needs to be redrawn.
 signal pixel_grid_updated  ## Emitted when the pixel grid needs to be redrawn.
+signal selection_properties_updated
 @warning_ignore("unused_signal")
 signal on_cursor_position_text_changed(text: String)
 @warning_ignore("unused_signal")
@@ -502,37 +503,28 @@ var selection_animated_borders := true:
 		if value == selection_animated_borders:
 			return
 		selection_animated_borders = value
-		if is_instance_valid(canvas.selection):
-			var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
-			marching_ants.material.set_shader_parameter("animated", selection_animated_borders)
+		selection_properties_updated.emit()
 ## Found in Preferences. The first color of the selection borders.
 var selection_border_color_1 := Color.WHITE:
 	set(value):
 		if value == selection_border_color_1:
 			return
 		selection_border_color_1 = value
-		if is_instance_valid(canvas.selection):
-			var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
-			marching_ants.material.set_shader_parameter("first_color", selection_border_color_1)
-			canvas.selection.queue_redraw()
+		selection_properties_updated.emit()
 ## Found in Preferences. The second color of the selection borders.
 var selection_border_color_2 := Color.BLACK:
 	set(value):
 		if value == selection_border_color_2:
 			return
 		selection_border_color_2 = value
-		if is_instance_valid(canvas.selection):
-			var marching_ants: Sprite2D = canvas.selection.marching_ants_outline
-			marching_ants.material.set_shader_parameter("second_color", selection_border_color_2)
-			canvas.selection.queue_redraw()
+		selection_properties_updated.emit()
 ## Found in Preferences. The second color of the selection borders.
 var transformation_preview_alpha := 0.5:
 	set(value):
 		if value == transformation_preview_alpha:
 			return
 		transformation_preview_alpha = value
-		if is_instance_valid(canvas.selection):
-			canvas.selection.queue_redraw()
+		selection_properties_updated.emit()
 
 ## Found in Preferences. If [code]true[/code], Pixelorama pauses when unfocused to save CPU usage.
 var pause_when_unfocused := true

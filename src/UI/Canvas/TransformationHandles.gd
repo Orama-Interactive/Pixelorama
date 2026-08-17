@@ -663,7 +663,7 @@ func begin_transform(
 	)
 	for cel in selection_node.get_selected_draw_cels():
 		var cel_image := cel.get_image()
-		cel.transformed_content = selection_node.get_selected_image(cel_image)
+		cel.transformed_content = SelectionNode.get_selected_image(cel_image)
 		cel_image.blit_rect_mask(
 			clear_image,
 			cel.transformed_content,
