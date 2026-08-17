@@ -8,10 +8,12 @@ var effects: Array[LayerEffect] = [
 		"Offset & Scale", load("res://src/Shaders/Effects/OffsetPixels.gdshaderinc"), "Transform"
 	),
 	LayerEffect.new(
-		"Corner Pin", load("res://src/Shaders/Effects/CornerPin.gdshader"), "Transform"
+		"Corner Pin", load("res://src/Shaders/Effects/CornerPin.gdshaderinc"), "Transform"
 	),
 	LayerEffect.new(
-		"Flat to Isometric", load("res://src/Shaders/Effects/FlatToIsometric.gdshaderinc"), "Transform"
+		"Flat to Isometric",
+		load("res://src/Shaders/Effects/FlatToIsometric.gdshaderinc"),
+		"Transform"
 	),
 	LayerEffect.new(
 		"Convolution Matrix",

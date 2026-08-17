@@ -1,14 +1,9 @@
-shader_type canvas_item;
-render_mode unshaded;
-
 // Works on the principle https://www.sciencedirect.com/science/article/pii/S0965997825001139
 
-uniform sampler2D selection : filter_nearest;
-
-uniform ivec2 top_left = ivec2(0, 0);
-uniform ivec2 top_right = ivec2(64, 0);
-uniform ivec2 bottom_left = ivec2(0, 64);
-uniform ivec2 bottom_right = ivec2(64, 64);
+// @uniform ivec2 top_left = ivec2(0, 0);
+// @uniform ivec2 top_right = ivec2(64, 0);
+// @uniform ivec2 bottom_left = ivec2(0, 64);
+// @uniform ivec2 bottom_right = ivec2(64, 64);
 
 
 // we define cross2 as the scalar z-component of the cross product.
@@ -97,9 +92,17 @@ vec2 inverse_deform(vec2 p, vec2 tl, vec2 tr, vec2 bl, vec2 br) {
 }
 
 
-void fragment() {
-	vec4 original_color = texture(TEXTURE, UV);
-	vec2 size = vec2(textureSize(TEXTURE, 0));
+vec4 apply_effect(
+	sampler2D source_texture,
+	vec2 uv,
+	sampler2D selection,
+	ivec2 top_left,
+	ivec2 top_right,
+	ivec2 bottom_left,
+	ivec2 bottom_right
+) {
+	vec4 original_color = texture(source_texture, uv);
+	vec2 size = vec2(textureSize(source_texture, 0));
 
 	// Convert to normalized UV system
 	vec2 tl = vec2(top_left) / size;
@@ -110,7 +113,7 @@ void fragment() {
 	// Find which original texture coordinate corresponds to this destination position.
 	// We are considering that UV is already deformed and working our way back to what color
 	// should be placed here according to un-deformed UV
-	vec2 source_uv = inverse_deform(UV, tl, tr, bl, br);
+	vec2 source_uv = inverse_deform(uv, tl, tr, bl, br);
 
 	// We are deforming entire image, obviously everything outside is transparent
 	vec4 distorted_color = vec4(0.0);
@@ -122,9 +125,9 @@ void fragment() {
 		source_uv.y >= 0.0 &&
 		source_uv.y <= 1.0
 	) {
-		distorted_color = texture(TEXTURE, source_uv);
+		distorted_color = texture(source_texture, source_uv);
 	}
 
-	vec4 selection_color = texture(selection, UV);
-	COLOR = mix(original_color, distorted_color, selection_color.a);
+	vec4 selection_color = texture(selection, uv);
+	return mix(original_color, distorted_color, selection_color.a);
 }
