@@ -35,7 +35,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				return
 
 		var quick_tool_shortcut := "quick_" + t.shortcut + "_tool"
-		if InputMap.has_action(quick_tool_shortcut) and not Tools.has_selection_tool():
+		if InputMap.has_action(quick_tool_shortcut) and not Tools.selection_tool_has_selection():
 			if event.is_action_pressed(quick_tool_shortcut, false, true) and not tool_activated:
 				Tools.quick_assign_tool(t.name, MOUSE_BUTTON_LEFT)
 				Tools.quick_assign_tool(t.name, MOUSE_BUTTON_RIGHT)
