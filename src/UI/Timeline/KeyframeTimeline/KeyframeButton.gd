@@ -2,6 +2,7 @@ class_name KeyframeButton
 extends TextureButton
 
 signal updated_position
+signal deleted(id: int)
 
 const KEYFRAME_ICON := preload("uid://yhha3l44svgs")
 const KEYFRAME_SELECTED_ICON := preload("uid://dtx6hygsgoifb")
@@ -26,6 +27,18 @@ func _init() -> void:
 func _on_gui_input(event: InputEvent) -> void:
 	var selected_keyframe_buttons := KeyframeTimeline.get_selected_keyframe_buttons()
 	var parent := get_parent() as Control
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.pressed:
+			var popup_menu := PopupMenu.new()
+			popup_menu.add_item("Delete keyframe")
+			popup_menu.id_pressed.connect(_on_popup_menu_id_pressed)
+			add_child(popup_menu)
+			var rect := Rect2()
+			rect.position = event.global_position
+			rect.size = Vector2(100, 0)
+			popup_menu.popup_on_parent(rect)
+			popup_menu.visibility_changed.connect(popup_menu.queue_free)
+
 	if not self in selected_keyframe_buttons:
 		# Check if it was pressed just recently, if it is then we have to reset
 		# selected_keyframe_buttons
@@ -41,6 +54,7 @@ func _on_gui_input(event: InputEvent) -> void:
 			selected_keyframe_buttons = [self]
 		else:
 			return
+
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			is_dragged = true
@@ -67,3 +81,8 @@ func _on_gui_input(event: InputEvent) -> void:
 			keyframe_button.position.x = snappedi(new_pos, KeyframeTimeline.frame_ui_size)
 			if keyframe_button.position.x < 0:
 				keyframe_button.position.x = 0
+
+
+func _on_popup_menu_id_pressed(id: int) -> void:
+	if id == 0:
+		deleted.emit(keyframe_id)

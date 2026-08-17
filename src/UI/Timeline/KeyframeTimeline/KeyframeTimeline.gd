@@ -236,6 +236,7 @@ func _create_keyframe_button(
 	key_button.position.y = param_track.custom_minimum_size.y / 2 - key_button.size.y / 2
 	key_button.pressed.connect(_on_keyframe_pressed.bind(key_button))
 	key_button.updated_position.connect(update_keyframe_positions)
+	key_button.deleted.connect(_on_keyframe_deleted)
 	return key_button
 
 
@@ -458,10 +459,19 @@ func add_effect_keyframe(anim_obj: AnimatableObject, frame_index: int, param_nam
 	undo_redo.commit_action()
 
 
-func _on_keyframe_deleted() -> void:
+func _on_keyframe_deleted(keyframe_id := -1) -> void:
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Delete keyframe")
-	for key_button in get_selected_keyframe_buttons():
+	var keyframe_buttons: Array[KeyframeButton]
+	if keyframe_id == -1 or keyframe_id in selected_keyframes:
+		keyframe_buttons = get_selected_keyframe_buttons()
+	else:
+		# If the keyframe we are deleting is not selected, find it.
+		for kfb: KeyframeButton in Global.get_tree().get_nodes_in_group(&"KeyframeButtons"):
+			if kfb.keyframe_id == keyframe_id:
+				keyframe_buttons = [kfb]
+				break
+	for key_button in keyframe_buttons:
 		var track := key_button.get_parent() as KeyframeAnimationTrack
 		var dict := key_button.dict
 		var param_name := key_button.param_name
