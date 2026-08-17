@@ -19,6 +19,9 @@ var effects: Array[LayerEffect] = [
 		"Outline", load("res://src/Shaders/Effects/OutlineInline.gdshader"), "Procedural"
 	),
 	LayerEffect.new(
+		"Trapezoid Deform", load("res://src/Shaders/Effects/Deform.gdshader"), "Procedural"
+	),
+	LayerEffect.new(
 		"Drop Shadow", load("res://src/Shaders/Effects/DropShadow.gdshader"), "Procedural"
 	),
 	LayerEffect.new("Invert Colors", load("res://src/Shaders/Effects/Invert.gdshader"), "Color"),
