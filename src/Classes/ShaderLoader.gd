@@ -159,7 +159,11 @@ static func create_ui_for_shader_uniforms(
 				params[u_name] = slider.value
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
-			hbox.add_child(slider)
+			var vbox := VBoxContainer.new()
+			vbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			hbox.add_child(vbox)
+			vbox.add_child(slider)
+			vbox.add_child(HSeparator.new())
 			parent_node.add_child(hbox)
 		elif u_type == "vec4":
 			if "source_color" in u_hint:
