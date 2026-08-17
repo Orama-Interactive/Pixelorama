@@ -146,6 +146,7 @@ func _create_brush_indicator() -> BitMap:
 func _input(event: InputEvent) -> void:
 	if _drawing:
 		if event.is_action_pressed("change_tool_mode"):
+			get_viewport().set_input_as_handled()
 			if _control_pts.size() > 0:
 				_current_state -= 1
 				_control_pts.resize(_control_pts.size() - 1)
@@ -167,6 +168,7 @@ func cursor_move(pos: Vector2i) -> void:
 		pos.x = Global.current_project.size.x - pos.x - 1
 	if _drawing:
 		if Input.is_action_pressed("shape_displace"):
+			get_viewport().set_input_as_handled()
 			_origin += pos - _last_pixel
 			for i in _control_pts.size():
 				_control_pts[i] = _control_pts[i] + pos - _last_pixel
