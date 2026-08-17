@@ -3,7 +3,7 @@ extends FlowContainer
 var pen_inverted := false
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		pen_inverted = event.pen_inverted
 		return
@@ -13,11 +13,7 @@ func _input(event: InputEvent) -> void:
 		return
 	if get_tree().current_scene.is_writing_text:
 		return
-	var tool_activated := (
-		Input.is_action_pressed(&"activate_left_tool")
-		or Input.is_action_pressed(&"activate_right_tool")
-		or Tools.active_multi_state_tools > 0
-	)
+	var tool_activated := Tools.active_multi_state_tools > 0
 
 	for tool_name in Tools.tools:  # Handle tool shortcuts
 		if not get_node(tool_name).visible:
@@ -39,7 +35,7 @@ func _input(event: InputEvent) -> void:
 				return
 
 		var quick_tool_shortcut := "quick_" + t.shortcut + "_tool"
-		if InputMap.has_action(quick_tool_shortcut) and not Tools.has_selection_tool():
+		if InputMap.has_action(quick_tool_shortcut) and not Tools.selection_tool_has_selection():
 			if event.is_action_pressed(quick_tool_shortcut, false, true) and not tool_activated:
 				Tools.quick_assign_tool(t.name, MOUSE_BUTTON_LEFT)
 				Tools.quick_assign_tool(t.name, MOUSE_BUTTON_RIGHT)

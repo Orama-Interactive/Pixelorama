@@ -97,7 +97,11 @@ func _input(event: InputEvent) -> void:
 	else:
 		var dir := Input.get_vector(&"camera_left", &"camera_right", &"camera_up", &"camera_down")
 		var root := get_tree().current_scene
-		if dir != Vector2.ZERO and not Tools.has_selection_tool() and not root.is_writing_text:
+		if (
+			dir != Vector2.ZERO
+			and not Tools.selection_tool_has_selection()
+			and not root.is_writing_text
+		):
 			offset = offset + (dir.rotated(camera_angle) / zoom) * CAMERA_SPEED_RATE
 
 
