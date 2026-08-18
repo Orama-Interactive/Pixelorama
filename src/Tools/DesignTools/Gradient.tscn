@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://b15b8yv4igjof"]
+
+[ext_resource type="PackedScene" uid="uid://ctfgfelg0sho8" path="res://src/Tools/BaseTool.tscn" id="1_ie0t5"]
+[ext_resource type="Script" uid="uid://bi328260it4xb" path="res://src/Tools/DesignTools/Gradient.gd" id="2_ie0t5"]
+[ext_resource type="PackedScene" uid="uid://bn4aw27dj7pwi" path="res://src/UI/Nodes/GradientEdit.tscn" id="3_ed0sv"]
+
+[node name="ToolOptions" unique_id=964459986 instance=ExtResource("1_ie0t5")]
+offset_right = 138.0
+offset_bottom = 105.0
+script = ExtResource("2_ie0t5")
+
+[node name="GradientEdit" parent="." index="2" unique_id=308571157 instance=ExtResource("3_ed0sv")]
+layout_mode = 2
+
+[node name="GradientOptions" type="GridContainer" parent="." index="3" unique_id=244793747]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="ShapeLabel" type="Label" parent="GradientOptions" index="0" unique_id=1041473976 groups=["gradient_common"]]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Shape:"
+
+[node name="ShapeOptionButton" type="OptionButton" parent="GradientOptions" index="1" unique_id=2126698017 groups=["gradient_common"]]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Linear"
+popup/item_0/id = 0
+popup/item_1/text = "Radial"
+popup/item_1/id = 1
+
+[node name="DitheringLabel" type="Label" parent="GradientOptions" index="2" unique_id=272014290 groups=["gradient_common"]]
+layout_mode = 2
+text = "Dithering pattern:"
+
+[node name="DitheringOptionButton" type="OptionButton" parent="GradientOptions" index="3" unique_id=733272890 groups=["gradient_common"]]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 1
+popup/item_0/text = "None"
+popup/item_0/id = 0
+
+[node name="RepeatLabel" type="Label" parent="GradientOptions" index="4" unique_id=951411977 groups=["gradient_common"]]
+layout_mode = 2
+text = "Repeat:"
+
+[node name="RepeatOptionButton" type="OptionButton" parent="GradientOptions" index="5" unique_id=895875958 groups=["gradient_common"]]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "Repeat"
+popup/item_1/id = 1
+popup/item_2/text = "Mirror"
+popup/item_2/id = 2
+popup/item_3/text = "Truncate"
+popup/item_3/id = 3
+
+[connection signal="item_selected" from="GradientOptions/DitheringOptionButton" to="." method="_on_dithering_option_button_item_selected"]

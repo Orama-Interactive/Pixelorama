@@ -160,6 +160,14 @@ var tools: Dictionary[String, Tool] = {
 		"res://src/Tools/DesignTools/Bucket.tscn",
 		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP]
 	),
+	"Gradient":
+	Tool.new(
+		"Gradient",
+		"Gradient",
+		"gradient_tool",
+		"res://src/Tools/DesignTools/Gradient.tscn",
+		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP]
+	),
 	"Shading":
 	Tool.new(
 		"Shading",
