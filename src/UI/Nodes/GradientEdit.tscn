@@ -120,8 +120,8 @@ borderless = false
 [node name="ColorPicker" type="ColorPicker" parent="Popup" unique_id=1565192928]
 offset_left = 4.0
 offset_top = 4.0
-offset_right = 161.0
-offset_bottom = 331.0
+offset_right = 302.0
+offset_bottom = 611.0
 
 [node name="DivideConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=48060438]
 

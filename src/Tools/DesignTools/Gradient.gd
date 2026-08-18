@@ -1,13 +1,22 @@
 class_name GradientTool
 extends BaseTool
 
+enum Shape { LINEAR, RADIAL }
+enum Repeat { NONE, REPEAT, MIRROR, TRUNCATE }
 enum FillArea { AREA, COLORS, SELECTION }
 
 static var gradient_shader: Shader
 
 var gradient_shader_inc := load("uid://dj3bi0pycege2")
 
+var _shape := Shape.LINEAR
+var _selected_dither_index := 0:
+	set(value):
+		_selected_dither_index = value
+		if value > 0:
+			_selected_dither_matrix = ShaderLoader.dither_matrices[value - 1]
 var _selected_dither_matrix := ShaderLoader.dither_matrices[0]
+var _repeat := Repeat.NONE
 var _fill_area := FillArea.AREA
 var _tolerance := 0.003
 
@@ -33,6 +42,7 @@ func _init() -> void:
 func _ready() -> void:
 	for matrix in ShaderLoader.dither_matrices:
 		dithering_option_button.add_item(matrix.name)
+	super()
 
 
 func _input(event: InputEvent) -> void:
@@ -43,6 +53,37 @@ func _input(event: InputEvent) -> void:
 		elif event.is_action_released(&"shape_displace"):
 			_displace_origin = false
 			get_viewport().set_input_as_handled()
+
+
+func get_config() -> Dictionary:
+	return {
+		"gradient": GradientEditNode.serialize_gradient(gradient_edit.gradient),
+		"shape": _shape,
+		"selected_dither_index": _selected_dither_index,
+		"repeat": _repeat,
+		"fill_area": _fill_area,
+		"tolerance": _tolerance,
+	}
+
+
+func set_config(config: Dictionary) -> void:
+	var gradient_dict = config.get("gradient")
+	if gradient_dict:
+		var gradient := GradientEditNode.deserialize_gradient(gradient_dict)
+		gradient_edit.set_gradient(gradient)
+	_shape = config.get("shape", _shape)
+	_selected_dither_index = config.get("selected_dither_index", _selected_dither_index)
+	_repeat = config.get("repeat", _repeat)
+	_fill_area = config.get("fill_area", _fill_area)
+	_tolerance = config.get("tolerance", _tolerance)
+
+
+func update_config() -> void:
+	%ShapeOptionButton.selected = _shape
+	%DitheringOptionButton.selected = _selected_dither_index
+	%RepeatOptionButton.selected = _repeat
+	_select_fill_area_optionbutton()
+	%ToleranceSlider.value = _tolerance * 255.0
 
 
 func draw_start(pos: Vector2i) -> void:
@@ -137,14 +178,14 @@ func apply_gradient(pos: Vector2) -> void:
 		"gradient_offset_texture": gradient_edit.get_gradient_offsets_texture(),
 		"use_dithering": dithering_option_button.selected > 0,
 		"selection": _selection_tex,
-		"repeat": repeat_option_button.selected,
+		"shape": _shape,
+		"repeat": _repeat,
 		"position": _click_pos.x / project.size.x - 0.5,
 		"size": pos.distance_to(_click_pos) / project.size.x,
 		"angle": angle,
 		"center": _click_pos / Vector2(project.size),
 		"radius": radius,
 		"dither_texture": _selected_dither_matrix.texture,
-		"shape": shape_option_button.selected,
 		"use_color_masking": use_color_masking,
 		"color_mask": _click_color,
 		"tolerance": _tolerance
@@ -201,6 +242,11 @@ func _get_undo_data() -> Dictionary:
 	return data
 
 
+func _select_fill_area_optionbutton() -> void:
+	%FillAreaOptions.selected = _fill_area
+	%ToleranceSlider.visible = (_fill_area != FillArea.SELECTION)
+
+
 ## Used when the fill area is set to similar area.
 func _select_segments(
 	mask: SelectionMap, segments: Array[FloodFillObject.Segment], selection_map: SelectionMap
@@ -218,9 +264,27 @@ func _set_bit(p: Vector2i, mask: SelectionMap, selection_map: SelectionMap) -> v
 		mask.select_pixel(p, true)
 
 
+func _on_gradient_edit_updated(_gradient: Gradient, _cc: bool) -> void:
+	update_config()
+	save_config()
+
+
+func _on_shape_option_button_item_selected(index: Shape) -> void:
+	_shape = index
+	update_config()
+	save_config()
+
+
+func _on_repeat_option_button_item_selected(index: Repeat) -> void:
+	_repeat = index
+	update_config()
+	save_config()
+
+
 func _on_dithering_option_button_item_selected(index: int) -> void:
-	if index > 0:
-		_selected_dither_matrix = ShaderLoader.dither_matrices[index - 1]
+	_selected_dither_index = index
+	update_config()
+	save_config()
 
 
 func _on_fill_area_options_item_selected(index: FillArea) -> void:

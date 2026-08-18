@@ -176,6 +176,15 @@ func _gui_input(ev: InputEvent) -> void:
 		update_from_value()
 
 
+func set_gradient(new_gradient: Gradient) -> void:
+	gradient = new_gradient
+	texture.gradient = gradient
+	interpolation_option_button.select(gradient.interpolation_mode)
+	color_space_option_button.select(gradient.interpolation_color_space)
+	_create_cursors()
+	updated.emit(gradient, continuous_change)
+
+
 func update_from_value() -> void:
 	gradient.offsets = []
 	for c in texture_rect.get_children():
@@ -259,7 +268,7 @@ func get_gradient_offsets_texture() -> ImageTexture:
 	return ImageTexture.create_from_image(offsets_image)
 
 
-func serialize_gradient(grad: Gradient) -> Dictionary:
+static func serialize_gradient(grad: Gradient) -> Dictionary:
 	var dict := {}
 	dict["offsets"] = grad.offsets
 	dict["colors"] = var_to_str(grad.colors)
@@ -268,7 +277,7 @@ func serialize_gradient(grad: Gradient) -> Dictionary:
 	return dict
 
 
-func deserialize_gradient(dict: Dictionary) -> Gradient:
+static func deserialize_gradient(dict: Dictionary) -> Gradient:
 	var new_gradient := Gradient.new()
 	new_gradient.offsets = dict.get("offsets", new_gradient.offsets)
 	var colors = str_to_var(dict.get("colors"))
@@ -381,12 +390,7 @@ func _on_preset_button_gui_input(event: InputEvent, preset: Preset) -> void:
 	if event.pressed:
 		return
 	if event.button_index == MOUSE_BUTTON_LEFT:  # Select preset
-		gradient = preset.gradient.duplicate()
-		texture.gradient = gradient
-		interpolation_option_button.select(gradient.interpolation_mode)
-		color_space_option_button.select(gradient.interpolation_color_space)
-		_create_cursors()
-		updated.emit(gradient, continuous_change)
+		set_gradient(preset.gradient.duplicate())
 		var popup_panel := preset_list_button.get_child(0) as PopupPanel
 		popup_panel.hide()
 	elif event.button_index == MOUSE_BUTTON_RIGHT or event.button_index == MOUSE_BUTTON_MIDDLE:
