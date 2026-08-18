@@ -1,9 +1,15 @@
 class_name GradientTool
 extends BaseTool
 
+enum FillArea { AREA, COLORS, SELECTION }
+
 static var gradient_shader: Shader
 
 var gradient_shader_inc := load("uid://dj3bi0pycege2")
+
+var _selected_dither_matrix := ShaderLoader.dither_matrices[0]
+var _fill_area := FillArea.AREA
+var _tolerance := 0.003
 
 var _undo_data := {}
 var _click_pos: Vector2
@@ -11,7 +17,7 @@ var _click_color: Color
 var _offset := Vector2i.ZERO
 var _drawing := false
 var _displace_origin := false
-var _selected_dither_matrix := ShaderLoader.dither_matrices[0]
+var _selection_tex: ImageTexture
 
 @onready var gradient_edit: GradientEditNode = $GradientEdit
 @onready var shape_option_button: OptionButton = %ShapeOptionButton
@@ -54,6 +60,21 @@ func draw_start(pos: Vector2i) -> void:
 	_click_color = cel.get_image().get_pixelv(pos)
 	_offset = pos
 	_drawing = true
+	_selection_tex = ImageTexture.new()
+	if project.has_selection:
+		var selection := project.selection_map.return_cropped_copy(project, project.size)
+		_selection_tex = ImageTexture.create_from_image(selection)
+	if _fill_area == FillArea.AREA:
+		var source_image := project.get_current_cel().get_image()
+		var draw_mask := SelectionMap.new()
+		draw_mask.copy_from(project.selection_map)
+		draw_mask.clear()
+		var flood_fill_object := FloodFillObject.new()
+		flood_fill_object.tolerance = _tolerance
+		flood_fill_object.flood_fill(
+			pos, source_image, draw_mask, project, _select_segments.bind(project.selection_map)
+		)
+		_selection_tex = ImageTexture.create_from_image(draw_mask)
 	apply_gradient(pos)
 	Global.canvas.sprite_changed_this_frame = true
 
@@ -102,10 +123,6 @@ func _reset_tool() -> void:
 
 func apply_gradient(pos: Vector2) -> void:
 	var project := Global.current_project
-	var selection_tex: ImageTexture
-	if project.has_selection:
-		var selection := project.selection_map.return_cropped_copy(project, project.size)
-		selection_tex = ImageTexture.create_from_image(selection)
 	var angle := rad_to_deg(-pos.angle_to_point(_click_pos))
 	var radius := pos - _click_pos
 	if Input.is_action_pressed("shape_perfect"):
@@ -113,13 +130,13 @@ func apply_gradient(pos: Vector2) -> void:
 		var square_size := maxi(absi(radius.x), absi(radius.y))
 		radius = Vector2i(square_size, square_size)
 	radius /= Vector2(project.size)
-
+	var use_color_masking := _fill_area != FillArea.SELECTION
 	var params := {
 		"gradient_texture": gradient_edit.texture,
 		"gradient_texture_no_interpolation": gradient_edit.get_gradient_texture_no_interpolation(),
 		"gradient_offset_texture": gradient_edit.get_gradient_offsets_texture(),
 		"use_dithering": dithering_option_button.selected > 0,
-		"selection": selection_tex,
+		"selection": _selection_tex,
 		"repeat": repeat_option_button.selected,
 		"position": _click_pos.x / project.size.x - 0.5,
 		"size": pos.distance_to(_click_pos) / project.size.x,
@@ -128,9 +145,9 @@ func apply_gradient(pos: Vector2) -> void:
 		"radius": radius,
 		"dither_texture": _selected_dither_matrix.texture,
 		"shape": shape_option_button.selected,
-		"use_color_masking": true,
+		"use_color_masking": use_color_masking,
 		"color_mask": _click_color,
-		"tolerance": %ToleranceSlider.value / 255.0
+		"tolerance": _tolerance
 	}
 	_restore_image_data()
 	var images := _get_selected_draw_images()
@@ -184,6 +201,35 @@ func _get_undo_data() -> Dictionary:
 	return data
 
 
+## Used when the fill area is set to similar area.
+func _select_segments(
+	mask: SelectionMap, segments: Array[FloodFillObject.Segment], selection_map: SelectionMap
+) -> void:
+	for c in segments.size():
+		var p := segments[c]
+		for px in range(p.left_position, p.right_position + 1):
+			# We don't have to check again whether the point being processed is within the bounds
+			_set_bit(Vector2i(px, p.y), mask, selection_map)
+
+
+## Used when the fill area is set to similar area.
+func _set_bit(p: Vector2i, mask: SelectionMap, selection_map: SelectionMap) -> void:
+	if selection_map.is_invisible() or selection_map.is_pixel_selected(p):
+		mask.select_pixel(p, true)
+
+
 func _on_dithering_option_button_item_selected(index: int) -> void:
 	if index > 0:
 		_selected_dither_matrix = ShaderLoader.dither_matrices[index - 1]
+
+
+func _on_fill_area_options_item_selected(index: FillArea) -> void:
+	_fill_area = index
+	update_config()
+	save_config()
+
+
+func _on_tolerance_slider_value_changed(value: float) -> void:
+	_tolerance = value / 255.0
+	update_config()
+	save_config()

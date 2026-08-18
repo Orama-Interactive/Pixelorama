@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bn4aw27dj7pwi" path="res://src/UI/Nodes/GradientEdit.tscn" id="3_ed0sv"]
 [ext_resource type="Script" uid="uid://tfdhqto6j5j0" path="res://src/UI/Nodes/Sliders/ValueSlider.gd" id="4_ie0t5"]
 
-[node name="ToolOptions" unique_id=964459986 instance=ExtResource("1_ie0t5")]
+[node name="ToolOptions2" unique_id=964459986 instance=ExtResource("1_ie0t5")]
 offset_right = 138.0
 offset_bottom = 105.0
 script = ExtResource("2_ie0t5")
@@ -68,11 +68,30 @@ popup/item_2/id = 2
 popup/item_3/text = "Truncate"
 popup/item_3/id = 3
 
-[node name="ToleranceLabel" type="Label" parent="GradientOptions" index="6" unique_id=319926115 groups=["gradient_common"]]
+[node name="FillArea" type="Label" parent="GradientOptions" index="6" unique_id=94359673]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+text = "Fill area:"
+
+[node name="FillAreaOptions" type="OptionButton" parent="GradientOptions" index="7" unique_id=248210037]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Similar area"
+popup/item_0/id = 0
+popup/item_1/text = "Similar colors"
+popup/item_1/id = 1
+popup/item_2/text = "Whole selection"
+popup/item_2/id = 2
+
+[node name="ToleranceLabel" type="Label" parent="GradientOptions" index="8" unique_id=319926115 groups=["gradient_common"]]
 layout_mode = 2
 text = "Tolerance:"
 
-[node name="ToleranceSlider" type="TextureProgressBar" parent="GradientOptions" index="7" unique_id=771107859]
+[node name="ToleranceSlider" type="TextureProgressBar" parent="GradientOptions" index="9" unique_id=771107859]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 24)
 layout_mode = 2
@@ -87,3 +106,5 @@ stretch_margin_bottom = 3
 script = ExtResource("4_ie0t5")
 
 [connection signal="item_selected" from="GradientOptions/DitheringOptionButton" to="." method="_on_dithering_option_button_item_selected"]
+[connection signal="item_selected" from="GradientOptions/FillAreaOptions" to="." method="_on_fill_area_options_item_selected"]
+[connection signal="value_changed" from="GradientOptions/ToleranceSlider" to="." method="_on_tolerance_slider_value_changed"]

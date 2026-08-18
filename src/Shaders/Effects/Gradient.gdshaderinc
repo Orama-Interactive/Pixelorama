@@ -39,6 +39,9 @@ float modify_uv(
 		float angle_sin = sin(radians(angle));
 		modified_uv = uv_offsetted.x * angle_cos - uv_offsetted.y * angle_sin;
 		modified_uv /= abs(angle_cos) + abs(angle_sin);
+		if (size == 0.0) {
+			size = 0.01;
+		}
 		modified_uv /= size;
 		float pivot = position / size;
 		modified_uv -= pivot - 0.5;
@@ -46,6 +49,12 @@ float modify_uv(
 	else { // Radial
 		vec2 uv_offsetted = uv * 2.0 - 1.0;
 		uv_offsetted -= (center * 2.0) - vec2(1.0);
+		if (radius.x == 0.0) {
+			radius.x = 0.01;
+		}
+		if (radius.y == 0.0) {
+			radius.y = 0.01;
+		}
 		uv_offsetted /= radius;
 		modified_uv = length(uv_offsetted);
 	}
