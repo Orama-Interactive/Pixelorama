@@ -685,7 +685,7 @@ func is_placing_tiles() -> bool:
 	return Global.current_project.get_current_cel() is CelTileMap and TileSetPanel.placing_tiles
 
 
-func has_selection_tool() -> bool:
+func selection_tool_has_selection() -> bool:
 	if not Global.current_project.has_selection:
 		return false
 	for mouse_button in _slots:

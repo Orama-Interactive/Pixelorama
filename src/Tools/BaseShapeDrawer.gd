@@ -61,8 +61,10 @@ func _input(event: InputEvent) -> void:
 	if _drawing:
 		if event.is_action_pressed("shape_displace"):
 			_displace_origin = true
+			get_viewport().set_input_as_handled()
 		elif event.is_action_released("shape_displace"):
 			_displace_origin = false
+			get_viewport().set_input_as_handled()
 	else:
 		super(event)
 

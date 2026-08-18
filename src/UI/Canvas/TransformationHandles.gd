@@ -113,7 +113,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if not Tools.has_selection_tool():
+	if not Tools.selection_tool_has_selection():
 		return
 	var project := Global.current_project
 	if not project.layers[project.current_layer].can_layer_get_drawn():
@@ -166,7 +166,7 @@ func _draw() -> void:
 		var preview_color := Color(1, 1, 1, Global.transformation_preview_alpha)
 		draw_texture(image_texture, Vector2.ZERO, preview_color)
 	draw_set_transform(position_tmp, rotation, scale_tmp)
-	if not Tools.has_selection_tool():
+	if not Tools.selection_tool_has_selection():
 		return
 	# Draw handles
 	for handle in handles:
@@ -663,7 +663,7 @@ func begin_transform(
 	)
 	for cel in selection_node.get_selected_draw_cels():
 		var cel_image := cel.get_image()
-		cel.transformed_content = selection_node.get_selected_image(cel_image)
+		cel.transformed_content = SelectionNode.get_selected_image(cel_image)
 		cel_image.blit_rect_mask(
 			clear_image,
 			cel.transformed_content,
