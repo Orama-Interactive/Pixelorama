@@ -16,6 +16,7 @@
 // @uniform float position : hint_range(-0.5, 0.5, 0.01) = 0.0;
 // @uniform float size : hint_range(0.01, 2.0, 0.01) = 1.0;
 // @uniform float angle : hint_range(0.0, 360.0, 0.01) = 0.0;
+// @uniform vec2 pivot = vec2(0.5);
 // @uniform vec2 center = vec2(0.5);
 // @uniform vec2 radius = vec2(1.0);
 // @uniform bool use_color_masking = false;
@@ -29,12 +30,13 @@ float modify_uv(
 	float position,
 	float size,
 	float angle,
+	vec2 pivot,
 	vec2 center,
 	vec2 radius,
 ) {
 	float modified_uv;
 	if (shape == 0) { // Linear
-		vec2 uv_offsetted = uv - 0.5;
+		vec2 uv_offsetted = uv - pivot;
 		float angle_cos = cos(radians(angle));
 		float angle_sin = sin(radians(angle));
 		modified_uv = uv_offsetted.x * angle_cos - uv_offsetted.y * angle_sin;
@@ -43,8 +45,8 @@ float modify_uv(
 			size = 0.01;
 		}
 		modified_uv /= size;
-		float pivot = position / size;
-		modified_uv -= pivot - 0.5;
+		float pos = position / size;
+		modified_uv -= pos - 0.5;
 	}
 	else { // Radial
 		vec2 uv_offsetted = uv * 2.0 - 1.0;
@@ -107,6 +109,7 @@ vec4 apply_effect(
 	float position,
 	float size,
 	float angle,
+	vec2 pivot,
 	vec2 center,
 	vec2 radius,
 	bool use_color_masking,
@@ -115,7 +118,7 @@ vec4 apply_effect(
 ) {
 	vec4 original_color = texture(source_texture, uv);
 	vec4 selection_color = texture(selection, uv);
-	float modified_uv = modify_uv(uv, shape, position, size, angle, center, radius);
+	float modified_uv = modify_uv(uv, shape, position, size, angle, pivot, center, radius);
 	if (repeat == 1)
 		modified_uv = fract(modified_uv);
 	else if (repeat == 2)

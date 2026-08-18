@@ -165,6 +165,7 @@ func _reset_tool() -> void:
 func apply_gradient(pos: Vector2) -> void:
 	var project := Global.current_project
 	var angle := rad_to_deg(-pos.angle_to_point(_click_pos))
+	var pivot := _click_pos / Vector2(project.size)
 	var radius := pos - _click_pos
 	if Input.is_action_pressed("shape_perfect"):
 		angle = snappedf(angle, 22.5)
@@ -180,9 +181,9 @@ func apply_gradient(pos: Vector2) -> void:
 		"selection": _selection_tex,
 		"shape": _shape,
 		"repeat": _repeat,
-		"position": _click_pos.x / project.size.x - 0.5,
 		"size": pos.distance_to(_click_pos) / project.size.x,
 		"angle": angle,
+		"pivot": pivot,
 		"center": _click_pos / Vector2(project.size),
 		"radius": radius,
 		"dither_texture": _selected_dither_matrix.texture,
