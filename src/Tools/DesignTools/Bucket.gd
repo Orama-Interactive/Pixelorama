@@ -295,11 +295,11 @@ func fill_in_color(pos: Vector2i) -> void:
 			"has_pattern": true if _fill_with == FillWith.PATTERN else false
 		}
 		if is_instance_valid(pattern_tex):
-			var pattern_size := Vector2i(pattern_tex.get_size())
+			var pattern_size := Vector2(pattern_tex.get_size())
 			params["pattern_size"] = pattern_size
 			# pixel offset converted to pattern uv offset
 			params["pattern_uv_offset"] = (
-				Vector2i.ONE / pattern_size * Vector2i(_offset_x, _offset_y)
+				Vector2.ONE / pattern_size * Vector2(_offset_x, _offset_y)
 			)
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(image, COLOR_REPLACE_SHADER, params, project.size)
@@ -362,7 +362,7 @@ func fill_in_selection() -> void:
 			params["pattern_size"] = pattern_size
 			# pixel offset converted to pattern uv offset
 			params["pattern_uv_offset"] = (
-				Vector2i.ONE / pattern_size * Vector2i(_offset_x, _offset_y)
+				Vector2.ONE / Vector2(pattern_size) * Vector2(_offset_x, _offset_y)
 			)
 		for image in images:
 			var gen := ShaderImageEffect.new()
