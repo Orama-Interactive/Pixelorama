@@ -383,6 +383,8 @@ func _on_preset_button_gui_input(event: InputEvent, preset: Preset) -> void:
 	if event.button_index == MOUSE_BUTTON_LEFT:  # Select preset
 		gradient = preset.gradient.duplicate()
 		texture.gradient = gradient
+		interpolation_option_button.select(gradient.interpolation_mode)
+		color_space_option_button.select(gradient.interpolation_color_space)
 		_create_cursors()
 		updated.emit(gradient, continuous_change)
 		var popup_panel := preset_list_button.get_child(0) as PopupPanel

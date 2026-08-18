@@ -11,7 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource("1")
 
-[node name="InterpolationContainer" type="HBoxContainer" parent="." unique_id=269042896]
+[node name="InterpolationContainer" type="HFlowContainer" parent="." unique_id=1654280717]
 layout_mode = 2
 
 [node name="OffsetValueSlider" type="TextureProgressBar" parent="InterpolationContainer" unique_id=1568485621]
