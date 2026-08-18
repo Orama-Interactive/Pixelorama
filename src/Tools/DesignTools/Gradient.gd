@@ -7,6 +7,7 @@ var gradient_shader_inc := load("uid://dj3bi0pycege2")
 
 var _undo_data := {}
 var _click_pos: Vector2
+var _click_color: Color
 var _offset := Vector2i.ZERO
 var _drawing := false
 var _displace_origin := false
@@ -43,11 +44,14 @@ func draw_start(pos: Vector2i) -> void:
 	super(pos)
 	Global.transform_content_confirmed.emit()
 	_undo_data = _get_undo_data()
-	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
+	var project := Global.current_project
+	if not project.layers[project.current_layer].can_layer_get_drawn():
 		return
-	if not Global.current_project.can_pixel_get_drawn(pos):
+	if not project.can_pixel_get_drawn(pos):
 		return
 	_click_pos = pos
+	var cel := project.get_current_cel()
+	_click_color = cel.get_image().get_pixelv(pos)
 	_offset = pos
 	_drawing = true
 	apply_gradient(pos)
@@ -75,6 +79,12 @@ func draw_end(pos: Vector2i) -> void:
 
 func cancel_tool() -> void:
 	super()
+	_restore_image_data()
+	Global.canvas.sprite_changed_this_frame = true
+	_reset_tool()
+
+
+func _restore_image_data() -> void:
 	for data in _undo_data:
 		if data is not Image:
 			continue
@@ -82,8 +92,6 @@ func cancel_tool() -> void:
 		data.set_data(
 			data.get_width(), data.get_height(), data.has_mipmaps(), data.get_format(), image_data
 		)
-	Global.canvas.sprite_changed_this_frame = true
-	_reset_tool()
 
 
 func _reset_tool() -> void:
@@ -120,7 +128,11 @@ func apply_gradient(pos: Vector2) -> void:
 		"radius": radius,
 		"dither_texture": _selected_dither_matrix.texture,
 		"shape": shape_option_button.selected,
+		"use_color_masking": true,
+		"color_mask": _click_color,
+		"tolerance": %ToleranceSlider.value / 255.0
 	}
+	_restore_image_data()
 	var images := _get_selected_draw_images()
 	for image in images:
 		var gen := ShaderImageEffect.new()
