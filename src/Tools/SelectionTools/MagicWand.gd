@@ -1,23 +1,6 @@
 extends BaseSelectionTool
 
-## Working array used as buffer for segments while flooding
-var _allegro_flood_segments: Array[Segment]
-## Results array per image while flooding
-var _allegro_image_segments: Array[Segment]
 var _tolerance := 0.003
-
-
-class Segment:
-	var flooding := false
-	var todo_above := false
-	var todo_below := false
-	var left_position := -5
-	var right_position := -5
-	var y := 0
-	var next := 0
-
-	func _init(_y: int) -> void:
-		y = _y
 
 
 func apply_selection(pos: Vector2i) -> void:
@@ -78,130 +61,21 @@ func _flood_fill(
 			var cell_pos := tilemap_cel.get_cell_position(pos)
 			tilemap_cel.bucket_fill(cell_pos, _set_bit_rect.bind(project, previous_selection_map))
 		return
-	var color := image.get_pixelv(pos)
-	# init flood data structures
-	_allegro_flood_segments = []
-	_allegro_image_segments = []
-	_compute_segments_for_image(pos, project, image, color)
-	# now actually color the image: since we have already checked a few things for the points
-	# we'll process here, we're going to skip a bunch of safety checks to speed things up.
-	_select_segments(selection_map, previous_selection_map)
+	var flood_fill_object := FloodFillObject.new()
+	flood_fill_object.tolerance = _tolerance
+	flood_fill_object.flood_fill(
+		pos, image, selection_map, project, _select_segments.bind(previous_selection_map)
+	)
 
 
-# Add a new segment to the array
-func _add_new_segment(y := 0) -> void:
-	_allegro_flood_segments.append(Segment.new(y))
-
-
-# fill an horizontal segment around the specified position, and adds it to the
-# list of segments filled. Returns the first x coordinate after the part of the
-# line that has been filled.
-func _flood_line_around_point(
-	pos: Vector2i, project: Project, image: Image, src_color: Color
-) -> int:
-	# this method is called by `_flood_fill` after the required data structures
-	# have been initialized
-	if not DrawingAlgos.similar_colors(image.get_pixelv(pos), src_color, _tolerance):
-		return pos.x + 1
-	var west := pos
-	var east := pos
-	while west.x >= 0 && DrawingAlgos.similar_colors(image.get_pixelv(west), src_color, _tolerance):
-		west += Vector2i.LEFT
-	while (
-		east.x < project.size.x
-		&& DrawingAlgos.similar_colors(image.get_pixelv(east), src_color, _tolerance)
-	):
-		east += Vector2i.RIGHT
-	# Make a note of the stuff we processed
-	var c := pos.y
-	var segment := _allegro_flood_segments[c]
-	# we may have already processed some segments on this y coordinate
-	if segment.flooding:
-		while segment.next > 0:
-			c = segment.next  # index of next segment in this line of image
-			segment = _allegro_flood_segments[c]
-		# found last current segment on this line
-		c = _allegro_flood_segments.size()
-		segment.next = c
-		_add_new_segment(pos.y)
-		segment = _allegro_flood_segments[c]
-	# set the values for the current segment
-	segment.flooding = true
-	segment.left_position = west.x + 1
-	segment.right_position = east.x - 1
-	segment.y = pos.y
-	segment.next = 0
-	# Should we process segments above or below this one?
-	# when there is a selected area, the pixels above and below the one we started creating this
-	# segment from may be outside it. It's easier to assume we should be checking for segments
-	# above and below this one than to specifically check every single pixel in it, because that
-	# test will be performed later anyway.
-	# On the other hand, this test we described is the same `project.can_pixel_get_drawn` does if
-	# there is no selection, so we don't need branching here.
-	segment.todo_above = pos.y > 0
-	segment.todo_below = pos.y < project.size.y - 1
-	# this is an actual segment we should be coloring, so we add it to the results for the
-	# current image
-	if segment.right_position >= segment.left_position:
-		_allegro_image_segments.append(segment)
-	# we know the point just east of the segment is not part of a segment that should be
-	# processed, else it would be part of this segment
-	return east.x + 1
-
-
-func _check_flooded_segment(
-	y: int, left: int, right: int, project: Project, image: Image, src_color: Color
-) -> bool:
-	var ret := false
-	var c := 0
-	while left <= right:
-		c = y
-		while true:
-			var segment := _allegro_flood_segments[c]
-			if left >= segment.left_position and left <= segment.right_position:
-				left = segment.right_position + 2
-				break
-			c = segment.next
-			if c == 0:  # couldn't find a valid segment, so we draw a new one
-				left = _flood_line_around_point(Vector2i(left, y), project, image, src_color)
-				ret = true
-				break
-	return ret
-
-
-func _compute_segments_for_image(
-	pos: Vector2i, project: Project, image: Image, src_color: Color
+func _select_segments(
+	selection_map: SelectionMap,
+	segments: Array[FloodFillObject.Segment],
+	previous_selection_map: SelectionMap
 ) -> void:
-	# initially allocate at least 1 segment per line of image
-	for j in image.get_height():
-		_add_new_segment(j)
-	# start flood algorithm
-	_flood_line_around_point(pos, project, image, src_color)
-	# test all segments while also discovering more
-	var done := false
-	while not done:
-		done = true
-		var max_index := _allegro_flood_segments.size()
-		for c in max_index:
-			var p := _allegro_flood_segments[c]
-			if p.todo_below:  # check below the segment?
-				p.todo_below = false
-				if _check_flooded_segment(
-					p.y + 1, p.left_position, p.right_position, project, image, src_color
-				):
-					done = false
-			if p.todo_above:  # check above the segment?
-				p.todo_above = false
-				if _check_flooded_segment(
-					p.y - 1, p.left_position, p.right_position, project, image, src_color
-				):
-					done = false
-
-
-func _select_segments(selection_map: SelectionMap, previous_selection_map: SelectionMap) -> void:
 	# short circuit for flat colors
-	for c in _allegro_image_segments.size():
-		var p := _allegro_image_segments[c]
+	for c in segments.size():
+		var p := segments[c]
 		for px in range(p.left_position, p.right_position + 1):
 			# We don't have to check again whether the point being processed is within the bounds
 			_set_bit(Vector2i(px, p.y), selection_map, previous_selection_map)

@@ -15,28 +15,8 @@ var _fill_with: int = FillWith.COLOR
 var _fill_merged_area := false  ## Fill regions from the merging of all layers
 var _offset_x := 0
 var _offset_y := 0
-var _area_start_idx: int = 0
-var _area_end_idx: int = 0
-## Working array used as buffer for segments while flooding
-var _allegro_flood_segments: Array[Segment]
-## Results array per image while flooding
-var _allegro_image_segments: Array[Segment]
 ## Used for _fill_merged_area = true
 var _sample_masks: Dictionary[Frame, Image] = {}
-
-
-class Segment:
-	var flooding := false
-	var todo_above := false
-	var todo_below := false
-	var left_position := -5
-	var right_position := -5
-	var y := 0
-	var next := 0
-
-	func _init(_y: int, _next) -> void:
-		y = _y
-		next = _next
 
 
 func _ready() -> void:
@@ -421,166 +401,28 @@ func _flood_fill(pos: Vector2i) -> void:
 				if project.has_selection:
 					project.selection_map.lock_selection_rect(project, false)
 				return
-		# init flood data structures
-		_allegro_flood_segments = []
-		_allegro_image_segments = []
-		_compute_segments_for_image(
-			pos,
-			project,
-			image if !_fill_merged_area else _sample_masks.get(cel.get_frame(project), cel.image),
-			color
-		)
-		# now actually color the image: since we have already checked a few things for the points
-		# we'll process here, we're going to skip a bunch of safety checks to speed things up.
-		_color_segments(image)
+		var source_image: Image = image
+		if _fill_merged_area:
+			source_image = _sample_masks.get(cel.get_frame(project), cel.image)
+		var flood_fill_object := FloodFillObject.new()
+		flood_fill_object.tolerance = _tolerance
+		flood_fill_object.selection_matters = true
+		flood_fill_object.flood_fill(pos, source_image, image, project, _color_segments)
 	if project.has_selection:
 		project.selection_map.lock_selection_rect(project, false)
 
 
-func _compute_segments_for_image(
-	pos: Vector2i, project: Project, image: Image, src_color: Color
-) -> void:
-	# initially allocate at least 1 segment per line of image
-	var y_range = [0, image.get_height()]
-	_area_end_idx = project.size.y - 1
-	_area_start_idx = 0
-	if project.has_selection:
-		var selection_rect := project.selection_map.get_selection_rect(project)
-		_area_start_idx = selection_rect.position.y
-		_area_end_idx = selection_rect.end.y - 1
-		y_range = [selection_rect.position.y, selection_rect.end.y]
-	for j in range(y_range[0], y_range[1]):
-		_add_new_segment(j)
-	# start flood algorithm
-	_flood_line_around_point(pos, project, image, src_color)
-	# test all segments while also discovering more
-	var done := false
-	while not done:
-		done = true
-		var max_index := _allegro_flood_segments.size()
-		for c in max_index:
-			var p := _allegro_flood_segments[c]
-			if p.todo_below:  # check below the segment?
-				p.todo_below = false
-				if _check_flooded_segment(
-					p.y + 1, p.left_position, p.right_position, project, image, src_color
-				):
-					done = false
-			if p.todo_above:  # check above the segment?
-				p.todo_above = false
-				if _check_flooded_segment(
-					p.y - 1, p.left_position, p.right_position, project, image, src_color
-				):
-					done = false
-
-
-## Add a new segment to the array
-func _add_new_segment(y := 0) -> void:
-	_allegro_flood_segments.append(Segment.new(y, _area_start_idx))
-
-
-## Fill an horizontal segment around the specified position, and adds it to the
-## list of segments filled. Returns the first x coordinate after the part of the
-## line that has been filled.
-## Τhis method is called by [method _flood_fill] after the required data structures
-## have been initialized.
-func _flood_line_around_point(
-	pos: Vector2i, project: Project, image: Image, src_color: Color
-) -> int:
-	if not DrawingAlgos.similar_colors(image.get_pixelv(pos), src_color, _tolerance):
-		return pos.x + 1
-	var west := pos
-	var east := pos
-	if project.has_selection:
-		while (
-			project.can_pixel_get_drawn(west)
-			&& DrawingAlgos.similar_colors(image.get_pixelv(west), src_color, _tolerance)
-		):
-			west += Vector2i.LEFT
-		while (
-			project.can_pixel_get_drawn(east)
-			&& DrawingAlgos.similar_colors(image.get_pixelv(east), src_color, _tolerance)
-		):
-			east += Vector2i.RIGHT
-	else:
-		while (
-			west.x >= 0
-			&& DrawingAlgos.similar_colors(image.get_pixelv(west), src_color, _tolerance)
-		):
-			west += Vector2i.LEFT
-		while (
-			east.x < project.size.x
-			&& DrawingAlgos.similar_colors(image.get_pixelv(east), src_color, _tolerance)
-		):
-			east += Vector2i.RIGHT
-	# Make a note of the stuff we processed
-	var c := pos.y - _area_start_idx
-	var segment := _allegro_flood_segments[c]
-	# we may have already processed some segments on this y coordinate
-	if segment.flooding:
-		while segment.next > _area_start_idx:
-			c = segment.next - _area_start_idx  # index of next segment in this line of image
-			segment = _allegro_flood_segments[c]
-		# found last current segment on this line
-		c = _allegro_flood_segments.size()
-		segment.next = c + _area_start_idx
-		_add_new_segment(pos.y)
-		segment = _allegro_flood_segments[c]
-	# set the values for the current segment
-	segment.flooding = true
-	segment.left_position = west.x + 1
-	segment.right_position = east.x - 1
-	segment.y = pos.y
-	segment.next = _area_start_idx
-	# Should we process segments above or below this one?
-	# when there is a selected area, the pixels above and below the one we started creating this
-	# segment from may be outside it. It's easier to assume we should be checking for segments
-	# above and below this one than to specifically check every single pixel in it, because that
-	# test will be performed later anyway.
-	# On the other hand, this test we described is the same `project.can_pixel_get_drawn` does if
-	# there is no selection, so we don't need branching here.
-	segment.todo_above = pos.y > _area_start_idx
-	segment.todo_below = pos.y < _area_end_idx
-	# this is an actual segment we should be coloring, so we add it to the results for the
-	# current image
-	if segment.right_position >= segment.left_position:
-		_allegro_image_segments.append(segment)
-	# we know the point just east of the segment is not part of a segment that should be
-	# processed, else it would be part of this segment
-	return east.x + 1
-
-
-func _check_flooded_segment(
-	y: int, left: int, right: int, project: Project, image: Image, src_color: Color
-) -> bool:
-	var ret := false
-	var c: int = 0
-	while left <= right:
-		c = y - _area_start_idx
-		while true:
-			var segment := _allegro_flood_segments[c]
-			if left >= segment.left_position and left <= segment.right_position:
-				left = segment.right_position + 2
-				break
-			c = segment.next - _area_start_idx
-			if c == 0:  # couldn't find a valid segment, so we draw a new one
-				left = _flood_line_around_point(Vector2i(left, y), project, image, src_color)
-				ret = true
-				break
-	return ret
-
-
-func _color_segments(image: ImageExtended) -> void:
+func _color_segments(image: ImageExtended, segments: Array[FloodFillObject.Segment]) -> void:
 	if _fill_with == FillWith.COLOR or _pattern == null:
 		# This is needed to ensure that the color used to fill is not wrong, due to float
 		# rounding issues.
 		var color_str: String = tool_slot.color.to_html()
 		var color := Color(color_str)
 		# short circuit for flat colors
-		for c in _allegro_image_segments.size():
-			var p := _allegro_image_segments[c]
+		for c in segments.size():
+			var p := segments[c]
 			# We don't have to check again whether the point being processed is within the bounds
-			var rect = Rect2(
+			var rect := Rect2(
 				Vector2i(p.left_position, p.y), Vector2i(p.right_position - p.left_position + 1, 1)
 			)
 			image.fill_rect(rect, color)
@@ -590,8 +432,8 @@ func _color_segments(image: ImageExtended) -> void:
 		var pattern_size := _pattern.image.get_size()
 		# we know the pattern had a valid size when we began flooding, so we can skip testing that
 		# again for every point in the pattern.
-		for c in _allegro_image_segments.size():
-			var p := _allegro_image_segments[c]
+		for c in segments.size():
+			var p := segments[c]
 			for px in range(p.left_position, p.right_position + 1):
 				_set_pixel_pattern(image, px, p.y, pattern_size)
 

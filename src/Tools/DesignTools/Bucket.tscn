@@ -109,12 +109,10 @@ stretch_mode = 5
 
 [node name="OffsetX" parent="FillPattern" index="1" unique_id=381068828 instance=ExtResource("1")]
 layout_mode = 2
-focus_mode = 0
 prefix = "Offset X:"
 
 [node name="OffsetY" parent="FillPattern" index="2" unique_id=2113544548 instance=ExtResource("1")]
 layout_mode = 2
-focus_mode = 0
 prefix = "Offset Y:"
 
 [connection signal="item_selected" from="FillAreaOptions" to="." method="_on_FillAreaOptions_item_selected"]
