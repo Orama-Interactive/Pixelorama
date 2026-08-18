@@ -302,6 +302,53 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 	return image
 
 
+func get_effect_point_position(cel: BaseCel, mouse_pos: Vector2i) -> Rect2i:
+	var test_color := Color.WHITE
+	var image := project.new_empty_image()
+	if not Rect2i(Vector2i.ZERO, image.get_size()).has_point(mouse_pos):
+		return Rect2i()
+	image.set_pixelv(mouse_pos, test_color)
+	if not effects_enabled or image.get_used_rect().size == Vector2i.ZERO:
+		return Rect2i()
+	var image_size := image.get_size()
+	var frame := cel.get_frame(project)
+	var frame_index := project.frames.find(frame)
+	for effect in effects:
+		if not effect.enabled or not is_instance_valid(effect.shader):
+			continue
+		var interpol_params := effect.get_params(frame_index)
+		interpol_params["PXO_time"] = frame.position_in_seconds(project)
+		interpol_params["PXO_frame_index"] = frame_index
+		interpol_params["PXO_layer_index"] = index
+		var shader_image_effect := ShaderImageEffect.new()
+		shader_image_effect.generate_image(image, effect.shader, interpol_params, image_size)
+	# Inherit effects from the parents, if their blend mode is set to pass through
+	for ancestor in get_ancestors():
+		if ancestor.blend_mode != BlendModes.PASS_THROUGH:
+			break
+		if not ancestor.effects_enabled:
+			continue
+		for effect in ancestor.effects:
+			if not effect.enabled:
+				continue
+			var interpol_params := effect.get_params(frame_index)
+			interpol_params["PXO_time"] = frame.position_in_seconds(project)
+			interpol_params["PXO_frame_index"] = frame_index
+			interpol_params["PXO_layer_index"] = index
+			var shader_image_effect := ShaderImageEffect.new()
+			shader_image_effect.generate_image(image, effect.shader, interpol_params, image_size)
+	var rect := image.get_used_rect()
+	# erase new pixels added by previous blends
+	for x in rect.size.x:
+		for y in rect.size.y:
+			if image.get_pixelv(rect.position + Vector2i(x, y)) != test_color:
+				image.set_pixelv(rect.position + Vector2i(x, y), Color(0, 0, 0, 0))
+	rect = image.get_used_rect()
+	if rect == Rect2i(mouse_pos, Vector2.ONE):
+		rect = Rect2i()
+	return rect
+
+
 func emit_effects_added_removed() -> void:
 	effects_added_removed.emit()
 
