@@ -304,9 +304,22 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 
 func get_effect_point_position(cel: BaseCel, mouse_pos: Vector2i) -> Rect2i:
 	var test_color := Color.WHITE
-	var image := project.new_empty_image()
-	if not Rect2i(Vector2i.ZERO, image.get_size()).has_point(mouse_pos):
+	if not Rect2i(Vector2i.ZERO, project.size).has_point(mouse_pos):
 		return Rect2i()
+	if effects.is_empty():
+		var is_ignoring := true
+		for ancestor in get_ancestors():
+			if ancestor.blend_mode != BlendModes.PASS_THROUGH:
+				break
+			if not ancestor.effects_enabled:
+				continue
+			if ancestor.effects:
+				for effect in ancestor.effects:
+					if effect.enabled:
+						is_ignoring = false
+		if is_ignoring:
+			return Rect2i()
+	var image := project.new_empty_image()
 	image.set_pixelv(mouse_pos, test_color)
 	if not effects_enabled or image.get_used_rect().size == Vector2i.ZERO:
 		return Rect2i()
@@ -321,6 +334,7 @@ func get_effect_point_position(cel: BaseCel, mouse_pos: Vector2i) -> Rect2i:
 		interpol_params["PXO_frame_index"] = frame_index
 		interpol_params["PXO_layer_index"] = index
 		var shader_image_effect := ShaderImageEffect.new()
+		## NOTE: we can optionally optimize code here as well
 		shader_image_effect.generate_image(image, effect.shader, interpol_params, image_size)
 	# Inherit effects from the parents, if their blend mode is set to pass through
 	for ancestor in get_ancestors():
