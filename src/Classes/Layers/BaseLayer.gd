@@ -303,7 +303,7 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 
 
 func get_effect_point_position(cel: BaseCel, mouse_pos: Vector2i) -> Rect2i:
-	var test_color := Color.WHITE
+	var test_color := Color(0.2, 0.2, 0.2, 0.2)  # Use a unique enough color
 	if not Rect2i(Vector2i.ZERO, project.size).has_point(mouse_pos):
 		return Rect2i()
 	if effects.is_empty():
