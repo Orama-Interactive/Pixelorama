@@ -7,6 +7,9 @@ var gradient_shader_inc := load("uid://dj3bi0pycege2")
 
 var _undo_data := {}
 var _click_pos: Vector2
+var _offset := Vector2i.ZERO
+var _drawing := false
+var _displace_origin := false
 var _selected_dither_matrix := ShaderLoader.dither_matrices[0]
 
 @onready var gradient_edit: GradientEditNode = $GradientEdit
@@ -25,8 +28,19 @@ func _ready() -> void:
 		dithering_option_button.add_item(matrix.name)
 
 
+func _input(event: InputEvent) -> void:
+	if _drawing:
+		if event.is_action_pressed(&"shape_displace"):
+			_displace_origin = true
+			get_viewport().set_input_as_handled()
+		elif event.is_action_released(&"shape_displace"):
+			_displace_origin = false
+			get_viewport().set_input_as_handled()
+
+
 func draw_start(pos: Vector2i) -> void:
-	super.draw_start(pos)
+	pos = snap_position(pos)
+	super(pos)
 	Global.transform_content_confirmed.emit()
 	_undo_data = _get_undo_data()
 	if !Global.current_project.layers[Global.current_project.current_layer].can_layer_get_drawn():
@@ -34,19 +48,29 @@ func draw_start(pos: Vector2i) -> void:
 	if not Global.current_project.can_pixel_get_drawn(pos):
 		return
 	_click_pos = pos
+	_offset = pos
+	_drawing = true
 	apply_gradient(pos)
 	Global.canvas.sprite_changed_this_frame = true
 
 
 func draw_move(pos: Vector2i) -> void:
-	apply_gradient(pos)
-	Global.canvas.sprite_changed_this_frame = true
+	pos = snap_position(pos)
+	super(pos)
+	if _drawing:
+		if _displace_origin:
+			_click_pos += Vector2(pos - _offset)
+		apply_gradient(pos)
+		_offset = pos
+		Global.canvas.sprite_changed_this_frame = true
 
 
 func draw_end(pos: Vector2i) -> void:
-	super.draw_end(pos)
+	pos = snap_position(pos)
+	super(pos)
 	apply_gradient(pos)
 	commit_undo()
+	_reset_tool()
 
 
 func cancel_tool() -> void:
@@ -59,6 +83,13 @@ func cancel_tool() -> void:
 			data.get_width(), data.get_height(), data.has_mipmaps(), data.get_format(), image_data
 		)
 	Global.canvas.sprite_changed_this_frame = true
+	_reset_tool()
+
+
+func _reset_tool() -> void:
+	_click_pos = Vector2.ZERO
+	_drawing = false
+	_displace_origin = false
 
 
 func apply_gradient(pos: Vector2) -> void:
