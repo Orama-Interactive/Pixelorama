@@ -36,7 +36,7 @@ func show_dialog(
 		for i in range(animation_tag.from - 1, animation_tag.to):
 			var frame: Frame = Global.current_project.frames[i]
 			old_duration += frame.get_duration_in_seconds(Global.current_project.fps)
-			duration_slider.value = old_duration
+		duration_slider.value = snappedf(old_duration, duration_slider.step)
 
 		from_spinbox.value = animation_tag.from
 		to_spinbox.value = animation_tag.to
