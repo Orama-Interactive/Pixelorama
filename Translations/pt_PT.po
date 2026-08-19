@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2025-11-04 16:55\n"
+"PO-Revision-Date: 2026-07-19 20:33\n"
 
 msgid "OK"
 msgstr "OK"
@@ -30,11 +30,8 @@ msgstr "Confirme por favor..."
 msgid "File Name:"
 msgstr "Nome do Ficheiro:"
 
-msgid "Project Name:"
-msgstr "Nome do Projeto:"
-
-msgid "Image Size"
-msgstr "Tamanho de Imagem"
+msgid "Project name:"
+msgstr ""
 
 msgid "Canvas Size"
 msgstr "Tamanho da Tela"
@@ -139,11 +136,11 @@ msgstr "Refazer"
 
 #. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
 msgid "Undo History"
-msgstr ""
+msgstr "Histórico de Ações"
 
 #. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
 msgid "Initial state"
-msgstr ""
+msgstr "Estado inicial"
 
 msgid "Copy"
 msgstr "Copiar"
@@ -206,8 +203,12 @@ msgstr "Recortar ao Conteúdo"
 msgid "Resize Canvas"
 msgstr "Redimensionar Tela"
 
-msgid "Offset Image"
-msgstr "Deslocar Imagem"
+msgid "Offset & Scale Image"
+msgstr ""
+
+#. Refers to the "Offset & Scale" layer effect.
+msgid "Offset & Scale"
+msgstr ""
 
 msgid "Offset:"
 msgstr "Descolamento:"
@@ -578,15 +579,6 @@ msgstr "Pincel do projeto"
 msgid "Random brush"
 msgstr "Pincel aleatório"
 
-msgid "Save Sprite as .pxo"
-msgstr "Gravar Imagem como .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Exportar Imagem como .png"
-
-msgid "Export Sprite"
-msgstr "Exportar Imagem"
-
 msgid "File Exists, Overwrite?"
 msgstr "O ficheiro já existe, Substituir?"
 
@@ -811,15 +803,15 @@ msgstr "Projeto Aseprite"
 
 #. Found in "Open" and "Save" file dialogs. Searches Krita project files only (.kra). Note that Krita is a software and should remain untranslated.
 msgid "Krita Project"
-msgstr ""
+msgstr "Projeto Krita"
 
 #. Found in "Open" and "Save" file dialogs. Searches Piskel project files only (.piskel). Note that Piskel is a software and should remain untranslated.
 msgid "Piskel Project"
-msgstr ""
+msgstr "Projeto Piskel"
 
 #. Found in "Open" and "Save" file dialogs. Searches Photoshop project files only (.psd). Note that Photoshop is a software and should remain untranslated.
 msgid "Photoshop Project"
-msgstr ""
+msgstr "Projeto Photoshop"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
@@ -893,6 +885,18 @@ msgstr "Cópia de Segurança"
 msgid "Performance"
 msgstr "Performance"
 
+#. Found in the Preferences. Refers to the attribution details of the current project, such as the project's creator and license.
+msgid "Attribution"
+msgstr ""
+
+#. Found in the Preferences. Refers to the author of the current project.
+msgid "Author"
+msgstr "Autor"
+
+#. Found in the Preferences. Refers to the default license that is set to the created project.
+msgid "Default license"
+msgstr ""
+
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
 msgstr "Drivers"
@@ -963,7 +967,7 @@ msgstr "Tamanho do tipo de letra:"
 
 #. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
 msgid "Screen orientation:"
-msgstr ""
+msgstr "Orientação do ecrã:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Escurecer interface durante uma caixa de diálogo"
@@ -983,6 +987,10 @@ msgstr "Quando esta preferência está ativada, a janela de seleção de ficheir
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
 msgstr "Modo de janela única"
+
+#. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
+msgid "Collapse main menu"
+msgstr "Fechar o menu principal"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
@@ -1010,6 +1018,22 @@ msgstr "Roxo"
 msgid "Rose"
 msgstr "Rosa"
 
+#. A theme. Black (#000000) is set as the main color so these pixels can be turned off on OLED screens.
+msgid "Black (OLED)"
+msgstr ""
+
+#. A theme. "System" refers to the Operating System.
+msgid "System"
+msgstr ""
+
+#. Refers to the base color of a theme.
+msgid "Base color:"
+msgstr ""
+
+#. Refers to the accent color of a theme.
+msgid "Accent color:"
+msgstr ""
+
 msgid "Theme"
 msgstr "Tema"
 
@@ -1033,15 +1057,15 @@ msgstr "Cor de fundo:"
 
 #. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
 msgid "Single tool mode"
-msgstr ""
+msgstr "Modo de ferramenta única"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
 msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
-msgstr ""
+msgstr "Ao ativar, o botão direito do rato irá ativar a mesma ferramenta que o botão esquerdo."
 
 #. Found in the preferences, under the Tools category.
-msgid "Share options between the left and the right tools"
-msgstr "Partilhar opções entre as ferramentas da esquerda e da direita"
+msgid "Share options between left and right tools"
+msgstr "Partilhar opções entre ferramentas da esquerda e da direita"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
@@ -1055,8 +1079,9 @@ msgstr "Cor da ferramenta esquerda:"
 msgid "Right tool color:"
 msgstr "Cor da ferramenta direita:"
 
-msgid "Tool button size:"
-msgstr "Tamanho de Botão de ferramenta:"
+#. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
+msgid "Make global palettes read-only"
+msgstr "Fazer paletas globais read-only"
 
 msgid "Small"
 msgstr "Pequeno"
@@ -1081,6 +1106,10 @@ msgstr "Todas os fotogramas"
 
 msgid "All projects"
 msgstr "Todos os projetos"
+
+#. An image effect that helps convert a flat image to isometric.
+msgid "Flat to Isometric"
+msgstr ""
 
 msgid "Invert Colors"
 msgstr "Inverter Cores"
@@ -1508,6 +1537,9 @@ msgstr "Holandês"
 
 msgid "Belarusian"
 msgstr "Bielorrusso"
+
+msgid "Thai"
+msgstr "Tailandês"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -1997,7 +2029,7 @@ msgstr "Cor de borda 2:"
 
 #. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
 msgid "Transformation preview alpha:"
-msgstr ""
+msgstr "Transparência da pré-visualização da transformação:"
 
 msgid "Only custom preset can be modified"
 msgstr "Apenas presets personalizados podem ser modificados"
@@ -2055,6 +2087,26 @@ msgstr "Driver de tablet:"
 #. Found in the Preferences, under Drivers. Hint tooltip of the tablet driver option.
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "Especifica a driver de tablet a ser usada em Windows. Se tiver Windows Ink ativado, selecione winink."
+
+#. Found in the Preferences. Refers to the displayed name of the current project author.
+msgid "Display name:"
+msgstr "Nome de exibição:"
+
+#. Found in the Preferences. Refers to the real name of the current project author.
+msgid "Real name:"
+msgstr "Nome real:"
+
+#. Found in the Preferences. Refers to the contact info of the current project author.
+msgid "Contact:"
+msgstr "Contacto:"
+
+#. Found in the Preferences. Refers to the company name of the current project author.
+msgid "Company/Studio:"
+msgstr "Empresa/Estúdio:"
+
+#. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
+msgid "Last saved by"
+msgstr "Ultima vez guardado por"
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
@@ -2318,7 +2370,7 @@ msgstr "Toda a seleção"
 
 #. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
 msgid "Fill regions from the merging of all layers"
-msgstr ""
+msgstr "Preencher regiões de uma mescla de todas as camadas"
 
 msgid "Fill with:"
 msgstr "Preencher com:"
@@ -2464,24 +2516,28 @@ msgstr "Escala de cinza"
 
 #. Refers to the color of a shape's edge.
 msgid "Edge Color"
-msgstr ""
+msgstr "Cor da Borda"
 
 #. Refers to the color of a tool.
 msgid "Tool color"
-msgstr ""
+msgstr "Cor da Ferramenta"
 
 msgid "Adjusted average"
-msgstr ""
+msgstr "Média ajustada"
 
 msgid "Blend at interface"
-msgstr ""
+msgstr "Misturar na interface"
 
 #. Refers to the left face of a box shape.
 msgid "Left Face"
-msgstr ""
+msgstr "Face Esquerda"
 
 #. Refers to the right face of a box shape.
 msgid "Right Face"
+msgstr "Face Direita"
+
+#. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
+msgid "Eraser mode"
 msgstr ""
 
 msgid "Mirroring"
@@ -2503,11 +2559,11 @@ msgstr "Habilitar o desenho espelhado verticalmente"
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↗) mirrored drawing"
-msgstr ""
+msgstr "Habilitar o desenho espelhado diagonalmente (↗)"
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↘) mirrored drawing"
-msgstr ""
+msgstr "Habilitar o desenho espelhado diagonalmente (↘)"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
@@ -2862,6 +2918,18 @@ msgstr "Cor"
 msgid "Luminosity"
 msgstr "Luminosidade"
 
+#. Found in the layer's section of the timeline, as a category of blend modes. Contains blend modes that do masking operations between layers, such as the "Intersection" and "Match colors" blend modes.
+msgid "Masking"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option. This blend mode belongs to the "Masking" category, and it erases the un-common areas between the blend and the base layers.
+msgid "Intersection"
+msgstr ""
+
+#. Found in the layer's section of the timeline, as a blend mode option.  This blend mode belongs to the "Masking" category, and it only shows the same colors between the blend and the base layers.
+msgid "Match colors"
+msgstr ""
+
 msgid "Opacity:"
 msgstr "Opacidade:"
 
@@ -2995,6 +3063,54 @@ msgstr "Desfazer: Alterar duração do fotograma"
 msgid "Redo: Change frame duration"
 msgstr "Refazer: Alterar duração do fotograma"
 
+msgid "Undo: Rename Layer"
+msgstr "Desfazer: Renomear Camada"
+
+msgid "Redo: Rename Layer"
+msgstr "Refazer: Renomear Camada"
+
+msgid "Undo: Change Layer Opacity"
+msgstr "Desfazer: Alterar Opacidade das Camadas"
+
+msgid "Redo: Change Layer Opacity"
+msgstr "Refazer: Alterar Opacidade das Camadas"
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
+msgid "Undo: Change Layer Onion Skinning Ignore Status"
+msgstr "Desfazer: Mudar Ignorar Onion Skinning da Camada"
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
+msgid "Redo: Change Layer Onion Skinning Ignore Status"
+msgstr "Refazer: Mudar Ignorar Onion Skinning da Camada"
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos.
+msgid "Undo: Change Layer User Data"
+msgstr "Desfazer: Mudar Dados do Utilizador da Camada"
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
+msgid "Redo: Change Layer User Data"
+msgstr "Refazer: Mudar Dados do Utilizador da Camada"
+
+msgid "Undo: Change Layer Color"
+msgstr "Desfazer: Mudar Cor da Camada"
+
+msgid "Redo: Change Layer Color"
+msgstr "Refazer: Mudar Cor da Camada"
+
+msgid "Undo: Change Layer Visibility"
+msgstr "Desfazer: Mudar Visibilidade da Camada"
+
+msgid "Redo: Change Layer Visibility"
+msgstr "Refazer: Mudar Visibilidade da Camada"
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos.
+msgid "Undo: Change Layer Locked Status"
+msgstr "Desfazer: Bloquear/Desbloquear Camada"
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
+msgid "Redo: Change Layer Locked Status"
+msgstr "Refazer: Bloquear/Desbloquear Camada"
+
 msgid "Move Guide"
 msgstr "Guias de Movimento"
 
@@ -3023,9 +3139,6 @@ msgstr "Nova Palete Vazia"
 
 msgid "Import Palette"
 msgstr "Importar Palete"
-
-msgid "Create Palette From Current Sprite"
-msgstr "Criar Palete da imagem atual"
 
 msgid "Palette Name:"
 msgstr "Nome da Palete:"
@@ -3117,7 +3230,7 @@ msgstr "Remover todas as extensões"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all backups"
-msgstr ""
+msgstr "Remover todos os backups"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
@@ -3132,8 +3245,28 @@ msgstr "Retrato"
 msgid "Landscape"
 msgstr "Paisagem"
 
+# Found in the "New project" window. Refers to the content of the new project, whether it will just be a blank canvas, or if it will be created with data from the clipboard.
+msgid "Content:"
+msgstr ""
+
+# Found in the "New project" window. Refers to the content of the new project, set to be just a blank canvas.
+msgid "Blank canvas"
+msgstr ""
+
+# Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
+msgid "App clipboard"
+msgstr ""
+
+# Found in the "New project" window. Refers to the content of the clipboard of the (operating) system.
+msgid "System clipboard"
+msgstr ""
+
 msgid "Templates:"
 msgstr "Modelo:"
+
+# Found in the "New project" window. Refers to recent project sizes.
+msgid "Recent:"
+msgstr ""
 
 msgid "Preset"
 msgstr "Preset"
@@ -3205,6 +3338,10 @@ msgid "Ellipse Tool"
 msgstr "Ferramenta de Elipse"
 
 msgid "Isometric Box Tool"
+msgstr "Ferramenta de Caixa Isométrica"
+
+#. A tool that exists only for tilemap layers, and is responsible for setting some properties for the tiles. Currently, it is only used for setting the autotiling bits for a tile.
+msgid "Tiles Property Painter"
 msgstr ""
 
 msgid "Switch Colors"
@@ -3296,21 +3433,21 @@ msgstr "Carácter(es) separador(es):"
 msgid "The character(s) that separate the file name and the frame number"
 msgstr "O(s) carácter(es) que separam o nome do ficheiro do número do frame"
 
-#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
-msgid "Trim images"
-msgstr "Cortar imagens"
+#. Found in the export dialog. It is an option button that allows users to removes the transparent area around non-transparent pixels of the exported images, or to remove every pixel outside of the selection.
+msgid "Crop mode:"
+msgstr ""
+
+#. Refers to the content of an image.
+msgid "Content"
+msgstr ""
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
 msgstr "Corta as imagens exportadas para a sua porção visível, considerando cada pixel não totalmente transparente como visível."
 
-#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
-msgid "Clip image content to selection"
-msgstr "Cortar conteúdo da imagem à seleção"
-
-#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
-msgid "Only export content that is within the bounds of a selected area."
-msgstr "Exportar apenas o conteúdo que está numa área selecionada."
+#. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
+msgid "Layers as separate files"
+msgstr "Camadas como ficheiros separados"
 
 msgid "Close"
 msgstr "Fechar"
@@ -3319,7 +3456,7 @@ msgid "Discard All"
 msgstr "Descartar tudo"
 
 msgid "Pixelorama did not close properly last time. Would you like to restore a previous session?"
-msgstr ""
+msgstr "O Pixelorama não encerrou corretamente da última vez. Gostaria de restaurar uma sessão anterior?"
 
 msgid "Backup reloaded"
 msgstr "Cópia de segurança carregada"
@@ -3349,6 +3486,10 @@ msgstr "Move o fotograma selecionado para a direita."
 msgid "Frame duration:"
 msgstr "Duração do frame:"
 
+#. Refers to the license of a project, which can be set from the project properties.
+msgid "License:"
+msgstr "Licença:"
+
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
 msgstr "Dados do utilizador:"
@@ -3370,7 +3511,7 @@ msgstr "Criar uma nova palete"
 
 #. Title of a window where the user can create a new project palette. Project palettes are palettes that are stored inside the project files, and are only being used by that project.
 msgid "Create a new project palette"
-msgstr ""
+msgstr "Criar nova paleta do projeto"
 
 msgid "Comment:"
 msgstr "Comentar:"
@@ -3381,8 +3522,8 @@ msgstr "Vazio"
 msgid "From Current Palette"
 msgstr "Da palete atual"
 
-msgid "From Current Sprite"
-msgstr "Da imagem atual"
+msgid "From Current Cel"
+msgstr "Da Célula Atual"
 
 msgid "From Current Selection"
 msgstr "Da seleção atual"
@@ -3731,26 +3872,6 @@ msgstr "Valor inicial:"
 msgid "Final value:"
 msgstr "Valor final:"
 
-#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
-msgid "Ease type:"
-msgstr "Tipo de easing:"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Starts slowly and speeds up towards the end"
-msgstr "Começa devagar e acelera ao fim"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Starts quickly and slows down towards the end"
-msgstr "Começa acelerado e abranda no fim"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Slowest at both ends, fast at middle"
-msgstr "Lento nas extremidades, rápido no meio"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Fast at both ends, slow at middle"
-msgstr "Rápido nas extremidades, lento no meio"
-
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
 msgstr "Quadrático (elevado a 2)"
@@ -3795,6 +3916,58 @@ msgstr "Recuando no fim"
 msgid "Spring towards the end"
 msgstr "Elástico perto do fim"
 
+#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
+msgid "Ease type:"
+msgstr "Tipo de easing:"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts slowly and speeds up towards the end"
+msgstr "Começa devagar e acelera ao fim"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts quickly and slows down towards the end"
+msgstr "Começa acelerado e abranda no fim"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Slowest at both ends, fast at middle"
+msgstr "Lento nas extremidades, rápido no meio"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Fast at both ends, slow at middle"
+msgstr "Rápido nas extremidades, lento no meio"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts slowly and speeds up towards the end", but with a shortened name.
+msgid "Ease in"
+msgstr ""
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts quickly and slows down towards the end", but with a shortened name.
+msgid "Ease out"
+msgstr ""
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Slowest at both ends, fast at middle", but with a shortened name.
+msgid "Ease in out"
+msgstr ""
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Fast at both ends, slow at middle", but with a shortened name.
+msgid "Ease out in"
+msgstr ""
+
+#. Found in the keyframe timeline on the right panel when there is no keyframe selected.
+msgid "No key selected"
+msgstr ""
+
+#. Found in the keyframe timeline when right clicking on a track. When selected, a new keyframe is being inserted at the selected frame.
+msgid "Insert keyframe"
+msgstr ""
+
+#. A button found in the keyframe timeline on the right panel when there is a keyframe selected. When clicked, it deletes the currently selected keyframe.
+msgid "Delete keyframe"
+msgstr ""
+
+#. A button found in the keyframe timeline on the right panel when two or more keyframes are selected. When clicked, it deletes the currently selected keyframes.
+msgid "Delete keyframes"
+msgstr ""
+
 #. Used to turn images into a singular color
 msgid "Monochrome"
 msgstr "Monocromático"
@@ -3818,8 +3991,8 @@ msgid "Hold Shift while pressing to instantly remove."
 msgstr "Pressione Shift enquanto clica para remover instantaneamente."
 
 #. Shown in the confirmation dialog for removing a reference image.
-msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr "Tem a certeza que quer remover esta imagem de referência? O ficheiro original não será apagado."
+msgid "Are you sure you want to remove this reference image?"
+msgstr ""
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -3844,10 +4017,6 @@ msgstr "Rodar a imagem de referência selecionada"
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
 msgstr "Redimensionar a imagem de referência selecionada"
-
-#. Button to select no reference images in the Reference Images panel.
-msgid "none"
-msgstr "nenhuma"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
@@ -3983,8 +4152,8 @@ msgstr "Modo de apenas colocar:"
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
-msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr "Ativando o modo de apenas colocar é uma ação permanente. Quando ativado, só poderá colocar tiles, e não poderá modificar tiles pré-existentes na camada."
+msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place, duplicate and edit existing tiles, and you won't be able to use Manual, Auto and Stack modes."
+msgstr ""
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
@@ -4028,6 +4197,11 @@ msgstr "Automático"
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
 msgstr "Pilha"
+
+#. A checkbox that toggles autotiling on or off for tilemap layers.
+#: src/UI/TilesPanel.tscn
+msgid "Autotiling:"
+msgstr ""
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"

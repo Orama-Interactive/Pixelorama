@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bq7ibhm0txl5p"]
+[gd_scene format=3 uid="uid://bq7ibhm0txl5p"]
 
 [ext_resource type="Script" uid="uid://dpciapd2x2va6" path="res://addons/keychain/ShortcutEdit.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://ca58ufal2ufd8" path="res://addons/keychain/assets/joy_button.svg" id="2"]
@@ -19,7 +19,7 @@
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_b4f3q"]
 
-[node name="ShortcutEdit" type="Control"]
+[node name="ShortcutEdit" type="Control" unique_id=899545836]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,7 +29,7 @@ grow_vertical = 2
 size_flags_vertical = 3
 script = ExtResource("1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=852144418]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,52 +38,52 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=570511677]
 layout_mode = 2
 
-[node name="ProfileLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="ProfileLabel" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=1404173835]
 layout_mode = 2
 text = "Shortcut profile:"
 
-[node name="ProfileOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+[node name="ProfileOptionButton" type="OptionButton" parent="VBoxContainer/HBoxContainer" unique_id=824603650]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 
-[node name="NewProfile" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="NewProfile" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1220509889]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "New"
 
-[node name="ResetProfile" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="ResetProfile" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1987606653]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Reset"
 
-[node name="RenameProfile" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="RenameProfile" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=492086360]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Rename"
 
-[node name="DeleteProfile" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="DeleteProfile" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=997640289]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Delete"
 
-[node name="OpenProfileFolder" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="OpenProfileFolder" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1836797572]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 text = "Open Folder"
 
-[node name="Filters" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Filters" type="HBoxContainer" parent="VBoxContainer" unique_id=1424923599]
 layout_mode = 2
 
-[node name="FilterByNameLineEdit" type="LineEdit" parent="VBoxContainer/Filters"]
+[node name="FilterByNameLineEdit" type="LineEdit" parent="VBoxContainer/Filters" unique_id=1161594546]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -91,7 +91,7 @@ placeholder_text = "Filter by name"
 clear_button_enabled = true
 right_icon = ExtResource("2_4odqy")
 
-[node name="FilterByShortcutLineEdit" type="LineEdit" parent="VBoxContainer/Filters"]
+[node name="FilterByShortcutLineEdit" type="LineEdit" parent="VBoxContainer/Filters" unique_id=2047884812]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -103,28 +103,28 @@ middle_mouse_paste_enabled = false
 selecting_enabled = false
 right_icon = ExtResource("2_wps2m")
 
-[node name="ClearAllFilters" type="Button" parent="VBoxContainer/Filters"]
+[node name="ClearAllFilters" type="Button" parent="VBoxContainer/Filters" unique_id=1074359240]
 layout_mode = 2
 text = "Clear all"
 
-[node name="ShortcutTree" type="Tree" parent="VBoxContainer"]
+[node name="ShortcutTree" type="Tree" parent="VBoxContainer" unique_id=1588014504]
 layout_mode = 2
 size_flags_vertical = 3
 hide_root = true
 
-[node name="MouseMovementOptions" type="HBoxContainer" parent="VBoxContainer"]
+[node name="MouseMovementOptions" type="HBoxContainer" parent="VBoxContainer" unique_id=1842708637]
 visible = false
 layout_mode = 2
 
-[node name="AngleLabel" type="Label" parent="VBoxContainer/MouseMovementOptions"]
+[node name="AngleLabel" type="Label" parent="VBoxContainer/MouseMovementOptions" unique_id=2037442645]
 layout_mode = 2
 text = "Angle:"
 
-[node name="AngleOptions" type="GridContainer" parent="VBoxContainer/MouseMovementOptions"]
+[node name="AngleOptions" type="GridContainer" parent="VBoxContainer/MouseMovementOptions" unique_id=140406963]
 layout_mode = 2
 columns = 3
 
-[node name="MMTopLeft" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions"]
+[node name="MMTopLeft" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions" unique_id=495320334]
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
@@ -132,7 +132,7 @@ button_group = SubResource("ButtonGroup_b4f3q")
 icon = ExtResource("2_gs4p1")
 icon_alignment = 1
 
-[node name="MMTop" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions"]
+[node name="MMTop" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions" unique_id=1899365055]
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
@@ -140,7 +140,7 @@ button_group = SubResource("ButtonGroup_b4f3q")
 icon = ExtResource("3_gw1s5")
 icon_alignment = 1
 
-[node name="MMTopRight" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions"]
+[node name="MMTopRight" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions" unique_id=399587526]
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
@@ -148,7 +148,7 @@ button_group = SubResource("ButtonGroup_b4f3q")
 icon = ExtResource("4_wps2m")
 icon_alignment = 1
 
-[node name="MMLeft" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions"]
+[node name="MMLeft" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions" unique_id=326030122]
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
@@ -156,7 +156,7 @@ button_group = SubResource("ButtonGroup_b4f3q")
 icon = ExtResource("4_dmnk0")
 icon_alignment = 1
 
-[node name="MMCenter" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions"]
+[node name="MMCenter" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions" unique_id=848294576]
 unique_name_in_owner = true
 layout_mode = 2
 disabled = true
@@ -164,7 +164,7 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_b4f3q")
 icon_alignment = 1
 
-[node name="MMRight" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions"]
+[node name="MMRight" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions" unique_id=501098037]
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
@@ -173,7 +173,7 @@ button_group = SubResource("ButtonGroup_b4f3q")
 icon = ExtResource("5_nwpwn")
 icon_alignment = 1
 
-[node name="MMBottomLeft" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions"]
+[node name="MMBottomLeft" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions" unique_id=551827364]
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
@@ -181,7 +181,7 @@ button_group = SubResource("ButtonGroup_b4f3q")
 icon = ExtResource("7_4odqy")
 icon_alignment = 1
 
-[node name="MMBottom" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions"]
+[node name="MMBottom" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions" unique_id=2052999564]
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
@@ -189,7 +189,7 @@ button_group = SubResource("ButtonGroup_b4f3q")
 icon = ExtResource("2_b4f3q")
 icon_alignment = 1
 
-[node name="MMBottomRight" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions"]
+[node name="MMBottomRight" type="Button" parent="VBoxContainer/MouseMovementOptions/AngleOptions" unique_id=1424600999]
 unique_name_in_owner = true
 layout_mode = 2
 toggle_mode = true
@@ -197,11 +197,11 @@ button_group = SubResource("ButtonGroup_b4f3q")
 icon = ExtResource("9_v7k3h")
 icon_alignment = 1
 
-[node name="SensitivityLabel" type="Label" parent="VBoxContainer/MouseMovementOptions"]
+[node name="SensitivityLabel" type="Label" parent="VBoxContainer/MouseMovementOptions" unique_id=1653349142]
 layout_mode = 2
 text = "Sensitivity:"
 
-[node name="SensitivityRange" type="SpinBox" parent="VBoxContainer/MouseMovementOptions"]
+[node name="SensitivityRange" type="SpinBox" parent="VBoxContainer/MouseMovementOptions" unique_id=1505352637]
 layout_mode = 2
 min_value = 0.001
 step = 0.001
@@ -209,7 +209,7 @@ value = 0.1
 allow_greater = true
 custom_arrow_step = 0.1
 
-[node name="ShortcutTypeMenu" type="PopupMenu" parent="."]
+[node name="ShortcutTypeMenu" type="PopupMenu" parent="." unique_id=93739634]
 size = Vector2i(154, 116)
 item_count = 4
 item_0/text = "Key"
@@ -225,34 +225,34 @@ item_3/text = "Joy Axis"
 item_3/icon = ExtResource("4")
 item_3/id = 3
 
-[node name="KeyboardShortcutSelectorDialog" parent="." instance=ExtResource("6")]
+[node name="KeyboardShortcutSelectorDialog" parent="." unique_id=1310371238 instance=ExtResource("6")]
 size = Vector2i(417, 134)
 
-[node name="MouseShortcutSelectorDialog" parent="." instance=ExtResource("6")]
+[node name="MouseShortcutSelectorDialog" parent="." unique_id=1741998363 instance=ExtResource("6")]
 size = Vector2i(417, 134)
 input_type = 1
 
-[node name="JoyKeyShortcutSelectorDialog" parent="." instance=ExtResource("6")]
+[node name="JoyKeyShortcutSelectorDialog" parent="." unique_id=1680135020 instance=ExtResource("6")]
 size = Vector2i(417, 134)
 input_type = 2
 
-[node name="JoyAxisShortcutSelectorDialog" parent="." instance=ExtResource("6")]
+[node name="JoyAxisShortcutSelectorDialog" parent="." unique_id=857949123 instance=ExtResource("6")]
 size = Vector2i(417, 134)
 input_type = 3
 
-[node name="ProfileSettings" type="ConfirmationDialog" parent="."]
+[node name="ProfileSettings" type="ConfirmationDialog" parent="." unique_id=562089573]
 
-[node name="ProfileName" type="LineEdit" parent="ProfileSettings"]
+[node name="ProfileName" type="LineEdit" parent="ProfileSettings" unique_id=865119281]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 192.0
 offset_bottom = 51.0
 
-[node name="DeleteConfirmation" type="ConfirmationDialog" parent="."]
+[node name="DeleteConfirmation" type="ConfirmationDialog" parent="." unique_id=631111364]
 size = Vector2i(427, 100)
 dialog_text = "Are you sure you want to delete this shortcut profile?"
 
-[node name="ResetConfirmation" type="ConfirmationDialog" parent="."]
+[node name="ResetConfirmation" type="ConfirmationDialog" parent="." unique_id=77929510]
 size = Vector2i(427, 100)
 dialog_text = "Are you sure you want to restore all shortcuts to their default settings?"
 

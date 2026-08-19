@@ -83,7 +83,6 @@ func set_pixel(image: Image, position: Vector2i, color: Color, ignore_mirroring 
 	var project := Global.current_project
 	if not Tools.check_alpha_lock(image, position):
 		drawers[0].set_pixel(image, position, color, color_op)
-	SteamManager.set_achievement("ACH_FIRST_PIXEL")
 	if ignore_mirroring:
 		return
 	if (

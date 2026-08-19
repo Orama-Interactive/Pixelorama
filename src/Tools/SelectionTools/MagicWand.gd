@@ -76,9 +76,7 @@ func _flood_fill(
 				continue
 			var tilemap_cel := cel as CelTileMap
 			var cell_pos := tilemap_cel.get_cell_position(pos)
-			tilemap_cel.bucket_fill(
-				cell_pos, -1, _set_bit_rect.bind(project, previous_selection_map)
-			)
+			tilemap_cel.bucket_fill(cell_pos, _set_bit_rect.bind(project, previous_selection_map))
 		return
 	var color := image.get_pixelv(pos)
 	# init flood data structures

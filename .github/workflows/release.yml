@@ -5,9 +5,9 @@ on:
     branches: [ release ]
 
 env:
-  GODOT_VERSION: 4.6
+  GODOT_VERSION: 4.7.1
   EXPORT_NAME: Pixelorama
-  TAG: v1.1.8
+  TAG: v1.2
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
 jobs:
@@ -15,10 +15,10 @@ jobs:
     name: Windows Export 🗔
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.6
+      image: docker://barichello/godot-ci:4.7.1
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           submodules: true
       - name: Setup 💻
@@ -68,10 +68,10 @@ jobs:
     name: Linux Export 🐧
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.6
+      image: docker://barichello/godot-ci:4.7.1
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           submodules: true
       - name: Setup 💻
@@ -127,7 +127,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           submodules: true
       - name: Setup environment 🔧
@@ -187,10 +187,10 @@ jobs:
     name: Web Export 🌐
     runs-on: ubuntu-latest
     container:
-      image: docker://barichello/godot-ci:4.6
+      image: docker://barichello/godot-ci:4.7.1
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           submodules: true
       - name: Setup 💻

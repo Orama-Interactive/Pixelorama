@@ -482,7 +482,13 @@ class ThemeAPI:
 
 	## Returns index of the [param theme] in preferences.
 	func find_theme_index(theme: Theme) -> int:
-		return Themes.themes.find(theme)
+		var index := -1
+		for i in Themes.themes.size():
+			var theme_var := Themes.themes[i]
+			if theme_var.theme == theme:
+				index = i
+				break
+		return index
 
 	## Returns the current theme resource.
 	func get_theme() -> Theme:
@@ -492,7 +498,7 @@ class ThemeAPI:
 	## return [code]true[/code], else [code]false[/code].
 	func set_theme(idx: int) -> bool:
 		if idx >= 0 and idx < Themes.themes.size():
-			Themes.change_theme(idx)
+			Global.theme_preset_index = idx
 			return true
 		else:
 			push_error("No theme found at index: ", idx)
@@ -588,7 +594,7 @@ class SelectionAPI:
 	## [param operation] influences it's behaviour with previous selection rects
 	## (0 for adding, 1 for subtracting, 2 for intersection).
 	func select_rect(rect: Rect2i, operation := 0) -> void:
-		Global.canvas.selection.transform_content_confirm()
+		Global.transform_content_confirmed.emit()
 		var undo_data_tmp := Global.canvas.selection.get_undo_data(false)
 		Global.canvas.selection.select_rect(rect, operation)
 		Global.canvas.selection.commit_undo("Select", undo_data_tmp)
@@ -601,7 +607,7 @@ class SelectionAPI:
 		destination: Vector2i, with_content := true, transform_standby := false
 	) -> void:
 		var selection_node := Global.canvas.selection
-		selection_node.transform_content_confirm()
+		Global.transform_content_confirmed.emit()
 		selection_node.transformation_handles.begin_transform(
 			null, Global.current_project, false, not with_content
 		)
@@ -612,7 +618,7 @@ class SelectionAPI:
 		var rel_direction := destination - (selection_rectangle.position as Vector2i)
 		selection_node.transformation_handles.move_transform(rel_direction)
 		if not transform_standby:
-			selection_node.transform_content_confirm()
+			Global.transform_content_confirmed.emit()
 
 	## Resizes the selection to [param new_size],
 	## with content if [param with_content] is [code]true[/code].
@@ -622,7 +628,7 @@ class SelectionAPI:
 		new_size: Vector2i, with_content := true, transform_standby := false
 	) -> void:
 		var selection_node := Global.canvas.selection
-		selection_node.transform_content_confirm()
+		Global.transform_content_confirmed.emit()
 		selection_node.transformation_handles.begin_transform(
 			null, Global.current_project, false, not with_content
 		)
@@ -630,7 +636,7 @@ class SelectionAPI:
 		var delta := new_size - image_size
 		selection_node.transformation_handles.resize_transform(delta)
 		if not transform_standby:
-			Global.canvas.selection.transform_content_confirm()
+			Global.transform_content_confirmed.emit()
 
 	## Inverts the selection.
 	func invert() -> void:
@@ -895,6 +901,17 @@ class ImportAPI:
 		OpenSave.custom_importer_scenes.erase(id)
 		ExtensionsApi.remove_action("ImportAPI", "add_import_option")
 
+	## Adds a callback function for opening files with custom extensions. Whenever a file with the
+	## given extension is opened, the given callback will be called with the file path as argument.
+	func add_open_callback(extension: String, callback: Callable) -> void:
+		OpenSave.register_custom_open_callback(extension, callback)
+		ExtensionsApi.add_action("ImportAPI", "add_open_callback")
+
+	## Removes the callback function for the given extension.
+	func remove_open_callback(extension: String) -> void:
+		OpenSave.unregister_custom_open_callback(extension)
+		ExtensionsApi.remove_action("ImportAPI", "add_open_callback")
+
 
 ## Gives access to palette related stuff.
 class PaletteAPI:
@@ -946,25 +963,45 @@ class PaletteAPI:
 ## Gives access to the basic commonly used signals.
 ## Some less common signals are not mentioned in Api but could be accessed through source directly.
 class SignalsAPI:
-	# system to auto-adjust texture_changed to the "current cel"
-	## This signal is not meant to be used directly.
-	## Use [method signal_current_cel_texture_changed] instead
-	signal texture_changed
-	var _last_cel: BaseCel
+	#region system to auto-adjust project/cel updaters to point to the "current cel"
+	## This dictionary is not meant to be used directly.
+	var _project_updaters: Dictionary[Callable, Signal] = {}
+	## This dictionary is not meant to be used directly.
+	var _cel_updaters: Dictionary[Callable, Signal] = {}
 
 	func _init() -> void:
-		Global.project_switched.connect(_update_texture_signal)
-		Global.cel_switched.connect(_update_texture_signal)
+		Global.project_switched.connect(
+			func():
+				_update_signals(true)
+				_update_signals(false)
+		)
+		Global.cel_switched.connect(_update_signals.bind(true))
 
-	func _update_texture_signal() -> void:
-		if _last_cel:
-			_last_cel.texture_changed.disconnect(_on_texture_changed)
-		if Global.current_project:
-			_last_cel = Global.current_project.get_current_cel()
-			_last_cel.texture_changed.connect(_on_texture_changed)
-
-	func _on_texture_changed() -> void:
-		texture_changed.emit()
+	func _update_signals(is_cel: bool) -> void:
+		if not Global.current_project:
+			return
+		var invalid_callables: Array[Callable] = []
+		var updater_array := _cel_updaters if is_cel else _project_updaters
+		for callable: Callable in updater_array:
+			if not callable.is_valid():
+				invalid_callables.append(callable)
+				continue
+			# Disconnect previous connection
+			if (
+				not updater_array[callable].is_null()
+				and updater_array[callable].is_connected(callable)
+			):
+				updater_array[callable].disconnect(callable)
+			# Reconnect new connection
+			var signal_name = updater_array[callable].get_name()
+			@warning_ignore("incompatible_ternary")
+			updater_array[callable] = Signal(
+				Global.current_project.get_current_cel() if is_cel else Global.current_project,
+				signal_name
+			)
+			updater_array[callable].connect(callable)
+		for callable: Callable in invalid_callables:
+			updater_array.erase(callable)
 
 	func _connect_disconnect(
 		signal_class: Signal, callable: Callable, is_disconnecting := false
@@ -978,7 +1015,9 @@ class SignalsAPI:
 				signal_class.disconnect(callable)
 				ExtensionsApi.remove_action("SignalsAPI", signal_class.get_name())
 
-	# APP RELATED SIGNALS
+	#endregion
+
+	#region APP RELATED SIGNALS
 	## Connects/disconnects a signal to [param callable], that emits
 	## when pixelorama is just opened.
 	func signal_pixelorama_opened(callable: Callable, is_disconnecting := false) -> void:
@@ -989,7 +1028,9 @@ class SignalsAPI:
 	func signal_pixelorama_about_to_close(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(Global.pixelorama_about_to_close, callable, is_disconnecting)
 
-	# PROJECT RELATED SIGNALS
+	#endregion
+
+	#region PROJECT RELATED SIGNALS
 	## Connects/disconnects a signal to [param callable], that emits
 	## whenever a new project is created.[br]
 	## [b]Binds: [/b]It has one bind of type [code]Project[/code] which is the newly
@@ -1001,6 +1042,11 @@ class SignalsAPI:
 	## after a project is saved.
 	func signal_project_saved(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(OpenSave.project_saved, callable, is_disconnecting)
+
+	## Connects/disconnects a signal to [param callable], that emits
+	## whenever you switch to some other project.
+	func signal_project_about_to_switch(callable: Callable, is_disconnecting := false) -> void:
+		_connect_disconnect(Global.project_about_to_switch, callable, is_disconnecting)
 
 	## Connects/disconnects a signal to [param callable], that emits
 	## whenever you switch to some other project.
@@ -1017,7 +1063,9 @@ class SignalsAPI:
 	func signal_project_data_changed(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(Global.project_data_changed, callable, is_disconnecting)
 
-	# TOOL RELATED SIGNALS
+	#endregion
+
+	#region TOOL RELATED SIGNALS
 	## Connects/disconnects a signal to [param callable], that emits
 	## whenever a tool changes color.[br]
 	## [b]Binds: [/b] It has two bind of type [Color] (a dictionary with keys "color" and "index")
@@ -1025,7 +1073,9 @@ class SignalsAPI:
 	func signal_tool_color_changed(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(Tools.color_changed, callable, is_disconnecting)
 
-	# TIMELINE RELATED SIGNALS
+	#endregion
+
+	#region TIMELINE RELATED SIGNALS
 	## Connects/disconnects a signal to [param callable], that emits
 	## whenever timeline animation starts.[br]
 	## [b]Binds: [/b] It has one bind of type [bool] which indicated if animation is in
@@ -1040,11 +1090,57 @@ class SignalsAPI:
 			Global.animation_timeline.animation_finished, callable, is_disconnecting
 		)
 
-	# UPDATER SIGNALS
+	#endregion
+
+	#region UPDATER SIGNALS
+	## Connects/disconnects a signal of name [param updater] from the [Project] class to
+	## [param callable], and always make sure that it emits from the current project.
+	func current_project_signal(
+		callable: Callable, updater: StringName, is_disconnecting := false
+	) -> void:
+		if not Global.current_project:
+			printerr(
+				"There are no projects detected, try calling current_project_signal after an await."
+			)
+			return
+		if Global.current_project.has_signal(updater):
+			if is_disconnecting:
+				Global.current_project.disconnect(updater, callable)
+				_project_updaters.erase(callable)
+			else:
+				Global.current_project.connect(updater, callable)
+				_project_updaters.set(callable, Signal(Global.current_project, updater))
+
+	## Connects/disconnects a signal of name [param updater] from the [BaseCel] class to
+	## [param callable], and always make sure that it emits from the current project's current cel.
+	func current_cel_signal(
+		callable: Callable, updater: StringName, is_disconnecting := false
+	) -> void:
+		if not Global.current_project:
+			printerr(
+				"There are no projects detected, try calling current_cel_signal after an await."
+			)
+			return
+		var current_cel := Global.current_project.get_current_cel()
+		if not current_cel:
+			printerr("There are no cels detected, try calling current_cel_signal after an await.")
+			return
+		if current_cel.has_signal(updater):
+			if is_disconnecting:
+				current_cel.disconnect(updater, callable)
+				_cel_updaters.erase(callable)
+			else:
+				current_cel.connect(updater, callable)
+				_cel_updaters.set(callable, Signal(current_cel, updater))
+
 	## Connects/disconnects a signal to [param callable], that emits
 	## whenever texture of the currently focused cel changes.
 	func signal_current_cel_texture_changed(callable: Callable, is_disconnecting := false) -> void:
-		_connect_disconnect(texture_changed, callable, is_disconnecting)
+		push_warning(
+			"signal_current_cel_texture_changed() is deprecated and will be removed. ",
+			"In later versions, please use current_cel_signal() instead."
+		)
+		current_cel_signal(callable, "texture_changed", is_disconnecting)
 
 	## Connects/disconnects a signal to [param callable], that emits
 	## whenever preview is about to be drawn.[br]
@@ -1053,3 +1149,4 @@ class SignalsAPI:
 	## Use this if you plan on changing preview of export.
 	func signal_export_about_to_preview(callable: Callable, is_disconnecting := false) -> void:
 		_connect_disconnect(Global.export_dialog.about_to_preview, callable, is_disconnecting)
+	#endregion

@@ -4,7 +4,7 @@ var blur_type := 0
 var blur_amount := 16
 var blur_radius := 1.0
 var blur_direction := Vector2.ONE
-var shader := preload("res://src/Shaders/Effects/GaussianBlur.gdshader")
+var shader := load("res://src/Shaders/Effects/GaussianBlur.gdshader")
 
 
 func _ready() -> void:

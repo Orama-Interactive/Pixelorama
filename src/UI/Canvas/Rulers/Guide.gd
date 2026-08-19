@@ -37,12 +37,12 @@ func _input(_event: InputEvent) -> void:
 		if Input.is_action_pressed(&"left_mouse"):
 			if type == Types.HORIZONTAL:
 				var yy := snappedf(mouse_pos.y, 0.5)
-				points[0].y = yy
-				points[1].y = yy
+				set_point_position(0, Vector2(points[0].x, yy))
+				set_point_position(1, Vector2(points[1].x, yy))
 			elif type == Types.VERTICAL:
 				var xx := snappedf(mouse_pos.x, 0.5)
-				points[0].x = xx
-				points[1].x = xx
+				set_point_position(0, Vector2(xx, points[0].y))
+				set_point_position(1, Vector2(xx, points[1].y))
 			elif type == Types.XY or type == Types.X_MINUS_Y:
 				var normal := Tools.X_MINUS_Y_LINE
 				if type == Types.X_MINUS_Y:
@@ -54,8 +54,8 @@ func _input(_event: InputEvent) -> void:
 				var half_len := (points[1] - points[0]).length() / 2.0
 				var center := normal * c
 
-				points[0] = center - dir * half_len
-				points[1] = center + dir * half_len
+				set_point_position(0, center - dir * half_len)
+				set_point_position(1, center + dir * half_len)
 			modulate.a = 0.5 if _outside_canvas() else 1.0
 		elif Input.is_action_just_released(&"left_mouse"):
 			Global.can_draw = true

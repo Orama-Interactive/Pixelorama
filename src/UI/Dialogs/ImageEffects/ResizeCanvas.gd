@@ -15,7 +15,7 @@ var image := Image.create(1, 1, false, Image.FORMAT_RGBA8)
 
 
 func _on_about_to_popup() -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	image.resize(Global.current_project.size.x, Global.current_project.size.y)
 	image.fill(Color(0.0, 0.0, 0.0, 0.0))
 	var frame := Global.current_project.frames[Global.current_project.current_frame]

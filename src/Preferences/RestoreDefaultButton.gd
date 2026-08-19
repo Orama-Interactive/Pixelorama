@@ -9,7 +9,7 @@ var node: Node
 
 
 func _ready() -> void:
-	disabled = true
+	set_disabled_status(true)
 	add_to_group(&"UIButtons")
 	modulate = Global.modulate_icon_color
 	texture_normal = preload("res://assets/graphics/misc/icon_reload.png")
@@ -17,6 +17,18 @@ func _ready() -> void:
 	size_flags_horizontal = Control.SIZE_SHRINK_END
 	size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	pressed.connect(_on_pressed)
+
+
+func set_disabled_status(disable: bool) -> void:
+	disabled = disable
+	if disable:
+		mouse_default_cursor_shape = Control.CURSOR_ARROW
+		tooltip_text = ""
+		focus_mode = Control.FOCUS_NONE
+	else:
+		mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		tooltip_text = "Restore default value"
+		focus_mode = Control.FOCUS_ALL
 
 
 func _on_pressed() -> void:

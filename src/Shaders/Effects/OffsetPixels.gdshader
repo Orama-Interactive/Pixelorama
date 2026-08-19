@@ -3,7 +3,7 @@ render_mode unshaded;
 
 uniform sampler2D selection : filter_nearest;
 uniform ivec2 offset = ivec2(0); // In pixels
-uniform float scale_amount: hint_range(0.01, 100.0) = 1.0;
+uniform float scale_amount: hint_range(0.0, 100.0, 0.01) = 1.0;
 uniform bool wrap_around = false;
 
 void fragment() {

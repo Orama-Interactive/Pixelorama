@@ -9,7 +9,7 @@ var transform_button_group: ButtonGroup
 
 @onready var list := %List as HFlowContainer
 @onready var drag_highlight := $Overlay/DragHighlight as ColorRect
-@onready var remove_btn := $ScrollContainer/Container/ReferenceEdit/ImageOptions/Remove as Button
+@onready var remove_btn := $ScrollContainer/Container/ReferenceEdit/Remove as Button
 @onready var transform_tools_btns := $ScrollContainer/Container/Tools/TransformTools
 
 # these will change their visibility if there are no references
@@ -157,7 +157,7 @@ func _on_references_changed() -> void:
 	var default := REFERENCE_IMAGE_BUTTON.instantiate()
 	default.references_panel = self
 	default.button_group = list_btn_group
-	default.text = "none"
+	default.text = "None"
 	default.get_child(0).visible = false  # Hide it's transparent checker
 	default.button_pressed = true
 	list.add_child(default)

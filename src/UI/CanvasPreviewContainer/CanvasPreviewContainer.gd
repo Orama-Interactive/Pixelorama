@@ -15,7 +15,7 @@ func _ready() -> void:
 func _gui_input(event: InputEvent) -> void:
 	var checker: ColorRect = $VBox/HBox/PreviewViewportContainer/SubViewport/TransparentChecker
 	if event is InputEventMouseButton:
-		var mouse_pos = checker.get_local_mouse_position()
+		var mouse_pos := checker.get_local_mouse_position()
 		if (
 			mouse_pos.x >= 0
 			and mouse_pos.y >= 0

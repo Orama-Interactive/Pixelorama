@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Pixelorama
-GenericName=2D sprite editor
-GenericName[el]=Επεξεργαστής δισδιάστατων εικόνων
+GenericName=Pixel Art & Animation
+GenericName[el]=Pixel Art & Animation
 GenericName[fr]=Éditeur de sprites 2D
 GenericName[ru]=2Д редактор спрайтов
 GenericName[pt_BR]=Editor de sprites 2D
@@ -24,4 +24,4 @@ Keywords=pixel;retro;animation;art;image;2d;sprite;graphics;drawing;editor;
 Keywords[el]=pixel;retro;animation;art;image;2d;sprite;graphics;drawing;editor;πίξελ;ρετρό;κίνηση;τέχνη;εικόνα;2δ;γραφικά;ζωγραφιά;ζωγραφική;επεξεργαστής;σχέδιο;
 Keywords[ru]=pixel;retro;animation;art;image;2d;sprite;graphics;drawing;editor;пиксель;ретро;анимация;арт;изображение;2д;спрайт;графика;рисование;редактор;
 Keywords[uk]=pixel;retro;animation;art;image;2d;sprite;graphics;drawing;editor;піксель;ретро;анімація;арт;зображення;2д;спрайт;графіка;малювання;редактор;
-MimeType=image/pxo;image/png;image/bmp;image/vnd.radiance;image/jpeg;image/svg+xml;image/x-tga;image/webp;x-scheme-handler/lospec-palette;
+MimeType=application/x-pixelorama;image/png;image/bmp;image/vnd.radiance;image/jpeg;image/svg+xml;image/x-tga;image/webp;x-scheme-handler/lospec-palette;

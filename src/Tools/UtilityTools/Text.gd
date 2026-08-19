@@ -28,14 +28,20 @@ var text_style := 0:
 		save_config()
 		_textedit_text_changed()
 
-var horizontal_alignment := HORIZONTAL_ALIGNMENT_LEFT
+var horizontal_alignment := HORIZONTAL_ALIGNMENT_LEFT:
+	set(value):
+		horizontal_alignment = value
+		save_config()
 var antialiasing := TextServer.FONT_ANTIALIASING_NONE:
 	set(value):
 		antialiasing = value
 		font.base_font.antialiasing = antialiasing
+		save_config()
 
 var _offset := Vector2i.ZERO
 
+@onready var bold_button: Button = %BoldButton
+@onready var italic_button: Button = %ItalicButton
 @onready var confirm_buttons: HBoxContainer = $ConfirmButtons
 @onready var font_option_button: OptionButton = $GridContainer/FontOptionButton
 @onready var horizontal_alignment_group: ButtonGroup = %HorizontalAlignmentLeftButton.button_group
@@ -83,6 +89,15 @@ func update_config() -> void:
 		if font_name == item_name:
 			font_option_button.selected = i
 	$TextSizeSlider.value = text_size
+	# Update group buttons
+	bold_button.set_pressed_no_signal(text_style & BOLD_FLAG)
+	italic_button.set_pressed_no_signal(text_style & ITALIC_FLAG)
+	var aa_button: Button = anti_aliasing_group.get_buttons().get(antialiasing)
+	if aa_button:
+		aa_button.button_pressed = true
+	var h_align_button: Button = horizontal_alignment_group.get_buttons().get(horizontal_alignment)
+	if h_align_button:
+		h_align_button.button_pressed = true
 
 
 func draw_start(pos: Vector2i) -> void:
@@ -119,7 +134,9 @@ func text_to_pixels() -> void:
 
 	var undo_data := _get_undo_data()
 	var project := Global.current_project
-	var image := project.frames[project.current_frame].cels[project.current_layer].get_image()
+	var cel_image := project.frames[project.current_frame].cels[project.current_layer].get_image()
+	if cel_image == null:
+		return
 
 	var vp := RenderingServer.viewport_create()
 	var canvas := RenderingServer.canvas_create()
@@ -135,40 +152,65 @@ func text_to_pixels() -> void:
 	var ci_rid := RenderingServer.canvas_item_create()
 	RenderingServer.viewport_set_canvas_transform(vp, canvas, Transform2D())
 	RenderingServer.canvas_item_set_parent(ci_rid, canvas)
-	var texture := RenderingServer.texture_2d_create(image)
-	RenderingServer.canvas_item_add_texture_rect(ci_rid, Rect2(Vector2.ZERO, project.size), texture)
 	RenderingServer.canvas_item_set_material(ci_rid, NEW_CANVAS_ITEM_MATERIAL.get_rid())
 	var text := text_edit.text
 	var color := tool_slot.color
 	var font_ascent := font.get_ascent(text_size)
 	var pos := Vector2(0, font_ascent + text_edit.get_theme_constant(&"line_spacing"))
 	pos += text_edit.position
+	var background_rid: RID
+	if antialiasing == TextServer.FONT_ANTIALIASING_LCD:
+		# NOTE: We need background information for FONT_ANTIALIASING_LCD to work.
+		background_rid = RenderingServer.texture_2d_create(cel_image)
+		RenderingServer.canvas_item_add_texture_rect(
+			ci_rid, Rect2(Vector2.ZERO, project.size), background_rid
+		)
 	font.draw_multiline_string(
 		ci_rid, pos, text, horizontal_alignment, text_edit.size.x, text_size, -1, color
 	)
 
 	RenderingServer.viewport_set_update_mode(vp, RenderingServer.VIEWPORT_UPDATE_ONCE)
 	RenderingServer.force_draw(false)
-	var viewport_texture := RenderingServer.texture_2d_get(RenderingServer.viewport_get_texture(vp))
+	var text_image := RenderingServer.texture_2d_get(RenderingServer.viewport_get_texture(vp))
 	RenderingServer.free_rid(vp)
 	RenderingServer.free_rid(canvas)
 	RenderingServer.free_rid(ci_rid)
-	RenderingServer.free_rid(texture)
-	viewport_texture.convert(image.get_format())
+	if background_rid:
+		RenderingServer.free_rid(background_rid)
+	text_image.convert(cel_image.get_format())
 
 	text_edit.queue_free()
 	text_edit = null
-	if not viewport_texture.is_empty():
-		image.copy_from(viewport_texture)
-		if image is ImageExtended:
-			image.convert_rgb_to_indexed()
+	if not text_image.is_empty():
+		# Crop to selection area
+		if project.has_selection:
+			var selected_content := project.new_empty_image()
+			var selection_map_copy := project.selection_map.return_cropped_copy(
+				project, project.size
+			)
+			var selection_rect := selection_map_copy.get_used_rect()
+			selected_content.blit_rect_mask(
+				text_image, selection_map_copy, selection_rect, selection_rect.position
+			)
+			text_image = selected_content
+		# Add this text to our cel's image
+		if background_rid:
+			cel_image.blit_rect(
+				text_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), Vector2i.ZERO
+			)
+		else:
+			cel_image.blend_rect(
+				text_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), Vector2i.ZERO
+			)
+		if cel_image is ImageExtended:
+			cel_image.convert_rgb_to_indexed()
 		commit_undo("Draw", undo_data)
 
 
 func commit_undo(action: String, undo_data: Dictionary) -> void:
 	var project := Global.current_project
 	Global.canvas.update_selected_cels_textures(project)
-	project.update_tilemaps(undo_data)
+	var used_tilesets := project.update_tilemaps(undo_data)
 	var redo_data := _get_undo_data()
 	var frame := -1
 	var layer := -1
@@ -177,7 +219,19 @@ func commit_undo(action: String, undo_data: Dictionary) -> void:
 		layer = project.current_layer
 
 	project.undo_redo.create_action(action)
+	var layers_to_update := PackedInt32Array()
+	for l in Global.current_project.layers:
+		if l is LayerTileMap:
+			if l.tileset in used_tilesets:
+				layers_to_update.append(l.index)
 	project.deserialize_cel_undo_data(redo_data, undo_data)
+	# we may be on a different layer during undo/redo
+	Global.current_project.undo_redo.add_do_property(
+		Global.canvas, "mandatory_update_layers", layers_to_update
+	)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.canvas, "mandatory_update_layers", layers_to_update
+	)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false, frame, layer))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true, frame, layer))
 	project.undo_redo.commit_action()
@@ -239,13 +293,11 @@ func _on_italic_button_toggled(toggled_on: bool) -> void:
 
 
 func _on_horizontal_alignment_button_pressed(button: BaseButton) -> void:
-	@warning_ignore("int_as_enum_without_cast")
-	horizontal_alignment = button.get_index()
+	horizontal_alignment = button.get_index() as HorizontalAlignment
 
 
 func _on_antialiasing_button_pressed(button: BaseButton) -> void:
-	@warning_ignore("int_as_enum_without_cast")
-	antialiasing = button.get_index()
+	antialiasing = button.get_index() as TextServer.FontAntialiasing
 
 
 func _exit_tree() -> void:

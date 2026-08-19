@@ -9,6 +9,18 @@ resource_name = "Tabs"
 script = ExtResource("1_jxh43")
 names = PackedStringArray("Tools")
 
+[sub_resource type="Resource" id="Resource_we4ee"]
+resource_name = "Tabs"
+script = ExtResource("1_jxh43")
+names = PackedStringArray("3D Object Tree")
+
+[sub_resource type="Resource" id="Resource_ww46h"]
+resource_name = "Split"
+script = ExtResource("2_lw52w")
+direction = 1
+first = SubResource("Resource_atmme")
+second = SubResource("Resource_we4ee")
+
 [sub_resource type="Resource" id="Resource_4b0py"]
 resource_name = "Tabs"
 script = ExtResource("1_jxh43")
@@ -18,7 +30,7 @@ names = PackedStringArray("Tiles")
 resource_name = "Split"
 script = ExtResource("2_lw52w")
 direction = 1
-first = SubResource("Resource_atmme")
+first = SubResource("Resource_ww46h")
 second = SubResource("Resource_4b0py")
 
 [sub_resource type="Resource" id="Resource_ouvfk"]
@@ -162,6 +174,7 @@ resource_name = "Default"
 script = ExtResource("3_4h5wj")
 root = SubResource("Resource_msuil")
 hidden_tabs = {
+"3D Object Tree": true,
 "Canvas Preview": true,
 "Color Picker Sliders": true,
 "Perspective Editor": true,

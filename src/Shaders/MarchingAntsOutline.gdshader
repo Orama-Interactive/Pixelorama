@@ -7,6 +7,8 @@ uniform vec4 first_color : source_color = vec4(1.0);
 uniform vec4 second_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform bool animated = true;
 uniform float frequency = 50.0;
+// Use this instead of TIME so we can control when the screen gets re-drawn.
+uniform float time;
 uniform float stripe_direction : hint_range(0, 1) = 0.5;
 
 
@@ -17,7 +19,7 @@ void fragment() {
 		vec2 ratio = (ts.x > ts.y) ? vec2(ts.y / ts.x, 1) : vec2(1, ts.x / ts.y);
 		vec2 uv = UV * ratio;
 		if(animated)
-			uv -= TIME / frequency;
+			uv -= time / frequency;
 		// Generate diagonal stripes
 		float pos = mix(uv.x, uv.y, stripe_direction) * frequency;
 		float value = floor(fract(pos) + 0.5);

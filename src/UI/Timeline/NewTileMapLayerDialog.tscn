@@ -1,37 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://hbgwxlin4jun"]
+[gd_scene format=3 uid="uid://hbgwxlin4jun"]
 
 [ext_resource type="PackedScene" uid="uid://bbnqcxa20a5a5" path="res://src/UI/Nodes/Sliders/ValueSliderV2.tscn" id="1_uvdem"]
 [ext_resource type="Script" uid="uid://dppsr4hf6f142" path="res://src/UI/Timeline/NewTileMapLayerDialog.gd" id="1_y2r5h"]
 
-[node name="NewTileMapLayerDialog" type="ConfirmationDialog"]
+[node name="NewTileMapLayerDialog" type="ConfirmationDialog" unique_id=1845542991]
 title = "New layer"
 position = Vector2i(0, 36)
 size = Vector2i(300, 284)
 script = ExtResource("1_y2r5h")
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="GridContainer" type="GridContainer" parent="." unique_id=152386652]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 292.0
 offset_bottom = 235.0
 columns = 2
 
-[node name="NameLabel" type="Label" parent="GridContainer"]
+[node name="NameLabel" type="Label" parent="GridContainer" unique_id=726894301]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Name:"
 
-[node name="NameLineEdit" type="LineEdit" parent="GridContainer"]
+[node name="NameLineEdit" type="LineEdit" parent="GridContainer" unique_id=970884832]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Tilemap 1"
 
-[node name="TilesetLabel" type="Label" parent="GridContainer"]
+[node name="TilesetLabel" type="Label" parent="GridContainer" unique_id=2135846905]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Tileset:"
 
-[node name="TilesetOptionButton" type="OptionButton" parent="GridContainer"]
+[node name="TilesetOptionButton" type="OptionButton" parent="GridContainer" unique_id=103256605]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 selected = 0
@@ -39,22 +39,22 @@ item_count = 1
 popup/item_0/text = "New tileset"
 popup/item_0/id = 0
 
-[node name="TilesetNameLabel" type="Label" parent="GridContainer"]
+[node name="TilesetNameLabel" type="Label" parent="GridContainer" unique_id=1055030391]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Tileset name:"
 
-[node name="TilesetNameLineEdit" type="LineEdit" parent="GridContainer"]
+[node name="TilesetNameLineEdit" type="LineEdit" parent="GridContainer" unique_id=1288913671]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "New Tileset"
 
-[node name="TileSizeLabel" type="Label" parent="GridContainer"]
+[node name="TileSizeLabel" type="Label" parent="GridContainer" unique_id=1371259562]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Tile size:"
 
-[node name="TileSizeSlider" parent="GridContainer" instance=ExtResource("1_uvdem")]
+[node name="TileSizeSlider" parent="GridContainer" unique_id=862200666 instance=ExtResource("1_uvdem")]
 layout_mode = 2
 value = Vector2(16, 16)
 min_value = Vector2(1, 1)
@@ -66,12 +66,12 @@ prefix_y = "Height:"
 suffix_x = "px"
 suffix_y = "px"
 
-[node name="TileShapeLabel" type="Label" parent="GridContainer"]
+[node name="TileShapeLabel" type="Label" parent="GridContainer" unique_id=1805530503]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Tile shape:"
 
-[node name="TileShapeOptionButton" type="OptionButton" parent="GridContainer"]
+[node name="TileShapeOptionButton" type="OptionButton" parent="GridContainer" unique_id=354661941]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 selected = 0
@@ -83,12 +83,12 @@ popup/item_1/id = 1
 popup/item_2/text = "Hexagonal"
 popup/item_2/id = 3
 
-[node name="TileOffsetAxisLabel" type="Label" parent="GridContainer"]
+[node name="TileOffsetAxisLabel" type="Label" parent="GridContainer" unique_id=2082659380]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Tile offset axis:"
 
-[node name="TileOffsetAxisButton" type="OptionButton" parent="GridContainer"]
+[node name="TileOffsetAxisButton" type="OptionButton" parent="GridContainer" unique_id=467008768]
 layout_mode = 2
 tooltip_text = "For all half-offset shapes (Isometric & Hexagonal), determines the offset axis."
 mouse_default_cursor_shape = 2

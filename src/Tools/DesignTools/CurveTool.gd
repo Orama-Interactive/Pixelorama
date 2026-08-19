@@ -9,7 +9,6 @@ var _fill_inside := false  ## When true, the inside area of the curve gets fille
 var _fill_inside_rect := Rect2i()  ## The bounding box that surrounds the area that gets filled.
 var _editing_bezier := false  ## Needed to determine when to show the control points preview line.
 var _editing_out_control_point := false  ## True when controlling the out control point only.
-var _thickness := 1  ## The thickness of the curve.
 var _last_mouse_position := Vector2.INF  ## The last position of the mouse
 ## chained means Krita-like behavior, single means Aseprite-like.
 var _bezier_mode: int = Bezier.CHAINED
@@ -23,26 +22,6 @@ func _init() -> void:
 	Global.project_about_to_switch.connect(_clear)
 	_drawer.color_op = Drawer.ColorOp.new()
 	update_indicator()
-
-
-func _ready() -> void:
-	super()
-	if tool_slot.button == MOUSE_BUTTON_RIGHT:
-		$ThicknessSlider.allow_global_input_events = not Global.share_options_between_tools
-		Global.share_options_between_tools_changed.connect(
-			func(enabled): $ThicknessSlider.allow_global_input_events = not enabled
-		)
-
-
-func update_brush() -> void:
-	pass
-
-
-func _on_thickness_value_changed(value: int) -> void:
-	_thickness = value
-	update_indicator()
-	update_config()
-	save_config()
 
 
 func _on_bezier_mode_item_selected(index: int) -> void:
@@ -59,8 +38,8 @@ func _on_fill_checkbox_toggled(toggled_on: bool) -> void:
 
 func update_indicator() -> void:
 	var bitmap := BitMap.new()
-	bitmap.create(Vector2i.ONE * _thickness)
-	bitmap.set_bit_rect(Rect2i(Vector2i.ZERO, Vector2i.ONE * _thickness), true)
+	bitmap.create(Vector2i.ONE)
+	bitmap.set_bit_rect(Rect2i(Vector2i.ZERO, Vector2i.ONE), true)
 	_indicator = bitmap
 	_polylines = _create_polylines(_indicator)
 
@@ -68,7 +47,6 @@ func update_indicator() -> void:
 func get_config() -> Dictionary:
 	var config := super.get_config()
 	config["fill_inside"] = _fill_inside
-	config["thickness"] = _thickness
 	config["bezier_mode"] = _bezier_mode
 	return config
 
@@ -76,20 +54,13 @@ func get_config() -> Dictionary:
 func set_config(config: Dictionary) -> void:
 	super.set_config(config)
 	_fill_inside = config.get("fill_inside", _fill_inside)
-	_thickness = config.get("thickness", _thickness)
 	_bezier_mode = config.get("bezier_mode", _bezier_mode)
 
 
 func update_config() -> void:
 	super.update_config()
 	$FillCheckbox.button_pressed = _fill_inside
-	$ThicknessSlider.value = _thickness
 	bezier_option_button.select(_bezier_mode)
-
-
-## This tool has no brush, so just return the indicator as it is.
-func _create_brush_indicator() -> BitMap:
-	return _indicator
 
 
 func _input(event: InputEvent) -> void:
@@ -102,12 +73,18 @@ func _input(event: InputEvent) -> void:
 				# if bezier's curvature is being changed in SINGLE mode
 				if _current_state == SingleState.MIDDLE_A:
 					_curve.set_point_out(
-						0, Vector2(_last_mouse_position) - _curve.get_point_position(0)
+						0,
+						(
+							Vector2(_last_mouse_position)
+							+ Vector2(0.5, 0.5)
+							- _curve.get_point_position(0)
+						)
 					)
 				_curve.set_point_in(
 					1,
 					(
 						Vector2(_last_mouse_position)
+						+ Vector2(0.5, 0.5)
 						- _curve.get_point_position(_curve.point_count - 1)
 					)
 				)
@@ -137,12 +114,7 @@ func _input(event: InputEvent) -> void:
 							)
 							_current_state -= 1
 	else:
-		# If options are being shared, no need to change the brush size on the right tool slots,
-		# otherwise it will be changed twice on both left and right tools.
-		if tool_slot.button == MOUSE_BUTTON_RIGHT and Global.share_options_between_tools:
-			return
-		var brush_size_value := _mm_action.get_action_distance_int(event)
-		$ThicknessSlider.value += brush_size_value
+		super(event)
 
 
 func draw_start(pos: Vector2i) -> void:
@@ -150,20 +122,16 @@ func draw_start(pos: Vector2i) -> void:
 		return
 	pos = snap_position(pos)
 	super.draw_start(pos)
-	if Input.is_action_pressed("shape_displace"):
-		_picking_color = true
-		_pick_color(pos)
-		return
-	_picking_color = false  # fixes _picking_color being true indefinitely after we pick color
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit()
 	update_mask()
 	if !_drawing:
 		bezier_option_button.disabled = true
 		_drawing = true
 		_current_state = SingleState.START
+		Tools.active_multi_state_tools += 1
 	# NOTE: _current_state of CHAINED mode is always SingleState.START so it will always pass this.
 	if _current_state == SingleState.START or _current_state == SingleState.END:
-		_curve.add_point(pos)
+		_curve.add_point(Vector2(pos) + Vector2(0.5, 0.5))
 	if _bezier_mode == Bezier.SINGLE:
 		_current_state += 1
 	_fill_inside_rect = Rect2i(pos, Vector2i.ZERO)
@@ -172,13 +140,11 @@ func draw_start(pos: Vector2i) -> void:
 func draw_move(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_move(pos)
-	if _picking_color:  # Still return even if we released Alt
-		if Input.is_action_pressed("shape_displace"):
-			_pick_color(pos)
-		return
 	if _drawing and _bezier_mode == Bezier.CHAINED:
 		_editing_bezier = true
-		var current_position := _curve.get_point_position(_curve.point_count - 1) - Vector2(pos)
+		var current_position := (
+			(_curve.get_point_position(_curve.point_count - 1) - Vector2(pos)) - Vector2(0.5, 0.5)
+		)
 		if not _editing_out_control_point:
 			_curve.set_point_in(_curve.point_count - 1, current_position)
 		_curve.set_point_out(_curve.point_count - 1, -current_position)
@@ -204,21 +170,22 @@ func cancel_tool() -> void:
 
 
 func draw_preview() -> void:
-	var previews := Global.canvas.previews_sprite
 	if not _drawing:
 		return
+	var previews := Global.canvas.previews_sprite
 	var points := _bezier()
+	var final_points := get_coords_to_draw(points, false)
 	var image := Image.create(
 		Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_LA8
 	)
-	for i in points.size():
+	for i in final_points.size():
 		if Global.mirror_view:  # This fixes previewing in mirror mode
-			points[i].x = image.get_width() - points[i].x - 1
-		if Rect2i(Vector2i.ZERO, image.get_size()).has_point(points[i]):
-			image.set_pixelv(points[i], Color.WHITE)
+			final_points[i].x = image.get_width() - final_points[i].x - 1
+		if Rect2i(Vector2i.ZERO, image.get_size()).has_point(final_points[i]):
+			image.set_pixelv(final_points[i], Color.WHITE)
 
 	# Handle mirroring
-	for point in mirror_array(points):
+	for point in mirror_array(final_points):
 		if Rect2i(Vector2i.ZERO, image.get_size()).has_point(point):
 			image.set_pixelv(point, Color.WHITE)
 	var texture := ImageTexture.create_from_image(image)
@@ -260,38 +227,35 @@ func _draw_shape() -> void:
 	bezier_option_button.disabled = false
 	var points := _bezier()
 	prepare_undo()
-	var images := _get_selected_draw_images()
-	for point in points:
-		# Reset drawer every time because pixel perfect sometimes breaks the tool
-		_drawer.reset()
+	_prepare_tool()
+	var final_points := get_coords_to_draw(points)
+	for point in final_points:
 		_fill_inside_rect = _fill_inside_rect.expand(point)
-		# Draw each point offsetted based on the shape's thickness
-		_draw_pixel(point, images)
+		_set_pixel(point)
+
 	if _fill_inside:
+		if is_image_brush():
+			for point in points:
+				_fill_inside_rect = _fill_inside_rect.expand(point)
 		var v := Vector2i()
 		for x in _fill_inside_rect.size.x:
 			v.x = x + _fill_inside_rect.position.x
 			for y in _fill_inside_rect.size.y:
 				v.y = y + _fill_inside_rect.position.y
 				if Geometry2D.is_point_in_polygon(v, points):
-					_draw_pixel(v, images)
+					var coords_to_draw := _draw_tool(v)
+					for coord in coords_to_draw:
+						_set_pixel(coord)
 	_clear()
 	commit_undo("Draw Shape")
-
-
-func _draw_pixel(point: Vector2i, images: Array[ImageExtended]) -> void:
-	if Tools.is_placing_tiles():
-		draw_tile(point)
-	else:
-		if Global.current_project.can_pixel_get_drawn(point):
-			for image in images:
-				_drawer.set_pixel(image, point, tool_slot.color)
 
 
 func _clear() -> void:
 	_curve.clear_points()
 	_fill_inside_rect = Rect2i()
-	_drawing = false
+	if _drawing:
+		Tools.active_multi_state_tools -= 1
+		_drawing = false
 	Global.canvas.previews_sprite.texture = null
 	_editing_out_control_point = false
 	Global.canvas.previews.queue_redraw()
@@ -305,7 +269,7 @@ func _bezier() -> Array[Vector2i]:
 		# Mirror the last point of the curve
 		last_pixel.x = (Global.current_project.size.x - 1) - last_pixel.x
 	if _current_state <= SingleState.END:  # this is general for both modes
-		_curve.add_point(last_pixel)
+		_curve.add_point(last_pixel + Vector2(0.5, 0.5))
 	var points := _curve.get_baked_points()
 	if _current_state <= SingleState.END:  # this is general for both modes
 		_curve.remove_point(_curve.point_count - 1)
@@ -313,7 +277,7 @@ func _bezier() -> Array[Vector2i]:
 	for i in points.size() - 1:
 		var point1 := points[i]
 		var point2 := points[i + 1]
-		final_points.append_array(bresenham_line_thickness(point1, point2, _thickness))
+		final_points.append_array(Geometry2D.bresenham_line(point1, point2))
 	return final_points
 
 
@@ -351,3 +315,8 @@ func draw_empty_circle(
 
 	line_end = circle_radius.rotated(TAU) + circle_center
 	canvas.draw_line(line_origin, line_end, color)
+
+
+func _exit_tree() -> void:
+	cancel_tool()
+	super()

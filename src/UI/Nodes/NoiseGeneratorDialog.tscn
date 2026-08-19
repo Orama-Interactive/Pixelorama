@@ -1,12 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://buixtfobyc3df"]
+[gd_scene format=3 uid="uid://buixtfobyc3df"]
 
 [ext_resource type="PackedScene" uid="uid://be14ffwmcp5xy" path="res://src/UI/Nodes/NoiseGenerator.tscn" id="1_wso7i"]
 
-[node name="NoiseGeneratorDialog" type="AcceptDialog"]
+[node name="NoiseGeneratorDialog" type="AcceptDialog" unique_id=32559367]
 title = "Generate noise"
 size = Vector2i(500, 500)
 
-[node name="NoiseGenerator" parent="." instance=ExtResource("1_wso7i")]
+[node name="NoiseGenerator" parent="." unique_id=1382255649 instance=ExtResource("1_wso7i")]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = -8.0

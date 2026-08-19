@@ -110,3 +110,5 @@ func _handle_tab_visibility() -> void:
 		tabs_visible = false
 	else:
 		tabs_visible = _show_tabs
+	# Needed for https://github.com/godotengine/godot/issues/122187
+	get_tab_bar().get_parent().visible = tabs_visible

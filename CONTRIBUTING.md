@@ -5,6 +5,7 @@
 * [Reporting bugs or proposing features](#reporting-bugs-or-proposing-features)
 * [Contributing pull requests](#contributing-pull-requests)
 * [Contributing translations](#contributing-translations)
+* [Contributing financially](#contributing-financially)
 * [Communicating with developers](#communicating-with-developers)
 
 **Please read the first section before reporting a bug!**
@@ -15,7 +16,7 @@ Please, open just one issue for each bug you'd like to report, or a feature you'
 
 Also, make sure to search the [issue tracker](https://github.com/Orama-Interactive/Pixelorama/issues) before opening a new issue, in case an issue like that exists. If you're unsure, feel free to open an issue. If it's a duplicate, we'll handle it.
 
-When reporting a bug, make sure to provide enough details, such as information about your Operating System (OS), Pixelorama version, Godot version (if you're using the source project) and clear steps to reproduce the issue. Feel free to include screenshots that might help, too.
+When reporting a bug, make sure to provide enough details, such as information about your Operating System (OS), Pixelorama version, Godot version (if you're using the source project) and clear steps to reproduce the issue. Feel free to include screenshots and videos that might help, too. Providing project (`.pxo`) files that are related to the problem can also be helpful too.
 <br><br>
 
 ## Contributing pull requests
@@ -43,7 +44,7 @@ If you want to add new features or fix bugs, please check the following guidelin
 - When you're creating a new script, if you have "Template" checked, Godot will place some comments and methods for you. If you're not using them, please remove them.
 
 ### Organization
-- New scripts and/or scenes should go under the `src/` directory and use `PascalCase` for file and folder names. [Read this guide for more information](https://www.gdquest.com/docs/guidelines/best-practices/godot-gdscript/).
+- New scripts and/or scenes should go under the `src/` directory. [Read this guide for more information](https://www.gdquest.com/docs/guidelines/best-practices/godot-gdscript/).
 - New images or other assets should go under the `assets/` directory and use `snake_case` for file and folder names.
 - If you're adding new UI elements with text, please include the new strings in the `Translations.pot` file. Do not include them in the other `*.po` files. Please make sure to group similar elements together (like element names and their tooltips) by placing them close to each other.
 - If you're making changes to UI elements that are `PackedScene`s, please directly edit them in their own scene files (open their scenes in the editor) instead of in `Main.tscn` or any parent scenes.
@@ -52,18 +53,29 @@ If you want to add new features or fix bugs, please check the following guidelin
 - If you want to add an error dialog, use the existing `ErrorDialog`, change its text and pop it up, instead of making a new one.
 <br><br>
 
+### AI-assisted contributions
+The term "AI" refers to any LLM/generative AI model like ChatGPT, Claude, Grok, etc., or any other models that fulfill the same role.
+
+To avoid spam/low effort pull requests, using AI to make contributions to Pixelorama is not allowed. Understand that contributions that are suspected of primarily using AI will be will be given the lowest priority for review and may even be closed without notice.
+
+AI contributions have the added pain of being demoralizing. Reviewing PRs is already tedious work, but it is rewarding because reviewers generally feel that their efforts are contributing to educating a new contributor (who may become a future maintainer/reviewer). If your feedback on PRs is just being absorbed by a machine and not going towards mentoring a potential future maintainer, it becomes much harder to justify spending your free time on PR review.
+
+Also, please do not use AI-generated text in human-to-human connection. We want to talk to you, not a machine that acts as an intermediary. Machine translations are still acceptable as long as the original content was written by a human.
+
 ## Contributing translations
 Pixelorama uses [Crowdin](https://crowdin.com/project/pixelorama) to host the translations. In order to contribute, you need to login with your Crowdin account, select the language(s) you'd like to provide translations for, select `Translations.pot`, and start translating!
 If you need help with the context of some strings, or want to translate in a language that is not available, feel free to contact me (Overloaded). All languages are welcome to be translated!
 <br><br>
 
+## Contributing financially
+Pixelorama is a free and open-source project. This means that all of our income so far comes solely from donations. Donating means that more time will be spent on developing and maintain the project. You can contribute by doing the following:
+
+- Joining the [Patreon](https://patreon.com/OramaInteractive).
+- Donating on [Itch.io](https://orama-interactive.itch.io/pixelorama/purchase).
+- Getting a [Steam copy](https://store.steampowered.com/app/2779170/Pixelorama/) and leaving a review.
+
 ## Communicating with developers
 To communicate with developers (e.g. to discuss a feature you want to implement or a bug you want to fix), the following channels can be used:
 
-- [GitHub Issues](https://github.com/Orama-Interactive/Pixelorama/issues) or [GitHub Discussions](https://github.com/Orama-Interactive/Pixelorama/discussions): If there is an
-  existing issue or discussion about a topic you want to discuss, just add a comment to it -
-  all developers watch the repository and will get an email notification. You
-  can also create a new issue/discussion.
-- [Our Discord Server](https://discord.gg/GTMtr8s): All developers and most contributors are there, so it's the best way for direct chat
-  about Pixelorama. You can use the channel `#pixelorama-dev` to stay up to date with Pixelorama's developments real-time,
-  or talk about the developments and request new features. If you seek support, please use the `#pixelorama-help` channel instead. Please avoid DMing developers and contributors, unless they tell you otherwise.
+- [GitHub Issues](https://github.com/Orama-Interactive/Pixelorama/issues) or [GitHub Discussions](https://github.com/Orama-Interactive/Pixelorama/discussions): If there is an existing issue or discussion about a topic you want to discuss, just add a comment to it - all developers watch the repository and will get an email notification. You can also create a new issue/discussion.
+- [Our Discord Server](https://discord.gg/GTMtr8s): All developers and most contributors are there, so it's the best way for direct chat about Pixelorama. You can use the channel `#pixelorama-dev` to stay up to date with Pixelorama's developments real-time, or talk about the developments and request new features. If you seek support, please use the `#pixelorama-help` channel instead. Please avoid DMing developers and contributors, unless they tell you otherwise.

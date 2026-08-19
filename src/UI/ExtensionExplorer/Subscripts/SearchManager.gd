@@ -37,13 +37,16 @@ func text_search(text_to_search: String) -> Array[ExtensionEntry]:
 
 
 func add_new_tags(tag_array: PackedStringArray) -> void:
-	for tag in tag_array:
+	for tag: String in tag_array:
 		if !tag in available_tags:
 			available_tags.append(tag)
+			available_tags.sort()
 			var tag_checkbox := CheckBox.new()
 			tag_checkbox.text = tag
 			tag_checkbox.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 			tag_list.add_child(tag_checkbox)
+			var index := available_tags.find(tag)
+			tag_list.move_child(tag_checkbox, index)
 			tag_checkbox.toggled.connect(start_tag_search)
 
 

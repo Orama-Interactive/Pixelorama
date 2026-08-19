@@ -22,11 +22,11 @@ func _ready() -> void:
 
 func draw_guide_line() -> void:
 	if type == Types.HORIZONTAL:
-		points[0] = Vector2(-19999, 0)
-		points[1] = Vector2(19999, 0)
+		set_point_position(0, Vector2(-19999, 0))
+		set_point_position(1, Vector2(19999, 0))
 	else:
-		points[0] = Vector2(0, 19999)
-		points[1] = Vector2(0, -19999)
+		set_point_position(0, Vector2(0, 19999))
+		set_point_position(1, Vector2(0, -19999))
 
 
 func _input(event: InputEvent) -> void:
@@ -43,11 +43,11 @@ func _input(event: InputEvent) -> void:
 			visible = false
 			return
 		if type == Types.HORIZONTAL:
-			points[0].y = mouse_point.y
-			points[1].y = mouse_point.y
+			set_point_position(0, Vector2(points[0].x, mouse_point.y))
+			set_point_position(1, Vector2(points[1].x, mouse_point.y))
 		else:
-			points[0].x = mouse_point.x
-			points[1].x = mouse_point.x
+			set_point_position(0, Vector2(mouse_point.x, points[0].y))
+			set_point_position(1, Vector2(mouse_point.x, points[1].y))
 	queue_redraw()
 
 

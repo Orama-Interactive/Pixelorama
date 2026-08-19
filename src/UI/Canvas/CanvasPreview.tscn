@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c546tskdu53j1"]
+[gd_scene format=3 uid="uid://c546tskdu53j1"]
 
 [ext_resource type="Script" uid="uid://d0fky8xflhu6s" path="res://src/UI/Canvas/CanvasPreview.gd" id="1"]
 [ext_resource type="Shader" uid="uid://b3cj543ir4o23" path="res://src/Shaders/BlendLayers.gdshader" id="1_28j41"]
@@ -8,10 +8,10 @@ shader = ExtResource("1_28j41")
 shader_parameter/origin_x_positive = true
 shader_parameter/origin_y_positive = true
 
-[node name="CanvasPreview" type="Node2D"]
+[node name="CanvasPreview" type="Node2D" unique_id=288925646]
 material = SubResource("ShaderMaterial_21d5l")
 script = ExtResource("1")
 
-[node name="AnimationTimer" type="Timer" parent="."]
+[node name="AnimationTimer" type="Timer" parent="." unique_id=937838332]
 
 [connection signal="timeout" from="AnimationTimer" to="." method="_on_AnimationTimer_timeout"]

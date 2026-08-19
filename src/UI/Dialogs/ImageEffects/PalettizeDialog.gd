@@ -1,6 +1,6 @@
 extends ImageEffect
 
-var shader := preload("res://src/Shaders/Effects/Palettize.gdshader")
+var shader := load("res://src/Shaders/Effects/Palettize.gdshader")
 
 
 func _ready() -> void:

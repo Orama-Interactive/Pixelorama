@@ -5,7 +5,9 @@ var unique_iso_lines := PackedVector2Array()
 
 
 func _ready() -> void:
-	Global.project_switched.connect(queue_redraw)
+	Global.grid_updated.connect(queue_redraw)
+	Global.project_about_to_switch.connect(_on_project_about_to_switch)
+	Global.project_switched.connect(_on_project_switched)
 	Global.cel_switched.connect(queue_redraw)
 
 
@@ -379,11 +381,11 @@ func _hexagonal_cell_points_append(
 
 ## Helper functions for _draw_pixelated_isometric_grid()
 func _create_polylines(points: Array[Vector2i], bound: Rect2i) -> Array:
-	var lines = []
+	var lines := []
 	for i in points.size():
-		var point = points[i]
+		var point := points[i]
 		if i < points.size() - 1:
-			var next_point = points[i + 1]
+			var next_point := points[i + 1]
 			if (
 				point.x < bound.position.x
 				or point.x > bound.end.x
@@ -485,3 +487,15 @@ func get_isometric_polyline(
 		lines.append(tile_size_x + Vector2i(point) + Vector2i(0, centre.y))
 		lines.append(Vector2i(tile_size) + Vector2i(point) - Vector2i(0, centre.y))
 	return lines
+
+
+func _on_project_about_to_switch() -> void:
+	var project := Global.current_project
+	if project.resized.is_connected(queue_redraw):
+		project.resized.disconnect(queue_redraw)
+
+
+func _on_project_switched() -> void:
+	var project := Global.current_project
+	if not project.resized.is_connected(queue_redraw):
+		project.resized.connect(queue_redraw)

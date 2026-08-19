@@ -22,25 +22,6 @@ func _update_properties() -> void:
 	# This also breaks non-uniform scales (not supported UI-wise, but...)
 	_ignore_spinbox_changes = true
 
-	# Image Path
-	if OS.get_name() == "Web":
-		$ImageOptions/ImagePath.disabled = true
-	else:
-		$ImageOptions/ImagePath.disabled = false
-
-	if ri.image_path.is_empty():
-		$ImageOptions/ImagePath.text = "(No Path)"
-		$ImageOptions/ImagePath.tooltip_text = "(No Path)"
-	else:
-		$ImageOptions/ImagePath.text = ri.image_path
-		$ImageOptions/ImagePath.tooltip_text = ri.image_path
-
-	if !ri.texture:
-		$ImageOptions/WarningLabel.visible = true
-		$ImageOptions/ImagePath.visible = false
-	else:
-		$ImageOptions/WarningLabel.visible = false
-		$ImageOptions/ImagePath.visible = true
 	# Transform
 	$Options/Position/X.value = ri.position.x
 	$Options/Position/Y.value = ri.position.y
@@ -64,11 +45,6 @@ func _reset_properties() -> void:
 	# This is because otherwise a little dance will occur.
 	# This also breaks non-uniform scales (not supported UI-wise, but...)
 	_ignore_spinbox_changes = true
-	$ImageOptions/ImagePath.text = "None"
-	$ImageOptions/ImagePath.tooltip_text = "None"
-	$ImageOptions/ImagePath.disabled = true
-	$ImageOptions/WarningLabel.visible = false
-	$ImageOptions/ImagePath.visible = true
 	# Transform
 	$Options/Position/X.value = 0.0
 	$Options/Position/Y.value = 0.0
@@ -85,16 +61,6 @@ func _reset_properties() -> void:
 	_ignore_spinbox_changes = false
 	# Fore update the "gizmo" drawing
 	references_container.queue_redraw()
-
-
-func _on_image_path_pressed() -> void:
-	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
-	if !ri:
-		return
-	if ri.image_path.is_empty():
-		print("No path for this image")
-		return
-	OS.shell_open(ri.image_path.get_base_dir())
 
 
 func _on_Monochrome_toggled(pressed: bool) -> void:
@@ -247,7 +213,7 @@ func _on_confirm_remove_dialog_canceled() -> void:
 	Global.dialog_open(false)
 
 
-func _on_reference_image_porperties_changed() -> void:
+func _on_reference_image_properties_changed() -> void:
 	_update_properties()
 
 
@@ -258,13 +224,13 @@ func _on_reference_image_changed(index: int) -> void:
 	# Disconnect the previously selected one
 	if _prev_index > -1:
 		var prev_ri: ReferenceImage = Global.current_project.get_reference_image(_prev_index)
-		if prev_ri.properties_changed.is_connected(_on_reference_image_porperties_changed):
-			prev_ri.properties_changed.disconnect(_on_reference_image_porperties_changed)
+		if prev_ri.properties_changed.is_connected(_on_reference_image_properties_changed):
+			prev_ri.properties_changed.disconnect(_on_reference_image_properties_changed)
 	# Connect the new Reference image (if it is one)
 	if index > -1:
-		Global.current_project.reference_images[index].properties_changed.connect(
-			_on_reference_image_porperties_changed
-		)
+		var ref_image := Global.current_project.reference_images[index]
+		if not ref_image.properties_changed.is_connected(_on_reference_image_properties_changed):
+			ref_image.properties_changed.connect(_on_reference_image_properties_changed)
 
 	_prev_index = index
 

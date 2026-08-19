@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2025-11-06 14:33\n"
+"PO-Revision-Date: 2026-07-20 13:59\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -30,11 +30,8 @@ msgstr "Παρακαλώ επιβεβαιώστε..."
 msgid "File Name:"
 msgstr "Όνομα αρχείου:"
 
-msgid "Project Name:"
+msgid "Project name:"
 msgstr "Όνομα έργου:"
-
-msgid "Image Size"
-msgstr "Μέγεθος εικόνας"
 
 msgid "Canvas Size"
 msgstr "Μέγεθος Καμβά"
@@ -137,7 +134,7 @@ msgid "Undo"
 msgstr "Αναίρεση"
 
 msgid "Redo"
-msgstr "Ακύρωση αναίρεσης"
+msgstr "Επαναφορά"
 
 #. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
 msgid "Undo History"
@@ -208,8 +205,12 @@ msgstr "Περικοπή στο περιεχόμενο"
 msgid "Resize Canvas"
 msgstr "Αλλαγή μεγέθους καμβά"
 
-msgid "Offset Image"
-msgstr "Μετατόπιση Εικόνας"
+msgid "Offset & Scale Image"
+msgstr "Μετατόπιση & κλιμάκωση εικόνας"
+
+#. Refers to the "Offset & Scale" layer effect.
+msgid "Offset & Scale"
+msgstr "Μετατόπιση & κλιμάκωση"
 
 msgid "Offset:"
 msgstr "Μετατόπιση:"
@@ -580,15 +581,6 @@ msgstr "Πινέλο από project"
 msgid "Random brush"
 msgstr "Τυχαίο πινέλο"
 
-msgid "Save Sprite as .pxo"
-msgstr "Αποθήκευση εικόνας ως .pxo"
-
-msgid "Export Sprite as .png"
-msgstr "Εξαγωγή εικόνας ως .png"
-
-msgid "Export Sprite"
-msgstr "Εξαγωγή εικόνας"
-
 msgid "File Exists, Overwrite?"
 msgstr "Το άρχειο υπάρχει, να γίνει αντικατάσταση;"
 
@@ -896,6 +888,18 @@ msgstr "Αντίγραφο ασφαλείας"
 msgid "Performance"
 msgstr "Επίδοση"
 
+#. Found in the Preferences. Refers to the attribution details of the current project, such as the project's creator and license.
+msgid "Attribution"
+msgstr "Απόδοση"
+
+#. Found in the Preferences. Refers to the author of the current project.
+msgid "Author"
+msgstr "Δημιουργός"
+
+#. Found in the Preferences. Refers to the default license that is set to the created project.
+msgid "Default license"
+msgstr "Προεπιλεγμένη άδεια"
+
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
 msgstr "Οδηγοί"
@@ -987,6 +991,10 @@ msgstr "Όταν αυτή η ρύθμιση είναι ενεργοποιημέ�
 msgid "Single window mode"
 msgstr "Λειτουργία ενός παραθύρου"
 
+#. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
+msgid "Collapse main menu"
+msgstr "Σύμπτυξη του κύριου μενού"
+
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
 msgstr "Όταν αυτή η ρύθμιση είναι ενεργοποιημένη, τα υποπαράθυρα του Pixelorama θα ενσωματωθούν στο κύριο παράθυρο, αλλιώς κάθε παράθυρο θα είναι ξεχωριστό."
@@ -1012,6 +1020,22 @@ msgstr "Μωβ"
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
 msgstr "Τριανταφυλλί"
+
+#. A theme. Black (#000000) is set as the main color so these pixels can be turned off on OLED screens.
+msgid "Black (OLED)"
+msgstr "Μαύρο (OLED)"
+
+#. A theme. "System" refers to the Operating System.
+msgid "System"
+msgstr "Σύστημα"
+
+#. Refers to the base color of a theme.
+msgid "Base color:"
+msgstr "Βασικό χρώμα:"
+
+#. Refers to the accent color of a theme.
+msgid "Accent color:"
+msgstr "Χρώμα έμφασης:"
 
 msgid "Theme"
 msgstr "Θέμα"
@@ -1043,7 +1067,7 @@ msgid "If this is enabled, the right mouse button will always activate the same 
 msgstr "Αν είναι ενεργοποιημένο, το δεξί κουμπί του ποντικιού θα ενεργοποιεί πάντα το ίδιο εργαλείο με το αριστερό κουμπί του ποντικιού."
 
 #. Found in the preferences, under the Tools category.
-msgid "Share options between the left and the right tools"
+msgid "Share options between left and right tools"
 msgstr "Κοινή χρήση επιλογών μεταξύ αριστερών και δεξιών εργαλείων"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
@@ -1058,8 +1082,9 @@ msgstr "Χρώμα αριστερού εργαλείου:"
 msgid "Right tool color:"
 msgstr "Χρώμα δεξιού εργαλείου:"
 
-msgid "Tool button size:"
-msgstr "Μέγεθος κουμπιών εργαλείων:"
+#. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
+msgid "Make global palettes read-only"
+msgstr "Ορισμός καθολικών παλετών μόνο για ανάγνωση"
 
 msgid "Small"
 msgstr "Μικρά"
@@ -1084,6 +1109,10 @@ msgstr "Όλα τα καρέ"
 
 msgid "All projects"
 msgstr "Όλα τα έργα"
+
+#. An image effect that helps convert a flat image to isometric.
+msgid "Flat to Isometric"
+msgstr "Επίπεδο σε ισομετρικό"
 
 msgid "Invert Colors"
 msgstr "Αντιστροφή χρωμάτων"
@@ -1511,6 +1540,9 @@ msgstr "Ολλανδικά"
 
 msgid "Belarusian"
 msgstr "Λευκορωσικά"
+
+msgid "Thai"
+msgstr "Ταϊλανδέζικα"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -2062,6 +2094,26 @@ msgstr "Οδηγός ταμπλέτας:"
 msgid "Specifies the tablet driver being used on Windows. If you have Windows Ink enabled, select winink."
 msgstr "Καθορίζει το πρόγραμμα οδήγησης ταμπλέτας που χρησιμοποιείται στα Windows. Εάν έχετε ενεργοποιημένο το Windows Ink, επιλέξτε winink."
 
+#. Found in the Preferences. Refers to the displayed name of the current project author.
+msgid "Display name:"
+msgstr "Εμφανιζόμενο όνομα:"
+
+#. Found in the Preferences. Refers to the real name of the current project author.
+msgid "Real name:"
+msgstr "Αληθινό όνομα:"
+
+#. Found in the Preferences. Refers to the contact info of the current project author.
+msgid "Contact:"
+msgstr "Επικοινωνία:"
+
+#. Found in the Preferences. Refers to the company name of the current project author.
+msgid "Company/Studio:"
+msgstr "Εταιρεία/Στούντιο:"
+
+#. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
+msgid "Last saved by"
+msgstr "Τελευταία αποθήκευση από"
+
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
 msgstr "Προσθήκη επέκτασης"
@@ -2490,6 +2542,10 @@ msgstr "Αριστερή όψη"
 msgid "Right Face"
 msgstr "Δεξιά όψη"
 
+#. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
+msgid "Eraser mode"
+msgstr "Λειτουργία διαγραφής"
+
 msgid "Mirroring"
 msgstr "Κατοπτρισμός"
 
@@ -2868,6 +2924,18 @@ msgstr "Χρώμα"
 msgid "Luminosity"
 msgstr "Φωτεινότητα"
 
+#. Found in the layer's section of the timeline, as a category of blend modes. Contains blend modes that do masking operations between layers, such as the "Intersection" and "Match colors" blend modes.
+msgid "Masking"
+msgstr "Μάσκα"
+
+#. Found in the layer's section of the timeline, as a blend mode option. This blend mode belongs to the "Masking" category, and it erases the un-common areas between the blend and the base layers.
+msgid "Intersection"
+msgstr "Τομή"
+
+#. Found in the layer's section of the timeline, as a blend mode option.  This blend mode belongs to the "Masking" category, and it only shows the same colors between the blend and the base layers.
+msgid "Match colors"
+msgstr "Ταίριασμα χρωμάτων"
+
 msgid "Opacity:"
 msgstr "Αδιαφάνεια:"
 
@@ -3001,6 +3069,54 @@ msgstr "Αναίρεση: Αλλαγή διάρκειας καρέ"
 msgid "Redo: Change frame duration"
 msgstr "Ακύρωση αναίρεσης: Αλλαγή διάρκειας καρέ"
 
+msgid "Undo: Rename Layer"
+msgstr "Αναίρεση: Μετονομασία στρώσης"
+
+msgid "Redo: Rename Layer"
+msgstr "Επαναφορά: Μετονομασία στρώσης"
+
+msgid "Undo: Change Layer Opacity"
+msgstr "Αναίρεση: Αλλαγή αδιαφάνειας στρώσης"
+
+msgid "Redo: Change Layer Opacity"
+msgstr "Επαναφορά: Αλλαγή αδιαφάνειας στρώσης"
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
+msgid "Undo: Change Layer Onion Skinning Ignore Status"
+msgstr "Αναίρεση: Αλλαγή κατάστασης συμπερίληψης στο onion skinning"
+
+#. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
+msgid "Redo: Change Layer Onion Skinning Ignore Status"
+msgstr "Επαναφορά: Αλλαγή κατάστασης συμπερίληψης στο onion skinning"
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos.
+msgid "Undo: Change Layer User Data"
+msgstr "Αναίρεση: Αλλαγή δεδομένα χρήστη στρώσης"
+
+#. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
+msgid "Redo: Change Layer User Data"
+msgstr "Επαναφορά: Αλλαγή δεδομένα χρήστη στρώσης"
+
+msgid "Undo: Change Layer Color"
+msgstr "Αναίρεση: Αλλαγή χρώματος στρώσης"
+
+msgid "Redo: Change Layer Color"
+msgstr "Επαναφορά: Αλλαγή χρώματος στρώσης"
+
+msgid "Undo: Change Layer Visibility"
+msgstr "Αναίρεση: Αλλαγή ορατότητας στρώσης"
+
+msgid "Redo: Change Layer Visibility"
+msgstr "Επαναφορά: Αλλαγή ορατότητας στρώσης"
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos.
+msgid "Undo: Change Layer Locked Status"
+msgstr "Αναίρεση: Αλλαγή κατάστασης κλειδώματος στρώσης"
+
+#. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
+msgid "Redo: Change Layer Locked Status"
+msgstr "Επαναφορά: Αλλαγή κατάστασης κλειδώματος στρώσης"
+
 msgid "Move Guide"
 msgstr "Μετακίνηση βοηθού"
 
@@ -3029,9 +3145,6 @@ msgstr "Νέα Κενή Παλέτα"
 
 msgid "Import Palette"
 msgstr "Εισαγωγή Παλέτας"
-
-msgid "Create Palette From Current Sprite"
-msgstr "Δημιουργία παλέτας από την τρέχουσα εικόνα"
 
 msgid "Palette Name:"
 msgstr "Όνομα Παλέτας:"
@@ -3138,8 +3251,28 @@ msgstr "Κατακόρυφος προσανατολισμός"
 msgid "Landscape"
 msgstr "Οριζόντιος προσανατολισμός"
 
+# Found in the "New project" window. Refers to the content of the new project, whether it will just be a blank canvas, or if it will be created with data from the clipboard.
+msgid "Content:"
+msgstr "Περιεχόμενο:"
+
+# Found in the "New project" window. Refers to the content of the new project, set to be just a blank canvas.
+msgid "Blank canvas"
+msgstr "Κενός καμβάς"
+
+# Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
+msgid "App clipboard"
+msgstr "Πρόχειρο εφαρμογής"
+
+# Found in the "New project" window. Refers to the content of the clipboard of the (operating) system.
+msgid "System clipboard"
+msgstr "Πρόχειρο συστήματος"
+
 msgid "Templates:"
 msgstr "Πρότυπα:"
+
+# Found in the "New project" window. Refers to recent project sizes.
+msgid "Recent:"
+msgstr "Πρόσφατα:"
 
 msgid "Preset"
 msgstr "Προκαθορισμένο"
@@ -3212,6 +3345,10 @@ msgstr "Εργαλείο έλλειψης"
 
 msgid "Isometric Box Tool"
 msgstr "Εργαλείο ισομετρικού κουτιού"
+
+#. A tool that exists only for tilemap layers, and is responsible for setting some properties for the tiles. Currently, it is only used for setting the autotiling bits for a tile.
+msgid "Tiles Property Painter"
+msgstr "Μολύβι ιδιοτήτων πλακιδίων"
 
 msgid "Switch Colors"
 msgstr "Εναλλαγή χρωμάτων"
@@ -3302,21 +3439,21 @@ msgstr "Διαχωριστικοί χαρακτήρες:"
 msgid "The character(s) that separate the file name and the frame number"
 msgstr "Οι χαρακτήρες που διαχωρίζουν το όνομα του αρχείου και τον αριθμό του καρέ"
 
-#. Found in the export dialog. It is an option that removes the transparent area around non-transparent pixels of the exported images.
-msgid "Trim images"
-msgstr "Περικοπή εικόνων"
+#. Found in the export dialog. It is an option button that allows users to removes the transparent area around non-transparent pixels of the exported images, or to remove every pixel outside of the selection.
+msgid "Crop mode:"
+msgstr "Είδος περικοπής:"
+
+#. Refers to the content of an image.
+msgid "Content"
+msgstr "Περιεχόμενο"
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
 msgstr "Περικοπή των εξαγόμενων εικόνων στο ορατό τμήμα τους, θεωρώντας κάθε pixel με ένα μη μηδενικό alpha κανάλι ως ορατό."
 
-#. Found in the export dialog. It is an option that allows users to only export the portions of the images that are within the selected area.
-msgid "Clip image content to selection"
-msgstr "Αποκοπή περιεχομένου εικόνας στην επιλογή"
-
-#. Found in the export dialog. Tooltip of the "clip image content to selection" option.
-msgid "Only export content that is within the bounds of a selected area."
-msgstr "Εξαγωγή μόνο περιεχομένου που βρίσκεται εντός των ορίων μιας επιλεγμένης περιοχής."
+#. Found in the export dialog. It is an option that only appears in the spritesheet tab, and it allows users to export each layer as a separate file, if "split layers" is enabled.
+msgid "Layers as separate files"
+msgstr "Στρώσεις ως ξεχωριστά αρχεία"
 
 msgid "Close"
 msgstr "Κλείσιμο"
@@ -3355,6 +3492,10 @@ msgstr "Μετακίνηση του επιλεγμένου καρέ προς τ�
 msgid "Frame duration:"
 msgstr "Διάρκεια καρέ:"
 
+#. Refers to the license of a project, which can be set from the project properties.
+msgid "License:"
+msgstr "Άδεια:"
+
 #. Refers to custom user defined data for projects, frames, cels, tags and layers, found in their respective properties.
 msgid "User data:"
 msgstr "Δεδομένα χρήστη:"
@@ -3387,8 +3528,8 @@ msgstr "Κενή"
 msgid "From Current Palette"
 msgstr "Από την τρέχουσα παλέτα"
 
-msgid "From Current Sprite"
-msgstr "Από την τρέχουσα εικόνα"
+msgid "From Current Cel"
+msgstr "Από το τρέχον cel"
 
 msgid "From Current Selection"
 msgstr "Από την τρέχουσα επιλογή"
@@ -3736,26 +3877,6 @@ msgstr "Αρχική τιμή:"
 msgid "Final value:"
 msgstr "Τελική τιμή:"
 
-#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
-msgid "Ease type:"
-msgstr "Τύπος ομαλής μετάβασης:"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Starts slowly and speeds up towards the end"
-msgstr "Ξεκινά αργά και επιταχύνει προς το τέλος"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Starts quickly and slows down towards the end"
-msgstr "Ξεκινά γρήγορα και επιβραδύνει προς το τέλος"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Slowest at both ends, fast at middle"
-msgstr "Χαμηλότερο και στα δύο άκρα, γρήγορα στη μέση"
-
-#. Found under certain image effects that support properties that can be animated. A type of easing function.
-msgid "Fast at both ends, slow at middle"
-msgstr "Γρήγορα και στα δύο άκρα, αργά στη μέση"
-
 #. Found under certain image effects that support properties that can be animated. A type of interpolation.
 msgid "Quadratic (power of 2)"
 msgstr "Τετραγωνική (δύναμη του 2)"
@@ -3800,6 +3921,58 @@ msgstr "Υποχώρηση στα άκρα"
 msgid "Spring towards the end"
 msgstr "Αναπήδηση προς το τέλος"
 
+#. Found under certain image effects that support properties that can be animated. Refers to the easing function that should be used to animate the property. https://easings.net/
+msgid "Ease type:"
+msgstr "Τύπος ομαλής μετάβασης:"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts slowly and speeds up towards the end"
+msgstr "Ξεκινά αργά και επιταχύνει προς το τέλος"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Starts quickly and slows down towards the end"
+msgstr "Ξεκινά γρήγορα και επιβραδύνει προς το τέλος"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Slowest at both ends, fast at middle"
+msgstr "Χαμηλότερο και στα δύο άκρα, γρήγορα στη μέση"
+
+#. Found under certain image effects that support properties that can be animated. A type of easing function.
+msgid "Fast at both ends, slow at middle"
+msgstr "Γρήγορα και στα δύο άκρα, αργά στη μέση"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts slowly and speeds up towards the end", but with a shortened name.
+msgid "Ease in"
+msgstr "Επιτάχυνση"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts quickly and slows down towards the end", but with a shortened name.
+msgid "Ease out"
+msgstr "Επιβράδυνση"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Slowest at both ends, fast at middle", but with a shortened name.
+msgid "Ease in out"
+msgstr "Επιτάχυνση–Επιβράδυνση"
+
+#. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Fast at both ends, slow at middle", but with a shortened name.
+msgid "Ease out in"
+msgstr "Επιβράδυνση–Επιτάχυνση"
+
+#. Found in the keyframe timeline on the right panel when there is no keyframe selected.
+msgid "No key selected"
+msgstr "Δεν επιλέχθηκε κλειδί"
+
+#. Found in the keyframe timeline when right clicking on a track. When selected, a new keyframe is being inserted at the selected frame.
+msgid "Insert keyframe"
+msgstr "Εισαγωγή καρέ-κλειδιού"
+
+#. A button found in the keyframe timeline on the right panel when there is a keyframe selected. When clicked, it deletes the currently selected keyframe.
+msgid "Delete keyframe"
+msgstr "Διαγραφή καρέ-κλειδιού"
+
+#. A button found in the keyframe timeline on the right panel when two or more keyframes are selected. When clicked, it deletes the currently selected keyframes.
+msgid "Delete keyframes"
+msgstr "Διαγραφή καρέ-κλειδιών"
+
 #. Used to turn images into a singular color
 msgid "Monochrome"
 msgstr "Μονόχρωμο"
@@ -3823,8 +3996,8 @@ msgid "Hold Shift while pressing to instantly remove."
 msgstr "Κρατήστε πατημένο το Shift για άμεση αφαίρεση."
 
 #. Shown in the confirmation dialog for removing a reference image.
-msgid "Are you sure you want to remove this reference image? It will not be deleted from your file system."
-msgstr "Είστε βέβαιοι ότι θέλετε να καταργήσετε αυτή την εικόνα αναφοράς? Δεν θα διαγραφεί από το σύστημα αρχείων σας."
+msgid "Are you sure you want to remove this reference image?"
+msgstr "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε αυτή την εικόνα αναφοράς;"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -3849,10 +4022,6 @@ msgstr "Περιστροφή της επιλεγμένης εικόνας ανα
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
 msgstr "Κλιμάκωση της επιλεγμένης εικόνας αναφοράς"
-
-#. Button to select no reference images in the Reference Images panel.
-msgid "none"
-msgstr "κανένα"
 
 #. Resets the Transform of the selected reference image on the canvas.
 msgid "Reset Transform"
@@ -3988,8 +4157,8 @@ msgstr "Λειτουργία μόνο για τοποθέτηση:"
 
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
-msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place tiles, and you won't be able to modify existing tiles anymore on this layer."
-msgstr "Η ενεργοποίηση της λειτουργίας μόνο για τοποθέτηση είναι μια μόνιμη ενέργεια. Μόλις ενεργοποιηθεί, θα είστε σε θέση να τοποθετήσετε πλακίδια και δε θα μπορείτε να τροποποιήσετε τα υπάρχοντα πλακίδια πια σε αυτή τη στρώση."
+msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place, duplicate and edit existing tiles, and you won't be able to use Manual, Auto and Stack modes."
+msgstr "Η ενεργοποίηση της λειτουργίας μόνο για τοποθέτηση είναι μια μόνιμη ενέργεια. Μόλις ενεργοποιηθεί, θα μπορείτε μόνο να τοποθετήσετε, να αντιγράψετε και να επεξεργαστείτε τα ήδη υπάρχοντα πλακίδια και δε θα μπορείτε να χρησιμοποιείτε τις λειτουργίες \"Χειροκίνητο\", \"Αυτόματο\" και \"Στοίβα\"."
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
@@ -4033,6 +4202,11 @@ msgstr "Αυτόματο"
 #: src/UI/TilesPanel.tscn
 msgid "Stack"
 msgstr "Στοίβα"
+
+#. A checkbox that toggles autotiling on or off for tilemap layers.
+#: src/UI/TilesPanel.tscn
+msgid "Autotiling:"
+msgstr "Αυτόματη τοποθέτηση πλακιδίων:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"

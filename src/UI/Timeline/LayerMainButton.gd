@@ -66,7 +66,7 @@ func _can_drop_data(pos: Vector2, data) -> bool:
 	var region: Rect2
 	var depth := curr_layer.get_hierarchy_depth()
 	var last_layer := Global.current_project.layers[drop_layers[-1]]
-	if Input.is_action_pressed(&"ctrl") and drop_layers.size() == 1:  # Swap layers
+	if Global.is_ctrl_or_cmd_pressed() and drop_layers.size() == 1:  # Swap layers
 		if last_layer.is_ancestor_of(curr_layer) or curr_layer.is_ancestor_of(last_layer):
 			Global.animation_timeline.drag_highlight.visible = false
 			return false
@@ -129,7 +129,7 @@ func _drop_data(pos: Vector2, data) -> void:
 		drop_from_parents.append(layers[drop_from_indices[i]].parent)
 
 	project.undo_redo.create_action("Change Layer Order")
-	if Input.is_action_pressed("ctrl") and initial_drop_layers.size() == 1:  # Swap layers
+	if Global.is_ctrl_or_cmd_pressed() and initial_drop_layers.size() == 1:  # Swap layers
 		# a and b both need "from", "to", and "to_parents"
 		# a is this layer (and children), b is the dropped layers
 		var a := {"from": range(layer_index - curr_layer.get_child_count(true), layer_index + 1)}

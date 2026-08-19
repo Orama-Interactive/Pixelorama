@@ -41,6 +41,7 @@ var drag := false
 var rotation_slider: ValueSlider
 var zoom_slider: ValueSlider
 var should_tween := true
+var auto_release_gui_focus := true
 
 @onready var viewport := get_viewport()
 
@@ -63,7 +64,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if not DisplayServer.is_touchscreen_available():
+	if not DisplayServer.is_touchscreen_available() and auto_release_gui_focus:
 		get_window().gui_release_focus()
 	if !Global.can_draw:
 		drag = false
@@ -77,6 +78,10 @@ func _input(event: InputEvent) -> void:
 		zoom_camera(1)
 	elif event.is_action_pressed(&"zoom_out", false, true):  # Wheel Down Event
 		zoom_camera(-1)
+	elif event.is_action_pressed(&"rotate_right", false, true):  # Wheel Up Event
+		rotate_camera(1)
+	elif event.is_action_pressed(&"rotate_left", false, true):  # Wheel Down Event
+		rotate_camera(-1)
 
 	elif event is InputEventMagnifyGesture:  # Zoom gesture on touchscreens
 		var scale_factor := (event as InputEventMagnifyGesture).factor
@@ -91,8 +96,17 @@ func _input(event: InputEvent) -> void:
 			update_transparent_checker_offset()
 	else:
 		var dir := Input.get_vector(&"camera_left", &"camera_right", &"camera_up", &"camera_down")
-		if dir != Vector2.ZERO and !_has_selection_tool():
+		var root := get_tree().current_scene
+		if (
+			dir != Vector2.ZERO
+			and not Tools.selection_tool_has_selection()
+			and not root.is_writing_text
+		):
 			offset = offset + (dir.rotated(camera_angle) / zoom) * CAMERA_SPEED_RATE
+
+
+func rotate_camera(dir: float) -> void:
+	camera_angle += PI / 180 * dir
 
 
 func zoom_camera(dir: float, event_pos := mouse_pos) -> void:
@@ -227,15 +241,6 @@ func _rotation_slider_value_changed(value: float) -> void:
 	var canvas_center: Vector2 = Global.current_project.size / 2
 	offset = (offset - canvas_center).rotated(difference) + canvas_center
 	camera_angle = angle
-
-
-func _has_selection_tool() -> bool:
-	if not Global.current_project.has_selection:
-		return false
-	for slot in Tools._slots.values():
-		if slot.tool_node is BaseSelectionTool:
-			return true
-	return false
 
 
 func _project_switched() -> void:

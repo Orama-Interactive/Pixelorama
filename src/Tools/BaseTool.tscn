@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctfgfelg0sho8"]
+[gd_scene format=3 uid="uid://ctfgfelg0sho8"]
 
 [ext_resource type="Script" uid="uid://cvovhck0o66tc" path="res://src/Tools/BaseTool.gd" id="1"]
 
-[node name="ToolOptions" type="VBoxContainer"]
+[node name="ToolOptions" type="VBoxContainer" unique_id=1941710537]
 offset_left = 7.0
 offset_top = 7.0
 offset_right = 123.0
@@ -10,11 +10,11 @@ offset_bottom = 65.0
 size_flags_horizontal = 3
 script = ExtResource("1")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1240193805]
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=236766783]
 layout_mode = 2
 theme_type_variation = &"HeaderSmall"
 text = "Tool Name"

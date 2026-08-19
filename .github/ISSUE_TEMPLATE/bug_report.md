@@ -20,7 +20,7 @@ https://github.com/Orama-Interactive/Pixelorama/issues?q=is%3Aissue
 
 
 **OS/device including version:**
-<!-- Specify GPU model and drivers if graphics-related. -->
+<!-- Specify GPU model and drivers if graphics-related. Alternatively, feel free to upload the godot.log file found in the "logs" folder, when pressing on Help -> Open Editor Data Folder. -->
 
 
 **Issue description:**

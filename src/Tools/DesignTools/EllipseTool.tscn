@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://4hp76lf38bc7"]
+[gd_scene format=3 uid="uid://4hp76lf38bc7"]
 
 [ext_resource type="PackedScene" uid="uid://n40lhf8hm7o1" path="res://src/Tools/BaseShapeDrawer.tscn" id="1"]
 [ext_resource type="Script" uid="uid://crdhxs1mlm2oi" path="res://src/Tools/DesignTools/EllipseTool.gd" id="2"]
 
-[node name="ToolOptions" instance=ExtResource("1")]
+[node name="ToolOptions" unique_id=4083025 instance=ExtResource("1")]
 script = ExtResource("2")

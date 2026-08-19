@@ -1,6 +1,6 @@
 # gdlint: ignore=max-public-methods
-class_name BaseLayer
-extends RefCounted
+@abstract class_name BaseLayer
+extends AnimatableObject
 ## Base class for layer properties. Different layer types extend from this class.
 
 signal name_changed  ## Emits when [member name] is changed.
@@ -15,7 +15,7 @@ signal ui_color_changed  ## Emits when [member ui_color] is changed.
 enum BlendModes {
 	PASS_THROUGH = -2,  ## Only for group layers. Ignores group blending, like it doesn't exist.
 	NORMAL = 0,  ## The blend layer colors are simply placed on top of the base colors.
-	ERASE,  ## Erases the non-transparent areas of the upper layer from the lower layer's alpha.
+	ERASE,  ## Erases the upper layer's alpha from the alpha of base layers.
 	DARKEN,  ## Keeps the darker colors between the blend and the base layers.
 	MULTIPLY,  ## Multiplies the numerical values of the two colors, giving a darker result.
 	COLOR_BURN,  ## Darkens by increasing the contrast between the blend and base colors.
@@ -34,7 +34,9 @@ enum BlendModes {
 	HUE,  ## Uses the blend hue while preserving the base saturation and luminosity.
 	SATURATION,  ## Uses the blend saturation while preserving the base hue and luminosity.
 	COLOR,  ## Uses the blend hue and saturation while preserving the base luminosity.
-	LUMINOSITY  ## Uses the blend luminosity while preserving the base hue and saturation.
+	LUMINOSITY,  ## Uses the blend luminosity while preserving the base hue and saturation.
+	INTERSECTION,  ## Erases the un-common areas between the blend and the base layers.
+	MATCH_COLORS,  ## Only shows the same colors between the blend and the base layers.
 }
 
 var name := "":  ## Name of the layer.
@@ -69,7 +71,17 @@ var ui_color := Color(0, 0, 0, 0):
 	set(value):
 		ui_color = value
 		ui_color_changed.emit()
+
 var text_server := TextServerManager.get_primary_interface()
+
+
+func _init(_project: Project, _name := "") -> void:
+	project = _project
+	name = _name
+	params["opacity"] = opacity
+	animated_params["opacity"] = {}
+	param_properties["opacity"] = {"hint_string": "0.0,1.0,0.01"}
+	super()
 
 
 ## Returns true if this is a direct or indirect parent of layer
@@ -238,6 +250,12 @@ func link_cel(cel: BaseCel, link_set = null) -> void:
 			cel_link_sets.append(link_set)
 
 
+func get_opacity(frame_index := -1) -> float:
+	if frame_index == -1 or animated_params["opacity"].is_empty():
+		return opacity
+	return get_animated_property(frame_index, "opacity")
+
+
 ## Returns a copy of the [param cel]'s [Image] with all of the effects applied to it.
 ## This method is not destructive as it does NOT change the data of the image,
 ## it just returns a copy.
@@ -255,16 +273,17 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 	if not effects_enabled:
 		return image
 	var image_size := image.get_size()
+	var frame := cel.get_frame(project)
+	var frame_index := project.frames.find(frame)
 	for effect in effects:
 		if not effect.enabled or not is_instance_valid(effect.shader):
 			continue
-		var params := effect.params
-		var frame := cel.get_frame(project)
-		params["PXO_time"] = frame.position_in_seconds(project)
-		params["PXO_frame_index"] = project.frames.find(frame)
-		params["PXO_layer_index"] = index
+		var interpol_params := effect.get_params(frame_index)
+		interpol_params["PXO_time"] = frame.position_in_seconds(project)
+		interpol_params["PXO_frame_index"] = frame_index
+		interpol_params["PXO_layer_index"] = index
 		var shader_image_effect := ShaderImageEffect.new()
-		shader_image_effect.generate_image(image, effect.shader, params, image_size)
+		shader_image_effect.generate_image(image, effect.shader, interpol_params, image_size)
 	# Inherit effects from the parents, if their blend mode is set to pass through
 	for ancestor in get_ancestors():
 		if ancestor.blend_mode != BlendModes.PASS_THROUGH:
@@ -274,8 +293,12 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 		for effect in ancestor.effects:
 			if not effect.enabled:
 				continue
+			var interpol_params := effect.get_params(frame_index)
+			interpol_params["PXO_time"] = frame.position_in_seconds(project)
+			interpol_params["PXO_frame_index"] = frame_index
+			interpol_params["PXO_layer_index"] = index
 			var shader_image_effect := ShaderImageEffect.new()
-			shader_image_effect.generate_image(image, effect.shader, effect.params, image_size)
+			shader_image_effect.generate_image(image, effect.shader, interpol_params, image_size)
 	return image
 
 
@@ -312,7 +335,8 @@ func serialize() -> Dictionary:
 		"opacity": opacity,
 		"ui_color": ui_color,
 		"parent": parent.index if is_instance_valid(parent) else -1,
-		"effects": effect_data
+		"effects": effect_data,
+		"animated_params": var_to_str(animated_params),
 	}
 	if not user_data.is_empty():
 		dict["user_data"] = user_data
@@ -363,8 +387,11 @@ func deserialize(dict: Dictionary) -> void:
 				print("Loading effect failed, not a dictionary.")
 				continue
 			var effect := LayerEffect.new()
+			effect.layer = self
 			effect.deserialize(effect_dict)
 			effects.append(effect)
+	if dict.has("animated_params"):
+		animated_params = str_to_var(dict["animated_params"])
 
 
 ## Returns a layer type that is one of the [param LayerTypes]
@@ -404,3 +431,14 @@ func instantiate_layer_button() -> Node:
 ## blend mode is set to something else rather than [enum BlendModes.PASS_THROUGH].
 func is_blender() -> bool:
 	return false
+
+
+func _on_keyframe_set(param_name: String) -> void:
+	if param_name == "opacity" and project.layers[project.current_layer] == self:
+		Global.animation_timeline.opacity_slider.editable = false
+
+
+func _on_keyframe_unset(param_name: String) -> void:
+	if param_name == "opacity" and project.layers[project.current_layer] == self:
+		if not has_keyframes("opacity"):
+			Global.animation_timeline.opacity_slider.editable = true

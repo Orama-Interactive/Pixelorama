@@ -34,8 +34,16 @@ var omniscale_shader_premul_alpha: Shader:
 				"unshaded", "unshaded, blend_premul_alpha"
 			)
 		return omniscale_shader_premul_alpha
-var rotxel_shader := preload("res://src/Shaders/Effects/Rotation/SmearRotxel.gdshader")
-var nn_shader := preload("res://src/Shaders/Effects/Rotation/NearestNeighbour.gdshader")
+var rotxel_shader: Shader:
+	get:
+		if rotxel_shader == null:
+			rotxel_shader = load("res://src/Shaders/Effects/Rotation/SmearRotxel.gdshader")
+		return rotxel_shader
+var nn_shader: Shader:
+	get:
+		if nn_shader == null:
+			nn_shader = load("res://src/Shaders/Effects/Rotation/NearestNeighbour.gdshader")
+		return nn_shader
 var isometric_tile_cache := {}
 
 
@@ -108,8 +116,9 @@ func blend_layers(
 func set_layer_metadata_image(
 	layer: BaseLayer, cel: BaseCel, image: Image, index: int, include := true
 ) -> void:
-	# Store the blend mode
-	image.set_pixel(index, 0, Color(layer.blend_mode / 255.0, 0.0, 0.0, 0.0))
+	# Store the blend mode. We are adding 0.5 to it because if we don't, it breaks for
+	# RGH textures due to rounding errors.
+	image.set_pixel(index, 0, Color((layer.blend_mode + 0.5) / 255.0, 0.0, 0.0, 0.0))
 	# Store the opacity
 	if layer.is_visible_in_hierarchy() and include:
 		var opacity := cel.get_final_opacity(layer)
@@ -121,7 +130,7 @@ func set_layer_metadata_image(
 		image.set_pixel(index, 3, Color.RED)
 	else:
 		image.set_pixel(index, 3, Color.BLACK)
-	if not include:
+	if layer.is_blended_by_ancestor():
 		# Store a small red value as a way to indicate that this layer should be skipped
 		# Used for layers such as child layers of a group, so that the group layer itself can
 		# successfully be used as a clipping mask with the layer below it.
@@ -141,6 +150,82 @@ func blend_layers_headless(
 				pixel_color.a *= opacity
 				cel_image.set_pixel(xx, yy, pixel_color)
 	image.blend_rect(cel_image, Rect2i(Vector2i.ZERO, project.size), origin)
+
+
+func get_rounded_rect_points(
+	pos: Vector2i, size: Vector2i, radius: int, thickness: int
+) -> Array[Vector2i]:
+	var points: Array[Vector2i] = []
+	if radius <= 0:
+		var y1 := size.y + pos.y - 1
+		for x in range(pos.x, size.x + pos.x):
+			var t := Vector2i(x, pos.y)
+			var b := Vector2i(x, y1)
+			points.append(t)
+			points.append(b)
+
+		var x1 := size.x + pos.x - 1
+		for y in range(pos.y + 1, size.y + pos.y):
+			var l := Vector2i(pos.x, y)
+			var r := Vector2i(x1, y)
+			points.append(l)
+			points.append(r)
+
+		return points
+
+	points = get_rounded_rect_points_filled(pos, size, radius)
+	var inner_size := size - Vector2i.ONE * (thickness * 2)
+	if inner_size.x <= 0 or inner_size.y <= 0:
+		return points
+
+	# Remove the inner rectangle to produce a hollow shape.
+	var thickness_vector := pos + Vector2i(thickness, thickness)
+	var inner_radius := maxi(0, radius - thickness)
+	var inner := get_rounded_rect_points_filled(thickness_vector, inner_size, inner_radius)
+	for p in inner:
+		points.erase(p)
+
+	return points
+
+
+func get_rounded_rect_points_filled(pos: Vector2i, size: Vector2i, radius: int) -> Array[Vector2i]:
+	var points: Array[Vector2i] = []
+	if radius <= 0:
+		for y in range(size.y):
+			for x in range(size.x):
+				points.append(pos + Vector2i(x, y))
+		return points
+
+	@warning_ignore("integer_division")
+	radius = min(radius, size.x / 2, size.y / 2)
+	var radius_squared := radius * radius
+
+	var left := pos.x
+	var right := pos.x + size.x - 1
+	var top := pos.y
+	var bottom := pos.y + size.y - 1
+
+	for y in range(top, bottom + 1):
+		var start_x := left
+		var end_x := right
+
+		# Top rounded region
+		if y < top + radius:
+			var dy := (top + radius) - y
+			var dx := floori(sqrt(radius_squared - dy * dy))
+			start_x = left + radius - dx
+			end_x = right - radius + dx
+
+		# Bottom rounded region
+		elif y > bottom - radius:
+			var dy := y - (bottom - radius)
+			var dx := floori(sqrt(radius_squared - dy * dy))
+			start_x = left + radius - dx
+			end_x = right - radius + dx
+
+		points.append_array(Geometry2D.bresenham_line(Vector2i(start_x, y), Vector2i(end_x, y)))
+
+	return points
 
 
 ## Algorithm based on http://members.chello.at/easyfilter/bresenham.html
@@ -814,7 +899,7 @@ func generate_hexagonal_flat_top(image: Image) -> void:
 # Image effects
 func center(indices: Array) -> void:
 	var project := Global.current_project
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit(project)
 	var redo_data := {}
 	var undo_data := {}
 	project.undo_redo.create_action("Center Frames")
@@ -913,7 +998,7 @@ func resize_image(
 func crop_to_selection() -> void:
 	if not Global.current_project.has_selection:
 		return
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit(Global.current_project)
 	var redo_data := {}
 	var undo_data := {}
 	var rect := Global.current_project.selection_map.get_selection_rect(Global.current_project)
@@ -936,7 +1021,7 @@ func crop_to_selection() -> void:
 ## Automatically makes the project smaller by looping through all of the cels and
 ## trimming out the pixels that are transparent in all cels.
 func crop_to_content() -> void:
-	Global.canvas.selection.transform_content_confirm()
+	Global.transform_content_confirmed.emit(Global.current_project)
 	var used_rect := Rect2i()
 	for cel in Global.current_project.get_all_pixel_cels():
 		if not cel is PixelCel:

@@ -34,6 +34,8 @@ func draw_start(pos: Vector2i) -> void:
 	pos = snap_position(pos)
 	super.draw_start(pos)
 	if !_move and !_draw_points:
+		# NOTE: We need the quick tools to be disabled, while we are adding control points
+		Tools.active_multi_state_tools += 1
 		_ongoing_selection = true
 		_draw_points.append(pos)
 		_last_position = pos
@@ -126,7 +128,9 @@ func apply_selection(pos: Vector2i) -> void:
 
 
 func _clear() -> void:
-	_ongoing_selection = false
+	if _ongoing_selection:
+		_ongoing_selection = false
+		Tools.active_multi_state_tools -= 1
 	Global.canvas.previews_sprite.texture = null
 	_draw_points.clear()
 	_ready_to_apply = false
@@ -190,3 +194,8 @@ func draw_empty_circle(
 
 	line_end = circle_radius.rotated(TAU) + circle_center
 	canvas.draw_line(line_origin, line_end, color)
+
+
+func _exit_tree() -> void:
+	_clear()
+	super()

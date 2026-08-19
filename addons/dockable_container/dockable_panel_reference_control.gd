@@ -31,6 +31,7 @@ func _ready() -> void:
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_VISIBILITY_CHANGED and _reference_to:
+		update_minimum_size()
 		_reference_to.visible = visible
 	elif what == NOTIFICATION_TRANSFORM_CHANGED and _reference_to:
 		_reposition_reference()

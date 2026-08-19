@@ -1,14 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0d66oh6bw3kt"]
+[gd_scene format=3 uid="uid://d0d66oh6bw3kt"]
 
 [ext_resource type="Script" uid="uid://c68dnixirmyng" path="res://src/UI/Nodes/Sliders/BasisSliders.gd" id="1_sbf5t"]
 [ext_resource type="PackedScene" uid="uid://dpoteid430evf" path="res://src/UI/Nodes/Sliders/ValueSliderV3.tscn" id="2_7swri"]
 
-[node name="BasisSliders" type="HBoxContainer"]
+[node name="BasisSliders" type="HBoxContainer" unique_id=716661406]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_sbf5t")
 
-[node name="XSlider" parent="." instance=ExtResource("2_7swri")]
+[node name="XSlider" parent="." unique_id=487320088 instance=ExtResource("2_7swri")]
 layout_mode = 2
 size_flags_horizontal = 3
 value = Vector3(1, 0, 0)
@@ -17,7 +17,7 @@ prefix_x = "XX:"
 prefix_y = "YX:"
 prefix_z = "ZX:"
 
-[node name="YSlider" parent="." instance=ExtResource("2_7swri")]
+[node name="YSlider" parent="." unique_id=2059840864 instance=ExtResource("2_7swri")]
 layout_mode = 2
 size_flags_horizontal = 3
 value = Vector3(0, 1, 0)
@@ -26,7 +26,7 @@ prefix_x = "XY:"
 prefix_y = "YY:"
 prefix_z = "ZY:"
 
-[node name="ZSlider" parent="." instance=ExtResource("2_7swri")]
+[node name="ZSlider" parent="." unique_id=908518519 instance=ExtResource("2_7swri")]
 layout_mode = 2
 size_flags_horizontal = 3
 value = Vector3(0, 0, 1)

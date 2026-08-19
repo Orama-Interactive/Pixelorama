@@ -11,16 +11,22 @@ func _input(event: InputEvent) -> void:
 	if !_move and _rect.has_area():
 		if event.is_action_pressed("shape_perfect"):
 			_square = true
+			get_viewport().set_input_as_handled()
 		elif event.is_action_released("shape_perfect"):
 			_square = false
+			get_viewport().set_input_as_handled()
 		if event.is_action_pressed("shape_center"):
 			_expand_from_center = true
+			get_viewport().set_input_as_handled()
 		elif event.is_action_released("shape_center"):
 			_expand_from_center = false
+			get_viewport().set_input_as_handled()
 		if event.is_action_pressed("shape_displace"):
 			_displace_origin = true
+			get_viewport().set_input_as_handled()
 		elif event.is_action_released("shape_displace"):
 			_displace_origin = false
+			get_viewport().set_input_as_handled()
 
 
 func draw_move(pos: Vector2i) -> void:

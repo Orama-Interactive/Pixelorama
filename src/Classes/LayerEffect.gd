@@ -1,14 +1,19 @@
 class_name LayerEffect
-extends RefCounted
+extends AnimatableObject
 
 var name := ""
-var shader: Shader
+var shader: Shader:
+	set(value):
+		shader = value
+		_set_params_from_shader()
+var layer: BaseLayer
 var category := ""
-var params := {}
 var enabled := true
 
 
-func _init(_name := "", _shader: Shader = null, _category := "", _params := {}) -> void:
+func _init(
+	_name := "", _shader: Shader = null, _category := "", _params: Dictionary[String, Variant] = {}
+) -> void:
 	name = _name
 	shader = _shader
 	category = _category
@@ -20,10 +25,14 @@ func duplicate() -> LayerEffect:
 
 
 func serialize() -> Dictionary:
-	var p_str := {}
-	for param in params:
-		p_str[param] = var_to_str(params[param])
-	return {"name": name, "shader_path": shader.resource_path, "params": p_str, "enabled": enabled}
+	return (
+		{
+			"name": name,
+			"shader_path": shader.resource_path,
+			"enabled": enabled,
+		}
+		. merged(super())
+	)
 
 
 func deserialize(dict: Dictionary) -> void:
@@ -34,12 +43,25 @@ func deserialize(dict: Dictionary) -> void:
 		var shader_to_load := load(path)
 		if is_instance_valid(shader_to_load) and shader_to_load is Shader:
 			shader = shader_to_load
-	if dict.has("params"):
-		if typeof(dict["params"]) == TYPE_DICTIONARY:
-			for param in dict["params"]:
-				if typeof(dict["params"][param]) == TYPE_STRING:
-					params[param] = str_to_var(dict["params"][param])
-		else:
-			params = str_to_var(dict["params"])
 	if dict.has("enabled"):
 		enabled = dict["enabled"]
+	super(dict)
+
+
+func is_param_valid(param_name: StringName) -> bool:
+	if shader == null:
+		return false
+	var uniforms := shader.get_shader_uniform_list()
+	for uniform in uniforms:
+		if param_name == (uniform["name"] as String):
+			return true
+	return false
+
+
+func _set_params_from_shader() -> void:
+	if not is_instance_valid(shader):
+		return
+	var uniforms := shader.get_shader_uniform_list()
+	for uniform in uniforms:
+		var u_name := uniform["name"] as String
+		param_properties[u_name] = uniform

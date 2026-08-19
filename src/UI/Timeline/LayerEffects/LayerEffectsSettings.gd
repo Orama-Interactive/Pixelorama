@@ -4,46 +4,48 @@ const LAYER_EFFECT_BUTTON = preload("res://src/UI/Timeline/LayerEffects/LayerEff
 const DELETE_TEXTURE := preload("res://assets/graphics/misc/close.svg")
 
 var effects: Array[LayerEffect] = [
-	LayerEffect.new("Offset & Scale", preload("res://src/Shaders/Effects/OffsetPixels.gdshader")),
 	LayerEffect.new(
-		"Convolution Matrix",
-		preload("res://src/Shaders/Effects/ConvolutionMatrix.gdshader"),
-		"Color"
+		"Offset & Scale", load("res://src/Shaders/Effects/OffsetPixels.gdshader"), "Transform"
 	),
 	LayerEffect.new(
-		"Gaussian Blur", preload("res://src/Shaders/Effects/GaussianBlur.gdshader"), "Blur"
+		"Corner Pin", load("res://src/Shaders/Effects/CornerPin.gdshader"), "Transform"
 	),
 	LayerEffect.new(
-		"Gradient", preload("res://src/Shaders/Effects/Gradient.gdshader"), "Procedural"
+		"Flat to Isometric", load("res://src/Shaders/Effects/FlatToIsometric.gdshader"), "Transform"
 	),
 	LayerEffect.new(
-		"Outline", preload("res://src/Shaders/Effects/OutlineInline.gdshader"), "Procedural"
+		"Convolution Matrix", load("res://src/Shaders/Effects/ConvolutionMatrix.gdshader"), "Color"
 	),
 	LayerEffect.new(
-		"Drop Shadow", preload("res://src/Shaders/Effects/DropShadow.gdshader"), "Procedural"
+		"Gaussian Blur", load("res://src/Shaders/Effects/GaussianBlur.gdshader"), "Blur"
 	),
-	LayerEffect.new("Invert Colors", preload("res://src/Shaders/Effects/Invert.gdshader"), "Color"),
+	LayerEffect.new("Gradient", load("res://src/Shaders/Effects/Gradient.gdshader"), "Procedural"),
 	LayerEffect.new(
-		"Desaturation", preload("res://src/Shaders/Effects/Desaturate.gdshader"), "Color"
+		"Outline", load("res://src/Shaders/Effects/OutlineInline.gdshader"), "Procedural"
 	),
 	LayerEffect.new(
-		"Adjust Hue/Saturation/Value", preload("res://src/Shaders/Effects/HSV.gdshader"), "Color"
+		"Drop Shadow", load("res://src/Shaders/Effects/DropShadow.gdshader"), "Procedural"
+	),
+	LayerEffect.new("Invert Colors", load("res://src/Shaders/Effects/Invert.gdshader"), "Color"),
+	LayerEffect.new("Desaturation", load("res://src/Shaders/Effects/Desaturate.gdshader"), "Color"),
+	LayerEffect.new(
+		"Adjust Hue/Saturation/Value", load("res://src/Shaders/Effects/HSV.gdshader"), "Color"
 	),
 	LayerEffect.new(
 		"Adjust Brightness/Contrast",
-		preload("res://src/Shaders/Effects/BrightnessContrast.gdshader"),
+		load("res://src/Shaders/Effects/BrightnessContrast.gdshader"),
 		"Color"
 	),
 	LayerEffect.new(
-		"Color Curves", preload("res://src/Shaders/Effects/ColorCurves.gdshader"), "Color"
+		"Color Curves", load("res://src/Shaders/Effects/ColorCurves.gdshader"), "Color"
 	),
-	LayerEffect.new("Palettize", preload("res://src/Shaders/Effects/Palettize.gdshader"), "Color"),
-	LayerEffect.new("Pixelize", preload("res://src/Shaders/Effects/Pixelize.gdshader"), "Blur"),
-	LayerEffect.new("Posterize", preload("res://src/Shaders/Effects/Posterize.gdshader"), "Color"),
+	LayerEffect.new("Palettize", load("res://src/Shaders/Effects/Palettize.gdshader"), "Color"),
+	LayerEffect.new("Pixelize", load("res://src/Shaders/Effects/Pixelize.gdshader"), "Blur"),
+	LayerEffect.new("Posterize", load("res://src/Shaders/Effects/Posterize.gdshader"), "Color"),
 	LayerEffect.new(
-		"Gradient Map", preload("res://src/Shaders/Effects/GradientMap.gdshader"), "Color"
+		"Gradient Map", load("res://src/Shaders/Effects/GradientMap.gdshader"), "Color"
 	),
-	LayerEffect.new("Index Map", preload("res://src/Shaders/Effects/IndexMap.gdshader"), "Color"),
+	LayerEffect.new("Index Map", load("res://src/Shaders/Effects/IndexMap.gdshader"), "Color"),
 ]
 ## A dictionary that maps each category to a [PopupMenu].
 var category_submenus: Dictionary[String, PopupMenu] = {}
@@ -120,13 +122,22 @@ func _on_effect_list_pressed(menu_item_index: int, menu: PopupMenu) -> void:
 	var index: int = menu.get_item_metadata(menu_item_index)
 	var layer := Global.current_project.layers[Global.current_project.current_layer]
 	var effect := effects[index].duplicate()
+	effect.layer = layer
 	Global.current_project.undo_redo.create_action("Add layer effect")
 	Global.current_project.undo_redo.add_do_method(func(): layer.effects.append(effect))
 	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)
+	# we may be a different layer during redo
+	Global.current_project.undo_redo.add_do_property(
+		Global.canvas, "mandatory_update_layers", [layer.index]
+	)
 	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw)
 	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	Global.current_project.undo_redo.add_undo_method(func(): layer.effects.erase(effect))
 	Global.current_project.undo_redo.add_undo_method(layer.emit_effects_added_removed)
+	# we may be a different layer during undo
+	Global.current_project.undo_redo.add_undo_property(
+		Global.canvas, "mandatory_update_layers", [layer.index]
+	)
 	Global.current_project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
 	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	Global.current_project.undo_redo.commit_action()
@@ -163,6 +174,7 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	ShaderLoader.create_ui_for_shader_uniforms(
 		effect.shader,
 		effect.params,
+		effect.param_properties,
 		parameter_vbox,
 		_set_parameter.bind(effect),
 		_load_parameter_texture.bind(effect)
@@ -198,10 +210,18 @@ func _delete_effect(effect: LayerEffect) -> void:
 	Global.current_project.undo_redo.create_action("Delete layer effect")
 	Global.current_project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
 	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)
+	# we may be a different layer during redo
+	Global.current_project.undo_redo.add_do_property(
+		Global.canvas, "mandatory_update_layers", [layer.index]
+	)
 	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw)
 	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	Global.current_project.undo_redo.add_undo_method(func(): layer.effects.insert(index, effect))
 	Global.current_project.undo_redo.add_undo_method(layer.emit_effects_added_removed)
+	# we may be a different layer during undo
+	Global.current_project.undo_redo.add_undo_property(
+		Global.canvas, "mandatory_update_layers", [layer.index]
+	)
 	Global.current_project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
 	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	Global.current_project.undo_redo.commit_action()
@@ -209,6 +229,7 @@ func _delete_effect(effect: LayerEffect) -> void:
 
 
 func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
+	Global.transform_content_confirmed.emit()
 	var project := Global.current_project
 	var index := layer.effects.find(effect)
 	var redo_data := {}
@@ -225,7 +246,7 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 			undo_data[cel_image.indices_image] = cel_image.indices_image.data
 		undo_data[cel_image] = cel_image.data
 		var image_size := cel_image.get_size()
-		var params := effect.params
+		var params := effect.get_params(i)
 		params["PXO_time"] = frame.position_in_seconds(project)
 		params["PXO_frame_index"] = i
 		params["PXO_layer_index"] = layer.index
@@ -235,7 +256,7 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
 		tile_editing_mode = TileSetPanel.TileEditingMode.AUTO
-	project.update_tilemaps(undo_data, tile_editing_mode)
+	var used_tilesets := project.update_tilemaps(undo_data, tile_editing_mode)
 	for frame in project.frames:
 		var cel := frame.cels[layer.index]
 		var cel_image := cel.get_image()
@@ -245,13 +266,33 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 			redo_data[cel_image.indices_image] = cel_image.indices_image.data
 		redo_data[cel_image] = cel_image.data
 	project.undo_redo.create_action("Apply layer effect")
+	var layers_to_update := PackedInt32Array()
+	for l in Global.current_project.layers:
+		if l is LayerTileMap:
+			if l.tileset in used_tilesets:
+				layers_to_update.append(l.index)
 	project.deserialize_cel_undo_data(redo_data, undo_data)
+	# we may be on a different layer during undo/redo
+	Global.current_project.undo_redo.add_do_property(
+		Global.canvas, "mandatory_update_layers", layers_to_update
+	)
+	Global.current_project.undo_redo.add_undo_property(
+		Global.canvas, "mandatory_update_layers", layers_to_update
+	)
 	project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
 	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)
+	# we may be a different layer during redo
+	Global.current_project.undo_redo.add_do_property(
+		Global.canvas, "mandatory_update_layers", [layer.index]
+	)
 	project.undo_redo.add_do_method(Global.canvas.queue_redraw)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_undo_method(func(): layer.effects.insert(index, effect))
 	Global.current_project.undo_redo.add_undo_method(layer.emit_effects_added_removed)
+	# we may be a different layer during undo
+	Global.current_project.undo_redo.add_undo_property(
+		Global.canvas, "mandatory_update_layers", [layer.index]
+	)
 	project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.commit_action()

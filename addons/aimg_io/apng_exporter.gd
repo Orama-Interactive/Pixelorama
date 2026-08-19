@@ -74,7 +74,8 @@ func export_animation(
 			result.write_chunk("fdAT", chunk.data_array)
 		# Done with this frame!
 		progress_report_obj.callv(progress_report_method, progress_report_args)
-		await RenderingServer.frame_post_draw
+		if DisplayServer.get_name() != "headless":
+			await RenderingServer.frame_post_draw
 	# Final chunk.
 	result.write_chunk("IEND", PackedByteArray())
 	return result.finish()

@@ -21,6 +21,20 @@ func _define_js() -> void:
 		JavaScriptBridge
 		. eval(
 			"""
+	var hasUnsavedChanges = false;
+	function setUnsavedChanges(value) {
+		hasUnsavedChanges = value;
+	}
+
+	window.addEventListener("beforeunload", function (e) {
+		if (!hasUnsavedChanges) {
+			return;
+		}
+		var confirmationMessage = "You may have unsaved changes. Are you sure you want to leave?";
+
+		(e || window.event).returnValue = confirmationMessage; //Gecko + IE
+		return confirmationMessage;                            //Webkit, Safari, Chrome
+	});
 	var fileData;
 	var fileType;
 	var fileName;

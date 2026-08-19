@@ -3,7 +3,7 @@ extends ImageEffect
 enum { LINEAR, RADIAL, LINEAR_DITHERING, RADIAL_DITHERING }
 enum Animate { POSITION, SIZE, ANGLE, CENTER_X, CENTER_Y, RADIUS_X, RADIUS_Y }
 
-var shader := preload("res://src/Shaders/Effects/Gradient.gdshader")
+var shader := load("res://src/Shaders/Effects/Gradient.gdshader")
 var selected_dither_matrix := ShaderLoader.dither_matrices[0]
 
 @onready var options_cont: Container = $VBoxContainer/ScrollContainer/GradientOptions

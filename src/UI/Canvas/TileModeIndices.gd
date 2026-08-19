@@ -23,6 +23,8 @@ func _draw() -> void:
 				continue
 			var text := cell.to_string()
 			var pos := tilemap_cel.get_pixel_coords(cell_coords)
+			if Global.mirror_view:
+				pos.x = Global.current_project.size.x - pos.x - tilemap_cel.get_tile_size().x
 			pos.y += tile_size.y - font.get_ascent(FONT_SIZE * 0.5) * scale_factor
 			draw_string(
 				font,

@@ -325,6 +325,7 @@ static func psd_to_pxo_project(psd_project: PhotoshopProject, add_frames := true
 	var project_size := psd_project.size
 	var new_project := Project.new([], psd_project.path.get_file().get_basename(), project_size)
 	new_project.fps = 1
+	new_project.clear_attribution_data()
 	# Initialize frames
 	if psd_project.frames.size() == 0 or not add_frames:
 		psd_project.frames = {0: PhotoshopFrame.new()}
@@ -462,10 +463,9 @@ static func psd_to_pxo_project(psd_project: PhotoshopProject, add_frames := true
 		Global.canvas.add_child(guide)
 
 	new_project.save_path = psd_project.path.get_basename() + ".pxo"
-	new_project.file_name = new_project.name
+	new_project.export_profile.file_name = new_project.name
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
-	Global.canvas.camera_zoom()
 
 
 static func offset_cel_image(

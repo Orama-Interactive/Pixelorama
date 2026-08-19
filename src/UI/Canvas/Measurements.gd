@@ -44,8 +44,10 @@ func _input(event: InputEvent) -> void:
 
 
 func _prepare_cel_rect() -> void:
-	var pos := canvas.current_pixel.floor()
 	var project := Global.current_project
+	var pos := canvas.current_pixel.floor()
+	if Global.mirror_view:
+		pos.x = project.size.x - pos.x - 1
 	var cel := project.get_current_cel()
 	var image := cel.get_image()
 	rect_bounds = image.get_used_rect()
@@ -109,6 +111,8 @@ func _draw_move_measurement() -> void:
 	# Draw boundary
 	var boundary := Rect2i(rect_bounds)
 	boundary.position += canvas.move_preview_location
+	if Global.mirror_view:
+		boundary.position.x = p_size.x - boundary.size.x - boundary.position.x
 	draw_rect(boundary, line_color, false, apparent_width)
 	# calculate lines
 	var top := Vector2(boundary.get_center().x, boundary.position.y)

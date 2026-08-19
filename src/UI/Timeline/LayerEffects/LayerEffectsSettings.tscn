@@ -1,43 +1,43 @@
-[gd_scene load_steps=2 format=3 uid="uid://dd1fkkc3vjh78"]
+[gd_scene format=3 uid="uid://dd1fkkc3vjh78"]
 
 [ext_resource type="Script" uid="uid://52br5thwfwqp" path="res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.gd" id="1_h6h7b"]
 
-[node name="LayerEffectsSettings" type="AcceptDialog"]
+[node name="LayerEffectsSettings" type="AcceptDialog" unique_id=1268464520]
 title = "Layer effects"
 size = Vector2i(600, 400)
 script = ExtResource("1_h6h7b")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=448097141]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 592.0
 offset_bottom = 351.0
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1915915671]
 layout_mode = 2
 
-[node name="EnabledButton" type="CheckButton" parent="VBoxContainer/HBoxContainer"]
+[node name="EnabledButton" type="CheckButton" parent="VBoxContainer/HBoxContainer" unique_id=897746385]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Enabled"
 
-[node name="EffectList" type="MenuButton" parent="VBoxContainer/HBoxContainer"]
+[node name="EffectList" type="MenuButton" parent="VBoxContainer/HBoxContainer" unique_id=1311206621]
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_default_cursor_shape = 2
 text = "Add effect"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=1286174939]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="EffectContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="EffectContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer" unique_id=1684614019]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="DragHighlight" type="ColorRect" parent="."]
+[node name="DragHighlight" type="ColorRect" parent="." unique_id=1534278724]
 visible = false
 offset_left = 8.0
 offset_top = 8.0

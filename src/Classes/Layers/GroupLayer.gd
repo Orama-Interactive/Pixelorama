@@ -9,8 +9,7 @@ var _blend_generator := ShaderImageEffect.new()
 
 
 func _init(_project: Project, _name := "") -> void:
-	project = _project
-	name = _name
+	super(_project, _name)
 	blend_mode = BlendModes.PASS_THROUGH
 
 
@@ -24,7 +23,7 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 		return image
 	var textures: Array[Image] = []
 	_cache_texture_data.clear()
-	var metadata_image := Image.create(children.size(), 4, false, Image.FORMAT_RGF)
+	var metadata_image := Image.create(children.size(), 4, false, Image.FORMAT_RGH)
 	# Corresponding to the index of texture in textures. This is not the layer index
 	var current_metadata_index := 0
 	for i in children.size():
@@ -58,7 +57,7 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 	if DisplayServer.get_name() != "headless" and textures.size() > 0:
 		var texture_array := Texture2DArray.new()
 		texture_array.create_from_images(textures)
-		var params := {
+		var blend_params := {
 			"layers": texture_array,
 			"metadata": ImageTexture.create_from_image(metadata_image),
 			"origin_x_positive": origin.x > 0,
@@ -80,7 +79,7 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 		else:
 			_group_cache.clear()
 			_blend_generator.generate_image(
-				image, DrawingAlgos.blend_layers_shader, params, project.size, true, false
+				image, DrawingAlgos.blend_layers_shader, blend_params, project.size, true, false
 			)
 			_group_cache[c_key] = image.get_data()
 		if apply_effects:

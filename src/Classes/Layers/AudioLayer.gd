@@ -26,11 +26,6 @@ var playback_frame := 0:  ## The frame where the audio stream starts playing.
 		playback_frame_changed.emit()
 
 
-func _init(_project: Project, _name := "") -> void:
-	project = _project
-	name = _name
-
-
 ## Returns the length of the audio stream.
 func get_audio_length() -> float:
 	if is_instance_valid(audio):

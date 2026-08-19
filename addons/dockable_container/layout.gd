@@ -11,7 +11,7 @@ extends Resource
 
 enum { MARGIN_LEFT, MARGIN_RIGHT, MARGIN_TOP, MARGIN_BOTTOM, MARGIN_CENTER }
 
-@export var root: DockableLayoutNode = DockableLayoutPanel.new():
+@export var root: DockableLayoutNode:
 	get:
 		return _root
 	set(value):
