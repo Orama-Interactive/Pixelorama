@@ -164,7 +164,7 @@ var tools: Dictionary[String, Tool] = {
 	Tool.new(
 		"Gradient",
 		"Gradient",
-		"gradient_tool",
+		"gradient",
 		"res://src/Tools/DesignTools/Gradient.tscn",
 		[Global.LayerTypes.PIXEL, Global.LayerTypes.TILEMAP]
 	),

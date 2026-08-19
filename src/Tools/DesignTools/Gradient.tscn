@@ -89,6 +89,7 @@ popup/item_2/text = "Whole selection"
 popup/item_2/id = 2
 
 [node name="ToleranceLabel" type="Label" parent="GradientOptions" index="8" unique_id=319926115 groups=["gradient_common"]]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Tolerance:"
 

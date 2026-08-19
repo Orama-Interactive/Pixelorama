@@ -245,6 +245,7 @@ func _get_undo_data() -> Dictionary:
 
 func _select_fill_area_optionbutton() -> void:
 	%FillAreaOptions.selected = _fill_area
+	%ToleranceLabel.visible = (_fill_area != FillArea.SELECTION)
 	%ToleranceSlider.visible = (_fill_area != FillArea.SELECTION)
 
 
