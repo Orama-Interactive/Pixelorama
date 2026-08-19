@@ -34,6 +34,7 @@ Built using Godot 4.7.1
 - The canvas can no longer move with arrow keys if the text tool is currently being used.
 - Fixed the keyframe cursor being in wrong place when using mouse wheel for scroll. [#1582](https://github.com/Orama-Interactive/Pixelorama/pull/1582)
 - Fixed frame auto scroll not working when keyframe cursor is moved to the left. [#1582](https://github.com/Orama-Interactive/Pixelorama/pull/1582)
+- The bucket tool's pattern offset is now working on similar color & whole selection fill modes.
 - Fixed text applied by the text tool not having correct transparent colors. [#1577](https://github.com/Orama-Interactive/Pixelorama/pull/1577)
 - Fixed text tool options not reflecting correct settings on loading. [#1578](https://github.com/Orama-Interactive/Pixelorama/pull/1578)
 - The text now respects the selection area. [#1579](https://github.com/Orama-Interactive/Pixelorama/pull/1579)
