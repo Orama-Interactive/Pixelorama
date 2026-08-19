@@ -39,6 +39,7 @@ const AUTHORS: PackedStringArray = [
 	"Jeremy Behreandt (behreajj)",
 	"João Vitor (dev-joaovitor)",
 	"John Jerome Romero (Wishdream)",
+	"Joseph Demarest",
 	"JumpJetAvocado",
 	"Kawan Weege (Dwahgon)",
 	"kevinms",
@@ -62,6 +63,7 @@ const AUTHORS: PackedStringArray = [
 	"nicejammer",
 	"Olof Knight (InsaneAwesomeTony)",
 	"PinyaColada",
+	"Qmaker-programmer",
 	"Rémi Verschelde (akien-mga)",
 	"rob-a-bolton",
 	"RorotoSic",
@@ -194,6 +196,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Alejandro Moctezuma (AlejandroMoc)": ["Spanish"],
 	"Dereck Sempai (FinnRonan)": ["Spanish"],
 	"Alex (AnSpanishTranslator)": ["Spanish"],
+	"Hugo (Hugoglyph)": ["Spanish"],
 	"Seifer23": ["Catalan"],
 	"Joel García Cascalló (jocsencat)": ["Catalan"],
 	"Dracks": ["Catalan"],
@@ -254,11 +257,11 @@ const TRANSLATORS_DICTIONARY := {
 const DONORS: PackedStringArray = [
 	"Astropulse",
 	"Benedikt",
-	"En Pax",
-	"Hugo Locurcio",
+	"Hugo Locurcio (Calinou)",
 	"Jérôme P.",
 	"Jonas Rudlang",
 	"Mike King",
+	"Alban Jusufi",
 ]
 
 @export_multiline var licenses: PackedStringArray
