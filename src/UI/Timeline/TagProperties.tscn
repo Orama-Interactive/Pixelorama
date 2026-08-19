@@ -46,6 +46,7 @@ text = "Duration:"
 [node name="DurationSlider" parent="GridContainer" unique_id=526960165 instance=ExtResource("2_jh8b3")]
 layout_mode = 2
 step = 0.01
+allow_greater = true
 suffix = "sec"
 
 [node name="FromLabel" type="Label" parent="GridContainer" unique_id=932912726]

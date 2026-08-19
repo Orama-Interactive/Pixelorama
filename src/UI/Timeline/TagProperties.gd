@@ -60,12 +60,12 @@ func _on_confirmed() -> void:
 	var tag_color := color_picker_button.color
 	var tag_to := clampi(to_spinbox.value, 0, Global.current_project.frames.size())
 	var tag_from := clampi(from_spinbox.value, 0, tag_to)
-	if not is_equal_approx(old_duration, duration_slider.value):
+	if abs(old_duration - duration_slider.value) > 0.01:  # is_equal_approx is buggy
 		# Spread the new duration weighted by their individual duration
 		var ratio = duration_slider.value / old_duration
 		for i in range(tag_from - 1, tag_to):
 			var frame: Frame = Global.current_project.frames[i]
-			frame.duration *= snappedf(ratio * frame.duration, 0.01)
+			frame.duration = snappedf(ratio * frame.duration, 0.01)
 	var user_data := user_data_text_edit.text
 	var new_animation_tags: Array[AnimationTag] = []
 	# Loop through the tags to create new classes for them, so that they won't be the same
