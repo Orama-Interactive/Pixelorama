@@ -39,21 +39,21 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 color = Color(1, 0, 0, 1)
 
-[node name="DurationLabel" type="Label" parent="GridContainer"]
+[node name="DurationLabel" type="Label" parent="GridContainer" unique_id=1869137238]
 layout_mode = 2
 text = "Duration:"
 
-[node name="DurationSlider" parent="GridContainer" instance=ExtResource("2_jh8b3")]
+[node name="DurationSlider" parent="GridContainer" unique_id=526960165 instance=ExtResource("2_jh8b3")]
 layout_mode = 2
 step = 0.01
 suffix = "sec"
 
-[node name="FromLabel" type="Label" parent="GridContainer"]
+[node name="FromLabel" type="Label" parent="GridContainer" unique_id=932912726]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "From:"
 
-[node name="FromSlider" parent="GridContainer" instance=ExtResource("2_jh8b3")]
+[node name="FromSlider" parent="GridContainer" unique_id=171978951 instance=ExtResource("2_jh8b3")]
 custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
 theme_type_variation = &""
@@ -66,7 +66,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "To:"
 
-[node name="ToSlider" parent="GridContainer" instance=ExtResource("2_jh8b3")]
+[node name="ToSlider" parent="GridContainer" unique_id=1577023591 instance=ExtResource("2_jh8b3")]
 custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
 theme_type_variation = &""
