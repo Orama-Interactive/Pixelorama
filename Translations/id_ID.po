@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Indonesian\n"
 "Language: id_ID\n"
-"PO-Revision-Date: 2026-07-19 20:33\n"
+"PO-Revision-Date: 2026-08-14 12:07\n"
 
 msgid "OK"
 msgstr "Iya"
@@ -50,6 +50,9 @@ msgstr "Tinggi:"
 
 msgid "Center"
 msgstr "Tengah"
+
+msgid "Main Menu"
+msgstr ""
 
 msgid "File"
 msgstr "Berkas"

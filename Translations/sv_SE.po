@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
-"PO-Revision-Date: 2026-07-21 09:47\n"
+"PO-Revision-Date: 2026-08-14 12:06\n"
 
 msgid "OK"
 msgstr "Okej"
@@ -50,6 +50,9 @@ msgstr "Höjd:"
 
 msgid "Center"
 msgstr "Centrera"
+
+msgid "Main Menu"
+msgstr ""
 
 msgid "File"
 msgstr "Fil"

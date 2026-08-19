@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Afrikaans\n"
 "Language: af_ZA\n"
-"PO-Revision-Date: 2026-07-19 20:32\n"
+"PO-Revision-Date: 2026-08-14 12:06\n"
 
 msgid "OK"
 msgstr "Goed"
@@ -50,6 +50,9 @@ msgstr "Hoogte:"
 
 msgid "Center"
 msgstr "Middel"
+
+msgid "Main Menu"
+msgstr ""
 
 msgid "File"
 msgstr "Lêer"

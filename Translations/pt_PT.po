@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Portuguese\n"
 "Language: pt_PT\n"
-"PO-Revision-Date: 2026-07-19 20:33\n"
+"PO-Revision-Date: 2026-08-14 12:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Nome do Ficheiro:"
 
 msgid "Project name:"
-msgstr ""
+msgstr "Nome do projeto:"
 
 msgid "Canvas Size"
 msgstr "Tamanho da Tela"
@@ -50,6 +50,9 @@ msgstr "Altura:"
 
 msgid "Center"
 msgstr "Centrar"
+
+msgid "Main Menu"
+msgstr ""
 
 msgid "File"
 msgstr "Ficheiro"
@@ -204,11 +207,11 @@ msgid "Resize Canvas"
 msgstr "Redimensionar Tela"
 
 msgid "Offset & Scale Image"
-msgstr ""
+msgstr "Deslocamento & Escalar Imagem"
 
 #. Refers to the "Offset & Scale" layer effect.
 msgid "Offset & Scale"
-msgstr ""
+msgstr "Deslocamento & Escalar"
 
 msgid "Offset:"
 msgstr "Descolamento:"
@@ -887,7 +890,7 @@ msgstr "Performance"
 
 #. Found in the Preferences. Refers to the attribution details of the current project, such as the project's creator and license.
 msgid "Attribution"
-msgstr ""
+msgstr "Atribuições"
 
 #. Found in the Preferences. Refers to the author of the current project.
 msgid "Author"
@@ -895,7 +898,7 @@ msgstr "Autor"
 
 #. Found in the Preferences. Refers to the default license that is set to the created project.
 msgid "Default license"
-msgstr ""
+msgstr "Licença padrão"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
@@ -1020,19 +1023,19 @@ msgstr "Rosa"
 
 #. A theme. Black (#000000) is set as the main color so these pixels can be turned off on OLED screens.
 msgid "Black (OLED)"
-msgstr ""
+msgstr "Preto (OLED)"
 
 #. A theme. "System" refers to the Operating System.
 msgid "System"
-msgstr ""
+msgstr "Sistema"
 
 #. Refers to the base color of a theme.
 msgid "Base color:"
-msgstr ""
+msgstr "Cor base:"
 
 #. Refers to the accent color of a theme.
 msgid "Accent color:"
-msgstr ""
+msgstr "Cor de destaque:"
 
 msgid "Theme"
 msgstr "Tema"
@@ -1109,7 +1112,7 @@ msgstr "Todos os projetos"
 
 #. An image effect that helps convert a flat image to isometric.
 msgid "Flat to Isometric"
-msgstr ""
+msgstr "Plano para Isométrico"
 
 msgid "Invert Colors"
 msgstr "Inverter Cores"
@@ -2538,7 +2541,7 @@ msgstr "Face Direita"
 
 #. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
 msgid "Eraser mode"
-msgstr ""
+msgstr "Modo Borracha"
 
 msgid "Mirroring"
 msgstr "Espelhar"
@@ -2920,15 +2923,15 @@ msgstr "Luminosidade"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. Contains blend modes that do masking operations between layers, such as the "Intersection" and "Match colors" blend modes.
 msgid "Masking"
-msgstr ""
+msgstr "Máscara"
 
 #. Found in the layer's section of the timeline, as a blend mode option. This blend mode belongs to the "Masking" category, and it erases the un-common areas between the blend and the base layers.
 msgid "Intersection"
-msgstr ""
+msgstr "Interseção"
 
 #. Found in the layer's section of the timeline, as a blend mode option.  This blend mode belongs to the "Masking" category, and it only shows the same colors between the blend and the base layers.
 msgid "Match colors"
-msgstr ""
+msgstr "Corresponder cores"
 
 msgid "Opacity:"
 msgstr "Opacidade:"
@@ -3247,26 +3250,26 @@ msgstr "Paisagem"
 
 # Found in the "New project" window. Refers to the content of the new project, whether it will just be a blank canvas, or if it will be created with data from the clipboard.
 msgid "Content:"
-msgstr ""
+msgstr "Conteúdo:"
 
 # Found in the "New project" window. Refers to the content of the new project, set to be just a blank canvas.
 msgid "Blank canvas"
-msgstr ""
+msgstr "Tela em branco"
 
 # Found in the "New project" window. Refers to the content of the clipboard of the app (Pixelorama).
 msgid "App clipboard"
-msgstr ""
+msgstr "Área de transferência da aplicação"
 
 # Found in the "New project" window. Refers to the content of the clipboard of the (operating) system.
 msgid "System clipboard"
-msgstr ""
+msgstr "Área de transferência do sistema"
 
 msgid "Templates:"
 msgstr "Modelo:"
 
 # Found in the "New project" window. Refers to recent project sizes.
 msgid "Recent:"
-msgstr ""
+msgstr "Recente:"
 
 msgid "Preset"
 msgstr "Preset"
@@ -3342,7 +3345,7 @@ msgstr "Ferramenta de Caixa Isométrica"
 
 #. A tool that exists only for tilemap layers, and is responsible for setting some properties for the tiles. Currently, it is only used for setting the autotiling bits for a tile.
 msgid "Tiles Property Painter"
-msgstr ""
+msgstr "Pintor de Propriedades de Azulejo"
 
 msgid "Switch Colors"
 msgstr "Trocar cores"
@@ -3435,11 +3438,11 @@ msgstr "O(s) carácter(es) que separam o nome do ficheiro do número do frame"
 
 #. Found in the export dialog. It is an option button that allows users to removes the transparent area around non-transparent pixels of the exported images, or to remove every pixel outside of the selection.
 msgid "Crop mode:"
-msgstr ""
+msgstr "Modo de recorte:"
 
 #. Refers to the content of an image.
 msgid "Content"
-msgstr ""
+msgstr "Conteúdo"
 
 #. Found in the export dialog. Tooltip of the "trim images" option.
 msgid "Trims the exported images to their visible portion, considering each pixel with a non-zero alpha channel as visible."
@@ -3938,35 +3941,35 @@ msgstr "Rápido nas extremidades, lento no meio"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts slowly and speeds up towards the end", but with a shortened name.
 msgid "Ease in"
-msgstr ""
+msgstr "Ease in"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Starts quickly and slows down towards the end", but with a shortened name.
 msgid "Ease out"
-msgstr ""
+msgstr "Ease out"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Slowest at both ends, fast at middle", but with a shortened name.
 msgid "Ease in out"
-msgstr ""
+msgstr "Ease in out"
 
 #. Found in the keyframe timeline on the right panel when there is a keyframe selected. A type of easing function, the same as "Fast at both ends, slow at middle", but with a shortened name.
 msgid "Ease out in"
-msgstr ""
+msgstr "Ease out in"
 
 #. Found in the keyframe timeline on the right panel when there is no keyframe selected.
 msgid "No key selected"
-msgstr ""
+msgstr "Nenhum keyframe selecionado"
 
 #. Found in the keyframe timeline when right clicking on a track. When selected, a new keyframe is being inserted at the selected frame.
 msgid "Insert keyframe"
-msgstr ""
+msgstr "Inserir keyframe"
 
 #. A button found in the keyframe timeline on the right panel when there is a keyframe selected. When clicked, it deletes the currently selected keyframe.
 msgid "Delete keyframe"
-msgstr ""
+msgstr "Apagar keyframe"
 
 #. A button found in the keyframe timeline on the right panel when two or more keyframes are selected. When clicked, it deletes the currently selected keyframes.
 msgid "Delete keyframes"
-msgstr ""
+msgstr "Apagar keyframes"
 
 #. Used to turn images into a singular color
 msgid "Monochrome"
@@ -3992,7 +3995,7 @@ msgstr "Pressione Shift enquanto clica para remover instantaneamente."
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image?"
-msgstr ""
+msgstr "Tem a certeza que quer remover esta imagem de referência?"
 
 #. Moves the reference image up in the list
 msgid "Move the selected reference image to the right"
@@ -4153,7 +4156,7 @@ msgstr "Modo de apenas colocar:"
 #. A confirmation dialog that appears when attempting to enable place-only mode in a tilemap layer.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Enabling place-only mode is a permanent action. Once activated, you will only be able to place, duplicate and edit existing tiles, and you won't be able to use Manual, Auto and Stack modes."
-msgstr ""
+msgstr "Ativar o modo de somente colocar é uma ação permanente. Após ativo, somente conseguirá colocar, duplicar e editar tiles, e não conseguirá utilizar os modos Manual, Auto ou Empilhado."
 
 #: src/UI/TilesPanel.gd
 msgid "Select a tile to place it on the canvas."
@@ -4201,7 +4204,7 @@ msgstr "Pilha"
 #. A checkbox that toggles autotiling on or off for tilemap layers.
 #: src/UI/TilesPanel.tscn
 msgid "Autotiling:"
-msgstr ""
+msgstr "Autotiling:"
 
 #: src/UI/TilesPanel.tscn
 msgid "Tile button size:"

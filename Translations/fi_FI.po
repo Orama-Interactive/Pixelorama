@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Finnish\n"
 "Language: fi_FI\n"
-"PO-Revision-Date: 2026-07-19 20:32\n"
+"PO-Revision-Date: 2026-08-14 12:06\n"
 
 msgid "OK"
 msgstr "OK"
@@ -50,6 +50,9 @@ msgstr "Korkeus:"
 
 msgid "Center"
 msgstr "Keskitetty"
+
+msgid "Main Menu"
+msgstr ""
 
 msgid "File"
 msgstr "Tiedosto"

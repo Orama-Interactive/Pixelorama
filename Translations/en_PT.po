@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Pirate English\n"
 "Language: en_PT\n"
-"PO-Revision-Date: 2026-07-19 20:33\n"
+"PO-Revision-Date: 2026-08-14 12:07\n"
 
 msgid "OK"
 msgstr ""
@@ -49,6 +49,9 @@ msgid "Height:"
 msgstr ""
 
 msgid "Center"
+msgstr ""
+
+msgid "Main Menu"
 msgstr ""
 
 msgid "File"

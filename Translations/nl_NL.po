@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
-"PO-Revision-Date: 2026-07-19 20:33\n"
+"PO-Revision-Date: 2026-08-14 12:06\n"
 
 msgid "OK"
 msgstr "Oké"
@@ -50,6 +50,9 @@ msgstr "Hoogte:"
 
 msgid "Center"
 msgstr "Centreren"
+
+msgid "Main Menu"
+msgstr ""
 
 msgid "File"
 msgstr "Bestand"

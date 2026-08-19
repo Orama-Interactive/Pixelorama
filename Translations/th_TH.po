@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Thai\n"
 "Language: th_TH\n"
-"PO-Revision-Date: 2026-07-19 20:33\n"
+"PO-Revision-Date: 2026-08-14 12:07\n"
 
 msgid "OK"
 msgstr "ตกลง"
@@ -50,6 +50,9 @@ msgstr "ความสูง:"
 
 msgid "Center"
 msgstr "กึ่งกลาง"
+
+msgid "Main Menu"
+msgstr ""
 
 msgid "File"
 msgstr "ไฟล์"

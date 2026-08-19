@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-07-19 20:33\n"
+"PO-Revision-Date: 2026-08-14 12:07\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -50,6 +50,9 @@ msgstr "Alto:"
 
 msgid "Center"
 msgstr "Centrigi"
+
+msgid "Main Menu"
+msgstr ""
 
 msgid "File"
 msgstr "Dosiero"

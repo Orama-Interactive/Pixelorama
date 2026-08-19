@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
-"PO-Revision-Date: 2026-07-19 20:32\n"
+"PO-Revision-Date: 2026-08-18 00:43\n"
 
 msgid "OK"
 msgstr "Aceptar"
@@ -50,6 +50,9 @@ msgstr "Alto:"
 
 msgid "Center"
 msgstr "Centro"
+
+msgid "Main Menu"
+msgstr "Menú principal"
 
 msgid "File"
 msgstr "Archivo"
@@ -1109,7 +1112,7 @@ msgstr "Todos los proyectos"
 
 #. An image effect that helps convert a flat image to isometric.
 msgid "Flat to Isometric"
-msgstr ""
+msgstr "Plano a isométrico"
 
 msgid "Invert Colors"
 msgstr "Invertir colores"

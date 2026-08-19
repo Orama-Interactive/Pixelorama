@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Malayalam\n"
 "Language: ml_IN\n"
-"PO-Revision-Date: 2026-07-19 20:33\n"
+"PO-Revision-Date: 2026-08-14 12:07\n"
 
 msgid "OK"
 msgstr "ഓക്കേ"
@@ -50,6 +50,9 @@ msgstr "ഉയരം:"
 
 msgid "Center"
 msgstr "നടുവേ"
+
+msgid "Main Menu"
+msgstr ""
 
 msgid "File"
 msgstr "ഫയൽ"

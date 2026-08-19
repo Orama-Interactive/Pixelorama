@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Arabic\n"
 "Language: ar_SA\n"
-"PO-Revision-Date: 2026-07-19 20:32\n"
+"PO-Revision-Date: 2026-08-14 12:06\n"
 
 msgid "OK"
 msgstr "حسنا"
@@ -50,6 +50,9 @@ msgstr "الطول:"
 
 msgid "Center"
 msgstr "في المنتصف"
+
+msgid "Main Menu"
+msgstr ""
 
 msgid "File"
 msgstr "الملف"
