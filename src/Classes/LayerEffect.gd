@@ -31,7 +31,7 @@ func _init(
 
 
 func duplicate() -> LayerEffect:
-	return LayerEffect.new(name, shader, category, params.duplicate())
+	return LayerEffect.new(name, shader_or_include, category, params.duplicate())
 
 
 func serialize() -> Dictionary:
