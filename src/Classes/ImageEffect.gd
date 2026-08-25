@@ -222,6 +222,7 @@ func _on_AffectOptionButton_item_selected(index: int) -> void:
 
 func set_and_update_preview_image(frame_idx: int) -> void:
 	_preview_idx = frame_idx
+	DrawingAlgos.force_bone_mode = DrawingAlgos.BoneRenderMode.EDIT
 	var frame := Global.current_project.frames[frame_idx]
 	selected_cels.resize(Global.current_project.size.x, Global.current_project.size.y)
 	selected_cels.fill(Color(0, 0, 0, 0))
@@ -230,6 +231,7 @@ func set_and_update_preview_image(frame_idx: int) -> void:
 	current_frame.fill(Color(0, 0, 0, 0))
 	DrawingAlgos.blend_layers(current_frame, frame)
 	update_preview()
+	DrawingAlgos.force_bone_mode = DrawingAlgos.BoneRenderMode.NONE
 
 
 func update_preview(using_timer := false) -> void:

@@ -163,6 +163,9 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 					Global.LayerTypes.AUDIO:
 						l = AudioLayer.new(project)
 						l.audio = from_layer.audio
+					Global.LayerTypes.BONE:
+						l = BoneLayer.new(project)
+						l.enabled = from_layer.enabled
 				if l == null:  # Ignore copying this layer if it isn't supported
 					continue
 				var cels := []
@@ -212,6 +215,9 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 				else:
 					# Add more types here if they have a copy_content() method.
 					if src_cel is PixelCel:
+						# NOTE: The PixelCel import is done here (instead of outside the else loop)
+						# in order for cel types that extend from PixelCel have something to
+						# fall back to other than BaseCel (because they need ImageExtended)
 						var src_img: ImageExtended = src_cel.copy_content()
 						var empty := project.new_empty_image()
 						var copy := ImageExtended.new()

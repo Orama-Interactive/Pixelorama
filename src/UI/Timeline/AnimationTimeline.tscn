@@ -243,7 +243,7 @@ offset_left = -22.0
 offset_top = -10.0
 offset_bottom = 10.0
 mouse_default_cursor_shape = 2
-item_count = 5
+item_count = 6
 popup/item_0/text = "Add Pixel Layer"
 popup/item_0/id = 0
 popup/item_1/text = "Add Group Layer"
@@ -254,6 +254,8 @@ popup/item_3/text = "Add Tilemap Layer"
 popup/item_3/id = 3
 popup/item_4/text = "Add Audio Layer"
 popup/item_4/id = 4
+popup/item_5/text = "Add Bone Layer"
+popup/item_5/id = 5
 
 [node name="TextureRect" type="TextureRect" parent="TimelineContainer/TimelineButtons/LayerTools/MarginContainer/LayerSettingsContainer/LayerButtons/AddLayer/AddLayerList" unique_id=2065861651]
 layout_mode = 0

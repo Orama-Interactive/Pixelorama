@@ -40,6 +40,7 @@ text = "Scale:"
 
 [node name="ScaleValueSlider" parent="VBoxContainer/OffsetOptions" index="3" unique_id=24022254 instance=ExtResource("4_30qvy")]
 layout_mode = 2
+focus_mode = 0
 min_value = 1.0
 max_value = 5000.0
 value = 100.0

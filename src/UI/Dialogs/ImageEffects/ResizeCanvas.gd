@@ -19,7 +19,9 @@ func _on_about_to_popup() -> void:
 	image.resize(Global.current_project.size.x, Global.current_project.size.y)
 	image.fill(Color(0.0, 0.0, 0.0, 0.0))
 	var frame := Global.current_project.frames[Global.current_project.current_frame]
+	DrawingAlgos.force_bone_mode = DrawingAlgos.BoneRenderMode.EDIT
 	DrawingAlgos.blend_layers(image, frame)
+	DrawingAlgos.force_bone_mode = DrawingAlgos.BoneRenderMode.NONE
 	if width_spinbox.value == Global.current_project.size.x:
 		_on_width_value_changed(width_spinbox.value)
 	else:

@@ -168,8 +168,8 @@ func can_layer_be_modified() -> bool:
 func is_blended_by_ancestor() -> bool:
 	var is_blended := false
 	for ancestor in get_ancestors():
-		if ancestor.blend_mode != BlendModes.PASS_THROUGH:
-			is_blended = true
+		is_blended = ancestor.is_blender()
+		if is_blended:
 			break
 	return is_blended
 
@@ -336,8 +336,8 @@ func serialize() -> Dictionary:
 		"ui_color": ui_color,
 		"parent": parent.index if is_instance_valid(parent) else -1,
 		"effects": effect_data,
-		"animated_params": var_to_str(animated_params),
 	}
+	dict.merge(super())  # Get animatable data
 	if not user_data.is_empty():
 		dict["user_data"] = user_data
 	if not cel_link_sets.is_empty():
@@ -390,8 +390,7 @@ func deserialize(dict: Dictionary) -> void:
 			effect.layer = self
 			effect.deserialize(effect_dict)
 			effects.append(effect)
-	if dict.has("animated_params"):
-		animated_params = str_to_var(dict["animated_params"])
+	super(dict)  # Update animatable data
 
 
 ## Returns a layer type that is one of the [param LayerTypes]
