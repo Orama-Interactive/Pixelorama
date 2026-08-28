@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Slovenian\n"
 "Language: sl_SI\n"
-"PO-Revision-Date: 2026-08-28 14:57\n"
+"PO-Revision-Date: 2026-08-28 16:27\n"
 
 msgid "OK"
 msgstr "V redu"
@@ -311,41 +311,41 @@ msgstr "Nastavitve"
 
 #. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
 msgid "Procedural"
-msgstr ""
+msgstr "Proceduralno"
 
 #. Refers to effects that blur the image.
 msgid "Blur"
-msgstr ""
+msgstr "Zamegli"
 
 #. A submenu of the Effects menu. Contains effects that have been loaded by the user.
 msgid "Loaded"
-msgstr ""
+msgstr "Naloženo"
 
 #. An option in the View menu. When selected, the canvas is being placed on the center of the screen.
 msgid "Center Canvas"
-msgstr ""
+msgstr "Poravnaj platno na sredino"
 
 msgid "Tile Mode"
-msgstr ""
+msgstr "Način ploščic"
 
 msgid "Tile Mode Offsets"
-msgstr ""
+msgstr "Odmiki načina ploščic"
 
 #. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
 msgid "X-basis:"
-msgstr ""
+msgstr "X-osnova:"
 
 #. Found under "Tile Mode Offsets". Basis is a linear algebra term. https://en.wikipedia.org/wiki/Basis_(linear_algebra)
 msgid "Y-basis:"
-msgstr ""
+msgstr "Y-osnova:"
 
 #. Found under "Tile Mode Offsets". It's a button that when pressed, enables masking for tile mode. Masking essentially limits drawing to the visible pixels of the image, thus preventing from drawing on transparent pixels.
 msgid "Masking:"
-msgstr ""
+msgstr "Maskiranje:"
 
 #. Verb, resets something.
 msgid "Reset"
-msgstr ""
+msgstr "Ponastavi"
 
 #. Verb, resets something.
 msgid "Reset %s"
@@ -626,174 +626,174 @@ msgid "Spritesheet"
 msgstr ""
 
 msgid "Animation"
-msgstr ""
+msgstr "Animacija"
 
 msgid "Preview:"
-msgstr ""
+msgstr "Predogled:"
 
 msgid "Frame:"
-msgstr ""
+msgstr "Okvir:"
 
 msgid "Orientation:"
-msgstr ""
+msgstr "Orientacija:"
 
 msgid "Browse"
-msgstr ""
+msgstr "Prebrskaj"
 
 msgid "Resize:"
-msgstr ""
+msgstr "Spremeni velikost:"
 
 #. Found in the export dialog, when exporting a jpeg file. Refers to the quality of the exported file.
 msgid "Quality:"
-msgstr ""
+msgstr "Kakovost:"
 
 msgid "Cancel Export"
-msgstr ""
+msgstr "Prekliči izvoz"
 
 msgid "Alert!"
-msgstr ""
+msgstr "Opozorilo!"
 
 msgid "Select Current Folder"
-msgstr ""
+msgstr "Izberi trenutno mapo"
 
 msgid "Open a Directory"
-msgstr ""
+msgstr "Odpri imenik"
 
 msgid "Background:"
-msgstr ""
+msgstr "Ozadje:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "Izbrani okvirji"
 
 msgid "Layers:"
-msgstr ""
+msgstr "Sloji:"
 
 #. Found in the export dialog
 msgid "Visible layers"
-msgstr ""
+msgstr "Vidni sloji"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "Izbrani sloji"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Sloj pikslov:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Združevalni sloj:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
-msgstr ""
+msgstr "3D sloj:"
 
 msgid "Direction:"
-msgstr ""
+msgstr "Smer:"
 
 msgid "Forward"
-msgstr ""
+msgstr "Naprej"
 
 msgid "Backwards"
-msgstr ""
+msgstr "Nazaj"
 
 msgid "Ping-Pong"
-msgstr ""
+msgstr "Namizni tenis"
 
 msgid "Columns"
-msgstr ""
+msgstr "Stolpci"
 
 msgid "Columns:"
-msgstr ""
+msgstr "Stolpci:"
 
 msgid "Rows"
-msgstr ""
+msgstr "Vrstice"
 
 msgid "Rows:"
-msgstr ""
+msgstr "Vrstice:"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new column.
 msgid "Tags by column"
-msgstr ""
+msgstr "Oznake po stolpcih"
 
 #. Found in the export dialog, in the Spritesheet tab. An orientation option that splits the spritesheet by animation tags. Each tag creates a new row.
 msgid "Tags by row"
-msgstr ""
+msgstr "Oznake po vrsticah"
 
 #. Found in the export dialog. It is a label that says the dimensions (widthxheight) of the exported image(s).
 msgid "Export dimensions:"
-msgstr ""
+msgstr "Izvozne dimenzije:"
 
 msgid "Save a File"
-msgstr ""
+msgstr "Shrani datoteko"
 
 msgid "Go to previous folder."
-msgstr ""
+msgstr "Pojdi na prejšnjo mapo."
 
 msgid "Go to next folder."
-msgstr ""
+msgstr "Pojdi na naslednjo mapo."
 
 msgid "Go to parent folder."
-msgstr ""
+msgstr "Pojdi v nadrejeno mapo."
 
 msgid "Path:"
-msgstr ""
+msgstr "Pot:"
 
 msgid "Refresh files."
-msgstr ""
+msgstr "Osveži datoteke."
 
 msgid "Toggle the visibility of hidden files."
-msgstr ""
+msgstr "Preklopi vidnost skritih datotek."
 
 msgid "Directories & Files:"
-msgstr ""
+msgstr "Imeniki & datoteke:"
 
 msgid "Create Folder"
-msgstr ""
+msgstr "Ustvari mapo"
 
 msgid "File:"
-msgstr ""
+msgstr "Datoteka:"
 
 #. Found in "Open" and "Save" file dialogs. Searches all file types.
 msgid "All Files"
-msgstr ""
+msgstr "Vse datoteke"
 
 #. Found in the "Open" file dialog. Searches all file types supported by Pixelorama.
 msgid "All Recognized"
-msgstr ""
+msgstr "Vse podprte"
 
 #. Found in "Open" and "Save" file dialogs. Searches Pixelorama Project files only (.pxo).
 msgid "Pixelorama Project"
-msgstr ""
+msgstr "Projekt Pixelorama"
 
 #. Found in the "Open" file dialog. Searches PNG files only. (Note that PNG is a file type and should remain untranslated)
 msgid "PNG Image"
-msgstr ""
+msgstr "Slika PNG"
 
 #. Found in the "Open" file dialog. Searches BMP files only. (Note that BMP is a file type and should remain untranslated)
 msgid "BMP Image"
-msgstr ""
+msgstr "Slika BMP"
 
 #. Found in the "Open" file dialog. Searches "Radiance HDR" files only. (Note that "Radiance HDR" is a file type and is better untranslated)
 msgid "Radiance HDR Image"
-msgstr ""
+msgstr "Slika Radiance HDR"
 
 #. Found in the "Open" file dialog. Searches JPEG files only. (Note that JPEG is a file type and should remain untranslated)
 msgid "JPEG Image"
-msgstr ""
+msgstr "Slika JPEG"
 
 #. Found in the "Open" file dialog. Searches SVG files only. (Note that SVG is a file type and should remain untranslated)
 msgid "SVG Image"
-msgstr ""
+msgstr "Slika SVG"
 
 #. Found in the "Open" file dialog. Searches TGA files only. (Note that TGA is a file type and should remain untranslated)
 msgid "TGA Image"
-msgstr ""
+msgstr "Slika TGA"
 
 #. Found in the "Open" file dialog. Searches WebP files only. (Note that WebP is a file type and should remain untranslated)
 msgid "WebP Image"
-msgstr ""
+msgstr "Slika WebP"
 
 #. Found in "Open" and "Save" file dialogs. Searches OpenRaster project files only (.ora). OpenRaster should remain untranslated. https://www.openraster.org/
 msgid "OpenRaster Project"
@@ -969,18 +969,18 @@ msgstr ""
 
 #. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
 msgid "Screen orientation:"
-msgstr ""
+msgstr "Orientacija zaslona:"
 
 msgid "Dim interface on dialog popup"
-msgstr ""
+msgstr "Zatemni vmesnik v pojavnem pogovornem oknu"
 
 #. Found in the preferences, under the interface section. If enabled, the notification labels appear in the canvas when performing an action, such as when undoing/redoing.
 msgid "Show notification labels"
-msgstr ""
+msgstr "Prikaži oznake obvestil"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones.
 msgid "Use native file dialogs"
-msgstr ""
+msgstr "Uporabi izvorna pogovorna okna datotek"
 
 #. Found in the preferences, tooltip of the "Use native file dialogs" option.
 msgid "When this setting is enabled, the native file dialogs of the operating system are being used, instead of Pixelorama's custom ones."
@@ -988,78 +988,78 @@ msgstr "Ko je ta nastavitev omogočena, se namesto prilagojenih pogovornih oken 
 
 #. Found in the preferences, under the interface section. When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window.
 msgid "Single window mode"
-msgstr ""
+msgstr "Način enega okna"
 
 #. Found in the preferences, under the interface section. When this setting is enabled, the main menu will be collapsed in a single button, rather than a menu bar. Useful for devices with smaller screens, such as phones.
 msgid "Collapse main menu"
-msgstr ""
+msgstr "Strni glavni meni"
 
 #. Found in the preferences, tooltip of the "Single window mode" option.
 msgid "When this setting is enabled, Pixelorama's subwindows will be embedded in the main window, otherwise each dialog will be its own separate window."
 msgstr "Ko je ta nastavitev omogočena, bodo podokna Pixelorame vdelana v glavno okno, sicer bo vsako pogovorno okno svoje ločeno okno."
 
 msgid "Dark"
-msgstr ""
+msgstr "Temna"
 
 msgid "Gray"
-msgstr ""
+msgstr "Siva"
 
 msgid "Blue"
-msgstr ""
+msgstr "Modra"
 
 msgid "Caramel"
-msgstr ""
+msgstr "Karamelna"
 
 msgid "Light"
-msgstr ""
+msgstr "Svetla"
 
 msgid "Purple"
-msgstr ""
+msgstr "Vijolična"
 
 #. A theme. Rose refers to the color rose.
 msgid "Rose"
-msgstr ""
+msgstr "Roza"
 
 #. A theme. Black (#000000) is set as the main color so these pixels can be turned off on OLED screens.
 msgid "Black (OLED)"
-msgstr ""
+msgstr "Črna (OLED)"
 
 #. A theme. "System" refers to the Operating System.
 msgid "System"
-msgstr ""
+msgstr "Sistemska"
 
 #. Refers to the base color of a theme.
 msgid "Base color:"
-msgstr ""
+msgstr "Osnovna barva:"
 
 #. Refers to the accent color of a theme.
 msgid "Accent color:"
-msgstr ""
+msgstr "Barva poudarkov:"
 
 msgid "Theme"
-msgstr ""
+msgstr "Tema"
 
 msgid "Buttons"
-msgstr ""
+msgstr "Gumbi"
 
 msgid "Icon color from:"
-msgstr ""
+msgstr "Barva ikone od:"
 
 msgid "Icon color:"
-msgstr ""
+msgstr "Barva ikone:"
 
 msgid "Background"
-msgstr ""
+msgstr "Ozadje"
 
 msgid "Background color from:"
-msgstr ""
+msgstr "Barva ozadja iz:"
 
 msgid "Background color:"
-msgstr ""
+msgstr "Barva ozadja:"
 
 #. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
 msgid "Single tool mode"
-msgstr ""
+msgstr "Način enega orodja"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
 msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
@@ -1067,7 +1067,7 @@ msgstr "Če je to omogočeno, bo desni gumb miške vedno aktiviral isto orodje k
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between left and right tools"
-msgstr ""
+msgstr "Možnosti deljenja med levim in desnim orodjem"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
@@ -1076,82 +1076,82 @@ msgstr "Če je to omogočeno, se bodo možnosti sinhronizirale med levim in desn
 "Na primer, obe orodji bosta imeli enako velikost čopiča in če jo spremenite na enem orodju, se bo ta takoj spremenila tudi na drugem."
 
 msgid "Left tool color:"
-msgstr ""
+msgstr "Barva levega orodja:"
 
 msgid "Right tool color:"
-msgstr ""
+msgstr "Barva desnega orodja:"
 
 #. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
 msgid "Make global palettes read-only"
-msgstr ""
+msgstr "Nastavi globalne palete samo za branje"
 
 msgid "Small"
-msgstr ""
+msgstr "Majhno"
 
 msgid "Big"
-msgstr ""
+msgstr "Veliko"
 
 msgid "Only affect selection"
-msgstr ""
+msgstr "Vpliva samo na izbiro"
 
 msgid "Selected cels"
-msgstr ""
+msgstr "Izbrane cel"
 
 msgid "Current cel"
-msgstr ""
+msgstr "Trenutni cel"
 
 msgid "Current frame"
-msgstr ""
+msgstr "Trenutni okvir"
 
 msgid "All frames"
-msgstr ""
+msgstr "Vsi okvirji"
 
 msgid "All projects"
-msgstr ""
+msgstr "Vsi projekti"
 
 #. An image effect that helps convert a flat image to isometric.
 msgid "Flat to Isometric"
-msgstr ""
+msgstr "Iz ravnega v izometrični format"
 
 msgid "Invert Colors"
-msgstr ""
+msgstr "Obrni barve"
 
 msgid "Modify Red Channel"
-msgstr ""
+msgstr "Spremeni rdeči kanal"
 
 msgid "Modify Green Channel"
-msgstr ""
+msgstr "Spremeni zeleni kanal"
 
 msgid "Modify Blue Channel"
-msgstr ""
+msgstr "Spremeni modri kanal"
 
 msgid "Modify Alpha Channel"
-msgstr ""
+msgstr "Spremeni alfa kanal"
 
 #. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Desaturation"
-msgstr ""
+msgstr "Desaturacija"
 
 #. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Outline"
-msgstr ""
+msgstr "Obroba"
 
 #. An image effect. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Drop Shadow"
-msgstr ""
+msgstr "Padajoča senca"
 
 msgid "Offset X:"
-msgstr ""
+msgstr "Odmik X:"
 
 msgid "Offset Y:"
-msgstr ""
+msgstr "Odmik Y:"
 
 msgid "Shadow color:"
-msgstr ""
+msgstr "Barva sence:"
 
 #. An image effect. https://en.wikipedia.org/wiki/Gaussian_blur
 msgid "Gaussian Blur"
-msgstr ""
+msgstr "Gaussova zameglitev"
 
 #. The type of the Gaussian blur, an image effect.
 msgid "Blur type:"
@@ -1338,171 +1338,171 @@ msgstr ""
 
 #. An image effect. It maps the color of the input to the nearest color in the selected palette. Useful for limiting color in pixel art and for artistic effects. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Palettize"
-msgstr ""
+msgstr "Paletiziraj"
 
 #. An image effect. It makes the input image pixelated. See Pixelorama's documentation page for more information: https://www.oramainteractive.com/Pixelorama-Docs/user_manual/image_effects
 msgid "Pixelize"
-msgstr ""
+msgstr "Pikseliraj"
 
 #. An image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize"
-msgstr ""
+msgstr "Posteriziraj"
 
 #. An option for the posterize image effect. For more details about what it does, you can refer to GIMP's documentation https://docs.gimp.org/2.8/en/gimp-tool-posterize.html
 msgid "Posterize levels:"
-msgstr ""
+msgstr "Ravni posterizacije:"
 
 #. An option for the posterize image effect.
 msgid "Dither intensity:"
-msgstr ""
+msgstr "Intenzivnost tresenja:"
 
 msgid "View Splash Screen"
-msgstr ""
+msgstr "Ogled uvodnega zaslona"
 
 msgid "Online Docs"
-msgstr ""
+msgstr "Spletna dokumentacija"
 
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Sledilnik težav"
 
 #. Found under the Help menu. When selected, it opens a window with a list of backups of projects opened in previous sessions.
 msgid "Restore Backup"
-msgstr ""
+msgstr "Obnovi varnostno kopijo"
 
 #. Found in the Restore Backup dialog.
 msgid "Past sessions"
-msgstr ""
+msgstr "Pretekle seje"
 
 #. Found in the Restore Backup dialog.
 msgid "Double click to load an entire session, or a specific project."
-msgstr ""
+msgstr "Dvokliknite, da naložite celotno sejo ali določen projekt."
 
 #. Found in the Restore Backup dialog.
 msgid "Sessions"
-msgstr ""
+msgstr "Seje"
 
 #. Found in the Restore Backup dialog.
 msgid "Projects"
-msgstr ""
+msgstr "Projekti"
 
 #. Found in the Restore Backup dialog.
 msgid "(Current Session)"
-msgstr ""
+msgstr "(Trenutna seja)"
 
 #. Found under the Help menu. When selected, it opens the folder where the application's data are being saved.
 msgid "Open Editor Data Folder"
-msgstr ""
+msgstr "Odpri mapo s podatki urejevalnika"
 
 msgid "Changelog"
-msgstr ""
+msgstr "Dnevnik sprememb"
 
 msgid "About Pixelorama"
-msgstr ""
+msgstr "O Pixelorami"
 
 #. Found under the Help menu. When clicked, it opens the URL of Orama Interactive's patreon page.
 msgid "Support Pixelorama's Development"
-msgstr ""
+msgstr "Podpri razvoj Pixelorame"
 
 msgid "Pixelorama - Pixelate your dreams!"
-msgstr ""
+msgstr "Pixelorama - Pikseliziraj svoje sanje!"
 
 msgid "Developed by Orama Interactive"
-msgstr ""
+msgstr "Razvito s strani Orama Interactive"
 
 msgid "©2019-present by Orama Interactive and contributors"
-msgstr ""
+msgstr "©2019–danes Orama Interactive in sodelavci"
 
 msgid "Website"
-msgstr ""
+msgstr "Spletna stran"
 
 #. Found in the About dialog. A button that, when you click it, it opens the URL of Pixelorama's source code.
 msgid "Source Code"
-msgstr ""
+msgstr "Izvorna koda"
 
 msgid "Donate"
-msgstr ""
+msgstr "Doniraj"
 
 msgid "Developers"
-msgstr ""
+msgstr "Razvijalci"
 
 msgid "Contributors"
-msgstr ""
+msgstr "Sodelavci"
 
 msgid "Donors"
-msgstr ""
+msgstr "Donatorji"
 
 msgid "Translators"
-msgstr ""
+msgstr "Prevajalci"
 
 #. Refers to software licenses. https://en.wikipedia.org/wiki/Software_license
 msgid "Licenses"
-msgstr ""
+msgstr "Licence"
 
 #. Refers to a software license. https://en.wikipedia.org/wiki/Software_license
 msgid "License"
-msgstr ""
+msgstr "Licenca"
 
 #. Refers to the licenses of the software that are used by the Godot Engine. https://en.wikipedia.org/wiki/Software_license
 msgid "Godot Licenses"
-msgstr ""
+msgstr "Licence Godot"
 
 #. Refers to software licenses that are not a part of Pixelorama or Godot. https://en.wikipedia.org/wiki/Software_license
 msgid "Third-party Licenses"
-msgstr ""
+msgstr "Licence tretjih oseb"
 
 msgid "English"
-msgstr ""
+msgstr "Angleščina"
 
 msgid "Greek"
-msgstr ""
+msgstr "Grščina"
 
 msgid "French"
-msgstr ""
+msgstr "Francoščina"
 
 msgid "German"
-msgstr ""
+msgstr "Nemščina"
 
 msgid "Polish"
-msgstr ""
+msgstr "Poljščina"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugalščina"
 
 msgid "Brazilian Portuguese"
-msgstr ""
+msgstr "Brazilska portugalščina"
 
 msgid "Russian"
-msgstr ""
+msgstr "Ruščina"
 
 msgid "Chinese Simplified"
-msgstr ""
+msgstr "Poenostavljena kitajščina"
 
 msgid "Chinese Traditional"
-msgstr ""
+msgstr "Tradicionalna kitajščina"
 
 msgid "Italian"
-msgstr ""
+msgstr "Italijanščina"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Latvijščina"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Španščina"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Katalonščina"
 
 msgid "Esperanto"
-msgstr ""
+msgstr "Esperanto"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonezijščina"
 
 msgid "Czech"
-msgstr ""
+msgstr "Češčina"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Arabščina"
 
 msgid "Turkish"
 msgstr ""
@@ -1814,175 +1814,175 @@ msgstr ""
 
 #. Shows saved colors in certain color picker menus.
 msgid "Swatches"
-msgstr ""
+msgstr "Vzorci"
 
 #. Found under color options in the color picker panel.
 msgid "Recent Colors"
-msgstr ""
+msgstr "Nedavne barve"
 
 msgid "Left tool"
-msgstr ""
+msgstr "Levo orodje"
 
 msgid "Right tool"
-msgstr ""
+msgstr "Desno orodje"
 
 msgid "Left pixel indicator"
-msgstr ""
+msgstr "Indikator levega piksla"
 
 msgid "Show left mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Pri risanju prikaži indikator pikslov leve miške ali čopič na platnu"
 
 msgid "Right pixel indicator"
-msgstr ""
+msgstr "Indikator desnega piksla"
 
 msgid "Show right mouse pixel indicator or brush on the canvas when drawing"
-msgstr ""
+msgstr "Pri risanju prikaži indikator pikslov desne miške ali čopič na platnu"
 
 msgid "Show left tool icon"
-msgstr ""
+msgstr "Prikaži ikono levega orodja"
 
 msgid "Displays an icon of the selected left tool next to the cursor on the canvas"
 msgstr "Prikaže ikono izbranega levega orodja poleg kazalca na platnu"
 
 msgid "Show right tool icon"
-msgstr ""
+msgstr "Prikaži ikono desnega orodja"
 
 msgid "Displays an icon of the selected right tool next to the cursor on the canvas"
 msgstr "Prikaže ikono izbranega desnega orodja poleg kazalca na platnu"
 
 msgid "Use native mouse cursors"
-msgstr ""
+msgstr "Uporabi izvorne kazalce miške"
 
 msgid "Use cross cursor for the canvas"
-msgstr ""
+msgstr "Uporabi križni kazalec za platno"
 
 msgid "Guides"
-msgstr ""
+msgstr "Vodila"
 
 msgid "Guides color:"
-msgstr ""
+msgstr "Barva vodil:"
 
 msgid "A color of ruler guides displayed on the canvas"
-msgstr ""
+msgstr "Barva vodil ravnila, prikazana na platnu"
 
 #. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping"
-msgstr ""
+msgstr "Pripenjanje"
 
 #. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping.
 msgid "Snapping distance:"
-msgstr ""
+msgstr "Razdalja pripenjanja:"
 
 #. Found in the Preferences, in the Canvas category. Refers to grid and guide snapping. Hint tooltip of the snapping distance slider.
 msgid "This is the distance in screen pixels where guide and grid snapping gets activated."
 msgstr "To je razdalja v slikovnih pikah zaslona, ​​kjer se aktivira pripenjanje vodil in mreže."
 
 msgid "Grid"
-msgstr ""
+msgstr "Mreža"
 
 msgid "Grid type:"
-msgstr ""
+msgstr "Vrsta mreže:"
 
 msgid "Sets the type of the grid between rectangular, isometric or both"
-msgstr ""
+msgstr "Nastavi vrsto mreže med pravokotno, izometrično ali obema"
 
 msgid "Rectangular"
-msgstr ""
+msgstr "Pravokotna"
 
 msgid "Isometric"
-msgstr ""
+msgstr "Izometrična"
 
 #. Refers to a hexagonal type of grid.
 msgid "Hexagonal"
-msgstr ""
+msgstr "Šesterokotna"
 
 #. Refers to a hexagonal type of grid, with pointy-top orientation.
 msgid "Hexagonal (pointy-top)"
-msgstr ""
+msgstr "Šesterokotna (s koničastim vrhom)"
 
 #. Refers to a hexagonal type of grid, with flat-top orientation.
 msgid "Hexagonal (flat-top)"
-msgstr ""
+msgstr "Šesterokotna (z ravnim vrhom)"
 
 msgid "All"
-msgstr ""
+msgstr "Vse"
 
 #. Found in the Preferences, in the Canvas category. Refers to the number of visible grids.
 msgid "Grids visible:"
-msgstr ""
+msgstr "Vidnih mrež:"
 
 #. Found in the Preferences, in the Canvas category. Refers to the grid that is being edited.
 msgid "Editing grid:"
-msgstr ""
+msgstr "Mreža za urejanje:"
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid size:"
-msgstr ""
+msgstr "Velikost mreže:"
 
 #. Found in the Preferences, in the Canvas category.
 msgid "Grid offset:"
-msgstr ""
+msgstr "Odmik mreže:"
 
 #. Found in the Preferences, in the Canvas category. Hint tooltip of the grid offset value sliders.
 msgid "Sets grid's offset from the canvas origin (top left corner of the image)"
-msgstr ""
+msgstr "Nastavi odmik mreže od izhodišča platna (zgornji levi kot slike)"
 
 msgid "Draw over Tile Mode:"
-msgstr ""
+msgstr "Način risanja čez ploščice:"
 
 msgid "If disabled, the grid will be drawn only over the original image"
-msgstr ""
+msgstr "Če je onemogočeno, bo mreža narisana samo čez izvirno sliko"
 
 msgid "Grid color:"
-msgstr ""
+msgstr "Barva mreže:"
 
 msgid "A color of the grid"
-msgstr ""
+msgstr "Barva mreže"
 
 msgid "Pixel Grid"
-msgstr ""
+msgstr "Mreža pikslov"
 
 msgid "Show at zoom:"
-msgstr ""
+msgstr "Prikaži pri povečavi:"
 
 msgid "Sets the minimal zoom at which pixel grid will be shown"
-msgstr ""
+msgstr "Nastavi najmanjšo povečavo, pri kateri bo prikazana mreža pikslov"
 
 msgid "Pixel grid color:"
-msgstr ""
+msgstr "Barva mreže pikslov:"
 
 msgid "A color of the pixel grid"
-msgstr ""
+msgstr "Barva mreže pikslov"
 
 msgid "Transparency"
-msgstr ""
+msgstr "Prosojnost"
 
 msgid "Checker size:"
-msgstr ""
+msgstr "Velikost šahovnice:"
 
 msgid "Size of the transparent checker background"
-msgstr ""
+msgstr "Velikost prozornega ozadja šahovnice"
 
 msgid "Checker color 1:"
-msgstr ""
+msgstr "Barva šahovnice 1:"
 
 msgid "First color of the transparent checker background"
-msgstr ""
+msgstr "Prva barva prozornega ozadja šahovnice"
 
 msgid "Checker color 2:"
-msgstr ""
+msgstr "Barva šahovnice 2:"
 
 msgid "Second color of the transparent checker background"
-msgstr ""
+msgstr "Druga barva prozornega ozadja šahovnice"
 
 msgid "Follow Canvas Movement"
-msgstr ""
+msgstr "Sledi gibanju platna"
 
 msgid "The transparent checker follow the movement of canvas"
-msgstr ""
+msgstr "Prozorna šahovnica sledi gibanju platna"
 
 msgid "Follow Canvas Zoom Level"
-msgstr ""
+msgstr "Sledi ravni povečave platna"
 
 msgid "The transparent checker follow the zoom level of canvas"
 msgstr ""
@@ -2230,66 +2230,66 @@ msgstr ""
 
 #. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Pixel brush"
-msgstr ""
+msgstr "Piksel čopič"
 
 #. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Circle brush"
-msgstr ""
+msgstr "Krožni čopič"
 
 #. Found when selecting a brush. One of the default brushes that come with Pixelorama.
 msgid "Filled circle brush"
-msgstr ""
+msgstr "Čopič s polnim krogom"
 
 #. Found when selecting a brush. It's a section that shows brushes the user has imported for the current project specifically.
 msgid "Project Brushes"
-msgstr ""
+msgstr "Projektni čopiči"
 
 #. Found when selecting a brush. It's a section that shows a few brushes that come with Pixelorama and brushes the user has imported from files (not project-specific).
 msgid "File Brushes"
-msgstr ""
+msgstr "Datotečni čopiči"
 
 #. Found when selecting a brush. One of the file brushes that come with Pixelorama.
 msgid "Snow"
-msgstr ""
+msgstr "Sneg"
 
 #. Found when selecting a brush. It's a section that shows file brushes that are randomized.
 msgid "Random File Brushes"
-msgstr ""
+msgstr "Naključni datotečni čopiči"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Grass"
-msgstr ""
+msgstr "Trava"
 
 #. Found when selecting a brush. One of the random brushes that come with Pixelorama.
 msgid "Star"
-msgstr ""
+msgstr "Zvezda"
 
 msgid "Custom brush"
-msgstr ""
+msgstr "Čopič po meri"
 
 msgid "Brush size:"
-msgstr ""
+msgstr "Velikost čopiča:"
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. It's a dropdown that shows rotation options for the brush.
 msgid "Rotation options"
-msgstr ""
+msgstr "Možnosti vrtenja"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to flip the brush in the X or Y axis.
 msgid "Flip:"
-msgstr ""
+msgstr "Obrni:"
 
 #. Found under "Rotation options" in the pencil tool options, when you select a brush that isn't a default brush. Property to rotate the brush.
 msgid "Rotate:"
-msgstr ""
+msgstr "Zavrti:"
 
 msgid "Overwrite color"
-msgstr ""
+msgstr "Prepiši barvo"
 
 msgid "Overwrites color instead of blending it. This option is only relevant with colors that are not fully opaque"
 msgstr "Prepiše barvo namesto mešanja. Ta možnost je ustrezna le pri barvah, ki niso popolnoma neprozorne"
 
 msgid "Pixel Perfect"
-msgstr ""
+msgstr "Pixel Perfect"
 
 msgid "Pixel Perfect\n"
 "Makes lines smooth by removing the extra pixels on the edges"
@@ -2298,123 +2298,123 @@ msgstr "Pixel Perfect\n"
 
 #. A button found in the global tool options. When enabled, the alpha value of the pixels being drawn is locked, meaning that the user can only draw on non-transparent pixels.
 msgid "Lock alpha"
-msgstr ""
+msgstr "Zakleni alfa"
 
 msgid "Fill inside"
-msgstr ""
+msgstr "Napolni znotraj"
 
 #. Found in the tool options of the Pencil tool, and refers to the spacing between brush strokes.
 msgid "Spacing"
-msgstr ""
+msgstr "Razmik"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the horizontal gap between brush strokes.
 msgid "Gap X:"
-msgstr ""
+msgstr "Vrzel X:"
 
 #. Found in the tool options of the Pencil tool if "Spacing" is enabled, and refers to the vertical gap between brush strokes.
 msgid "Gap Y:"
-msgstr ""
+msgstr "Vrzel Y:"
 
 msgid "Fill Shape"
-msgstr ""
+msgstr "Oblika polnenja"
 
 msgid "Fills the drawn shape with color, instead of drawing a hollow shape"
-msgstr ""
+msgstr "Narisano obliko zapolni z barvo, namesto da bi narisalo votlo obliko"
 
 #. Found in the tool options of the Pencil, Eraser and Shading tools. It is a percentage of how dense the brush is. 100% density means that the brush gets completely drawn, anything less leaves gaps inside the brush, acting like a spray tool.
 msgid "Density:"
-msgstr ""
+msgstr "Gostota:"
 
 #. Found in the pencil tool options, when you select a brush that isn't a default brush. Property to change the strength of the selected color in the selected brush (0: Color from the brush itself, 100: the currently selected color).
 msgid "Brush color from:"
-msgstr ""
+msgstr "Barva čopiča iz:"
 
 msgid "0: Color from the brush itself, 100: the currently selected color"
-msgstr ""
+msgstr "0: Barva iz samega čopiča, 100: trenutno izbrana barva"
 
 #. Found in the bucket tool options.
 msgid "Fill area:"
-msgstr ""
+msgstr "Območje polnjenja:"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar area"
-msgstr ""
+msgstr "Podobno območje"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Similar colors"
-msgstr ""
+msgstr "Podobne barve"
 
 #. Found in the bucket tool options, one of the fill area options.
 msgid "Whole selection"
-msgstr ""
+msgstr "Celotna izbira"
 
 #. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
 msgid "Fill regions from the merging of all layers"
-msgstr ""
+msgstr "Zapolnite območja z združitvijo vseh plasti"
 
 msgid "Fill with:"
-msgstr ""
+msgstr "Zapolni s/z:"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Selected color"
-msgstr ""
+msgstr "Izbrana barva"
 
 #. Found in the bucket tool options, one of the fill with options.
 msgid "Pattern"
-msgstr ""
+msgstr "Vzorec"
 
 msgid "Offset"
-msgstr ""
+msgstr "Odmik"
 
 msgid "Simple Shading"
-msgstr ""
+msgstr "Preprosto senčenje"
 
 msgid "Hue Shifting"
-msgstr ""
+msgstr "Premik odtenka"
 
 msgid "Lighten"
-msgstr ""
+msgstr "Posvetli"
 
 msgid "Darken"
-msgstr ""
+msgstr "Potemni"
 
 msgid "Amount:"
-msgstr ""
+msgstr "Količina:"
 
 msgid "Lighten/Darken amount"
-msgstr ""
+msgstr "Količina posvetlitve/potemnitve"
 
 #. Found in the shading tool options. Mode to apply shading by replacing drawing's colors with the colors that are next to them in the selected palette.
 msgid "Color Replace"
-msgstr ""
+msgstr "Zamenjava barve"
 
 msgid "Please select a color from the palette."
-msgstr ""
+msgstr "Izberi barvo iz palete."
 
 #. Found in the shading tool options, in "Color Replace" mode. Parameter that specifies how many colors to the right of the selected color in the palette should be included for the shading.
 msgid "Colors right:"
-msgstr ""
+msgstr "Barve desno:"
 
 msgid "Pick for:"
-msgstr ""
+msgstr "Izberi za:"
 
 msgid "Left Color"
-msgstr ""
+msgstr "Leva barva"
 
 msgid "Right Color"
-msgstr ""
+msgstr "Desna barva"
 
 #. Found in the color picker tool options. Specifies what mode should be used for picking a color.
 msgid "Pick mode:"
-msgstr ""
+msgstr "Način izbire:"
 
 #. Found in the color picker tool options, as a pick mode. Picks the top color from the canvas in the selected pixel.
 msgid "Top Color"
-msgstr ""
+msgstr "Zgornja barva"
 
 #. Found in the color picker tool options, as a pick mode. Picks the color from the currently selected layer in the selected pixel.
 msgid "Current Layer"
-msgstr ""
+msgstr "Trenutna plast"
 
 msgid "Mode:"
 msgstr ""
@@ -2601,7 +2601,7 @@ msgid "Ping-pong loop"
 msgstr ""
 
 msgid "Onion Skinning:"
-msgstr ""
+msgstr "Onion Skinning:"
 
 msgid "Past Frames"
 msgstr ""
