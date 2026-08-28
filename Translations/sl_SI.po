@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Slovenian\n"
 "Language: sl_SI\n"
-"PO-Revision-Date: 2026-08-28 13:32\n"
+"PO-Revision-Date: 2026-08-28 14:57\n"
 
 msgid "OK"
 msgstr "V redu"
@@ -173,141 +173,141 @@ msgid "Move to Trash"
 msgstr "Premakni v koš"
 
 msgid "New Brush"
-msgstr ""
+msgstr "Nov čopič"
 
 msgid "Scale Image"
-msgstr ""
+msgstr "Velikost slike"
 
 msgid "Pixels"
-msgstr ""
+msgstr "Pikslov"
 
 msgid "Percentage"
-msgstr ""
+msgstr "Odstotek"
 
 #. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
 msgid "Color mode:"
-msgstr ""
+msgstr "Barvni način:"
 
 #. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
 msgid "Color Mode"
-msgstr ""
+msgstr "Barvni način"
 
 #. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
 msgid "Indexed"
-msgstr ""
+msgstr "Indeksirano"
 
 #. Found in the image menu. Sets the size of the project to be the same as the size of the active selection.
 msgid "Crop to Selection"
-msgstr ""
+msgstr "Obreži na izbor"
 
 #. Found in the image menu. Automatically trims out all the transparent pixels, making the image smaller.
 msgid "Crop to Content"
-msgstr ""
+msgstr "Obreži na vsebino"
 
 msgid "Resize Canvas"
-msgstr ""
+msgstr "Spremeni velikost platna"
 
 msgid "Offset & Scale Image"
-msgstr ""
+msgstr "Odmik & velikost slike"
 
 #. Refers to the "Offset & Scale" layer effect.
 msgid "Offset & Scale"
-msgstr ""
+msgstr "Odmik & velikost"
 
 msgid "Offset:"
-msgstr ""
+msgstr "Odmik:"
 
 #. Found in the Offset Image dialog. It's a checkbox that, if enabled, wraps around the image if pixels go out of canvas bounds.
 msgid "Wrap around:"
-msgstr ""
+msgstr "Ovijanje okoli:"
 
 #. Found in the menu that appears when you right click a frame button. Center is a verb, it is used to place the content of the frame to the center of the canvas.
 msgid "Center Frames"
-msgstr ""
+msgstr "Poravnaj okvirje"
 
 msgid "Rotate Image"
-msgstr ""
+msgstr "Zavrti sliko"
 
 msgid "Pivot x:"
-msgstr ""
+msgstr "Vrtišče x:"
 
 msgid "Pivot y:"
-msgstr ""
+msgstr "Vrtišče y:"
 
 msgid "Smear options:"
-msgstr ""
+msgstr "Možnosti razmazovanja:"
 
 msgid "Tolerance:"
-msgstr ""
+msgstr "Toleranca:"
 
 msgid "Initial angle:"
-msgstr ""
+msgstr "Začetni kot:"
 
 #. Found under the Select menu, It's a checkbox that, if enabled, wraps around brush strokes if some part of them goes out of selection bounds.
 msgid "Wrap Strokes"
-msgstr ""
+msgstr "Ovijanje potez"
 
 msgid "Clear"
-msgstr ""
+msgstr "Počisti"
 
 msgid "Invert"
-msgstr ""
+msgstr "Obrni"
 
 #. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
 msgid "Select cel area"
-msgstr ""
+msgstr "Izberi območje cel"
 
 msgid "Modify"
-msgstr ""
+msgstr "Spremeni"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users expand the active selection.
 msgid "Expand"
-msgstr ""
+msgstr "Razširi"
 
 #. Title of a window that lets users expand the active selection.
 msgid "Expand Selection"
-msgstr ""
+msgstr "Razširi izbor"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users shrink the active selection.
 msgid "Shrink"
-msgstr ""
+msgstr "Skrči"
 
 #. Title of a window that lets users shrink the active selection.
 msgid "Shrink Selection"
-msgstr ""
+msgstr "Skrči izbor"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users create a border of the active selection.
 msgid "Border"
-msgstr ""
+msgstr "Meja"
 
 #. Title of a window that lets users create a border of the active selection.
 msgid "Border Selection"
-msgstr ""
+msgstr "Mejni izbor"
 
 #. Refers to a diamond-like shape.
 msgid "Diamond"
-msgstr ""
+msgstr "Diamant"
 
 msgid "Circle"
-msgstr ""
+msgstr "Krog"
 
 msgid "Square"
-msgstr ""
+msgstr "Kvadrat"
 
 msgid "Grayscale View"
-msgstr ""
+msgstr "Pogled sivih odtenkov"
 
 msgid "Mirror Image"
-msgstr ""
+msgstr "Zrcalna slika"
 
 msgid "Flip Horizontal"
-msgstr ""
+msgstr "Obrni vodoravno"
 
 msgid "Flip Vertical"
-msgstr ""
+msgstr "Obrni navpično"
 
 msgid "Preferences"
-msgstr ""
+msgstr "Nastavitve"
 
 #. A submenu of the Effects menu. Contains effects that generate new pixels, such as outline, drop shadow and gradient.
 msgid "Procedural"
