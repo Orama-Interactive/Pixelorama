@@ -10,6 +10,7 @@ extends RefCounted
 
 static var chunk_count: int = 0
 
+
 static func save_aseprite_file(project: Project, path: String) -> Error:
 	# https://github.com/aseprite/aseprite/blob/main/docs/ase-file-specs.md#header
 	var ase_file := FileAccess.open(path, FileAccess.WRITE)
