@@ -265,7 +265,7 @@ static func _write_cel_chunk(
 				if color_depth != 8:
 					return false
 				elif (image as ImageExtended).indices_image.get_data().is_empty():
-						return false
+					return false
 			var width := image.get_width()
 			var height := image.get_height()
 			data.put_u16(width)
