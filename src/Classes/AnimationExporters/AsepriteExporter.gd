@@ -9,6 +9,7 @@ extends RefCounted
 # AsepriteExporter writes them back.
 
 static var chunk_count: int = 0
+static var palette_index_offset: int = 0  # Used for index mode we need to free index 0
 
 
 static func save_aseprite_file(project: Project, path: String) -> Error:
@@ -29,6 +30,7 @@ static func save_aseprite_file(project: Project, path: String) -> Error:
 	var color_depth := 32
 	if project.color_mode == Project.INDEXED_MODE:
 		color_depth = 8
+		palette_index_offset = 1
 
 	ase_file.store_16(color_depth)
 	ase_file.store_32(1)  # project_flags, 1 = Layer opacity has valid value
@@ -36,11 +38,10 @@ static func save_aseprite_file(project: Project, path: String) -> Error:
 	ase_file.store_32(0)  # Reserved.
 	ase_file.store_32(0)  # Reserved.
 
-	# Transparent palette entry. Pixelorama's indexed representation reserves index 0
-	# for transparency.
+	# Represents index of transparent color in indexed mode
 	ase_file.store_8(0)
 
-	# In compliance with: BYTE[3]     Ignore these bytes
+	# Ignore 3 bytes (Reserved for future)
 	ase_file.store_8(0)
 	ase_file.store_8(0)
 	ase_file.store_8(0)
@@ -312,10 +313,9 @@ static func _write_palette_chunk(buffer: StreamPeerBuffer, palette: Palette) -> 
 	data.big_endian = false
 
 	data.put_u32(palette.colors_max)  # Palette Size
-	data.put_u32(0)  # First index
+	data.put_u32(palette_index_offset)  # Index of the first palette slot
 	data.put_u32(palette.colors_max - 1)  # Last index
 	data.put_data(PackedByteArray([0, 0, 0, 0, 0, 0, 0, 0]))  # Reserved 8 bytes for future.
-
 	for i in palette.colors_max:
 		data.put_u16(0)  # color name not used by Pixelorama
 		var color: Color = Color(0, 0, 0, 0)
@@ -386,22 +386,13 @@ static func _write_string(buffer: StreamPeerBuffer, text: String) -> void:
 
 ## Auto calculates and returns the image data for both index and rgba mode.
 static func _get_cel_pixel_data(image: Image, color_depth: int) -> PackedByteArray:
-	if color_depth == 8:  # Indexed
+	if color_depth == 8 and image is ImageExtended:  # Indexed
 		# Pixelorama's indexed image representation. indices_image is an Image with an
 		# OpenGL texture format RED with a single component and a bitdepth of 8.
-		var indices: PackedByteArray = image.indices_image.get_data()
-		var output := PackedByteArray()
-		output.resize(indices.size())
-
-		for i in indices.size():
-			var index := indices[i]
-			# Aseprite palette index 0 is transparent.
-			if index == 0:
-				output[i] = 0
-			else:
-				output[i] = index + 1
-
-		return output
+		var indices_image: Image = image.indices_image
+		if not indices_image.get_format() == Image.FORMAT_R8:
+			indices_image.convert(Image.FORMAT_R8)
+		return image.indices_image.get_data()
 	return image.get_data()
 
 
