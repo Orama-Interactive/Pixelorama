@@ -111,6 +111,8 @@ static func _write_frame(
 
 	if frame_index == 0:
 		# Aseprite currently supports only one project palette
+		for i in project.tilesets.size():
+			_write_tileset_chunk(chunks_buffer, project.tilesets[i], i)
 		_write_palette_chunk(chunks_buffer, Palettes.current_palette)
 		_write_tags_chunk(chunks_buffer, project)
 		for tag: AnimationTag in project.animation_tags:
@@ -256,6 +258,9 @@ static func _write_cel_chunk(
 	data.put_data(PackedByteArray([0, 0, 0, 0, 0]))
 
 	match cel_type:
+		1:
+			var linked_frame := _get_linked_frame_index(project, ase_layer_index, order_layers, cel)
+			data.put_u16(linked_frame)
 		2:
 			var image := cel.get_image()
 			if (
@@ -273,9 +278,8 @@ static func _write_cel_chunk(
 			var pixel_data := _get_cel_pixel_data(image, color_depth)
 			var compressed := pixel_data.compress(FileAccess.COMPRESSION_DEFLATE)
 			data.put_data(compressed)
-		1:
-			var linked_frame := _get_linked_frame_index(project, ase_layer_index, order_layers, cel)
-			data.put_u16(linked_frame)
+		3:
+			pass
 
 	_write_chunk(buffer, AsepriteParser.ChunkTypes.CEL, data.data_array)
 	return true
@@ -326,6 +330,35 @@ static func _write_palette_chunk(buffer: StreamPeerBuffer, palette: Palette) -> 
 		data.put_u8(color.b8)
 		data.put_u8(color.a8)
 	_write_chunk(buffer, AsepriteParser.ChunkTypes.PALETTE, data.data_array)
+
+
+static func _write_tileset_chunk(
+	buffer: StreamPeerBuffer, tileset: TileSetCustom, idx: int
+) -> void:
+	# https://github.com/aseprite/aseprite/blob/main/docs/ase-file-specs.md#palette-chunk-0x2019
+	var data := StreamPeerBuffer.new()
+	data.big_endian = false
+
+	data.put_u32(idx)  # Tileset ID
+	var flags := 0
+	flags |= 2
+	flags |= 4
+	flags |= 8
+	flags |= 16
+	flags |= 32
+	data.put_u32(flags)  # Tileset flags
+	data.put_u32(tileset.tiles.size())
+	data.put_u16(tileset.tile_size.x)
+	data.put_u16(tileset.tile_size.y)
+	data.put_16(1)  # Default base index
+	data.put_data(PackedByteArray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]))  # Reserved 14 bytes.
+	_write_string(data, tileset.name)
+
+	var image := tileset.create_image_atlas(tileset.tiles.size())
+	var compressed := image.get_data().compress(FileAccess.COMPRESSION_DEFLATE)
+	data.put_u32(compressed.size())
+	data.put_data(compressed)
+	_write_chunk(buffer, AsepriteParser.ChunkTypes.TILESET, data.data_array)
 
 
 static func _write_user_data_chunk(

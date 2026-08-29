@@ -152,7 +152,7 @@ static func open_aseprite_file(path: String) -> void:
 					var y_pos := ase_file.get_16()
 					cel.opacity = ase_file.get_8() / 255.0
 					var cel_type := ase_file.get_16()
-					cel.z_index = ase_file.get_16()
+					cel.z_index = unsigned16_to_signed(ase_file.get_16())
 					ase_file.get_buffer(5)  # For future
 					if cel_type == 0 or cel_type == 2:  # Raw uncompressed and compressed image
 						var width := ase_file.get_16()
@@ -584,3 +584,9 @@ static func organize_layer_child_levels(project: Project) -> void:
 		var layer := project.layers[i]
 		layer.remove_meta(&"layer_child_level")
 		layer.index = i
+
+
+static func unsigned16_to_signed(unsigned) -> int:
+	const MAX_15B = 1 << 15
+	const MAX_16B = 1 << 16
+	return (unsigned + MAX_15B) % MAX_16B - MAX_15B
