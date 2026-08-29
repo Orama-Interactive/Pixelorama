@@ -5,49 +5,26 @@ extends RefCounted
 # https://github.com/aseprite/aseprite/blob/main/docs/ase-file-specs.md
 #
 # This is the reverse of AsepriteParser.gd:
-# AsepriteParser reads the binary structures below;
+# AsepriteParser reads the binary structures below
 # AsepriteExporter writes them back.
 
 static var chunk_count: int = 0
 
 static func save_aseprite_file(project: Project, path: String) -> Error:
+	# https://github.com/aseprite/aseprite/blob/main/docs/ase-file-specs.md#header
 	var ase_file := FileAccess.open(path, FileAccess.WRITE)
 	if ase_file == null:
 		return FileAccess.get_open_error()
 
-	# NOTE: ASE FILE HEADER  (As used by our AsepriteParser class)
-	# DWORD  File size
-	# WORD   Magic number
-	# WORD   Frames
-	# WORD   Width
-	# WORD   Height
-	# WORD   Color depth
-	# DWORD  Flags
-	# WORD   Speed (deprecated)
-	# DWORD  0
-	# DWORD  0
-	# BYTE   Transparent palette index
-	# BYTE   0
-	# BYTE   0
-	# BYTE   0
-	# WORD   Number of colors
-	# BYTE   Pixel width
-	# BYTE   Pixel height
-	# SHORT  Grid X
-	# SHORT  Grid Y
-	# WORD   Grid width
-	# WORD   Grid height
-	# BYTE[84] reserved
+	# ASE FILE HEADER  (As used by our AsepriteParser class)
 	var file_size_position := ase_file.get_position()
-	ase_file.store_32(0) # file size: Filled in at the end.
+	ase_file.store_32(0)  # File size: Filled in at the end.
 	ase_file.store_16(0xA5E0)  # magic number
 	ase_file.store_16(project.frames.size())  # frame count
 	ase_file.store_16(project.size.x)  # size x
 	ase_file.store_16(project.size.y)  # size y
 
-	# Pixelorama normally works in RGBA8.
-	#
-	# Indexed projects use 8-bit pixels.
+	# Pixelorama normally works in RGBA8. Indexed projects use 8-bit pixels.
 	var color_depth := 32
 	if project.color_mode == Project.INDEXED_MODE:
 		color_depth = 8
@@ -156,20 +133,8 @@ static func _write_frame(
 			if written:
 				_write_user_data_chunk(chunks_buffer, AsepriteParser.ChunkTypes.CEL, cel)
 
-
-	# NOTE: Writing FRAME HEADER. A frame header is 16 bytes
+	# Writing FRAME HEADER. A frame header is 16 bytes
 	# https://github.com/aseprite/aseprite/blob/main/docs/ase-file-specs.md#frames
-	# DWORD     Bytes in this frame
-	# WORD      Magic number (always 0xF1FA)
-	# WORD      Old field which specifies the number of "chunks"
-	#           in this frame. If this value is 0xFFFF, we might
-	#           have more chunks to read in this frame
-	#           (so we have to use the new field)
-	# WORD      Frame duration (in milliseconds)
-	# BYTE[2]   For future (set to zero)
-	# DWORD     New field which specifies the number of "chunks"
-	#           in this frame (if this is 0, use the old field)
-
 	var output := PackedByteArray()
 	output.resize(16)
 	var frame_size := chunks_buffer.data_array.size() + 16  # 16 is the header size
@@ -342,9 +307,9 @@ static func _write_palette_chunk(buffer: StreamPeerBuffer, palette: Palette) -> 
 	var data := StreamPeerBuffer.new()
 	data.big_endian = false
 
-	data.put_u32(palette.colors_max) # Palette Size
-	data.put_u32(0) # First index
-	data.put_u32(palette.colors_max) # Last index
+	data.put_u32(palette.colors_max)  # Palette Size
+	data.put_u32(0)  # First index
+	data.put_u32(palette.colors_max)  # Last index
 	data.put_data(PackedByteArray([0, 0, 0, 0, 0, 0, 0, 0]))  # Reserved 8 bytes for future.
 
 	for i in palette.colors_max:
@@ -361,9 +326,7 @@ static func _write_palette_chunk(buffer: StreamPeerBuffer, palette: Palette) -> 
 
 
 static func _write_user_data_chunk(
-	buffer: StreamPeerBuffer,
-	previous_type: AsepriteParser.ChunkTypes,
-	object: RefCounted
+	buffer: StreamPeerBuffer, previous_type: AsepriteParser.ChunkTypes, object: RefCounted
 ) -> void:
 	var data := StreamPeerBuffer.new()
 	data.big_endian = false
