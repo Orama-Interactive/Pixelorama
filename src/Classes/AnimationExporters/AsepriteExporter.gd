@@ -314,7 +314,7 @@ static func _write_palette_chunk(buffer: StreamPeerBuffer, palette: Palette) -> 
 	data.put_data(PackedByteArray([0, 0, 0, 0, 0, 0, 0, 0]))  # Reserved 8 bytes for future.
 
 	for i in palette.colors_max:
-		data.put_u16(0)  # color name not used bu Pixelorama
+		data.put_u16(0)  # color name not used by Pixelorama
 		var color: Color = Color(0, 0, 0, 0)
 		if palette.colors.has(i):
 			color = palette.colors[i].color
@@ -382,7 +382,7 @@ static func _write_string(buffer: StreamPeerBuffer, text: String) -> void:
 	buffer.put_data(bytes)
 
 
-## Auto calculates and returns the image data for both indx and rgba mode.
+## Auto calculates and returns the image data for both index and rgba mode.
 static func _get_cel_pixel_data(image: Image, color_depth: int) -> PackedByteArray:
 	if color_depth == 8:  # Indexed
 		# Pixelorama's indexed image representation. indices_image is an Image with an
