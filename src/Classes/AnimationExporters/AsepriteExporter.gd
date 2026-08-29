@@ -261,7 +261,10 @@ static func _write_cel_chunk(
 				image == null
 				or (image.get_used_rect().size == Vector2i.ZERO and cel.link_set == null)
 			):
-				return false
+				if color_depth != 8:
+					return false
+				elif (image as ImageExtended).indices_image.get_data().is_empty():
+						return false
 			var width := image.get_width()
 			var height := image.get_height()
 			data.put_u16(width)
@@ -310,7 +313,7 @@ static func _write_palette_chunk(buffer: StreamPeerBuffer, palette: Palette) -> 
 
 	data.put_u32(palette.colors_max)  # Palette Size
 	data.put_u32(0)  # First index
-	data.put_u32(palette.colors_max)  # Last index
+	data.put_u32(palette.colors_max - 1)  # Last index
 	data.put_data(PackedByteArray([0, 0, 0, 0, 0, 0, 0, 0]))  # Reserved 8 bytes for future.
 
 	for i in palette.colors_max:
@@ -322,7 +325,6 @@ static func _write_palette_chunk(buffer: StreamPeerBuffer, palette: Palette) -> 
 		data.put_u8(color.g8)
 		data.put_u8(color.b8)
 		data.put_u8(color.a8)
-
 	_write_chunk(buffer, AsepriteParser.ChunkTypes.PALETTE, data.data_array)
 
 
