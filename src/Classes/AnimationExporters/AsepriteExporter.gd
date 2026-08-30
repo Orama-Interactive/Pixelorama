@@ -110,7 +110,7 @@ static func _write_frame(
 	if frame_index == 0:
 		# Aseprite currently supports only one project palette
 		for i in project.tilesets.size():
-			_write_tileset_chunk(chunks_buffer, project.tilesets[i], i)
+			_write_tileset_chunk(project, chunks_buffer, project.tilesets[i], i, color_depth)
 		_write_palette_chunk(chunks_buffer, Palettes.current_palette, color_depth)
 		_write_tags_chunk(chunks_buffer, project)
 		for tag: AnimationTag in project.animation_tags:
@@ -283,9 +283,9 @@ static func _write_cel_chunk(
 			var used_rect := image.get_used_rect()
 			if used_rect.size == Vector2i.ZERO:
 				return false
-			var size_tiles: Vector2i = (
-				(Vector2(used_rect.size) / Vector2(tile_map.get_tile_size())).ceil()
-			)
+			var starting_position := tile_map.get_cell_position(used_rect.position)
+			var ending_position := tile_map.get_cell_position(used_rect.end - Vector2i.ONE)
+			var size_tiles: Vector2i = (ending_position - starting_position) + Vector2i.ONE
 			data.put_u16(size_tiles.x)
 			data.put_u16(size_tiles.y)
 			data.put_u16(32)  # Bits per tile (at the moment it's always 32-bit per tile)
@@ -299,10 +299,8 @@ static func _write_cel_chunk(
 			var tile_data := PackedByteArray()
 			# 32 bits per tile = 4 bytes per tile
 			tile_data.resize(4 * size_tiles.x * size_tiles.y)
-			var starting_position := tile_map.get_cell_position(used_rect.position)
-			var ending_position := tile_map.get_cell_position(used_rect.end) + Vector2i.ONE
-			for y in range(starting_position.y, ending_position.y):
-				for x in range(starting_position.x, ending_position.x):
+			for y in range(starting_position.y, ending_position.y + 1):
+				for x in range(starting_position.x, ending_position.x + 1):
 					var cell := tile_map.get_cell_at(Vector2i(x, y))
 					var tile_id := cell.index
 					var transformed_bit := 0
@@ -382,7 +380,7 @@ static func _write_palette_chunk(buffer: StreamPeerBuffer, palette: Palette, dep
 
 
 static func _write_tileset_chunk(
-	buffer: StreamPeerBuffer, tileset: TileSetCustom, idx: int
+	project: Project, buffer: StreamPeerBuffer, tileset: TileSetCustom, idx: int, depth: int
 ) -> void:
 	# https://github.com/aseprite/aseprite/blob/main/docs/ase-file-specs.md#tileset-chunk-0x2023
 	var data := StreamPeerBuffer.new()
@@ -403,7 +401,11 @@ static func _write_tileset_chunk(
 	data.put_data(PackedByteArray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]))  # Reserved 14 bytes.
 	_write_string(data, tileset.name)
 
-	var image := tileset.create_image_atlas(tileset.tiles.size(), false, false)
+	var image: Image = tileset.create_image_atlas(tileset.tiles.size(), false, false)
+	if depth == 8:
+		var index_image := ImageExtended.new()
+		index_image.copy_from_custom(image, true)
+		image = index_image.indices_image
 	var compressed := image.get_data().compress(FileAccess.COMPRESSION_DEFLATE)
 	data.put_u32(compressed.size())
 	data.put_data(compressed)

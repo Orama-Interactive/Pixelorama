@@ -115,6 +115,8 @@ func convert_rgb_to_indexed() -> void:
 	shader_image_effect.generate_image(
 		indices_image, SET_INDICES, params, indices_image.get_size(), false
 	)
+	if indices_image.get_format() != Image.FORMAT_R8:
+		indices_image.convert(Image.FORMAT_R8)
 	convert_indexed_to_rgb()
 
 
