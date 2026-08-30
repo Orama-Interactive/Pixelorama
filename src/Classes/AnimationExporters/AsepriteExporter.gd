@@ -228,7 +228,10 @@ static func _write_cel_chunk(
 
 	var position := Vector2i.ZERO
 	if cel is CelTileMap:
-		position = Vector2i(cel.offset)
+		# NOTE: Aseprite gets offset from the top-right corner of the cropped tilemap
+		var used_rect := cel.get_image().get_used_rect()
+		var ase_offset = cel.get_pixel_coords(cel.get_cell_position(used_rect.position))
+		position = Vector2i(ase_offset)
 
 	data.put_16(position.x)
 	data.put_16(position.y)
@@ -277,8 +280,45 @@ static func _write_cel_chunk(
 			var compressed := pixel_data.compress(FileAccess.COMPRESSION_DEFLATE)
 			data.put_data(compressed)
 		3:
-			return false  # Logic not yet added
+			var tile_map := cel as CelTileMap
+			var image := tile_map.get_image()
+			var used_rect := image.get_used_rect()
+			if used_rect.size == Vector2i.ZERO:
+				return false
+			var size_tiles: Vector2i = (
+				Vector2(used_rect.size) / Vector2(tile_map.get_tile_size())
+			).ceil()
+			data.put_u16(size_tiles.x)
+			data.put_u16(size_tiles.y)
+			data.put_u16(32)  # Bits per tile (at the moment it's always 32-bit per tile)
+			data.put_32(0x1FFFFFFF)  # Bitmask for tile ID
+			data.put_32(0x80000000)  # Bitmask for X flip
+			data.put_32(0x40000000)  # Bitmask for Y flip
+			data.put_32(0x20000000)  # Bitmask for diagonal flip (swap X/Y axis)
+			data.put_data(PackedByteArray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]))  # Reserved 10 bytes
 
+			var byte_offset := 0
+			var tile_data := PackedByteArray()
+			# 32 bits per tile = 4 bytes per tile
+			tile_data.resize(4 * size_tiles.x * size_tiles.y)
+			var starting_position := tile_map.get_cell_position(used_rect.position)
+			var ending_position := tile_map.get_cell_position(used_rect.end) + Vector2i.ONE
+			for y in range(starting_position.y, ending_position.y):
+				for x in range(starting_position.x, ending_position.x):
+					var cell := tile_map.get_cell_at(Vector2i(x, y))
+					var tile_id := cell.index
+					var transformed_bit := 0
+					if cell.transpose:
+						transformed_bit |= 32
+					if cell.flip_v:
+						transformed_bit |= 64
+					if cell.flip_h:
+						transformed_bit |= 128
+					tile_data.encode_u16(byte_offset, tile_id)
+					tile_data.encode_u16(byte_offset + 2, transformed_bit)
+					byte_offset += 4
+			var tile_data_compressed := tile_data.compress(FileAccess.COMPRESSION_DEFLATE)
+			data.put_data(tile_data_compressed)
 	_write_chunk(buffer, AsepriteParser.ChunkTypes.CEL, data.data_array)
 	return true
 
@@ -348,7 +388,7 @@ static func _write_palette_chunk(buffer: StreamPeerBuffer, palette: Palette, dep
 static func _write_tileset_chunk(
 	buffer: StreamPeerBuffer, tileset: TileSetCustom, idx: int
 ) -> void:
-	# https://github.com/aseprite/aseprite/blob/main/docs/ase-file-specs.md#palette-chunk-0x2019
+	# https://github.com/aseprite/aseprite/blob/main/docs/ase-file-specs.md#tileset-chunk-0x2023
 	var data := StreamPeerBuffer.new()
 	data.big_endian = false
 
@@ -367,7 +407,7 @@ static func _write_tileset_chunk(
 	data.put_data(PackedByteArray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]))  # Reserved 14 bytes.
 	_write_string(data, tileset.name)
 
-	var image := tileset.create_image_atlas(tileset.tiles.size())
+	var image := tileset.create_image_atlas(tileset.tiles.size(), false, false)
 	var compressed := image.get_data().compress(FileAccess.COMPRESSION_DEFLATE)
 	data.put_u32(compressed.size())
 	data.put_data(compressed)
