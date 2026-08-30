@@ -327,7 +327,7 @@ static func _write_palette_chunk(buffer: StreamPeerBuffer, palette: Palette, dep
 		colors.append(color)
 	if depth == 8:
 		colors = colors.slice(0, last_color_index + 1)  # trim empty slots in end
-		# NOTE: In index mode one additional slot is pressent in the palette, Aseprite treats it
+		# NOTE: In index mode one additional slot is present in the palette, Aseprite treats it
 		# as part of the palette and even includes it in palette exports so we should add it here.
 		colors.insert(0, Color.BLACK)
 	if colors.is_empty():
