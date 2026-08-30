@@ -108,8 +108,8 @@ static func _write_frame(
 
 	if frame_index == 0:
 		# Aseprite currently supports only one project palette
-		#for i in project.tilesets.size():
-			#_write_tileset_chunk(chunks_buffer, project.tilesets[i], i)
+		for i in project.tilesets.size():
+			_write_tileset_chunk(chunks_buffer, project.tilesets[i], i)
 		_write_palette_chunk(chunks_buffer, Palettes.current_palette, color_depth)
 		_write_tags_chunk(chunks_buffer, project)
 		for tag: AnimationTag in project.animation_tags:
@@ -276,7 +276,7 @@ static func _write_cel_chunk(
 			var compressed := pixel_data.compress(FileAccess.COMPRESSION_DEFLATE)
 			data.put_data(compressed)
 		3:
-			pass
+			return false  # Logic not yet added
 
 	_write_chunk(buffer, AsepriteParser.ChunkTypes.CEL, data.data_array)
 	return true
@@ -314,26 +314,23 @@ static func _write_palette_chunk(buffer: StreamPeerBuffer, palette: Palette, dep
 	data.big_endian = false
 
 	var colors := PackedColorArray()
-	var first_color_index := -1
 	var last_color_index := -1
+
 	for i in palette.colors_max:
 		var color: Color = Color(0, 0, 0, 0)
 		if palette.colors.has(i):
-			if first_color_index == -1:  # Color found for first time
-				first_color_index = i
 			color = palette.colors[i].color
-			last_color_index = i
+			last_color_index = colors.size()
+		elif depth != 8:  # Ignore empty slots in RGBA mode
+			continue
 		colors.append(color)
-	if first_color_index == -1:  # Palette has no colors, ignore it
-		return
-	colors = colors.slice(0, last_color_index + 1)  # trim empty slots in end
-	## in Non-index mode: we don't need transparent slots before first color too
-	if depth != 8:
-		colors = colors.slice(first_color_index, colors.size())
-	else:
+	if depth == 8:
+		colors = colors.slice(0, last_color_index + 1)  # trim empty slots in end
 		# NOTE: In index mode one additional slot is pressent in the palette, Aseprite treats it
 		# as part of the palette and even includes it in palette exports so we should add it here.
 		colors.insert(0, Color.BLACK)
+	if colors.is_empty():
+		return
 	data.put_u32(colors.size())  # Palette Size
 	data.put_u32(0)  # Index of the first palette slot
 	data.put_u32(colors.size() - 1)  # Last index
