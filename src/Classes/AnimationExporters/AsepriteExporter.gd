@@ -224,20 +224,19 @@ static func _write_cel_chunk(
 ) -> bool:
 	var data := StreamPeerBuffer.new()
 	data.big_endian = false
-	data.put_u16(ase_layer_index)
-
+	data.put_u16(ase_layer_index)  # Store layer index (it is different from Pixelorama convention)
+	# Calculate and store offset
 	var position := Vector2i.ZERO
 	if cel is CelTileMap:
 		# NOTE: Aseprite gets offset from the top-right corner of the cropped tilemap
 		var used_rect := cel.get_image().get_used_rect()
 		var ase_offset = cel.get_pixel_coords(cel.get_cell_position(used_rect.position))
 		position = Vector2i(ase_offset)
-
 	data.put_16(position.x)
 	data.put_16(position.y)
-
+	# Store opacity
 	data.put_u8(clampi(int(cel.opacity * 255.0), 0, 255))
-
+	# Store cel type
 	var cel_type: int = 2  # Compressed image
 	var is_link_cel := cel.link_set != null
 	if is_link_cel and cel.link_set.has("cels"):
@@ -252,12 +251,11 @@ static func _write_cel_chunk(
 	elif cel is CelTileMap:
 		cel_type = 3  # CelTileMap compressed
 	data.put_u16(cel_type)
-
 	# Z-index.
 	data.put_16(cel.z_index)
 	# Reserved.
 	data.put_data(PackedByteArray([0, 0, 0, 0, 0]))
-
+	# Store cel data according to it's type
 	match cel_type:
 		1:
 			var linked_frame := _get_linked_frame_index(project, ase_layer_index, order_layers, cel)
@@ -286,8 +284,8 @@ static func _write_cel_chunk(
 			if used_rect.size == Vector2i.ZERO:
 				return false
 			var size_tiles: Vector2i = (
-				Vector2(used_rect.size) / Vector2(tile_map.get_tile_size())
-			).ceil()
+				(Vector2(used_rect.size) / Vector2(tile_map.get_tile_size())).ceil()
+			)
 			data.put_u16(size_tiles.x)
 			data.put_u16(size_tiles.y)
 			data.put_u16(32)  # Bits per tile (at the moment it's always 32-bit per tile)
@@ -296,7 +294,7 @@ static func _write_cel_chunk(
 			data.put_32(0x40000000)  # Bitmask for Y flip
 			data.put_32(0x20000000)  # Bitmask for diagonal flip (swap X/Y axis)
 			data.put_data(PackedByteArray([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]))  # Reserved 10 bytes
-
+			# Store tile IDs and flags.
 			var byte_offset := 0
 			var tile_data := PackedByteArray()
 			# 32 bits per tile = 4 bytes per tile
@@ -327,7 +325,6 @@ static func _write_tags_chunk(buffer: StreamPeerBuffer, project: Project) -> voi
 	# https://github.com/aseprite/aseprite/blob/main/docs/ase-file-specs.md#tags-chunk-0x2018
 	if project.animation_tags.is_empty():
 		return
-
 	var data := StreamPeerBuffer.new()
 	data.big_endian = false
 
@@ -335,7 +332,7 @@ static func _write_tags_chunk(buffer: StreamPeerBuffer, project: Project) -> voi
 	data.put_u16(project.animation_tags.size())
 	# Reserved 8 bytes.
 	data.put_data(PackedByteArray([0, 0, 0, 0, 0, 0, 0, 0]))
-
+	# Store tag information
 	for tag in project.animation_tags:
 		data.put_u16(tag.from - 1)
 		data.put_u16(tag.to - 1)
@@ -345,7 +342,6 @@ static func _write_tags_chunk(buffer: StreamPeerBuffer, project: Project) -> voi
 		data.put_data(PackedByteArray([0, 0, 0]))  # Deprecated RGB values
 		data.put_u8(0)  # Extra reserved byte.
 		_write_string(data, tag.name)  # Tag name
-
 	_write_chunk(buffer, AsepriteParser.ChunkTypes.TAGS, data.data_array)
 
 
