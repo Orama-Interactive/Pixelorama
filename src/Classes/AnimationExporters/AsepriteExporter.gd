@@ -110,7 +110,7 @@ static func _write_frame(
 	if frame_index == 0:
 		# Aseprite currently supports only one project palette
 		for i in project.tilesets.size():
-			_write_tileset_chunk(project, chunks_buffer, project.tilesets[i], i, color_depth)
+			_write_tileset_chunk(chunks_buffer, project.tilesets[i], i, color_depth)
 		_write_palette_chunk(chunks_buffer, Palettes.current_palette, color_depth)
 		_write_tags_chunk(chunks_buffer, project)
 		for tag: AnimationTag in project.animation_tags:
@@ -380,7 +380,7 @@ static func _write_palette_chunk(buffer: StreamPeerBuffer, palette: Palette, dep
 
 
 static func _write_tileset_chunk(
-	project: Project, buffer: StreamPeerBuffer, tileset: TileSetCustom, idx: int, depth: int
+	buffer: StreamPeerBuffer, tileset: TileSetCustom, idx: int, color_depth: int
 ) -> void:
 	# https://github.com/aseprite/aseprite/blob/main/docs/ase-file-specs.md#tileset-chunk-0x2023
 	var data := StreamPeerBuffer.new()
@@ -402,7 +402,7 @@ static func _write_tileset_chunk(
 	_write_string(data, tileset.name)
 
 	var image: Image = tileset.create_image_atlas(tileset.tiles.size(), false, false)
-	if depth == 8:
+	if color_depth == 8:
 		var index_image := ImageExtended.new()
 		index_image.copy_from_custom(image, true)
 		image = index_image.indices_image
