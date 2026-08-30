@@ -111,6 +111,7 @@ static func open_aseprite_file(path: String) -> void:
 			var chunk_type := ase_file.get_16()
 			if chunk_type != 0x2020:
 				previous_chunk_type = chunk_type
+			prints("Found Chunk:", chunk_type, "(", ChunkTypes.find_key(chunk_type), ")")
 			match chunk_type:
 				ChunkTypes.LAYER:
 					var layer_flags := ase_file.get_16()

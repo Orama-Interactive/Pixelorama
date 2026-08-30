@@ -9,8 +9,6 @@ extends RefCounted
 # AsepriteExporter writes them back.
 
 static var chunk_count: int = 0
-static var palette_index_offset: int = 0  # Used for index mode we need to free index 0
-
 
 static func save_aseprite_file(project: Project, path: String) -> Error:
 	# https://github.com/aseprite/aseprite/blob/main/docs/ase-file-specs.md#header
@@ -30,7 +28,6 @@ static func save_aseprite_file(project: Project, path: String) -> Error:
 	var color_depth := 32
 	if project.color_mode == Project.INDEXED_MODE:
 		color_depth = 8
-		palette_index_offset = 1
 
 	ase_file.store_16(color_depth)
 	ase_file.store_32(1)  # project_flags, 1 = Layer opacity has valid value
@@ -111,9 +108,9 @@ static func _write_frame(
 
 	if frame_index == 0:
 		# Aseprite currently supports only one project palette
-		for i in project.tilesets.size():
-			_write_tileset_chunk(chunks_buffer, project.tilesets[i], i)
-		_write_palette_chunk(chunks_buffer, Palettes.current_palette)
+		#for i in project.tilesets.size():
+			#_write_tileset_chunk(chunks_buffer, project.tilesets[i], i)
+		_write_palette_chunk(chunks_buffer, Palettes.current_palette, color_depth)
 		_write_tags_chunk(chunks_buffer, project)
 		for tag: AnimationTag in project.animation_tags:
 			_write_user_data_chunk(chunks_buffer, AsepriteParser.ChunkTypes.TAGS, tag)
@@ -311,24 +308,42 @@ static func _write_tags_chunk(buffer: StreamPeerBuffer, project: Project) -> voi
 	_write_chunk(buffer, AsepriteParser.ChunkTypes.TAGS, data.data_array)
 
 
-static func _write_palette_chunk(buffer: StreamPeerBuffer, palette: Palette) -> void:
+static func _write_palette_chunk(buffer: StreamPeerBuffer, palette: Palette, depth: int) -> void:
 	# https://github.com/aseprite/aseprite/blob/main/docs/ase-file-specs.md#palette-chunk-0x2019
 	var data := StreamPeerBuffer.new()
 	data.big_endian = false
 
-	data.put_u32(palette.colors_max)  # Palette Size
-	data.put_u32(palette_index_offset)  # Index of the first palette slot
-	data.put_u32(palette.colors_max - 1)  # Last index
-	data.put_data(PackedByteArray([0, 0, 0, 0, 0, 0, 0, 0]))  # Reserved 8 bytes for future.
+	var colors := PackedColorArray()
+	var first_color_index := -1
+	var last_color_index := -1
 	for i in palette.colors_max:
-		data.put_u16(0)  # color name not used by Pixelorama
 		var color: Color = Color(0, 0, 0, 0)
 		if palette.colors.has(i):
+			if first_color_index == -1:  # Color found for first time
+				first_color_index = i
 			color = palette.colors[i].color
-		data.put_u8(color.r8)
-		data.put_u8(color.g8)
-		data.put_u8(color.b8)
-		data.put_u8(color.a8)
+			last_color_index = i
+		colors.append(color)
+	if first_color_index == -1:  # Palette has no colors, ignore it
+		return
+	colors = colors.slice(0, last_color_index + 1)  # trim empty slots in end
+	## in Non-index mode: we don't need transparent slots before first color too
+	if depth != 8:
+		colors = colors.slice(first_color_index, colors.size())
+	else:
+		# NOTE: In index mode one additional slot is pressent in the palette, Aseprite treats it
+		# as part of the palette and even includes it in palette exports so we should add it here.
+		colors.insert(0, Color.BLACK)
+	data.put_u32(colors.size())  # Palette Size
+	data.put_u32(0)  # Index of the first palette slot
+	data.put_u32(colors.size() - 1)  # Last index
+	data.put_data(PackedByteArray([0, 0, 0, 0, 0, 0, 0, 0]))  # Reserved 8 bytes for future.
+	for i in colors.size():
+		data.put_u16(0)  # color name not used by Pixelorama
+		data.put_u8(colors[i].r8)
+		data.put_u8(colors[i].g8)
+		data.put_u8(colors[i].b8)
+		data.put_u8(colors[i].a8)
 	_write_chunk(buffer, AsepriteParser.ChunkTypes.PALETTE, data.data_array)
 
 
@@ -407,6 +422,7 @@ static func _write_chunk(buffer: StreamPeerBuffer, chunk_type: int, data: Packed
 	buffer.put_u32(data.size() + 6)
 	buffer.put_u16(chunk_type)  # WORD type
 	buffer.put_data(data)  # data
+	prints("Exported Chunk:", AsepriteParser.ChunkTypes.find_key(chunk_type))
 	chunk_count += 1
 
 
