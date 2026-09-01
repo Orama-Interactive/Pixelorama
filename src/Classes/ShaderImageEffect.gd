@@ -56,7 +56,9 @@ func handle_texture_blit_shader(
 	drawable_texture.blit_rect(
 		Rect2i(0, 0, size.x, size.y), ImageTexture.create_from_image(img), Color.WHITE, 0, material
 	)
-	img.copy_from(drawable_texture.get_image())
+	var drawable_image := drawable_texture.get_image()
+	drawable_image.convert(img.get_format())
+	img.copy_from(drawable_image)
 
 
 func handle_canvas_item_shader(
