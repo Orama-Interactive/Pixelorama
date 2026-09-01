@@ -475,7 +475,7 @@ static func _get_cel_pixel_data(image: Image, color_depth: int) -> PackedByteArr
 		# Pixelorama's indexed image representation. indices_image is an Image with an
 		# OpenGL texture format RED with a single component and a bitdepth of 8.
 		var indices_image: Image = image.indices_image
-		if not indices_image.get_format() == Image.FORMAT_R8:
+		if not indices_image.get_format() == Image.FORMAT_R8:  # Failsafe
 			indices_image.convert(Image.FORMAT_R8)
 		return image.indices_image.get_data()
 	return image.get_data()
