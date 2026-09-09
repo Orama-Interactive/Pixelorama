@@ -7,7 +7,7 @@ on:
 env:
   GODOT_VERSION: 4.7.2
   EXPORT_NAME: Pixelorama
-  TAG: v1.2.1
+  TAG: v1.2.2
   BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
 jobs:
