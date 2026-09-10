@@ -830,6 +830,7 @@ func add_frames(new_frames: Array, indices: PackedInt32Array) -> void:
 
 func remove_frames(indices: PackedInt32Array) -> void:  # indices should be in ascending order
 	Global.transform_content_confirmed.emit(self)
+	indices.sort()
 	selected_cels.clear()
 	for i in indices.size():
 		# With each removed index, future indices need to be lowered, so subtract by i
