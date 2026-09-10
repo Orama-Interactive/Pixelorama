@@ -54,8 +54,12 @@ func _input(event: InputEvent) -> void:
 		var popup_position := Global.control.get_global_mouse_position()
 		reference_menu.popup_on_parent(Rect2i(popup_position, Vector2i.ONE))
 
-	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
+	if Rect2i(Vector2i.ZERO, Global.current_project.size).has_point(Global.canvas.current_pixel):
+		if not dragging:
+			queue_redraw()
+			return
 
+	var ri: ReferenceImage = Global.current_project.get_current_reference_image()
 	if !ri:
 		return
 
@@ -311,6 +315,11 @@ func commit_undo(action: String, undo_data_tmp: Dictionary) -> void:
 
 func _draw() -> void:
 	if index < 0:
+		return
+	if (
+		Rect2i(Vector2i.ZERO, Global.current_project.size).has_point(Global.canvas.current_pixel)
+		and Tools.active_button != -1
+	):
 		return
 	var line_width := 2.0 / Global.camera.zoom.x
 	# If we are dragging show where the Reference was coming from
