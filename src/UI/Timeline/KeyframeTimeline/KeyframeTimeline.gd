@@ -6,7 +6,6 @@ static var frame_ui_size := 50:
 		frame_ui_size = clampi(value, 10, 128)
 ## Array of keyframe IDs.
 static var selected_keyframes: Array[int]
-static var next_keyframe_id := 0
 var current_layer: BaseLayer:
 	set(value):
 		if is_instance_valid(current_layer):
@@ -446,10 +445,12 @@ func _update_keyframe_property_ui(dict: Dictionary, keyframe_id: int) -> void:
 
 
 func add_effect_keyframe(anim_obj: AnimatableObject, frame_index: int, param_name: String) -> void:
+	var project := Global.current_project
+	var next_keyframe_id := project.next_keyframe_id
 	selected_keyframes = [next_keyframe_id]
-	var undo_redo := Global.current_project.undo_redo
+	var undo_redo := project.undo_redo
 	undo_redo.create_action("Add keyframe")
-	undo_redo.add_do_method(anim_obj.add_keyframe.bind(param_name, frame_index))
+	undo_redo.add_do_method(anim_obj.add_keyframe.bind(param_name, frame_index, project))
 	undo_redo.add_undo_method(anim_obj.delete_keyframe.bind(param_name, frame_index))
 	undo_redo.add_undo_method(unselect_keyframe.bind(next_keyframe_id))
 	undo_redo.add_do_method(recreate_timeline)

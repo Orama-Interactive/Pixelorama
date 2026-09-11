@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.2.2] - 2026-09-09
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+
+Built using Godot 4.7.2
+
+### Added
+- Implemented a new gradient tool. [#1591](https://github.com/Orama-Interactive/Pixelorama/pull/1591)
+- It is now possible to export projects as Aseprite files. [#1603](https://github.com/Orama-Interactive/Pixelorama/pull/1603)
+- You can now adjust the time taken by frames in a tag without disturbing their relative duration ratio. [#1312](https://github.com/Orama-Interactive/Pixelorama/pull/1312)
+
+### Changed
+- Integer zoom now zooms exponentially, just like the normal zoom. [#1594](https://github.com/Orama-Interactive/Pixelorama/pull/1594)
+
+### Fixed
+- Fixed keyframe IDs conflicting with already existing keyframes when loading pxo files and adding new keyframes on them.
+- Massively improved performance of stacked layer effects. [#1591](https://github.com/Orama-Interactive/Pixelorama/pull/1591)
+- Fixed cel button preview acting like the cel is still linked, even if it got unlinked.
+
+
 ## [v1.2.1] - 2026-08-19
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)),  [Joseph Demarest](https://github.com/JosephDemarest), [Qmaker-programmer](https://github.com/Qmaker-programmer)
@@ -44,6 +64,7 @@ Built using Godot 4.7.1
 - Fixed rounding errors in the Index Map effect.
 - Fixed an issue where the selection outline colors were not being updated when Pixelorama launches.
 - Fixed a crash when using tools coming from extensions.
+
 
 ## [v1.2] - 2026-07-29
 This update has been brought to you by the contributions of:
@@ -112,6 +133,7 @@ Built using Godot 4.6.3
 
 ### Removed
 - Removed tool & background color options from the Preferences in favor of the new theming system. If there is enough demand for them, we could add them again. [#1515](https://github.com/Orama-Interactive/Pixelorama/pull/1515)
+
 
 ## [v1.1.10] - 2026-04-30
 This update has been brought to you by the contributions of:

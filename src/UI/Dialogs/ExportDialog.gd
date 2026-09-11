@@ -15,6 +15,7 @@ var image_exports: Array[Export.FileFormat] = [
 	Export.FileFormat.SVG,
 	Export.FileFormat.EXR,
 	Export.FileFormat.GIF,
+	Export.FileFormat.ASE,
 	Export.FileFormat.APNG,
 	Export.FileFormat.MP4,
 	Export.FileFormat.AVI,
@@ -69,9 +70,11 @@ var _is_initializing_export_settings := false
 @onready var export_progress_popup: Window = $ExportProgressBar
 @onready var export_progress_bar := %ProgressBar as ProgressBar
 @onready var frame_timer: Timer = $FrameTimer
+@onready var aseprite_convert_info: ConfirmationDialog = %AsepriteConvertInfo
 
 
 func _ready() -> void:
+	aseprite_convert_info.confirmed.connect(export)
 	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	get_cancel_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	crop_image_option.add_item("None", Export.CropMode.NONE)
@@ -466,7 +469,10 @@ func _on_interpolation_item_selected(id: Image.Interpolation) -> void:
 
 
 func _on_confirmed() -> void:
-	export()
+	if Global.current_project.export_profile.file_format == Export.FileFormat.ASE:
+		aseprite_convert_info.popup_centered_clamped()
+	else:
+		export()
 
 
 func export() -> void:

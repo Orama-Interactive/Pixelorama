@@ -11,6 +11,8 @@ enum NewPalettePresetType {EMPTY, FROM_CURRENT_PALETTE, FROM_CURRENT_SPRITE, FRO
 ## Color options when user creates a new palette from current sprite or selection
 enum GetColorsFrom { CURRENT_FRAME, CURRENT_CEL, ALL_FRAMES }
 const DEFAULT_PALETTE_NAME := "Default"
+## Used to mark empty slots during some export formats like gpl.
+const EMPTY_SLOT_TAG := "PixeloramaEmptySlot"
 ## Maximum allowed width of imported palettes.
 const MAX_IMPORT_PAL_WIDTH := 1 << 14
 var palettes_write_path := Global.home_data_directory.path_join("Palettes")
@@ -609,7 +611,7 @@ func export_gpl(palette: Palette, path: String) -> void:
 	# Colors
 	for i in palette.colors_max:
 		var color := Color.BLACK
-		var comment: String = "PixeloramaEmptySlot"
+		var comment: String = EMPTY_SLOT_TAG
 		if i in palette.colors:
 			color = palette.colors[i].color
 			comment = color.to_html(false)
@@ -657,7 +659,7 @@ func _import_gpl(path: String, text: String) -> Palette:
 			var color := Color(red, green, blue)
 			if color_data.size() >= 4:
 				colors.append(color)
-				if color_data[3] == "PixeloramaEmptySlot":
+				if color_data[3] == EMPTY_SLOT_TAG:
 					empty_slots.append(colors.size() - 1)  # Pixelorama is meant to ignore this slot
 			else:
 				colors.append(color)

@@ -125,17 +125,18 @@ func has_keyframes(property_name: String) -> bool:
 func add_keyframe(
 	param_name: String,
 	frame_index: int,
+	project: Project,
 	value: Variant = get_params(frame_index)[param_name],
 	trans := Tween.TRANS_LINEAR,
 	ease_type := Tween.EASE_IN
 ) -> void:
 	if not animated_params.has(param_name):
 		animated_params[param_name] = {}
-	var id := KeyframeTimeline.next_keyframe_id
+	var id := project.next_keyframe_id
 	animated_params[param_name][frame_index] = {
 		"id": id, "value": value, "trans": trans, "ease": ease_type
 	}
-	KeyframeTimeline.next_keyframe_id += 1
+	project.next_keyframe_id += 1
 	keyframe_set.emit(param_name)
 
 
