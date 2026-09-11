@@ -1255,6 +1255,7 @@ func undo_or_redo(
 			"Move Selection",
 			"Scale",
 			"Center Frames",
+			"Center Cels",
 			"Merge Layer",
 			"Link Cel",
 			"Unlink Cel"

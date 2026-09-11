@@ -1,6 +1,6 @@
 extends Button
 
-enum MenuOptions { PROPERTIES, PLAY_AUDIO, SELECT_PIXELS, DELETE, LINK, UNLINK, CLONE_CEL }
+enum MenuOptions { PROPERTIES, PLAY_AUDIO, SELECT_PIXELS, CENTER, DELETE, LINK, UNLINK, CLONE_CEL }
 
 var frame := 0
 var layer := 0
@@ -45,6 +45,7 @@ func _ready() -> void:
 	else:
 		popup_menu.add_item("Select pixels", MenuOptions.SELECT_PIXELS)
 	if cel is PixelCel:
+		popup_menu.add_item("Center Content", MenuOptions.CENTER)
 		popup_menu.add_item("Delete", MenuOptions.DELETE)
 		popup_menu.add_item("Link cels to", MenuOptions.LINK)
 		popup_menu.add_item("Unlink cels", MenuOptions.UNLINK)
@@ -175,6 +176,8 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 				layer_class.playback_frame = frame
 		MenuOptions.SELECT_PIXELS:
 			Global.canvas.selection.select_cel_pixels(layer_class, project.frames[frame])
+		MenuOptions.CENTER:
+			_center_cel_content()
 		MenuOptions.DELETE:
 			_delete_cel_content()
 
@@ -318,6 +321,41 @@ static func _clone_cel_content(indices: Array, paste_offset := Vector2i.RIGHT) -
 	project.undo_redo.add_do_method(project.change_cel.bind(new_selected_cels[0][0]))
 	project.undo_redo.add_undo_property(project, "selected_cels", indices)
 	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
+	project.undo_redo.commit_action()
+
+
+func _center_cel_content() -> void:
+	var indices := _get_cel_indices()
+	var project := Global.current_project
+	var redo_data := {}
+	var undo_data := {}
+	project.undo_redo.create_action("Center Cels")
+	for cel_index in indices:
+		var frame_index: int = cel_index[0]
+		var layer_index: int = cel_index[1]
+		var selected_cel := project.frames[frame_index].cels[layer_index]
+		if not cel is PixelCel:
+			continue
+		var old_content: ImageExtended = (selected_cel as PixelCel).get_image()
+		var used_rect := old_content.get_used_rect()
+		var offset: Vector2i = (0.5 * (project.size - used_rect.size)).floor()
+
+		var tmp_centered := project.new_empty_image()
+		tmp_centered.blend_rect(old_content, used_rect, offset)
+		var centered := ImageExtended.new()
+		centered.copy_from_custom(tmp_centered, old_content.is_indexed)
+		if cel is CelTileMap:
+			var tilemap_cel := cel as CelTileMap
+			var tilemap_offset := (offset - used_rect.position) % tilemap_cel.get_tile_size()
+			tilemap_cel.serialize_undo_data_source_image(
+				centered, redo_data, undo_data, tilemap_offset
+			)
+		centered.add_data_to_dictionary(redo_data, old_content)
+		old_content.add_data_to_dictionary(undo_data)
+
+	project.deserialize_cel_undo_data(redo_data, undo_data)
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
 
 
