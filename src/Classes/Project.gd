@@ -63,6 +63,7 @@ var selected_cels := [[0, 0]]  ## Array of Arrays of 2 integers (frame & layer)
 ## array just contains the indices of the layers in increasing order.
 ## See [method order_layers].
 var ordered_layers: Array[int] = [0]
+var next_keyframe_id := 0
 
 var animation_tags: Array[AnimationTag] = []:
 	set(value):
@@ -323,6 +324,7 @@ func serialize() -> Dictionary:
 		"tile_mode_y_basis_x": tiles.y_basis.x,
 		"tile_mode_y_basis_y": tiles.y_basis.y,
 		"layers": layer_data,
+		"next_keyframe_id": next_keyframe_id,
 		"tags": tag_data,
 		"guides": guide_data,
 		"symmetry_points": [x_symmetry_point, y_symmetry_point],
@@ -549,6 +551,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			var new_pos := y_symmetry_axis.points[point]
 			new_pos.x = floorf(x_symmetry_point / 2 + 1)
 			y_symmetry_axis.set_point_position(point, new_pos)
+	next_keyframe_id = dict.get("next_keyframe_id", next_keyframe_id)
 	var exp_settings = dict.get("export_profile", {})
 	if typeof(exp_settings) == TYPE_DICTIONARY:
 		export_profile.deserialize(exp_settings)
@@ -827,6 +830,7 @@ func add_frames(new_frames: Array, indices: PackedInt32Array) -> void:
 
 func remove_frames(indices: PackedInt32Array) -> void:  # indices should be in ascending order
 	Global.transform_content_confirmed.emit(self)
+	indices.sort()
 	selected_cels.clear()
 	for i in indices.size():
 		# With each removed index, future indices need to be lowered, so subtract by i

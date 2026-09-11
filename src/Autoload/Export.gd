@@ -5,7 +5,7 @@ enum ExportTab { IMAGE, SPRITESHEET }
 enum Orientation { COLUMNS, ROWS, TAGS_BY_ROW, TAGS_BY_COLUMN }
 enum AnimationDirection { FORWARD, BACKWARDS, PING_PONG }
 ## See file_format_string, file_format_description, and ExportDialog.gd
-enum FileFormat { PNG, WEBP, JPEG, SVG, EXR, GIF, APNG, MP4, AVI, OGV, MKV, WEBM }
+enum FileFormat { PNG, WEBP, JPEG, SVG, EXR, GIF, ASE, APNG, MP4, AVI, OGV, MKV, WEBM }
 enum { VISIBLE_LAYERS, SELECTED_LAYERS }
 enum ExportFrames { ALL_FRAMES, SELECTED_FRAMES }
 
@@ -15,6 +15,7 @@ var temp_path := OS.get_temp_dir().path_join("pixelorama_tmp")
 ## List of animated formats
 var animated_formats := [
 	FileFormat.GIF,
+	FileFormat.ASE,
 	FileFormat.APNG,
 	FileFormat.MP4,
 	FileFormat.AVI,
@@ -34,6 +35,7 @@ var file_format_dictionary: Dictionary[FileFormat, Array] = {
 	FileFormat.SVG: [".svg", "SVG Image"],
 	FileFormat.EXR: [".exr", "EXR Image"],
 	FileFormat.GIF: [".gif", "GIF Image"],
+	FileFormat.ASE: [".aseprite", "Aseprite Project"],
 	FileFormat.APNG: [".apng", "APNG Image"],
 	FileFormat.MP4: [".mp4", "MPEG-4 Video"],
 	FileFormat.AVI: [".avi", "AVI Video"],
@@ -621,23 +623,26 @@ func export_processed_images(
 				)
 				return false
 		else:
-			var exporter: AImgIOBaseExporter
-			if export_profile.file_format == FileFormat.APNG:
-				exporter = AImgIOAPNGExporter.new()
+			if export_profile.file_format == FileFormat.ASE:
+				AsepriteExporter.save_aseprite_file(project, export_paths[0])
 			else:
-				exporter = GIFAnimationExporter.new()
-			var details := {
-				"exporter": exporter,
-				"export_dialog": export_dialog,
-				"export_paths": export_paths,
-				"project": project
-			}
-			if not _multithreading_enabled():
-				export_animated(details)
-			else:
-				if gif_export_thread.is_started():
-					gif_export_thread.wait_to_finish()
-				gif_export_thread.start(export_animated.bind(details))
+				var exporter: AImgIOBaseExporter
+				if export_profile.file_format == FileFormat.APNG:
+					exporter = AImgIOAPNGExporter.new()
+				else:
+					exporter = GIFAnimationExporter.new()
+				var details := {
+					"exporter": exporter,
+					"export_dialog": export_dialog,
+					"export_paths": export_paths,
+					"project": project
+				}
+				if not _multithreading_enabled():
+					export_animated(details)
+				else:
+					if gif_export_thread.is_started():
+						gif_export_thread.wait_to_finish()
+					gif_export_thread.start(export_animated.bind(details))
 	else:
 		for i in range(processed_images.size()):
 			if OS.has_feature("web"):

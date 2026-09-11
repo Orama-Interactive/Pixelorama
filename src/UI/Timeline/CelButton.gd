@@ -197,8 +197,9 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 						project.layers[layer].link_cel.bind(s_cel, s_cel.link_set)
 					)
 					if s_cel.link_set.size() > 1:  # Skip copying content if not linked to another
+						var new_texture := ImageTexture.create_from_image(s_cel.get_image())
 						project.undo_redo.add_do_method(
-							s_cel.set_content.bind(s_cel.copy_content(), ImageTexture.new())
+							s_cel.set_content.bind(s_cel.copy_content(), new_texture)
 						)
 						project.undo_redo.add_undo_method(
 							s_cel.set_content.bind(s_cel.get_content(), s_cel.image_texture)
@@ -258,29 +259,42 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 			project.undo_redo.commit_action()
 
 		MenuOptions.CLONE_CEL:
-			_clone_cel_content()
+			_clone_cel_content(_get_cel_indices())
 
 
 ## Clones the cel content only (skips other properties like duration, opacity etc...)
-func _clone_cel_content() -> void:
-	var indices := _get_cel_indices()
+static func _clone_cel_content(indices: Array, paste_offset := Vector2i.RIGHT) -> void:
 	var project := Global.current_project
 	project.undo_redo.create_action("Draw")
 	var new_selected_cels := []
-	var new_end_frame: Frame = null  # Frame to be added at end of timeline if required
+	var new_frames: Dictionary[int, Frame] = {}
+	var new_frames_idx := PackedInt32Array()
+	var filtered_indices := []
 	for cel_index in indices:
+		# Calculate which indices are valid and which indices need new frames
+		var new_frame_layer := [cel_index[0] + paste_offset.x, cel_index[1] + paste_offset.y]
+		if (
+			new_frame_layer[0] < 0
+			or new_frame_layer[1] < 0
+			or new_frame_layer[1] >= project.layers.size()
+		):
+			continue
+		filtered_indices.append(cel_index)
+		if new_frame_layer[0] >= project.frames.size() and not new_frame_layer[0] in new_frames_idx:
+			new_frames_idx.append(new_frame_layer[0])
+	if new_frames_idx.size() > 0:
+		new_frames = Global.animation_timeline.undo_redo_add_frames(new_frames_idx)
+	for cel_index in filtered_indices:
 		var frame_index: int = cel_index[0]
 		var layer_index: int = cel_index[1]
-		var new_frame_layer := [frame_index + 1, layer_index]
+		var new_frame_layer := [frame_index + paste_offset.x, layer_index + paste_offset.y]
 		if !new_selected_cels.has(new_frame_layer):
 			new_selected_cels.append(new_frame_layer)
 		var selected_cel := project.frames[frame_index].cels[layer_index]
 		var next_cel: PixelCel = null
 		var is_using_new_frame := false
-		if new_frame_layer[0] >= project.frames.size():
-			if not new_end_frame:
-				new_end_frame = Global.animation_timeline.undo_redo_add_frame(new_frame_layer[0])
-			next_cel = new_end_frame.cels[new_frame_layer[1]]
+		if new_frames.has(new_frame_layer[0]):
+			next_cel = new_frames.get(new_frame_layer[0]).cels[new_frame_layer[1]]
 			is_using_new_frame = true
 		else:
 			next_cel = project.frames[new_frame_layer[0]].cels[new_frame_layer[1]]
@@ -294,16 +308,16 @@ func _clone_cel_content() -> void:
 				project.undo_redo.add_do_method(linked_cel.set_content.bind(new_content))
 				project.undo_redo.add_undo_method(linked_cel.set_content.bind(old_content))
 		project.undo_redo.add_do_method(
-			Global.undo_or_redo.bind(false, frame_index + 1, layer_index, project)
+			Global.undo_or_redo.bind(false, new_frame_layer[0], new_frame_layer[1], project)
 		)
 		if not is_using_new_frame:
 			project.undo_redo.add_undo_method(
-				Global.undo_or_redo.bind(true, frame_index + 1, layer_index, project)
+				Global.undo_or_redo.bind(true, new_frame_layer[0], new_frame_layer[1], project)
 			)
 	project.undo_redo.add_do_property(project, "selected_cels", new_selected_cels)
 	project.undo_redo.add_do_method(project.change_cel.bind(new_selected_cels[0][0]))
 	project.undo_redo.add_undo_property(project, "selected_cels", indices)
-	project.undo_redo.add_undo_method(project.change_cel.bind(indices[0][0]))
+	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
 	project.undo_redo.commit_action()
 
 
@@ -409,9 +423,11 @@ func _can_drop_data(pos: Vector2, data) -> bool:
 	for l in drop_layers:
 		if l != layer:
 			different_layers = true
-	var is_swapping := Global.is_ctrl_or_cmd_pressed() or different_layers
+	var is_swapping_or_cloning := (
+		Global.is_ctrl_or_cmd_pressed() or different_layers or Input.is_action_pressed(&"shift")
+	)
 
-	if is_swapping:
+	if is_swapping_or_cloning:
 		for cel_idx in drop_cels:
 			# Can't move to the same cel
 			if drop_cels.has([cel_idx[0] + offset.x, cel_idx[1] + offset.y]):
@@ -447,7 +463,7 @@ func _can_drop_data(pos: Vector2, data) -> bool:
 		or (project.frames[frame].cels[layer].link_set == null and not are_dropped_cels_linked)
 	):
 		var region: Rect2
-		if is_swapping:  # Swap cels
+		if is_swapping_or_cloning:  # Swap cels
 			var copy_drop_cels := drop_cels.duplicate()  # to prevent overriting original array.
 			# Don't highlight this button right now (it is done later, a few lines ahead)
 			Global.animation_timeline.set_cels_highlight(copy_drop_cels, offset)
@@ -486,7 +502,9 @@ func _drop_data(_pos: Vector2, data) -> void:
 		offset.y = layer - Array(drop_layers).max()
 	var project := Global.current_project
 	project.undo_redo.create_action("Move Cels")
-	if Global.is_ctrl_or_cmd_pressed() or different_layers:  # Swap cels
+	if Input.is_action_pressed(&"shift"):
+		_clone_cel_content(drop_cels, offset)
+	elif Global.is_ctrl_or_cmd_pressed() or different_layers:  # Swap cels
 		var swap_cel_positions := []
 		for cel_idx in drop_cels:
 			var drop_point_frame: int = cel_idx[0] + offset.x

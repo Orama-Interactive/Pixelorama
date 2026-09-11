@@ -253,16 +253,19 @@ func _select_fill_area_optionbutton() -> void:
 func _select_segments(
 	mask: SelectionMap, segments: Array[FloodFillObject.Segment], selection_map: SelectionMap
 ) -> void:
+	var map_is_invisible := selection_map.is_invisible()
 	for c in segments.size():
 		var p := segments[c]
 		for px in range(p.left_position, p.right_position + 1):
 			# We don't have to check again whether the point being processed is within the bounds
-			_set_bit(Vector2i(px, p.y), mask, selection_map)
+			_set_bit(Vector2i(px, p.y), mask, selection_map, map_is_invisible)
 
 
 ## Used when the fill area is set to similar area.
-func _set_bit(p: Vector2i, mask: SelectionMap, selection_map: SelectionMap) -> void:
-	if selection_map.is_invisible() or selection_map.is_pixel_selected(p):
+func _set_bit(
+	p: Vector2i, mask: SelectionMap, selection_map: SelectionMap, map_is_invisible: bool
+) -> void:
+	if map_is_invisible or selection_map.is_pixel_selected(p):
 		mask.select_pixel(p, true)
 
 
