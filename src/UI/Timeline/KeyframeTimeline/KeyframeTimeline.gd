@@ -33,7 +33,10 @@ var keyframe_timeline_frame_display: KeyframeTimelineFrameDisplay = %KeyframeTim
 @onready var properties_container: VBoxContainer = %PropertiesContainer
 @onready var no_key_selected_label: Label = %NoKeySelectedLabel
 @onready var properties_grid_container: GridContainer = %PropertiesGridContainer
+@onready var randomize_values_button: Button = %RandomizeValues
 @onready var delete_keyframe_button: Button = %DeleteKeyframeButton
+@onready var randomize_dialog: ConfirmationDialog = %RandomizeDialog
+@onready var rand_spread_mag: ValueSlider = %SpreadMagnitude
 
 
 func _ready() -> void:
@@ -50,6 +53,7 @@ func _ready() -> void:
 		var project := Global.current_project
 		current_layer = project.layers[project.current_layer]
 		await get_tree().process_frame
+	randomize_dialog.confirmed.connect(func(): randomize_keyframe_value(rand_spread_mag.value))
 	_on_track_scroll_container_resized()
 
 
@@ -283,6 +287,7 @@ func select_keyframes() -> void:
 	value_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	properties_grid_container.add_child(value_label)
 	var property = dict[param_name][frame_index]["value"]
+	randomize_values_button.visible = !no_key_selected_label.visible and is_randomizable(property)
 	var track := key_button.get_parent() as KeyframeAnimationTrack
 	var property_properties := {}  # I apologize for the horrible variable name.
 	if track.type == KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT:
@@ -362,6 +367,7 @@ func unselect_keyframe(key_id := -1) -> void:
 		no_key_selected_label.visible = true
 		properties_grid_container.visible = not no_key_selected_label.visible
 		delete_keyframe_button.visible = not no_key_selected_label.visible
+		randomize_values_button.visible = not no_key_selected_label.visible
 		await get_tree().process_frame
 		_on_track_scroll_container_resized()
 
@@ -455,6 +461,86 @@ func add_effect_keyframe(anim_obj: AnimatableObject, frame_index: int, param_nam
 	undo_redo.add_undo_method(unselect_keyframe.bind(next_keyframe_id))
 	undo_redo.add_do_method(recreate_timeline)
 	undo_redo.add_undo_method(recreate_timeline)
+	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	undo_redo.commit_action()
+
+
+func _on_keyframe_randomized() -> void:
+	randomize_dialog.popup_centered_clamped()
+
+
+func is_randomizable(property: Variant) -> bool:
+	return (
+		typeof(property)
+		in [TYPE_INT, TYPE_FLOAT, TYPE_VECTOR2, TYPE_VECTOR3, TYPE_COLOR, TYPE_BASIS]
+	)
+
+
+func randomize_keyframe_value(spread: float, keyframe_id := -1):
+	var undo_redo := Global.current_project.undo_redo
+	undo_redo.create_action("Value Randomized")
+	var keyframe_buttons: Array[KeyframeButton]
+	if keyframe_id == -1 or keyframe_id in selected_keyframes:
+		keyframe_buttons = get_selected_keyframe_buttons()
+	else:
+		# If the keyframe we are randomizing is not selected, find it.
+		for kfb: KeyframeButton in Global.get_tree().get_nodes_in_group(&"KeyframeButtons"):
+			if kfb.keyframe_id == keyframe_id:
+				keyframe_buttons = [kfb]
+				break
+	var last_key_button: KeyframeButton
+	for key_button in keyframe_buttons:
+		var dict := key_button.dict
+		var param_name := key_button.param_name
+		var frame_index := key_button.frame_index
+		var old_value = dict[param_name][frame_index]["value"]
+		var new_value: Variant
+		match typeof(old_value):
+			TYPE_INT, TYPE_FLOAT:
+				new_value = randf_range(-spread, spread) + old_value
+			TYPE_VECTOR2:
+				var rand_x := randf_range(-spread, spread)
+				var rand_y := randf_range(-spread, spread)
+				new_value = Vector2(rand_x, rand_y) + old_value
+			TYPE_VECTOR3:
+				var rand_x := randf_range(-spread, spread)
+				var rand_y := randf_range(-spread, spread)
+				var rand_z := randf_range(-spread, spread)
+				new_value = Vector3(rand_x, rand_y, rand_z) + old_value
+			TYPE_BASIS:
+				var rand_xx := randi_range(-roundi(spread), roundi(spread))
+				var rand_xy := randi_range(-roundi(spread), roundi(spread))
+				var rand_xz := randi_range(-roundi(spread), roundi(spread))
+				var rand_yx := randi_range(-roundi(spread), roundi(spread))
+				var rand_yy := randi_range(-roundi(spread), roundi(spread))
+				var rand_yz := randi_range(-roundi(spread), roundi(spread))
+				var rand_zx := randi_range(-roundi(spread), roundi(spread))
+				var rand_zy := randi_range(-roundi(spread), roundi(spread))
+				var rand_zz := randi_range(-roundi(spread), roundi(spread))
+				new_value = Basis(
+					old_value.x + Vector3(rand_xx, rand_xy, rand_xz),
+					old_value.y + Vector3(rand_yx, rand_yy, rand_yz),
+					old_value.z + Vector3(rand_zx, rand_zy, rand_zz),
+				)
+			TYPE_COLOR:
+				var rand_r: float = wrapf(randf_range(-spread, spread) + old_value.r, 0, 1)
+				var rand_g: float = wrapf(randf_range(-spread, spread) + old_value.g, 0, 1)
+				var rand_b: float = wrapf(randf_range(-spread, spread) + old_value.b, 0, 1)
+				var rand_a: float = wrapf(randf_range(-spread, spread) + old_value.a, 0, 1)
+				new_value = Color(rand_r, rand_g, rand_b, rand_a)
+			_:
+				continue
+		undo_redo.add_do_method(func(): dict[param_name][frame_index]["value"] = new_value)
+		undo_redo.add_undo_method(func(): dict[param_name][frame_index]["value"] = old_value)
+		last_key_button = key_button
+	var last_dict := last_key_button.dict
+	var last_param_name := last_key_button.param_name
+	var last_frame_index := last_key_button.frame_index
+	var property_dict := last_dict[last_param_name][last_frame_index] as Dictionary
+	var last_key_id := last_key_button.keyframe_id
+	undo_redo.add_do_method(_update_keyframe_property_ui.bind(property_dict, last_key_id))
+	undo_redo.add_undo_method(_update_keyframe_property_ui.bind(property_dict, last_key_id))
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
