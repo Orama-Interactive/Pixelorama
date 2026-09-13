@@ -16,7 +16,7 @@ func _ready() -> void:
 
 
 func _input(_event: InputEvent) -> void:
-	if !visible:
+	if not visible or Global.lock_guides:
 		return
 	super._input(_event)
 	if type == Types.HORIZONTAL:

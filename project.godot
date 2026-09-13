@@ -1203,6 +1203,10 @@ quick_gradient_tool={
 "deadzone": 0.2,
 "events": []
 }
+lock_guides={
+"deadzone": 0.2,
+"events": []
+}
 
 [input_devices]
 
