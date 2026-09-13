@@ -643,7 +643,13 @@ var show_rulers := true:
 		show_rulers = value
 		get_tree().set_group(&"CanvasRulers", "visible", value)
 ## If [code]true[/code], the guides are visible.
-var lock_guides := false
+var lock_guides := false:
+	set(value):
+		if value == lock_guides:
+			return
+		lock_guides = value
+		if is_instance_valid(top_menu_container):
+			top_menu_container.view_menu.set_item_checked(ViewMenu.LOCK_GUIDES, value)
 ## If [code]true[/code], the guides are visible.
 var show_guides := true
 ## If [code]true[/code], the mouse guides are visible.

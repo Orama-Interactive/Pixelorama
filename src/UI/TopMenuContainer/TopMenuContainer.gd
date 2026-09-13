@@ -404,14 +404,14 @@ func _setup_view_menu() -> void:
 		_toggle_show_pixel_grid()
 	if show_rulers != Global.show_rulers:
 		_toggle_show_rulers()
-	if lock_guides != Global.lock_guides:
-		Global.lock_guides = lock_guides
 	if show_guides != Global.show_guides:
 		_toggle_show_guides()
 	if show_mouse_guides != Global.show_mouse_guides:
 		_toggle_show_mouse_guides()
 	if show_pixel_indices != Global.show_pixel_indices:
 		_toggle_show_pixel_indices()
+	if lock_guides != Global.lock_guides:
+		Global.lock_guides = lock_guides
 	if display_layer_effects != Global.display_layer_effects:
 		Global.display_layer_effects = display_layer_effects
 	if snap_to_rectangular_grid_boundary != Global.snap_to_rectangular_grid_boundary:
@@ -855,9 +855,6 @@ func view_menu_id_pressed(id: int) -> void:
 			_toggle_show_pixel_indices()
 		Global.ViewMenu.LOCK_GUIDES:
 			Global.lock_guides = not Global.lock_guides
-			view_menu.set_item_checked(
-				Global.ViewMenu.LOCK_GUIDES, Global.lock_guides
-			)
 		Global.ViewMenu.DISPLAY_LAYER_EFFECTS:
 			Global.display_layer_effects = not Global.display_layer_effects
 		_:
