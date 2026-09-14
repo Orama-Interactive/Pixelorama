@@ -66,6 +66,7 @@ var backup_dialog := Dialog.new("res://src/UI/Dialogs/BackupRestoreDialog.tscn")
 @onready var ui_elements := main_ui.get_children()
 @onready var main_menu_button: MenuButton = $MarginContainer/HBoxContainer/MainMenuButton
 @onready var menu_bar: MenuBar = $MarginContainer/HBoxContainer/MenuBar
+@onready var top_labels: HBoxContainer = $MarginContainer/HBoxContainer/TopLabels
 @onready var file_menu := $MarginContainer/HBoxContainer/MenuBar/File as PopupMenu
 @onready var edit_menu := $MarginContainer/HBoxContainer/MenuBar/Edit as PopupMenu
 @onready var select_menu := $MarginContainer/HBoxContainer/MenuBar/Select as PopupMenu
@@ -131,6 +132,17 @@ func _ready() -> void:
 	# Fill the copy layout from option button with the default layouts
 	for layout in Global.default_layouts:
 		layout_from_option_button.add_item(layout.resource_path.get_basename().get_file())
+	resized.connect(_on_top_container_resized)
+
+
+func _on_top_container_resized():
+	await RenderingServer.frame_post_draw
+	var pos_minimum_x := menu_bar.position.x
+	if menu_bar.visible:
+		pos_minimum_x += menu_bar.size.x
+	var middle_offset = size.x / 2.0 - top_labels.size.x / 2.0
+	var true_offset := clampf(middle_offset, pos_minimum_x, top_labels.position.x)
+	top_labels.offset_transform_position = Vector2(true_offset - top_labels.position.x, 0)
 
 
 func _input(event: InputEvent) -> void:
