@@ -48,7 +48,7 @@ static func set_achievement(achievement_name: String) -> void:
 	if not steam_class.isSteamRunning():
 		return
 	var status: Dictionary = steam_class.getAchievement(achievement_name)
-	if status["achieved"]:
+	if status.get("achieved"):
 		achievements[achievement_name] = true
 		return
 	steam_class.setAchievement(achievement_name)
