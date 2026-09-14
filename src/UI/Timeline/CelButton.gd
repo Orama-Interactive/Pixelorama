@@ -45,7 +45,7 @@ func _ready() -> void:
 	else:
 		popup_menu.add_item("Select pixels", MenuOptions.SELECT_PIXELS)
 	if cel is PixelCel:
-		popup_menu.add_item("Center Content", MenuOptions.CENTER)
+		popup_menu.add_item("Center content", MenuOptions.CENTER)
 		popup_menu.add_item("Delete", MenuOptions.DELETE)
 		popup_menu.add_item("Link cels to", MenuOptions.LINK)
 		popup_menu.add_item("Unlink cels", MenuOptions.UNLINK)
