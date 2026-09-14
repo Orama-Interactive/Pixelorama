@@ -23,7 +23,7 @@ func _ready() -> void:
 
 
 func _input(_event: InputEvent) -> void:
-	if not visible:
+	if not visible or Global.lock_guides:
 		return
 	mouse_pos = get_local_mouse_position()
 	var is_hovering := is_pos_over_line(mouse_pos)

@@ -74,6 +74,7 @@ enum ViewMenu {
 	SHOW_GUIDES,
 	SHOW_MOUSE_GUIDES,
 	SHOW_REFERENCE_IMAGES,
+	LOCK_GUIDES,
 	DISPLAY_LAYER_EFFECTS,
 	SNAP_TO,
 }
@@ -642,6 +643,14 @@ var show_rulers := true:
 		show_rulers = value
 		get_tree().set_group(&"CanvasRulers", "visible", value)
 ## If [code]true[/code], the guides are visible.
+var lock_guides := false:
+	set(value):
+		if value == lock_guides:
+			return
+		lock_guides = value
+		if is_instance_valid(top_menu_container):
+			top_menu_container.view_menu.set_item_checked(ViewMenu.LOCK_GUIDES, value)
+## If [code]true[/code], the guides are visible.
 var show_guides := true
 ## If [code]true[/code], the mouse guides are visible.
 var show_mouse_guides := false
@@ -998,6 +1007,7 @@ func _initialize_keychain() -> void:
 		&"show_guides": Keychain.InputAction.new("", "View menu", true),
 		&"show_rulers": Keychain.InputAction.new("", "View menu", true),
 		&"show_reference_images": Keychain.InputAction.new("", "View menu", true),
+		&"lock_guides": Keychain.InputAction.new("", "View menu", true),
 		&"display_layer_effects": Keychain.InputAction.new("", "View menu", true),
 		&"moveable_panels": Keychain.InputAction.new("", "Window menu", true),
 		&"zen_mode": Keychain.InputAction.new("", "Window menu", true),

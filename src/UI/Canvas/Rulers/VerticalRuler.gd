@@ -107,7 +107,7 @@ func _on_VerticalRuler_pressed() -> void:
 
 
 func create_guide() -> void:
-	if !Global.show_guides:
+	if not Global.show_guides or Global.lock_guides:
 		return
 	var guide := Guide.new()
 	if absf(camera.camera_angle_degrees) < 45 or absf(camera.camera_angle_degrees) > 135:
