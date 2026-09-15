@@ -42,7 +42,8 @@ func get_config() -> Dictionary:
 
 
 func set_config(config: Dictionary) -> void:
-	_color_slot = config.get("color_slot", _color_slot)
+	if not _is_quick_assigned:
+		_color_slot = config.get("color_slot", _color_slot)
 	_mode = config.get("mode", _mode)
 
 
