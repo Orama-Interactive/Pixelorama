@@ -339,6 +339,7 @@ func _setup_view_menu() -> void:
 		"Show Guides": "show_guides",
 		"Show Mouse Guides": "",
 		"Show Reference Images": "show_reference_images",
+		"Lock Guides": "lock_guides",
 		"Display Layer Effects": &"display_layer_effects",
 		"Snap To": "",
 	}
@@ -357,6 +358,7 @@ func _setup_view_menu() -> void:
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_RULERS, true)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_GUIDES, true)
 	view_menu.set_item_checked(Global.ViewMenu.SHOW_REFERENCE_IMAGES, true)
+	view_menu.set_item_checked(Global.ViewMenu.LOCK_GUIDES, false)
 	view_menu.set_item_checked(Global.ViewMenu.DISPLAY_LAYER_EFFECTS, true)
 	view_menu.hide_on_checkable_item_selection = false
 	view_menu.id_pressed.connect(view_menu_id_pressed)
@@ -377,6 +379,9 @@ func _setup_view_menu() -> void:
 	)
 	var show_mouse_guides: bool = Global.config_cache.get_value(
 		"view_menu", "show_mouse_guides", Global.show_mouse_guides
+	)
+	var lock_guides: bool = Global.config_cache.get_value(
+		"view_menu", "lock_guides", Global.lock_guides
 	)
 	var display_layer_effects: bool = Global.config_cache.get_value(
 		"view_menu", "display_layer_effects", Global.display_layer_effects
@@ -405,6 +410,8 @@ func _setup_view_menu() -> void:
 		_toggle_show_mouse_guides()
 	if show_pixel_indices != Global.show_pixel_indices:
 		_toggle_show_pixel_indices()
+	if lock_guides != Global.lock_guides:
+		Global.lock_guides = lock_guides
 	if display_layer_effects != Global.display_layer_effects:
 		Global.display_layer_effects = display_layer_effects
 	if snap_to_rectangular_grid_boundary != Global.snap_to_rectangular_grid_boundary:
@@ -846,6 +853,8 @@ func view_menu_id_pressed(id: int) -> void:
 			)
 		Global.ViewMenu.SHOW_PIXEL_INDICES:
 			_toggle_show_pixel_indices()
+		Global.ViewMenu.LOCK_GUIDES:
+			Global.lock_guides = not Global.lock_guides
 		Global.ViewMenu.DISPLAY_LAYER_EFFECTS:
 			Global.display_layer_effects = not Global.display_layer_effects
 		_:

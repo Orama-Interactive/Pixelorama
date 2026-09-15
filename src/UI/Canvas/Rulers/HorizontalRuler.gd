@@ -110,7 +110,7 @@ func _on_HorizontalRuler_pressed() -> void:
 
 
 func create_guide() -> void:
-	if !Global.show_guides:
+	if not Global.show_guides or Global.lock_guides:
 		return
 	var mouse_pos := get_local_mouse_position()
 	if mouse_pos.x < RULER_WIDTH:  # For double guides
