@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.2.3] - 2026-09-15
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+
+Built using Godot 4.7.2
+
+### Added
+- Locking guides in place is now possible from the View menu. [#1612](https://github.com/Orama-Interactive/Pixelorama/pull/1612)
+- Cloning cels is now possible when you hold Shift while dragging them. [#1590](https://github.com/Orama-Interactive/Pixelorama/pull/1590)
+- You can now center the content of cels from the cel button's right click menu, in the timeline. [#1605](https://github.com/Orama-Interactive/Pixelorama/pull/1605)
+
+### Fixed
+- Fixed Pixelorama freezing when using the bucket tool when a selection is active.
+
+
 ## [v1.2.2] - 2026-09-09
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
