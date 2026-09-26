@@ -47,6 +47,7 @@ var effects: Array[LayerEffect] = [
 	LayerEffect.new(
 		"Color Curves", load("res://src/Shaders/Effects/ColorCurves.gdshaderinc"), "Color"
 	),
+	LayerEffect.new("Luma", load("res://src/Shaders/Effects/Luma.gdshaderinc"), "Color"),
 	LayerEffect.new("Palettize", load("res://src/Shaders/Effects/Palettize.gdshaderinc"), "Color"),
 	LayerEffect.new("Pixelize", load("res://src/Shaders/Effects/Pixelize.gdshaderinc"), "Blur"),
 	LayerEffect.new("Posterize", load("res://src/Shaders/Effects/Posterize.gdshaderinc"), "Color"),
