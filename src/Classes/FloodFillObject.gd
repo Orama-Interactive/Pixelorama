@@ -127,7 +127,7 @@ func _flood_line_around_point(
 			segment = _allegro_flood_segments[c]
 		# found last current segment on this line
 		c = _allegro_flood_segments.size()
-		segment.next = c - _area_start_idx
+		segment.next = c + _area_start_idx
 		_add_new_segment(pos.y)
 		segment = _allegro_flood_segments[c]
 	# set the values for the current segment
@@ -160,7 +160,7 @@ func _check_flooded_segment(
 	var ret := false
 	var c := 0
 	while left <= right:
-		c = y
+		c = y - _area_start_idx
 		while true:
 			var segment := _allegro_flood_segments[c]
 			if left >= segment.left_position and left <= segment.right_position:
