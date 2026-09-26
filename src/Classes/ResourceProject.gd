@@ -28,6 +28,7 @@ static func instantiate(resource_title: String, updater: Callable, resource_imag
 	Global.projects.append(resource_proj)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 
+
 ## Returns the full image of the [Frame] at [param frame_idx] in resource project.
 func get_frame_image(frame_idx: int) -> Image:
 	var frame_image := Image.create_empty(size.x, size.y, false, Image.FORMAT_RGBA8)

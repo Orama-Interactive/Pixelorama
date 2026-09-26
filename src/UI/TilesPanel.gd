@@ -159,7 +159,7 @@ static func _modify_texture_resource(
 	if tile.image:
 		var v_proj_name := str(tileset.name, " Tile: ", tile_idx)
 		ResourceProject.instantiate(
-			v_proj_name, _update_tile.bind(project, tileset, tile_idx) , tile.image
+			v_proj_name, _update_tile.bind(project, tileset, tile_idx), tile.image
 		)
 
 
