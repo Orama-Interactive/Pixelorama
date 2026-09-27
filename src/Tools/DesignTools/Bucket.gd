@@ -370,6 +370,8 @@ func fill_in_selection() -> void:
 			"selection": selection_tex,
 			"size": project.size,
 			"pattern": pattern_tex,
+			"mix_color": tool_slot.color,
+			"pattern_interpolation": _pattern_interpolate / 100.0
 		}
 		if is_instance_valid(pattern_tex):
 			params["pattern_size"] = pattern_size

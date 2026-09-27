@@ -14,7 +14,7 @@ uniform sampler2D selection : filter_nearest, repeat_disable;
 uniform bool has_pattern;
 uniform sampler2D pattern: repeat_enable;
 uniform vec2 pattern_size;
-uniform float pattern_interpolation;
+uniform float pattern_interpolation = 0.0;
 uniform vec2 pattern_uv_offset;
 
 
