@@ -124,9 +124,8 @@ func camera_zoom(project := Global.current_project) -> void:
 static func get_canvas_cel_image(cel: BaseCel, layer: BaseLayer, image: Image) -> void:
 	var project := layer.project
 	if layer.is_blender():
-		var blended: Image = layer.blend_children(
-			project.frames[project.current_frame], Global.display_layer_effects
-		)
+		var frame := project.frames[project.current_frame]
+		var blended: Image = layer.blend_children(frame, Global.display_layer_effects)
 		image.copy_from(blended)
 	else:
 		if Global.display_layer_effects:

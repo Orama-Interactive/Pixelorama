@@ -151,10 +151,7 @@ func transform_content_confirm(
 		else:
 			transformation_handles.bake_transform_to_image(src, bounds)
 
-		var start_point := transformation_origin
-		var end_point := transformation_origin + bounds.size - Vector2.ONE
-		cel.ensure_canvas_point_in_bounds(end_point)
-		cel.ensure_canvas_point_in_bounds(start_point, false)
+		cel.ensure_canvas_rect_in_bounds(transformation_origin, bounds.size)
 		if Tools.is_placing_tiles():
 			if cel.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 				continue

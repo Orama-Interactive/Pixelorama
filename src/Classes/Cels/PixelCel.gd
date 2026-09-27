@@ -34,28 +34,35 @@ func ensure_canvas_point_in_bounds(
 	canvas_pos: Vector2i, change_offset_when_invisible := true
 ) -> Vector2i:
 	if image.is_invisible() and change_offset_when_invisible:
-		change_offset(canvas_pos)
+		change_offset(snap_cel_bounds(canvas_pos))
 	var local := canvas_pos - offset
 	var new_offset := offset
 	var new_size := image.get_size()
 	if local.x < 0:
 		new_size.x += -local.x
 		new_offset.x += local.x
-		local.x = 0
 	elif local.x >= new_size.x:
 		new_size.x = local.x + 1
-		local.x = new_size.x - 1
 	if local.y < 0:
 		new_size.y += -local.y
 		new_offset.y += local.y
-		local.y = 0
 	elif local.y >= new_size.y:
 		new_size.y = local.y + 1
-		local.y = new_size.y - 1
+	new_size = snap_cel_bounds(new_size, true)
+	new_offset = snap_cel_bounds(new_offset)
 	if new_size != Vector2i(image.get_size()):
-		resize_image(new_size, offset - new_offset)
+		resize_cel_image(new_size, offset - new_offset)
+	if new_offset != offset:
 		change_offset(new_offset)
+
+	local = canvas_pos - offset
 	return local
+
+
+func ensure_canvas_rect_in_bounds(dst: Vector2i, rect_size: Vector2i) -> void:
+	var end_point := dst + rect_size - Vector2i.ONE
+	ensure_canvas_point_in_bounds(end_point)
+	ensure_canvas_point_in_bounds(dst, false)
 
 
 func shrink_to_content() -> void:
@@ -63,19 +70,29 @@ func shrink_to_content() -> void:
 	if used.size == image.get_size():
 		return
 	if used.size == Vector2i.ZERO:
-		resize_image(Vector2i.ONE, Vector2i.ZERO)
+		resize_cel_image(Vector2i.ONE, Vector2i.ZERO)
 		return
+	used.position = snap_cel_bounds(used.position)
+	used.end = snap_cel_bounds(used.end, true)
 	var new_offset := offset + used.position
-	resize_image(used.size, -used.position)
+	resize_cel_image(used.size, -used.position)
 	change_offset(new_offset)
 
 
-func resize_image(new_size: Vector2i, content_offset: Vector2i) -> void:
-	var new_image := ImageExtended.create_custom(
-		new_size.x, new_size.y, false, image.get_format(), image.is_indexed
-	)
+func resize_cel_image(new_size: Vector2i, content_offset: Vector2i) -> void:
+	var new_image := Image.create_empty(new_size.x, new_size.y, false, image.get_format())
 	new_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), content_offset)
 	image.copy_from_custom(new_image)
+
+
+func snap_cel_bounds(coords: Vector2i, ceil_snap := false) -> Vector2i:
+	var bounds_snap := get_cel_bounds_snap()
+	if bounds_snap == Vector2i.ZERO:
+		return coords
+	var diff: Vector2 = coords - offset
+	if ceil_snap:
+		diff += Vector2(bounds_snap) - Vector2.ONE
+	return offset + Vector2i(diff - diff.posmodv(bounds_snap))
 
 
 func blit_image_to_cel(source_image: Image) -> void:
@@ -83,10 +100,13 @@ func blit_image_to_cel(source_image: Image) -> void:
 	var image_to_blit := source_image.get_region(used_rect)
 	ensure_canvas_point_in_bounds(used_rect.end - Vector2i.ONE, false)
 	ensure_canvas_point_in_bounds(used_rect.position, false)
-	#image.fill_rect(used_rect, Color(0, 0, 0, 0))
 	var dst := used_rect.position - offset
 	image.blit_rect(image_to_blit, Rect2i(Vector2i.ZERO, image_to_blit.get_size()), dst)
 	image.convert_rgb_to_indexed()
+
+
+func get_cel_bounds_snap() -> Vector2i:
+	return Vector2i.ZERO
 
 
 func serialize() -> Dictionary:

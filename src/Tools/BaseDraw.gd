@@ -720,7 +720,8 @@ func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:
 	if _brush.type in IMAGE_BRUSHES and not _draw_line or Tools.is_placing_tiles():
 		pos -= _brush_image.get_size() / 2
 		pos -= offset
-		canvas.draw_texture(_brush_texture, pos)
+		if _brush_texture:
+			canvas.draw_texture(_brush_texture, pos)
 	else:
 		if _draw_line:
 			pos.x = _line_end.x if _line_end.x < _line_start.x else _line_start.x
@@ -818,11 +819,7 @@ func _draw_brush_image(
 		var final_dst := dst
 		var variant = images[draw_image]
 		if variant is PixelCel:
-			var brush_size := brush_image.get_size()
-			var start_point := dst
-			var end_point := dst + brush_size - Vector2i.ONE
-			variant.ensure_canvas_point_in_bounds(end_point)
-			variant.ensure_canvas_point_in_bounds(start_point, false)
+			variant.ensure_canvas_rect_in_bounds(dst, brush_image.get_size())
 			final_dst -= variant.offset
 		if Tools.alpha_locked:
 			var mask := draw_image.get_region(Rect2i(final_dst, brush_image.get_size()))

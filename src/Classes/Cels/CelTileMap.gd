@@ -235,8 +235,8 @@ func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
 			else:
 				pixel_coords += Vector2i(quarter_tile_size.x, 0)
 		godot_tilemap.queue_free()
-		return pixel_coords + offset
-	return cell_coords * get_tile_size() + offset
+		return pixel_coords
+	return cell_coords * get_tile_size()
 
 
 func get_image_portion(rect: Rect2i, source_image := image, force_disable_clip := false) -> Image:
@@ -255,7 +255,7 @@ func get_image_portion(rect: Rect2i, source_image := image, force_disable_clip :
 			):
 				_should_clip_tiles = false
 			var grid_coord := (
-				(Vector2(rect.position - offset) * 2 / Vector2(get_tile_size())).round()
+				(Vector2(rect.position) * 2 / Vector2(get_tile_size())).round()
 			)
 			var is_smaller_tile := int(grid_coord.y) % 2 != 0
 			DrawingAlgos.generate_isometric_rectangle(mask, is_smaller_tile and _should_clip_tiles)
@@ -292,6 +292,10 @@ func get_tile_offset_axis() -> TileSet.TileOffsetAxis:
 	if place_only_mode:
 		return tile_offset_axis
 	return tileset.tile_offset_axis
+
+
+func get_cel_bounds_snap() -> Vector2i:
+	return get_tile_size()
 
 
 func bucket_fill(cell_coords: Vector2i, callable: Callable) -> void:
@@ -962,6 +966,7 @@ func _draw_cell(source_image: Image, tile_image: Image, coords: Vector2i) -> voi
 	var transformed_tile_size := tile_image.get_size()
 	var tile_offset := (transformed_tile_size - get_tile_size()) / 2
 	coords -= tile_offset
+	ensure_canvas_rect_in_bounds(coords + offset, transformed_tile_size)
 	if get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
 		source_image.blit_rect(tile_image, Rect2i(Vector2i.ZERO, transformed_tile_size), coords)
 	else:
@@ -974,7 +979,7 @@ func _draw_cell(source_image: Image, tile_image: Image, coords: Vector2i) -> voi
 			)
 			mask.fill(Color(0, 0, 0, 0))
 			if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
-				var grid_coord = (Vector2(coords - offset) * 2 / Vector2(get_tile_size())).round()
+				var grid_coord := (Vector2(coords) * 2 / Vector2(get_tile_size())).round()
 				var is_smaller_tile = int(grid_coord.y) % 2 != 0
 				var old_clip := _should_clip_tiles
 				# Disable _should_clip_tiles when placing tiles (it's only useful in drawing)
@@ -1177,8 +1182,8 @@ func duplicate_cel() -> CelTileMap:
 	new_cel.z_index = z_index
 	new_cel.user_data = user_data
 	new_cel.ui_color = ui_color
-
 	new_cel.offset = offset
+
 	new_cel.place_only_mode = place_only_mode
 	new_cel.tile_size = tile_size
 	new_cel.tile_shape = tile_shape

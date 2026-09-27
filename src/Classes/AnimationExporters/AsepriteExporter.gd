@@ -452,7 +452,7 @@ static func _write_chunk(buffer: StreamPeerBuffer, chunk_type: int, data: Packed
 	buffer.put_u32(data.size() + 6)
 	buffer.put_u16(chunk_type)  # WORD type
 	buffer.put_data(data)  # data
-	prints("Exported Chunk:", AsepriteParser.ChunkTypes.find_key(chunk_type))
+	print_verbose("Exported Chunk: ", AsepriteParser.ChunkTypes.find_key(chunk_type))
 	chunk_count += 1
 
 

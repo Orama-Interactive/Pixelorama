@@ -761,9 +761,11 @@ func serialize_cel_undo_data(cels: Array[BaseCel], data: Dictionary) -> void:
 			continue
 		var image := (cel as PixelCel).get_image()
 		image.add_data_to_dictionary(data)
-		data[cel] = {"offset": cel.offset}
 		if cel is CelTileMap:
 			data[cel] = (cel as CelTileMap).serialize_undo_data()
+		else:
+			data[cel] = {}
+		data[cel]["offset"] = cel.offset
 
 
 ## Loads data from [param redo_data] and param [undo_data],
