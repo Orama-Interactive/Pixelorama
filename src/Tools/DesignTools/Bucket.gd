@@ -124,9 +124,8 @@ func get_config() -> Dictionary:
 
 
 func set_config(config: Dictionary) -> void:
-	if _pattern:
-		var index = config.get("pattern_index", _pattern.index)
-		_pattern = Global.patterns_popup.get_pattern(index)
+	var index = config.get("pattern_index", _pattern.index if _pattern else 0)
+	_pattern = Global.patterns_popup.get_pattern(index)
 	_fill_area = config.get("fill_area", _fill_area)
 	_fill_merged_area = config.get("fill_merged_area", _fill_merged_area)
 	_fill_with = config.get("fill_with", _fill_with)
