@@ -65,7 +65,6 @@ enum ViewMenu {
 	CENTER_CANVAS,
 	TILE_MODE,
 	TILE_MODE_OFFSETS,
-	GREYSCALE_VIEW,
 	MIRROR_VIEW,
 	SHOW_GRID,
 	SHOW_PIXEL_GRID,
@@ -629,8 +628,6 @@ var cross_cursor := true
 #endregion
 
 #region View menu options
-## If [code]true[/code], the canvas is in greyscale.
-var greyscale_view := false
 ## If [code]true[/code], the content of canvas is flipped.
 var mirror_view := false
 ## If [code]true[/code], the grid is visible.

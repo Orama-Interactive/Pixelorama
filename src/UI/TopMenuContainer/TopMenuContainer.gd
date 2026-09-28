@@ -82,8 +82,6 @@ var backup_dialog := Dialog.new("res://src/UI/Dialogs/BackupRestoreDialog.tscn")
 @onready var cursor_position_label := %CursorPosition as Label
 @onready var current_frame_mark := %CurrentFrameMark as Label
 
-@onready var greyscale_vision: ColorRect = main_ui.find_child("GreyscaleVision")
-
 
 class Dialog:
 	## This class is used to help with lazy loading dialog scenes in order to
@@ -330,7 +328,6 @@ func _setup_view_menu() -> void:
 		"Center Canvas": "center_canvas",
 		"Tile Mode": "",
 		"Tile Mode Offsets": "",
-		"Grayscale View": &"grayscale_view",
 		"Mirror View": "mirror_view",
 		"Show Grid": "show_grid",
 		"Show Pixel Grid": "show_pixel_grid",
@@ -832,8 +829,6 @@ func view_menu_id_pressed(id: int) -> void:
 			Global.camera.offset = Global.current_project.size / 2
 		Global.ViewMenu.TILE_MODE_OFFSETS:
 			_popup_dialog(get_tree().current_scene.tile_mode_offsets_dialog)
-		Global.ViewMenu.GREYSCALE_VIEW:
-			_toggle_greyscale_view()
 		Global.ViewMenu.MIRROR_VIEW:
 			_toggle_mirror_view()
 		Global.ViewMenu.SHOW_GRID:
@@ -1073,12 +1068,6 @@ func _on_add_layout_confirmation_visibility_changed() -> void:
 
 func _on_delete_layout_confirmation_visibility_changed() -> void:
 	Global.dialog_open(delete_layout_confirmation.visible)
-
-
-func _toggle_greyscale_view() -> void:
-	Global.greyscale_view = !Global.greyscale_view
-	greyscale_vision.visible = Global.greyscale_view
-	view_menu.set_item_checked(Global.ViewMenu.GREYSCALE_VIEW, Global.greyscale_view)
 
 
 func _toggle_mirror_view() -> void:
