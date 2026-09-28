@@ -59,10 +59,10 @@ func ensure_canvas_point_in_bounds(
 	return local
 
 
-func ensure_canvas_rect_in_bounds(dst: Vector2i, rect_size: Vector2i) -> void:
-	var end_point := dst + rect_size - Vector2i.ONE
+func ensure_canvas_rect_in_bounds(start_point: Vector2i, rect_size: Vector2i) -> void:
+	var end_point := start_point + rect_size - Vector2i.ONE
 	ensure_canvas_point_in_bounds(end_point)
-	ensure_canvas_point_in_bounds(dst, false)
+	ensure_canvas_point_in_bounds(start_point, false)
 
 
 func shrink_to_content() -> void:
@@ -72,8 +72,9 @@ func shrink_to_content() -> void:
 	if used.size == Vector2i.ZERO:
 		resize_cel_image(Vector2i.ONE, Vector2i.ZERO)
 		return
+	var used_end := snap_cel_bounds(used.end, true)
 	used.position = snap_cel_bounds(used.position)
-	used.end = snap_cel_bounds(used.end, true)
+	used.end = used_end
 	var new_offset := offset + used.position
 	resize_cel_image(used.size, -used.position)
 	change_offset(new_offset)
