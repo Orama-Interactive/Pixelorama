@@ -73,7 +73,7 @@ func shrink_to_content() -> void:
 		resize_cel_image(Vector2i.ONE, Vector2i.ZERO)
 		return
 	var used_end := snap_cel_bounds(used.end, true, true)
-	used.position = snap_cel_bounds(used.position, false, true)
+	used.position = snap_cel_bounds(used.position, true)
 	used.end = used_end
 	var new_offset := offset + used.position
 	resize_cel_image(used.size, -used.position)
@@ -86,7 +86,7 @@ func resize_cel_image(new_size: Vector2i, content_offset: Vector2i) -> void:
 	image.copy_from_custom(new_image)
 
 
-func snap_cel_bounds(coords: Vector2i, ceil_snap := false, local := false) -> Vector2i:
+func snap_cel_bounds(coords: Vector2i, local := false, ceil_snap := false) -> Vector2i:
 	var bounds_snap := get_cel_bounds_snap()
 	if bounds_snap == Vector2i.ZERO:
 		return coords
