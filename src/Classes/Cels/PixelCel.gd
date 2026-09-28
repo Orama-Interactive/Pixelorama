@@ -48,7 +48,7 @@ func ensure_canvas_point_in_bounds(
 		new_offset.y += local.y
 	elif local.y >= new_size.y:
 		new_size.y = local.y + 1
-	new_size = snap_cel_bounds(new_size, true)
+	new_size = snap_cel_bounds(new_size, true, true)
 	new_offset = snap_cel_bounds(new_offset)
 	if new_size != Vector2i(image.get_size()):
 		resize_cel_image(new_size, offset - new_offset)
@@ -72,8 +72,8 @@ func shrink_to_content() -> void:
 	if used.size == Vector2i.ZERO:
 		resize_cel_image(Vector2i.ONE, Vector2i.ZERO)
 		return
-	var used_end := snap_cel_bounds(used.end, true)
-	used.position = snap_cel_bounds(used.position)
+	var used_end := snap_cel_bounds(used.end, true, true)
+	used.position = snap_cel_bounds(used.position, false, true)
 	used.end = used_end
 	var new_offset := offset + used.position
 	resize_cel_image(used.size, -used.position)
@@ -86,14 +86,19 @@ func resize_cel_image(new_size: Vector2i, content_offset: Vector2i) -> void:
 	image.copy_from_custom(new_image)
 
 
-func snap_cel_bounds(coords: Vector2i, ceil_snap := false) -> Vector2i:
+func snap_cel_bounds(coords: Vector2i, ceil_snap := false, local := false) -> Vector2i:
 	var bounds_snap := get_cel_bounds_snap()
 	if bounds_snap == Vector2i.ZERO:
 		return coords
-	var diff: Vector2 = coords - offset
+	var diff: Vector2 = coords
 	if ceil_snap:
 		diff += Vector2(bounds_snap) - Vector2.ONE
-	return offset + Vector2i(diff - diff.posmodv(bounds_snap))
+	if not local:
+		diff -= Vector2(offset)
+	var result := Vector2i(diff - diff.posmodv(bounds_snap))
+	if not local:
+		result += offset
+	return result
 
 
 func blit_image_to_cel(source_image: Image) -> void:
