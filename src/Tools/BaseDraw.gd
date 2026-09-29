@@ -389,21 +389,23 @@ func cancel_tool() -> void:
 
 
 func draw_tile(pos: Vector2i) -> void:
-	var tile_index := 0 if _is_eraser else TileSetPanel.selected_tile_index
 	var mirrored_positions := Tools.get_mirrored_positions(pos, Global.current_project)
-	var tile_positions: Array[Vector2i] = []
-	tile_positions.resize(mirrored_positions.size() + 1)
-	tile_positions[0] = get_cell_position(pos)
-	if tile_positions[0] in _drawn_tiles:
-		return
-	_drawn_tiles[tile_positions[0]] = true
-	for i in mirrored_positions.size():
-		var mirrored_position := mirrored_positions[i]
-		tile_positions[i + 1] = get_cell_position(mirrored_position)
+	var tile_index := 0 if _is_eraser else TileSetPanel.selected_tile_index
 	for cel in _get_selected_draw_cels():
 		if cel is not CelTileMap:
 			return
 		var tilemap_cel := cel as CelTileMap
+		var old_offset := tilemap_cel.offset
+		var final_pos := tilemap_cel.ensure_canvas_point_in_bounds(pos)
+		var tile_positions: Array[Vector2i] = []
+		tile_positions.resize(mirrored_positions.size() + 1)
+		tile_positions[0] = tilemap_cel.get_cell_position(final_pos)
+		if tile_positions[0] in _drawn_tiles and old_offset == tilemap_cel.offset:
+			return
+		_drawn_tiles[tile_positions[0]] = true
+		for i in mirrored_positions.size():
+			var mirrored_pos := tilemap_cel.ensure_canvas_point_in_bounds(mirrored_positions[i])
+			tile_positions[i + 1] = tilemap_cel.get_cell_position(mirrored_pos)
 		if TileSetPanel.autotiling_enabled:
 			tilemap_cel.autotile(tile_positions, tile_index == 0)
 		else:
@@ -417,11 +419,11 @@ func _prepare_tool() -> void:
 		return
 	_brush_size_dynamics = _brush_size
 	var strength := Tools.get_alpha_dynamic(_strength)
-	var max_inctrment := maxi(1, _brush_size + Tools.brush_size_max_increment)
+	var max_increment := maxi(1, _brush_size + Tools.brush_size_max_increment)
 	if Tools.dynamics_size == Tools.Dynamics.PRESSURE:
-		_brush_size_dynamics = roundi(lerpf(_brush_size, max_inctrment, Tools.pen_pressure))
+		_brush_size_dynamics = roundi(lerpf(_brush_size, max_increment, Tools.pen_pressure))
 	elif Tools.dynamics_size == Tools.Dynamics.VELOCITY:
-		_brush_size_dynamics = roundi(lerpf(_brush_size, max_inctrment, Tools.mouse_velocity))
+		_brush_size_dynamics = roundi(lerpf(_brush_size, max_increment, Tools.mouse_velocity))
 	_drawer.pixel_perfect = Tools.pixel_perfect if _brush_size == 1 else false
 	_drawer.color_op.strength = strength
 	_indicator = _create_brush_indicator()
@@ -716,7 +718,7 @@ func draw_indicator(left: bool) -> void:
 
 
 func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:
-	var canvas: Node2D = Global.canvas.indicators
+	var canvas := Global.canvas.indicators
 	if _brush.type in IMAGE_BRUSHES and not _draw_line or Tools.is_placing_tiles():
 		pos -= _brush_image.get_size() / 2
 		pos -= offset
