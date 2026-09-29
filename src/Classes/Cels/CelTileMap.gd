@@ -208,7 +208,9 @@ func get_cell_at(cell_coords: Vector2i) -> Cell:
 
 ## Returns the position of a cell in the tilemap
 ## at pixel coordinates [param coords] in the cel's image.
-func get_cell_position(pixel_coords: Vector2i) -> Vector2i:
+func get_cell_position(pixel_coords: Vector2i, bound_check := false) -> Vector2i:
+	if bound_check:
+		pixel_coords = ensure_canvas_point_in_bounds(pixel_coords)
 	var cell_coords := Vector2i()
 	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 		pixel_coords -= get_tile_size() / 2
@@ -720,6 +722,8 @@ func serialize_undo_data_source_image(
 ## Reads data from a [param dict] [Dictionary], and uses them to add methods to [param undo_redo].
 func deserialize_undo_data(dict: Dictionary, undo_redo: UndoRedo, undo: bool) -> void:
 	super(dict, undo_redo, undo)
+	if not dict.has("cell_data"):
+		return
 	var cell_data = dict.cell_data
 	if undo:
 		if dict.has("tile_size"):

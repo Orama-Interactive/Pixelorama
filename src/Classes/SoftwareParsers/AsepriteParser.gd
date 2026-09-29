@@ -208,6 +208,7 @@ static func open_aseprite_file(path: String) -> void:
 							chunk_size - TILEMAP_CEL_CHUNK_SIZE
 						)
 						var tile_size := tilemap_cel.get_tile_size()
+						cel.get_image().crop(width * tile_size.x, height * tile_size.y)
 						var tile_data_size := (
 							width * height * tile_size.x * tile_size.y * pixel_byte
 						)

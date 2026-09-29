@@ -35,7 +35,6 @@ var _line_polylines := []
 var _stroke_project: Project
 var _stroke_images: Dictionary[Image, Variant]
 var _is_mask_size_zero := true
-var _drawn_tiles: Dictionary[Vector2i, bool]
 var _circle_tool_shortcut: Array[Vector2i]
 var _mm_action: Keychain.MouseMovementInputAction
 var _is_using_mm_action := false
@@ -372,7 +371,6 @@ func draw_end(pos: Vector2i) -> void:
 			_stroke_dimensions = _brush_image.get_size()
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
-	_drawn_tiles.clear()
 	SteamManager.set_achievement("ACH_FIRST_PIXEL")
 
 
@@ -395,17 +393,11 @@ func draw_tile(pos: Vector2i) -> void:
 		if cel is not CelTileMap:
 			return
 		var tilemap_cel := cel as CelTileMap
-		var old_offset := tilemap_cel.offset
-		var final_pos := tilemap_cel.ensure_canvas_point_in_bounds(pos)
 		var tile_positions: Array[Vector2i] = []
 		tile_positions.resize(mirrored_positions.size() + 1)
-		tile_positions[0] = tilemap_cel.get_cell_position(final_pos)
-		if tile_positions[0] in _drawn_tiles and old_offset == tilemap_cel.offset:
-			return
-		_drawn_tiles[tile_positions[0]] = true
+		tile_positions[0] = tilemap_cel.get_cell_position(pos, true)
 		for i in mirrored_positions.size():
-			var mirrored_pos := tilemap_cel.ensure_canvas_point_in_bounds(mirrored_positions[i])
-			tile_positions[i + 1] = tilemap_cel.get_cell_position(mirrored_pos)
+			tile_positions[i + 1] = tilemap_cel.get_cell_position(mirrored_positions[i], true)
 		if TileSetPanel.autotiling_enabled:
 			tilemap_cel.autotile(tile_positions, tile_index == 0)
 		else:
