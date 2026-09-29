@@ -920,8 +920,8 @@ func center_frames(indices: Array, project := Global.current_project) -> void:
 		for cel in project.frames[frame].cels:
 			if not cel is PixelCel:
 				continue
-			project.undo_redo.add_do_property(cel, "offset", cel.offset + delta)
-			project.undo_redo.add_undo_property(cel, "offset", cel.offset)
+			project.undo_redo.add_do_method(cel.change_offset.bind(cel.offset + delta))
+			project.undo_redo.add_undo_method(cel.change_offset.bind(cel.offset))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
@@ -937,8 +937,8 @@ func center_cels(indices: Array, project := Global.current_project) -> void:
 			continue
 		var used_rect := cel.get_cel_rect()
 		var offset: Vector2i = (0.5 * (project.size - used_rect.size)).floor()
-		project.undo_redo.add_do_property(cel, "offset", offset)
-		project.undo_redo.add_undo_property(cel, "offset", cel.offset)
+		project.undo_redo.add_do_method(cel.change_offset.bind(offset))
+		project.undo_redo.add_undo_method(cel.change_offset.bind(cel.offset))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
