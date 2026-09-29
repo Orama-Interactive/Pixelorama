@@ -72,6 +72,7 @@ func _pick_color(pos: Vector2i) -> void:
 		return
 	if Tools.is_placing_tiles():
 		var cel := Global.current_project.get_current_cel() as CelTileMap
+		pos -= cel.offset
 		Tools.selected_tile_index_changed.emit(cel.get_cell_index_at_coords(pos))
 		return
 	var image := _get_draw_image()
