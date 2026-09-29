@@ -558,8 +558,9 @@ func get_selected_cells(selection_map: SelectionMap, selection_rect: Rect2i) -> 
 			var pos := Vector2i(x, y) + selection_rect.position
 			var x_index := x / get_tile_size().x
 			if selection_map.is_pixel_selected(pos):
-				var cell_pos := get_cell_position(pos)
-				selected_cells[x_index].append(cells[cell_pos].serialize())
+				var cell_pos := get_cell_position(pos - offset)
+				if cells.has(cell_pos):
+					selected_cells[x_index].append(cells[cell_pos].serialize())
 			else:
 				# If it's not selected, append the transparent tile 0.
 				selected_cells[x_index].append(
