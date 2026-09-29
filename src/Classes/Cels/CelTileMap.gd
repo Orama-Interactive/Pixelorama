@@ -1276,7 +1276,9 @@ func deserialize(dict: Dictionary) -> void:
 	for cell_coords_str in cell_data:
 		var cell_data_serialized: Dictionary = cell_data[cell_coords_str]
 		var cell_coords := str_to_var("Vector2i" + cell_coords_str) as Vector2i
-		get_cell_at(cell_coords).deserialize(cell_data_serialized)
+		var cell := get_cell_at(cell_coords)
+		cell.deserialize(cell_data_serialized)
+	queue_update_cel_portions()
 
 
 func get_class_name() -> String:

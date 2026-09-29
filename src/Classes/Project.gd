@@ -476,8 +476,8 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 							file.get_buffer(size.x * size.y * 4)
 						cels.append(layer.new_empty_cel())
 					Global.LayerTypes.TILEMAP:
-						var image := _load_image_from_pxo(
-							frame_i, cel_i, image_size, zip_reader, file
+						var image := ImageExtended.create_custom(
+							image_size.x, image_size.y, false, get_image_format(), is_indexed()
 						)
 						var tileset_index = dict.layers[cel_i].tileset_index
 						var tileset := tilesets[tileset_index]
