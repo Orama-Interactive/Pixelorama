@@ -189,6 +189,7 @@ func set_index(
 
 ## Changes the [member offset] of the tilemap. Automatically resizes the cells and redraws the grid.
 func change_offset(new_offset: Vector2i) -> void:
+	_rebase_cells(offset, new_offset)
 	super(new_offset)
 	_resize_cells(get_image().get_size(), false)
 	Global.grid_updated.emit()
@@ -196,7 +197,18 @@ func change_offset(new_offset: Vector2i) -> void:
 
 func resize_cel_image(new_size: Vector2i, content_offset: Vector2i) -> void:
 	super(new_size, content_offset)
-	_resize_cells(get_image().get_size(), true)
+	_resize_cells(get_image().get_size(), false)
+
+
+func _rebase_cells(old_offset: Vector2i, new_offset: Vector2i) -> void:
+	@warning_ignore("integer_division")
+	var delta := (new_offset - old_offset) / get_tile_size()
+	if delta == Vector2i.ZERO:
+		return
+	var rebased: Dictionary[Vector2i, Cell] = {}
+	for cell_coords in cells:
+		rebased[cell_coords - delta] = cells[cell_coords]
+	cells = rebased
 
 
 ## Returns the [CelTileMap.Cell] at position [param cell_coords] in tilemap space.
@@ -226,8 +238,8 @@ func get_cell_position(pixel_coords: Vector2i, bound_check := false) -> Vector2i
 
 ## Returns the index of a cell in the tilemap
 ## at pixel coordinates [param coords] in the cel's image.
-func get_cell_index_at_coords(coords: Vector2i) -> int:
-	return get_cell_at(get_cell_position(coords)).index
+func get_cell_index_at_coords(coords: Vector2i, bound_check := false) -> int:
+	return get_cell_at(get_cell_position(coords, bound_check)).index
 
 
 func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
