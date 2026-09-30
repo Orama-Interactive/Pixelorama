@@ -293,7 +293,7 @@ func _fill_new_palette_with_colors(
 			for frame in current_project.frames:
 				for cel in frame.cels:
 					cels.append(cel)
-
+	var start_index = 0
 	for cel in cels:
 		var cel_image := Image.new()
 		cel_image.copy_from(cel.get_image())
@@ -305,7 +305,8 @@ func _fill_new_palette_with_colors(
 				if not add_alpha_colors:
 					color.a = 1
 				if not new_palette.has_theme_color(color):
-					new_palette.add_color(color)
+					start_index += 1
+					new_palette.add_color(color, start_index)
 	undo_redo_add_palette(new_palette, is_global)
 
 
