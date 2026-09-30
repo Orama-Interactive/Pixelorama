@@ -303,6 +303,7 @@ func get_cel_bounds_snap() -> Vector2i:
 	return get_tile_size()
 
 
+#region Bucket tool
 func bucket_fill(cell_coords: Vector2i, canvas_size: Vector2i) -> Array[Vector2i]:
 	var result: Array[Vector2i]
 	var godot_tilemap := create_tilemap_layer_dull_node()
@@ -314,7 +315,7 @@ func bucket_fill(cell_coords: Vector2i, canvas_size: Vector2i) -> Array[Vector2i
 	while not to_check.is_empty():
 		var coords := to_check.pop_back() as Vector2i
 		if not already_checked.has(coords):
-			if not is_within_image_bounds(coords, canvas_size):
+			if not is_within_canvas_bounds(coords, canvas_size):
 				already_checked.append(coords)
 				continue
 			if not cells.has(coords):
@@ -331,7 +332,7 @@ func bucket_fill(cell_coords: Vector2i, canvas_size: Vector2i) -> Array[Vector2i
 	return result
 
 
-func is_within_image_bounds(cell_coords: Vector2i, canvas_size: Vector2i) -> bool:
+func is_within_canvas_bounds(cell_coords: Vector2i, canvas_size: Vector2i) -> bool:
 	var pixel_pos := get_pixel_coords(cell_coords) + offset
 	var cell_rect := Rect2i(pixel_pos, get_tile_size())
 	var canvas_rect := Rect2i(Vector2i.ZERO, canvas_size)
@@ -361,6 +362,18 @@ func ensure_fill_corners_in_bounds(filled: Array[Vector2i]) -> void:
 	var bottom_right_pixel := get_pixel_coords(corners.end) + offset
 	ensure_canvas_point_in_bounds(bottom_right_pixel)
 	ensure_canvas_point_in_bounds(top_left_pixel, false)
+
+
+func get_all_same_index_cells(tile_index: int, canvas_size: Vector2i) -> Array[Vector2i]:
+	var coords_to_fill: Array[Vector2i]
+	for coord: Vector2i in cells:
+		var cell := get_cell_at(coord)
+		if cell.index == tile_index and is_within_canvas_bounds(coord, canvas_size):
+			coords_to_fill.append(coord)
+	return coords_to_fill
+
+
+#endregion
 
 
 #region Autotiling

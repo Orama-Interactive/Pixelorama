@@ -214,19 +214,28 @@ func fill(pos: Vector2i) -> void:
 func fill_in_color(pos: Vector2i) -> void:
 	var project := Global.current_project
 	if Tools.is_placing_tiles():
+		var paint_index := TileSetPanel.selected_tile_index
 		for cel in _get_selected_draw_cels():
 			if cel is not CelTileMap:
 				continue
 			var tilemap_cel := cel as CelTileMap
 			var tile_index := tilemap_cel.get_cell_index_at_coords(pos, true)
-			for cell_coords: Vector2i in tilemap_cel.cells:
-				var cell := tilemap_cel.get_cell_at(cell_coords)
-				if cell.index == tile_index:
-					var paint_index := TileSetPanel.selected_tile_index
-					if TileSetPanel.autotiling_enabled:
-						tilemap_cel.autotile([cell_coords], paint_index == 0)
-					else:
-						tilemap_cel.set_index(cell, paint_index)
+			# Find all cells with the same index.
+			var coords_to_fill := tilemap_cel.get_all_same_index_cells(tile_index, project.size)
+			var prev_offset := tilemap_cel.offset
+			if paint_index != 0:
+				tilemap_cel.ensure_fill_corners_in_bounds(coords_to_fill)
+			@warning_ignore("integer_division")
+			var offset_delta := (
+				(tilemap_cel.offset - prev_offset) / tilemap_cel.get_cel_bounds_snap()
+			)
+			for coord in coords_to_fill:
+				coord -= offset_delta
+				var cell := tilemap_cel.get_cell_at(coord)
+				if TileSetPanel.autotiling_enabled:
+					tilemap_cel.autotile([coord], paint_index == 0)
+				else:
+					tilemap_cel.set_index(cell, paint_index)
 		return
 	var current_cel := project.get_current_cel()
 	var current_image := project.crop_image_to_project_size(
@@ -361,7 +370,7 @@ func _flood_fill(pos: Vector2i) -> void:
 	if project.has_selection:
 		project.selection_map.lock_selection_rect(project, true)
 	if Tools.is_placing_tiles():
-		var tile_index := TileSetPanel.selected_tile_index
+		var paint_index := TileSetPanel.selected_tile_index
 		for cel in _get_selected_draw_cels(false):
 			if cel is not CelTileMap:
 				continue
@@ -369,19 +378,20 @@ func _flood_fill(pos: Vector2i) -> void:
 			var cell_pos := tilemap_cel.get_cell_position(pos, true)
 			var prev_offset := tilemap_cel.offset
 			var coords_to_fill := tilemap_cel.bucket_fill(cell_pos, project.size)
-			tilemap_cel.ensure_fill_corners_in_bounds(coords_to_fill)
+			if paint_index != 0:
+				tilemap_cel.ensure_fill_corners_in_bounds(coords_to_fill)
 			@warning_ignore("integer_division")
 			var offset_delta := (
 				(tilemap_cel.offset - prev_offset) / tilemap_cel.get_cel_bounds_snap()
 			)
 			for coord in coords_to_fill:
 				coord -= offset_delta
-				if TileSetPanel.autotiling_enabled and tile_index == 0:
-					tilemap_cel.autotile([coord], tile_index == 0)
+				if TileSetPanel.autotiling_enabled and paint_index == 0:
+					tilemap_cel.autotile([coord], paint_index == 0)
 				else:
-					tilemap_cel.set_index(tilemap_cel.get_cell_at(coord), tile_index)
-			if TileSetPanel.autotiling_enabled and tile_index != 0:
-				tilemap_cel.autotile([cell_pos], tile_index == 0)
+					tilemap_cel.set_index(tilemap_cel.get_cell_at(coord), paint_index)
+			if TileSetPanel.autotiling_enabled and paint_index != 0:
+				tilemap_cel.autotile([cell_pos], paint_index == 0)
 		if project.has_selection:
 			project.selection_map.lock_selection_rect(project, false)
 		return
