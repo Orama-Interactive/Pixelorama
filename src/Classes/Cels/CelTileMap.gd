@@ -200,17 +200,6 @@ func resize_cel_image(new_size: Vector2i, content_offset: Vector2i) -> void:
 	_resize_cells(get_image().get_size(), false)
 
 
-func _rebase_cells(old_offset: Vector2i, new_offset: Vector2i) -> void:
-	@warning_ignore("integer_division")
-	var delta := (new_offset - old_offset) / get_tile_size()
-	if delta == Vector2i.ZERO:
-		return
-	var rebased: Dictionary[Vector2i, Cell] = {}
-	for cell_coords in cells:
-		rebased[cell_coords - delta] = cells[cell_coords]
-	cells = rebased
-
-
 ## Returns the [CelTileMap.Cell] at position [param cell_coords] in tilemap space.
 func get_cell_at(cell_coords: Vector2i) -> Cell:
 	if not cells.has(cell_coords):
@@ -314,7 +303,8 @@ func get_cel_bounds_snap() -> Vector2i:
 	return get_tile_size()
 
 
-func bucket_fill(cell_coords: Vector2i, callable: Callable) -> void:
+func bucket_fill(cell_coords: Vector2i, canvas_size: Vector2i) -> Array[Vector2i]:
+	var result: Array[Vector2i]
 	var godot_tilemap := create_tilemap_layer_dull_node()
 	var source_cell := get_cell_at(cell_coords)
 	var source_index := source_cell.index
@@ -324,19 +314,53 @@ func bucket_fill(cell_coords: Vector2i, callable: Callable) -> void:
 	while not to_check.is_empty():
 		var coords := to_check.pop_back() as Vector2i
 		if not already_checked.has(coords):
-			if not cells.has(coords):
+			if not is_within_image_bounds(coords, canvas_size):
 				already_checked.append(coords)
 				continue
+			if not cells.has(coords):
+				cells[coords] = Cell.new()
 			var current_cell := cells[coords]
 			if source_index == current_cell.index:
-				var index := TileSetPanel.selected_tile_index
-				callable.call(coords, index)
+				result.append(coords)
 				# Get surrounding tiles (handles different tile shapes).
 				var around := godot_tilemap.get_surrounding_cells(coords)
 				for i in around.size():
 					to_check.push_back(around[i])
 			already_checked.append(coords)
 	godot_tilemap.queue_free()
+	return result
+
+
+func is_within_image_bounds(cell_coords: Vector2i, canvas_size: Vector2i) -> bool:
+	var pixel_pos := get_pixel_coords(cell_coords) + offset
+	var cell_rect := Rect2i(pixel_pos, get_tile_size())
+	var canvas_rect := Rect2i(Vector2i.ZERO, canvas_size)
+	return canvas_rect.intersects(cell_rect)
+
+
+## Returns the top-left and bottom-right cell coordinates of the filled region.
+static func get_fill_corners(filled: Array[Vector2i]) -> Rect2i:
+	if filled.is_empty():
+		return Rect2i()
+	var min_coords := filled[0]
+	var max_coords := filled[0]
+	for coords in filled:
+		min_coords.x = mini(min_coords.x, coords.x)
+		min_coords.y = mini(min_coords.y, coords.y)
+		max_coords.x = maxi(max_coords.x, coords.x)
+		max_coords.y = maxi(max_coords.y, coords.y)
+	var corners := Rect2i()
+	corners.position = min_coords
+	corners.end = max_coords
+	return corners
+
+
+func ensure_fill_corners_in_bounds(filled: Array[Vector2i]) -> void:
+	var corners := CelTileMap.get_fill_corners(filled)
+	var top_left_pixel := get_pixel_coords(corners.position) + offset
+	var bottom_right_pixel := get_pixel_coords(corners.end) + offset
+	ensure_canvas_point_in_bounds(bottom_right_pixel)
+	ensure_canvas_point_in_bounds(top_left_pixel, false)
 
 
 #region Autotiling
@@ -1094,6 +1118,17 @@ func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
 		else:
 			if not is_instance_valid(cells[cell_coords]):
 				cells[cell_coords] = Cell.new()
+
+
+func _rebase_cells(old_offset: Vector2i, new_offset: Vector2i) -> void:
+	@warning_ignore("integer_division")
+	var delta := (new_offset - old_offset) / get_cel_bounds_snap()
+	if delta == Vector2i.ZERO:
+		return
+	var rebased: Dictionary[Vector2i, Cell] = {}
+	for cell_coords in cells:
+		rebased[cell_coords - delta] = cells[cell_coords]
+	cells = rebased
 
 
 ## Returns [code]true[/code] if the user just did a Redo.
