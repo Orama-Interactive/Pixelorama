@@ -718,6 +718,17 @@ func draw_indicator(left: bool) -> void:
 
 func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:
 	var canvas: Node2D = Global.canvas.indicators
+
+	var cel := Global.current_project.get_current_cel()
+	var layer := Global.current_project.layers[Global.current_project.current_layer]
+	var effect_rect := layer.get_effect_point_position(cel, pos)
+	if effect_rect.has_area():
+		effect_rect.size *= _brush_size_dynamics
+		effect_rect.position -= Vector2i(floor(Vector2(effect_rect.size) / 2.0))
+		canvas.draw_rect(effect_rect, color, false)
+		# Dim the original color to indicate it's not important
+		color.a = 0.5
+
 	if _brush.type in IMAGE_BRUSHES and not _draw_line or Tools.is_placing_tiles():
 		pos -= _brush_image.get_size() / 2
 		pos -= offset
