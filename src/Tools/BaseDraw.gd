@@ -680,14 +680,20 @@ func draw_indicator(left: bool) -> void:
 	if Tools.is_placing_tiles():
 		var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
 		var grid_size := tilemap_cel.get_tile_size()
+		@warning_ignore("integer_division")
+		var half_grid := grid_size / 2
 		var grid_center := Vector2()
 		if tilemap_cel.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
-			var cell_position := tilemap_cel.get_cell_position(snapped_position)
-			grid_center = tilemap_cel.get_pixel_coords(cell_position) + (grid_size / 2)
+			var cell_position := tilemap_cel.get_cell_position(
+				snapped_position - Vector2(tilemap_cel.offset)
+			)
+			grid_center = (
+				tilemap_cel.get_pixel_coords(cell_position) + half_grid + tilemap_cel.offset
+			)
 		else:
 			var offset := tilemap_cel.offset % grid_size
-			var offset_pos := snapped_position - Vector2(grid_size / 2) - Vector2(offset)
-			grid_center = offset_pos.snapped(grid_size) + Vector2(grid_size / 2) + Vector2(offset)
+			var offset_pos := snapped_position - Vector2(half_grid) - Vector2(offset)
+			grid_center = offset_pos.snapped(grid_size) + Vector2(half_grid) + Vector2(offset)
 		snapped_position = grid_center.floor()
 	draw_indicator_at(snapped_position, Vector2i.ZERO, color)
 	if (

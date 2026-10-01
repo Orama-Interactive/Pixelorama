@@ -201,8 +201,8 @@ func resize_cel_image(new_size: Vector2i, content_offset: Vector2i) -> void:
 
 
 func snap_cel_bounds(coords: Vector2i, local := false, ceil_snap := false) -> Vector2i:
-	if get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
-		var bounds_snap := get_cel_bounds_snap()
+	if get_tile_shape() in [TileSet.TILE_SHAPE_SQUARE, TileSet.TILE_SHAPE_ISOMETRIC]:
+		var bounds_snap := get_tile_size()
 		if bounds_snap == Vector2i.ZERO:
 			return coords
 		var diff: Vector2 = coords
@@ -220,8 +220,7 @@ func snap_cel_bounds(coords: Vector2i, local := false, ceil_snap := false) -> Ve
 		if not local:
 			pixel += Vector2(offset)
 		if ceil_snap:
-			var bias := Vector2(get_tile_size()) * 0.5
-			pixel += bias
+			pixel += Vector2(get_tile_size()) * 0.5
 		var snapped_pixel := godot_tilemap.map_to_local(godot_tilemap.local_to_map(pixel))
 		if not local:
 			snapped_pixel -= Vector2(offset)
@@ -242,16 +241,16 @@ func get_cell_at(cell_coords: Vector2i) -> Cell:
 func get_cell_position(pixel_coords: Vector2i, bound_check := false) -> Vector2i:
 	if bound_check:
 		pixel_coords = ensure_canvas_point_in_bounds(pixel_coords)
-	var cell_coords := Vector2i()
-	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
-		pixel_coords -= get_tile_size() / 2
-		var godot_tilemap := create_tilemap_layer_dull_node()
-		cell_coords = godot_tilemap.local_to_map(pixel_coords)
-		godot_tilemap.queue_free()
-	else:
+	if get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
 		var x_pos := float(pixel_coords.x) / get_tile_size().x
 		var y_pos := float(pixel_coords.y) / get_tile_size().y
-		cell_coords = Vector2i(floori(x_pos), floori(y_pos))
+		return Vector2i(floori(x_pos), floori(y_pos))
+
+	var cell_coords := Vector2i()
+	pixel_coords -= get_tile_size() / 2
+	var godot_tilemap := create_tilemap_layer_dull_node()
+	cell_coords = godot_tilemap.local_to_map(pixel_coords)
+	godot_tilemap.queue_free()
 	return cell_coords
 
 
@@ -327,10 +326,6 @@ func get_tile_offset_axis() -> TileSet.TileOffsetAxis:
 	if place_only_mode:
 		return tile_offset_axis
 	return tileset.tile_offset_axis
-
-
-func get_cel_bounds_snap() -> Vector2i:
-	return get_tile_size()
 
 
 #region Bucket tool
@@ -1038,14 +1033,11 @@ func _update_cell(cell: Cell, prev_index := -1, force_update := false) -> void:
 	var index := cell.index
 	if index >= tileset.tiles.size():
 		index = 0
-	if prev_index != index:
-		var current_tile := tileset.tiles[index].image
-		var transformed_tile := transform_tile(
-			current_tile, cell.flip_h, cell.flip_v, cell.transpose
-		)
-		if image_portion.get_data() != transformed_tile.get_data():
-			_draw_cell(image, transformed_tile, coords)
-			image.convert_rgb_to_indexed()
+	var current_tile := tileset.tiles[index].image
+	var transformed_tile := transform_tile(current_tile, cell.flip_h, cell.flip_v, cell.transpose)
+	if image_portion.get_data() != transformed_tile.get_data():
+		_draw_cell(image, transformed_tile, coords)
+		image.convert_rgb_to_indexed()
 
 
 func _draw_cell(source_image: Image, tile_image: Image, coords: Vector2i) -> void:
@@ -1166,7 +1158,7 @@ func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
 
 func _rebase_cells(old_offset: Vector2i, new_offset: Vector2i) -> void:
 	@warning_ignore("integer_division")
-	var delta := (new_offset - old_offset) / get_cel_bounds_snap()
+	var delta := (new_offset - old_offset) / get_tile_size()
 	if delta == Vector2i.ZERO:
 		return
 	var rebased: Dictionary[Vector2i, Cell] = {}

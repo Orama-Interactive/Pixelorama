@@ -227,7 +227,7 @@ func fill_in_color(pos: Vector2i) -> void:
 				tilemap_cel.ensure_fill_corners_in_bounds(coords_to_fill)
 			@warning_ignore("integer_division")
 			var offset_delta := (
-				(tilemap_cel.offset - prev_offset) / tilemap_cel.get_cel_bounds_snap()
+				(tilemap_cel.offset - prev_offset) / tilemap_cel.get_tile_size()
 			)
 			for coord in coords_to_fill:
 				coord -= offset_delta
@@ -382,7 +382,7 @@ func _flood_fill(pos: Vector2i) -> void:
 				tilemap_cel.ensure_fill_corners_in_bounds(coords_to_fill)
 			@warning_ignore("integer_division")
 			var offset_delta := (
-				(tilemap_cel.offset - prev_offset) / tilemap_cel.get_cel_bounds_snap()
+				(tilemap_cel.offset - prev_offset) / tilemap_cel.get_tile_size()
 			)
 			for coord in coords_to_fill:
 				coord -= offset_delta
