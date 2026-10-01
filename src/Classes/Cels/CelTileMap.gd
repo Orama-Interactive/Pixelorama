@@ -183,7 +183,7 @@ func set_index(
 			)
 		queue_update_cel_portions(true)
 	else:
-		_update_cell(cell, previous_index, force_update)
+		_update_cell(cell, force_update)
 	Global.canvas.queue_redraw()
 
 
@@ -1009,7 +1009,7 @@ func _re_index_cells_after_index(index: int, decrease := true) -> void:
 
 ## Updates the [param source_image] data of the cell of the tilemap in [param cell_position],
 ## to ensure that it is the same as its mapped tile in the [member tileset].
-func _update_cell(cell: Cell, prev_index := -1, force_update := false) -> void:
+func _update_cell(cell: Cell, force_update := false) -> void:
 	if cell.updated_this_frame and not force_update:
 		return
 	cell.updated_this_frame = true
