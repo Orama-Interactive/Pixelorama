@@ -226,9 +226,7 @@ func fill_in_color(pos: Vector2i) -> void:
 			if paint_index != 0:
 				tilemap_cel.ensure_fill_corners_in_bounds(coords_to_fill)
 			@warning_ignore("integer_division")
-			var offset_delta := (
-				(tilemap_cel.offset - prev_offset) / tilemap_cel.get_tile_size()
-			)
+			var offset_delta := (tilemap_cel.offset - prev_offset) / tilemap_cel.get_tile_size()
 			for coord in coords_to_fill:
 				coord -= offset_delta
 				var cell := tilemap_cel.get_cell_at(coord)
@@ -236,6 +234,8 @@ func fill_in_color(pos: Vector2i) -> void:
 					tilemap_cel.autotile([coord], paint_index == 0)
 				else:
 					tilemap_cel.set_index(cell, paint_index)
+				# Needs to be set again in case we are choosing a random tile.
+				paint_index = TileSetPanel.selected_tile_index
 		return
 	var current_cel := project.get_current_cel()
 	var current_image := project.crop_image_to_project_size(
@@ -381,15 +381,15 @@ func _flood_fill(pos: Vector2i) -> void:
 			if paint_index != 0:
 				tilemap_cel.ensure_fill_corners_in_bounds(coords_to_fill)
 			@warning_ignore("integer_division")
-			var offset_delta := (
-				(tilemap_cel.offset - prev_offset) / tilemap_cel.get_tile_size()
-			)
+			var offset_delta := (tilemap_cel.offset - prev_offset) / tilemap_cel.get_tile_size()
 			for coord in coords_to_fill:
 				coord -= offset_delta
 				if TileSetPanel.autotiling_enabled and paint_index == 0:
 					tilemap_cel.autotile([coord], paint_index == 0)
 				else:
 					tilemap_cel.set_index(tilemap_cel.get_cell_at(coord), paint_index)
+				# Needs to be set again in case we are choosing a random tile.
+				paint_index = TileSetPanel.selected_tile_index
 			if TileSetPanel.autotiling_enabled and paint_index != 0:
 				tilemap_cel.autotile([cell_pos], paint_index == 0)
 		if project.has_selection:

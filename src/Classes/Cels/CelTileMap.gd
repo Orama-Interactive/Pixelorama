@@ -201,32 +201,20 @@ func resize_cel_image(new_size: Vector2i, content_offset: Vector2i) -> void:
 
 
 func snap_cel_bounds(coords: Vector2i, local := false, ceil_snap := false) -> Vector2i:
-	if get_tile_shape() in [TileSet.TILE_SHAPE_SQUARE, TileSet.TILE_SHAPE_ISOMETRIC]:
-		var bounds_snap := get_tile_size()
-		if bounds_snap == Vector2i.ZERO:
-			return coords
-		var diff: Vector2 = coords
-		if ceil_snap:
-			diff += Vector2(bounds_snap) - Vector2.ONE
-		if not local:
-			diff -= Vector2(offset)
-		var result := Vector2i(diff - diff.posmodv(bounds_snap))
-		if not local:
-			result += offset
-		return result
-	else:
-		var godot_tilemap := create_tilemap_layer_dull_node()
-		var pixel := godot_tilemap.map_to_local(get_cell_position(coords))
-		if not local:
-			pixel += Vector2(offset)
-		if ceil_snap:
-			pixel += Vector2(get_tile_size()) * 0.5
-		var snapped_pixel := godot_tilemap.map_to_local(godot_tilemap.local_to_map(pixel))
-		if not local:
-			snapped_pixel -= Vector2(offset)
-		var result := godot_tilemap.local_to_map(snapped_pixel)
-		godot_tilemap.queue_free()
-		return get_pixel_coords(result)
+	var bounds_snap := get_tile_size()
+	if bounds_snap == Vector2i.ZERO:
+		return coords
+	if get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
+		bounds_snap /= 2
+	var diff: Vector2 = coords
+	if ceil_snap:
+		diff += Vector2(bounds_snap) - Vector2.ONE
+	if not local:
+		diff -= Vector2(offset)
+	var result := Vector2i(diff - diff.posmodv(bounds_snap))
+	if not local:
+		result += offset
+	return result
 
 
 ## Returns the [CelTileMap.Cell] at position [param cell_coords] in tilemap space.
