@@ -731,6 +731,8 @@ func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:
 
 
 func _set_pixel(pos: Vector2i, ignore_mirroring := false) -> void:
+	if _stroke_project == null:
+		return
 	if pos in _draw_cache and _for_frame == _stroke_project.current_frame:
 		return
 	if _draw_cache.size() > _cache_limit or _for_frame != _stroke_project.current_frame:

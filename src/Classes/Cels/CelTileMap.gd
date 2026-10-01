@@ -200,6 +200,36 @@ func resize_cel_image(new_size: Vector2i, content_offset: Vector2i) -> void:
 	_resize_cells(get_image().get_size(), false)
 
 
+func snap_cel_bounds(coords: Vector2i, local := false, ceil_snap := false) -> Vector2i:
+	if get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
+		var bounds_snap := get_cel_bounds_snap()
+		if bounds_snap == Vector2i.ZERO:
+			return coords
+		var diff: Vector2 = coords
+		if ceil_snap:
+			diff += Vector2(bounds_snap) - Vector2.ONE
+		if not local:
+			diff -= Vector2(offset)
+		var result := Vector2i(diff - diff.posmodv(bounds_snap))
+		if not local:
+			result += offset
+		return result
+	else:
+		var godot_tilemap := create_tilemap_layer_dull_node()
+		var pixel := godot_tilemap.map_to_local(get_cell_position(coords))
+		if not local:
+			pixel += Vector2(offset)
+		if ceil_snap:
+			var bias := Vector2(get_tile_size()) * 0.5
+			pixel += bias
+		var snapped_pixel := godot_tilemap.map_to_local(godot_tilemap.local_to_map(pixel))
+		if not local:
+			snapped_pixel -= Vector2(offset)
+		var result := godot_tilemap.local_to_map(snapped_pixel)
+		godot_tilemap.queue_free()
+		return get_pixel_coords(result)
+
+
 ## Returns the [CelTileMap.Cell] at position [param cell_coords] in tilemap space.
 func get_cell_at(cell_coords: Vector2i) -> Cell:
 	if not cells.has(cell_coords):
@@ -232,53 +262,53 @@ func get_cell_index_at_coords(coords: Vector2i, bound_check := false) -> int:
 
 
 func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
-	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
-		var godot_tilemap := create_tilemap_layer_dull_node()
-		var pixel_coords := godot_tilemap.map_to_local(cell_coords).floor() as Vector2i
-		if get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
-			var quarter_tile_size := get_tile_size() / 4
-			if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
-				pixel_coords += Vector2i(0, quarter_tile_size.y)
-			else:
-				pixel_coords += Vector2i(quarter_tile_size.x, 0)
-		godot_tilemap.queue_free()
-		return pixel_coords
-	return cell_coords * get_tile_size()
+	if get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
+		return cell_coords * get_tile_size()
+
+	var godot_tilemap := create_tilemap_layer_dull_node()
+	var pixel_coords := godot_tilemap.map_to_local(cell_coords).floor() as Vector2i
+	if get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
+		var quarter_tile_size := get_tile_size() / 4
+		if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
+			pixel_coords += Vector2i(0, quarter_tile_size.y)
+		else:
+			pixel_coords += Vector2i(quarter_tile_size.x, 0)
+	godot_tilemap.queue_free()
+	return pixel_coords
 
 
 func get_image_portion(rect: Rect2i, source_image := image, force_disable_clip := false) -> Image:
-	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
-		var mask := Image.create_empty(
-			get_tile_size().x, get_tile_size().y, false, Image.FORMAT_LA8
-		)
-		mask.fill(Color(0, 0, 0, 0))
-		if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
-			var old_clip := _should_clip_tiles
-			# Disable _should_clip_tiles when placing tiles (it's only useful in drawing)
-			if (
-				Tools.is_placing_tiles()
-				or TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL
-				or force_disable_clip
-			):
-				_should_clip_tiles = false
-			var grid_coord := (Vector2(rect.position) * 2 / Vector2(get_tile_size())).round()
-			var is_smaller_tile := int(grid_coord.y) % 2 != 0
-			DrawingAlgos.generate_isometric_rectangle(mask, is_smaller_tile and _should_clip_tiles)
-			_should_clip_tiles = old_clip
-		elif get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
-			if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
-				DrawingAlgos.generate_hexagonal_pointy_top(mask)
-			else:
-				DrawingAlgos.generate_hexagonal_flat_top(mask)
-		var to_return := Image.create_empty(
-			get_tile_size().x, get_tile_size().y, false, source_image.get_format()
-		)
-		var portion := source_image.get_region(rect)
-		to_return.blit_rect_mask(
-			portion, mask, Rect2i(Vector2i.ZERO, portion.get_size()), Vector2i.ZERO
-		)
-		return to_return
-	return source_image.get_region(rect)
+	if get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
+		return source_image.get_region(rect)
+
+	var mask := Image.create_empty(get_tile_size().x, get_tile_size().y, false, Image.FORMAT_LA8)
+	mask.fill(Color(0, 0, 0, 0))
+	if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
+		var old_clip := _should_clip_tiles
+		# Disable _should_clip_tiles when placing tiles (it's only useful in drawing)
+		if (
+			Tools.is_placing_tiles()
+			or TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL
+			or force_disable_clip
+		):
+			_should_clip_tiles = false
+		var grid_coord := (Vector2(rect.position) * 2 / Vector2(get_tile_size())).round()
+		var is_smaller_tile := int(grid_coord.y) % 2 != 0
+		DrawingAlgos.generate_isometric_rectangle(mask, is_smaller_tile and _should_clip_tiles)
+		_should_clip_tiles = old_clip
+	elif get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
+		if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
+			DrawingAlgos.generate_hexagonal_pointy_top(mask)
+		else:
+			DrawingAlgos.generate_hexagonal_flat_top(mask)
+	var to_return := Image.create_empty(
+		get_tile_size().x, get_tile_size().y, false, source_image.get_format()
+	)
+	var portion := source_image.get_region(rect)
+	to_return.blit_rect_mask(
+		portion, mask, Rect2i(Vector2i.ZERO, portion.get_size()), Vector2i.ZERO
+	)
+	return to_return
 
 
 func get_tile_size() -> Vector2i:
@@ -1101,6 +1131,7 @@ func queue_update_cel_portions(skip_zeroes := false) -> void:
 ## Resizes the [member cells] array based on [param new_size].
 func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
 	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
+		@warning_ignore("integer_division")
 		var half_size := get_tile_size() / 2
 		for x in range(0, new_size.x + 1, half_size.x):
 			for y in range(0, new_size.y + 1, half_size.y):
@@ -1339,6 +1370,7 @@ func deserialize(dict: Dictionary) -> void:
 		var cell := get_cell_at(cell_coords)
 		cell.deserialize(cell_data_serialized)
 	queue_update_cel_portions()
+	update_texture.call_deferred()
 
 
 func get_class_name() -> String:

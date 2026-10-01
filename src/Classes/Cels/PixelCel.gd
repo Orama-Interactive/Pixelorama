@@ -86,19 +86,8 @@ func resize_cel_image(new_size: Vector2i, content_offset: Vector2i) -> void:
 	image.copy_from_custom(new_image)
 
 
-func snap_cel_bounds(coords: Vector2i, local := false, ceil_snap := false) -> Vector2i:
-	var bounds_snap := get_cel_bounds_snap()
-	if bounds_snap == Vector2i.ZERO:
-		return coords
-	var diff: Vector2 = coords
-	if ceil_snap:
-		diff += Vector2(bounds_snap) - Vector2.ONE
-	if not local:
-		diff -= Vector2(offset)
-	var result := Vector2i(diff - diff.posmodv(bounds_snap))
-	if not local:
-		result += offset
-	return result
+func snap_cel_bounds(coords: Vector2i, _local := false, _ceil_snap := false) -> Vector2i:
+	return coords
 
 
 func blit_image_to_cel(source_image: Image) -> void:
@@ -109,10 +98,6 @@ func blit_image_to_cel(source_image: Image) -> void:
 	var dst := used_rect.position - offset
 	image.blit_rect(image_to_blit, Rect2i(Vector2i.ZERO, image_to_blit.get_size()), dst)
 	image.convert_rgb_to_indexed()
-
-
-func get_cel_bounds_snap() -> Vector2i:
-	return Vector2i.ZERO
 
 
 func serialize() -> Dictionary:
