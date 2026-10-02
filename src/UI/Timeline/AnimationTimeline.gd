@@ -1316,8 +1316,12 @@ func flatten_layers(
 		var new_cel := new_layer.new_cel_from_image(new_image)
 		new_cel.shrink_to_content()
 		if new_cel is CelTileMap:
-			# WIP, needs support for undo.
+			var tileset := (new_cel as CelTileMap).tileset
+			var undo := tileset.serialize_undo_data()
 			new_cel.update_tilemap()
+			var redo := tileset.serialize_undo_data()
+			project.undo_redo.add_do_method(tileset.deserialize_undo_data.bind(redo, new_cel))
+			project.undo_redo.add_undo_method(tileset.deserialize_undo_data.bind(undo, new_cel))
 		new_cels.append(new_cel)
 
 	while bottom_layer.parent != null:
