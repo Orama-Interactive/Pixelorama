@@ -182,7 +182,7 @@ func transform_content_cancel(project := Global.current_project) -> void:
 				cel.transformed_content,
 				cel.transformed_content,
 				Rect2i(Vector2i.ZERO, Global.current_project.selection_map.get_size()),
-				project.selection_map.get_selection_rect(project).position
+				project.selection_map.get_selection_rect(project).position - cel.offset
 			)
 			cel.transformed_content = null
 	for cel_index in project.selected_cels:
