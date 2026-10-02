@@ -149,8 +149,8 @@ static func open_aseprite_file(path: String) -> void:
 					var layer_index := ase_file.get_16()
 					var layer := new_project.layers[layer_index]
 					var cel := layer.new_empty_cel()
-					var x_pos := ase_file.get_16()
-					var y_pos := ase_file.get_16()
+					var x_pos := unsigned16_to_signed(ase_file.get_16())
+					var y_pos := unsigned16_to_signed(ase_file.get_16())
 					cel.offset = Vector2(x_pos, y_pos)
 					cel.opacity = ase_file.get_8() / 255.0
 					var cel_type := ase_file.get_16()
@@ -584,7 +584,7 @@ static func organize_layer_child_levels(project: Project) -> void:
 		layer.index = i
 
 
-static func unsigned16_to_signed(unsigned) -> int:
-	const MAX_15B = 1 << 15
-	const MAX_16B = 1 << 16
+static func unsigned16_to_signed(unsigned: int) -> int:
+	const MAX_15B := 1 << 15
+	const MAX_16B := 1 << 16
 	return (unsigned + MAX_15B) % MAX_16B - MAX_15B
