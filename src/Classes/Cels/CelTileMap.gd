@@ -352,29 +352,41 @@ func is_within_canvas_bounds(cell_coords: Vector2i, canvas_size: Vector2i) -> bo
 	return canvas_rect.intersects(cell_rect)
 
 
-## Returns the top-left and bottom-right cell coordinates of the filled region.
-static func get_fill_corners(filled: Array[Vector2i]) -> Rect2i:
-	if filled.is_empty():
-		return Rect2i()
-	var min_coords := filled[0]
-	var max_coords := filled[0]
-	for coords in filled:
-		min_coords.x = mini(min_coords.x, coords.x)
-		min_coords.y = mini(min_coords.y, coords.y)
-		max_coords.x = maxi(max_coords.x, coords.x)
-		max_coords.y = maxi(max_coords.y, coords.y)
-	var corners := Rect2i()
-	corners.position = min_coords
-	corners.end = max_coords
-	return corners
-
-
 func ensure_fill_corners_in_bounds(filled: Array[Vector2i]) -> void:
-	var corners := CelTileMap.get_fill_corners(filled)
-	var top_left_pixel := get_pixel_coords(corners.position) + offset
-	var bottom_right_pixel := get_pixel_coords(corners.end) + offset
-	ensure_canvas_point_in_bounds(bottom_right_pixel)
-	ensure_canvas_point_in_bounds(top_left_pixel, false)
+	if filled.is_empty():
+		return
+	var min_pixel := Vector2i.MAX
+	var max_pixel := Vector2i.MIN
+	# Calculate everything using the current offset.
+	for cell_coords in filled:
+		var pixel_pos := get_pixel_coords(cell_coords) + offset
+		var tile_end := pixel_pos + get_tile_size() - Vector2i.ONE
+		min_pixel = min_pixel.min(pixel_pos)
+		min_pixel = min_pixel.min(tile_end)
+		max_pixel = max_pixel.max(pixel_pos)
+		max_pixel = max_pixel.max(tile_end)
+
+	var new_offset := offset
+	var new_size := image.get_size()
+	if min_pixel.x < new_offset.x:
+		new_size.x += new_offset.x - min_pixel.x
+		new_offset.x = min_pixel.x
+	if min_pixel.y < new_offset.y:
+		new_size.y += new_offset.y - min_pixel.y
+		new_offset.y = min_pixel.y
+
+	var required_end := max_pixel + Vector2i.ONE
+	if required_end.x > new_offset.x + new_size.x:
+		new_size.x = required_end.x - new_offset.x
+	if required_end.y > new_offset.y + new_size.y:
+		new_size.y = required_end.y - new_offset.y
+
+	new_size = snap_cel_bounds(new_size, true, true)
+	new_offset = snap_cel_bounds(new_offset)
+	if new_size != image.get_size():
+		resize_cel_image(new_size, offset - new_offset)
+	if new_offset != offset:
+		change_offset(new_offset)
 
 
 func get_all_same_index_cells(tile_index: int, canvas_size: Vector2i) -> Array[Vector2i]:
@@ -1344,11 +1356,16 @@ func serialize() -> Dictionary:
 func deserialize(dict: Dictionary) -> void:
 	super.deserialize(dict)
 	var cell_data = dict.get("cell_data", [])
+	var coords: Array[Vector2i]
 	for cell_coords_str in cell_data:
 		var cell_data_serialized: Dictionary = cell_data[cell_coords_str]
+		if cell_data_serialized.has("index") and cell_data_serialized.index == 0:
+			continue
 		var cell_coords := str_to_var("Vector2i" + cell_coords_str) as Vector2i
 		var cell := get_cell_at(cell_coords)
 		cell.deserialize(cell_data_serialized)
+		coords.append(cell_coords)
+	ensure_fill_corners_in_bounds(coords)
 	queue_update_cel_portions()
 	update_texture.call_deferred()
 
