@@ -1231,6 +1231,13 @@ func _deserialize_cell_data(cell_data: Dictionary, resize: bool) -> void:
 
 
 # Overridden Methods:
+func size_changed(new_size: Vector2i) -> void:
+	if get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
+		return
+	if image.get_size() != new_size:
+		image.crop(new_size.x, new_size.y)
+
+
 func get_content() -> Variant:
 	return [image, cells]
 
