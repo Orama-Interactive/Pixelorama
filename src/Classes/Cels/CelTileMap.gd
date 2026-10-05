@@ -189,6 +189,8 @@ func set_index(
 
 ## Changes the [member offset] of the tilemap. Automatically resizes the cells and redraws the grid.
 func change_offset(new_offset: Vector2i) -> void:
+	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
+		return
 	_rebase_cells(offset, new_offset)
 	super(new_offset)
 	_resize_cells(get_image().get_size(), false)
@@ -196,6 +198,8 @@ func change_offset(new_offset: Vector2i) -> void:
 
 
 func resize_cel_image(new_size: Vector2i, content_offset: Vector2i) -> void:
+	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
+		return
 	super(new_size, content_offset)
 	_resize_cells(get_image().get_size(), false)
 
@@ -204,9 +208,7 @@ func snap_cel_bounds(coords: Vector2i, local := false, ceil_snap := false) -> Ve
 	var bounds_snap := get_tile_size()
 	if bounds_snap == Vector2i.ZERO:
 		return coords
-	if get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
-		bounds_snap /= 2
-	var diff: Vector2 = coords
+	var diff: Vector2 = coords  # Needs to be Vector2, because Vector2i doesn't have posmodv.
 	if ceil_snap:
 		diff += Vector2(bounds_snap) - Vector2.ONE
 	if not local:
