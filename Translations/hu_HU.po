@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2026-10-06 10:26\n"
+"PO-Revision-Date: 2026-10-06 11:25\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -591,19 +591,19 @@ msgstr "Az alábbi fájlok már léteznek. Kívánja felülírni őket?\n"
 "%s"
 
 msgid "Directory path is not valid!"
-msgstr ""
+msgstr "Érvénytelen elérési út!"
 
 msgid "File name is not valid!"
-msgstr ""
+msgstr "Érvénytelen fájlnév!"
 
 msgid "Directory path and file name are not valid!"
-msgstr ""
+msgstr "Érvénytelen elérési út és fájlnév!"
 
 msgid "Exporting in progress..."
 msgstr "Exportálás folyamatban..."
 
 msgid "Can't load file '%s'."
-msgstr ""
+msgstr "Nem lehet betölteni a '%s' fájlt."
 
 msgid "Can't load file '%s'.\n"
 "Error code: %s"
@@ -612,7 +612,8 @@ msgstr "Nem lehet megnyitni %s fájlt\n"
 
 msgid "Can't load file '%s'.\n"
 "This is not a valid palette file."
-msgstr ""
+msgstr "Nem lehet betölteni a '%s' fájlt.\n"
+"Nem egy érvényes paletta fájl."
 
 msgid "Frame"
 msgstr "Képkocka"
@@ -665,7 +666,7 @@ msgstr "Háttér:"
 
 #. Found in the export dialog
 msgid "Selected frames"
-msgstr ""
+msgstr "Kijelölt képkockák"
 
 msgid "Layers:"
 msgstr "Rétegek:"
@@ -676,15 +677,15 @@ msgstr "Aktív rétegek"
 
 #. Found in the export dialog
 msgid "Selected layers"
-msgstr ""
+msgstr "Kijelölt rétegek"
 
 #. A type of layer. A pixel layer is the most common type of layer, which stores image data in pixels.
 msgid "Pixel layer:"
-msgstr ""
+msgstr "Pixel réteg:"
 
 #. A type of layer. A group layer stores other layers as its children, similar to how a folder holds files.
 msgid "Group layer:"
-msgstr ""
+msgstr "Csoport réteg:"
 
 #. A type of layer. A 3D layer contains data of 3D objects that are rasterized automatically by Pixelorama.
 msgid "3D layer:"
