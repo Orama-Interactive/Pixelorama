@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Hungarian\n"
 "Language: hu_HU\n"
-"PO-Revision-Date: 2026-08-14 12:06\n"
+"PO-Revision-Date: 2026-10-06 08:14\n"
 
 msgid "OK"
 msgstr "Ok"
@@ -31,7 +31,7 @@ msgid "File Name:"
 msgstr "Fájlnév:"
 
 msgid "Project name:"
-msgstr ""
+msgstr "Projekt neve:"
 
 msgid "Canvas Size"
 msgstr "Vászon mérete"
@@ -52,7 +52,7 @@ msgid "Center"
 msgstr "Középre"
 
 msgid "Main Menu"
-msgstr ""
+msgstr "Főmenü"
 
 msgid "File"
 msgstr "Fájl"
@@ -74,7 +74,7 @@ msgstr "Kép"
 
 #. Noun, refers to a Pixelorama project.
 msgid "Project"
-msgstr ""
+msgstr "Projekt"
 
 msgid "Effects"
 msgstr "Effektek"
@@ -143,7 +143,7 @@ msgstr ""
 
 #. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
 msgid "Initial state"
-msgstr ""
+msgstr "Kezdeti állapot"
 
 msgid "Copy"
 msgstr "Másolás"
@@ -159,17 +159,17 @@ msgstr "Beillesztés a helyére"
 
 #. Found under the Edit menu. When selected, the image from the clipboard, if it exists, gets pasted into Pixelorama.
 msgid "Paste from Clipboard"
-msgstr ""
+msgstr "Beillesztés vágólapról"
 
 msgid "Delete"
 msgstr "Törlés"
 
 msgid "Delete Permanently"
-msgstr ""
+msgstr "Végleges törlés"
 
 #. Found when requesting to delete a palette or an extension. Refers to when you move something to recycle bin.
 msgid "Move to Trash"
-msgstr ""
+msgstr "Lomtárba helyezés"
 
 msgid "New Brush"
 msgstr "Új ecset"
@@ -185,11 +185,11 @@ msgstr "Százalék"
 
 #. Found in the create new image dialog. Allows users to change the color mode of the new project, such as RGBA or indexed mode.
 msgid "Color mode:"
-msgstr ""
+msgstr "Színmód:"
 
 #. Found in the image menu. A submenu that allows users to change the color mode of the project, such as RGBA or indexed mode.
 msgid "Color Mode"
-msgstr ""
+msgstr "Színmód"
 
 #. Found in the image menu, under the "Color Mode" submenu. Refers to the indexed color mode. See this wikipedia page for more information: https://en.wikipedia.org/wiki/Indexed_color
 msgid "Indexed"
@@ -257,7 +257,7 @@ msgid "Select cel area"
 msgstr ""
 
 msgid "Modify"
-msgstr ""
+msgstr "Módosít"
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users expand the active selection.
 msgid "Expand"
@@ -269,7 +269,7 @@ msgstr ""
 
 #. Found under the Select menu, in the Modify submenu. When selected, it shows a window that lets users shrink the active selection.
 msgid "Shrink"
-msgstr ""
+msgstr "Zsugorít"
 
 #. Title of a window that lets users shrink the active selection.
 msgid "Shrink Selection"
@@ -285,13 +285,13 @@ msgstr ""
 
 #. Refers to a diamond-like shape.
 msgid "Diamond"
-msgstr ""
+msgstr "Gyémánt"
 
 msgid "Circle"
-msgstr ""
+msgstr "Kör"
 
 msgid "Square"
-msgstr ""
+msgstr "Négyzet"
 
 msgid "Grayscale View"
 msgstr ""
@@ -344,11 +344,11 @@ msgstr ""
 
 #. Verb, resets something.
 msgid "Reset"
-msgstr ""
+msgstr "Alaphelyzetbe"
 
 #. Verb, resets something.
 msgid "Reset %s"
-msgstr ""
+msgstr "%s visszaállítása"
 
 msgid "Use Current Frame"
 msgstr ""
