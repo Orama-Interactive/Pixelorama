@@ -187,38 +187,6 @@ func set_index(
 	Global.canvas.queue_redraw()
 
 
-## Changes the [member offset] of the tilemap. Automatically resizes the cells and redraws the grid.
-func change_offset(new_offset: Vector2i) -> void:
-	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
-		return
-	_rebase_cells(offset, new_offset)
-	super(new_offset)
-	_resize_cells(get_image().get_size(), false)
-	Global.grid_updated.emit()
-
-
-func resize_cel_image(new_size: Vector2i, content_offset: Vector2i) -> void:
-	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
-		return
-	super(new_size, content_offset)
-	_resize_cells(get_image().get_size(), false)
-
-
-func snap_cel_bounds(coords: Vector2i, local := false, ceil_snap := false) -> Vector2i:
-	var bounds_snap := get_tile_size()
-	if bounds_snap == Vector2i.ZERO:
-		return coords
-	var diff: Vector2 = coords  # Needs to be Vector2, because Vector2i doesn't have posmodv.
-	if ceil_snap:
-		diff += Vector2(bounds_snap) - Vector2.ONE
-	if not local:
-		diff -= Vector2(offset)
-	var result := Vector2i(diff - diff.posmodv(bounds_snap))
-	if not local:
-		result += offset
-	return result
-
-
 ## Returns the [CelTileMap.Cell] at position [param cell_coords] in tilemap space.
 func get_cell_at(cell_coords: Vector2i) -> Cell:
 	if not cells.has(cell_coords):
@@ -226,8 +194,8 @@ func get_cell_at(cell_coords: Vector2i) -> Cell:
 	return cells[cell_coords]
 
 
-## Returns the position of a cell in the tilemap
-## at pixel coordinates [param coords] in the cel's image.
+## Returns the position of a cell in the tilemap,
+## given pixel coordinates [param pixel_coords] in the cel's image.
 func get_cell_position(pixel_coords: Vector2i, bound_check := false) -> Vector2i:
 	if bound_check:
 		pixel_coords = ensure_canvas_point_in_bounds(pixel_coords)
@@ -250,6 +218,7 @@ func get_cell_index_at_coords(coords: Vector2i, bound_check := false) -> int:
 	return get_cell_at(get_cell_position(coords, bound_check)).index
 
 
+## Returns the pixel coordinates, given [param cell_coords] in tilemap space.
 func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
 	if get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
 		return cell_coords * get_tile_size()
@@ -347,6 +316,8 @@ func bucket_fill(cell_coords: Vector2i, canvas_size: Vector2i) -> Array[Vector2i
 	return result
 
 
+## Returns [code]true[/code] if the coordinates of a cell ([param cell_coords])
+## are within the [param canvas_size].
 func is_within_canvas_bounds(cell_coords: Vector2i, canvas_size: Vector2i) -> bool:
 	var pixel_pos := get_pixel_coords(cell_coords) + offset
 	var cell_rect := Rect2i(pixel_pos, get_tile_size())
@@ -354,19 +325,19 @@ func is_within_canvas_bounds(cell_coords: Vector2i, canvas_size: Vector2i) -> bo
 	return canvas_rect.intersects(cell_rect)
 
 
-func ensure_fill_corners_in_bounds(filled: Array[Vector2i]) -> void:
-	if filled.is_empty():
+## Given an array of [param cell_coordinates], ensure that the corners fit
+## within the cel image's bounds, expanding the image and shifting its [member offset] if needed.
+func ensure_fill_corners_in_bounds(cell_coordinates: Array[Vector2i]) -> void:
+	if cell_coordinates.is_empty():
 		return
 	var min_pixel := Vector2i.MAX
 	var max_pixel := Vector2i.MIN
 	# Calculate everything using the current offset.
-	for cell_coords in filled:
+	for cell_coords in cell_coordinates:
 		var pixel_pos := get_pixel_coords(cell_coords) + offset
 		var tile_end := pixel_pos + get_tile_size() - Vector2i.ONE
-		min_pixel = min_pixel.min(pixel_pos)
-		min_pixel = min_pixel.min(tile_end)
-		max_pixel = max_pixel.max(pixel_pos)
-		max_pixel = max_pixel.max(tile_end)
+		min_pixel = min_pixel.min(pixel_pos).min(tile_end)
+		max_pixel = max_pixel.max(pixel_pos).max(tile_end)
 
 	var new_offset := offset
 	var new_size := image.get_size()
@@ -391,6 +362,8 @@ func ensure_fill_corners_in_bounds(filled: Array[Vector2i]) -> void:
 		change_offset(new_offset)
 
 
+## Returns all cells that have the same [param tile_index]
+## and are within the bounds of a canvas with size [param canvas_size].
 func get_all_same_index_cells(tile_index: int, canvas_size: Vector2i) -> Array[Vector2i]:
 	var coords_to_fill: Array[Vector2i]
 	for coord: Vector2i in cells:
@@ -1231,6 +1204,39 @@ func _deserialize_cell_data(cell_data: Dictionary, resize: bool) -> void:
 
 
 # Overridden Methods:
+## Changes the [member offset] of the cel. Automatically resizes the cells and redraws the grid.
+func change_offset(new_offset: Vector2i) -> void:
+	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
+		return
+	_rebase_cells(offset, new_offset)
+	super(new_offset)
+	_resize_cells(get_image().get_size(), false)
+	Global.grid_updated.emit()
+
+
+func resize_cel_image(new_size: Vector2i, content_offset: Vector2i) -> void:
+	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
+		return
+	super(new_size, content_offset)
+	_resize_cells(get_image().get_size(), false)
+
+
+## Snaps pixel coordinates to the tilemap grid.
+func snap_cel_bounds(coords: Vector2i, local := false, ceil_snap := false) -> Vector2i:
+	var bounds_snap := get_tile_size()
+	if bounds_snap == Vector2i.ZERO or bounds_snap == Vector2i.ONE:
+		return coords
+	var diff: Vector2 = coords  # Needs to be Vector2, because Vector2i doesn't have posmodv.
+	if ceil_snap:
+		diff += Vector2(bounds_snap) - Vector2.ONE
+	if not local:
+		diff -= Vector2(offset)
+	var result := Vector2i(diff - diff.posmodv(bounds_snap))
+	if not local:
+		result += offset
+	return result
+
+
 func size_changed(new_size: Vector2i) -> void:
 	if get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
 		return

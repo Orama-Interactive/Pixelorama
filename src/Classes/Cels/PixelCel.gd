@@ -28,7 +28,7 @@ func set_indexed_mode(indexed: bool) -> void:
 		image.convert_rgb_to_indexed()
 
 
-## Grow the image so a canvas-space point is inside it,
+## Grows the image so a canvas-space point is inside it,
 ## shifting the cel's [member offset] if needed. Returns the coordinate in the cel's local space.
 func ensure_canvas_point_in_bounds(
 	canvas_pos: Vector2i, change_offset_when_invisible := true
@@ -59,12 +59,16 @@ func ensure_canvas_point_in_bounds(
 	return local
 
 
+## Grows the image so a rectangle is inside it,
+## shifting the cel's [member offset] if needed.
 func ensure_canvas_rect_in_bounds(start_point: Vector2i, rect_size: Vector2i) -> void:
 	var end_point := start_point + rect_size - Vector2i.ONE
 	ensure_canvas_point_in_bounds(end_point)
 	ensure_canvas_point_in_bounds(start_point, false)
 
 
+## Automatically shrinks the cel image to its used rectangle.
+## Usually called after using the eraser tool.
 func shrink_to_content() -> void:
 	var used := image.get_used_rect()
 	if used.size == image.get_size():
@@ -80,16 +84,21 @@ func shrink_to_content() -> void:
 	change_offset(new_offset)
 
 
+## Resizes the [member image] to a [param new_size],
+## using [param content_offset] as an offset.
 func resize_cel_image(new_size: Vector2i, content_offset: Vector2i) -> void:
 	var new_image := Image.create_empty(new_size.x, new_size.y, false, image.get_format())
 	new_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), content_offset)
 	image.copy_from_custom(new_image)
 
 
+## Snaps pixel coordinates to a grid.
+## Does not do anything for [PixelCel], it is meant to be overwritten by [CelTileMap].
 func snap_cel_bounds(coords: Vector2i, _local := false, _ceil_snap := false) -> Vector2i:
 	return coords
 
 
+## Blits an image to the cel image, ensuring that the cel image is big enough.
 func blit_image_to_cel(source_image: Image) -> void:
 	var used_rect := source_image.get_used_rect()
 	var image_to_blit := source_image.get_region(used_rect)
