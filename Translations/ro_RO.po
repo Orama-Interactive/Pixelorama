@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2026-08-16 15:27\n"
+"PO-Revision-Date: 2026-10-02 12:58\n"
 
 msgid "OK"
 msgstr "OK"
@@ -3092,11 +3092,11 @@ msgstr "Refacere: modificare stare ignorare strat în cadre multiple simultane"
 
 #. Appears as a notification when the user data field of a layer is changed, and the user undos.
 msgid "Undo: Change Layer User Data"
-msgstr ""
+msgstr "Anulare: modificare date utilizator strat"
 
 #. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
 msgid "Redo: Change Layer User Data"
-msgstr ""
+msgstr "Refacere: modificare date utilizator strat"
 
 msgid "Undo: Change Layer Color"
 msgstr "Anulare: modificarea culorii stratului"
