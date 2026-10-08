@@ -222,12 +222,16 @@ func draw_end(pos: Vector2i) -> void:
 func cancel_tool() -> void:
 	super()
 	for data in _undo_data:
-		if data is not Image:
-			continue
-		var image_data = _undo_data[data]["data"]
-		data.set_data(
-			data.get_width(), data.get_height(), data.has_mipmaps(), data.get_format(), image_data
-		)
+		if data is Image:
+			var image_data = _undo_data[data]["data"]
+			var image_size := Vector2i(_undo_data[data]["width"], _undo_data[data]["height"])
+			if data.get_size() != image_size:
+				data.crop(image_size.x, image_size.y)
+			data.set_data(
+				image_size.x, image_size.y, data.has_mipmaps(), data.get_format(), image_data
+			)
+		elif data is BaseCel:
+			data.offset = _undo_data[data]["offset"]
 	Global.canvas.sprite_changed_this_frame = true
 
 
