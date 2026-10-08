@@ -514,6 +514,7 @@ func _set_pixel_pattern(image: Image, x: int, y: int, pattern_size: Vector2i) ->
 		pc = lerp(pc, tool_slot.color, _pattern_interpolate / 100.0)
 	image.set_pixel(x, y, pc)
 
+
 func commit_undo() -> void:
 	var project := Global.current_project
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
