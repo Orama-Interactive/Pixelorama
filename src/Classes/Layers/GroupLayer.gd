@@ -14,7 +14,7 @@ func _init(_project: Project, _name := "") -> void:
 
 
 ## Blends all of the images of children layer of the group layer into a single image.
-func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true) -> Image:
+func blend_children(frame: Frame, apply_effects := true) -> Image:
 	var image := ImageExtended.create_custom(
 		project.size.x, project.size.y, false, project.get_image_format(), project.is_indexed()
 	)
@@ -30,27 +30,13 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 		var layer := children[i]
 		if layer is GroupLayer:
 			current_metadata_index = _blend_child_group(
-				image,
-				layer,
-				frame,
-				textures,
-				metadata_image,
-				current_metadata_index,
-				origin,
-				apply_effects
+				image, layer, frame, textures, metadata_image, current_metadata_index, apply_effects
 			)
 			# NOTE: incrementation of current_metadata_index is done internally in
 			# _blend_child_group(), so we don't have to use current_metadata_index += 1 here
 		else:
 			_include_child_in_blending(
-				image,
-				layer,
-				frame,
-				textures,
-				metadata_image,
-				current_metadata_index,
-				origin,
-				apply_effects
+				image, layer, frame, textures, metadata_image, current_metadata_index, apply_effects
 			)
 			current_metadata_index += 1
 
@@ -60,10 +46,8 @@ func blend_children(frame: Frame, origin := Vector2i.ZERO, apply_effects := true
 		var blend_params := {
 			"layers": texture_array,
 			"metadata": ImageTexture.create_from_image(metadata_image),
-			"origin_x_positive": origin.x > 0,
-			"origin_y_positive": origin.y > 0,
 		}
-		var c_key := [_cache_texture_data, metadata_image.get_data(), origin.x > 0, origin.y > 0]
+		var c_key := [_cache_texture_data, metadata_image.get_data()]
 		if _group_cache.has(c_key):
 			# Don't waste time re-generating for groups that have remained unchanged
 			var cache_image = Image.create_from_data(
@@ -94,12 +78,11 @@ func _include_child_in_blending(
 	textures: Array[Image],
 	metadata_image: Image,
 	i: int,
-	origin: Vector2i,
 	apply_effects: bool
 ) -> void:
 	var cel := frame.cels[layer.index]
 	if DisplayServer.get_name() == "headless":
-		DrawingAlgos.blend_layers_headless(image, project, layer, cel, origin)
+		DrawingAlgos.blend_layers_headless(image, project, layer, cel, Vector2i.ZERO)
 	else:
 		var cel_image: Image
 		if apply_effects:
@@ -109,12 +92,6 @@ func _include_child_in_blending(
 		textures.append(cel_image)
 		_cache_texture_data.append(cel_image.get_data())
 		DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, i)
-		if origin != Vector2i.ZERO:
-			# Only used as a preview for the move tool, when used on a group's children
-			var test_array := [project.frames.find(frame), project.layers.find(layer)]
-			if test_array in project.selected_cels:
-				var origin_fixed := Vector2(origin).abs() / Vector2(cel_image.get_size())
-				metadata_image.set_pixel(i, 2, Color(origin_fixed.x, origin_fixed.y, 0.0, 0.0))
 
 
 ## Include a child group in the blending process.
@@ -129,7 +106,6 @@ func _blend_child_group(
 	textures: Array[Image],
 	metadata_image: Image,
 	i: int,
-	origin: Vector2i,
 	apply_effects: bool
 ) -> int:
 	var new_i := i
@@ -141,18 +117,18 @@ func _blend_child_group(
 			var child := children[j]
 			if child is GroupLayer:
 				new_i = _blend_child_group(
-					image, child, frame, textures, metadata_image, new_i, origin, apply_effects
+					image, child, frame, textures, metadata_image, new_i, apply_effects
 				)
 			else:
 				metadata_image.crop(metadata_image.get_width() + 1, metadata_image.get_height())
 				_include_child_in_blending(
-					image, child, frame, textures, metadata_image, new_i, origin, apply_effects
+					image, child, frame, textures, metadata_image, new_i, apply_effects
 				)
 				new_i += 1
 	else:
-		var blended_children := (layer as GroupLayer).blend_children(frame, origin)
+		var blended_children := (layer as GroupLayer).blend_children(frame)
 		if DisplayServer.get_name() == "headless":
-			image.blend_rect(blended_children, blend_rect, origin)
+			image.blend_rect(blended_children, blend_rect, Vector2i.ZERO)
 		else:
 			textures.append(blended_children)
 			_cache_texture_data.append(blended_children.get_data())

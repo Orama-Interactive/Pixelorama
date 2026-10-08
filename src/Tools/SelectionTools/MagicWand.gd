@@ -4,7 +4,7 @@ var _tolerance := 0.003
 
 
 func apply_selection(pos: Vector2i) -> void:
-	super.apply_selection(pos)
+	super(pos)
 	var project := Global.current_project
 	if pos.x < 0 or pos.y < 0 or pos.x >= project.size.x or pos.y >= project.size.y:
 		return
@@ -15,8 +15,9 @@ func apply_selection(pos: Vector2i) -> void:
 	if _intersect:
 		project.selection_map.clear()
 
+	var cel := project.get_current_cel()
 	var cel_image := Image.new()
-	cel_image.copy_from(_get_draw_image())
+	cel_image.copy_from(project.crop_image_to_project_size(cel.get_image(), cel.offset))
 	_flood_fill(pos, cel_image, project, previous_selection_map)
 	# Handle mirroring
 	for mirror_pos in Tools.get_mirrored_positions(pos):
@@ -59,7 +60,9 @@ func _flood_fill(
 				continue
 			var tilemap_cel := cel as CelTileMap
 			var cell_pos := tilemap_cel.get_cell_position(pos)
-			tilemap_cel.bucket_fill(cell_pos, _set_bit_rect.bind(project, previous_selection_map))
+			var coords_to_select := tilemap_cel.bucket_fill(cell_pos, project.size)
+			for coord in coords_to_select:
+				_set_bit_rect(coord, project, previous_selection_map)
 		return
 	var flood_fill_object := FloodFillObject.new()
 	flood_fill_object.tolerance = _tolerance
@@ -88,9 +91,7 @@ func _set_bit(p: Vector2i, selection_map: SelectionMap, prev_selection_map: Sele
 		selection_map.select_pixel(p, !_subtract)
 
 
-func _set_bit_rect(
-	p: Vector2i, _index: int, project: Project, prev_selection_map: SelectionMap
-) -> void:
+func _set_bit_rect(p: Vector2i, project: Project, prev_selection_map: SelectionMap) -> void:
 	var selection_map := project.selection_map
 	var tilemap := project.get_current_cel() as CelTileMap
 	var pixel_coords := p * tilemap.get_tile_size()

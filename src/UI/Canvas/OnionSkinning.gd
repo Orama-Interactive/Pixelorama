@@ -35,9 +35,6 @@ func _draw() -> void:
 				var layer := project.layers[layer_i]
 				if layer.is_visible_in_hierarchy() and not layer.ignore_onion:
 					color.a = opacity / i
-					if [change, layer_i] in project.selected_cels:
-						draw_texture(cel.image_texture, canvas.move_preview_location, color)
-					else:
-						draw_texture(cel.image_texture, Vector2.ZERO, color)
+					draw_texture(cel.image_texture, cel.offset, color)
 				layer_i += 1
 	draw_set_transform(position, rotation, scale)

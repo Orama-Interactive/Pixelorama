@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="5"]
 [ext_resource type="Script" uid="uid://bs5pld0j5yvsk" path="res://src/UI/Canvas/Rulers/HorizontalRuler.gd" id="6"]
 [ext_resource type="Script" uid="uid://ctqrsfsbx4kwk" path="res://src/UI/Canvas/CanvasCamera.gd" id="7"]
-[ext_resource type="Shader" uid="uid://bhgdieau4cr1b" path="res://src/Shaders/Greyscale.gdshader" id="8"]
 [ext_resource type="Shader" uid="uid://c50kmfvf635kb" path="res://src/Shaders/TransparentChecker.gdshader" id="9"]
 [ext_resource type="PackedScene" uid="uid://wo0hqxkst808" path="res://src/UI/GlobalToolOptions/GlobalToolOptions.tscn" id="10"]
 [ext_resource type="PackedScene" uid="uid://cxhs8qy5ilufv" path="res://src/UI/ReferenceImages/ReferencesPanel.tscn" id="11"]
@@ -191,9 +190,6 @@ shader_parameter/rect_size = Vector2(0, 0)
 shader_parameter/follow_movement = false
 shader_parameter/follow_scale = false
 
-[sub_resource type="ShaderMaterial" id="27"]
-shader = ExtResource("8")
-
 [sub_resource type="ShaderMaterial" id="3"]
 shader = ExtResource("9")
 shader_parameter/size = 10.0
@@ -302,18 +298,6 @@ material = SubResource("2")
 
 [node name="Camera2D" type="Node2D" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" unique_id=1478356410 groups=["CanvasCameras"]]
 script = ExtResource("7")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" unique_id=1574676608]
-
-[node name="GreyscaleVision" type="ColorRect" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport/CanvasLayer" unique_id=1489047676]
-visible = false
-material = SubResource("27")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 2
 
 [node name="Second Canvas" type="SubViewportContainer" parent="DockableContainer" unique_id=1483064810]
 visible = false

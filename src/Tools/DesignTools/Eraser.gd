@@ -91,7 +91,10 @@ func draw_end(pos: Vector2i) -> void:
 		draw_tool(_line_start)
 		draw_fill_gap(_line_start, _line_end)
 		_draw_line = false
-
+	for image in _stroke_images:
+		var variant = _stroke_images[image]
+		if variant is PixelCel:
+			variant.shrink_to_content()
 	super.draw_end(pos)
 	commit_undo()
 	SteamManager.set_achievement("ACH_ERASE_PIXEL")
@@ -99,7 +102,7 @@ func draw_end(pos: Vector2i) -> void:
 	update_random_image()
 
 
-func _draw_brush_image(image: Image, src_rect: Rect2i, dst: Vector2i) -> void:
+func _draw_brush_image(image: Image, src_rect: Rect2i, dst: Vector2i, _overwrite := true) -> void:
 	_changed = true
 	if _strength == 1:
 		var brush_size := image.get_size()
@@ -108,7 +111,11 @@ func _draw_brush_image(image: Image, src_rect: Rect2i, dst: Vector2i) -> void:
 
 		var images := _get_selected_draw_images()
 		for draw_image in images:
-			draw_image.blit_rect_mask(_clear_image, image, src_rect, dst)
+			var final_dst := dst
+			var variant = images[draw_image]
+			if variant is PixelCel:
+				final_dst -= variant.offset
+			draw_image.blit_rect_mask(_clear_image, image, src_rect, final_dst)
 			draw_image.convert_rgb_to_indexed()
 	else:
 		for xx in image.get_size().x:

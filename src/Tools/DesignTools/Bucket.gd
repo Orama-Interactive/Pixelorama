@@ -231,13 +231,6 @@ func cancel_tool() -> void:
 	Global.canvas.sprite_changed_this_frame = true
 
 
-func draw_tile(cell_coords: Vector2i, index: int, tilemap_cel: CelTileMap) -> void:
-	if TileSetPanel.autotiling_enabled:
-		tilemap_cel.autotile([cell_coords], index == 0)
-	else:
-		tilemap_cel.set_index(tilemap_cel.get_cell_at(cell_coords), index)
-
-
 func fill(pos: Vector2i) -> void:
 	match _fill_area:
 		FillArea.AREA:
@@ -252,23 +245,37 @@ func fill(pos: Vector2i) -> void:
 func fill_in_color(pos: Vector2i) -> void:
 	var project := Global.current_project
 	if Tools.is_placing_tiles():
+		var paint_index := TileSetPanel.selected_tile_index
 		for cel in _get_selected_draw_cels():
 			if cel is not CelTileMap:
 				continue
 			var tilemap_cel := cel as CelTileMap
-			var tile_index := tilemap_cel.get_cell_index_at_coords(pos)
-			for cell_coords: Vector2i in tilemap_cel.cells:
-				var cell := tilemap_cel.get_cell_at(cell_coords)
-				if cell.index == tile_index:
-					var paint_index := TileSetPanel.selected_tile_index
-					if TileSetPanel.autotiling_enabled:
-						tilemap_cel.autotile([cell_coords], paint_index == 0)
-					else:
-						tilemap_cel.set_index(cell, paint_index)
+			var tile_index := tilemap_cel.get_cell_index_at_coords(pos, true)
+			# Find all cells with the same index.
+			var coords_to_fill := tilemap_cel.get_all_same_index_cells(tile_index, project.size)
+			var prev_offset := tilemap_cel.offset
+			if paint_index != 0:
+				tilemap_cel.ensure_fill_corners_in_bounds(coords_to_fill)
+			@warning_ignore("integer_division")
+			var offset_delta := (tilemap_cel.offset - prev_offset) / tilemap_cel.get_tile_size()
+			for coord in coords_to_fill:
+				coord -= offset_delta
+				var cell := tilemap_cel.get_cell_at(coord)
+				if TileSetPanel.autotiling_enabled:
+					tilemap_cel.autotile([coord], paint_index == 0)
+				else:
+					tilemap_cel.set_index(cell, paint_index)
+				# Needs to be set again in case we are choosing a random tile.
+				paint_index = TileSetPanel.selected_tile_index
 		return
-	var color := project.get_current_cel().get_image().get_pixelv(pos)
-	var images := _get_selected_draw_images()
-	for image in images:
+	var current_cel := project.get_current_cel()
+	var current_image := project.crop_image_to_project_size(
+		current_cel.get_image(), current_cel.offset
+	)
+	var color := current_image.get_pixelv(pos)
+	var cels := _get_selected_draw_cels(false)
+	for cel: PixelCel in cels:
+		var image := project.crop_image_to_project_size(cel.get_image(), cel.offset)
 		if Tools.check_alpha_lock(image, pos):
 			continue
 		var pattern_image: Image
@@ -315,6 +322,7 @@ func fill_in_color(pos: Vector2i) -> void:
 			)
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(image, COLOR_REPLACE_SHADER, params, project.size)
+		cel.blit_image_to_cel(image)
 
 
 func fill_in_area(pos: Vector2i) -> void:
@@ -328,7 +336,7 @@ func fill_in_area(pos: Vector2i) -> void:
 
 func fill_in_selection() -> void:
 	var project := Global.current_project
-	var images := _get_selected_draw_images()
+	var cels := _get_selected_draw_cels(false)
 	if _fill_with == FillWith.COLOR or _pattern == null:
 		if project.has_selection:
 			var filler := project.new_empty_image()
@@ -337,13 +345,17 @@ func fill_in_selection() -> void:
 				project, project.size
 			)
 			var rect := selection_map_copy.get_used_rect()
-			for image in images:
+			for cel: PixelCel in cels:
+				var image := project.crop_image_to_project_size(cel.get_image(), cel.offset)
 				image.blit_rect_mask(filler, selection_map_copy, rect, rect.position)
-				image.convert_rgb_to_indexed()
+				cel.blit_image_to_cel(image)
+				#image.convert_rgb_to_indexed()
 		else:
-			for image in images:
+			for cel: PixelCel in cels:
+				var image := project.crop_image_to_project_size(cel.get_image(), cel.offset)
 				image.fill(tool_slot.color)
-				image.convert_rgb_to_indexed()
+				cel.blit_image_to_cel(image)
+				#image.convert_rgb_to_indexed()
 	else:
 		# End early if we are filling with an empty pattern
 		var pattern_image: Image = _pattern.image
@@ -378,9 +390,11 @@ func fill_in_selection() -> void:
 			params["pattern_uv_offset"] = (
 				Vector2.ONE / Vector2(pattern_size) * Vector2(_offset_x, _offset_y)
 			)
-		for image in images:
+		for cel: PixelCel in cels:
+			var image := project.crop_image_to_project_size(cel.get_image(), cel.offset)
 			var gen := ShaderImageEffect.new()
 			gen.generate_image(image, PATTERN_FILL_SHADER, params, project.size)
+			cel.blit_image_to_cel(image)
 
 
 func _flood_fill(pos: Vector2i) -> void:
@@ -390,22 +404,39 @@ func _flood_fill(pos: Vector2i) -> void:
 	if project.has_selection:
 		project.selection_map.lock_selection_rect(project, true)
 	if Tools.is_placing_tiles():
+		var paint_index := TileSetPanel.selected_tile_index
 		for cel in _get_selected_draw_cels(false):
 			if cel is not CelTileMap:
 				continue
 			var tilemap_cel := cel as CelTileMap
-			var cell_pos := tilemap_cel.get_cell_position(pos)
-			tilemap_cel.bucket_fill(cell_pos, draw_tile.bind(tilemap_cel))
+			var cell_pos := tilemap_cel.get_cell_position(pos, true)
+			var prev_offset := tilemap_cel.offset
+			var coords_to_fill := tilemap_cel.bucket_fill(cell_pos, project.size)
+			if paint_index != 0:
+				tilemap_cel.ensure_fill_corners_in_bounds(coords_to_fill)
+			@warning_ignore("integer_division")
+			var offset_delta := (tilemap_cel.offset - prev_offset) / tilemap_cel.get_tile_size()
+			for coord in coords_to_fill:
+				coord -= offset_delta
+				if TileSetPanel.autotiling_enabled and paint_index == 0:
+					tilemap_cel.autotile([coord], paint_index == 0)
+				else:
+					tilemap_cel.set_index(tilemap_cel.get_cell_at(coord), paint_index)
+				# Needs to be set again in case we are choosing a random tile.
+				paint_index = TileSetPanel.selected_tile_index
+			if TileSetPanel.autotiling_enabled and paint_index != 0:
+				tilemap_cel.autotile([cell_pos], paint_index == 0)
 		if project.has_selection:
 			project.selection_map.lock_selection_rect(project, false)
 		return
 
 	var cels := _get_selected_draw_cels(false)
 	for cel: PixelCel in cels:
-		var image: ImageExtended = cel.image
+		var image := project.crop_image_to_project_size(cel.get_image(), cel.offset)
+		#var image := ImageExtended.create_from_image(cropped)
 		if Tools.check_alpha_lock(image, pos):
 			continue
-		var color: Color = image.get_pixelv(pos)
+		var color := image.get_pixelv(pos)
 		if _fill_merged_area:
 			color = _sample_masks.get(cel.get_frame(project), cel.image).get_pixelv(pos)
 		if _fill_with == FillWith.COLOR or _pattern == null:
@@ -422,11 +453,13 @@ func _flood_fill(pos: Vector2i) -> void:
 					)
 					var rect := selection_map_copy.get_used_rect()
 					image.blit_rect_mask(filler, selection_map_copy, rect, rect.position)
-					image.convert_rgb_to_indexed()
+					cel.blit_image_to_cel(image)
+					#image.convert_rgb_to_indexed()
 					continue
 				else:
 					image.fill(tool_slot.color)
-					image.convert_rgb_to_indexed()
+					cel.blit_image_to_cel(image)
+					#image.convert_rgb_to_indexed()
 					continue
 		else:
 			# end early if we are filling with an empty pattern
@@ -435,18 +468,19 @@ func _flood_fill(pos: Vector2i) -> void:
 				if project.has_selection:
 					project.selection_map.lock_selection_rect(project, false)
 				return
-		var source_image: Image = image
+		var source_image := image
 		if _fill_merged_area:
 			source_image = _sample_masks.get(cel.get_frame(project), cel.image)
 		var flood_fill_object := FloodFillObject.new()
 		flood_fill_object.tolerance = _tolerance
 		flood_fill_object.selection_matters = true
 		flood_fill_object.flood_fill(pos, source_image, image, project, _color_segments)
+		cel.blit_image_to_cel(image)
 	if project.has_selection:
 		project.selection_map.lock_selection_rect(project, false)
 
 
-func _color_segments(image: ImageExtended, segments: Array[FloodFillObject.Segment]) -> void:
+func _color_segments(image: Image, segments: Array[FloodFillObject.Segment]) -> void:
 	if _fill_with == FillWith.COLOR or _pattern == null:
 		# This is needed to ensure that the color used to fill is not wrong, due to float
 		# rounding issues.
@@ -460,7 +494,7 @@ func _color_segments(image: ImageExtended, segments: Array[FloodFillObject.Segme
 				Vector2i(p.left_position, p.y), Vector2i(p.right_position - p.left_position + 1, 1)
 			)
 			image.fill_rect(rect, color)
-		image.convert_rgb_to_indexed()
+		#image.convert_rgb_to_indexed()
 	else:
 		# shortcircuit tests for patternfills
 		var pattern_size := _pattern.image.get_size()
@@ -472,14 +506,13 @@ func _color_segments(image: ImageExtended, segments: Array[FloodFillObject.Segme
 				_set_pixel_pattern(image, px, p.y, pattern_size)
 
 
-func _set_pixel_pattern(image: ImageExtended, x: int, y: int, pattern_size: Vector2i) -> void:
+func _set_pixel_pattern(image: Image, x: int, y: int, pattern_size: Vector2i) -> void:
 	var px := (x + _offset_x) % pattern_size.x
 	var py := (y + _offset_y) % pattern_size.y
 	var pc := _pattern.image.get_pixel(px, py)
 	if not is_equal_approx(pc.a, 0):
 		pc = lerp(pc, tool_slot.color, _pattern_interpolate / 100.0)
-	image.set_pixel_custom(x, y, pc)
-
+	image.set_pixel(x, y, pc)
 
 func commit_undo() -> void:
 	var project := Global.current_project

@@ -134,10 +134,12 @@ func text_to_pixels() -> void:
 
 	var undo_data := _get_undo_data()
 	var project := Global.current_project
-	var cel_image := project.frames[project.current_frame].cels[project.current_layer].get_image()
-	if cel_image == null:
+	var cel := project.get_current_cel()
+	var cel_image := cel.get_image()
+	if cel is not PixelCel or cel_image == null:
 		return
-
+	var text_rect := text_edit.get_rect()
+	(cel as PixelCel).ensure_canvas_rect_in_bounds(text_rect.position, text_rect.size)
 	var vp := RenderingServer.viewport_create()
 	var canvas := RenderingServer.canvas_create()
 	RenderingServer.viewport_attach_canvas(vp, canvas)
@@ -157,7 +159,7 @@ func text_to_pixels() -> void:
 	var color := tool_slot.color
 	var font_ascent := font.get_ascent(text_size)
 	var pos := Vector2(0, font_ascent + text_edit.get_theme_constant(&"line_spacing"))
-	pos += text_edit.position
+	pos += text_edit.position - Vector2(cel.offset)
 	var background_rid: RID
 	if antialiasing == TextServer.FONT_ANTIALIASING_LCD:
 		# NOTE: We need background information for FONT_ANTIALIASING_LCD to work.

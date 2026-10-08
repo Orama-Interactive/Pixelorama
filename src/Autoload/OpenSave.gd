@@ -215,7 +215,8 @@ func handle_loading_image(file: String, image: Image, force_import_dialog := fal
 ## For loading the output of AImgIO as a project
 func handle_loading_aimg(path: String, frames: Array) -> void:
 	var project := Project.new([], path.uri_decode().get_file(), frames[0].content.get_size())
-	project.layers.append(PixelLayer.new(project))
+	var layer := PixelLayer.new(project)
+	project.layers.append(layer)
 	Global.projects.append(project)
 
 	# Determine FPS as 1, unless all frames agree.
@@ -237,9 +238,7 @@ func handle_loading_aimg(path: String, frames: Array) -> void:
 			frame.set_duration_in_seconds(aimg_frame.duration, project.fps)
 		var content := aimg_frame.content
 		content.convert(project.get_image_format())
-		var image_extended := ImageExtended.new()
-		image_extended.copy_from_custom(content)
-		frame.cels.append(PixelCel.new(image_extended, 1))
+		frame.cels.append(layer.new_cel_from_image(content))
 		project.frames.append(frame)
 
 	set_new_imported_tab(project, path)
@@ -902,9 +901,7 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 	if cel is CelTileMap:
 		undo_data[cel] = (cel as CelTileMap).serialize_undo_data()
 	cel_image.add_data_to_dictionary(undo_data)
-	cel_image.fill(0)
-	cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
-	cel_image.convert_rgb_to_indexed()
+	cel_image.copy_from_custom(image)
 	var redo_data := {}
 	if cel is CelTileMap:
 		(cel as CelTileMap).update_tilemap()
@@ -938,11 +935,7 @@ func open_image_as_new_frame(
 		var layer := project.layers[i]
 		if i == layer_index and layer is PixelLayer:
 			image.convert(project.get_image_format())
-			var cel_image := Image.create(
-				project_width, project_height, false, project.get_image_format()
-			)
-			cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
-			frame.cels.append(layer.new_cel_from_image(cel_image))
+			frame.cels.append(layer.new_cel_from_image(image))
 		else:
 			frame.cels.append(project.layers[i].new_empty_cel())
 	if not undo:
@@ -974,11 +967,7 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 	for i in project.frames.size():
 		if i == frame_index:
 			image.convert(project.get_image_format())
-			var cel_image := Image.create(
-				project_width, project_height, false, project.get_image_format()
-			)
-			cel_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
-			cels.append(layer.new_cel_from_image(cel_image))
+			cels.append(layer.new_cel_from_image(image))
 		else:
 			cels.append(layer.new_empty_cel())
 
@@ -1151,7 +1140,6 @@ func open_gif_file(path: String) -> bool:
 	new_project.layers.append(layer)
 	for gif_frame in imported_frames:
 		var frame_image := gif_frame.image
-		frame_image.crop(new_project.size.x, new_project.size.y)
 		var cel := layer.new_cel_from_image(frame_image)
 		var delay := gif_frame.delay
 		if delay <= 0.0:
@@ -1256,14 +1244,14 @@ func open_ora_file(path: String) -> void:
 				# Create cel
 				var cel := layer.new_empty_cel()
 				if cel is PixelCel:
+					var image_x := int(parser.get_named_attribute_value("x"))
+					var image_y := int(parser.get_named_attribute_value("y"))
+					cel.offset = Vector2i(image_x, image_y)
 					var image_path := parser.get_named_attribute_value_safe("src")
 					var image_data := zip_reader.read_file(image_path)
 					var image := Image.new()
 					image.load_png_from_buffer(image_data)
-					var image_rect := Rect2i(Vector2i.ZERO, image.get_size())
-					var image_x := int(parser.get_named_attribute_value("x"))
-					var image_y := int(parser.get_named_attribute_value("y"))
-					cel.get_image().blit_rect(image, image_rect, Vector2i(image_x, image_y))
+					cel.get_image().copy_from_custom(image)
 				new_project.frames[0].cels.insert(0, cel)
 		elif parser.get_node_type() == XMLParser.NODE_ELEMENT_END:
 			var node_name := parser.get_node_name()

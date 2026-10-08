@@ -5,8 +5,6 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_21d5l"]
 shader = ExtResource("1_28j41")
-shader_parameter/origin_x_positive = true
-shader_parameter/origin_y_positive = true
 
 [node name="CanvasPreview" type="Node2D" unique_id=288925646]
 material = SubResource("ShaderMaterial_21d5l")
