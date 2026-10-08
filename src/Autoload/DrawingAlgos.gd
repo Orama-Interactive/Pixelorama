@@ -90,6 +90,8 @@ func blend_layers(
 				textures.append(cel_image)
 			else:
 				var cel_image := layer.display_effects(cel)
+				if layer.use_cel_image_for_effects:
+					cel_image.copy_from(project.crop_image_to_project_size(cel_image, cel.offset))
 				textures.append(cel_image)
 			if (
 				layer.is_blended_by_ancestor()
@@ -127,14 +129,14 @@ func set_layer_metadata_image(
 		image.set_pixel(index, 1, Color())
 	# Store the clipping mask boolean
 	if layer.clipping_mask:
-		image.set_pixel(index, 3, Color.RED)
+		image.set_pixel(index, 2, Color.RED)
 	else:
-		image.set_pixel(index, 3, Color.BLACK)
+		image.set_pixel(index, 2, Color.BLACK)
 	if layer.is_blended_by_ancestor():
 		# Store a small red value as a way to indicate that this layer should be skipped
 		# Used for layers such as child layers of a group, so that the group layer itself can
 		# successfully be used as a clipping mask with the layer below it.
-		image.set_pixel(index, 3, Color(0.2, 0.0, 0.0, 0.0))
+		image.set_pixel(index, 2, Color(0.2, 0.0, 0.0, 0.0))
 
 
 func blend_layers_headless(
@@ -142,7 +144,7 @@ func blend_layers_headless(
 ) -> void:
 	var opacity := cel.get_final_opacity(layer)
 	var cel_image := Image.new()
-	cel_image.copy_from(cel.get_image())
+	cel_image.copy_from(project.crop_image_to_project_size(cel.get_image(), cel.offset))
 	if opacity < 1.0:  # If we have cel or layer transparency
 		for xx in cel_image.get_size().x:
 			for yy in cel_image.get_size().y:
@@ -897,11 +899,8 @@ func generate_hexagonal_flat_top(image: Image) -> void:
 
 
 # Image effects
-func center(indices: Array) -> void:
-	var project := Global.current_project
+func center_frames(indices: Array, project := Global.current_project) -> void:
 	Global.transform_content_confirmed.emit(project)
-	var redo_data := {}
-	var undo_data := {}
 	project.undo_redo.create_action("Center Frames")
 	for frame in indices:
 		# Find used rect of the current frame (across all of the layers)
@@ -909,7 +908,7 @@ func center(indices: Array) -> void:
 		for cel in project.frames[frame].cels:
 			if not cel is PixelCel:
 				continue
-			var cel_rect := cel.get_image().get_used_rect()
+			var cel_rect := cel.get_cel_rect()
 			if cel_rect.has_area():
 				used_rect = used_rect.merge(cel_rect) if used_rect.has_area() else cel_rect
 		if not used_rect.has_area():
@@ -917,44 +916,60 @@ func center(indices: Array) -> void:
 
 		# Now apply centering
 		var offset: Vector2i = (0.5 * (project.size - used_rect.size)).floor()
+		var delta := offset - used_rect.position
 		for cel in project.frames[frame].cels:
 			if not cel is PixelCel:
 				continue
-			var cel_image := (cel as PixelCel).get_image()
-			var tmp_centered := project.new_empty_image()
-			tmp_centered.blend_rect(cel_image, used_rect, offset)
-			var centered := ImageExtended.new()
-			centered.copy_from_custom(tmp_centered, cel_image.is_indexed)
-			if cel is CelTileMap:
-				var tilemap_cel := cel as CelTileMap
-				var tilemap_offset := (offset - used_rect.position) % tilemap_cel.get_tile_size()
-				tilemap_cel.serialize_undo_data_source_image(
-					centered, redo_data, undo_data, tilemap_offset
-				)
-			centered.add_data_to_dictionary(redo_data, cel_image)
-			cel_image.add_data_to_dictionary(undo_data)
-	project.deserialize_cel_undo_data(redo_data, undo_data)
+			project.undo_redo.add_do_method(cel.change_offset.bind(cel.offset + delta))
+			project.undo_redo.add_undo_method(cel.change_offset.bind(cel.offset))
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.commit_action()
+
+
+func center_cels(indices: Array, project := Global.current_project) -> void:
+	project.undo_redo.create_action("Center Cels")
+	for cel_index in indices:
+		var frame_index: int = cel_index[0]
+		var layer_index: int = cel_index[1]
+		var cel := project.frames[frame_index].cels[layer_index]
+		if not cel is PixelCel:
+			continue
+		var used_rect := cel.get_cel_rect()
+		var offset: Vector2i = (0.5 * (project.size - used_rect.size)).floor()
+		project.undo_redo.add_do_method(cel.change_offset.bind(offset))
+		project.undo_redo.add_undo_method(cel.change_offset.bind(cel.offset))
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.commit_action()
 
 
 func scale_project(width: int, height: int, interpolation: int) -> void:
+	var project := Global.current_project
+	var ratio_x := float(width) / float(project.size.x)
+	var ratio_y := float(height) / float(project.size.y)
 	var redo_data := {}
 	var undo_data := {}
 	var tilesets: Array[TileSetCustom] = []
-	for cel in Global.current_project.get_all_pixel_cels():
+	for cel in project.get_all_pixel_cels():
 		if not cel is PixelCel:
 			continue
 		var cel_image := (cel as PixelCel).get_image()
-		var sprite := resize_image(cel_image, width, height, interpolation) as ImageExtended
+		var new_width := cel_image.get_width() * ratio_x
+		var new_height := cel_image.get_height() * ratio_y
+		var sprite := resize_image(cel_image, new_width, new_height, interpolation) as ImageExtended
+		var new_offset := Vector2(cel.offset) * Vector2(ratio_x, ratio_y)
+
 		if cel is CelTileMap:
 			var tilemap_cel := cel as CelTileMap
 			var skip_tileset_undo := not tilesets.has(tilemap_cel.tileset)
 			tilemap_cel.serialize_undo_data_source_image(
-				sprite, redo_data, undo_data, Vector2i.ZERO, skip_tileset_undo, interpolation
+				sprite, redo_data, undo_data, new_offset, skip_tileset_undo, interpolation
 			)
 			tilesets.append(tilemap_cel.tileset)
+		else:
+			redo_data[cel] = {"offset": new_offset}
+			undo_data[cel] = {"offset": cel.offset}
 		sprite.add_data_to_dictionary(redo_data, cel_image)
 		cel_image.add_data_to_dictionary(undo_data)
 
@@ -995,38 +1010,25 @@ func resize_image(
 
 
 ## Sets the size of the project to be the same as the size of the active selection.
-func crop_to_selection() -> void:
-	if not Global.current_project.has_selection:
+func crop_to_selection(project := Global.current_project) -> void:
+	if not project.has_selection:
 		return
-	Global.transform_content_confirmed.emit(Global.current_project)
-	var redo_data := {}
-	var undo_data := {}
-	var rect := Global.current_project.selection_map.get_selection_rect(Global.current_project)
-	# Loop through all the cels to crop them
-	for cel in Global.current_project.get_all_pixel_cels():
-		var cel_image := cel.get_image()
-		var tmp_cropped := cel_image.get_region(rect)
-		var cropped := ImageExtended.new()
-		cropped.copy_from_custom(tmp_cropped, cel_image.is_indexed)
-		if cel is CelTileMap:
-			var tilemap_cel := cel as CelTileMap
-			var offset := rect.position
-			tilemap_cel.serialize_undo_data_source_image(cropped, redo_data, undo_data, -offset)
-		cropped.add_data_to_dictionary(redo_data, cel_image)
-		cel_image.add_data_to_dictionary(undo_data)
-
-	general_do_and_undo_scale(rect.size.x, rect.size.y, redo_data, undo_data)
+	Global.transform_content_confirmed.emit(project)
+	var rect := project.selection_map.get_selection_rect(project)
+	resize_canvas(rect.size.x, rect.size.y, -rect.position.x, -rect.position.y)
 
 
 ## Automatically makes the project smaller by looping through all of the cels and
 ## trimming out the pixels that are transparent in all cels.
-func crop_to_content() -> void:
-	Global.transform_content_confirmed.emit(Global.current_project)
+func crop_to_content(project := Global.current_project) -> void:
+	Global.transform_content_confirmed.emit(project)
 	var used_rect := Rect2i()
-	for cel in Global.current_project.get_all_pixel_cels():
+	for cel in project.get_all_pixel_cels():
 		if not cel is PixelCel:
 			continue
-		var cel_used_rect := cel.get_image().get_used_rect()
+		if cel.get_image().is_invisible():
+			continue
+		var cel_used_rect := cel.get_cel_rect()
 		if cel_used_rect == Rect2i(0, 0, 0, 0):  # If the cel has no content
 			continue
 
@@ -1039,44 +1041,16 @@ func crop_to_content() -> void:
 	if used_rect == Rect2i(0, 0, 0, 0):
 		return
 
-	var width := used_rect.size.x
-	var height := used_rect.size.y
-	var redo_data := {}
-	var undo_data := {}
-	# Loop through all the cels to trim them
-	for cel in Global.current_project.get_all_pixel_cels():
-		var cel_image := cel.get_image()
-		var tmp_cropped := cel_image.get_region(used_rect)
-		var cropped := ImageExtended.new()
-		cropped.copy_from_custom(tmp_cropped, cel_image.is_indexed)
-		if cel is CelTileMap:
-			var tilemap_cel := cel as CelTileMap
-			var offset := used_rect.position
-			tilemap_cel.serialize_undo_data_source_image(cropped, redo_data, undo_data, -offset)
-		cropped.add_data_to_dictionary(redo_data, cel_image)
-		cel_image.add_data_to_dictionary(undo_data)
-
-	general_do_and_undo_scale(width, height, redo_data, undo_data)
+	resize_canvas(used_rect.size.x, used_rect.size.y, -used_rect.position.x, -used_rect.position.y)
 
 
 func resize_canvas(width: int, height: int, offset_x: int, offset_y: int) -> void:
 	var redo_data := {}
 	var undo_data := {}
 	for cel in Global.current_project.get_all_pixel_cels():
-		var cel_image := cel.get_image()
-		var resized := ImageExtended.create_custom(
-			width, height, cel_image.has_mipmaps(), cel_image.get_format(), cel_image.is_indexed
-		)
-		resized.blend_rect(
-			cel_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), Vector2i(offset_x, offset_y)
-		)
-		resized.convert_rgb_to_indexed()
-		if cel is CelTileMap:
-			var tilemap_cel := cel as CelTileMap
-			var offset := Vector2i(offset_x, offset_y)
-			tilemap_cel.serialize_undo_data_source_image(resized, redo_data, undo_data, offset)
-		resized.add_data_to_dictionary(redo_data, cel_image)
-		cel_image.add_data_to_dictionary(undo_data)
+		var offset := Vector2i(offset_x, offset_y)
+		redo_data[cel] = {"offset": offset + cel.offset}
+		undo_data[cel] = {"offset": cel.offset}
 
 	general_do_and_undo_scale(width, height, redo_data, undo_data)
 

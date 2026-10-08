@@ -1012,15 +1012,19 @@ func change_layer_automatically(pos: Vector2i) -> void:
 		return
 	var image := Image.new()
 	image.copy_from(project.get_current_cel().get_image())
-	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1:
+	if pos.x > project.size.x - 1 or pos.y > project.size.y - 1:
 		return
-
 	var curr_frame := project.frames[project.current_frame]
 	for layer in project.layers.size():
 		var layer_index := (project.layers.size() - 1) - layer
 		if project.layers[layer_index].is_visible_in_hierarchy():
-			image = curr_frame.cels[layer_index].get_image()
-			var color := image.get_pixelv(pos)
+			var cel := curr_frame.cels[layer_index]
+			image = cel.get_image()
+			var cel_rect := cel.get_cel_rect()
+			if not cel_rect.has_point(pos):
+				continue
+			var local_pos := Vector2i(pos) - cel.offset
+			var color := image.get_pixelv(local_pos)
 			if not is_zero_approx(color.a):
 				# Change layer.
 				project.selected_cels.clear()

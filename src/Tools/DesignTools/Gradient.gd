@@ -98,7 +98,8 @@ func draw_start(pos: Vector2i) -> void:
 		return
 	_click_pos = pos
 	var cel := project.get_current_cel()
-	_click_color = cel.get_image().get_pixelv(pos)
+	var source_image := project.crop_image_to_project_size(cel.get_image(), cel.offset)
+	_click_color = source_image.get_pixelv(pos)
 	_offset = pos
 	_drawing = true
 	_selection_tex = ImageTexture.new()
@@ -106,7 +107,6 @@ func draw_start(pos: Vector2i) -> void:
 		var selection := project.selection_map.return_cropped_copy(project, project.size)
 		_selection_tex = ImageTexture.create_from_image(selection)
 	if _fill_area == FillArea.AREA:
-		var source_image := project.get_current_cel().get_image()
 		var draw_mask := SelectionMap.new()
 		draw_mask.copy_from(project.selection_map)
 		draw_mask.clear()
@@ -148,12 +148,16 @@ func cancel_tool() -> void:
 
 func _restore_image_data() -> void:
 	for data in _undo_data:
-		if data is not Image:
-			continue
-		var image_data = _undo_data[data]["data"]
-		data.set_data(
-			data.get_width(), data.get_height(), data.has_mipmaps(), data.get_format(), image_data
-		)
+		if data is Image:
+			var image_data = _undo_data[data]["data"]
+			var image_size := Vector2i(_undo_data[data]["width"], _undo_data[data]["height"])
+			if data.get_size() != image_size:
+				data.crop(image_size.x, image_size.y)
+			data.set_data(
+				image_size.x, image_size.y, data.has_mipmaps(), data.get_format(), image_data
+			)
+		elif data is BaseCel:
+			data.offset = _undo_data[data]["offset"]
 
 
 func _reset_tool() -> void:
@@ -167,7 +171,7 @@ func apply_gradient(pos: Vector2) -> void:
 	var angle := rad_to_deg(-pos.angle_to_point(_click_pos))
 	var pivot := _click_pos / Vector2(project.size)
 	var radius := pos - _click_pos
-	if Input.is_action_pressed("shape_perfect"):
+	if Input.is_action_pressed(&"shape_perfect"):
 		angle = snappedf(angle, 22.5)
 		var square_size := maxi(absi(radius.x), absi(radius.y))
 		radius = Vector2i(square_size, square_size)
@@ -192,10 +196,12 @@ func apply_gradient(pos: Vector2) -> void:
 		"tolerance": _tolerance
 	}
 	_restore_image_data()
-	var images := _get_selected_draw_images()
-	for image in images:
+	var cels := _get_selected_draw_cels(false)
+	for cel: PixelCel in cels:
+		var image := project.crop_image_to_project_size(cel.get_image(), cel.offset)
 		var gen := ShaderImageEffect.new()
 		gen.generate_image(image, gradient_shader, params, project.size)
+		cel.blit_image_to_cel(image)
 
 
 func commit_undo() -> void:

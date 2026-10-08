@@ -331,9 +331,9 @@ func _draw_shape() -> void:
 			if dst_rect.size == Vector2i.ZERO:
 				continue
 			var src_rect := Rect2i(dst_rect.position - dst, dst_rect.size)
-			var brush_image: Image = remove_unselected_parts_of_brush(box_img, dst)
+			var brush_image := remove_unselected_parts_of_brush(box_img, dst)
 			dst = dst_rect.position
-			_draw_brush_image(brush_image, src_rect, dst)
+			_draw_brush_image(brush_image, src_rect, dst, false)
 
 			# Handle Mirroring
 			var mirror_x := (project.x_symmetry_point + 1) - dst.x - src_rect.size.x
@@ -347,18 +347,22 @@ func _draw_shape() -> void:
 				if Tools.horizontal_mirror:
 					var x_dst := Vector2i(mirror_x, dst.y)
 					var mirr_b_x := remove_unselected_parts_of_brush(brush_copy_x, x_dst)
-					_draw_brush_image(mirr_b_x, _flip_rect(src_rect, box_size, true, false), x_dst)
+					_draw_brush_image(
+						mirr_b_x, _flip_rect(src_rect, box_size, true, false), x_dst, false
+					)
 					if Tools.vertical_mirror:
 						brush_copy_x.flip_y()
 						var xy_dst := Vector2i(mirror_x, mirror_y)
 						var mirr_b_xy := remove_unselected_parts_of_brush(brush_copy_x, xy_dst)
 						_draw_brush_image(
-							mirr_b_xy, _flip_rect(src_rect, box_size, true, true), xy_dst
+							mirr_b_xy, _flip_rect(src_rect, box_size, true, true), xy_dst, false
 						)
 				if Tools.vertical_mirror:
 					var y_dst := Vector2i(dst.x, mirror_y)
 					var mirr_b_y := remove_unselected_parts_of_brush(brush_copy_y, y_dst)
-					_draw_brush_image(mirr_b_y, _flip_rect(src_rect, box_size, false, true), y_dst)
+					_draw_brush_image(
+						mirr_b_y, _flip_rect(src_rect, box_size, false, true), y_dst, false
+					)
 	else:
 		var box_points := _control_pts.duplicate()
 		box_points.push_front(_origin)
@@ -373,13 +377,12 @@ func _draw_shape() -> void:
 	commit_undo("Draw Shape")
 
 
-func _draw_pixel(point: Vector2i, images: Array[ImageExtended]) -> void:
+func _draw_pixel(point: Vector2i, images: Dictionary[Image, Variant]) -> void:
 	if Tools.is_placing_tiles():
 		draw_tile(point)
 	else:
 		if Global.current_project.can_pixel_get_drawn(point):
-			for image in images:
-				_drawer.set_pixel(image, point, tool_slot.color)
+			_drawer_set_pixel(point, images)
 
 
 func _clear() -> void:
@@ -667,17 +670,6 @@ func box_constraint(old_point: Vector2i, point: Vector2i, state: int) -> Vector2
 		point.x = _control_pts[2].x
 		point.y = _control_pts[2].y - absi(floori(point.distance_to(_control_pts[2])))
 	return point
-
-
-func _draw_brush_image(brush_image: Image, src_rect: Rect2i, dst: Vector2i) -> void:
-	var images := _get_selected_draw_images()
-	for draw_image in images:
-		if Tools.alpha_locked:
-			var mask := draw_image.get_region(Rect2i(dst, brush_image.get_size()))
-			draw_image.blend_rect_mask(brush_image, mask, src_rect, dst)
-		else:
-			draw_image.blend_rect(brush_image, src_rect, dst)
-		draw_image.convert_rgb_to_indexed()
 
 
 func _exit_tree() -> void:

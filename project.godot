@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Pixelorama"
 config/description="Unleash your creativity with Pixelorama, a powerful and accessible open-source pixel art multitool. Whether you want to create sprites, tiles, animations, or just express yourself in the language of pixel art, this software will realize your pixel-perfect dreams with a vast toolbox of features."
-config/version="v1.2.3-stable"
+config/version="v1.2.4-dev"
 config/tags=PackedStringArray("pixelorama")
 run/main_scene="res://src/Main.tscn"
 config/use_custom_user_dir=true
@@ -27,8 +27,8 @@ boot_splash/image="res://assets/graphics/splash.png"
 config/icon="res://assets/graphics/icons/icon.png"
 config/macos_native_icon="res://assets/graphics/icons/icon.icns"
 config/windows_native_icon="res://assets/graphics/icons/icon.ico"
-config/ExtensionsAPI_Version=9
-config/Pxo_Version=7
+config/ExtensionsAPI_Version=10
+config/Pxo_Version=8
 
 [autoload]
 
@@ -1085,10 +1085,6 @@ mm_color_change_value={
 }
 mm_color_change_alpha={
 "deadzone": 0.2,
-"events": []
-}
-grayscale_view={
-"deadzone": 0.5,
 "events": []
 }
 quick_pencil_tool={

@@ -9,8 +9,6 @@ uniform sampler2DArray layers : filter_nearest;
 // the second are the opacities, the third are the origins and the fourth are the
 // clipping mask booleans.
 uniform sampler2D metadata : filter_nearest;
-uniform bool origin_x_positive = true;
-uniform bool origin_y_positive = true;
 
 // Conversion functions from
 // https://gist.github.com/unitycoder/aaf94ddfe040ec2da93b58d3c65ab9d9
@@ -64,7 +62,7 @@ vec4 blend(int blend_type, vec4 current_color, vec4 prev_color, float opacity) {
 			return prev_color;
 		}
 	}
-	
+
 	vec4 result;
 	bool should_blend_alpha = true;
 	switch(blend_type) {
@@ -202,16 +200,9 @@ int find_previous_opaque_layer(int index) {
 
 void fragment() {
 	ivec2 metadata_size = textureSize(metadata, 0);
-	vec2 first_origin = texelFetch(metadata, ivec2(0, 2), 0).rg;
-	if (!origin_x_positive) {
-		first_origin.x = -first_origin.x;
-	}
-	if (!origin_y_positive) {
-		first_origin.y = -first_origin.y;
-	}
 	float first_opacity = texelFetch(metadata, ivec2(0, 1), 0).r;
-	vec4 result_color = texture(layers, vec3(UV - first_origin, 0.0));
-	result_color.a = border_trim(result_color, UV - first_origin);
+	vec4 result_color = texture(layers, vec3(UV, 0.0));
+	result_color.a = border_trim(result_color, UV);
 	result_color.a *= first_opacity;
 	for(int i = 1; i < metadata_size.x; i++) // Loops through every layer
 	{
@@ -219,28 +210,13 @@ void fragment() {
 		// Blend modes are being stored as integers divided by 255, so convert them back to
 		// their integer form
 		int current_blend_mode = int(floor(blend_mode_float * 255.0));
-		
-		vec2 current_origin = texelFetch(metadata, ivec2(i, 2), 0).rg;
-		if (!origin_x_positive) {
-			current_origin.x = -current_origin.x;
-		}
-		if (!origin_y_positive) {
-			current_origin.y = -current_origin.y;
-		}
 		// get origin of previous layer (used for clipping masks to work correctly)
 		int clipping_i = find_previous_opaque_layer(i);
-		vec2 prev_origin = texelFetch(metadata, ivec2(clipping_i, 2), 0).rg;
-		if (!origin_x_positive) {
-			prev_origin.x = -prev_origin.x;
-		}
-		if (!origin_y_positive) {
-			prev_origin.y = -prev_origin.y;
-		}
 		float current_opacity = texelFetch(metadata, ivec2(i, 1), 0).r;
-		vec2 uv = UV - current_origin;
+		vec2 uv = UV;
 		vec4 layer_color = texture(layers, vec3(uv, float(i)));
-		vec4 prev_layer_color = texture(layers, vec3(UV - prev_origin, float(clipping_i)));
-		float clipping_mask = texelFetch(metadata, ivec2(i, 3), 0).r;
+		vec4 prev_layer_color = texture(layers, vec3(UV, float(clipping_i)));
+		float clipping_mask = texelFetch(metadata, ivec2(i, 2), 0).r;
 		layer_color.a *= prev_layer_color.a * step(0.5, clipping_mask) + 1.0 * step(clipping_mask, 0.5);
 		layer_color.a = border_trim(layer_color, uv);
 		result_color = blend(current_blend_mode, layer_color, result_color, current_opacity);
