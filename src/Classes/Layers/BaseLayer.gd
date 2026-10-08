@@ -71,6 +71,10 @@ var ui_color := Color(0, 0, 0, 0):
 	set(value):
 		ui_color = value
 		ui_color_changed.emit()
+## If [code]true[/code], layer effects use the cel image as it is.
+## Otherwise, they use a copy of the image, cropped to the canvas size.
+## For effects like offset it might be best to have it be [code]true[/code],
+## while for effects like outline, drop shadow & gradient it might be best to be [code]false[/code].
 var use_cel_image_for_effects := false
 
 var text_server := TextServerManager.get_primary_interface()
