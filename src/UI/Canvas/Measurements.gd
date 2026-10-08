@@ -50,18 +50,23 @@ func _prepare_cel_rect() -> void:
 		pos.x = project.size.x - pos.x - 1
 	var cel := project.get_current_cel()
 	var image := cel.get_image()
-	rect_bounds = image.get_used_rect()
-	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1 or pos.x < 0 or pos.y < 0:
+	rect_bounds = cel.get_cel_rect()
+	if pos.x > project.size.x - 1 or pos.y > project.size.x - 1 or pos.x < 0 or pos.y < 0:
 		return
 
 	var curr_frame := project.frames[project.current_frame]
 	for layer in project.layers.size():
 		var layer_index := (project.layers.size() - 1) - layer
 		if project.layers[layer_index].is_visible_in_hierarchy():
-			image = curr_frame.cels[layer_index].get_image()
-			var color := image.get_pixelv(pos)
+			cel = curr_frame.cels[layer_index]
+			image = cel.get_image()
+			var cel_rect := cel.get_cel_rect()
+			if not cel_rect.has_point(pos):
+				continue
+			var local_pos := Vector2i(pos) - cel.offset
+			var color := image.get_pixelv(local_pos)
 			if not is_zero_approx(color.a):
-				rect_bounds = image.get_used_rect()
+				rect_bounds = cel_rect
 				break
 
 
@@ -91,7 +96,7 @@ func _prepare_movement_rect() -> void:
 			var cel := project.frames[frame].cels[cel_idx]
 			if not cel is PixelCel:
 				continue
-			var cel_rect := cel.get_image().get_used_rect()
+			var cel_rect := cel.get_cel_rect()
 			if cel_rect.has_area():
 				used_rect = used_rect.merge(cel_rect) if used_rect.has_area() else cel_rect
 		if not used_rect.has_area():

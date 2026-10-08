@@ -9,6 +9,7 @@ var layer_indices: PackedInt32Array
 @onready var opacity_slider := $GridContainer/OpacitySlider as ValueSlider
 @onready var blend_modes_button := $GridContainer/BlendModeOptionButton as OptionButton
 @onready var ignore_onion_check_button := $GridContainer/OnionIgnoreButton as CheckButton
+@onready var use_cel_image_button := $GridContainer/UseCelImageButton as CheckButton
 @onready var play_at_frame_slider := $GridContainer/PlayAtFrameSlider as ValueSlider
 @onready var user_data_text_edit := $GridContainer/UserDataTextEdit as TextEdit
 @onready var ui_color_picker_button := $GridContainer/UIColorPickerButton as ColorPickerButton
@@ -44,6 +45,7 @@ func _on_visibility_changed() -> void:
 		var blend_mode_index := blend_modes_button.get_item_index(first_layer.blend_mode)
 		blend_modes_button.selected = blend_mode_index
 		ignore_onion_check_button.set_pressed_no_signal(first_layer.ignore_onion)
+		use_cel_image_button.set_pressed_no_signal(first_layer.use_cel_image_for_effects)
 		if first_layer is AudioLayer:
 			play_at_frame_slider.value = first_layer.playback_frame + 1
 		play_at_frame_slider.max_value = project.frames.size()
@@ -193,6 +195,25 @@ func _on_onion_ignore_button_toggled(toggled_on: bool) -> void:
 		project.undo_redo.add_undo_method(Global.canvas.refresh_onion)
 		project.undo_redo.add_do_method(_emit_layer_property_signal)
 		project.undo_redo.add_undo_method(_emit_layer_property_signal)
+		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+
+	project.undo_redo.commit_action()
+
+
+func _on_use_cel_image_button_toggled(toggled_on: bool) -> void:
+	if layer_indices.size() == 0:
+		return
+
+	var project: Project = Global.current_project
+	project.undo_redo.create_action("Change Layer Onion Skinning Ignore Status")
+	for layer_index in layer_indices:
+		var layer := project.layers[layer_index]
+
+		project.undo_redo.add_do_property(layer, "use_cel_image_for_effects", toggled_on)
+		project.undo_redo.add_undo_property(
+			layer, "use_cel_image_for_effects", layer.use_cel_image_for_effects
+		)
 		project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 		project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 

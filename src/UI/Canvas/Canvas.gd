@@ -49,23 +49,21 @@ func _ready() -> void:
 
 
 func _draw() -> void:
+	var project := Global.current_project
 	var position_tmp := position
 	var scale_tmp := scale
 	if Global.mirror_view:
-		position_tmp.x = position_tmp.x + Global.current_project.size.x
+		position_tmp.x = position_tmp.x + project.size.x
 		scale_tmp.x = -1
-	# If we just use the first cel and it happens to be a GroupCel
-	# nothing will get drawn
-	var cel_to_draw := Global.current_project.find_first_drawable_cel()
 	draw_set_transform(position_tmp, rotation, scale_tmp)
 	# Placeholder so we can have a material here
-	if is_instance_valid(cel_to_draw):
-		draw_texture(cel_to_draw.image_texture, Vector2.ZERO)
+	var image_to_draw := project.empty_image_texture
+	draw_texture(image_to_draw, Vector2.ZERO)
 	draw_layers(project_changed)
 	project_changed = false
 	if Global.onion_skinning:
 		refresh_onion()
-	currently_visible_frame.size = Global.current_project.size
+	currently_visible_frame.size = project.size
 	current_frame_drawer.queue_redraw()
 	tile_mode.queue_redraw()
 	draw_set_transform(position, rotation, scale)
@@ -123,6 +121,21 @@ func camera_zoom(project := Global.current_project) -> void:
 	Global.transparent_checker.update_rect()
 
 
+static func get_canvas_cel_image(cel: BaseCel, layer: BaseLayer, image: Image) -> void:
+	var project := layer.project
+	if layer.is_blender():
+		var frame := project.frames[project.current_frame]
+		var blended: Image = layer.blend_children(frame, Global.display_layer_effects)
+		image.copy_from(blended)
+	else:
+		if Global.display_layer_effects:
+			image.copy_from(layer.display_effects(cel))
+			if layer.use_cel_image_for_effects:
+				image.copy_from(project.crop_image_to_project_size(image, cel.offset))
+		else:
+			image.copy_from(project.crop_image_to_project_size(cel.get_image(), cel.offset))
+
+
 func update_texture(
 	layer_i: int, frame_i := -1, project := Global.current_project, undo := false
 ) -> void:
@@ -138,16 +151,8 @@ func update_texture(
 			# Don't update if the cel is on a different frame (can happen with undo/redo)
 			return
 		var layer := project.layers[layer_i].get_blender_ancestor()
-		var cel_image: Image
-		if layer.is_blender():
-			cel_image = layer.blend_children(
-				project.frames[project.current_frame], Vector2i.ZERO, Global.display_layer_effects
-			)
-		else:
-			if Global.display_layer_effects:
-				cel_image = layer.display_effects(current_cel)
-			else:
-				cel_image = current_cel.get_image()
+		var cel_image := Image.new()
+		get_canvas_cel_image(current_cel, layer, cel_image)
 		if (
 			cel_image.get_size()
 			== Vector2i(layer_texture_array.get_width(), layer_texture_array.get_height())
@@ -176,12 +181,8 @@ func draw_layers(force_recreate := false) -> void:
 		var textures: Array[Image] = []
 		textures.resize(project.layers.size())
 		# Nx4 texture, where N is the number of layers and the first row are the blend modes,
-		# the second are the opacities, the third are the origins and the fourth are the
-		# clipping mask booleans.
-		# We are using RGH because RG8 causes the move tool preview to be imprecise and
-		# not follow the pixel grid, and because RGF is not supported by all hardware
-		# see https://github.com/Orama-Interactive/Pixelorama/issues/1546.
-		layer_metadata_image = Image.create(project.layers.size(), 4, false, Image.FORMAT_RGH)
+		# the second are the opacities, the third are the clipping mask booleans.
+		layer_metadata_image = Image.create(project.layers.size(), 4, false, Image.FORMAT_R8)
 		# Draw current frame layers
 		for i in project.layers.size():
 			var layer := project.layers[i]
@@ -189,14 +190,6 @@ func draw_layers(force_recreate := false) -> void:
 			var cel_image := Image.new()
 			_update_texture_array_layer(project, layer, cel_image, false)
 			textures[ordered_index] = cel_image
-			# Store the origin
-			if [project.current_frame, i] in project.selected_cels:
-				var origin := Vector2(move_preview_location).abs() / Vector2(cel_image.get_size())
-				layer_metadata_image.set_pixel(
-					ordered_index, 2, Color(origin.x, origin.y, 0.0, 0.0)
-				)
-			else:
-				layer_metadata_image.set_pixel(ordered_index, 2, Color())
 
 		layer_texture_array.create_from_images(textures)
 		layer_metadata_texture.set_image(layer_metadata_image)
@@ -225,22 +218,14 @@ func draw_layers(force_recreate := false) -> void:
 										include = true
 						if not include:
 							continue
-				var ordered_index := project.ordered_layers.find(layer.index)
 				var cel_image := Image.new()
 				_update_texture_array_layer(project, layer, cel_image, true)
 				var parent_layer := layer.get_blender_ancestor()
 				if layer != parent_layer:
 					# True when the layer has parents. In that case, update its top-most parent.
 					_update_texture_array_layer(project, parent_layer, Image.new(), true)
-				# Update the origin
-				var origin := Vector2(move_preview_location).abs() / Vector2(cel_image.get_size())
-				layer_metadata_image.set_pixel(
-					ordered_index, 2, Color(origin.x, origin.y, 0.0, 0.0)
-				)
 			layer_metadata_texture.update(layer_metadata_image)
 
-	material.set_shader_parameter("origin_x_positive", move_preview_location.x > 0)
-	material.set_shader_parameter("origin_y_positive", move_preview_location.y > 0)
 	mandatory_update_layers = []
 	update_all_layers = false
 
@@ -251,19 +236,7 @@ func _update_texture_array_layer(
 	var ordered_index := project.ordered_layers.find(layer.index)
 	var cel := project.frames[project.current_frame].cels[layer.index]
 	var include := true
-	if layer.is_blender():
-		cel_image.copy_from(
-			layer.blend_children(
-				project.frames[project.current_frame],
-				move_preview_location,
-				Global.display_layer_effects
-			)
-		)
-	else:
-		if Global.display_layer_effects:
-			cel_image.copy_from(layer.display_effects(cel))
-		else:
-			cel_image.copy_from(cel.get_image())
+	get_canvas_cel_image(cel, layer, cel_image)
 	if layer.is_blended_by_ancestor():
 		include = false
 	if update_layer:

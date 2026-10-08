@@ -28,6 +28,8 @@ var ui_color := Color(0, 0, 0, 0):
 	set(value):
 		ui_color = value
 		ui_color_changed.emit()
+var offset := Vector2i.ZERO  ## The offset of the cel in pixel coordinates.
+var prev_offset := offset  ## Used for undo/redo purposes.
 
 
 func get_final_opacity(layer: BaseLayer) -> float:
@@ -42,6 +44,15 @@ func get_frame(project: Project) -> Frame:
 		if frame.cels.has(self):
 			return frame
 	return null
+
+
+func get_cel_rect() -> Rect2i:
+	return Rect2i(offset, get_image().get_size())
+
+
+## Changes the [member offset] of the cel.
+func change_offset(new_offset: Vector2i) -> void:
+	offset = new_offset
 
 
 # Methods to Override:
@@ -88,7 +99,9 @@ func get_image() -> Image:
 
 ## Returns a copy of the cel.
 func duplicate_cel() -> BaseCel:
-	return get_script().new()
+	var new_cel := get_script().new() as BaseCel
+	new_cel.deserialize(serialize())
+	return new_cel
 
 
 ## Used to update the texture of the cel.
@@ -108,6 +121,7 @@ func serialize() -> Dictionary:
 	if not user_data.is_empty():
 		dict["user_data"] = user_data
 	dict["ui_color"] = ui_color
+	dict["offset"] = offset
 	return dict
 
 
@@ -122,6 +136,14 @@ func deserialize(dict: Dictionary) -> void:
 			ui_color = str_to_var("Color" + tmp_ui_color)
 		else:
 			ui_color = tmp_ui_color
+	var new_offset: Vector2i
+	var new_offset_str = dict.get("offset", "(0, 0)")
+	if typeof(new_offset_str) in [TYPE_VECTOR2I, TYPE_VECTOR2]:
+		new_offset = new_offset_str
+	else:
+		new_offset = str_to_var("Vector2i" + new_offset_str) as Vector2i
+	if new_offset != offset:
+		change_offset(new_offset)
 
 
 func size_changed(_new_size: Vector2i) -> void:

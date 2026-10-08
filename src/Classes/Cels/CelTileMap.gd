@@ -66,8 +66,6 @@ var tile_offset_axis := TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
 		re_order_tilemap()
 var vertical_cell_min := 0  ## The minimum vertical cell.
 var vertical_cell_max := 0  ## The maximum vertical cell.
-var offset := Vector2i.ZERO  ## The offset of the tilemap in pixel coordinates.
-var prev_offset := offset  ## Used for undo/redo purposes.
 ## The key is the index of the tile in the tileset,
 ## and the value is the coords of the tilemap tile that changed first, along with
 ## its image that is being changed when manual mode is enabled.
@@ -185,15 +183,8 @@ func set_index(
 			)
 		queue_update_cel_portions(true)
 	else:
-		_update_cell(cell, previous_index, force_update)
+		_update_cell(cell, force_update)
 	Global.canvas.queue_redraw()
-
-
-## Changes the [member offset] of the tilemap. Automatically resizes the cells and redraws the grid.
-func change_offset(new_offset: Vector2i) -> void:
-	offset = new_offset
-	_resize_cells(get_image().get_size(), false)
-	Global.grid_updated.emit()
 
 
 ## Returns the [CelTileMap.Cell] at position [param cell_coords] in tilemap space.
@@ -203,79 +194,79 @@ func get_cell_at(cell_coords: Vector2i) -> Cell:
 	return cells[cell_coords]
 
 
-## Returns the position of a cell in the tilemap
-## at pixel coordinates [param coords] in the cel's image.
-func get_cell_position(pixel_coords: Vector2i) -> Vector2i:
-	var offset_coords := pixel_coords - offset
+## Returns the position of a cell in the tilemap,
+## given pixel coordinates [param pixel_coords] in the cel's image.
+func get_cell_position(pixel_coords: Vector2i, bound_check := false) -> Vector2i:
+	if bound_check:
+		pixel_coords = ensure_canvas_point_in_bounds(pixel_coords)
+	if get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
+		var x_pos := float(pixel_coords.x) / get_tile_size().x
+		var y_pos := float(pixel_coords.y) / get_tile_size().y
+		return Vector2i(floori(x_pos), floori(y_pos))
+
 	var cell_coords := Vector2i()
-	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
-		offset_coords -= get_tile_size() / 2
-		var godot_tilemap := create_tilemap_layer_dull_node()
-		cell_coords = godot_tilemap.local_to_map(offset_coords)
-		godot_tilemap.queue_free()
-	else:
-		var x_pos := float(offset_coords.x) / get_tile_size().x
-		var y_pos := float(offset_coords.y) / get_tile_size().y
-		cell_coords = Vector2i(floori(x_pos), floori(y_pos))
+	pixel_coords -= get_tile_size() / 2
+	var godot_tilemap := create_tilemap_layer_dull_node()
+	cell_coords = godot_tilemap.local_to_map(pixel_coords)
+	godot_tilemap.queue_free()
 	return cell_coords
 
 
 ## Returns the index of a cell in the tilemap
 ## at pixel coordinates [param coords] in the cel's image.
-func get_cell_index_at_coords(coords: Vector2i) -> int:
-	return get_cell_at(get_cell_position(coords)).index
+func get_cell_index_at_coords(coords: Vector2i, bound_check := false) -> int:
+	return get_cell_at(get_cell_position(coords, bound_check)).index
 
 
+## Returns the pixel coordinates, given [param cell_coords] in tilemap space.
 func get_pixel_coords(cell_coords: Vector2i) -> Vector2i:
-	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
-		var godot_tilemap := create_tilemap_layer_dull_node()
-		var pixel_coords := godot_tilemap.map_to_local(cell_coords).floor() as Vector2i
-		if get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
-			var quarter_tile_size := get_tile_size() / 4
-			if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
-				pixel_coords += Vector2i(0, quarter_tile_size.y)
-			else:
-				pixel_coords += Vector2i(quarter_tile_size.x, 0)
-		godot_tilemap.queue_free()
-		return pixel_coords + offset
-	return cell_coords * get_tile_size() + offset
+	if get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
+		return cell_coords * get_tile_size()
+
+	var godot_tilemap := create_tilemap_layer_dull_node()
+	var pixel_coords := godot_tilemap.map_to_local(cell_coords).floor() as Vector2i
+	if get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
+		var quarter_tile_size := get_tile_size() / 4
+		if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
+			pixel_coords += Vector2i(0, quarter_tile_size.y)
+		else:
+			pixel_coords += Vector2i(quarter_tile_size.x, 0)
+	godot_tilemap.queue_free()
+	return pixel_coords
 
 
 func get_image_portion(rect: Rect2i, source_image := image, force_disable_clip := false) -> Image:
-	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
-		var mask := Image.create_empty(
-			get_tile_size().x, get_tile_size().y, false, Image.FORMAT_LA8
-		)
-		mask.fill(Color(0, 0, 0, 0))
-		if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
-			var old_clip := _should_clip_tiles
-			# Disable _should_clip_tiles when placing tiles (it's only useful in drawing)
-			if (
-				Tools.is_placing_tiles()
-				or TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL
-				or force_disable_clip
-			):
-				_should_clip_tiles = false
-			var grid_coord := (
-				(Vector2(rect.position - offset) * 2 / Vector2(get_tile_size())).round()
-			)
-			var is_smaller_tile := int(grid_coord.y) % 2 != 0
-			DrawingAlgos.generate_isometric_rectangle(mask, is_smaller_tile and _should_clip_tiles)
-			_should_clip_tiles = old_clip
-		elif get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
-			if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
-				DrawingAlgos.generate_hexagonal_pointy_top(mask)
-			else:
-				DrawingAlgos.generate_hexagonal_flat_top(mask)
-		var to_return := Image.create_empty(
-			get_tile_size().x, get_tile_size().y, false, source_image.get_format()
-		)
-		var portion := source_image.get_region(rect)
-		to_return.blit_rect_mask(
-			portion, mask, Rect2i(Vector2i.ZERO, portion.get_size()), Vector2i.ZERO
-		)
-		return to_return
-	return source_image.get_region(rect)
+	if get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
+		return source_image.get_region(rect)
+
+	var mask := Image.create_empty(get_tile_size().x, get_tile_size().y, false, Image.FORMAT_LA8)
+	mask.fill(Color(0, 0, 0, 0))
+	if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
+		var old_clip := _should_clip_tiles
+		# Disable _should_clip_tiles when placing tiles (it's only useful in drawing)
+		if (
+			Tools.is_placing_tiles()
+			or TileSetPanel.tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL
+			or force_disable_clip
+		):
+			_should_clip_tiles = false
+		var grid_coord := (Vector2(rect.position) * 2 / Vector2(get_tile_size())).round()
+		var is_smaller_tile := int(grid_coord.y) % 2 != 0
+		DrawingAlgos.generate_isometric_rectangle(mask, is_smaller_tile and _should_clip_tiles)
+		_should_clip_tiles = old_clip
+	elif get_tile_shape() == TileSet.TILE_SHAPE_HEXAGON:
+		if get_tile_offset_axis() == TileSet.TILE_OFFSET_AXIS_HORIZONTAL:
+			DrawingAlgos.generate_hexagonal_pointy_top(mask)
+		else:
+			DrawingAlgos.generate_hexagonal_flat_top(mask)
+	var to_return := Image.create_empty(
+		get_tile_size().x, get_tile_size().y, false, source_image.get_format()
+	)
+	var portion := source_image.get_region(rect)
+	to_return.blit_rect_mask(
+		portion, mask, Rect2i(Vector2i.ZERO, portion.get_size()), Vector2i.ZERO
+	)
+	return to_return
 
 
 func get_tile_size() -> Vector2i:
@@ -296,7 +287,9 @@ func get_tile_offset_axis() -> TileSet.TileOffsetAxis:
 	return tileset.tile_offset_axis
 
 
-func bucket_fill(cell_coords: Vector2i, callable: Callable) -> void:
+#region Bucket tool
+func bucket_fill(cell_coords: Vector2i, canvas_size: Vector2i) -> Array[Vector2i]:
+	var result: Array[Vector2i]
 	var godot_tilemap := create_tilemap_layer_dull_node()
 	var source_cell := get_cell_at(cell_coords)
 	var source_index := source_cell.index
@@ -306,19 +299,81 @@ func bucket_fill(cell_coords: Vector2i, callable: Callable) -> void:
 	while not to_check.is_empty():
 		var coords := to_check.pop_back() as Vector2i
 		if not already_checked.has(coords):
-			if not cells.has(coords):
+			if not is_within_canvas_bounds(coords, canvas_size):
 				already_checked.append(coords)
 				continue
+			if not cells.has(coords):
+				cells[coords] = Cell.new()
 			var current_cell := cells[coords]
 			if source_index == current_cell.index:
-				var index := TileSetPanel.selected_tile_index
-				callable.call(coords, index)
+				result.append(coords)
 				# Get surrounding tiles (handles different tile shapes).
 				var around := godot_tilemap.get_surrounding_cells(coords)
 				for i in around.size():
 					to_check.push_back(around[i])
 			already_checked.append(coords)
 	godot_tilemap.queue_free()
+	return result
+
+
+## Returns [code]true[/code] if the coordinates of a cell ([param cell_coords])
+## are within the [param canvas_size].
+func is_within_canvas_bounds(cell_coords: Vector2i, canvas_size: Vector2i) -> bool:
+	var pixel_pos := get_pixel_coords(cell_coords) + offset
+	var cell_rect := Rect2i(pixel_pos, get_tile_size())
+	var canvas_rect := Rect2i(Vector2i.ZERO, canvas_size)
+	return canvas_rect.intersects(cell_rect)
+
+
+## Given an array of [param cell_coordinates], ensure that the corners fit
+## within the cel image's bounds, expanding the image and shifting its [member offset] if needed.
+func ensure_fill_corners_in_bounds(cell_coordinates: Array[Vector2i]) -> void:
+	if cell_coordinates.is_empty():
+		return
+	var min_pixel := Vector2i.MAX
+	var max_pixel := Vector2i.MIN
+	# Calculate everything using the current offset.
+	for cell_coords in cell_coordinates:
+		var pixel_pos := get_pixel_coords(cell_coords) + offset
+		var tile_end := pixel_pos + get_tile_size() - Vector2i.ONE
+		min_pixel = min_pixel.min(pixel_pos).min(tile_end)
+		max_pixel = max_pixel.max(pixel_pos).max(tile_end)
+
+	var new_offset := offset
+	var new_size := image.get_size()
+	if min_pixel.x < new_offset.x:
+		new_size.x += new_offset.x - min_pixel.x
+		new_offset.x = min_pixel.x
+	if min_pixel.y < new_offset.y:
+		new_size.y += new_offset.y - min_pixel.y
+		new_offset.y = min_pixel.y
+
+	var required_end := max_pixel + Vector2i.ONE
+	if required_end.x > new_offset.x + new_size.x:
+		new_size.x = required_end.x - new_offset.x
+	if required_end.y > new_offset.y + new_size.y:
+		new_size.y = required_end.y - new_offset.y
+
+	new_size = snap_cel_bounds(new_size, true, true)
+	new_offset = snap_cel_bounds(new_offset)
+	if new_size != image.get_size():
+		resize_cel_image(new_size, offset - new_offset)
+	if new_offset != offset:
+		change_offset(new_offset)
+
+
+## Returns all cells that have the same [param tile_index]
+## and are within the bounds of a canvas with size [param canvas_size].
+func get_all_same_index_cells(tile_index: int, canvas_size: Vector2i) -> Array[Vector2i]:
+	var coords_to_fill: Array[Vector2i]
+	for coord: Vector2i in cells:
+		var cell := get_cell_at(coord)
+		if cell.index == tile_index and is_within_canvas_bounds(coord, canvas_size):
+			coords_to_fill.append(coord)
+	return coords_to_fill
+
+
+#endregion
 
 
 #region Autotiling
@@ -552,8 +607,9 @@ func get_selected_cells(selection_map: SelectionMap, selection_rect: Rect2i) -> 
 			var pos := Vector2i(x, y) + selection_rect.position
 			var x_index := x / get_tile_size().x
 			if selection_map.is_pixel_selected(pos):
-				var cell_pos := get_cell_position(pos)
-				selected_cells[x_index].append(cells[cell_pos].serialize())
+				var cell_pos := get_cell_position(pos - offset)
+				if cells.has(cell_pos):
+					selected_cells[x_index].append(cells[cell_pos].serialize())
 			else:
 				# If it's not selected, append the transparent tile 0.
 				selected_cells[x_index].append(
@@ -715,20 +771,19 @@ func serialize_undo_data_source_image(
 
 ## Reads data from a [param dict] [Dictionary], and uses them to add methods to [param undo_redo].
 func deserialize_undo_data(dict: Dictionary, undo_redo: UndoRedo, undo: bool) -> void:
+	super(dict, undo_redo, undo)
+	if not dict.has("cell_data"):
+		return
 	var cell_data = dict.cell_data
 	if undo:
 		if dict.has("tile_size"):
 			undo_redo.add_undo_property(self, "tile_size", dict.tile_size)
-		if dict.has("offset"):
-			undo_redo.add_undo_method(change_offset.bind(dict.offset))
 		undo_redo.add_undo_method(_deserialize_cell_data.bind(cell_data, dict.resize))
 		if dict.has("tileset"):
 			undo_redo.add_undo_method(tileset.deserialize_undo_data.bind(dict.tileset, self))
 	else:
 		if dict.has("tile_size"):
 			undo_redo.add_do_property(self, "tile_size", dict.tile_size)
-		if dict.has("offset"):
-			undo_redo.add_do_method(change_offset.bind(dict.offset))
 		undo_redo.add_do_method(_deserialize_cell_data.bind(cell_data, dict.resize))
 		if dict.has("tileset"):
 			undo_redo.add_do_method(tileset.deserialize_undo_data.bind(dict.tileset, self))
@@ -941,7 +996,7 @@ func _re_index_cells_after_index(index: int, decrease := true) -> void:
 
 ## Updates the [param source_image] data of the cell of the tilemap in [param cell_position],
 ## to ensure that it is the same as its mapped tile in the [member tileset].
-func _update_cell(cell: Cell, prev_index := -1, force_update := false) -> void:
+func _update_cell(cell: Cell, force_update := false) -> void:
 	if cell.updated_this_frame and not force_update:
 		return
 	cell.updated_this_frame = true
@@ -953,14 +1008,11 @@ func _update_cell(cell: Cell, prev_index := -1, force_update := false) -> void:
 	var index := cell.index
 	if index >= tileset.tiles.size():
 		index = 0
-	if prev_index != index:
-		var current_tile := tileset.tiles[index].image
-		var transformed_tile := transform_tile(
-			current_tile, cell.flip_h, cell.flip_v, cell.transpose
-		)
-		if image_portion.get_data() != transformed_tile.get_data():
-			_draw_cell(image, transformed_tile, coords)
-			image.convert_rgb_to_indexed()
+	var current_tile := tileset.tiles[index].image
+	var transformed_tile := transform_tile(current_tile, cell.flip_h, cell.flip_v, cell.transpose)
+	if image_portion.get_data() != transformed_tile.get_data():
+		_draw_cell(image, transformed_tile, coords)
+		image.convert_rgb_to_indexed()
 
 
 func _draw_cell(source_image: Image, tile_image: Image, coords: Vector2i) -> void:
@@ -979,7 +1031,7 @@ func _draw_cell(source_image: Image, tile_image: Image, coords: Vector2i) -> voi
 			)
 			mask.fill(Color(0, 0, 0, 0))
 			if get_tile_shape() == TileSet.TILE_SHAPE_ISOMETRIC:
-				var grid_coord = (Vector2(coords - offset) * 2 / Vector2(get_tile_size())).round()
+				var grid_coord := (Vector2(coords) * 2 / Vector2(get_tile_size())).round()
 				var is_smaller_tile = int(grid_coord.y) % 2 != 0
 				var old_clip := _should_clip_tiles
 				# Disable _should_clip_tiles when placing tiles (it's only useful in drawing)
@@ -1046,6 +1098,7 @@ func queue_update_cel_portions(skip_zeroes := false) -> void:
 ## Resizes the [member cells] array based on [param new_size].
 func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
 	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
+		@warning_ignore("integer_division")
 		var half_size := get_tile_size() / 2
 		for x in range(0, new_size.x + 1, half_size.x):
 			for y in range(0, new_size.y + 1, half_size.y):
@@ -1060,10 +1113,9 @@ func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
 			horizontal_cells += 1
 		if offset.y % get_tile_size().y != 0:
 			vertical_cells += 1
-		var offset_in_tiles := Vector2i((Vector2(offset) / Vector2(get_tile_size())).ceil())
 		for x in horizontal_cells:
 			for y in vertical_cells:
-				var cell_coords := Vector2i(x, y) - offset_in_tiles
+				var cell_coords := Vector2i(x, y)
 				if not cells.has(cell_coords):
 					cells[cell_coords] = Cell.new()
 	for cell_coords in cells:
@@ -1077,6 +1129,17 @@ func _resize_cells(new_size: Vector2i, reset_indices := true) -> void:
 		else:
 			if not is_instance_valid(cells[cell_coords]):
 				cells[cell_coords] = Cell.new()
+
+
+func _rebase_cells(old_offset: Vector2i, new_offset: Vector2i) -> void:
+	@warning_ignore("integer_division")
+	var delta := (new_offset - old_offset) / get_tile_size()
+	if delta == Vector2i.ZERO:
+		return
+	var rebased: Dictionary[Vector2i, Cell] = {}
+	for cell_coords in cells:
+		rebased[cell_coords - delta] = cells[cell_coords]
+	cells = rebased
 
 
 ## Returns [code]true[/code] if the user just did a Redo.
@@ -1141,6 +1204,46 @@ func _deserialize_cell_data(cell_data: Dictionary, resize: bool) -> void:
 
 
 # Overridden Methods:
+## Changes the [member offset] of the cel. Automatically resizes the cells and redraws the grid.
+func change_offset(new_offset: Vector2i) -> void:
+	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
+		return
+	_rebase_cells(offset, new_offset)
+	super(new_offset)
+	_resize_cells(get_image().get_size(), false)
+	Global.grid_updated.emit()
+
+
+func resize_cel_image(new_size: Vector2i, content_offset: Vector2i) -> void:
+	if get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
+		return
+	super(new_size, content_offset)
+	_resize_cells(get_image().get_size(), false)
+
+
+## Snaps pixel coordinates to the tilemap grid.
+func snap_cel_bounds(coords: Vector2i, local := false, ceil_snap := false) -> Vector2i:
+	var bounds_snap := get_tile_size()
+	if bounds_snap == Vector2i.ZERO or bounds_snap == Vector2i.ONE:
+		return coords
+	var diff: Vector2 = coords  # Needs to be Vector2, because Vector2i doesn't have posmodv.
+	if ceil_snap:
+		diff += Vector2(bounds_snap) - Vector2.ONE
+	if not local:
+		diff -= Vector2(offset)
+	var result := Vector2i(diff - diff.posmodv(bounds_snap))
+	if not local:
+		result += offset
+	return result
+
+
+func size_changed(new_size: Vector2i) -> void:
+	if get_tile_shape() == TileSet.TILE_SHAPE_SQUARE:
+		return
+	if image.get_size() != new_size:
+		image.crop(new_size.x, new_size.y)
+
+
 func get_content() -> Variant:
 	return [image, cells]
 
@@ -1156,7 +1259,7 @@ func set_content(content, texture: ImageTexture = null) -> void:
 
 
 func create_empty_content() -> Array:
-	var empty := Image.create(image.get_width(), image.get_height(), false, image.get_format())
+	var empty := Image.create(1, 1, false, image.get_format())
 	var new_image := ImageExtended.new()
 	new_image.copy_from_custom(empty, image.is_indexed)
 	var empty_cells: Dictionary[Vector2i, Cell] = {}
@@ -1182,8 +1285,8 @@ func duplicate_cel() -> CelTileMap:
 	new_cel.z_index = z_index
 	new_cel.user_data = user_data
 	new_cel.ui_color = ui_color
-
 	new_cel.offset = offset
+
 	new_cel.place_only_mode = place_only_mode
 	new_cel.tile_size = tile_size
 	new_cel.tile_shape = tile_shape
@@ -1262,21 +1365,24 @@ func serialize() -> Dictionary:
 		var cell := cells[cell_coords]
 		cell_data[cell_coords] = cell.serialize()
 	dict["cell_data"] = cell_data
-	dict["offset"] = offset
 	return dict
 
 
 func deserialize(dict: Dictionary) -> void:
 	super.deserialize(dict)
 	var cell_data = dict.get("cell_data", [])
+	var coords: Array[Vector2i]
 	for cell_coords_str in cell_data:
 		var cell_data_serialized: Dictionary = cell_data[cell_coords_str]
+		if cell_data_serialized.has("index") and cell_data_serialized.index == 0:
+			continue
 		var cell_coords := str_to_var("Vector2i" + cell_coords_str) as Vector2i
-		get_cell_at(cell_coords).deserialize(cell_data_serialized)
-	var new_offset_str = dict.get("offset", "(0, 0)")
-	var new_offset := str_to_var("Vector2i" + new_offset_str) as Vector2i
-	if new_offset != offset:
-		change_offset(new_offset)
+		var cell := get_cell_at(cell_coords)
+		cell.deserialize(cell_data_serialized)
+		coords.append(cell_coords)
+	ensure_fill_corners_in_bounds(coords)
+	queue_update_cel_portions()
+	update_texture.call_deferred()
 
 
 func get_class_name() -> String:

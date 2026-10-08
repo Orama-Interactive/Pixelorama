@@ -419,9 +419,9 @@ static func psd_to_pxo_project(psd_project: PhotoshopProject, add_frames := true
 					# If the layer is not visible in any frame or it is visible in all frames,
 					# it means that it is not being animated.
 					for frame_i in psd_project.frames.size():
-						var image := offset_cel_image(psd_layer.image, layer, psd_project, frame_i)
+						var cel := (layer as PixelLayer).new_cel_from_image(psd_layer.image)
+						cel.offset = offset_cel(layer, psd_project, frame_i)
 						var frame := frames[frame_i]
-						var cel := (layer as PixelLayer).new_cel_from_image(image)
 						frame.cels.append(cel)
 				else:
 					# Layers that are not visible in the first frame will be treated as invisible
@@ -430,10 +430,8 @@ static func psd_to_pxo_project(psd_project: PhotoshopProject, add_frames := true
 					for frame_i in psd_project.frames.size():
 						var frame := frames[frame_i]
 						if frame_i in visible_layer_in_frames:
-							var image := offset_cel_image(
-								psd_layer.image, layer, psd_project, frame_i
-							)
-							var cel := (layer as PixelLayer).new_cel_from_image(image)
+							var cel := (layer as PixelLayer).new_cel_from_image(psd_layer.image)
+							cel.offset = offset_cel(layer, psd_project, frame_i)
 							frame.cels.append(cel)
 						else:
 							var cel := layer.new_empty_cel()
@@ -468,16 +466,9 @@ static func psd_to_pxo_project(psd_project: PhotoshopProject, add_frames := true
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 
 
-static func offset_cel_image(
-	image: Image, layer: BaseLayer, psd_project: PhotoshopProject, frame_index: int
-) -> Image:
-	var result_image := Image.new()
-	result_image.copy_from(image)
-	var project_size := psd_project.size
-	result_image.crop(project_size.x, project_size.y)
-	var img_copy := Image.new()
-	img_copy.copy_from(result_image)
-	result_image.fill(Color(0, 0, 0, 0))
+static func offset_cel(
+	layer: BaseLayer, psd_project: PhotoshopProject, frame_index: int
+) -> Vector2i:
 	var psd_layer: PhotoshopLayer = layer.get_meta(&"psd_layer")
 	var left := psd_layer.left
 	var top := psd_layer.top
@@ -491,8 +482,7 @@ static func offset_cel_image(
 			var offset_dict: Dictionary = frame.layer_data[psd_layer_index].get("Ofst", {})
 			offset.x += offset_dict.get("Hrzn", 0)
 			offset.y += offset_dict.get("Vrtc", 0)
-	result_image.blit_rect(img_copy, Rect2i(Vector2i.ZERO, result_image.get_size()), offset)
-	return result_image
+	return offset
 
 
 static func get_layer_visibility_per_frame(

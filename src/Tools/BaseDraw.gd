@@ -33,9 +33,8 @@ var _line_polylines := []
 
 # Memorize some stuff when doing brush strokes
 var _stroke_project: Project
-var _stroke_images: Array[ImageExtended] = []
+var _stroke_images: Dictionary[Image, Variant]
 var _is_mask_size_zero := true
-var _drawn_tiles: Dictionary[Vector2i, bool]
 var _circle_tool_shortcut: Array[Vector2i]
 var _mm_action: Keychain.MouseMovementInputAction
 var _is_using_mm_action := false
@@ -358,7 +357,7 @@ func draw_tool(pos: Vector2i) -> void:
 func draw_end(pos: Vector2i) -> void:
 	super.draw_end(pos)
 	_stroke_project = null
-	_stroke_images = []
+	_stroke_images = {}
 	drawing_on_3d_node = null
 	materials_3d = {}
 	_circle_tool_shortcut = []
@@ -372,7 +371,6 @@ func draw_end(pos: Vector2i) -> void:
 			_stroke_dimensions = _brush_image.get_size()
 	_indicator = _create_brush_indicator()
 	_polylines = _create_polylines(_indicator)
-	_drawn_tiles.clear()
 	SteamManager.set_achievement("ACH_FIRST_PIXEL")
 
 
@@ -389,21 +387,17 @@ func cancel_tool() -> void:
 
 
 func draw_tile(pos: Vector2i) -> void:
-	var tile_index := 0 if _is_eraser else TileSetPanel.selected_tile_index
 	var mirrored_positions := Tools.get_mirrored_positions(pos, Global.current_project)
-	var tile_positions: Array[Vector2i] = []
-	tile_positions.resize(mirrored_positions.size() + 1)
-	tile_positions[0] = get_cell_position(pos)
-	if tile_positions[0] in _drawn_tiles:
-		return
-	_drawn_tiles[tile_positions[0]] = true
-	for i in mirrored_positions.size():
-		var mirrored_position := mirrored_positions[i]
-		tile_positions[i + 1] = get_cell_position(mirrored_position)
+	var tile_index := 0 if _is_eraser else TileSetPanel.selected_tile_index
 	for cel in _get_selected_draw_cels():
 		if cel is not CelTileMap:
 			return
 		var tilemap_cel := cel as CelTileMap
+		var tile_positions: Array[Vector2i] = []
+		tile_positions.resize(mirrored_positions.size() + 1)
+		tile_positions[0] = tilemap_cel.get_cell_position(pos, true)
+		for i in mirrored_positions.size():
+			tile_positions[i + 1] = tilemap_cel.get_cell_position(mirrored_positions[i], true)
 		if TileSetPanel.autotiling_enabled:
 			tilemap_cel.autotile(tile_positions, tile_index == 0)
 		else:
@@ -417,11 +411,11 @@ func _prepare_tool() -> void:
 		return
 	_brush_size_dynamics = _brush_size
 	var strength := Tools.get_alpha_dynamic(_strength)
-	var max_inctrment := maxi(1, _brush_size + Tools.brush_size_max_increment)
+	var max_increment := maxi(1, _brush_size + Tools.brush_size_max_increment)
 	if Tools.dynamics_size == Tools.Dynamics.PRESSURE:
-		_brush_size_dynamics = roundi(lerpf(_brush_size, max_inctrment, Tools.pen_pressure))
+		_brush_size_dynamics = roundi(lerpf(_brush_size, max_increment, Tools.pen_pressure))
 	elif Tools.dynamics_size == Tools.Dynamics.VELOCITY:
-		_brush_size_dynamics = roundi(lerpf(_brush_size, max_inctrment, Tools.mouse_velocity))
+		_brush_size_dynamics = roundi(lerpf(_brush_size, max_increment, Tools.mouse_velocity))
 	_drawer.pixel_perfect = Tools.pixel_perfect if _brush_size == 1 else false
 	_drawer.color_op.strength = strength
 	_indicator = _create_brush_indicator()
@@ -551,12 +545,11 @@ func draw_on_3d_object(pos: Vector2, layer: Layer3D, clear_mat := true) -> Vecto
 	return uv * Vector2(image.get_size())
 
 
-func update_materials(images: Array[ImageExtended]) -> void:
-	if not materials_3d.is_empty():
-		for i in materials_3d.size():
-			var mat := materials_3d.keys()[i] as BaseMaterial3D
-			if i < images.size():
-				mat.albedo_texture.update(images[i])
+func update_materials(images: Dictionary[Image, Variant]) -> void:
+	for image in images:
+		var mat = images[image]
+		if mat is BaseMaterial3D:
+			mat.albedo_texture.update(image)
 
 
 ## Calls [method Geometry2D.bresenham_line] and takes [param thickness] into account.
@@ -687,14 +680,20 @@ func draw_indicator(left: bool) -> void:
 	if Tools.is_placing_tiles():
 		var tilemap_cel := Global.current_project.get_current_cel() as CelTileMap
 		var grid_size := tilemap_cel.get_tile_size()
+		@warning_ignore("integer_division")
+		var half_grid := grid_size / 2
 		var grid_center := Vector2()
 		if tilemap_cel.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
-			var cell_position := tilemap_cel.get_cell_position(snapped_position)
-			grid_center = tilemap_cel.get_pixel_coords(cell_position) + (grid_size / 2)
+			var cell_position := tilemap_cel.get_cell_position(
+				snapped_position - Vector2(tilemap_cel.offset)
+			)
+			grid_center = (
+				tilemap_cel.get_pixel_coords(cell_position) + half_grid + tilemap_cel.offset
+			)
 		else:
 			var offset := tilemap_cel.offset % grid_size
-			var offset_pos := snapped_position - Vector2(grid_size / 2) - Vector2(offset)
-			grid_center = offset_pos.snapped(grid_size) + Vector2(grid_size / 2) + Vector2(offset)
+			var offset_pos := snapped_position - Vector2(half_grid) - Vector2(offset)
+			grid_center = offset_pos.snapped(grid_size) + Vector2(half_grid) + Vector2(offset)
 		snapped_position = grid_center.floor()
 	draw_indicator_at(snapped_position, Vector2i.ZERO, color)
 	if (
@@ -717,11 +716,12 @@ func draw_indicator(left: bool) -> void:
 
 
 func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:
-	var canvas: Node2D = Global.canvas.indicators
+	var canvas := Global.canvas.indicators
 	if _brush.type in IMAGE_BRUSHES and not _draw_line or Tools.is_placing_tiles():
 		pos -= _brush_image.get_size() / 2
 		pos -= offset
-		canvas.draw_texture(_brush_texture, pos)
+		if _brush_texture:
+			canvas.draw_texture(_brush_texture, pos)
 	else:
 		if _draw_line:
 			pos.x = _line_end.x if _line_end.x < _line_start.x else _line_start.x
@@ -737,6 +737,8 @@ func draw_indicator_at(pos: Vector2i, offset: Vector2i, color: Color) -> void:
 
 
 func _set_pixel(pos: Vector2i, ignore_mirroring := false) -> void:
+	if _stroke_project == null:
+		return
 	if pos in _draw_cache and _for_frame == _stroke_project.current_frame:
 		return
 	if _draw_cache.size() > _cache_limit or _for_frame != _stroke_project.current_frame:
@@ -753,23 +755,23 @@ func _set_pixel_no_cache(pos: Vector2i, ignore_mirroring := false) -> void:
 	if randi() % 100 >= _brush_density:
 		return
 	pos = _stroke_project.tiles.get_canon_position(pos)
-	if Global.current_project.has_selection:
-		pos = Global.current_project.selection_map.get_canon_position(pos)
+	if _stroke_project.has_selection:
+		pos = _stroke_project.selection_map.get_canon_position(pos)
 	if Tools.is_placing_tiles():
 		draw_tile(pos)
 		return
-	if !_stroke_project.can_pixel_get_drawn(pos):
+	if not _stroke_project.can_pixel_get_drawn(pos):
 		return
-
-	var images := _stroke_images
 	if _is_mask_size_zero:
-		for image in images:
-			_drawer.set_pixel(image, pos, tool_slot.color, ignore_mirroring)
+		_drawer_set_pixel(pos, _stroke_images, ignore_mirroring)
 	else:
 		var i := pos.x + pos.y * _stroke_project.size.x
+		var first_image := _stroke_images.keys()[0] as Image
 		if _mask.size() >= i + 1:
-			var alpha_dynamic: float = Tools.get_alpha_dynamic()
-			var alpha: float = images[0].get_pixelv(pos).a
+			var alpha_dynamic := Tools.get_alpha_dynamic()
+			var alpha := 1.0
+			if pos.x < first_image.get_width() and pos.y < first_image.get_height():
+				alpha = first_image.get_pixelv(pos).a
 			if _mask[i] < alpha_dynamic:
 				# Overwrite colors to avoid additive blending between strokes of
 				# brushes that are larger than 1px
@@ -779,25 +781,61 @@ func _set_pixel_no_cache(pos: Vector2i, ignore_mirroring := false) -> void:
 				if overwrite != null and _mask[i] > alpha:
 					_drawer.color_op.overwrite = true
 				_mask[i] = alpha_dynamic
-				for image in images:
-					_drawer.set_pixel(image, pos, tool_slot.color, ignore_mirroring)
+				_drawer_set_pixel(pos, _stroke_images, ignore_mirroring)
 				if overwrite != null:
 					_drawer.color_op.overwrite = overwrite
 		else:
-			for image in images:
-				_drawer.set_pixel(image, pos, tool_slot.color, ignore_mirroring)
-	update_materials(images)
+			_drawer_set_pixel(pos, _stroke_images, ignore_mirroring)
+	update_materials(_stroke_images)
 
 
-func _draw_brush_image(brush_image: Image, src_rect: Rect2i, dst: Vector2i) -> void:
+func _drawer_set_pixel(
+	pos: Vector2i, images: Dictionary[Image, Variant], ignore_mirroring := false
+) -> void:
+	for image in images:
+		var variant = images[image]
+		var local_pos := pos
+		var mirrored_positions := Tools.get_mirrored_positions(pos, _stroke_project)
+		if variant is PixelCel:
+			var cel := variant as PixelCel
+			local_pos = cel.ensure_canvas_point_in_bounds(pos)
+			if not ignore_mirroring:
+				for i in mirrored_positions.size():
+					var mirror_pos := mirrored_positions[i]
+					if _stroke_project.can_pixel_get_drawn(mirror_pos):
+						mirrored_positions[i] = cel.ensure_canvas_point_in_bounds(mirror_pos)
+		_drawer.set_pixel(image, local_pos, tool_slot.color)
+
+		if not ignore_mirroring:
+			for i in mirrored_positions.size():
+				var mirror_pos := mirrored_positions[i]
+				if _stroke_project.can_pixel_get_drawn(mirror_pos):
+					_drawer.set_pixel(image, mirror_pos, tool_slot.color)
+
+
+func _draw_brush_image(
+	brush_image: Image, src_rect: Rect2i, dst: Vector2i, overwrite := true
+) -> void:
 	var images := _get_selected_draw_images()
 	for draw_image in images:
+		var final_dst := dst
+		var variant = images[draw_image]
+		if variant is PixelCel:
+			variant.ensure_canvas_rect_in_bounds(dst, brush_image.get_size())
+			final_dst -= variant.offset
 		if Tools.alpha_locked:
-			var mask := draw_image.get_region(Rect2i(dst, brush_image.get_size()))
-			draw_image.blit_rect_mask(brush_image, mask, src_rect, dst)
+			var mask := draw_image.get_region(Rect2i(final_dst, brush_image.get_size()))
+			if overwrite:
+				draw_image.blit_rect_mask(brush_image, mask, src_rect, final_dst)
+			else:
+				draw_image.blend_rect_mask(brush_image, mask, src_rect, final_dst)
 		else:
-			draw_image.blit_rect(brush_image, src_rect, dst)
+			if overwrite:
+				draw_image.blit_rect(brush_image, src_rect, final_dst)
+			else:
+				draw_image.blend_rect(brush_image, src_rect, final_dst)
 		draw_image.convert_rgb_to_indexed()
+	update_materials(images)
 
 
 func _create_blended_brush_image(image: Image) -> Image:
@@ -934,7 +972,7 @@ func _get_undo_data() -> Dictionary:
 			cels.append(project.frames[cel_index[0]].cels[cel_index[1]])
 	else:
 		for frame in project.frames:
-			var cel: BaseCel = frame.cels[project.current_layer]
+			var cel := frame.cels[project.current_layer]
 			if not cel is PixelCel:
 				continue
 			cels.append(cel)

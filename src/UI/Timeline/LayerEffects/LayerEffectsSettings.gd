@@ -214,53 +214,52 @@ func move_effect(layer: BaseLayer, from_index: int, to_index: int) -> void:
 
 
 func _delete_effect(effect: LayerEffect) -> void:
-	var layer := Global.current_project.layers[Global.current_project.current_layer]
+	var layer := effect.layer
+	var project := layer.project
 	var index := layer.effects.find(effect)
-	Global.current_project.undo_redo.create_action("Delete layer effect")
-	Global.current_project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
-	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)
+	project.undo_redo.create_action("Delete layer effect")
+	project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
+	project.undo_redo.add_do_method(layer.emit_effects_added_removed)
 	# we may be a different layer during redo
-	Global.current_project.undo_redo.add_do_property(
-		Global.canvas, "mandatory_update_layers", [layer.index]
-	)
-	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw)
-	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	Global.current_project.undo_redo.add_undo_method(func(): layer.effects.insert(index, effect))
-	Global.current_project.undo_redo.add_undo_method(layer.emit_effects_added_removed)
+	project.undo_redo.add_do_property(Global.canvas, "mandatory_update_layers", [layer.index])
+	project.undo_redo.add_do_method(Global.canvas.queue_redraw)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_undo_method(func(): layer.effects.insert(index, effect))
+	project.undo_redo.add_undo_method(layer.emit_effects_added_removed)
 	# we may be a different layer during undo
-	Global.current_project.undo_redo.add_undo_property(
-		Global.canvas, "mandatory_update_layers", [layer.index]
-	)
-	Global.current_project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
-	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
-	Global.current_project.undo_redo.commit_action()
+	project.undo_redo.add_undo_property(Global.canvas, "mandatory_update_layers", [layer.index])
+	project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.commit_action()
 	effect_container.get_child(index).queue_free()
 
 
 func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 	Global.transform_content_confirmed.emit()
-	var project := Global.current_project
+	var project := layer.project
 	var index := layer.effects.find(effect)
 	var redo_data := {}
 	var undo_data := {}
 	for i in project.frames.size():
 		var frame := project.frames[i]
 		var cel := frame.cels[layer.index]
-		var cel_image := cel.get_image()
+		undo_data[cel] = {"offset": cel.offset}
 		if cel is CelTileMap:
 			if cel.place_only_mode:
 				continue
 			undo_data[cel] = (cel as CelTileMap).serialize_undo_data()
+		var cel_image := cel.get_image()
 		if cel_image is ImageExtended:
 			undo_data[cel_image.indices_image] = cel_image.indices_image.data
 		undo_data[cel_image] = cel_image.data
-		var image_size := cel_image.get_size()
 		var params := effect.get_params(i)
 		params["PXO_time"] = frame.position_in_seconds(project)
 		params["PXO_frame_index"] = i
 		params["PXO_layer_index"] = layer.index
+		var cropped_image := project.crop_image_to_project_size(cel.get_image(), cel.offset)
 		var shader_image_effect := ShaderImageEffect.new()
-		shader_image_effect.generate_image(cel_image, effect.shader, params, image_size)
+		shader_image_effect.generate_image(cropped_image, effect.shader, params, project.size)
+		cel.blit_image_to_cel(cropped_image)
 
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
@@ -269,6 +268,7 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 	for frame in project.frames:
 		var cel := frame.cels[layer.index]
 		var cel_image := cel.get_image()
+		redo_data[cel] = {"offset": cel.offset}
 		if cel is CelTileMap:
 			redo_data[cel] = (cel as CelTileMap).serialize_undo_data()
 		if cel_image is ImageExtended:
@@ -276,32 +276,24 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 		redo_data[cel_image] = cel_image.data
 	project.undo_redo.create_action("Apply layer effect")
 	var layers_to_update := PackedInt32Array()
-	for l in Global.current_project.layers:
+	for l in project.layers:
 		if l is LayerTileMap:
 			if l.tileset in used_tilesets:
 				layers_to_update.append(l.index)
 	project.deserialize_cel_undo_data(redo_data, undo_data)
 	# we may be on a different layer during undo/redo
-	Global.current_project.undo_redo.add_do_property(
-		Global.canvas, "mandatory_update_layers", layers_to_update
-	)
-	Global.current_project.undo_redo.add_undo_property(
-		Global.canvas, "mandatory_update_layers", layers_to_update
-	)
+	project.undo_redo.add_do_property(Global.canvas, "mandatory_update_layers", layers_to_update)
+	project.undo_redo.add_undo_property(Global.canvas, "mandatory_update_layers", layers_to_update)
 	project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
-	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)
+	project.undo_redo.add_do_method(layer.emit_effects_added_removed)
 	# we may be a different layer during redo
-	Global.current_project.undo_redo.add_do_property(
-		Global.canvas, "mandatory_update_layers", [layer.index]
-	)
+	project.undo_redo.add_do_property(Global.canvas, "mandatory_update_layers", [layer.index])
 	project.undo_redo.add_do_method(Global.canvas.queue_redraw)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	project.undo_redo.add_undo_method(func(): layer.effects.insert(index, effect))
-	Global.current_project.undo_redo.add_undo_method(layer.emit_effects_added_removed)
+	project.undo_redo.add_undo_method(layer.emit_effects_added_removed)
 	# we may be a different layer during undo
-	Global.current_project.undo_redo.add_undo_property(
-		Global.canvas, "mandatory_update_layers", [layer.index]
-	)
+	project.undo_redo.add_undo_property(Global.canvas, "mandatory_update_layers", [layer.index])
 	project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.commit_action()

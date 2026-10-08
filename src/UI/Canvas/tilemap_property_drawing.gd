@@ -32,7 +32,7 @@ func _draw() -> void:
 				tilemap_cel.get_tile_size(),
 				tilemap_cel.get_tile_offset_axis()
 			)
-			draw_set_transform(pos + half_size, rotation, scale)
+			draw_set_transform(pos + half_size + tilemap_cel.offset, rotation, scale)
 			draw_colored_polygon(polygon, terrain_color)
 		for i in tile.terrain_peering_bits.size():
 			if not tileset.is_valid_terrain_peering_bit_for_mode(
@@ -54,7 +54,7 @@ func _draw() -> void:
 				continue
 			var uvs := PackedVector2Array()
 			uvs.resize(polygon.size())
-			draw_set_transform(pos + half_size, rotation, scale)
+			draw_set_transform(pos + half_size + tilemap_cel.offset, rotation, scale)
 			draw_colored_polygon(polygon, terrain_color)
 	draw_set_transform(position, rotation, scale)
 
