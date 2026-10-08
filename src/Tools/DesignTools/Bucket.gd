@@ -13,6 +13,11 @@ var _tolerance := 0.003
 var _fill_area: int = FillArea.AREA
 var _fill_with: int = FillWith.COLOR
 var _fill_merged_area := false  ## Fill regions from the merging of all layers
+var _pattern_interpolate := 0:
+	set(value):
+		if _pattern_interpolate != value:
+			_pattern_interpolate = value
+			update_pattern()
 var _offset_x := 0
 var _offset_y := 0
 ## Used for _fill_merged_area = true
@@ -21,6 +26,7 @@ var _sample_masks: Dictionary[Frame, Image] = {}
 
 func _ready() -> void:
 	super._ready()
+	Tools.color_changed.connect(_on_Color_changed)
 	update_pattern()
 
 
@@ -36,6 +42,10 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_released("change_tool_mode"):
 		_fill_area = _prev_mode
 		_select_fill_area_optionbutton()
+
+
+func _on_Color_changed(_color_info: Dictionary, _button: int) -> void:
+	update_pattern()
 
 
 func _on_FillAreaOptions_item_selected(index: int) -> void:
@@ -107,19 +117,20 @@ func get_config() -> Dictionary:
 		"fill_merged_area": _fill_merged_area,
 		"fill_with": _fill_with,
 		"tolerance": _tolerance,
+		"brush_interpolate": _pattern_interpolate,
 		"offset_x": _offset_x,
 		"offset_y": _offset_y,
 	}
 
 
 func set_config(config: Dictionary) -> void:
-	if _pattern:
-		var index = config.get("pattern_index", _pattern.index)
-		_pattern = Global.patterns_popup.get_pattern(index)
+	var index = config.get("pattern_index", _pattern.index if _pattern else 0)
+	_pattern = Global.patterns_popup.get_pattern(index)
 	_fill_area = config.get("fill_area", _fill_area)
 	_fill_merged_area = config.get("fill_merged_area", _fill_merged_area)
 	_fill_with = config.get("fill_with", _fill_with)
 	_tolerance = config.get("tolerance", _tolerance)
+	_pattern_interpolate = config.get("brush_interpolate", _pattern_interpolate)
 	_offset_x = config.get("offset_x", _offset_x)
 	_offset_y = config.get("offset_y", _offset_y)
 	update_pattern()
@@ -130,6 +141,7 @@ func update_config() -> void:
 	$FillWithOptions.selected = _fill_with
 	$ToleranceSlider.value = _tolerance * 255.0
 	$FillPattern.visible = _fill_with == FillWith.PATTERN
+	$FillPattern/ColorInterpolation.value = _pattern_interpolate
 	$FillPattern/OffsetX.value = _offset_x
 	$FillPattern/OffsetY.value = _offset_y
 	$MergeAreaOptions.button_pressed = _fill_merged_area
@@ -143,11 +155,30 @@ func update_pattern() -> void:
 			_pattern = Global.patterns_popup.default_pattern
 	var tex: ImageTexture
 	if !_pattern.image.is_empty():
-		tex = ImageTexture.create_from_image(_pattern.image)
+		var preview_pattern := _pattern.image
+		if _pattern_interpolate > 0:
+			preview_pattern = _blend_image(
+				preview_pattern, tool_slot.color, _pattern_interpolate / 100.0
+			)
+		tex = ImageTexture.create_from_image(preview_pattern)
 	$FillPattern/Type/Texture2D.texture = tex
 	var pattern_size := _pattern.image.get_size()
 	$FillPattern/OffsetX.max_value = pattern_size.x - 1
 	$FillPattern/OffsetY.max_value = pattern_size.y - 1
+
+
+func _blend_image(image: Image, color: Color, factor: float) -> Image:
+	var interpolated_image := Image.new()
+	interpolated_image.copy_from(image)
+	var image_size := interpolated_image.get_size()
+	for y in image_size.y:
+		for x in image_size.x:
+			var color_old := interpolated_image.get_pixel(x, y)
+			if color_old.a > 0:
+				var color_new := color_old.lerp(color, factor)
+				color_new.a = color_old.a
+				interpolated_image.set_pixel(x, y, color_new)
+	return interpolated_image
 
 
 func draw_start(pos: Vector2i) -> void:
@@ -279,6 +310,7 @@ func fill_in_color(pos: Vector2i) -> void:
 			"tolerance": _tolerance,
 			"selection": selection_tex,
 			"pattern": pattern_tex,
+			"pattern_interpolation": _pattern_interpolate / 100.0,
 			"has_pattern": true if _fill_with == FillWith.PATTERN else false
 		}
 		if is_instance_valid(pattern_tex):
@@ -349,6 +381,8 @@ func fill_in_selection() -> void:
 			"selection": selection_tex,
 			"size": project.size,
 			"pattern": pattern_tex,
+			"mix_color": tool_slot.color,
+			"pattern_interpolation": _pattern_interpolate / 100.0
 		}
 		if is_instance_valid(pattern_tex):
 			params["pattern_size"] = pattern_size
@@ -476,6 +510,8 @@ func _set_pixel_pattern(image: Image, x: int, y: int, pattern_size: Vector2i) ->
 	var px := (x + _offset_x) % pattern_size.x
 	var py := (y + _offset_y) % pattern_size.y
 	var pc := _pattern.image.get_pixel(px, py)
+	if not is_equal_approx(pc.a, 0):
+		pc = lerp(pc, tool_slot.color, _pattern_interpolate / 100.0)
 	image.set_pixel(x, y, pc)
 
 
@@ -522,3 +558,9 @@ func _get_undo_data() -> Dictionary:
 			cels.append(cel)
 		Global.current_project.serialize_cel_undo_data(cels, data)
 	return data
+
+
+func _on_InterpolateFactor_value_changed(value: float) -> void:
+	_pattern_interpolate = int(value)
+	update_config()
+	save_config()
