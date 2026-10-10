@@ -91,7 +91,7 @@ func set_tile_bit(pos: Vector2i) -> void:
 	if Global.current_project.get_current_cel() is not CelTileMap:
 		return
 	var cel := Global.current_project.get_current_cel() as CelTileMap
-	var tile_index := cel.get_cell_index_at_coords(pos)
+	var tile_index := cel.get_cell_index_at_coords(pos - cel.offset)
 	if tile_index == 0:
 		return
 	var terrain_id := TileSetPanel.current_terrain_index
@@ -116,8 +116,8 @@ func get_appropriate_bit(pos: Vector2i, cel: CelTileMap, tile: TileSetCustom.Til
 	@warning_ignore("integer_division")
 	var half_size := cel.get_tile_size() / 2
 	var tileset := cel.tileset
-	var cell_position := get_cell_position(pos)
-	var cell_position_pixel_coords := cel.get_pixel_coords(cell_position)
+	var cell_position := get_cell_position(pos - cel.offset)
+	var cell_position_pixel_coords := cel.get_pixel_coords(cell_position) + cel.offset
 	var final_pos := pos - cell_position_pixel_coords - half_size
 	var polygon := tileset.get_terrain_polygon(
 		cel.get_tile_shape(), cel.get_tile_size(), cel.get_tile_offset_axis()

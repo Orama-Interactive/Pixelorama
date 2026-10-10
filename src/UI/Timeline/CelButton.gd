@@ -1,6 +1,6 @@
 extends Button
 
-enum MenuOptions { PROPERTIES, PLAY_AUDIO, SELECT_PIXELS, DELETE, LINK, UNLINK, CLONE_CEL }
+enum MenuOptions { PROPERTIES, PLAY_AUDIO, SELECT_PIXELS, CENTER, DELETE, LINK, UNLINK, CLONE_CEL }
 
 var frame := 0
 var layer := 0
@@ -45,6 +45,7 @@ func _ready() -> void:
 	else:
 		popup_menu.add_item("Select pixels", MenuOptions.SELECT_PIXELS)
 	if cel is PixelCel:
+		popup_menu.add_item("Center content", MenuOptions.CENTER)
 		popup_menu.add_item("Delete", MenuOptions.DELETE)
 		popup_menu.add_item("Link cels to", MenuOptions.LINK)
 		popup_menu.add_item("Unlink cels", MenuOptions.UNLINK)
@@ -175,6 +176,8 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 				layer_class.playback_frame = frame
 		MenuOptions.SELECT_PIXELS:
 			Global.canvas.selection.select_cel_pixels(layer_class, project.frames[frame])
+		MenuOptions.CENTER:
+			DrawingAlgos.center_cels(_get_cel_indices())
 		MenuOptions.DELETE:
 			_delete_cel_content()
 

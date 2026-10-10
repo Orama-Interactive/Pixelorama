@@ -87,7 +87,9 @@ func _confirmed() -> void:
 			if cel is CelTileMap and cel.place_only_mode:
 				continue
 			commit_idx = cel_index[0]  # frame is cel_index[0] in this mode
-			commit_action(cel.image)
+			var cel_image := project.crop_image_to_project_size(cel.get_image(), cel.offset)
+			commit_action(cel_image)
+			cel.blit_image_to_cel(cel_image)
 		_commit_undo("Draw", undo_data, project)
 
 	elif affect == FRAME:
@@ -103,7 +105,9 @@ func _confirmed() -> void:
 				i += 1
 				continue
 			if project.layers[i].can_layer_get_drawn():
-				commit_action(cel.image)
+				var cel_image := project.crop_image_to_project_size(cel.get_image(), cel.offset)
+				commit_action(cel_image)
+				cel.blit_image_to_cel(cel_image)
 			i += 1
 		_commit_undo("Draw", undo_data, project)
 
@@ -121,7 +125,9 @@ func _confirmed() -> void:
 					i += 1
 					continue
 				if project.layers[i].can_layer_get_drawn():
-					commit_action(cel.image)
+					var cel_image := project.crop_image_to_project_size(cel.get_image(), cel.offset)
+					commit_action(cel_image)
+					cel.blit_image_to_cel(cel_image)
 				i += 1
 		_commit_undo("Draw", undo_data, project)
 
@@ -142,7 +148,11 @@ func _confirmed() -> void:
 						i += 1
 						continue
 					if _project.layers[i].can_layer_get_drawn():
-						commit_action(cel.image, _project)
+						var cel_image := project.crop_image_to_project_size(
+							cel.get_image(), cel.offset
+						)
+						commit_action(cel_image, _project)
+						cel.blit_image_to_cel(cel_image)
 					i += 1
 			_commit_undo("Draw", undo_data, _project)
 

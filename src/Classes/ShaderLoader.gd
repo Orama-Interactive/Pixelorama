@@ -697,12 +697,4 @@ static func _shader_update_texture(
 static func modify_texture_resource(
 	image: Image, resource_name: StringName, update_callable: Callable
 ) -> void:
-	if not is_instance_valid(image):
-		image = Image.create_empty(64, 64, false, Image.FORMAT_RGBA8)
-	var resource_proj := ResourceProject.new([], resource_name, image.get_size())
-	resource_proj.layers.append(PixelLayer.new(resource_proj))
-	resource_proj.frames.append(resource_proj.new_empty_frame())
-	resource_proj.frames[0].cels[0].set_content(image)
-	resource_proj.resource_updated.connect(update_callable)
-	Global.projects.append(resource_proj)
-	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+	ResourceProject.instantiate(resource_name, update_callable, image)

@@ -1080,7 +1080,7 @@ func _blend_layers(
 		var layer := project.layers[export_profile.export_layers - 2]
 		var layer_image := Image.new()
 		if layer is GroupLayer:
-			layer_image.copy_from(layer.blend_children(frame, Vector2i.ZERO))
+			layer_image.copy_from(layer.blend_children(frame))
 		else:
 			layer_image.copy_from(
 				layer.display_effects(frame.cels[export_profile.export_layers - 2])

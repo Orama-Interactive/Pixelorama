@@ -33,10 +33,7 @@ func get_image() -> ImageExtended:
 
 func duplicate_cel() -> Cel3D:
 	var new_cel := Cel3D.new(viewport)
-	new_cel.opacity = opacity
-	new_cel.z_index = z_index
-	new_cel.user_data = user_data
-	new_cel.ui_color = ui_color
+	new_cel.deserialize(serialize())
 	return new_cel
 
 

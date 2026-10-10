@@ -71,6 +71,11 @@ var ui_color := Color(0, 0, 0, 0):
 	set(value):
 		ui_color = value
 		ui_color_changed.emit()
+## If [code]true[/code], layer effects use the cel image as it is.
+## Otherwise, they use a copy of the image, cropped to the canvas size.
+## For effects like offset it might be best to have it be [code]true[/code],
+## while for effects like outline, drop shadow & gradient it might be best to be [code]false[/code].
+var use_cel_image_for_effects := false
 
 var text_server := TextServerManager.get_primary_interface()
 
@@ -269,7 +274,10 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 		var cel_image := cel.get_image()
 		if cel_image is ImageExtended:
 			image.is_indexed = cel_image.is_indexed
-		image.copy_from_custom(cel_image)
+		if use_cel_image_for_effects:
+			image.copy_from_custom(cel_image)
+		else:
+			image.copy_from_custom(project.crop_image_to_project_size(cel_image, cel.offset))
 	if not effects_enabled:
 		return image
 	var image_size := image.get_size()

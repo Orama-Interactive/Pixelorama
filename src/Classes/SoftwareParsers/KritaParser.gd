@@ -202,11 +202,10 @@ static func open_kra_file(path: String) -> void:
 								var image_data := zip_reader.read_file(frame_path)
 								var frame_image := read_krita_image(image_data)
 								if not frame_image.is_empty():
-									var current_cel := layer.new_empty_cel()
-									var image_rect := Rect2i(Vector2i.ZERO, frame_image.get_size())
-									current_cel.get_image().blit_rect(
-										frame_image, image_rect, Vector2i(image_x, image_y)
+									var current_cel := (layer as PixelLayer).new_cel_from_image(
+										frame_image
 									)
+									current_cel.offset = offset
 									new_project.frames[time].cels.insert(0, current_cel)
 								prev_time = time + 1
 								prev_image = frame_image
@@ -389,15 +388,15 @@ static func lzf_decompress(data_in: PackedByteArray, len_data_out: int) -> Packe
 	var data_out := PackedByteArray()
 	data_out.resize(len_data_out)
 
-	var len_data_in: int = data_in.size()
-	var input_pos: int = 0
-	var output_pos: int = 0
+	var len_data_in := data_in.size()
+	var input_pos := 0
+	var output_pos := 0
 
 	while true:
 		if input_pos >= len_data_in:
 			break
 
-		var ctrl: int = data_in[input_pos]
+		var ctrl := data_in[input_pos]
 		input_pos += 1
 
 		if ctrl < 32:
@@ -417,8 +416,8 @@ static func lzf_decompress(data_in: PackedByteArray, len_data_out: int) -> Packe
 				output_pos += 1
 				input_pos += 1
 		else:
-			var data_len: int = ctrl >> 5
-			var ref: int = output_pos - ((ctrl & 0x1f) << 8) - 1
+			var data_len := ctrl >> 5
+			var ref := output_pos - ((ctrl & 0x1f) << 8) - 1
 
 			if data_len == 7:
 				data_len += data_in[input_pos]
@@ -449,13 +448,12 @@ static func lzf_decompress(data_in: PackedByteArray, len_data_out: int) -> Packe
 
 
 static func fill_frames(
-	project: Project, layer: BaseLayer, image: Image, from: int, to: int, offset: Vector2i
+	project: Project, layer: PixelLayer, image: Image, from: int, to: int, offset: Vector2i
 ) -> void:
 	for i in range(from, to):
 		var frame := project.frames[i]
-		var current_cel := layer.new_empty_cel()
-		var image_rect := Rect2i(Vector2i.ZERO, image.get_size())
-		current_cel.get_image().blit_rect(image, image_rect, offset)
+		var current_cel := layer.new_cel_from_image(image)
+		current_cel.offset = offset
 		frame.cels.insert(0, current_cel)
 
 

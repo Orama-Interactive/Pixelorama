@@ -15,6 +15,20 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 	super._init(_frames, _name + " (Virtual Resource)", _size)
 
 
+static func instantiate(resource_title: String, updater: Callable, resource_image: Image = null):
+	if not resource_image:
+		resource_image = Image.create_empty(
+			Global.current_project.size.x, Global.current_project.size.y, false, Image.FORMAT_RGBA8
+		)
+	var resource_proj := ResourceProject.new([], resource_title, resource_image.get_size())
+	resource_proj.layers.append(PixelLayer.new(resource_proj))
+	resource_proj.frames.append(resource_proj.new_empty_frame())
+	resource_proj.frames[0].cels[0].set_content(resource_image)
+	resource_proj.resource_updated.connect(updater)
+	Global.projects.append(resource_proj)
+	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+
+
 ## Returns the full image of the [Frame] at [param frame_idx] in resource project.
 func get_frame_image(frame_idx: int) -> Image:
 	var frame_image := Image.create_empty(size.x, size.y, false, Image.FORMAT_RGBA8)

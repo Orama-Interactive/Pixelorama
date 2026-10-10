@@ -406,19 +406,28 @@ msgstr ""
 msgid "Tallscreen"
 msgstr ""
 
+#. Found under the View menu.
 msgid "Mirror View"
 msgstr ""
 
+#. Found under the View menu.
 msgid "Show Grid"
 msgstr ""
 
+#. Found under the View menu.
 msgid "Show Pixel Grid"
 msgstr ""
 
+#. Found under the View menu.
 msgid "Show Rulers"
 msgstr ""
 
+#. Found under the View menu.
 msgid "Show Guides"
+msgstr ""
+
+#. Found under the View menu.
+msgid "Lock Guides"
 msgstr ""
 
 #. Found under the View menu.
@@ -1529,6 +1538,9 @@ msgstr ""
 msgid "Thai"
 msgstr ""
 
+msgid "Slovenian"
+msgstr ""
+
 #. Found in the About dialog.
 msgid "Lead Developer"
 msgstr ""
@@ -2624,6 +2636,10 @@ msgstr ""
 
 #. An option found in the right click menu of a cel. If selected, all non-transparent pixels of that cel get selected.
 msgid "Select pixels"
+msgstr ""
+
+#. An option found in the right click menu of a cel. If selected, centers the content of the cel.
+msgid "Center content"
 msgstr ""
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
