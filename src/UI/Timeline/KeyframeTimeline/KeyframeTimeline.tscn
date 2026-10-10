@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cyarevvdmj517" path="res://src/UI/Timeline/KeyframeTimeline/KeyframeTimelineCursor.gd" id="2_3wn0x"]
 [ext_resource type="Script" uid="uid://hmhmdm0a8vgr" path="res://src/UI/Timeline/KeyframeTimeline/KeyframeTimelineTrackContainer.gd" id="2_bho5j"]
 [ext_resource type="Script" uid="uid://cbvfn34ccek0l" path="res://src/UI/Timeline/KeyframeTimeline/KeyframeTimelineFrameDisplay.gd" id="2_f3yqq"]
+[ext_resource type="PackedScene" uid="uid://yjhp0ssng2mp" path="res://src/UI/Nodes/Sliders/ValueSlider.tscn" id="5_0n3lj"]
 
 [node name="KeyframeTimeline" type="Panel" unique_id=690812003]
 clip_contents = true
@@ -110,6 +111,12 @@ visible = false
 layout_mode = 2
 columns = 2
 
+[node name="RandomizeValues" type="Button" parent="VBoxContainer/HSplitContainer/PropertiesPanelContainer/PropertiesContainer" unique_id=1314031781]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Randomize Values"
+
 [node name="DeleteKeyframeButton" type="Button" parent="VBoxContainer/HSplitContainer/PropertiesPanelContainer/PropertiesContainer" unique_id=915259021]
 unique_name_in_owner = true
 visible = false
@@ -117,9 +124,43 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "Delete keyframe"
 
+[node name="Popups" type="Control" parent="." unique_id=222769067]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RandomizeDialog" type="ConfirmationDialog" parent="Popups" unique_id=1704938743]
+unique_name_in_owner = true
+oversampling_override = 1.0
+title = "Randonize Values"
+position = Vector2i(0, 36)
+size = Vector2i(351, 100)
+
+[node name="GridContainer" type="GridContainer" parent="Popups/RandomizeDialog" unique_id=1276330261]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 343.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="Label" type="Label" parent="Popups/RandomizeDialog/GridContainer" unique_id=1224342609]
+layout_mode = 2
+text = "Spread:"
+
+[node name="SpreadMagnitude" parent="Popups/RandomizeDialog/GridContainer" unique_id=1726316798 instance=ExtResource("5_0n3lj")]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 5.0
+step = 0.01
+value = 5.0
+allow_greater = true
+
 [connection signal="gui_input" from="VBoxContainer/HSplitContainer/HSplitContainer/LayerElementContainer/LayerElementTree" to="." method="_on_layer_element_tree_gui_input"]
 [connection signal="item_collapsed" from="VBoxContainer/HSplitContainer/HSplitContainer/LayerElementContainer/LayerElementTree" to="." method="_on_layer_element_tree_item_collapsed"]
 [connection signal="resized" from="VBoxContainer/HSplitContainer/HSplitContainer/TrackScrollContainer" to="." method="_on_track_scroll_container_resized"]
 [connection signal="sort_children" from="VBoxContainer/HSplitContainer/HSplitContainer/TrackScrollContainer" to="." method="_on_track_scroll_container_sort_children"]
 [connection signal="gui_input" from="VBoxContainer/HSplitContainer/HSplitContainer/TrackScrollContainer/PanelContainer/TrackContainer" to="VBoxContainer/HSplitContainer/HSplitContainer/TrackScrollContainer/PanelContainer/TrackContainer" method="_on_gui_input"]
+[connection signal="pressed" from="VBoxContainer/HSplitContainer/PropertiesPanelContainer/PropertiesContainer/RandomizeValues" to="." method="_on_keyframe_randomized"]
 [connection signal="pressed" from="VBoxContainer/HSplitContainer/PropertiesPanelContainer/PropertiesContainer/DeleteKeyframeButton" to="." method="_on_keyframe_deleted"]
