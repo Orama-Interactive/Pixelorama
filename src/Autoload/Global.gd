@@ -65,7 +65,6 @@ enum ViewMenu {
 	CENTER_CANVAS,
 	TILE_MODE,
 	TILE_MODE_OFFSETS,
-	GREYSCALE_VIEW,
 	MIRROR_VIEW,
 	SHOW_GRID,
 	SHOW_PIXEL_GRID,
@@ -629,8 +628,6 @@ var cross_cursor := true
 #endregion
 
 #region View menu options
-## If [code]true[/code], the canvas is in greyscale.
-var greyscale_view := false
 ## If [code]true[/code], the content of canvas is flipped.
 var mirror_view := false
 ## If [code]true[/code], the grid is visible.
@@ -999,7 +996,6 @@ func _initialize_keychain() -> void:
 		&"pixelize": Keychain.InputAction.new("", "Effects menu", true),
 		&"posterize": Keychain.InputAction.new("", "Effects menu", true),
 		&"center_canvas": Keychain.InputAction.new("", "View menu", true),
-		&"grayscale_view": Keychain.InputAction.new("", "View menu", true),
 		&"mirror_view": Keychain.InputAction.new("", "View menu", true),
 		&"show_grid": Keychain.InputAction.new("", "View menu", true),
 		&"show_pixel_grid": Keychain.InputAction.new("", "View menu", true),
@@ -1264,8 +1260,6 @@ func undo_or_redo(
 			"Select",
 			"Move Selection",
 			"Scale",
-			"Center Frames",
-			"Center Cels",
 			"Merge Layer",
 			"Link Cel",
 			"Unlink Cel"

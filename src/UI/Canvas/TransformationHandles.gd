@@ -663,12 +663,13 @@ func begin_transform(
 	)
 	for cel in selection_node.get_selected_draw_cels():
 		var cel_image := cel.get_image()
-		cel.transformed_content = SelectionNode.get_selected_image(cel_image)
+		var cel_image_cropped := project.crop_image_to_project_size(cel_image, cel.offset)
+		cel.transformed_content = SelectionNode.get_selected_image(cel_image_cropped)
 		cel_image.blit_rect_mask(
 			clear_image,
 			cel.transformed_content,
 			Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
-			selection_rect.position
+			selection_rect.position - cel.offset
 		)
 	for cel_index in project.selected_cels:
 		canvas.update_texture(cel_index[1])

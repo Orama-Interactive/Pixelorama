@@ -106,7 +106,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 		REVERSE:
 			Global.animation_timeline.reverse_frames(indices)
 		CENTER:
-			DrawingAlgos.center(indices)
+			DrawingAlgos.center_frames(indices)
 
 
 func _get_drag_data(_position: Vector2) -> Variant:

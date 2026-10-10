@@ -151,12 +151,14 @@ func transform_content_confirm(
 		else:
 			transformation_handles.bake_transform_to_image(src, bounds)
 
+		cel.ensure_canvas_rect_in_bounds(transformation_origin, bounds.size)
 		if Tools.is_placing_tiles():
 			if cel.get_tile_shape() != TileSet.TILE_SHAPE_SQUARE:
 				continue
-			cel_image.blit_rect(src, bounds, transformation_origin)
+			cel_image.blit_rect(src, bounds, transformation_origin - Vector2(cel.offset))
 		else:
-			cel_image.blit_rect_mask(src, src, bounds, transformation_origin)
+			cel_image.blit_rect_mask(src, src, bounds, transformation_origin - Vector2(cel.offset))
+		cel.shrink_to_content()
 		cel_image.convert_rgb_to_indexed()
 	commit_undo("Move Selection", undo_data)
 
@@ -180,7 +182,7 @@ func transform_content_cancel(project := Global.current_project) -> void:
 				cel.transformed_content,
 				cel.transformed_content,
 				Rect2i(Vector2i.ZERO, Global.current_project.selection_map.get_size()),
-				project.selection_map.get_selection_rect(project).position
+				project.selection_map.get_selection_rect(project).position - cel.offset
 			)
 			cel.transformed_content = null
 	for cel_index in project.selected_cels:
@@ -254,34 +256,32 @@ func get_selected_draw_cels() -> Array[BaseCel]:
 	return cels
 
 
-func _get_selected_draw_images(tile_cel_pointer: Array[CelTileMap]) -> Array[ImageExtended]:
-	var images: Array[ImageExtended] = []
+func _get_selected_draw_images() -> Dictionary[Image, BaseCel]:
+	var images: Dictionary[Image, BaseCel]
 	var project := Global.current_project
 	for cel_index in project.selected_cels:
 		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
 		if not cel is PixelCel:
 			continue
-		if cel is CelTileMap and Tools.is_placing_tiles():
-			tile_cel_pointer.append(cel)
-			continue
 		if project.layers[cel_index[1]].can_layer_get_drawn():
 			var image := cel.get_image()
 			if is_instance_valid(image) and image is ImageExtended:  # Avoid type conflicts
-				images.append(cel.get_image())
+				images[cel.get_image()] = cel
 	return images
 
 
 ## Returns the portion of current cel's image enclosed by the selection.
 func get_enclosed_image() -> Image:
 	var project := Global.current_project
-	if !project.has_selection:
+	if not project.has_selection:
 		return
 
-	var image := project.get_current_cel().get_image()
 	var enclosed_img := Image.new()
 	if transformation_handles.is_transforming():
 		enclosed_img.copy_from(transformation_handles.transformed_image)
 	else:
+		var cel := project.get_current_cel()
+		var image := project.crop_image_to_project_size(cel.get_image(), cel.offset)
 		enclosed_img = get_selected_image(image)
 	return enclosed_img
 
@@ -315,22 +315,10 @@ func copy() -> void:
 			if transformation_handles.only_transforms_selection:
 				transform_content_confirm()
 				selection_rect = project.selection_map.get_selection_rect(project)
+		to_copy = get_enclosed_image()
 		if transformation_handles.is_transforming():
-			to_copy.copy_from(transformation_handles.transformed_image)
 			cl_selection_map = preview_selection_map
 		else:
-			to_copy = image.get_region(selection_rect)
-			# Remove unincluded pixels if the selection is not a single rectangle
-			var offset_pos := selection_rect.position
-			for x in to_copy.get_size().x:
-				for y in to_copy.get_size().y:
-					var pos := Vector2i(x, y)
-					if offset_pos.x < 0:
-						offset_pos.x = 0
-					if offset_pos.y < 0:
-						offset_pos.y = 0
-					if not project.selection_map.is_pixel_selected(pos + offset_pos, false):
-						to_copy.set_pixelv(pos, Color(0))
 			cl_selection_map.copy_from(project.selection_map)
 		cl_big_bounding_rectangle = selection_rect
 
@@ -556,44 +544,44 @@ func delete(selected_cels := true) -> void:
 			return
 
 	var undo_data_tmp := get_undo_data(true)
-	var images: Array[ImageExtended]
-	var tile_cels: Array[CelTileMap]
+	var images: Dictionary[Image, BaseCel]
 	if selected_cels:
-		images = _get_selected_draw_images(tile_cels)
+		images = _get_selected_draw_images()
 	else:
-		var current_cel_image := project.get_current_cel().get_image()
+		var current_cel := project.get_current_cel()
+		var current_cel_image := current_cel.get_image()
 		# Avoid type conflict
 		if is_instance_valid(current_cel_image) and current_cel_image is ImageExtended:
-			images = [current_cel_image]
-		if project.get_current_cel() is CelTileMap:
-			if Tools.is_placing_tiles():
-				images.clear()
-				tile_cels.append(project.get_current_cel())
+			images[current_cel_image] = current_cel
 
 	if project.has_selection:
 		var blank := project.new_empty_image()
 		var selection_map_copy := project.selection_map.return_cropped_copy(project, project.size)
 		var selection_rect := selection_map_copy.get_used_rect()
+		var selection := project.selection_map.get_used_rect()
 		for image in images:
-			image.blit_rect_mask(blank, selection_map_copy, selection_rect, selection_rect.position)
-			image.convert_rgb_to_indexed()
-		var selection = project.selection_map.get_used_rect()
-		for tile_cel: CelTileMap in tile_cels:
-			var row := 0
-			for y in range(
-				selection.position.y, selection.end.y, floori(tile_cel.tile_size.y / 2.0)
-			):
-				var current_offset := floori(tile_cel.tile_size.x / 2.0) if row % 2 != 0 else 0
-				for x in range(
-					selection.position.x + current_offset, selection.end.x, tile_cel.tile_size.x
+			var cel := images[image]
+			if cel is CelTileMap and Tools.is_placing_tiles():
+				var row := 0
+				for y in range(
+					selection.position.y, selection.end.y, floori(cel.tile_size.y / 2.0)
 				):
-					var point = Vector2i(x, y) + Vector2i((Vector2(tile_cel.tile_size) / 2).ceil())
-					if selection.has_point(point):
-						var tile_position := tile_cel.get_cell_position(point)
-						var cell := tile_cel.get_cell_at(tile_position)
-						tile_cel.set_index(cell, 0)
-						tile_cel.update_tilemap()
-				row += 1
+					var current_offset := floori(cel.tile_size.x / 2.0) if row % 2 != 0 else 0
+					for x in range(
+						selection.position.x + current_offset, selection.end.x, cel.tile_size.x
+					):
+						var p := Vector2i(x, y) + Vector2i((Vector2(cel.tile_size) / 2).ceil())
+						if selection.has_point(p):
+							var tile_position := (cel as CelTileMap).get_cell_position(p)
+							var cell := (cel as CelTileMap).get_cell_at(tile_position)
+							cel.set_index(cell, 0)
+							cel.update_tilemap()
+					row += 1
+			else:
+				image.blit_rect_mask(
+					blank, selection_map_copy, selection_rect, selection_rect.position - cel.offset
+				)
+				image.convert_rgb_to_indexed()
 	else:
 		for image in images:
 			image.fill(0)
@@ -663,13 +651,12 @@ func select_cel_rect() -> void:
 	project.selection_map.crop(project.size.x, project.size.y)
 	project.selection_map.clear()
 	var current_cel := project.get_current_cel()
-	var cel_image: Image
+	var cel_rect := current_cel.get_cel_rect()
 	if current_cel is GroupCel:
 		var group_layer := project.layers[project.current_layer] as GroupLayer
-		cel_image = group_layer.blend_children(project.frames[project.current_frame])
-	else:
-		cel_image = current_cel.get_image()
-	project.selection_map.select_rect(cel_image.get_used_rect())
+		var cel_image := group_layer.blend_children(project.frames[project.current_frame])
+		cel_rect = cel_image.get_used_rect()
+	project.selection_map.select_rect(cel_rect)
 	project.selection_map_changed()
 	project.selection_offset = Vector2.ZERO
 	commit_undo("Select", undo_data_tmp)
@@ -686,7 +673,7 @@ func select_cel_pixels(layer: BaseLayer, frame: Frame) -> void:
 	if current_cel is GroupCel:
 		cel_image = (layer as GroupLayer).blend_children(frame)
 	else:
-		cel_image = current_cel.get_image()
+		cel_image = project.crop_image_to_project_size(current_cel.get_image(), current_cel.offset)
 	var selection_format := project.selection_map.get_format()
 	project.selection_map.copy_from(cel_image)
 	project.selection_map.convert(selection_format)

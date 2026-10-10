@@ -1143,6 +1143,8 @@ func _on_RemoveLayer_pressed() -> void:
 					indices.append(child.index)
 			indices.append(layer.index)
 	indices.sort()
+	if indices.size() == project.layers.size():
+		indices.remove_at(0)  # Ensure the project has at least 1 layer.
 
 	var layers: Array[BaseLayer]
 	var cels := []
@@ -1221,79 +1223,14 @@ func change_layer_order(up: bool) -> void:
 
 func _on_MergeDownLayer_pressed() -> void:
 	var project := Global.current_project
-	var top_layer := project.layers[project.current_layer]
+	var indices := [project.current_layer - 1, project.current_layer]
 	var bottom_layer := project.layers[project.current_layer - 1]
-	if not bottom_layer is PixelLayer:
-		return
-	var top_cels := []
-
-	project.undo_redo.create_action("Merge Layer")
-	for frame in project.frames:
-		var top_cel := frame.cels[top_layer.index]
-		top_cels.append(top_cel)  # Store for undo purposes
-
-		var top_image := top_layer.display_effects(top_cel)
-		var bottom_cel := frame.cels[bottom_layer.index] as PixelCel
-		var bottom_image := bottom_cel.get_image()
-		var textures: Array[Image] = []
-		textures.append(bottom_image)
-		textures.append(top_image)
-		var metadata_image := Image.create(2, 4, false, Image.FORMAT_R8)
-		DrawingAlgos.set_layer_metadata_image(bottom_layer, bottom_cel, metadata_image, 0)
-		metadata_image.set_pixel(0, 1, Color(1.0, 0.0, 0.0, 0.0))
-		DrawingAlgos.set_layer_metadata_image(top_layer, top_cel, metadata_image, 1)
-		var texture_array := Texture2DArray.new()
-		texture_array.create_from_images(textures)
-		var params := {
-			"layers": texture_array, "metadata": ImageTexture.create_from_image(metadata_image)
-		}
-		var new_bottom_image := ImageExtended.create_custom(
-			top_image.get_width(),
-			top_image.get_height(),
-			top_image.has_mipmaps(),
-			top_image.get_format(),
-			project.is_indexed()
-		)
-		# Merge the image itself.
-		var gen := ShaderImageEffect.new()
-		gen.generate_image(new_bottom_image, DrawingAlgos.blend_layers_shader, params, project.size)
-		new_bottom_image.convert_rgb_to_indexed()
-		if (
-			bottom_cel.link_set != null
-			and bottom_cel.link_set.size() > 1
-			and not top_image.is_invisible()
-		):
-			# Unlink cel:
-			project.undo_redo.add_do_method(bottom_layer.link_cel.bind(bottom_cel, null))
-			project.undo_redo.add_undo_method(
-				bottom_layer.link_cel.bind(bottom_cel, bottom_cel.link_set)
-			)
-			project.undo_redo.add_do_property(bottom_cel, "image", new_bottom_image)
-			project.undo_redo.add_undo_property(bottom_cel, "image", bottom_cel.image)
-		else:
-			var undo_data := {}
-			var redo_data := {}
-			if bottom_cel is CelTileMap:
-				(bottom_cel as CelTileMap).serialize_undo_data_source_image(
-					new_bottom_image, redo_data, undo_data, Vector2i.ZERO, true
-				)
-			new_bottom_image.add_data_to_dictionary(redo_data, bottom_image)
-			bottom_image.add_data_to_dictionary(undo_data)
-			project.deserialize_cel_undo_data(redo_data, undo_data)
-
-	project.undo_redo.add_do_method(project.remove_layers.bind([top_layer.index]))
-	project.undo_redo.add_undo_method(
-		project.add_layers.bind([top_layer], [top_layer.index], [top_cels])
-	)
-	project.undo_redo.add_do_method(project.change_cel.bind(-1, bottom_layer.index))
-	project.undo_redo.add_undo_method(project.change_cel.bind(-1, top_layer.index))
-	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
-	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	project.undo_redo.commit_action()
-	bottom_layer.visible = true
+	flatten_layers(indices, false, bottom_layer.name)
 
 
-func flatten_layers(indices: PackedInt32Array, only_visible := false) -> void:
+func flatten_layers(
+	indices: PackedInt32Array, only_visible := false, flattened_name := "Flattened"
+) -> void:
 	var project := Global.current_project
 	if indices.size() <= 1:
 		# If only the selected layer is about to be flattened,
@@ -1334,8 +1271,13 @@ func flatten_layers(indices: PackedInt32Array, only_visible := false) -> void:
 				indices.remove_at(i)
 	if indices.size() == 0:
 		return
-	var new_layer := PixelLayer.new(project)
-	new_layer.name = "Flattened"
+	var bottom_layer := project.layers[indices[0]]
+	var new_layer: PixelLayer
+	if bottom_layer is LayerTileMap:
+		new_layer = LayerTileMap.new(project, bottom_layer.tileset)
+	else:
+		new_layer = PixelLayer.new(project)
+	new_layer.name = flattened_name
 	new_layer.index = indices[0]
 	var prev_layers := []
 	var prev_cels := []
@@ -1343,6 +1285,7 @@ func flatten_layers(indices: PackedInt32Array, only_visible := false) -> void:
 	prev_cels.resize(indices.size())
 	for i in indices.size():
 		prev_cels[i] = []
+	project.undo_redo.create_action("Flatten layers")
 	for frame_index in project.frames.size():
 		var frame := project.frames[frame_index]
 		var textures: Array[Image] = []
@@ -1373,14 +1316,21 @@ func flatten_layers(indices: PackedInt32Array, only_visible := false) -> void:
 		gen.generate_image(new_image, DrawingAlgos.blend_layers_shader, params, project.size)
 		new_image.convert_rgb_to_indexed()
 		var new_cel := new_layer.new_cel_from_image(new_image)
+		new_cel.shrink_to_content()
+		if new_cel is CelTileMap:
+			var tileset := (new_cel as CelTileMap).tileset
+			var undo := tileset.serialize_undo_data()
+			new_cel.update_tilemap()
+			var redo := tileset.serialize_undo_data()
+			project.undo_redo.add_do_method(tileset.deserialize_undo_data.bind(redo, new_cel))
+			project.undo_redo.add_undo_method(tileset.deserialize_undo_data.bind(undo, new_cel))
 		new_cels.append(new_cel)
-	var bottom_layer := project.layers[indices[0]]
+
 	while bottom_layer.parent != null:
 		if not indices.has(bottom_layer.parent.index):
 			new_layer.parent = bottom_layer.parent
 			break
 		bottom_layer = bottom_layer.parent
-	project.undo_redo.create_action("Flatten layers")
 	project.undo_redo.add_do_method(project.remove_layers.bind(indices))
 	project.undo_redo.add_do_method(
 		project.add_layers.bind([new_layer], [new_layer.index], [new_cels])

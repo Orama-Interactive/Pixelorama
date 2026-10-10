@@ -64,6 +64,8 @@ var selected_cels := [[0, 0]]  ## Array of Arrays of 2 integers (frame & layer)
 ## See [method order_layers].
 var ordered_layers: Array[int] = [0]
 var next_keyframe_id := 0
+## Used as a placeholder to allow canvas drawing.
+var empty_image_texture: ImageTexture
 
 var animation_tags: Array[AnimationTag] = []:
 	set(value):
@@ -160,7 +162,7 @@ func _init(_frames: Array[Frame] = [], _name := tr("untitled"), _size := Vector2
 		Vector2(19999, 19999) + x_minus_y_symmetry_point * 2.0
 	)
 	Global.canvas.add_child(diagonal_x_minus_y_symmetry_axis)
-
+	empty_image_texture = ImageTexture.create_from_image(new_empty_image())
 	if OS.get_name() == "Web":
 		export_profile.directory_path = "user://"
 	else:
@@ -179,7 +181,7 @@ func remove() -> void:
 		guide.queue_free()
 	for frame in frames:
 		for l in layers.size():
-			var cel: BaseCel = frame.cels[l]
+			var cel := frame.cels[l]
 			cel.on_remove()
 	# Prevents memory leak (due to the layers' project reference stopping ref counting from freeing)
 	layers.clear()
@@ -457,9 +459,14 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			var cel_i := 0
 			for cel in frame.cels:
 				var layer := layers[cel_i]
+				var image_size := size
+				if cel.has("image_size"):
+					image_size = str_to_var(cel["image_size"])
 				match layer.get_layer_type():
 					Global.LayerTypes.PIXEL:
-						var image := _load_image_from_pxo(frame_i, cel_i, zip_reader, file)
+						var image := _load_image_from_pxo(
+							frame_i, cel_i, image_size, zip_reader, file
+						)
 						cels.append(PixelCel.new(image))
 					Global.LayerTypes.GROUP:
 						cels.append(GroupCel.new())
@@ -469,7 +476,17 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 							file.get_buffer(size.x * size.y * 4)
 						cels.append(layer.new_empty_cel())
 					Global.LayerTypes.TILEMAP:
-						var image := _load_image_from_pxo(frame_i, cel_i, zip_reader, file)
+						var new_image_size := Vector2i.ONE
+						var tile_shape: int = dict.layers[cel_i].tile_shape
+						if tile_shape in [TileSet.TILE_SHAPE_ISOMETRIC, TileSet.TILE_SHAPE_HEXAGON]:
+							new_image_size = size
+						var image := ImageExtended.create_custom(
+							new_image_size.x,
+							new_image_size.y,
+							false,
+							get_image_format(),
+							is_indexed()
+						)
 						var tileset_index = dict.layers[cel_i].tileset_index
 						var tileset := tilesets[tileset_index]
 						var new_cel := CelTileMap.new(tileset, image)
@@ -595,14 +612,16 @@ func _deserialize_metadata(object: Object, dict: Dictionary) -> void:
 ## If the pxo file is saved with Pixelorama version 1.0 and on,
 ## the [param zip_reader] is used to load the image. Otherwise, [param file] is used.
 func _load_image_from_pxo(
-	frame_i: int, cel_i: int, zip_reader: ZIPReader, file: FileAccess
+	frame_i: int, cel_i: int, image_size: Vector2i, zip_reader: ZIPReader, file: FileAccess
 ) -> ImageExtended:
 	var image: Image
 	var indices_data := PackedByteArray()
 	if is_instance_valid(zip_reader):  # For pxo files saved in 1.0+
 		var path := "image_data/frames/%s/layer_%s" % [frame_i + 1, cel_i + 1]
 		var image_data := zip_reader.read_file(path)
-		image = Image.create_from_data(size.x, size.y, false, get_image_format(), image_data)
+		image = Image.create_from_data(
+			image_size.x, image_size.y, false, get_image_format(), image_data
+		)
 		var indices_path := "image_data/frames/%s/indices_layer_%s" % [frame_i + 1, cel_i + 1]
 		if zip_reader.file_exists(indices_path):
 			indices_data = zip_reader.read_file(indices_path)
@@ -635,6 +654,7 @@ func _size_changed(value: Vector2i) -> void:
 	tiles.tile_size = value
 	size = value
 	Global.canvas.crop_rect.reset()
+	empty_image_texture.set_image(new_empty_image())
 	resized.emit()
 
 
@@ -698,6 +718,14 @@ func find_first_drawable_cel(frame := frames[current_frame]) -> BaseCel:
 	return result
 
 
+func crop_image_to_project_size(image: Image, offset: Vector2i) -> Image:
+	if not image:
+		return null
+	var canvas_image := Image.create_empty(size.x, size.y, image.has_mipmaps(), image.get_format())
+	canvas_image.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), offset)
+	return canvas_image
+
+
 ## Returns an [Array] of type [PixelCel] containing all of the pixel cels of the project.
 func get_all_pixel_cels() -> Array[PixelCel]:
 	var cels: Array[PixelCel]
@@ -743,6 +771,9 @@ func serialize_cel_undo_data(cels: Array[BaseCel], data: Dictionary) -> void:
 		image.add_data_to_dictionary(data)
 		if cel is CelTileMap:
 			data[cel] = (cel as CelTileMap).serialize_undo_data()
+		else:
+			data[cel] = {}
+		data[cel]["offset"] = cel.offset
 
 
 ## Loads data from [param redo_data] and param [undo_data],
@@ -752,11 +783,11 @@ func serialize_cel_undo_data(cels: Array[BaseCel], data: Dictionary) -> void:
 func deserialize_cel_undo_data(redo_data: Dictionary, undo_data: Dictionary) -> void:
 	Global.undo_redo_compress_images(redo_data, undo_data, self)
 	for cel in redo_data:
-		if cel is CelTileMap:
-			(cel as CelTileMap).deserialize_undo_data(redo_data[cel], undo_redo, false)
+		if cel is PixelCel:
+			(cel as PixelCel).deserialize_undo_data(redo_data[cel], undo_redo, false)
 	for cel in undo_data:
-		if cel is CelTileMap:
-			(cel as CelTileMap).deserialize_undo_data(undo_data[cel], undo_redo, true)
+		if cel is PixelCel:
+			(cel as PixelCel).deserialize_undo_data(undo_data[cel], undo_redo, true)
 
 
 ## Returns all [BaseCel]s in [param cels], and for every [CelTileMap],

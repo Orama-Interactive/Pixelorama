@@ -88,9 +88,10 @@ func get_layer_type() -> int:
 func new_empty_cel() -> BaseCel:
 	var format := project.get_image_format()
 	var is_indexed := project.is_indexed()
-	var image := ImageExtended.create_custom(
-		project.size.x, project.size.y, false, format, is_indexed
-	)
+	var image_size := Vector2i.ONE
+	if tile_shape in [TileSet.TILE_SHAPE_ISOMETRIC, TileSet.TILE_SHAPE_HEXAGON]:
+		image_size = project.size
+	var image := ImageExtended.create_custom(image_size.x, image_size.y, false, format, is_indexed)
 	var cel_tilemap := CelTileMap.new(tileset, image)
 	pass_variables_to_cel(cel_tilemap)
 	return cel_tilemap

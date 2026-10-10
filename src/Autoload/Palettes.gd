@@ -293,7 +293,7 @@ func _fill_new_palette_with_colors(
 			for frame in current_project.frames:
 				for cel in frame.cels:
 					cels.append(cel)
-
+	var start_index = 0
 	for cel in cels:
 		var cel_image := Image.new()
 		cel_image.copy_from(cel.get_image())
@@ -305,7 +305,8 @@ func _fill_new_palette_with_colors(
 				if not add_alpha_colors:
 					color.a = 1
 				if not new_palette.has_theme_color(color):
-					new_palette.add_color(color)
+					start_index += 1
+					new_palette.add_color(color, start_index)
 	undo_redo_add_palette(new_palette, is_global)
 
 
@@ -552,9 +553,9 @@ func _get_palette_files(path: String) -> PackedStringArray:
 
 
 func import_palette_from_path(path: String, make_copy := false, is_initialising := false) -> void:
+	var is_duplicate := false
 	if does_palette_exist(path.get_basename().get_file()):
-		# If there is a palette with same name ignore import for now
-		return
+		is_duplicate = true
 
 	var palette: Palette = null
 	if FileAccess.file_exists(path):
@@ -577,6 +578,9 @@ func import_palette_from_path(path: String, make_copy := false, is_initialising 
 			palette.deserialize(text)
 
 	if is_instance_valid(palette):
+		if is_duplicate:
+			# Change name for duplicate entries
+			palette.name = get_valid_name(palette.name, null)
 		if make_copy:
 			save_palette(palette)  # Makes a copy of the palette
 		palettes[palette.name] = palette
