@@ -1143,6 +1143,8 @@ func _on_RemoveLayer_pressed() -> void:
 					indices.append(child.index)
 			indices.append(layer.index)
 	indices.sort()
+	if indices.size() == project.layers.size():
+		indices.remove_at(0)  # Ensure the project has at least 1 layer.
 
 	var layers: Array[BaseLayer]
 	var cels := []
