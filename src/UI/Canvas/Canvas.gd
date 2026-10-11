@@ -241,7 +241,9 @@ func _update_texture_array_layer(
 		include = false
 	if update_layer:
 		layer_texture_array.update_layer(cel_image, ordered_index)
-	DrawingAlgos.set_layer_metadata_image(layer, cel, layer_metadata_image, ordered_index, include)
+	DrawingAlgos.set_layer_metadata_image(
+		layer, cel, layer_metadata_image, ordered_index, include, false
+	)
 
 
 func refresh_onion() -> void:

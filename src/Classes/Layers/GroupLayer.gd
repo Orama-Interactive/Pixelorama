@@ -106,7 +106,7 @@ func _include_child_in_blending(
 			cel_image = cel.get_image()
 		textures.append(cel_image)
 		_cache_texture_data.append(cel_image.get_data())
-		DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, i)
+		DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, i, true, animate_params)
 
 
 ## Include a child group in the blending process.
@@ -162,7 +162,9 @@ func _blend_child_group(
 		else:
 			textures.append(blended_children)
 			_cache_texture_data.append(blended_children.get_data())
-			DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, i)
+			DrawingAlgos.set_layer_metadata_image(
+				layer, cel, metadata_image, i, true, animate_params
+			)
 		new_i += 1
 	return new_i
 
