@@ -488,7 +488,7 @@ static func create_keyframe_button(
 		keyframe_button.texture_normal = KEYFRAME_SMALL_ICON
 		keyframe_button.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
 		keyframe_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		keyframe_button.tooltip_text = "Animate property."
+		keyframe_button.tooltip_text = "Add keyframe."
 		keyframe_button.pressed.connect(on_keyframe_pressed.bind(param_name))
 		keyframe_button.pressed.connect(
 			func(): keyframe_button.texture_normal = KeyframeButton.KEYFRAME_ICON
@@ -497,17 +497,20 @@ static func create_keyframe_button(
 
 
 static func get_proper_keyframe_texture(
+	keyframe_button: TextureButton,
 	animatable: AnimatableObject,
 	param_name: String,
 	frame_index := Global.current_project.current_frame
-) -> Texture2D:
+) -> void:
+	keyframe_button.tooltip_text = "Add keyframe."
+	keyframe_button.texture_normal = ShaderLoader.KEYFRAME_SMALL_ICON
 	if param_name in animatable.animated_params:
 		if animatable.animated_params[param_name].size() > 0:
 			if animatable.animated_params[param_name].has(frame_index):
-				return KeyframeButton.KEYFRAME_ICON
+				keyframe_button.texture_normal = KeyframeButton.KEYFRAME_ICON
+				keyframe_button.tooltip_text = "Update keyframe."
 			else:
-				return ShaderLoader.KEYFRAME_HOLLOW_ICON
-	return ShaderLoader.KEYFRAME_SMALL_ICON
+				keyframe_button.texture_normal = ShaderLoader.KEYFRAME_HOLLOW_ICON
 
 
 static func _vec2str_to_vector2(vec2: String) -> Vector2:

@@ -125,9 +125,7 @@ func _set_proper_keyframe_texture(effect: LayerEffect, effect_param_container: C
 			Global.set_value_to_node(param_node, value)
 			effect.params[param_node.name] = value
 			if keyframe_button is TextureButton:
-				keyframe_button.texture_normal = ShaderLoader.get_proper_keyframe_texture(
-					effect, param_node.name
-				)
+				ShaderLoader.get_proper_keyframe_texture(keyframe_button, effect, param_node.name)
 				keyframe_button.self_modulate = Color.WHITE
 
 
@@ -408,9 +406,7 @@ func _on_keyframe_changed(param_name: String, effect: LayerEffect, effect_index:
 		var keyframe_button = hbox.get_child(2)
 		if keyframe_button is not TextureButton:
 			continue
-		keyframe_button.texture_normal = ShaderLoader.get_proper_keyframe_texture(
-			effect, param_node.name
-		)
+		ShaderLoader.get_proper_keyframe_texture(keyframe_button, effect, param_node.name)
 		keyframe_button.self_modulate = Color.WHITE
 
 

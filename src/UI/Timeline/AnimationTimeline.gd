@@ -1474,9 +1474,7 @@ func _update_layer_settings_ui(animate_opacity := false) -> void:
 	if animate_opacity:
 		opacity = animated_opacity
 		layer.opacity = opacity
-		opacity_keyframe_button.texture_normal = ShaderLoader.get_proper_keyframe_texture(
-			layer, "opacity"
-		)
+		ShaderLoader.get_proper_keyframe_texture(opacity_keyframe_button, layer, "opacity")
 		opacity_keyframe_button.self_modulate = Color.WHITE
 	else:
 		if is_equal_approx(opacity, animated_opacity):
