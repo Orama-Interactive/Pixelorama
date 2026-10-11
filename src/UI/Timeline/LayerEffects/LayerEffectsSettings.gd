@@ -103,8 +103,9 @@ func _on_cel_switched() -> void:
 
 	for i in layer.effects.size():
 		var effect := layer.effects[i]
-		effect.keyframe_set.connect(_on_keyframe_changed.bind(effect, i))
-		effect.keyframe_unset.connect(_on_keyframe_changed.bind(effect, i))
+		if not effect.keyframe_set.is_connected(_on_keyframe_changed):
+			effect.keyframe_set.connect(_on_keyframe_changed.bind(effect, i))
+			effect.keyframe_unset.connect(_on_keyframe_changed.bind(effect, i))
 		var effect_param_container := effect_container.get_child(i).get_child(0)
 		_set_proper_keyframe_texture(effect, effect_param_container)
 

@@ -265,7 +265,7 @@ func get_opacity(frame_index := -1) -> float:
 ## Returns a copy of the [param cel]'s [Image] with all of the effects applied to it.
 ## This method is not destructive as it does NOT change the data of the image,
 ## it just returns a copy.
-func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
+func display_effects(cel: BaseCel, animate_params := true, image_override: Image = null) -> Image:
 	var image := ImageExtended.new()
 	if is_instance_valid(image_override):
 		if image_override is ImageExtended:
@@ -287,12 +287,16 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 	for effect in effects:
 		if not effect.enabled or not is_instance_valid(effect.shader):
 			continue
-		var interpol_params := effect.get_params(frame_index)
-		interpol_params["PXO_time"] = frame.position_in_seconds(project)
-		interpol_params["PXO_frame_index"] = frame_index
-		interpol_params["PXO_layer_index"] = index
+		var effect_params := {}
+		if animate_params:
+			effect_params = effect.get_params(frame_index)
+		else:
+			effect_params = effect.params
+		effect_params["PXO_time"] = frame.position_in_seconds(project)
+		effect_params["PXO_frame_index"] = frame_index
+		effect_params["PXO_layer_index"] = index
 		var shader_image_effect := ShaderImageEffect.new()
-		shader_image_effect.generate_image(image, effect.shader, interpol_params, image_size)
+		shader_image_effect.generate_image(image, effect.shader, effect_params, image_size)
 	# Inherit effects from the parents, if their blend mode is set to pass through
 	for ancestor in get_ancestors():
 		if ancestor.blend_mode != BlendModes.PASS_THROUGH:

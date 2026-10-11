@@ -293,7 +293,7 @@ static func create_ui_for_shader_uniforms(
 						var dither_tex := dither_matrices[index].texture
 						value_changed.call(dither_tex, u_name)
 				)
-				option_button.slider.name = u_name
+				option_button.name = u_name
 				for matrix in dither_matrices:
 					option_button.add_item(matrix.name)
 				if params.has(u_name):

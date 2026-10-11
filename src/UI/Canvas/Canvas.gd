@@ -125,11 +125,11 @@ static func get_canvas_cel_image(cel: BaseCel, layer: BaseLayer, image: Image) -
 	var project := layer.project
 	if layer.is_blender():
 		var frame := project.frames[project.current_frame]
-		var blended: Image = layer.blend_children(frame, Global.display_layer_effects)
+		var blended: Image = layer.blend_children(frame, false, Global.display_layer_effects)
 		image.copy_from(blended)
 	else:
 		if Global.display_layer_effects:
-			image.copy_from(layer.display_effects(cel))
+			image.copy_from(layer.display_effects(cel, false))
 			if layer.use_cel_image_for_effects:
 				image.copy_from(project.crop_image_to_project_size(image, cel.offset))
 		else:

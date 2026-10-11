@@ -14,7 +14,7 @@ func _init(_project: Project, _name := "") -> void:
 
 
 ## Blends all of the images of children layer of the group layer into a single image.
-func blend_children(frame: Frame, apply_effects := true) -> Image:
+func blend_children(frame: Frame, animate_params := true, apply_effects := true) -> Image:
 	var image := ImageExtended.create_custom(
 		project.size.x, project.size.y, false, project.get_image_format(), project.is_indexed()
 	)
@@ -30,13 +30,27 @@ func blend_children(frame: Frame, apply_effects := true) -> Image:
 		var layer := children[i]
 		if layer is GroupLayer:
 			current_metadata_index = _blend_child_group(
-				image, layer, frame, textures, metadata_image, current_metadata_index, apply_effects
+				image,
+				layer,
+				frame,
+				textures,
+				metadata_image,
+				current_metadata_index,
+				animate_params,
+				apply_effects
 			)
 			# NOTE: incrementation of current_metadata_index is done internally in
 			# _blend_child_group(), so we don't have to use current_metadata_index += 1 here
 		else:
 			_include_child_in_blending(
-				image, layer, frame, textures, metadata_image, current_metadata_index, apply_effects
+				image,
+				layer,
+				frame,
+				textures,
+				metadata_image,
+				current_metadata_index,
+				animate_params,
+				apply_effects
 			)
 			current_metadata_index += 1
 
@@ -67,7 +81,7 @@ func blend_children(frame: Frame, apply_effects := true) -> Image:
 			)
 			_group_cache[c_key] = image.get_data()
 		if apply_effects:
-			image = display_effects(frame.cels[index], image)
+			image = display_effects(frame.cels[index], animate_params, image)
 	return image
 
 
@@ -78,6 +92,7 @@ func _include_child_in_blending(
 	textures: Array[Image],
 	metadata_image: Image,
 	i: int,
+	animate_params: bool,
 	apply_effects: bool
 ) -> void:
 	var cel := frame.cels[layer.index]
@@ -86,7 +101,7 @@ func _include_child_in_blending(
 	else:
 		var cel_image: Image
 		if apply_effects:
-			cel_image = layer.display_effects(cel)
+			cel_image = layer.display_effects(cel, animate_params)
 		else:
 			cel_image = cel.get_image()
 		textures.append(cel_image)
@@ -106,6 +121,7 @@ func _blend_child_group(
 	textures: Array[Image],
 	metadata_image: Image,
 	i: int,
+	animate_params: bool,
 	apply_effects: bool
 ) -> int:
 	var new_i := i
@@ -117,12 +133,26 @@ func _blend_child_group(
 			var child := children[j]
 			if child is GroupLayer:
 				new_i = _blend_child_group(
-					image, child, frame, textures, metadata_image, new_i, apply_effects
+					image,
+					child,
+					frame,
+					textures,
+					metadata_image,
+					new_i,
+					animate_params,
+					apply_effects
 				)
 			else:
 				metadata_image.crop(metadata_image.get_width() + 1, metadata_image.get_height())
 				_include_child_in_blending(
-					image, child, frame, textures, metadata_image, new_i, apply_effects
+					image,
+					child,
+					frame,
+					textures,
+					metadata_image,
+					new_i,
+					animate_params,
+					apply_effects
 				)
 				new_i += 1
 	else:
