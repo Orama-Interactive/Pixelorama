@@ -1381,6 +1381,7 @@ func _on_opacity_keyframe_button_pressed() -> void:
 		var layer := project.layers[idx_pair[1]]
 		layer.add_keyframe_undo_redo("opacity", frame_idx, project, layer.opacity)
 	opacity_keyframe_button.texture_normal = KeyframeButton.KEYFRAME_ICON
+	opacity_keyframe_button.self_modulate = Color.WHITE
 
 
 func _on_timeline_settings_close_requested() -> void:
@@ -1462,19 +1463,26 @@ func _cel_switched() -> void:
 	layer.keyframe_unset.connect(_on_layer_keyframe_changed)
 
 
-func _update_layer_settings_ui(animated_opacity := false) -> void:
+func _update_layer_settings_ui(animate_opacity := false) -> void:
 	var project := Global.current_project
 	var layer := project.layers[project.current_layer]
 	# Temporarily disconnect it in order to prevent layer opacity changing
 	# on different layers, or while undoing.
 	opacity_slider.value_changed.disconnect(_on_opacity_slider_value_changed)
 	var opacity := layer.opacity
-	if animated_opacity:
-		opacity = layer.get_opacity(project.current_frame)
+	var animated_opacity := layer.get_opacity(project.current_frame)
+	if animate_opacity:
+		opacity = animated_opacity
 		layer.opacity = opacity
 		opacity_keyframe_button.texture_normal = ShaderLoader.get_proper_keyframe_texture(
 			layer, "opacity"
 		)
+		opacity_keyframe_button.self_modulate = Color.WHITE
+	else:
+		if is_equal_approx(opacity, animated_opacity):
+			opacity_keyframe_button.self_modulate = Color.WHITE
+		else:
+			opacity_keyframe_button.self_modulate = Color.ORANGE
 	opacity_slider.value = opacity * 100
 	opacity_slider.value_changed.connect(_on_opacity_slider_value_changed)
 	var blend_mode_index := blend_modes_button.get_item_index(layer.blend_mode)

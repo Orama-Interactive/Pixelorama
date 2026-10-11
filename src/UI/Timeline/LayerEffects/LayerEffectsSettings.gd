@@ -128,6 +128,7 @@ func _set_proper_keyframe_texture(effect: LayerEffect, effect_param_container: C
 				keyframe_button.texture_normal = ShaderLoader.get_proper_keyframe_texture(
 					effect, param_node.name
 				)
+				keyframe_button.self_modulate = Color.WHITE
 
 
 func _add_effect_to_list(i: int) -> void:
@@ -209,8 +210,8 @@ func _create_effect_node(layer: BaseLayer, effect: LayerEffect) -> Node:
 		effect.params,
 		effect.param_properties,
 		parameter_vbox,
-		_set_parameter.bind(effect),
-		_load_parameter_texture.bind(effect),
+		_set_parameter.bind(effect, layer),
+		_load_parameter_texture.bind(effect, layer),
 		_on_keyframe_pressed.bind(effect)
 	)
 	foldable_container.layer = layer
@@ -347,19 +348,44 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 	project.undo_redo.commit_action()
 
 
-func _set_parameter(value, param: String, effect: LayerEffect) -> void:
+func _set_parameter(value, param: String, effect: LayerEffect, layer: BaseLayer) -> void:
 	effect.params[param] = value
 	Global.canvas.queue_redraw()
 
+	# Set the keyframe button to orange if the user makes a temporary change.
+	var frame_index := layer.project.current_frame
+	if not effect.animated_params.has(param):
+		return
+	var effect_index := layer.effects.find(effect)
+	var effect_param_container := effect_container.get_child(effect_index).get_child(0)
+	for i in range(0, effect_param_container.get_child_count()):
+		var hbox := effect_param_container.get_child(i)
+		if hbox.get_child_count() <= 2:
+			continue
+		var param_node := hbox.get_child(1)
+		if param_node is Container and not param_node is BasisSliders:
+			param_node = param_node.get_child(0)
+		if param_node.name != param:
+			continue
+		var keyframe_button := hbox.get_child(2)
+		if keyframe_button is not TextureButton:
+			continue
+		if value != effect.get_animated_property(frame_index, param):
+			keyframe_button.self_modulate = Color.ORANGE
+		else:
+			keyframe_button.self_modulate = Color.WHITE
 
-func _load_parameter_texture(path: String, param: String, effect: LayerEffect) -> void:
+
+func _load_parameter_texture(
+	path: String, param: String, effect: LayerEffect, layer: BaseLayer
+) -> void:
 	var image := Image.new()
 	image.load(path)
 	if not image:
 		print("Error loading texture")
 		return
 	var image_tex := ImageTexture.create_from_image(image)
-	_set_parameter(image_tex, param, effect)
+	_set_parameter(image_tex, param, effect, layer)
 
 
 func _on_keyframe_pressed(param: String, effect: LayerEffect) -> void:
@@ -385,6 +411,7 @@ func _on_keyframe_changed(param_name: String, effect: LayerEffect, effect_index:
 		keyframe_button.texture_normal = ShaderLoader.get_proper_keyframe_texture(
 			effect, param_node.name
 		)
+		keyframe_button.self_modulate = Color.WHITE
 
 
 func _on_enabled_button_toggled(button_pressed: bool) -> void:
