@@ -14,7 +14,6 @@ enum LoopType { NO, CYCLE, PINGPONG }
 
 const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
 const ANIMATION_TAG_TSCN := preload("res://src/UI/Timeline/AnimationTagUI.tscn")
-const LAYER_FX_SCENE_PATH := "res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.tscn"
 ## Do not let [member min_cel_size] go below 22, as this is the size of the layer icons.
 const CEL_MIN_SIZE_HARD_LIMIT := 22
 const CEL_MIN_SIZE_OFFSET := 15
@@ -37,12 +36,6 @@ var min_cel_size := 36:
 var max_cel_size := 144
 var past_above_canvas := true
 var future_above_canvas := true
-var layer_effect_settings: AcceptDialog:
-	get:
-		if not is_instance_valid(layer_effect_settings):
-			layer_effect_settings = load(LAYER_FX_SCENE_PATH).instantiate()
-			add_child(layer_effect_settings)
-		return layer_effect_settings
 var global_layer_visibility := true
 var global_layer_lock := false
 var global_layer_expand := true
@@ -61,10 +54,10 @@ var global_layer_expand := true
 @onready var move_up_layer := %MoveUpLayer as Button
 @onready var move_down_layer := %MoveDownLayer as Button
 @onready var merge_down_layer := %MergeDownLayer as Button
-@onready var layer_fx := %LayerFX as Button
 @onready var keyframe_timeline_button := %KeyframeTimelineButton as Button
 @onready var blend_modes_button := %BlendModes as OptionButton
 @onready var opacity_slider := %OpacitySlider as ValueSlider
+@onready var opacity_keyframe_button := %OpacityKeyframeButton as TextureButton
 @onready var frame_scroll_container := %FrameScrollContainer as Control
 @onready var timeline_scroll := %TimelineScroll as ScrollContainer
 @onready var frame_scroll_bar := %FrameScrollBar as HScrollBar
@@ -137,6 +130,10 @@ func _ready() -> void:
 	# Makes sure that the frame and tag scroll bars are in the right place:
 	layer_vbox.emit_signal.call_deferred("resized")
 	drag_highlight.visibility_changed.connect(clear_highlight)
+	await get_tree().process_frame
+	var layer := Global.current_project.layers[Global.current_project.current_layer]
+	layer.keyframe_set.connect(_on_layer_keyframe_changed)
+	layer.keyframe_unset.connect(_on_layer_keyframe_changed)
 
 
 func _notification(what: int) -> void:
@@ -1372,11 +1369,21 @@ func _on_opacity_slider_value_changed(value: float) -> void:
 
 		project.undo_redo.commit_action()
 	else:
-		for idx_pair in Global.current_project.selected_cels:
-			var layer := Global.current_project.layers[idx_pair[1]]
+		for idx_pair in project.selected_cels:
+			var layer := project.layers[idx_pair[1]]
 			layer.opacity = new_opacity
 			Global.canvas.queue_redraw()
 			_update_layer_settings_ui()
+
+
+func _on_opacity_keyframe_button_pressed() -> void:
+	var project := Global.current_project
+	for idx_pair in project.selected_cels:
+		var frame_idx: int = idx_pair[0]
+		var layer := project.layers[idx_pair[1]]
+		layer.add_keyframe_undo_redo("opacity", frame_idx, project, layer.opacity)
+	opacity_keyframe_button.texture_normal = KeyframeButton.KEYFRAME_ICON
+	opacity_keyframe_button.self_modulate = Color.WHITE
 
 
 func _on_timeline_settings_close_requested() -> void:
@@ -1423,41 +1430,60 @@ func _cel_switched() -> void:
 	for layer_button in layer_vbox.get_children():
 		layer_button.button_pressed = false  # Unpress all layer buttons
 
+	for connection in get_incoming_connections():
+		if connection.callable == _on_layer_keyframe_changed:
+			connection.signal.disconnect(_on_layer_keyframe_changed)
+
 	for cel in Global.current_project.selected_cels:  # Press selected buttons
-		var frame: int = cel[0]
-		var layer: int = cel[1]
-		if frame < frame_hbox.get_child_count():
-			var frame_button: BaseButton = frame_hbox.get_child(frame)
+		var frame_index: int = cel[0]
+		var layer_index: int = cel[1]
+		if frame_index < frame_hbox.get_child_count():
+			var frame_button: BaseButton = frame_hbox.get_child(frame_index)
 			frame_button.button_pressed = true  # Press selected frame buttons
 
 		var layer_vbox_child_count: int = layer_vbox.get_child_count()
-		if layer < layer_vbox_child_count:
-			var layer_button = layer_vbox.get_child(layer_vbox_child_count - 1 - layer)
+		if layer_index < layer_vbox_child_count:
+			var layer_button = layer_vbox.get_child(layer_vbox_child_count - 1 - layer_index)
 			layer_button.button_pressed = true  # Press selected layer buttons
 
 		var cel_vbox_child_count: int = cel_vbox.get_child_count()
-		if layer < cel_vbox_child_count:
-			var cel_hbox: Container = cel_vbox.get_child(cel_vbox_child_count - 1 - layer)
-			if frame < cel_hbox.get_child_count():
-				var cel_button: BaseButton = cel_hbox.get_child(frame)
+		if layer_index < cel_vbox_child_count:
+			var cel_hbox: Container = cel_vbox.get_child(cel_vbox_child_count - 1 - layer_index)
+			if frame_index < cel_hbox.get_child_count():
+				var cel_button: BaseButton = cel_hbox.get_child(frame_index)
 				cel_button.button_pressed = true  # Press selected cel buttons
 	_toggle_frame_buttons()
 	_toggle_layer_buttons()
 	_fill_blend_modes_option_button()
-	_update_layer_settings_ui()
+	_update_layer_settings_ui(true)
 	var project := Global.current_project
 	frame_scroll_container.ensure_control_visible(frame_hbox.get_child(project.current_frame))
-	var layer_index := project.layers.size() - project.current_layer - 1
-	timeline_scroll.ensure_control_visible(layer_vbox.get_child(layer_index))
+	var layer_button_index := project.layers.size() - project.current_layer - 1
+	timeline_scroll.ensure_control_visible(layer_vbox.get_child(layer_button_index))
+	var layer := project.layers[project.current_layer]
+	layer.keyframe_set.connect(_on_layer_keyframe_changed)
+	layer.keyframe_unset.connect(_on_layer_keyframe_changed)
 
 
-func _update_layer_settings_ui() -> void:
+func _update_layer_settings_ui(animate_opacity := false) -> void:
 	var project := Global.current_project
 	var layer := project.layers[project.current_layer]
 	# Temporarily disconnect it in order to prevent layer opacity changing
 	# on different layers, or while undoing.
 	opacity_slider.value_changed.disconnect(_on_opacity_slider_value_changed)
-	opacity_slider.value = layer.opacity * 100
+	var opacity := layer.opacity
+	var animated_opacity := layer.get_opacity(project.current_frame)
+	if animate_opacity:
+		opacity = animated_opacity
+		layer.opacity = opacity
+		ShaderLoader.get_proper_keyframe_texture(opacity_keyframe_button, layer, "opacity")
+		opacity_keyframe_button.self_modulate = Color.WHITE
+	else:
+		if is_equal_approx(opacity, animated_opacity):
+			opacity_keyframe_button.self_modulate = Color.WHITE
+		else:
+			opacity_keyframe_button.self_modulate = Color.ORANGE
+	opacity_slider.value = opacity * 100
 	opacity_slider.value_changed.connect(_on_opacity_slider_value_changed)
 	var blend_mode_index := blend_modes_button.get_item_index(layer.blend_mode)
 	blend_modes_button.selected = blend_mode_index
@@ -1490,6 +1516,12 @@ func update_cel_button_ui(layer_index: int) -> void:
 		cel_hbox.get_child(f).layer = layer_index
 		cel_hbox.get_child(f).frame = f
 		cel_hbox.get_child(f).button_setup()
+
+
+## Needed for the keyframe button to update visually with undo/redo.
+func _on_layer_keyframe_changed(param_name: String) -> void:
+	if param_name == "opacity":
+		_update_layer_settings_ui(true)
 
 
 func _on_animation_tags_changed() -> void:
@@ -1535,7 +1567,6 @@ func _toggle_layer_buttons() -> void:
 	var layer := project.layers[project.current_layer]
 	var child_count := layer.get_child_count(true)
 
-	opacity_slider.editable = not layer.has_keyframes("opacity")
 	Global.disable_button(
 		remove_layer, layer.is_locked_in_hierarchy() or project.layers.size() == child_count + 1
 	)
@@ -1562,7 +1593,6 @@ func _toggle_layer_buttons() -> void:
 			or below_layer is AudioLayer
 		)
 	)
-	Global.disable_button(layer_fx, layer is AudioLayer)
 
 
 func project_changed() -> void:
@@ -1693,11 +1723,6 @@ func project_cel_removed(frame: int, layer: int) -> void:
 	var cel_hbox := cel_vbox.get_child(cel_vbox.get_child_count() - 1 - layer)
 	cel_hbox.get_child(frame).queue_free()
 	cel_hbox.remove_child(cel_hbox.get_child(frame))
-
-
-func _on_layer_fx_pressed() -> void:
-	layer_effect_settings.popup_centered_clamped()
-	Global.dialog_open(true)
 
 
 func _on_cel_size_slider_value_changed(value: float) -> void:

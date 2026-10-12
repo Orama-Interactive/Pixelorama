@@ -9,11 +9,14 @@ static var selected_keyframes: Array[int]
 var current_layer: BaseLayer:
 	set(value):
 		if is_instance_valid(current_layer):
-			if current_layer.effects_added_removed.is_connected(_on_effects_added_removed):
-				current_layer.effects_added_removed.disconnect(_on_effects_added_removed)
+			if current_layer.effect_added.is_connected(_on_effects_added_removed):
+				current_layer.effect_added.disconnect(_on_effects_added_removed)
+			if current_layer.effect_removed.is_connected(_on_effects_added_removed):
+				current_layer.effect_removed.disconnect(_on_effects_added_removed)
 		current_layer = value
 		recreate_timeline()
-		current_layer.effects_added_removed.connect(_on_effects_added_removed)
+		current_layer.effect_added.connect(_on_effects_added_removed)
+		current_layer.effect_removed.connect(_on_effects_added_removed)
 		await get_tree().process_frame
 		await get_tree().process_frame
 		keyframe_timeline_cursor.update_position()
@@ -30,10 +33,6 @@ var keyframe_timeline_frame_display: KeyframeTimelineFrameDisplay = %KeyframeTim
 @onready var layer_element_tree: Tree = %LayerElementTree
 @onready var track_container: VBoxContainer = %TrackContainer
 @onready var keyframe_timeline_cursor: Control = %KeyframeTimelineCursor
-@onready var properties_container: VBoxContainer = %PropertiesContainer
-@onready var no_key_selected_label: Label = %NoKeySelectedLabel
-@onready var properties_grid_container: GridContainer = %PropertiesGridContainer
-@onready var delete_keyframe_button: Button = %DeleteKeyframeButton
 
 
 func _ready() -> void:
@@ -74,6 +73,9 @@ func _input(event: InputEvent) -> void:
 					continue
 				key_button.position.x = key_button.frame_index * frame_ui_size
 		keyframe_timeline_cursor.update_position()
+	if event.is_action_pressed(&"delete"):
+		_on_keyframe_deleted()
+		get_viewport().set_input_as_handled()
 
 
 func _on_cel_switched() -> void:
@@ -88,7 +90,7 @@ func _on_cel_switched() -> void:
 	unselect_keyframe()
 
 
-func _on_effects_added_removed() -> void:
+func _on_effects_added_removed(_effect: LayerEffect) -> void:
 	# Await is needed so that the params get added to the layer effect.
 	await get_tree().process_frame
 	recreate_timeline()
@@ -121,10 +123,15 @@ func recreate_timeline() -> void:
 	layer_element_tree.clear()
 	for child in track_container.get_children():
 		child.queue_free()
+	for connection in get_incoming_connections():
+		if connection.callable == _keyframe_changed:
+			connection.signal.disconnect(_keyframe_changed)
 	var root := layer_element_tree.create_item()
 	var layer_item := add_section(
 		current_layer.name, KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT, root
 	)
+	current_layer.keyframe_set.connect(_keyframe_changed)
+	current_layer.keyframe_unset.connect(_keyframe_changed)
 	#region Add tracks for layer's animatable properties.
 	for param_name in current_layer.animated_params:
 		add_property(
@@ -133,6 +140,8 @@ func recreate_timeline() -> void:
 	#endregion
 	#region Add tracks for animatable objects.
 	for effect in current_layer.effects:
+		effect.keyframe_set.connect(_keyframe_changed)
+		effect.keyframe_unset.connect(_keyframe_changed)
 		var effect_item := add_section(
 			effect.name, KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT, layer_item
 		)
@@ -213,11 +222,14 @@ func add_property(
 			param_track.add_child(key_button)
 
 
+func _keyframe_changed(_param_name: String) -> void:
+	recreate_timeline()
+
+
 func _hide_extra_ui() -> void:
 	var was_visible_before = layer_element_tree.get_parent().visible
 	var tree_root := layer_element_tree.get_root()
 	layer_element_tree.get_parent().visible = tree_root.get_first_child() != null
-	properties_container.get_parent().visible = tree_root.get_first_child() != null
 	if layer_element_tree.get_parent().visible != was_visible_before:
 		await get_tree().process_frame
 		_on_track_scroll_container_resized()
@@ -227,6 +239,7 @@ func _create_keyframe_button(
 	frame_index: int, param_track: KeyframeAnimationTrack, dict: Dictionary, param_name: String
 ) -> KeyframeButton:
 	var key_button := KeyframeButton.new()
+	key_button.keyframe_timeline = self
 	key_button.keyframe_id = dict[param_name][frame_index].get("id", 0)
 	key_button.dict = dict
 	key_button.param_name = param_name
@@ -246,8 +259,6 @@ func _add_ui_frames() -> void:
 
 
 func _on_keyframe_pressed(key_button: KeyframeButton) -> void:
-	for child in properties_grid_container.get_children():
-		child.queue_free()
 	for selected_keyframe in get_selected_keyframe_buttons():
 		selected_keyframe.button_pressed = false
 	selected_keyframes = [key_button.keyframe_id]
@@ -255,7 +266,6 @@ func _on_keyframe_pressed(key_button: KeyframeButton) -> void:
 
 
 func select_keyframes() -> void:
-	_clear_keyframe_properties_container()
 	if selected_keyframes.size() == 0:
 		return
 	var key_button: KeyframeButton
@@ -266,82 +276,6 @@ func select_keyframes() -> void:
 	if not key_button:
 		unselect_keyframe()
 		return
-	var dict := key_button.dict
-	var param_name := key_button.param_name
-	var frame_index := key_button.frame_index
-	if not dict[param_name].has(frame_index):
-		return
-	no_key_selected_label.visible = false
-	properties_grid_container.visible = not no_key_selected_label.visible
-	delete_keyframe_button.visible = not no_key_selected_label.visible
-	if selected_keyframes.size() == 1:
-		delete_keyframe_button.text = "Delete keyframe"
-	else:
-		delete_keyframe_button.text = "Delete keyframes"
-	var value_label := Label.new()
-	value_label.text = "Value:"
-	value_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	properties_grid_container.add_child(value_label)
-	var property = dict[param_name][frame_index]["value"]
-	var track := key_button.get_parent() as KeyframeAnimationTrack
-	var property_properties := {}  # I apologize for the horrible variable name.
-	if track.type == KeyframeAnimationTrack.TrackTypes.LAYER_EFFECT:
-		property_properties = track.animatable_object.param_properties[param_name].duplicate()
-	if property_properties.has("hint_string"):
-		property_properties["hint_string"] += ",or_less,or_greater"
-	else:
-		property_properties["hint_string"] = "or_less,or_greater"
-	var node := Global.create_node_from_variable(
-		property, _on_keyframe_property_changed.bind("value"), property_properties
-	)
-	if is_instance_valid(node):
-		properties_grid_container.add_child(node)
-	var trans_type = dict[param_name][frame_index]["trans"]
-	var ease_type = dict[param_name][frame_index]["ease"]
-
-	if AnimatableObject.is_interpolatable_type(property):
-		var trans_label := Label.new()
-		trans_label.text = "Interpolation:"
-		trans_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		properties_grid_container.add_child(trans_label)
-		var trans_type_options := OptionButton.new()
-		trans_type_options.name = "TransTypeOptions"
-		trans_type_options.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		trans_type_options.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		trans_type_options.add_item("Linear", Tween.TRANS_LINEAR)
-		trans_type_options.add_item("Quadratic (power of 2)", Tween.TRANS_QUAD)
-		trans_type_options.add_item("Cubic (power of 3)", Tween.TRANS_CUBIC)
-		trans_type_options.add_item("Quartic (power of 4)", Tween.TRANS_QUART)
-		trans_type_options.add_item("Quintic (power of 5)", Tween.TRANS_QUINT)
-		trans_type_options.add_item("Exponential (power of x)", Tween.TRANS_EXPO)
-		trans_type_options.add_item("Square root", Tween.TRANS_CIRC)
-		trans_type_options.add_item("Sine", Tween.TRANS_SINE)
-		trans_type_options.add_item("Wiggling around the edges", Tween.TRANS_ELASTIC)
-		trans_type_options.add_item("Bouncing at the end", Tween.TRANS_BOUNCE)
-		trans_type_options.add_item("Backing out at ends", Tween.TRANS_BACK)
-		trans_type_options.add_item("Spring towards the end", Tween.TRANS_SPRING)
-		trans_type_options.add_item("Constant", AnimatableObject.TRANS_CONSTANT)
-		trans_type_options.select(trans_type)
-		trans_type_options.item_selected.connect(_on_keyframe_property_changed.bind("trans"))
-		trans_type_options.fit_to_longest_item = false
-		properties_grid_container.add_child(trans_type_options)
-
-		var easing_label := Label.new()
-		easing_label.text = "Ease type:"
-		easing_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		properties_grid_container.add_child(easing_label)
-		var ease_type_options := OptionButton.new()
-		ease_type_options.name = "EaseTypeOptions"
-		ease_type_options.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		ease_type_options.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
-		ease_type_options.add_item("Ease in", Tween.EASE_IN)
-		ease_type_options.add_item("Ease out", Tween.EASE_OUT)
-		ease_type_options.add_item("Ease in out", Tween.EASE_IN_OUT)
-		ease_type_options.add_item("Ease out in", Tween.EASE_OUT_IN)
-		ease_type_options.select(ease_type)
-		ease_type_options.item_selected.connect(_on_keyframe_property_changed.bind("ease"))
-		properties_grid_container.add_child(ease_type_options)
-
 	await get_tree().process_frame
 	_on_track_scroll_container_resized()
 
@@ -358,20 +292,8 @@ func unselect_keyframe(key_id := -1) -> void:
 			if kfb.keyframe_id == key_id:
 				kfb.button_pressed = false
 	if selected_keyframes.size() == 0:
-		_clear_keyframe_properties_container()
-		no_key_selected_label.visible = true
-		properties_grid_container.visible = not no_key_selected_label.visible
-		delete_keyframe_button.visible = not no_key_selected_label.visible
 		await get_tree().process_frame
 		_on_track_scroll_container_resized()
-
-
-func _clear_keyframe_properties_container() -> void:
-	for child in properties_grid_container.get_children():
-		# Remove child is needed so that new child nodes
-		# will have the correct name.
-		properties_grid_container.remove_child(child)
-		child.queue_free()
 
 
 func append_keyframes_to_selection(rect: Rect2) -> void:
@@ -386,10 +308,9 @@ func append_keyframes_to_selection(rect: Rect2) -> void:
 	select_keyframes()
 
 
-func _on_keyframe_property_changed(new_value, property_name: String) -> void:
+func on_keyframe_property_changed(new_value, property_name: String) -> void:
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Change keyframe %s" % property_name, UndoRedo.MERGE_ENDS)
-	var last_key_button: KeyframeButton
 	for key_button in get_selected_keyframe_buttons():
 		var dict := key_button.dict
 		var param_name := key_button.param_name
@@ -397,72 +318,19 @@ func _on_keyframe_property_changed(new_value, property_name: String) -> void:
 		var old_value = dict[param_name][frame_index][property_name]
 		undo_redo.add_do_method(func(): dict[param_name][frame_index][property_name] = new_value)
 		undo_redo.add_undo_method(func(): dict[param_name][frame_index][property_name] = old_value)
-		last_key_button = key_button
-	var last_dict := last_key_button.dict
-	var last_param_name := last_key_button.param_name
-	var last_frame_index := last_key_button.frame_index
-	var property_dict := last_dict[last_param_name][last_frame_index] as Dictionary
-	var last_key_id := last_key_button.keyframe_id
-	undo_redo.add_do_method(_update_keyframe_property_ui.bind(property_dict, last_key_id))
-	undo_redo.add_undo_method(_update_keyframe_property_ui.bind(property_dict, last_key_id))
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
-
-
-## Called on undo/redo when changing a keyframe property
-func _update_keyframe_property_ui(dict: Dictionary, keyframe_id: int) -> void:
-	if selected_keyframes.is_empty():
-		return
-	if keyframe_id != selected_keyframes[-1]:
-		return
-	var value = dict.get("value")
-	var trans_type: int = dict.get("trans", Tween.TRANS_LINEAR)
-	var ease_type: Tween.EaseType = dict.get("ease", Tween.EASE_IN)
-	var property_value_node := properties_grid_container.get_child(1)
-	if property_value_node is CheckBox:
-		property_value_node.set_pressed_no_signal(value)
-	elif property_value_node is ValueSlider:
-		property_value_node.set_value_no_signal_update_display(value)
-	elif property_value_node is ValueSliderV2:
-		property_value_node.set_value_no_signal(value)
-	elif property_value_node is ValueSliderV3:
-		property_value_node.set_value_no_signal(value)
-	elif property_value_node is ColorPickerButton:
-		property_value_node.color = value
-	elif property_value_node is LineEdit or property_value_node is TextEdit:
-		property_value_node.text = value
-	if properties_grid_container.has_node(^"TransTypeOptions"):
-		var trans_type_options := (
-			properties_grid_container.get_node(^"TransTypeOptions") as OptionButton
-		)
-		trans_type_options.select(trans_type)
-	if properties_grid_container.has_node(^"EaseTypeOptions"):
-		var ease_type_options := (
-			properties_grid_container.get_node(^"EaseTypeOptions") as OptionButton
-		)
-		ease_type_options.select(ease_type)
 
 
 func add_effect_keyframe(anim_obj: AnimatableObject, frame_index: int, param_name: String) -> void:
 	var project := Global.current_project
 	var next_keyframe_id := project.next_keyframe_id
 	selected_keyframes = [next_keyframe_id]
-	var undo_redo := project.undo_redo
-	undo_redo.create_action("Add keyframe")
-	undo_redo.add_do_method(anim_obj.add_keyframe.bind(param_name, frame_index, project))
-	undo_redo.add_undo_method(anim_obj.delete_keyframe.bind(param_name, frame_index))
-	undo_redo.add_undo_method(unselect_keyframe.bind(next_keyframe_id))
-	undo_redo.add_do_method(recreate_timeline)
-	undo_redo.add_undo_method(recreate_timeline)
-	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
-	undo_redo.commit_action()
+	anim_obj.add_keyframe_undo_redo(param_name, frame_index, project)
 
 
 func _on_keyframe_deleted(keyframe_id := -1) -> void:
-	var undo_redo := Global.current_project.undo_redo
-	undo_redo.create_action("Delete keyframe")
 	var keyframe_buttons: Array[KeyframeButton]
 	if keyframe_id == -1 or keyframe_id in selected_keyframes:
 		keyframe_buttons = get_selected_keyframe_buttons()
@@ -472,6 +340,10 @@ func _on_keyframe_deleted(keyframe_id := -1) -> void:
 			if kfb.keyframe_id == keyframe_id:
 				keyframe_buttons = [kfb]
 				break
+	if keyframe_buttons.is_empty():
+		return
+	var undo_redo := Global.current_project.undo_redo
+	undo_redo.create_action("Delete keyframe")
 	for key_button in keyframe_buttons:
 		var track := key_button.get_parent() as KeyframeAnimationTrack
 		var dict := key_button.dict
@@ -483,9 +355,6 @@ func _on_keyframe_deleted(keyframe_id := -1) -> void:
 		undo_redo.add_undo_method(
 			anim_obj.set_keyframe_data.bind(param_name, frame_index, old_dict)
 		)
-		undo_redo.add_do_method(unselect_keyframe.bind(key_button.keyframe_id))
-	undo_redo.add_do_method(recreate_timeline)
-	undo_redo.add_undo_method(recreate_timeline)
 	undo_redo.add_do_method(Global.undo_or_redo.bind(false))
 	undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	undo_redo.commit_action()
@@ -543,9 +412,8 @@ func _on_track_scroll_container_resized() -> void:
 	var split_separation := get_theme_constant(&"separation", &"SplitContainer")
 	var margin_container := keyframe_timeline_frame_display.get_parent() as MarginContainer
 	var l_marg := layer_element_tree.size.x if layer_element_tree.is_visible_in_tree() else 0.0
-	var r_marg := properties_container.size.x if properties_container.is_visible_in_tree() else 0.0
 	margin_container.add_theme_constant_override(&"margin_left", l_marg + split_separation)
-	margin_container.add_theme_constant_override(&"margin_right", r_marg + split_separation)
+	margin_container.add_theme_constant_override(&"margin_right", split_separation)
 	await get_tree().process_frame
 	keyframe_timeline_cursor.update_position()
 

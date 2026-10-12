@@ -6,7 +6,8 @@ extends AnimatableObject
 signal name_changed  ## Emits when [member name] is changed.
 signal visibility_changed  ## Emits when [member visible] is changed.
 signal locked_changed  ## Emits when [member locked] is changed.
-signal effects_added_removed  ## Emits when an effect is added or removed to/from [member effects].
+signal effect_added(effect: LayerEffect)  ## Emits when an effect is added to [member effects].
+signal effect_removed(effect: LayerEffect)  ## Emits when an effect is removed from [member effects]
 signal ui_color_changed  ## Emits when [member ui_color] is changed.
 
 ## All currently supported layer blend modes between two layers. The upper layer
@@ -264,7 +265,7 @@ func get_opacity(frame_index := -1) -> float:
 ## Returns a copy of the [param cel]'s [Image] with all of the effects applied to it.
 ## This method is not destructive as it does NOT change the data of the image,
 ## it just returns a copy.
-func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
+func display_effects(cel: BaseCel, animate_params := true, image_override: Image = null) -> Image:
 	var image := ImageExtended.new()
 	if is_instance_valid(image_override):
 		if image_override is ImageExtended:
@@ -286,12 +287,16 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 	for effect in effects:
 		if not effect.enabled or not is_instance_valid(effect.shader):
 			continue
-		var interpol_params := effect.get_params(frame_index)
-		interpol_params["PXO_time"] = frame.position_in_seconds(project)
-		interpol_params["PXO_frame_index"] = frame_index
-		interpol_params["PXO_layer_index"] = index
+		var effect_params := {}
+		if animate_params:
+			effect_params = effect.get_params(frame_index)
+		else:
+			effect_params = effect.params
+		effect_params["PXO_time"] = frame.position_in_seconds(project)
+		effect_params["PXO_frame_index"] = frame_index
+		effect_params["PXO_layer_index"] = index
 		var shader_image_effect := ShaderImageEffect.new()
-		shader_image_effect.generate_image(image, effect.shader, interpol_params, image_size)
+		shader_image_effect.generate_image(image, effect.shader, effect_params, image_size)
 	# Inherit effects from the parents, if their blend mode is set to pass through
 	for ancestor in get_ancestors():
 		if ancestor.blend_mode != BlendModes.PASS_THROUGH:
@@ -310,8 +315,22 @@ func display_effects(cel: BaseCel, image_override: Image = null) -> Image:
 	return image
 
 
-func emit_effects_added_removed() -> void:
-	effects_added_removed.emit()
+func add_effect(effect: LayerEffect, effect_position := -1) -> void:
+	if effect_position == -1:
+		effects.append(effect)
+	else:
+		effects.insert(effect_position, effect)
+	effect_added.emit(effect)
+
+
+func remove_effect(effect: LayerEffect) -> void:
+	effects.erase(effect)
+	effect_removed.emit(effect)
+
+
+func move_effect(layer_effect: LayerEffect, effect_position: int) -> void:
+	remove_effect(layer_effect)
+	add_effect(layer_effect, effect_position)
 
 
 ## Returns the final color of the layer button,
@@ -439,14 +458,3 @@ func instantiate_layer_button() -> Node:
 ## blend mode is set to something else rather than [enum BlendModes.PASS_THROUGH].
 func is_blender() -> bool:
 	return false
-
-
-func _on_keyframe_set(param_name: String) -> void:
-	if param_name == "opacity" and project.layers[project.current_layer] == self:
-		Global.animation_timeline.opacity_slider.editable = false
-
-
-func _on_keyframe_unset(param_name: String) -> void:
-	if param_name == "opacity" and project.layers[project.current_layer] == self:
-		if not has_keyframes("opacity"):
-			Global.animation_timeline.opacity_slider.editable = true

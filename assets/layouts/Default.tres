@@ -137,7 +137,7 @@ second = SubResource("Resource_8ff4m")
 [sub_resource type="Resource" id="Resource_sg54a"]
 resource_name = "Tabs"
 script = ExtResource("1_jxh43")
-names = PackedStringArray("Palettes")
+names = PackedStringArray("Palettes", "Layer FX")
 
 [sub_resource type="Resource" id="Resource_gdwmg"]
 resource_name = "Split"

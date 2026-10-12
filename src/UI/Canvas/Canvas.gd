@@ -125,11 +125,11 @@ static func get_canvas_cel_image(cel: BaseCel, layer: BaseLayer, image: Image) -
 	var project := layer.project
 	if layer.is_blender():
 		var frame := project.frames[project.current_frame]
-		var blended: Image = layer.blend_children(frame, Global.display_layer_effects)
+		var blended: Image = layer.blend_children(frame, false, Global.display_layer_effects)
 		image.copy_from(blended)
 	else:
 		if Global.display_layer_effects:
-			image.copy_from(layer.display_effects(cel))
+			image.copy_from(layer.display_effects(cel, false))
 			if layer.use_cel_image_for_effects:
 				image.copy_from(project.crop_image_to_project_size(image, cel.offset))
 		else:
@@ -241,7 +241,9 @@ func _update_texture_array_layer(
 		include = false
 	if update_layer:
 		layer_texture_array.update_layer(cel_image, ordered_index)
-	DrawingAlgos.set_layer_metadata_image(layer, cel, layer_metadata_image, ordered_index, include)
+	DrawingAlgos.set_layer_metadata_image(
+		layer, cel, layer_metadata_image, ordered_index, include, false
+	)
 
 
 func refresh_onion() -> void:

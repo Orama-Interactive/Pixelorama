@@ -32,11 +32,16 @@ var offset := Vector2i.ZERO  ## The offset of the cel in pixel coordinates.
 var prev_offset := offset  ## Used for undo/redo purposes.
 
 
-func get_final_opacity(layer: BaseLayer) -> float:
+func get_final_opacity(layer: BaseLayer, animated := true) -> float:
 	var project := layer.project
 	var frame := get_frame(project)
 	var frame_index := project.frames.find(frame)
-	return layer.get_opacity(frame_index) * opacity
+	var layer_opacity := 1.0
+	if animated:
+		layer_opacity = layer.get_opacity(frame_index)
+	else:
+		layer_opacity = layer.opacity
+	return layer_opacity * opacity
 
 
 func get_frame(project: Project) -> Frame:

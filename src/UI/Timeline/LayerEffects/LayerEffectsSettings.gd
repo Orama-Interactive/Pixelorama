@@ -1,6 +1,6 @@
-extends AcceptDialog
+class_name LayerFXPanel
+extends PanelContainer
 
-const LAYER_EFFECT_BUTTON = preload("res://src/UI/Timeline/LayerEffects/LayerEffectButton.gd")
 const DELETE_TEXTURE := preload("res://assets/graphics/misc/close.svg")
 
 var effects: Array[LayerEffect] = [
@@ -56,17 +56,17 @@ var effects: Array[LayerEffect] = [
 	),
 	LayerEffect.new("Index Map", load("res://src/Shaders/Effects/IndexMap.gdshader"), "Color"),
 ]
+var current_layer: BaseLayer
 ## A dictionary that maps each category to a [PopupMenu].
 var category_submenus: Dictionary[String, PopupMenu] = {}
 
-@onready var enabled_button: CheckButton = $VBoxContainer/HBoxContainer/EnabledButton
-@onready var effect_list: MenuButton = $VBoxContainer/HBoxContainer/EffectList
-@onready var effect_container: VBoxContainer = $VBoxContainer/ScrollContainer/EffectContainer
+@onready var enabled_button: CheckButton = %EnabledButton
+@onready var effect_list: MenuButton = $MarginContainer/VBoxContainer/HBoxContainer/EffectList
+@onready var effect_container: VBoxContainer = %EffectContainer
 @onready var drag_highlight: ColorRect = $DragHighlight
 
 
 func _ready() -> void:
-	get_ok_button().size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var effect_list_popup := effect_list.get_popup()
 	for i in effects.size():
 		_add_effect_to_list(i)
@@ -74,8 +74,11 @@ func _ready() -> void:
 		DirAccess.make_dir_recursive_absolute(OpenSave.SHADERS_DIRECTORY)
 	for file_name in DirAccess.get_files_at(OpenSave.SHADERS_DIRECTORY):
 		_load_shader_file(OpenSave.SHADERS_DIRECTORY.path_join(file_name))
+	Global.cel_switched.connect(_on_cel_switched)
 	OpenSave.shader_copied.connect(_load_shader_file)
 	effect_list_popup.index_pressed.connect(_on_effect_list_pressed.bind(effect_list_popup))
+	await get_tree().process_frame
+	_on_cel_switched()
 
 
 func _notification(what: int) -> void:
@@ -83,19 +86,47 @@ func _notification(what: int) -> void:
 		drag_highlight.hide()
 
 
-func _on_about_to_popup() -> void:
+func _on_cel_switched() -> void:
+	for connection in get_incoming_connections():
+		if connection.callable.get_method() == "_on_keyframe_changed":
+			connection.signal.disconnect(_on_keyframe_changed)
 	var layer := Global.current_project.layers[Global.current_project.current_layer]
-	enabled_button.button_pressed = layer.effects_enabled
-	for effect in layer.effects:
-		if is_instance_valid(effect.shader):
-			_create_effect_ui(layer, effect)
-
-
-func _on_visibility_changed() -> void:
-	if not visible:
-		Global.dialog_open(false)
+	if layer != current_layer:
 		for child in effect_container.get_children():
 			child.queue_free()
+		enabled_button.button_pressed = layer.effects_enabled
+		for effect in layer.effects:
+			if is_instance_valid(effect.shader):
+				_add_effect_node(layer, effect)
+
+	current_layer = layer
+
+	for i in layer.effects.size():
+		var effect := layer.effects[i]
+		if not effect.keyframe_set.is_connected(_on_keyframe_changed):
+			effect.keyframe_set.connect(_on_keyframe_changed.bind(effect, i))
+			effect.keyframe_unset.connect(_on_keyframe_changed.bind(effect, i))
+		var effect_param_container := effect_container.get_child(i).get_child(0)
+		_set_proper_keyframe_texture(effect, effect_param_container)
+
+
+func _set_proper_keyframe_texture(effect: LayerEffect, effect_param_container: Control) -> void:
+	var frame_index := Global.current_project.current_frame
+	for j in range(0, effect_param_container.get_child_count()):
+		var hbox := effect_param_container.get_child(j)
+		var param_node := hbox.get_child(1)
+		if param_node is Container and not param_node is BasisSliders:
+			param_node = param_node.get_child(0)
+		var keyframe_button: Node
+		if hbox.get_child_count() > 2:
+			keyframe_button = hbox.get_child(2)
+		if param_node.name in effect.animated_params:
+			var value = effect.get_params(frame_index)[param_node.name]
+			Global.set_value_to_node(param_node, value)
+			effect.params[param_node.name] = value
+			if keyframe_button is TextureButton:
+				ShaderLoader.get_proper_keyframe_texture(keyframe_button, effect, param_node.name)
+				keyframe_button.self_modulate = Color.WHITE
 
 
 func _add_effect_to_list(i: int) -> void:
@@ -129,40 +160,33 @@ func _load_shader_file(file_path: String) -> void:
 
 func _on_effect_list_pressed(menu_item_index: int, menu: PopupMenu) -> void:
 	var index: int = menu.get_item_metadata(menu_item_index)
-	var layer := Global.current_project.layers[Global.current_project.current_layer]
+	var project := Global.current_project
+	var layer := project.layers[project.current_layer]
 	var effect := effects[index].duplicate()
 	effect.layer = layer
-	Global.current_project.undo_redo.create_action("Add layer effect")
-	Global.current_project.undo_redo.add_do_method(func(): layer.effects.append(effect))
-	Global.current_project.undo_redo.add_do_method(layer.emit_effects_added_removed)
+	project.undo_redo.create_action("Add layer effect")
+	project.undo_redo.add_do_method(layer.add_effect.bind(effect))
+	project.undo_redo.add_do_method(_add_effect_node.bind(layer, effect))
 	# we may be a different layer during redo
-	Global.current_project.undo_redo.add_do_property(
-		Global.canvas, "mandatory_update_layers", [layer.index]
-	)
-	Global.current_project.undo_redo.add_do_method(Global.canvas.queue_redraw)
-	Global.current_project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	Global.current_project.undo_redo.add_undo_method(func(): layer.effects.erase(effect))
-	Global.current_project.undo_redo.add_undo_method(layer.emit_effects_added_removed)
+	project.undo_redo.add_do_property(Global.canvas, "mandatory_update_layers", [layer.index])
+	project.undo_redo.add_do_method(Global.canvas.queue_redraw)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_undo_method(layer.remove_effect.bind(effect))
+	project.undo_redo.add_undo_method(_remove_effect_node)
 	# we may be a different layer during undo
-	Global.current_project.undo_redo.add_undo_property(
-		Global.canvas, "mandatory_update_layers", [layer.index]
-	)
-	Global.current_project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
-	Global.current_project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
-	Global.current_project.undo_redo.commit_action()
-	_create_effect_ui(layer, effect)
+	project.undo_redo.add_undo_property(Global.canvas, "mandatory_update_layers", [layer.index])
+	project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.commit_action()
 
 
-func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
-	var panel_container := PanelContainer.new()
-	var hbox := HBoxContainer.new()
+func _create_effect_node(layer: BaseLayer, effect: LayerEffect) -> Node:
+	var foldable_container := LayerEffectFoldable.new()
+	foldable_container.title = effect.name
 	var enable_checkbox := CheckButton.new()
 	enable_checkbox.button_pressed = effect.enabled
 	enable_checkbox.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	enable_checkbox.toggled.connect(_enable_effect.bind(effect))
-	var label := Label.new()
-	label.text = effect.name
-	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var delete_button := TextureButton.new()
 	delete_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	delete_button.texture_normal = DELETE_TEXTURE
@@ -170,36 +194,50 @@ func _create_effect_ui(layer: BaseLayer, effect: LayerEffect) -> void:
 	delete_button.add_to_group(&"UIButtons")
 	delete_button.modulate = Global.modulate_icon_color
 	delete_button.pressed.connect(_delete_effect.bind(effect))
-	hbox.add_child(enable_checkbox)
-	hbox.add_child(label)
+	foldable_container.add_title_bar_control(enable_checkbox)
 	if layer is PixelLayer:
 		var apply_button := Button.new()
 		apply_button.text = "Apply"
 		apply_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		apply_button.pressed.connect(_apply_effect.bind(layer, effect))
-		hbox.add_child(apply_button)
-	hbox.add_child(delete_button)
-	var parameter_vbox := CollapsibleContainer.new()
+		foldable_container.add_title_bar_control(apply_button)
+	foldable_container.add_title_bar_control(delete_button)
+	var parameter_vbox := VBoxContainer.new()
 	ShaderLoader.create_ui_for_shader_uniforms(
 		effect.shader,
 		effect.params,
 		effect.param_properties,
 		parameter_vbox,
-		_set_parameter.bind(effect),
-		_load_parameter_texture.bind(effect)
+		_set_parameter.bind(effect, layer),
+		_load_parameter_texture.bind(effect, layer),
+		_on_keyframe_pressed.bind(effect)
 	)
-	var collapsible_button := parameter_vbox.get_button()
-	collapsible_button.set_script(LAYER_EFFECT_BUTTON)
-	collapsible_button.layer = layer
-	collapsible_button.add_child(hbox)
-	hbox.anchor_left = 0.05
-	hbox.anchor_top = 0
-	hbox.anchor_right = 0.99
-	hbox.anchor_bottom = 1
-	panel_container.add_child(parameter_vbox)
-	effect_container.add_child(panel_container)
-	parameter_vbox.set_visible_children(false)
-	collapsible_button.custom_minimum_size.y = collapsible_button.size.y + 4
+	foldable_container.layer = layer
+	foldable_container.parent_panel = self
+	foldable_container.add_child(parameter_vbox)
+	foldable_container.fold()
+	_set_proper_keyframe_texture(effect, parameter_vbox)
+	return foldable_container
+
+
+func _add_effect_node(layer: BaseLayer, effect: LayerEffect, to_index := -1) -> void:
+	var node := _create_effect_node(layer, effect)
+	effect_container.add_child(node)
+	if to_index != -1:
+		effect_container.move_child(node, to_index)
+	if not effect.keyframe_set.is_connected(_on_keyframe_changed):
+		var effect_index := layer.effects.find(effect)
+		effect.keyframe_set.connect(_on_keyframe_changed.bind(effect, effect_index))
+		effect.keyframe_unset.connect(_on_keyframe_changed.bind(effect, effect_index))
+
+
+func _remove_effect_node(child_index := -1) -> void:
+	effect_container.get_child(child_index).queue_free()
+
+
+func _move_effect_node(from_index: int, to_index: int) -> void:
+	var drop_panel := effect_container.get_child(from_index)
+	effect_container.move_child(drop_panel, to_index)
 
 
 func _enable_effect(button_pressed: bool, effect: LayerEffect) -> void:
@@ -208,9 +246,19 @@ func _enable_effect(button_pressed: bool, effect: LayerEffect) -> void:
 
 
 func move_effect(layer: BaseLayer, from_index: int, to_index: int) -> void:
+	var project := layer.project
 	var layer_effect := layer.effects[from_index]
-	layer.effects.remove_at(from_index)
-	layer.effects.insert(to_index, layer_effect)
+
+	project.undo_redo.create_action("Re-arrange layer effect")
+	project.undo_redo.add_do_method(layer.move_effect.bind(layer_effect, to_index))
+	project.undo_redo.add_do_method(_move_effect_node.bind(from_index, to_index))
+	project.undo_redo.add_do_method(Global.canvas.queue_redraw)
+	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
+	project.undo_redo.add_undo_method(layer.move_effect.bind(layer_effect, from_index))
+	project.undo_redo.add_undo_method(_move_effect_node.bind(to_index, from_index))
+	project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
+	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
+	project.undo_redo.commit_action()
 
 
 func _delete_effect(effect: LayerEffect) -> void:
@@ -218,20 +266,19 @@ func _delete_effect(effect: LayerEffect) -> void:
 	var project := layer.project
 	var index := layer.effects.find(effect)
 	project.undo_redo.create_action("Delete layer effect")
-	project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
-	project.undo_redo.add_do_method(layer.emit_effects_added_removed)
+	project.undo_redo.add_do_method(layer.remove_effect.bind(effect))
+	project.undo_redo.add_do_method(_remove_effect_node.bind(index))
 	# we may be a different layer during redo
 	project.undo_redo.add_do_property(Global.canvas, "mandatory_update_layers", [layer.index])
 	project.undo_redo.add_do_method(Global.canvas.queue_redraw)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	project.undo_redo.add_undo_method(func(): layer.effects.insert(index, effect))
-	project.undo_redo.add_undo_method(layer.emit_effects_added_removed)
+	project.undo_redo.add_undo_method(layer.add_effect.bind(effect, index))
+	project.undo_redo.add_undo_method(_add_effect_node.bind(layer, effect, index))
 	# we may be a different layer during undo
 	project.undo_redo.add_undo_property(Global.canvas, "mandatory_update_layers", [layer.index])
 	project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.commit_action()
-	effect_container.get_child(index).queue_free()
 
 
 func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
@@ -284,35 +331,83 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 	# we may be on a different layer during undo/redo
 	project.undo_redo.add_do_property(Global.canvas, "mandatory_update_layers", layers_to_update)
 	project.undo_redo.add_undo_property(Global.canvas, "mandatory_update_layers", layers_to_update)
-	project.undo_redo.add_do_method(func(): layer.effects.erase(effect))
-	project.undo_redo.add_do_method(layer.emit_effects_added_removed)
+	project.undo_redo.add_do_method(layer.remove_effect.bind(effect))
+	project.undo_redo.add_do_method(_remove_effect_node.bind(index))
 	# we may be a different layer during redo
 	project.undo_redo.add_do_property(Global.canvas, "mandatory_update_layers", [layer.index])
 	project.undo_redo.add_do_method(Global.canvas.queue_redraw)
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	project.undo_redo.add_undo_method(func(): layer.effects.insert(index, effect))
-	project.undo_redo.add_undo_method(layer.emit_effects_added_removed)
+	project.undo_redo.add_undo_method(layer.add_effect.bind(effect, index))
+	project.undo_redo.add_undo_method(_add_effect_node.bind(layer, effect, index))
 	# we may be a different layer during undo
 	project.undo_redo.add_undo_property(Global.canvas, "mandatory_update_layers", [layer.index])
 	project.undo_redo.add_undo_method(Global.canvas.queue_redraw)
 	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
 	project.undo_redo.commit_action()
-	effect_container.get_child(index).queue_free()
 
 
-func _set_parameter(value, param: String, effect: LayerEffect) -> void:
+func _set_parameter(value, param: String, effect: LayerEffect, layer: BaseLayer) -> void:
 	effect.params[param] = value
 	Global.canvas.queue_redraw()
 
+	# Set the keyframe button to orange if the user makes a temporary change.
+	var frame_index := layer.project.current_frame
+	if not effect.animated_params.has(param):
+		return
+	var effect_index := layer.effects.find(effect)
+	var effect_param_container := effect_container.get_child(effect_index).get_child(0)
+	for i in range(0, effect_param_container.get_child_count()):
+		var hbox := effect_param_container.get_child(i)
+		if hbox.get_child_count() <= 2:
+			continue
+		var param_node := hbox.get_child(1)
+		if param_node is Container and not param_node is BasisSliders:
+			param_node = param_node.get_child(0)
+		if param_node.name != param:
+			continue
+		var keyframe_button := hbox.get_child(2)
+		if keyframe_button is not TextureButton:
+			continue
+		if value != effect.get_animated_property(frame_index, param):
+			keyframe_button.self_modulate = Color.ORANGE
+		else:
+			keyframe_button.self_modulate = Color.WHITE
 
-func _load_parameter_texture(path: String, param: String, effect: LayerEffect) -> void:
+
+func _load_parameter_texture(
+	path: String, param: String, effect: LayerEffect, layer: BaseLayer
+) -> void:
 	var image := Image.new()
 	image.load(path)
-	if !image:
+	if not image:
 		print("Error loading texture")
 		return
 	var image_tex := ImageTexture.create_from_image(image)
-	_set_parameter(image_tex, param, effect)
+	_set_parameter(image_tex, param, effect, layer)
+
+
+func _on_keyframe_pressed(param: String, effect: LayerEffect) -> void:
+	var project := Global.current_project
+	effect.add_keyframe_undo_redo(param, project.current_frame, project, effect.params[param])
+
+
+## Needed for the keyframe buttons to update visually with undo/redo.
+func _on_keyframe_changed(param_name: String, effect: LayerEffect, effect_index: int) -> void:
+	var effect_param_container := effect_container.get_child(effect_index).get_child(0)
+	for i in range(0, effect_param_container.get_child_count()):
+		var hbox := effect_param_container.get_child(i)
+		if hbox.get_child_count() <= 2:
+			continue
+		var param_node := hbox.get_child(1)
+		if param_node is Container and not param_node is BasisSliders:
+			param_node = param_node.get_child(0)
+		if param_node.name != param_name:
+			continue
+		var keyframe_button = hbox.get_child(2)
+		if keyframe_button is not TextureButton:
+			continue
+		ShaderLoader.get_proper_keyframe_texture(keyframe_button, effect, param_node.name)
+		keyframe_button.self_modulate = Color.WHITE
 
 
 func _on_enabled_button_toggled(button_pressed: bool) -> void:

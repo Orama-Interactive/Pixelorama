@@ -82,8 +82,9 @@ func _ready() -> void:
 	layer_ui_color.color = layer.get_ui_color()
 	layer_fx_texture_rect.visible = layer.effects.size() > 0
 	layer_type_texture_rect.texture = ARRAY_TEXTURE_TYPES[layer.get_layer_type()]
-	layer.effects_added_removed.connect(
-		func(): layer_fx_texture_rect.visible = layer.effects.size() > 0
+	layer.effect_added.connect(func(_effect): layer_fx_texture_rect.visible = true)
+	layer.effect_removed.connect(
+		func(_effect): layer_fx_texture_rect.visible = layer.effects.size() > 0
 	)
 	for child in $HBoxContainer.get_children():
 		if not child is Button:
