@@ -101,11 +101,10 @@ func snap_cel_bounds(coords: Vector2i, _local := false, _ceil_snap := false) -> 
 ## Blits an image to the cel image, ensuring that the cel image is big enough.
 func blit_image_to_cel(source_image: Image) -> void:
 	var used_rect := source_image.get_used_rect()
-	var image_to_blit := source_image.get_region(used_rect)
 	ensure_canvas_point_in_bounds(used_rect.end - Vector2i.ONE, false)
 	ensure_canvas_point_in_bounds(used_rect.position, false)
-	var dst := used_rect.position - offset
-	image.blit_rect(image_to_blit, Rect2i(Vector2i.ZERO, image_to_blit.get_size()), dst)
+	image.blit_rect(source_image, Rect2i(Vector2i.ZERO, source_image.get_size()), -offset)
+	shrink_to_content()
 	image.convert_rgb_to_indexed()
 
 
