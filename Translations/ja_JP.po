@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Japanese\n"
 "Language: ja_JP\n"
-"PO-Revision-Date: 2026-08-14 13:40\n"
+"PO-Revision-Date: 2026-10-12 10:59\n"
 
 msgid "OK"
 msgstr "OK"
@@ -419,20 +419,29 @@ msgstr "ワイドスクリーン"
 msgid "Tallscreen"
 msgstr "トールスクリーン"
 
+#. Found under the View menu.
 msgid "Mirror View"
 msgstr "ミラービュー"
 
+#. Found under the View menu.
 msgid "Show Grid"
 msgstr "グリッドを表示"
 
+#. Found under the View menu.
 msgid "Show Pixel Grid"
 msgstr "ピクセルグリッドを表示"
 
+#. Found under the View menu.
 msgid "Show Rulers"
 msgstr "ルーラーを表示"
 
+#. Found under the View menu.
 msgid "Show Guides"
 msgstr "ガイドを表示"
+
+#. Found under the View menu.
+msgid "Lock Guides"
+msgstr ""
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
@@ -1546,6 +1555,9 @@ msgstr "ベラルーシ語"
 
 msgid "Thai"
 msgstr "タイ語"
+
+msgid "Slovenian"
+msgstr ""
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -2716,6 +2728,10 @@ msgstr ""
 msgid "Select pixels"
 msgstr "ピクセルを選択"
 
+#. An option found in the right click menu of a cel. If selected, centers the content of the cel.
+msgid "Center content"
+msgstr ""
+
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
 msgstr "セルのリンク先"
@@ -3631,6 +3647,10 @@ msgstr "参照画像"
 msgid "Perspective Editor"
 msgstr "透視投影エディター"
 
+#. A UI panel. Contains non-destructive layer effects. https://pixelorama.org/concepts/layer#layer-effects
+msgid "Layer FX"
+msgstr ""
+
 #. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
 msgid "Recorder"
 msgstr "レコーダー"
@@ -3930,6 +3950,10 @@ msgstr "終了へ向かって跳ぶ"
 msgid "Ease type:"
 msgstr "イースタイプ:"
 
+#. Refers to the easing function that should be used to animate the property. https://easings.net/
+msgid "Ease type"
+msgstr ""
+
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts slowly and speeds up towards the end"
 msgstr "ゆっくり開始し、終わりに向かってスピードアップします"
@@ -3969,6 +3993,12 @@ msgstr "キーが選択されていません"
 #. Found in the keyframe timeline when right clicking on a track. When selected, a new keyframe is being inserted at the selected frame.
 msgid "Insert keyframe"
 msgstr "キーフレームを挿入"
+
+msgid "Add keyframe."
+msgstr ""
+
+msgid "Update keyframe."
+msgstr ""
 
 #. A button found in the keyframe timeline on the right panel when there is a keyframe selected. When clicked, it deletes the currently selected keyframe.
 msgid "Delete keyframe"
