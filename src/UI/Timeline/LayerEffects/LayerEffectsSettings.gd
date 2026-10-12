@@ -303,10 +303,16 @@ func _apply_effect(layer: BaseLayer, effect: LayerEffect) -> void:
 		params["PXO_time"] = frame.position_in_seconds(project)
 		params["PXO_frame_index"] = i
 		params["PXO_layer_index"] = layer.index
-		var cropped_image := project.crop_image_to_project_size(cel.get_image(), cel.offset)
+		var effect_image: Image
+		if layer.use_cel_image_for_effects:
+			effect_image = cel.get_image()
+		else:
+			effect_image = project.crop_image_to_project_size(cel.get_image(), cel.offset)
+		var image_size := effect_image.get_size()
 		var shader_image_effect := ShaderImageEffect.new()
-		shader_image_effect.generate_image(cropped_image, effect.shader, params, project.size)
-		cel.blit_image_to_cel(cropped_image)
+		shader_image_effect.generate_image(effect_image, effect.shader, params, image_size)
+		if not layer.use_cel_image_for_effects:
+			cel.blit_image_to_cel(effect_image)
 
 	var tile_editing_mode := TileSetPanel.tile_editing_mode
 	if tile_editing_mode == TileSetPanel.TileEditingMode.MANUAL:
