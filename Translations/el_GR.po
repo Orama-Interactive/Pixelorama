@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2026-08-14 15:27\n"
+"PO-Revision-Date: 2026-10-12 10:58\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -419,20 +419,29 @@ msgstr "Οριζόντια"
 msgid "Tallscreen"
 msgstr "Κάθετη"
 
+#. Found under the View menu.
 msgid "Mirror View"
 msgstr "Αναστροφή προβολής"
 
+#. Found under the View menu.
 msgid "Show Grid"
 msgstr "Εμφάνιση πλέγματος"
 
+#. Found under the View menu.
 msgid "Show Pixel Grid"
 msgstr "Εμφάνιση pixel πλέγματος"
 
+#. Found under the View menu.
 msgid "Show Rulers"
 msgstr "Εμφάνιση χαράκων"
 
+#. Found under the View menu.
 msgid "Show Guides"
 msgstr "Εμφάνιση οδηγών"
+
+#. Found under the View menu.
+msgid "Lock Guides"
+msgstr ""
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
@@ -1546,6 +1555,9 @@ msgstr "Λευκορωσικά"
 
 msgid "Thai"
 msgstr "Ταϊλανδέζικα"
+
+msgid "Slovenian"
+msgstr ""
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -2715,6 +2727,10 @@ msgstr "Προσθήκη Ετικέτας Καρέ"
 msgid "Select pixels"
 msgstr "Επιλογή εικονοστοιχείων"
 
+#. An option found in the right click menu of a cel. If selected, centers the content of the cel.
+msgid "Center content"
+msgstr ""
+
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
 msgstr "Σύνδεση cels με"
@@ -3629,6 +3645,10 @@ msgstr "Εικόνες αναφοράς"
 msgid "Perspective Editor"
 msgstr "Επεξεργαστής προοπτικής"
 
+#. A UI panel. Contains non-destructive layer effects. https://pixelorama.org/concepts/layer#layer-effects
+msgid "Layer FX"
+msgstr ""
+
 #. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
 msgid "Recorder"
 msgstr "Καταγραφή"
@@ -3928,6 +3948,10 @@ msgstr "Αναπήδηση προς το τέλος"
 msgid "Ease type:"
 msgstr "Τύπος ομαλής μετάβασης:"
 
+#. Refers to the easing function that should be used to animate the property. https://easings.net/
+msgid "Ease type"
+msgstr ""
+
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts slowly and speeds up towards the end"
 msgstr "Ξεκινά αργά και επιταχύνει προς το τέλος"
@@ -3967,6 +3991,12 @@ msgstr "Δεν επιλέχθηκε κλειδί"
 #. Found in the keyframe timeline when right clicking on a track. When selected, a new keyframe is being inserted at the selected frame.
 msgid "Insert keyframe"
 msgstr "Εισαγωγή καρέ-κλειδιού"
+
+msgid "Add keyframe."
+msgstr ""
+
+msgid "Update keyframe."
+msgstr ""
 
 #. A button found in the keyframe timeline on the right panel when there is a keyframe selected. When clicked, it deletes the currently selected keyframe.
 msgid "Delete keyframe"
