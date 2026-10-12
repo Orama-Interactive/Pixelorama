@@ -590,8 +590,12 @@ func show_save_dialog(project := Global.current_project) -> void:
 		save_sprite_html5.popup_centered_clamped()
 		var save_filename_line_edit := save_sprite_html5.get_node("%FileNameLineEdit")
 		save_filename_line_edit.text = project.name
+		var save_include_blended = save_sprite_html5.get_node("%IncludeBlended")
+		save_include_blended.button_pressed = project.include_blended_images
 	else:
 		save_sprite_dialog.current_file = project.name + ".pxo"
+		if save_sprite_dialog.option_count > 0:
+			save_sprite_dialog.set_option_default(0, project.include_blended_images)
 		save_sprite_dialog.popup_centered_clamped()
 		save_file_dialog_opened.emit(true)
 
