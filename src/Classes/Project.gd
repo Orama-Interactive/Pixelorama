@@ -83,6 +83,8 @@ var fps := 6.0:
 	set(value):
 		fps = value
 		fps_changed.emit()
+## If [code]true[/code], blended images are included in the pxo files.
+var include_blended_images := false
 var license := ""  ## The license of the project, set in the project properties.
 var user_data := ""  ## User defined data, set in the project properties.
 var author_display_name := ""  ## The displayed name of the project author.
@@ -340,6 +342,7 @@ func serialize() -> Dictionary:
 		"tilesets": tileset_data,
 		"vanishing_points": vanishing_points,
 		"fps": fps,
+		"include_blended_images": include_blended_images,
 		"license": license,
 		"user_data": user_data,
 		"author_display_name": author_display_name,
@@ -577,6 +580,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 	if export_profile.file_name.is_empty() or export_profile.file_name == "untitled":
 		export_profile.file_name = name
 	fps = dict.get("fps", fps)
+	include_blended_images = dict.get("include_blended_images", include_blended_images)
 	license = dict.get("license", license)
 	author_display_name = dict.get("author_display_name", "")
 	author_real_name = dict.get("author_real_name", "")

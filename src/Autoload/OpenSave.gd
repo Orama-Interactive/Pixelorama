@@ -474,9 +474,7 @@ func open_v0_pxo_file(path: String, empty_project: bool) -> Project:
 	return new_project
 
 
-func save_pxo_file(
-	path: String, autosave: bool, include_blended := false, project := Global.current_project
-) -> bool:
+func save_pxo_file(path: String, autosave: bool, project := Global.current_project) -> bool:
 	project.initialize_attribution_data()
 	if not autosave:
 		project.name = path.uri_decode().get_file().trim_suffix(".pxo")
@@ -539,7 +537,7 @@ func save_pxo_file(
 
 	var frame_index := 1
 	for frame in project.frames:
-		if not autosave and include_blended:
+		if not autosave and project.include_blended_images:
 			var blended := project.new_empty_image()
 			if frame == current_frame:
 				blended = preview
@@ -1347,7 +1345,7 @@ func _on_Autosave_timeout() -> void:
 			))
 		if not DirAccess.dir_exists_absolute(current_session_backup):
 			DirAccess.make_dir_recursive_absolute(current_session_backup)
-		save_pxo_file(project.backup_path, true, false, project)
+		save_pxo_file(project.backup_path, true, project)
 
 
 func save_project_to_recent_list(path: String) -> void:

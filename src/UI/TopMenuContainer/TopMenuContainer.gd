@@ -775,7 +775,7 @@ func _save_project_file() -> void:
 	if path == "":
 		main.show_save_dialog()
 	else:
-		main.save_project(path, false)
+		main.save_project(path)
 
 
 func _export_file() -> void:
