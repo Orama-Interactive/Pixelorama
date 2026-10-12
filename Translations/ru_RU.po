@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Russian\n"
 "Language: ru_RU\n"
-"PO-Revision-Date: 2026-10-12 10:59\n"
+"PO-Revision-Date: 2026-10-12 12:19\n"
 
 msgid "OK"
 msgstr "OK"
@@ -140,11 +140,11 @@ msgstr "Повторить"
 
 #. An option found under the Edit menu. Brings up a dialog which contains the undo history, allowing users to quickly jump between undo steps.
 msgid "Undo History"
-msgstr ""
+msgstr "История действий"
 
 #. Refers to the initial state of the undo/redo stack, which is basically an empty canvas on a new project, or the state of a loaded project at the time it was loaded, before any changes applied to it.
 msgid "Initial state"
-msgstr ""
+msgstr "Начальное состояние"
 
 msgid "Copy"
 msgstr "Копировать"
@@ -208,11 +208,11 @@ msgid "Resize Canvas"
 msgstr "Изменить размер холста"
 
 msgid "Offset & Scale Image"
-msgstr ""
+msgstr "Смещение и масштабирование изображения"
 
 #. Refers to the "Offset & Scale" layer effect.
 msgid "Offset & Scale"
-msgstr ""
+msgstr "Смещение и масштаб"
 
 msgid "Offset:"
 msgstr "Смещение:"
@@ -440,7 +440,7 @@ msgstr "Показать направляющие"
 
 #. Found under the View menu.
 msgid "Lock Guides"
-msgstr ""
+msgstr "Заблокировать направляющие"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
@@ -817,15 +817,15 @@ msgstr "Проект Aseprite"
 
 #. Found in "Open" and "Save" file dialogs. Searches Krita project files only (.kra). Note that Krita is a software and should remain untranslated.
 msgid "Krita Project"
-msgstr ""
+msgstr "Проект Krita"
 
 #. Found in "Open" and "Save" file dialogs. Searches Piskel project files only (.piskel). Note that Piskel is a software and should remain untranslated.
 msgid "Piskel Project"
-msgstr ""
+msgstr "Проект Piskel"
 
 #. Found in "Open" and "Save" file dialogs. Searches Photoshop project files only (.psd). Note that Photoshop is a software and should remain untranslated.
 msgid "Photoshop Project"
-msgstr ""
+msgstr "Проект Photoshop"
 
 #. Found in the "Open" file dialog. Searches Pixelorama palette files only (.json).
 msgid "Pixelorama palette"
@@ -901,7 +901,7 @@ msgstr "Производительность"
 
 #. Found in the Preferences. Refers to the attribution details of the current project, such as the project's creator and license.
 msgid "Attribution"
-msgstr ""
+msgstr "Атрибуция "
 
 #. Found in the Preferences. Refers to the author of the current project.
 msgid "Author"
@@ -909,7 +909,7 @@ msgstr "Автор"
 
 #. Found in the Preferences. Refers to the default license that is set to the created project.
 msgid "Default license"
-msgstr ""
+msgstr "Лицензия по умолчанию"
 
 #. Found in the preferences. Refers to device drivers, such as video drivers and tablet drivers.
 msgid "Drivers"
@@ -981,7 +981,7 @@ msgstr "Размер шрифта:"
 
 #. Found in the preferences, under the interface section. Allows users to change the orientation of the screen in mobile devices.
 msgid "Screen orientation:"
-msgstr ""
+msgstr "Ориентация экрана:"
 
 msgid "Dim interface on dialog popup"
 msgstr "Затемнять интерфейс при появлении диалога"
@@ -1038,7 +1038,7 @@ msgstr "Чёрный (OLED)"
 
 #. A theme. "System" refers to the Operating System.
 msgid "System"
-msgstr ""
+msgstr "Система"
 
 #. Refers to the base color of a theme.
 msgid "Base color:"
@@ -1071,15 +1071,15 @@ msgstr "Цвет фона:"
 
 #. Found in the preferences, under the Tools category. If enabled, the right mouse button is always mapped to the same tool as the left button.
 msgid "Single tool mode"
-msgstr ""
+msgstr "Режим одного инструмента"
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Single tool mode" preference.
 msgid "If this is enabled, the right mouse button will always activate the same tool as the left mouse button."
-msgstr ""
+msgstr "Если эта функция включена, правая кнопка мыши всегда будет активировать тот же инструмент, что и левая кнопка мыши."
 
 #. Found in the preferences, under the Tools category.
 msgid "Share options between left and right tools"
-msgstr ""
+msgstr "Общие настройки инструментов для левой и правой кнопок мыши "
 
 #. Found in the preferences, under the Tools category. Tooltip of the "Share options between the left and the right tools" preference.
 msgid "If this is enabled, options will be synced between the left and the right tool.\n"
@@ -1095,7 +1095,7 @@ msgstr "Цвет правого инструмента:"
 
 #. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
 msgid "Make global palettes read-only"
-msgstr ""
+msgstr "Сделать глобальные палитры доступными только для чтения"
 
 msgid "Small"
 msgstr "Маленький"
@@ -1123,7 +1123,7 @@ msgstr "Все проекты"
 
 #. An image effect that helps convert a flat image to isometric.
 msgid "Flat to Isometric"
-msgstr ""
+msgstr "Преобразование плоского изображения в изометрию"
 
 msgid "Invert Colors"
 msgstr "Инвертировать цвета"
@@ -1386,7 +1386,7 @@ msgstr "Прошлые сессии"
 
 #. Found in the Restore Backup dialog.
 msgid "Double click to load an entire session, or a specific project."
-msgstr ""
+msgstr "Двойной клик для загрузки всей сессии или конкретного проекта."
 
 #. Found in the Restore Backup dialog.
 msgid "Sessions"
@@ -1555,7 +1555,7 @@ msgid "Thai"
 msgstr "Тайский"
 
 msgid "Slovenian"
-msgstr ""
+msgstr "Словенский "
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -1786,7 +1786,14 @@ msgid "Isometric Box Tool\n\n"
 "Hold %s to snap the angle of the basis point\n"
 "Hold %s to displace the shape's origin\n"
 "Press %s to edit the last added basis"
-msgstr ""
+msgstr "Isometric Box Tool\n"
+"%s для левой кнопки мыши\n"
+"%s для правой кнопки мыши\n\n"
+"Рисует изометрическую коробку\n"
+"Нажмите %s/%s, чтобы добавить опорную точку\n"
+"Удерживайте %s, чтобы зафиксировать угол опорной точки\n"
+"Удерживайте %s, чтобы сместить начало координат фигуры\n"
+"Нажмите %s, чтобы изменить последнюю добавленную опорную точку"
 
 msgid "Text\n\n"
 "%s for left mouse button\n"
@@ -2040,7 +2047,7 @@ msgstr "Цвет границы 2:"
 
 #. Found in the Preferences, under the Selection category. Changes the transparency (alpha value) of the current active transformation preview.
 msgid "Transformation preview alpha:"
-msgstr ""
+msgstr "Альфа канал пред просмотра трансформации:"
 
 msgid "Only custom preset can be modified"
 msgstr "Только пользовательские предустановки могут быть изменены"
@@ -2117,7 +2124,7 @@ msgstr "Компания/Студия:"
 
 #. Found in the project properties. It is a header of the information about the author of the project who last saved the project.
 msgid "Last saved by"
-msgstr ""
+msgstr "Последним сохранил"
 
 #. Found in the Preferences, under Extensions.
 msgid "Add Extension"
@@ -2199,7 +2206,7 @@ msgstr "Невозможно получить информацию из удал
 
 #. Found in the Preferences, under Extensions, in the "Explore Online" popup, under Options. Placeholder text for adding a link to an extensions repository. "Will be automatically removed" refers to the text field itself, if no link is entered.
 msgid "Paste repository link, given by the repository owner. If left empty, it will automatically be removed."
-msgstr ""
+msgstr "Вставьте ссылку на репозиторий, предоставленную владельцем репозитория. Если оставить поле пустым, оно будет автоматически удалено."
 
 #. Found in the Preferences, under Extensions. This is the text of a confirmation dialog that appears when the user attempts to enable an extension.
 msgid "Are you sure you want to enable this extension? Make sure to only enable extensions from sources that you trust."
@@ -2381,7 +2388,7 @@ msgstr "Всё выделение"
 
 #. A checkbox found in the bucket tool options. When enabled, the bucket tool will treat all visible layers as if they were merged into a single image when determining what area to fill.
 msgid "Fill regions from the merging of all layers"
-msgstr ""
+msgstr "Заполнять области при объединении всех слоев"
 
 msgid "Fill with:"
 msgstr "Заполнить:"
@@ -2534,22 +2541,22 @@ msgid "Tool color"
 msgstr "Цвет инструмента"
 
 msgid "Adjusted average"
-msgstr ""
+msgstr "Скорректированное среднее"
 
 msgid "Blend at interface"
-msgstr ""
+msgstr "Смешивание на границе"
 
 #. Refers to the left face of a box shape.
 msgid "Left Face"
-msgstr ""
+msgstr "Левая грань"
 
 #. Refers to the right face of a box shape.
 msgid "Right Face"
-msgstr ""
+msgstr "Правая грань"
 
 #. Found in the tool options of the tiles property painter tool, which only appears when using tilemap layers. It is a checkbox that, when toggled on, erases bits (properties of a tile) instead of setting them.
 msgid "Eraser mode"
-msgstr ""
+msgstr "Режим ластика"
 
 msgid "Mirroring"
 msgstr "Зеркало"
@@ -2570,11 +2577,11 @@ msgstr "Режим рисования с вертикальным зеркали
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↗) mirrored drawing"
-msgstr ""
+msgstr "Включить зеркальное рисование по диагонали (↘)"
 
 #. Found in the global tool options, tooltip of one of the diagonal mirror buttons.
 msgid "Enable diagonal (↘) mirrored drawing"
-msgstr ""
+msgstr "Включить зеркальное рисование по диагонали (↘)"
 
 #. Found in the global tool options, in the menu that appears next to each mirror button. It affects the position of a symmetry guide.
 msgid "Move to canvas center"
@@ -2719,7 +2726,7 @@ msgstr "Выбрать пиксели"
 
 #. An option found in the right click menu of a cel. If selected, centers the content of the cel.
 msgid "Center content"
-msgstr ""
+msgstr "Центрировать содержимое"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
@@ -2935,15 +2942,15 @@ msgstr "Яркость"
 
 #. Found in the layer's section of the timeline, as a category of blend modes. Contains blend modes that do masking operations between layers, such as the "Intersection" and "Match colors" blend modes.
 msgid "Masking"
-msgstr ""
+msgstr "Маска"
 
 #. Found in the layer's section of the timeline, as a blend mode option. This blend mode belongs to the "Masking" category, and it erases the un-common areas between the blend and the base layers.
 msgid "Intersection"
-msgstr ""
+msgstr "Пересечение"
 
 #. Found in the layer's section of the timeline, as a blend mode option.  This blend mode belongs to the "Masking" category, and it only shows the same colors between the blend and the base layers.
 msgid "Match colors"
-msgstr ""
+msgstr "Подбор цветов"
 
 msgid "Opacity:"
 msgstr "Прозрачность:"
@@ -3079,52 +3086,52 @@ msgid "Redo: Change frame duration"
 msgstr "Повторить: Изменить длительность кадра"
 
 msgid "Undo: Rename Layer"
-msgstr ""
+msgstr "Отменить: Переименование слоя"
 
 msgid "Redo: Rename Layer"
-msgstr ""
+msgstr "Повторить: Переименование слоя"
 
 msgid "Undo: Change Layer Opacity"
-msgstr ""
+msgstr "Отменить: Изменение непрозрачности слоя"
 
 msgid "Redo: Change Layer Opacity"
-msgstr ""
+msgstr "Повторить: Изменение непрозрачности слоя"
 
 #. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos.
 msgid "Undo: Change Layer Onion Skinning Ignore Status"
-msgstr ""
+msgstr "Отменить: Изменение статуса игнорирования кальки слоя"
 
 #. Appears as a notification when the "Ignore in onion skinning" checkbox is toggled on or off the properties of a layer, and the user undos and then redos.
 msgid "Redo: Change Layer Onion Skinning Ignore Status"
-msgstr ""
+msgstr "Повторить: Изменение статуса игнорирования кальки слоя"
 
 #. Appears as a notification when the user data field of a layer is changed, and the user undos.
 msgid "Undo: Change Layer User Data"
-msgstr ""
+msgstr "Отменить: Изменение пользовательских данных слоя"
 
 #. Appears as a notification when the user data field of a layer is changed, and the user undos and then redos.
 msgid "Redo: Change Layer User Data"
-msgstr ""
+msgstr "Повторить: Изменение пользовательских данных слоя"
 
 msgid "Undo: Change Layer Color"
-msgstr ""
+msgstr "Отменить: Изменение цвета слоя"
 
 msgid "Redo: Change Layer Color"
-msgstr ""
+msgstr "Повторить: Изменение цвета слоя"
 
 msgid "Undo: Change Layer Visibility"
-msgstr ""
+msgstr "Отменить: Изменение видимости слоя"
 
 msgid "Redo: Change Layer Visibility"
-msgstr ""
+msgstr "Повторить: Изменение видимости слоя"
 
 #. Appears as a notification when a layer gets locked or unlocked, and the user undos.
 msgid "Undo: Change Layer Locked Status"
-msgstr ""
+msgstr "Отменить: Изменение статуса блокировки слоя"
 
 #. Appears as a notification when a layer gets locked or unlocked, and the user undos and then redos.
 msgid "Redo: Change Layer Locked Status"
-msgstr ""
+msgstr "Повторить: Изменение статуса блокировки слоя"
 
 msgid "Move Guide"
 msgstr "Сдвинуть направляющие"
@@ -3245,7 +3252,7 @@ msgstr "Удалить все расширения"
 
 #. Found in the preferences, under the Reset category.
 msgid "Remove all backups"
-msgstr ""
+msgstr "Удалить все резервные копии"
 
 #. Found in the preferences, under the Reset category.
 msgid "Clear the recently opened file list"
