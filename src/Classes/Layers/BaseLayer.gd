@@ -306,12 +306,16 @@ func display_effects(cel: BaseCel, animate_params := true, image_override: Image
 		for effect in ancestor.effects:
 			if not effect.enabled:
 				continue
-			var interpol_params := effect.get_params(frame_index)
-			interpol_params["PXO_time"] = frame.position_in_seconds(project)
-			interpol_params["PXO_frame_index"] = frame_index
-			interpol_params["PXO_layer_index"] = index
+			var effect_params := {}
+			if animate_params:
+				effect_params = effect.get_params(frame_index)
+			else:
+				effect_params = effect.params
+			effect_params["PXO_time"] = frame.position_in_seconds(project)
+			effect_params["PXO_frame_index"] = frame_index
+			effect_params["PXO_layer_index"] = index
 			var shader_image_effect := ShaderImageEffect.new()
-			shader_image_effect.generate_image(image, effect.shader, interpol_params, image_size)
+			shader_image_effect.generate_image(image, effect.shader, effect_params, image_size)
 	return image
 
 
