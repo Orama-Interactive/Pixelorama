@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Esperanto\n"
 "Language: eo_UY\n"
-"PO-Revision-Date: 2026-08-14 12:07\n"
+"PO-Revision-Date: 2026-10-12 11:00\n"
 
 msgid "OK"
 msgstr "Bone"
@@ -417,20 +417,29 @@ msgstr "Larĝekrana"
 msgid "Tallscreen"
 msgstr "Altekrana"
 
+#. Found under the View menu.
 msgid "Mirror View"
 msgstr "Spegulita vido"
 
+#. Found under the View menu.
 msgid "Show Grid"
 msgstr "Montri kradon"
 
+#. Found under the View menu.
 msgid "Show Pixel Grid"
 msgstr "Montri bilderan kradon"
 
+#. Found under the View menu.
 msgid "Show Rulers"
 msgstr "Montri liniilojn"
 
+#. Found under the View menu.
 msgid "Show Guides"
 msgstr "Montri direktliniojn"
+
+#. Found under the View menu.
+msgid "Lock Guides"
+msgstr ""
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
@@ -1544,6 +1553,9 @@ msgstr "Belarusa"
 
 msgid "Thai"
 msgstr "Taja"
+
+msgid "Slovenian"
+msgstr ""
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -2712,6 +2724,10 @@ msgstr ""
 msgid "Select pixels"
 msgstr "Elekti bilderojn"
 
+#. An option found in the right click menu of a cel. If selected, centers the content of the cel.
+msgid "Center content"
+msgstr ""
+
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
 msgstr "Ligi animacierojn al"
@@ -3627,6 +3643,10 @@ msgstr "Referencaj bildoj"
 msgid "Perspective Editor"
 msgstr "Redaktilo de perspektivo"
 
+#. A UI panel. Contains non-destructive layer effects. https://pixelorama.org/concepts/layer#layer-effects
+msgid "Layer FX"
+msgstr ""
+
 #. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
 msgid "Recorder"
 msgstr "Registrilo"
@@ -3926,6 +3946,10 @@ msgstr ""
 msgid "Ease type:"
 msgstr "Tipo de transiro:"
 
+#. Refers to the easing function that should be used to animate the property. https://easings.net/
+msgid "Ease type"
+msgstr ""
+
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts slowly and speeds up towards the end"
 msgstr "Komencas malrapide kaj plirapidigas"
@@ -3965,6 +3989,12 @@ msgstr "Neniu ĉefkadro elektita"
 #. Found in the keyframe timeline when right clicking on a track. When selected, a new keyframe is being inserted at the selected frame.
 msgid "Insert keyframe"
 msgstr "Inserti ĉefkadron"
+
+msgid "Add keyframe."
+msgstr ""
+
+msgid "Update keyframe."
+msgstr ""
 
 #. A button found in the keyframe timeline on the right panel when there is a keyframe selected. When clicked, it deletes the currently selected keyframe.
 msgid "Delete keyframe"
