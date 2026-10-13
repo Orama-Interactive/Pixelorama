@@ -4,11 +4,42 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
+## [v1.2.4] - Unreleased
+This update has been brought to you by the contributions of:
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@vibrant-reindeer](https://github.com/vibrant-reindeer), [@williamchange](https://github.com/williamchange).
+
+Built using Godot 4.7.2.
+
+### Added
+- **Cels can now have content outside the canvas.** You can now move pixels outside of the canvas, and they will remain instead of being cut off. This should also result in less memory usage, as the size of each cel image is now exactly as much as it needs to be, instead of always being the same as the canvas size. This also affects rectangular tilemap cels, but not isometric & hexagonal tilemaps, and the move tool will not work at all in these two tilemap shapes. This change also means that forward compatibility is broken, meaning that older versions will not be able to load pxo files made from this version and on. Of course, backwards compatibility should have remained intact, meaning v1.2.4 is be able to load older pxo files. [#1628](https://github.com/Orama-Interactive/Pixelorama/pull/1628)
+- Added a new "Layer FX" panel, replacing the old FX timeline button and window, resulting in less clicking and making effects faster to tweak. Please note that if you have Pixelorama already installed and you are using the Default layout, you need to reset it (by going to Window -> Layouts -> Reset Default) for the new panel to appear in its default position. Otherwise, you'll have to move it yourself somewhere by enabling Moveable Panels and dragging the panel's tab to the place of your choosing. By default, the new panel will appear next to the top-left most one, which in the Default layout is the Tools panel. [#1631](https://github.com/Orama-Interactive/Pixelorama/pull/1631)
+- Animatable properties, such as the layer opacity and layer effect properties, have a small button next to them that automatically creates a keyframe on the current frame, with the current value of the property. Interpolation and easing type of a keyframe can now be set by right clicking on it. [#1631](https://github.com/Orama-Interactive/Pixelorama/pull/1631)
+- When pressing <kbd>Delete</kbd> in your keyboard and the mouse cursor is inside the keyframe timeline, the selected keyframes get deleted, instead of the cel content. [#1631](https://github.com/Orama-Interactive/Pixelorama/pull/1631)
+- The "Include blended images" option is now stored inside the pxo files, in order for it to be remembered on a per-project basis, between multiple sessions.
+- Added a new Luma layer effect. [#1620](https://github.com/Orama-Interactive/Pixelorama/pull/1620)
+- Added a "pattern color from" option in the Bucket tool, allowing users to change the color of patterns. [#1621](https://github.com/Orama-Interactive/Pixelorama/pull/1621)
+
+### Changed
+- Importing the same palette more than once now adds it as a duplicate, instead of silently failing. [#1623](https://github.com/Orama-Interactive/Pixelorama/pull/1623)
+- Double Window & Help menus are now prevented on macOS. [#1633](https://github.com/Orama-Interactive/Pixelorama/pull/1633)
+
+### Fixed
+- Fixed crash when deleting all layers of a project, by ensuring that at least one remains.
+- Fixed transform copy selection content (set to <kbd>Control + Alt</kbd> by default) not working when there was already an active transformation.
+- Fixed Pixelorama sometimes freezing when making palettes from images. [#1624](https://github.com/Orama-Interactive/Pixelorama/pull/1624)
+- Fixed constant interpolation in the keyframe timeline not working. [#1631](https://github.com/Orama-Interactive/Pixelorama/pull/1631)
+- Fixed interpolation types in the keyframe timeline being wrong. [#1631](https://github.com/Orama-Interactive/Pixelorama/pull/1631)
+
+### Removed
+- Removed the keyframe properties (value, interpolation, easing type) from the right side of the keyframe timeline to save some space. [#1631](https://github.com/Orama-Interactive/Pixelorama/pull/1631)
+- The Grayscale view has been removed, you can now use the new Luma effect. [#1620](https://github.com/Orama-Interactive/Pixelorama/pull/1620)
+
+
 ## [v1.2.3] - 2026-09-15
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)).
 
-Built using Godot 4.7.2
+Built using Godot 4.7.2.
 
 ### Added
 - Locking guides in place is now possible from the View menu. [#1612](https://github.com/Orama-Interactive/Pixelorama/pull/1612)
