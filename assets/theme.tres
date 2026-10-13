@@ -197,10 +197,10 @@ border_width_bottom = 1
 border_color = Color(0.602353, 0.602353, 0.602353, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mihib"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
+content_margin_left = 24.0
+content_margin_top = 4.0
+content_margin_right = 6.0
+content_margin_bottom = 4.0
 bg_color = Color(0.141176, 0.141176, 0.141176, 1)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
