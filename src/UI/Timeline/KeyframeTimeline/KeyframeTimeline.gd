@@ -1,6 +1,8 @@
 class_name KeyframeTimeline
 extends Control
 
+const TRACK_X_MARGIN := 0.2
+
 static var frame_ui_size := 50:
 	set(value):
 		frame_ui_size = clampi(value, 10, 128)
@@ -71,7 +73,8 @@ func _input(event: InputEvent) -> void:
 			for key_button in track.get_children():
 				if key_button is not KeyframeButton:
 					continue
-				key_button.position.x = key_button.frame_index * frame_ui_size
+				var offset_pos: float = key_button.frame_index + TRACK_X_MARGIN
+				key_button.position.x = offset_pos * frame_ui_size - key_button.size.x / 2
 		keyframe_timeline_cursor.update_position()
 	if event.is_action_pressed(&"delete"):
 		_on_keyframe_deleted()
@@ -244,8 +247,10 @@ func _create_keyframe_button(
 	key_button.dict = dict
 	key_button.param_name = param_name
 	key_button.frame_index = frame_index
-	key_button.position.x = frame_index * frame_ui_size
-	key_button.position.y = param_track.custom_minimum_size.y / 2 - key_button.size.y / 2
+	key_button.position.x = (frame_index + TRACK_X_MARGIN) * frame_ui_size
+	var half_size := key_button.size / 2
+	key_button.position.x -= half_size.x
+	key_button.position.y = param_track.custom_minimum_size.y / 2 - half_size.y
 	key_button.pressed.connect(_on_keyframe_pressed.bind(key_button))
 	key_button.updated_position.connect(update_keyframe_positions)
 	key_button.deleted.connect(_on_keyframe_deleted)
@@ -369,7 +374,7 @@ func update_keyframe_positions() -> void:
 
 	for kf in get_selected_keyframe_buttons():
 		var frame_from := kf.frame_index
-		var frame_to := floori(kf.position.x / frame_ui_size)
+		var frame_to := floori((kf.position.x + TRACK_X_MARGIN) / frame_ui_size)
 		if frame_from == frame_to:
 			continue
 		var param_dict: Dictionary = kf.dict[kf.param_name]

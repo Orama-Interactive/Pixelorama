@@ -34,11 +34,13 @@ func _gui_input(event: InputEvent) -> void:
 		return
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-			var rect := Rect2()
 			# Snap event.position to the nearest frame marking. This solves the issue of keyframe
 			# getting created at the wrong frame even if the user right clicks at a frame marking.
-			var snapped_event := snappedf(event.position.x, KeyframeTimeline.frame_ui_size)
-			keyframe_at = floori(snapped_event / KeyframeTimeline.frame_ui_size)
+			var track_offset := KeyframeTimeline.TRACK_X_MARGIN * KeyframeTimeline.frame_ui_size
+			keyframe_at = roundi((event.position.x - track_offset) / KeyframeTimeline.frame_ui_size)
+			if keyframe_at < 0:  # We currently do not allow keyframes at negative frames.
+				keyframe_at = 0
+			var rect := Rect2()
 			rect.position = event.global_position
 			rect.size = Vector2(100, 0)
 			popup_menu.popup_on_parent(rect)

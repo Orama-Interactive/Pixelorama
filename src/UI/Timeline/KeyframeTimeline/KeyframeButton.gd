@@ -49,17 +49,17 @@ func _on_gui_input(event: InputEvent) -> void:
 			return
 
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed:
+		if event.pressed:  # Start dragging.
 			is_dragged = true
 			drag_mouse_start_pos = parent.get_local_mouse_position().x
 			for keyframe_button in selected_keyframe_buttons:
 				keyframe_button.drag_pos = keyframe_button.position.x
 		else:
-			if is_dragged:
+			if is_dragged:  # Release.
 				is_dragged = false
-				# if the button was clicked to drag, while it wasn't selected then the
-				# pressed signal isn't emitted yet (it emits on release), so we have to manually
-				# emit it first
+				# If the button was clicked to drag, while it wasn't selected,
+				# then the pressed signal isn't emitted yet (it emits on release),
+				# so we have to manually emit it first.
 				if not button_pressed and self in selected_keyframe_buttons:
 					button_pressed = true
 					pressed.emit()
@@ -67,11 +67,14 @@ func _on_gui_input(event: InputEvent) -> void:
 					updated_position.emit()
 
 	if event is InputEventMouseMotion and is_dragged:
+		var track_offset := KeyframeTimeline.TRACK_X_MARGIN
 		var mouse_pos: float = parent.get_local_mouse_position().x
 		var delta := mouse_pos - drag_mouse_start_pos
 		for keyframe_button in selected_keyframe_buttons:
 			var new_pos := keyframe_button.drag_pos + delta
-			keyframe_button.position.x = snappedi(new_pos, KeyframeTimeline.frame_ui_size)
+			var frame := floori((new_pos + track_offset) / KeyframeTimeline.frame_ui_size)
+			keyframe_button.position.x = (frame + track_offset) * KeyframeTimeline.frame_ui_size
+			keyframe_button.position.x -= keyframe_button.size.x / 2
 			if keyframe_button.position.x < 0:
 				keyframe_button.position.x = 0
 

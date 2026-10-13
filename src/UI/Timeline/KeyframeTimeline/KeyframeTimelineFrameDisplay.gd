@@ -12,8 +12,10 @@ func _draw() -> void:
 	var font := Themes.get_font()
 	var project := Global.current_project
 	for i in project.frames.size():
-		var xx := i * KeyframeTimeline.frame_ui_size - x_offset
-		if (i + 1) * KeyframeTimeline.frame_ui_size - x_offset > 1:
+		var offset_i := i + KeyframeTimeline.TRACK_X_MARGIN
+		var xx := offset_i * KeyframeTimeline.frame_ui_size - x_offset
+		var x_next := (offset_i + 1) * KeyframeTimeline.frame_ui_size - x_offset
+		if x_next > 1:
 			# NOTE: We use maxf(1, ...) so that the line when xx = 0.0 is drawn properly.
 			xx = maxf(1, xx)
 		var width: int = -1
