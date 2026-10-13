@@ -127,7 +127,7 @@ some useful [b][SYSTEM OPTIONS][/b] are:
 
 	static func set_output(project: Project, next_arg: String) -> void:
 		if not next_arg.is_empty():
-			project.file_name = next_arg.get_file().get_basename()
+			project.export_profile.file_name = next_arg.get_file().get_basename()
 			var directory_path = next_arg.get_base_dir()
 			if directory_path != ".":
 				project.export_profile.directory_path = directory_path
