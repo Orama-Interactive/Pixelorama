@@ -141,12 +141,30 @@ func deserialize(dict: Dictionary) -> void:
 			ui_color = str_to_var("Color" + tmp_ui_color)
 		else:
 			ui_color = tmp_ui_color
-	var new_offset: Vector2i
-	var new_offset_str = dict.get("offset", "(0, 0)")
-	if typeof(new_offset_str) in [TYPE_VECTOR2I, TYPE_VECTOR2]:
-		new_offset = new_offset_str
-	else:
-		new_offset = str_to_var("Vector2i" + new_offset_str) as Vector2i
+
+	var new_offset: Vector2i = offset  # Start with default value
+	if dict.has("offset"):  # Offset data found but type unknown.
+		var tmp_offset = dict.offset
+		if typeof(tmp_offset) in [TYPE_VECTOR2I, TYPE_VECTOR2]:
+			new_offset = tmp_offset
+		else:
+			new_offset = str_to_var("Vector2i" + tmp_offset) as Vector2i
+	else:  # Offset data not found, calculate from image
+		print("Offset data not found, this is likely a project from an older version, calculating")
+		var old_content = get_content()
+		if old_content is Image:
+			new_offset = old_content.get_used_rect().position
+			var cropped_image: Image
+			cropped_image = old_content.get_region(old_content.get_used_rect())
+			var new_content: Image = cropped_image
+			if old_content is ImageExtended and old_content.is_indexed:
+				var indices_image = old_content.indices_image.get_region(
+					old_content.get_used_rect()
+				)
+				new_content = ImageExtended.new()
+				new_content.copy_from_custom(cropped_image, true)
+				new_content.indices_image = indices_image
+			set_content(new_content)
 	if new_offset != offset:
 		change_offset(new_offset)
 
