@@ -358,6 +358,9 @@ func _set_parameter(value, param: String, effect: LayerEffect, layer: BaseLayer)
 
 	# Set the keyframe button to orange if the user makes a temporary change.
 	var frame_index := layer.project.current_frame
+	# Sanity check: When the effect UI is being created this check will trigger a return
+	if layer.effects.size() != effect_container.get_child_count():
+		return
 	if not effect.animated_params.has(param):
 		return
 	var effect_index := layer.effects.find(effect)
