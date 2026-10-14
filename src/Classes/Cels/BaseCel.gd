@@ -51,8 +51,21 @@ func get_frame(project: Project) -> Frame:
 	return null
 
 
+# NOTE: the cel's image must always be shifted through offset, that means it's get_used_rect()
+# should always have (0, 0) as position and size equal to the bounds of content
+# (i-e. used rect's size). There are some possibilities when get_used_rect()'s position won't
+# start from zero such as content loaded by projects exported from v1.2.3 and before. In these
+# cases we will correct it.
 func get_cel_rect() -> Rect2i:
-	return Rect2i(offset, get_image().get_size())
+	var used_rect := get_image().get_used_rect()
+	if self is CelTileMap:  # Extend bounds to tile boundary.
+		used_rect.position = (self as CelTileMap).get_pixel_coords(
+			(self as CelTileMap).get_cell_position(used_rect.position)
+		)
+		used_rect.end = (self as CelTileMap).get_pixel_coords(
+			(self as CelTileMap).get_cell_position(used_rect.end - Vector2i.ONE)
+		) + (self as CelTileMap).tile_size
+	return Rect2i(offset + used_rect.position, used_rect.size)
 
 
 ## Changes the [member offset] of the cel.
@@ -149,22 +162,6 @@ func deserialize(dict: Dictionary) -> void:
 			new_offset = tmp_offset
 		else:
 			new_offset = str_to_var("Vector2i" + tmp_offset) as Vector2i
-	else:  # Offset data not found, calculate from image
-		print("Offset data not found, this is likely a project from an older version, calculating")
-		var old_content = get_content()
-		if old_content is Image:
-			new_offset = old_content.get_used_rect().position
-			var cropped_image: Image
-			cropped_image = old_content.get_region(old_content.get_used_rect())
-			var new_content: Image = cropped_image
-			if old_content is ImageExtended and old_content.is_indexed:
-				var indices_image = old_content.indices_image.get_region(
-					old_content.get_used_rect()
-				)
-				new_content = ImageExtended.new()
-				new_content.copy_from_custom(cropped_image, true)
-				new_content.indices_image = indices_image
-			set_content(new_content)
 	if new_offset != offset:
 		change_offset(new_offset)
 
