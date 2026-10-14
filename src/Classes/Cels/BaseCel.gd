@@ -62,9 +62,12 @@ func get_cel_rect() -> Rect2i:
 		used_rect.position = (self as CelTileMap).get_pixel_coords(
 			(self as CelTileMap).get_cell_position(used_rect.position)
 		)
-		used_rect.end = (self as CelTileMap).get_pixel_coords(
-			(self as CelTileMap).get_cell_position(used_rect.end - Vector2i.ONE)
-		) + (self as CelTileMap).tile_size
+		used_rect.end = (
+			(self as CelTileMap).get_pixel_coords(
+				(self as CelTileMap).get_cell_position(used_rect.end - Vector2i.ONE)
+			)
+			+ (self as CelTileMap).tile_size
+		)
 	return Rect2i(offset + used_rect.position, used_rect.size)
 
 
