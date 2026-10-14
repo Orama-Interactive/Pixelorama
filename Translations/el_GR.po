@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2026-10-12 10:58\n"
+"PO-Revision-Date: 2026-10-14 10:02\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -441,7 +441,7 @@ msgstr "Εμφάνιση οδηγών"
 
 #. Found under the View menu.
 msgid "Lock Guides"
-msgstr ""
+msgstr "Κλείδωμα οδηγών"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
@@ -1557,7 +1557,7 @@ msgid "Thai"
 msgstr "Ταϊλανδέζικα"
 
 msgid "Slovenian"
-msgstr ""
+msgstr "Σλοβενικά"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -2729,7 +2729,7 @@ msgstr "Επιλογή εικονοστοιχείων"
 
 #. An option found in the right click menu of a cel. If selected, centers the content of the cel.
 msgid "Center content"
-msgstr ""
+msgstr "Κεντράρισμα περιεχομένου"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
@@ -3647,7 +3647,7 @@ msgstr "Επεξεργαστής προοπτικής"
 
 #. A UI panel. Contains non-destructive layer effects. https://pixelorama.org/concepts/layer#layer-effects
 msgid "Layer FX"
-msgstr ""
+msgstr "Εφέ στρώσης"
 
 #. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
 msgid "Recorder"
@@ -3950,7 +3950,7 @@ msgstr "Τύπος ομαλής μετάβασης:"
 
 #. Refers to the easing function that should be used to animate the property. https://easings.net/
 msgid "Ease type"
-msgstr ""
+msgstr "Τύπος ομαλής μετάβασης"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts slowly and speeds up towards the end"
@@ -3993,10 +3993,10 @@ msgid "Insert keyframe"
 msgstr "Εισαγωγή καρέ-κλειδιού"
 
 msgid "Add keyframe."
-msgstr ""
+msgstr "Προσθήκη καρέ-κλειδιού."
 
 msgid "Update keyframe."
-msgstr ""
+msgstr "Ενημέρωση καρέ-κλειδιού."
 
 #. A button found in the keyframe timeline on the right panel when there is a keyframe selected. When clicked, it deletes the currently selected keyframe.
 msgid "Delete keyframe"
