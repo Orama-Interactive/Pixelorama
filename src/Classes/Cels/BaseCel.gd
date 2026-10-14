@@ -154,7 +154,6 @@ func deserialize(dict: Dictionary) -> void:
 			ui_color = str_to_var("Color" + tmp_ui_color)
 		else:
 			ui_color = tmp_ui_color
-
 	var new_offset: Vector2i = offset  # Start with default value
 	if dict.has("offset"):  # Offset data found but type unknown.
 		var tmp_offset = dict.offset
