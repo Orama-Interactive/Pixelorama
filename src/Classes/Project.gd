@@ -359,9 +359,7 @@ func serialize() -> Dictionary:
 
 func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAccess = null) -> void:
 	about_to_deserialize.emit(dict)
-	var pxo_version = dict.get(
-		"pxo_version", ProjectSettings.get_setting("application/config/Pxo_Version")
-	)
+	var pxo_version = dict.get("pxo_version", 1)
 	if dict.has("size_x") and dict.has("size_y"):
 		size = Vector2i(dict.size_x, dict.size_y)
 		selection_map.crop(size.x, size.y)
