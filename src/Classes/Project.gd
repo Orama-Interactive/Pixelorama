@@ -470,7 +470,10 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 						var image := _load_image_from_pxo(
 							frame_i, cel_i, image_size, zip_reader, file
 						)
-						cels.append(PixelCel.new(image))
+						var new_cel := PixelCel.new(image)
+						if pxo_version < 8:
+							new_cel.shrink_to_content()
+						cels.append(new_cel)
 					Global.LayerTypes.GROUP:
 						cels.append(GroupCel.new())
 					Global.LayerTypes.THREE_D:
@@ -493,6 +496,8 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 						var tileset_index = dict.layers[cel_i].tileset_index
 						var tileset := tilesets[tileset_index]
 						var new_cel := CelTileMap.new(tileset, image)
+						if pxo_version < 8:
+							new_cel.shrink_to_content()
 						cels.append(new_cel)
 					Global.LayerTypes.AUDIO:
 						cels.append(AudioCel.new())

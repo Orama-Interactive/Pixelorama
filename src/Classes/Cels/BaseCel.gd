@@ -51,24 +51,8 @@ func get_frame(project: Project) -> Frame:
 	return null
 
 
-# NOTE: the cel's image must always be shifted through offset, that means it's get_used_rect()
-# should always have (0, 0) as position and size equal to the bounds of content
-# (i-e. used rect's size). There are some possibilities when get_used_rect()'s position won't
-# start from zero such as content loaded by projects exported from v1.2.3 and before. In these
-# cases we will correct it.
 func get_cel_rect() -> Rect2i:
-	var used_rect := get_image().get_used_rect()
-	if self is CelTileMap:  # Extend bounds to tile boundary.
-		used_rect.position = (self as CelTileMap).get_pixel_coords(
-			(self as CelTileMap).get_cell_position(used_rect.position)
-		)
-		used_rect.end = (
-			(self as CelTileMap).get_pixel_coords(
-				(self as CelTileMap).get_cell_position(used_rect.end - Vector2i.ONE)
-			)
-			+ (self as CelTileMap).tile_size
-		)
-	return Rect2i(offset + used_rect.position, used_rect.size)
+	return Rect2i(offset, get_image().get_size())
 
 
 ## Changes the [member offset] of the cel.
