@@ -114,6 +114,10 @@ func _set_proper_keyframe_texture(effect: LayerEffect, effect_param_container: C
 	var frame_index := Global.current_project.current_frame
 	for j in range(0, effect_param_container.get_child_count()):
 		var hbox := effect_param_container.get_child(j)
+		# NOTE: there is no guarantee that hbox is an HBoxContainer, for example in Index map effect
+		# a FileDialog is also child of effect_param_container, so we need to verify the type.
+		if not hbox is HBoxContainer:
+			continue
 		var param_node := hbox.get_child(1)
 		if param_node is Container and not param_node is BasisSliders:
 			param_node = param_node.get_child(0)
@@ -358,6 +362,9 @@ func _set_parameter(value, param: String, effect: LayerEffect, layer: BaseLayer)
 
 	# Set the keyframe button to orange if the user makes a temporary change.
 	var frame_index := layer.project.current_frame
+	# Sanity check: When the effect UI is being created this check will trigger a return
+	if layer.effects.size() != effect_container.get_child_count():
+		return
 	if not effect.animated_params.has(param):
 		return
 	var effect_index := layer.effects.find(effect)
