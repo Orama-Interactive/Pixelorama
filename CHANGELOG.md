@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@vibrant-reindeer](https://github.com/vibrant-reindeer), [@williamchange](https://github.com/williamchange).
 
-Built using Godot 4.7.2.
+Built using Godot 4.7.1.
 
 ### Added
 - **Cels can now have content outside the canvas.** You can now move pixels outside of the canvas, and they will remain instead of being cut off. This should also result in less memory usage, as the size of each cel image is now exactly as much as it needs to be, instead of always being the same as the canvas size. This also affects rectangular tilemap cels, but not isometric & hexagonal tilemaps, and the move tool will not work at all in these two tilemap shapes. This change also means that forward compatibility is broken, meaning that older versions will not be able to load pxo files made from this version and on. Of course, backwards compatibility should have remained intact, meaning v1.2.4 is be able to load older pxo files. [#1628](https://github.com/Orama-Interactive/Pixelorama/pull/1628)
@@ -52,9 +52,9 @@ Built using Godot 4.7.2.
 
 ## [v1.2.2] - 2026-09-09
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind))
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)).
 
-Built using Godot 4.7.2
+Built using Godot 4.7.2.
 
 ### Added
 - Implemented a new gradient tool. [#1591](https://github.com/Orama-Interactive/Pixelorama/pull/1591)
@@ -72,9 +72,9 @@ Built using Godot 4.7.2
 
 ## [v1.2.1] - 2026-08-19
 This update has been brought to you by the contributions of:
-Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)),  [Joseph Demarest](https://github.com/JosephDemarest), [Qmaker-programmer](https://github.com/Qmaker-programmer)
+Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)),  [Joseph Demarest](https://github.com/JosephDemarest), [Qmaker-programmer](https://github.com/Qmaker-programmer).
 
-Built using Godot 4.7.1
+Built using Godot 4.7.1.
 
 ### Added
 - Exporting images as SVG files is now possible. Right now it's very basic, it just takes each non-transparent pixel and makes it a `<rect>` element. In the future we could add an option to merge pixels that have the same color into singular `<rect>` elements, resulting in a smaller file size, but taking a longer time to export.
