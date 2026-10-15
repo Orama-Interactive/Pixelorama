@@ -51,8 +51,24 @@ func get_frame(project: Project) -> Frame:
 	return null
 
 
+# NOTE: the cel's image must always be shifted through offset, that means it's get_used_rect()
+# should always have (0, 0) as position and size equal to the bounds of content
+# (i-e. used rect's size). There are some possibilities when get_used_rect()'s position won't
+# start from zero such as content loaded by projects exported from v1.2.3 and before. In these
+# cases we will correct it.
 func get_cel_rect() -> Rect2i:
-	return Rect2i(offset, get_image().get_size())
+	var used_rect := get_image().get_used_rect()
+	if self is CelTileMap:  # Extend bounds to tile boundary.
+		used_rect.position = (self as CelTileMap).get_pixel_coords(
+			(self as CelTileMap).get_cell_position(used_rect.position)
+		)
+		used_rect.end = (
+			(self as CelTileMap).get_pixel_coords(
+				(self as CelTileMap).get_cell_position(used_rect.end - Vector2i.ONE)
+			)
+			+ (self as CelTileMap).tile_size
+		)
+	return Rect2i(offset + used_rect.position, used_rect.size)
 
 
 ## Changes the [member offset] of the cel.
@@ -141,12 +157,13 @@ func deserialize(dict: Dictionary) -> void:
 			ui_color = str_to_var("Color" + tmp_ui_color)
 		else:
 			ui_color = tmp_ui_color
-	var new_offset: Vector2i
-	var new_offset_str = dict.get("offset", "(0, 0)")
-	if typeof(new_offset_str) in [TYPE_VECTOR2I, TYPE_VECTOR2]:
-		new_offset = new_offset_str
-	else:
-		new_offset = str_to_var("Vector2i" + new_offset_str) as Vector2i
+	var new_offset: Vector2i = offset  # Start with default value
+	if dict.has("offset"):  # Offset data found but type unknown.
+		var tmp_offset = dict.offset
+		if typeof(tmp_offset) in [TYPE_VECTOR2I, TYPE_VECTOR2]:
+			new_offset = tmp_offset
+		else:
+			new_offset = str_to_var("Vector2i" + tmp_offset) as Vector2i
 	if new_offset != offset:
 		change_offset(new_offset)
 
