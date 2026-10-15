@@ -494,13 +494,13 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 						var tileset_index = dict.layers[cel_i].tileset_index
 						var tileset := tilesets[tileset_index]
 						var new_cel := CelTileMap.new(tileset, image)
-						if pxo_version < 8:
-							new_cel.shrink_to_content()
 						cels.append(new_cel)
 					Global.LayerTypes.AUDIO:
 						cels.append(AudioCel.new())
 				cel["pxo_version"] = pxo_version
 				cels[cel_i].deserialize(cel)
+				if cels[cel_i] is CelTileMap and pxo_version < 8:
+					cels[cel_i].shrink_to_content.call_deferred()
 				_deserialize_metadata(cels[cel_i], cel)
 				cel_i += 1
 			var duration := 1.0
