@@ -513,7 +513,7 @@ func remove_tool(t: Tool) -> void:
 	tools.erase(t.name)
 
 
-func set_tool(tool_name: String, button: int) -> void:
+func set_tool(tool_name: String, button: int, quick_assigned := false) -> void:
 	# To prevent any unintentional syncing, we will temporarily disconnect the signal
 	if config_changed.is_connected(attempt_config_share):
 		config_changed.disconnect(attempt_config_share)
@@ -528,6 +528,9 @@ func set_tool(tool_name: String, button: int) -> void:
 			Global.move_guides_on_canvas = false
 	node.name = tool_name
 	node.tool_slot = slot
+	# NOTE: Using set here is better because it's used internally by the tool anyway
+	# and won't cause tools added by previous extensions to break.
+	node.set("_is_quick_assigned", quick_assigned)
 	slot.tool_node = node
 	slot.button = button
 	panel.add_child(slot.tool_node)
@@ -551,9 +554,11 @@ func get_tool(button: int) -> Slot:
 	return _slots[button]
 
 
-func assign_tool(tool_name: String, button: int, allow_refresh := false) -> void:
+func assign_tool(
+	tool_name: String, button: int, allow_refresh := false, quick_assigned := false
+) -> void:
 	if Global.single_tool_mode and button == MOUSE_BUTTON_LEFT:
-		assign_tool(tool_name, MOUSE_BUTTON_RIGHT, allow_refresh)
+		assign_tool(tool_name, MOUSE_BUTTON_RIGHT, allow_refresh, quick_assigned)
 	var slot := _slots[button]
 	var panel := _panels[button]
 
@@ -563,7 +568,7 @@ func assign_tool(tool_name: String, button: int, allow_refresh := false) -> void
 		panel.remove_child(slot.tool_node)
 		slot.tool_node.queue_free()
 
-	set_tool(tool_name, button)
+	set_tool(tool_name, button, quick_assigned)
 	update_tool_buttons()
 	update_tool_cursors()
 	Global.config_cache.set_value(slot.kname, "tool", tool_name)
@@ -572,7 +577,7 @@ func assign_tool(tool_name: String, button: int, allow_refresh := false) -> void
 func quick_assign_tool(tool_name: String, button: int, allow_refresh := false) -> void:
 	if prev_tool_names[button].is_empty():
 		prev_tool_names[button] = get_tool(button).tool_node.name
-	assign_tool(tool_name, button, allow_refresh)
+	assign_tool(tool_name, button, allow_refresh, true)
 
 
 func quick_assign_tool_revert(button: int, allow_refresh := false) -> void:
