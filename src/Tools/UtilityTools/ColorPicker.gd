@@ -42,7 +42,8 @@ func get_config() -> Dictionary:
 
 
 func set_config(config: Dictionary) -> void:
-	if not _is_quick_assigned:
+	# color_slot is not shared between the two slots unless single tool mode is active.
+	if Global.single_tool_mode or not is_syncing:
 		_color_slot = config.get("color_slot", _color_slot)
 	_mode = config.get("mode", _mode)
 
