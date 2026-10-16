@@ -604,7 +604,8 @@ func begin_transform(
 	image: Image = null,
 	project := Global.current_project,
 	force_move_content := false,
-	force_move_selection_only := false
+	force_move_selection_only := false,
+	clear_cel_content := true
 ) -> void:
 	var selection_only_action := Input.is_action_pressed(&"transform_move_selection_only", true)
 	var move_selection_only := selection_only_action or force_move_selection_only
@@ -654,23 +655,22 @@ func begin_transform(
 		return
 	transformed_image.copy_from(pre_transformed_image)
 	queue_redraw()
-	# Remove content from the cels
+
 	var clear_image := Image.create(
 		pre_transformed_image.get_width(),
 		pre_transformed_image.get_height(),
 		pre_transformed_image.has_mipmaps(),
 		pre_transformed_image.get_format()
 	)
+	# Set cel.transformed_content.
 	for cel in selection_node.get_selected_draw_cels():
 		var cel_image := cel.get_image()
 		var cel_image_cropped := project.crop_image_to_project_size(cel_image, cel.offset)
 		cel.transformed_content = SelectionNode.get_selected_image(cel_image_cropped)
-		cel_image.blit_rect_mask(
-			clear_image,
-			cel.transformed_content,
-			Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
-			selection_rect.position - cel.offset
-		)
+		if clear_cel_content:  # Remove content from the cels.
+			var src_rect := Rect2i(Vector2i.ZERO, project.selection_map.get_size())
+			var dst := selection_rect.position - cel.offset
+			cel_image.blit_rect_mask(clear_image, cel.transformed_content, src_rect, dst)
 	for cel_index in project.selected_cels:
 		canvas.update_texture(cel_index[1])
 

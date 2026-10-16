@@ -412,7 +412,10 @@ func _get_draw_rect() -> Rect2i:
 
 
 func _get_draw_image() -> ImageExtended:
-	return Global.current_project.get_current_cel().get_image()
+	var image := Global.current_project.get_current_cel().get_image()
+	if image is not ImageExtended:
+		image = ImageExtended.create_from_image(image, Global.current_project.is_indexed())
+	return image
 
 
 func _get_selected_draw_cels(include_all_layers := true) -> Array[BaseCel]:

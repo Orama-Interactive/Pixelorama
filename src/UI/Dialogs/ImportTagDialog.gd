@@ -207,19 +207,20 @@ func add_animation(indices: Array, destination: int, from_tag: AnimationTag = nu
 					var copy := ImageExtended.new()
 					copy.copy_from_custom(empty, project.is_indexed())
 					copy.blit_rect(src_img, Rect2(Vector2.ZERO, src_img.get_size()), Vector2.ZERO)
-					new_cel.set_content([copy, copied_content[1]])
+					new_cel.set_content([copy, copied_content[1], copied_content[2]])
 					new_cel.set_indexed_mode(project.is_indexed())
 				else:
 					# Add more types here if they have a copy_content() method.
 					if src_cel is PixelCel:
-						var src_img: ImageExtended = src_cel.copy_content()
+						var copied_content = src_cel.copy_content()
+						var src_img: ImageExtended = copied_content[0]
 						var empty := project.new_empty_image()
 						var copy := ImageExtended.new()
 						copy.copy_from_custom(empty, project.is_indexed())
 						copy.blit_rect(
 							src_img, Rect2(Vector2.ZERO, src_img.get_size()), Vector2.ZERO
 						)
-						new_cel.set_content(copy)
+						new_cel.set_content([copy, copied_content[1]])
 						new_cel.set_indexed_mode(project.is_indexed())
 
 			else:

@@ -83,6 +83,8 @@ var fps := 6.0:
 	set(value):
 		fps = value
 		fps_changed.emit()
+## If [code]true[/code], blended images are included in the pxo files.
+var include_blended_images := false
 var license := ""  ## The license of the project, set in the project properties.
 var user_data := ""  ## User defined data, set in the project properties.
 var author_display_name := ""  ## The displayed name of the project author.
@@ -340,6 +342,7 @@ func serialize() -> Dictionary:
 		"tilesets": tileset_data,
 		"vanishing_points": vanishing_points,
 		"fps": fps,
+		"include_blended_images": include_blended_images,
 		"license": license,
 		"user_data": user_data,
 		"author_display_name": author_display_name,
@@ -356,9 +359,7 @@ func serialize() -> Dictionary:
 
 func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAccess = null) -> void:
 	about_to_deserialize.emit(dict)
-	var pxo_version = dict.get(
-		"pxo_version", ProjectSettings.get_setting("application/config/Pxo_Version")
-	)
+	var pxo_version = dict.get("pxo_version", 1)
 	if dict.has("size_x") and dict.has("size_y"):
 		size = Vector2i(dict.size_x, dict.size_y)
 		selection_map.crop(size.x, size.y)
@@ -467,7 +468,10 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 						var image := _load_image_from_pxo(
 							frame_i, cel_i, image_size, zip_reader, file
 						)
-						cels.append(PixelCel.new(image))
+						var new_cel := PixelCel.new(image)
+						if pxo_version < 8:
+							new_cel.shrink_to_content()
+						cels.append(new_cel)
 					Global.LayerTypes.GROUP:
 						cels.append(GroupCel.new())
 					Global.LayerTypes.THREE_D:
@@ -495,6 +499,8 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 						cels.append(AudioCel.new())
 				cel["pxo_version"] = pxo_version
 				cels[cel_i].deserialize(cel)
+				if cels[cel_i] is CelTileMap and pxo_version < 8:
+					cels[cel_i].shrink_to_content.call_deferred()
 				_deserialize_metadata(cels[cel_i], cel)
 				cel_i += 1
 			var duration := 1.0
@@ -577,6 +583,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 	if export_profile.file_name.is_empty() or export_profile.file_name == "untitled":
 		export_profile.file_name = name
 	fps = dict.get("fps", fps)
+	include_blended_images = dict.get("include_blended_images", include_blended_images)
 	license = dict.get("license", license)
 	author_display_name = dict.get("author_display_name", "")
 	author_real_name = dict.get("author_real_name", "")

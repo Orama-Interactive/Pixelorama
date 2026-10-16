@@ -87,7 +87,12 @@ func _pick_color(pos: Vector2i) -> void:
 				var idx := (project.layers.size() - 1) - layer
 				if project.layers[idx].is_visible_in_hierarchy():
 					var cel := curr_frame.cels[idx]
-					image = cel.get_image()
+					if cel.get_image() is ImageExtended:
+						image = cel.get_image()
+					else:
+						image = ImageExtended.create_from_image(
+							cel.get_image(), project.is_indexed()
+						)
 					var final_pos := pos
 					final_pos -= cel.offset
 					if not image.pos_inside_image(final_pos):

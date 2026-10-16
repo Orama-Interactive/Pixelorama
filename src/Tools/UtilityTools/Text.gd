@@ -60,7 +60,7 @@ func _ready() -> void:
 	Tools.color_changed.connect(_on_color_changed)
 	horizontal_alignment_group.pressed.connect(_on_horizontal_alignment_button_pressed)
 	anti_aliasing_group.pressed.connect(_on_antialiasing_button_pressed)
-	super._ready()
+	super()
 
 
 func get_config() -> Dictionary:
@@ -143,7 +143,7 @@ func text_to_pixels() -> void:
 	var vp := RenderingServer.viewport_create()
 	var canvas := RenderingServer.canvas_create()
 	RenderingServer.viewport_attach_canvas(vp, canvas)
-	RenderingServer.viewport_set_size(vp, project.size.x, project.size.y)
+	RenderingServer.viewport_set_size(vp, text_rect.size.x, text_rect.size.y)
 	RenderingServer.viewport_set_disable_3d(vp, true)
 	RenderingServer.viewport_set_active(vp, true)
 	RenderingServer.viewport_set_transparent_background(vp, true)
@@ -165,7 +165,7 @@ func text_to_pixels() -> void:
 		# NOTE: We need background information for FONT_ANTIALIASING_LCD to work.
 		background_rid = RenderingServer.texture_2d_create(cel_image)
 		RenderingServer.canvas_item_add_texture_rect(
-			ci_rid, Rect2(Vector2.ZERO, project.size), background_rid
+			ci_rid, Rect2(Vector2.ZERO, text_rect.size), background_rid
 		)
 	font.draw_multiline_string(
 		ci_rid, pos, text, horizontal_alignment, text_edit.size.x, text_size, -1, color

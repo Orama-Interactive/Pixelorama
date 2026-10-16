@@ -32,11 +32,16 @@ var offset := Vector2i.ZERO  ## The offset of the cel in pixel coordinates.
 var prev_offset := offset  ## Used for undo/redo purposes.
 
 
-func get_final_opacity(layer: BaseLayer) -> float:
+func get_final_opacity(layer: BaseLayer, animated := true) -> float:
 	var project := layer.project
 	var frame := get_frame(project)
 	var frame_index := project.frames.find(frame)
-	return layer.get_opacity(frame_index) * opacity
+	var layer_opacity := 1.0
+	if animated:
+		layer_opacity = layer.get_opacity(frame_index)
+	else:
+		layer_opacity = layer.opacity
+	return layer_opacity * opacity
 
 
 func get_frame(project: Project) -> Frame:
@@ -136,12 +141,13 @@ func deserialize(dict: Dictionary) -> void:
 			ui_color = str_to_var("Color" + tmp_ui_color)
 		else:
 			ui_color = tmp_ui_color
-	var new_offset: Vector2i
-	var new_offset_str = dict.get("offset", "(0, 0)")
-	if typeof(new_offset_str) in [TYPE_VECTOR2I, TYPE_VECTOR2]:
-		new_offset = new_offset_str
-	else:
-		new_offset = str_to_var("Vector2i" + new_offset_str) as Vector2i
+	var new_offset: Vector2i = offset  # Start with default value
+	if dict.has("offset"):  # Offset data found but type unknown.
+		var tmp_offset = dict.offset
+		if typeof(tmp_offset) in [TYPE_VECTOR2I, TYPE_VECTOR2]:
+			new_offset = tmp_offset
+		else:
+			new_offset = str_to_var("Vector2i" + tmp_offset) as Vector2i
 	if new_offset != offset:
 		change_offset(new_offset)
 
