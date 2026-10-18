@@ -798,22 +798,21 @@ func _drawer_set_pixel(
 ) -> void:
 	for image in images:
 		var variant = images[image]
-		var local_pos := pos
-		var mirrored_positions := Tools.get_mirrored_positions(pos, _stroke_project)
+		var pixel_cel: PixelCel
 		if variant is PixelCel:
-			var cel := variant as PixelCel
-			local_pos = cel.ensure_canvas_point_in_bounds(pos)
-			if not ignore_mirroring:
-				for i in mirrored_positions.size():
-					var mirror_pos := mirrored_positions[i]
-					if _stroke_project.can_pixel_get_drawn(mirror_pos):
-						mirrored_positions[i] = cel.ensure_canvas_point_in_bounds(mirror_pos)
-		_drawer.set_pixel(image, local_pos, tool_slot.color)
+			pixel_cel = variant
+		var mirrored_positions := Tools.get_mirrored_positions(pos, _stroke_project)
+		var local_pos := pos if not pixel_cel else pixel_cel.ensure_canvas_point_in_bounds(pos)
 
+		_drawer.set_pixel(image, local_pos, tool_slot.color)
 		if not ignore_mirroring:
 			for i in mirrored_positions.size():
 				var mirror_pos := mirrored_positions[i]
 				if _stroke_project.can_pixel_get_drawn(mirror_pos):
+					# If cel is a PixelCel, convert coordinates relative to project to be now
+					# relative to cel's image coordinates.
+					if pixel_cel:
+						mirror_pos = pixel_cel.ensure_canvas_point_in_bounds(mirror_pos)
 					_drawer.set_pixel(image, mirror_pos, tool_slot.color)
 
 
