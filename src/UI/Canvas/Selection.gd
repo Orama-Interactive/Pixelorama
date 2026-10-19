@@ -302,13 +302,14 @@ func copy() -> void:
 	var cl_big_bounding_rectangle := Rect2()
 	var cl_selection_offset := Vector2.ZERO
 
-	var image := project.get_current_cel().get_image()
 	var to_copy := Image.new()
-	if !project.has_selection:
+	if not project.has_selection:
+		var cel := project.get_current_cel()
+		var image := cel.get_image()
 		to_copy.copy_from(image)
+		cl_big_bounding_rectangle = cel.get_cel_rect()
 		cl_selection_map.copy_from(project.selection_map)
-		cl_selection_map.select_all()
-		cl_big_bounding_rectangle = Rect2(Vector2.ZERO, project.size)
+		cl_selection_map.select_rect(cl_big_bounding_rectangle)
 	else:
 		var selection_rect := project.selection_map.get_selection_rect(project)
 		if transformation_handles.is_transforming():
@@ -321,9 +322,9 @@ func copy() -> void:
 		else:
 			cl_selection_map.copy_from(project.selection_map)
 		cl_big_bounding_rectangle = selection_rect
+	cl_selection_offset = project.selection_offset
 
 	cl_image = to_copy
-	cl_selection_offset = project.selection_offset
 	var transfer_clipboard := {
 		"image": cl_image,
 		"selection_map": cl_selection_map.data,
