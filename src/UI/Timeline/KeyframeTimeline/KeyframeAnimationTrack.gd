@@ -13,6 +13,7 @@ var is_property := false
 var popup_menu := PopupMenu.new()
 var keyframe_at := 0
 var line_color := Color.WHITE
+var separator_color := Color.GRAY
 
 
 func _ready() -> void:
@@ -50,7 +51,29 @@ func _draw() -> void:
 	if animatable_object != null:
 		var dash_color := Color(line_color.r, line_color.g, line_color.b, line_color.a * 0.5)
 		draw_dashed_line(Vector2(0, size.y / 2.0), Vector2(size.x, size.y / 2.0), dash_color)
-	draw_line(Vector2(0, size.y), Vector2(size.x, size.y), line_color)
+	if get_child_count() > 1:
+		var keyframes := get_children()
+		keyframes.sort_custom(func (a, b): return true if a.position.x < b.position.x else false)
+		for i in range(keyframes.size() - 1):
+			if not keyframes[i] is KeyframeButton or not keyframes[i + 1] is KeyframeButton:
+				continue
+			var k1 := keyframes[i] as KeyframeButton
+			var k2 := keyframes[i + 1] as KeyframeButton
+			if (
+				not k1.dict[k1.param_name].has(k1.frame_index)
+				or not k2.dict[k2.param_name].has(k2.frame_index)
+			):
+				continue
+			var value_a = k1.dict[k1.param_name][k1.frame_index]["value"]
+			var value_b = k2.dict[k2.param_name][k2.frame_index]["value"]
+			if value_a == value_b:
+				draw_line(
+					Vector2(k1.position.x + (k1.size.x / 2), size.y / 2.0),
+					Vector2(k2.position.x + (k2.size.x / 2), size.y / 2.0),
+					line_color,
+					2
+				)
+	draw_line(Vector2(0, size.y), Vector2(size.x, size.y), separator_color)
 
 
 func _on_popup_menu_id_pressed(id: int) -> void:
