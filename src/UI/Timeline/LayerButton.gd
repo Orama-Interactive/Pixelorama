@@ -194,7 +194,7 @@ func update_buttons() -> void:
 
 	visibility_button.modulate.a = 1
 	lock_button.modulate.a = 1
-	popup_menu.set_item_checked(0, layer.clipping_mask)
+	popup_menu.set_item_checked(MenuOptions.CLIPPING_MASK, layer.clipping_mask)
 	clipping_mask_icon.visible = layer.clipping_mask
 	if is_instance_valid(layer.parent):
 		if not layer.parent.is_visible_in_hierarchy():
