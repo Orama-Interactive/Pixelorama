@@ -53,7 +53,7 @@ func _draw() -> void:
 		draw_dashed_line(Vector2(0, size.y / 2.0), Vector2(size.x, size.y / 2.0), dash_color)
 	if get_child_count() > 1:
 		var keyframes := get_children().filter(func(x): return x is KeyframeButton)
-		keyframes.sort_custom(func (a, b): return true if a.position.x < b.position.x else false)
+		keyframes.sort_custom(func(a, b): return true if a.position.x < b.position.x else false)
 		for i in range(keyframes.size() - 1):
 			if not keyframes[i] is KeyframeButton or not keyframes[i + 1] is KeyframeButton:
 				continue
