@@ -55,8 +55,6 @@ func _draw() -> void:
 		var keyframes := get_children().filter(func(x): return x is KeyframeButton)
 		keyframes.sort_custom(func(a, b): return true if a.position.x < b.position.x else false)
 		for i in range(keyframes.size() - 1):
-			if not keyframes[i] is KeyframeButton or not keyframes[i + 1] is KeyframeButton:
-				continue
 			var k1 := keyframes[i] as KeyframeButton
 			var k2 := keyframes[i + 1] as KeyframeButton
 			if (
