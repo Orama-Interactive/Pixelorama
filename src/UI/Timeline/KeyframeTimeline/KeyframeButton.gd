@@ -77,6 +77,7 @@ func _on_gui_input(event: InputEvent) -> void:
 			keyframe_button.position.x -= keyframe_button.size.x / 2
 			if keyframe_button.position.x < 0:
 				keyframe_button.position.x = 0
+		(get_parent() as KeyframeAnimationTrack).queue_redraw()
 
 
 func create_popup_menu(pos: Vector2) -> void:

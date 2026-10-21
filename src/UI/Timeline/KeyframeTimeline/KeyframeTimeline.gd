@@ -75,6 +75,7 @@ func _input(event: InputEvent) -> void:
 					continue
 				var offset_pos: float = key_button.frame_index + TRACK_X_MARGIN
 				key_button.position.x = offset_pos * frame_ui_size - key_button.size.x / 2
+			track.queue_redraw()
 		keyframe_timeline_cursor.update_position()
 	if event.is_action_pressed(&"delete"):
 		_on_keyframe_deleted()
