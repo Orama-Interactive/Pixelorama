@@ -314,10 +314,21 @@ func append_keyframes_to_selection(rect: Rect2) -> void:
 	select_keyframes()
 
 
-func on_keyframe_property_changed(new_value, property_name: String) -> void:
+func on_keyframe_property_changed(new_value, property_name: String, keyframe_id := -1) -> void:
+	var keyframe_buttons: Array[KeyframeButton]
+	if keyframe_id == -1 or keyframe_id in selected_keyframes:
+		keyframe_buttons = get_selected_keyframe_buttons()
+	else:
+		# If the keyframe we are deleting is not selected, find it.
+		for kfb: KeyframeButton in Global.get_tree().get_nodes_in_group(&"KeyframeButtons"):
+			if kfb.keyframe_id == keyframe_id:
+				keyframe_buttons = [kfb]
+				break
+	if keyframe_buttons.is_empty():
+		return
 	var undo_redo := Global.current_project.undo_redo
 	undo_redo.create_action("Change keyframe %s" % property_name, UndoRedo.MERGE_ENDS)
-	for key_button in get_selected_keyframe_buttons():
+	for key_button in keyframe_buttons:
 		var dict := key_button.dict
 		var param_name := key_button.param_name
 		var frame_index := key_button.frame_index

@@ -147,22 +147,34 @@ func _gcd(a: int, b: int) -> int:
 func _on_X_value_changed(val: float) -> void:
 	value.x = val
 	if _locked_ratio:
-		value.y = maxf(min_value.y, (value.x / ratio.x) * ratio.y)
-		value.z = maxf(min_value.z, (value.x / ratio.x) * ratio.z)
+		var minimum_y := -INF if allow_lesser else min_value.y
+		var maximum_y := INF if allow_greater else max_value.y
+		value.y = clampf((value.x / ratio.x) * ratio.y, minimum_y, maximum_y)
+		var minimum_z := -INF if allow_lesser else min_value.z
+		var maximum_z := INF if allow_greater else max_value.z
+		value.y = clampf((value.x / ratio.x) * ratio.z, minimum_z, maximum_z)
 
 
 func _on_Y_value_changed(val: float) -> void:
 	value.y = val
 	if _locked_ratio:
-		value.x = maxf(min_value.x, (value.y / ratio.y) * ratio.x)
-		value.z = maxf(min_value.z, (value.y / ratio.y) * ratio.z)
+		var minimum_x := -INF if allow_lesser else min_value.x
+		var maximum_x := INF if allow_greater else max_value.x
+		value.x = clampf((value.y / ratio.y) * ratio.x, minimum_x, maximum_x)
+		var minimum_z := -INF if allow_lesser else min_value.z
+		var maximum_z := INF if allow_greater else max_value.z
+		value.y = clampf((value.x / ratio.x) * ratio.z, minimum_z, maximum_z)
 
 
 func _on_Z_value_changed(val: float) -> void:
 	value.z = val
 	if _locked_ratio:
-		value.x = maxf(min_value.x, (value.z / ratio.z) * ratio.x)
-		value.y = maxf(min_value.y, (value.z / ratio.z) * ratio.y)
+		var minimum_x := -INF if allow_lesser else min_value.x
+		var maximum_x := INF if allow_greater else max_value.x
+		value.x = clampf((value.z / ratio.z) * ratio.x, minimum_x, maximum_x)
+		var minimum_y := -INF if allow_lesser else min_value.y
+		var maximum_y := INF if allow_greater else max_value.y
+		value.y = clampf((value.z / ratio.z) * ratio.y, minimum_y, maximum_y)
 
 
 func _on_RatioButton_toggled(button_pressed: bool) -> void:

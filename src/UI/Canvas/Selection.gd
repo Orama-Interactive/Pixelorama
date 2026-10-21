@@ -302,13 +302,14 @@ func copy() -> void:
 	var cl_big_bounding_rectangle := Rect2()
 	var cl_selection_offset := Vector2.ZERO
 
-	var image := project.get_current_cel().get_image()
 	var to_copy := Image.new()
-	if !project.has_selection:
+	if not project.has_selection:
+		var cel := project.get_current_cel()
+		var image := cel.get_image()
 		to_copy.copy_from(image)
+		cl_big_bounding_rectangle = cel.get_cel_rect()
 		cl_selection_map.copy_from(project.selection_map)
-		cl_selection_map.select_all()
-		cl_big_bounding_rectangle = Rect2(Vector2.ZERO, project.size)
+		cl_selection_map.select_rect(cl_big_bounding_rectangle)
 	else:
 		var selection_rect := project.selection_map.get_selection_rect(project)
 		if transformation_handles.is_transforming():
@@ -321,9 +322,9 @@ func copy() -> void:
 		else:
 			cl_selection_map.copy_from(project.selection_map)
 		cl_big_bounding_rectangle = selection_rect
+	cl_selection_offset = project.selection_offset
 
 	cl_image = to_copy
-	cl_selection_offset = project.selection_offset
 	var transfer_clipboard := {
 		"image": cl_image,
 		"selection_map": cl_selection_map.data,
@@ -528,6 +529,16 @@ func delete(selected_cels := true) -> void:
 	var project := Global.current_project
 	if !project.layers[project.current_layer].can_layer_get_drawn():
 		return
+	var images: Dictionary[Image, BaseCel]
+	if selected_cels:
+		images = _get_selected_draw_images()
+	else:
+		var current_cel := project.get_current_cel()
+		var current_cel_image := current_cel.get_image()
+		# Avoid type conflict
+		if is_instance_valid(current_cel_image) and current_cel_image is ImageExtended:
+			images[current_cel_image] = current_cel
+
 	if transformation_handles.is_transforming():
 		if (
 			transformation_handles.transformed_image.is_empty()
@@ -539,21 +550,14 @@ func delete(selected_cels := true) -> void:
 			clear_selection()
 			transformation_handles.set_selection(null, Rect2())
 			is_pasting = false
+			for image in images:
+				var cel := images[image]
+				cel.shrink_to_content()
 			queue_redraw()
 			commit_undo("Draw", undo_data)
 			return
 
 	var undo_data_tmp := get_undo_data(true)
-	var images: Dictionary[Image, BaseCel]
-	if selected_cels:
-		images = _get_selected_draw_images()
-	else:
-		var current_cel := project.get_current_cel()
-		var current_cel_image := current_cel.get_image()
-		# Avoid type conflict
-		if is_instance_valid(current_cel_image) and current_cel_image is ImageExtended:
-			images[current_cel_image] = current_cel
-
 	if project.has_selection:
 		var blank := project.new_empty_image()
 		var selection_map_copy := project.selection_map.return_cropped_copy(project, project.size)
@@ -582,9 +586,12 @@ func delete(selected_cels := true) -> void:
 					blank, selection_map_copy, selection_rect, selection_rect.position - cel.offset
 				)
 				image.convert_rgb_to_indexed()
+			cel.shrink_to_content()
 	else:
 		for image in images:
+			var cel := images[image]
 			image.fill(0)
+			cel.shrink_to_content()
 			image.convert_rgb_to_indexed()
 	clear_selection()
 	commit_undo("Draw", undo_data_tmp)

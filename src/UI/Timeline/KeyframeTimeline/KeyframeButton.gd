@@ -104,7 +104,7 @@ func create_popup_menu(pos: Vector2) -> void:
 		trans_type_options.add_radio_check_item("Constant", AnimatableObject.TRANS_CONSTANT)
 		trans_type_options.set_item_checked(trans_type_options.get_item_index(trans_type), true)
 		trans_type_options.id_pressed.connect(
-			keyframe_timeline.on_keyframe_property_changed.bind("trans")
+			keyframe_timeline.on_keyframe_property_changed.bind("trans", keyframe_id)
 		)
 		popup_menu.add_submenu_node_item("Interpolation", trans_type_options)
 
@@ -115,7 +115,7 @@ func create_popup_menu(pos: Vector2) -> void:
 		ease_type_options.add_radio_check_item("Ease out in", Tween.EASE_OUT_IN)
 		ease_type_options.set_item_checked(ease_type_options.get_item_index(ease_type), true)
 		ease_type_options.id_pressed.connect(
-			keyframe_timeline.on_keyframe_property_changed.bind("ease")
+			keyframe_timeline.on_keyframe_property_changed.bind("ease", keyframe_id)
 		)
 		popup_menu.add_submenu_node_item("Ease type", ease_type_options)
 

@@ -73,10 +73,12 @@ func _draw() -> void:
 	first = final_transform.affine_inverse() * Vector2.ZERO
 	last = final_transform.affine_inverse() * viewport_container.size
 
+	var font_size := Themes.get_font_size()
+	var color := Global.control.theme.get_color(&"font_color", &"Label")
 	for j in range(ceili(first.y), ceili(last.y)):
 		var pos: Vector2 = final_transform * Vector2(0, j)
 		if j % (major_subdivision * minor_subdivision) == 0:
-			draw_line(Vector2(0, pos.y), Vector2(RULER_WIDTH, pos.y), Color.WHITE)
+			draw_line(Vector2(0, pos.y), Vector2(RULER_WIDTH, pos.y), color)
 			var text_angle := -PI / 2
 			var text_pos := Vector2(font.get_height() - 4, pos.y - 2)
 			if is_layout_rtl():
@@ -88,18 +90,14 @@ func _draw() -> void:
 			var str_to_draw := "%*.*f" % [0, step_decimals(val), snappedf(val, 0.1)]
 			str_to_draw = text_server.format_number(str_to_draw)
 			draw_string(
-				font, Vector2(), str_to_draw, HORIZONTAL_ALIGNMENT_LEFT, -1, Themes.get_font_size()
+				font, Vector2(0, -4), str_to_draw, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, color
 			)
 			draw_set_transform_matrix(Transform2D())
 		else:
 			if j % minor_subdivision == 0:
-				draw_line(
-					Vector2(RULER_WIDTH * 0.33, pos.y), Vector2(RULER_WIDTH, pos.y), Color.WHITE
-				)
+				draw_line(Vector2(RULER_WIDTH * 0.33, pos.y), Vector2(RULER_WIDTH, pos.y), color)
 			else:
-				draw_line(
-					Vector2(RULER_WIDTH * 0.66, pos.y), Vector2(RULER_WIDTH, pos.y), Color.WHITE
-				)
+				draw_line(Vector2(RULER_WIDTH * 0.66, pos.y), Vector2(RULER_WIDTH, pos.y), color)
 
 
 func _on_VerticalRuler_pressed() -> void:

@@ -75,33 +75,33 @@ func _draw() -> void:
 	first = final_transform.affine_inverse() * Vector2.ZERO
 	last = final_transform.affine_inverse() * viewport_container.size
 
+	var font_size := Themes.get_font_size()
+	var color := Global.control.theme.get_color(&"font_color", &"Label")
 	for j in range(ceili(first.x), ceili(last.x)):
 		var pos: Vector2 = final_transform * Vector2(j, 0)
 		if j % (major_subdivision * minor_subdivision) == 0:
 			draw_line(
-				Vector2(pos.x + RULER_WIDTH, 0),
-				Vector2(pos.x + RULER_WIDTH, RULER_WIDTH),
-				Color.WHITE
+				Vector2(pos.x + RULER_WIDTH, 0), Vector2(pos.x + RULER_WIDTH, RULER_WIDTH), color
 			)
 			var val := ((ruler_transform * major_subdivide * minor_subdivide) * Vector2(j, 0)).x
 			var str_to_draw := "%*.*f" % [0, step_decimals(val), snappedf(val, 0.1)]
 			str_to_draw = text_server.format_number(str_to_draw)
-			var draw_pos := Vector2(pos.x + RULER_WIDTH + 2, font.get_height() - 4)
+			var draw_pos := Vector2(pos.x + RULER_WIDTH + 2, font.get_height() - 8)
 			draw_string(
-				font, draw_pos, str_to_draw, HORIZONTAL_ALIGNMENT_LEFT, -1, Themes.get_font_size()
+				font, draw_pos, str_to_draw, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, color
 			)
 		else:
 			if j % minor_subdivision == 0:
 				draw_line(
 					Vector2(pos.x + RULER_WIDTH, RULER_WIDTH * 0.33),
 					Vector2(pos.x + RULER_WIDTH, RULER_WIDTH),
-					Color.WHITE
+					color
 				)
 			else:
 				draw_line(
 					Vector2(pos.x + RULER_WIDTH, RULER_WIDTH * 0.66),
 					Vector2(pos.x + RULER_WIDTH, RULER_WIDTH),
-					Color.WHITE
+					color
 				)
 
 
