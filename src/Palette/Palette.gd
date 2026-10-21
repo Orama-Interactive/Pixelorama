@@ -131,13 +131,18 @@ func deserialize_from_dictionary(data: Dictionary) -> void:
 	if data.has("comment"):
 		comment = data.comment
 	if data.has("colors"):
-		for color_data in data.colors:
+		for color_data: Dictionary in data.colors:
+			var color_value = color_data.get("color")
+			if not color_value:
+				continue
+			var index = color_data.get("index")
+			if not index:
+				continue
 			var color: Color
-			if typeof(color_data["color"]) == TYPE_STRING:
-				color = str_to_var("Color" + color_data["color"])
-			elif typeof(color_data["color"]) == TYPE_COLOR:
-				color = color_data["color"]
-			var index := color_data["index"] as int
+			if typeof(color_value) == TYPE_STRING:
+				color = str_to_var("Color" + color_value)
+			elif typeof(color_value) == TYPE_COLOR:
+				color = color_value
 			var palette_color := PaletteColor.new(color, index)
 			colors[index] = palette_color
 	if data.has("width"):
