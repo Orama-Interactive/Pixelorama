@@ -206,6 +206,7 @@ func text_to_pixels() -> void:
 			)
 		if cel_image is ImageExtended:
 			cel_image.convert_rgb_to_indexed()
+		(cel as PixelCel).shrink_to_content()
 		commit_undo("Draw", undo_data)
 
 
