@@ -563,7 +563,7 @@ func assign_tool(tool_name: String, button: int, allow_refresh := false) -> void
 		panel.remove_child(slot.tool_node)
 		slot.tool_node.queue_free()
 
-	set_tool(tool_name, button,)
+	set_tool(tool_name, button)
 	update_tool_buttons()
 	update_tool_cursors()
 	Global.config_cache.set_value(slot.kname, "tool", tool_name)
