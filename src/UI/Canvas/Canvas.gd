@@ -129,7 +129,8 @@ static func get_canvas_cel_image(cel: BaseCel, layer: BaseLayer, image: Image) -
 		image.copy_from(blended)
 	else:
 		if Global.display_layer_effects:
-			image.copy_from(layer.display_effects(cel, false))
+			var animate_params := layer.index != project.current_layer
+			image.copy_from(layer.display_effects(cel, animate_params))
 			if layer.use_cel_image_for_effects:
 				image.copy_from(project.crop_image_to_project_size(image, cel.offset))
 		else:
