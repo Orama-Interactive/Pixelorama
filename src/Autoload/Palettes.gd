@@ -299,8 +299,12 @@ func _fill_new_palette_with_colors(
 		cel_image.copy_from(cel.get_image())
 		if cel_image.is_invisible():
 			continue
+		var cel_rect := cel.get_cel_rect()
 		for i in pixels:
-			var color := cel_image.get_pixelv(abs(i - cel.offset))
+			if not cel_rect.has_point(i):
+				continue
+			var color_pos := i - cel.offset
+			var color := cel_image.get_pixelv(color_pos.abs())
 			if color.a > 0:
 				if not add_alpha_colors:
 					color.a = 1
