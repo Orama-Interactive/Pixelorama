@@ -381,17 +381,6 @@ func palette_delete_and_reselect(permanent := true, palette := current_palette) 
 		select_palette("")
 
 
-func current_palette_add_color(mouse_button: int, start_index := 0) -> void:
-	if (
-		not current_palette.is_full()
-		and (mouse_button == MOUSE_BUTTON_LEFT or mouse_button == MOUSE_BUTTON_RIGHT)
-	):
-		# Get color on left or right tool
-		var color := Tools.get_assigned_color(mouse_button)
-		current_palette.add_color(color, start_index)
-		save_palette()
-
-
 func current_palette_get_color(index: int) -> Color:
 	return current_palette.get_color(index)
 

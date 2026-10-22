@@ -508,6 +508,7 @@ func _current_palette_add_color(color: Color, start_index := 0) -> void:
 		commit_undo()
 	else:  # Triggers when global palettes are writable
 		palette_in_focus.add_color(color, start_index)
+		Palettes.save_palette()
 		redraw_current_palette()
 		toggle_add_delete_buttons()
 
@@ -529,5 +530,6 @@ func _current_palette_undo_redo_remove_color(index := 0) -> void:
 		commit_undo()
 	else:  # Triggers when global palettes are writable
 		palette_in_focus.remove_color(index)
+		Palettes.save_palette()
 		redraw_current_palette()
 		toggle_add_delete_buttons()
