@@ -64,7 +64,7 @@ func blend_children(frame: Frame, animate_params := true, apply_effects := true)
 		var c_key := [_cache_texture_data, metadata_image.get_data()]
 		if _group_cache.has(c_key):
 			# Don't waste time re-generating for groups that have remained unchanged
-			var cache_image = Image.create_from_data(
+			var cache_image := Image.create_from_data(
 				project.size.x,
 				project.size.y,
 				false,

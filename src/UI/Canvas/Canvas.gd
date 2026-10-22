@@ -154,10 +154,8 @@ func update_texture(
 		var layer := project.layers[layer_i].get_blender_ancestor()
 		var cel_image := Image.new()
 		get_canvas_cel_image(current_cel, layer, cel_image)
-		if (
-			cel_image.get_size()
-			== Vector2i(layer_texture_array.get_width(), layer_texture_array.get_height())
-		):
+		var l_tx_size := Vector2i(layer_texture_array.get_width(), layer_texture_array.get_height())
+		if cel_image.get_size() == l_tx_size:
 			layer_texture_array.update_layer(cel_image, project.ordered_layers.find(layer.index))
 
 
