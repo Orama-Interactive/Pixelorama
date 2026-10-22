@@ -19,6 +19,7 @@ var drag_pos := 0.0
 
 func _init() -> void:
 	add_to_group(&"KeyframeButtons")
+	add_to_group(&"UIButtons")
 	toggle_mode = true
 	texture_normal = KEYFRAME_ICON
 	texture_pressed = KEYFRAME_SELECTED_ICON
