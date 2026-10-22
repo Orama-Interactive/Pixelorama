@@ -133,10 +133,10 @@ func deserialize_from_dictionary(data: Dictionary) -> void:
 	if data.has("colors"):
 		for color_data: Dictionary in data.colors:
 			var color_value = color_data.get("color")
-			if not color_value:
+			if color_value == null:
 				continue
 			var index = color_data.get("index")
-			if not index:
+			if index == null:
 				continue
 			var color: Color
 			if typeof(color_value) == TYPE_STRING:
