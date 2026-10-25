@@ -102,8 +102,10 @@ func _include_child_in_blending(
 		var cel_image: Image
 		if apply_effects:
 			cel_image = layer.display_effects(cel, animate_params)
+			if layer.use_cel_image_for_effects:
+				cel_image = project.crop_image_to_project_size(cel_image, cel.offset)
 		else:
-			cel_image = cel.get_image()
+			cel_image = project.crop_image_to_project_size(cel.get_image(), cel.offset)
 		textures.append(cel_image)
 		_cache_texture_data.append(cel_image.get_data())
 		DrawingAlgos.set_layer_metadata_image(layer, cel, metadata_image, i, true, animate_params)
