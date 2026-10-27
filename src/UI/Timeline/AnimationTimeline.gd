@@ -1859,5 +1859,6 @@ func _on_keyframe_timeline_button_pressed() -> void:
 	var texture_button: TextureRect = keyframe_timeline_button.get_child(0)
 	if keyframe_timeline_enabled:
 		Global.change_button_texturerect(texture_button, "keyframe_based_timeline_button.png")
+		layer_frame_h_split.split_offset = layer_frame_header_h_split.split_offset
 	else:
 		Global.change_button_texturerect(texture_button, "cel_based_timeline_button.png")
