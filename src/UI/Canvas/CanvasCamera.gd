@@ -243,6 +243,11 @@ func _zoom_slider_value_changed(value: float) -> void:
 func _rotation_slider_value_changed(value: float) -> void:
 	# Negative makes going up rotate clockwise
 	var angle := deg_to_rad(-value)
+	rotate_camera_radians(angle)
+
+
+func rotate_camera_radians(angle: float) -> void:
+	# NOTE: Angle decreasing rotate clockwise and vice versa
 	var difference := angle - camera_angle
 	var canvas_center: Vector2 = Global.current_project.size / 2
 	offset = (offset - canvas_center).rotated(difference) + canvas_center
