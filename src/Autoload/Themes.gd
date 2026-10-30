@@ -18,6 +18,7 @@ var themes: Array[ThemeVariation] = [
 	ThemeVariation.new(MAIN_THEME, "Dark"),
 	system_theme,
 	ThemeVariation.new(MAIN_THEME, "Light", Color("e7f1f7"), Color("484b68")),
+	ThemeVariation.new(MAIN_THEME, "Black and white", Color.BLACK, Color.WHITE, 0.0)
 	ThemeVariation.new(MAIN_THEME, "Black (OLED)", Color.BLACK, Color("7c8dbf"), 0.0),
 	ThemeVariation.new(MAIN_THEME, "Gray", Color("333333"), Color("a7b2ea")),
 	ThemeVariation.new(MAIN_THEME, "Blue", Color("47526e"), Color("92a8e0")),
