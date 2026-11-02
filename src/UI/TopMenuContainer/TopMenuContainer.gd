@@ -474,6 +474,8 @@ func _setup_window_menu() -> void:
 		Global.WindowMenu.WINDOW_OPACITY,
 		!ProjectSettings.get_setting("display/window/per_pixel_transparency/allowed")
 	)
+	if OS.get_name() == "macOS":
+		window_menu.system_menu_id = NativeMenu.WINDOW_MENU_ID
 
 
 func _setup_panels_submenu(item: String) -> void:
@@ -680,6 +682,8 @@ func _setup_help_menu() -> void:
 		i += 1
 
 	help_menu.id_pressed.connect(help_menu_id_pressed)
+	if OS.get_name() == "macOS":
+		help_menu.system_menu_id = NativeMenu.HELP_MENU_ID
 
 
 func _set_menu_shortcut(
