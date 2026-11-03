@@ -310,7 +310,8 @@ func serialize() -> Dictionary:
 
 	var reference_image_data := []
 	for reference_image in reference_images:
-		reference_image_data.append(reference_image.serialize())
+		if reference_image.texture:
+			reference_image_data.append(reference_image.serialize())
 	var tileset_data := []
 	for tileset in tilesets:
 		tileset_data.append(tileset.serialize())

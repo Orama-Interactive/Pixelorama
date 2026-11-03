@@ -568,9 +568,10 @@ func save_pxo_file(path: String, autosave: bool, project := Global.current_proje
 		brush_index += 1
 	for i in project.reference_images.size():
 		var reference_image := project.reference_images[i]
-		zip_packer.start_file("image_data/reference_images/reference_%s" % i)
-		zip_packer.write_file(reference_image.texture.get_image().get_data())
-		zip_packer.close_file()
+		if reference_image.texture:
+			zip_packer.start_file("image_data/reference_images/reference_%s" % i)
+			zip_packer.write_file(reference_image.texture.get_image().get_data())
+			zip_packer.close_file()
 	if project.tiles.has_mask:
 		zip_packer.start_file("image_data/tile_map")
 		zip_packer.write_file(project.tiles.tile_mask.get_data())
