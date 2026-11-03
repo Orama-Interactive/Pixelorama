@@ -36,6 +36,7 @@ Built using Godot 4.7.1.
 - Fixed layer button's "Clipping mask" option in the right click menu being unchecked even if the layer is a clipping mask.
 - Fixed keyframes, text & line colors of the keyframe frame display & the rulers on non-dark themes.
 - Fixed ValueSliderV2/V3's ratio locking with negative values.
+- Fix crash when saving old pxo files, if they had reference images that were not included in the pxo file.
 - Fixed issue in Windows where the application acted as if the Shift button was constantly being held, even if it had been released. The issue was fixed by downgrading to Godot 4.7.1, and should hopefully not happen again when we upgrade to 4.7.3 or 4.8. [#1627](https://github.com/Orama-Interactive/Pixelorama/issues/1627)
 - Added the DroidSansFallback font to make Chinese, Japanese and Korean characters render in the Web version. [#1634](https://github.com/Orama-Interactive/Pixelorama/pull/1634)
 - When "Create new folder for each frame tag" is enabled when exporting, folders are now created automatically if they don't already exist, fixing error code 7 when trying to export. [#1629](https://github.com/Orama-Interactive/Pixelorama/issues/1629)
