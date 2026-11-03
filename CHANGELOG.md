@@ -43,6 +43,7 @@ Built using Godot 4.7.1.
 - Fixed Pixelorama sometimes freezing when making palettes from images. [#1624](https://github.com/Orama-Interactive/Pixelorama/pull/1624)
 - Fixed constant interpolation in the keyframe timeline not working. [#1631](https://github.com/Orama-Interactive/Pixelorama/pull/1631)
 - Fixed interpolation types in the keyframe timeline being wrong. [#1631](https://github.com/Orama-Interactive/Pixelorama/pull/1631)
+- Fixed (slightly) wrong color being used by bucket tool in whole selection mode. [#1643](https://github.com/Orama-Interactive/Pixelorama/pull/1643)
 
 ### Removed
 - Removed the keyframe properties (value, interpolation, easing type) from the right side of the keyframe timeline to save some space. [#1631](https://github.com/Orama-Interactive/Pixelorama/pull/1631)
