@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). All the dates are in YYYY-MM-DD format.
 <br><br>
 
-## [v1.2.4] - Unreleased
+## [v1.2.4] - 2026-11-03
 This update has been brought to you by the contributions of:
 Fayez Akhtar ([@Variable-ind](https://github.com/Variable-ind)), [@vibrant-reindeer](https://github.com/vibrant-reindeer), [@williamchange](https://github.com/williamchange).
 
