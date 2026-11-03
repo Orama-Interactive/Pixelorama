@@ -60,7 +60,7 @@ func _ready() -> void:
 	Tools.color_changed.connect(_on_color_changed)
 	horizontal_alignment_group.pressed.connect(_on_horizontal_alignment_button_pressed)
 	anti_aliasing_group.pressed.connect(_on_antialiasing_button_pressed)
-	super._ready()
+	super()
 
 
 func get_config() -> Dictionary:
@@ -134,14 +134,16 @@ func text_to_pixels() -> void:
 
 	var undo_data := _get_undo_data()
 	var project := Global.current_project
-	var cel_image := project.frames[project.current_frame].cels[project.current_layer].get_image()
-	if cel_image == null:
+	var cel := project.get_current_cel()
+	var cel_image := cel.get_image()
+	if cel is not PixelCel or cel_image == null:
 		return
-
+	var text_rect := text_edit.get_rect()
+	(cel as PixelCel).ensure_canvas_rect_in_bounds(text_rect.position, text_rect.size)
 	var vp := RenderingServer.viewport_create()
 	var canvas := RenderingServer.canvas_create()
 	RenderingServer.viewport_attach_canvas(vp, canvas)
-	RenderingServer.viewport_set_size(vp, project.size.x, project.size.y)
+	RenderingServer.viewport_set_size(vp, text_rect.size.x, text_rect.size.y)
 	RenderingServer.viewport_set_disable_3d(vp, true)
 	RenderingServer.viewport_set_active(vp, true)
 	RenderingServer.viewport_set_transparent_background(vp, true)
@@ -157,13 +159,13 @@ func text_to_pixels() -> void:
 	var color := tool_slot.color
 	var font_ascent := font.get_ascent(text_size)
 	var pos := Vector2(0, font_ascent + text_edit.get_theme_constant(&"line_spacing"))
-	pos += text_edit.position
+	pos += text_edit.position - Vector2(cel.offset)
 	var background_rid: RID
 	if antialiasing == TextServer.FONT_ANTIALIASING_LCD:
 		# NOTE: We need background information for FONT_ANTIALIASING_LCD to work.
 		background_rid = RenderingServer.texture_2d_create(cel_image)
 		RenderingServer.canvas_item_add_texture_rect(
-			ci_rid, Rect2(Vector2.ZERO, project.size), background_rid
+			ci_rid, Rect2(Vector2.ZERO, text_rect.size), background_rid
 		)
 	font.draw_multiline_string(
 		ci_rid, pos, text, horizontal_alignment, text_edit.size.x, text_size, -1, color
@@ -204,6 +206,7 @@ func text_to_pixels() -> void:
 			)
 		if cel_image is ImageExtended:
 			cel_image.convert_rgb_to_indexed()
+		(cel as PixelCel).shrink_to_content()
 		commit_undo("Draw", undo_data)
 
 

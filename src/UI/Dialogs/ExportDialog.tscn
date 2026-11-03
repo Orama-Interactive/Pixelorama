@@ -399,7 +399,25 @@ offset_bottom = 251.0
 layout_mode = 2
 text = "File %s already exists. Overwrite?"
 
+[node name="AsepriteConvertInfo" type="ConfirmationDialog" parent="." unique_id=126267382]
+unique_name_in_owner = true
+oversampling_override = 1.0
+title = "Converting to Aseprite"
+size = Vector2i(390, 132)
+ok_button_text = "Continue"
+
+[node name="Label" type="Label" parent="AsepriteConvertInfo" unique_id=719074952]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 382.0
+offset_bottom = 83.0
+text = "Please note that this is a best effort conversion
+and may not support all features of Pixelorama."
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ExportProgressBar" type="Window" parent="." unique_id=438204898]
+oversampling_override = 1.0
 title = "Export Progress"
 size = Vector2i(400, 100)
 visible = false

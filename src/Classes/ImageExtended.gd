@@ -47,6 +47,20 @@ static func create_custom(
 	return new_image
 
 
+static func create_from_image(image: Image, _is_indexed := false) -> ImageExtended:
+	var new_image := ImageExtended.new()
+	new_image.crop(image.get_width(), image.get_height())
+	if image.has_mipmaps():
+		new_image.generate_mipmaps()
+	new_image.convert(image.get_format())
+	new_image.copy_from(image)
+	new_image.is_indexed = _is_indexed
+	if new_image.is_indexed:
+		new_image.resize_indices()
+		new_image.select_palette("", false)
+	return new_image
+
+
 ## Equivalent of [method Image.copy_from], but also handles the logic necessary for indexed mode.
 ## If [param _is_indexed] is [code]true[/code], the image is set to be using indexed mode.
 func copy_from_custom(image: Image, indexed := is_indexed) -> void:
@@ -180,6 +194,10 @@ func color_distance(c1: Color, c2: Color) -> float:
 	var v1 := Vector4(c1.r, c1.g, c1.b, c1.a)
 	var v2 := Vector4(c2.r, c2.g, c2.b, c2.a)
 	return v2.distance_to(v1)
+
+
+func pos_inside_image(pos: Vector2i) -> bool:
+	return pos.x >= 0 and pos.y >= 0 and pos.x <= get_width() - 1 and pos.y <= get_height() - 1
 
 
 ## Adds image data to a [param dict] [Dictionary]. Used for undo/redo.

@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://3pmb60gpst7b" path="res://src/UI/Nodes/TransparentChecker.tscn" id="5"]
 [ext_resource type="Script" uid="uid://bs5pld0j5yvsk" path="res://src/UI/Canvas/Rulers/HorizontalRuler.gd" id="6"]
 [ext_resource type="Script" uid="uid://ctqrsfsbx4kwk" path="res://src/UI/Canvas/CanvasCamera.gd" id="7"]
-[ext_resource type="Shader" uid="uid://bhgdieau4cr1b" path="res://src/Shaders/Greyscale.gdshader" id="8"]
 [ext_resource type="Shader" uid="uid://c50kmfvf635kb" path="res://src/Shaders/TransparentChecker.gdshader" id="9"]
 [ext_resource type="PackedScene" uid="uid://wo0hqxkst808" path="res://src/UI/GlobalToolOptions/GlobalToolOptions.tscn" id="10"]
 [ext_resource type="PackedScene" uid="uid://cxhs8qy5ilufv" path="res://src/UI/ReferenceImages/ReferencesPanel.tscn" id="11"]
@@ -19,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dbr6mulku2qju" path="res://src/UI/Timeline/AnimationTimeline.tscn" id="18"]
 [ext_resource type="PackedScene" uid="uid://ba24iuv55m4l3" path="res://src/UI/Canvas/Canvas.tscn" id="19"]
 [ext_resource type="PackedScene" uid="uid://wplk62pbgih4" path="res://src/Palette/PalettePanel.tscn" id="20"]
+[ext_resource type="PackedScene" uid="uid://dd1fkkc3vjh78" path="res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.tscn" id="21_1236t"]
 [ext_resource type="Script" uid="uid://dqwin6fl5qqn0" path="res://src/UI/ViewportContainer.gd" id="23"]
 [ext_resource type="PackedScene" uid="uid://bfbragmmdwfbl" path="res://src/UI/TilesPanel.tscn" id="23_wyr78"]
 [ext_resource type="PackedScene" uid="uid://dvpfnxblh1n3n" path="res://src/UI/3DObjectTree.tscn" id="24_bf5mq"]
@@ -30,7 +30,7 @@
 [sub_resource type="Resource" id="Resource_xnnnd"]
 resource_name = "Tabs"
 script = ExtResource("36")
-names = PackedStringArray("Tools", "Reference Images", "Tiles", "3D Object Tree")
+names = PackedStringArray("Tools", "Reference Images", "Tiles", "3D Object Tree", "Layer FX")
 
 [sub_resource type="Resource" id="Resource_34hle"]
 resource_name = "Tabs"
@@ -191,9 +191,6 @@ shader_parameter/rect_size = Vector2(0, 0)
 shader_parameter/follow_movement = false
 shader_parameter/follow_scale = false
 
-[sub_resource type="ShaderMaterial" id="27"]
-shader = ExtResource("8")
-
 [sub_resource type="ShaderMaterial" id="3"]
 shader = ExtResource("9")
 shader_parameter/size = 10.0
@@ -292,7 +289,7 @@ camera_path = NodePath("SubViewport/Camera2D")
 disable_3d = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(749, 515)
+size = Vector2i(767, 515)
 render_target_update_mode = 4
 
 [node name="TransparentChecker" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" unique_id=977983793 instance=ExtResource("5")]
@@ -302,18 +299,6 @@ material = SubResource("2")
 
 [node name="Camera2D" type="Node2D" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" unique_id=1478356410 groups=["CanvasCameras"]]
 script = ExtResource("7")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport" unique_id=1574676608]
-
-[node name="GreyscaleVision" type="ColorRect" parent="DockableContainer/Main Canvas/ViewportandVerticalRuler/SubViewportContainer/SubViewport/CanvasLayer" unique_id=1489047676]
-visible = false
-material = SubResource("27")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 2
 
 [node name="Second Canvas" type="SubViewportContainer" parent="DockableContainer" unique_id=1483064810]
 visible = false
@@ -373,6 +358,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Palettes" parent="DockableContainer" unique_id=1759517791 instance=ExtResource("20")]
+layout_mode = 2
+
+[node name="Layer FX" parent="DockableContainer" unique_id=2107963552 instance=ExtResource("21_1236t")]
+visible = false
 layout_mode = 2
 
 [node name="Tiles" parent="DockableContainer" unique_id=1039496240 instance=ExtResource("23_wyr78")]

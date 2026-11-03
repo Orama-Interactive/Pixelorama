@@ -262,6 +262,7 @@ const DONORS: PackedStringArray = [
 	"Jonas Rudlang",
 	"Mike King",
 	"Alban Jusufi",
+	"mixhi"
 ]
 
 @export_multiline var licenses: PackedStringArray

@@ -199,23 +199,8 @@ func draw_end(pos: Vector2i) -> void:
 	_spacing_mode = _old_spacing_mode
 
 
-func _draw_brush_image(brush_image: Image, src_rect: Rect2i, dst: Vector2i) -> void:
+func _draw_brush_image(
+	brush_image: Image, src_rect: Rect2i, dst: Vector2i, overwrite := _overwrite
+) -> void:
 	_changed = true
-	var images := _get_selected_draw_images()
-	if _overwrite:
-		for draw_image in images:
-			if Tools.alpha_locked:
-				var mask := draw_image.get_region(Rect2i(dst, brush_image.get_size()))
-				draw_image.blit_rect_mask(brush_image, mask, src_rect, dst)
-			else:
-				draw_image.blit_rect(brush_image, src_rect, dst)
-			draw_image.convert_rgb_to_indexed()
-	else:
-		for draw_image in images:
-			if Tools.alpha_locked:
-				var mask := draw_image.get_region(Rect2i(dst, brush_image.get_size()))
-				draw_image.blend_rect_mask(brush_image, mask, src_rect, dst)
-			else:
-				draw_image.blend_rect(brush_image, src_rect, dst)
-			draw_image.convert_rgb_to_indexed()
-	update_materials(images)
+	super(brush_image, src_rect, dst, overwrite)

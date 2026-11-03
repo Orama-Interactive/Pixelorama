@@ -79,22 +79,6 @@ func reset() -> void:
 		drawer.reset()
 
 
-func set_pixel(image: Image, position: Vector2i, color: Color, ignore_mirroring := false) -> void:
-	var project := Global.current_project
+func set_pixel(image: Image, position: Vector2i, color: Color) -> void:
 	if not Tools.check_alpha_lock(image, position):
 		drawers[0].set_pixel(image, position, color, color_op)
-	if ignore_mirroring:
-		return
-	if (
-		not Tools.horizontal_mirror
-		and not Tools.vertical_mirror
-		and not Tools.diagonal_xy_mirror
-		and not Tools.diagonal_x_minus_y_mirror
-	):
-		return
-	# Handle mirroring
-	var mirrored_positions := Tools.get_mirrored_positions(position, project)
-	for i in mirrored_positions.size():
-		var mirror_pos := mirrored_positions[i]
-		if project.can_pixel_get_drawn(mirror_pos) && not Tools.check_alpha_lock(image, mirror_pos):
-			drawers[i + 1].set_pixel(image, mirror_pos, color, color_op)

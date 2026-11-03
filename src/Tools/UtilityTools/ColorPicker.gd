@@ -42,7 +42,9 @@ func get_config() -> Dictionary:
 
 
 func set_config(config: Dictionary) -> void:
-	_color_slot = config.get("color_slot", _color_slot)
+	# color_slot is not shared between the two slots unless single tool mode is active.
+	if Global.single_tool_mode or not is_syncing:
+		_color_slot = config.get("color_slot", _color_slot)
 	_mode = config.get("mode", _mode)
 
 
@@ -68,19 +70,16 @@ func draw_end(pos: Vector2i) -> void:
 func _pick_color(pos: Vector2i) -> void:
 	var project := Global.current_project
 	pos = project.tiles.get_canon_position(pos)
-	if pos.x < 0 or pos.y < 0:
+	if pos.x < 0 or pos.y < 0 or pos.x > project.size.x - 1 or pos.y > project.size.y - 1:
 		return
 	if Tools.is_placing_tiles():
 		var cel := Global.current_project.get_current_cel() as CelTileMap
+		pos -= cel.offset
 		Tools.selected_tile_index_changed.emit(cel.get_cell_index_at_coords(pos))
 		return
-	var image := Image.new()
-	image.copy_from(_get_draw_image())
-	if pos.x > image.get_width() - 1 or pos.y > image.get_height() - 1:
-		return
-
+	var image := _get_draw_image()
 	var color := Color(0, 0, 0, 0)
-	var palette_index = -1
+	var palette_index := -1
 	match _mode:
 		TOP_COLOR:
 			var curr_frame := project.frames[project.current_frame]
@@ -88,19 +87,32 @@ func _pick_color(pos: Vector2i) -> void:
 				var idx := (project.layers.size() - 1) - layer
 				if project.layers[idx].is_visible_in_hierarchy():
 					var cel := curr_frame.cels[idx]
-					image = cel.get_image()
-					color = image.get_pixelv(pos)
+					if cel.get_image() is ImageExtended:
+						image = cel.get_image()
+					else:
+						image = ImageExtended.create_from_image(
+							cel.get_image(), project.is_indexed()
+						)
+					var final_pos := pos
+					final_pos -= cel.offset
+					if not image.pos_inside_image(final_pos):
+						continue
+					color = image.get_pixelv(final_pos)
 					# If image is indexed then get index as well
 					if cel is PixelCel:
-						if cel.image.is_indexed:
-							palette_index = cel.image.indices_image.get_pixel(pos.x, pos.y).r8 - 1
+						if image.is_indexed:
+							palette_index = (
+								image.indices_image.get_pixel(final_pos.x, final_pos.y).r8 - 1
+							)
 					if not is_zero_approx(color.a):
 						break
 		CURRENT_LAYER:
-			color = image.get_pixelv(pos)
-			var current_cel = Global.current_project.get_current_cel()
-			if current_cel is PixelCel:
-				if current_cel.image.is_indexed:
-					palette_index = current_cel.image.index_image.get_pixel(pos.x, pos.y).r8 - 1
+			var current_cel := project.get_current_cel()
+			pos -= current_cel.offset
+			if image.pos_inside_image(pos):
+				color = image.get_pixelv(pos)
+				if current_cel is PixelCel:
+					if image.is_indexed:
+						palette_index = image.indices_image.get_pixel(pos.x, pos.y).r8 - 1
 	var button := MOUSE_BUTTON_LEFT if _color_slot == 0 else MOUSE_BUTTON_RIGHT
 	Tools.assign_color(color, button, false, palette_index)

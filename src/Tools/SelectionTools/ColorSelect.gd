@@ -25,7 +25,7 @@ func _on_tolerance_slider_value_changed(value: float) -> void:
 
 
 func apply_selection(pos: Vector2i) -> void:
-	super.apply_selection(pos)
+	super(pos)
 	var project := Global.current_project
 	if pos.x < 0 or pos.y < 0:
 		return
@@ -59,10 +59,11 @@ func apply_selection(pos: Vector2i) -> void:
 							cel, p, project.selection_map, prev_selection_map.is_pixel_selected(p)
 						)
 					else:
-						select_tilemap_cell(cel, p, project.selection_map, !_subtract)
+						select_tilemap_cell(cel, p, project.selection_map, not _subtract)
 	else:
+		var cel := project.get_current_cel()
 		var cel_image := Image.new()
-		cel_image.copy_from(_get_draw_image())
+		cel_image.copy_from(project.crop_image_to_project_size(cel.get_image(), cel.offset))
 		var color := cel_image.get_pixelv(pos)
 		var params := {"color": color, "tolerance": _tolerance, "operation": operation}
 		if _add or _subtract or _intersect:

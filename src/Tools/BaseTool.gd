@@ -410,7 +410,10 @@ func _get_draw_rect() -> Rect2i:
 
 
 func _get_draw_image() -> ImageExtended:
-	return Global.current_project.get_current_cel().get_image()
+	var image := Global.current_project.get_current_cel().get_image()
+	if image is not ImageExtended:
+		image = ImageExtended.create_from_image(image, Global.current_project.is_indexed())
+	return image
 
 
 func _get_selected_draw_cels(include_all_layers := true) -> Array[BaseCel]:
@@ -428,23 +431,18 @@ func _get_selected_draw_cels(include_all_layers := true) -> Array[BaseCel]:
 	return cels
 
 
-func _get_selected_draw_images() -> Array[ImageExtended]:
-	var images: Array[ImageExtended] = []
+func _get_selected_draw_images() -> Dictionary[Image, Variant]:
+	var images: Dictionary[Image, Variant]
 	if not materials_3d.is_empty():
 		for mat in materials_3d:
 			if is_instance_valid(mat.albedo_texture):
 				var temp_image := mat.albedo_texture.get_image()
 				var image := ImageExtended.new()
 				image.copy_from_custom(temp_image)
-				images.append(image)
+				images[image] = mat
 		return images
-	var project := Global.current_project
-	for cel_index in project.selected_cels:
-		var cel: BaseCel = project.frames[cel_index[0]].cels[cel_index[1]]
-		if not cel is PixelCel:
-			continue
-		if project.layers[cel_index[1]].can_layer_get_drawn():
-			images.append(cel.get_image())
+	for cel in _get_selected_draw_cels(false):
+		images[cel.get_image()] = cel
 	return images
 
 

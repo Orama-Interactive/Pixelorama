@@ -11,6 +11,8 @@ enum NewPalettePresetType {EMPTY, FROM_CURRENT_PALETTE, FROM_CURRENT_SPRITE, FRO
 ## Color options when user creates a new palette from current sprite or selection
 enum GetColorsFrom { CURRENT_FRAME, CURRENT_CEL, ALL_FRAMES }
 const DEFAULT_PALETTE_NAME := "Default"
+## Used to mark empty slots during some export formats like gpl.
+const EMPTY_SLOT_TAG := "PixeloramaEmptySlot"
 ## Maximum allowed width of imported palettes.
 const MAX_IMPORT_PAL_WIDTH := 1 << 14
 var palettes_write_path := Global.home_data_directory.path_join("Palettes")
@@ -291,19 +293,24 @@ func _fill_new_palette_with_colors(
 			for frame in current_project.frames:
 				for cel in frame.cels:
 					cels.append(cel)
-
+	var start_index := 0
 	for cel in cels:
 		var cel_image := Image.new()
 		cel_image.copy_from(cel.get_image())
 		if cel_image.is_invisible():
 			continue
+		var cel_rect := cel.get_cel_rect()
 		for i in pixels:
-			var color := cel_image.get_pixelv(i)
+			if not cel_rect.has_point(i):
+				continue
+			var color_pos := i - cel.offset
+			var color := cel_image.get_pixelv(color_pos.abs())
 			if color.a > 0:
 				if not add_alpha_colors:
 					color.a = 1
 				if not new_palette.has_theme_color(color):
-					new_palette.add_color(color)
+					new_palette.add_color(color, start_index)
+					start_index += 1
 	undo_redo_add_palette(new_palette, is_global)
 
 
@@ -376,17 +383,6 @@ func palette_delete_and_reselect(permanent := true, palette := current_palette) 
 		if palette == current_palette:
 			current_palette = null
 		select_palette("")
-
-
-func current_palette_add_color(mouse_button: int, start_index := 0) -> void:
-	if (
-		not current_palette.is_full()
-		and (mouse_button == MOUSE_BUTTON_LEFT or mouse_button == MOUSE_BUTTON_RIGHT)
-	):
-		# Get color on left or right tool
-		var color := Tools.get_assigned_color(mouse_button)
-		current_palette.add_color(color, start_index)
-		save_palette()
 
 
 func current_palette_get_color(index: int) -> Color:
@@ -550,9 +546,9 @@ func _get_palette_files(path: String) -> PackedStringArray:
 
 
 func import_palette_from_path(path: String, make_copy := false, is_initialising := false) -> void:
+	var is_duplicate := false
 	if does_palette_exist(path.get_basename().get_file()):
-		# If there is a palette with same name ignore import for now
-		return
+		is_duplicate = true
 
 	var palette: Palette = null
 	if FileAccess.file_exists(path):
@@ -575,6 +571,9 @@ func import_palette_from_path(path: String, make_copy := false, is_initialising 
 			palette.deserialize(text)
 
 	if is_instance_valid(palette):
+		if is_duplicate:
+			# Change name for duplicate entries
+			palette.name = get_valid_name(palette.name, null)
 		if make_copy:
 			save_palette(palette)  # Makes a copy of the palette
 		palettes[palette.name] = palette
@@ -609,7 +608,7 @@ func export_gpl(palette: Palette, path: String) -> void:
 	# Colors
 	for i in palette.colors_max:
 		var color := Color.BLACK
-		var comment: String = "PixeloramaEmptySlot"
+		var comment: String = EMPTY_SLOT_TAG
 		if i in palette.colors:
 			color = palette.colors[i].color
 			comment = color.to_html(false)
@@ -657,7 +656,7 @@ func _import_gpl(path: String, text: String) -> Palette:
 			var color := Color(red, green, blue)
 			if color_data.size() >= 4:
 				colors.append(color)
-				if color_data[3] == "PixeloramaEmptySlot":
+				if color_data[3] == EMPTY_SLOT_TAG:
 					empty_slots.append(colors.size() - 1)  # Pixelorama is meant to ignore this slot
 			else:
 				colors.append(color)

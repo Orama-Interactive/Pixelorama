@@ -299,7 +299,7 @@ func draw_end(pos: Vector2i) -> void:
 	update_random_image()
 
 
-func _draw_brush_image(image: Image, src_rect: Rect2i, dst: Vector2i) -> void:
+func _draw_brush_image(image: Image, src_rect: Rect2i, dst: Vector2i, _overwrite := true) -> void:
 	_changed = true
 	for xx in image.get_size().x:
 		for yy in image.get_size().y:

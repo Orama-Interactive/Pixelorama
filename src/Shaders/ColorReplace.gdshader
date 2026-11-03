@@ -14,6 +14,7 @@ uniform sampler2D selection : filter_nearest, repeat_disable;
 uniform bool has_pattern;
 uniform sampler2D pattern: repeat_enable;
 uniform vec2 pattern_size;
+uniform float pattern_interpolation = 0.0;
 uniform vec2 pattern_uv_offset;
 
 
@@ -32,10 +33,15 @@ void blit() {
 	vec4 selection_color = texture(selection, UV);
 	vec4 col = original_color;
 	if (similar_colors(original_color, old_color, tolerance))
-		if (has_pattern)
+		if (has_pattern) {
 			col = textureLod(pattern, UV * (size / pattern_size) + pattern_uv_offset, 0.0);
-		else
+			if (abs(col.a) > 0.0001) {
+				col = mix(col, new_color, pattern_interpolation);
+			}
+		}
+		else {
 			col = new_color;
+		}
 
 	COLOR0 = mix(original_color, col, selection_color.a);
 }

@@ -158,13 +158,9 @@ static func _modify_texture_resource(
 	var tile := tileset.tiles[tile_idx]
 	if tile.image:
 		var v_proj_name := str(tileset.name, " Tile: ", tile_idx)
-		var resource_proj := ResourceProject.new([], v_proj_name, tile.image.get_size())
-		resource_proj.layers.append(PixelLayer.new(resource_proj))
-		resource_proj.frames.append(resource_proj.new_empty_frame())
-		resource_proj.frames[0].cels[0].set_content(tile.image)
-		resource_proj.resource_updated.connect(_update_tile.bind(project, tileset, tile_idx))
-		Global.projects.append(resource_proj)
-		Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
+		ResourceProject.instantiate(
+			v_proj_name, _update_tile.bind(project, tileset, tile_idx), tile.image
+		)
 
 
 static func _update_tile(

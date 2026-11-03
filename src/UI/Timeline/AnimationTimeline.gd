@@ -14,7 +14,6 @@ enum LoopType { NO, CYCLE, PINGPONG }
 
 const FRAME_BUTTON_TSCN := preload("res://src/UI/Timeline/FrameButton.tscn")
 const ANIMATION_TAG_TSCN := preload("res://src/UI/Timeline/AnimationTagUI.tscn")
-const LAYER_FX_SCENE_PATH := "res://src/UI/Timeline/LayerEffects/LayerEffectsSettings.tscn"
 ## Do not let [member min_cel_size] go below 22, as this is the size of the layer icons.
 const CEL_MIN_SIZE_HARD_LIMIT := 22
 const CEL_MIN_SIZE_OFFSET := 15
@@ -37,12 +36,6 @@ var min_cel_size := 36:
 var max_cel_size := 144
 var past_above_canvas := true
 var future_above_canvas := true
-var layer_effect_settings: AcceptDialog:
-	get:
-		if not is_instance_valid(layer_effect_settings):
-			layer_effect_settings = load(LAYER_FX_SCENE_PATH).instantiate()
-			add_child(layer_effect_settings)
-		return layer_effect_settings
 var global_layer_visibility := true
 var global_layer_lock := false
 var global_layer_expand := true
@@ -61,10 +54,10 @@ var global_layer_expand := true
 @onready var move_up_layer := %MoveUpLayer as Button
 @onready var move_down_layer := %MoveDownLayer as Button
 @onready var merge_down_layer := %MergeDownLayer as Button
-@onready var layer_fx := %LayerFX as Button
 @onready var keyframe_timeline_button := %KeyframeTimelineButton as Button
 @onready var blend_modes_button := %BlendModes as OptionButton
 @onready var opacity_slider := %OpacitySlider as ValueSlider
+@onready var opacity_keyframe_button := %OpacityKeyframeButton as TextureButton
 @onready var frame_scroll_container := %FrameScrollContainer as Control
 @onready var timeline_scroll := %TimelineScroll as ScrollContainer
 @onready var frame_scroll_bar := %FrameScrollBar as HScrollBar
@@ -137,6 +130,10 @@ func _ready() -> void:
 	# Makes sure that the frame and tag scroll bars are in the right place:
 	layer_vbox.emit_signal.call_deferred("resized")
 	drag_highlight.visibility_changed.connect(clear_highlight)
+	await get_tree().process_frame
+	var layer := Global.current_project.layers[Global.current_project.current_layer]
+	layer.keyframe_set.connect(_on_layer_keyframe_changed)
+	layer.keyframe_unset.connect(_on_layer_keyframe_changed)
 
 
 func _notification(what: int) -> void:
@@ -417,7 +414,7 @@ func add_frame() -> void:
 	var project := Global.current_project
 	var frame_add_index := project.current_frame + 1
 	project.undo_redo.create_action("Add Frame")
-	undo_redo_add_frame(frame_add_index)
+	undo_redo_add_frames([frame_add_index])
 	project.undo_redo.add_do_method(project.change_cel.bind(project.current_frame + 1))
 	project.undo_redo.add_undo_method(project.change_cel.bind(project.current_frame))
 	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
@@ -432,40 +429,46 @@ func add_frame() -> void:
 ## This method adds a new frame assuming that an undo action is already created, hence it can be
 ## reused in multiple undo actions like adding frame, cloning cel etc. Returns the new frame for
 ## further adjustment outside of this method.
-func undo_redo_add_frame(frame_add_index: int) -> Frame:
+func undo_redo_add_frames(frame_add_indices: PackedInt32Array) -> Dictionary[int, Frame]:
 	var project := Global.current_project
-	var frame := project.new_empty_frame()
-	for l in range(project.layers.size()):
-		if project.layers[l].new_cels_linked:  # If the link button is pressed
-			var prev_cel := project.frames[project.current_frame].cels[l]
-			if prev_cel.link_set == null:
-				prev_cel.link_set = {}
-				project.undo_redo.add_do_method(
-					project.layers[l].link_cel.bind(prev_cel, prev_cel.link_set)
-				)
-				project.undo_redo.add_undo_method(project.layers[l].link_cel.bind(prev_cel, null))
-			frame.cels[l].set_content(prev_cel.get_content(), prev_cel.image_texture)
-			frame.cels[l].link_set = prev_cel.link_set
-
-	# Code to PUSH AHEAD tags starting after the frame
+	var new_frames: Dictionary[int, Frame] = {}
 	var new_animation_tags := project.animation_tags.duplicate()
-	# Loop through the tags to create new classes for them, so that they won't be the same
-	# as Global.current_project.animation_tags's classes. Needed for undo/redo to work properly.
-	for i in new_animation_tags.size():
-		new_animation_tags[i] = new_animation_tags[i].duplicate()
-	# Loop through the tags to see if the frame is in one
-	for tag in new_animation_tags:
-		if frame_add_index >= tag.from && frame_add_index <= tag.to:
-			tag.to += 1
-		elif (frame_add_index) < tag.from:
-			tag.from += 1
-			tag.to += 1
+	frame_add_indices.sort()
+	for frame_add_index in frame_add_indices:
+		var frame := project.new_empty_frame()
+		new_frames[frame_add_index] = frame
+		for l in range(project.layers.size()):
+			if project.layers[l].new_cels_linked:  # If the link button is pressed
+				var prev_cel := project.frames[project.current_frame].cels[l]
+				if prev_cel.link_set == null:
+					prev_cel.link_set = {}
+					project.undo_redo.add_do_method(
+						project.layers[l].link_cel.bind(prev_cel, prev_cel.link_set)
+					)
+					project.undo_redo.add_undo_method(
+						project.layers[l].link_cel.bind(prev_cel, null)
+					)
+				frame.cels[l].set_content(prev_cel.get_content(), prev_cel.image_texture)
+				frame.cels[l].link_set = prev_cel.link_set
 
-	project.undo_redo.add_do_method(project.add_frames.bind([frame], [frame_add_index]))
-	project.undo_redo.add_undo_method(project.remove_frames.bind([frame_add_index]))
+		# Code to PUSH AHEAD tags starting after the frame
+		# Loop through the tags to create new classes for them, so that they won't be the same
+		# as Global.current_project.animation_tags's classes. Needed for undo/redo to work properly.
+		for i in new_animation_tags.size():
+			new_animation_tags[i] = new_animation_tags[i].duplicate()
+		# Loop through the tags to see if the frame is in one
+		for tag in new_animation_tags:
+			if frame_add_index >= tag.from && frame_add_index <= tag.to:
+				tag.to += 1
+			elif (frame_add_index) < tag.from:
+				tag.from += 1
+				tag.to += 1
+	# NOTE: It is assumed that new_frames.values() and new_frames.keys() are in correct order.
+	project.undo_redo.add_do_method(project.add_frames.bind(new_frames.values(), new_frames.keys()))
+	project.undo_redo.add_undo_method(project.remove_frames.bind(new_frames.keys()))
 	project.undo_redo.add_do_property(project, "animation_tags", new_animation_tags)
 	project.undo_redo.add_undo_property(project, "animation_tags", project.animation_tags)
-	return frame
+	return new_frames
 
 
 func _on_DeleteFrame_pressed() -> void:
@@ -1137,6 +1140,8 @@ func _on_RemoveLayer_pressed() -> void:
 					indices.append(child.index)
 			indices.append(layer.index)
 	indices.sort()
+	if indices.size() == project.layers.size():
+		indices.remove_at(0)  # Ensure the project has at least 1 layer.
 
 	var layers: Array[BaseLayer]
 	var cels := []
@@ -1215,79 +1220,14 @@ func change_layer_order(up: bool) -> void:
 
 func _on_MergeDownLayer_pressed() -> void:
 	var project := Global.current_project
-	var top_layer := project.layers[project.current_layer]
+	var indices := [project.current_layer - 1, project.current_layer]
 	var bottom_layer := project.layers[project.current_layer - 1]
-	if not bottom_layer is PixelLayer:
-		return
-	var top_cels := []
-
-	project.undo_redo.create_action("Merge Layer")
-	for frame in project.frames:
-		var top_cel := frame.cels[top_layer.index]
-		top_cels.append(top_cel)  # Store for undo purposes
-
-		var top_image := top_layer.display_effects(top_cel)
-		var bottom_cel := frame.cels[bottom_layer.index] as PixelCel
-		var bottom_image := bottom_cel.get_image()
-		var textures: Array[Image] = []
-		textures.append(bottom_image)
-		textures.append(top_image)
-		var metadata_image := Image.create(2, 4, false, Image.FORMAT_R8)
-		DrawingAlgos.set_layer_metadata_image(bottom_layer, bottom_cel, metadata_image, 0)
-		metadata_image.set_pixel(0, 1, Color(1.0, 0.0, 0.0, 0.0))
-		DrawingAlgos.set_layer_metadata_image(top_layer, top_cel, metadata_image, 1)
-		var texture_array := Texture2DArray.new()
-		texture_array.create_from_images(textures)
-		var params := {
-			"layers": texture_array, "metadata": ImageTexture.create_from_image(metadata_image)
-		}
-		var new_bottom_image := ImageExtended.create_custom(
-			top_image.get_width(),
-			top_image.get_height(),
-			top_image.has_mipmaps(),
-			top_image.get_format(),
-			project.is_indexed()
-		)
-		# Merge the image itself.
-		var gen := ShaderImageEffect.new()
-		gen.generate_image(new_bottom_image, DrawingAlgos.blend_layers_shader, params, project.size)
-		new_bottom_image.convert_rgb_to_indexed()
-		if (
-			bottom_cel.link_set != null
-			and bottom_cel.link_set.size() > 1
-			and not top_image.is_invisible()
-		):
-			# Unlink cel:
-			project.undo_redo.add_do_method(bottom_layer.link_cel.bind(bottom_cel, null))
-			project.undo_redo.add_undo_method(
-				bottom_layer.link_cel.bind(bottom_cel, bottom_cel.link_set)
-			)
-			project.undo_redo.add_do_property(bottom_cel, "image", new_bottom_image)
-			project.undo_redo.add_undo_property(bottom_cel, "image", bottom_cel.image)
-		else:
-			var undo_data := {}
-			var redo_data := {}
-			if bottom_cel is CelTileMap:
-				(bottom_cel as CelTileMap).serialize_undo_data_source_image(
-					new_bottom_image, redo_data, undo_data, Vector2i.ZERO, true
-				)
-			new_bottom_image.add_data_to_dictionary(redo_data, bottom_image)
-			bottom_image.add_data_to_dictionary(undo_data)
-			project.deserialize_cel_undo_data(redo_data, undo_data)
-
-	project.undo_redo.add_do_method(project.remove_layers.bind([top_layer.index]))
-	project.undo_redo.add_undo_method(
-		project.add_layers.bind([top_layer], [top_layer.index], [top_cels])
-	)
-	project.undo_redo.add_do_method(project.change_cel.bind(-1, bottom_layer.index))
-	project.undo_redo.add_undo_method(project.change_cel.bind(-1, top_layer.index))
-	project.undo_redo.add_undo_method(Global.undo_or_redo.bind(true))
-	project.undo_redo.add_do_method(Global.undo_or_redo.bind(false))
-	project.undo_redo.commit_action()
-	bottom_layer.visible = true
+	flatten_layers(indices, false, bottom_layer.name)
 
 
-func flatten_layers(indices: PackedInt32Array, only_visible := false) -> void:
+func flatten_layers(
+	indices: PackedInt32Array, only_visible := false, flattened_name := "Flattened"
+) -> void:
 	var project := Global.current_project
 	if indices.size() <= 1:
 		# If only the selected layer is about to be flattened,
@@ -1328,8 +1268,13 @@ func flatten_layers(indices: PackedInt32Array, only_visible := false) -> void:
 				indices.remove_at(i)
 	if indices.size() == 0:
 		return
-	var new_layer := PixelLayer.new(project)
-	new_layer.name = "Flattened"
+	var bottom_layer := project.layers[indices[0]]
+	var new_layer: PixelLayer
+	if bottom_layer is LayerTileMap:
+		new_layer = LayerTileMap.new(project, bottom_layer.tileset)
+	else:
+		new_layer = PixelLayer.new(project)
+	new_layer.name = flattened_name
 	new_layer.index = indices[0]
 	var prev_layers := []
 	var prev_cels := []
@@ -1337,6 +1282,7 @@ func flatten_layers(indices: PackedInt32Array, only_visible := false) -> void:
 	prev_cels.resize(indices.size())
 	for i in indices.size():
 		prev_cels[i] = []
+	project.undo_redo.create_action("Flatten layers")
 	for frame_index in project.frames.size():
 		var frame := project.frames[frame_index]
 		var textures: Array[Image] = []
@@ -1367,14 +1313,21 @@ func flatten_layers(indices: PackedInt32Array, only_visible := false) -> void:
 		gen.generate_image(new_image, DrawingAlgos.blend_layers_shader, params, project.size)
 		new_image.convert_rgb_to_indexed()
 		var new_cel := new_layer.new_cel_from_image(new_image)
+		new_cel.shrink_to_content()
+		if new_cel is CelTileMap:
+			var tileset := (new_cel as CelTileMap).tileset
+			var undo := tileset.serialize_undo_data()
+			new_cel.update_tilemap()
+			var redo := tileset.serialize_undo_data()
+			project.undo_redo.add_do_method(tileset.deserialize_undo_data.bind(redo, new_cel))
+			project.undo_redo.add_undo_method(tileset.deserialize_undo_data.bind(undo, new_cel))
 		new_cels.append(new_cel)
-	var bottom_layer := project.layers[indices[0]]
+
 	while bottom_layer.parent != null:
 		if not indices.has(bottom_layer.parent.index):
 			new_layer.parent = bottom_layer.parent
 			break
 		bottom_layer = bottom_layer.parent
-	project.undo_redo.create_action("Flatten layers")
 	project.undo_redo.add_do_method(project.remove_layers.bind(indices))
 	project.undo_redo.add_do_method(
 		project.add_layers.bind([new_layer], [new_layer.index], [new_cels])
@@ -1416,11 +1369,21 @@ func _on_opacity_slider_value_changed(value: float) -> void:
 
 		project.undo_redo.commit_action()
 	else:
-		for idx_pair in Global.current_project.selected_cels:
-			var layer := Global.current_project.layers[idx_pair[1]]
+		for idx_pair in project.selected_cels:
+			var layer := project.layers[idx_pair[1]]
 			layer.opacity = new_opacity
 			Global.canvas.queue_redraw()
 			_update_layer_settings_ui()
+
+
+func _on_opacity_keyframe_button_pressed() -> void:
+	var project := Global.current_project
+	for idx_pair in project.selected_cels:
+		var frame_idx: int = idx_pair[0]
+		var layer := project.layers[idx_pair[1]]
+		layer.add_keyframe_undo_redo("opacity", frame_idx, project, layer.opacity)
+	opacity_keyframe_button.texture_normal = KeyframeButton.KEYFRAME_ICON
+	opacity_keyframe_button.self_modulate = Color.WHITE
 
 
 func _on_timeline_settings_close_requested() -> void:
@@ -1467,41 +1430,60 @@ func _cel_switched() -> void:
 	for layer_button in layer_vbox.get_children():
 		layer_button.button_pressed = false  # Unpress all layer buttons
 
+	for connection in get_incoming_connections():
+		if connection.callable == _on_layer_keyframe_changed:
+			connection.signal.disconnect(_on_layer_keyframe_changed)
+
 	for cel in Global.current_project.selected_cels:  # Press selected buttons
-		var frame: int = cel[0]
-		var layer: int = cel[1]
-		if frame < frame_hbox.get_child_count():
-			var frame_button: BaseButton = frame_hbox.get_child(frame)
+		var frame_index: int = cel[0]
+		var layer_index: int = cel[1]
+		if frame_index < frame_hbox.get_child_count():
+			var frame_button: BaseButton = frame_hbox.get_child(frame_index)
 			frame_button.button_pressed = true  # Press selected frame buttons
 
 		var layer_vbox_child_count: int = layer_vbox.get_child_count()
-		if layer < layer_vbox_child_count:
-			var layer_button = layer_vbox.get_child(layer_vbox_child_count - 1 - layer)
+		if layer_index < layer_vbox_child_count:
+			var layer_button = layer_vbox.get_child(layer_vbox_child_count - 1 - layer_index)
 			layer_button.button_pressed = true  # Press selected layer buttons
 
 		var cel_vbox_child_count: int = cel_vbox.get_child_count()
-		if layer < cel_vbox_child_count:
-			var cel_hbox: Container = cel_vbox.get_child(cel_vbox_child_count - 1 - layer)
-			if frame < cel_hbox.get_child_count():
-				var cel_button: BaseButton = cel_hbox.get_child(frame)
+		if layer_index < cel_vbox_child_count:
+			var cel_hbox: Container = cel_vbox.get_child(cel_vbox_child_count - 1 - layer_index)
+			if frame_index < cel_hbox.get_child_count():
+				var cel_button: BaseButton = cel_hbox.get_child(frame_index)
 				cel_button.button_pressed = true  # Press selected cel buttons
 	_toggle_frame_buttons()
 	_toggle_layer_buttons()
 	_fill_blend_modes_option_button()
-	_update_layer_settings_ui()
+	_update_layer_settings_ui(true)
 	var project := Global.current_project
 	frame_scroll_container.ensure_control_visible(frame_hbox.get_child(project.current_frame))
-	var layer_index := project.layers.size() - project.current_layer - 1
-	timeline_scroll.ensure_control_visible(layer_vbox.get_child(layer_index))
+	var layer_button_index := project.layers.size() - project.current_layer - 1
+	timeline_scroll.ensure_control_visible(layer_vbox.get_child(layer_button_index))
+	var layer := project.layers[project.current_layer]
+	layer.keyframe_set.connect(_on_layer_keyframe_changed)
+	layer.keyframe_unset.connect(_on_layer_keyframe_changed)
 
 
-func _update_layer_settings_ui() -> void:
+func _update_layer_settings_ui(animate_opacity := false) -> void:
 	var project := Global.current_project
 	var layer := project.layers[project.current_layer]
 	# Temporarily disconnect it in order to prevent layer opacity changing
 	# on different layers, or while undoing.
 	opacity_slider.value_changed.disconnect(_on_opacity_slider_value_changed)
-	opacity_slider.value = layer.opacity * 100
+	var opacity := layer.opacity
+	var animated_opacity := layer.get_opacity(project.current_frame)
+	if animate_opacity:
+		opacity = animated_opacity
+		layer.opacity = opacity
+		ShaderLoader.get_proper_keyframe_texture(opacity_keyframe_button, layer, "opacity")
+		opacity_keyframe_button.self_modulate = Color.WHITE
+	else:
+		if is_equal_approx(opacity, animated_opacity):
+			opacity_keyframe_button.self_modulate = Color.WHITE
+		else:
+			opacity_keyframe_button.self_modulate = Color.ORANGE
+	opacity_slider.value = opacity * 100
 	opacity_slider.value_changed.connect(_on_opacity_slider_value_changed)
 	var blend_mode_index := blend_modes_button.get_item_index(layer.blend_mode)
 	blend_modes_button.selected = blend_mode_index
@@ -1534,6 +1516,12 @@ func update_cel_button_ui(layer_index: int) -> void:
 		cel_hbox.get_child(f).layer = layer_index
 		cel_hbox.get_child(f).frame = f
 		cel_hbox.get_child(f).button_setup()
+
+
+## Needed for the keyframe button to update visually with undo/redo.
+func _on_layer_keyframe_changed(param_name: String) -> void:
+	if param_name == "opacity":
+		_update_layer_settings_ui(true)
 
 
 func _on_animation_tags_changed() -> void:
@@ -1579,7 +1567,6 @@ func _toggle_layer_buttons() -> void:
 	var layer := project.layers[project.current_layer]
 	var child_count := layer.get_child_count(true)
 
-	opacity_slider.editable = not layer.has_keyframes("opacity")
 	Global.disable_button(
 		remove_layer, layer.is_locked_in_hierarchy() or project.layers.size() == child_count + 1
 	)
@@ -1606,7 +1593,6 @@ func _toggle_layer_buttons() -> void:
 			or below_layer is AudioLayer
 		)
 	)
-	Global.disable_button(layer_fx, layer is AudioLayer)
 
 
 func project_changed() -> void:
@@ -1737,11 +1723,6 @@ func project_cel_removed(frame: int, layer: int) -> void:
 	var cel_hbox := cel_vbox.get_child(cel_vbox.get_child_count() - 1 - layer)
 	cel_hbox.get_child(frame).queue_free()
 	cel_hbox.remove_child(cel_hbox.get_child(frame))
-
-
-func _on_layer_fx_pressed() -> void:
-	layer_effect_settings.popup_centered_clamped()
-	Global.dialog_open(true)
 
 
 func _on_cel_size_slider_value_changed(value: float) -> void:
@@ -1878,5 +1859,6 @@ func _on_keyframe_timeline_button_pressed() -> void:
 	var texture_button: TextureRect = keyframe_timeline_button.get_child(0)
 	if keyframe_timeline_enabled:
 		Global.change_button_texturerect(texture_button, "keyframe_based_timeline_button.png")
+		layer_frame_h_split.split_offset = layer_frame_header_h_split.split_offset
 	else:
 		Global.change_button_texturerect(texture_button, "cel_based_timeline_button.png")

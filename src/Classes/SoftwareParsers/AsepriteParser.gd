@@ -111,16 +111,8 @@ static func open_aseprite_file(path: String) -> void:
 			var chunk_type := ase_file.get_16()
 			if chunk_type != 0x2020:
 				previous_chunk_type = chunk_type
+			print_verbose("Found Chunk: ", chunk_type, " (", ChunkTypes.find_key(chunk_type), ")")
 			match chunk_type:
-				ChunkTypes.OLD_PALETTE_1, ChunkTypes.OLD_PALETTE_2:
-					var n_of_packets := ase_file.get_16()
-					for packet in n_of_packets:
-						var _n_entries_skip := ase_file.get_8()
-						var _n_of_colors := ase_file.get_8()
-						for color in number_of_colors:
-							var _red := ase_file.get_8()
-							var _green := ase_file.get_8()
-							var _blue := ase_file.get_8()
 				ChunkTypes.LAYER:
 					var layer_flags := ase_file.get_16()
 					var layer_type := ase_file.get_16()
@@ -157,16 +149,16 @@ static func open_aseprite_file(path: String) -> void:
 					var layer_index := ase_file.get_16()
 					var layer := new_project.layers[layer_index]
 					var cel := layer.new_empty_cel()
-					var x_pos := ase_file.get_16()
-					var y_pos := ase_file.get_16()
+					var x_pos := unsigned16_to_signed(ase_file.get_16())
+					var y_pos := unsigned16_to_signed(ase_file.get_16())
+					cel.offset = Vector2(x_pos, y_pos)
 					cel.opacity = ase_file.get_8() / 255.0
 					var cel_type := ase_file.get_16()
-					cel.z_index = ase_file.get_16()
+					cel.z_index = unsigned16_to_signed(ase_file.get_16())
 					ase_file.get_buffer(5)  # For future
 					if cel_type == 0 or cel_type == 2:  # Raw uncompressed and compressed image
 						var width := ase_file.get_16()
 						var height := ase_file.get_16()
-						var image_rect := Rect2i(Vector2i.ZERO, Vector2i(width, height))
 						var color_bytes := ase_file.get_buffer(chunk_size - IMAGE_CEL_CHUNK_SIZE)
 						if cel_type == 2:  # Compressed image
 							color_bytes = color_bytes.decompress(
@@ -177,9 +169,7 @@ static func open_aseprite_file(path: String) -> void:
 								width, height, false, image_format, color_bytes
 							)
 							ase_cel_image.convert(new_project.get_image_format())
-							cel.get_image().blit_rect(
-								ase_cel_image, image_rect, Vector2i(x_pos, y_pos)
-							)
+							cel.get_image().copy_from(ase_cel_image)
 						else:  # Indexed mode
 							for k in color_bytes.size():
 								color_bytes[k] += 1
@@ -188,9 +178,8 @@ static func open_aseprite_file(path: String) -> void:
 							var ase_cel_image := Image.create_from_data(
 								width, height, false, Image.FORMAT_R8, color_bytes
 							)
-							cel.get_image().indices_image.blit_rect(
-								ase_cel_image, image_rect, Vector2i(x_pos, y_pos)
-							)
+							cel.get_image().crop(width, height)
+							cel.get_image().indices_image.copy_from(ase_cel_image)
 							cel.get_image().convert_indexed_to_rgb()
 					elif cel_type == 1:  # Linked cel
 						var frame_position_to_link_with := ase_file.get_16()
@@ -219,13 +208,13 @@ static func open_aseprite_file(path: String) -> void:
 							chunk_size - TILEMAP_CEL_CHUNK_SIZE
 						)
 						var tile_size := tilemap_cel.get_tile_size()
+						cel.get_image().crop(width * tile_size.x, height * tile_size.y)
 						var tile_data_size := (
 							width * height * tile_size.x * tile_size.y * pixel_byte
 						)
 						var tile_data := tile_data_compressed.decompress(
 							tile_data_size, FileAccess.COMPRESSION_DEFLATE
 						)
-						tilemap_cel.offset = Vector2(x_pos, y_pos)
 						for y in height:
 							for x in width:
 								var cell_pos := x + (y * width)
@@ -301,7 +290,6 @@ static func open_aseprite_file(path: String) -> void:
 						var tag := AnimationTag.new(text, Color.WHITE, from_frame + 1, to_frame + 1)
 						new_project.animation_tags.append(tag)
 				ChunkTypes.PALETTE:
-					# TODO: Import palettes into Pixelorama once we support project palettes
 					var _palette_size := ase_file.get_32()
 					var first_index_to_change := ase_file.get_32()
 					var last_index_to_change := ase_file.get_32()
@@ -316,6 +304,25 @@ static func open_aseprite_file(path: String) -> void:
 						colors.append(Color.from_rgba8(red, green, blue, alpha))
 						if flags & 1 == 1:
 							var _name := parse_aseprite_string(ase_file)
+					var palette_name := "Imported Palette %s" % palettes.size()
+					var correct_name := Palettes.get_valid_name(palette_name, new_project)
+					var palette := Palettes.fill_imported_palette_with_colors(correct_name, colors)
+					palette.is_project_palette = true
+					palettes[correct_name] = palette
+					project_current_palette_name = correct_name
+				ChunkTypes.OLD_PALETTE_1, ChunkTypes.OLD_PALETTE_2:
+					# NOTE: Aseprite still uses ChunkTypes.OLD_PALETTE_1 in newwe versions in order
+					# to store small palettes (which don't contain alpha)
+					var n_of_packets := ase_file.get_16()
+					var colors: PackedColorArray
+					for packet in n_of_packets:
+						var _n_entries_skip := ase_file.get_8()
+						var _n_of_colors := ase_file.get_8()
+						for color in number_of_colors:
+							var red := ase_file.get_8()
+							var green := ase_file.get_8()
+							var blue := ase_file.get_8()
+							colors.append(Color.from_rgba8(red, green, blue))
 					var palette_name := "Imported Palette %s" % palettes.size()
 					var correct_name := Palettes.get_valid_name(palette_name, new_project)
 					var palette := Palettes.fill_imported_palette_with_colors(correct_name, colors)
@@ -575,3 +582,9 @@ static func organize_layer_child_levels(project: Project) -> void:
 		var layer := project.layers[i]
 		layer.remove_meta(&"layer_child_level")
 		layer.index = i
+
+
+static func unsigned16_to_signed(unsigned: int) -> int:
+	const MAX_15B := 1 << 15
+	const MAX_16B := 1 << 16
+	return (unsigned + MAX_15B) % MAX_16B - MAX_15B

@@ -57,7 +57,7 @@ second = SubResource("Resource_p32ds")
 [sub_resource type="Resource" id="Resource_1dcep"]
 resource_name = "Tabs"
 script = ExtResource("1_t44r1")
-names = PackedStringArray("Canvas Preview", "Reference Images", "Recorder")
+names = PackedStringArray("Canvas Preview", "Reference Images", "Layer FX", "Recorder")
 
 [sub_resource type="Resource" id="Resource_hc3ve"]
 resource_name = "Tabs"

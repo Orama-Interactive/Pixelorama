@@ -5,7 +5,7 @@ enum ExportTab { IMAGE, SPRITESHEET }
 enum Orientation { COLUMNS, ROWS, TAGS_BY_ROW, TAGS_BY_COLUMN }
 enum AnimationDirection { FORWARD, BACKWARDS, PING_PONG }
 ## See file_format_string, file_format_description, and ExportDialog.gd
-enum FileFormat { PNG, WEBP, JPEG, SVG, EXR, GIF, APNG, MP4, AVI, OGV, MKV, WEBM }
+enum FileFormat { PNG, WEBP, JPEG, SVG, EXR, GIF, ASE, APNG, MP4, AVI, OGV, MKV, WEBM }
 enum { VISIBLE_LAYERS, SELECTED_LAYERS }
 enum ExportFrames { ALL_FRAMES, SELECTED_FRAMES }
 
@@ -15,6 +15,7 @@ var temp_path := OS.get_temp_dir().path_join("pixelorama_tmp")
 ## List of animated formats
 var animated_formats := [
 	FileFormat.GIF,
+	FileFormat.ASE,
 	FileFormat.APNG,
 	FileFormat.MP4,
 	FileFormat.AVI,
@@ -34,6 +35,7 @@ var file_format_dictionary: Dictionary[FileFormat, Array] = {
 	FileFormat.SVG: [".svg", "SVG Image"],
 	FileFormat.EXR: [".exr", "EXR Image"],
 	FileFormat.GIF: [".gif", "GIF Image"],
+	FileFormat.ASE: [".aseprite", "Aseprite Project"],
 	FileFormat.APNG: [".apng", "APNG Image"],
 	FileFormat.MP4: [".mp4", "MPEG-4 Video"],
 	FileFormat.AVI: [".avi", "AVI Video"],
@@ -177,11 +179,11 @@ func remove_custom_file_format(id: int) -> void:
 	for key in custom_file_formats.keys():
 		if custom_file_formats[key] == id:
 			custom_file_formats.erase(key)
-			# remove exporter generator
+			# Remove exporter generator.
 			Export.custom_exporter_generators.erase(id)
-			#  remove from animated (if it is present there)
+			# Remove from animated (if it is present there).
 			Export.animated_formats.erase(id)
-			#  remove from export dialog
+			# Remove from export dialog.
 			Global.export_dialog.image_exports.erase(id)
 			Global.export_dialog.spritesheet_exports.erase(id)
 			return
@@ -621,23 +623,26 @@ func export_processed_images(
 				)
 				return false
 		else:
-			var exporter: AImgIOBaseExporter
-			if export_profile.file_format == FileFormat.APNG:
-				exporter = AImgIOAPNGExporter.new()
+			if export_profile.file_format == FileFormat.ASE:
+				AsepriteExporter.save_aseprite_file(project, export_paths[0])
 			else:
-				exporter = GIFAnimationExporter.new()
-			var details := {
-				"exporter": exporter,
-				"export_dialog": export_dialog,
-				"export_paths": export_paths,
-				"project": project
-			}
-			if not _multithreading_enabled():
-				export_animated(details)
-			else:
-				if gif_export_thread.is_started():
-					gif_export_thread.wait_to_finish()
-				gif_export_thread.start(export_animated.bind(details))
+				var exporter: AImgIOBaseExporter
+				if export_profile.file_format == FileFormat.APNG:
+					exporter = AImgIOAPNGExporter.new()
+				else:
+					exporter = GIFAnimationExporter.new()
+				var details := {
+					"exporter": exporter,
+					"export_dialog": export_dialog,
+					"export_paths": export_paths,
+					"project": project
+				}
+				if not _multithreading_enabled():
+					export_animated(details)
+				else:
+					if gif_export_thread.is_started():
+						gif_export_thread.wait_to_finish()
+					gif_export_thread.start(export_animated.bind(details))
 	else:
 		for i in range(processed_images.size()):
 			if OS.has_feature("web"):
@@ -972,7 +977,7 @@ func _create_export_path(
 		path = path.replace("{name}", project.name)
 	var path_extras := ""
 	var separator_character := export_profile.separator_character
-	# Only append frame number when there are multiple files exported
+	# Only append frame number when there are multiple files exported.
 	if multifile:
 		if layer > -1:
 			var layer_name := project.layers[layer].name
@@ -980,7 +985,7 @@ func _create_export_path(
 		var counter: String = (
 			str(layer).pad_zeros(export_profile.number_of_digits)
 			if export_profile.current_tab == ExportTab.SPRITESHEET
-			else str(str(frame).pad_zeros(export_profile.number_of_digits))
+			else str(frame).pad_zeros(export_profile.number_of_digits)
 		)
 		path_extras += separator_character + counter
 	var frame_tag_and_start_id := _get_processed_image_tag_name_and_start_id(
@@ -1003,8 +1008,13 @@ func _create_export_path(
 				separator_character + frame_tag_dir + separator_character + tag_frame_number
 			)
 		if export_profile.new_dir_for_each_frame_tag:
+			var directory_path := export_profile.directory_path
+			if not frame_tag_dir.is_empty():
+				directory_path = directory_path.path_join(frame_tag_dir)
+				if not DirAccess.dir_exists_absolute(directory_path):
+					DirAccess.make_dir_recursive_absolute(directory_path)
 			path += path_extras
-			return export_profile.directory_path.path_join(frame_tag_dir).path_join(
+			return directory_path.path_join(
 				path + file_format_string(export_profile.file_format, true)
 			)
 	path += path_extras
@@ -1075,7 +1085,7 @@ func _blend_layers(
 		var layer := project.layers[export_profile.export_layers - 2]
 		var layer_image := Image.new()
 		if layer is GroupLayer:
-			layer_image.copy_from(layer.blend_children(frame, Vector2i.ZERO))
+			layer_image.copy_from(layer.blend_children(frame))
 		else:
 			layer_image.copy_from(
 				layer.display_effects(frame.cels[export_profile.export_layers - 2])

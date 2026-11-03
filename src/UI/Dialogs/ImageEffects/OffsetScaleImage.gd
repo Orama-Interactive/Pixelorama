@@ -119,6 +119,8 @@ func blend_layers(
 			cel_image = (layer as GroupLayer).blend_children(frame)
 		else:
 			cel_image = layer.display_effects(cel)
+			if layer.use_cel_image_for_effects:
+				cel_image.copy_from(project.crop_image_to_project_size(cel_image, cel.offset))
 		if layer.is_blended_by_ancestor() and not only_selected_cels and not only_selected_layers:
 			include = false
 		if include:  # Apply offset effect to it

@@ -107,11 +107,16 @@ offset_bottom = 32.0
 expand_mode = 1
 stretch_mode = 5
 
-[node name="OffsetX" parent="FillPattern" index="1" unique_id=381068828 instance=ExtResource("1")]
+[node name="ColorInterpolation" parent="FillPattern" index="1" unique_id=1726316798 instance=ExtResource("1")]
+layout_mode = 2
+tooltip_text = "0: Color from the pattern itself, 100: the currently selected color"
+prefix = "Pattern color from:"
+
+[node name="OffsetX" parent="FillPattern" index="2" unique_id=381068828 instance=ExtResource("1")]
 layout_mode = 2
 prefix = "Offset X:"
 
-[node name="OffsetY" parent="FillPattern" index="2" unique_id=2113544548 instance=ExtResource("1")]
+[node name="OffsetY" parent="FillPattern" index="3" unique_id=2113544548 instance=ExtResource("1")]
 layout_mode = 2
 prefix = "Offset Y:"
 
@@ -120,5 +125,6 @@ prefix = "Offset Y:"
 [connection signal="value_changed" from="ToleranceSlider" to="." method="_on_tolerance_slider_value_changed"]
 [connection signal="item_selected" from="FillWithOptions" to="." method="_on_FillWithOptions_item_selected"]
 [connection signal="pressed" from="FillPattern/Type" to="." method="_on_PatternType_pressed"]
+[connection signal="value_changed" from="FillPattern/ColorInterpolation" to="." method="_on_InterpolateFactor_value_changed"]
 [connection signal="value_changed" from="FillPattern/OffsetX" to="." method="_on_PatternOffsetX_value_changed"]
 [connection signal="value_changed" from="FillPattern/OffsetY" to="." method="_on_PatternOffsetY_value_changed"]
