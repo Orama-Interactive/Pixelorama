@@ -127,7 +127,7 @@ some useful [b][SYSTEM OPTIONS][/b] are:
 
 	static func set_output(project: Project, next_arg: String) -> void:
 		if not next_arg.is_empty():
-			project.file_name = next_arg.get_file().get_basename()
+			project.export_profile.file_name = next_arg.get_file().get_basename()
 			var directory_path = next_arg.get_base_dir()
 			if directory_path != ".":
 				project.export_profile.directory_path = directory_path
@@ -590,13 +590,21 @@ func show_save_dialog(project := Global.current_project) -> void:
 		save_sprite_html5.popup_centered_clamped()
 		var save_filename_line_edit := save_sprite_html5.get_node("%FileNameLineEdit")
 		save_filename_line_edit.text = project.name
+		var save_include_blended = save_sprite_html5.get_node("%IncludeBlended")
+		save_include_blended.button_pressed = project.include_blended_images
 	else:
 		save_sprite_dialog.current_file = project.name + ".pxo"
+		if save_sprite_dialog.option_count > 0:
+			save_sprite_dialog.set_option_default(0, project.include_blended_images)
 		save_sprite_dialog.popup_centered_clamped()
 		save_file_dialog_opened.emit(true)
 
 
 func _on_SaveSprite_file_selected(path: String) -> void:
+	if save_sprite_dialog.get_selected_options().size() > 0:
+		Global.current_project.include_blended_images = save_sprite_dialog.get_selected_options()[
+			save_sprite_dialog.get_option_name(0)
+		]
 	save_project(path)
 	save_file_dialog_opened.emit(false)
 
@@ -606,24 +614,21 @@ func _on_save_sprite_canceled() -> void:
 	is_quitting_on_save = false
 
 
-func save_project(path: String, through_dialog := true) -> void:
-	var project_to_save := Global.current_project
+func _on_save_sprite_html_5_confirmed() -> void:
+	var include_blended: bool = save_sprite_html5.get_node("%IncludeBlended").button_pressed
+	Global.current_project.include_blended_images = include_blended
+	var save_filename_line_edit := save_sprite_html5.get_node("%FileNameLineEdit")
+	Global.current_project.name = save_filename_line_edit.text
+	save_project("")
+
+
+func save_project(path: String, project_to_save := Global.current_project) -> void:
 	if is_quitting_on_save:
 		project_to_save = changed_projects_on_quit[0]
-	var include_blended := false
 	if OS.get_name() == "Web":
-		if through_dialog:
-			var save_filename_line_edit := save_sprite_html5.get_node("%FileNameLineEdit")
-			project_to_save.name = save_filename_line_edit.text
 		var file_name := project_to_save.name + ".pxo"
 		path = "user://".path_join(file_name)
-		include_blended = save_sprite_html5.get_node("%IncludeBlended").button_pressed
-	else:
-		if save_sprite_dialog.get_selected_options().size() > 0:
-			include_blended = save_sprite_dialog.get_selected_options()[
-				save_sprite_dialog.get_option_name(0)
-			]
-	var success := OpenSave.save_pxo_file(path, false, include_blended, project_to_save)
+	var success := OpenSave.save_pxo_file(path, false, project_to_save)
 	if success:
 		open_sprite_dialog.current_dir = path.get_base_dir()
 	if is_quitting_on_save:

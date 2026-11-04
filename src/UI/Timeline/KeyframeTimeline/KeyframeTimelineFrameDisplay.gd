@@ -10,16 +10,16 @@ func _ready() -> void:
 
 func _draw() -> void:
 	var font := Themes.get_font()
+	var color := Global.control.theme.get_color(&"font_color", &"Label")
 	var project := Global.current_project
 	for i in project.frames.size():
-		var xx := i * KeyframeTimeline.frame_ui_size - x_offset
-		if (i + 1) * KeyframeTimeline.frame_ui_size - x_offset > 1:
+		var offset_i := i + KeyframeTimeline.TRACK_X_MARGIN
+		var xx := offset_i * KeyframeTimeline.frame_ui_size - x_offset
+		var x_next := (offset_i + 1) * KeyframeTimeline.frame_ui_size - x_offset
+		if x_next > 1:
 			# NOTE: We use maxf(1, ...) so that the line when xx = 0.0 is drawn properly.
 			xx = maxf(1, xx)
-		var width: int = -1
-		if i == project.current_frame:
-			width = 2
-		draw_line(Vector2(xx, 0), Vector2(xx, size.y), Color.WHITE, width)
-		draw_string(
-			font, Vector2(xx + 2, 16), str(i + 1), HORIZONTAL_ALIGNMENT_LEFT, -1, 16 + width
-		)
+		var width := 2 if i == project.current_frame else -1
+		draw_line(Vector2(xx, 0), Vector2(xx, size.y), color, width)
+		var pos := Vector2(xx + 2, 16)
+		draw_string(font, pos, str(i + 1), HORIZONTAL_ALIGNMENT_LEFT, -1, 16 + width, color)

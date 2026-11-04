@@ -1245,7 +1245,7 @@ func size_changed(new_size: Vector2i) -> void:
 
 
 func get_content() -> Variant:
-	return [image, cells]
+	return [image, offset, cells]
 
 
 func set_content(content, texture: ImageTexture = null) -> void:
@@ -1253,8 +1253,8 @@ func set_content(content, texture: ImageTexture = null) -> void:
 		var cell := cells[cell_coords]
 		if cell.index > 0:
 			tileset.tiles[cell.index].times_used -= 1
-	super.set_content(content[0], texture)
-	cells = content[1]
+	super(content, texture)
+	cells = content[2]
 	find_times_used_of_tiles()
 
 
@@ -1263,7 +1263,7 @@ func create_empty_content() -> Array:
 	var new_image := ImageExtended.new()
 	new_image.copy_from_custom(empty, image.is_indexed)
 	var empty_cells: Dictionary[Vector2i, Cell] = {}
-	return [new_image, empty_cells]
+	return [new_image, Vector2i.ZERO, empty_cells]
 
 
 func copy_content() -> Array:
@@ -1276,7 +1276,7 @@ func copy_content() -> Array:
 	for cell in cells:
 		copied_cells[cell] = Cell.new()
 		copied_cells[cell].deserialize(cells[cell].serialize())
-	return [copy_image, copied_cells.duplicate(true)]
+	return [copy_image, offset, copied_cells.duplicate(true)]
 
 
 func duplicate_cel() -> CelTileMap:

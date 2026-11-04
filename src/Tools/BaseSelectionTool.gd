@@ -122,19 +122,8 @@ func draw_start(mouse_pos: Vector2i) -> void:
 		_move = true
 		if quick_copy:  # Move selection without cutting it from the original position (quick copy)
 			if transformation_handles.is_transforming():
-				Global.transform_content_confirmed.emit()
-			transformation_handles.begin_transform(null, project, true)
-			var select_rect := project.selection_map.get_selection_rect(project)
-			for cel in _get_selected_draw_unlocked_cels():
-				var image := cel.get_image()
-				image.blit_rect_mask(
-					cel.transformed_content,
-					cel.transformed_content,
-					Rect2i(Vector2i.ZERO, project.selection_map.get_size()),
-					select_rect.position
-				)
-			Global.canvas.queue_redraw()
-
+				Global.transform_content_confirmed.emit(project, false)
+			transformation_handles.begin_transform(null, project, true, false, false)
 		else:
 			transformation_handles.begin_transform()
 

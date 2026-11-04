@@ -1,8 +1,5 @@
 extends Button
 
-## This is NOT related to the CollapsibleContainer class (though it behaves similarly)
-## It was done like this because the "Content" is part of a different node
-
 @export var point_text := "":
 	set(value):
 		$Label.text = value

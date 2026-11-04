@@ -6,7 +6,7 @@ const DOCS_URL := "https://www.pixelorama.org/Introduction/"
 const ISSUES_URL := "https://github.com/Orama-Interactive/Pixelorama/issues"
 const SUPPORT_URL := "https://www.patreon.com/OramaInteractive"
 # gdlint: ignore=max-line-length
-const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v123---2026-09-15"
+const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/master/CHANGELOG.md#v124---2026-11-03"
 const EXTERNAL_LINK_ICON := preload("res://assets/graphics/misc/external_link.svg")
 const PIXELORAMA_ICON := preload("res://assets/graphics/icons/icon_16x16.png")
 const HEART_ICON := preload("res://assets/graphics/misc/heart.svg")
@@ -486,6 +486,8 @@ func _setup_window_menu() -> void:
 		Global.WindowMenu.WINDOW_OPACITY,
 		!ProjectSettings.get_setting("display/window/per_pixel_transparency/allowed")
 	)
+	if OS.get_name() == "macOS":
+		window_menu.system_menu_id = NativeMenu.WINDOW_MENU_ID
 
 
 func _setup_panels_submenu(item: String) -> void:
@@ -692,6 +694,8 @@ func _setup_help_menu() -> void:
 		i += 1
 
 	help_menu.id_pressed.connect(help_menu_id_pressed)
+	if OS.get_name() == "macOS":
+		help_menu.system_menu_id = NativeMenu.HELP_MENU_ID
 
 
 func _set_menu_shortcut(
@@ -787,7 +791,7 @@ func _save_project_file() -> void:
 	if path == "":
 		main.show_save_dialog()
 	else:
-		main.save_project(path, false)
+		main.save_project(path)
 
 
 func _export_file() -> void:

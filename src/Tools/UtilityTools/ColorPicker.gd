@@ -42,7 +42,9 @@ func get_config() -> Dictionary:
 
 
 func set_config(config: Dictionary) -> void:
-	_color_slot = config.get("color_slot", _color_slot)
+	# color_slot is not shared between the two slots unless single tool mode is active.
+	if Global.single_tool_mode or not is_syncing:
+		_color_slot = config.get("color_slot", _color_slot)
 	_mode = config.get("mode", _mode)
 
 
@@ -85,7 +87,12 @@ func _pick_color(pos: Vector2i) -> void:
 				var idx := (project.layers.size() - 1) - layer
 				if project.layers[idx].is_visible_in_hierarchy():
 					var cel := curr_frame.cels[idx]
-					image = cel.get_image()
+					if cel.get_image() is ImageExtended:
+						image = cel.get_image()
+					else:
+						image = ImageExtended.create_from_image(
+							cel.get_image(), project.is_indexed()
+						)
 					var final_pos := pos
 					final_pos -= cel.offset
 					if not image.pos_inside_image(final_pos):

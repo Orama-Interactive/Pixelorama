@@ -42,11 +42,11 @@ func _on_keyframe_timeline_frame_display_gui_input(event: InputEvent) -> void:
 			# Snap the cursor to the frame, as we don't have any useful behavior defined for
 			# cursor being in the middle of frames, this makes more sense
 			var container_pos := keyframe_timeline_frame_display.get_global_rect().position.x
-			var x_offset := keyframe_timeline_frame_display.x_offset
-			var frame_pos = (
-				Global.current_project.current_frame * KeyframeTimeline.frame_ui_size
-				+ container_pos
-				- x_offset
+			var x_offset := keyframe_timeline_frame_display.x_offset + 2
+			var project := Global.current_project
+			var offset_frame := project.current_frame + KeyframeTimeline.TRACK_X_MARGIN
+			var frame_pos := (
+				offset_frame * KeyframeTimeline.frame_ui_size + container_pos - x_offset
 			)
 			pos = frame_pos
 			is_dragged = false
@@ -58,12 +58,13 @@ func _on_keyframe_timeline_frame_display_gui_input(event: InputEvent) -> void:
 func _change_cel(new_pos: Vector2) -> void:
 	var container_pos := keyframe_timeline_frame_display.get_global_rect().position.x
 	var container_end := keyframe_timeline_frame_display.get_global_rect().end.x
-	var x_offset := keyframe_timeline_frame_display.x_offset
+	var x_offset := keyframe_timeline_frame_display.x_offset + 2
 	# NOTE: container_pos - KeyframeTimeline.frame_ui_size is for allowing reverse auto scroll
 	pos = clampf(
 		new_pos.x - (size.x / 2.0), container_pos - KeyframeTimeline.frame_ui_size, container_end
 	)
 	var frame_position_float := (pos - container_pos + x_offset) / KeyframeTimeline.frame_ui_size
+	frame_position_float -= KeyframeTimeline.TRACK_X_MARGIN
 	var frame := roundi(frame_position_float)
 	frame = clampi(frame, 0, Global.current_project.frames.size() - 1)
 	# Change frame
@@ -73,8 +74,9 @@ func _change_cel(new_pos: Vector2) -> void:
 		Global.current_project.selected_cels.append(frame_layer)
 	Global.current_project.change_cel(frame, -1)
 	# Snap to the frame position if it is close enough, otherwise move freely
-	if abs(frame_position_float - frame) < 0.3:
-		pos = frame * KeyframeTimeline.frame_ui_size + container_pos - x_offset
+	if absf(frame_position_float - frame) < 0.3:
+		var offset_frame := frame + KeyframeTimeline.TRACK_X_MARGIN
+		pos = (offset_frame * KeyframeTimeline.frame_ui_size + container_pos - x_offset)
 
 
 func update_position() -> void:
@@ -82,8 +84,9 @@ func update_position() -> void:
 		return
 	var frame := Global.current_project.current_frame
 	var container_pos := keyframe_timeline_frame_display.get_global_rect().position.x
-	var x_offset := keyframe_timeline_frame_display.x_offset
-	pos = frame * KeyframeTimeline.frame_ui_size + container_pos - x_offset
+	var offset_frame := frame + KeyframeTimeline.TRACK_X_MARGIN
+	var x_offset := keyframe_timeline_frame_display.x_offset + 2
+	pos = (offset_frame * KeyframeTimeline.frame_ui_size + container_pos - x_offset)
 
 
 func _draw() -> void:

@@ -101,11 +101,10 @@ func snap_cel_bounds(coords: Vector2i, _local := false, _ceil_snap := false) -> 
 ## Blits an image to the cel image, ensuring that the cel image is big enough.
 func blit_image_to_cel(source_image: Image) -> void:
 	var used_rect := source_image.get_used_rect()
-	var image_to_blit := source_image.get_region(used_rect)
 	ensure_canvas_point_in_bounds(used_rect.end - Vector2i.ONE, false)
 	ensure_canvas_point_in_bounds(used_rect.position, false)
-	var dst := used_rect.position - offset
-	image.blit_rect(image_to_blit, Rect2i(Vector2i.ZERO, image_to_blit.get_size()), dst)
+	image.blit_rect(source_image, Rect2i(Vector2i.ZERO, source_image.get_size()), -offset)
+	shrink_to_content()
 	image.convert_rgb_to_indexed()
 
 
@@ -126,17 +125,18 @@ func deserialize_undo_data(dict: Dictionary, undo_redo: UndoRedo, undo: bool) ->
 
 
 func get_content() -> Variant:
-	return image
+	return [image, offset]
 
 
 func set_content(content, texture: ImageTexture = null) -> void:
 	var proper_content: ImageExtended
-	if content is not ImageExtended:
+	if content[0] is not ImageExtended:
 		proper_content = ImageExtended.new()
-		proper_content.copy_from_custom(content, image.is_indexed)
+		proper_content.copy_from_custom(content[0], image.is_indexed)
 	else:
-		proper_content = content
+		proper_content = content[0]
 	image = proper_content
+	offset = content[1]
 	if is_instance_valid(texture) and is_instance_valid(texture.get_image()):
 		image_texture = texture
 		if image_texture.get_image().get_size() != image.get_size():
@@ -149,7 +149,7 @@ func create_empty_content() -> Variant:
 	var empty := Image.create(1, 1, false, image.get_format())
 	var new_image := ImageExtended.new()
 	new_image.copy_from_custom(empty, image.is_indexed)
-	return new_image
+	return [new_image, Vector2i.ZERO]
 
 
 func copy_content() -> Variant:
@@ -158,7 +158,7 @@ func copy_content() -> Variant:
 	)
 	var copy_image := ImageExtended.new()
 	copy_image.copy_from_custom(tmp_image, image.is_indexed)
-	return copy_image
+	return [copy_image, offset]
 
 
 func get_image() -> ImageExtended:

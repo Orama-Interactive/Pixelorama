@@ -184,7 +184,7 @@ func _on_onion_ignore_button_toggled(toggled_on: bool) -> void:
 	if layer_indices.size() == 0:
 		return
 
-	var project: Project = Global.current_project
+	var project := Global.current_project
 	project.undo_redo.create_action("Change Layer Onion Skinning Ignore Status")
 	for layer_index in layer_indices:
 		var layer := project.layers[layer_index]
@@ -205,8 +205,8 @@ func _on_use_cel_image_button_toggled(toggled_on: bool) -> void:
 	if layer_indices.size() == 0:
 		return
 
-	var project: Project = Global.current_project
-	project.undo_redo.create_action("Change Layer Onion Skinning Ignore Status")
+	var project := Global.current_project
+	project.undo_redo.create_action("Change Layer Effect Image Using Status")
 	for layer_index in layer_indices:
 		var layer := project.layers[layer_index]
 

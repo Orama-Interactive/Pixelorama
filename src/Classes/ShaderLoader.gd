@@ -6,8 +6,11 @@ const VALUE_SLIDER_V3_TSCN := preload("res://src/UI/Nodes/Sliders/ValueSliderV3.
 const BASIS_SLIDERS_TSCN := preload("res://src/UI/Nodes/Sliders/BasisSliders.tscn")
 const GRADIENT_EDIT_TSCN := preload("res://src/UI/Nodes/GradientEdit.tscn")
 const NOISE_GENERATOR := preload("res://src/UI/Nodes/NoiseGeneratorDialog.tscn")
+const KEYFRAME_SMALL_ICON := preload("uid://vnvueq4spwm1")
+const KEYFRAME_HOLLOW_ICON := preload("uid://btgxcvqnlgcqo")
+
 const UNIFORMS_TO_IGNORE: Array[String] = [
-	"PXO_time", "PXO_frame_index", "PXO_layer_index", "source_texture0"
+	"PXO_time", "PXO_frame_index", "PXO_layer_index", "source_texture0", "selection"
 ]
 
 static var dither_matrices: Array[DitherMatrix] = [
@@ -46,7 +49,8 @@ static func create_ui_for_shader_uniforms(
 	param_properties: Dictionary,
 	parent_node: Control,
 	value_changed: Callable,
-	file_selected: Callable
+	file_selected: Callable,
+	on_keyframe_pressed := Callable()
 ) -> void:
 	var code := shader.code.split("\n")
 	var shader_metadata := get_shader_metadata(code)
@@ -60,7 +64,6 @@ static func create_ui_for_shader_uniforms(
 	# A Dictionary used to group together nodes
 	# under the same group_uniform. Currently only used for CurveTextures.
 	var group_nodes: Dictionary[String, Control] = {}
-	var color_button_hbox: HBoxContainer = null  # Used for RGBA buttons, if they exist.
 	var current_group := ""
 	for uniform in uniforms:
 		# Example uniform:
@@ -120,7 +123,9 @@ static func create_ui_for_shader_uniforms(
 					params[u_name] = editor_node.selected
 				else:
 					params[u_name] = editor_node.value
+			editor_node.name = u_name
 			hbox.add_child(editor_node)
+			create_keyframe_button(u_name, hbox, on_keyframe_pressed)
 			parent_node.add_child(hbox)
 		elif u_type == "vec2" or u_type == "ivec2" or u_type == "uvec2":
 			var label := Label.new()
@@ -141,6 +146,7 @@ static func create_ui_for_shader_uniforms(
 				slider.value = params[u_name]
 			else:
 				params[u_name] = slider.value
+			slider.name = u_name
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
 			var vbox := VBoxContainer.new()
@@ -148,6 +154,7 @@ static func create_ui_for_shader_uniforms(
 			hbox.add_child(vbox)
 			vbox.add_child(slider)
 			vbox.add_child(HSeparator.new())
+			create_keyframe_button(u_name, hbox, on_keyframe_pressed)
 			parent_node.add_child(hbox)
 		elif u_type == "vec4":
 			if "source_color" in u_hint:
@@ -162,12 +169,14 @@ static func create_ui_for_shader_uniforms(
 					color_button.color = params[u_name]
 				else:
 					params[u_name] = color_button.color
+				color_button.name = u_name
 				color_button.color_changed.connect(value_changed.bind(u_name))
 				color_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 				color_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 				var hbox := HBoxContainer.new()
 				hbox.add_child(label)
 				hbox.add_child(color_button)
+				create_keyframe_button(u_name, hbox, on_keyframe_pressed)
 				parent_node.add_child(hbox)
 		elif u_type == "mat3":
 			var label := Label.new()
@@ -183,14 +192,14 @@ static func create_ui_for_shader_uniforms(
 				sliders.value = params[u_name]
 			else:
 				params[u_name] = sliders.value
+			sliders.name = u_name
 			sliders.value_changed.connect(value_changed.bind(u_name))
 			var hbox := HBoxContainer.new()
 			hbox.add_child(label)
 			hbox.add_child(sliders)
+			create_keyframe_button(u_name, hbox, on_keyframe_pressed)
 			parent_node.add_child(hbox)
 		elif u_type == "sampler2D":
-			if u_name == "selection":
-				continue
 			if u_name == "palette_texture":
 				var palette := Palettes.current_palette
 				var palette_texture := ImageTexture.create_from_image(palette.convert_to_image())
@@ -284,6 +293,7 @@ static func create_ui_for_shader_uniforms(
 						var dither_tex := dither_matrices[index].texture
 						value_changed.call(dither_tex, u_name)
 				)
+				option_button.name = u_name
 				for matrix in dither_matrices:
 					option_button.add_item(matrix.name)
 				if params.has(u_name):
@@ -351,33 +361,23 @@ static func create_ui_for_shader_uniforms(
 					params, u_name, hbox, value_changed, parent_node, file_selected
 				)
 		elif u_type == "bool":
-			var button: BaseButton
-			if u_name in ["red", "green", "blue", "alpha"]:
-				button = Button.new()
-				button.text = u_name[0].to_upper()
-				button.toggle_mode = true
-				if is_instance_valid(color_button_hbox):
-					color_button_hbox.add_child(button)
-				else:
-					color_button_hbox = HBoxContainer.new()
-					color_button_hbox.add_child(button)
-					parent_node.add_child(color_button_hbox)
-			else:
-				button = CheckBox.new()
-				var label := Label.new()
-				label.text = humanized_u_name
-				label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				button.text = "On"
-				var hbox := HBoxContainer.new()
-				hbox.add_child(label)
-				hbox.add_child(button)
-				parent_node.add_child(hbox)
+			var button := CheckBox.new()
+			var label := Label.new()
+			label.text = humanized_u_name
+			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			button.text = "On"
+			var hbox := HBoxContainer.new()
+			hbox.add_child(label)
+			hbox.add_child(button)
+			create_keyframe_button(u_name, hbox, on_keyframe_pressed)
+			parent_node.add_child(hbox)
 			if u_value == "true":
 				button.button_pressed = true
 			if params.has(u_name):
 				button.button_pressed = params[u_name]
 			else:
 				params[u_name] = button.button_pressed
+			button.name = u_name
 			button.toggled.connect(value_changed.bind(u_name))
 			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
@@ -476,6 +476,41 @@ void fragment() {
 	var shader := Shader.new()
 	shader.code = shader_code
 	return shader
+
+
+static func create_keyframe_button(
+	param_name: String, parent: Node, on_keyframe_pressed: Callable
+) -> void:
+	if on_keyframe_pressed.is_valid():
+		var keyframe_button := TextureButton.new()
+		keyframe_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		keyframe_button.custom_minimum_size.x = 16
+		keyframe_button.texture_normal = KEYFRAME_SMALL_ICON
+		keyframe_button.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+		keyframe_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+		keyframe_button.tooltip_text = "Add keyframe."
+		keyframe_button.pressed.connect(on_keyframe_pressed.bind(param_name))
+		keyframe_button.pressed.connect(
+			func(): keyframe_button.texture_normal = KeyframeButton.KEYFRAME_ICON
+		)
+		parent.add_child(keyframe_button)
+
+
+static func get_proper_keyframe_texture(
+	keyframe_button: TextureButton,
+	animatable: AnimatableObject,
+	param_name: String,
+	frame_index := Global.current_project.current_frame
+) -> void:
+	keyframe_button.tooltip_text = "Add keyframe."
+	keyframe_button.texture_normal = ShaderLoader.KEYFRAME_SMALL_ICON
+	if param_name in animatable.animated_params:
+		if animatable.animated_params[param_name].size() > 0:
+			if animatable.animated_params[param_name].has(frame_index):
+				keyframe_button.texture_normal = KeyframeButton.KEYFRAME_ICON
+				keyframe_button.tooltip_text = "Update keyframe."
+			else:
+				keyframe_button.texture_normal = ShaderLoader.KEYFRAME_HOLLOW_ICON
 
 
 static func _vec2str_to_vector2(vec2: String) -> Vector2:
@@ -604,6 +639,7 @@ static func _create_gradient_texture_ui(
 			gradient_edit.set_gradient_texture_1d(texture)
 	else:
 		params[u_name] = gradient_edit.texture
+	gradient_edit.name = u_name
 	# This needs to be call_deferred because GradientTexture2D gets updated next frame.
 	# Without this, the texture is purple.
 	value_changed.call_deferred(gradient_edit.texture, u_name)
@@ -624,6 +660,7 @@ static func _create_curve_texture_ui(
 	else:
 		curve_edit.set_default_curve()
 		params[u_name] = CurveEdit.to_texture(curve_edit.curve)
+	curve_edit.name = u_name
 	curve_edit.value_changed.connect(
 		func(curve: Curve): value_changed.call(CurveEdit.to_texture(curve), u_name)
 	)

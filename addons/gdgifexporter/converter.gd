@@ -4,12 +4,12 @@ var _shader: Shader
 
 
 func get_indexed_datas(image: Image, colors: Array) -> PackedByteArray:
-	_shader = load("./lookup_color.gdshader")
+	_shader = load("res://addons/gdgifexporter/lookup_color.gdshader")
 	return _convert(image, colors)
 
 
 func get_similar_indexed_datas(image: Image, colors: Array) -> PackedByteArray:
-	_shader = load("./lookup_similar.gdshader")
+	_shader = load("res://addons/gdgifexporter/lookup_similar.gdshader")
 	return _convert(image, colors)
 
 

@@ -293,20 +293,24 @@ func _fill_new_palette_with_colors(
 			for frame in current_project.frames:
 				for cel in frame.cels:
 					cels.append(cel)
-	var start_index = 0
+	var start_index := 0
 	for cel in cels:
 		var cel_image := Image.new()
 		cel_image.copy_from(cel.get_image())
 		if cel_image.is_invisible():
 			continue
+		var cel_rect := cel.get_cel_rect()
 		for i in pixels:
-			var color := cel_image.get_pixelv(i)
+			if not cel_rect.has_point(i):
+				continue
+			var color_pos := i - cel.offset
+			var color := cel_image.get_pixelv(color_pos.abs())
 			if color.a > 0:
 				if not add_alpha_colors:
 					color.a = 1
 				if not new_palette.has_theme_color(color):
-					start_index += 1
 					new_palette.add_color(color, start_index)
+					start_index += 1
 	undo_redo_add_palette(new_palette, is_global)
 
 
@@ -379,17 +383,6 @@ func palette_delete_and_reselect(permanent := true, palette := current_palette) 
 		if palette == current_palette:
 			current_palette = null
 		select_palette("")
-
-
-func current_palette_add_color(mouse_button: int, start_index := 0) -> void:
-	if (
-		not current_palette.is_full()
-		and (mouse_button == MOUSE_BUTTON_LEFT or mouse_button == MOUSE_BUTTON_RIGHT)
-	):
-		# Get color on left or right tool
-		var color := Tools.get_assigned_color(mouse_button)
-		current_palette.add_color(color, start_index)
-		save_palette()
 
 
 func current_palette_get_color(index: int) -> Color:

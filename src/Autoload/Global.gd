@@ -1669,6 +1669,23 @@ func create_node_from_variable(
 	return null
 
 
+func set_value_to_node(node: Control, value) -> void:
+	if node is CheckBox:
+		node.set_pressed_no_signal(value)
+	elif node is ValueSlider:
+		node.set_value_no_signal_update_display(value)
+	elif node is ValueSliderV2:
+		node.set_value_no_signal(value)
+	elif node is ValueSliderV3:
+		node.set_value_no_signal(value)
+	elif node is ColorPickerButton:
+		node.color = value
+	elif node is BasisSliders:
+		node.value = value
+	elif node is LineEdit or node is TextEdit:
+		node.text = value
+
+
 func degrees_to_radians(value_in_deg) -> Variant:
 	var new_value
 	if typeof(value_in_deg) == TYPE_FLOAT:

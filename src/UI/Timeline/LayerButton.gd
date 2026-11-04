@@ -82,8 +82,9 @@ func _ready() -> void:
 	layer_ui_color.color = layer.get_ui_color()
 	layer_fx_texture_rect.visible = layer.effects.size() > 0
 	layer_type_texture_rect.texture = ARRAY_TEXTURE_TYPES[layer.get_layer_type()]
-	layer.effects_added_removed.connect(
-		func(): layer_fx_texture_rect.visible = layer.effects.size() > 0
+	layer.effect_added.connect(func(_effect): layer_fx_texture_rect.visible = true)
+	layer.effect_removed.connect(
+		func(_effect): layer_fx_texture_rect.visible = layer.effects.size() > 0
 	)
 	for child in $HBoxContainer.get_children():
 		if not child is Button:
@@ -193,7 +194,7 @@ func update_buttons() -> void:
 
 	visibility_button.modulate.a = 1
 	lock_button.modulate.a = 1
-	popup_menu.set_item_checked(0, layer.clipping_mask)
+	popup_menu.set_item_checked(MenuOptions.CLIPPING_MASK, layer.clipping_mask)
 	clipping_mask_icon.visible = layer.clipping_mask
 	if is_instance_valid(layer.parent):
 		if not layer.parent.is_visible_in_hierarchy():

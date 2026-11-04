@@ -97,7 +97,7 @@ func _draw() -> void:
 		"%spx" % str(snappedf(mouse_pos.y if type == Types.HORIZONTAL else mouse_pos.x, 0.5))
 	)
 	string = text_server.format_number(string)
-	var color: Color = Global.control.theme.get_color("font_color", "Label")
+	var color := Global.control.theme.get_color(&"font_color", &"Label")
 	# X and Y offsets for nicer looking spacing
 	var x_offset := 5
 	var y_offset := -7  # Only used where the string is above the guide

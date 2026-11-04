@@ -125,11 +125,12 @@ static func get_canvas_cel_image(cel: BaseCel, layer: BaseLayer, image: Image) -
 	var project := layer.project
 	if layer.is_blender():
 		var frame := project.frames[project.current_frame]
-		var blended: Image = layer.blend_children(frame, Global.display_layer_effects)
+		var blended: Image = layer.blend_children(frame, false, Global.display_layer_effects)
 		image.copy_from(blended)
 	else:
 		if Global.display_layer_effects:
-			image.copy_from(layer.display_effects(cel))
+			var animate_params := layer.index != project.current_layer
+			image.copy_from(layer.display_effects(cel, animate_params))
 			if layer.use_cel_image_for_effects:
 				image.copy_from(project.crop_image_to_project_size(image, cel.offset))
 		else:
@@ -153,10 +154,8 @@ func update_texture(
 		var layer := project.layers[layer_i].get_blender_ancestor()
 		var cel_image := Image.new()
 		get_canvas_cel_image(current_cel, layer, cel_image)
-		if (
-			cel_image.get_size()
-			== Vector2i(layer_texture_array.get_width(), layer_texture_array.get_height())
-		):
+		var l_tx_size := Vector2i(layer_texture_array.get_width(), layer_texture_array.get_height())
+		if cel_image.get_size() == l_tx_size:
 			layer_texture_array.update_layer(cel_image, project.ordered_layers.find(layer.index))
 
 
@@ -241,7 +240,9 @@ func _update_texture_array_layer(
 		include = false
 	if update_layer:
 		layer_texture_array.update_layer(cel_image, ordered_index)
-	DrawingAlgos.set_layer_metadata_image(layer, cel, layer_metadata_image, ordered_index, include)
+	DrawingAlgos.set_layer_metadata_image(
+		layer, cel, layer_metadata_image, ordered_index, include, false
+	)
 
 
 func refresh_onion() -> void:

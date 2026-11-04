@@ -38,6 +38,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
+svg/scale=1.6
 editor/scale_with_editor_scale=false
 editor/convert_colors_with_editor_theme=false

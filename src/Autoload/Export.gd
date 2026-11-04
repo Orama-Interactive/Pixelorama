@@ -179,11 +179,11 @@ func remove_custom_file_format(id: int) -> void:
 	for key in custom_file_formats.keys():
 		if custom_file_formats[key] == id:
 			custom_file_formats.erase(key)
-			# remove exporter generator
+			# Remove exporter generator.
 			Export.custom_exporter_generators.erase(id)
-			#  remove from animated (if it is present there)
+			# Remove from animated (if it is present there).
 			Export.animated_formats.erase(id)
-			#  remove from export dialog
+			# Remove from export dialog.
 			Global.export_dialog.image_exports.erase(id)
 			Global.export_dialog.spritesheet_exports.erase(id)
 			return
@@ -977,7 +977,7 @@ func _create_export_path(
 		path = path.replace("{name}", project.name)
 	var path_extras := ""
 	var separator_character := export_profile.separator_character
-	# Only append frame number when there are multiple files exported
+	# Only append frame number when there are multiple files exported.
 	if multifile:
 		if layer > -1:
 			var layer_name := project.layers[layer].name
@@ -985,7 +985,7 @@ func _create_export_path(
 		var counter: String = (
 			str(layer).pad_zeros(export_profile.number_of_digits)
 			if export_profile.current_tab == ExportTab.SPRITESHEET
-			else str(str(frame).pad_zeros(export_profile.number_of_digits))
+			else str(frame).pad_zeros(export_profile.number_of_digits)
 		)
 		path_extras += separator_character + counter
 	var frame_tag_and_start_id := _get_processed_image_tag_name_and_start_id(
@@ -1008,8 +1008,13 @@ func _create_export_path(
 				separator_character + frame_tag_dir + separator_character + tag_frame_number
 			)
 		if export_profile.new_dir_for_each_frame_tag:
+			var directory_path := export_profile.directory_path
+			if not frame_tag_dir.is_empty():
+				directory_path = directory_path.path_join(frame_tag_dir)
+				if not DirAccess.dir_exists_absolute(directory_path):
+					DirAccess.make_dir_recursive_absolute(directory_path)
 			path += path_extras
-			return export_profile.directory_path.path_join(frame_tag_dir).path_join(
+			return directory_path.path_join(
 				path + file_format_string(export_profile.file_format, true)
 			)
 	path += path_extras
