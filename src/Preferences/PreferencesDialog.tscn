@@ -1393,7 +1393,6 @@ columns = 3
 [node name="DisplayNameLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/AuthorContainer" unique_id=778042227]
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 mouse_filter = 1
 text = "Display name:"
 
@@ -1404,7 +1403,6 @@ size_flags_horizontal = 3
 [node name="RealNameLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/AuthorContainer" unique_id=959034553]
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 mouse_filter = 1
 text = "Real name:"
 
@@ -1415,7 +1413,6 @@ size_flags_horizontal = 3
 [node name="ContactLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/AuthorContainer" unique_id=993045809]
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 mouse_filter = 1
 text = "Contact:"
 
@@ -1426,7 +1423,6 @@ size_flags_horizontal = 3
 [node name="CompanyStudioLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Attribution/AuthorContainer" unique_id=326685751]
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Sets the limit of the application's frames per second. The lower the number, the lower the CPU usage, but the application gets slower, choppier and unresponsive. 0 means that there is no limit."
 mouse_filter = 1
 text = "Company/Studio:"
 
