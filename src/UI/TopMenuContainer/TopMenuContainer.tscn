@@ -62,6 +62,8 @@ flat = true
 [node name="TopLabels" type="HBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1935929971]
 layout_mode = 2
 size_flags_horizontal = 6
+offset_transform_enabled = true
+offset_transform_visual_only = false
 theme_override_constants/separation = 20
 
 [node name="RotationSlider" type="TextureProgressBar" parent="MarginContainer/HBoxContainer/TopLabels" unique_id=204642904]
