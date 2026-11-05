@@ -367,21 +367,19 @@ func _on_about_to_popup() -> void:
 			default_directory_path, export_profile.file_name, export_profile.file_format
 		)
 
-	# If export already occurred - sets GUI to show previous settings
-	# we don't emit signals because there settings are already set, so nothing new is changed.
-	options_resize.set_value_no_signal(export_profile.resize)
+	options_resize.set_value(export_profile.resize)
 	options_interpolation.selected = export_profile.interpolation
-	options_quality.set_value_no_signal(export_profile.save_quality * 100.0)
+	options_quality.set_value(export_profile.save_quality * 100.0)
 	direction_option_button.selected = export_profile.direction
-	repeat_count_spinbox.set_value_no_signal(export_profile.repeat_count)
-	split_layers_checkbox.set_pressed_no_signal(export_profile.split_layers)
+	repeat_count_spinbox.set_value(export_profile.repeat_count)
+	split_layers_checkbox.set_pressed(export_profile.split_layers)
 	crop_image_option.selected = export_profile.crop_mode
 	erase_outside_selection.disabled = (export_profile.crop_mode == Export.CropMode.SELECTION)
-	erase_outside_selection.set_pressed_no_signal(export_profile.erase_unselected_area)
+	erase_outside_selection.set_pressed(export_profile.erase_unselected_area)
 	separator_character_edit.text = export_profile.separator_character
-	export_json_checkbox.set_pressed_no_signal(export_profile.export_json)
-	include_tags_in_filename_checkbox.set_pressed_no_signal(export_profile.include_tag_in_filename)
-	multiple_animations_directories_checkbox.set_pressed_no_signal(
+	export_json_checkbox.set_pressed(export_profile.export_json)
+	include_tags_in_filename_checkbox.set_pressed(export_profile.include_tag_in_filename)
+	multiple_animations_directories_checkbox.set_pressed(
 		export_profile.new_dir_for_each_frame_tag
 	)
 
