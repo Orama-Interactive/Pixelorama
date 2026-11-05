@@ -379,9 +379,7 @@ func _on_about_to_popup() -> void:
 	separator_character_edit.text = export_profile.separator_character
 	export_json_checkbox.set_pressed(export_profile.export_json)
 	include_tags_in_filename_checkbox.set_pressed(export_profile.include_tag_in_filename)
-	multiple_animations_directories_checkbox.set_pressed(
-		export_profile.new_dir_for_each_frame_tag
-	)
+	multiple_animations_directories_checkbox.set_pressed(export_profile.new_dir_for_each_frame_tag)
 
 	directory_path_label.text = export_profile.directory_path
 	var file_ext := Export.file_format_string(export_profile.file_format)
