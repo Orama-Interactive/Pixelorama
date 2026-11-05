@@ -237,9 +237,12 @@ func _on_algorithm_item_selected(index: int) -> void:
 
 
 func _set_cursor_text(rect: Rect2i) -> void:
-	cursor_text = "%s, %s" % [rect.position.x, rect.position.y]
-	cursor_text += " -> %s, %s" % [rect.end.x - 1, rect.end.y - 1]
-	cursor_text += " (%s, %s)" % [rect.size.x, rect.size.y]
+	var parts: PackedStringArray = [
+		"⇱ %s, %s" % [rect.position.x, rect.position.y],
+		"⇲ %s, %s" % [rect.end.x - 1, rect.end.y - 1],
+		"(%s×%s)" % [rect.size.x, rect.size.y],
+	]
+	cursor_text = "  ".join(parts)
 
 
 func _on_position_value_changed(value: Vector2) -> void:

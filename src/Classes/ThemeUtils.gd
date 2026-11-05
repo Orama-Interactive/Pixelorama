@@ -144,6 +144,7 @@ static var theme_properties: Dictionary[String, Array] = {
 		ThemeProperty.new(&"font_color", &"OptionButton"),
 		ThemeProperty.new(&"font_color", &"ProgressBar"),
 		ThemeProperty.new(&"font_color", &"Label"),
+		ThemeProperty.new(&"default_color", &"RichTextLabel"),
 		ThemeProperty.new(&"font_color", &"LineEdit"),
 		ThemeProperty.new(
 			&"font_placeholder_color",

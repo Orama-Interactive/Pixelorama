@@ -79,7 +79,7 @@ var backup_dialog := Dialog.new("res://src/UI/Dialogs/BackupRestoreDialog.tscn")
 @onready var delete_layout_confirmation := $DeleteLayoutConfirmation as ConfirmationDialog
 @onready var layout_name_line_edit := %LayoutName as LineEdit
 @onready var layout_from_option_button := %LayoutFrom as OptionButton
-@onready var cursor_position_label := %CursorPosition as Label
+@onready var cursor_position_label := %CursorPosition as RichTextLabel
 @onready var current_frame_mark := %CurrentFrameMark as Label
 
 
@@ -192,7 +192,7 @@ func _on_project_switched() -> void:
 	if not project.selection_changed.is_connected(_on_project_selection_changed):
 		project.selection_changed.connect(_on_project_selection_changed)
 	_on_project_selection_changed()
-	var project_size_text := "[%s×%s]" % [project.size.x, project.size.y]
+	var project_size_text := "🖼 %s×%s" % [project.size.x, project.size.y]
 	_on_cursor_position_text_changed(project_size_text)
 	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, not project.has_selection)
 	_update_file_menu_buttons(project)
