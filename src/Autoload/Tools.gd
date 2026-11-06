@@ -935,13 +935,16 @@ func handle_draw(position: Vector2i, event: InputEvent) -> void:
 				_slots[active_button].tool_node.draw_move(draw_pos)
 
 	var project := Global.current_project
-	var text := "[%s×%s]" % [project.size.x, project.size.y]
-	text += "    %s, %s" % [position.x, position.y]
-	if not _slots[MOUSE_BUTTON_LEFT].tool_node.cursor_text.is_empty():
-		text += "    %s" % _slots[MOUSE_BUTTON_LEFT].tool_node.cursor_text
-	if not _slots[MOUSE_BUTTON_RIGHT].tool_node.cursor_text.is_empty():
-		text += "    %s" % _slots[MOUSE_BUTTON_RIGHT].tool_node.cursor_text
-	Global.on_cursor_position_text_changed.emit(text)
+	var parts: PackedStringArray = [
+		"🖼 %s×%s" % [project.size.x, project.size.y],
+		"✛ %s, %s" % [position.x, position.y],
+	]
+	for mouse_button: MouseButton in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT]:
+		var cursor_text: String = _slots[mouse_button].tool_node.cursor_text
+		if not cursor_text.is_empty():
+			parts.append(cursor_text)
+
+	Global.on_cursor_position_text_changed.emit("    ".join(parts))
 
 
 ## Returns [code]true[/code] if [member alpha_locked] is [code]true[/code]

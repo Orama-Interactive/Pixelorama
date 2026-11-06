@@ -105,10 +105,14 @@ script = ExtResource("1")
 suffix = "%"
 snap_step = 100.0
 
-[node name="CursorPosition" type="Label" parent="MarginContainer/HBoxContainer/TopLabels" unique_id=669818577]
+[node name="CursorPosition" type="RichTextLabel" parent="MarginContainer/HBoxContainer/TopLabels" unique_id=81277763]
 unique_name_in_owner = true
 layout_mode = 2
-text = "[64×64]"
+size_flags_vertical = 8
+text = "🖼 64×64"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
 
 [node name="QuickAccessButtons" type="VFlowContainer" parent="MarginContainer/HBoxContainer" unique_id=1032869178]
 visible = false
