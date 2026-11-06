@@ -1675,8 +1675,31 @@ func project_layer_added(layer_index: int) -> void:
 	var layer := project.layers[layer_index]
 	var layer_button := layer.instantiate_layer_button() as LayerButton
 	layer_button.layer_index = layer_index
-	if layer.name == "":
-		layer.set_name_to_default(project.layers.size())
+
+	var normalized_name := layer.name.strip_edges()
+	var needs_default_name := normalized_name.is_empty()
+
+	if not needs_default_name:
+		for existing_layer in project.layers:
+			if existing_layer != layer and existing_layer.name.strip_edges() == normalized_name:
+				needs_default_name = true
+				break
+
+	if needs_default_name:
+		var default_number := layer_index + 1
+		var default_name := "Layer " + str(default_number)
+		var default_name_exists := true
+
+		while default_name_exists:
+			default_name_exists = false
+			for existing_layer in project.layers:
+				if existing_layer != layer and existing_layer.name.strip_edges() == default_name:
+					default_name_exists = true
+					default_number += 1
+					default_name = "Layer " + str(default_number)
+					break
+
+		layer.name = default_name
 
 	var cel_hbox := HBoxContainer.new()
 	cel_hbox.add_theme_constant_override("separation", 0)
