@@ -1681,10 +1681,7 @@ func project_layer_added(layer_index: int) -> void:
 
 	if not needs_default_name:
 		for existing_layer in project.layers:
-			if (
-				existing_layer != layer
-				and existing_layer.name.strip_edges() == normalized_name
-			):
+			if existing_layer != layer and existing_layer.name.strip_edges() == normalized_name:
 				needs_default_name = true
 				break
 
@@ -1696,10 +1693,7 @@ func project_layer_added(layer_index: int) -> void:
 		while default_name_exists:
 			default_name_exists = false
 			for existing_layer in project.layers:
-				if (
-					existing_layer != layer
-					and existing_layer.name.strip_edges() == default_name
-				):
+				if existing_layer != layer and existing_layer.name.strip_edges() == default_name:
 					default_name_exists = true
 					default_number += 1
 					default_name = "Layer " + str(default_number)
