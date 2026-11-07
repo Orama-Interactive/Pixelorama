@@ -189,8 +189,7 @@ func text_to_pixels() -> void:
 			var cropped_text_image = project.new_empty_image()
 			cropped_text_image.blit_rect(
 				text_image,
-				Rect2i(Vector2i.ZERO,
-				cel_image.get_size()),
+				Rect2i(Vector2i.ZERO, cel_image.get_size()),
 				text_paste_position + Vector2(cel.offset)
 			)
 			text_image = cropped_text_image
