@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2026-10-23 02:14\n"
+"PO-Revision-Date: 2026-11-07 09:33\n"
 
 msgid "OK"
 msgstr "确定"
@@ -378,7 +378,7 @@ msgstr "可移动面板"
 
 #. Button found in the three vertical dots menu of any panel, when Moveable Panels is enabled in the Window menu. It "detaches" the panel, making it a floating window.
 msgid "Make Floating"
-msgstr "制作浮动"
+msgstr "设为浮动"
 
 msgid "Manage Layouts"
 msgstr "管理布局"
