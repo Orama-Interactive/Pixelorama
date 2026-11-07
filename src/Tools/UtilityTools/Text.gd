@@ -159,7 +159,6 @@ func text_to_pixels() -> void:
 	var color := tool_slot.color
 	var font_ascent := font.get_ascent(text_size)
 	var pos := Vector2(0, font_ascent + text_edit.get_theme_constant(&"line_spacing"))
-	pos += text_edit.position - Vector2(cel.offset)
 	var background_rid: RID
 	if antialiasing == TextServer.FONT_ANTIALIASING_LCD:
 		# NOTE: We need background information for FONT_ANTIALIASING_LCD to work.
@@ -180,12 +179,21 @@ func text_to_pixels() -> void:
 	if background_rid:
 		RenderingServer.free_rid(background_rid)
 	text_image.convert(cel_image.get_format())
+	var text_paste_position: Vector2 = text_edit.position - Vector2(cel.offset)
 
 	text_edit.queue_free()
 	text_edit = null
 	if not text_image.is_empty():
 		# Crop to selection area
 		if project.has_selection:
+			var cropped_text_image = project.new_empty_image()
+			cropped_text_image.blit_rect(
+				text_image,
+				Rect2i(Vector2i.ZERO,
+				cel_image.get_size()),
+				text_paste_position + Vector2(cel.offset)
+			)
+			text_image = cropped_text_image
 			var selected_content := project.new_empty_image()
 			var selection_map_copy := project.selection_map.return_cropped_copy(
 				project, project.size
@@ -195,14 +203,15 @@ func text_to_pixels() -> void:
 				text_image, selection_map_copy, selection_rect, selection_rect.position
 			)
 			text_image = selected_content
+			text_paste_position = -cel.offset
 		# Add this text to our cel's image
 		if background_rid:
 			cel_image.blit_rect(
-				text_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), Vector2i.ZERO
+				text_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), text_paste_position
 			)
 		else:
 			cel_image.blend_rect(
-				text_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), Vector2i.ZERO
+				text_image, Rect2i(Vector2i.ZERO, cel_image.get_size()), text_paste_position
 			)
 		if cel_image is ImageExtended:
 			cel_image.convert_rgb_to_indexed()
