@@ -369,9 +369,9 @@ func _on_about_to_popup() -> void:
 
 	# If export already occurred - sets GUI to show previous settings
 	# we don't emit signals because there settings are already set, so nothing new is changed.
-	options_resize.set_value_no_signal(export_profile.resize)
+	options_resize.set_value_no_signal_update_display(export_profile.resize)
 	options_interpolation.selected = export_profile.interpolation
-	options_quality.set_value_no_signal(export_profile.save_quality * 100.0)
+	options_quality.set_value_no_signal_update_display(export_profile.save_quality * 100.0)
 	direction_option_button.selected = export_profile.direction
 	repeat_count_spinbox.set_value_no_signal(export_profile.repeat_count)
 	split_layers_checkbox.set_pressed_no_signal(export_profile.split_layers)
