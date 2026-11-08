@@ -1092,9 +1092,14 @@ func _on_CloneLayer_pressed() -> void:
 				new_cel.link_set = cl_layer.cel_link_sets[src_layer.cel_link_sets.find(
 					src_cel.link_set
 				)]
+				# Make the cels share the same image resource if the cels are linked,
+				# Else copy the corresponding contents
 				if new_cel.link_set["cels"].size() > 0:
 					var linked_cel: BaseCel = new_cel.link_set["cels"][0]
 					new_cel.set_content(linked_cel.get_content(), linked_cel.image_texture)
+					# Each cel has it's own offset, the offset of src_cel should be used here
+					# instead of linked_cel's offset (which was set by linked_cel.get_content()).
+					new_cel.offset = src_cel.offset
 				else:
 					new_cel.set_content(src_cel.copy_content())
 				new_cel.link_set["cels"].append(new_cel)
