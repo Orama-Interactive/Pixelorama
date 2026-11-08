@@ -203,7 +203,6 @@ func process_data(project := Global.current_project) -> void:
 		frames.size() * (export_profile.repeat_count + 1) > blended_frames.size()
 		or not blended_frames.has_all(frames)
 	):
-		print("cache")
 		cache_blended_frames(project)
 	match export_profile.current_tab:
 		ExportTab.IMAGE:
