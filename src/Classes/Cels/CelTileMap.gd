@@ -1248,7 +1248,7 @@ func get_content() -> Variant:
 	return [image, offset, cells]
 
 
-func set_content(content, texture: ImageTexture = null) -> void:
+func set_content(content, texture: ImageTexture = null, _keep_offset: bool = false) -> void:
 	for cell_coords in cells:
 		var cell := cells[cell_coords]
 		if cell.index > 0:

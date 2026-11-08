@@ -128,7 +128,7 @@ func get_content() -> Variant:
 	return [image, offset]
 
 
-func set_content(content, texture: ImageTexture = null) -> void:
+func set_content(content, texture: ImageTexture = null, keep_offset: bool = false) -> void:
 	var proper_content: ImageExtended
 	if content[0] is not ImageExtended:
 		proper_content = ImageExtended.new()
@@ -136,7 +136,8 @@ func set_content(content, texture: ImageTexture = null) -> void:
 	else:
 		proper_content = content[0]
 	image = proper_content
-	offset = content[1]
+	if not keep_offset:
+		offset = content[1]
 	if is_instance_valid(texture) and is_instance_valid(texture.get_image()):
 		image_texture = texture
 		if image_texture.get_image().get_size() != image.get_size():

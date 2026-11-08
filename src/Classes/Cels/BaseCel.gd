@@ -77,7 +77,7 @@ func get_content() -> Variant:
 ## The content methods deal with the unique content of each cel type. For example, an Image for
 ## PixelCel, or a Dictionary of settings for a procedural layer type, and null for Groups.
 ## Can be used for linking/unlinking cels, copying, and deleting content.
-func set_content(_content, _texture: ImageTexture = null) -> void:
+func set_content(_content, _texture: ImageTexture = null, _keep_offset: bool = false) -> void:
 	return
 
 

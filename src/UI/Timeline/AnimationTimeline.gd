@@ -1094,7 +1094,7 @@ func _on_CloneLayer_pressed() -> void:
 				)]
 				if new_cel.link_set["cels"].size() > 0:
 					var linked_cel: BaseCel = new_cel.link_set["cels"][0]
-					new_cel.set_content(linked_cel.get_content(), linked_cel.image_texture)
+					new_cel.set_content(linked_cel.get_content(), linked_cel.image_texture, true)
 				else:
 					new_cel.set_content(src_cel.copy_content())
 				new_cel.link_set["cels"].append(new_cel)
