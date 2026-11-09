@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2026-11-07 09:33\n"
+"PO-Revision-Date: 2026-11-09 13:20\n"
 
 msgid "OK"
 msgstr "确定"
@@ -4051,7 +4051,7 @@ msgstr "移动选中的参考图像"
 
 #. Rotates the reference on the canvas
 msgid "Rotate the selected reference image"
-msgstr "移动选中的参考图像"
+msgstr "旋转选中的参考图像"
 
 #. Rotates the reference on the canvas
 msgid "Scale the selected reference image"
