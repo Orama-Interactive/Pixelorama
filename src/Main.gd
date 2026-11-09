@@ -54,6 +54,7 @@ class CLI:
 		["--output", "-o"]: [CLI.set_output, "[path] Name of output file (with extension)"],
 		["--scale"]: [CLI.set_export_scale, "[integer] Scales up the export image by a number"],
 		["--frames", "-f"]: [CLI.set_frames, "[integer-integer] Used to specify frame range"],
+		["--tag", "-t"]: [CLI.set_tag, "[string] Used to specify which tag to export"],
 		["--direction", "-d"]: [CLI.set_direction, "[0, 1, 2] Specifies direction"],
 		["--json"]: [CLI.set_json, "Export the JSON data of the project"],
 		["--split-layers"]: [CLI.set_split_layers, "Each layer exports separately"],
@@ -164,6 +165,14 @@ some useful [b][SYSTEM OPTIONS][/b] are:
 				project.selected_cels = [[frame_number, project.current_layer]]
 				project.change_cel(frame_number)
 				export_profile.frame_current_tag = Export.ExportFrames.SELECTED_FRAMES
+
+	static func set_tag(project: Project, next_arg: String) -> void:
+		if not next_arg.is_empty():
+			var tag_name = next_arg
+			var export_profile := project.export_profile
+			var tag_index = project.animation_tags.find_custom(func(tag): return tag.name == tag_name)
+			if tag_index != -1:
+				export_profile.frame_current_tag = tag_index + Export.ExportFrames.size()
 
 	static func set_direction(project: Project, next_arg: String) -> void:
 		var export_profile := project.export_profile
