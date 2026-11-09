@@ -170,7 +170,9 @@ some useful [b][SYSTEM OPTIONS][/b] are:
 		if not next_arg.is_empty():
 			var tag_name = next_arg
 			var export_profile := project.export_profile
-			var tag_index = project.animation_tags.find_custom(func(tag): return tag.name == tag_name)
+			var tag_index = project.animation_tags.find_custom(
+				func(tag): return tag.name == tag_name
+			)
 			if tag_index != -1:
 				export_profile.frame_current_tag = tag_index + Export.ExportFrames.size()
 
