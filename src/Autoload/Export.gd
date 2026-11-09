@@ -198,7 +198,11 @@ func external_export(project := Global.current_project) -> void:
 func process_data(project := Global.current_project) -> void:
 	var frames := _calculate_frames(project)
 	var export_profile := project.export_profile
-	if frames.size() * (export_profile.repeat_count + 1) > blended_frames.size():
+	# Regenerate cache if repeat count changes or if the frames have changed
+	if (
+		frames.size() * (export_profile.repeat_count + 1) > blended_frames.size()
+		or not blended_frames.has_all(frames)
+	):
 		cache_blended_frames(project)
 	match export_profile.current_tab:
 		ExportTab.IMAGE:
