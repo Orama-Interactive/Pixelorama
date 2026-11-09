@@ -63,6 +63,7 @@ class CLI:
 			CLI.set_sheet_layers_as_separate_files,
 			"Spritesheets in split layer mode will export multiple files for each layer."
 		],
+		["--layer", "-l"]: [CLI.set_layer, "[string] Used to specify which layer to export"],
 		["--help", "-h", "-?"]: [CLI.generate_help, "Displays this help page"],
 		["--scene"]: [CLI.dummy, "Used internally by Godot."]
 	}
@@ -199,6 +200,16 @@ some useful [b][SYSTEM OPTIONS][/b] are:
 
 	static func set_sheet_layers_as_separate_files(project: Project, _next_arg: String) -> void:
 		project.export_profile.sheet_layers_as_separate_files = true
+
+	static func set_layer(project: Project, next_arg: String) -> void:
+		if not next_arg.is_empty():
+			var layer_name = next_arg
+			var export_profile := project.export_profile
+			var layer_index = project.layers.find_custom(
+				func(layer): return layer.name == layer_name
+			)
+			if layer_index != -1:
+				export_profile.export_layers = layer_index + 2
 
 	static func dummy(_project: Project, _next_arg: String) -> void:
 		pass
