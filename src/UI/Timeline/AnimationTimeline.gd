@@ -1097,7 +1097,7 @@ func _on_CloneLayer_pressed() -> void:
 				if new_cel.link_set["cels"].size() > 0:
 					var linked_cel: BaseCel = new_cel.link_set["cels"][0]
 					new_cel.set_content(linked_cel.get_content(), linked_cel.image_texture)
-					# Each cel has it's own offset, the offset of src_cel should be used here
+					# Each cel has its own offset, the offset of src_cel should be used here
 					# instead of linked_cel's offset (which was set by linked_cel.get_content()).
 					new_cel.offset = src_cel.offset
 				else:
