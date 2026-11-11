@@ -412,7 +412,10 @@ func deserialize(dict: Dictionary) -> void:
 				link_set["cels"].append(cel)
 				cel.link_set = link_set
 				var linked_cel: BaseCel = link_set["cels"][0]
+				var correct_offset := cel.offset
 				cel.set_content(linked_cel.get_content(), linked_cel.image_texture)
+				## linked_cel.get_content() overwrites the offset too which is not desired
+				cel.offset = correct_offset
 			cel_link_sets.append(link_set)
 	if dict.has("effects"):
 		for effect_dict in dict["effects"]:

@@ -10,6 +10,7 @@ const CHANGELOG_URL := "https://github.com/Orama-Interactive/Pixelorama/blob/mas
 const EXTERNAL_LINK_ICON := preload("res://assets/graphics/misc/external_link.svg")
 const PIXELORAMA_ICON := preload("res://assets/graphics/icons/icon_16x16.png")
 const HEART_ICON := preload("res://assets/graphics/misc/heart.svg")
+const PROJECT_SIZE_TEMPLATE := "⛶ %s×%s"
 
 var text_server := TextServerManager.get_primary_interface()
 var recent_projects := []
@@ -79,7 +80,7 @@ var backup_dialog := Dialog.new("res://src/UI/Dialogs/BackupRestoreDialog.tscn")
 @onready var delete_layout_confirmation := $DeleteLayoutConfirmation as ConfirmationDialog
 @onready var layout_name_line_edit := %LayoutName as LineEdit
 @onready var layout_from_option_button := %LayoutFrom as OptionButton
-@onready var cursor_position_label := %CursorPosition as Label
+@onready var cursor_position_label := %CursorPosition as RichTextLabel
 @onready var current_frame_mark := %CurrentFrameMark as Label
 
 
@@ -192,8 +193,7 @@ func _on_project_switched() -> void:
 	if not project.selection_changed.is_connected(_on_project_selection_changed):
 		project.selection_changed.connect(_on_project_selection_changed)
 	_on_project_selection_changed()
-	var project_size_text := "[%s×%s]" % [project.size.x, project.size.y]
-	_on_cursor_position_text_changed(project_size_text)
+	_on_cursor_position_text_changed(PROJECT_SIZE_TEMPLATE % [project.size.x, project.size.y])
 	edit_menu.set_item_disabled(Global.EditMenu.NEW_BRUSH, not project.has_selection)
 	_update_file_menu_buttons(project)
 	for j in Tiles.MODE.values():
@@ -204,8 +204,7 @@ func _on_project_switched() -> void:
 
 func _on_project_resized() -> void:
 	var project := Global.current_project
-	var project_size_text := "[%s×%s]" % [project.size.x, project.size.y]
-	_on_cursor_position_text_changed(project_size_text)
+	_on_cursor_position_text_changed(PROJECT_SIZE_TEMPLATE % [project.size.x, project.size.y])
 
 
 func _on_project_selection_changed() -> void:
