@@ -35,10 +35,6 @@ func ensure_canvas_point_in_bounds(
 ) -> Vector2i:
 	if image.is_invisible() and change_offset_when_invisible:
 		change_offset(snap_cel_bounds(canvas_pos))
-		if link_set:
-			for cel: BaseCel in link_set["cels"]:
-				if self != cel:
-					cel.offset = offset
 	var local := canvas_pos - offset
 	var new_offset := offset
 	var new_size := image.get_size()
@@ -86,10 +82,6 @@ func shrink_to_content() -> void:
 	var new_offset := offset + used.position
 	resize_cel_image(used.size, -used.position)
 	change_offset(new_offset)
-	if link_set:
-		for cel: BaseCel in link_set["cels"]:
-			if self != cel:
-				cel.change_offset(offset)
 
 
 ## Resizes the [member image] to a [param new_size],
