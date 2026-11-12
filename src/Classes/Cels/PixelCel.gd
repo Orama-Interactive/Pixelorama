@@ -86,6 +86,10 @@ func shrink_to_content() -> void:
 	var new_offset := offset + used.position
 	resize_cel_image(used.size, -used.position)
 	change_offset(new_offset)
+	if link_set:
+		for cel: BaseCel in link_set["cels"]:
+			if self != cel:
+				cel.change_offset(offset)
 
 
 ## Resizes the [member image] to a [param new_size],
