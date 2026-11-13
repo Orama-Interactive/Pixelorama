@@ -665,7 +665,9 @@ func open_image_as_new_tab(path: String, image: Image) -> void:
 
 	var frame := Frame.new()
 	image.convert(project.get_image_format())
-	frame.cels.append(layer.new_cel_from_image(image))
+	var cel := layer.new_cel_from_image(image)
+	cel.shrink_to_content()
+	frame.cels.append(cel)
 
 	project.frames.append(frame)
 	set_new_imported_tab(project, path)
@@ -689,7 +691,9 @@ func open_image_as_spritesheet_tab_smart(
 		)
 		image.convert(project.get_image_format())
 		cropped_image.blit_rect(image, rect, offset)
-		frame.cels.append(layer.new_cel_from_image(cropped_image))
+		var cel := layer.new_cel_from_image(cropped_image)
+		cel.shrink_to_content()
+		frame.cels.append(cel)
 		project.frames.append(frame)
 	set_new_imported_tab(project, path)
 
@@ -716,7 +720,9 @@ func open_image_as_spritesheet_tab(
 			var frame := Frame.new()
 			project.size = cropped_image.get_size()
 			cropped_image.convert(project.get_image_format())
-			frame.cels.append(layer.new_cel_from_image(cropped_image))
+			var cel := layer.new_cel_from_image(cropped_image)
+			cel.shrink_to_content()
+			frame.cels.append(cel)
 			project.frames.append(frame)
 	set_new_imported_tab(project, path)
 
@@ -754,7 +760,9 @@ func open_image_as_spritesheet_layer_smart(
 				project_width, project_height, false, project.get_image_format()
 			)
 			cropped_image.blit_rect(image, sliced_rects[f - start_frame], offset)
-			cels.append(layer.new_cel_from_image(cropped_image))
+			var cel := layer.new_cel_from_image(cropped_image)
+			cel.shrink_to_content()
+			cels.append(cel)
 		else:
 			cels.append(layer.new_empty_cel())
 		# If amount of cels exceede our project frames, then add new frame
@@ -843,7 +851,9 @@ func open_image_as_spritesheet_layer(
 			if not detect_empty:
 				if cropped_image.get_used_rect().size == Vector2i.ZERO:
 					continue  # We don't need this cel
-			cels.append(layer.new_cel_from_image(cropped_image))
+			var cel := layer.new_cel_from_image(cropped_image)
+			cel.shrink_to_content()
+			cels.append(cel)
 		else:
 			cels.append(layer.new_empty_cel())
 		# If amount of cels exceede our project frames, then add new frame
@@ -901,6 +911,7 @@ func open_image_at_cel(image: Image, layer_index := 0, frame_index := 0) -> void
 		undo_data[cel] = (cel as CelTileMap).serialize_undo_data()
 	cel_image.add_data_to_dictionary(undo_data)
 	cel_image.copy_from_custom(image)
+	cel.shrink_to_content()
 	var redo_data := {}
 	if cel is CelTileMap:
 		(cel as CelTileMap).update_tilemap()
@@ -934,7 +945,9 @@ func open_image_as_new_frame(
 		var layer := project.layers[i]
 		if i == layer_index and layer is PixelLayer:
 			image.convert(project.get_image_format())
-			frame.cels.append(layer.new_cel_from_image(image))
+			var cel := (layer as PixelLayer).new_cel_from_image(image)
+			cel.shrink_to_content()
+			frame.cels.append(cel)
 		else:
 			frame.cels.append(project.layers[i].new_empty_cel())
 	if not undo:
@@ -966,7 +979,9 @@ func open_image_as_new_layer(image: Image, file_name: String, frame_index := 0) 
 	for i in project.frames.size():
 		if i == frame_index:
 			image.convert(project.get_image_format())
-			cels.append(layer.new_cel_from_image(image))
+			var cel := layer.new_cel_from_image(image)
+			cel.shrink_to_content()
+			cels.append(cel)
 		else:
 			cels.append(layer.new_empty_cel())
 
