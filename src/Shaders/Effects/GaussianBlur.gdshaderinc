@@ -14,14 +14,15 @@
 //
 // improved with wide Gaussian bell curve and alpha-weighted averaging for correct color
 // on transparent backgrounds.
-vec4 texture_xorgaussian(sampler2D tex, vec2 uv, vec2 pixel_size, float blurriness, int iterations, int quality) {
+vec4 texture_xorgaussian(sampler2D tex, sampler2D selection, vec2 uv, vec2 pixel_size, float blurriness, int iterations, int quality) {
 	vec2 radius = blurriness / (1.0 / pixel_size).xy;
-	float total_weight = 1.0;
 
 	// Center pixel
 	vec4 center = texture(tex, uv);
-	vec3 blur_color_sum = center.rgb * center.a;
-	float blur_alpha_sum = center.a;
+	float center_selection = texture(selection, uv).a;
+	float total_weight = center_selection;
+	vec3 blur_color_sum = center.rgb * center.a * center_selection;
+	float blur_alpha_sum = center.a * center_selection;
 
 	// Add up the colors of pixels around the center pixel according to their gaussian weights.
 	for(float d = 0.0; d < TAU; d += TAU / float(iterations)) {
@@ -29,8 +30,10 @@ vec4 texture_xorgaussian(sampler2D tex, vec2 uv, vec2 pixel_size, float blurrine
 			vec2 directions = uv + vec2(cos(d), sin(d)) * radius * i;
 			// Read color located at the direction (r, theta) = (radius * i, d) relative to center.
 			vec4 sample_col = texture(tex, directions);
+			// Pixels outside the selection must not contribute, otherwise their colors bleed in.
+			float sample_selection = texture(selection, directions).a;
 			// Wide Gaussian: exp(-i^2 * 0.5) - gentle falloff for wider gradient spread
-			float w = exp(-i * i * 0.5);
+			float w = exp(-i * i * 0.5) * sample_selection;
 			blur_color_sum += sample_col.rgb * sample_col.a * w;
 			blur_alpha_sum += sample_col.a * w;
 			total_weight += w;
@@ -43,14 +46,16 @@ vec4 texture_xorgaussian(sampler2D tex, vec2 uv, vec2 pixel_size, float blurrine
 		// Unpremultiply RGB: compute alpha-weighted average color
 		blurred_tex.rgb = blur_color_sum / blur_alpha_sum;
 	}
-	blurred_tex.a = blur_alpha_sum / total_weight;
+	if (total_weight > 0.0) {
+		blurred_tex.a = blur_alpha_sum / total_weight;
+	}
 
 	return blurred_tex;
 }
 
 // Monk's multi-pass gaussian blur — improved with per-iteration Gaussian decay
 // and alpha-weighted averaging for correct color on transparent backgrounds.
-vec4 texture_monksgaussian_multipass(sampler2D tex, vec2 uv, vec2 pixel_size, int iterations, vec2 direction) {
+vec4 texture_monksgaussian_multipass(sampler2D tex, sampler2D selection, vec2 uv, vec2 pixel_size, int iterations, vec2 direction) {
 	vec3 blur_color_sum = vec3(0.0);
 	float blur_alpha_sum = 0.0;
 	float total_weight = 0.0;
@@ -63,17 +68,24 @@ vec4 texture_monksgaussian_multipass(sampler2D tex, vec2 uv, vec2 pixel_size, in
 		vec2 off1 = vec2(1.3846153846) * (direction * size);
 		vec2 off2 = vec2(3.2307692308) * (direction * size);
 
-		vec4 s0 = texture(tex, uv);
-		vec4 s1 = texture(tex, uv + (off1 / resolution));
-		vec4 s2 = texture(tex, uv - (off1 / resolution));
-		vec4 s3 = texture(tex, uv + (off2 / resolution));
-		vec4 s4 = texture(tex, uv - (off2 / resolution));
+		vec2 uv0 = uv;
+		vec2 uv1 = uv + (off1 / resolution);
+		vec2 uv2 = uv - (off1 / resolution);
+		vec2 uv3 = uv + (off2 / resolution);
+		vec2 uv4 = uv - (off2 / resolution);
 
-		float w0 = 0.2270270270 * scale_weight;
-		float w1 = 0.3162162162 * scale_weight;
-		float w2 = 0.3162162162 * scale_weight;
-		float w3 = 0.0702702703 * scale_weight;
-		float w4 = 0.0702702703 * scale_weight;
+		vec4 s0 = texture(tex, uv0);
+		vec4 s1 = texture(tex, uv1);
+		vec4 s2 = texture(tex, uv2);
+		vec4 s3 = texture(tex, uv3);
+		vec4 s4 = texture(tex, uv4);
+
+		// Samples outside the selection must not contribute, otherwise their colors bleed in.
+		float w0 = 0.2270270270 * scale_weight * texture(selection, uv0).a;
+		float w1 = 0.3162162162 * scale_weight * texture(selection, uv1).a;
+		float w2 = 0.3162162162 * scale_weight * texture(selection, uv2).a;
+		float w3 = 0.0702702703 * scale_weight * texture(selection, uv3).a;
+		float w4 = 0.0702702703 * scale_weight * texture(selection, uv4).a;
 
 		blur_color_sum += s0.rgb * s0.a * w0;
 		blur_color_sum += s1.rgb * s1.a * w1;
@@ -94,14 +106,16 @@ vec4 texture_monksgaussian_multipass(sampler2D tex, vec2 uv, vec2 pixel_size, in
 	if (blur_alpha_sum > 0.0) {
 		blurred_tex.rgb = blur_color_sum / blur_alpha_sum;
 	}
-	blurred_tex.a = blur_alpha_sum / total_weight;
+	if (total_weight > 0.0) {
+		blurred_tex.a = blur_alpha_sum / total_weight;
+	}
 
 	return blurred_tex;
 }
 
 // NoDev's gaussian blur functions — improved with wide Gaussian bell curve
 // and alpha-weighted averaging for correct color on transparent backgrounds.
-vec4 texture_nodevgaussian_singlepass(sampler2D tex, vec2 uv, vec2 pixel_size, float blurriness, float radius) {
+vec4 texture_nodevgaussian_singlepass(sampler2D tex, sampler2D selection, vec2 uv, vec2 pixel_size, float blurriness, float radius) {
 	float sigma = max(1.0, blurriness * 0.7);
 	vec3 blur_color_sum = vec3(0);
 	float blur_alpha_sum = 0.0;
@@ -112,7 +126,9 @@ vec4 texture_nodevgaussian_singlepass(sampler2D tex, vec2 uv, vec2 pixel_size, f
 		vec2 anchor = vec2(cos(d), sin(d)) * radius * i;
 		vec2 directions = uv + pixel_size * anchor;
 		vec4 sample_col = texture(tex, directions);
-		float w = exp(-(i * i) / (2.0 * sigma * sigma));
+		// Pixels outside the selection must not contribute, otherwise their colors bleed in.
+		float sample_selection = texture(selection, directions).a;
+		float w = exp(-(i * i) / (2.0 * sigma * sigma)) * sample_selection;
 		blur_color_sum += sample_col.rgb * sample_col.a * w;
 		blur_alpha_sum += sample_col.a * w;
 		total_weight += w;
@@ -122,12 +138,14 @@ vec4 texture_nodevgaussian_singlepass(sampler2D tex, vec2 uv, vec2 pixel_size, f
 	if (blur_alpha_sum > 0.0) {
 		blurred_tex.rgb = blur_color_sum / blur_alpha_sum;
 	}
-	blurred_tex.a = blur_alpha_sum / total_weight;
+	if (total_weight > 0.0) {
+		blurred_tex.a = blur_alpha_sum / total_weight;
+	}
 
 	return blurred_tex;
 }
 
-vec4 texture_nodevgaussian_multipass(sampler2D tex, vec2 uv, vec2 pixel_size, float blurriness, vec2 direction) {
+vec4 texture_nodevgaussian_multipass(sampler2D tex, sampler2D selection, vec2 uv, vec2 pixel_size, float blurriness, vec2 direction) {
 	float sigma = max(1.0, blurriness * 0.7);
 	vec3 blur_color_sum = vec3(0);
 	float blur_alpha_sum = 0.0;
@@ -136,7 +154,9 @@ vec4 texture_nodevgaussian_multipass(sampler2D tex, vec2 uv, vec2 pixel_size, fl
 	for (float i = -blurriness; i <= blurriness; i++) {
 		vec2 directions = uv + pixel_size * (direction * i);
 		vec4 sample_col = texture(tex, directions);
-		float w = exp(-(i * i) / (2.0 * sigma * sigma));
+		// Pixels outside the selection must not contribute, otherwise their colors bleed in.
+		float sample_selection = texture(selection, directions).a;
+		float w = exp(-(i * i) / (2.0 * sigma * sigma)) * sample_selection;
 		blur_color_sum += sample_col.rgb * sample_col.a * w;
 		blur_alpha_sum += sample_col.a * w;
 		total_weight += w;
@@ -146,7 +166,9 @@ vec4 texture_nodevgaussian_multipass(sampler2D tex, vec2 uv, vec2 pixel_size, fl
 	if (blur_alpha_sum > 0.0) {
 		blurred_tex.rgb = blur_color_sum / blur_alpha_sum;
 	}
-	blurred_tex.a = blur_alpha_sum / total_weight;
+	if (total_weight > 0.0) {
+		blurred_tex.a = blur_alpha_sum / total_weight;
+	}
 
 	return blurred_tex;
 }
@@ -165,19 +187,19 @@ vec4 apply_effect(
 	vec2 pixel_size = 1.0 / vec2(textureSize(source_texture, 0));
 	vec4 col = original_color;
 	if (blur_type == 0) {
-		vec4 xorgaussian = texture_xorgaussian(source_texture, uv, pixel_size, float(blur_amount), 32, 8);
+		vec4 xorgaussian = texture_xorgaussian(source_texture, selection, uv, pixel_size, float(blur_amount), 32, 8);
 		col = xorgaussian;
 	}
 	else if (blur_type == 1) {
-		vec4 monksgaussian_multipass = texture_monksgaussian_multipass(source_texture, uv, pixel_size, blur_amount, blur_direction);
+		vec4 monksgaussian_multipass = texture_monksgaussian_multipass(source_texture, selection, uv, pixel_size, blur_amount, blur_direction);
 		col = monksgaussian_multipass;
 	}
 	else if (blur_type == 2) {
-		vec4 nodevgaussian_singlepass = texture_nodevgaussian_singlepass(source_texture, uv, pixel_size, float(blur_amount), blur_radius);
+		vec4 nodevgaussian_singlepass = texture_nodevgaussian_singlepass(source_texture, selection, uv, pixel_size, float(blur_amount), blur_radius);
 		col = nodevgaussian_singlepass;
 	}
 	else if (blur_type == 3) {
-		vec4 nodevgaussian_multipass = texture_nodevgaussian_multipass(source_texture, uv, pixel_size, float(blur_amount), blur_direction);
+		vec4 nodevgaussian_multipass = texture_nodevgaussian_multipass(source_texture, selection, uv, pixel_size, float(blur_amount), blur_direction);
 		col = nodevgaussian_multipass;
 	}
 	else {
