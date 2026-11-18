@@ -317,7 +317,6 @@ func serialize() -> Dictionary:
 		tileset_data.append(tileset.serialize())
 
 	var metadata := _serialize_metadata(self)
-
 	var project_data := {
 		"pixelorama_version": Global.current_version,
 		"pxo_version": ProjectSettings.get_setting("application/config/Pxo_Version"),
@@ -569,11 +568,11 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 		y_symmetry_point = dict.symmetry_points[1]
 		for point in x_symmetry_axis.points.size():
 			var new_pos := x_symmetry_axis.points[point]
-			new_pos.y = floorf(y_symmetry_point / 2 + 1)
+			new_pos.y = snappedf((y_symmetry_point + 1) / 2, 0.5)
 			x_symmetry_axis.set_point_position(point, new_pos)
 		for point in y_symmetry_axis.points.size():
 			var new_pos := y_symmetry_axis.points[point]
-			new_pos.x = floorf(x_symmetry_point / 2 + 1)
+			new_pos.x = snappedf((x_symmetry_point + 1) / 2, 0.5)
 			y_symmetry_axis.set_point_position(point, new_pos)
 	next_keyframe_id = dict.get("next_keyframe_id", next_keyframe_id)
 	var exp_settings = dict.get("export_profile", {})
