@@ -52,14 +52,14 @@ func delete_point(idx: int) -> void:
 	project.undo_redo.create_action("Delete Vanishing Point")
 	project.undo_redo.add_do_method(
 		# Do: Delete vanishing point
-		func ():
+		func():
 			var point := vanishing_point_container.get_child(idx)
 			delete_pool.append(point.serialize())
 			point.update_data_to_project(true)
 	)
 	project.undo_redo.add_undo_method(
 		# Undo: Delete vanishing point
-		func ():
+		func():
 			var point = delete_pool.pop_back()
 			Global.current_project.vanishing_points.insert(idx, point)
 			_recreate_points()
