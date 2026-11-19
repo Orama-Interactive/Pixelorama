@@ -331,7 +331,8 @@ func serialize() -> Dictionary:
 		"next_keyframe_id": next_keyframe_id,
 		"tags": tag_data,
 		"guides": guide_data,
-		"symmetry_points": [
+		"symmetry_points":
+		[
 			# Sort in same order as SymmetryGuide.Types
 			x_symmetry_point,
 			y_symmetry_point,
@@ -593,9 +594,10 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			new_pos.x = snappedf((x_symmetry_point + 1) / 2, 0.5)
 			y_symmetry_axis.set_point_position(point, new_pos)
 		if diagonal_xy_symmetry_axis.points.size() == 2:
-			var half_dist := diagonal_xy_symmetry_axis.points[0].distance_to(
-				diagonal_xy_symmetry_axis.points[1]
-			) / 2
+			var half_dist := (
+				diagonal_xy_symmetry_axis.points[0].distance_to(diagonal_xy_symmetry_axis.points[1])
+				/ 2
+			)
 			diagonal_xy_symmetry_axis.set_point_position(
 				0, xy_symmetry_point + Tools.XY_LINE * half_dist
 			)
@@ -603,9 +605,12 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 				1, xy_symmetry_point - Tools.XY_LINE * half_dist
 			)
 		if diagonal_x_minus_y_symmetry_axis.points.size() == 2:
-			var half_dist := diagonal_x_minus_y_symmetry_axis.points[0].distance_to(
-				diagonal_x_minus_y_symmetry_axis.points[1]
-			) / 2
+			var half_dist := (
+				diagonal_x_minus_y_symmetry_axis.points[0].distance_to(
+					diagonal_x_minus_y_symmetry_axis.points[1]
+				)
+				/ 2
+			)
 			diagonal_x_minus_y_symmetry_axis.set_point_position(
 				0, x_minus_y_symmetry_point + Tools.X_MINUS_Y_LINE * half_dist
 			)
