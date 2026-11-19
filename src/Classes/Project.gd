@@ -78,7 +78,7 @@ var palettes: Dictionary[String, Palette] = {}
 var project_current_palette_name: String = ""
 var reference_images: Array[ReferenceImage] = []
 var reference_index: int = -1  ## The currently selected index ReferenceImage
-var vanishing_points := []  ## Array of Vanishing Points
+var vanishing_points: Array[Dictionary] = []  ## Array of Vanishing Points data.
 var fps := 6.0:
 	set(value):
 		fps = value
@@ -562,7 +562,7 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			ri.deserialize(g)
 			Global.canvas.reference_image_container.add_child(ri)
 	if dict.has("vanishing_points"):
-		vanishing_points = dict.vanishing_points
+		vanishing_points = Array(dict.vanishing_points, TYPE_DICTIONARY, &"", null)
 	if dict.has("symmetry_points"):
 		x_symmetry_point = dict.symmetry_points[0]
 		y_symmetry_point = dict.symmetry_points[1]

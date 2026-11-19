@@ -31,7 +31,8 @@ func serialize() -> Dictionary:
 	return data
 
 
-func deserialize(start_data: Dictionary) -> void:
+## This is not meant to be called directly (use [method initiate] instead).
+func _deserialize(start_data: Dictionary) -> void:
 	if start_data:  # Data is not {} means the project knows about this point
 		if start_data.has("pos_x") and start_data.has("pos_y"):
 			pos_x.value = start_data.pos_x
@@ -46,12 +47,12 @@ func deserialize(start_data: Dictionary) -> void:
 		update_data_to_project()
 
 	add_line({}, true)  # This is a tracker line (Always follows mouse)
-	color_picker_button.color = color
 	update_boundary_color()
+	color_picker_button.color = color
 
 
 func initiate(start_data := {}, idx := -1) -> void:
-	deserialize(start_data)
+	_deserialize(start_data)
 	# Title of Vanishing point button
 	if idx != -1:  # If the initialization is part of a Redo
 		title.point_text = str("Point: ", idx + 1)
@@ -227,17 +228,18 @@ func remove_line(line_index: int) -> void:
 func update_data_to_project(removal := false) -> void:
 	var project := Global.current_project
 	var idx := get_index()
-	# If deletion is requested
 	if removal:
+		# If deletion is requested remove it's data from project and queue it for removal
 		project.vanishing_points.remove_at(idx)
-		return
-	# If project knows about this vanishing point then update it
-	var data := serialize()
-	if idx < project.vanishing_points.size():
-		project.vanishing_points[idx] = data
-	# If project doesn't know about this vanishing point then NOW it knows
+		queue_free()
 	else:
-		project.vanishing_points.append(data)
+		# If project knows about this vanishing point then update it.
+		# If it's a newly made vanishing point then add it's data to the project
+		var data := serialize()
+		if idx < project.vanishing_points.size():
+			project.vanishing_points[idx] = data
+		else:
+			project.vanishing_points.append(data)
 	Global.current_project.has_changed = true
 
 
