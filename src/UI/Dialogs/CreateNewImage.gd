@@ -165,8 +165,7 @@ func _on_confirmed() -> void:
 		var clipboard_img := SelectionNode.get_clipboard_image(
 			current_content == Content.CLIPBOARD_APP
 		)
-		var clipboad_rect := Rect2i(Vector2i.ZERO, clipboard_img.get_size())
-		cel_image.blit_rect(clipboard_img, clipboad_rect, Vector2i.ZERO)
+		cel_image.copy_from(clipboard_img)
 	Global.projects.append(new_project)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1
 
