@@ -412,8 +412,21 @@ func deserialize(dict: Dictionary) -> void:
 				link_set["cels"].append(cel)
 				cel.link_set = link_set
 				var linked_cel: BaseCel = link_set["cels"][0]
+				var correct_offset := cel.offset
 				cel.set_content(linked_cel.get_content(), linked_cel.image_texture)
-			cel_link_sets.append(link_set)
+				## linked_cel.get_content() overwrites the offset too which is not desired
+				cel.offset = correct_offset
+			# Backwards compatibility: v1.2.4 allowed linked cels with different offsets.
+			# That feature no longer exists so we have to unlink those cels.
+			var first_cel: BaseCel = link_set["cels"][0]
+			var mismatch: bool = link_set["cels"].any(
+				func(cel): return cel.offset != first_cel.offset
+			)
+			if mismatch:
+				for cel in link_set["cels"].duplicate():
+					link_cel(cel, null)
+			else:
+				cel_link_sets.append(link_set)
 	if dict.has("effects"):
 		for effect_dict in dict["effects"]:
 			if not typeof(effect_dict) == TYPE_DICTIONARY:

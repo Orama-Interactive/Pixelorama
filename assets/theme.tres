@@ -514,20 +514,6 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
-[sub_resource type="StyleBoxEmpty" id="123"]
-
-[sub_resource type="StyleBoxFlat" id="52"]
-content_margin_left = 4.0
-content_margin_top = 4.0
-content_margin_right = 4.0
-content_margin_bottom = 4.0
-bg_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.0679686, 0.0679686, 0.0679686, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_co58r"]
 content_margin_left = 4.0
 content_margin_top = 4.0
@@ -884,9 +870,7 @@ PopupMenu/styles/panel = SubResource("105")
 PopupMenu/styles/separator = SubResource("115")
 PopupPanel/styles/panel = SubResource("StyleBoxFlat_fc11h")
 ProgressBar/colors/font_color = Color(0.776471, 0.776471, 0.776471, 1)
-RichTextLabel/colors/default_color = Color(0.77832, 0.77832, 0.77832, 1)
-RichTextLabel/styles/focus = SubResource("123")
-RichTextLabel/styles/normal = SubResource("52")
+RichTextLabel/colors/default_color = Color(0.776471, 0.776471, 0.776471, 1)
 RulerButton/base_type = &"Button"
 RulerButton/styles/disabled = SubResource("StyleBoxFlat_co58r")
 RulerButton/styles/focus = SubResource("1")

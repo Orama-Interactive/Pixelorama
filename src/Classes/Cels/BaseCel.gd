@@ -58,6 +58,12 @@ func get_cel_rect() -> Rect2i:
 ## Changes the [member offset] of the cel.
 func change_offset(new_offset: Vector2i) -> void:
 	offset = new_offset
+	if link_set:
+		for cel: BaseCel in link_set["cels"]:
+			if self != cel:
+				# Needs to be set_deferred, otherwise the offset is wrong
+				# if multiple linked cels are all selected at the same time.
+				cel.set_deferred("offset", offset)
 
 
 # Methods to Override:
