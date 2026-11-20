@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="DockableLayout" format=3]
+
+[ext_resource type="Script" path="res://addons/dockable_container/layout_panel.gd" id="1"]
+[ext_resource type="Script" path="res://addons/dockable_container/layout_split.gd" id="2"]
+[ext_resource type="Script" path="res://addons/dockable_container/layout.gd" id="3"]
+
+[sub_resource type="Resource" id="Resource_11ams"]
+resource_name = "Tabs"
+script = ExtResource("1")
+names = PackedStringArray("Main Canvas")
+current_tab = 0
+
+[sub_resource type="Resource" id="Resource_6x0gc"]
+resource_name = "Tabs"
+script = ExtResource("1")
+names = PackedStringArray("Palettes", "Color Picker", "Tiles", "3D Object Tree", "Reference Images", "Left Tool Options", "Right Tool Options", "Second Canvas", "Canvas Preview", "Ceramic")
+current_tab = 0
+
+[sub_resource type="Resource" id="Resource_poj22"]
+resource_name = "Split"
+script = ExtResource("2")
+direction = 0
+percent = 1.0
+first = SubResource("Resource_11ams")
+second = SubResource("Resource_6x0gc")
+
+[sub_resource type="Resource" id="Resource_p5t51"]
+resource_name = "Tabs"
+script = ExtResource("1")
+names = PackedStringArray("Tools", "Global Tool Options", "Animation Timeline", "Perspective Editor", "Recorder")
+current_tab = 0
+
+[sub_resource type="Resource" id="Resource_guryd"]
+resource_name = "Split"
+script = ExtResource("2")
+direction = 1
+percent = 0.6869834710743802
+first = SubResource("Resource_poj22")
+second = SubResource("Resource_p5t51")
+
+[resource]
+resource_name = "Mini Screen"
+script = ExtResource("3")
+root = SubResource("Resource_guryd")
+hidden_tabs = {
+"Color Picker Sliders": true,
+"PBR Preview": true
+}
+windows = {}
+save_on_change = true
+layout_reset_path = ""
