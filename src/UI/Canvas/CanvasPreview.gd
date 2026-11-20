@@ -48,9 +48,8 @@ func _draw() -> void:
 				# Otherwise showing a different frame than the main canvas is impossible
 				_draw_layers()
 		Mode.SPRITESHEET:
-			var image := project.frames[project.current_frame].cels[0].get_image()
-			var slices := _split_spritesheet(image, h_frames, v_frames)
-			# Limit start and end
+			var slices := _get_sheet_rects(project.size, h_frames, v_frames)
+			# Limit start and end values.
 			if end_sprite_sheet_frame > slices.size():
 				end_sprite_sheet_frame = slices.size()
 			if start_sprite_sheet_frame < 0:
@@ -59,12 +58,9 @@ func _draw() -> void:
 				frame_index = start_sprite_sheet_frame - 1
 			var src_rect := slices[frame_index]
 			var rect := Rect2(Vector2.ZERO, src_rect.size)
-			# If we just use the first cel and it happens to be a GroupCel
-			# nothing will get drawn
-			var cel_to_draw := Global.current_project.find_first_drawable_cel()
-			# Placeholder so we can have a material here
-			if is_instance_valid(cel_to_draw):
-				draw_texture_rect_region(cel_to_draw.image_texture, rect, src_rect)
+			# Placeholder so we can have a material here.
+			var image_to_draw := project.empty_image_texture
+			draw_texture_rect_region(image_to_draw, rect, src_rect)
 			transparent_checker.fit_rect(rect)
 
 
@@ -123,12 +119,12 @@ func _cel_switched() -> void:
 	queue_redraw()
 
 
-func _split_spritesheet(image: Image, horiz: int, vert: int) -> Array[Rect2]:
+func _get_sheet_rects(sheet_size: Vector2i, horiz: int, vert: int) -> Array[Rect2]:
 	var result: Array[Rect2] = []
-	horiz = mini(horiz, image.get_size().x)
-	vert = mini(vert, image.get_size().y)
-	var frame_width := image.get_size().x / horiz
-	var frame_height := image.get_size().y / vert
+	horiz = mini(horiz, sheet_size.x)
+	vert = mini(vert, sheet_size.y)
+	var frame_width := sheet_size.x / horiz
+	var frame_height := sheet_size.y / vert
 	for yy in range(vert):
 		for xx in range(horiz):
 			result.append(Rect2(frame_width * xx, frame_height * yy, frame_width, frame_height))

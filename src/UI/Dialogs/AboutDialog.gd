@@ -78,7 +78,9 @@ const AUTHORS: PackedStringArray = [
 	"Vaibhav Kubre (kubre)",
 	"Vance Palacio (vanceism7)",
 	"VernalUmbrella",
+	"vibrant-reindeer",
 	"Vriska Weaver (henlo-birb)",
+	"williamchange",
 	"zibetnu",
 ]
 
@@ -149,6 +151,7 @@ const TRANSLATORS_DICTIONARY := {
 	"toxidcheckery": ["Russian"],
 	"POCAT228": ["Russian"],
 	"Кирилл Ванин (Arizulu)": ["Russian"],
+	"m1xim4ik (m1xim4ik.1)": ["Russian"],
 	"stomleny_cmok": ["Russian", "Ukrainian"],
 	"Bohdan Matviiv (BodaMat)": ["Ukrainian"],
 	"Ruslan Hryschuk (kifflow)": ["Ukrainian"],
@@ -212,6 +215,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Martin Novák (novhack)": ["Czech"],
 	"Lullius": ["Norwegian Bokmål"],
 	"Aninus Partikler (aninuscsalas)": ["Hungarian"],
+	"Gilbike": ["Hungarian"],
 	"jaehyeon1090": ["Korean"],
 	"sfun_G": ["Korean"],
 	"랄이 (lalicraft)": ["Korean"],
@@ -237,6 +241,7 @@ const TRANSLATORS_DICTIONARY := {
 	"Lucifer25x": ["Turkish"],
 	"izan (i.zan)": ["Turkish"],
 	"cosmichead": ["Turkish"],
+	"Alkan K. (alkankim)": ["Turkish"],
 	"CaelusV": ["Danish"],
 	"Jonas Vejlin (jonas.vejlin)": ["Danish"],
 	"Cat (cultcats)": ["Danish"],
@@ -261,7 +266,6 @@ const DONORS: PackedStringArray = [
 	"Jérôme P.",
 	"Jonas Rudlang",
 	"Mike King",
-	"Alban Jusufi",
 	"mixhi"
 ]
 

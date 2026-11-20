@@ -23,7 +23,7 @@ static func instantiate(resource_title: String, updater: Callable, resource_imag
 	var resource_proj := ResourceProject.new([], resource_title, resource_image.get_size())
 	resource_proj.layers.append(PixelLayer.new(resource_proj))
 	resource_proj.frames.append(resource_proj.new_empty_frame())
-	resource_proj.frames[0].cels[0].set_content(resource_image)
+	resource_proj.frames[0].cels[0].set_content([resource_image, Vector2i.ZERO])
 	resource_proj.resource_updated.connect(updater)
 	Global.projects.append(resource_proj)
 	Global.tabs.current_tab = Global.tabs.get_tab_count() - 1

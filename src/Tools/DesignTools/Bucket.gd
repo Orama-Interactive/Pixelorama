@@ -341,10 +341,14 @@ func fill_in_area(pos: Vector2i) -> void:
 func fill_in_selection() -> void:
 	var project := Global.current_project
 	var cels := _get_selected_draw_cels(false)
+	# This is needed to ensure that the color used to fill is not wrong, due to float
+	# rounding issues.
+	var color_str: String = tool_slot.color.to_html()
+	var color := Color(color_str)
 	if _fill_with == FillWith.COLOR or _pattern == null:
 		if project.has_selection:
 			var filler := project.new_empty_image()
-			filler.fill(tool_slot.color)
+			filler.fill(color)
 			var selection_map_copy := project.selection_map.return_cropped_copy(
 				project, project.size
 			)
@@ -357,7 +361,7 @@ func fill_in_selection() -> void:
 		else:
 			for cel: PixelCel in cels:
 				var image := project.crop_image_to_project_size(cel.get_image(), cel.offset)
-				image.fill(tool_slot.color)
+				image.fill(color)
 				cel.blit_image_to_cel(image)
 				#image.convert_rgb_to_indexed()
 	else:
@@ -385,7 +389,7 @@ func fill_in_selection() -> void:
 			"selection": selection_tex,
 			"size": project.size,
 			"pattern": pattern_tex,
-			"mix_color": tool_slot.color,
+			"mix_color": color,
 			"pattern_interpolation": _pattern_interpolate / 100.0
 		}
 		if is_instance_valid(pattern_tex):
