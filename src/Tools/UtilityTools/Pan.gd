@@ -3,6 +3,7 @@ extends BaseTool
 var _tool_active := false
 var _last_position := Vector2.INF
 
+
 func draw_start(pos: Vector2i) -> void:
 	super.draw_start(pos)
 	for camera: CanvasCamera in get_tree().get_nodes_in_group("CanvasCameras"):
