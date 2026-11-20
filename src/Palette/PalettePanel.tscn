@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://brrmadr5hbecl" path="res://src/Palette/PaletteGrid.gd" id="5"]
 [ext_resource type="Texture2D" uid="uid://des606sdhau2i" path="res://assets/graphics/layers/lock.png" id="5_unk2t"]
 [ext_resource type="Script" uid="uid://bxugfciwcodjx" path="res://src/Palette/PalettePanel.gd" id="8"]
+[ext_resource type="Texture2D" uid="uid://d3nhxgjkgdwx4" path="res://assets/graphics/timeline/loop_pingpong.png" id="8_unk2t"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_4n3yg"]
 action = &"edit_palette"
@@ -181,6 +182,46 @@ size_flags_vertical = 0
 texture = ExtResource("3")
 stretch_mode = 3
 
+[node name="ExpandSwatchesH" type="Button" parent="PaletteVBoxContainer/PaletteButtons" unique_id=2001677006 groups=["UIButtons"]]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "Expand swatches horizontally"
+toggle_mode = true
+
+[node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/ExpandSwatchesH" unique_id=802047137]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("8_unk2t")
+stretch_mode = 3
+
+[node name="ExpandSwatchesV" type="Button" parent="PaletteVBoxContainer/PaletteButtons" unique_id=1365765247 groups=["UIButtons"]]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+tooltip_text = "Expand swatches vertically"
+toggle_mode = true
+
+[node name="TextureRect" type="TextureRect" parent="PaletteVBoxContainer/PaletteButtons/ExpandSwatchesV" unique_id=131601005]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("8_unk2t")
+stretch_mode = 3
+
 [node name="HSeparator" type="HSeparator" parent="PaletteVBoxContainer" unique_id=1598266660]
 layout_mode = 2
 
@@ -210,6 +251,8 @@ layout_mode = 2
 [connection signal="item_selected" from="PaletteVBoxContainer/PaletteButtons/PaletteSelect" to="." method="_on_PaletteSelect_item_selected"]
 [connection signal="pressed" from="PaletteVBoxContainer/PaletteButtons/EditPalette" to="." method="_on_EditPalette_pressed"]
 [connection signal="pressed" from="PaletteVBoxContainer/PaletteButtons/AddPalette" to="." method="_on_AddPalette_pressed"]
+[connection signal="toggled" from="PaletteVBoxContainer/PaletteButtons/ExpandSwatchesH" to="." method="_on_Expand_Swatches_H_toggled"]
+[connection signal="toggled" from="PaletteVBoxContainer/PaletteButtons/ExpandSwatchesV" to="." method="_on_Expand_Swatches_V_toggled"]
 [connection signal="swatch_double_clicked" from="PaletteVBoxContainer/ScrollContainer/PaletteGrid" to="." method="_on_PaletteGrid_swatch_double_clicked"]
 [connection signal="swatch_dropped" from="PaletteVBoxContainer/ScrollContainer/PaletteGrid" to="." method="_on_PaletteGrid_swatch_dropped"]
 [connection signal="swatch_pressed" from="PaletteVBoxContainer/ScrollContainer/PaletteGrid" to="." method="_on_PaletteGrid_swatch_pressed"]

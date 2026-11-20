@@ -21,7 +21,25 @@ var grid_locked := true:
 		else:
 			_on_resized()
 var swatch_size := DEFAULT_SWATCH_SIZE
-
+var expand_swatches_horizontally := false:
+	set(value):
+		expand_swatches_horizontally = value
+		if expand_swatches_horizontally:
+			for swatch in swatches:
+				swatch.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		else:
+			for swatch in swatches:
+				swatch.size_flags_horizontal = Control.SIZE_FILL
+		_on_resized()
+var expand_swatches_vertically := false:
+	set(value):
+		expand_swatches_vertically = value
+		if expand_swatches_vertically:
+			for swatch in swatches:
+				swatch.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		else:
+			for swatch in swatches:
+				swatch.size_flags_vertical = Control.SIZE_FILL
 
 func _ready() -> void:
 	swatch_size = Global.config_cache.get_value("palettes", "swatch_size", DEFAULT_SWATCH_SIZE)
@@ -64,6 +82,12 @@ func setup_swatches() -> void:
 	swatches.clear()
 	for i in range(grid_size.x * grid_size.y):
 		var swatch := PaletteSwatch.new()
+		# Set size flags if swatch expand toggles are true
+		if expand_swatches_horizontally:
+			swatch.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		if expand_swatches_vertically:
+			swatch.size_flags_vertical = Control.SIZE_EXPAND_FILL
+		
 		swatch.index = i
 		init_swatch(swatch)
 		swatch.pressed.connect(_on_palette_swatch_pressed.bind(i))
@@ -204,8 +228,12 @@ func change_swatch_size(size_diff: Vector2) -> void:
 
 func _on_resized() -> void:
 	if not grid_locked:
-		columns = maxi(1, size.x / (swatch_size.x + 3))
-
+		if not expand_swatches_horizontally:
+			columns = maxi(1, size.x / (swatch_size.x + 3))
+		else:
+			# No additional columns will be added once swatch amount = columns
+			# so that swatches can fill-expand
+			columns = maxi(1, clampi(size.x / (swatch_size.x + 3), 0, swatches.size()))
 
 func _on_palette_swatch_pressed(mouse_button: int, index: int) -> void:
 	var palette_index := convert_grid_index_to_palette_index(index)
