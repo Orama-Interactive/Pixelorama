@@ -480,6 +480,15 @@ func _setup_window_menu() -> void:
 func _setup_panels_submenu(item: String) -> void:
 	panels_submenu.set_name("panels_submenu")
 	panels_submenu.hide_on_checkable_item_selection = false
+	populate_panels_submenu()
+
+	panels_submenu.id_pressed.connect(_panels_submenu_id_pressed)
+	window_menu.add_child(panels_submenu)
+	window_menu.add_submenu_item(item, panels_submenu.get_name())
+
+
+func populate_panels_submenu() -> void:
+	panels_submenu.clear()  # Does not do anything if it's called for the first time
 	for element in ui_elements:
 		if element.name == "Tiles" or element.name == "3D Object Tree":
 			continue
@@ -488,10 +497,6 @@ func _setup_panels_submenu(item: String) -> void:
 		var is_hidden: bool = main_ui.is_control_hidden(element)
 		var index := panels_submenu.get_item_index(id)
 		panels_submenu.set_item_checked(index, !is_hidden)
-
-	panels_submenu.id_pressed.connect(_panels_submenu_id_pressed)
-	window_menu.add_child(panels_submenu)
-	window_menu.add_submenu_item(item, panels_submenu.get_name())
 
 
 func _setup_layouts_submenu(item: String) -> void:
