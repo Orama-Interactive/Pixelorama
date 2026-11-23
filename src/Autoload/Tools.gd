@@ -428,6 +428,10 @@ func _ready() -> void:
 
 	horizontal_mirror = Global.config_cache.get_value("tools", "horizontal_mirror", false)
 	vertical_mirror = Global.config_cache.get_value("tools", "vertical_mirror", false)
+	diagonal_xy_mirror = Global.config_cache.get_value("tools", "diagonal_xy_mirror", false)
+	diagonal_x_minus_y_mirror = Global.config_cache.get_value(
+		"tools", "diagonal_x_minus_y_mirror", false
+	)
 	pixel_perfect = Global.config_cache.get_value("tools", "pixel_perfect", false)
 	alpha_locked = Global.config_cache.get_value("tools", "alpha_locked", false)
 
