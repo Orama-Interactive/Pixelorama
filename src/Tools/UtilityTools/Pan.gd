@@ -14,9 +14,7 @@ func draw_start(pos: Vector2i) -> void:
 
 func _input(event: InputEvent) -> void:
 	if _tool_active:
-		if (
-			Input.is_action_pressed(&"change_tool_mode") and event is InputEventMouseMotion
-		):
+		if Input.is_action_pressed(&"change_tool_mode") and event is InputEventMouseMotion:
 			var new_rel = (
 				Global.canvas.get_local_mouse_position()
 				- Vector2(Global.current_project.size) / 2.0
