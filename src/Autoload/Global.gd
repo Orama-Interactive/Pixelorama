@@ -1310,7 +1310,12 @@ func dialog_open(open: bool, is_file_dialog := false) -> void:
 
 
 func popup_error(text: String) -> void:
-	error_dialog.set_text(text)
+	if error_dialog.visible:
+		error_dialog.dialog_text += "\n\n" + text
+
+	else:
+		error_dialog.set_text(text)
+
 	error_dialog.popup_centered_clamped()
 	dialog_open(true)
 
