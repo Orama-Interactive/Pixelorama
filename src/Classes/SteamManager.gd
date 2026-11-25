@@ -1,7 +1,7 @@
 class_name SteamManager
 extends Node
 
-## A class that manages Steam-specific functionalities. Currently only unlocks achievements.
+## A class that manages Steam-specific functionalities.
 ## On non-Steam builds, this node gets automatically freed.
 
 ## The Steam app id of Pixelorama.
@@ -37,6 +37,31 @@ func _ready() -> void:
 	if not steam_class.isSteamRunning():
 		print("Steam is not running!")
 		return
+
+
+## Wrapper for [method OS.execute] that executes the given process outside the Steam Linux
+## Runtime. Should only be used when [method is_in_runtime] returns [code]true[/code].
+static func execute_outside_runtime(
+	path: String,
+	arguments: PackedStringArray,
+	output: Array = [],
+	read_stderr := false,
+	open_console := false
+) -> int:
+	# gdlint:ignore = max-line-length
+	# https://gitlab.steamos.cloud/steamrt/steam-runtime-tools/-/blob/main/docs/slr-for-game-developers.md#running-commands-outside-the-container
+	var complete_arguments: PackedStringArray = ["--alongside-steam", "--host", "-c"]
+	complete_arguments.append("%s %s" % [path, " ".join(arguments)])
+	return OS.execute(
+		"steam-runtime-launch-client", complete_arguments, output, read_stderr, open_console
+	)
+
+
+## Returns [code]true[/code] if Pixelorama is running inside the Steam Linux Runtime.
+static func is_in_runtime() -> bool:
+	# gdlint:ignore = max-line-length
+	# https://gitlab.steamos.cloud/steamrt/steam-runtime-tools/-/blob/main/docs/slr-for-game-developers.md#detecting-the-container-environment
+	return OS.is_sandboxed() and "Steam Runtime" in OS.get_distribution_name()
 
 
 ## Unlocks an achievement on Steam based on its [param achievement_name].
