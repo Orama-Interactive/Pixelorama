@@ -36,6 +36,9 @@ var edit_palette_dialog: ConfirmationDialog:
 @onready var sort_button := %Sort as MenuButton
 @onready var sort_button_popup := sort_button.get_popup()
 @onready var lock_grid: Button = %LockGrid
+@onready var expand_swatches_h: Button = %ExpandSwatchesH
+@onready var expand_swatches_v: Button = %ExpandSwatchesV
+
 
 ## This color picker button itself is hidden, but its popup is used to edit color swatches.
 @onready var hidden_color_picker := $"%HiddenColorPickerButton" as ColorPickerButton
@@ -61,6 +64,12 @@ func _ready() -> void:
 	sort_button_popup.add_submenu_node_item("Palette Sort", sort_submenu)
 	lock_grid.button_pressed = Global.config_cache.get_value(
 		"palettes", "palette_locked", palette_grid.grid_locked
+	)
+	expand_swatches_h.button_pressed = Global.config_cache.get_value(
+		"palettes", "palette_expand_swatches_horizontally", palette_grid.expand_swatches_horizontally
+	)
+	expand_swatches_v.button_pressed = Global.config_cache.get_value(
+		"palettes", "palette_expand_swatches_vertically", palette_grid.expand_swatches_vertically
 	)
 
 	Palettes.palette_selected.connect(select_palette)
@@ -173,6 +182,14 @@ func toggle_add_delete_buttons() -> void:
 	else:
 		delete_color_button.mouse_default_cursor_shape = CURSOR_POINTING_HAND
 
+
+func _on_Expand_Swatches_H_toggled(toggled_on: bool) -> void:
+	palette_grid.expand_swatches_horizontally = toggled_on
+	Global.config_cache.set_value("palettes", "palette_expand_swatches_horizontally", toggled_on)
+
+func _on_Expand_Swatches_V_toggled(toggled_on: bool) -> void:
+	palette_grid.expand_swatches_vertically = toggled_on
+	Global.config_cache.set_value("palettes", "palette_expand_swatches_vertically", toggled_on)
 
 func _on_AddPalette_pressed() -> void:
 	create_palette_dialog.open(Palettes.current_palette)
