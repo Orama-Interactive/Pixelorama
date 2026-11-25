@@ -283,6 +283,8 @@ var selected_item := 0
 @onready var system_language := language.get_node(^"System Language") as CheckBox
 @onready var theme_preset_option_button: OptionButton = %ThemePresetOptionButton
 @onready var grid_options: GridContainer = %GridOptions
+@onready var visible_tools_menu_button: MenuButton = %VisibleToolsMenuButton
+@onready var visible_tools_menu_popup := visible_tools_menu_button.get_popup()
 @onready var autosave_container: Container = right_side.get_node("Backup/AutosaveContainer")
 @onready var autosave_interval: SpinBox = autosave_container.get_node("AutosaveInterval")
 @onready var shortcuts: Control = right_side.get_node("Shortcuts/ShortcutEdit")
@@ -338,6 +340,15 @@ func _ready() -> void:
 		if not child is AcceptDialog:
 			continue
 		child.confirmed.connect(Tools.update_hint_tooltips)
+
+	var i := 0
+	for tool_name in Tools.tools:
+		var tool := Tools.tools[tool_name]
+		visible_tools_menu_popup.add_check_item(tool.display_name)
+		visible_tools_menu_popup.set_item_checked(i, not tool.is_hidden)
+		visible_tools_menu_popup.set_item_metadata(i, tool_name)
+		i += 1
+	visible_tools_menu_popup.index_pressed.connect(_on_visible_tools_menu_popup_index_pressed)
 
 	if OS.get_name() == "Web":
 		var startup := right_side.get_node(^"Startup")
@@ -623,6 +634,16 @@ func _on_language_pressed(index: int) -> void:
 
 func _on_reset_button_pressed() -> void:
 	$ResetOptionsConfirmation.popup_centered_clamped()
+
+
+func _on_visible_tools_menu_popup_index_pressed(index: int) -> void:
+	var tool_name: String = visible_tools_menu_popup.get_item_metadata(index)
+	var tool := Tools.tools[tool_name]
+	tool.set_hidden_status(not tool.is_hidden)
+	visible_tools_menu_popup.set_item_checked(index, not tool.is_hidden)
+	var layer := Global.current_project.layers[Global.current_project.current_layer]
+	var layer_type := layer.get_layer_type()
+	Tools.show_relevant_tools(layer_type)
 
 
 func _on_reset_options_confirmation_confirmed() -> void:
