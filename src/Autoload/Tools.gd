@@ -305,9 +305,10 @@ class Tool:
 	var icon: Texture2D
 	var cursor_icon: Texture2D
 	var shortcut := ""
+	var layer_types: PackedInt32Array = []
 	var extra_hint := ""
 	var extra_shortcuts: PackedStringArray = []
-	var layer_types: PackedInt32Array = []
+	var is_hidden := false
 	var button_node: BaseButton
 
 	func _init(
@@ -328,6 +329,7 @@ class Tool:
 		extra_shortcuts = _extra_shortcuts
 		icon = load("res://assets/graphics/tools/%s.png" % name.to_lower())
 		cursor_icon = load("res://assets/graphics/tools/cursors/%s.png" % name.to_lower())
+		is_hidden = Global.config_cache.get_value("tools", "%s_hidden" % name, is_hidden)
 
 	func instantiate_scene() -> Node:
 		if not is_instance_valid(scene):
@@ -373,6 +375,11 @@ class Tool:
 		else:
 			hint = tr(hint) % shortcuts
 		return hint
+
+	func set_hidden_status(new_status: bool) -> void:
+		is_hidden = new_status
+		Global.config_cache.set_value("tools", "%s_hidden" % name, is_hidden)
+		Global.config_cache.save(Global.CONFIG_PATH)
 
 
 class Slot:
@@ -428,6 +435,10 @@ func _ready() -> void:
 
 	horizontal_mirror = Global.config_cache.get_value("tools", "horizontal_mirror", false)
 	vertical_mirror = Global.config_cache.get_value("tools", "vertical_mirror", false)
+	diagonal_xy_mirror = Global.config_cache.get_value("tools", "diagonal_xy_mirror", false)
+	diagonal_x_minus_y_mirror = Global.config_cache.get_value(
+		"tools", "diagonal_x_minus_y_mirror", false
+	)
 	pixel_perfect = Global.config_cache.get_value("tools", "pixel_perfect", false)
 	alpha_locked = Global.config_cache.get_value("tools", "alpha_locked", false)
 
@@ -446,9 +457,9 @@ func _ready() -> void:
 	# Await is necessary to hide tools irrelevant to the current layer (That may have been
 	# added by extensions), And to make sure projects loaded at startup have correct visible tools
 	await get_tree().process_frame
-	var layer: BaseLayer = Global.current_project.layers[Global.current_project.current_layer]
+	var layer := Global.current_project.layers[Global.current_project.current_layer]
 	var layer_type := layer.get_layer_type()
-	_show_relevant_tools(layer_type)
+	show_relevant_tools(layer_type)
 
 
 func _input(event: InputEvent) -> void:
@@ -962,17 +973,17 @@ func get_alpha_dynamic(strength := 1.0) -> float:
 
 
 func _cel_switched() -> void:
-	var layer: BaseLayer = Global.current_project.layers[Global.current_project.current_layer]
+	var layer := Global.current_project.layers[Global.current_project.current_layer]
 	var layer_type := layer.get_layer_type()
 	# Do not make any changes when its the same type of layer, or an audio layer
 	if layer_type == _curr_layer_type or layer_type in [Global.LayerTypes.AUDIO]:
 		return
 	quick_assign_tool_revert(MOUSE_BUTTON_RIGHT)
 	quick_assign_tool_revert(MOUSE_BUTTON_LEFT)
-	_show_relevant_tools(layer_type)
+	show_relevant_tools(layer_type)
 
 
-func _show_relevant_tools(layer_type: Global.LayerTypes) -> void:
+func show_relevant_tools(layer_type: Global.LayerTypes) -> void:
 	# Hide tools that are not available in the current layer type
 	var fallback_available_tool: StringName
 	for button in _tool_buttons.get_children():
@@ -993,7 +1004,7 @@ func _show_relevant_tools(layer_type: Global.LayerTypes) -> void:
 
 
 func _is_tool_available(layer_type: int, t: Tool) -> bool:
-	return t.layer_types.is_empty() or layer_type in t.layer_types
+	return (t.layer_types.is_empty() or layer_type in t.layer_types) and not t.is_hidden
 
 
 func _on_single_tool_mode_changed(mode: bool) -> void:

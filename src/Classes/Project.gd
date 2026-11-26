@@ -78,7 +78,7 @@ var palettes: Dictionary[String, Palette] = {}
 var project_current_palette_name: String = ""
 var reference_images: Array[ReferenceImage] = []
 var reference_index: int = -1  ## The currently selected index ReferenceImage
-var vanishing_points := []  ## Array of Vanishing Points
+var vanishing_points: Array[Dictionary] = []  ## Array of Vanishing Points data.
 var fps := 6.0:
 	set(value):
 		fps = value
@@ -331,7 +331,14 @@ func serialize() -> Dictionary:
 		"next_keyframe_id": next_keyframe_id,
 		"tags": tag_data,
 		"guides": guide_data,
-		"symmetry_points": [x_symmetry_point, y_symmetry_point],
+		"symmetry_points":
+		[
+			# Sort in same order as SymmetryGuide.Types
+			x_symmetry_point,
+			y_symmetry_point,
+			var_to_str(xy_symmetry_point),
+			var_to_str(x_minus_y_symmetry_point)
+		],
 		"frames": frame_data,
 		"current_frame": current_frame,
 		"current_layer": current_layer,
@@ -562,10 +569,22 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			ri.deserialize(g)
 			Global.canvas.reference_image_container.add_child(ri)
 	if dict.has("vanishing_points"):
-		vanishing_points = dict.vanishing_points
+		vanishing_points = Array(dict.vanishing_points, TYPE_DICTIONARY, &"", null)
 	if dict.has("symmetry_points"):
-		x_symmetry_point = dict.symmetry_points[0]
-		y_symmetry_point = dict.symmetry_points[1]
+		for i in dict.symmetry_points.size():
+			match i:
+				SymmetryGuide.Types.HORIZONTAL:
+					x_symmetry_point = dict.symmetry_points[i]
+					continue
+				SymmetryGuide.Types.VERTICAL:
+					y_symmetry_point = dict.symmetry_points[i]
+					continue
+				SymmetryGuide.Types.XY:
+					xy_symmetry_point = str_to_var(dict.symmetry_points[i])
+					continue
+				SymmetryGuide.Types.X_MINUS_Y:
+					x_minus_y_symmetry_point = str_to_var(dict.symmetry_points[i])
+					continue
 		for point in x_symmetry_axis.points.size():
 			var new_pos := x_symmetry_axis.points[point]
 			new_pos.y = snappedf((y_symmetry_point + 1) / 2, 0.5)
@@ -574,6 +593,30 @@ func deserialize(dict: Dictionary, zip_reader: ZIPReader = null, file: FileAcces
 			var new_pos := y_symmetry_axis.points[point]
 			new_pos.x = snappedf((x_symmetry_point + 1) / 2, 0.5)
 			y_symmetry_axis.set_point_position(point, new_pos)
+		if diagonal_xy_symmetry_axis.points.size() == 2:
+			var half_dist := (
+				diagonal_xy_symmetry_axis.points[0].distance_to(diagonal_xy_symmetry_axis.points[1])
+				/ 2
+			)
+			diagonal_xy_symmetry_axis.set_point_position(
+				0, xy_symmetry_point + Tools.XY_LINE * half_dist
+			)
+			diagonal_xy_symmetry_axis.set_point_position(
+				1, xy_symmetry_point - Tools.XY_LINE * half_dist
+			)
+		if diagonal_x_minus_y_symmetry_axis.points.size() == 2:
+			var half_dist := (
+				diagonal_x_minus_y_symmetry_axis.points[0].distance_to(
+					diagonal_x_minus_y_symmetry_axis.points[1]
+				)
+				/ 2
+			)
+			diagonal_x_minus_y_symmetry_axis.set_point_position(
+				0, x_minus_y_symmetry_point + Tools.X_MINUS_Y_LINE * half_dist
+			)
+			diagonal_x_minus_y_symmetry_axis.set_point_position(
+				1, x_minus_y_symmetry_point - Tools.X_MINUS_Y_LINE * half_dist
+			)
 	next_keyframe_id = dict.get("next_keyframe_id", next_keyframe_id)
 	var exp_settings = dict.get("export_profile", {})
 	if typeof(exp_settings) == TYPE_DICTIONARY:
@@ -651,10 +694,12 @@ func _size_changed(value: Vector2i) -> void:
 		size = value
 		return
 	if size.x != 0:
+		@warning_ignore("integer_division")
 		tiles.x_basis = tiles.x_basis * value.x / size.x
 	else:
 		tiles.x_basis = Vector2i(value.x, 0)
 	if size.y != 0:
+		@warning_ignore("integer_division")
 		tiles.y_basis = tiles.y_basis * value.y / size.y
 	else:
 		tiles.y_basis = Vector2i(0, value.y)

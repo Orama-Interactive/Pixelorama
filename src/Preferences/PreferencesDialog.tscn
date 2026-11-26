@@ -979,6 +979,15 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
+[node name="VisibleToolsMenuButton" type="MenuButton" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools" unique_id=852083008]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 2
+text = "Visible tools"
+flat = false
+alignment = 0
+
 [node name="ToolOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Tools" unique_id=508595581]
 layout_mode = 2
 columns = 3

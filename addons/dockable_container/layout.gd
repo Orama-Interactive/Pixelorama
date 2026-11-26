@@ -9,6 +9,8 @@ extends Resource
 ##
 ## Hidden tabs are marked in the `hidden_tabs` Dictionary by name.
 
+signal changed_dirty
+
 enum { MARGIN_LEFT, MARGIN_RIGHT, MARGIN_TOP, MARGIN_BOTTOM, MARGIN_CENTER }
 
 @export var root: DockableLayoutNode:
@@ -90,6 +92,7 @@ func reset() -> void:
 		var layout_to_reset := load(layout_reset_path)
 		if is_instance_valid(layout_to_reset) and layout_to_reset is DockableLayout:
 			copy_from(layout_to_reset.clone())
+			changed_dirty.emit()
 
 
 func get_names() -> PackedStringArray:

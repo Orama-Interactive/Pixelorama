@@ -258,10 +258,14 @@ func set_layout(value: DockableLayout) -> void:
 		value = DockableLayout.new()
 	if value == _layout:
 		return
-	if _layout and _layout.changed.is_connected(queue_sort):
-		_layout.changed.disconnect(queue_sort)
+	if _layout:
+		if _layout.changed.is_connected(queue_sort):
+			_layout.changed.disconnect(queue_sort)
+		if _layout.changed_dirty.is_connected(mark_layout_dirty):
+			_layout.changed_dirty.disconnect(mark_layout_dirty)
 	_layout = value
 	_layout.changed.connect(queue_sort)
+	_layout.changed_dirty.connect(mark_layout_dirty)
 	for window in _windows_container.get_children():
 		if not window.name in _layout.windows and window is FloatingWindow:
 			window.prevent_data_erasure = true  # We don't want to delete data.
@@ -274,6 +278,10 @@ func set_layout(value: DockableLayout) -> void:
 			_convert_to_window(panel)
 	_layout_dirty = true
 	queue_sort()
+
+
+func mark_layout_dirty():
+	_layout_dirty = true
 
 
 func set_use_hidden_tabs_for_min_size(value: bool) -> void:

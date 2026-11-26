@@ -263,7 +263,6 @@ class PanelAPI:
 	func add_node_as_tab(node: Node) -> void:
 		var dockable := _get_dockable_container_ui()
 		var top_menu_container := Global.top_menu_container
-		var panels_submenu: PopupMenu = top_menu_container.panels_submenu
 		# adding the node to the first tab we find, it'll be re-ordered by layout anyway
 		var tabs := _get_tabs_in_root(dockable.layout.root)
 		if tabs.size() != 0:
@@ -274,12 +273,7 @@ class PanelAPI:
 			return
 		top_menu_container.ui_elements.append(node)
 		# refreshing Panels submenu
-		var new_elements = top_menu_container.ui_elements
-		panels_submenu.clear()
-		for element in new_elements:
-			panels_submenu.add_check_item(element.name)
-			var is_hidden := dockable.is_control_hidden(element)
-			panels_submenu.set_item_checked(new_elements.find(element), !is_hidden)
+		top_menu_container.populate_panels_submenu()
 		# re-assigning layout
 		top_menu_container.set_layout(top_menu_container.selected_layout)
 		# we must make tabs_visible = true for a few moments if it is false
