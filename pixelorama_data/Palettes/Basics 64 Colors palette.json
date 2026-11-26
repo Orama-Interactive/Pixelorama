@@ -1,0 +1,15 @@
+{
+ "colors": [
+  {
+   "color": "(0.0, 0.0, 0.0, 1.0)",
+   "index": 0
+  },
+  {
+   "color": "(0.0667, 0.0667, 0.0667, 1.0)",
+   "index": 1
+  }
+ ],
+ "comment": "Basics 64 colors palette in 8x8 size\tBy Musclor13",
+ "height": 8,
+ "width": 8
+}
