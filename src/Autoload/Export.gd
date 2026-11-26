@@ -744,7 +744,7 @@ func export_video(export_paths: PackedStringArray, project: Project) -> bool:
 		"passthrough",
 		export_paths[0]
 	]
-	var success := OS.execute(Global.ffmpeg_path, ffmpeg_execute, [], true)
+	var success := Global.execute(Global.ffmpeg_path, ffmpeg_execute, [], true)
 	if success < 0 or success > 1:
 		var fail_text := """Video failed to export. Make sure you have FFMPEG installed
 			and have set the correct path in the preferences."""
@@ -794,7 +794,9 @@ func export_video(export_paths: PackedStringArray, project: Project) -> bool:
 			)
 		)
 		# ffmpeg -i input1 -i input2 ... -i inputn -filter_complex amix=inputs=n output_path
-		var combined_audio_success := OS.execute(Global.ffmpeg_path, ffmpeg_combine_audio, [], true)
+		var combined_audio_success := Global.execute(
+			Global.ffmpeg_path, ffmpeg_combine_audio, [], true
+		)
 		if combined_audio_success == 0 or combined_audio_success == 1:
 			var copied_video := temp_path.path_join("video." + export_paths[0].get_extension())
 			# Then mix the audio file with the video.
@@ -808,7 +810,7 @@ func export_video(export_paths: PackedStringArray, project: Project) -> bool:
 			ffmpeg_final_video.append_array(
 				["-c:v", "copy", "-map", "0:v:0", "-map", "1:a:0", export_paths[0]]
 			)
-			OS.execute(Global.ffmpeg_path, ffmpeg_final_video, [], true)
+			Global.execute(Global.ffmpeg_path, ffmpeg_final_video, [], true)
 	_clear_temp_folder()
 	return true
 
@@ -966,7 +968,7 @@ func is_using_ffmpeg(format: FileFormat) -> bool:
 func is_ffmpeg_installed() -> bool:
 	if Global.ffmpeg_path.is_empty():
 		return false
-	var ffmpeg_executed := OS.execute(Global.ffmpeg_path, [])
+	var ffmpeg_executed := Global.execute(Global.ffmpeg_path, [])
 	if ffmpeg_executed == 0 or ffmpeg_executed == 1:
 		return true
 	return false

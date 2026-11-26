@@ -255,7 +255,7 @@ func handle_loading_video(file: String) -> bool:
 	var output_file_path := temp_path_real.path_join("%04d.png")
 	# ffmpeg -y -i input_file %04d.png
 	var ffmpeg_execute: PackedStringArray = ["-y", "-i", file, output_file_path]
-	var success := OS.execute(Global.ffmpeg_path, ffmpeg_execute, [], true)
+	var success := Global.execute(Global.ffmpeg_path, ffmpeg_execute, [], true)
 	if success < 0 or success > 1:  # FFMPEG is probably not installed correctly
 		DirAccess.remove_absolute(Export.temp_path)
 		return false
@@ -285,7 +285,7 @@ func handle_loading_video(file: String) -> bool:
 	var output_audio_file := temp_path_real.path_join("audio.mp3")
 	# ffmpeg -y -i input_file -vn audio.mp3
 	var ffmpeg_execute_audio: PackedStringArray = ["-y", "-i", file, "-vn", output_audio_file]
-	OS.execute(Global.ffmpeg_path, ffmpeg_execute_audio, [], true)
+	Global.execute(Global.ffmpeg_path, ffmpeg_execute_audio, [], true)
 	if FileAccess.file_exists(output_audio_file):
 		open_audio_file(output_audio_file)
 		temp_dir.remove("audio.mp3")

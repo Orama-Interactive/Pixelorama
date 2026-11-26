@@ -941,6 +941,23 @@ func get_system_info() -> String:
 	return String(" - ").join(info)
 
 
+## Wrapper for [method OS.execute] that applies workarounds to execute outside
+## supported containers.
+func execute(
+	path: String,
+	arguments: PackedStringArray,
+	output: Array = [],
+	read_stderr := false,
+	open_console := false
+) -> int:
+	if SteamManager.is_in_runtime():
+		return SteamManager.execute_outside_runtime(
+			path, arguments, output, read_stderr, open_console
+		)
+
+	return OS.execute(path, arguments, output, read_stderr, open_console)
+
+
 func update_grids(grids_data: Dictionary) -> void:
 	# Remove old grids
 	grids.clear()

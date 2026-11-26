@@ -293,7 +293,7 @@ func export_gif(project: Project) -> void:
 		"[0:v] palettegen",
 		path.path_join("palette.png")
 	]
-	var success := OS.execute(Global.ffmpeg_path, palette_generation, [], true)
+	var success := Global.execute(Global.ffmpeg_path, palette_generation, [], true)
 	var clip_fps := export_fps
 	if export_by == FFmpegExportBy.DURATION_DETERMINES_FPS:
 		clip_fps = frame_count / export_duretion
@@ -313,7 +313,7 @@ func export_gif(project: Project) -> void:
 		str(frame_count),
 		path.path_join(project.name + ".gif")
 	]
-	success = OS.execute(Global.ffmpeg_path, ffmpeg_execute, [], true)
+	success = Global.execute(Global.ffmpeg_path, ffmpeg_execute, [], true)
 	if success < 0 or success > 1:
 		var fail_text := """Video failed to export. Make sure you have FFMPEG installed
 			and have set the correct path in the preferences."""
