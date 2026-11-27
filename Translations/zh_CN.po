@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
-"PO-Revision-Date: 2026-11-09 13:20\n"
+"PO-Revision-Date: 2026-11-27 18:01\n"
 
 msgid "OK"
 msgstr "确定"
@@ -888,6 +888,10 @@ msgstr "画布"
 msgid "Timeline"
 msgstr "时间轴"
 
+#. A category in the Preferences, containing options that have to do with touch screen & gestures.
+msgid "Touch"
+msgstr ""
+
 msgid "Selection"
 msgstr "选区"
 
@@ -1093,6 +1097,14 @@ msgstr "左侧工具颜色："
 
 msgid "Right tool color:"
 msgstr "左侧工具颜色："
+
+#. Found in the preferences, under the Touch category. When it is enabled, it allows drawing in the canvas using fingers.
+msgid "Draw with finger"
+msgstr ""
+
+#. Found in the preferences, under the Touch category. When it is enabled, it moving the canvas with a two finger swipe gesture.
+msgid "Move canvas with two-finger swipe"
+msgstr ""
 
 #. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
 msgid "Make global palettes read-only"
