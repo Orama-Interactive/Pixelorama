@@ -193,6 +193,7 @@ func load_image_from_buffer(buffer: PackedByteArray) -> Image:
 func handle_loading_image(file: String, image: Image, force_import_dialog := false) -> void:
 	if (
 		Global.projects.size() <= 1
+		and Global.current_project.size == Vector2i(Global.default_width, Global.default_height)
 		and Global.current_project.is_empty()
 		and not force_import_dialog
 	):
