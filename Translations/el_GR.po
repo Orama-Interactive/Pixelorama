@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2026-11-27 00:57\n"
+"PO-Revision-Date: 2026-11-27 15:37\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -256,7 +256,7 @@ msgstr "Αντιστροφή"
 
 #. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
 msgid "Select cel area"
-msgstr "Επιλέξτε περιοχή cel"
+msgstr "Επιλογή περιοχής cel"
 
 msgid "Modify"
 msgstr "Τροποποίηση"
