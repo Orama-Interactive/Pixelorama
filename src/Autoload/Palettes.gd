@@ -508,41 +508,18 @@ func _get_palette_priority_file_map(looking_paths: PackedStringArray) -> Array[P
 	# Holds pattern files already found
 	var working_file_set: Dictionary = {}
 	for search_directory in looking_paths:
+		if not DirAccess.dir_exists_absolute(search_directory):
+			final_list.append([])
+			continue
+
 		var to_add_files: PackedStringArray = []
-		var files := _get_palette_files(search_directory)
-		# files to check
-		for maybe_to_add in files:
+		for maybe_to_add in DirAccess.get_files_at(search_directory):
 			if not maybe_to_add in working_file_set:
 				to_add_files.append(maybe_to_add)
 				working_file_set[maybe_to_add] = true
 
 		final_list.append(to_add_files)
 	return final_list
-
-
-## Get the palette files in a single directory.
-## if it does not exist, return []
-func _get_palette_files(path: String) -> PackedStringArray:
-	var dir := DirAccess.open(path)
-	var results: PackedStringArray = []
-
-	if !dir:
-		return []
-	dir.list_dir_begin()
-
-	while true:
-		var file_name := dir.get_next()
-		if file_name == "":
-			break
-		elif (
-			(not file_name.begins_with("."))
-			&& file_name.to_lower().ends_with("json")
-			&& not dir.current_is_dir()
-		):
-			results.append(file_name)
-
-	dir.list_dir_end()
-	return results
 
 
 func import_palette_from_path(path: String, make_copy := false, is_initialising := false) -> void:
