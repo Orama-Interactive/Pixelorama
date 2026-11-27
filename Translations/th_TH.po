@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Thai\n"
 "Language: th_TH\n"
-"PO-Revision-Date: 2026-10-12 10:59\n"
+"PO-Revision-Date: 2026-11-27 18:01\n"
 
 msgid "OK"
 msgstr "ตกลง"
@@ -888,6 +888,10 @@ msgstr "แคนวาส"
 msgid "Timeline"
 msgstr "ไทม์ไลน์"
 
+#. A category in the Preferences, containing options that have to do with touch screen & gestures.
+msgid "Touch"
+msgstr ""
+
 msgid "Selection"
 msgstr "การเลือก"
 
@@ -1093,6 +1097,14 @@ msgstr "สีเครื่องมือซ้าย:"
 
 msgid "Right tool color:"
 msgstr "สีเครื่องมือขวา:"
+
+#. Found in the preferences, under the Touch category. When it is enabled, it allows drawing in the canvas using fingers.
+msgid "Draw with finger"
+msgstr ""
+
+#. Found in the preferences, under the Touch category. When it is enabled, it moving the canvas with a two finger swipe gesture.
+msgid "Move canvas with two-finger swipe"
+msgstr ""
 
 #. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
 msgid "Make global palettes read-only"
