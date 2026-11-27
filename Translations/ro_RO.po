@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Romanian\n"
 "Language: ro_RO\n"
-"PO-Revision-Date: 2026-11-27 18:00\n"
+"PO-Revision-Date: 2026-11-27 20:40\n"
 
 msgid "OK"
 msgstr "OK"
@@ -888,7 +888,7 @@ msgstr "Cronologie"
 
 #. A category in the Preferences, containing options that have to do with touch screen & gestures.
 msgid "Touch"
-msgstr ""
+msgstr "Tactil"
 
 msgid "Selection"
 msgstr "Selecție"
@@ -1098,11 +1098,11 @@ msgstr "Culoarea instrumentului din dreapta:"
 
 #. Found in the preferences, under the Touch category. When it is enabled, it allows drawing in the canvas using fingers.
 msgid "Draw with finger"
-msgstr ""
+msgstr "Desenare cu degetele"
 
 #. Found in the preferences, under the Touch category. When it is enabled, it moving the canvas with a two finger swipe gesture.
 msgid "Move canvas with two-finger swipe"
-msgstr ""
+msgstr "Mutare pânză prin glisare cu două degete"
 
 #. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
 msgid "Make global palettes read-only"
