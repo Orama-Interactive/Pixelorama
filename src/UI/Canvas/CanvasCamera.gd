@@ -87,11 +87,14 @@ func _input(event: InputEvent) -> void:
 		var scale_factor := (event as InputEventMagnifyGesture).factor
 		var zoom_strength := log(scale_factor) * 8.0
 		zoom_camera(zoom_strength, event.position)
-	elif event is InputEventPanGesture:
+	elif event is InputEventPanGesture and Global.move_canvas_with_two_finger_swipe:
 		# Pan gesture on touchscreens
 		offset = offset + event.delta.rotated(camera_angle) * 2.0 / zoom
 	elif event is InputEventMouseMotion:
-		if drag:
+		var move_with_touch := (
+			event.device == InputEvent.DEVICE_ID_EMULATION and not Global.draw_with_finger
+		)
+		if drag or move_with_touch:
 			offset = offset - event.relative.rotated(camera_angle) / zoom
 			update_transparent_checker_offset()
 	else:

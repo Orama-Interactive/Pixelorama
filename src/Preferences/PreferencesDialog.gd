@@ -107,6 +107,13 @@ var preferences: Array[Preference] = [
 	Preference.new(
 		"right_tool_color", "Tools/ToolOptions/RightToolColorButton", "color", Color("fd6d14")
 	),
+	Preference.new("draw_with_finger", "Touch/TouchOptions/DrawWithFinger", "button_pressed", true),
+	Preference.new(
+		"move_canvas_with_two_finger_swipe",
+		"Touch/TouchOptions/MoveCanvasSwipe",
+		"button_pressed",
+		true
+	),
 	Preference.new(
 		"global_palettes_readonly",
 		"Palettes/PaletteOptions/GlobalPalettesReadonly",

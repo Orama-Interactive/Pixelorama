@@ -1070,6 +1070,58 @@ size_flags_horizontal = 3
 mouse_default_cursor_shape = 2
 color = Color(0.992157, 0.427451, 0.0784314, 1)
 
+[node name="Touch" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide" unique_id=1021854190]
+visible = false
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Touch" unique_id=414580322 groups=["HeaderLabels"]]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Touch/Header" unique_id=1145194746]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "Touch"
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Touch/Header" unique_id=2015621942]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="TouchOptions" type="GridContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Touch" unique_id=133469189]
+layout_mode = 2
+columns = 3
+
+[node name="DrawWithFingerLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Touch/TouchOptions" unique_id=1450803072]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "If this is enabled, global palettes will be readonly and changes to them will be applied on a project wide copy instead."
+mouse_filter = 1
+text = "Draw with finger"
+
+[node name="DrawWithFinger" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Touch/TouchOptions" unique_id=1259081547]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "If this is enabled, global palettes will be readonly and changes to them will be applied on a project wide copy instead."
+mouse_default_cursor_shape = 2
+button_pressed = true
+text = "On"
+
+[node name="MoveCanvasSwipeLabel" type="Label" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Touch/TouchOptions" unique_id=1659857317]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "If this is enabled, global palettes will be readonly and changes to them will be applied on a project wide copy instead."
+mouse_filter = 1
+text = "Move canvas with two-finger swipe"
+
+[node name="MoveCanvasSwipe" type="CheckBox" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide/Touch/TouchOptions" unique_id=1260617775]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "If this is enabled, global palettes will be readonly and changes to them will be applied on a project wide copy instead."
+mouse_default_cursor_shape = 2
+button_pressed = true
+text = "On"
+
 [node name="Palettes" type="VBoxContainer" parent="HSplitContainer/VBoxContainer/ScrollContainer/RightSide" unique_id=1780868494]
 visible = false
 layout_mode = 2

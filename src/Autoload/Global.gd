@@ -337,8 +337,6 @@ var modulate_clear_color := Color.GRAY:
 			return
 		modulate_clear_color = value
 		Themes.change_clear_color()
-## Found in Preferences. Controls the readonly mode of global palettes.
-var global_palettes_readonly := true
 ## Found in Preferences. The selected size mode of tool buttons using [enum ButtonSize] enum.
 var tool_button_size := ButtonSize.SMALL:
 	set(value):
@@ -386,6 +384,14 @@ var right_tool_color := Color("fd6d14"):
 			var background: NinePatchRect = child.get_node("BackgroundRight")
 			background.modulate = value
 		Tools._slots[MOUSE_BUTTON_RIGHT].tool_node.color_rect.color = value
+
+## Found in Preferences. If true, allows drawing using fingers.
+## Otherwise, you can only use mice and tablet pens.
+var draw_with_finger := true
+## Found in Preferences. If true, allows moving the canvas with a two finger swipe gesture.
+var move_canvas_with_two_finger_swipe := true
+## Found in Preferences. Controls the readonly mode of global palettes.
+var global_palettes_readonly := true
 
 var default_width := 64  ## Found in Preferences. The default width of startup project.
 var default_height := 64  ## Found in Preferences. The default height of startup project.

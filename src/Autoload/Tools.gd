@@ -868,6 +868,9 @@ func draw_preview() -> void:
 func handle_draw(position: Vector2i, event: InputEvent) -> void:
 	if not Global.can_draw:
 		return
+	if event is InputEventMouse and not Global.draw_with_finger:
+		if event.device == InputEvent.DEVICE_ID_EMULATION:
+			return
 
 	var draw_pos := position
 	if Global.mirror_view:
