@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Turkish\n"
 "Language: tr_TR\n"
-"PO-Revision-Date: 2026-10-12 10:59\n"
+"PO-Revision-Date: 2026-11-27 18:01\n"
 
 msgid "OK"
 msgstr "Tamam"
@@ -441,7 +441,7 @@ msgstr "Kılavuzları Göster"
 
 #. Found under the View menu.
 msgid "Lock Guides"
-msgstr ""
+msgstr "Kilit Rehberleri"
 
 #. Found under the View menu.
 msgid "Show Mouse Guides"
@@ -664,7 +664,7 @@ msgid "Cancel Export"
 msgstr "Dışarı Aktarmayı İptal Et"
 
 msgid "Alert!"
-msgstr "Dikkat!"
+msgstr "Yol Silindiri!"
 
 msgid "Select Current Folder"
 msgstr "Geçerli Klasörü Seç"
@@ -888,6 +888,10 @@ msgstr "Tuval"
 msgid "Timeline"
 msgstr "Zaman çizelgesi"
 
+#. A category in the Preferences, containing options that have to do with touch screen & gestures.
+msgid "Touch"
+msgstr ""
+
 msgid "Selection"
 msgstr "Seçim"
 
@@ -1093,6 +1097,14 @@ msgstr "Sol araç rengi:"
 
 msgid "Right tool color:"
 msgstr "Sağ araç rengi:"
+
+#. Found in the preferences, under the Touch category. When it is enabled, it allows drawing in the canvas using fingers.
+msgid "Draw with finger"
+msgstr ""
+
+#. Found in the preferences, under the Touch category. When it is enabled, it moving the canvas with a two finger swipe gesture.
+msgid "Move canvas with two-finger swipe"
+msgstr ""
 
 #. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
 msgid "Make global palettes read-only"
@@ -1557,7 +1569,7 @@ msgid "Thai"
 msgstr "Tayca"
 
 msgid "Slovenian"
-msgstr ""
+msgstr "Slovence"
 
 #. Found in the About dialog.
 msgid "Lead Developer"
@@ -2730,7 +2742,7 @@ msgstr "Pikselleri seç"
 
 #. An option found in the right click menu of a cel. If selected, centers the content of the cel.
 msgid "Center content"
-msgstr ""
+msgstr "Merkez içeriği"
 
 #. An option found in the right click menu of a cel. If selected, all selected cels get linked together.
 msgid "Link cels to"
@@ -3649,7 +3661,7 @@ msgstr "Perspektif düzenleyici"
 
 #. A UI panel. Contains non-destructive layer effects. https://pixelorama.org/concepts/layer#layer-effects
 msgid "Layer FX"
-msgstr ""
+msgstr "FX Katmanı"
 
 #. A UI panel. It is used to record the software in order to show the progress of art, usually in form of time lapses.
 msgid "Recorder"
@@ -3952,7 +3964,7 @@ msgstr "Azalma türü:"
 
 #. Refers to the easing function that should be used to animate the property. https://easings.net/
 msgid "Ease type"
-msgstr ""
+msgstr "Kolaylık tipi"
 
 #. Found under certain image effects that support properties that can be animated. A type of easing function.
 msgid "Starts slowly and speeds up towards the end"
@@ -3995,10 +4007,10 @@ msgid "Insert keyframe"
 msgstr "Anahtar kare ekle"
 
 msgid "Add keyframe."
-msgstr ""
+msgstr "Anahtar çerçeve ekle."
 
 msgid "Update keyframe."
-msgstr ""
+msgstr "Anahtar çerçeveyi güncelleme."
 
 #. A button found in the keyframe timeline on the right panel when there is a keyframe selected. When clicked, it deletes the currently selected keyframe.
 msgid "Delete keyframe"
@@ -4028,7 +4040,7 @@ msgstr "Kaldır"
 
 #. A tooltip to tell users to hold the Shift key while clicking the remove button
 msgid "Hold Shift while pressing to instantly remove."
-msgstr "Anında kaldırmak için Shift tuşunu basılı tutun."
+msgstr "Anında kaldırmak için Shift tuşuna basılı tutun."
 
 #. Shown in the confirmation dialog for removing a reference image.
 msgid "Are you sure you want to remove this reference image?"
@@ -4178,12 +4190,12 @@ msgstr "Merdiven aşağı"
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Diamond right"
-msgstr "Sağ elmas"
+msgstr "Elmas haklı"
 
 #. A tile layout option.
 #: src/UI/Timeline/LayerProperties.tscn
 msgid "Diamond down"
-msgstr "Aşağı elmas"
+msgstr "Elmas düştü"
 
 #. A button that toggles place-only mode on for a tilemap layer. This mode is used to only place tiles in a tilemap, without the ability to modify them.
 #: src/UI/Timeline/LayerProperties.tscn

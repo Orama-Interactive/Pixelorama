@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
-"PO-Revision-Date: 2026-10-14 10:02\n"
+"PO-Revision-Date: 2026-11-27 18:00\n"
 
 msgid "OK"
 msgstr "Εντάξει"
@@ -256,7 +256,7 @@ msgstr "Αντιστροφή"
 
 #. Found under the Select menu. When selected, the area of non-transparent pixels in the cel is being selected.
 msgid "Select cel area"
-msgstr "Επιλέξτε περιοχή cel"
+msgstr "Επιλογή περιοχής cel"
 
 msgid "Modify"
 msgstr "Τροποποίηση"
@@ -888,6 +888,10 @@ msgstr "Καμβάς"
 msgid "Timeline"
 msgstr "Χρονοδιάγραμμα"
 
+#. A category in the Preferences, containing options that have to do with touch screen & gestures.
+msgid "Touch"
+msgstr ""
+
 msgid "Selection"
 msgstr "Επιλογή"
 
@@ -1093,6 +1097,14 @@ msgstr "Χρώμα αριστερού εργαλείου:"
 
 msgid "Right tool color:"
 msgstr "Χρώμα δεξιού εργαλείου:"
+
+#. Found in the preferences, under the Touch category. When it is enabled, it allows drawing in the canvas using fingers.
+msgid "Draw with finger"
+msgstr ""
+
+#. Found in the preferences, under the Touch category. When it is enabled, it moving the canvas with a two finger swipe gesture.
+msgid "Move canvas with two-finger swipe"
+msgstr ""
 
 #. Found in the preferences, under the Palettes category. When it is enabled, making a change to a global palette automatically creates a project palette copy with that change. If it is disabled, the change gets applied to the global palette, without creating a project palette copy.
 msgid "Make global palettes read-only"
@@ -1672,7 +1684,7 @@ msgstr "Ζουμ (Μεγέθυνση)\n\n"
 msgid "Pan\n\n"
 "%s for left mouse button\n"
 "%s for right mouse button"
-msgstr "Μετακίνηση κάμερας\n\n"
+msgstr "Μετακίνηση καμβά\n\n"
 "%s για το αριστερό κουμπί ποντικιού\n"
 "%s για το δεξί κουμπί ποντικιού"
 
@@ -3333,7 +3345,7 @@ msgid "Zoom"
 msgstr "Ζουμ"
 
 msgid "Pan"
-msgstr "Μετακίνηση κάμερας"
+msgstr "Μετακίνηση καμβά"
 
 msgid "Color Picker"
 msgstr "Επιλογέας χρωμάτων"
